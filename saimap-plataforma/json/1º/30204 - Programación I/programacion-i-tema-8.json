@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "1. ¿Qué biblioteca estándar de C++ proporciona las clases y herramientas necesarias para realizar la lectura y escritura en archivos?",
+      "options": [
+        "<iostream>",
+        "<fstream>",
+        "<iomanip>"
+      ],
+      "correct": 1,
+      "hint": "Su nombre hace alusión a 'File Stream'.",
+      "explanation": "La biblioteca estándar <fstream> proporciona las clases de flujo ifstream, ofstream y fstream, especializadas en el manejo de archivos en disco."
+    },
+    {
+      "q": "2. ¿Cuál es la clase de C++ que se debe instanciar para realizar exclusivamente operaciones de entrada (lectura) desde un archivo?",
+      "options": [
+        "std::ofstream",
+        "std::ifstream",
+        "std::fstream"
+      ],
+      "correct": 1,
+      "hint": "El prefijo 'if' proviene de 'Input File'.",
+      "explanation": "std::ifstream (Input File Stream) es la clase dedicada en C++ exclusivamente a la lectura de datos desde un archivo físico."
+    },
+    {
+      "q": "3. ¿Qué clase de flujo de archivos de C++ se debe declarar para realizar únicamente operaciones de escritura en disco?",
+      "options": [
+        "std::ifstream",
+        "std::ofstream",
+        "std::fstream"
+      ],
+      "correct": 1,
+      "hint": "El prefijo 'of' proviene de 'Output File'.",
+      "explanation": "std::ofstream (Output File Stream) es la clase especializada de la biblioteca estándar para realizar operaciones de escritura de datos."
+    },
+    {
+      "q": "4. ¿Qué clase de flujo permite realizar de manera simultánea operaciones de lectura y de escritura sobre el mismo archivo?",
+      "options": [
+        "std::ifstream",
+        "std::ofstream",
+        "std::fstream"
+      ],
+      "correct": 2,
+      "hint": "Es la clase bidireccional básica de ficheros.",
+      "explanation": "std::fstream hereda tanto de std::istream como de std::ostream, permitiendo la lectura y escritura bidireccional sobre un archivo."
+    },
+    {
+      "q": "5. ¿Cuál es el modo de apertura de archivos por defecto cuando se instancia un objeto de la clase `std::ifstream`?",
+      "options": [
+        "std::ios::out",
+        "std::ios::in",
+        "std::ios::binary"
+      ],
+      "correct": 1,
+      "hint": "Se enfoca en la entrada de datos.",
+      "explanation": "Por defecto, la clase std::ifstream abre los ficheros en modo de lectura, que está representado por el flag std::ios::in."
+    },
+    {
+      "q": "6. ¿Cuál es el modo de apertura por defecto para los objetos pertenecientes a la clase `std::ofstream`?",
+      "options": [
+        "std::ios::in",
+        "std::ios::out",
+        "std::ios::app"
+      ],
+      "correct": 1,
+      "hint": "Se enfoca en la salida de datos.",
+      "explanation": "Por defecto, la clase std::ofstream abre los archivos en modo de salida std::ios::out, el cual trunca el contenido del archivo si ya existe."
+    },
+    {
+      "q": "7. ¿Qué bandera (flag) de apertura se debe utilizar para escribir nuevos datos al final del archivo existente sin eliminar su contenido?",
+      "options": [
+        "std::ios::trunc",
+        "std::ios::ate",
+        "std::ios::app"
+      ],
+      "correct": 2,
+      "hint": "Proviene de la palabra inglesa 'append' (anexar).",
+      "explanation": "std::ios::app (append) abre el archivo de manera que todas las operaciones de escritura se realicen automáticamente al final del mismo."
+    },
+    {
+      "q": "8. ¿Cuál es la diferencia de comportamiento principal entre las banderas de apertura `std::ios::app` y `std::ios::ate`?",
+      "options": [
+        "std::ios::app no permite mover el puntero de escritura (escribe siempre al final), mientras que std::ios::ate permite posicionar el puntero en cualquier byte del archivo tras abrirlo",
+        "std::ios::ate trunca el archivo a longitud cero obligatoriamente y std::ios::app conserva los datos",
+        "Ninguna, ambas fuerzan a que el puntero apunte al principio en modo de solo lectura"
+      ],
+      "correct": 0,
+      "hint": "Con ios::app, el puntero se reposiciona al final justo antes de cada escritura.",
+      "explanation": "El modo std::ios::app fuerza que toda escritura ocurra al final del fichero ignorando llamadas a seekp(). En cambio, std::ios::ate solo posiciona el puntero al final en la apertura, permitiendo moverlo después libremente."
+    },
+    {
+      "q": "9. ¿Qué bandera de apertura se utiliza para forzar a que un archivo existente reduzca su tamaño a cero bytes en el momento de ser abierto?",
+      "options": [
+        "std::ios::trunc",
+        "std::ios::app",
+        "std::ios::binary"
+      ],
+      "correct": 0,
+      "hint": "Su nombre proviene de la palabra 'truncate'.",
+      "explanation": "std::ios::trunc (truncate) vacía por completo el archivo existente, dejándolo con un tamaño inicial de cero bytes al abrirse."
+    },
+    {
+      "q": "10. ¿Para qué se utiliza la bandera de modo de apertura `std::ios::binary`?",
+      "options": [
+        "Para indicar que el archivo contendrá código ejecutable compilado en ensamblador",
+        "Para transferir datos en crudo (bytes) sin traducciones de caracteres especiales del S.O. (como \\n a \\r\\n)",
+        "Para cifrar el contenido del archivo mediante claves binarias"
+      ],
+      "correct": 1,
+      "hint": "Evita traducciones de caracteres y de fin de línea de Windows.",
+      "explanation": "El modo std::ios::binary indica al flujo que no aplique formateos ni traducciones dependientes del sistema operativo al leer o escribir (por ejemplo, omitiendo la conversión de '\\n' a '\\r\\n' en Windows)."
+    },
+    {
+      "q": "11. ¿Qué operador bit a bit se emplea en C++ para combinar diferentes modos de apertura en una sola expresión de inicialización?",
+      "options": [
+        "El operador de suma aritmética '+'",
+        "El operador AND lógico '&&'",
+        "El operador OR a nivel de bits '|'"
+      ],
+      "correct": 2,
+      "hint": "Se trata de combinar máscaras de bits independientes.",
+      "explanation": "Las banderas de modo se definen como bits independientes en una máscara. Se combinan mediante el operador de disyunción a nivel de bits (OR), representado por '|'."
+    },
+    {
+      "q": "12. ¿Qué función miembro de un flujo de ficheros comprueba si el flujo se encuentra actualmente asociado a un recurso físico de disco?",
+      "options": [
+        "is_open()",
+        "good()",
+        "open()"
+      ],
+      "correct": 0,
+      "hint": "Significa literalmente 'está abierto'.",
+      "explanation": "El método is_open() devuelve true si el objeto del flujo está asociado con éxito a un archivo físico abierto en el sistema de archivos."
+    },
+    {
+      "q": "13. ¿Cuál es el propósito fundamental de invocar explícitamente el método `.close()` sobre un flujo de archivo?",
+      "options": [
+        "Cerrar la consola de entrada y salida estándar del sistema",
+        "Vaciar los buffers de escritura intermedios de la RAM a disco, romper la asociación del flujo y liberar el descriptor de archivo",
+        "Eliminar permanentemente los punteros de lectura del sistema operativo"
+      ],
+      "correct": 1,
+      "hint": "Asegura el guardado de datos y libera los descriptores del sistema operativo.",
+      "explanation": "close() vuelca al disco físico los datos del búfer intermedio que aún no se hayan guardado (flush), rompe la asociación del flujo y libera el descriptor del fichero para el sistema operativo."
+    },
+    {
+      "q": "14. ¿Qué bandera de estado de error se activa cuando una operación de lectura intenta extraer datos más allá del final del archivo?",
+      "options": [
+        "failbit",
+        "badbit",
+        "eofbit"
+      ],
+      "correct": 2,
+      "hint": "EOF es el acrónimo de 'End Of File'.",
+      "explanation": "La bandera eofbit (End of File) se activa en el flujo cuando se llega al final físico del archivo de datos durante una lectura."
+    },
+    {
+      "q": "15. ¿Qué método devuelve `true` si se ha alcanzado el fin de archivo tras una lectura fallida en el flujo?",
+      "options": [
+        "eof()",
+        "fail()",
+        "bad()"
+      ],
+      "correct": 0,
+      "hint": "Tiene el mismo nombre que la bandera de fin de archivo.",
+      "explanation": "El método eof() devuelve true si la bandera de estado eofbit se encuentra activa en el flujo."
+    },
+    {
+      "q": "16. ¿Qué bandera de estado de error se activa cuando una operación de E/S falla debido a un error lógico o de formato (por ejemplo, leer una letra al esperar un número entero)?",
+      "options": [
+        "eofbit",
+        "failbit",
+        "badbit"
+      ],
+      "correct": 1,
+      "hint": "Indica que una operación no pudo realizarse con éxito.",
+      "explanation": "La bandera failbit se activa cuando ocurre un error de formato o lógica en la lectura/escritura, lo que se considera un error recuperable."
+    },
+    {
+      "q": "17. ¿Qué bandera de estado de error indica una anomalía de bajo nivel física o crítica (como un error de hardware en el disco duro o falta de espacio)?",
+      "options": [
+        "failbit",
+        "eofbit",
+        "badbit"
+      ],
+      "correct": 2,
+      "hint": "Indica un estado 'malo' (bad).",
+      "explanation": "La bandera badbit denota un fallo grave de hardware o de sistema que compromete la integridad del flujo de datos, siendo usualmente un error no recuperable."
+    },
+    {
+      "q": "18. ¿Qué método miembro devuelve `true` si el flujo de datos no tiene activa ninguna bandera de error y se encuentra listo para operar?",
+      "options": [
+        "good()",
+        "fail()",
+        "clear()"
+      ],
+      "correct": 0,
+      "hint": "Significa 'bueno' en inglés.",
+      "explanation": "El método good() devuelve true si todas las banderas de error (eofbit, failbit, badbit) están apagadas (valen 0)."
+    },
+    {
+      "q": "19. ¿Qué método del flujo se utiliza para borrar y restablecer a cero todas las banderas de estado de error acumuladas?",
+      "options": [
+        "clear()",
+        "rdstate()",
+        "good()"
+      ],
+      "correct": 0,
+      "hint": "Su nombre significa 'limpiar' o 'despejar'.",
+      "explanation": "El método clear() limpia todas las banderas de error del flujo, restaurándolo a su estado básico de validez (good) para poder continuar operando."
+    },
+    {
+      "q": "20. ¿Qué método de la clase de flujo devuelve el valor numérico correspondiente al estado de error codificado como máscara de bits?",
+      "options": [
+        "rdstate()",
+        "clear()",
+        "fail()"
+      ],
+      "correct": 0,
+      "hint": "Significa literalmente 'leer estado'.",
+      "explanation": "rdstate() (read state) devuelve el valor acumulado de las banderas de estado del flujo codificado en un objeto del tipo std::ios::iostate."
+    },
+    {
+      "q": "21. ¿Qué operador estándar de C++ se utiliza para extraer datos formateados desde un flujo de archivo de entrada y guardarlos en variables?",
+      "options": [
+        "El operador de inserción '<<'",
+        "El operador de extracción '>>'",
+        "El operador de dirección '&'"
+      ],
+      "correct": 1,
+      "hint": "Apunta en la dirección de flujo hacia la variable.",
+      "explanation": "El operador de extracción '>>' lee datos del flujo ignorando los espacios en blanco iniciales por defecto y realiza la conversión al tipo de la variable destino."
+    },
+    {
+      "q": "22. ¿Qué operador estándar de C++ se emplea para escribir datos formateados en un flujo de salida?",
+      "options": [
+        "El operador de extracción '>>'",
+        "El operador de inserción '<<'",
+        "El operador de indirección '*'"
+      ],
+      "correct": 1,
+      "hint": "Apunta desde la variable u objeto de datos hacia el flujo de salida.",
+      "explanation": "El operador de inserción '<<' convierte datos formateados en cadenas de caracteres y los envía al flujo de salida."
+    },
+    {
+      "q": "23. ¿Qué hace el manipulador estándar `std::flush` en un flujo de salida?",
+      "options": [
+        "Inserta un salto de línea",
+        "Fuerza a que los datos acumulados en el búfer intermedio de memoria RAM se escriban en disco de inmediato",
+        "Limpia el estado de error del flujo de escritura"
+      ],
+      "correct": 1,
+      "hint": "Vacía el búfer físico sin añadir ningún salto de línea.",
+      "explanation": "El manipulador std::flush vacía el búfer de salida, forzando la escritura inmediata de los datos en disco sin alterar el texto del archivo."
+    },
+    {
+      "q": "24. ¿Qué diferencia práctica existe entre utilizar `std::endl` y el carácter `\\n` al escribir texto en un fichero?",
+      "options": [
+        "std::endl escribe un salto de línea y fuerza un vaciado del búfer (flush), mientras que '\\n' solo escribe el salto de línea sin flush automático",
+        "std::endl es de uso exclusivo en archivos binarios y '\\n' en archivos de texto plano",
+        "std::endl borra el archivo y '\\n' inserta un espacio en blanco"
+      ],
+      "correct": 0,
+      "hint": "std::endl realiza un flush implícito.",
+      "explanation": "El uso de std::endl equivale a escribir '\\n' y llamar a std::flush. Es más costoso a nivel de rendimiento en bucles de escritura frecuentes."
+    },
+    {
+      "q": "25. ¿Qué función se debe usar en C++ para leer una línea completa de texto (incluyendo espacios en blanco) desde un flujo de entrada hasta el siguiente salto de línea?",
+      "options": [
+        "archivo.get()",
+        "std::getline()",
+        "archivo.read()"
+      ],
+      "correct": 1,
+      "hint": "Es una función global que recibe el flujo y la variable de tipo string.",
+      "explanation": "std::getline(flujo, cadena) lee todos los caracteres de una línea (incluyendo espacios en blanco) y los guarda en un string de C++, extrayendo y descartando el salto de línea."
+    },
+    {
+      "q": "26. ¿Qué método miembro de un flujo de entrada se utiliza para realizar la lectura de bloques de bytes sin formatear (lectura binaria)?",
+      "options": [
+        "read()",
+        "write()",
+        "get()"
+      ],
+      "correct": 0,
+      "hint": "Significa 'leer' en inglés.",
+      "explanation": "El método read() lee un bloque de bytes contiguos sin procesar de un archivo y los copia a un array en memoria."
+    },
+    {
+      "q": "27. ¿Qué método miembro de un flujo de salida se utiliza para realizar la escritura directa de bloques de bytes en disco (escritura binaria)?",
+      "options": [
+        "read()",
+        "write()",
+        "put()"
+      ],
+      "correct": 1,
+      "hint": "Significa 'escribir' en inglés.",
+      "explanation": "El método write() toma una dirección de memoria y escribe directamente un bloque contiguo de bytes sin procesar en el archivo de salida."
+    },
+    {
+      "q": "28. ¿Por qué es necesario aplicar `reinterpret_cast<char*>` o `reinterpret_cast<const char*>` al invocar `read` o `write` en E/S binaria?",
+      "options": [
+        "Para cifrar los datos del struct a caracteres ASCII",
+        "Porque las firmas de estos métodos exigen obligatoriamente punteros a bloques de caracteres crudos (char*) para transferir los bytes de memoria",
+        "Para eliminar los caracteres nulos adicionales"
+      ],
+      "correct": 1,
+      "hint": "Permite tratar cualquier tipo de datos como una secuencia simple de bytes.",
+      "explanation": "Los métodos read() y write() reciben un puntero a char (o const char) para procesar los datos de forma secuencial byte a byte. El cast fuerza al compilador a tratar la dirección de cualquier estructura como un puntero a char."
+    },
+    {
+      "q": "29. ¿Qué método miembro se utiliza para extraer exactamente un único carácter (byte) de un flujo de entrada, sin omitir espacios ni saltos de línea?",
+      "options": [
+        "get()",
+        "put()",
+        "peek()"
+      ],
+      "correct": 0,
+      "hint": "Significa 'obtener'.",
+      "explanation": "El método get() extrae un único carácter del archivo, procesando espacios en blanco y saltos de línea de forma ordinaria."
+    },
+    {
+      "q": "30. ¿Qué método miembro permite insertar un único carácter o byte directamente en el archivo de salida?",
+      "options": [
+        "put()",
+        "write()",
+        "get()"
+      ],
+      "correct": 0,
+      "hint": "Significa 'poner'.",
+      "explanation": "El método put() escribe un único byte o carácter en el flujo de salida actual."
+    },
+    {
+      "q": "31. ¿Qué método miembro de un flujo de entrada devuelve la posición actual del puntero de lectura?",
+      "options": [
+        "tellg()",
+        "tellp()",
+        "seekg()"
+      ],
+      "correct": 0,
+      "hint": "La letra 'g' al final proviene del término 'get' (lectura).",
+      "explanation": "tellg() (tell get) devuelve la posición absoluta del puntero de lectura en el flujo de entrada."
+    },
+    {
+      "q": "32. ¿Qué método miembro de un flujo de salida devuelve la posición actual del puntero de escritura?",
+      "options": [
+        "tellp()",
+        "tellg()",
+        "seekp()"
+      ],
+      "correct": 0,
+      "hint": "La letra 'p' al final proviene de la palabra 'put' (escritura).",
+      "explanation": "tellp() (tell put) devuelve la posición absoluta actual del puntero de escritura en el flujo de salida."
+    },
+    {
+      "q": "33. ¿Qué método miembro de un flujo se emplea para desplazar manualmente la posición del puntero de lectura del archivo?",
+      "options": [
+        "seekg()",
+        "seekp()",
+        "tellg()"
+      ],
+      "correct": 0,
+      "hint": "La letra 'g' corresponde a la operación 'get' (lectura).",
+      "explanation": "seekg() (seek get) mueve el puntero de lectura a una nueva posición dentro del archivo de entrada."
+    },
+    {
+      "q": "34. ¿Qué método miembro se emplea para desplazar manualmente la posición del puntero de escritura del archivo?",
+      "options": [
+        "seekp()",
+        "seekg()",
+        "tellp()"
+      ],
+      "correct": 0,
+      "hint": "La letra 'p' corresponde a la operación 'put' (escritura).",
+      "explanation": "seekp() (seek put) mueve el puntero de escritura a una nueva posición en el archivo de salida."
+    },
+    {
+      "q": "35. ¿Cuáles son los tres posibles puntos de referencia (origen de movimiento) para indicar un desplazamiento en seekg/seekp?",
+      "options": [
+        "std::ios::beg, std::ios::cur, std::ios::end",
+        "std::ios::start, std::ios::center, std::ios::finish",
+        "std::ios::left, std::ios::right, std::ios::middle"
+      ],
+      "correct": 0,
+      "hint": "Representan el inicio, la posición actual y el final.",
+      "explanation": "Los orígenes estándar de desplazamiento en C++ son std::ios::beg (inicio), std::ios::cur (posición actual) y std::ios::end (final del archivo)."
+    },
+    {
+      "q": "36. ¿Cómo se posiciona el puntero de lectura exactamente en el decimoquinto byte de un archivo desde el comienzo del mismo?",
+      "options": [
+        "seekg(15, std::ios::beg)",
+        "seekg(15, std::ios::cur)",
+        "seekg(-15, std::ios::end)"
+      ],
+      "correct": 0,
+      "hint": "El punto de origen debe ser el inicio absoluto.",
+      "explanation": "La llamada seekg(15, std::ios::beg) mueve el puntero de lectura a la posición correspondiente al byte indexado como 15 desde el inicio."
+    },
+    {
+      "q": "37. ¿Cómo se retrocede el puntero de lectura exactamente 8 bytes con respecto a su posición actual?",
+      "options": [
+        "seekg(-8, std::ios::cur)",
+        "seekg(8, std::ios::cur)",
+        "seekg(-8, std::ios::beg)"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento debe ser negativo y relativo a la posición actual.",
+      "explanation": "Un valor negativo en el primer argumento de seekg() junto con std::ios::cur mueve el puntero de lectura hacia atrás desde la posición actual."
+    },
+    {
+      "q": "38. ¿Qué tipo de datos de la biblioteca estándar de C++ se utiliza habitualmente para registrar la posición absoluta devuelta por `tellg()` o `tellp()`?",
+      "options": [
+        "std::streampos",
+        "int",
+        "long"
+      ],
+      "correct": 0,
+      "hint": "Es un tipo específico que soporta archivos de gran tamaño.",
+      "explanation": "El tipo std::streampos se define en la biblioteca estándar para guardar posiciones absolutas de punteros de archivos independientemente de la plataforma."
+    },
+    {
+      "q": "39. Si un flujo de lectura tiene activa la bandera `failbit` debido a una entrada incorrecta, ¿qué ocurre si el programa intenta continuar leyendo del flujo sin limpiarlo?",
+      "options": [
+        "El programa lanza una excepción y aborta de inmediato",
+        "Todas las lecturas posteriores se ignoran de forma silenciosa y el flujo permanece inactivo",
+        "El flujo limpia de forma automática la bandera de error en la siguiente instrucción"
+      ],
+      "correct": 1,
+      "hint": "El flujo bloquea toda operación hasta que se llama a clear().",
+      "explanation": "Si una bandera de error de E/S está encendida, el flujo ignora cualquier intento de lectura subsiguiente de forma silenciosa hasta que se invoque clear()."
+    },
+    {
+      "q": "40. Al utilizar la función `std::getline(flujo, cadena)`, ¿cómo se gestiona el carácter delimitador (como el salto de línea) en el archivo?",
+      "options": [
+        "Se copia al final de la variable 'cadena'",
+        "Se extrae del flujo de entrada y se descarta, por lo que no se guarda en la variable",
+        "Permanece en el flujo de entrada para la siguiente operación de lectura"
+      ],
+      "correct": 1,
+      "hint": "Es extraído para avanzar la lectura pero no se guarda en el string.",
+      "explanation": "std::getline extrae el delimitador del flujo de entrada y lo descarta, por lo que el string leído no lo contiene y el flujo avanza a la siguiente línea."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "1. Rellene el espacio en blanco para abrir de forma explícita un archivo de escritura:\n\n```cpp\nstd::ofstream archivo;\narchivo.____(\"salida.txt\");\n```",
+      "options": [
+        "open",
+        "is_open",
+        "link"
+      ],
+      "correct": 0,
+      "hint": "Se encarga de asociar el flujo al archivo físico.",
+      "explanation": "El método open() abre el archivo en disco especificado por el nombre de la ruta y lo asocia al objeto de flujo."
+    },
+    {
+      "q": "2. Complete el código para iterar leyendo líneas completas de un archivo de texto de forma segura:\n\n```cpp\nstd::string linea;\nwhile (std::____(archivo, linea)) {\n    std::cout << linea << std::endl;\n}\n```",
+      "options": [
+        "get",
+        "getline",
+        "read"
+      ],
+      "correct": 1,
+      "hint": "Es una función global que procesa el salto de línea.",
+      "explanation": "std::getline(flujo, string) lee líneas enteras y devuelve el flujo de entrada, lo que permite evaluar el fin de archivo en la condición de while."
+    },
+    {
+      "q": "3. Se desea posicionar el puntero de lectura al final de un archivo. Rellene el espacio correspondiente:\n\n```cpp\narchivo.seekg(0, std::ios::____);\n```",
+      "options": [
+        "beg",
+        "cur",
+        "end"
+      ],
+      "correct": 2,
+      "hint": "Significa 'final' en inglés.",
+      "explanation": "std::ios::end representa la referencia al final físico del archivo de datos."
+    },
+    {
+      "q": "4. Complete el casting de tipo necesario para poder escribir la dirección de una variable struct en un flujo binario:\n\n```cpp\nPersona p;\narchivo.write(____(&p), sizeof(p));\n```",
+      "options": [
+        "reinterpret_cast<const char*>",
+        "static_cast<char*>",
+        "dynamic_cast<char*>"
+      ],
+      "correct": 0,
+      "hint": "Castea a puntero de caracteres de sólo lectura.",
+      "explanation": "El método write() requiere un puntero a const char*, lo cual se logra utilizando reinterpret_cast<const char*> sobre la dirección de la estructura."
+    },
+    {
+      "q": "5. Rellene el espacio para comprobar si el estado de error del flujo impide realizar más operaciones:\n\n```cpp\nif (archivo.____()) {\n    std::cerr << \"El flujo ha entrado en fallo.\";\n}\n```",
+      "options": [
+        "fail",
+        "good",
+        "clear"
+      ],
+      "correct": 0,
+      "hint": "El método comprueba si se ha activado failbit o badbit.",
+      "explanation": "El método fail() comprueba el estado del flujo, devolviendo true si ha ocurrido algún error lógico o crítico de E/S."
+    },
+    {
+      "q": "6. Se desea abrir un archivo en modo de adición para no destruir los registros almacenados previamente. Rellene el espacio:\n\n```cpp\nstd::ofstream log(\"eventos.log\", std::ios::____);\n```",
+      "options": [
+        "app",
+        "ate",
+        "trunc"
+      ],
+      "correct": 0,
+      "hint": "Su nombre proviene de la palabra 'append'.",
+      "explanation": "std::ios::app abre el archivo en modo de adición, asegurando que las escrituras se añadan al final del archivo."
+    },
+    {
+      "q": "7. Rellene el espacio para obtener la posición actual en bytes del puntero de escritura:\n\n```cpp\nstd::streampos pos = archivo.____();\n```",
+      "options": [
+        "tellg",
+        "tellp",
+        "seekp"
+      ],
+      "correct": 1,
+      "hint": "La letra final 'p' viene de la operación 'put' (escritura).",
+      "explanation": "El método tellp() devuelve la posición actual del puntero de escritura (put) en el flujo de salida."
+    },
+    {
+      "q": "8. Complete el código para leer de forma binaria el contenido de una variable de tipo flotante `double`:\n\n```cpp\ndouble d;\narchivo.read(reinterpret_cast<char*>(&d), ____(d));\n```",
+      "options": [
+        "size",
+        "sizeof",
+        "length"
+      ],
+      "correct": 1,
+      "hint": "Operador integrado de C++ para calcular el tamaño en bytes.",
+      "explanation": "sizeof(d) calcula el tamaño en bytes de la variable en memoria para que la lectura binaria extraiga el número exacto de bytes."
+    },
+    {
+      "q": "9. Complete la instrucción para imprimir una línea y asegurar que el búfer de salida del archivo se escribe inmediatamente en el disco:\n\n```cpp\narchivo << \"Registro de error\" << std::____;\n```",
+      "options": [
+        "flush",
+        "endl",
+        "clear"
+      ],
+      "correct": 1,
+      "hint": "Inserta salto de línea y realiza flush.",
+      "explanation": "std::endl realiza un salto de línea en el flujo e invoca al método flush() para asegurar la escritura física inmediata."
+    },
+    {
+      "q": "10. Rellene la condición para verificar si un archivo pudo abrirse con éxito en el disco:\n\n```cpp\nif (!archivo.____()) {\n    std::cerr << \"Error de apertura\";\n}\n```",
+      "options": [
+        "good",
+        "is_open",
+        "fail"
+      ],
+      "correct": 1,
+      "hint": "Método dedicado a verificar la conexión física del flujo con el disco.",
+      "explanation": "El método is_open() devuelve true si el flujo de archivo está correctamente abierto y vinculado al recurso."
+    },
+    {
+      "q": "11. Rellene el espacio para avanzar el puntero de lectura 10 bytes a partir de su posición actual:\n\n```cpp\narchivo.seekg(10, std::ios::____);\n```",
+      "options": [
+        "cur",
+        "beg",
+        "end"
+      ],
+      "correct": 0,
+      "hint": "Significa 'current' en inglés.",
+      "explanation": "std::ios::cur indica que el desplazamiento se debe realizar relativo a la posición actual del puntero del flujo."
+    },
+    {
+      "q": "12. Complete el código para restaurar el estado de error de un archivo y permitir nuevas lecturas tras encontrar un formato erróneo:\n\n```cpp\narchivo.____();\n```",
+      "options": [
+        "clear",
+        "reset",
+        "good"
+      ],
+      "correct": 0,
+      "hint": "Limpia y restablece las banderas de error.",
+      "explanation": "El método clear() restablece las banderas de estado del flujo de archivos a 'goodbit', eliminando señales de error previas."
+    },
+    {
+      "q": "13. Rellene el espacio para comprobar si el error del flujo se debe a un fallo crítico e irreversible del dispositivo físico:\n\n```cpp\nif (archivo.rdstate() & std::ios::____) {\n    std::cerr << \"Fallo de hardware\";\n}\n```",
+      "options": [
+        "badbit",
+        "failbit",
+        "eofbit"
+      ],
+      "correct": 0,
+      "hint": "Es la bandera para errores irreparables del medio físico.",
+      "explanation": "std::ios::badbit representa errores críticos del hardware de archivos que imposibilitan seguir operando con el flujo."
+    },
+    {
+      "q": "14. Se desea abrir un flujo bidireccional en formato binario. Complete el código:\n\n```cpp\nstd::fstream archivo(\"datos.bin\", std::ios::in | std::ios::out | std::ios::____);\n```",
+      "options": [
+        "binary",
+        "app",
+        "trunc"
+      ],
+      "correct": 0,
+      "hint": "Evita interpretaciones de formato en caracteres.",
+      "explanation": "std::ios::binary indica que el archivo debe ser tratado como binario puro sin traducciones de salto de línea."
+    },
+    {
+      "q": "15. Complete la instrucción para extraer un único carácter (incluyendo espacios) del archivo de entrada:\n\n```cpp\nchar c;\nwhile (archivo.____(c)) {\n    std::cout << c;\n}\n```",
+      "options": [
+        "get",
+        "put",
+        "read"
+      ],
+      "correct": 0,
+      "hint": "Método miembro de lectura de un solo carácter.",
+      "explanation": "El método get(c) lee el siguiente carácter del flujo, sin omitir espacios ni saltos de línea, y lo guarda en 'c'."
+    },
+    {
+      "q": "16. Complete el código para enviar un carácter crudo al flujo de salida de datos:\n\n```cpp\nchar c = '*';\narchivo.____(c);\n```",
+      "options": [
+        "write",
+        "put",
+        "print"
+      ],
+      "correct": 1,
+      "hint": "Opuesto de get().",
+      "explanation": "El método put() escribe un único carácter de texto de forma directa en el flujo de salida."
+    },
+    {
+      "q": "17. Rellene el espacio para que el bucle incremente correctamente un contador de palabras leídas:\n\n```cpp\nstd::string pal;\nint cant = 0;\nwhile (archivo >> pal) {\n    ____;\n}\n```",
+      "options": [
+        "cant++",
+        "pal++",
+        "archivo++"
+      ],
+      "correct": 0,
+      "hint": "Aumenta en uno la variable entera acumuladora.",
+      "explanation": "cant++ incrementa la variable contadora cada vez que se lee una palabra exitosamente con el operador >>."
+    },
+    {
+      "q": "18. Se desea reposicionar el puntero de lectura al inicio físico del archivo. Rellene la instrucción:\n\n```cpp\narchivo.seekg(____, std::ios::beg);\n```",
+      "options": [
+        "0",
+        "1",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "Desplazamiento nulo desde el origen.",
+      "explanation": "Indicar 0 en seekg desde std::ios::beg devuelve el puntero al inicio absoluto del fichero."
+    },
+    {
+      "q": "19. Rellene el espacio para declarar un objeto capaz de leer de un archivo:\n\n```cpp\nstd::____ archivo(\"entrada.txt\");\n```",
+      "options": [
+        "ifstream",
+        "ofstream",
+        "fstream"
+      ],
+      "correct": 0,
+      "hint": "Prefijo 'if' de entrada.",
+      "explanation": "std::ifstream representa un flujo de archivos configurado para lectura de datos (entrada)."
+    },
+    {
+      "q": "20. Rellene el espacio para declarar un objeto capaz de escribir en un archivo:\n\n```cpp\nstd::____ archivo(\"salida.txt\");\n```",
+      "options": [
+        "ofstream",
+        "ifstream",
+        "fstream"
+      ],
+      "correct": 0,
+      "hint": "Prefijo 'of' de salida.",
+      "explanation": "std::ofstream representa un flujo de archivos configurado para escritura de datos (salida)."
+    },
+    {
+      "q": "21. ¿Qué modos de apertura borran o descartan por completo el contenido existente de un archivo en disco al abrirlo?",
+      "options": [
+        "Abrir con std::ios::out sin especificar std::ios::app",
+        "Abrir combinando explícitamente con std::ios::trunc",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Tanto out por defecto como trunc realizan esta acción.",
+      "explanation": "La apertura de un archivo de escritura con std::ios::out trunca por defecto el archivo, al igual que usar std::ios::trunc. Todas las anteriores son correctas."
+    },
+    {
+      "q": "22. Analice las siguientes constantes del flujo de C++. ¿Cuáles representan banderas del estado de validez o error?",
+      "options": [
+        "std::ios::eofbit",
+        "std::ios::failbit y std::ios::badbit",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Hay tres banderas estándar principales.",
+      "explanation": "Las banderas estándar de error en flujos de C++ son eofbit, failbit y badbit. Todas son correctas."
+    },
+    {
+      "q": "23. Considere el uso de la clase bidireccional `std::fstream`. ¿Qué operaciones permite realizar?",
+      "options": [
+        "Lectura secuencial formateada con el operador '>>'",
+        "Lectura y escritura de bloques binarios mediante read() y write()",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "std::fstream combina ifstream y ofstream.",
+      "explanation": "La clase fstream es bidireccional y soporta todas las operaciones de entrada/salida de istream y ostream. Todas son correctas."
+    },
+    {
+      "q": "24. ¿Por qué causas comunes puede fallar la apertura de un fichero de lectura (`ifstream`), haciendo que `is_open()` retorne `false`?",
+      "options": [
+        "El archivo no existe en la ruta de búsqueda del disco",
+        "El usuario no tiene permisos suficientes para leer el archivo en el sistema operativo",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Cualquier problema de acceso al archivo físico causa fallo.",
+      "explanation": "is_open() devuelve false si el archivo no existe, la ruta es inválida, o si faltan permisos del sistema de archivos. Todas son correctas."
+    },
+    {
+      "q": "25. ¿Qué métodos de la clase de flujo de C++ permiten consultar de forma directa el estado del mismo?",
+      "options": [
+        "good() y fail()",
+        "bad() y eof()",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Los métodos comprueban de manera individual el estado del flujo.",
+      "explanation": "El programador puede interrogar al flujo con good(), fail(), bad() y eof() para validar su estado de error. Todas son correctas."
+    },
+    {
+      "q": "26. ¿Qué acciones provocan que los datos del búfer temporal de salida se guarden físicamente en el disco?",
+      "options": [
+        "Llamar explícitamente al método `.flush()` o al manipulador `std::flush`",
+        "Cerrar el archivo con el método `.close()` o usar `std::endl`",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Tanto flush como la clausura de ficheros vuelcan el buffer.",
+      "explanation": "El vaciado de buffer (flush) se puede forzar con std::flush o std::endl, y se produce implícitamente al cerrar el archivo mediante close(). Todas son correctas."
+    },
+    {
+      "q": "27. Al abrir un archivo con la bandera `std::ios::binary` en un sistema operativo Windows, ¿qué efectos se producen?",
+      "options": [
+        "Se desactiva la traducción automática del salto de línea '\\n' al par de bytes '\\r\\n'",
+        "Se desactiva la interpretación histórica del byte ASCII 26 (Ctrl+Z) como fin del archivo",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "El flujo binario realiza transferencias exactas byte a byte.",
+      "explanation": "El modo binary en Windows evita traducciones de nueva línea y lecturas interrumpidas por caracteres históricos de control. Todas son correctas."
+    },
+    {
+      "q": "28. ¿Qué métodos permiten obtener la posición actual de un puntero dentro de un archivo?",
+      "options": [
+        "tellg() para el puntero de lectura (get)",
+        "tellp() para el puntero de escritura (put)",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Ambos métodos indican la posición absoluta.",
+      "explanation": "tellg() y tellp() se utilizan para consultar la posición absoluta en bytes de los punteros de lectura y escritura. Todas son correctas."
+    },
+    {
+      "q": "29. ¿Qué constantes se pueden emplear como origen para establecer un desplazamiento relativo mediante los métodos `seekg` y `seekp`?",
+      "options": [
+        "std::ios::beg (comienzo del archivo)",
+        "std::ios::cur (posición actual) y std::ios::end (fin del archivo)",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Existen tres constantes de desplazamiento en std::ios.",
+      "explanation": "beg, cur y end son las tres constantes válidas para especificar el punto de referencia del desplazamiento. Todas son correctas."
+    },
+    {
+      "q": "30. ¿Qué operaciones o características se activan si abrimos un archivo combinando los modos `std::ios::in | std::ios::out`?",
+      "options": [
+        "Se permite leer del archivo sin perder los datos iniciales",
+        "Se permite escribir y modificar datos en el archivo sin truncarlo inicialmente",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Es la combinación básica para lectura/escritura aleatoria sin vaciado.",
+      "explanation": "La combinación ios::in | ios::out permite realizar operaciones bidireccionales en cualquier parte del archivo sin destruirlo al abrir. Todas son correctas."
+    },
+    {
+      "q": "31. Si intentamos abrir un archivo inexistente para lectura usando `std::ifstream`, ¿cuál de las siguientes banderas se activa indicando un fallo irreversible de hardware físico que imposibilita llamar a clear()?",
+      "options": [
+        "std::ios::badbit",
+        "std::ios::eofbit",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Se activa failbit, pero es recuperable y se puede limpiar.",
+      "explanation": "Abrir un archivo inexistente activa failbit, el cual es un error lógico recuperable. No se activa badbit ni eofbit, y se puede llamar a clear(). Ninguna es correcta."
+    },
+    {
+      "q": "32. ¿Qué operador de extracción se utiliza para leer de forma directa una línea de texto que contiene espacios desde un archivo y guardarla en un `std::string`?",
+      "options": [
+        "El operador >>",
+        "El operador <<",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "El operador >> se detiene al encontrar espacios.",
+      "explanation": "No se utiliza un operador de extracción (>> o <<) para leer líneas con espacios; en su lugar, se emplea la función global std::getline. Ninguna es correcta."
+    },
+    {
+      "q": "33. ¿Qué método miembro de la clase `std::ofstream` nos permite eliminar de forma física un archivo guardado en el disco duro?",
+      "options": [
+        "remove()",
+        "clear()",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Las clases de flujo no administran eliminación física.",
+      "explanation": "Los objetos ofstream no tienen métodos miembros para borrar archivos del disco. Para borrar archivos se usan funciones del sistema como std::remove(). Ninguna es correcta."
+    },
+    {
+      "q": "34. Si abrimos un archivo con el modo `std::ios::app`, ¿qué instrucción de desplazamiento `seekp()` nos permite retroceder al principio del archivo para sobrescribir los primeros 10 bytes del mismo?",
+      "options": [
+        "seekp(0, std::ios::beg)",
+        "seekp(10, std::ios::beg)",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "El modo ios::app obliga a escribir siempre al final del archivo.",
+      "explanation": "En modo ios::app, el puntero de escritura se fuerza de forma automática al final del archivo antes de cada inserción, impidiendo sobrescribir datos. Ninguna es correcta."
+    },
+    {
+      "q": "35. ¿Cuál es el tamaño exacto en bytes de la clase `std::streampos` garantizado de manera universal por el estándar de C++?",
+      "options": [
+        "Exactamente 4 bytes",
+        "Exactamente 8 bytes",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "El tamaño de streampos depende de la plataforma e implementación.",
+      "explanation": "El estándar de C++ no garantiza un tamaño fijo para std::streampos, variando entre compiladores según el sistema operativo y sistema de archivos. Ninguna es correcta."
+    },
+    {
+      "q": "36. ¿Qué bandera del espacio `std::ios` se debe especificar al abrir un archivo para evitar que se cree un nuevo archivo vacío si este no existe previamente?",
+      "options": [
+        "std::ios::nocreate",
+        "std::ios::noreplace",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Esas banderas históricas no forman parte de C++ estándar.",
+      "explanation": "Las banderas ios::nocreate o ios::noreplace no pertenecen al estándar C++. Para lograr este comportamiento simplemente se abre con ifstream o in|out. Ninguna es correcta."
+    },
+    {
+      "q": "37. ¿Cuál es la posición inicial numérica del puntero de escritura tras abrir un archivo con `std::ofstream` en el modo adición `std::ios::app`?",
+      "options": [
+        "La posición fija -1",
+        "La posición fija 1",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Apunta al final, que corresponde al número de bytes actual del archivo.",
+      "explanation": "La posición inicial con ios::app corresponde al tamaño actual del archivo en bytes (fin del archivo), no a -1 o 1. Ninguna es correcta."
+    },
+    {
+      "q": "38. ¿Qué método miembro de la clase `std::ifstream` devuelve directamente la longitud total del archivo de texto en caracteres sin mover el puntero de lectura?",
+      "options": [
+        "size()",
+        "length()",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "No hay métodos directos de tamaño en ifstream.",
+      "explanation": "ifstream no contiene métodos size() o length(). Se debe desplazar el puntero al final mediante seekg y consultar con tellg. Ninguna es correcta."
+    },
+    {
+      "q": "39. ¿Qué método miembro se utiliza para borrar el contenido almacenado en el archivo de disco y truncarlo a cero bytes sin necesidad de cerrar el flujo?",
+      "options": [
+        "flush()",
+        "clear()",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Estas funciones operan sobre buffers o banderas de error.",
+      "explanation": "Ninguna de estas funciones borra o trunca el archivo abierto. Para vaciar un archivo se debe cerrar y volver a abrir en modo ios::trunc. Ninguna es correcta."
+    },
+    {
+      "q": "40. Suponga que un archivo contiene la cadena '12.34 abc'. Si ejecutamos el fragmento de código: `int x; archivo >> x;`, ¿cuál es el valor final de `x` y el estado del flujo?",
+      "options": [
+        "x = 12.34 y el flujo está en estado good()",
+        "x = 0 y el flujo está en estado de error fail()",
+        "Ninguna de las opciones anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Se lee la parte entera 12, el punto detiene la extracción y el flujo sigue en good().",
+      "explanation": "El operador de extracción de enteros lee la parte entera '12' y se detiene en el carácter '.'. Así, x almacena 12 y el flujo permanece en estado good(). Ninguna es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Traducción de Salto de Línea en Windows",
+      "context": "Un programa en C++ escribe los caracteres de texto \"Hola\\nMundo\\nC++\\n\" utilizando un objeto de tipo std::ofstream.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuál es el tamaño total en caracteres (bytes) del texto en memoria RAM antes de guardarse en disco?",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "El texto consta de las palabras y saltos de línea: 'Hola\\n' (5 bytes), 'Mundo\\n' (6 bytes), 'C++\\n' (4 bytes). La suma es $5 + 6 + 4 = 15$ bytes."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Si el archivo se abre en modo texto en Windows (donde cada salto de línea \\n se traduce automáticamente a la pareja de caracteres \\r\\n), ¿cuántos bytes ocupará físicamente el archivo en el disco?",
+          "correctValue": 18,
+          "explanation": "Cada uno de los 3 caracteres '\\n' se expande a '\\r\\n' (2 bytes), incrementando el tamaño físico en 3 bytes: $15 + 3 = 18$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Si el archivo se abre con el flag std::ios::binary desactivando cualquier traducción del sistema operativo, ¿cuántos bytes ocupará físicamente el archivo en el disco?",
+          "correctValue": 15,
+          "explanation": "En modo binario no se realiza traducción de caracteres, por lo que el tamaño coincide exactamente con el de memoria: $15$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "¿Cuál es la diferencia en bytes entre la escritura en modo texto en Windows y la escritura en modo binario para este texto?",
+          "correctValue": 3,
+          "explanation": "La diferencia se debe a las traducciones de los 3 saltos de línea: $18 - 15 = 3$ bytes.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Lectura de Enteros Formateados y Fin de Fichero (EOF)",
+      "context": "Un archivo de texto contiene exactamente los caracteres \"10 20 30 40 50\". Se lee usando un flujo std::ifstream archivo.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuántos enteros se leerán con éxito si ejecutamos un bucle while (archivo >> x)?",
+          "correctValue": 5,
+          "explanation": "Se leen exitosamente los números 10, 20, 30, 40 y 50, que son 5 enteros.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Si usamos el bucle while (!archivo.eof()) { archivo >> x; contador++; }, ¿cuántas veces se ejecuta el cuerpo del bucle, sabiendo que la bandera de fin de archivo solo se activa tras un intento de lectura fallido?",
+          "correctValue": 6,
+          "explanation": "Se ejecutan 5 veces para leer con éxito los 5 enteros. En la 5ª iteración se lee el '50'. Como no ha fallado la lectura (se leyó '50'), eof() sigue siendo false. El bucle itera una 6ª vez, intenta leer y falla (activando eof), por lo que se ejecuta $6$ veces en total.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del último entero almacenado en la variable x tras la finalización del bucle while (archivo >> x)?",
+          "correctValue": 50,
+          "explanation": "La última lectura exitosa corresponde al número $50$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "¿Cuántos espacios en blanco descartará automáticamente el operador de extracción >> durante toda la lectura exitosa de los datos?",
+          "correctValue": 4,
+          "explanation": "Hay 4 espacios separando los 5 números: \"10[ ]20[ ]30[ ]40[ ]50\".",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Desplazamientos de Puntero de Lectura (seekg y tellg)",
+      "context": "Un archivo tiene un tamaño total de 120 bytes y se abre para operaciones de lectura.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuál es la posición inicial en bytes devuelta por tellg() al abrir el archivo en modo std::ios::in?",
+          "correctValue": 0,
+          "explanation": "Al abrir un flujo de lectura ordinario, el puntero de lectura se sitúa al comienzo del archivo, en el byte $0$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Si ejecutamos archivo.seekg(45, std::ios::beg);, ¿cuál es el valor de la posición actual devuelto por tellg()?",
+          "correctValue": 45,
+          "explanation": "seekg con beg se mueve a la posición absoluta desde el inicio del archivo, que es $45$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Si a continuación hacemos archivo.seekg(15, std::ios::cur);, ¿cuál es el valor devuelto por tellg()?",
+          "correctValue": 60,
+          "explanation": "cur indica movimiento relativo desde la posición actual: $45 + 15 = 60$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Si después hacemos archivo.seekg(-10, std::ios::end);, ¿cuál es la posición actual en bytes devuelta por tellg()?",
+          "correctValue": 110,
+          "explanation": "end indica movimiento relativo al final del archivo. Si el archivo tiene 120 bytes: $120 - 10 = 110$ bytes.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Tamaño de Registros en Lectura/Escritura Binaria",
+      "context": "Considere la siguiente estructura de datos sin padding en C++: struct Registro { int id; char codigo[16]; double valor; }; de tamaño total 28 bytes.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuál es el tamaño en bytes obtenido mediante sizeof(Registro)?",
+          "correctValue": 28,
+          "explanation": "$sizeof(int) + sizeof(char[16]) + sizeof(double) = 4 + 16 + 8 = 28$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Si escribimos 8 de estos registros en un archivo usando el método .write(), ¿cuántos bytes totales se escribirán en el disco?",
+          "correctValue": 224,
+          "explanation": "$8 \\times sizeof(Registro) = 8 \\times 28 = 224$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Si queremos leer directamente el registro con índice 5 (0-indexed, el sexto registro que empieza tras 5 registros), ¿cuántos bytes de desplazamiento debemos indicar desde el inicio del archivo en seekg?",
+          "correctValue": 140,
+          "explanation": "Para saltar 5 registros: $5 \\times 28 = 140$ bytes de desplazamiento.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "¿Cuál será la posición del puntero devuelto por tellg() tras leer con éxito el registro número 6 (el del desplazamiento 140)?",
+          "correctValue": 168,
+          "explanation": "El puntero avanza los 28 bytes leídos desde la posición 140: $140 + 28 = 168$ bytes.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Tamaño de Archivo y Posiciones de Puntero",
+      "context": "Un programa lee un archivo de datos binarios que contiene únicamente la cadena \"Ficheros_C++\".",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuál es el tamaño en bytes del archivo calculado mediante seekg(0, ios::end) y luego tellg()?",
+          "correctValue": 12,
+          "explanation": "La cadena \"Ficheros_C++\" tiene 12 caracteres (F-i-c-h-e-r-o-s-_-C-+-+), ocupando $12$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Si hacemos seekg(0, ios::beg) y leemos 4 caracteres con archivo.get(c), ¿cuál es la posición del puntero de lectura tellg()?",
+          "correctValue": 4,
+          "explanation": "Cada llamada a get() lee 1 byte. Al leer 4 bytes desde la posición 0, el puntero queda en la posición $4$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Si ahora retrocedemos 2 bytes respecto a la posición actual mediante seekg(-2, ios::cur), ¿cuál será el valor devuelto por tellg()?",
+          "correctValue": 2,
+          "explanation": "$4 - 2 = 2$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si ejecutamos seekg(0, ios::end) y luego seekg(-5, ios::cur), ¿cuál será la posición final del puntero en bytes?",
+          "correctValue": 7,
+          "explanation": "seekg(0, ios::end) coloca el puntero en 12. Moverlo -5 bytes en cur da $12 - 5 = 7$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Análisis de Caracteres con get()",
+      "context": "Un archivo de texto contiene únicamente los caracteres \"A B\\nC D\".",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuántas llamadas exitosas a archivo.get(c) se realizarán antes de alcanzar el final del archivo?",
+          "correctValue": 7,
+          "explanation": "La cadena \"A B\\nC D\" contiene: 'A'(1), ' '(2), 'B'(3), '\\n'(4), 'C'(5), ' '(6), 'D'(7). Son $7$ caracteres.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "¿Cuántos caracteres espacio en blanco ' ' se leerán en total mediante get()?",
+          "correctValue": 2,
+          "explanation": "Hay dos espacios: uno entre A y B, y otro entre C y D. Total = $2$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "¿Cuántos caracteres salto de línea \\n se leerán en total?",
+          "correctValue": 1,
+          "explanation": "Hay un único salto de línea entre la B y la C: $1$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "¿Cuál es el código ASCII en base 10 del último carácter leído con éxito?",
+          "correctValue": 68,
+          "explanation": "El último carácter leído es 'D', cuyo código ASCII decimal es $68$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Estado de Error por Desajuste de Tipo",
+      "context": "El archivo datos.txt contiene \"14 3.14 Hola\". Se declara: int a; double b; std::string c; std::ifstream f(\"datos.txt\");",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Si hacemos f >> a;, ¿cuál es el valor numérico guardado en la variable a?",
+          "correctValue": 14,
+          "explanation": "El primer token es \"14\", que se analiza y lee con éxito como el entero $14$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Si a continuación hacemos f >> b;, ¿cuál es el valor guardado en b?",
+          "correctValue": 3.14,
+          "explanation": "El segundo token es \"3.14\", que se lee correctamente como el double $3.14$.",
+          "tolerance": 0.001
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si inmediatamente después hacemos int d; f >> d; (intentando leer 'Hola' como entero), ¿qué valor booleano (1 para true, 0 para false) devolverá f.fail()?",
+          "correctValue": 1,
+          "explanation": "Intentar convertir \"Hola\" a int produce un fallo de tipo, activando failbit. Por tanto, f.fail() devuelve true ($1$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si tras el fallo ejecutamos f.clear(); y realizamos f >> c;, ¿cuántos caracteres tiene el string leído en c?",
+          "correctValue": 4,
+          "explanation": "Al limpiar el error, el flujo vuelve a funcionar y lee el string \"Hola\", cuya longitud es $4$ caracteres.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Lectura Binaria Parcial con read() y gcount()",
+      "context": "Un archivo contiene exactamente 80 bytes de datos en disco.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Si llamamos a archivo.read(buf, 50);, ¿cuántos bytes lee la operación?",
+          "correctValue": 50,
+          "explanation": "Al haber 80 bytes disponibles, se leen los $50$ bytes solicitados completos.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "¿Cuál es el valor devuelto por archivo.gcount() después de esa primera operación?",
+          "correctValue": 50,
+          "explanation": "gcount() devuelve el número de bytes leídos por la última operación de entrada sin formato: $50$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Si seguidamente llamamos a archivo.read(buf, 50);, ¿cuántos bytes lee la operación?",
+          "correctValue": 30,
+          "explanation": "Quedaban $80 - 50 = 30$ bytes disponibles. Se lee el resto de bytes antes de alcanzar EOF.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "¿Cuál es el valor de archivo.gcount() tras esta segunda lectura?",
+          "correctValue": 30,
+          "explanation": "La segunda lectura extrajo exitosamente $30$ bytes.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Desplazamientos Relativos y Absolutos Combinados",
+      "context": "Un archivo binario de datos tiene una longitud física de exactamente 200 bytes.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Tras hacer seekg(80, ios::beg), ¿cuál es el valor de tellg()?",
+          "correctValue": 80,
+          "explanation": "seekg con ios::beg posiciona al puntero a 80 bytes desde el inicio.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Si luego hacemos seekg(40, ios::cur), ¿cuál es la posición en bytes?",
+          "correctValue": 120,
+          "explanation": "Avanza 40 bytes respecto a la posición actual (80): $80 + 40 = 120$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Si a continuación hacemos seekg(-30, ios::cur), ¿cuál es la posición?",
+          "correctValue": 90,
+          "explanation": "Retrocede 30 bytes respecto a la posición actual (120): $120 - 30 = 90$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Si finalmente nos movemos al byte -20 respecto al final: seekg(-20, ios::end), ¿en qué posición absoluta en bytes queda el puntero?",
+          "correctValue": 180,
+          "explanation": "Como el archivo mide 200 bytes, colocarse 20 bytes antes del final resulta en la posición $200 - 20 = 180$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Lectura de Flotantes Formateados",
+      "context": "Un archivo de texto contiene los caracteres \"1.5 2.5 3.5 4.5\" separados por espacios.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuántos números reales se leen con éxito en un bucle double v; while (archivo >> v)?",
+          "correctValue": 4,
+          "explanation": "Se leen con éxito los cuatro valores decimales separados por espacios: $4$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "¿Cuál es la suma acumulada de los primeros 3 números leídos?",
+          "correctValue": 7.5,
+          "explanation": "Suma: $1.5 + 2.5 + 3.5 = 7.5$.",
+          "tolerance": 0.001
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Si leemos el primer número en una variable de tipo int en vez de double, ¿cuál será el valor entero resultante almacenado en la variable?",
+          "correctValue": 1,
+          "explanation": "Al leer un entero de la cadena '1.5', lee la parte entera $1$ y se detiene en el carácter '.' decimal.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Si tras realizar la lectura del int (con valor 1), procedemos a leer un double, ¿cuál será el valor del flotante leído (la parte decimal y el espacio posterior)?",
+          "correctValue": 0.5,
+          "explanation": "La lectura continúa exactamente en el punto decimal '.', leyendo '.5' (que equivale a $0.5$).",
+          "tolerance": 0.001
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Máscaras de Bits de Modos de Apertura",
+      "context": "Suponga que en una biblioteca estándar se definen las siguientes banderas de ios: ios::in = 1, ios::out = 2, ios::ate = 4, ios::app = 8, ios::trunc = 16, ios::binary = 32.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuál es el valor numérico decimal de la máscara combinada std::ios::in | std::ios::out?",
+          "correctValue": 3,
+          "explanation": "$1 \\lor 2 = 3$ (binario $000011$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de std::ios::out | std::ios::binary?",
+          "correctValue": 34,
+          "explanation": "$2 \\lor 32 = 34$ (binario $100010$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de std::ios::in | std::ios::binary?",
+          "correctValue": 33,
+          "explanation": "$1 \\lor 32 = 33$ (binario $100001$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "¿Cuál es el valor de std::ios::out | std::ios::app | std::ios::binary?",
+          "correctValue": 42,
+          "explanation": "$2 \\lor 8 \\lor 32 = 42$ (binario $101010$).",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Conteo de Iteraciones en Lectura de Caracteres",
+      "context": "Un archivo contiene únicamente la cadena \"A B C D\".",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Si leemos usando while (archivo >> c) cont++;, ¿cuántas veces se ejecuta el bucle?",
+          "correctValue": 4,
+          "explanation": "El operador >> ignora automáticamente los espacios en blanco, por lo que lee exitosamente los 4 caracteres ('A', 'B', 'C', 'D'). El bucle se ejecuta $4$ veces.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Si leemos usando while (archivo.get(c)) cont++;, ¿cuántas veces se ejecuta el bucle?",
+          "correctValue": 7,
+          "explanation": "El método get() extrae todos los caracteres, incluidos espacios: 'A'(1), ' '(2), 'B'(3), ' '(4), 'C'(5), ' '(6), 'D'(7). Total = $7$ ejecuciones.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "¿Cuántos espacios en blanco en total lee la llamada get(c)?",
+          "correctValue": 3,
+          "explanation": "Hay 3 espacios separando los 4 caracteres: $3$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "¿Cuál es el código ASCII en base 10 del carácter leído en la tercera iteración del bucle while (archivo.get(c)) (que corresponde a 'B')?",
+          "correctValue": 66,
+          "explanation": "Los caracteres leídos en orden son: 1º 'A', 2º ' ', 3º 'B'. El código ASCII de 'B' es $66$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Comportamiento de peek()",
+      "context": "Un archivo contiene la palabra \"C++\".",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuál es el código ASCII del carácter retornado por archivo.peek() al abrir el archivo en la posición inicial?",
+          "correctValue": 67,
+          "explanation": "peek() observa el primer carácter, que es 'C' (código ASCII $67$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de tellg() tras invocar archivo.peek()?",
+          "correctValue": 0,
+          "explanation": "peek() no extrae el carácter, por lo que el puntero permanece en la posición inicial $0$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Si llamamos a archivo.get(c);, ¿cuál es el valor de tellg()?",
+          "correctValue": 1,
+          "explanation": "get() extrae 1 carácter, haciendo avanzar el puntero a la posición $1$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Si ahora llamamos de nuevo a archivo.peek(), ¿cuál es el código ASCII del carácter retornado?",
+          "correctValue": 43,
+          "explanation": "En la posición 1, el carácter es '+', cuyo código ASCII es $43$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Conteo de Líneas de Texto",
+      "context": "Un archivo de texto contiene las siguientes 4 líneas:\nLinea 1\n\n\nLinea 4",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuántas llamadas exitosas a std::getline(archivo, s) se realizarán?",
+          "correctValue": 4,
+          "explanation": "Hay 4 líneas en el archivo (2 con texto y 2 vacías), por lo que se realizan $4$ lecturas exitosas.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "¿Cuál es la longitud en caracteres del string s leído en la segunda iteración del bucle?",
+          "correctValue": 0,
+          "explanation": "La segunda línea está vacía, por lo que el string leído tiene longitud $0$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuál es la longitud del string s leído en la cuarta iteración del bucle?",
+          "correctValue": 7,
+          "explanation": "La cuarta línea es \"Linea 4\", que tiene $7$ caracteres.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "¿Cuántos caracteres en total se han guardado en los strings durante toda la lectura (suma de longitudes de s)?",
+          "correctValue": 14,
+          "explanation": "Línea 1 (\"Linea 1\": 7), Línea 2 (0), Línea 3 (0), Línea 4 (\"Linea 4\": 7). Suma total: $7 + 0 + 0 + 7 = 14$ caracteres.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Escritura de Enteros Formateados con setw",
+      "context": "Usando <iomanip>, un programa escribe en un archivo de texto: archivo << std::setw(6) << 123 << std::setw(4) << 45;",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuántos caracteres en total se escribirán físicamente en el fichero?",
+          "correctValue": 10,
+          "explanation": "setw(6) para 123 escribe 3 espacios + 123 (6 caracteres). setw(4) para 45 escribe 2 espacios + 45 (4 caracteres). En total: $6 + 4 = 10$ caracteres.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "¿Cuántos caracteres de espacio en blanco se insertan antes del número 123?",
+          "correctValue": 3,
+          "explanation": "Dado que el número tiene 3 dígitos (\"123\") y el ancho total es 6: $6 - 3 = 3$ espacios.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "¿Cuántos caracteres de espacio en blanco se insertan antes del número 45?",
+          "correctValue": 2,
+          "explanation": "El número tiene 2 dígitos (\"45\") y el ancho es 4: $4 - 2 = 2$ espacios.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Si abrimos el archivo para lectura y leemos los dos enteros mediante archivo >> a >> b;, ¿cuál es el valor de a + b?",
+          "correctValue": 168,
+          "explanation": "Se extraen los valores 123 y 45 con éxito, ya que el operador de extracción ignora los espacios intermedios. Suma: $123 + 45 = 168$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Ignorar Caracteres con ignore()",
+      "context": "Un archivo contiene los caracteres \"100#200#300\".",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Si ejecutamos int n; archivo >> n;, ¿qué valor numérico se almacena en n?",
+          "correctValue": 100,
+          "explanation": "El operador extrae los dígitos hasta encontrar '#', de modo que lee $100$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Si llamamos a archivo.ignore(100, '#');, ¿cuál es la posición del puntero de lectura tellg() inmediatamente después?",
+          "correctValue": 4,
+          "explanation": "La lectura inicial de 100 deja el puntero en la posición 3 (índice del '#'). ignore extrae caracteres hasta el '#' inclusive, por lo que extrae el '#' (1 byte) y se detiene en la posición $4$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Si leemos el siguiente entero int m; archivo >> m;, ¿qué valor se almacena en m?",
+          "correctValue": 200,
+          "explanation": "La lectura extrae el número $200$ y se detiene en el siguiente '#'.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si volvemos a llamar a archivo.ignore(1); y leemos otro entero int k; archivo >> k;, ¿qué valor se almacena en k?",
+          "correctValue": 300,
+          "explanation": "ignore(1) salta el '#' de la posición actual y la lectura extrae el número $300$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Saltos en Archivo Binario de Enteros",
+      "context": "Un archivo binario contiene 10 números enteros de tipo int (4 bytes cada uno).",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuántos bytes ocupa el archivo en total?",
+          "correctValue": 40,
+          "explanation": "$10 \\text{ enteros} \\times 4 \\text{ bytes/entero} = 40$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Si queremos posicionarnos al inicio del cuarto entero (índice 3, 0-based), ¿cuántos bytes de desplazamiento debemos indicar en seekg desde beg?",
+          "correctValue": 12,
+          "explanation": "Queremos saltar los primeros 3 enteros: $3 \\times 4 = 12$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Si leemos un entero en esa posición, ¿cuál será el valor del puntero tellg() tras la lectura?",
+          "correctValue": 16,
+          "explanation": "La lectura de 1 entero (4 bytes) avanza el puntero desde 12 a $12 + 4 = 16$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si desde la posición 16 hacemos seekg(-8, ios::cur), ¿cuál será la posición del puntero?",
+          "correctValue": 8,
+          "explanation": "Retrocedemos 8 bytes respecto a la posición actual: $16 - 8 = 8$ (apunta al tercer entero).",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Operación putback() en Flujos",
+      "context": "Un archivo contiene la cadena \"xyz\".",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Si leemos el primer carácter con archivo.get(c);, ¿cuál es el código ASCII del carácter leído?",
+          "correctValue": 120,
+          "explanation": "El primer carácter es 'x', cuyo código ASCII decimal es $120$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Si a continuación hacemos archivo.putback('A');, ¿qué carácter leerá la siguiente instrucción get(c)? Indique su código ASCII en base 10.",
+          "correctValue": 65,
+          "explanation": "putback devuelve el carácter 'A' al flujo de entrada, por lo que la siguiente lectura lee 'A' (ASCII $65$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuál es la posición devuelta por tellg() justo después del putback('A')?",
+          "correctValue": 0,
+          "explanation": "Al devolver el carácter al flujo, el puntero retrocede a la posición del carácter insertado, que es $0$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si leemos de nuevo con archivo.get(c);, ¿cuál será la posición devuelta por tellg() tras esa lectura?",
+          "correctValue": 1,
+          "explanation": "La extracción avanza el puntero de nuevo a la posición $1$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Bucle de Lectura de Enteros con Error de Formato",
+      "context": "Un archivo contiene \"5 10 15 abc 20\". Ejecutamos el bucle: int suma=0, n; while(archivo>>n) suma+=n;",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuál es el valor final de suma?",
+          "correctValue": 30,
+          "explanation": "Se suman con éxito los enteros 5, 10 y 15: $5 + 10 + 15 = 30$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "¿Cuántas lecturas con éxito de enteros se completaron antes de salir del bucle?",
+          "correctValue": 3,
+          "explanation": "Se leen correctamente 5, 10 y 15, totalizando $3$ enteros leídos.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "¿Qué valor booleano (1 para true, 0 para false) devuelve archivo.fail() tras finalizar el bucle?",
+          "correctValue": 1,
+          "explanation": "El bucle se detiene al intentar leer \"abc\" como entero, lo que activa failbit. fail() devuelve true ($1$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Si después de salir del bucle ejecutamos archivo.clear(); y realizamos std::string s; archivo >> s;, ¿cuántos caracteres tiene el string leído en s?",
+          "correctValue": 3,
+          "explanation": "Tras limpiar el error, leemos el token como string. Se extrae \"abc\", cuya longitud es $3$ caracteres.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Representación de Booleanos en Flujos de Texto",
+      "context": "Un programa escribe lo siguiente en un archivo: archivo << false << \" \" << true << \" \" << std::boolalpha << false;",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuántos caracteres en total se escribirán físicamente en el archivo (incluyendo los espacios)?",
+          "correctValue": 9,
+          "explanation": "Escribe '0' (false), un espacio, '1' (true), un espacio, y luego con boolalpha escribe 'false'. El archivo contiene: \"0 1 false\" (longitud $9$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Si leemos los dos primeros valores en variables enteras int a, b; archivo >> a >> b;, ¿cuál es el valor de a + b?",
+          "correctValue": 1,
+          "explanation": "Se lee $a = 0$ y $b = 1$. La suma es $0 + 1 = 1$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Si leemos el tercer valor en un std::string s; archivo >> s;, ¿cuántos caracteres tiene el string s?",
+          "correctValue": 5,
+          "explanation": "El tercer token es \"false\", que se lee como string de longitud $5$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Si intentamos leer el tercer valor en una variable bool x sin activar std::boolalpha en el flujo de entrada, ¿se leerá correctamente? Devuelve 1 para sí o 0 para no.",
+          "correctValue": 0,
+          "explanation": "Por defecto, la entrada booleana requiere los caracteres '0' o '1'. La palabra \"false\" causará un fallo de tipo. Devuelve $0$ (false).",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Archivo Vacío y Estado del Flujo",
+      "context": "Se abre un archivo completamente vacío (0 bytes de tamaño) para operaciones de lectura.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "¿Qué posición devuelve tellg() al abrir el archivo?",
+          "correctValue": 0,
+          "explanation": "El puntero se sitúa al inicio del archivo, que es el byte $0$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Si hacemos seekg(0, ios::end), ¿qué posición devuelve tellg()?",
+          "correctValue": 0,
+          "explanation": "Al medir el final de un archivo vacío, la posición absoluta sigue siendo $0$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Si intentamos leer un carácter mediante char c; archivo >> c;, ¿qué valor booleano (1 para true, 0 para false) devuelve archivo.eof()?",
+          "correctValue": 1,
+          "explanation": "Como no hay caracteres disponibles, se alcanza de inmediato el fin de archivo, activando eofbit: devuelve true ($1$).",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "¿Qué valor booleano (1 para true, 0 para false) devuelve archivo.fail()?",
+          "correctValue": 1,
+          "explanation": "La lectura fallida también activa failbit, por lo que fail() devuelve true ($1$).",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Comportamiento del Búfer y Vaciado Físico",
+      "context": "Suponga un búfer de salida de exactamente 512 bytes de capacidad. Un programa escribe caracteres individuales de 1 byte de tamaño.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Si el programa escribe 500 bytes sin invocar flush ni cerrar el archivo, ¿cuántos bytes se han transferido realmente al disco físico?",
+          "correctValue": 0,
+          "explanation": "Como 500 bytes no superan el límite del búfer (512), no se produce un vaciado automático y se transfieren $0$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Si el programa escribe 20 bytes más (total 520 bytes), ¿cuántos bytes se envían de forma automática al disco físico al llenarse el búfer?",
+          "correctValue": 512,
+          "explanation": "Al superar el límite, el búfer de 512 bytes se llena y se envía completo al disco: $512$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "¿Cuántos bytes quedan acumulados en el búfer tras este vaciado automático?",
+          "correctValue": 8,
+          "explanation": "Queda el remanente en el búfer: $520 - 512 = 8$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Si inmediatamente después se ejecuta archivo.flush(), ¿cuántos bytes quedan retenidos en el búfer?",
+          "correctValue": 0,
+          "explanation": "flush() fuerza el envío de todos los bytes residuales al disco, dejando $0$ bytes en el búfer.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Conteo de Caracteres en Cadena de Texto",
+      "context": "Un archivo contiene únicamente la cadena de texto \"Programacion_I_C++\".",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuál es la longitud en caracteres del archivo?",
+          "correctValue": 17,
+          "explanation": "La cadena \"Programacion_I_C++\" tiene $17$ caracteres.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "¿Cuántas veces aparece el carácter '_' en el archivo?",
+          "correctValue": 2,
+          "explanation": "Aparece 2 veces (después de Programacion y después de I): $2$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "¿Cuántas veces aparece la letra 'o' (sin tilde) en el archivo?",
+          "correctValue": 2,
+          "explanation": "Aparece en \"Pr[o]gramaci[o]n\": $2$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si leemos el archivo carácter a carácter usando archivo.get(c), ¿cuál es el código ASCII del carácter leído en el índice 12 (0-based)?",
+          "correctValue": 95,
+          "explanation": "El carácter en el índice 12 es '_', cuyo código ASCII decimal es $95$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Apertura Múltiple del Mismo Fichero",
+      "context": "Un programa abre un archivo usando std::ofstream out(\"temp.txt\"); y escribe \"123456\". Sin cerrar out ni hacer flush, abre el mismo con std::ifstream in(\"temp.txt\");.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Si intentamos leer un entero con int val; in >> val;, ¿cuántos bytes leerá con éxito el flujo in?",
+          "correctValue": 0,
+          "explanation": "Dado que el búfer de escritura de out aún no se ha vaciado a disco, el archivo en disco mide 0 bytes. La lectura lee $0$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Si ahora llamamos a out.close(); e in.close(); y volvemos a abrir in.open(\"temp.txt\");, ¿cuál es el valor del entero leído mediante in >> val?",
+          "correctValue": 123456,
+          "explanation": "Al cerrar out, se vuelcan los datos. La lectura extrae el número entero $123456$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "¿Cuántas cifras tiene el número leído en la parte b?",
+          "correctValue": 6,
+          "explanation": "El número 123456 tiene $6$ cifras.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Si a continuación abrimos out.open(\"temp.txt\", ios::app); y escribimos \"789\", ¿cuál es el tamaño final en bytes del archivo?",
+          "correctValue": 9,
+          "explanation": "En modo app se agregan 3 bytes al final de los 6 existentes: $6 + 3 = 9$ bytes.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Modificación de Archivo Binario con fstream",
+      "context": "Un archivo binario contiene los caracteres \"ABCDE\". Se abre usando std::fstream archivo(\"datos.bin\", ios::in | ios::out | ios::binary);.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Si hacemos archivo.seekp(2); archivo.put('X');, ¿cuál es la posición del puntero de escritura tellp() inmediatamente después?",
+          "correctValue": 3,
+          "explanation": "Escribir 1 carácter mediante put() hace avanzar el puntero de escritura en 1 byte: $2 + 1 = 3$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Si hacemos archivo.seekg(0); std::string s; archivo >> s; ¿cuál es el código ASCII del carácter en el índice 4 de la cadena leída en s?",
+          "correctValue": 69,
+          "explanation": "La cadena leída es \"ABXDE\" (ya que se reemplazó el carácter del índice 2 por 'X'). El carácter en el índice 4 es 'E', cuyo código ASCII es $69$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "¿Cuál será el código ASCII del carácter en el índice 2 de la cadena que ahora está guardada en el archivo?",
+          "correctValue": 88,
+          "explanation": "El carácter en el índice 2 es 'X', cuyo código ASCII decimal es $88$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "¿Cuál es la longitud en caracteres de la cadena leída en s?",
+          "correctValue": 5,
+          "explanation": "La cadena \"ABXDE\" tiene $5$ caracteres.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Sincronización de Punteros de Lectura y Escritura",
+      "context": "En una implementación estándar, los punteros de lectura y escritura en std::fstream comparten el mismo puntero de archivo. Se abre un archivo de 100 bytes.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Si hacemos archivo.seekg(40);, ¿cuál es el valor devuelto por tellp()?",
+          "correctValue": 40,
+          "explanation": "Al compartir el mismo puntero subyacente, mover el puntero de lectura seekg también actualiza el puntero de escritura tellp a $40$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Si escribimos 15 bytes mediante archivo.write(datos, 15);, ¿cuál es la posición del puntero de escritura tellp() resultante?",
+          "correctValue": 55,
+          "explanation": "Escribir 15 bytes desplaza el puntero de escritura 15 posiciones: $40 + 15 = 55$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "¿Cuál es el valor devuelto por tellg() inmediatamente después de la escritura anterior?",
+          "correctValue": 55,
+          "explanation": "Al estar sincronizados, tellg() también indica la posición $55$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Si reposicionamos el puntero de lectura al principio con archivo.seekg(0);, ¿cuál es el valor de tellp() resultante?",
+          "correctValue": 0,
+          "explanation": "El puntero de escritura se sincroniza y pasa a valer $0$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Conteo de Palabras según Longitud",
+      "context": "Un archivo contiene el texto \"C++ es un gran lenguaje de programacion\".",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "¿Cuántas palabras tienen una longitud de exactamente 2 caracteres?",
+          "correctValue": 3,
+          "explanation": "Las palabras son: \"es\", \"un\" y \"de\". Son $3$ palabras.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "¿Cuántas palabras tienen una longitud mayor o igual a 8 caracteres?",
+          "correctValue": 2,
+          "explanation": "Las palabras son: \"lenguaje\" (8) y \"programacion\" (12). Son $2$ palabras.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "¿Cuántos caracteres de espacio en blanco separan las palabras en el texto?",
+          "correctValue": 6,
+          "explanation": "Hay 6 espacios separando las 7 palabras: $6$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "¿Cuál es la longitud en caracteres de la palabra más larga?",
+          "correctValue": 12,
+          "explanation": "La palabra más larga es \"programacion\", con $12$ caracteres.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Desplazamiento por Registros en Binario",
+      "context": "Un archivo binario tiene registros de 20 bytes cada uno. El archivo contiene en total 10 registros.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Si queremos posicionar el puntero de lectura al inicio del registro 4 (0-based, el quinto registro), ¿qué desplazamiento absoluto en bytes indicamos en seekg(offset, ios::beg)?",
+          "correctValue": 80,
+          "explanation": "Queremos saltar 4 registros de 20 bytes: $4 \\times 20 = 80$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Si estando en la posición 80 queremos avanzar 3 registros más, ¿qué desplazamiento relativo en bytes indicamos en seekg(offset, ios::cur)?",
+          "correctValue": 60,
+          "explanation": "Queremos saltar 3 registros de 20 bytes hacia adelante: $3 \\times 20 = 60$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Si queremos posicionarnos al inicio del último registro del archivo, ¿qué desplazamiento relativo negativo en bytes indicamos desde el final del archivo en seekg(offset, ios::end)?",
+          "correctValue": -20,
+          "explanation": "El último registro mide 20 bytes y termina en el final del archivo. Para posicionarnos en su inicio, retrocedemos $20$ bytes desde el final: $-20$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "¿En qué posición absoluta en bytes quedará el puntero en la parte c?",
+          "correctValue": 180,
+          "explanation": "El archivo mide $10 \\times 20 = 200$ bytes. Desplazarse -20 bytes desde el final da la posición $200 - 20 = 180$.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Lectura de Cadenas Delimitadas con getline",
+      "context": "Un archivo contiene \"Carlos;21;9.5;Notable\". Se lee usando std::getline con el delimitador ';'.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Si hacemos std::getline(archivo, s, ';'), ¿cuántos caracteres tiene el string s leido?",
+          "correctValue": 6,
+          "explanation": "Se lee la subcadena \"Carlos\", cuya longitud es $6$ caracteres.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Si hacemos una segunda llamada std::getline(archivo, s, ';') y convertimos a entero, ¿qué valor numérico entero obtenemos?",
+          "correctValue": 21,
+          "explanation": "Se lee la subcadena \"21\", que al convertirse a entero da el valor $21$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Si hacemos una tercera llamada std::getline(archivo, s, ';') y convertimos a float, ¿qué valor flotante obtenemos?",
+          "correctValue": 9.5,
+          "explanation": "Se lee la subcadena \"9.5\", que al convertirse a decimal da $9.5$.",
+          "tolerance": 0.001
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "¿Cuántos bytes se han extraído en total del flujo tras completar la tercera lectura (incluyendo los delimitadores extraídos)?",
+          "correctValue": 14,
+          "explanation": "Subcadenas y delimitadores leídos: \"Carlos;\" (7 bytes), \"21;\" (3 bytes), \"9.5;\" (4 bytes). Total: $7 + 3 + 4 = 14$ bytes.",
+          "tolerance": 0.0
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Lectura Parcial de Archivo Binario",
+      "context": "Un archivo binario contiene 12 enteros de tipo int (4 bytes cada uno).",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "¿Cuál es el tamaño total del archivo en bytes?",
+          "correctValue": 48,
+          "explanation": "$12 \\text{ enteros} \\times 4 \\text{ bytes/entero} = 48$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Si leemos la primera mitad de los enteros del archivo en un array, ¿cuántos bytes lee la función read()?",
+          "correctValue": 24,
+          "explanation": "La mitad de 12 enteros es 6 enteros: $6 \\times 4 \\text{ bytes} = 24$ bytes.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuál será la posición absoluta devuelta por tellg() tras la lectura anterior?",
+          "correctValue": 24,
+          "explanation": "Se leyeron 24 bytes desde el inicio, por lo que el puntero se sitúa en el byte $24$.",
+          "tolerance": 0.0
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si después hacemos seekg(-8, ios::cur) y leemos un entero int val, ¿cuál es el índice del entero leido (0-based)?",
+          "correctValue": 4,
+          "explanation": "$24 - 8 = 16$ bytes (posición inicial de la lectura). El entero se encuentra en los bytes 16 a 20. Su índice es $16 / 4 = 4$.",
+          "tolerance": 0.0
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Combinación de banderas de modo de apertura",
+      "tex": "$$\\text{ModoCombinado} = \\text{std::ios::in} \\mid \\text{std::ios::out} \\mid \\text{std::ios::binary}$$"
+    },
+    {
+      "name": "Cálculo del tamaño de un archivo en bytes",
+      "tex": "$$\\text{TamañoArchivo} = \\text{tellg()}_{\\text{end}} - \\text{tellg()}_{\\text{beg}}$$"
+    },
+    {
+      "name": "Offset absoluto de acceso a un registro en binario",
+      "tex": "$$\\text{PosiciónBytes} = N \\times \\text{sizeof}(\\text{Registro})$$"
+    },
+    {
+      "name": "Relación de estado correcto de un flujo",
+      "tex": "$$\\text{good()} \\iff \\neg(\\text{failbit} \\lor \\text{badbit} \\lor \\text{eofbit})$$"
+    },
+    {
+      "name": "Sintaxis general de lectura de línea delimitada",
+      "tex": "$$\\text{std::getline}(\\text{flujo}, \\text{cadena}, \\text{delimitador})$$"
+    },
+    {
+      "name": "Firma del método de escritura binaria write",
+      "tex": "$$\\text{flujo.write}(\\text{reinterpret\\_cast<const char*>}(\\&\\text{objeto}), \\text{sizeof}(\\text{objeto}))$$"
+    },
+    {
+      "name": "Firma del método de lectura binaria read",
+      "tex": "$$\\text{flujo.read}(\\text{reinterpret\\_cast<char*>}(\\&\\text{objeto}), \\text{sizeof}(\\text{objeto}))$$"
+    },
+    {
+      "name": "Desplazamiento relativo desde la posición actual",
+      "tex": "$$\\text{flujo.seekg}(\\text{desplazamiento}, \\text{std::ios::cur})$$"
+    }
+  ]
+}

@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué es un array (vector o matriz) en C++?",
+      "options": [
+        "Una estructura de datos estática y homogénea que almacena elementos del mismo tipo en memoria contigua.",
+        "Una estructura dinámica y heterogénea que puede almacenar elementos de cualquier tipo.",
+        "Un tipo de dato primitivo que solo puede almacenar un valor a la vez."
+      ],
+      "correct": 0,
+      "hint": "Reserva memoria de forma secuencial y todos los elementos son idénticos en tipo.",
+      "explanation": "Un array es una estructura homogénea (todos los elementos son del mismo tipo) y estática (su tamaño se define en tiempo de compilación y no cambia) que se ubica de forma contigua en memoria."
+    },
+    {
+      "q": "En C++, ¿cuál es el coste temporal de acceder a un elemento de un array mediante su índice?",
+      "options": [
+        "O(1)",
+        "O(n)",
+        "O(log n)"
+      ],
+      "correct": 0,
+      "hint": "El acceso es directo gracias a la dirección base y el índice.",
+      "explanation": "El acceso a cualquier posición de un array es directo (tiempo constante, $$O(1)$$), ya que la dirección de memoria se calcula mediante una fórmula simple a partir del índice."
+    },
+    {
+      "q": "¿Qué sucede en tiempo de ejecución en C++ si se accede a un índice fuera de los límites declarados de un array?",
+      "options": [
+        "C++ no comprueba los límites; el comportamiento es indefinido (puede leer basura o provocar Segmentation Fault).",
+        "El compilador lanza automáticamente una excepción del tipo 'std::out_of_range' que detiene el programa de forma segura.",
+        "El sistema operativo redimensiona el array dinámicamente para evitar el error."
+      ],
+      "correct": 0,
+      "hint": "C++ prioriza la velocidad y no realiza comprobaciones de rango implícitas.",
+      "explanation": "C++ no comprueba los límites de los arrays por defecto. Acceder a una posición inválida causa comportamiento indefinido, pudiendo corromper la memoria o colgar el programa."
+    },
+    {
+      "q": "¿Cuál es el rango de índices válidos para acceder a un array de enteros de tamaño 10?",
+      "options": [
+        "Desde 0 hasta 9.",
+        "Desde 1 hasta 10.",
+        "Desde 0 hasta 10."
+      ],
+      "correct": 0,
+      "hint": "Los índices en C++ siempre son base cero.",
+      "explanation": "Para un array de tamaño N, los índices válidos van desde 0 hasta N-1. En este caso, de 0 a 9."
+    },
+    {
+      "q": "Al declarar un array local como 'int numeros[5];' dentro de una función, ¿qué valores contienen inicialmente sus elementos si no se inicializa explícitamente?",
+      "options": [
+        "Valores indeterminados (basura de memoria).",
+        "Todos sus elementos se inicializan a cero automáticamente.",
+        "El programa no compila porque exige inicializar todo array."
+      ],
+      "correct": 0,
+      "hint": "Las variables locales automáticas en C++ no se inicializan por defecto.",
+      "explanation": "Los arrays declarados localmente sin inicializador contienen basura, es decir, cualquier valor que estuviera en esa porción de memoria de la pila."
+    },
+    {
+      "q": "Si declaramos un array como 'int datos[5] = {10, 20};', ¿qué valores toman los elementos restantes del array?",
+      "options": [
+        "Se inicializan automáticamente a 0.",
+        "Contienen basura de memoria ya que no fueron definidos.",
+        "Provoca un error de compilación por inicialización incompleta."
+      ],
+      "correct": 0,
+      "hint": "La inicialización parcial pone a cero el resto.",
+      "explanation": "Si se inicializa un array parcialmente, los elementos para los cuales no se proporciona un valor explícito se inicializan automáticamente a cero."
+    },
+    {
+      "q": "¿Cómo se define el tamaño de un array estático en C++?",
+      "options": [
+        "Debe ser una expresión constante entera conocida en tiempo de compilación.",
+        "Puede ser una variable cuyo valor se decida durante la ejecución del programa.",
+        "Se define de forma dinámica mediante el operador 'new'."
+      ],
+      "correct": 0,
+      "hint": "El compilador necesita saber cuánta memoria reservar en el stack antes de ejecutar.",
+      "explanation": "El tamaño de un array estático debe ser una constante conocida al compilar (como un literal o una constante $$const$$), para que el compilador reserve el tamaño contiguo exacto."
+    },
+    {
+      "q": "Cuando se pasa un array como parámetro a una función (por ejemplo, 'void f(int arr[], int n)'), ¿de qué forma se transmite?",
+      "options": [
+        "Por referencia de forma implícita (decaimiento a puntero).",
+        "Por valor (se realiza una copia completa de los datos en el stack frame).",
+        "Únicamente se puede pasar por referencia constante explícita usando el operador '&'."
+      ],
+      "correct": 0,
+      "hint": "El nombre de un array equivale a la dirección de su primer elemento.",
+      "explanation": "En C++, los arrays no se copian al pasarse a funciones. El nombre del array decae en un puntero a su primer elemento, pasándose implícitamente por referencia/dirección."
+    },
+    {
+      "q": "¿Por qué es habitual pasar un parámetro entero adicional 'int tam' a las funciones que reciben arrays?",
+      "options": [
+        "Porque al decaer el array a puntero, la función pierde la información sobre el tamaño del array original.",
+        "Para obligar al compilador a reservar un marco de activación más grande en la pila.",
+        "Porque es obligatorio en C++ para que el enlazador asocie la función con la biblioteca estándar."
+      ],
+      "correct": 0,
+      "hint": "El puntero transmitido solo indica dónde empieza el array en memoria, no dónde termina.",
+      "explanation": "Dado que la función recibe únicamente un puntero al inicio del array, no tiene forma de saber cuántos elementos contiene. Por ello, se debe pasar el tamaño como un parámetro adicional."
+    },
+    {
+      "q": "¿Cómo se puede evitar que una función modifique los elementos de un array que se le pasa como parámetro?",
+      "options": [
+        "Añadiendo el modificador 'const' antes del tipo del array en el parámetro formal.",
+        "Declarando el array con la directiva '#pragma readonly' dentro de la función.",
+        "Pasando el array dentro de un struct por referencia estricta."
+      ],
+      "correct": 0,
+      "hint": "Es el modificador estándar de C++ para lectura exclusiva.",
+      "explanation": "Usar $$const$$ (ej. $$const\\ int\\ arr[]$$) indica al compilador que los elementos del array son de solo lectura dentro de la función, generando un error si se intenta modificarlos."
+    },
+    {
+      "q": "¿Qué orden utiliza C++ para almacenar los elementos de una matriz bidimensional en memoria?",
+      "options": [
+        "Orden de fila mayor (Row-major order): se almacena fila por fila de forma contigua.",
+        "Orden de columna mayor (Column-major order): se almacena columna por columna de forma contigua.",
+        "Almacenamiento disperso aleatorio gestionado por la pila de llamadas."
+      ],
+      "correct": 0,
+      "hint": "El índice de la derecha (columnas) cambia más rápido al avanzar en memoria física.",
+      "explanation": "C++ utiliza el orden de fila mayor. Esto significa que los elementos de la fila 0 se almacenan de forma contigua, seguidos de la fila 1, y así sucesivamente."
+    },
+    {
+      "q": "Si tenemos una matriz declarada como 'int M[3][4]', ¿cuál es el número total de elementos almacenados en memoria?",
+      "options": [
+        "12",
+        "7",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Multiplica el número de filas por el número de columnas.",
+      "explanation": "El número total de elementos en una matriz bidimensional es el producto del número de filas por el de columnas: $$3 \\times 4 = 12$$."
+    },
+    {
+      "q": "Al declarar el parámetro formal de una matriz bidimensional en una función (por ejemplo, 'void procesar(int M[][4], int filas)'), ¿por qué es obligatorio especificar el tamaño de la segunda dimensión?",
+      "options": [
+        "Para que el compilador pueda calcular el offset de memoria al acceder a un elemento 'M[i][j]' mediante la fórmula 'i * columnas + j'.",
+        "Porque C++ prohíbe el paso de matrices a funciones si no se definen todas sus dimensiones.",
+        "Para reservar memoria en la pila para la segunda dimensión únicamente."
+      ],
+      "correct": 0,
+      "hint": "El compilador necesita saber el ancho de cada fila para poder saltar de una fila a otra.",
+      "explanation": "Para calcular la posición de $$M[i][j]$$, el compilador requiere saber el tamaño de las columnas (segunda dimensión): $$offset = (i \\times COLUMNAS + j) \\times sizeof(Tipo)$$. La primera dimensión no es necesaria para este cálculo."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de la Búsqueda Lineal en el peor de los casos en un array de tamaño n?",
+      "options": [
+        "O(n)",
+        "O(1)",
+        "O(log n)"
+      ],
+      "correct": 0,
+      "hint": "En el peor caso, el elemento buscado está en la última posición o no existe.",
+      "explanation": "La búsqueda lineal requiere examinar cada elemento secuencialmente. Si el elemento no está o está al final, se realizan n comparaciones, dando una complejidad $$O(n)$$"
+    },
+    {
+      "q": "¿Cuál es el requisito indispensable para poder aplicar el algoritmo de Búsqueda Binaria sobre un array?",
+      "options": [
+        "El array debe estar previamente ordenado.",
+        "El array debe estar inicializado a cero en su totalidad.",
+        "El array debe contener únicamente números enteros positivos."
+      ],
+      "correct": 0,
+      "hint": "El algoritmo descarta mitades basándose en si la clave es mayor o menor que el valor medio.",
+      "explanation": "La búsqueda binaria requiere que el array esté ordenado. Si no lo está, la comparación con el elemento central no permite descartar con certeza una de las mitades."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de la Búsqueda Binaria en el peor de los casos en un array ordenado de tamaño n?",
+      "options": [
+        "O(log n)",
+        "O(n)",
+        "O(n^2)"
+      ],
+      "correct": 0,
+      "hint": "El rango de búsqueda se divide por la mitad en cada paso.",
+      "explanation": "Al dividir el espacio de búsqueda por 2 en cada iteración, el número de comparaciones necesarias en el peor caso es proporcional al logaritmo en base 2 de n, es decir, $$O(\\log n)$$"
+    },
+    {
+      "q": "¿Cómo funciona a grandes rasgos el algoritmo de ordenación por Selección (Selection Sort)?",
+      "options": [
+        "Busca reiteradamente el elemento mínimo del sub-array desordenado y lo intercambia con el elemento al inicio de dicha sección.",
+        "Compara parejas de elementos adyacentes y los intercambia si están en orden incorrecto.",
+        "Inserta de forma consecutiva cada elemento en su posición correspondiente dentro de una sección ya ordenada a su izquierda."
+      ],
+      "correct": 0,
+      "hint": "Su nombre viene de 'seleccionar' el elemento menor en cada pasada.",
+      "explanation": "El ordenamiento por selección divide el array en zonas ordenada y desordenada, busca el menor en la zona desordenada y lo coloca al principio de esta, ampliando la zona ordenada."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal del algoritmo de Selección (Selection Sort) en el mejor de los casos (por ejemplo, si el array ya está ordenado)?",
+      "options": [
+        "O(n^2)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct": 0,
+      "hint": "El algoritmo siempre realiza los bucles anidados para buscar el menor sin importar el orden inicial.",
+      "explanation": "Selection Sort realiza siempre las mismas comparaciones independientemente de si el array está ordenado o no. Sus bucles anidados se ejecutan siempre, resultando en $$O(n^2)$$ en todos los casos."
+    },
+    {
+      "q": "¿Cuál es el principio de funcionamiento del algoritmo de ordenación por Burbuja (Bubble Sort)?",
+      "options": [
+        "Compara e intercambia repetidamente elementos adyacentes si están desordenados, haciendo que los mayores 'floten' hacia el final.",
+        "Selecciona el elemento central y divide el array en dos mitades ordenadas.",
+        "Busca el elemento máximo y lo sitúa en la primera posición del array de forma directa."
+      ],
+      "correct": 0,
+      "hint": "Los elementos más grandes van subiendo poco a poco a su posición final como burbujas.",
+      "explanation": "Bubble Sort realiza pasadas comparando elementos adyacentes y los intercambia si están desordenados, logrando que el elemento más grande de la zona sin ordenar se desplace al extremo final en cada pasada."
+    },
+    {
+      "q": "¿Cómo funciona el algoritmo de ordenación por Inserción (Insertion Sort)?",
+      "options": [
+        "Inserta consecutivamente cada elemento del array en su posición correcta dentro de la parte izquierda ya ordenada.",
+        "Divide el array por la mitad repetidamente de forma recursiva hasta ordenarlo.",
+        "Intercambia el primer elemento con el último de forma iterativa."
+      ],
+      "correct": 0,
+      "hint": "Es similar a ordenar cartas en la mano una por una.",
+      "explanation": "Insertion Sort recorre el array a partir del segundo elemento y lo inserta en la posición adecuada comparándolo con los que ya están ordenados a su izquierda, desplazándolos si es necesario."
+    },
+    {
+      "q": "En el algoritmo de Inserción (Insertion Sort), ¿cuál es la complejidad temporal en el mejor de los casos (un array ya ordenado)?",
+      "options": [
+        "O(n)",
+        "O(n^2)",
+        "O(1)"
+      ],
+      "correct": 0,
+      "hint": "El bucle interno de inserción se detiene inmediatamente en la primera comparación si ya está ordenado.",
+      "explanation": "En un array ya ordenado, el bucle interno de Insertion Sort realiza una sola comparación y termina de inmediato para cada elemento. Así, solo se hace una pasada lineal de $$O(n)$$ operaciones."
+    },
+    {
+      "q": "En C++, si definimos un array como 'int arr[3] = {1, 2, 3};', ¿cuál es el resultado de la expresión '*(arr + 1)'?",
+      "options": [
+        "El valor de arr[1], es decir, 2.",
+        "La dirección de memoria del segundo elemento.",
+        "El valor de arr[0] incrementado en 1, es decir, 2."
+      ],
+      "correct": 0,
+      "hint": "La aritmética de punteros aplica la desreferenciación tras desplazar la dirección.",
+      "explanation": "$$*(arr + 1)$$ es semánticamente idéntico a $$arr[1]$$. Desplaza el puntero $$arr$$ en un entero y luego lo desreferencia, obteniendo el valor en la segunda posición (2)."
+    },
+    {
+      "q": "Dada la declaración 'int arr[5] = {1, 2, 3, 4, 5};', ¿qué representa la expresión 'arr' por sí sola en la mayoría de contextos?",
+      "options": [
+        "Un puntero constante que apunta a la dirección de memoria de arr[0].",
+        "El tamaño total en bytes del array.",
+        "El número total de elementos (5)."
+      ],
+      "correct": 0,
+      "hint": "Se conoce como decaimiento de array a puntero.",
+      "explanation": "En C++, el identificador de un array decae automáticamente en un puntero a su primer elemento ($$&arr[0]$$) en casi todos los contextos excepto al usar $$sizeof$$."
+    },
+    {
+      "q": "Si ejecutamos 'sizeof(arr)' para 'int arr[10];' en una plataforma donde 'sizeof(int) == 4', ¿cuál es el valor obtenido?",
+      "options": [
+        "40",
+        "10",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "El operador sizeof en arrays estáticos devuelve los bytes totales ocupados.",
+      "explanation": "El tamaño total ocupado es el número de elementos multiplicado por el tamaño de cada elemento: $$10 \\times 4 = 40$$ bytes."
+    },
+    {
+      "q": "Si pasamos el array de la pregunta anterior a una función 'void f(int arr[10])' y ejecutamos 'sizeof(arr)' dentro de ella, ¿qué valor se obtiene en un sistema de 64 bits?",
+      "options": [
+        "8, ya que arr decae en un puntero a int y sizeof devuelve el tamaño del puntero.",
+        "40, ya que el compilador recuerda el tamaño original declarado en la firma.",
+        "4, ya que es el tamaño del tipo base de los elementos del array."
+      ],
+      "correct": 0,
+      "hint": "Los parámetros formales de tipo array se tratan internamente como punteros.",
+      "explanation": "Dentro de una función, un parámetro formal $$int\\ arr[]$$ o $$int\\ arr[10]$$ es en realidad un puntero ($$int*$$). Por tanto, $$sizeof(arr)$$ devuelve el tamaño del puntero (8 bytes en 64 bits)."
+    },
+    {
+      "q": "¿Qué fórmula matemática permite obtener el número de elementos de un array estático 'T arr[N]' sin usar constantes explícitas?",
+      "options": [
+        "sizeof(arr) / sizeof(arr[0])",
+        "sizeof(arr) / sizeof(T*)",
+        "sizeof(arr[0]) * sizeof(arr)"
+      ],
+      "correct": 0,
+      "hint": "Divide el espacio total del array entre el tamaño de un solo elemento.",
+      "explanation": "Dividir los bytes totales de la estructura ($$sizeof(arr)$$) entre los bytes de su primer elemento ($$sizeof(arr[0])$$) nos da la cantidad exacta de elementos del array."
+    },
+    {
+      "q": "En una matriz bidimensional 'int M[R][C]', ¿cómo calcula el compilador el índice lineal correspondiente al elemento M[i][j]?",
+      "options": [
+        "i * C + j",
+        "i * R + j",
+        "i + j * R"
+      ],
+      "correct": 0,
+      "hint": "Se debe saltar 'i' filas completas (cada una de tamaño 'C' columnas) y sumar 'j'.",
+      "explanation": "Dado que la matriz se almacena fila a fila, para llegar a la fila $$i$$ debemos saltar $$i$$ filas completas de tamaño $$C$$. Luego, nos movemos $$j$$ posiciones en la fila actual: $$i \\times C + j$$."
+    },
+    {
+      "q": "Si intentamos declarar un array como 'int tam = 5; int arr[tam];' dentro de C++ estándar sin extensiones del compilador:",
+      "options": [
+        "Es incorrecto, el tamaño de un array estático debe ser constante en tiempo de compilación (como 'const int tam = 5;').",
+        "Es perfectamente válido en cualquier versión de C++.",
+        "Es válido si 'tam' es de tipo float en lugar de int."
+      ],
+      "correct": 0,
+      "hint": "C++ no soporta de forma estándar los Arrays de Longitud Variable (VLA) de C99 en el stack de forma nativa.",
+      "explanation": "El estándar de C++ requiere que los límites de los arrays estáticos sean constantes en tiempo de compilación. Usar una variable común ($$int\\ tam$$) provocará un error de compilación."
+    },
+    {
+      "q": "Si inicializamos un array como 'int arr[] = {1, 2, 3, 4};', ¿cuál es su tamaño?",
+      "options": [
+        "4, determinado automáticamente por el compilador según la lista de inicialización.",
+        "Indefinido, ya que no se especificó un tamaño entre los corchetes.",
+        "1, porque toma por defecto el valor del primer elemento."
+      ],
+      "correct": 0,
+      "hint": "Si los corchetes están vacíos, el compilador cuenta los valores provistos.",
+      "explanation": "Si omitimos el tamaño del array pero proporcionamos una lista de inicialización, el compilador asume un tamaño igual al número de elementos de la lista."
+    },
+    {
+      "q": "¿Por qué los algoritmos con complejidad O(n^2) como Bubble Sort se consideran inadecuados para ordenar grandes volúmenes de datos?",
+      "options": [
+        "Logran un número de operaciones que crece de forma cuadrática con el número de elementos, haciéndolos inviables para miles de datos.",
+        "Porque consumen una cantidad excesiva de memoria adicional que desborda el stack.",
+        "Porque no son compatibles con arrays de números reales."
+      ],
+      "correct": 0,
+      "hint": "El crecimiento cuadrático es extremadamente lento comparado con O(n log n).",
+      "explanation": "Para 1 millón de elementos, un algoritmo de $$O(n^2)$$ requiere alrededor de $$10^{12}$$ operaciones, tardando horas o días, mientras que uno de $$O(n \\log n)$$ solo requiere unas $$2 \\times 10^7$$ operaciones."
+    },
+    {
+      "q": "¿Qué es la 'traza' de una matriz bidimensional?",
+      "options": [
+        "La suma de todos los elementos situados en su diagonal principal.",
+        "La suma de todos los elementos de la primera fila y primera columna.",
+        "El número de elementos que contienen valores distintos de cero."
+      ],
+      "correct": 0,
+      "hint": "Solo se define para matrices cuadradas y suma la diagonal de arriba-izquierda a abajo-derecha.",
+      "explanation": "La traza es la suma de los elementos de la diagonal principal, es decir, de aquellos elementos $$M[i][j]$$ donde $$i == j$$."
+    },
+    {
+      "q": "Si declaramos una matriz como 'int M[3][3]' y la inicializamos como 'int M[3][3] = {};', ¿qué valores contiene?",
+      "options": [
+        "Todos sus elementos se inicializan a 0.",
+        "Contiene basura de memoria al no indicarse valores explícitos.",
+        "Provoca un error por sintaxis vacía."
+      ],
+      "correct": 0,
+      "hint": "Las llaves vacías forzan la inicialización por defecto de todos sus elementos.",
+      "explanation": "En C++, usar llaves vacías $${}$$ en la inicialización pone a cero todos los elementos de la matriz."
+    },
+    {
+      "q": "¿Qué ventaja principal aporta la Búsqueda Binaria frente a la Búsqueda Secuencial?",
+      "options": [
+        "Un número drásticamente menor de comparaciones en arrays grandes (O(log n) vs O(n)).",
+        "La posibilidad de ejecutarse sobre arrays de elementos desordenados.",
+        "Que no requiere el uso de bucles o recursión."
+      ],
+      "correct": 0,
+      "hint": "Piensa en buscar en un listín telefónico de 1 millón de personas.",
+      "explanation": "Para un millón de elementos, la búsqueda secuencial puede requerir 1 millón de comparaciones, mientras que la binaria requiere a lo sumo 20. El ahorro de tiempo es inmenso."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos asignar un array completo a otro en C++ de forma directa (por ejemplo, 'arr1 = arr2;')?",
+      "options": [
+        "Provoca un error de compilación, ya que los arrays estáticos no admiten asignación directa.",
+        "Se copian todos los elementos de arr2 a arr1 de forma secuencial.",
+        "El puntero arr1 pasa a apuntar a la dirección de memoria de arr2, perdiendo su memoria original."
+      ],
+      "correct": 0,
+      "hint": "Los nombres de arrays son punteros constantes y no pueden reasignarse.",
+      "explanation": "C++ no permite copiar arrays estáticos mediante la asignación directa. Para copiarlos se debe utilizar un bucle elemento por elemento o usar funciones como $$std::copy$$."
+    },
+    {
+      "q": "En el algoritmo de ordenación por Selección (Selection Sort), ¿cuántas comparaciones se realizan para ordenar un array de tamaño n?",
+      "options": [
+        "Siempre n * (n - 1) / 2 comparaciones.",
+        "Depende del desorden del array, variando entre n y n^2.",
+        "Exactamente n comparaciones en total."
+      ],
+      "correct": 0,
+      "hint": "Es la suma aritmética desde 1 hasta n-1.",
+      "explanation": "Selection Sort realiza siempre la suma de comparaciones $$(n-1) + (n-2) + \\dots + 1 = n(n-1)/2$$, sin importar si el array ya estaba ordenado."
+    },
+    {
+      "q": "¿Qué significa que un array sea una estructura de datos 'homogénea'?",
+      "options": [
+        "Que todos sus elementos son obligatoriamente del mismo tipo de dato.",
+        "Que se distribuye de manera uniforme a lo largo del montón de memoria.",
+        "Que el tiempo de acceso a cualquier elemento es siempre constante."
+      ],
+      "correct": 0,
+      "hint": "Se opone a heterogéneo (como un struct que puede mezclar tipos).",
+      "explanation": "Homogéneo significa que todos los elementos de la colección son idénticos en tipo (por ejemplo, todos $$int$$ o todos $$double$$)."
+    },
+    {
+      "q": "¿Qué se entiende por estructura 'estática' al referirnos a arrays en C++?",
+      "options": [
+        "Que el tamaño del array se fija en tiempo de compilación y no puede modificarse durante la ejecución.",
+        "Que el array se almacena exclusivamente en la zona de memoria estática global.",
+        "Que sus elementos no pueden sufrir modificaciones tras su inicialización."
+      ],
+      "correct": 0,
+      "hint": "Contrasta con las colecciones dinámicas (como std::vector) cuyo tamaño varía.",
+      "explanation": "Un array estático tiene un tamaño fijo definido en su declaración. No puede crecer ni encogerse durante la ejecución del programa."
+    },
+    {
+      "q": "Si se tiene una matriz declarada como 'int M[2][3]' y se accede al elemento 'M[1][3]', ¿qué ocurre?",
+      "options": [
+        "Es un acceso fuera de límites, ya que la columna máxima válida es 2.",
+        "Se accede de forma segura al primer elemento de la segunda fila.",
+        "El compilador devuelve automáticamente un valor de 0 para evitar fallos."
+      ],
+      "correct": 0,
+      "hint": "Los índices van de 0 a filas-1 y de 0 a columnas-1.",
+      "explanation": "Para $$int\\ M[2][3]$$, las columnas válidas son 0, 1 y 2. Acceder a $$M[1][3]$$ es un desbordamiento de límites, provocando comportamiento indefinido."
+    },
+    {
+      "q": "Si pasamos un array bidimensional a una función como 'void f(int M[3][4])', ¿qué realiza el compilador con la primera dimensión (filas)?",
+      "options": [
+        "La ignora por completo, tratando el parámetro como 'int M[][4]' (decaimiento a puntero de fila).",
+        "La verifica rigurosamente en tiempo de ejecución para evitar fallos de límites.",
+        "Reserva memoria local para una copia de 3 filas en la pila."
+      ],
+      "correct": 0,
+      "hint": "El compilador solo requiere saber el tamaño de las columnas.",
+      "explanation": "El tamaño de la primera dimensión es irrelevante para el paso de parámetros, ya que decae a un puntero a un array de 4 enteros: $$int\\ (*M)[4]$$. La dimensión de filas se ignora."
+    },
+    {
+      "q": "Al ordenar un array con Bubble Sort, ¿cómo se puede optimizar el algoritmo si el array ya se encuentra ordenado?",
+      "options": [
+        "Utilizando una bandera (flag) que controle si se realizaron intercambios en la última pasada; si no hubo, se aborta el bucle.",
+        "Reduciendo a la mitad el tamaño del array en cada iteración del bucle.",
+        "Cambiando las comparaciones de menor a mayor."
+      ],
+      "correct": 0,
+      "hint": "Si una pasada entera no realiza ningún intercambio, significa que los datos ya están en orden.",
+      "explanation": "La optimización del Bubble Sort consiste en llevar registro de si hubo intercambios. Si en una pasada no se intercambió nada, el array está ordenado y se puede terminar inmediatamente, logrando un tiempo óptimo $$O(n)$$"
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Para inicializar el primer elemento de un vector de enteros con el valor 10, complete el código: 'int arr[3] = {____, 20, 30};'",
+      "options": [
+        "10",
+        "0",
+        "5"
+      ],
+      "correct": 0,
+      "hint": "Es la primera posición de la lista de inicialización.",
+      "explanation": "La inicialización secuencial asigna el primer valor (10) al índice 0, el segundo (20) al índice 1, etc."
+    },
+    {
+      "q": "Se desea acceder a la esquina superior izquierda de una matriz de reales. Complete la expresión: 'double val = mat[____][0];'",
+      "options": [
+        "0",
+        "1",
+        "filas"
+      ],
+      "correct": 0,
+      "hint": "El primer índice representa la fila inicial.",
+      "explanation": "La esquina superior izquierda corresponde a la fila 0 y columna 0."
+    },
+    {
+      "q": "Complete la condición del bucle para recorrer todo el array: 'for (int i = 0; i < n; ____) { sum += arr[i]; }'",
+      "options": [
+        "++i",
+        "i = 0",
+        "i += 2"
+      ],
+      "correct": 0,
+      "hint": "Se debe incrementar el índice de uno en uno.",
+      "explanation": "El incremento estándar para visitar cada elemento consecutivamente es ++i o i++."
+    },
+    {
+      "q": "En la ordenación por selección, complete la línea que actualiza el índice mínimo: 'if (arr[j] < arr[____]) { idx_minimo = j; }'",
+      "options": [
+        "idx_minimo",
+        "i",
+        "j"
+      ],
+      "correct": 0,
+      "hint": "Se compara con el valor menor actual de la iteración.",
+      "explanation": "El algoritmo compara el elemento actual arr[j] con el menor provisional arr[idx_minimo] para actualizar el índice."
+    },
+    {
+      "q": "Al calcular el elemento central en la búsqueda binaria, complete la fórmula para evitar desbordamiento: 'int medio = izq + (der - izq) / ____;'",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "Se divide el intervalo en dos partes iguales.",
+      "explanation": "La división por 2 encuentra el punto medio de la sublista actual de búsqueda."
+    },
+    {
+      "q": "Si la clave es mayor que el valor central en una búsqueda binaria, complete la actualización del rango: 'if (arr[medio] < clave) { izquierda = ____; }'",
+      "options": [
+        "medio + 1",
+        "medio",
+        "medio - 1"
+      ],
+      "correct": 0,
+      "hint": "Se descarta la mitad izquierda del rango, incluido el elemento medio.",
+      "explanation": "Dado que el array está ordenado y el valor central es menor que la clave, buscamos a partir del siguiente elemento: medio + 1."
+    },
+    {
+      "q": "Para calcular la traza de una matriz cuadrada M, complete el acceso: 'for(int i = 0; i < 3; ++i) { suma += M[i][____]; }'",
+      "options": [
+        "i",
+        "0",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "La diagonal principal tiene índices de fila y columna idénticos.",
+      "explanation": "Los elementos de la diagonal principal se acceden mediante M[i][i] para cada fila i."
+    },
+    {
+      "q": "Para calcular el tamaño en bytes de un tipo en un array, complete la expresión: 'void f(int arr[], int n) { int sz = n * sizeof(____); }'",
+      "options": [
+        "arr[0]",
+        "arr",
+        "n"
+      ],
+      "correct": 0,
+      "hint": "Se necesita el tamaño en bytes de un elemento individual.",
+      "explanation": "sizeof(arr[0]) devuelve el tamaño en bytes del tipo base (int) en el array."
+    },
+    {
+      "q": "En el ordenamiento por inserción, complete la condición de inserción: 'while (j >= 0 && arr[j] > ____) { arr[j+1] = arr[j]; j--; }'",
+      "options": [
+        "clave",
+        "arr[j]",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Se compara con el valor que deseamos reubicar.",
+      "explanation": "El elemento provisional se desplaza a la derecha si es mayor que la variable temporal (clave) que estamos insertando."
+    },
+    {
+      "q": "Para inicializar una matriz M a todo ceros de forma limpia, complete el código: 'int M[3][3] = {____};'",
+      "options": [
+        "0",
+        "1",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "El valor cero dentro de llaves inicializa todos los elementos ausentes a 0.",
+      "explanation": "Poner {0} o llaves vacías en C++ inicializa toda la matriz bidimensional a 0 de forma estándar."
+    },
+    {
+      "q": "En Bubble Sort, complete el condicional de intercambio adyacente: 'if (arr[j] > arr[____]) { swap(arr[j], arr[j+1]); }'",
+      "options": [
+        "j+1",
+        "j",
+        "j-1"
+      ],
+      "correct": 0,
+      "hint": "Se compara el elemento actual con el que tiene inmediatamente a su derecha.",
+      "explanation": "Se compara arr[j] con arr[j+1] para determinar si están en orden incorrecto."
+    },
+    {
+      "q": "Al buscar el máximo de un array, complete la actualización: 'if (arr[i] > max_val) max_val = ____;'",
+      "options": [
+        "arr[i]",
+        "i",
+        "max_val"
+      ],
+      "correct": 0,
+      "hint": "Se almacena el nuevo valor mayor encontrado.",
+      "explanation": "Si arr[i] supera al máximo histórico, max_val toma el valor de dicho elemento (arr[i])."
+    },
+    {
+      "q": "Dada la declaración 'int a[10];', complete la asignación al último elemento: 'a[____] = 99;'",
+      "options": [
+        "9",
+        "10",
+        "11"
+      ],
+      "correct": 0,
+      "hint": "El tamaño es 10 y los índices empiezan en 0.",
+      "explanation": "El último elemento se encuentra en el índice tamaño - 1, que es 9."
+    },
+    {
+      "q": "Complete la declaración para que contenga 2 filas y 3 columnas: 'int M[2][____] = {{1, 2, 3}, {4, 5, 6}};'",
+      "options": [
+        "3",
+        "2",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Es el número de elementos de cada fila.",
+      "explanation": "La inicialización muestra que cada fila tiene 3 elementos, por lo que la segunda dimensión debe ser 3."
+    },
+    {
+      "q": "Si la clave es menor que el valor medio en búsqueda binaria, actualice el límite: 'if (arr[medio] > clave) { derecha = ____; }'",
+      "options": [
+        "medio - 1",
+        "medio + 1",
+        "medio"
+      ],
+      "correct": 0,
+      "hint": "Descarte la mitad derecha a partir del elemento medio.",
+      "explanation": "Como la clave es menor, buscamos a la izquierda del elemento medio, moviendo el límite superior a medio - 1."
+    },
+    {
+      "q": "Para imprimir los 5 elementos de un array, complete el límite del bucle: 'for(int i = 0; ____; ++i) { cout << a[i]; }'",
+      "options": [
+        "i < 5",
+        "i <= 5",
+        "i < 4"
+      ],
+      "correct": 0,
+      "hint": "Los índices válidos son del 0 al 4.",
+      "explanation": "La condición i < 5 permite recorrer los índices 0, 1, 2, 3, 4 y terminar cuando i alcanza 5."
+    },
+    {
+      "q": "Complete la línea para copiar arr1 en arr2: 'for(int i = 0; i < 5; ++i) { arr2[i] = ____; }'",
+      "options": [
+        "arr1[i]",
+        "arr1",
+        "i"
+      ],
+      "correct": 0,
+      "hint": "Se asigna el elemento en la misma posición i.",
+      "explanation": "La copia manual requiere asignar el elemento arr1[i] en la misma celda de arr2[i]."
+    },
+    {
+      "q": "Para determinar el número de elementos, complete la fórmula: 'int n = sizeof(arr) / sizeof(arr[____]);'",
+      "options": [
+        "0",
+        "sizeof(arr)",
+        "int"
+      ],
+      "correct": 0,
+      "hint": "Se divide el tamaño total entre el tamaño del primer elemento.",
+      "explanation": "Dividir sizeof(arr) entre sizeof(arr[0]) proporciona el conteo de elementos."
+    },
+    {
+      "q": "Al inicializar 'int v[4] = {5, 6};', complete el valor resultante del elemento en la tercera posición: 'v[2] == ____'",
+      "options": [
+        "0",
+        "garbage",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Los elementos no especificados se rellenan por defecto.",
+      "explanation": "Dado que se proporcionaron 2 valores para un array de 4, los elementos en los índices 2 y 3 se inicializan a 0."
+    },
+    {
+      "q": "Para acumular la suma de todos los elementos de la matriz M, complete el acceso: 'suma += M[____][j];'",
+      "options": [
+        "i",
+        "j",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Se controla mediante el índice del bucle externo que maneja las filas.",
+      "explanation": "En bucles anidados convencionales, la fila es controlada por i y la columna por j, accediendo a M[i][j]."
+    },
+    {
+      "q": "¿Qué consecuencias negativas puede acarrear el acceso a un índice fuera de los límites de un array en C++?",
+      "options": [
+        "Lectura de datos basura de la memoria y comportamiento impredecible del programa.",
+        "Caída del programa con un error de segmentación (Segmentation Fault).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Acceder fuera de rango provoca un comportamiento indefinido.",
+      "explanation": "El comportamiento indefinido puede manifestarse como lectura de datos basura o provocando una violación de acceso a la memoria."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre el paso de arrays como parámetros en C++ son correctas?",
+      "options": [
+        "El array se pasa implícitamente por referencia al transmitirse la dirección de memoria de su primer elemento.",
+        "Cualquier modificación sobre los elementos del array dentro de la función altera el array original en el llamador.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La función opera directamente sobre la dirección de memoria del array.",
+      "explanation": "Al pasarse la dirección de memoria, el array decae en un puntero. Esto permite modificar directamente sus elementos y evita copiar datos."
+    },
+    {
+      "q": "¿Por qué es importante pasar el tamaño de un array a las funciones de C++?",
+      "options": [
+        "Porque la función recibe un puntero y no tiene manera intrínseca de conocer el tamaño del array.",
+        "Para evitar errores en tiempo de ejecución al recorrer la memoria más allá del final del array.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El compilador no añade metadatos de tamaño al puntero base.",
+      "explanation": "Pasar el tamaño previene desbordamientos de buffer ya que el puntero base carece de información de límites."
+    },
+    {
+      "q": "¿Qué requisitos y ventajas presenta la Búsqueda Binaria?",
+      "options": [
+        "Exige que los elementos del array estén previamente ordenados.",
+        "Logra reducir sustancialmente las comparaciones necesarias en el peor caso a O(log n).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es un algoritmo eficiente de división y descarte.",
+      "explanation": "La búsqueda binaria requiere ordenación previa y ofrece una gran eficiencia logarítmica."
+    },
+    {
+      "q": "En C++, ¿cuáles de las siguientes declaraciones e inicializaciones de arrays son válidas sintácticamente?",
+      "options": [
+        "int arr[] = {1, 2, 3};",
+        "int arr[3] = {1, 2, 3};",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El compilador puede inferir el tamaño o se le puede dar de forma explícita.",
+      "explanation": "Ambas formas son correctas y válidas según el estándar de C++."
+    },
+    {
+      "q": "¿Cuáles de los siguientes algoritmos de ordenación tienen un coste computacional en el peor caso de O(n^2)?",
+      "options": [
+        "Ordenación por Selección (Selection Sort).",
+        "Ordenación por Burbuja (Bubble Sort) y Ordenación por Inserción (Insertion Sort).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son algoritmos iterativos cuadráticos comunes.",
+      "explanation": "Todos estos algoritmos clásicos básicos presentan una complejidad cuadrática en el peor caso."
+    },
+    {
+      "q": "Al pasar una matriz bidimensional como argumento en C++, ¿cuál de las siguientes opciones describe correctamente las exigencias sobre sus dimensiones?",
+      "options": [
+        "Se debe indicar obligatoriamente el tamaño de la segunda dimensión (columnas).",
+        "Se deben declarar explícitamente todas las dimensiones excepto la primera.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El compilador debe conocer el salto de fila completo.",
+      "explanation": "El compilador requiere todas las dimensiones excepto la primera para poder efectuar la aritmética de direcciones."
+    },
+    {
+      "q": "¿Qué ventajas aporta el uso de arrays estáticos en C++ comparado con estructuras dinámicas cuando se conoce el tamaño?",
+      "options": [
+        "Acceso directo y ultra rápido al no requerir indirecciones extra de punteros.",
+        "Asignación contigua en la pila de llamadas que evita fragmentar la memoria del montón (heap).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son estructuras eficientes en velocidad y en organización física.",
+      "explanation": "La memoria contigua en el stack minimiza la fragmentación y optimiza la caché de la CPU."
+    },
+    {
+      "q": "Si declaramos un array local 'double arr[8];' sin inicializar dentro de un bloque en C++:",
+      "options": [
+        "El valor de sus elementos es indeterminado y contiene basura.",
+        "Los elementos residen en la pila y se liberarán automáticamente al salir de la función.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Las variables locales automáticas se reservan en el stack frame y no tienen inicializador por defecto.",
+      "explanation": "Los arrays automáticos no se limpian al declararse y se destruyen inmediatamente al salir del ámbito de la función."
+    },
+    {
+      "q": "Considere la matriz 'int M[3][3] = {{1}, {2}, {3}};'. ¿Qué afirmaciones son correctas?",
+      "options": [
+        "M[0][0] vale 1, M[1][0] vale 2 y M[2][0] vale 3.",
+        "Todos los elementos restantes en la matriz se inicializan automáticamente a 0.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La inicialización de sublistas parciales completa a 0 el resto de la fila.",
+      "explanation": "Cada sublista inicializa la primera celda de su respectiva fila, completando a 0 el resto de columnas."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de realizar una Búsqueda Binaria sobre un array de tamaño n que no está ordenado?",
+      "options": [
+        "O(log n)",
+        "O(1)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La búsqueda binaria requiere orden de forma obligatoria.",
+      "explanation": "La búsqueda binaria sobre datos desordenados no funciona y produce resultados incorrectos. No tiene complejidad de búsqueda válida en ese estado."
+    },
+    {
+      "q": "Dada la declaración 'int arr[5] = {1, 2, 3};', ¿cuál es el valor almacenado en el índice 5 (arr[5])?",
+      "options": [
+        "0",
+        "Basura de memoria.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los índices válidos son 0, 1, 2, 3, 4.",
+      "explanation": "Acceder a arr[5] es un acceso fuera de límites. No es una posición de memoria válida del array."
+    },
+    {
+      "q": "¿Cómo comprueba C++ a nivel de compilación que los índices no se desborden?",
+      "options": [
+        "Mediante la opción de compilador '-fcheck-bounds' habilitada por defecto.",
+        "Con la directiva '#pragma bounds_checking' en la cabecera.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El compilador no suele hacer comprobaciones automáticas de rango en arrays estáticos nativos.",
+      "explanation": "C++ no verifica límites de arrays nativos en compilación ni ejecución; es responsabilidad exclusiva del programador."
+    },
+    {
+      "q": "Si una función recibe un array como 'void f(const int arr[], int size)', ¿cuál es el comportamiento en memoria?",
+      "options": [
+        "Se realiza una copia completa del array en el stack para proteger sus valores originales.",
+        "El compilador prohíbe realizar lecturas de los elementos del array para proteger los datos.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El paso sigue siendo por dirección y permite lecturas libres.",
+      "explanation": "Se pasa por dirección de forma normal, pero const bloquea la escritura sobre el array. Las lecturas son válidas."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal del algoritmo de Selección (Selection Sort) en su mejor caso (array ya ordenado)?",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Selection Sort no se beneficia del orden preexistente.",
+      "explanation": "Selection Sort siempre tarda $$O(n^2)$$ debido a que realiza todos sus bucles de forma incondicional."
+    },
+    {
+      "q": "¿Cuál es el índice asignado al primer elemento de un array en C++?",
+      "options": [
+        "1",
+        "-1",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El índice inicial es el valor que representa cero desplazamientos.",
+      "explanation": "El primer elemento de cualquier array en C++ se encuentra estrictamente en la posición 0."
+    },
+    {
+      "q": "¿Qué valor por defecto toman los elementos de un array declarado de forma local 'int arr[10];'?",
+      "options": [
+        "Todos los elementos se ponen a 0.",
+        "Todos los elementos se inicializan a -1.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "No hay inicialización automática en variables locales en la pila.",
+      "explanation": "Los arrays locales automáticos contienen valores basura e indeterminados, no valores definidos como 0 o -1."
+    },
+    {
+      "q": "Dentro de una función 'void f(int arr[], int n)', ¿qué operador determina directamente el número de elementos utilizando sizeof?",
+      "options": [
+        "sizeof(arr) / sizeof(arr[0])",
+        "sizeof(arr) / sizeof(int*)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El array ya ha decaído en un puntero dentro de la función.",
+      "explanation": "Dentro de la función, arr es un puntero ordinario. sizeof(arr) devuelve el tamaño del puntero (4 u 8 bytes), por lo que no se puede calcular n."
+    },
+    {
+      "q": "Considere: 'int a[3] = {10, 20, 30}; cout << *a + 1;'. ¿Qué valor se muestra por pantalla?",
+      "options": [
+        "20",
+        "10",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "*a es el primer elemento, a ese valor se le suma uno.",
+      "explanation": "*a devuelve 10 (a[0]). Sumar 1 da como resultado 11. Ninguna opción es 11."
+    },
+    {
+      "q": "En una matriz 'int A[3][4]', ¿cuál es el índice equivalente del elemento A[2][1] si la representamos como un array lineal 1D?",
+      "options": [
+        "7",
+        "10",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Aplique la fórmula i * Columnas + j.",
+      "explanation": "El índice lineal es $$2 \\times 4 + 1 = 9$$. Ninguna opción es 9."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_1",
+      "title": "Memoria de Array Unidimensional",
+      "context": "Se tiene la declaración `int arr[10];` que comienza en la dirección base 1000 en un sistema donde `sizeof(int) == 4` bytes.",
+      "parts": [
+        {
+          "id": "lab_1_a",
+          "label": "a",
+          "question": "Calcule el tamaño total en bytes ocupado por el array.",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El tamaño total es: $$10 \\text{ elementos} \\times 4 \\text{ bytes/elemento} = 40 \\text{ bytes}$$."
+        },
+        {
+          "id": "lab_1_b",
+          "label": "b",
+          "question": "Calcule la dirección de memoria en la que se ubica el primer elemento (arr[0]).",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "La dirección del primer elemento es directamente la dirección base: $$1000$$."
+        },
+        {
+          "id": "lab_1_c",
+          "label": "c",
+          "question": "Calcule la dirección de memoria del elemento arr[5].",
+          "correctValue": 1020,
+          "tolerance": 0,
+          "explanation": "La dirección de arr[5] se calcula como: $$\\text{Base} + 5 \\times \\text{sizeof}(int) = 1000 + 5 \\times 4 = 1020$$."
+        },
+        {
+          "id": "lab_1_d",
+          "label": "d",
+          "question": "Calcule la dirección de memoria de arr[9], que es el último elemento.",
+          "correctValue": 1036,
+          "tolerance": 0,
+          "explanation": "La dirección del último elemento (arr[9]) es: $$\\text{Base} + 9 \\times \\text{sizeof}(int) = 1000 + 9 \\times 4 = 1036$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_2",
+      "title": "Direccionamiento de Matriz Bidimensional",
+      "context": "Dada una matriz `int mat[3][4];` que se almacena en orden Row-Major en memoria con dirección de inicio 2000. Considere `sizeof(int) == 4` bytes.",
+      "parts": [
+        {
+          "id": "lab_2_a",
+          "label": "a",
+          "question": "Calcule el número total de elementos que componen la matriz.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El número total de celdas es: $$3 \\text{ filas} \\times 4 \\text{ columnas} = 12 \\text{ elementos}$$."
+        },
+        {
+          "id": "lab_2_b",
+          "label": "b",
+          "question": "Calcule el tamaño total en bytes ocupado por la matriz mat en memoria.",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "El espacio total es: $$12 \\text{ elementos} \\times 4 \\text{ bytes} = 48 \\text{ bytes}$$."
+        },
+        {
+          "id": "lab_2_c",
+          "label": "c",
+          "question": "Calcule el desplazamiento (offset) en bytes del elemento mat[1][2] con respecto a la dirección base.",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El desplazamiento es: $$(1 \\text{ fila} \\times 4 \\text{ col/fila} + 2 \\text{ col}) \\times 4 \\text{ bytes} = 6 \\times 4 = 24 \\text{ bytes}$$."
+        },
+        {
+          "id": "lab_2_d",
+          "label": "d",
+          "question": "Determine la dirección de memoria absoluta del elemento mat[2][3].",
+          "correctValue": 2044,
+          "tolerance": 0,
+          "explanation": "La dirección es: $$\\text{Base} + (2 \\times 4 + 3) \\times 4 = 2000 + 11 \\times 4 = 2044$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_3",
+      "title": "Búsqueda Secuencial en Vector",
+      "context": "Sea el array `int datos[8] = {14, 22, 5, 8, 9, 3, 22, 11};` sobre el que se realiza una búsqueda lineal secuencial de izquierda a derecha.",
+      "parts": [
+        {
+          "id": "lab_3_a",
+          "label": "a",
+          "question": "¿Cuántas comparaciones de elementos se realizan para buscar la clave 5?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se comparan los elementos en índices 0, 1 y 2 (valores 14, 22 y 5). Se encuentra al 3er intento."
+        },
+        {
+          "id": "lab_3_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones de elementos se realizan para buscar la clave 11?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El valor 11 está en el último índice (7), por lo que se comparan los 8 elementos."
+        },
+        {
+          "id": "lab_3_c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones de elementos se realizan al buscar un elemento inexistente como 99?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Para confirmar que no existe en el array de tamaño 8, se deben inspeccionar todos los elementos, haciendo 8 comparaciones."
+        },
+        {
+          "id": "lab_3_d",
+          "label": "d",
+          "question": "¿Cuál es el índice de la primera coincidencia encontrada para el valor 22?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El número 22 aparece por primera vez en el índice 1 (segunda posición)."
+        }
+      ]
+    },
+    {
+      "id": "lab_4",
+      "title": "Búsqueda Binaria - Traza de Índices",
+      "context": "En el array ordenado `int A[7] = {2, 5, 8, 12, 16, 23, 38};` se realiza una búsqueda binaria para encontrar la clave 23. La posición media se calcula como `medio = izquierda + (derecha - izquierda) / 2`.",
+      "parts": [
+        {
+          "id": "lab_4_a",
+          "label": "a",
+          "question": "¿Cuál es el índice medio evaluado en la primera iteración?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Con izquierda=0 y derecha=6, $$medio = 0 + (6-0)/2 = 3$$."
+        },
+        {
+          "id": "lab_4_b",
+          "label": "b",
+          "question": "¿Cuál es el índice medio evaluado en la segunda iteración tras reducir el rango?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Dado que A[3]=12 < 23, izquierda=4, derecha=6. $$medio = 4 + (6-4)/2 = 5$$."
+        },
+        {
+          "id": "lab_4_c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones en total con elementos del array se realizan para confirmar la posición del 23?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se compara con A[3]=12 (falla) y con A[5]=23 (acierto). Total = 2 comparaciones."
+        },
+        {
+          "id": "lab_4_d",
+          "label": "d",
+          "question": "Si buscáramos la clave 5, ¿cuál sería el índice medio calculado en la segunda iteración?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Primera iteración medio=3. A[3]=12 > 5 => izq=0, der=2. Segunda iteración $$medio = 0 + (2-0)/2 = 1$$ (A[1]=5, encontrado)."
+        }
+      ]
+    },
+    {
+      "id": "lab_5",
+      "title": "Ordenación por Selección - Conteo de Intercambios",
+      "context": "Se ejecuta el algoritmo de ordenación por selección directa en el array desordenado `int arr[5] = {5, 2, 9, 1, 6};`. El algoritmo intercambia elementos solo si el índice mínimo encontrado difiere de la posición actual.",
+      "parts": [
+        {
+          "id": "lab_5_a",
+          "label": "a",
+          "question": "¿Cuál es el elemento mínimo encontrado en la primera pasada (i=0)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al recorrer el array de índices 0 a 4, el valor menor es 1 (en el índice 3)."
+        },
+        {
+          "id": "lab_5_b",
+          "label": "b",
+          "question": "¿Qué valor queda almacenado en el índice 0 tras el primer intercambio de la ordenación?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se intercambia el mínimo (1) con el elemento inicial (5), por lo que arr[0] pasa a valer 1."
+        },
+        {
+          "id": "lab_5_c",
+          "label": "c",
+          "question": "¿Cuántos intercambios (swaps) se realizan en total para ordenar completamente este array?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "1: {5,2,9,1,6} -> {1,2,9,5,6}. 2: i=1 min=2, no swap. 3: i=2 min=5 (index 3), swap -> {1,2,5,9,6}. 4: i=3 min=6 (index 4), swap -> {1,2,5,6,9}. Total intercambios = 3."
+        },
+        {
+          "id": "lab_5_d",
+          "label": "d",
+          "question": "¿En qué índice terminará ubicado el elemento 9 una vez completado el ordenamiento?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Al estar el array ordenado de menor a mayor {1, 2, 5, 6, 9}, el elemento mayor (9) termina en el último índice (4)."
+        }
+      ]
+    },
+    {
+      "id": "lab_6",
+      "title": "Burbuja - Conteo de Comparaciones",
+      "context": "Dado el array `int arr[4] = {4, 3, 2, 1};`. Se aplica el algoritmo de ordenación por burbuja estándar sin optimizaciones (el bucle externo corre n-1 veces, y el interno compara elementos adyacentes).",
+      "parts": [
+        {
+          "id": "lab_6_a",
+          "label": "a",
+          "question": "¿Cuántas comparaciones entre elementos adyacentes se realizan en la primera pasada del algoritmo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se comparan: (arr[0], arr[1]), (arr[1], arr[2]) y (arr[2], arr[3]). Es decir, 3 comparaciones."
+        },
+        {
+          "id": "lab_6_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones de elementos se realizan en total a lo largo de toda la ordenación?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La suma total es: $$(n-1) + (n-2) + \\dots + 1 = 3 + 2 + 1 = 6$$ comparaciones."
+        },
+        {
+          "id": "lab_6_c",
+          "label": "c",
+          "question": "¿Cuántas operaciones de intercambio (swaps) se realizan en total para ordenar este array?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Como el array está en orden inverso completo, cada comparación resulta en un intercambio: $$3 + 2 + 1 = 6$$ swaps."
+        },
+        {
+          "id": "lab_6_d",
+          "label": "d",
+          "question": "¿Qué valor queda almacenado en el índice 1 del array tras completarse la primera pasada?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Tras la 1ª pasada: (4,3)->{3,4,2,1}, (4,2)->{3,2,4,1}, (4,1)->{3,2,1,4}. El índice 1 contiene el valor 2."
+        }
+      ]
+    },
+    {
+      "id": "lab_7",
+      "title": "Traza de Diagonal de Matriz Cuadrada",
+      "context": "Dada la matriz cuadrada `int M[3][3] = {{2, 4, 6}, {1, 5, 9}, {3, 8, 7}};`.",
+      "parts": [
+        {
+          "id": "lab_7_a",
+          "label": "a",
+          "question": "Calcule el valor de la traza de la matriz (suma de la diagonal principal).",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "La traza es: $$M[0][0] + M[1][1] + M[2][2] = 2 + 5 + 7 = 14$$."
+        },
+        {
+          "id": "lab_7_b",
+          "label": "b",
+          "question": "Calcule la suma de los elementos de la diagonal secundaria (de la esquina superior derecha a la inferior izquierda).",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "La diagonal secundaria es: $$M[0][2] + M[1][1] + M[2][0] = 6 + 5 + 3 = 14$$."
+        },
+        {
+          "id": "lab_7_c",
+          "label": "c",
+          "question": "Calcule la suma de los elementos que componen la primera fila (fila 0).",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Suma fila 0: $$2 + 4 + 6 = 12$$."
+        },
+        {
+          "id": "lab_7_d",
+          "label": "d",
+          "question": "Calcule la suma de los elementos que forman la segunda columna (columna 1).",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "Suma columna 1: $$4 + 5 + 8 = 17$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_8",
+      "title": "Inicialización Incompleta y Sizing",
+      "context": "Considere la declaración `int v[6] = {3, 5, 7};` en una plataforma con enteros de 4 bytes.",
+      "parts": [
+        {
+          "id": "lab_8_a",
+          "label": "a",
+          "question": "¿Qué valor numérico tiene el elemento v[0]?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El primer valor de la lista es 3, que se asigna a v[0]."
+        },
+        {
+          "id": "lab_8_b",
+          "label": "b",
+          "question": "¿Qué valor numérico toma el elemento v[3] debido a la inicialización parcial?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al no tener valor en la lista de inicialización, v[3] se pone a 0 automáticamente."
+        },
+        {
+          "id": "lab_8_c",
+          "label": "c",
+          "question": "¿Qué valor numérico toma el último elemento v[5]?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al igual que v[3] y v[4], v[5] se inicializa por defecto a 0."
+        },
+        {
+          "id": "lab_8_d",
+          "label": "d",
+          "question": "Calcule el tamaño devuelto por la expresión `sizeof(v)`.",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El tamaño es: $$6 \\text{ elementos} \\times 4 \\text{ bytes/entero} = 24 \\text{ bytes}$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_9",
+      "title": "Trazado de Bucles en Matriz Triangular",
+      "context": "Dada la matriz `int M[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};`. Se ejecuta el fragmento: int sum = 0; for (int i = 0; i < 3; ++i) { for (int j = i; j < 3; ++j) { sum += M[i][j]; } }",
+      "parts": [
+        {
+          "id": "lab_9_a",
+          "label": "a",
+          "question": "¿Cuántas veces en total se ejecuta la línea 'sum += M[i][j];'?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El bucle corre para (i=0: j=0,1,2), (i=1: j=1,2), y (i=2: j=2). Es decir, $$3 + 2 + 1 = 6$$ veces."
+        },
+        {
+          "id": "lab_9_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final acumulado en la variable sum?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "La suma incluye M[0][0]=1, M[0][1]=2, M[0][2]=3, M[1][1]=5, M[1][2]=6, M[2][2]=9. Total = $$1 + 2 + 3 + 5 + 6 + 9 = 26$$."
+        },
+        {
+          "id": "lab_9_c",
+          "label": "c",
+          "question": "Si cambiáramos el inicio del bucle interno a 'j = 0' (recorriendo toda la matriz), ¿cuántas ejecuciones se realizarían?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Una matriz de 3x3 tiene 9 elementos, por lo que un bucle completo anidado ejecuta la suma 9 veces."
+        },
+        {
+          "id": "lab_9_d",
+          "label": "d",
+          "question": "¿Cuál sería el valor de la suma si solo acumuláramos cuando 'i == j'?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La suma de los elementos M[i][i] es: $$M[0][0] + M[1][1] + M[2][2] = 1 + 5 + 9 = 15$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_10",
+      "title": "Inserción con Desplazamiento de Elementos",
+      "context": "Se tiene un vector de enteros con 5 elementos ordenados `int v[6] = {2, 4, 6, 8, 10};` (capacidad de 6 elementos). Deseamos insertar el número 7 manteniendo el orden ascendente.",
+      "parts": [
+        {
+          "id": "lab_10_a",
+          "label": "a",
+          "question": "¿En qué índice del vector debe quedar insertado el número 7?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El vector ordenado resultante debe ser {2, 4, 6, 7, 8, 10}. Por tanto, 7 se coloca en el índice 3."
+        },
+        {
+          "id": "lab_10_b",
+          "label": "b",
+          "question": "¿Cuántos elementos del vector original deben desplazarse hacia la derecha para hacer espacio?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los elementos mayores que 7 (8 y 10) deben moverse una celda a la derecha (del índice 3 al 4, y del 4 al 5)."
+        },
+        {
+          "id": "lab_10_c",
+          "label": "c",
+          "question": "¿Cuál será el valor del elemento v[3] tras realizar la inserción?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El valor insertado en el índice 3 es precisamente el número 7."
+        },
+        {
+          "id": "lab_10_d",
+          "label": "d",
+          "question": "¿Qué valor ocupará el último índice v[5] tras la inserción?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El elemento mayor (10) se desplaza al último índice del array, v[5]."
+        }
+      ]
+    },
+    {
+      "id": "lab_11",
+      "title": "Ordenación por Inserción - Desplazamientos",
+      "context": "Se aplica el algoritmo de ordenación por inserción (Insertion Sort) sobre el array `int arr[5] = {3, 1, 4, 2, 5};`.",
+      "parts": [
+        {
+          "id": "lab_11_a",
+          "label": "a",
+          "question": "¿Cuántos elementos se desplazan a la derecha en la primera inserción (i=1, valor 1)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El elemento 3 se desplaza una posición para que el 1 se inserte en arr[0]."
+        },
+        {
+          "id": "lab_11_b",
+          "label": "b",
+          "question": "¿Cuántos elementos se desplazan en la segunda inserción (i=2, valor 4)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al ser 4 mayor que 3 (el elemento anterior), no se realiza ningún desplazamiento."
+        },
+        {
+          "id": "lab_11_c",
+          "label": "c",
+          "question": "¿Cuántos elementos se desplazan en la tercera inserción (i=3, valor 2)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los valores 3 y 4 se desplazan una celda a la derecha para poder insertar el 2 en el índice 1."
+        },
+        {
+          "id": "lab_11_d",
+          "label": "d",
+          "question": "Determine el número total de desplazamientos realizados en todo el proceso de ordenación.",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los desplazamientos son: 1 (para insertar 1) + 0 (para 4) + 2 (para 2) + 0 (para 5) = 3 desplazamientos en total."
+        }
+      ]
+    },
+    {
+      "id": "lab_12",
+      "title": "Búsqueda Binaria - Clave Ausente",
+      "context": "Se realiza una búsqueda binaria para encontrar la clave 10 en el array `int arr[6] = {1, 3, 5, 7, 9, 11};`.",
+      "parts": [
+        {
+          "id": "lab_12_a",
+          "label": "a",
+          "question": "¿Cuántas iteraciones del bucle 'while (izquierda <= derecha)' se ejecutan antes de terminar la búsqueda?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "1ª iteración: izq=0, der=5, medio=2. 2ª iteración: izq=3, der=5, medio=4. 3ª iteración: izq=5, der=5, medio=5. Luego finaliza. Total = 3 iteraciones."
+        },
+        {
+          "id": "lab_12_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del índice medio en la primera iteración?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$medio = 0 + (5-0)/2 = 2$$ (apunta a arr[2]=5)."
+        },
+        {
+          "id": "lab_12_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del índice medio en la segunda iteración?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Como 5 < 10, izq=3, der=5. $$medio = 3 + (5-3)/2 = 4$$ (arr[4]=9)."
+        },
+        {
+          "id": "lab_12_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del índice medio en la tercera iteración?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Como 9 < 10, izq=5, der=5. $$medio = 5 + (5-5)/2 = 5$$ (arr[5]=11)."
+        }
+      ]
+    },
+    {
+      "id": "lab_13",
+      "title": "Propiedades de Matriz Simétrica",
+      "context": "Dada la matriz simétrica de tamaño 3x3: `int M[3][3] = {{1, 2, 3}, {2, 4, 5}, {3, 5, 6}};`.",
+      "parts": [
+        {
+          "id": "lab_13_a",
+          "label": "a",
+          "question": "Calcule la suma de los elementos que se encuentran estrictamente por encima de la diagonal principal.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Suma superior: $$M[0][1] + M[0][2] + M[1][2] = 2 + 3 + 5 = 10$$."
+        },
+        {
+          "id": "lab_13_b",
+          "label": "b",
+          "question": "Calcule la suma de los elementos que se encuentran estrictamente por debajo de la diagonal principal.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Al ser simétrica, la suma es idéntica a la superior: $$M[1][0] + M[2][0] + M[2][1] = 2 + 3 + 5 = 10$$."
+        },
+        {
+          "id": "lab_13_c",
+          "label": "c",
+          "question": "Calcule la suma de todos los elementos de la matriz.",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "Suma total: $$\\text{diagonal principal} + 2 \\times \\text{suma superior} = (1+4+6) + 2 \\times 10 = 11 + 20 = 31$$."
+        },
+        {
+          "id": "lab_13_d",
+          "label": "d",
+          "question": "¿Cuántas comparaciones M[i][j] == M[j][i] con i < j son necesarias para verificar programáticamente que es simétrica?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Solo se comparan las parejas fuera de la diagonal: (0,1), (0,2), y (1,2). Es decir, 3 comparaciones."
+        }
+      ]
+    },
+    {
+      "id": "lab_14",
+      "title": "Rotación Cíclica a la Derecha",
+      "context": "Dado el array `int v[5] = {10, 20, 30, 40, 50};`. Se le aplica una rotación cíclica a la derecha de una posición (el último pasa al primero, y los demás avanzan un índice).",
+      "parts": [
+        {
+          "id": "lab_14_a",
+          "label": "a",
+          "question": "¿Qué valor queda almacenado en el índice 0 del array tras la rotación?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "El último elemento (50) rota para ocupar la primera posición (v[0])."
+        },
+        {
+          "id": "lab_14_b",
+          "label": "b",
+          "question": "¿Qué valor queda almacenado en el índice 1 del array tras la rotación?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El valor anterior de v[0] (10) se desplaza a v[1]."
+        },
+        {
+          "id": "lab_14_c",
+          "label": "c",
+          "question": "¿Qué valor queda almacenado en el índice 4 del array tras la rotación?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El elemento previo en v[3] (40) avanza al último índice v[4]."
+        },
+        {
+          "id": "lab_14_d",
+          "label": "d",
+          "question": "Calcule la suma de todos los elementos del array después de haber efectuado la rotación.",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "La rotación no altera el conjunto de elementos, solo su posición. La suma es $$10 + 20 + 30 + 40 + 50 = 150$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_15",
+      "title": "Multiplicación de Matrices",
+      "context": "Sean las matrices A de tamaño 2x3 y B de tamaño 3x2 definidas como: A = {{1, 2, 3}, {4, 5, 6}}, B = {{7, 8}, {9, 1}, {2, 3}}. Multiplicamos C = A * B de tamaño 2x2.",
+      "parts": [
+        {
+          "id": "lab_15_a",
+          "label": "a",
+          "question": "Calcule el valor de la celda C[0][0].",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "$$C[0][0] = 1 \\times 7 + 2 \\times 9 + 3 \\times 2 = 7 + 18 + 6 = 31$$."
+        },
+        {
+          "id": "lab_15_b",
+          "label": "b",
+          "question": "Calcule the valor de la celda C[0][1].",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "$$C[0][1] = 1 \\times 8 + 2 \\times 1 + 3 \\times 3 = 8 + 2 + 9 = 19$$."
+        },
+        {
+          "id": "lab_15_c",
+          "label": "c",
+          "question": "Calcule el valor de la celda C[1][0].",
+          "correctValue": 85,
+          "tolerance": 0,
+          "explanation": "$$C[1][0] = 4 \\times 7 + 5 \\times 9 + 6 \\times 2 = 28 + 45 + 12 = 85$$."
+        },
+        {
+          "id": "lab_15_d",
+          "label": "d",
+          "question": "Calcule el valor de la celda C[1][1].",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "$$C[1][1] = 4 \\times 8 + 5 \\times 1 + 6 \\times 3 = 32 + 5 + 18 = 55$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_16",
+      "title": "Transposición de Matrices",
+      "context": "Dada la matriz rectangular M = {{1, 2, 3}, {4, 5, 6}} de tamaño 2x3. Sea T su matriz transpuesta.",
+      "parts": [
+        {
+          "id": "lab_16_a",
+          "label": "a",
+          "question": "¿Cuántas filas tiene la matriz transpuesta T?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al transponer, el número de columnas de M (3) se convierte en el número de filas de T."
+        },
+        {
+          "id": "lab_16_b",
+          "label": "b",
+          "question": "¿Cuántas columnas tiene la matriz transpuesta T?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El número de filas de M (2) se convierte en el número de columnas de T."
+        },
+        {
+          "id": "lab_16_c",
+          "label": "c",
+          "question": "Calcule el valor numérico en la posición T[2][0].",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$T[2][0] = M[0][2] = 3$$."
+        },
+        {
+          "id": "lab_16_d",
+          "label": "d",
+          "question": "Calcule el valor numérico en la posición T[1][1].",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$T[1][1] = M[1][1] = 5$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_17",
+      "title": "Filtros en Vectores",
+      "context": "Dado el vector `int arr[8] = {12, -3, 4, 15, 0, 8, 22, 5};`.",
+      "parts": [
+        {
+          "id": "lab_17_a",
+          "label": "a",
+          "question": "¿Cuántos elementos del vector son estrictamente mayores que 0?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Los elementos positivos son 12, 4, 15, 8, 22 y 5 (en total 6)."
+        },
+        {
+          "id": "lab_17_b",
+          "label": "b",
+          "question": "¿Cuántos elementos del vector son estrictamente menores que 0?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único elemento negativo es -3."
+        },
+        {
+          "id": "lab_17_c",
+          "label": "c",
+          "question": "¿Cuántos elementos del vector son estrictamente mayores que 10?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los valores superiores a 10 son 12, 15 y 22 (en total 3)."
+        },
+        {
+          "id": "lab_17_d",
+          "label": "d",
+          "question": "Calcule la suma de todos los elementos pares (incluyendo el 0).",
+          "correctValue": 46,
+          "tolerance": 0,
+          "explanation": "Los elementos pares son 12, 4, 0, 8 y 22. Suma: $$12 + 4 + 0 + 8 + 22 = 46$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_18",
+      "title": "Eliminación en Vector por Índice",
+      "context": "Dado el vector `int v[6] = {10, 20, 30, 40, 50, 60};`. Se elimina el elemento del índice 2 (valor 30), y se desplazan los siguientes a la izquierda.",
+      "parts": [
+        {
+          "id": "lab_18_a",
+          "label": "a",
+          "question": "¿Cuántos elementos se desplazan una posición a la izquierda tras la eliminación?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los elementos tras el índice 2 (40, 50 y 60) deben moverse a la izquierda, es decir, 3 elementos."
+        },
+        {
+          "id": "lab_18_b",
+          "label": "b",
+          "question": "Qué valor queda almacenado en v[2] tras la eliminación?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El valor 40 (anteriormente en v[3]) pasa a ocupar la posición del índice 2."
+        },
+        {
+          "id": "lab_18_c",
+          "label": "c",
+          "question": "Qué valor queda almacenado en v[4] tras la eliminación?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "El valor 60 se desplaza del índice 5 al índice 4."
+        },
+        {
+          "id": "lab_18_d",
+          "label": "d",
+          "question": "¿Cuál es el número efectivo de elementos del vector después de la eliminación?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al eliminar un elemento de un vector de tamaño 6, el nuevo tamaño lógico es $$6 - 1 = 5$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_19",
+      "title": "Análisis de Frecuencias y Duplicados",
+      "context": "Dado el array de enteros `int arr[7] = {3, 1, 4, 3, 2, 3, 4};`.",
+      "parts": [
+        {
+          "id": "lab_19_a",
+          "label": "a",
+          "question": "¿Cuántas veces se repite el número 3 en el array?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El valor 3 aparece en las posiciones 0, 3 y 5, sumando 3 ocurrencias."
+        },
+        {
+          "id": "lab_19_b",
+          "label": "b",
+          "question": "¿Cuántas veces se repite el número 4 en el array?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El valor 4 aparece en las posiciones 2 y 6, sumando 2 ocurrencias."
+        },
+        {
+          "id": "lab_19_c",
+          "label": "c",
+          "question": "¿Cuántos valores distintos (únicos) contiene el array?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los valores únicos presentes son 1, 2, 3 y 4 (en total 4)."
+        },
+        {
+          "id": "lab_19_d",
+          "label": "d",
+          "question": "Recorriendo de izquierda a derecha, ¿en qué índice se encuentra el primer elemento que ya había aparecido anteriormente?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los primeros elementos son 3 (idx 0), 1 (idx 1), 4 (idx 2). El elemento en el índice 3 es 3, que ya había aparecido. Así, el primer duplicado está en el índice 3."
+        }
+      ]
+    },
+    {
+      "id": "lab_20",
+      "title": "Producto Escalar y Espacio",
+      "context": "Sean los vectores `int u[4] = {2, -1, 3, 5};` y `int v[4] = {4, 2, -1, 3};` en un sistema de enteros de 4 bytes.",
+      "parts": [
+        {
+          "id": "lab_20_a",
+          "label": "a",
+          "question": "Calcule el producto escalar de los vectores u y v.",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "$$u \\cdot v = 2 \\times 4 + (-1) \\times 2 + 3 \\times (-1) + 5 \\times 3 = 8 - 2 - 3 + 15 = 18$$."
+        },
+        {
+          "id": "lab_20_b",
+          "label": "b",
+          "question": "Calcule el tamaño en bytes del vector u.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El tamaño es: $$4 \\text{ enteros} \\times 4 \\text{ bytes} = 16 \\text{ bytes}$$."
+        },
+        {
+          "id": "lab_20_c",
+          "label": "c",
+          "question": "¿Cuántas multiplicaciones de elementos individuales se realizan para calcular el producto escalar?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se multiplica cada pareja de coordenadas de los vectores de dimensión 4. Son 4 multiplicaciones."
+        },
+        {
+          "id": "lab_20_d",
+          "label": "d",
+          "question": "Calcule el producto escalar del vector u con sí mismo (u * u).",
+          "correctValue": 39,
+          "tolerance": 0,
+          "explanation": "$$u \\cdot u = 2^2 + (-1)^2 + 3^2 + 5^2 = 4 + 1 + 9 + 25 = 39$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_21",
+      "title": "Inversión In-place de Vector",
+      "context": "Se tiene el array `int arr[6] = {1, 2, 3, 4, 5, 6};`. Se invierte su orden en memoria (in-place) mediante intercambios de elementos.",
+      "parts": [
+        {
+          "id": "lab_21_a",
+          "label": "a",
+          "question": "¿Cuántas operaciones de intercambio (swaps) se necesitan para invertir este array?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para un array de tamaño N, se realizan $$N/2$$ intercambios. En este caso, $$6/2 = 3$$ swaps (intercambiando 1 y 6, 2 y 5, 3 y 4)."
+        },
+        {
+          "id": "lab_21_b",
+          "label": "b",
+          "question": "¿Qué valor queda en la posición de índice 0 después de la inversión?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El último elemento (6) pasa a ocupar la primera posición (índice 0)."
+        },
+        {
+          "id": "lab_21_c",
+          "label": "c",
+          "question": "¿Qué valor queda en la posición de índice 3 después de la inversión?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El elemento original arr[2]=3 pasa al índice 3 tras su intercambio con el 4."
+        },
+        {
+          "id": "lab_21_d",
+          "label": "d",
+          "question": "Calcule la suma de los elementos situados en los índices 1 y 4 tras la inversión.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El array invertido es {6, 5, 4, 3, 2, 1}. Los elementos en los índices 1 y 4 son 5 y 2. Su suma es $$5 + 2 = 7$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_22",
+      "title": "Matriz Identidad en Memoria",
+      "context": "Se tiene una matriz identidad de tamaño 4x4: `int I[4][4];` que se inicia con la diagonal en 1 y el resto en 0.",
+      "parts": [
+        {
+          "id": "lab_22_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los elementos de la matriz.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Solo los 4 elementos de la diagonal principal valen 1, los demás valen 0. Suma: 4."
+        },
+        {
+          "id": "lab_22_b",
+          "label": "b",
+          "question": "¿Cuántos elementos de la matriz toman el valor 0?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El total de elementos es $$4 \\times 4 = 16$$. Restando los 4 de la diagonal, quedan $$16 - 4 = 12$$ elementos iguales a 0."
+        },
+        {
+          "id": "lab_22_c",
+          "label": "c",
+          "question": "Si la matriz se ubica en la dirección base 5000 y sizeof(int) = 4, ¿cuál es la dirección de I[2][2]?",
+          "correctValue": 5040,
+          "tolerance": 0,
+          "explanation": "La dirección de I[2][2] es: $$\\text{Base} + (2 \\text{ filas} \\times 4 \\text{ col/fila} + 2 \\text{ col}) \\times 4 \\text{ bytes} = 5000 + 10 \\times 4 = 5040$$."
+        },
+        {
+          "id": "lab_22_d",
+          "label": "d",
+          "question": "Calcule la traza de esta matriz identidad.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La traza es la suma diagonal: $$1 + 1 + 1 + 1 = 4$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_23",
+      "title": "Promedio y Límites en Matriz",
+      "context": "Dada la matriz `int M[2][4] = {{3, 5, 8, 2}, {4, 6, 1, 7}};`.",
+      "parts": [
+        {
+          "id": "lab_23_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los elementos de la matriz M.",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "Suma: $$3 + 5 + 8 + 2 + 4 + 6 + 1 + 7 = 36$$."
+        },
+        {
+          "id": "lab_23_b",
+          "label": "b",
+          "question": "Calcule el promedio de todos los elementos de la matriz M.",
+          "correctValue": 4.5,
+          "tolerance": 0,
+          "explanation": "Promedio: $$36 \\text{ (suma)} / 8 \\text{ (elementos)} = 4.5$$."
+        },
+        {
+          "id": "lab_23_c",
+          "label": "c",
+          "question": "¿Cuántos elementos son estrictamente mayores que el promedio obtenido?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los elementos mayores que 4.5 son 5, 8, 6 y 7. Es decir, 4 elementos."
+        },
+        {
+          "id": "lab_23_d",
+          "label": "d",
+          "question": "Determine el valor mínimo absoluto almacenado en la matriz.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El valor menor en la matriz es 1 (ubicado en M[1][2])."
+        }
+      ]
+    },
+    {
+      "id": "lab_24",
+      "title": "Aritmética de Punteros sobre Arrays",
+      "context": "Dado el array `int arr[5] = {10, 20, 30, 40, 50};`. Definimos un puntero a entero `int* p = arr;`.",
+      "parts": [
+        {
+          "id": "lab_24_a",
+          "label": "a",
+          "question": "¿Qué valor se obtiene al desreferenciar el puntero p (*p)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El puntero p apunta inicialmente al primer elemento arr[0], que vale 10."
+        },
+        {
+          "id": "lab_24_b",
+          "label": "b",
+          "question": "¿Qué valor se obtiene mediante la expresión *(p + 2)?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "p+2 desplaza el puntero 2 posiciones, apuntando a arr[2]. Al desreferenciar se obtiene 30."
+        },
+        {
+          "id": "lab_24_c",
+          "label": "c",
+          "question": "¿Qué valor numérico tiene la expresión p[4]?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "La notación indexada p[4] equivale a *(p+4), devolviendo el valor de arr[4], que es 50."
+        },
+        {
+          "id": "lab_24_d",
+          "label": "d",
+          "question": "¿Cuántos bytes ocupa el puntero p en memoria en una arquitectura de 64 bits?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "En sistemas de 64 bits, cualquier dirección de memoria (puntero) se representa usando 8 bytes."
+        }
+      ]
+    },
+    {
+      "id": "lab_25",
+      "title": "Máximo y sus Frecuencias",
+      "context": "Se define el array de enteros `int arr[9] = {5, 12, 8, 12, 3, 12, 7, 9, 2};`.",
+      "parts": [
+        {
+          "id": "lab_25_a",
+          "label": "a",
+          "question": "¿Cuál es el valor máximo absoluto presente en el array?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El valor más alto que aparece en la lista es el 12."
+        },
+        {
+          "id": "lab_25_b",
+          "label": "b",
+          "question": "¿Cuántas veces se encuentra el valor máximo dentro del array?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El número 12 aparece en los índices 1, 3 y 5, es decir, 3 veces en total."
+        },
+        {
+          "id": "lab_25_c",
+          "label": "c",
+          "question": "¿Cuál es el índice de la primera aparición del valor máximo?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La primera vez que encontramos 12 es en la segunda posición (índice 1)."
+        },
+        {
+          "id": "lab_25_d",
+          "label": "d",
+          "question": "¿Cuál es el índice de la última aparición del valor máximo?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La última ocurrencia del número 12 se sitúa en la posición de índice 5."
+        }
+      ]
+    },
+    {
+      "id": "lab_26",
+      "title": "Submatriz y Esquinas",
+      "context": "Dada la matriz de enteros `int M[4][4] = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};`.",
+      "parts": [
+        {
+          "id": "lab_26_a",
+          "label": "a",
+          "question": "Calcule la suma de los cuatro elementos de las esquinas de la matriz.",
+          "correctValue": 34,
+          "tolerance": 0,
+          "explanation": "Suma esquinas: $$M[0][0] + M[0][3] + M[3][0] + M[3][3] = 1 + 4 + 13 + 16 = 34$$."
+        },
+        {
+          "id": "lab_26_b",
+          "label": "b",
+          "question": "Calcule la suma de los cuatro elementos centrales de la matriz (la submatriz 2x2 interna).",
+          "correctValue": 34,
+          "tolerance": 0,
+          "explanation": "Suma central: $$M[1][1] + M[1][2] + M[2][1] + M[2][2] = 6 + 7 + 10 + 11 = 34$$."
+        },
+        {
+          "id": "lab_26_c",
+          "label": "c",
+          "question": "Calcule la traza de la matriz M.",
+          "correctValue": 34,
+          "tolerance": 0,
+          "explanation": "Traza diagonal: $$M[0][0] + M[1][1] + M[2][2] + M[3][3] = 1 + 6 + 11 + 16 = 34$$."
+        },
+        {
+          "id": "lab_26_d",
+          "label": "d",
+          "question": "Calcule la suma de los elementos situados en la primera columna (columna 0).",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "Suma columna 0: $$M[0][0] + M[1][0] + M[2][0] + M[3][0] = 1 + 5 + 9 + 13 = 28$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_27",
+      "title": "Combinación de Vectores Ordenados (Merge)",
+      "context": "Se combinan dos vectores ordenados `int A[3] = {1, 5, 8};` y `int B[3] = {2, 4, 9};` en un vector C de tamaño 6 empleando el algoritmo estándar de combinación.",
+      "parts": [
+        {
+          "id": "lab_27_a",
+          "label": "a",
+          "question": "¿Cuántas comparaciones entre elementos se realizan durante la combinación?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se comparan: (1,2)->1, (5,2)->2, (5,4)->4, (5,9)->5, (8,9)->8. El elemento 9 se copia directamente. Total = 5 comparaciones."
+        },
+        {
+          "id": "lab_27_b",
+          "label": "b",
+          "question": "¿Qué valor queda almacenado en el índice 3 del vector combinado C?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El vector combinado C es {1, 2, 4, 5, 8, 9}. El elemento en C[3] es 5."
+        },
+        {
+          "id": "lab_27_c",
+          "label": "c",
+          "question": "¿Qué valor queda almacenado en el índice 4 del vector combinado C?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El elemento en la posición C[4] es el número 8."
+        },
+        {
+          "id": "lab_27_d",
+          "label": "d",
+          "question": "Calcule la suma de los elementos en posiciones pares de C (C[0], C[2] y C[4]).",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Suma de elementos pares: $$C[0] + C[2] + C[4] = 1 + 4 + 8 = 13$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_28",
+      "title": "Conteo de Búsqueda Binaria en Grandes Volúmenes",
+      "context": "Analizamos el comportamiento de la búsqueda binaria sobre un array de elementos ordenados en el peor caso.",
+      "parts": [
+        {
+          "id": "lab_28_a",
+          "label": "a",
+          "question": "¿Cuál es el número máximo de iteraciones que realiza el algoritmo para un array de 1000 elementos?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Dado que $$2^9 = 512 < 1000$$ y $$2^{10} = 1024 \\ge 1000$$, se necesitan a lo sumo 10 iteraciones."
+        },
+        {
+          "id": "lab_28_b",
+          "label": "b",
+          "question": "¿Cuál es el número de iteraciones en el mejor caso posible (el elemento está en el centro)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el mejor caso posible, la primera comparación en el punto medio coincide con la clave, finalizando en 1 iteración."
+        },
+        {
+          "id": "lab_28_c",
+          "label": "c",
+          "question": "¿Cuál es el número máximo de iteraciones para un array de 1,000,000 elementos?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Dado que $$2^{19} = 524288 < 1000000$$ y $$2^{20} = 1048576 \\ge 1000000$$, el número máximo de iteraciones es 20."
+        },
+        {
+          "id": "lab_28_d",
+          "label": "d",
+          "question": "Si buscamos en un array con índices del 0 al 999, ¿cuál es el primer índice medio evaluado?",
+          "correctValue": 499,
+          "tolerance": 0,
+          "explanation": "La posición media inicial es: $$medio = 0 + (999-0)/2 = 499$$ (usando división entera)."
+        }
+      ]
+    },
+    {
+      "id": "lab_29",
+      "title": "Comparación de Búsqueda Secuencial vs Binaria",
+      "context": "Buscamos el número 90 en un array ordenado `arr` de tamaño 64 donde cada celda almacena `arr[i] = i * 2` (para i de 0 a 63).",
+      "parts": [
+        {
+          "id": "lab_29_a",
+          "label": "a",
+          "question": "¿Cuál es el índice en el que se ubica el elemento 90?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "Buscamos $$i$$ tal que $$i \\times 2 = 90$$, obteniendo $$i = 45$$."
+        },
+        {
+          "id": "lab_29_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones realiza el algoritmo de búsqueda lineal secuencial para encontrar este elemento?",
+          "correctValue": 46,
+          "tolerance": 0,
+          "explanation": "La búsqueda secuencial recorre las posiciones de la 0 a la 45, lo que resulta en 46 comparaciones."
+        },
+        {
+          "id": "lab_29_c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones realiza el algoritmo de búsqueda binaria en total para encontrar el 90?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Búsqueda binaria: 1) medio=31 (val 62 < 90) -> izq=32. 2) medio=47 (val 94 > 90) -> der=46. 3) medio=39 (val 78 < 90) -> izq=40. 4) medio=43 (val 86 < 90) -> izq=44. 5) medio=45 (val 90 == 90), encontrado. Total = 5 comparaciones."
+        },
+        {
+          "id": "lab_29_d",
+          "label": "d",
+          "question": "¿Cuál es el índice medio evaluado en el primer paso de la búsqueda binaria?",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "Con izquierda=0 y derecha=63, el primer índice medio es: $$0 + (63-0)/2 = 31$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_30",
+      "title": "Direccionamiento en Matriz Tridimensional",
+      "context": "Se tiene la matriz tridimensional `int A[2][3][4];` en un sistema con enteros de 4 bytes, ubicada en dirección base 0.",
+      "parts": [
+        {
+          "id": "lab_30_a",
+          "label": "a",
+          "question": "¿Cuál es el número total de elementos contenidos en el array tridimensional A?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El total de elementos es la multiplicación de sus dimensiones: $$2 \\times 3 \\times 4 = 24$$."
+        },
+        {
+          "id": "lab_30_b",
+          "label": "b",
+          "question": "Calcule el tamaño total en bytes ocupado por el array A.",
+          "correctValue": 96,
+          "tolerance": 0,
+          "explanation": "El tamaño es: $$24 \\text{ elementos} \\times 4 \\text{ bytes/elemento} = 96 \\text{ bytes}$$."
+        },
+        {
+          "id": "lab_30_c",
+          "label": "c",
+          "question": "Calcule el desplazamiento (offset) en bytes de la celda A[1][2][3] con respecto a la dirección base 0.",
+          "correctValue": 92,
+          "tolerance": 0,
+          "explanation": "El desplazamiento lineal en elementos es: $$1 \\times (3 \\times 4) + 2 \\times 4 + 3 = 12 + 8 + 3 = 23$$ celdas. En bytes: $$23 \\times 4 \\text{ bytes} = 92 \\text{ bytes}$$."
+        },
+        {
+          "id": "lab_30_d",
+          "label": "d",
+          "question": "¿Cuántos elementos individuales componen cada sección bidimensional de tamaño 3x4 (A[0] y A[1])?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Cada bloque tridimensional se compone de submatrices de tamaño $$3 \\times 4 = 12$$ elementos."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Dirección de un elemento en un array unidimensional (1D)",
+      "tex": "$$\\text{Dir}(\\text{arr}[i]) = \\text{DirBase} + i \\times \\text{sizeof}(\\text{Tipo})$$"
+    },
+    {
+      "name": "Dirección en orden de fila mayor (Row-Major) para una matriz 2D",
+      "tex": "$$\\text{Dir}(\\text{mat}[i][j]) = \\text{DirBase} + (i \\times C + j) \\times \\text{sizeof}(\\text{Tipo})$$"
+    },
+    {
+      "name": "Dirección de memoria en un array tridimensional (3D)",
+      "tex": "$$\\text{Dir}(\\text{arr}[i][j][k]) = \\text{DirBase} + (i \\times D_2 \\times D_3 + j \\times D_3 + k) \\times \\text{sizeof}(\\text{Tipo})$$"
+    },
+    {
+      "name": "Complejidad temporal de la búsqueda binaria (peor caso)",
+      "tex": "$$\\mathcal{O}(\\log_2 n)$$"
+    },
+    {
+      "name": "Complejidad temporal de la búsqueda secuencial lineal",
+      "tex": "$$\\mathcal{O}(n)$$"
+    },
+    {
+      "name": "Complejidad temporal en el peor caso de ordenación lineal (Burbuja, Selección, Inserción)",
+      "tex": "$$\\mathcal{O}(n^2)$$"
+    },
+    {
+      "name": "Cálculo del número de elementos de un array estático en C++",
+      "tex": "$$N = \\frac{\\text{sizeof}(\\text{arr})}{\\text{sizeof}(\\text{arr}[0])}$$"
+    },
+    {
+      "name": "Traza de una matriz cuadrada A de tamaño NxN",
+      "tex": "$$\\text{Tr}(A) = \\sum_{i=0}^{N-1} A[i][i]$$"
+    }
+  ]
+}

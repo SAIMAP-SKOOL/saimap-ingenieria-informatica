@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué carácter se utiliza en C++ para indicar el final de una cadena de caracteres al estilo de C (C-string)?",
+      "options": [
+        "El carácter de salto de línea '\\n'",
+        "El carácter nulo '\\0'",
+        "El carácter de retorno de carro '\\r'"
+      ],
+      "correct": 1,
+      "hint": "Es el carácter con valor numérico 0 en la tabla ASCII.",
+      "explanation": "Las cadenas al estilo de C (C-strings) son arrays de caracteres que terminan obligatoriamente con el carácter nulo `\\0`. Esto permite a las funciones del sistema identificar dónde termina la cadena en memoria."
+    },
+    {
+      "q": "Para una cadena literal como \"Hola\", ¿cuántos bytes de almacenamiento reserva automáticamente el compilador en C++?",
+      "options": [
+        "4 bytes, uno por cada carácter visible.",
+        "5 bytes, incluyendo el carácter terminador '\\0'.",
+        "8 bytes debido al alineamiento de palabra de memoria."
+      ],
+      "correct": 1,
+      "hint": "Recuerda que se añade un carácter invisible de finalización.",
+      "explanation": "El compilador añade automáticamente el carácter nulo `\\0` al final de cualquier literal de cadena. Por tanto, para una cadena de longitud $N$, reserva $N + 1$ bytes en memoria."
+    },
+    {
+      "q": "¿Cuál es el propósito de la función `strlen` de la biblioteca `<cstring>`?",
+      "options": [
+        "Devolver el tamaño físico del array en bytes.",
+        "Devolver la longitud de la cadena sin incluir el carácter nulo '\\0'.",
+        "Devolver la longitud de la cadena incluyendo el carácter nulo '\\0'."
+      ],
+      "correct": 1,
+      "hint": "Mide solo los caracteres del texto real.",
+      "explanation": "`strlen` cuenta los caracteres que componen el texto desde la posición inicial hasta encontrar el primer `\\0`, sin incluir este último. Su complejidad es $\\mathcal{O}(N)$."
+    },
+    {
+      "q": "¿Qué biblioteca de C++ se debe incluir para trabajar con las funciones de manipulación de cadenas de C (`strcpy`, `strcat`, `strcmp`, etc.)?",
+      "options": [
+        "<string>",
+        "<cstring>",
+        "<cchar>"
+      ],
+      "correct": 1,
+      "hint": "Tiene el prefijo 'c' por ser heredada de C.",
+      "explanation": "La biblioteca `<cstring>` contiene la declaración de funciones de manipulación de cadenas de estilo C (como `strlen`, `strcpy`, `strcat` y `strcmp`)."
+    },
+    {
+      "q": "¿Qué sucede si intentas copiar una cadena de 15 caracteres en un array de tamaño 10 usando `strcpy`?",
+      "options": [
+        "El programa lanza una excepción de tipo `std::out_of_range`.",
+        "Se produce un desbordamiento de búfer (Buffer Overflow), sobrescribiendo posiciones de memoria contiguas.",
+        "La copia se trunca automáticamente a los primeros 9 caracteres más el '\\0'."
+      ],
+      "correct": 1,
+      "hint": "Las funciones de la biblioteca estándar de C no realizan comprobaciones de límites.",
+      "explanation": "`strcpy` copia bytes en memoria de forma secuencial hasta encontrar el `\\0`. Si el destino no es lo suficientemente grande, sobrescribirá los datos adyacentes, lo que constituye un error grave de seguridad llamado desbordamiento de búfer."
+    },
+    {
+      "q": "¿Qué valor devuelve la función `strcmp(cad1, cad2)` si las dos cadenas comparadas son idénticas?",
+      "options": [
+        "Devuelve 1.",
+        "Devuelve 0.",
+        "Devuelve un valor booleano `true`."
+      ],
+      "correct": 1,
+      "hint": "Indica igualdad exacta con un resultado neutral.",
+      "explanation": "`strcmp` devuelve `0` si las cadenas son idénticas. Si `cad1` es alfabéticamente menor que `cad2` devuelve un valor negativo, y si es mayor, un valor positivo."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de la clase `std::string` frente a las C-strings tradicionales?",
+      "options": [
+        "Que no consume memoria en absoluto.",
+        "La gestión dinámica y automática de la memoria necesaria para almacenar la cadena.",
+        "Que se ejecuta siempre en tiempo de compilación."
+      ],
+      "correct": 1,
+      "hint": "Piensa en el redimensionamiento del texto.",
+      "explanation": "`std::string` gestiona internamente la memoria dinámica. Cuando el texto crece, la clase se encarga de reasignar memoria de forma transparente para el programador, evitando desbordamientos de búfer."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de la función `std::string::size()` en C++11 y versiones posteriores?",
+      "options": [
+        "$\\mathcal{O}(1)$ porque el tamaño se almacena de forma explícita.",
+        "$\\mathcal{O}(N)$ donde $N$ es la longitud de la cadena.",
+        "$\\mathcal{O}(\\log N)$ debido a la estructura en árbol del objeto."
+      ],
+      "correct": 0,
+      "hint": "No necesita recorrer la cadena para contar sus caracteres.",
+      "explanation": "A diferencia de `strlen`, el tamaño de un objeto `std::string` se guarda internamente en una variable miembro, por lo que su obtención mediante `size()` o `length()` es constante: $\\mathcal{O}(1)$."
+    },
+    {
+      "q": "Si tenemos `std::string s = \"Hola\";`, ¿qué ocurre al ejecutar `s.clear();`?",
+      "options": [
+        "La cadena se elimina de la memoria liberando el objeto por completo.",
+        "La cadena se vacía, su longitud pasa a ser 0 y `empty()` devolverá `true`.",
+        "La cadena se llena con espacios en blanco hasta el tamaño máximo."
+      ],
+      "correct": 1,
+      "hint": "Borra el contenido lógico sin destruir la estructura del objeto.",
+      "explanation": "El método `clear()` elimina todos los caracteres de la cadena, dejándola en un estado vacío (longitud 0). Su memoria reservada (capacidad) puede no verse alterada de inmediato."
+    },
+    {
+      "q": "¿Qué método de `std::string` devuelve una nueva cadena que contiene una subcadena a partir de una posición y longitud dadas?",
+      "options": [
+        "`sub()`",
+        "`substr()`",
+        "`find()`"
+      ],
+      "correct": 1,
+      "hint": "Es la abreviatura de 'substring'.",
+      "explanation": "El método `substr(posicion, longitud)` devuelve una subcadena que comienza en el índice `posicion` y tiene el tamaño especificado en `longitud`."
+    },
+    {
+      "q": "Si el método `find()` de `std::string` no encuentra la subcadena buscada, ¿qué valor especial retorna?",
+      "options": [
+        "El valor `-1` de tipo entero con signo.",
+        "La constante estática `std::string::npos`.",
+        "El valor booleano `false`."
+      ],
+      "correct": 1,
+      "hint": "Es un valor constante de tipo `size_t` que representa una posición no válida.",
+      "explanation": "`find()` devuelve `std::string::npos` cuando la búsqueda no tiene éxito. Internamente, suele equivaler a `-1` interpretado como un entero sin signo (`size_t`)."
+    },
+    {
+      "q": "¿Cuál es el comportamiento del operador de extracción estándar `cin >> cadena` al leer texto de la consola?",
+      "options": [
+        "Lee una línea completa, deteniéndose únicamente al pulsar Enter.",
+        "Se detiene al encontrar el primer espacio en blanco, tabulador o salto de línea.",
+        "Ignora los saltos de línea y lee de forma ilimitada."
+      ],
+      "correct": 1,
+      "hint": "Piensa en qué pasa cuando escribes un nombre y un apellido separados por un espacio.",
+      "explanation": "El operador `>>` de `std::cin` lee texto delimitado por espacios en blanco (espacios, tabuladores, retornos de carro, etc.). Para leer líneas con espacios debemos usar funciones de lectura de líneas."
+    },
+    {
+      "q": "¿Cómo se debe leer una frase con espacios utilizando un objeto de la clase `std::string`?",
+      "options": [
+        "Mediante la función global `getline(std::cin, cadena)`.",
+        "Mediante la función miembro `std::cin.getline(cadena)`.",
+        "Mediante el operador `std::cin >> cadena`."
+      ],
+      "correct": 0,
+      "hint": "Es una función global que recibe el flujo de entrada y el objeto string.",
+      "explanation": "Para objetos `std::string`, la lectura de líneas completas con espacios se realiza con la función global `std::getline(std::cin, cadena)`."
+    },
+    {
+      "q": "¿Cómo se debe leer una frase con espacios utilizando una cadena de caracteres de estilo C (`char cadena[100]`)?",
+      "options": [
+        "Mediante `std::getline(std::cin, cadena)`.",
+        "Mediante la función miembro de flujo `std::cin.getline(cadena, tamaño)`.",
+        "Mediante `std::cin >> cadena`."
+      ],
+      "correct": 1,
+      "hint": "Esta función miembro requiere el array de destino y el tamaño máximo de lectura.",
+      "explanation": "Para C-strings, se utiliza la función miembro de flujo `std::cin.getline(array, tamaño)`, la cual evita desbordamientos de búfer limitando la lectura al tamaño especificado."
+    },
+    {
+      "q": "¿Qué sucede al intentar compilar la expresión `std::string s = \"Hola\" + \"Mundo\";`?",
+      "options": [
+        "Se concatena correctamente resultando en \"HolaMundo\".",
+        "Se produce un error de compilación porque no se pueden sumar directamente dos punteros constantes de caracteres.",
+        "El compilador asigna una dirección de memoria aleatoria al objeto."
+      ],
+      "correct": 1,
+      "hint": "Los literales de cadena son en realidad arrays constantes de caracteres, no objetos std::string.",
+      "explanation": "Los literales entre comillas son representados como `const char[]` (punteros a caracteres). C++ no permite el operador de suma entre dos punteros. Al menos uno de los operandos debe ser de la clase `std::string`."
+    },
+    {
+      "q": "¿Qué método de `std::string` permite acceder a un carácter indicando su índice y lanzando una excepción si está fuera de los límites?",
+      "options": [
+        "`at()`",
+        "El operador de corchetes `[]`.",
+        "`char_at()`"
+      ],
+      "correct": 0,
+      "hint": "Proporciona seguridad comprobando los límites (bounds checking).",
+      "explanation": "El método `s.at(indice)` comprueba si el índice es válido y, de no serlo, lanza una excepción `std::out_of_range`. El operador `s[indice]` no realiza esta comprobación."
+    },
+    {
+      "q": "¿Cómo se obtiene un puntero de tipo `const char*` compatible con C a partir de un objeto `std::string s`?",
+      "options": [
+        "Usando la conversión explícita `(char*)s`.",
+        "Invocando el método `s.c_str()`.",
+        "Invocando el método `s.to_cstring()`."
+      ],
+      "correct": 1,
+      "hint": "Devuelve una cadena compatible con funciones de C.",
+      "explanation": "El método `c_str()` de `std::string` devuelve un puntero a un array de caracteres de sólo lectura terminado en `\\0`, permitiendo la interoperabilidad con funciones de C tradicionales."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre la capacidad (`capacity()`) y el tamaño (`size()`) de un objeto `std::string`?",
+      "options": [
+        "La capacidad es el tamaño del objeto en bytes de su estructura interna, el tamaño es el número de caracteres.",
+        "El tamaño es el número real de caracteres que contiene; la capacidad es el espacio total reservado en memoria antes de necesitar una nueva asignación.",
+        "No hay diferencia, ambos métodos siempre devuelven el mismo valor entero."
+      ],
+      "correct": 1,
+      "hint": "La capacidad siempre es mayor o igual al tamaño de la cadena.",
+      "explanation": "`size()` indica la longitud de la cadena almacenada actualmente. `capacity()` representa el número máximo de caracteres que puede albergar antes de que el objeto tenga que reasignar memoria interna para crecer."
+    },
+    {
+      "q": "¿Por qué es muy recomendable pasar objetos `std::string` a las funciones por referencia constante (`const std::string&`)?",
+      "options": [
+        "Porque de este modo la cadena pasa a comportarse como un puntero de estilo C.",
+        "Para evitar la copia completa de los caracteres de la cadena y la consiguiente reserva de memoria dinámica, garantizando además que la función no modifique la cadena original.",
+        "Porque la clase `std::string` no soporta la copia por valor estándar."
+      ],
+      "correct": 1,
+      "hint": "Reduce el uso inútil de recursos de CPU y memoria.",
+      "explanation": "Pasar por valor implica duplicar el objeto y su memoria interna mediante una asignación dinámica. Utilizar `const std::string&` evita la duplicación y protege el valor original contra modificaciones."
+    },
+    {
+      "q": "Si declaras `char s[] = \"Hola\";`, ¿cuál es el valor almacenado en `s[4]`?",
+      "options": [
+        "La letra 'a'.",
+        "El carácter nulo '\\0'.",
+        "Un valor indefinido (basura de la memoria)."
+      ],
+      "correct": 1,
+      "hint": "Piensa en el índice final de una C-string.",
+      "explanation": "Los índices de `s` van de 0 a 4. 'H' en `s[0]`, 'o' en `s[1]`, 'l' en `s[2]`, 'a' en `s[3]`. El carácter terminador `\\0` se sitúa en `s[4]`."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre `strcmp` es correcta?",
+      "options": [
+        "Devuelve la diferencia entre las longitudes de las cadenas.",
+        "Realiza una comparación de códigos ASCII carácter por carácter.",
+        "Sólo compara los primeros caracteres de cada cadena."
+      ],
+      "correct": 1,
+      "hint": "Usa el orden lexicográfico basado en el código numérico de los caracteres.",
+      "explanation": "`strcmp` compara las cadenas lexicográficamente restando los valores de los caracteres ASCII correspondientes en la primera posición en la que difieren."
+    },
+    {
+      "q": "¿Qué ocurre si una C-string no contiene el carácter de terminación nula `\\0` al intentar imprimirla con `std::cout`?",
+      "options": [
+        "El programa fallará con error de sintaxis en tiempo de compilación.",
+        "`std::cout` continuará imprimiendo caracteres de memoria contiguos hasta encontrar por casualidad un valor 0, provocando posibles lecturas basura o violación de acceso.",
+        "Se imprimirá únicamente el primer carácter del array."
+      ],
+      "correct": 1,
+      "hint": "Cout necesita saber cuándo detener la salida.",
+      "explanation": "Sin el `\\0`, `std::cout` no tiene forma de saber dónde termina la cadena en memoria y continuará leyendo secuencialmente bytes sucesivos, lo que puede provocar la impresión de caracteres extraños o una caída del programa por acceso a memoria no permitida."
+    },
+    {
+      "q": "Si tenemos `std::string s = \"C++\";`, ¿cuál es el resultado de intentar concatenar un carácter usando `s.push_back('!')`?",
+      "options": [
+        "La cadena pasa a ser \"C++!\".",
+        "Se produce un error de compilación debido a incompatibilidad de tipos.",
+        "La cadena se vacía e introduce únicamente '!'."
+      ],
+      "correct": 0,
+      "hint": "Añade un carácter individual al final.",
+      "explanation": "El método `push_back(char c)` de `std::string` añade el carácter especificado al final de la cadena de caracteres existente, incrementando su tamaño en 1."
+    },
+    {
+      "q": "¿Qué función de `<cctype>` se utiliza para comprobar si un carácter representa un dígito numérico (del '0' al '9')?",
+      "options": [
+        "`std::isnum()`",
+        "`std::isdigit()`",
+        "`std::istype()`"
+      ],
+      "correct": 1,
+      "hint": "Su nombre en inglés hace referencia a un dígito.",
+      "explanation": "`std::isdigit(char c)` devuelve un valor entero (distinto de 0 para verdadero) si el carácter que recibe se encuentra en el rango del código ASCII de los dígitos numéricos del '0' al '9'."
+    },
+    {
+      "q": "Si comparamos las cadenas `\"Gato\"` y `\"gato\"` mediante `strcmp`, ¿cuál es el resultado esperado?",
+      "options": [
+        "Devolverá 0, pues representan la misma palabra.",
+        "Devolverá un valor negativo porque 'G' (ASCII 71) es menor que 'g' (ASCII 103).",
+        "Devolverá un valor positivo porque 'G' es mayúscula y tiene más peso visual."
+      ],
+      "correct": 1,
+      "hint": "Compara los valores ASCII directos.",
+      "explanation": "Las letras mayúsculas tienen valores ASCII menores (de 65 a 90) que las minúsculas (de 97 a 122). Al restar 'G' (71) menos 'g' (103) se obtiene un valor negativo."
+    },
+    {
+      "q": "¿Qué sucede con los caracteres del búfer de entrada de consola si usamos `cin >> cadena` y el usuario introduce \"Hola Mundo\"?",
+      "options": [
+        "Ambas palabras se leen juntas eliminando el espacio.",
+        "\"Hola\" se asigna a la variable, y \" Mundo\" permanece en el búfer listo para la próxima lectura.",
+        "Todo el búfer de entrada se borra automáticamente."
+      ],
+      "correct": 1,
+      "hint": "El espacio en blanco actúa como delimitador y deja el resto sin procesar.",
+      "explanation": "`cin >>` lee \"Hola\" y detiene la extracción. El espacio y \"Mundo\" quedan almacenados en el búfer de entrada del flujo `std::cin`."
+    },
+    {
+      "q": "¿Qué hace el método `std::string::append(const std::string& str)`?",
+      "options": [
+        "Modifica la cadena insertando `str` al principio.",
+        "Añade (concatena) la cadena `str` al final de la cadena actual.",
+        "Elimina todas las coincidencias de `str` en la cadena."
+      ],
+      "correct": 1,
+      "hint": "Es equivalente a usar el operador +=.",
+      "explanation": "El método `append` añade los caracteres de la cadena pasada como parámetro al final de la cadena invocadora, modificando su tamaño."
+    },
+    {
+      "q": "En un array declarado como `char texto[50];`, ¿qué representa la expresión `texto` en sí misma?",
+      "options": [
+        "El valor entero del primer carácter.",
+        "Un puntero a la dirección de memoria del primer elemento del array.",
+        "El número de caracteres almacenados en el array."
+      ],
+      "correct": 1,
+      "hint": "Los nombres de arrays decaen en punteros en C++.",
+      "explanation": "En C y C++, el nombre de un array se evalúa como la dirección de inicio del bloque de memoria del propio array (un puntero a su primer elemento: `&texto[0]`)."
+    },
+    {
+      "q": "Si tenemos un objeto `std::string s = \"Prueba\";`, ¿qué retorna la llamada `s.substr(10, 2)`?",
+      "options": [
+        "Una cadena vacía.",
+        "Lanza una excepción de tipo `std::out_of_range`.",
+        "Un puntero nulo."
+      ],
+      "correct": 1,
+      "hint": "La posición inicial especificada está fuera de los límites de la longitud de la cadena.",
+      "explanation": "Si la posición de inicio para `substr` es estrictamente mayor que el tamaño de la cadena (`s.size()`), la función lanza una excepción de tipo `std::out_of_range`."
+    },
+    {
+      "q": "¿Qué librería contiene la función `tolower` para la conversión de caracteres a minúsculas?",
+      "options": [
+        "<cstring>",
+        "<cctype>",
+        "<cstdconvert>"
+      ],
+      "correct": 1,
+      "hint": "Es para la comprobación y conversión de tipos de caracteres.",
+      "explanation": "La biblioteca `<cctype>` (de C-type) contiene funciones para el tratamiento y clasificación de caracteres, como `tolower`, `toupper`, `isalpha`, `isdigit`, etc."
+    },
+    {
+      "q": "Si una cadena `std::string s` contiene el texto \"Programacion\", ¿qué carácter devuelve la expresión `s[s.length() - 1]`?",
+      "options": [
+        "El carácter de finalización '\\0'.",
+        "La letra 'n'.",
+        "Provoca un desbordamiento de búfer."
+      ],
+      "correct": 1,
+      "hint": "Los índices son base 0, por lo que el último índice es la longitud menos 1.",
+      "explanation": "La longitud de \"Programacion\" es 12. Como los índices válidos van de 0 a 11, `s[11]` devuelve el último carácter visible de la cadena, que es 'n'."
+    },
+    {
+      "q": "Dado `char s[10] = \"Ok\";`, ¿qué valor devuelve `sizeof(s)` en C++?",
+      "options": [
+        "2 (longitud del texto).",
+        "3 (incluyendo el terminador '\\0').",
+        "10 (el número total de bytes reservados por el array)."
+      ],
+      "correct": 2,
+      "hint": "sizeof calcula el tamaño del tipo de dato en memoria.",
+      "explanation": "El operador `sizeof` evalúa el tamaño físico del array completo en memoria, que se declaró explícitamente con un tamaño de 10 elementos de tipo `char` (10 bytes)."
+    },
+    {
+      "q": "¿Qué operador de comparación determina si dos objetos `std::string` tienen el mismo contenido lexicográfico?",
+      "options": [
+        "El operador de comparación de igualdad `==`.",
+        "La función miembro `compare_equal()`.",
+        "El operador de asignación `=`."
+      ],
+      "correct": 0,
+      "hint": "Se asemeja a las comparaciones de tipos básicos.",
+      "explanation": "La clase `std::string` sobrecarga los operadores relacionales estándar, de forma que `s1 == s2` compara sus caracteres uno a uno devolviendo `true` si son iguales."
+    },
+    {
+      "q": "Si tenemos `char dest[6] = \"Hola\";` y hacemos `strcat(dest, \"s\");`, ¿qué carácter se sitúa en `dest[4]`?",
+      "options": [
+        "El carácter 's'.",
+        "El carácter terminador '\\0'.",
+        "El carácter 'a'."
+      ],
+      "correct": 0,
+      "hint": "La concatenación sobrescribe el terminador previo de la cadena de destino.",
+      "explanation": "Antes de concatenar, \"Hola\" ocupa los índices 0 a 3, con `\\0` en la posición 4. Al concatenar \"s\", el terminador se sobrescribe con 's' (índice 4), y se coloca un nuevo `\\0` al final (índice 5)."
+    },
+    {
+      "q": "¿Qué método se puede usar para redimensionar un objeto `std::string` cambiando su longitud lógica?",
+      "options": [
+        "`s.resize(nuevo_tamano)`",
+        "`s.reserve(nuevo_tamano)`",
+        "`s.length(nuevo_tamano)`"
+      ],
+      "correct": 0,
+      "hint": "Modifica directamente el número de caracteres válidos.",
+      "explanation": "`resize` cambia la longitud de la cadena al tamaño dado. Si es menor, trunca los caracteres sobrantes. Si es mayor, añade caracteres por defecto (usualmente '\\0' o el carácter especificado)."
+    },
+    {
+      "q": "Si queremos borrar todos los caracteres de un `std::string` a partir de un índice `i`, ¿cuál es el método adecuado?",
+      "options": [
+        "`s.clear(i)`",
+        "`s.erase(i)`",
+        "`s.remove(i)`"
+      ],
+      "correct": 1,
+      "hint": "Elimina una sección de caracteres del string.",
+      "explanation": "El método `erase(posicion)` elimina todos los caracteres desde la posición indicada hasta el final de la cadena de texto."
+    },
+    {
+      "q": "¿Qué tipo de dato se devuelve habitualmente al restar dos punteros que apuntan a elementos de un array de caracteres?",
+      "options": [
+        "Un puntero a carácter `char*`.",
+        "Un tipo entero con signo representativo de la distancia (`ptrdiff_t`).",
+        "Un valor flotante."
+      ],
+      "correct": 1,
+      "hint": "Es un tipo que representa la diferencia de punteros en la biblioteca estándar.",
+      "explanation": "La diferencia entre dos punteros da como resultado un tipo entero con signo llamado `ptrdiff_t`, que indica el número de elementos de separación entre ambas direcciones."
+    },
+    {
+      "q": "¿Qué constante de la biblioteca estándar representa un error de búsqueda en arrays tradicionales (C-strings)?",
+      "options": [
+        "El valor `NULL` (o `nullptr` en C++ moderno).",
+        "`std::string::npos`",
+        "El número `-1`."
+      ],
+      "correct": 0,
+      "hint": "Las funciones tradicionales de C retornan un puntero especial para indicar fallo.",
+      "explanation": "Funciones tradicionales como `strchr` o `strstr` devuelven un puntero nulo (`nullptr` o `NULL`) para indicar que el elemento o subcadena no fue encontrado."
+    },
+    {
+      "q": "Si tenemos `std::string s1 = \"A\"; std::string s2 = \"B\";`, ¿cuál es el resultado de la comparación `s1 < s2`?",
+      "options": [
+        "Devuelve `true` porque el código ASCII de 'A' (65) es menor que el de 'B' (66).",
+        "Devuelve `false` porque 'B' va después de 'A'.",
+        "Se produce un error ya que requiere llamar al método `compare`."
+      ],
+      "correct": 0,
+      "hint": "La relación de orden se basa en los valores ASCII.",
+      "explanation": "El operador `<` está sobrecargado para realizar una comparación alfabética en base al código ASCII de los caracteres. Dado que $65 < 66$, `s1 < s2` evalúa a `true`."
+    },
+    {
+      "q": "¿Cuál es la función en `<cstring>` diseñada para copiar un número máximo de caracteres entre arrays, previniendo desbordamientos?",
+      "options": [
+        "`strcpy`",
+        "`strncpy`",
+        "`strcpy_safe`"
+      ],
+      "correct": 1,
+      "hint": "Añade un parámetro 'n' para limitar los bytes a copiar.",
+      "explanation": "`strncpy(destino, origen, n)` copia como máximo `n` caracteres del origen, ayudando a mitigar riesgos de desbordamientos de búfer en las cadenas de C."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Completa el espacio en blanco de modo que la cadena s quede totalmente vacía:\\n```cpp\\nstd::string s = \"Texto\";\\ns.____();\\n```",
+      "options": [
+        "clear",
+        "erase",
+        "reset"
+      ],
+      "correct": 0,
+      "hint": "Busca un método miembro común sin parámetros para vaciar.",
+      "explanation": "El método `clear()` elimina todos los elementos de un objeto `std::string`, reduciendo su longitud lógica a 0."
+    },
+    {
+      "q": "Completa el código para realizar una copia segura de cadenas C-style limitando el número de caracteres:\\n```cpp\\nchar dest[10];\\n____(dest, \"Hola Mundo\", 9);\\ndest[9] = '\\0';\\n```",
+      "options": [
+        "strcpy",
+        "strncpy",
+        "memcpy"
+      ],
+      "correct": 1,
+      "hint": "Es la versión acotada por longitud de strcpy.",
+      "explanation": "`strncpy` copia un número preestablecido de caracteres desde el origen hacia el destino."
+    },
+    {
+      "q": "Completa para concatenar la cadena de origen al final del destino en C:\\n```cpp\\nchar destino[20] = \"Hola \";\\n____(destino, \"Amigo\");\\n```",
+      "options": [
+        "strcat",
+        "strcpy",
+        "strncat"
+      ],
+      "correct": 0,
+      "hint": "Es la abreviatura de 'string concatenate'.",
+      "explanation": "`strcat` busca el carácter de fin de cadena en la cadena de destino y añade la de origen a partir de esa posición."
+    },
+    {
+      "q": "Completa la llamada para extraer la subcadena \"Mundo\" (de longitud 5) a partir de la posición 5:\\n```cpp\\nstd::string s = \"Hola Mundo\";\\nstd::string sub = s.____(5, 5);\\n```",
+      "options": [
+        "substr",
+        "substring",
+        "slice"
+      ],
+      "correct": 0,
+      "hint": "El método estándar en C++ es substr.",
+      "explanation": "El método `substr(pos, len)` genera una nueva cadena copiando `len` caracteres a partir del índice `pos`."
+    },
+    {
+      "q": "Completa la condición para comprobar si la cadena `s` no contiene ningún carácter:\\n```cpp\\nstd::string s;\\nif (s.____()) {\\n    std::cout << \"Vacia\";\\n}\\n```",
+      "options": [
+        "size",
+        "empty",
+        "clear"
+      ],
+      "correct": 1,
+      "hint": "El método devuelve un booleano indicando si el tamaño es 0.",
+      "explanation": "`empty()` es un método de `std::string` que devuelve `true` si el tamaño de la cadena es cero."
+    },
+    {
+      "q": "Completa el código para encontrar la primera aparición del carácter 'a' en la cadena:\\n```cpp\\nstd::string s = \"Programacion\";\\nsize_t pos = s.____('a');\\n```",
+      "options": [
+        "find",
+        "search",
+        "locate"
+      ],
+      "correct": 0,
+      "hint": "Método miembro que devuelve el índice del elemento buscado.",
+      "explanation": "`find` busca la primera ocurrencia de un carácter o subcadena y devuelve su índice."
+    },
+    {
+      "q": "Completa para leer una línea completa con espacios del flujo estándar de entrada:\\n```cpp\\nstd::string linea;\\n____(std::cin, linea);\\n```",
+      "options": [
+        "getline",
+        "cin.getline",
+        "read_line"
+      ],
+      "correct": 0,
+      "hint": "Es una función global no perteneciente a la clase cin directamente.",
+      "explanation": "`std::getline` toma un flujo de entrada como primer argumento y un objeto `std::string` como segundo."
+    },
+    {
+      "q": "Completa el código para leer una cadena de estilo C que contiene espacios de consola:\\n```cpp\\nchar buffer[100];\\nstd::cin.____(buffer, 100);\\n```",
+      "options": [
+        "getline",
+        "read",
+        "get"
+      ],
+      "correct": 0,
+      "hint": "Es un método miembro de la clase cin que limita la lectura.",
+      "explanation": "`cin.getline(char* s, streamsize n)` es el método de flujo de entrada de C++ para arrays de caracteres."
+    },
+    {
+      "q": "Completa el código para obtener el carácter de la posición 2 del string `s` realizando control de límites:\\n```cpp\\nstd::string s = \"Curso\";\\nchar c = s.____(2);\\n```",
+      "options": [
+        "at",
+        "get",
+        "char_at"
+      ],
+      "correct": 0,
+      "hint": "Comprueba el índice y lanza std::out_of_range en caso erróneo.",
+      "explanation": "`at(index)` accede de forma segura al elemento en la posición especificada en un `std::string`."
+    },
+    {
+      "q": "Completa para calcular la longitud de una C-string:\\n```cpp\\nchar s[] = \"Hola\";\\nsize_t tam = ____(s);\\n```",
+      "options": [
+        "strlen",
+        "sizeof",
+        "strcmp"
+      ],
+      "correct": 0,
+      "hint": "Función de la cabecera cstring.",
+      "explanation": "`strlen` recorre el array hasta encontrar `\\0` y calcula la cantidad de caracteres visibles."
+    },
+    {
+      "q": "Completa el código para realizar la comparación lexicográfica de dos cadenas C-style:\\n```cpp\\nchar s1[] = \"abc\";\\nchar s2[] = \"abd\";\\nint comparacion = ____(s1, s2);\\n```",
+      "options": [
+        "strcmp",
+        "strcmp_s",
+        "compare"
+      ],
+      "correct": 0,
+      "hint": "Función estándar de comparación de cadenas de C.",
+      "explanation": "`strcmp` compara dos cadenas carácter a carácter según su valor ASCII y devuelve un entero indicando la relación."
+    },
+    {
+      "q": "Completa para obtener una representación en cadena compatible con C de un objeto de la clase `std::string`:\\n```cpp\\nstd::string s = \"Universidad\";\\nconst char* c_str_ptr = s.____();\\n```",
+      "options": [
+        "c_str",
+        "data",
+        "to_char"
+      ],
+      "correct": 0,
+      "hint": "Significa 'C-string'.",
+      "explanation": "El método `c_str()` de `std::string` devuelve un puntero a una zona de memoria que contiene la cadena terminada en `\\0`."
+    },
+    {
+      "q": "Completa para truncar una cadena de estilo C en la posición del índice 2:\\n```cpp\\nchar s[10] = \"Hola\";\\ns[____] = '\\0';\\n```",
+      "options": [
+        "2",
+        "3",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "El carácter nulo se asigna en el índice donde queremos que termine el texto.",
+      "explanation": "Al colocar `\\0` en `s[2]`, funciones como `strlen` verán que la cadena finaliza ahí, de modo que el contenido efectivo pasa a ser \"Ho\" (longitud 2)."
+    },
+    {
+      "q": "Completa la directiva para poder declarar y usar objetos de la clase `std::string`:\\n```cpp\\n#include <____>\\nstd::string cadena;\\n```",
+      "options": [
+        "string",
+        "cstring",
+        "iostream"
+      ],
+      "correct": 0,
+      "hint": "Es la librería estándar de strings en C++.",
+      "explanation": "La biblioteca `<string>` declara la clase `std::string` y sus métodos en el espacio de nombres `std`."
+    },
+    {
+      "q": "Completa la directiva para poder usar la función de C-style `strlen`:\\n```cpp\\n#include <____>\\nint len = strlen(\"C++\");\\n```",
+      "options": [
+        "cstring",
+        "string",
+        "cctype"
+      ],
+      "correct": 0,
+      "hint": "Librería de C para manejo de cadenas.",
+      "explanation": "La cabecera `<cstring>` de C++ define funciones útiles para tratar arrays de caracteres al estilo C."
+    },
+    {
+      "q": "Completa el código para cambiar la longitud de un string `s` conservando solo los primeros 3 caracteres:\\n```cpp\\nstd::string s = \"Informática\";\\ns.____(3);\\n```",
+      "options": [
+        "resize",
+        "reserve",
+        "shrink_to_fit"
+      ],
+      "correct": 0,
+      "hint": "Modifica el tamaño actual del string.",
+      "explanation": "`resize(n)` ajusta el tamaño lógico de la cadena de texto a exactamente `n` elementos."
+    },
+    {
+      "q": "Completa el código para insertar un carácter al final de un string `std::string`:\\n```cpp\\nstd::string s = \"C++\";\\ns.____('!');\\n```",
+      "options": [
+        "push_back",
+        "append",
+        "insert"
+      ],
+      "correct": 0,
+      "hint": "Método habitual en contenedores para insertar un único elemento al final.",
+      "explanation": "`push_back(char c)` inserta el carácter `c` al final del string."
+    },
+    {
+      "q": "Completa para representar que no se ha encontrado una posición válida en la cadena:\\n```cpp\\nstd::string s = \"Ejemplo\";\\nif (s.find('z') == std::string::____) {\\n    std::cout << \"No encontrado\";\\n}\\n```",
+      "options": [
+        "npos",
+        "null",
+        "invalid"
+      ],
+      "correct": 0,
+      "hint": "Es una constante estática pública de la clase string.",
+      "explanation": "`std::string::npos` es el valor de retorno que representa una coincidencia inexistente."
+    },
+    {
+      "q": "Completa el código para eliminar el último carácter de una cadena `std::string`:\\n```cpp\\nstd::string s = \"Hola\";\\ns.____(); // s ahora contiene \"Hol\"\\n```",
+      "options": [
+        "pop_back",
+        "erase",
+        "clear"
+      ],
+      "correct": 0,
+      "hint": "Método complementario a push_back.",
+      "explanation": "`pop_back()` de `std::string` elimina el último carácter de la cadena, disminuyendo su tamaño en 1."
+    },
+    {
+      "q": "Completa el código para conocer la capacidad de memoria asignada actual de un string:\\n```cpp\\nstd::string s = \"Hola\";\\nsize_t cap = s.____();\\n```",
+      "options": [
+        "capacity",
+        "max_size",
+        "size"
+      ],
+      "correct": 0,
+      "hint": "Indica el tamaño del búfer interno de almacenamiento.",
+      "explanation": "`capacity()` devuelve el número de caracteres que la cadena puede albergar sin requerir reasignar memoria."
+    },
+    {
+      "q": "¿Qué consecuencias puede traer un desbordamiento de búfer al utilizar `strcpy(destino, origen)`?",
+      "options": [
+        "Sobrescribir datos almacenados en variables de memoria contiguas.",
+        "Fallos inesperados del programa o cuelgues (segmentation fault).",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Es un fallo grave en la gestión de memoria de C.",
+      "explanation": "El desbordamiento de búfer ocurre al escribir más allá del límite reservado para un array, lo que altera datos contiguos y compromete la estabilidad y seguridad."
+    },
+    {
+      "q": "¿Qué métodos de `std::string` permiten obtener el número de caracteres de la cadena?",
+      "options": [
+        "`length()`",
+        "`size()`",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "La clase proporciona sinónimos para facilitar la compatibilidad con contenedores de la STL.",
+      "explanation": "`length()` y `size()` son métodos equivalentes en `std::string` que devuelven exactamente la misma información: el número de caracteres del string."
+    },
+    {
+      "q": "¿Qué funciones de `<cstring>` pueden causar desbordamientos de búfer si no se controlan debidamente sus límites?",
+      "options": [
+        "`strcpy`",
+        "`strcat`",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Ambas funciones copian o concatenan sin comprobar el tamaño destino.",
+      "explanation": "Tanto `strcpy` como `strcat` no reciben el tamaño del array destino como parámetro, por lo que escriben indefinidamente hasta hallar `\\0` en el origen."
+    },
+    {
+      "q": "¿Qué tipos de datos se consideran separadores o delimitadores al leer un string con `std::cin >> s`?",
+      "options": [
+        "El carácter de espacio ' '.",
+        "El tabulador '\\t' y el salto de línea '\\n'.",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Cualquier espacio en blanco en general interrumpe la lectura estándar.",
+      "explanation": "El operador `>>` de `std::cin` salta los espacios iniciales y lee caracteres hasta que encuentra cualquier tipo de carácter delimitador de espacio en blanco."
+    },
+    {
+      "q": "¿Qué operaciones son directamente válidas entre objetos de tipo `std::string`?",
+      "options": [
+        "Comparación de cadenas mediante el operador relacional `==`.",
+        "Unión o concatenación mediante el operador aritmético `+`.",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "La clase std::string ofrece operadores sobrecargados.",
+      "explanation": "`std::string` soporta los operadores `==`, `!=`, `<`, `>`, `+` y `+=` para simplificar la programación frente a las funciones clásicas de C."
+    },
+    {
+      "q": "Dado `std::string s = \"Dato\";`, ¿cuáles de las siguientes expresiones acceden al carácter 'a' en la posición de índice 1?",
+      "options": [
+        "`s[1]`",
+        "`s.at(1)`",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Hay métodos seguros e inseguros para el acceso directo.",
+      "explanation": "Tanto el operador `[]` (rápido pero sin control) como el método `at()` (con comprobación de límites) devuelven una referencia al carácter en el índice especificado."
+    },
+    {
+      "q": "¿Qué situaciones causan comportamiento indefinido al trabajar con cadenas tradicionales de C?",
+      "options": [
+        "Omitir el carácter nulo '\\0' en la inicialización o manipulación del array.",
+        "Escribir en una posición de índice mayor que el tamaño del array.",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Piensa en las consecuencias del manejo manual de arrays sin comprobaciones.",
+      "explanation": "No incluir el terminador nulo o escribir fuera de los límites del array son fallos críticos que desencadenan fallos lógicos o violaciones de memoria."
+    },
+    {
+      "q": "¿Qué operaciones realizan una copia profunda (duplicación en memoria física de los caracteres) al ejecutarse?",
+      "options": [
+        "`strcpy(dest, src)` en cadenas de tipo C.",
+        "`std::string s2 = s1;` al realizar la asignación de objetos.",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Implica la creación de una copia independiente de la cadena original.",
+      "explanation": "Tanto `strcpy` como la asignación de `std::string` duplican los caracteres en una nueva sección de memoria para mantener la independencia de ambas variables."
+    },
+    {
+      "q": "¿Por qué `std::string` es preferible a `char[]` para el desarrollo en C++ moderno?",
+      "options": [
+        "Facilita el mantenimiento al evitar la gestión manual de punteros y memoria.",
+        "Disminuye los errores de programación habituales como los desbordamientos de búfer.",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Considera la seguridad y la simplicidad del desarrollo.",
+      "explanation": "La clase `std::string` encapsula el acceso seguro y dinámico a la memoria, lo que reduce la propensión a bugs en C++."
+    },
+    {
+      "q": "Si declaramos `char s[10] = \"Hola\";`, ¿cuál de las siguientes afirmaciones es correcta?",
+      "options": [
+        "La longitud lógica de la cadena de texto es 4.",
+        "La cantidad física de bytes reservados es 10.",
+        "Todas las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Estudia la diferencia entre el tamaño declarado y el contenido.",
+      "explanation": "El array almacena la palabra \"Hola\" más `\\0` (5 bytes utilizados lógicamente), pero ocupa un espacio físico reservado de 10 bytes en la memoria (de `s[0]` a `s[9]`)."
+    },
+    {
+      "q": "Si ejecutamos `strcmp(cad1, cad2)` y las cadenas son idénticas, ¿qué valor devuelve?",
+      "options": [
+        "Devuelve un valor positivo.",
+        "Devuelve un valor negativo.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "El resultado indica igualdad perfecta mediante un valor neutro.",
+      "explanation": "El resultado de `strcmp` al comparar cadenas idénticas es `0`, el cual no es ni positivo ni negativo, por lo que ninguna opción es correcta."
+    },
+    {
+      "q": "¿Qué valor devuelve `strcmp(\"a\", \"b\")`?",
+      "options": [
+        "El valor `0` indicando igualdad.",
+        "Un valor positivo ya que 'b' es mayor que 'a'.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Compara el primer carácter de cada cadena: 'a' (ASCII 97) - 'b' (ASCII 98).",
+      "explanation": "Dado que el valor ASCII de 'a' (97) es menor que el de 'b' (98), `strcmp` devuelve un valor estrictamente negativo (menor que 0)."
+    },
+    {
+      "q": "¿Qué operador de C++ permite obtener el número de caracteres almacenados en un `std::string` sin usar funciones o métodos?",
+      "options": [
+        "El operador `sizeof`.",
+        "El operador asterisco de desreferencia `*`.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Piensa si existe un operador incorporado específico para cadenas dinámicas.",
+      "explanation": "No existe ningún operador nativo de C++ para calcular el tamaño lógico de una cadena sin recurrir a métodos miembros como `size()` o `length()`."
+    },
+    {
+      "q": "¿Cuál es la sintaxis correcta para concatenar directamente dos literales de cadena como \"Hola\" y \"Mundo\" utilizando el operador `+` en C++?",
+      "options": [
+        "\"Hola\" + \"Mundo\"",
+        "&\"Hola\" + &\"Mundo\"",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "C++ no permite sumar directamente dos punteros constantes.",
+      "explanation": "No se puede concatenar dos literales de cadena directamente con `+` porque ambos son arrays constantes. Se requiere que al menos uno de los operandos sea un objeto `std::string`."
+    },
+    {
+      "q": "¿Qué carácter de terminación nula se añade de forma obligatoria dentro del recuento del método `s.size()` de un objeto `std::string s`?",
+      "options": [
+        "El carácter '\\0' en todos los casos.",
+        "El carácter de salto de línea '\\n'.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Analiza si el tamaño lógico de std::string incluye terminadores.",
+      "explanation": "`std::string::size()` indica la cantidad de caracteres reales del texto sin contar ningún carácter nulo terminador, a diferencia de los arrays de C."
+    },
+    {
+      "q": "¿Qué función de `<cstring>` devuelve la posición del índice numérico de la primera aparición de un carácter en un array?",
+      "options": [
+        "`strlen`",
+        "`strcmp`",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "La función strchr busca un carácter pero devuelve otra cosa.",
+      "explanation": "La función `strchr` devuelve un puntero (`char*`) a la ubicación en memoria del carácter encontrado, no su índice numérico directo."
+    },
+    {
+      "q": "Si declaramos `std::string s = \"Ejemplo\";` y ejecutamos `s.clear();`, ¿cuál es el nuevo tamaño del objeto medido por `sizeof(s)`?",
+      "options": [
+        "Retorna 0 bytes.",
+        "Retorna el valor 7 bytes.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "sizeof mide el objeto contenedor en sí, no los elementos asignados dinámicamente.",
+      "explanation": "`sizeof` calcula el tamaño fijo de la estructura de la clase `std::string` en la pila (suele ser de 24, 32 o 40 bytes dependiendo de la implementación de la biblioteca estándar), el cual permanece constante independientemente de la longitud de la cadena almacenada."
+    },
+    {
+      "q": "Si buscamos un carácter inexistente como 'z' en un string s mediante `s.find('z')`, ¿qué valor numérico sin signo de tipo `size_t` devuelve la función?",
+      "options": [
+        "El valor -1.",
+        "El valor 0.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "El valor devuelto es std::string::npos, el cual es el valor máximo almacenable en size_t.",
+      "explanation": "Devuelve `std::string::npos`, que es el entero sin signo máximo para `size_t` (por ejemplo, $18446744073709551615$ en sistemas de 64 bits), no el entero con signo -1 o 0."
+    },
+    {
+      "q": "Si declaramos `char s[6] = \"Texto\";`, ¿en qué posición de índice se encuentra la letra 't' en minúscula?",
+      "options": [
+        "En el índice 0.",
+        "En el índice 5.",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "Los índices empiezan en 0. 'T' mayúscula está en 0, 'e' en 1, 'x' en 2, 't' minúscula en 3.",
+      "explanation": "La letra 't' minúscula está en `s[3]`. En `s[0]` se encuentra 'T' en mayúscula y en `s[5]` se encuentra el terminador nulo `\\0`. Ninguna opción dada es correcta."
+    },
+    {
+      "q": "Si tenemos `std::string s = \"C++\"; s.push_back('x');`, ¿cuál es el nuevo valor del string si lo comparamos usando `==`?",
+      "options": [
+        "\"xC++\"",
+        "\"C++\"",
+        "Ninguna de las opciones anteriores."
+      ],
+      "correct": 2,
+      "hint": "El carácter se inserta al final de la cadena de texto.",
+      "explanation": "El nuevo contenido es \"C++x\", por lo que ninguna de las opciones anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Tamaños físicos y lógicos de C-strings",
+      "context": "Dado el siguiente fragmento de código C++:\n```cpp\nchar s1[] = \"Hola\";\nchar s2[10] = \"Mundo\";\n```",
+      "parts": [
+        {
+          "id": "1a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño físico en bytes de s1 (evaluado con sizeof(s1))?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El literal `\"Hola\"` tiene 4 caracteres. El compilador añade automáticamente el carácter nulo terminador `\\0`, reservando $4 + 1 = 5$ bytes de memoria. El operador `sizeof` devuelve el tamaño físico total, que es $5$."
+        },
+        {
+          "id": "1b",
+          "label": "b",
+          "question": "¿Cuál es el tamaño físico en bytes de s2 (evaluado con sizeof(s2))?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El array `s2` se declara con un tamaño físico explícito de $10$ elementos de tipo `char`. Por lo tanto, `sizeof(s2)` devuelve $10$ bytes."
+        },
+        {
+          "id": "1c",
+          "label": "c",
+          "question": "¿Cuál es la longitud lógica de s1 devuelta por strlen(s1)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La función `strlen` calcula la longitud de la cadena contando los caracteres desde el inicio hasta el carácter nulo terminador sin incluir este último. Así, para `\"Hola\"` devuelve $4$."
+        },
+        {
+          "id": "1d",
+          "label": "d",
+          "question": "¿Cuál es la longitud lógica de s2 devuelta por strlen(s2)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La cadena almacenada en `s2` es `\"Mundo\"`. La función `strlen(s2)` cuenta sus caracteres excluyendo el `\\0`, dando un resultado de $5$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Longitud y manipulación básica de std::string",
+      "context": "Dado el siguiente fragmento de código C++:\n```cpp\nstd::string s1 = \"C++20\";\nstd::string s2;\n```",
+      "parts": [
+        {
+          "id": "2a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada s1.length()?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El método `length()` de `std::string` devuelve el número de caracteres válidos en la cadena, que para `\"C++20\"` es exactamente $5$."
+        },
+        {
+          "id": "2b",
+          "label": "b",
+          "question": "¿Cuál es the valor devuelto por la llamada s2.size() inicialmente?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El constructor por defecto crea una cadena vacía, por lo que su tamaño inicial (`size()`) es $0$."
+        },
+        {
+          "id": "2c",
+          "label": "c",
+          "question": "Si ejecutamos `s2 = s1 + \"!\";`, ¿cuál es el valor resultante de s2.length()?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Al concatenar `s1` ($5$ caracteres) con `\"!\"` ($1$ carácter), la nueva cadena tiene una longitud de $5 + 1 = 6$ caracteres."
+        },
+        {
+          "id": "2d",
+          "label": "d",
+          "question": "Si ejecutamos `s1.clear();`, ¿cuál es la longitud lógica final de s1?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El método `clear()` vacía la cadena, reduciendo su número de caracteres a $0$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Búsqueda y extracción de subcadenas",
+      "context": "Se tiene la cadena: `std::string s = \"Programacion_I\";`",
+      "parts": [
+        {
+          "id": "3a",
+          "label": "a",
+          "question": "¿Cuál es la posición (índice de base 0) de la primera aparición del carácter 'g'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los caracteres de `\"Programacion_I\"` se indexan desde 0: P(0), r(1), o(2), g(3). Por lo tanto, la posición es $3$."
+        },
+        {
+          "id": "3b",
+          "label": "b",
+          "question": "¿Cuál es la longitud de la subcadena obtenida al ejecutar s.substr(3, 5)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La llamada `s.substr(pos, len)` toma como segundo parámetro el tamaño de la subcadena deseada. En este caso se solicitan $5$ caracteres, devolviendo `\"grama\"`."
+        },
+        {
+          "id": "3c",
+          "label": "c",
+          "question": "¿Cuál es el índice del carácter de subrayado '_' en la cadena s?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Contando desde 0, los caracteres de `\"Programacion\"` ocupan los índices del $0$ al $11$. El guion bajo `_` ocupa el índice $12$."
+        },
+        {
+          "id": "3d",
+          "label": "d",
+          "question": "Si ejecutamos `s.clear();`, ¿cuál es el tamaño de la cadena s?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "`clear()` restablece la cadena a una longitud de $0$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Operaciones secuenciales de copia y concatenación",
+      "context": "Considera el siguiente código en C++:\n```cpp\nchar dest[20] = \"Base\";\nchar src[] = \"Datos\";\n```",
+      "parts": [
+        {
+          "id": "4a",
+          "label": "a",
+          "question": "¿Cuál es el valor de strlen(dest) antes de cualquier operación?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`\"Base\"` tiene 4 caracteres visibles, por lo que `strlen` devuelve $4$."
+        },
+        {
+          "id": "4b",
+          "label": "b",
+          "question": "Tras ejecutar `strcat(dest, src);`, ¿cuál es el valor de strlen(dest)?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "`strcat` concatena `\"Datos\"` ($5$ caracteres) al final de `\"Base\"` ($4$ caracteres). La longitud resultante es $4 + 5 = 9$."
+        },
+        {
+          "id": "4c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño físico en bytes de dest (sizeof(dest)) después de la concatenación?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El tamaño físico de un array estático en C++ no varía en tiempo de ejecución. `sizeof(dest)` permanece igual a la reserva inicial de $20$ bytes."
+        },
+        {
+          "id": "4d",
+          "label": "d",
+          "question": "Si ahora ejecutamos `strcpy(dest, \"Ok\");`, ¿cuál es la nueva longitud lógica de dest?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "`strcpy` sobrescribe el contenido de `dest` con la cadena `\"Ok\"` y su correspondiente `\\0`, haciendo que `strlen(dest)` devuelva $2$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Bucle sobre array de caracteres",
+      "context": "Dado el siguiente fragmento de código:\n```cpp\nchar s[] = \"Estructuras\";\nint c = 0;\nfor (int i = 0; s[i] != '\\0'; i++) {\n    if (s[i] == 'r') {\n        c++;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "5a",
+          "label": "a",
+          "question": "¿Cuántas veces se ejecuta el cuerpo del bucle for?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "La condición del bucle evalúa `s[i] != '\\0'`. La cadena `\"Estructuras\"` tiene $11$ caracteres visibles, por lo que el bucle itera $11$ veces antes de encontrar el terminador."
+        },
+        {
+          "id": "5b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable c?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La variable `c` cuenta las ocurrencias del carácter `'r'`. En `\"Estructuras\"` la letra `'r'` aparece en los índices 2 y 8, por lo que `c` termina valiendo $2$."
+        },
+        {
+          "id": "5c",
+          "label": "c",
+          "question": "¿Cuál es el índice del carácter de terminación nula '\\0' en el array s?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Como la cadena tiene $11$ caracteres (de los índices $0$ al $10$), el terminador `\\0` se sitúa exactamente en el índice $11$."
+        },
+        {
+          "id": "5d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño total en bytes asignado en memoria para s (sizeof(s))?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El array almacena los 11 caracteres de `\"Estructuras\"` más el terminador nulo, requiriendo un espacio de $11 + 1 = 12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Concatenación y acceso a caracteres de std::string",
+      "context": "Dado el código:\n```cpp\nstd::string a = \"123\";\nstd::string b = \"4567\";\nstd::string c = a + b;\n```",
+      "parts": [
+        {
+          "id": "6a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño (length) de la cadena c?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La cadena `c` es el resultado de concatenar `\"123\"` (3 caracteres) y `\"4567\"` (4 caracteres). Su tamaño es $3 + 4 = 7$."
+        },
+        {
+          "id": "6b",
+          "label": "b",
+          "question": "¿Cuál es el valor entero correspondiente al código ASCII del carácter c[3]?",
+          "correctValue": 52,
+          "tolerance": 0,
+          "explanation": "En la cadena concatenada `\"1234567\"`, `c[3]` es el carácter `'4'`. El código ASCII de `'4'` es $52$."
+        },
+        {
+          "id": "6c",
+          "label": "c",
+          "question": "Si hacemos `c.push_back('8');`, ¿cuál es la nueva longitud de c?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "`push_back` inserta un carácter al final del string, aumentando su tamaño en $1$. Así, pasa de $7$ a $8$."
+        },
+        {
+          "id": "6d",
+          "label": "d",
+          "question": "Si posteriormente ejecutamos `c.pop_back(); c.pop_back();`, ¿cuál es la longitud final de c?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Cada instrucción `pop_back()` elimina un carácter del final del string. Tras dos llamadas, la longitud disminuye en 2, pasando de $8$ a $6$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Comparaciones lexicográficas con strcmp",
+      "context": "Considera los resultados de las siguientes llamadas a strcmp:\n```cpp\nint r1 = strcmp(\"abc\", \"abc\");\nint r2_sign = (strcmp(\"abc\", \"abd\") < 0) ? -1 : 1;\nint r3_sign = (strcmp(\"abd\", \"abc\") > 0) ? 1 : -1;\n```",
+      "parts": [
+        {
+          "id": "7a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por r1?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al comparar dos cadenas idénticas, `strcmp` devuelve exactamente $0$."
+        },
+        {
+          "id": "7b",
+          "label": "b",
+          "question": "¿Cuál es el valor de r2_sign?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Como `'c'` (ASCII 99) es menor que `'d'` (ASCII 100), `strcmp(\"abc\", \"abd\")` devuelve un valor negativo ($<0$). Así, la condición se cumple y `r2_sign` vale $-1$."
+        },
+        {
+          "id": "7c",
+          "label": "c",
+          "question": "¿Cuál es el valor de r3_sign?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como `'d'` (ASCII 100) es mayor que `'c'` (ASCII 99), `strcmp(\"abd\", \"abc\")` devuelve un valor positivo ($>0$). Por tanto, `r3_sign` toma el valor $1$."
+        },
+        {
+          "id": "7d",
+          "label": "d",
+          "question": "¿Cuál es el valor numérico de la diferencia de caracteres `char('d') - char('c')`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El código ASCII de `'d'` es $100$ y el de `'c'` es $99$. La diferencia aritmética es $100 - 99 = 1$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Acceso seguro a elementos e índices de std::string",
+      "context": "Sea el string: `std::string s = \"Informatica\";`",
+      "parts": [
+        {
+          "id": "8a",
+          "label": "a",
+          "question": "¿Cuál es la posición (índice base 0) de la letra 't'?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Indexando la cadena: I(0), n(1), f(2), o(3), r(4), m(5), a(6), t(7), i(8), c(9), a(10). El índice de 't' es exactamente $7$."
+        },
+        {
+          "id": "8b",
+          "label": "b",
+          "question": "¿Cuál es el código ASCII del carácter devuelto por s.at(5)?",
+          "correctValue": 109,
+          "tolerance": 0,
+          "explanation": "El carácter en el índice $5$ de `\"Informatica\"` es `'m'`. El código ASCII de `'m'` es $109$."
+        },
+        {
+          "id": "8c",
+          "label": "c",
+          "question": "¿Cuál es la longitud devuelta por s.size()?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "La palabra `\"Informatica\"` tiene un total de $11$ caracteres visibles."
+        },
+        {
+          "id": "8d",
+          "label": "d",
+          "question": "¿Cuántos caracteres contiene la subcadena s.substr(2, 4)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El método `substr(pos, len)` extrae una subcadena de longitud especificada por el segundo parámetro. Aquí se piden $4$ caracteres, dando `\"form\"`."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Modificación de caracteres en std::string",
+      "context": "Dado el fragmento de código:\n```cpp\nstd::string s = \"P1-2026\";\ns[1] = '0';\ns[2] = s[0];\n```",
+      "parts": [
+        {
+          "id": "9a",
+          "label": "a",
+          "question": "¿Cuál es el código ASCII del carácter en s[1] después de las modificaciones?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "`s[1]` ha sido asignado con el carácter `'0'`. El código ASCII de `'0'` es $48$."
+        },
+        {
+          "id": "9b",
+          "label": "b",
+          "question": "¿Cuál es el código ASCII del carácter en s[2] después de las modificaciones?",
+          "correctValue": 80,
+          "tolerance": 0,
+          "explanation": "`s[2]` recibe el valor de `s[0]`, que es `'P'`. El código ASCII de `'P'` es $80$."
+        },
+        {
+          "id": "9c",
+          "label": "c",
+          "question": "¿Cuál es la longitud de la cadena s?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La modificación individual de caracteres no altera la longitud total de la cadena, la cual permanece en $7$."
+        },
+        {
+          "id": "9d",
+          "label": "d",
+          "question": "Si ejecutamos `s.resize(4);`, ¿cuál es la nueva longitud de s?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`resize(4)` trunca la cadena conservando únicamente los primeros $4$ caracteres, reduciendo el tamaño a $4$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Bucle de conteo de vocales en cadena",
+      "context": "Se ejecuta el siguiente programa:\n```cpp\nstd::string texto = \"Metodos Programacion\";\nint vocales = 0;\nfor (size_t i = 0; i < texto.length(); i++) {\n    char c = std::tolower(texto[i]);\n    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {\n        vocales++;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "10a",
+          "label": "a",
+          "question": "¿Cuántos caracteres en total tiene la cadena texto?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La cadena `\"Metodos Programacion\"` consta de 7 letras en 'Metodos', 1 espacio, y 12 letras en 'Programacion'. Total = $7 + 1 + 12 = 20$."
+        },
+        {
+          "id": "10b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable vocales?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Las vocales en `\"Metodos Programacion\"` son: e, o, o, o, a, a, i, o. Esto suma un total de $8$ vocales."
+        },
+        {
+          "id": "10c",
+          "label": "c",
+          "question": "¿Qué índice tiene el primer espacio en blanco en la cadena texto?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El texto es `\"Metodos Programacion\"`. La palabra `\"Metodos\"` ocupa los índices del $0$ al $6$. El espacio en blanco se sitúa en el índice $7$."
+        },
+        {
+          "id": "10d",
+          "label": "d",
+          "question": "Si extraemos una subcadena usando `texto.substr(8)`, ¿cuál es su longitud?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "`texto.substr(8)` extrae todo el contenido desde el índice $8$ hasta el final de la cadena, que coincide con `\"Programacion\"` (longitud $12$)."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Punteros y aritmética sobre cadenas C-style",
+      "context": "Dado el siguiente fragmento de código:\n```cpp\nchar s[] = \"C++Curso\";\nchar* ptr = s;\n```",
+      "parts": [
+        {
+          "id": "11a",
+          "label": "a",
+          "question": "¿Qué valor ASCII entero representa al carácter *(ptr + 3)?",
+          "correctValue": 67,
+          "tolerance": 0,
+          "explanation": "`ptr` apunta a `s[0]`. La expresión `*(ptr + 3)` accede a `s[3]`, que es la letra `'C'`. Su código ASCII es $67$."
+        },
+        {
+          "id": "11b",
+          "label": "b",
+          "question": "¿Cuál es la posición (índice) del carácter 'u' en el array s?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Recorriendo la cadena `\"C++Curso\"`: C(0), +(1), +(2), C(3), u(4)... Por tanto, el índice es $4$."
+        },
+        {
+          "id": "11c",
+          "label": "c",
+          "question": "¿Qué valor numérico devuelve la llamada strlen(ptr + 3)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "`ptr + 3` apunta a la subcadena `\"Curso\"`. Su longitud es de $5$ caracteres."
+        },
+        {
+          "id": "11d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño total físico en bytes del array s (sizeof(s))?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "La cadena `\"C++Curso\"` tiene $8$ caracteres visibles. Sumando el terminador nulo `\\0`, `sizeof(s)` devuelve $9$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Comparación por caracteres y bucles anidados",
+      "context": "Se ejecutan las siguientes líneas en C++:\n```cpp\nstd::string s1 = \"abc\";\nstd::string s2 = \"bcd\";\nint coincidencias = 0;\nfor (size_t i = 0; i < s1.size(); ++i) {\n    for (size_t j = 0; j < s2.size(); ++j) {\n        if (s1[i] == s2[j]) {\n            coincidencias++;\n        }\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "12a",
+          "label": "a",
+          "question": "¿Cuántas veces en total se ejecuta la condición del if dentro del bucle interno?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El bucle externo realiza $3$ iteraciones (tamaño de `s1`) y el interno realiza $3$ iteraciones (tamaño de `s2`) por cada una del externo. Total de ejecuciones = $3 \\times 3 = 9$."
+        },
+        {
+          "id": "12b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de coincidencias?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los caracteres comunes entre `\"abc\"` y `\"bcd\"` son `'b'` y `'c'`. Por lo tanto, se encuentran exactamente $2$ coincidencias."
+        },
+        {
+          "id": "12c",
+          "label": "c",
+          "question": "¿Cuál es la suma de las longitudes de s1 y s2?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Cada cadena tiene una longitud de $3$ caracteres, por lo que la suma es $3 + 3 = 6$."
+        },
+        {
+          "id": "12d",
+          "label": "d",
+          "question": "Si ejecutamos `s1.append(s2);`, ¿cuál es el nuevo tamaño de s1?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "`append()` concatena la cadena `s2` al final de `s1`. El nuevo tamaño es la suma de sus longitudes originales: $3 + 3 = 6$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Uso de find y control de npos",
+      "context": "Dado el fragmento de código:\n```cpp\nstd::string s = \"Algoritmia\";\nsize_t p1 = s.find(\"rit\");\nsize_t p2 = s.find('x');\n```",
+      "parts": [
+        {
+          "id": "13a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico del índice devuelto en p1?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La subcadena `\"rit\"` se encuentra en `\"Algoritmia\"` comenzando en el índice $4$ (A(0), l(1), g(2), o(3), r(4))."
+        },
+        {
+          "id": "13b",
+          "label": "b",
+          "question": "Si convertimos p2 a un entero con signo mediante static_cast<int>(p2), ¿qué valor entero se obtiene?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Al no encontrar `'x'`, `find` devuelve `std::string::npos`, que es el valor máximo del tipo entero sin signo `size_t`. Al convertir este valor a entero con signo, equivale a $-1$."
+        },
+        {
+          "id": "13c",
+          "label": "c",
+          "question": "¿Cuál es el índice de la primera aparición de la letra 'i'?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Recorriendo `\"Algoritmia\"`: A(0), l(1), g(2), o(3), r(4), i(5). La primera `'i'` está en el índice $5$."
+        },
+        {
+          "id": "13d",
+          "label": "d",
+          "question": "¿Cuál es el índice de la última aparición de la letra 'i' en s?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La segunda letra `'i'` en `\"Algoritmia\"` está situada en la posición de índice $8$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Extracción y códigos ASCII de subcadenas",
+      "context": "Dado el código:\n```cpp\nstd::string s = \"ABCDEF\";\nstd::string s1 = s.substr(1, 2);\nstd::string s2 = s.substr(4);\n```",
+      "parts": [
+        {
+          "id": "14a",
+          "label": "a",
+          "question": "¿Cuál es la longitud de la subcadena s1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "`s.substr(1, 2)` extrae una subcadena de longitud $2$ a partir del índice $1$, dando `\"BC\"`."
+        },
+        {
+          "id": "14b",
+          "label": "b",
+          "question": "¿Cuál es la longitud de la subcadena s2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al omitir el tamaño en `s.substr(4)`, se extrae desde el índice $4$ hasta el final. Los caracteres son `'E'` y `'F'`, dando una longitud de $2$."
+        },
+        {
+          "id": "14c",
+          "label": "c",
+          "question": "¿Cuál es el código ASCII del carácter s1[0]?",
+          "correctValue": 66,
+          "tolerance": 0,
+          "explanation": "`s1` es `\"BC\"`, por lo que `s1[0]` es `'B'`. El código ASCII de `'B'` es $66$."
+        },
+        {
+          "id": "14d",
+          "label": "d",
+          "question": "¿Cuál es el código ASCII del carácter s2[1]?",
+          "correctValue": 70,
+          "tolerance": 0,
+          "explanation": "`s2` es `\"EF\"`, por lo que `s2[1]` es `'F'`. El código ASCII de `'F'` es $70$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Efecto del carácter terminador nulo en arrays",
+      "context": "Considere la declaración de la cadena C-style:\n```cpp\nchar cadena[8] = \"Examen\";\ncadena[4] = '\\0';\n```",
+      "parts": [
+        {
+          "id": "15a",
+          "label": "a",
+          "question": "¿Cuál es la longitud lógica de la cadena devuelta por strlen(cadena) después del cambio?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Al poner `\\0` en `cadena[4]`, la cadena pasa a ser lógicamente `\"Exam\"`. Su longitud contada por `strlen` es $4$."
+        },
+        {
+          "id": "15b",
+          "label": "b",
+          "question": "¿Cuál es el tamaño total en bytes del array cadena (sizeof(cadena))?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El operador `sizeof` evalúa el tamaño estático del array en la pila, el cual sigue siendo $8$ bytes."
+        },
+        {
+          "id": "15c",
+          "label": "c",
+          "question": "¿Cuál es el valor ASCII del carácter almacenado en la posición física cadena[5]?",
+          "correctValue": 110,
+          "tolerance": 0,
+          "explanation": "Modificar `cadena[4]` no altera la memoria física de `cadena[5]`, que conserva la letra `'n'` de `\"Examen\"`. El código ASCII de `'n'` es $110$."
+        },
+        {
+          "id": "15d",
+          "label": "d",
+          "question": "Si ahora asignamos `cadena[0] = '\\0';`, ¿cuál es el nuevo resultado de strlen(cadena)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al situar el terminador en la primera posición (`cadena[0]`), la cadena pasa a tener una longitud de $0$ caracteres."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Extracción y suma de dígitos en cadenas",
+      "context": "Analiza el siguiente código:\n```cpp\nstd::string code = \"A9B8C7\";\nint sum = 0;\nfor (char c : code) {\n    if (std::isdigit(c)) {\n        sum += (c - '0');\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "16a",
+          "label": "a",
+          "question": "¿Cuántos caracteres tiene la cadena code?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La cadena `\"A9B8C7\"` contiene exactamente $6$ caracteres."
+        },
+        {
+          "id": "16b",
+          "label": "b",
+          "question": "¿Cuál es el valor final acumulado en la variable sum?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El bucle acumula los dígitos numéricos convertidos a entero: $9 + 8 + 7 = 24$."
+        },
+        {
+          "id": "16c",
+          "label": "c",
+          "question": "¿Cuál es la posición (índice de base 0) de la primera cifra numérica en la cadena?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En `\"A9B8C7\"`, `'A'` está en el índice $0$ y `'9'` en el índice $1$. Por tanto, el índice es $1$."
+        },
+        {
+          "id": "16d",
+          "label": "d",
+          "question": "¿Cuál es la suma de los códigos ASCII de todos los caracteres alfabéticos de code ('A', 'B', 'C')?",
+          "correctValue": 198,
+          "tolerance": 0,
+          "explanation": "Los caracteres son `'A'` (ASCII 65), `'B'` (ASCII 66) y `'C'` (ASCII 67). La suma es $65 + 66 + 67 = 198$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Inversión de cadenas y swap de caracteres",
+      "context": "Dado el código:\n```cpp\nstd::string s = \"Roma\";\nfor (size_t i = 0; i < s.length() / 2; ++i) {\n    char temp = s[i];\n    s[i] = s[s.length() - 1 - i];\n    s[s.length() - 1 - i] = temp;\n}\n```",
+      "parts": [
+        {
+          "id": "17a",
+          "label": "a",
+          "question": "¿Cuántas veces se ejecuta el cuerpo del bucle for?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La longitud de `\"Roma\"` es $4$. La condición de parada es `i < 4 / 2` (es decir, `i < 2`), por lo que itera para `i = 0` e `i = 1`, es decir, $2$ veces."
+        },
+        {
+          "id": "17b",
+          "label": "b",
+          "question": "¿Cuál es el código ASCII del carácter s[0] tras el bucle?",
+          "correctValue": 97,
+          "tolerance": 0,
+          "explanation": "La cadena se invierte. El carácter en `s[0]` pasa de ser `'R'` a ser `'a'`. El código ASCII de `'a'` es $97$."
+        },
+        {
+          "id": "17c",
+          "label": "c",
+          "question": "¿Cuál es el código ASCII del carácter s[3] tras el bucle?",
+          "correctValue": 82,
+          "tolerance": 0,
+          "explanation": "El carácter en `s[3]` pasa a ser el original `s[0]`, es decir, `'R'`. El código ASCII de `'R'` es $82$."
+        },
+        {
+          "id": "17d",
+          "label": "d",
+          "question": "¿Cuál es la longitud de la cadena s después del bucle?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La inversión permuta caracteres pero no altera la cantidad de elementos, la cual sigue siendo $4$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Conteo de mayúsculas en un string",
+      "context": "Dado el fragmento de código:\n```cpp\nstd::string s = \"Progra-1\";\nint mayusculas = 0;\nfor (char c : s) {\n    if (std::isupper(c)) {\n        mayusculas++;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "18a",
+          "label": "a",
+          "question": "¿Cuántos caracteres tiene la cadena s en total?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La cadena `\"Progra-1\"` tiene 8 caracteres (P, r, o, g, r, a, -, 1)."
+        },
+        {
+          "id": "18b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable mayusculas?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La única letra mayúscula en la cadena es `'P'`, por lo que la variable acumuladora `mayusculas` vale $1$."
+        },
+        {
+          "id": "18c",
+          "label": "c",
+          "question": "¿Cuál es el código ASCII del carácter especial '-'?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "El código ASCII estándar del guion medio `'-'` es $45$."
+        },
+        {
+          "id": "18d",
+          "label": "d",
+          "question": "Si aplicáramos toupper a todos los caracteres, ¿cuál sería el código ASCII de s[1] ('r' convertida a mayúscula)?",
+          "correctValue": 82,
+          "tolerance": 0,
+          "explanation": "La letra `'r'` minúscula se convierte en `'R'`. El código ASCII de `'R'` es $82$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Comparación y búsqueda de diferencias",
+      "context": "Se ejecutan las siguientes líneas:\n```cpp\nstd::string s1 = \"Navidad\";\nstd::string s2 = \"Novedad\";\nint diff_index = -1;\nfor (size_t i = 0; i < s1.length(); i++) {\n    if (s1[i] != s2[i]) {\n        diff_index = i;\n        break;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "19a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de diff_index al romperse el bucle?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La comparación carácter a carácter es: s1[0] == s2[0] ('N' == 'N'), pero s1[1] != s2[1] ('a' != 'o'). El bucle se rompe en `i = 1`."
+        },
+        {
+          "id": "19b",
+          "label": "b",
+          "question": "¿Cuál es la diferencia absoluta entre los códigos ASCII de s2[1] y s1[1]?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "El código ASCII de `'o'` es $111$ y el de `'a'` es $97$. La diferencia absoluta es $|111 - 97| = 14$."
+        },
+        {
+          "id": "19c",
+          "label": "c",
+          "question": "¿Cuál es la longitud de la cadena s1?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "`\"Navidad\"` tiene exactamente $7$ caracteres."
+        },
+        {
+          "id": "19d",
+          "label": "d",
+          "question": "¿Qué longitud tiene el prefijo idéntico común entre s1 y s2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo el primer carácter (`'N'`) es idéntico antes de aparecer la primera discrepancia, por lo que la longitud del prefijo común es $1$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Desplazamiento ASCII sobre caracteres",
+      "context": "Dado el siguiente bucle:\n```cpp\nstd::string s = \"abc\";\nfor (char &c : s) {\n    c = c + 2;\n}\n```",
+      "parts": [
+        {
+          "id": "20a",
+          "label": "a",
+          "question": "¿Cuál es la longitud de la cadena s?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La cadena contiene $3$ caracteres de forma constante."
+        },
+        {
+          "id": "20b",
+          "label": "b",
+          "question": "¿Cuál es el valor ASCII del primer carácter s[0] tras el bucle?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "El carácter inicial es `'a'` (ASCII 97). Sumándole $2$, obtenemos `'c'` (ASCII 99)."
+        },
+        {
+          "id": "20c",
+          "label": "c",
+          "question": "¿Cuál es el valor ASCII del segundo carácter s[1] tras el bucle?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El carácter inicial es `'b'` (ASCII 98). Sumándole $2$, obtenemos `'d'` (ASCII 100)."
+        },
+        {
+          "id": "20d",
+          "label": "d",
+          "question": "¿Cuál es el valor ASCII del tercer carácter s[2] tras el bucle?",
+          "correctValue": 101,
+          "tolerance": 0,
+          "explanation": "El carácter inicial es `'c'` (ASCII 99). Sumándole $2$, obtenemos `'e'` (ASCII 101)."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Inserción y eliminación en std::string",
+      "context": "Dado el código:\n```cpp\nstd::string s = \"Hola\";\ns.insert(2, \"XX\");\n```",
+      "parts": [
+        {
+          "id": "21a",
+          "label": "a",
+          "question": "¿Cuál es la longitud de la cadena s después de realizar la inserción?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Al insertar $2$ caracteres (`\"XX\"`) en la cadena original `\"Hola\"` ($4$ caracteres), la longitud pasa a ser $4 + 2 = 6$."
+        },
+        {
+          "id": "21b",
+          "label": "b",
+          "question": "¿Cuál es el índice (base 0) del primer carácter 'X' en la cadena resultante?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La inserción se realiza en la posición $2$, por lo que los caracteres insertados comienzan exactamente en ese índice."
+        },
+        {
+          "id": "21c",
+          "label": "c",
+          "question": "¿Cuál es el código ASCII del carácter s[4]?",
+          "correctValue": 108,
+          "tolerance": 0,
+          "explanation": "La cadena resultante es `\"HoXXla\"`. El carácter en `s[4]` es `'l'`. Su código ASCII es $108$."
+        },
+        {
+          "id": "21d",
+          "label": "d",
+          "question": "Si a continuación ejecutamos `s.erase(2, 2);`, ¿cuál es la nueva longitud de s?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`erase(2, 2)` elimina $2$ caracteres a partir del índice $2$ (borrando `\"XX\"`). La longitud vuelve a ser $4$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Reemplazo de caracteres con replace",
+      "context": "Dado el código:\n```cpp\nstd::string s = \"Tema-6\";\ns.replace(4, 1, \"VI\");\n```",
+      "parts": [
+        {
+          "id": "22a",
+          "label": "a",
+          "question": "¿Cuál es la longitud final de s tras la operación?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "`s.replace(4, 1, \"VI\")` reemplaza $1$ carácter (el `'6'` en la posición 4) por $2$ caracteres (`\"VI\"`). La longitud pasa de $6$ a $7$."
+        },
+        {
+          "id": "22b",
+          "label": "b",
+          "question": "¿Cuál es el código ASCII del carácter en s[4]?",
+          "correctValue": 86,
+          "tolerance": 0,
+          "explanation": "El carácter en `s[4]` pasa a ser `'V'`. El código ASCII de `'V'` es $86$."
+        },
+        {
+          "id": "22c",
+          "label": "c",
+          "question": "¿Cuál es el código ASCII del carácter en s[5]?",
+          "correctValue": 73,
+          "tolerance": 0,
+          "explanation": "El carácter en `s[5]` es `'I'`. El código ASCII de `'I'` es $73$."
+        },
+        {
+          "id": "22d",
+          "label": "d",
+          "question": "¿Cuál es el índice del guion medio '-' en la cadena?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La cadena resultante es `\"Tema-VI\"`. El guion medio está en el índice $3$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Análisis de espacios en blanco en una frase",
+      "context": "Dado el string:\n`std::string frase = \" Aprender C++ es divertido \";`",
+      "parts": [
+        {
+          "id": "23a",
+          "label": "a",
+          "question": "¿Cuál es la longitud total del string frase?",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "Contando los caracteres, incluyendo los espacios al principio y final: `\" Aprender C++ es divertido \"` tiene $27$ caracteres."
+        },
+        {
+          "id": "23b",
+          "label": "b",
+          "question": "¿Cuántos caracteres de espacio en blanco (' ') contiene la frase?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Hay un espacio inicial, otro entre cada una de las 4 palabras, y otro al final. Total = $5$ espacios."
+        },
+        {
+          "id": "23c",
+          "label": "c",
+          "question": "¿Cuál es el índice (base 0) del primer carácter que no es un espacio?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Dado que el índice 0 es un espacio, el primer carácter visible (`'A'`) se encuentra en el índice $1$."
+        },
+        {
+          "id": "23d",
+          "label": "d",
+          "question": "¿Cuál es el índice del último carácter que no es un espacio?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "El último carácter es un espacio en el índice 26. Por tanto, el carácter anterior (`'o'`) se encuentra en el índice $25$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Distribución en memoria de arrays bidimensionales de caracteres",
+      "context": "Considere la declaración de una matriz de caracteres (array de strings):\n```cpp\nchar palabras[3][6] = {\"Uno\", \"Dos\", \"Tres\"};\n```",
+      "parts": [
+        {
+          "id": "24a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño total en bytes reservado en memoria para palabras (sizeof(palabras))?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "El array tiene $3$ filas y $6$ columnas de tipo `char` (1 byte). El espacio total es $3 \\times 6 = 18$ bytes."
+        },
+        {
+          "id": "24b",
+          "label": "b",
+          "question": "¿Cuál es la longitud lógica devuelta por strlen(palabras[0])?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "`palabras[0]` apunta a la cadena `\"Uno\"`, que tiene $3$ caracteres."
+        },
+        {
+          "id": "24c",
+          "label": "c",
+          "question": "¿Cuál es la longitud lógica devuelta por strlen(palabras[2])?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`palabras[2]` apunta a la cadena `\"Tres\"`, que tiene $4$ caracteres."
+        },
+        {
+          "id": "24d",
+          "label": "d",
+          "question": "¿Cuántos bytes con valor nulo ('\\0') contiene en total la estructura completa de memoria del array?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Cada una de las tres filas de tamaño 6 contiene la cadena terminada en `\\0` y el resto de elementos rellenos de ceros. Fila 1 (`\"Uno\\0\\0\\0\"`): $3$. Fila 2 (`\"Dos\\0\\0\\0\"`): $3$. Fila 3 (`\"Tres\\0\\0\"`): $2$. Total ceros = $3 + 3 + 2 = 8$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Procesamiento y conversión de base hexadecimal",
+      "context": "Se ejecuta el siguiente algoritmo de parsing manual:\n```cpp\nstd::string hex = \"1A3\";\nint val = 0;\nfor (char c : hex) {\n    val *= 16;\n    if (std::isdigit(c)) {\n        val += (c - '0');\n    } else {\n        val += (std::toupper(c) - 'A' + 10);\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "25a",
+          "label": "a",
+          "question": "¿Cuántas iteraciones realiza el bucle sobre la cadena hex?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La cadena `\"1A3\"` tiene $3$ caracteres, por lo que realiza $3$ iteraciones."
+        },
+        {
+          "id": "25b",
+          "label": "b",
+          "question": "¿Cuál es el valor acumulado en val tras procesar el primer carácter ('1')?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$val = 0 \\times 16 + (1 - 0) = 1$."
+        },
+        {
+          "id": "25c",
+          "label": "c",
+          "question": "¿Cuál es el valor acumulado en val tras procesar el segundo carácter ('A')?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "$val = 1 \\times 16 + (10) = 26$."
+        },
+        {
+          "id": "25d",
+          "label": "d",
+          "question": "¿Cuál es el valor decimal final de val?",
+          "correctValue": 419,
+          "tolerance": 0,
+          "explanation": "$val = 26 \\times 16 + 3 = 416 + 3 = 419$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Verificación de palíndromos y trazado de índices",
+      "context": "Dado el algoritmo:\n```cpp\nstd::string pal = \"reconocer\";\nint matches = 0;\nint n = pal.length();\nfor (int i = 0; i < n / 2; i++) {\n    if (pal[i] == pal[n - 1 - i]) {\n        matches++;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "26a",
+          "label": "a",
+          "question": "¿Cuál es la longitud n de la palabra?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "`\"reconocer\"` consta de $9$ caracteres."
+        },
+        {
+          "id": "26b",
+          "label": "b",
+          "question": "¿Cuál es el límite del bucle expresado como la división entera n / 2?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La división entera $9 / 2$ es $4$."
+        },
+        {
+          "id": "26c",
+          "label": "c",
+          "question": "¿Cuál es el valor final de la variable matches?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Como la palabra es simétrica (palíndromo), las comparaciones para $i = 0, 1, 2, 3$ coinciden en todos los casos. Por lo tanto, `matches` vale $4$."
+        },
+        {
+          "id": "26d",
+          "label": "d",
+          "question": "¿Cuál es el valor ASCII del carácter central pal[n/2]?",
+          "correctValue": 110,
+          "tolerance": 0,
+          "explanation": "El carácter central está en `pal[4]`, que es `'n'`. Su código ASCII es $110$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Manipulación de punteros sobre arrays de caracteres",
+      "context": "Considera el siguiente código:\n```cpp\nchar s[] = \"Puntero\";\nchar* p = s;\np += 3;\n```",
+      "parts": [
+        {
+          "id": "27a",
+          "label": "a",
+          "question": "¿Cuál es la longitud de la cadena vista desde el puntero p (strlen(p))?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`p` apunta a la subcadena `\"tero\"`. Su longitud es $4$."
+        },
+        {
+          "id": "27b",
+          "label": "b",
+          "question": "¿Cuál es el valor ASCII del carácter al que apunta p (*p)?",
+          "correctValue": 116,
+          "tolerance": 0,
+          "explanation": "`*p` es el carácter `'t'`. El código ASCII de `'t'` es $116$."
+        },
+        {
+          "id": "27c",
+          "label": "c",
+          "question": "Si modificamos el valor apuntado haciendo `*p = '\\0';`, ¿cuál es la nueva longitud de la cadena completa s?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al colocar el terminador en `s[3]`, la cadena se corta a `\"Pun\"`. Su longitud es $3$."
+        },
+        {
+          "id": "27d",
+          "label": "d",
+          "question": "¿Cuál es la capacidad física en bytes del array s (sizeof(s)) después del cambio?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El tamaño físico del array en la memoria permanece invariable en $8$ bytes (7 caracteres + terminador)."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Uso del método compare de la clase string",
+      "context": "Dado el código:\n```cpp\nstd::string s1 = \"Alfa\";\nstd::string s2 = \"Beta\";\nint c1 = s1.compare(s2);\nint c2 = s2.compare(s1);\nint c3 = s1.compare(\"Alfa\");\n```",
+      "parts": [
+        {
+          "id": "28a",
+          "label": "a",
+          "question": "Si c1 es menor que 0, introduzca -1; de lo contrario introduzca 1. ¿Cuál es su signo?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "`\"Alfa\"` es lexicográficamente menor que `\"Beta\"`, por lo que `compare` devuelve un valor menor que $0$ (signo $-1$)."
+        },
+        {
+          "id": "28b",
+          "label": "b",
+          "question": "Si c2 es mayor que 0, introduzca 1; de lo contrario introduzca -1. ¿Cuál es su signo?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "`\"Beta\"` es alfabéticamente mayor que `\"Alfa\"`, por lo que `compare` devuelve un valor mayor que $0$ (signo $1$)."
+        },
+        {
+          "id": "28c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto en c3?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Las dos cadenas son idénticas, por lo que `compare` devuelve exactamente $0$."
+        },
+        {
+          "id": "28d",
+          "label": "d",
+          "question": "¿Cuál es el código ASCII del carácter en el índice 2 de s1?",
+          "correctValue": 102,
+          "tolerance": 0,
+          "explanation": "El carácter en `s1[2]` es `'f'`. Su código ASCII es $102$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Eliminación y redimensionamiento con erase y reserve",
+      "context": "Dado el fragmento de código:\n```cpp\nstd::string s = \"Compu-Science\";\ns.erase(5);\n```",
+      "parts": [
+        {
+          "id": "29a",
+          "label": "a",
+          "question": "¿Cuál es la longitud final de s después de la operación erase?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "`erase(5)` elimina todos los caracteres a partir del índice $5$ inclusive, dejando la cadena con los primeros $5$ caracteres (`\"Compu\"`). Su longitud es $5$."
+        },
+        {
+          "id": "29b",
+          "label": "b",
+          "question": "¿Cuál es el código ASCII del último carácter de la cadena resultante?",
+          "correctValue": 117,
+          "tolerance": 0,
+          "explanation": "La cadena restante es `\"Compu\"`. El último carácter es `'u'`, cuyo código ASCII es $117$."
+        },
+        {
+          "id": "29c",
+          "label": "c",
+          "question": "Si ahora hacemos `s += \"\";`, ¿cuál es la longitud resultante de s?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Concatenar una cadena vacía no modifica los caracteres ni altera el tamaño del string, que continúa siendo $5$."
+        },
+        {
+          "id": "29d",
+          "label": "d",
+          "question": "Si reservamos espacio en memoria mediante `s.reserve(50);`, ¿cuál es el nuevo tamaño lógico (length()) de s?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "`reserve` modifica únicamente la capacidad reservada en memoria dinámica, pero no altera el tamaño lógico de la cadena, que permanece en $5$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Seguimiento de copia sobre buffer preexistente",
+      "context": "Se tiene el siguiente código C++:\n```cpp\nchar buffer[100] = \"Inicial\";\nint len_in = strlen(buffer);\nstrcpy(buffer, \"Corto\");\nint len_fin = strlen(buffer);\n```",
+      "parts": [
+        {
+          "id": "30a",
+          "label": "a",
+          "question": "¿Cuál es la longitud lógica len_in de la cadena inicial?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "`\"Inicial\"` tiene $7$ caracteres."
+        },
+        {
+          "id": "30b",
+          "label": "b",
+          "question": "¿Cuál es la longitud lógica len_fin tras la ejecución de strcpy?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al copiar `\"Corto\"` en `buffer`, la longitud del texto activo pasa a ser $5$."
+        },
+        {
+          "id": "30c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño físico total en bytes del array buffer?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El array fue declarado estáticamente con una capacidad física de $100$ elementos de tipo `char` ($100$ bytes)."
+        },
+        {
+          "id": "30d",
+          "label": "d",
+          "question": "¿Cuál es el código ASCII del elemento buffer[6] después de la llamada a strcpy?",
+          "correctValue": 108,
+          "tolerance": 0,
+          "explanation": "`strcpy` copia la palabra `\"Corto\"` y su terminador nulo, escribiendo del índice $0$ al $5$. El elemento `buffer[6]` no es sobrescrito por `strcpy` y conserva el valor que tenía originalmente en la inicialización de `\"Inicial\"`, que es `'l'` (código ASCII $108$)."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Relación entre longitud lógica y tamaño de almacenamiento en memoria física para C-strings",
+      "tex": "$$\\text{Tamaño en bytes} = N + 1$$"
+    },
+    {
+      "name": "Complejidad temporal de la función strlen() en C-strings",
+      "tex": "$$\\mathcal{O}(N)$$"
+    },
+    {
+      "name": "Complejidad temporal del método size() / length() en std::string (C++11 en adelante)",
+      "tex": "$$\\mathcal{O}(1)$$"
+    },
+    {
+      "name": "Fórmula matemática para el cálculo de la dirección física en memoria de s[i] en un array de caracteres",
+      "tex": "$$\\text{Dir}(s[i]) = \\text{DirBase} + i \\times \\text{sizeof}(\\text{char})$$"
+    },
+    {
+      "name": "Cálculo simplificado de la comparación de strcmp basada en la diferencia de caracteres",
+      "tex": "$$\\text{strcmp}(s_1, s_2) \\approx s_1[i] - s_2[i]$$"
+    },
+    {
+      "name": "Capacidad de búfer mínima requerida para concatenar con seguridad dos C-strings S1 y S2",
+      "tex": "$$\\text{Capacidad Mínima} \\ge \\text{strlen}(S_1) + \\text{strlen}(S_2) + 1$$"
+    },
+    {
+      "name": "Complejidad temporal de inserción o eliminación de caracteres en std::string",
+      "tex": "$$\\mathcal{O}(N)$$"
+    },
+    {
+      "name": "Rango de índices válidos de caracteres generados por el método substr(pos, len) sobre un string s",
+      "tex": "$$\\text{Índices} \\in [\\text{pos}, \\text{pos} + \\text{len} - 1]$$"
+    }
+  ]
+}
