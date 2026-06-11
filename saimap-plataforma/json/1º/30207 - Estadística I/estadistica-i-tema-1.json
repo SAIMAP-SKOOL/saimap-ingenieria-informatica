@@ -1,304 +1,2056 @@
 {
   "TEST_A": [
     {
-      "q": "1. La media aritmética es una medida de centralización que se comporta de forma robusta ante la presencia de valores atípicos ($$outliers$$) en la muestra.",
+      "q": "¿Cuál es el objetivo principal del Análisis Exploratorio de Datos (EDA)?",
       "options": [
-        "Verdadero",
-        "Falso",
-        "No se puede determinar"
-      ],
-      "correct": 1,
-      "hint": "Recuerda que la media aritmética actúa como el centro de gravedad físico de los datos.",
-      "explanation": "La media es muy sensible a valores extremos porque en su cálculo interviene el valor numérico de todas las observaciones, a diferencia de la mediana que solo depende del orden jerárquico."
-    },
-    {
-      "q": "2. Si sumamos todas las desviaciones de un conjunto de datos respecto a su media aritmética, el resultado de $$\\sum_{i=1}^n (x_i - \\bar{x})$$ es siempre igual a:",
-      "options": [
-        "$$n \\cdot \\bar{x}$$",
-        "$$0$$",
-        "$$s^2$$"
-      ],
-      "correct": 1,
-      "hint": "Esta es una propiedad matemática fundamental de la media aritmética.",
-      "explanation": "$$\\sum (x_i - \\bar{x}) = \\sum x_i - \\sum \\bar{x} = n\\bar{x} - n\\bar{x} = 0$$. Los desvíos negativos y positivos se cancelan mutuamente por completo."
-    },
-    {
-      "q": "3. Indique la afirmación CORRECTA sobre la varianza muestral ($$s^2$$):",
-      "options": [
-        "Se mide en las mismas unidades que la variable original analizada.",
-        "Es un estadístico adimensional que permite comparar dispersiones de escalas distintas.",
-        "Mide la media de las desviaciones al cuadrado de las observaciones respecto a la media."
-      ],
-      "correct": 2,
-      "hint": "Considera la presencia del exponente cuadrático en la definición matemática.",
-      "explanation": "La varianza se define como $$\\frac{1}{n} \\sum (x_i - \\bar{x})^2$$. Sus unidades son cuadradas (ej: $$s^2$$) y no las originales de los datos, para lo cual se extrae la raíz (desviación típica)."
-    },
-    {
-      "q": "4. Indique la afirmación INCORRECTA respecto a las medidas de forma de una distribución:",
-      "options": [
-        "Una distribución leptocúrtica ($$g_2 > 0$$) presenta un apuntamiento mayor que la Normal.",
-        "En una distribución con asimetría positiva ($$As > 0$$), la cola derecha es más corta que la cola izquierda.",
-        "La curtosis platicúrtica ($$g_2 < 0$$) describe una distribución relativamente aplanada."
-      ],
-      "correct": 1,
-      "hint": "La asimetría positiva desplaza la cola más larga hacia valores altos (derecha).",
-      "explanation": "En una distribución asimétrica a la derecha (asimetría positiva), la cola derecha es más larga y pesada, y la media suele ser mayor que la mediana."
-    },
-    {
-      "q": "5. El coeficiente de variación ($$CV$$) se define matemáticamente como:",
-      "options": [
-        "$$CV = \\frac{s}{|\\bar{x}|}$$",
-        "$$CV = \\frac{|\\bar{x}|}{s}$$",
-        "$$CV = \\sqrt{s^2}$$"
+        "Resumir y describir las características esenciales de un conjunto de datos.",
+        "Realizar contrastes de hipótesis estadísticos avanzados de forma automática.",
+        "Predecir valores futuros mediante algoritmos de aprendizaje automático."
       ],
       "correct": 0,
-      "hint": "Es una medida relativa que normaliza la desviación estándar con respecto al promedio absoluto.",
-      "explanation": "El coeficiente de variación es $$CV = \\frac{s}{|\\bar{x}|}$$. Al dividir la desviación estándar por la media, se elimina la unidad de medida, dando un indicador adimensional."
+      "hint": "Consiste en la primera fase de análisis visual y estadístico.",
+      "explanation": "El EDA busca resumir y describir las características esenciales de un conjunto de datos recopilados, permitiendo identificar patrones, anomalías y la estructura general de la información."
     },
     {
-      "q": "6. Si multiplicamos todos los valores de una variable estadística por una constante $$k \\neq 0$$, la nueva varianza queda multiplicada por:",
+      "q": "Dada una muestra de tamaño $n$ agrupada en $k$ valores distintos, ¿cuál es la relación correcta para la frecuencia absoluta?",
       "options": [
-        "$$k$$",
-        "$$k^2$$",
-        "$$|k|$$"
+        "$\\sum_{i=1}^k n_i = 1$",
+        "$\\sum_{i=1}^k n_i = n$",
+        "$\\sum_{i=1}^k n_i = f_i$"
       ],
       "correct": 1,
-      "hint": "Revisa los efectos de las transformaciones lineales sobre la variabilidad cuadrática.",
-      "explanation": "Por propiedades de la varianza: $$Var(k \\cdot X) = k^2 \\cdot Var(X)$$, dado que la dispersión se eleva al cuadrado en la definición."
+      "hint": "La frecuencia absoluta representa el número de repeticiones de cada valor en la muestra.",
+      "explanation": "La suma de todas las frecuencias absolutas ($n_i$) de los distintos valores en la muestra es igual al tamaño muestral total ($n$)."
     },
     {
-      "q": "7. La mediana ($$Me$$) de una variable continua u ordenada equivale exactamente al percentil:",
+      "q": "La frecuencia relativa $f_i$ se define como:",
       "options": [
-        "$$P_{25}$$",
-        "$$P_{50}$$",
-        "$$P_{75}$$"
+        "$f_i = \\frac{n_i}{n}$",
+        "$f_i = n_i \\cdot n$",
+        "$f_i = N_i - N_{i-1}$"
       ],
-      "correct": 1,
-      "hint": "La mediana divide la muestra exactamente en dos mitades del 50% cada una.",
-      "explanation": "El percentil 50 ($$P_{50}$$) representa el valor que acumula por debajo al 50% de las observaciones ordenadas, coincidiendo exactamente con la mediana ($$Me$$)."
+      "correct": 0,
+      "hint": "Es la proporción de la muestra que presenta el valor $x_i$.",
+      "explanation": "La frecuencia relativa ($f_i$) representa la proporción de observaciones que toman el valor $x_i$, y se calcula dividiendo la frecuencia absoluta por el tamaño muestral: $f_i = \\frac{n_i}{n}$."
     },
     {
-      "q": "8. Indique cuál de las siguientes variables clasifica como una variable cualitativa nominal:",
+      "q": "¿Cuál es la suma de todas las frecuencias relativas en una distribución unidimensional?",
       "options": [
-        "El número de CPUs en un clúster de servidores.",
-        "El estado de ejecución de un hilo de sistema (RUNNING, BLOCKED, TERMINATED).",
-        "La latencia promedio de una petición de red medida en milisegundos."
+        "$n$",
+        "$100$",
+        "$1$"
       ],
-      "correct": 1,
-      "hint": "Una variable nominal representa categorías ordenables o no ordenables sin jerarquía natural cuantitativa.",
-      "explanation": "Los estados del hilo de sistema son categorías cualitativas que no tienen un orden numérico ni jerárquico intrínseco, lo que la define como cualitativa nominal."
+      "correct": 2,
+      "hint": "Representan proporciones que suman el total de la muestra.",
+      "explanation": "Dado que cada $f_i = n_i / n$, la suma de todas las frecuencias relativas es $\\sum f_i = \\sum (n_i / n) = \\frac{1}{n} \\sum n_i = \\frac{n}{n} = 1$."
     },
     {
-      "q": "9. En R, la función nativa que calcula la mediana de un vector numérico asignado es:",
+      "q": "La frecuencia absoluta acumulada $N_i$ se define como:",
       "options": [
-        "$$mean()$$",
-        "$$median()$$",
-        "$$summary()$$"
+        "La suma de las frecuencias absolutas de los valores mayores o iguales a $x_i$.",
+        "La proporción de observaciones menores o iguales a $x_i$.",
+        "La suma de las frecuencias absolutas de los valores menores o iguales a $x_i$."
       ],
-      "correct": 1,
-      "hint": "Es la traducción literal del concepto en inglés para centralización robusta.",
-      "explanation": "La función para la mediana es $$median()$$. $$mean()$$ calcula la media y $$summary()$$ proporciona un resumen de 5 números."
+      "correct": 2,
+      "hint": "Acumula el conteo absoluto desde el menor valor observado hasta el actual.",
+      "explanation": "La frecuencia absoluta acumulada para la posición $i$ es el número de observaciones menores o iguales a $x_i$: $N_i = \\sum_{j=1}^i n_j$."
     },
     {
-      "q": "10. La cuasivarianza ($$s_{n-1}^2$$) divide la suma de desviaciones cuadradas por $$n-1$$ en lugar de $$n$$ con el fin de:",
+      "q": "¿Cuál es la relación matemática entre la frecuencia relativa acumulada $F_i$ y la frecuencia absoluta acumulada $N_i$?",
       "options": [
-        "Compensar errores en la recogida manual de datos.",
-        "Obtener un estimador insesgado de la varianza poblacional.",
-        "Asegurar que el estadístico resultante sea siempre menor que la varianza muestral."
+        "$F_i = N_i \\cdot n$",
+        "$F_i = \\frac{N_i}{n}$",
+        "$F_i = N_i - n$"
       ],
       "correct": 1,
-      "hint": "Piensa en el sesgo sistemático que ocurre cuando estimamos la variabilidad de una población a partir de una muestra pequeña.",
-      "explanation": "Dividir entre $$n-1$$ corrige el sesgo por subestimación sistemática que comete la varianza muestral al tratar de estimar la varianza de la población."
+      "hint": "Es la versión normalizada o en proporción de la frecuencia absoluta acumulada.",
+      "explanation": "La frecuencia relativa acumulada representa la proporción de observaciones menores o iguales a un valor dado, por lo que $F_i = \\frac{N_i}{n}$."
+    },
+    {
+      "q": "En términos de física e intuición, ¿cómo se interpreta la media aritmética de una distribución?",
+      "options": [
+        "Como el valor que divide la distribución en dos partes con idéntico número de observaciones.",
+        "Como el centro de gravedad o punto de equilibrio perfecto de los datos.",
+        "Como el valor que presenta la mayor densidad o concentración de datos."
+      ],
+      "correct": 1,
+      "hint": "Si se colocan las observaciones sobre una regla graduada, es el punto donde se equilibra.",
+      "explanation": "La media aritmética representa el centro de gravedad de los datos. Si colocamos los datos en una regla graduada en sus respectivas posiciones, la media es el punto de apoyo exacto para mantener el equilibrio perfecto."
+    },
+    {
+      "q": "¿Cómo afecta la presencia de valores atípicos (outliers) extremos a la media aritmética?",
+      "options": [
+        "No la afecta en absoluto, ya que es una medida robusta.",
+        "La afecta significativamente, atrayéndola hacia el extremo del valor atípico.",
+        "La hace oscilar, pero siempre tiende a mantenerse en el valor central original."
+      ],
+      "correct": 1,
+      "hint": "La media utiliza todos los valores en su cálculo, por lo que es sensible.",
+      "explanation": "La media aritmética es muy sensible a los valores extremos (outliers). Un solo valor extremadamente alto o bajo arrastra la media en esa dirección, ya que todos los datos entran en el promedio."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe mejor a la mediana ($Me$)?",
+      "options": [
+        "Es el valor que más veces se repite en la muestra.",
+        "Es una medida robusta que no se ve afectada por valores extremos.",
+        "Es el promedio ponderado de las observaciones por sus frecuencias acumuladas."
+      ],
+      "correct": 1,
+      "hint": "Se calcula ordenando los datos de menor a mayor y buscando el valor central.",
+      "explanation": "La mediana es una medida de centralización robusta porque su cálculo depende del orden de los datos y no de su magnitud extrema. Un outlier lejano no altera el valor del dato central."
+    },
+    {
+      "q": "Si el tamaño de la muestra $n$ es un número impar, la mediana se localiza en la posición:",
+      "options": [
+        "$\\frac{n}{2}$",
+        "$\\frac{n+1}{2}$",
+        "$\\frac{n}{2} + 1$"
+      ],
+      "correct": 1,
+      "hint": "Con datos ordenados e impar, hay un único valor central exacto.",
+      "explanation": "Cuando $n$ es impar, el valor central que divide la muestra en dos mitades del 50% está exactamente en la posición ordenada $\\frac{n+1}{2}$."
+    },
+    {
+      "q": "Si el tamaño de la muestra $n$ es par, ¿cómo se determina la mediana ($Me$)?",
+      "options": [
+        "Es el valor de la observación en la posición $\\frac{n}{2}$.",
+        "Es la media aritmética de los valores en las posiciones $\\frac{n}{2}$ y $\\frac{n}{2} + 1$.",
+        "No está definida para muestras de tamaño par y debe usarse la moda."
+      ],
+      "correct": 1,
+      "hint": "Hay dos elementos en el centro de la muestra ordenada.",
+      "explanation": "Al ser $n$ par, no hay una única posición central. Se toma la media aritmética de los dos valores centrales situados en las posiciones ordenadas $\\frac{n}{2}$ y $\\frac{n}{2} + 1$."
+    },
+    {
+      "q": "¿Qué es la moda ($Mo$) de una variable estadística?",
+      "options": [
+        "El promedio de los dos valores centrales.",
+        "El valor (o valores) con mayor frecuencia absoluta en la muestra.",
+        "El valor que tiene una frecuencia acumulada igual a 0.5."
+      ],
+      "correct": 1,
+      "hint": "Se relaciona con lo más común o popular en el conjunto de observaciones.",
+      "explanation": "La moda es el valor o categoría que presenta la mayor frecuencia absoluta ($n_i$) en el conjunto de datos observados."
+    },
+    {
+      "q": "Una distribución que presenta dos picos o dos valores con la máxima frecuencia absoluta se denomina:",
+      "options": [
+        "Platicúrtica.",
+        "Asimétrica.",
+        "Bimodal."
+      ],
+      "correct": 2,
+      "hint": "Prefijo para indicar dos modas.",
+      "explanation": "Si una distribución de frecuencias presenta dos valores locales (o categorías) con la mayor frecuencia absoluta, se le llama distribución bimodal."
+    },
+    {
+      "q": "¿Qué representan los cuantiles en un análisis unidimensional?",
+      "options": [
+        "Valores que dividen los datos ordenados en intervalos de igual proporción de observaciones.",
+        "Los valores que maximizan la varianza muestral.",
+        "Los extremos máximos y mínimos de las observaciones."
+      ],
+      "correct": 0,
+      "hint": "Generalizan el concepto de la mediana a otras proporciones.",
+      "explanation": "Los cuantiles son puntos de corte que dividen la distribución de datos (una vez ordenados) en intervalos tales que cada uno contiene la misma proporción de observaciones."
+    },
+    {
+      "q": "El primer cuartil $Q_1$ equivale al percentil:",
+      "options": [
+        "$P_{50}$",
+        "$P_{25}$",
+        "$P_{75}$"
+      ],
+      "correct": 1,
+      "hint": "Divide el primer 25% de los datos.",
+      "explanation": "El primer cuartil ($Q_1$) deja a su izquierda el 25% de las observaciones ordenadas de menor a mayor, lo cual equivale exactamente al percentil 25 ($P_{25}$)."
+    },
+    {
+      "q": "¿Qué relación hay entre el segundo cuartil ($Q_2$), el percentil 50 ($P_{50}$) y la mediana ($Me$)?",
+      "options": [
+        "$Q_2 = P_{50} = Me$",
+        "$Q_2 = 2 \\cdot Me$",
+        "$Q_2 = P_{50} \\neq Me$"
+      ],
+      "correct": 0,
+      "hint": "Todos ellos dividen los datos en dos mitades del 50%.",
+      "explanation": "El segundo cuartil ($Q_2$), el percentil 50 ($P_{50}$) y la mediana ($Me$) son distintas formas de denotar el mismo valor central que divide la muestra ordenada en dos partes del 50%."
+    },
+    {
+      "q": "¿Por qué las medidas de centralización no son suficientes para describir un conjunto de datos?",
+      "options": [
+        "Porque no indican el orden original de recogida de los datos.",
+        "Porque muestras con la misma media pueden tener dispersiones y distribuciones muy diferentes.",
+        "Porque siempre requieren que el tamaño muestral sea impar para ser válidas."
+      ],
+      "correct": 1,
+      "hint": "Muestras como $\\{10, 10, 10\\}$ y $\\{0, 10, 20\\}$ tienen idéntica media pero distinta estructura.",
+      "explanation": "Dos conjuntos de datos pueden tener idénticos valores de tendencia central (como la media) pero comportamientos muy distintos debido a la separación o variabilidad de sus observaciones respecto a ese centro."
+    },
+    {
+      "q": "¿Cómo se define el Rango o Recorrido ($R$) de una muestra?",
+      "options": [
+        "La media de las diferencias absolutas respecto a la mediana.",
+        "La diferencia entre el valor máximo y el valor mínimo de la muestra.",
+        "El intervalo donde se concentra el 50% de las observaciones centrales."
+      ],
+      "correct": 1,
+      "hint": "Es la medida de dispersión más simple y sensible a valores extremos.",
+      "explanation": "El rango se calcula restando el valor menor observador del mayor: $R = x_{max} - x_{min}$."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una razón para elevar al cuadrado las desviaciones $(x_i - \\bar{x})$ en el cálculo de la varianza?",
+      "options": [
+        "Para evitar que las desviaciones positivas y negativas se cancelen mutuamente (ya que su suma directa siempre es 0).",
+        "Para transformar la variable de cuantitativa a cualitativa.",
+        "Para reducir la escala de los valores en muestras muy grandes."
+      ],
+      "correct": 0,
+      "hint": "La suma de desviaciones respecto a la media $\\sum (x_i - \\bar{x})$ es siempre nula.",
+      "explanation": "Elevar al cuadrado asegura que las diferencias con la media sean todas no negativas (evitando la cancelación nula $\\sum (x_i - \\bar{x}) = 0$) y penaliza de forma no lineal las observaciones alejadas del centro."
+    },
+    {
+      "q": "¿Qué inconveniente presenta la varianza ($s^2$) respecto a las unidades de medida originales?",
+      "options": [
+        "No tiene unidades de medida (es adimensional).",
+        "Sus unidades están elevadas al cuadrado, lo que dificulta la interpretación directa.",
+        "Siempre se expresa en porcentajes."
+      ],
+      "correct": 1,
+      "hint": "Si los datos se miden en segundos, ¿en qué se mide la varianza?",
+      "explanation": "Al elevar las diferencias al cuadrado, la varianza se expresa en las unidades de la variable elevadas al cuadrado (ej. segundos al cuadrado, metros al cuadrado), perdiendo la escala física original de los datos."
+    },
+    {
+      "q": "¿Qué es la cuasivarianza muestral ($s_{n-1}^2$) y por qué se utiliza en inferencia?",
+      "options": [
+        "Es una variante de la varianza dividida por $n-1$, empleada para obtener un estimador insesgado de la varianza poblacional.",
+        "Es la raíz cuadrada de la varianza muestral, usada para volver a las unidades originales.",
+        "Es el coeficiente de variación expresado en escala de 0 a 1."
+      ],
+      "correct": 0,
+      "hint": "Divide por un grado de libertad menos que el tamaño total $n$.",
+      "explanation": "La cuasivarianza ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas por $n-1$ en lugar de por $n$. Esto compensa el sesgo en muestras pequeñas al estimar la varianza de la población de origen."
+    },
+    {
+      "q": "La desviación típica o estándar ($s$) se calcula como:",
+      "options": [
+        "La raíz cuadrada positiva de la varianza.",
+        "El cuadrado de la varianza muestral.",
+        "El cociente entre la varianza y la media aritmética."
+      ],
+      "correct": 0,
+      "hint": "Permite retornar a las unidades de medida originales de la variable.",
+      "explanation": "La desviación típica es la raíz cuadrada de la varianza ($s = \\sqrt{s^2}$), lo que la devuelve a las mismas unidades que las observaciones originales."
+    },
+    {
+      "q": "El Coeficiente de Variación ($CV$) se define matemáticamente como:",
+      "options": [
+        "$CV = \\frac{|\\bar{x}|}{s}$",
+        "$CV = \\frac{s}{|\\bar{x}|}$",
+        "$CV = s \\cdot \\bar{x}$"
+      ],
+      "correct": 1,
+      "hint": "Expresa la desviación típica como una proporción de la media.",
+      "explanation": "El coeficiente de variación mide la dispersión relativa de los datos respecto a la media: $CV = \\frac{s}{|\\bar{x}|}$. Es adimensional."
+    },
+    {
+      "q": "¿Qué ventaja ofrece el Coeficiente de Variación ($CV$) frente a la desviación típica?",
+      "options": [
+        "Es una medida adimensional, ideal para comparar la dispersión de variables con diferentes escalas o unidades.",
+        "Siempre está acotado estrictamente entre 0 y 1.",
+        "No requiere el cálculo de la media aritmética."
+      ],
+      "correct": 0,
+      "hint": "Al dividir la desviación típica (con unidades) entre la media (con unidades), las unidades se cancelan.",
+      "explanation": "Al ser adimensional, el $CV$ permite comparar la variabilidad de conjuntos de datos expresados en distintas unidades de medida (ej. comparar el peso en kg con la altura en cm)."
+    },
+    {
+      "q": "Por convención, ¿qué se suele interpretar si el coeficiente de variación ($CV$) es menor que 0.3?",
+      "options": [
+        "Que la distribución es altamente heterogénea y la media no es representativa.",
+        "Que la distribución es homogénea y la media aritmética es muy representativa de los datos.",
+        "Que los datos siguen una distribución estrictamente bimodal."
+      ],
+      "correct": 1,
+      "hint": "Un $CV$ bajo indica que la dispersión respecto a la media es pequeña.",
+      "explanation": "Un $CV < 0.3$ (ó 30%) sugiere que los datos están agrupados de manera bastante uniforme en torno a la media, lo cual hace que esta sea una buena medida de representación central."
+    },
+    {
+      "q": "Si el coeficiente de asimetría de una distribución es $As > 0$, ¿qué forma presenta y cuál es la relación usual entre media y mediana?",
+      "options": [
+        "Es simétrica; la media es idéntica a la mediana.",
+        "Presenta asimetría negativa (cola izquierda más larga); la media es menor que la mediana.",
+        "Presenta asimetría positiva (cola derecha más larga); la media suele ser mayor que la mediana."
+      ],
+      "correct": 2,
+      "hint": "Un sesgo positivo indica valores altos atípicos que arrastran la cola y la media a la derecha.",
+      "explanation": "Cuando $As > 0$, hay una asimetría a la derecha (cola derecha larga). Las observaciones extremas altas elevan el valor de la media, superando típicamente a la mediana."
+    },
+    {
+      "q": "¿Qué mide el apuntamiento o curtosis de una distribución?",
+      "options": [
+        "El grado de concentración de los datos en la zona central de la distribución comparada con la Normal.",
+        "La diferencia exacta entre el percentil 75 y el percentil 25.",
+        "Si hay más datos a la izquierda o a la derecha del centro de gravedad."
+      ],
+      "correct": 0,
+      "hint": "Evalúa la forma de las colas y la agudeza del pico central de la distribución.",
+      "explanation": "La curtosis indica cómo de concentrados están los datos alrededor de la zona central en comparación con una distribución Normal teórica (la cual sirve de referencia)."
+    },
+    {
+      "q": "Una distribución de curtosis leptocúrtica ($g_2 > 0$) se caracteriza por:",
+      "options": [
+        "Tener un perfil plano, con datos distribuidos de forma uniforme en todo el recorrido.",
+        "Ser muy apuntada en el centro y con colas pesadas (datos muy concentrados en el centro y extremos).",
+        "Tener exactamente la misma forma de campana que la distribución Normal estándar."
+      ],
+      "correct": 1,
+      "hint": "El prefijo \"lepto\" significa fino o estrecho; las colas acumulan más probabilidad.",
+      "explanation": "Las distribuciones leptocúrticas presentan un apuntamiento pronunciado (pico más alto en el centro) y colas pesadas, lo que indica alta concentración en el centro y presencia de observaciones en los extremos."
+    },
+    {
+      "q": "En R, ¿cómo se realiza la asignación de un valor a una variable u objeto?",
+      "options": [
+        "Mediante el operador `=` únicamente.",
+        "Mediante el operador `<-`.",
+        "Usando la palabra clave `var`."
+      ],
+      "correct": 1,
+      "hint": "Es una flecha que apunta hacia la variable a la que se le asigna el valor.",
+      "explanation": "Aunque en R moderno se puede usar `=`, el operador estándar e idóneo de asignación es `<-`."
+    },
+    {
+      "q": "¿Qué función de R se utiliza para combinar elementos y crear un vector de datos?",
+      "options": [
+        "`vector()`",
+        "`combine()`",
+        "`c()`"
+      ],
+      "correct": 2,
+      "hint": "Es una sola letra que abrevia la palabra \"combine\" o \"concatenate\".",
+      "explanation": "La función `c()` se usa de forma generalizada en R para concatenar o combinar valores individuales en un único vector."
+    },
+    {
+      "q": "La función `mean(x)` en R calcula:",
+      "options": [
+        "La media aritmética del vector `x`.",
+        "La mediana del vector `x`.",
+        "La cuasivarianza de los elementos de `x`."
+      ],
+      "correct": 0,
+      "hint": "Significa \"media\" en inglés.",
+      "explanation": "La función `mean()` de R recibe un vector de valores numéricos y calcula su promedio o media aritmética."
+    },
+    {
+      "q": "Al ejecutar `median(x)` en R sobre el vector `latencias <- c(12, 15, 11, 14, 115, 13, 16, 12, 14, 18)`, el valor devuelto es robusto porque:",
+      "options": [
+        "Calcula la media aritmética ignorando el valor más pequeño.",
+        "Calcula el valor central de los datos ordenados (14), sin verse afectado por el outlier de 115 ms.",
+        "Devuelve el rango de las observaciones."
+      ],
+      "correct": 1,
+      "hint": "La mediana no depende del valor extremo de los datos, sino de su posición ordenada.",
+      "explanation": "La mediana ($Me$) busca la posición central. En este vector ordenado, el valor central es 14, independientemente de que el máximo sea 115 ms o 1000 ms."
+    },
+    {
+      "q": "¿Qué devuelve la función `range(x)` en R?",
+      "options": [
+        "El valor del recorrido o rango como un único número real.",
+        "Un vector con dos elementos: el valor mínimo y el valor máximo de `x`.",
+        "La lista completa de datos ordenados de menor a mayor."
+      ],
+      "correct": 1,
+      "hint": "Devuelve los extremos del intervalo del recorrido.",
+      "explanation": "A diferencia de la definición estadística de Rango ($R = x_{max} - x_{min}$), la función `range()` en R devuelve los valores mínimo y máximo como un vector de dos componentes, es decir, `c(min(x), max(x))`."
+    },
+    {
+      "q": "¿Qué cálculo estadístico realiza la función `sd(x)` en R?",
+      "options": [
+        "La desviación típica muestral clásica (dividiendo por $n$).",
+        "La cuasidesviación típica muestral (dividiendo por $n-1$).",
+        "La suma de las desviaciones absolutas."
+      ],
+      "correct": 1,
+      "hint": "En R, las funciones de dispersión estándar estiman la variabilidad poblacional dividiendo por $n-1$.",
+      "explanation": "La función `sd()` en R calcula la desviación estándar muestral usando la raíz de la cuasivarianza (con denominador $n-1$), no la varianza descriptiva directa (denominador $n$)."
+    },
+    {
+      "q": "¿Qué cálculo estadístico realiza la función `var(x)` en R?",
+      "options": [
+        "La varianza muestral con denominador $n$.",
+        "La cuasivarianza muestral con denominador $n-1$.",
+        "El coeficiente de variación muestral."
+      ],
+      "correct": 1,
+      "hint": "Al igual que `sd()`, utiliza la corrección de Bessel ($n-1$) para estimación poblacional.",
+      "explanation": "En R, la función `var()` calcula la cuasivarianza muestral de los datos, es decir, divide por $n-1$ para obtener un estimador insesgado de la varianza poblacional."
+    },
+    {
+      "q": "¿Qué información NO se incluye por defecto en la salida de la función `summary(x)` de R para un vector numérico?",
+      "options": [
+        "El primer y tercer cuartil.",
+        "La desviación típica muestral.",
+        "El mínimo y el máximo de los datos."
+      ],
+      "correct": 1,
+      "hint": "Proporciona el mínimo, Q1, mediana, media, Q3 y el máximo.",
+      "explanation": "La función `summary()` proporciona las medidas de posición clásicas (mínimo, cuartiles, mediana, media y máximo), pero no incluye la desviación típica ni la varianza."
+    },
+    {
+      "q": "Para calcular el percentil 90 de un vector `x` en R, ¿cuál es la sintaxis correcta?",
+      "options": [
+        "`percentile(x, 90)`",
+        "`quantile(x, probs = 0.90)`",
+        "`quantile(x, 90)`"
+      ],
+      "correct": 1,
+      "hint": "La función es `quantile` y la probabilidad se especifica como un valor decimal entre 0 y 1.",
+      "explanation": "Se utiliza la función `quantile()` pasando el vector de datos y el parámetro `probs` (o simplemente el segundo argumento) expresado como una proporción: `probs = 0.90` para el percentil 90."
+    },
+    {
+      "q": "¿Qué tipo de gráfico se genera al ejecutar la función `hist(x)` en R?",
+      "options": [
+        "Un diagrama de dispersión unidimensional.",
+        "Un gráfico de barras ordenadas por frecuencia acumulada.",
+        "Un histograma que muestra las frecuencias de los intervalos de la variable."
+      ],
+      "correct": 2,
+      "hint": "Es el gráfico descriptivo básico para representar variables cuantitativas en intervalos.",
+      "explanation": "La función `hist()` en R dibuja el histograma del vector de datos, agrupando los datos en clases e ilustrando sus frecuencias mediante barras."
+    },
+    {
+      "q": "¿Cuál es el propósito principal de la función `boxplot(x)` en R?",
+      "options": [
+        "Representar la evolución temporal de la variable.",
+        "Generar un diagrama de caja que facilita ver los cuartiles, la dispersión y los outliers.",
+        "Mostrar el ajuste de los datos a una línea de regresión lineal simple."
+      ],
+      "correct": 1,
+      "hint": "Es una caja con \"bigotes\" que muestra la mediana, cuartiles y valores extremos.",
+      "explanation": "El diagrama de caja (boxplot) grafica la distribución de datos basándose en el resumen de los cinco números (mínimo, $Q_1$, mediana, $Q_3$ y máximo), permitiendo detectar outliers de forma visual muy rápida."
+    },
+    {
+      "q": "Si una variable continua se agrupa en intervalos de clase de distinta amplitud, ¿cómo se dibuja la altura de cada barra en un histograma para que refleje correctamente los datos?",
+      "options": [
+        "La altura debe ser igual a la frecuencia absoluta de la clase.",
+        "La altura debe ser proporcional a la densidad de frecuencia (frecuencia dividida por la amplitud del intervalo).",
+        "La altura debe ser igual a la frecuencia relativa acumulada de la clase."
+      ],
+      "correct": 1,
+      "hint": "Lo que debe ser proporcional a la frecuencia es el *área* del rectángulo, no la altura.",
+      "explanation": "En un histograma con intervalos de amplitudes variables, el área de cada barra representa la frecuencia. Por tanto, la altura de cada barra debe ser la densidad de frecuencia, definida como $d_i = f_i / a_i$ (o $n_i / a_i$), donde $a_i$ es la amplitud del intervalo."
     }
   ],
   "TEST_B": [
     {
-      "q": "1. Dada la muestra de latencias de disco en milisegundos: $$\\{10, 12, 10, 10, 18\\}$$. La mediana de esta muestra es ____ ms.",
+      "q": "En una muestra con datos $\\{2, 4, 4, 8, 12\\}$, la media aritmética es ____.",
       "options": [
-        "10",
-        "12",
-        "18"
-      ],
-      "correct": 0,
-      "hint": "Ordena primero los elementos de menor a mayor.",
-      "explanation": "Muestra ordenada: $$\\{10, 10, 10, 12, 18\\}$$. El valor central (posición 3) es 10."
-    },
-    {
-      "q": "2. Dada la muestra de tiempos de respuesta: $$\\{2, 4, 6, 8\\}$$. Su media aritmética ($$\\bar{x}$$) es igual a ____.",
-      "options": [
-        "4",
-        "5",
-        "6"
-      ],
-      "correct": 1,
-      "hint": "Suma todos los valores y divide por el tamaño de la muestra ($$n=4$$).",
-      "explanation": "$$\\bar{x} = \\frac{2+4+6+8}{4} = \\frac{20}{4} = 5$$."
-    },
-    {
-      "q": "3. Para la muestra de núcleos utilizados: $$\\{2, 4, 8\\}$$, la varianza muestral ($$s^2$$) es igual a ____.",
-      "options": [
-        "5.33",
-        "6.22",
-        "Todas las anteriores son incorrectas"
-      ],
-      "correct": 1,
-      "hint": "Calcula la media ($$\\bar{x} = 4.67$$) y evalúa $$\\frac{1}{n} \\sum (x_i - \\bar{x})^2$$.",
-      "explanation": "Media: $$14/3 \\approx 4.667$$. Desviaciones cuadráticas: $$(2-4.667)^2 + (4-4.667)^2 + (8-4.667)^2 = 7.111 + 0.444 + 11.111 = 18.667$$. Dividiendo entre $$n=3$$ da $$6.222$$."
-    },
-    {
-      "q": "4. Si un conjunto de datos tiene una media de 50 y una desviación estándar de 15, el coeficiente de variación ($$CV$$) es de ____.",
-      "options": [
-        "0.30",
-        "3.33",
-        "0.15"
-      ],
-      "correct": 0,
-      "hint": "Aplica la fórmula $$CV = \\frac{s}{\\bar{x}}$$.",
-      "explanation": "$$CV = \\frac{15}{50} = 0.30$$."
-    },
-    {
-      "q": "5. Dada una muestra con valores ordenados $$\\{3, 5, 7, 9, 11, 13\\}$$, el primer cuartil ($$Q_1$$) o percentil 25 es ____.",
-      "options": [
-        "5.0",
         "6.0",
-        "Ninguna de las anteriores es correcta"
-      ],
-      "correct": 2,
-      "hint": "Usa la posición interpolada para cuantiles continuos.",
-      "explanation": "Para la posición $$Q_1$$, calculamos $$i = p(n+1)/100 = 25(7)/100 = 1.75$$. Interpolando entre el valor en la posición 1 ($$3$$) y 2 ($$5$$): $$3 + 0.75 \\times (5-3) = 4.5$$. Al no estar listado en las opciones correctas (la opción A es 5.0 y B es 6.0), elegimos 'Ninguna de las anteriores es correcta' (4.5)."
-    },
-    {
-      "q": "6. Indique cuál de las siguientes afirmaciones respecto a la desviación típica es correcta:",
-      "options": [
-        "Siempre tiene un valor mayor o igual a cero.",
-        "Se altera con sumas constantes aplicadas a los datos de origen.",
-        "Todas las anteriores son correctas"
+        "4.0",
+        "8.0"
       ],
       "correct": 0,
-      "hint": "La desviación típica mide dispersión, y la dispersión no puede ser negativa ni se afecta por sumas de traslación constante.",
-      "explanation": "La desviación estándar es la raíz cuadrada de un valor cuadrático, por lo que siempre $$s \\ge 0$$. Sumar una constante traslada los datos sin cambiar su dispersión."
+      "hint": "Suma los datos y divide entre el tamaño muestral n=5.",
+      "explanation": "La suma es $2 + 4 + 4 + 8 + 12 = 30$. Al dividir por $n = 5$, obtenemos $30 / 5 = 6.0$."
     },
     {
-      "q": "7. Si en R ejecutamos `range(c(5, 12, 3, 9))` obtendremos el resultado ____.",
+      "q": "Dada la muestra $\\{3, 9, 4, 7, 10\\}$, la mediana es ____.",
       "options": [
-        "6",
-        "$$\\{3, 12\\}$$",
+        "4.0",
+        "7.0",
+        "6.6"
+      ],
+      "correct": 1,
+      "hint": "Ordena los datos de menor a mayor y selecciona el valor en la posición central.",
+      "explanation": "Muestra ordenada: $\\{3, 4, 7, 9, 10\\}$. Con $n = 5$, el valor central en la posición 3 es $7.0$."
+    },
+    {
+      "q": "En el conjunto de datos $\\{1, 2, 2, 3, 4, 4, 4, 5\\}$, la moda es ____.",
+      "options": [
+        "2",
+        "4",
         "3"
       ],
       "correct": 1,
-      "hint": "La función `range()` de R no devuelve la diferencia, sino el valor mínimo y máximo.",
-      "explanation": "`range` en R calcula el vector conteniendo el mínimo y máximo de la muestra: c(3, 12)."
+      "hint": "Busca el valor que más veces aparece.",
+      "explanation": "El valor 4 aparece 3 veces, mientras que el 2 aparece 2 veces y los demás una vez. La moda es 4."
     },
     {
-      "q": "8. Si una muestra de tamaño 100 tiene una cuasivarianza de 25, la varianza muestral es ____.",
+      "q": "Si una variable tiene un rango de 15 y el valor mínimo es 3, el valor máximo es ____.",
       "options": [
-        "24.75",
-        "25.25",
-        "25.00"
-      ],
-      "correct": 0,
-      "hint": "Usa la relación entre varianza y cuasivarianza: $$s^2 = \\frac{n-1}{n} s_{n-1}^2$$.",
-      "explanation": "$$s^2 = \\frac{99}{100} \\times 25 = 0.99 \\times 25 = 24.75$$."
-    },
-    {
-      "q": "9. Para cualquier conjunto de observaciones idénticas entre si (ej: $$\\{5, 5, 5, 5\\}$$), la varianza muestral resultante es siempre ____.",
-      "options": [
-        "$$5$$",
-        "$$0$$",
-        "Ninguna de las anteriores es correcta"
+        "12",
+        "18",
+        "5"
       ],
       "correct": 1,
-      "hint": "Si todos los datos coinciden con su media, no hay diferencias cuadráticas.",
-      "explanation": "Al ser todos los datos idénticos, la media es 5. Los desvíos $$(x_i - \\bar{x})$$ son todos $$0$$, por lo que la varianza es $$0$$."
+      "hint": "Recuerda que $R = Max - Min$.",
+      "explanation": "Rango $R = Max - Min$. Entonces, $Max = R + Min = 15 + 3 = 18$."
     },
     {
-      "q": "10. La mediana de la muestra de hilos bloqueados: $$\\{3, 1, 4, 1, 5, 9\\}$$ es ____.",
+      "q": "En una muestra de tamaño $n=10$ la suma de las frecuencias absolutas $\\sum_{i=1}^k n_i$ es igual a ____.",
       "options": [
-        "3.5",
-        "4.0",
-        "Ninguna de las anteriores es correcta"
+        "1.0",
+        "10",
+        "5"
+      ],
+      "correct": 1,
+      "hint": "La suma de frecuencias absolutas es el tamaño total de la muestra.",
+      "explanation": "Por definición, la suma de las frecuencias absolutas en cualquier muestra es igual al tamaño muestral, que en este caso es 10."
+    },
+    {
+      "q": "Si la varianza de un conjunto de datos de latencias es $16\\text{ ms}^2$, la desviación típica es ____.",
+      "options": [
+        "4 ms",
+        "8 ms",
+        "256 ms"
       ],
       "correct": 0,
-      "hint": "Ordena la muestra de tamaño $$n=6$$ y promedia los elementos centrales.",
-      "explanation": "Muestra ordenada: $$\\{1, 1, 3, 4, 5, 9\\}$$. Los elementos centrales (posiciones 3 y 4) son $$3$$ y $$4$$. Promedio: $$\\frac{3+4}{2} = 3.5$$."
+      "hint": "La desviación típica es la raíz cuadrada de la varianza.",
+      "explanation": "Desviación típica $s = \\sqrt{s^2} = \\sqrt{16} = 4$ ms."
+    },
+    {
+      "q": "Si un vector en R es `x <- c(5, 5, 5, 5)`, la varianza muestral calculada mediante `var(x)` es ____.",
+      "options": [
+        "5.0",
+        "0.0",
+        "2.5"
+      ],
+      "correct": 1,
+      "hint": "Todos los datos son iguales. ¿Hay dispersión?",
+      "explanation": "Si todas las observaciones son idénticas, no hay dispersión respecto a la media. Por lo tanto, su varianza es 0."
+    },
+    {
+      "q": "En una distribución con media $\\bar{x} = 20$ y desviación típica $s = 5$, el coeficiente de variación ($CV$) es ____.",
+      "options": [
+        "0.25",
+        "4.0",
+        "1.25"
+      ],
+      "correct": 0,
+      "hint": "CV se calcula dividiendo la desviación típica entre la media.",
+      "explanation": "Coeficiente de variación $CV = s / \\bar{x} = 5 / 20 = 0.25$."
+    },
+    {
+      "q": "En una muestra ordenada de 100 observaciones, el percentil 75 equivale a la posición ____.",
+      "options": [
+        "25",
+        "75",
+        "50"
+      ],
+      "correct": 1,
+      "hint": "El percentil 75 deja el 75% de los datos por debajo.",
+      "explanation": "El percentil 75 corresponde al valor en la posición ordenada 75 en una muestra de 100 elementos."
+    },
+    {
+      "q": "Si el primer cuartil ($Q_1$) es 12 y el tercer cuartil ($Q_3$) es 20, el rango intercuartílico ($IQR = Q_3 - Q_1$) es ____.",
+      "options": [
+        "8",
+        "16",
+        "32"
+      ],
+      "correct": 0,
+      "hint": "Resta el primer cuartil al tercer cuartil.",
+      "explanation": "IQR = Q3 - Q1 = 20 - 12 = 8."
+    },
+    {
+      "q": "Dada la muestra $\\{10, 15, 20\\}$, la varianza muestral (con denominador $n=3$) es ____.",
+      "options": [
+        "16.67",
+        "50.0",
+        "15.0"
+      ],
+      "correct": 0,
+      "hint": "Calcula primero la media y luego la media de las desviaciones al cuadrado.",
+      "explanation": "Media $\\bar{x} = (10+15+20)/3 = 15$. Varianza $s^2 = ((10-15)^2 + (15-15)^2 + (20-15)^2)/3 = (25 + 0 + 25)/3 = 50/3 \\approx 16.67$."
+    },
+    {
+      "q": "Dada la muestra $\\{10, 15, 20\\}$, la cuasivarianza ($s_{n-1}^2$, denominador $n-1=2$) es ____.",
+      "options": [
+        "25.0",
+        "16.67",
+        "50.0"
+      ],
+      "correct": 0,
+      "hint": "Divide la suma de los desvíos al cuadrado (50) por $n-1 = 2$.",
+      "explanation": "La cuasivarianza se calcula como $s_{n-1}^2 = \\frac{1}{n-1} \\sum (x_i - \\bar{x})^2 = 50 / 2 = 25.0$."
+    },
+    {
+      "q": "Para la muestra $\\{2, 8\\}$, la media aritmética es ____.",
+      "options": [
+        "5.0",
+        "4.0",
+        "6.0"
+      ],
+      "correct": 0,
+      "hint": "Promedio de los dos valores.",
+      "explanation": "Media $\\bar{x} = (2 + 8) / 2 = 5.0$."
+    },
+    {
+      "q": "Si en una muestra de 50 elementos el valor 4 se repite 10 veces, su frecuencia relativa es ____.",
+      "options": [
+        "0.20",
+        "10.0",
+        "0.50"
+      ],
+      "correct": 0,
+      "hint": "Divide la frecuencia absoluta por el tamaño total.",
+      "explanation": "Frecuencia relativa $f_i = n_i / n = 10 / 50 = 0.20$."
+    },
+    {
+      "q": "Si en un histograma la frecuencia acumulada del tercer intervalo es 30 sobre un total de 40 datos, la frecuencia relativa acumulada correspondiente es ____.",
+      "options": [
+        "0.75",
+        "1.33",
+        "0.30"
+      ],
+      "correct": 0,
+      "hint": "Divide el valor acumulado entre el tamaño muestral.",
+      "explanation": "Frecuencia relativa acumulada $F_3 = N_3 / n = 30 / 40 = 0.75$."
+    },
+    {
+      "q": "Si una variable tiene media $\\bar{x} = -10$ y desviación típica $s = 2$, el coeficiente de variación ($CV$) es ____.",
+      "options": [
+        "-0.20",
+        "0.20",
+        "5.0"
+      ],
+      "correct": 1,
+      "hint": "El coeficiente de variación utiliza el valor absoluto de la media en el denominador.",
+      "explanation": "$CV = s / |\\bar{x}| = 2 / |-10| = 2 / 10 = 0.20$. Es siempre no negativo."
+    },
+    {
+      "q": "En una muestra ordenada $\\{5, 7, 9, 11\\}$, la mediana es ____.",
+      "options": [
+        "8.0",
+        "7.0",
+        "9.0"
+      ],
+      "correct": 0,
+      "hint": "Con n=4 (par), es la media de los dos valores centrales.",
+      "explanation": "Con $n = 4$, los valores centrales en las posiciones 2 y 3 son 7 y 9. Su media es $(7 + 9) / 2 = 8.0$."
+    },
+    {
+      "q": "En una muestra de tiempos de respuesta $\\{1.5, 2.5, 3.5, 4.5\\}$ en segundos, el rango es ____.",
+      "options": [
+        "3.0 s",
+        "4.5 s",
+        "1.5 s"
+      ],
+      "correct": 0,
+      "hint": "R = Max - Min.",
+      "explanation": "El máximo es 4.5 s y el mínimo es 1.5 s. Rango R = 4.5 - 1.5 = 3.0 s."
+    },
+    {
+      "q": "Si en R creamos un vector `v <- c(2, 4, 6)` y ejecutamos `mean(v)`, el resultado obtenido es ____.",
+      "options": [
+        "3.0",
+        "4.0",
+        "12.0"
+      ],
+      "correct": 1,
+      "hint": "Media del vector con valores 2, 4 y 6.",
+      "explanation": "La media de $\\{2, 4, 6\\}$ es $(2 + 4 + 6) / 3 = 12 / 3 = 4.0$."
+    },
+    {
+      "q": "Si la cuasivarianza de una muestra de tamaño 10 es 9, la suma de las desviaciones al cuadrado $\\sum (x_i - \\bar{x})^2$ es ____.",
+      "options": [
+        "90",
+        "81",
+        "9"
+      ],
+      "correct": 1,
+      "hint": "Recuerda que la cuasivarianza divide por $n-1 = 9$.",
+      "explanation": "Como $s_{n-1}^2 = \\frac{1}{n-1} \\sum (x_i - \\bar{x})^2$, entonces la suma de desviaciones cuadráticas es $s_{n-1}^2 \\cdot (n-1) = 9 \\cdot (10 - 1) = 9 \\cdot 9 = 81$."
+    },
+    {
+      "q": "Si una muestra de tamaño $n = 5$ contiene las observaciones $\\{4, 4, 4, 4, 4\\}$, ¿cuáles de los siguientes estadísticos son correctos?",
+      "options": [
+        "La media es 4 y la mediana es 4.",
+        "La varianza muestral es 0.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza qué ocurre cuando todos los datos son idénticos.",
+      "explanation": "Si todos los datos son iguales a 4, la media y la mediana son 4. Al no haber variabilidad, la varianza es 0. Por tanto, todas las opciones son correctas."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la mediana de un conjunto de datos es verdadera?",
+      "options": [
+        "Divide la muestra ordenada en dos partes del 50% cada una.",
+        "Es una medida robusta frente a la presencia de outliers.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa las características definitorias de la mediana en el manual.",
+      "explanation": "La mediana es una medida de centralización que divide los datos ordenados al 50% y es robusta frente a outliers, a diferencia de la media. Todas las anteriores son correctas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes medidas de dispersión se miden en las mismas unidades que los datos originales?",
+      "options": [
+        "El rango o recorrido de la variable.",
+        "La desviación típica muestral.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considera si el rango y la desviación típica tienen o no la dimensión física original de los datos.",
+      "explanation": "Tanto el rango ($x_{max} - x_{min}$) como la desviación típica (raíz de la varianza) conservan la unidad original de medida. Todas son correctas."
+    },
+    {
+      "q": "Sobre el coeficiente de variación ($CV$), ¿cuáles de las siguientes afirmaciones son correctas?",
+      "options": [
+        "Es una medida de dispersión adimensional.",
+        "Permite comparar la variabilidad de variables con unidades de medida distintas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa la sección del CV en el texto.",
+      "explanation": "El CV se define como $s / |\\bar{x}|$. Al dividir dos términos en las mismas unidades, el resultado es adimensional, lo que facilita comparar la dispersión entre diferentes variables o escalas. Todas son correctas."
+    },
+    {
+      "q": "Si una distribución es perfectamente simétrica y unimodal, ¿cuál de las siguientes relaciones se cumple?",
+      "options": [
+        "El coeficiente de asimetría de Fisher es igual a 0.",
+        "La media aritmética es igual a la mediana y a la moda.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "En simetría perfecta unimodal, los tres estadísticos centrales coinciden en el eje de simetría.",
+      "explanation": "Una distribución simétrica unimodal tiene su centro en el mismo punto para la media, mediana y moda, y su coeficiente de asimetría es nulo. Todas son correctas."
+    },
+    {
+      "q": "En el entorno de programación R, ¿cuál de los siguientes comandos descriptivos es válido?",
+      "options": [
+        "`mean(latencias)` para calcular el promedio aritmético.",
+        "`summary(latencias)` para obtener un resumen estadístico rápido.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa la sección de Introducción Práctica a R.",
+      "explanation": "Ambos comandos son estándar en R para la descripción numérica rápida de vectores de datos. Todas las anteriores son correctas."
+    },
+    {
+      "q": "¿Qué se puede deducir si en una muestra de latencias en un servidor el coeficiente de variación es $CV = 0.15$?",
+      "options": [
+        "Que la distribución de los tiempos es homogénea.",
+        "Que la media aritmética es muy representativa de los datos de la muestra.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda el criterio habitual de $CV < 0.3$.",
+      "explanation": "Como $CV = 0.15 < 0.3$, la distribución es homogénea y la media es un excelente representante de los datos. Todas son correctas."
+    },
+    {
+      "q": "En un conjunto de datos $\\{10, 20, 30, 40\\}$, ¿cuál de las siguientes opciones describe correctamente sus propiedades de posición?",
+      "options": [
+        "El valor mínimo es 10 y el máximo es 40.",
+        "La mediana es 25.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Calcula la mediana de 4 valores ordenados y los extremos.",
+      "explanation": "El rango de datos va de 10 a 40. La mediana de $\\{10, 20, 30, 40\\}$ con n=4 es la media de los valores centrales 20 y 30, es decir, $(20+30)/2 = 25$. Todas las opciones son correctas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes funciones en R están destinadas a la generación de gráficos descriptivos de variables?",
+      "options": [
+        "`hist()` para construir histogramas de frecuencia.",
+        "`boxplot()` para crear diagramas de caja y bigotes.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piensa en las funciones gráficas mencionadas en la sección 6.",
+      "explanation": "En R, `hist(x)` and `boxplot(x)` son las funciones integradas nativas para realizar gráficos exploratorios de distribuciones unidimensionales. Todas son correctas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes características corresponden a una distribución con curtosis leptocúrtica ($g_2 > 0$)?",
+      "options": [
+        "Presenta un perfil muy apuntado en la zona central de la distribución.",
+        "Presenta colas más pesadas en comparación con una distribución Normal.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa el apartado de Medidas de Forma sobre curtosis.",
+      "explanation": "Las distribuciones leptocúrticas se definen por tener colas pesadas y una mayor concentración o apuntamiento central que la Normal. Todas son correctas."
+    },
+    {
+      "q": "Para la muestra $\\{5, 5, 5\\}$, ¿cuál es su desviación típica muestral?",
+      "options": [
+        "5.0",
+        "15.0",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Como todos los datos son iguales, calcula la variabilidad real.",
+      "explanation": "Dado que no hay dispersión alguna en $\\{5, 5, 5\\}$, la desviación típica es 0. Al no figurar este valor entre las dos primeras opciones, la respuesta correcta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Si el tamaño muestral de un estudio es $n = 50$, ¿cuál es la suma de las frecuencias relativas $\\sum f_i$?",
+      "options": [
+        "50",
+        "0.5",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La suma de frecuencias relativas siempre es constante para cualquier tamaño muestral.",
+      "explanation": "La suma de las frecuencias relativas es siempre igual a 1, con independencia de $n$. Dado que 1 no figura en las opciones, la correcta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Dada la muestra ordenada $\\{2, 4, 6, 8, 10, 100\\}$, ¿cuál de los siguientes estadísticos de centralización es el que mejor describe el comportamiento representativo y habitual sin verse afectado por el outlier?",
+      "options": [
+        "La media aritmética.",
+        "El rango muestral.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El estadístico robusto por excelencia frente a valores atípicos es la mediana.",
+      "explanation": "La mediana ($Me = 7$) es la medida robusta adecuada. Como las opciones ofrecen \"La media aritmética\" (que es sensible a outliers) y \"El rango\" (que es de dispersión, no de centralización), la respuesta correcta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Si en R asignamos `datos <- c(1, 3, 5)` y queremos calcular la media aritmética, ¿cuál de las siguientes funciones debemos llamar?",
+      "options": [
+        "`media(datos)`",
+        "`average(datos)`",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "R es un entorno con comandos en inglés; recuerda el nombre exacto del manual.",
+      "explanation": "La función correcta en R es `mean()`. Como las opciones ofrecen `media()` y `average()`, la correcta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Si una distribución tiene una media de 10 y una varianza de -4, ¿cómo podemos catalogar su dispersión?",
+      "options": [
+        "La distribución es extremadamente homogénea.",
+        "La distribución es altamente dispersa.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "¿Puede una varianza ser negativa?",
+      "explanation": "La varianza se calcula como una suma de desviaciones al cuadrado, por lo que matemáticamente es imposible que sea negativa ($s^2 \\ge 0$). Una varianza de -4 es absurda. La respuesta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "En una muestra con un único valor de moda $Mo = 8$, ¿cómo se denomina estadísticamente la distribución según su número de modas?",
+      "options": [
+        "Bimodal.",
+        "Multimodal.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Revisa los términos para una sola moda.",
+      "explanation": "Una distribución con una sola moda se denomina unimodal. Al no estar en las opciones, la correcta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Si la frecuencia relativa acumulada en la última clase de una tabla de frecuencias es $F_k$, ¿cuál es su valor numérico?",
+      "options": [
+        "$n$",
+        "$n-1$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Acumula el 100% de la muestra.",
+      "explanation": "Por definición, la frecuencia relativa acumulada de la última clase $F_k$ siempre es igual a 1 (ó 100%). Como $1$ no está listado, la respuesta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Para calcular la desviación típica muestral en R de un vector `v`, ¿cuál es la función directa del sistema que divide entre el tamaño de la muestra $n$ (notación clásica, no cuasidesviación típica)?",
+      "options": [
+        "`sd(v)`",
+        "`var(v)`",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "R calcula por defecto cuasidesviación con `sd()` y cuasivarianza con `var()`.",
+      "explanation": "R no dispone de una función directa nativa en su paquete base para calcular la desviación típica dividiendo por $n$. `sd()` calcula con divisor $n-1$. Por tanto, es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Si los datos se expresan en metros, ¿cuáles son las unidades de la varianza muestral?",
+      "options": [
+        "Metros ($m$)",
+        "Metros por segundo ($m/s$)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La varianza eleva la variable al cuadrado.",
+      "explanation": "La varianza se mide en unidades elevadas al cuadrado. Si los datos están en metros, la varianza estará en metros al cuadrado ($m^2$). Al no estar entre las opciones, la correcta es \"Ninguna de las anteriores\"."
+    },
+    {
+      "q": "Si una distribución es platicúrtica, su coeficiente de curtosis $g_2$ cumple la siguiente condición:",
+      "options": [
+        "$g_2 > 0$",
+        "$g_2 = 0$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Las distribuciones platicúrticas son planas y tienen curtosis negativa.",
+      "explanation": "Una distribución platicúrtica tiene una curtosis negativa ($g_2 < 0$). Como las opciones listan $> 0$ y $= 0$, la respuesta correcta es \"Ninguna de las anteriores\"."
     }
   ],
   "LABORATORIO": [
     {
       "id": 1,
-      "title": "Tiempos de Compilación y Outliers",
-      "context": "Se analiza el rendimiento de un compilador de C++ midiendo el tiempo de compilación (en segundos) en 8 compilaciones de control independientes: $$\\{9, 10, 11, 12, 13, 14, 15, 35\\}$$. Se observa que la última ejecución presenta una anomalía temporal debido a un proceso en segundo plano (outlier).",
+      "title": "Tiempos de Compilación de Software",
+      "context": "Se analiza el tiempo de compilación (en segundos) de un software en 8 ejecuciones distintas: {12, 15, 9, 14, 35, 11, 13, 10}.",
       "parts": [
         {
           "id": "p1a",
           "label": "a)",
-          "question": "Calcule la media aritmética ($$\\bar{x}$$) del tiempo de compilación.",
-          "correctValue": 14.875,
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 119,
           "tolerance": 0.01,
-          "explanation": "$$\\bar{x} = \\frac{9 + 10 + 11 + 12 + 13 + 14 + 15 + 35}{8} = \\frac{119}{8} = 14.875\\text{ s}$$"
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 119$."
         },
         {
           "id": "p1b",
           "label": "b)",
-          "question": "Calcule la mediana ($$Me$$) de la distribución para evitar la distorsión del outlier.",
-          "correctValue": 12.5,
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 14.875,
           "tolerance": 0.01,
-          "explanation": "$$n = 8$$ (par). Los valores centrales ordenados son $$12$$ (posición 4) y $$13$$ (posición 5). $$Me = \\frac{12 + 13}{2} = 12.5\\text{ s}$$"
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (119) entre el tamaño de la muestra ($n = 8$): $\\bar{x} = \\frac{119}{8} = 14.8750$."
         },
         {
           "id": "p1c",
           "label": "c)",
-          "question": "Determine la cuasivarianza ($$s_{n-1}^2$$) muestral de estos tiempos.",
-          "correctValue": 67.268,
-          "tolerance": 0.05,
-          "explanation": "$$\\sum x_i^2 = 9^2 + 10^2 + ... + 35^2 = 2241$$. \\nCuasivarianza: $$s_{n-1}^2 = \\frac{1}{n-1} \\left(\\sum x_i^2 - n\\bar{x}^2\\right) = \\frac{1}{7} \\left(2241 - 8 \\times 14.875^2\\right) = \\frac{2241 - 1770.125}{7} = 67.268\\text{ s}^2$$"
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 2261,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 2261$."
         },
         {
           "id": "p1d",
           "label": "d)",
-          "question": "Determine la cuasadesviación típica ($$s_{n-1}$$) en segundos.",
-          "correctValue": 8.202,
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 61.3594,
           "tolerance": 0.01,
-          "explanation": "$$s_{n-1} = \\sqrt{s_{n-1}^2} = \\sqrt{67.268} \\approx 8.202\\text{ s}$$"
+          "explanation": "Utilizando la suma de cuadrados (2261) y la media (14.8750), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{2261}{8} - (14.8750)^2 = 282.6250 - 221.2656 = 61.3594$."
         }
       ]
     },
     {
       "id": 2,
-      "title": "Distribución de Núcleos de CPU",
-      "context": "Se recopilan los datos del número de núcleos de CPU utilizados por 10 procesos concurrentes en un servidor del laboratorio de sistemas distribuibles: $$\\{2, 4, 2, 8, 4, 2, 4, 4, 8, 2\\}$$.",
+      "title": "Peticiones Concurrentes a Base de Datos",
+      "context": "Se registra el número de peticiones concurrentes a una base de datos en 5 intervalos de un minuto: {15, 22, 18, 25, 20}.",
       "parts": [
         {
           "id": "p2a",
           "label": "a)",
-          "question": "Determine la frecuencia relativa ($$f_i$$) de los procesos que consumen exactamente 4 núcleos.",
-          "correctValue": 0.4,
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 100,
           "tolerance": 0.01,
-          "explanation": "$$n=10$$. El valor $$x_i=4$$ se repite $$n_i=4$$ veces. $$f_i = \\frac{n_i}{n} = \\frac{4}{10} = 0.4$$"
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 100$."
         },
         {
           "id": "p2b",
           "label": "b)",
-          "question": "Calcule la frecuencia relativa acumulada ($$F_i$$) hasta un máximo de 4 núcleos inclusive.",
-          "correctValue": 0.8,
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 20.0,
           "tolerance": 0.01,
-          "explanation": "Frecuencias absolutas acumuladas hasta 4: procesos con 2 núcleos ($$4$$) + procesos con 4 núcleos ($$4$$). $$N_i = 8$$. $$F_i = \\frac{N_i}{n} = \\frac{8}{10} = 0.8$$"
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (100) entre el tamaño de la muestra ($n = 5$): $\\bar{x} = \\frac{100}{5} = 20.0000$."
         },
         {
           "id": "p2c",
           "label": "c)",
-          "question": "Calcule la media aritmética ($$\\bar{x}$$) de núcleos de CPU utilizados.",
-          "correctValue": 4.0,
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 2058,
           "tolerance": 0.01,
-          "explanation": "$$\\bar{x} = \\frac{2\\times 4 + 4\\times 4 + 8\\times 2}{10} = \\frac{8 + 16 + 16}{10} = \\frac{40}{10} = 4.0$$"
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 2058$."
         },
         {
           "id": "p2d",
           "label": "d)",
-          "question": "Calcule la varianza muestral ($$s^2$$) del consumo de núcleos.",
-          "correctValue": 4.8,
-          "tolerance": 0.05,
-          "explanation": "$$\\bar{x} = 4$$. Varianza: $$s^2 = \\frac{1}{10} \\sum (x_i - \\bar{x})^2 = \\frac{4 \\times (2-4)^2 + 4 \\times (4-4)^2 + 2 \\times (8-4)^2}{10} = \\frac{4(4) + 0 + 2(16)}{10} = \\frac{16 + 32}{10} = \\frac{48}{10} = 4.8$$"
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 11.6,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (2058) y la media (20.0000), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{2058}{5} - (20.0000)^2 = 411.6000 - 400.0000 = 11.6000$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Errores de Red por Día",
+      "context": "Se mide el número de errores de red detectados por día durante una semana de pruebas: {4, 7, 5, 9, 6, 8, 3}.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 42,
+          "tolerance": 0.01,
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 42$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (42) entre el tamaño de la muestra ($n = 7$): $\\bar{x} = \\frac{42}{7} = 6.0000$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 280,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 280$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (280) y la media (6.0000), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{280}{7} - (6.0000)^2 = 40.0000 - 36.0000 = 4.0000$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Latencias de Lectura de Disco",
+      "context": "Se realiza una prueba de latencia de lectura de disco (en ms) en 6 lecturas secuenciales: {20, 24, 22, 28, 26, 30}.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 150,
+          "tolerance": 0.01,
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 150$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 25.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (150) entre el tamaño de la muestra ($n = 6$): $\\bar{x} = \\frac{150}{6} = 25.0000$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 3820,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 3820$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 11.6667,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (3820) y la media (25.0000), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{3820}{6} - (25.0000)^2 = 636.6667 - 625.0000 = 11.6667$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Transferencias de Archivos Fallidas",
+      "context": "Número de transferencias de archivos fallidas observadas por hora en 6 horas de alta carga: {2, 0, 1, 3, 2, 4}.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 12,
+          "tolerance": 0.01,
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 12$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (12) entre el tamaño de la muestra ($n = 6$): $\\bar{x} = \\frac{12}{6} = 2.0000$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 34,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 34$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 1.6667,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (34) y la media (2.0000), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{34}{6} - (2.0000)^2 = 5.6667 - 4.0000 = 1.6667$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Uso de CPU de Servidor Web",
+      "context": "Se mide el porcentaje medio de uso de CPU en un servidor web durante 7 mediciones consecutivas: {45, 50, 48, 52, 55, 47, 51}.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 348,
+          "tolerance": 0.01,
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 348$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 49.7143,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (348) entre el tamaño de la muestra ($n = 7$): $\\bar{x} = \\frac{348}{7} = 49.7143$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 17368,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 17368$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 9.6327,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (17368) y la media (49.7143), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{17368}{7} - (49.7143)^2 = 2481.1429 - 2471.5102 = 9.6327$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Ancho de Banda Consumido",
+      "context": "Se monitoriza el ancho de banda consumido (en Mbps) en un canal de comunicación en 6 momentos aleatorios: {100, 105, 98, 102, 110, 95}.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 610,
+          "tolerance": 0.01,
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 610$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 101.6667,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (610) entre el tamaño de la muestra ($n = 6$): $\\bar{x} = \\frac{610}{6} = 101.6667$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 62158,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 62158$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 23.5556,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (62158) y la media (101.6667), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{62158}{6} - (101.6667)^2 = 10359.6667 - 10336.1111 = 23.5556$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Tiempos de Respuesta de Ping",
+      "context": "Tiempos de respuesta de ping (en ms) a un servidor DNS medidos en 7 paquetes ICMP: {12, 14, 13, 15, 11, 16, 12}.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula la suma de todas las observaciones, es decir, $\\sum_{i=1}^n x_i$.",
+          "correctValue": 93,
+          "tolerance": 0.01,
+          "explanation": "La suma de todas las observaciones se calcula sumando directamente los valores de la muestra: $\\sum x_i = 93$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcula la media aritmética de la muestra (utilizando el resultado anterior).",
+          "correctValue": 13.2857,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de los datos obtenida en la parte anterior (93) entre el tamaño de la muestra ($n = 7$): $\\bar{x} = \\frac{93}{7} = 13.2857$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcula la suma de los cuadrados de todas las observaciones, es decir, $\\sum_{i=1}^n x_i^2$.",
+          "correctValue": 1255,
+          "tolerance": 0.01,
+          "explanation": "Se eleva cada valor observado al cuadrado y se suman los resultados: $\\sum x_i^2 = 1255$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcula la varianza muestral descriptiva (con denominador n) usando los resultados anteriores mediante la fórmula simplificada.",
+          "correctValue": 2.7755,
+          "tolerance": 0.01,
+          "explanation": "Utilizando la suma de cuadrados (1255) y la media (13.2857), aplicamos la fórmula simplificada de la varianza: $s^2 = \\left( \\frac{\\sum x_i^2}{n} \\right) - \\bar{x}^2 = \\frac{1255}{7} - (13.2857)^2 = 179.2857 - 176.5102 = 2.7755$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Procesos en Cola de Espera",
+      "context": "Número de procesos en cola de espera de ejecución en 7 mediciones: {8, 12, 6, 10, 14, 9, 11}.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{70}{7} = 10.0000$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 42.0,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (10.0000) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 42.0000$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 7.0,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (42.0000) por $n-1 = 6$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{42.0000}{6} = 7.0000$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 2.6458,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (7.0000): $s_{n-1} = \\sqrt{7.0000} = 2.6458$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Paquetes Perdidos por Hora",
+      "context": "Se analiza el número de paquetes IP perdidos por hora durante una ventana de monitorización de 8 horas: {0, 2, 1, 0, 3, 1, 2, 0}.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 1.125,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{9}{8} = 1.1250$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 8.875,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (1.1250) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 8.8750$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 1.2679,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (8.8750) por $n-1 = 7$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{8.8750}{7} = 1.2679$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 1.126,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (1.2679): $s_{n-1} = \\sqrt{1.2679} = 1.1260$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Consumo de Energía de Servidor",
+      "context": "Consumo de energía en vatios (W) medido en un nodo de computación en 6 mediciones periódicas: {120, 125, 122, 128, 130, 124}.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 124.8333,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{749}{6} = 124.8333$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 68.8333,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (124.8333) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 68.8333$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 13.7667,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (68.8333) por $n-1 = 5$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{68.8333}{5} = 13.7667$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 3.7103,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (13.7667): $s_{n-1} = \\sqrt{13.7667} = 3.7103$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Tiempo de Arranque del Sistema",
+      "context": "Tiempo de arranque (en segundos) medido en 6 máquinas virtuales idénticas inicializadas en la nube: {30, 35, 32, 38, 34, 36}.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 34.1667,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{205}{6} = 34.1667$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 40.8333,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (34.1667) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 40.8333$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 8.1667,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (40.8333) por $n-1 = 5$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{40.8333}{5} = 8.1667$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 2.8577,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (8.1667): $s_{n-1} = \\sqrt{8.1667} = 2.8577$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Conexiones SSH Activas",
+      "context": "Número de conexiones SSH simultáneas en un cortafuegos registradas en 7 horas del día: {5, 8, 6, 7, 9, 4, 6}.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 6.4286,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{45}{7} = 6.4286$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 17.7143,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (6.4286) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 17.7143$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 2.9524,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (17.7143) por $n-1 = 6$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{17.7143}{6} = 2.9524$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 1.7182,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (2.9524): $s_{n-1} = \\sqrt{2.9524} = 1.7182$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Tamaño de Archivos Subidos",
+      "context": "Tamaño medio de archivos (en MB) subidos a un servicio de almacenamiento por 5 usuarios: {12, 16, 14, 18, 15}.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 15.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{75}{5} = 15.0000$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 20.0,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (15.0000) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 20.0000$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (20.0000) por $n-1 = 4$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{20.0000}{4} = 5.0000$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 2.2361,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (5.0000): $s_{n-1} = \\sqrt{5.0000} = 2.2361$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Tiempo de Respuesta HTTP",
+      "context": "Tiempo de respuesta HTTP (en ms) devuelto por un microservicio REST en 5 llamadas consecutivas: {250, 270, 260, 290, 280}.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 270.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{1350}{5} = 270.0000$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 1000.0,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (270.0000) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 1000.0000$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 250.0,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (1000.0000) por $n-1 = 4$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{1000.0000}{4} = 250.0000$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 15.8114,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (250.0000): $s_{n-1} = \\sqrt{250.0000} = 15.8114$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Fallos de Página de Memoria",
+      "context": "Número de fallos de página por segundo en un proceso informático crítico medido en 6 periodos: {14, 18, 16, 20, 22, 15}.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 17.5,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética se calcula dividiendo la suma de todos los valores entre el tamaño muestral: $\\bar{x} = \\frac{105}{6} = 17.5000$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Calcula la suma de las desviaciones al cuadrado respecto a la media, es decir, $\\sum_{i=1}^n (x_i - \\bar{x})^2$.",
+          "correctValue": 47.5,
+          "tolerance": 0.01,
+          "explanation": "Restamos la media (17.5000) a cada observación, elevamos al cuadrado cada desviación y sumamos: $\\sum (x_i - \\bar{x})^2 = 47.5000$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcula la cuasivarianza muestral ($s_{n-1}^2$) a partir del resultado anterior.",
+          "correctValue": 9.5,
+          "tolerance": 0.01,
+          "explanation": "La cuasivarianza muestral ($s_{n-1}^2$) divide la suma de desviaciones cuadráticas (47.5000) por $n-1 = 5$: $s_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1} = \\frac{47.5000}{5} = 9.5000$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Calcula la cuasidesviación típica muestral ($s_{n-1}$) utilizando el resultado anterior.",
+          "correctValue": 3.0822,
+          "tolerance": 0.01,
+          "explanation": "La cuasidesviación típica es la raíz cuadrada de la cuasivarianza calculada anteriormente (9.5000): $s_{n-1} = \\sqrt{9.5000} = 3.0822$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Número de Contenedores Activos",
+      "context": "Número de contenedores Docker activos en un cluster de Kubernetes medido en 7 horas consecutivas: {10, 12, 11, 13, 15, 9, 14}.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 12,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [9, 10, 11, 12, 13, 14, 15]. Al ser el tamaño $n = 7$ impar, la mediana es el valor central: $Me = 12$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 6,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (15) y el valor mínimo (9): $R = 15 - 9 = 6$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 12.0000$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 4.0000$. Luego, la desviación típica es $s = \\sqrt{4.0000} = 2.0000$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (6) entre la desviación típica obtenida en c (2.0000): $\\frac{R}{s} = \\frac{6}{2.0000} = 3.0000$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Tiempo de Ejecución de Script",
+      "context": "Tiempo de ejecución (en segundos) de un script en Python medido en 5 ejecuciones de benchmarking: {8.5, 9.2, 8.8, 9.5, 9.0}.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 9.0,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [8.5, 8.8, 9.0, 9.2, 9.5]. Al ser el tamaño $n = 5$ impar, la mediana es el valor central: $Me = 9.0$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (9.5) y el valor mínimo (8.5): $R = 9.5 - 8.5 = 1.0$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 0.3406,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 9.0000$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 0.1160$. Luego, la desviación típica es $s = \\sqrt{0.1160} = 0.3406$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 2.9361,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (1.0) entre la desviación típica obtenida en c (0.3406): $\\frac{R}{s} = \\frac{1.0}{0.3406} = 2.9361$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Temperatura del Procesador",
+      "context": "Temperatura del procesador (°C) medida en un nodo de cálculo en 6 momentos de alta carga: {55, 58, 56, 60, 57, 59}.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 57.5,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [55, 56, 57, 58, 59, 60]. Al ser el tamaño $n = 6$ par, la mediana es el promedio de los valores centrales: $Me = 57.5$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 5,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (60) y el valor mínimo (55): $R = 60 - 55 = 5$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 1.7078,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 57.5000$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 2.9167$. Luego, la desviación típica es $s = \\sqrt{2.9167} = 1.7078$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 2.9277,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (5) entre la desviación típica obtenida en c (1.7078): $\\frac{R}{s} = \\frac{5}{1.7078} = 2.9277$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Commits por Día en Repositorio",
+      "context": "Número de commits diarios recibidos en un repositorio de control de versiones durante 6 días de trabajo: {3, 6, 4, 7, 5, 8}.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 5.5,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [3, 4, 5, 6, 7, 8]. Al ser el tamaño $n = 6$ par, la mediana es el promedio de los valores centrales: $Me = 5.5$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 5,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (8) y el valor mínimo (3): $R = 8 - 3 = 5$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 1.7078,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 5.5000$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 2.9167$. Luego, la desviación típica es $s = \\sqrt{2.9167} = 1.7078$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 2.9277,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (5) entre la desviación típica obtenida en c (1.7078): $\\frac{R}{s} = \\frac{5}{1.7078} = 2.9277$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Tiempo de Respuesta de API",
+      "context": "Tiempo de respuesta (en ms) de una API interna en 6 llamadas de prueba: {40, 45, 42, 48, 44, 46}.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 44.5,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [40, 42, 44, 45, 46, 48]. Al ser el tamaño $n = 6$ par, la mediana es el promedio de los valores centrales: $Me = 44.5$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 8,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (48) y el valor mínimo (40): $R = 48 - 40 = 8$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 2.6087,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 44.1667$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 6.8056$. Luego, la desviación típica es $s = \\sqrt{6.8056} = 2.6087$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 3.0666,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (8) entre la desviación típica obtenida en c (2.6087): $\\frac{R}{s} = \\frac{8}{2.6087} = 3.0666$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Peticiones HTTP Bloqueadas",
+      "context": "Número de peticiones bloqueadas por un cortafuegos de aplicación web en 7 horas: {2, 5, 3, 6, 4, 7, 1}.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 4,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [1, 2, 3, 4, 5, 6, 7]. Al ser el tamaño $n = 7$ impar, la mediana es el valor central: $Me = 4$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 6,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (7) y el valor mínimo (1): $R = 7 - 1 = 6$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 4.0000$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 4.0000$. Luego, la desviación típica es $s = \\sqrt{4.0000} = 2.0000$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (6) entre la desviación típica obtenida en c (2.0000): $\\frac{R}{s} = \\frac{6}{2.0000} = 3.0000$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Consumo de RAM de Aplicación",
+      "context": "Consumo de RAM en gigabytes (GB) de un proceso Java medido en 5 momentos del ciclo de vida: {8, 12, 10, 14, 11}.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 11,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [8, 10, 11, 12, 14]. Al ser el tamaño $n = 5$ impar, la mediana es el valor central: $Me = 11$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 6,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (14) y el valor mínimo (8): $R = 14 - 8 = 6$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 11.0000$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 4.0000$. Luego, la desviación típica es $s = \\sqrt{4.0000} = 2.0000$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (6) entre la desviación típica obtenida en c (2.0000): $\\frac{R}{s} = \\frac{6}{2.0000} = 3.0000$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Transacciones por Segundo",
+      "context": "Transacciones por segundo (TPS) registradas en una pasarela de pago en 6 instantes de carga alta: {200, 220, 210, 240, 230, 215}.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcula la mediana de la muestra tras ordenar los datos.",
+          "correctValue": 217.5,
+          "tolerance": 0.01,
+          "explanation": "Ordenamos la muestra: [200, 210, 215, 220, 230, 240]. Al ser el tamaño $n = 6$ par, la mediana es el promedio de los valores centrales: $Me = 217.5$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Calcula el rango o recorrido de la muestra ($R$).",
+          "correctValue": 40,
+          "tolerance": 0.01,
+          "explanation": "El rango es la diferencia entre el valor máximo (240) y el valor mínimo (200): $R = 240 - 200 = 40$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 13.0437,
+          "tolerance": 0.01,
+          "explanation": "Primero calculamos la media $\\bar{x} = 219.1667$ y la varianza muestral descriptiva $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 170.1389$. Luego, la desviación típica es $s = \\sqrt{170.1389} = 13.0437$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Calcula la relación o cociente entre el rango y la desviación típica ($R / s$).",
+          "correctValue": 3.0666,
+          "tolerance": 0.01,
+          "explanation": "Dividimos el rango obtenido en b (40) entre la desviación típica obtenida en c (13.0437): $\\frac{R}{s} = \\frac{40}{13.0437} = 3.0666$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Tiempo de Backup de Servidor",
+      "context": "Tiempo de copia de seguridad (en minutos) registrado en un servidor corporativo en 6 ejecuciones: {15, 18, 16, 20, 17, 19}.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 17.5,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética es la suma de todas las observaciones dividida por el número total de observaciones: $\\bar{x} = \\frac{105}{6} = 17.5000$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 1.7078,
+          "tolerance": 0.01,
+          "explanation": "La varianza muestral descriptiva es $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 2.9167$. La desviación típica es su raíz cuadrada: $s = \\sqrt{2.9167} = 1.7078$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcula el coeficiente de variación ($CV$) de la muestra.",
+          "correctValue": 0.0976,
+          "tolerance": 0.01,
+          "explanation": "El coeficiente de variación es la desviación típica (1.7078) dividida por el valor absoluto de la media (17.5000): $CV = \\frac{1.7078}{17.5000} = 0.0976$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcula el umbral de anomalías superiores definido como $\\bar{x} + 2.5 \\cdot s$.",
+          "correctValue": 21.7696,
+          "tolerance": 0.01,
+          "explanation": "Multiplicamos la desviación típica (1.7078) por 2.5 y se la sumamos a la media (17.5000): $U = \\bar{x} + 2.5 \\cdot s = 17.5000 + 2.5 \\cdot 1.7078 = 21.7696$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Hilos en Espera en JVM",
+      "context": "Número de hilos de ejecución concurrentes bloqueados o en espera en la máquina virtual de Java en 6 lecturas: {12, 16, 14, 18, 15, 17}.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 15.3333,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética es la suma de todas las observaciones dividida por el número total de observaciones: $\\bar{x} = \\frac{92}{6} = 15.3333$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 1.972,
+          "tolerance": 0.01,
+          "explanation": "La varianza muestral descriptiva es $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 3.8889$. La desviación típica es su raíz cuadrada: $s = \\sqrt{3.8889} = 1.9720$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Calcula el coeficiente de variación ($CV$) de la muestra.",
+          "correctValue": 0.1286,
+          "tolerance": 0.01,
+          "explanation": "El coeficiente de variación es la desviación típica (1.9720) dividida por el valor absoluto de la media (15.3333): $CV = \\frac{1.9720}{15.3333} = 0.1286$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcula el umbral de anomalías superiores definido como $\\bar{x} + 2.5 \\cdot s$.",
+          "correctValue": 20.2634,
+          "tolerance": 0.01,
+          "explanation": "Multiplicamos la desviación típica (1.9720) por 2.5 y se la sumamos a la media (15.3333): $U = \\bar{x} + 2.5 \\cdot s = 15.3333 + 2.5 \\cdot 1.9720 = 20.2634$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Mensajes en Cola RabbitMQ",
+      "context": "Número de mensajes acumulados en una cola de RabbitMQ medidos en 7 intervalos consecutivos: {5, 10, 8, 12, 9, 11, 7}.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 8.8571,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética es la suma de todas las observaciones dividida por el número total de observaciones: $\\bar{x} = \\frac{62}{7} = 8.8571$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 2.2315,
+          "tolerance": 0.01,
+          "explanation": "La varianza muestral descriptiva es $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 4.9796$. La desviación típica es su raíz cuadrada: $s = \\sqrt{4.9796} = 2.2315$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcula el coeficiente de variación ($CV$) de la muestra.",
+          "correctValue": 0.2519,
+          "tolerance": 0.01,
+          "explanation": "El coeficiente de variación es la desviación típica (2.2315) dividida por el valor absoluto de la media (8.8571): $CV = \\frac{2.2315}{8.8571} = 0.2519$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcula el umbral de anomalías superiores definido como $\\bar{x} + 2.5 \\cdot s$.",
+          "correctValue": 14.4359,
+          "tolerance": 0.01,
+          "explanation": "Multiplicamos la desviación típica (2.2315) por 2.5 y se la sumamos a la media (8.8571): $U = \\bar{x} + 2.5 \\cdot s = 8.8571 + 2.5 \\cdot 2.2315 = 14.4359$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Tiempo de Descarga de Parche",
+      "context": "Tiempo (en segundos) que tarda un servidor en descargar un parche de seguridad de 50 MB en 6 intentos: {45, 50, 48, 52, 55, 47}.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 49.5,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética es la suma de todas las observaciones dividida por el número total de observaciones: $\\bar{x} = \\frac{297}{6} = 49.5000$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 3.304,
+          "tolerance": 0.01,
+          "explanation": "La varianza muestral descriptiva es $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 10.9167$. La desviación típica es su raíz cuadrada: $s = \\sqrt{10.9167} = 3.3040$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcula el coeficiente de variación ($CV$) de la muestra.",
+          "correctValue": 0.0667,
+          "tolerance": 0.01,
+          "explanation": "El coeficiente de variación es la desviación típica (3.3040) dividida por el valor absoluto de la media (49.5000): $CV = \\frac{3.3040}{49.5000} = 0.0667$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcula el umbral de anomalías superiores definido como $\\bar{x} + 2.5 \\cdot s$.",
+          "correctValue": 57.7601,
+          "tolerance": 0.01,
+          "explanation": "Multiplicamos la desviación típica (3.3040) por 2.5 y se la sumamos a la media (49.5000): $U = \\bar{x} + 2.5 \\cdot s = 49.5000 + 2.5 \\cdot 3.3040 = 57.7601$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Fallos de Compilación de Proyecto",
+      "context": "Número de fallos de compilación semanales registrados en un entorno de integración continua durante 6 semanas: {1, 3, 2, 4, 3, 5}.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética es la suma de todas las observaciones dividida por el número total de observaciones: $\\bar{x} = \\frac{18}{6} = 3.0000$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 1.291,
+          "tolerance": 0.01,
+          "explanation": "La varianza muestral descriptiva es $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 1.6667$. La desviación típica es su raíz cuadrada: $s = \\sqrt{1.6667} = 1.2910$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcula el coeficiente de variación ($CV$) de la muestra.",
+          "correctValue": 0.4303,
+          "tolerance": 0.01,
+          "explanation": "El coeficiente de variación es la desviación típica (1.2910) dividida por el valor absoluto de la media (3.0000): $CV = \\frac{1.2910}{3.0000} = 0.4303$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcula el umbral de anomalías superiores definido como $\\bar{x} + 2.5 \\cdot s$.",
+          "correctValue": 6.2275,
+          "tolerance": 0.01,
+          "explanation": "Multiplicamos la desviación típica (1.2910) por 2.5 y se la sumamos a la media (3.0000): $U = \\bar{x} + 2.5 \\cdot s = 3.0000 + 2.5 \\cdot 1.2910 = 6.2275$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Latencia de Consulta DNS",
+      "context": "Latencia en consultas DNS (en ms) medidas a un servidor local en 6 pruebas consecutivas: {15, 18, 16, 22, 19, 20}.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcula la media aritmética de la muestra.",
+          "correctValue": 18.3333,
+          "tolerance": 0.01,
+          "explanation": "La media aritmética es la suma de todas las observaciones dividida por el número total de observaciones: $\\bar{x} = \\frac{110}{6} = 18.3333$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula la desviación típica muestral clásica ($s$, con denominador n).",
+          "correctValue": 2.357,
+          "tolerance": 0.01,
+          "explanation": "La varianza muestral descriptiva es $s^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n} = 5.5556$. La desviación típica es su raíz cuadrada: $s = \\sqrt{5.5556} = 2.3570$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcula el coeficiente de variación ($CV$) de la muestra.",
+          "correctValue": 0.1286,
+          "tolerance": 0.01,
+          "explanation": "El coeficiente de variación es la desviación típica (2.3570) dividida por el valor absoluto de la media (18.3333): $CV = \\frac{2.3570}{18.3333} = 0.1286$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcula el umbral de anomalías superiores definido como $\\bar{x} + 2.5 \\cdot s$.",
+          "correctValue": 24.2259,
+          "tolerance": 0.01,
+          "explanation": "Multiplicamos la desviación típica (2.3570) por 2.5 y se la sumamos a la media (18.3333): $U = \\bar{x} + 2.5 \\cdot s = 18.3333 + 2.5 \\cdot 2.3570 = 24.2259$."
         }
       ]
     }
@@ -306,27 +2058,35 @@
   "FORMULAS": [
     {
       "name": "Media Aritmética",
-      "tex": "\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i"
+      "tex": "$$\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i$$"
     },
     {
       "name": "Varianza Muestral",
-      "tex": "s^2 = \\frac{1}{n} \\sum_{i=1}^n (x_i - \\bar{x})^2"
+      "tex": "$$s^2 = \\frac{1}{n} \\sum_{i=1}^n (x_i - \\bar{x})^2$$"
+    },
+    {
+      "name": "Fórmula Simplificada de la Varianza",
+      "tex": "$$s^2 = \\left( \\frac{1}{n} \\sum_{i=1}^n x_i^2 \\right) - \\bar{x}^2$$"
     },
     {
       "name": "Cuasivarianza Muestral",
-      "tex": "s_{n-1}^2 = \\frac{1}{n-1} \\sum_{i=1}^n (x_i - \\bar{x})^2"
+      "tex": "$$s_{n-1}^2 = \\frac{1}{n-1} \\sum_{i=1}^n (x_i - \\bar{x})^2$$"
     },
     {
-      "name": "Desviación Estándar Muestral",
-      "tex": "s = \\sqrt{s^2}"
+      "name": "Desviación Típica Muestral",
+      "tex": "$$s = \\sqrt{s^2}$$"
     },
     {
       "name": "Coeficiente de Variación",
-      "tex": "CV = \\frac{s}{|\\bar{x}|}"
+      "tex": "$$CV = \\frac{s}{|\\bar{x}|}$$"
     },
     {
       "name": "Frecuencia Relativa",
-      "tex": "f_i = \\frac{n_i}{n}"
+      "tex": "$$f_i = \\frac{n_i}{n}$$"
+    },
+    {
+      "name": "Frecuencia Relativa Acumulada",
+      "tex": "$$F_i = \\frac{N_i}{n}$$"
     }
   ]
 }
