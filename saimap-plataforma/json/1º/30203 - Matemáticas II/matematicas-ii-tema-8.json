@@ -1,0 +1,2095 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Bajo qué condición general sobre la matriz de iteración $B$ converge un método iterativo de la forma $x^{(k+1)} = B x^{(k)} + c$ para cualquier vector inicial?",
+      "options": [
+        "El radio espectral de $B$ debe ser estrictamente menor que 1: $\\rho(B) < 1$.",
+        "La matriz $B$ debe ser simétrica y con traza menor que 1.",
+        "El determinante de $B$ debe ser estrictamente menor que 1."
+      ],
+      "correct": 0,
+      "hint": "Recuerda que la convergencia está ligada al comportamiento del error $e^{(k+1)} = B e^{(k)}$ a largo plazo.",
+      "explanation": "Un método iterativo lineal converge para cualquier vector inicial si y solo si el radio espectral de la matriz de iteración $\\rho(B)$ es menor que 1. Esto garantiza que $\\lim_{k \\to \\infty} B^k = 0$."
+    },
+    {
+      "q": "¿Cómo se define matemáticamente el radio espectral $\\rho(B)$ de una matriz cuadrada $B$?",
+      "options": [
+        "$\\rho(B) = \\max \\{|\\lambda_i| : \\lambda_i \\text{ es autovalor de } B\\}$",
+        "$\\rho(B) = \\sum_{i=1}^n |\\lambda_i|$",
+        "$\\rho(B) = \\min \\{|\\lambda_i| : \\lambda_i \\text{ es autovalor de } B\\}$"
+      ],
+      "correct": 0,
+      "hint": "El radio espectral mide la magnitud del autovalor dominante.",
+      "explanation": "El radio espectral $\\rho(B)$ es el máximo valor absoluto (o módulo) de los autovalores de la matriz $B$."
+    },
+    {
+      "q": "En la descomposición de la matriz de coeficientes $A = M - N$ para definir un método iterativo, ¿qué propiedad fundamental debe cumplir la matriz $M$?",
+      "options": [
+        "Debe ser fácilmente invertible para que el coste computacional de calcular $M^{-1}v$ sea bajo.",
+        "Debe ser la matriz transpuesta de $N$ para garantizar convergencia.",
+        "Debe tener todos sus autovalores iguales a cero."
+      ],
+      "correct": 0,
+      "hint": "En la recurrencia, multiplicamos por la inversa de $M$.",
+      "explanation": "La ecuación iterativa es $x^{(k+1)} = M^{-1}N x^{(k)} + M^{-1}b$. Por lo tanto, $M$ debe ser fácil de invertir (por ejemplo, diagonal o triangular) para que cada iteración sea eficiente."
+    },
+    {
+      "q": "En el método de Jacobi, ¿cómo se definen las matrices de descomposición $M$ y $N$ a partir de la matriz $A = D - L - U$?",
+      "options": [
+        "$M = D$ y $N = L + U$",
+        "$M = D - L$ y $N = U$",
+        "$M = D - U$ y $N = L$"
+      ],
+      "correct": 0,
+      "hint": "Jacobi solo utiliza los valores del paso anterior, por lo que no aprovecha información actual en diagonal ni en triángulos.",
+      "explanation": "En el método de Jacobi se escoge la parte diagonal $M = D$, de modo que $N = L + U$ (donde $-L$ y $-U$ son las partes triangulares inferior y superior estrictas)."
+    },
+    {
+      "q": "En el método de Gauss-Seidel, ¿cuál es la elección de las matrices $M$ y $N$ para la recurrencia $M x^{(k+1)} = N x^{(k)} + b$?",
+      "options": [
+        "$M = D - L$ y $N = U$",
+        "$M = D$ y $N = L + U$",
+        "$M = D - L - U$ y $N = I$"
+      ],
+      "correct": 0,
+      "hint": "Gauss-Seidel aprovecha las nuevas componentes de la iteración actual en la parte inferior de la matriz.",
+      "explanation": "En Gauss-Seidel, las componentes actualizadas se usan inmediatamente, lo que matricialmente corresponde a elegir $M = D - L$ (diagonal menos triangular inferior estricta) y $N = U$ (triangular superior estricta)."
+    },
+    {
+      "q": "Si una matriz $A$ es estrictamente diagonal dominante por filas, ¿qué se puede concluir con certeza sobre los métodos de Jacobi y Gauss-Seidel?",
+      "options": [
+        "Ambos métodos convergen de forma garantizada para cualquier vector inicial $x^{(0)}$.",
+        "Solo Gauss-Seidel converge, mientras que Jacobi puede divergir.",
+        "Los métodos convergen si y solo si el vector inicial es el vector nulo."
+      ],
+      "correct": 0,
+      "hint": "La dominancia diagonal es una condición suficiente muy potente para ambos métodos.",
+      "explanation": "La dominancia diagonal estricta por filas de la matriz $A$ es una condición suficiente que asegura que tanto el método de Jacobi como el de Gauss-Seidel convergen para cualquier aproximación inicial."
+    },
+    {
+      "q": "¿Qué condición sobre la diagonal principal es necesaria para poder aplicar los métodos de Jacobi o Gauss-Seidel sin reordenar filas?",
+      "options": [
+        "Todos los elementos de la diagonal principal $a_{ii}$ deben ser distintos de cero.",
+        "Todos los elementos de la diagonal principal deben ser positivos.",
+        "La traza de la matriz debe ser igual a cero."
+      ],
+      "correct": 0,
+      "hint": "Considera qué ocurre al dividir por los elementos de la diagonal principal en la formulación por componentes.",
+      "explanation": "En las fórmulas por componentes de ambos métodos se divide por $a_{ii}$. Si algún elemento de la diagonal es cero, el método no se puede aplicar directamente (daría una división por cero), por lo que se requiere reordenar filas."
+    },
+    {
+      "q": "Para matrices simétricas y definidas positivas, ¿qué método iterativo tiene asegurada la convergencia según el teorema de Ostrowski-Reich?",
+      "options": [
+        "El método de Gauss-Seidel (y en general SOR con $0 < \\omega < 2$).",
+        "El método de Jacobi de forma exclusiva.",
+        "Ningún método iterativo converge para este tipo de matrices."
+      ],
+      "correct": 0,
+      "hint": "El teorema de Ostrowski-Reich se refiere específicamente a métodos basados en relajación sobre matrices simétricas definidas positivas.",
+      "explanation": "El teorema de Ostrowski-Reich establece que para una matriz simétrica y definida positiva, el método SOR (y por tanto Gauss-Seidel, que corresponde a $\\omega = 1$) converge para cualquier vector inicial si y solo si $0 < \\omega < 2$."
+    },
+    {
+      "q": "Si la matriz de iteración $B$ tiene un radio espectral de $\\rho(B) = 0.99$, ¿cómo se describe cualitativamente la convergencia del método?",
+      "options": [
+        "El método converge a la solución, pero de forma extremadamente lenta.",
+        "El método diverge rápidamente porque el valor está cerca de 1.",
+        "El método converge instantáneamente en un par de iteraciones."
+      ],
+      "correct": 0,
+      "hint": "El error disminuye en cada paso multiplicándose aproximadamente por $\\rho(B)$.",
+      "explanation": "Dado que $\\rho(B) < 1$, el método converge. Sin embargo, como el radio espectral está muy cerca de 1, el factor de reducción del error en cada iteración es muy lento, lo que requiere muchas iteraciones."
+    },
+    {
+      "q": "¿Cuál es la expresión para la matriz de iteración de Jacobi $B_J$ en términos de la diagonal $D$ y la suma de las partes triangulares estrictas $L + U$?",
+      "options": [
+        "$B_J = D^{-1}(L + U)$",
+        "$B_J = (D - L)^{-1}U$",
+        "$B_J = D(L + U)^{-1}$"
+      ],
+      "correct": 0,
+      "hint": "La recurrencia de Jacobi es $x^{(k+1)} = D^{-1}(L+U)x^{(k)} + D^{-1}b$.",
+      "explanation": "La matriz de iteración de Jacobi es $B_J = D^{-1}(L + U)$, obtenida al despejar $x^{(k+1)}$ en $D x^{(k+1)} = (L + U)x^{(k)} + b$."
+    },
+    {
+      "q": "¿Cuál es la expresión matricial de la matriz de iteración de Gauss-Seidel $B_{GS}$?",
+      "options": [
+        "$B_{GS} = (D - L)^{-1}U$",
+        "$B_{GS} = D^{-1}(L + U)$",
+        "$B_{GS} = (D - U)^{-1}L$"
+      ],
+      "correct": 0,
+      "hint": "Recuerda que en Gauss-Seidel $M = D - L$ y $N = U$.",
+      "explanation": "La matriz de iteración de Gauss-Seidel es $B_{GS} = M^{-1}N = (D - L)^{-1}U$."
+    },
+    {
+      "q": "¿Qué relación se cumple entre el error en la iteración $k$, definido como $e^{(k)} = x^{(k)} - x^*$, y el de la iteración inicial $e^{(0)}$?",
+      "options": [
+        "$e^{(k)} = B^k e^{(0)}$",
+        "$e^{(k)} = B e^{(k-1)} + c$",
+        "$e^{(k)} = (B - I)^k e^{(0)}$"
+      ],
+      "correct": 0,
+      "hint": "Usa la relación recursiva del error $e^{(k)} = B e^{(k-1)}$.",
+      "explanation": "Como el error se propaga como $e^{(k)} = B e^{(k-1)}$, aplicando inducción obtenemos que el error en la iteración $k$ es exactamente $e^{(k)} = B^k e^{(0)}$."
+    },
+    {
+      "q": "El residuo de un sistema lineal en la etapa $k$ se define como $r^{(k)} = b - A x^{(k)}$. ¿Qué relación matemática vincula el residuo con el error real $e^{(k)} = x^{(k)} - x^*$?",
+      "options": [
+        "$r^{(k)} = -A e^{(k)}$",
+        "$r^{(k)} = B e^{(k)}$",
+        "$r^{(k)} = A^{-1} e^{(k)}$"
+      ],
+      "correct": 0,
+      "hint": "Sustituye $b = A x^*$ en la expresión del residuo.",
+      "explanation": "$r^{(k)} = b - A x^{(k)} = A x^* - A x^{(k)} = A (x^* - x^{(k)}) = -A e^{(k)}$."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de utilizar un criterio de parada basado en el incremento relativo $\\frac{\\|x^{(k+1)} - x^{(k)}\\|}{\\|x^{(k+1)}\\|} < \\text{tol}$ en vez del incremento absoluto?",
+      "options": [
+        "Es independiente de la escala de la solución y de los coeficientes del sistema.",
+        "No requiere el cálculo de normas vectoriales.",
+        "Permite omitir la comprobación del número máximo de iteraciones."
+      ],
+      "correct": 0,
+      "hint": "Piensa en qué ocurre si la solución exacta tiene componentes del orden de $10^6$ o de $10^{-6}$.",
+      "explanation": "El criterio relativo normaliza el incremento dividiéndolo por la magnitud del vector solución actual, haciendo que el criterio sea aplicable sin importar el rango de magnitud de la solución."
+    },
+    {
+      "q": "En matrices dispersas de gran tamaño, ¿por qué los métodos iterativos conservan la eficiencia de memoria a diferencia de la eliminación gaussiana?",
+      "options": [
+        "Porque no alteran la matriz original de coeficientes, evitando el fenómeno de llenado (fill-in).",
+        "Porque reducen el tamaño de la matriz en cada iteración.",
+        "Porque solo requieren almacenar una aproximación escalar de la solución."
+      ],
+      "correct": 0,
+      "hint": "En los métodos directos, las operaciones de fila introducen coeficientes no nulos en posiciones donde antes había ceros.",
+      "explanation": "Los métodos iterativos solo realizan multiplicaciones matriz-vector con la matriz original $A$ (o partes de ella). No modifican la matriz ni introducen nuevos elementos no nulos, preservando la dispersión."
+    },
+    {
+      "q": "En el contexto del método de las potencias para aproximar autovalores, ¿qué es un autovalor dominante?",
+      "options": [
+        "Un autovalor $\\lambda_1$ tal que $|\\lambda_1| > |\\lambda_i|$ para cualquier otro autovalor $\\lambda_i$.",
+        "El autovalor que tiene la mayor multiplicidad algebraica en el polinomio característico.",
+        "El autovalor real de mayor magnitud positiva, independientemente de los autovalores complejos."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con el módulo o valor absoluto de los autovalores.",
+      "explanation": "Un autovalor es dominante si su valor absoluto es estrictamente mayor que el valor absoluto de todos los demás autovalores de la matriz."
+    },
+    {
+      "q": "¿A qué velocidad converge la sucesión de aproximaciones en el método de las potencias?",
+      "options": [
+        "La convergencia es lineal y su tasa depende del cociente $|\\lambda_2 / \\lambda_1|$, donde $\\lambda_2$ es el segundo autovalor de mayor módulo.",
+        "La convergencia es siempre cuadrática, similar al método de Newton.",
+        "La convergencia es de tipo superlineal y depende únicamente de la traza de la matriz."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el ratio entre el término de error dominante y el autovalor dominante al elevar a la potencia $k$.",
+      "explanation": "El error en el método de las potencias disminuye proporcionalmente a $(|\\lambda_2 / \\lambda_1|)^k$, por lo que la convergencia es lineal con tasa $|\\lambda_2 / \\lambda_1|$."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos aplicar el método de las potencias a una matriz cuyos dos autovalores mayores en módulo son $\\lambda_1 = 5$ y $\\lambda_2 = -5$?",
+      "options": [
+        "El método no convergerá a un único vector, produciéndose oscilaciones debido a que no hay un único autovalor dominante.",
+        "Convergerá rápidamente al autovalor promedio, es decir, a 0.",
+        "Convergerá a 5 tras duplicar el número de iteraciones necesarias."
+      ],
+      "correct": 0,
+      "hint": "Los módulos de ambos autovalores son iguales ($|5| = |-5|$), por lo que ninguno domina estrictamente.",
+      "explanation": "Al tener el mismo valor absoluto, no existe un único autovalor dominante. Los términos asociados en la combinación lineal no decrecen uno con respecto a otro, lo que causa oscilaciones permanentes."
+    },
+    {
+      "q": "El cociente de Rayleigh para un vector no nulo $x$ y una matriz real simétrica $A$ se define como $R_A(x) = \\frac{x^T A x}{x^T x}$. Si $x$ es un autovector de $A$ asociado a $\\lambda$, ¿cuánto vale su cociente de Rayleigh?",
+      "options": [
+        "Exactly $\\lambda$",
+        "$\\lambda^2$",
+        "$\\sqrt{\\lambda}$"
+      ],
+      "correct": 0,
+      "hint": "Sustituye $A x = \\lambda x$ en la fórmula.",
+      "explanation": "$R_A(x) = \\frac{x^T (A x)}{x^T x} = \\frac{x^T (\\lambda x)}{x^T x} = \\lambda \\frac{x^T x}{x^T x} = \\lambda$."
+    },
+    {
+      "q": "¿Por qué es crucial el proceso de normalización del vector $y^{(k+1)} = A x^{(k)}$ en cada paso del método de las potencias?",
+      "options": [
+        "Para evitar el desbordamiento (overflow) o subdesbordamiento (underflow) de las componentes del vector debido a multiplicaciones sucesivas.",
+        "Para asegurar que el autovalor estimado coincida con la traza de la matriz.",
+        "Porque de lo contrario la matriz de iteración se volvería singular."
+      ],
+      "correct": 0,
+      "hint": "Si multiplicamos repetidamente por una matriz con autovalor dominante mayor que 1, las componentes crecen de forma geométrica.",
+      "explanation": "Si $|\\lambda_1| > 1$, la norma de $A^k x^{(0)}$ crece exponencialmente y desborda la memoria. Si $|\\lambda_1| < 1$, decae a cero. La normalización mantiene las componentes en un rango acotado."
+    },
+    {
+      "q": "En el método de Gauss-Seidel, ¿cuál es el orden correcto en el que se actualizan las componentes de la solución?",
+      "options": [
+        "Secuencialmente: para calcular $x_i^{(k+1)}$ se usan los valores ya calculados $x_1^{(k+1)}, \\dots, x_{i-1}^{(k+1)}$ y los previos $x_{i+1}^{(k)}, \\dots, x_n^{(k)}$.",
+        "Simultáneamente: todas las componentes se actualizan a la vez usando exclusivamente el vector completo de la iteración anterior $x^{(k)}$.",
+        "Aleatoriamente: se eligen las componentes mediante un generador de números pseudoaleatorios."
+      ],
+      "correct": 0,
+      "hint": "Recuerda que Gauss-Seidel retroalimenta de forma inmediata las componentes calculadas en la misma iteración.",
+      "explanation": "El algoritmo de Gauss-Seidel actualiza secuencialmente las incógnitas de $1$ a $n$, empleando de inmediato los nuevos valores de la iteración en curso en cuanto están disponibles."
+    },
+    {
+      "q": "Si representamos el sistema de ecuaciones como $A \\cdot x = b$ con $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 4 \\end{pmatrix}$, ¿se cumple la condición de diagonal dominante por filas?",
+      "options": [
+        "Sí, en ambas filas el elemento de la diagonal es mayor en valor absoluto que la suma de los restantes en esa fila.",
+        "No, porque en la segunda fila no se cumple.",
+        "No, porque la matriz no es simétrica."
+      ],
+      "correct": 0,
+      "hint": "Analiza las filas por separado: $|3| > |1|$ y $|4| > |2|$.",
+      "explanation": "Fila 1: $|a_{11}| = 3 > |a_{12}| = 1$. Fila 2: $|a_{22}| = 4 > |a_{21}| = 2$. Por tanto, es estrictamente diagonal dominante por filas."
+    },
+    {
+      "q": "¿Cuál es la relación matemática entre el método de relajación (SOR) y el método de Gauss-Seidel?",
+      "options": [
+        "El método de Gauss-Seidel es un caso particular de SOR cuando el parámetro de relajación es $\\omega = 1$.",
+        "El método de Jacobi es equivalente a SOR con $\\omega = 0.5$.",
+        "SOR solo se puede aplicar a matrices diagonales, mientras que Gauss-Seidel es general."
+      ],
+      "correct": 0,
+      "hint": "Considera la definición de SOR: $x^{(k+1)} = (1 - \\omega) x^{(k)} + \\omega x_{GS}^{(k+1)}$.",
+      "explanation": "SOR calcula una media ponderada entre el valor anterior y el valor que daría Gauss-Seidel. Si el parámetro de peso $\\omega$ es igual a 1, se obtiene exactamente el método de Gauss-Seidel."
+    },
+    {
+      "q": "En Matlab/Octave, ¿cuál es el significado del operador `\\` en la línea de código `x = D \\ (-LU * x_prev + b)` dentro del método de Jacobi?",
+      "options": [
+        "Resuelve eficientemente el sistema diagonal, lo cual equivale a multiplicar por $D^{-1}$ sin calcular explícitamente su inversa.",
+        "Representa una división elemento a elemento de los vectores y matrices.",
+        "Es un comentario de código que el intérprete de Matlab ignora."
+      ],
+      "correct": 0,
+      "hint": "El operador barra invertida `\\` es el resolutor de sistemas lineales en Matlab.",
+      "explanation": "En Matlab, `A \\ b` resuelve el sistema $Ax = b$. Cuando la matriz es diagonal (`D`), la resolución es inmediata y computacionalmente trivial, evitando la costosa y numéricamente inestable inversión explícita."
+    },
+    {
+      "q": "Si para un sistema lineal la matriz de iteración de Jacobi es $B_J = \\begin{pmatrix} 0 & 0.8 \\\\ 0.8 & 0 \\end{pmatrix}$, ¿cuál es su radio espectral $\\rho(B_J)$ y qué implica para la convergencia?",
+      "options": [
+        "$\\rho(B_J) = 0.8 < 1$, lo que garantiza que el método de Jacobi converge.",
+        "$\\rho(B_J) = 0.64 < 1$, lo que garantiza la convergencia.",
+        "$\\rho(B_J) = 1.6 > 1$, lo que implica que el método diverge."
+      ],
+      "correct": 0,
+      "hint": "Calcula los autovalores de la matriz $B_J$ resolviendo el polinomio característico $\\lambda^2 - 0.64 = 0$.",
+      "explanation": "Los autovalores de $B_J$ son $\\lambda = \\pm 0.8$. El radio espectral es el máximo absoluto, $\\rho(B_J) = 0.8$. Al ser menor que 1, la convergencia está garantizada."
+    },
+    {
+      "q": "¿Qué se puede afirmar sobre la convergencia del método de Jacobi para una matriz simétrica y definida positiva?",
+      "options": [
+        "No se garantiza la convergencia en general, ya que hay matrices simétricas y definidas positivas para las cuales Jacobi diverge.",
+        "Converge siempre con el doble de velocidad que Gauss-Seidel.",
+        "La convergencia está totalmente garantizada para cualquier vector inicial."
+      ],
+      "correct": 0,
+      "hint": "La definición positiva garantiza la convergencia de Gauss-Seidel, pero no es suficiente para Jacobi.",
+      "explanation": "Aunque una matriz sea simétrica y definida positiva, el método de Jacobi puede divergir. Un ejemplo clásico es una matriz donde los elementos fuera de la diagonal sean demasiado grandes."
+    },
+    {
+      "q": "Para una matriz tridiagonal y consistentemente ordenada, si el radio espectral de Jacobi es $\\rho(B_J) = 0.5$, ¿cuánto vale el radio espectral de Gauss-Seidel $\\rho(B_{GS})$?",
+      "options": [
+        "$\\rho(B_{GS}) = 0.25$",
+        "$\\rho(B_{GS}) = 0.5$",
+        "$\\rho(B_{GS}) = 0.7071$"
+      ],
+      "correct": 0,
+      "hint": "Utiliza la relación teórica $\\rho(B_{GS}) = (\\rho(B_J))^2$ para este tipo de matrices.",
+      "explanation": "Para matrices tridiagonales y consistentemente ordenadas, se cumple que $\\rho(B_{GS}) = (\\rho(B_J))^2$. Así, $\\rho(B_{GS}) = 0.5^2 = 0.25$."
+    },
+    {
+      "q": "Si un método iterativo lineal se detiene cuando la norma del residuo relativo es menor que $10^{-6}$, ¿qué mide directamente este criterio?",
+      "options": [
+        "La bondad del ajuste de la solución en la ecuación del sistema, ajustado según la escala del término independiente.",
+        "La cota exacta del error absoluto de las componentes de la solución aproximada.",
+        "La distancia euclídea al autovalor dominante de la matriz."
+      ],
+      "correct": 0,
+      "hint": "El residuo relativo es $\\|b - A x^{(k)}\\| / \\|b\\|.$",
+      "explanation": "El residuo relativo mide cuánto dista el vector $A x^{(k)}$ de $b$, escalado por la norma de $b$. Indica la precisión de la aproximación con respecto a las ecuaciones originales."
+    },
+    {
+      "q": "En el contexto de los métodos iterativos, ¿qué significa que la convergencia sea asintóticamente lineal con factor de convergencia $r$?",
+      "options": [
+        "Que a largo plazo, el error en el paso $k+1$ satisface $\\|e^{(k+1)}\\| \\approx r \\|e^{(k)}\\|$, con $0 < r < 1$.",
+        "Que el error se reduce a la mitad cada 2 iteraciones.",
+        "Que la gráfica del error es una línea recta con pendiente positiva."
+      ],
+      "correct": 0,
+      "hint": "La tasa lineal significa que el error disminuye por un factor constante en cada paso.",
+      "explanation": "La convergencia lineal implica que la razón del error entre dos iteraciones sucesivas tiende a una constante $r$ menor que 1. En este caso, $r = \\rho(B)$."
+    },
+    {
+      "q": "Si una matriz $A$ es estrictamente diagonal dominante por columnas (es decir, en cada columna el término diagonal es mayor en valor absoluto que la suma del resto de términos de la columna), ¿qué se sabe de la convergencia de Jacobi?",
+      "options": [
+        "El método de Jacobi converge de forma garantizada.",
+        "El método de Jacobi siempre diverge.",
+        "Jacobi converge si y solo si la matriz es tridiagonal."
+      ],
+      "correct": 0,
+      "hint": "La dominancia diagonal por columnas también es condición suficiente de convergencia para Jacobi.",
+      "explanation": "Aunque es menos habitual que la dominancia por filas, la dominancia diagonal estricta por columnas también es una condición suficiente que garantiza la convergencia de Jacobi."
+    },
+    {
+      "q": "Para el método de las potencias, si el autovalor dominante $\\lambda_1$ es simple y el vector inicial $x^{(0)}$ se expresa como combinación lineal de los autovectores, ¿qué coeficiente asociado a $v_1$ (autovector dominante) debe ser distinto de cero?",
+      "options": [
+        "El coeficiente $c_1$ correspondiente al autovector dominante $v_1$, de lo contrario el método podría converger a otro autovalor.",
+        "Todos los coeficientes de la combinación lineal deben ser exactamente iguales a cero.",
+        "El coeficiente correspondiente al menor autovalor."
+      ],
+      "correct": 0,
+      "hint": "Si no hay componente en la dirección del autovector dominante, la multiplicación no podrá amplificarla.",
+      "explanation": "Para que el método de las potencias converja al autovalor dominante $\\lambda_1$, el vector inicial $x^{(0)}$ debe tener una componente no nula en la dirección de su autovector asociado $v_1$, es decir, $c_1 \\neq 0$."
+    },
+    {
+      "q": "En el método de Gauss-Seidel, si la matriz original es de la forma $A = D - L - U$, ¿cómo se expresa analíticamente la componente $x_i^{(k+1)}$ en función de las demás?",
+      "options": [
+        "$x_i^{(k+1)} = \\frac{1}{a_{ii}} \\left( b_i - \\sum_{j < i} a_{ij} x_j^{(k+1)} - \\sum_{j > i} a_{ij} x_j^{(k)} \\right)$",
+        "$x_i^{(k+1)} = \\frac{1}{a_{ii}} \\left( b_i - \\sum_{j \\neq i} a_{ij} x_j^{(k)} \\right)$",
+        "$x_i^{(k+1)} = \\frac{1}{a_{ii}} \\left( b_i - \\sum_{j = 1}^n a_{ij} x_j^{(k+1)} \\right)$"
+      ],
+      "correct": 0,
+      "hint": "Recuerda que para $j < i$ se usan los valores del paso $(k+1)$ y para $j > i$ los del paso $(k)$.",
+      "explanation": "La fórmula de Gauss-Seidel utiliza los valores nuevos $x_j^{(k+1)}$ para $j < i$ ya que ya han sido calculados en la iteración actual, y los valores viejos $x_j^{(k)}$ para $j > i$."
+    },
+    {
+      "q": "¿Qué ocurre con el número de iteraciones necesarias para converger si incrementamos la exigencia de la tolerancia (por ejemplo, de $10^{-3}$ a $10^{-6}$)?",
+      "options": [
+        "El número de iteraciones aumenta linealmente respecto al logaritmo de la tolerancia.",
+        "El número de iteraciones se reduce a la mitad debido al aumento de precisión.",
+        "El método diverge inmediatamente al requerir demasiada precisión de máquina."
+      ],
+      "correct": 0,
+      "hint": "Piensa en la relación del error $e^{(k)} \\approx \\rho(B)^k e^{(0)}$ y despeja $k$.",
+      "explanation": "Dado que el error decae como $\\rho(B)^k$, para que el error sea menor que $\\epsilon$ requerimos $k \\approx \\frac{\\ln(\\epsilon)}{\\ln(\\rho(B))}$. Esto muestra una relación lineal con respecto a $\\ln(\\epsilon)$."
+    },
+    {
+      "q": "En el análisis de convergencia, ¿qué es la matriz de iteración de un método de relajación SOR con parámetro $\\omega$?",
+      "options": [
+        "$B_{\\omega} = (D - \\omega L)^{-1} [(1 - \\omega)D + \\omega U]$",
+        "$B_{\\omega} = D^{-1}(L + U) \\omega$",
+        "$B_{\\omega} = (D - L)^{-1} (\\omega U)$"
+      ],
+      "correct": 0,
+      "hint": "Despeja $x^{(k+1)}$ a partir de $(D - \\omega L)x^{(k+1)} = ((1-\\omega)D + \\omega U)x^{(k)} + \\omega b$.",
+      "explanation": "La matriz de iteración de SOR se obtiene reorganizando sus ecuaciones en forma matricial, resultando $B_{\\omega} = (D - \\omega L)^{-1} [(1 - \\omega)D + \\omega U]$."
+    },
+    {
+      "q": "Si un sistema lineal tiene como matriz de coeficientes a una matriz triangular superior, ¿cuál de los siguientes métodos iterativos convergerá en una sola iteración?",
+      "options": [
+        "Gauss-Seidel (si ordenamos de abajo hacia arriba o modificamos el recorrido de las componentes).",
+        "Jacobi, con cualquier vector inicial.",
+        "Ninguno de los dos, ya que ambos requieren siempre múltiples iteraciones."
+      ],
+      "correct": 0,
+      "hint": "Una matriz triangular superior permite resolver el sistema por sustitución hacia atrás en un paso ordenado.",
+      "explanation": "Para una matriz triangular superior, si se aplica Gauss-Seidel recorriendo las ecuaciones de abajo hacia arriba (o si la matriz fuera triangular inferior y barremos en el orden estándar), se obtiene la solución exacta en la primera iteración, pues todas las componentes necesarias ya están actualizadas."
+    },
+    {
+      "q": "Si calculamos $\\rho(B_{GS})$ y $\\rho(B_J)$ para una matriz estrictamente diagonal dominante, ¿qué propiedad general se cumple respecto al radio espectral?",
+      "options": [
+        "Ambos son estrictamente menores que 1.",
+        "El de Gauss-Seidel es siempre exactamente el doble del de Jacobi.",
+        "El de Jacobi es siempre mayor o igual a 1."
+      ],
+      "correct": 0,
+      "hint": "La dominancia diagonal es condición suficiente para asegurar la convergencia de ambos.",
+      "explanation": "La dominancia diagonal estricta asegura la convergencia de ambos métodos, por lo que tanto el radio espectral de Jacobi como el de Gauss-Seidel son estrictamente menores que 1."
+    },
+    {
+      "q": "¿Qué se entiende por 'método iterativo consistente'?",
+      "options": [
+        "Un método tal que si sustituimos la solución exacta $x^*$ en la ecuación iterativa, esta se cumple de forma exacta: $x^* = B x^* + c$.",
+        "Un método que da la solución exacta en exactamente $n$ pasos, donde $n$ es la dimensión del sistema.",
+        "Un método que converge para cualquier matriz de coeficientes sin importar sus autovalores."
+      ],
+      "correct": 0,
+      "hint": "La consistencia relaciona la solución exacta con la regla de iteración.",
+      "explanation": "Un método es consistente con el sistema original si la solución verdadera del sistema $x^*$ es un punto fijo de la iteración, de modo que $x^* = B x^* + c$."
+    },
+    {
+      "q": "Para aproximar el autovalor de menor módulo de una matriz invertible $A$, ¿qué variante del método de las potencias es la adecuada?",
+      "options": [
+        "El método de las potencias inversas, aplicando el método estándar a la matriz $A^{-1}$.",
+        "El método de las potencias con desplazamiento (shift).",
+        "Multiplicar repetidamente por la matriz transpuesta de $A$."
+      ],
+      "correct": 0,
+      "hint": "Los autovalores de $A^{-1}$ son los recíprocos de los de $A$, de forma que el menor de $A$ se convierte en el mayor de $A^{-1}$.",
+      "explanation": "Si los autovalores de $A$ son $\\lambda_i$, los de $A^{-1}$ son $1/\\lambda_i$. El autovalor de menor módulo de $A$ corresponde al de mayor módulo de $A^{-1}$, por lo que aplicando el método de las potencias a $A^{-1}$ se obtiene la aproximación requerida."
+    },
+    {
+      "q": "Si en el método de las potencias el cociente de Rayleigh se aproxima a $\\lambda_1$, ¿cómo se aproxima el autovector correspondiente?",
+      "options": [
+        "Mediante la sucesión de vectores normalizados $x^{(k)}$.",
+        "Mediante la norma del vector residuo $y^{(k)}$.",
+        "Mediante la suma acumulada de los vectores de iteración."
+      ],
+      "correct": 0,
+      "hint": "El vector $x^{(k)}$ se define en cada paso como la normalización del vector $y^{(k)}$.",
+      "explanation": "La sucesión de vectores normalizados $x^{(k)}$ converge hacia el autovector asociado al autovalor dominante, con una norma igual a 1 en el espacio correspondiente."
+    },
+    {
+      "q": "En el diseño de algoritmos de optimización o resolución de ecuaciones, ¿qué papel juega el condicionamiento de la matriz de coeficientes en los métodos iterativos?",
+      "options": [
+        "Matrices mal condicionadas suelen dar lugar a matrices de iteración con radios espectrales muy cercanos a 1, ralentizando la convergencia.",
+        "Si la matriz está mal condicionada, el radio espectral siempre es estrictamente menor que 0.1, acelerando el proceso.",
+        "No influye en absoluto, ya que el número de condición de una matriz solo afecta a los métodos directos."
+      ],
+      "correct": 0,
+      "hint": "El condicionamiento refleja la sensibilidad del sistema lineal.",
+      "explanation": "Los sistemas mal condicionados son inherentemente difíciles de resolver de manera precisa. En los métodos iterativos, esto suele manifestarse en matrices de iteración con radios espectrales próximos a 1 y una velocidad de convergencia muy lenta."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En los métodos iterativos lineales, la ecuación de recurrencia general viene dada por $x^{(k+1)} = ____ \\cdot x^{(k)} + c$, donde la matriz de la derecha es la de iteración.",
+      "options": [
+        "$B$",
+        "$A$",
+        "$D$"
+      ],
+      "correct": 0,
+      "hint": "Es la matriz que multiplica al vector del estado anterior.",
+      "explanation": "La ecuación general de un método iterativo es $x^{(k+1)} = B x^{(k)} + c$, donde $B$ es la matriz de iteración."
+    },
+    {
+      "q": "En la descomposición de la matriz de coeficientes para el método de Jacobi, se toma la parte no diagonal con signo cambiado como la matriz $N = ____$.",
+      "options": [
+        "$L + U$",
+        "$D - L$",
+        "$D - U$"
+      ],
+      "correct": 0,
+      "hint": "Jacobi descompone $A = D - L - U$ con $M = D$.",
+      "explanation": "Como $A = M - N$ y en Jacobi $M = D$, entonces $N = M - A = D - (D - L - U) = L + U$."
+    },
+    {
+      "q": "Si la matriz de iteración $B$ cumple que $\\rho(B) = ____$, entonces se garantiza que el método iterativo divergerá para algún vector inicial.",
+      "options": [
+        "$1.25$",
+        "$0.75$",
+        "$0.12$"
+      ],
+      "correct": 0,
+      "hint": "Busca un radio espectral mayor o igual a 1.",
+      "explanation": "Un método iterativo lineal diverge si el radio espectral de su matriz de iteración es mayor o igual a 1. De las opciones, solo 1.25 es mayor que 1."
+    },
+    {
+      "q": "Un método iterativo converge para cualquier vector inicial si y solo si el ____ espectral de la matriz de iteración es estrictamente menor que 1.",
+      "options": [
+        "radio",
+        "diámetro",
+        "trazo"
+      ],
+      "correct": 0,
+      "hint": "Se refiere al autovalor máximo en módulo.",
+      "explanation": "La propiedad matemática clave para la convergencia es que el radio espectral $\\rho(B) < 1$."
+    },
+    {
+      "q": "El método de Gauss-Seidel utiliza los valores ya calculados de la iteración actual, lo que formalmente equivale a tomar la matriz del sistema como $M = ____$.",
+      "options": [
+        "$D - L$",
+        "$D$",
+        "$D + U$"
+      ],
+      "correct": 0,
+      "hint": "En la descomposición $A = M - N$, la matriz $M$ contiene la diagonal y la parte inferior.",
+      "explanation": "Para Gauss-Seidel, $M$ incluye la diagonal y la parte triangular inferior estricta con signo cambiado: $M = D - L$."
+    },
+    {
+      "q": "Una matriz $A$ es estrictamente diagonal dominante por filas si se cumple que $|a_{ii}| > ____$ para cada fila $i$.",
+      "options": [
+        "$\\sum_{j \\ne i} |a_{ij}|$",
+        "$\\sum_{j} |a_{ij}|$",
+        "$\\max_{j} |a_{ij}|$"
+      ],
+      "correct": 0,
+      "hint": "Es la suma de los valores absolutos de los elementos de la fila fuera de la diagonal.",
+      "explanation": "La definición de dominancia diagonal estricta por filas exige que el módulo del elemento diagonal sea estrictamente mayor que la suma de los módulos de los elementos restantes de la misma fila."
+    },
+    {
+      "q": "Si la matriz $A$ del sistema lineal es simétrica y ____, se garantiza matemáticamente la convergencia del método de Gauss-Seidel.",
+      "options": [
+        "definida positiva",
+        "definida negativa",
+        "singular"
+      ],
+      "correct": 0,
+      "hint": "Es la propiedad típica de las matrices de covarianza o de rigidez en física.",
+      "explanation": "Si la matriz $A$ es simétrica y definida positiva, el método de Gauss-Seidel siempre converge, independientemente del vector inicial."
+    },
+    {
+      "q": "En el método de las potencias para aproximar autovalores, el vector obtenido tras multiplicar por la matriz se normaliza usando su ____.",
+      "options": [
+        "norma",
+        "traza",
+        "determinante"
+      ],
+      "correct": 0,
+      "hint": "Se divide cada componente del vector por la longitud del vector.",
+      "explanation": "El proceso de normalización consiste en dividir el vector obtenido por su norma (usualmente la norma 2 o infinito) para mantener su longitud acotada."
+    },
+    {
+      "q": "El método de las potencias permite aproximar el autovalor ____ en valor absoluto de una matriz.",
+      "options": [
+        "dominante",
+        "mínimo",
+        "nulo"
+      ],
+      "correct": 0,
+      "hint": "Es el autovalor con el mayor módulo.",
+      "explanation": "El método estándar de las potencias aproxima el autovalor de mayor valor absoluto, denominado autovalor dominante."
+    },
+    {
+      "q": "El cociente de ____ se define como $\\frac{x^T A x}{x^T x}$ y sirve para estimar el autovalor asociado a un autovector aproximado $x$.",
+      "options": [
+        "Rayleigh",
+        "Jacobi",
+        "Frobenius"
+      ],
+      "correct": 0,
+      "hint": "Lleva el nombre de un físico británico galardonado con el Premio Nobel.",
+      "explanation": "El cociente de Rayleigh $\\frac{x^T A x}{x^T x}$ proporciona una excelente aproximación al autovalor cuando $x$ es una aproximación de un autovector."
+    },
+    {
+      "q": "En el método de Jacobi, para calcular la aproximación $x_i^{(k+1)}$, dividimos la expresión acumulada por el coeficiente diagonal ____.",
+      "options": [
+        "$a_{ii}$",
+        "$a_{ij}$",
+        "$a_{11}$"
+      ],
+      "correct": 0,
+      "hint": "Es el elemento de la fila $i$ y columna $i$.",
+      "explanation": "La fórmula de Jacobi es $x_i^{(k+1)} = \\frac{1}{a_{ii}}(b_i - \\sum_{j \\neq i} a_{ij} x_j^{(k)})$, de forma que se divide por el coeficiente diagonal $a_{ii}$."
+    },
+    {
+      "q": "Para una matriz de iteración con autovalores $\\lambda_1 = 0.5$ y $\\lambda_2 = -0.7$, el radio espectral de la matriz es ____.",
+      "options": [
+        "$0.7$",
+        "$0.5$",
+        "$1.2$"
+      ],
+      "correct": 0,
+      "hint": "El radio espectral es el máximo de los valores absolutos de los autovalores.",
+      "explanation": "El radio espectral es $\\max(\\{|0.5|, |-0.7|\\}) = \\max(\\{0.5, 0.7\\}) = 0.7$."
+    },
+    {
+      "q": "Si el error de la iteración $k$ es $e^{(k)}$, la relación $e^{(k+1)} = ____ e^{(k)}$ modela la reducción del error en cada iteración.",
+      "options": [
+        "$B$",
+        "$A$",
+        "$M$"
+      ],
+      "correct": 0,
+      "hint": "Es la matriz de iteración del método.",
+      "explanation": "La propagación del error está determinada por la matriz de iteración $B$, satisfaciendo $e^{(k+1)} = B e^{(k)}$."
+    },
+    {
+      "q": "En Matlab/Octave, para extraer la diagonal de una matriz $A$ y obtener una matriz diagonal con esos elementos, se utiliza el comando ____.",
+      "options": [
+        "`diag(diag(A))`",
+        "`diagonal(A)`",
+        "`diag(A)`"
+      ],
+      "correct": 0,
+      "hint": "`diag(A)` devuelve un vector columna con la diagonal. Aplicarlo de nuevo crea la matriz diagonal.",
+      "explanation": "En Matlab, `diag(A)` devuelve la diagonal como vector. Al anidar `diag(diag(A))`, se genera una matriz diagonal que contiene dichos elementos en la diagonal y ceros fuera de ella."
+    },
+    {
+      "q": "El criterio de parada $\\|x^{(k+1)} - x^{(k)}\\| < \\text{tol}$ se denomina criterio basado en el ____ sucesivo.",
+      "options": [
+        "incremento",
+        "residuo",
+        "cociente"
+      ],
+      "correct": 0,
+      "hint": "Mide la diferencia entre dos aproximaciones sucesivas.",
+      "explanation": "Este criterio de parada se fundamenta en controlar el incremento o diferencia entre iteraciones consecutivas."
+    },
+    {
+      "q": "Si realizamos el método de Gauss-Seidel, la descomposición matricial es $A = M - N$ con la matriz $N = ____$.",
+      "options": [
+        "$U$",
+        "$L + U$",
+        "$D$"
+      ],
+      "correct": 0,
+      "hint": "Gauss-Seidel define $M = D - L$. Despeja $N$ de $A = M - N$.",
+      "explanation": "Dado que $A = D - L - U$ y $M = D - L$, entonces $N = M - A = (D - L) - (D - L - U) = U$."
+    },
+    {
+      "q": "El método de las potencias converge con una tasa lineal que depende directamente de la relación de módulos entre el autovalor dominante y el ____.",
+      "options": [
+        "segundo autovalor de mayor módulo",
+        "autovalor de menor módulo",
+        "determinante de la matriz"
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con el autovalor $\\lambda_2$ en la ordenación $|\\lambda_1| > |\\lambda_2| \\ge \\dots$.",
+      "explanation": "La tasa de convergencia del método de las potencias es proporcional a $|\\lambda_2 / \\lambda_1|^k$, donde $\\lambda_2$ es el segundo autovalor más grande en valor absoluto."
+    },
+    {
+      "q": "En informática, el almacenamiento de matrices dispersas evita registrar los elementos ____ para ahorrar memoria y tiempo de cómputo.",
+      "options": [
+        "nulos",
+        "positivos",
+        "diagonales"
+      ],
+      "correct": 0,
+      "hint": "Son los elementos con valor igual a cero.",
+      "explanation": "Las matrices dispersas tienen la gran mayoría de sus entradas iguales a cero. Al omitir el almacenamiento de los elementos nulos, se reduce drásticamente el espacio de memoria."
+    },
+    {
+      "q": "Cuando el radio espectral $\\rho(B)$ es muy cercano a ____, el método iterativo requiere un número extremadamente alto de iteraciones.",
+      "options": [
+        "$1$",
+        "$0$",
+        "infinito"
+      ],
+      "correct": 0,
+      "hint": "Es la frontera entre la convergencia y la divergencia.",
+      "explanation": "Si $\\rho(B) \\approx 1$, el factor de reducción del error en cada iteración es muy pequeño, por lo que la velocidad de convergencia decae y se aproxima a la divergencia."
+    },
+    {
+      "q": "La iteración de Gauss-Seidel en componentes utiliza la fórmula: $x_i^{(k+1)} = \\frac{1}{a_{ii}} ( b_i - \\sum_{j < i} a_{ij} x_j^{(k+1)} - \\sum_{j > i} a_{ij} ____ )$.",
+      "options": [
+        "$x_j^{(k)}$",
+        "$x_j^{(k+1)}$",
+        "$x_i^{(k)}$"
+      ],
+      "correct": 0,
+      "hint": "Para los índices $j$ mayores que $i$, aún no hemos calculado la nueva iteración.",
+      "explanation": "En el sumatorio para $j > i$ se emplean los valores de la iteración anterior $x_j^{(k)}$, puesto que aún no han sido actualizados en la iteración actual."
+    },
+    {
+      "q": "¿Qué factores determinan la velocidad de convergencia de un método iterativo lineal de la forma $x^{(k+1)} = B x^{(k)} + c$?",
+      "options": [
+        "El radio espectral de la matriz de iteración $B$.",
+        "El comportamiento de las potencias $B^k$ a medida que $k$ aumenta.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos aspectos matemáticos están intrínsecamente relacionados.",
+      "explanation": "La velocidad de convergencia está regida por el radio espectral $\\rho(B)$, el cual a su vez define la tasa de decrecimiento de las potencias $B^k$ de la matriz de iteración."
+    },
+    {
+      "q": "Para resolver un sistema lineal $A \\cdot x = b$ mediante un método iterativo clásico, ¿qué matrices se definen de forma directa a partir de la matriz de coeficientes $A$?",
+      "options": [
+        "La matriz diagonal $D$.",
+        "Las matrices triangulares estrictas $-L$ (inferior) y $-U$ (superior).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se descompone $A$ como $D - L - U$.",
+      "explanation": "Para la formulación de Jacobi y Gauss-Seidel, la matriz $A$ se descompone en su parte diagonal $D$, triangular inferior estricta $-L$ y triangular superior estricta $-U$."
+    },
+    {
+      "q": "¿Cuáles son las condiciones suficientes que garantizan que el método de Jacobi converge para un sistema $A \\cdot x = b$?",
+      "options": [
+        "La matriz de coeficientes $A$ es estrictamente diagonal dominante por filas.",
+        "La matriz de coeficientes $A$ es estrictamente diagonal dominante por columnas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquiera de las dos formas de dominancia diagonal estricta asegura la convergencia de Jacobi.",
+      "explanation": "Tanto la dominancia diagonal estricta por filas como por columnas son condiciones suficientes de convergencia para el método de Jacobi."
+    },
+    {
+      "q": "¿Cuáles de las siguientes normas vectoriales se emplean habitualmente en los criterios de parada de algoritmos iterativos?",
+      "options": [
+        "La norma infinito (máximo absoluto de los componentes).",
+        "La norma euclídea o norma 2.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier norma matemática en $\\mathbb{R}^n$ sirve para acotar el error.",
+      "explanation": "Debido a la equivalencia de normas en espacios de dimensión finita, se puede emplear la norma infinito (de cálculo muy rápido) o la norma 2."
+    },
+    {
+      "q": "¿Qué beneficios ofrece almacenar y computar sistemas con matrices dispersas (sparse) en ingeniería informática?",
+      "options": [
+        "Ahorro masivo en el consumo de memoria RAM al no guardar los elementos nulos.",
+        "Aceleración computacional al evitar realizar operaciones algebraicas con ceros.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La dispersión permite optimizar tanto espacio como tiempo de proceso.",
+      "explanation": "El uso de estructuras dispersas optimiza drásticamente el uso de memoria y elimina multiplicaciones innecesarias por cero, permitiendo resolver sistemas gigantes."
+    },
+    {
+      "q": "¿En qué aplicaciones informáticas reales se utilizan de manera extensiva los métodos iterativos para resolver sistemas gigantes?",
+      "options": [
+        "En el algoritmo de búsqueda y ordenación web PageRank de Google.",
+        "En simulación física y procesamiento de imágenes médicas (tomografía).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piensa en sistemas con millones o miles de millones de incógnitas dispersas.",
+      "explanation": "Tanto PageRank (matriz de adyacencia de la Web) como el análisis por elementos finitos en física médica plantean sistemas lineales de gran dimensión idóneos para métodos iterativos."
+    },
+    {
+      "q": "¿Qué información se obtiene al aplicar de forma exitosa el método de las potencias a una matriz real y simétrica?",
+      "options": [
+        "El valor numérico del autovalor dominante de la matriz.",
+        "Una buena aproximación del autovector asociado al autovalor dominante.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El algoritmo produce una aproximación tanto del autovalor como del autovector correspondiente.",
+      "explanation": "A medida que progresa el método de las potencias, la aproximación del vector $x^{(k)}$ converge al autovector, y el cociente de Rayleigh aproxima el autovalor dominante."
+    },
+    {
+      "q": "¿Qué dificultades prácticas pueden presentarse al resolver un sistema lineal mediante un método iterativo?",
+      "options": [
+        "Una velocidad de convergencia muy lenta si el radio espectral es muy cercano a 1.",
+        "La necesidad de reordenar las filas si se detecta un cero en la diagonal principal.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos aspectos son obstáculos típicos al programar estos métodos.",
+      "explanation": "Una diagonal con ceros impide la ejecución directa de Jacobi o Gauss-Seidel, y un radio espectral cercano a 1 ralentiza enormemente el algoritmo."
+    },
+    {
+      "q": "En el código Matlab/Octave de un método iterativo, ¿qué variables de control deben especificarse para garantizar que el bucle no sea infinito?",
+      "options": [
+        "La tolerancia de precisión para detenerse cuando el cambio sea pequeño.",
+        "El número máximo de iteraciones permitidas (`max_iter`).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son los parámetros clásicos de control en algoritmos de aproximación numérica.",
+      "explanation": "Para evitar bucles infinitos en caso de divergencia o convergencia muy lenta, se define un límite de iteraciones junto a la tolerancia de error."
+    },
+    {
+      "q": "¿Qué propiedades tienen los autovalores de una matriz simétrica y definida positiva?",
+      "options": [
+        "Todos sus autovalores son números reales.",
+        "Todos sus autovalores son estrictamente mayores que cero.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es la definición matemática y espectral clásica de estas matrices.",
+      "explanation": "Una matriz simétrica tiene autovalores reales, y al ser definida positiva, todos ellos son estrictamente positivos."
+    },
+    {
+      "q": "Si una matriz de iteración $B$ tiene un radio espectral de $\\rho(B) = 1.05$, ¿cuál de los siguientes vectores de partida garantiza la convergencia a la solución exacta?",
+      "options": [
+        "El vector inicial nulo $x^{(0)} = [0, 0, 0]^T$ únicamente.",
+        "El vector de componentes muy pequeñas $x^{(0)} = [10^{-6}, 10^{-6}, 10^{-6}]^T$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Si el radio espectral es mayor que 1, el método diverge para casi cualquier vector inicial debido a la amplificación del error.",
+      "explanation": "Dado que $\\rho(B) > 1$, la norma del error crece indefinidamente en las direcciones de los autovectores con autovalor mayor que 1, imposibilitando la convergencia general."
+    },
+    {
+      "q": "Si realizamos una iteración del método de Jacobi en un sistema de ecuaciones y obtenemos que la norma del residuo es exactamente cero, ¿qué conclusión es correcta?",
+      "options": [
+        "Significa que el método de Jacobi ha divergido completamente.",
+        "Significa que la matriz de coeficientes del sistema es singular.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El residuo es $b - A x^{(k)}$. Si es cero, la aproximación es la solución exacta.",
+      "explanation": "Un residuo nulo indica que hemos encontrado la solución exacta del sistema, por lo que el método ha convergido con precisión absoluta, no que haya divergido o sea singular."
+    },
+    {
+      "q": "¿Cuál es el radio espectral de la matriz identidad de tamaño $3 \\times 3$?",
+      "options": [
+        "$0$",
+        "$3$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los autovalores de la identidad son todos iguales a 1.",
+      "explanation": "Los autovalores de la matriz identidad son todos 1. Por lo tanto, el radio espectral es $\\max(\\{|1|\\}) = 1$. Ninguna de las opciones dadas (0 o 3) es correcta."
+    },
+    {
+      "q": "Si una matriz de iteración $B$ de tamaño $2 \\times 2$ tiene autovalores $\\lambda_1 = -0.5$ y $\\lambda_2 = -0.8$, ¿cuál es su radio espectral?",
+      "options": [
+        "$-0.8$",
+        "$0.5$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El radio espectral se define usando valores absolutos.",
+      "explanation": "El radio espectral es el máximo módulo, es decir, $\\max(\\{|-0.5|, |-0.8|\\}) = \\max(\\{0.5, 0.8\\}) = 0.8$. Ninguna de las opciones ($-0.8$ o $0.5$) es correcta."
+    },
+    {
+      "q": "¿Qué método directo tiene un coste computacional de $\\mathcal{O}(n)$ operaciones aritméticas para cualquier matriz general de coeficientes de tamaño $n \\times n$?",
+      "options": [
+        "La eliminación de Gauss.",
+        "La factorización LU.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los métodos directos sobre matrices densas generales tienen un coste cúbico.",
+      "explanation": "Los métodos directos como la eliminación gaussiana o LU tienen una complejidad de $\\mathcal{O}(n^3)$ operaciones en matrices densas generales, no lineal $\\mathcal{O}(n)$."
+    },
+    {
+      "q": "Para aplicar el método de las potencias estándar a una matriz $A$, ¿cuál debe ser su autovalor dominante?",
+      "options": [
+        "Debe ser exactamente igual a 0.",
+        "Debe ser complejo conjugado puro y con parte real negativa.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El autovalor dominante debe ser simple y estrictamente mayor en módulo que los demás.",
+      "explanation": "El autovalor dominante debe ser no nulo y su módulo estrictamente mayor que el de los demás para que el método converja, por lo que las opciones 0 y complejo conjugado puro no son correctas."
+    },
+    {
+      "q": "¿Qué valor del parámetro de relajación $\\omega$ en el método SOR corresponde al método de Jacobi tradicional?",
+      "options": [
+        "$\\omega = 1$",
+        "$\\omega = 0.5$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "SOR es una aceleración de Gauss-Seidel, no de Jacobi.",
+      "explanation": "El método SOR con $\\omega = 1$ coincide con Gauss-Seidel. No hay ningún valor de $\\omega$ en SOR que equivalga a Jacobi, ya que SOR se basa en la estructura triangular inferior."
+    },
+    {
+      "q": "En el método de Jacobi, ¿cómo se calcula la nueva aproximación de la solución si la matriz diagonal $D$ tiene un cero en su diagonal principal?",
+      "options": [
+        "Utilizando la pseudoinversa de Moore-Penrose de la matriz diagonal en lugar de su inversa ordinaria.",
+        "Asignando cero a todas las componentes de la iteración de forma automática.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "No se puede aplicar Jacobi directamente con un cero en la diagonal principal.",
+      "explanation": "Si hay un cero en la diagonal principal, el método de Jacobi no se puede definir debido a la división por cero. La solución pasa por reordenar las filas del sistema original para asegurar elementos diagonales no nulos."
+    },
+    {
+      "q": "Si para una matriz de coeficientes general, el radio espectral de Gauss-Seidel es $\\rho(B_{GS}) = 0.49$, ¿cuánto vale exactamente el radio espectral de Jacobi $\\rho(B_J)$?",
+      "options": [
+        "$\\rho(B_J) = 0.245$",
+        "$\\rho(B_J) = 0.7$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Solo existe una relación simple si la matriz es tridiagonal y consistentemente ordenada.",
+      "explanation": "Para matrices generales no existe una relación unívoca entre $\\rho(B_J)$ y $\\rho(B_{GS})$. La fórmula $\\rho(B_{GS}) = \\rho(B_J)^2$ solo es válida en matrices tridiagonales y consistentemente ordenadas."
+    },
+    {
+      "q": "¿Cuál es el comando en Matlab/Octave para calcular directamente todos los autovalores analíticos exactos de una matriz dispersa sin aproximar?",
+      "options": [
+        "`norm(A)`",
+        "`cond(A)`",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los autovalores se calculan analíticamente mediante raíces del polinomio característico.",
+      "explanation": "El comando para calcular autovalores es `eig(A)`. Ni `norm` (norma) ni `cond` (número de condición) sirven para calcular autovalores, por lo que ninguna es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Iteración de Jacobi en sistema 2x2",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 5x + y = 6 \\\\ x + 4y = 5 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0$ e $y^{(0)} = 0$ aplicando el método de Jacobi.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcula el valor aproximado de la primera componente $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.2,
+          "tolerance": 0.001,
+          "explanation": "La ecuación de Jacobi para la primera incógnita es $x^{(k+1)} = \\frac{6 - y^{(k)}}{5}$. Con $y^{(0)} = 0$, obtenemos $x^{(1)} = \\frac{6 - 0}{5} = 1.2$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcula el valor aproximado de la segunda componente $y^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "La ecuación de Jacobi para la segunda incógnita es $y^{(k+1)} = \\frac{5 - x^{(k)}}{4}$. Con $x^{(0)} = 0$, obtenemos $y^{(1)} = \\frac{5 - 0}{4} = 1.25$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Utilizando los valores anteriores, calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.95,
+          "tolerance": 0.001,
+          "explanation": "Con $y^{(1)} = 1.25$, calculamos $x^{(2)} = \\frac{6 - 1.25}{5} = \\frac{4.75}{5} = 0.95$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.95,
+          "tolerance": 0.001,
+          "explanation": "Con $x^{(1)} = 1.2$, calculamos $y^{(2)} = \\frac{5 - 1.2}{4} = \\frac{3.8}{4} = 0.95$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Iteración de Gauss-Seidel en sistema 2x2",
+      "context": "Dado el mismo sistema lineal:\\n$$\\begin{cases} 5x + y = 6 \\\\ x + 4y = 5 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0$ e $y^{(0)} = 0$ aplicando el método de Gauss-Seidel.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcula la componente $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.2,
+          "tolerance": 0.001,
+          "explanation": "Para la primera componente, la fórmula es igual que en Jacobi: $x^{(1)} = \\frac{6 - y^{(0)}}{5} = 1.2$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcula la componente $y^{(1)}$ tras la primera iteración (usando el nuevo $x^{(1)}$).",
+          "correctValue": 0.95,
+          "tolerance": 0.001,
+          "explanation": "En Gauss-Seidel usamos $x^{(1)} = 1.2$ inmediatamente: $y^{(1)} = \\frac{5 - x^{(1)}}{4} = \\frac{5 - 1.2}{4} = 0.95$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 1.01,
+          "tolerance": 0.001,
+          "explanation": "Usando el valor actualizado $y^{(1)} = 0.95$, calculamos $x^{(2)} = \\frac{6 - y^{(1)}}{5} = \\frac{6 - 0.95}{5} = 1.01$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.9975,
+          "tolerance": 0.0001,
+          "explanation": "Usando el valor actualizado $x^{(2)} = 1.01$, calculamos $y^{(2)} = \\frac{5 - x^{(2)}}{4} = \\frac{5 - 1.01}{4} = 0.9975$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Matriz de iteración de Jacobi y radio espectral",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 5x + y = 6 \\\\ x + 4y = 5 \\end{cases}$$\\nanalizamos la matriz de iteración de Jacobi $B_J$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "La matriz de iteración de Jacobi es $B_J = D^{-1}(L+U)$. Calcula el valor absoluto del determinante de $B_J$.",
+          "correctValue": 0.05,
+          "tolerance": 0.0001,
+          "explanation": "La matriz es $B_J = \\begin{pmatrix} 0 & -0.2 \\\\ -0.25 & 0 \\end{pmatrix}$. Su determinante es $0 - (-0.2 \\cdot -0.25) = -0.05$. El valor absoluto es $0.05$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcula el radio espectral $\\rho(B_J)$ de la matriz de iteración.",
+          "correctValue": 0.223607,
+          "tolerance": 0.001,
+          "explanation": "Los autovalores se obtienen de $\\det(\\lambda I - B_J) = \\lambda^2 - 0.05 = 0 \\implies \\lambda = \\pm \\sqrt{0.05} \\approx \\pm 0.2236$. El radio espectral es $\\rho(B_J) = \\sqrt{0.05} \\approx 0.2236$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcula el cociente de convergencia asintótica del método de Jacobi, definido como $R(B_J) = -\\ln(\\rho(B_J))$.",
+          "correctValue": 1.497866,
+          "tolerance": 0.001,
+          "explanation": "$R(B_J) = -\\ln(0.223607) \\approx 1.4979$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcula la norma infinito de la matriz de iteración de Jacobi $\\|B_J\\|_\\infty$.",
+          "correctValue": 0.25,
+          "tolerance": 0.001,
+          "explanation": "La norma infinito es el máximo de las sumas en valor absoluto de las filas. Fila 1: $|-0.2| = 0.2$. Fila 2: $|-0.25| = 0.25$. El máximo es $0.25$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Matriz de iteración de Gauss-Seidel y velocidad",
+      "context": "Dado el mismo sistema lineal:\\n$$\\begin{cases} 5x + y = 6 \\\\ x + 4y = 5 \\end{cases}$$\\nanalizamos la matriz de iteración de Gauss-Seidel $B_{GS}$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula el determinante de la matriz de iteración de Gauss-Seidel $B_{GS}$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0001,
+          "explanation": "La matriz de iteración es $B_{GS} = \\begin{pmatrix} 0 & -0.2 \\\\ 0 & 0.05 \\end{pmatrix}$. Dado que la primera columna es completamente nula, el determinante es 0."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Determina el autovalor no nulo de $B_{GS}$.",
+          "correctValue": 0.05,
+          "tolerance": 0.0001,
+          "explanation": "Los autovalores son las raíces de $\\det(\\lambda I - B_{GS}) = \\lambda(\\lambda - 0.05) = 0 \\implies \\lambda = 0$ y $\\lambda = 0.05$. El autovalor no nulo es $0.05$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcula el radio espectral $\\rho(B_{GS})$.",
+          "correctValue": 0.05,
+          "tolerance": 0.0001,
+          "explanation": "El radio espectral es el máximo módulo de los autovalores, es decir, $\\rho(B_{GS}) = 0.05$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcula la velocidad asintótica de convergencia $R(B_{GS}) = -\\ln(\\rho(B_{GS}))$.",
+          "correctValue": 2.995732,
+          "tolerance": 0.001,
+          "explanation": "$R(B_{GS}) = -\\ln(0.05) \\approx 2.9957$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Iteración de Jacobi en sistema 3x3",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 10x - y + z = 10 \\\\ x + 5y - z = 5 \\\\ -x + y + 8z = 8 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0, y^{(0)} = 1, z^{(0)} = -1$ aplicando el método de Jacobi.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula el valor de la primera componente $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.2,
+          "tolerance": 0.001,
+          "explanation": "La ecuación para la primera incógnita es $x^{(k+1)} = \\frac{10 + y^{(k)} - z^{(k)}}{10}$. Con $y^{(0)} = 1$ y $z^{(0)} = -1$, calculamos $x^{(1)} = \\frac{10 + 1 - (-1)}{10} = 1.2$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcula el valor de la segunda componente $y^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.8,
+          "tolerance": 0.001,
+          "explanation": "La ecuación para la segunda incógnita es $y^{(k+1)} = \\frac{5 - x^{(k)} + z^{(k)}}{5}$. Con $x^{(0)} = 0$ y $z^{(0)} = -1$, calculamos $y^{(1)} = \\frac{5 - 0 + (-1)}{5} = 0.8$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcula el valor de la tercera componente $z^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.875,
+          "tolerance": 0.001,
+          "explanation": "La ecuación para la tercera incógnita es $z^{(k+1)} = \\frac{8 + x^{(k)} - y^{(k)}}{8}$. Con $x^{(0)} = 0$ y $y^{(0)} = 1$, calculamos $z^{(1)} = \\frac{8 + 0 - 1}{8} = 0.875$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Utilizando los valores anteriores, calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.9925,
+          "tolerance": 0.0001,
+          "explanation": "Con $y^{(1)} = 0.8$ y $z^{(1)} = 0.875$, calculamos $x^{(2)} = \\frac{10 + 0.8 - 0.875}{10} = \\frac{9.925}{10} = 0.9925$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Iteración de Gauss-Seidel en sistema 3x3",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 10x - y + z = 10 \\\\ x + 5y - z = 5 \\\\ -x + y + 8z = 8 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0, y^{(0)} = 1, z^{(0)} = -1$ aplicando el método de Gauss-Seidel.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Calcula el valor aproximado de la primera componente $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.2,
+          "tolerance": 0.001,
+          "explanation": "La primera componente usa los valores anteriores: $x^{(1)} = \\frac{10 + y^{(0)} - z^{(0)}}{10} = \\frac{10 + 1 - (-1)}{10} = 1.2$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Calcula la componente $y^{(1)}$ tras la primera iteración (usando el nuevo $x^{(1)}$).",
+          "correctValue": 0.56,
+          "tolerance": 0.001,
+          "explanation": "Usamos $x^{(1)} = 1.2$ e $z^{(0)} = -1$: $y^{(1)} = \\frac{5 - x^{(1)} + z^{(0)}}{5} = \\frac{5 - 1.2 - 1}{5} = 0.56$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula la componente $z^{(1)}$ tras la primera iteración (usando los nuevos $x^{(1)}$ e $y^{(1)}$).",
+          "correctValue": 1.08,
+          "tolerance": 0.001,
+          "explanation": "Usamos $x^{(1)} = 1.2$ e $y^{(1)} = 0.56$: $z^{(1)} = \\frac{8 + x^{(1)} - y^{(1)}}{8} = \\frac{8 + 1.2 - 0.56}{8} = 1.08$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.948,
+          "tolerance": 0.0001,
+          "explanation": "Usando $y^{(1)} = 0.56$ y $z^{(1)} = 1.08$, calculamos $x^{(2)} = \\frac{10 + 0.56 - 1.08}{10} = \\frac{9.48}{10} = 0.948$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Componentes de la matriz de iteración de Jacobi",
+      "context": "Dado el sistema de ecuaciones:\\n$$\\begin{cases} 10x - y + z = 10 \\\\ x + 5y - z = 5 \\\\ -x + y + 8z = 8 \\end{cases}$$\\nanalizamos los elementos individuales de su matriz de iteración de Jacobi $B_J = D^{-1}(L+U)$.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Determina el valor del elemento en la fila 1, columna 2 de $B_J$.",
+          "correctValue": 0.1,
+          "tolerance": 0.0001,
+          "explanation": "De la primera ecuación, $x = \\frac{10 + y - z}{10} = 1 + 0.1y - 0.1z$. El coeficiente de $y$ es $0.1$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Determina el valor del elemento en la fila 2, columna 1 de $B_J$.",
+          "correctValue": -0.2,
+          "tolerance": 0.0001,
+          "explanation": "De la segunda ecuación, $y = \\frac{5 - x + z}{5} = 1 - 0.2x + 0.2z$. El coeficiente de $x$ es $-0.2$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Determina el valor del elemento en la fila 3, columna 2 de $B_J$.",
+          "correctValue": -0.125,
+          "tolerance": 0.0001,
+          "explanation": "De la tercera ecuación, $z = \\frac{8 + x - y}{8} = 1 + 0.125x - 0.125y$. El coeficiente de $y$ es $-0.125$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcula la norma infinito de la matriz de iteración $B_J$, dado que las sumas absolutas de filas son 0.2, 0.4 y 0.25 respectivamente.",
+          "correctValue": 0.4,
+          "tolerance": 0.0001,
+          "explanation": "La norma infinito es el máximo de las sumas en valor absoluto por filas. Fila 1: $|0.1| + |-0.1| = 0.2$. Fila 2: $|-0.2| + |0.2| = 0.4$. Fila 3: $|0.125| + |-0.125| = 0.25$. El máximo es $0.4$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Método de las Potencias - Primera Iteración",
+      "context": "Sea la matriz simétrica $A = \\begin{pmatrix} 4 & 1 \\\\ 1 & 3 \\end{pmatrix}$. Iniciamos el método de las potencias para estimar el autovalor dominante con el vector $x^{(0)} = \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$. Usamos la norma 2 para normalizar en cada paso.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula el valor de la primera componente del vector sin normalizar $y^{(1)} = A x^{(0)}$.",
+          "correctValue": 4.0,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\begin{pmatrix} 4 & 1 \\\\ 1 & 3 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 1 \\end{pmatrix}$. La primera componente es 4.0."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcula la norma 2 del vector $y^{(1)}$.",
+          "correctValue": 4.123106,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(1)}\\|_2 = \\sqrt{4^2 + 1^2} = \\sqrt{17} \\approx 4.123106$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(1)} = y^{(1)} / \\|y^{(1)}\\|_2$.",
+          "correctValue": 0.970143,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)}_1 = 4 / \\sqrt{17} \\approx 0.970143$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcula el cociente de Rayleigh $\\lambda^{(1)} = (x^{(1)})^T A x^{(1)}$ para estimar el autovalor dominante.",
+          "correctValue": 4.411765,
+          "tolerance": 0.001,
+          "explanation": "El cociente de Rayleigh es $(x^{(1)})^T A x^{(1)} = \\frac{1}{17} \\begin{pmatrix} 4 & 1 \\end{pmatrix} \\begin{pmatrix} 17 \\\\ 7 \\end{pmatrix} = \\frac{68 + 7}{17} = \\frac{75}{17} \\approx 4.411765$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Método de las Potencias - Segunda Iteración",
+      "context": "Continuamos el método de las potencias para la matriz $A = \\begin{pmatrix} 4 & 1 \\\\ 1 & 3 \\end{pmatrix}$ a partir de $x^{(1)} = \\frac{1}{\\sqrt{17}} \\begin{pmatrix} 4 \\\\ 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula el valor de la primera componente del vector sin normalizar $y^{(2)} = A x^{(1)}$.",
+          "correctValue": 4.123106,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)} = \\begin{pmatrix} 4 & 1 \\\\ 1 & 3 \\end{pmatrix} \\begin{pmatrix} 4/\\sqrt{17} \\\\ 1/\\sqrt{17} \\end{pmatrix} = \\frac{1}{\\sqrt{17}} \\begin{pmatrix} 17 \\\\ 7 \\end{pmatrix} = \\begin{pmatrix} \\sqrt{17} \\\\ 7/\\sqrt{17} \\end{pmatrix}$. La primera componente es $\\sqrt{17} \\approx 4.123106$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula la norma 2 del vector $y^{(2)}$.",
+          "correctValue": 4.458963,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(2)}\\|_2 = \\frac{1}{\\sqrt{17}} \\sqrt{17^2 + 7^2} = \\sqrt{\\frac{338}{17}} \\approx 4.458963$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(2)} = y^{(2)} / \\|y^{(2)}\\|_2$.",
+          "correctValue": 0.924678,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)}_1 = \\frac{17/\\sqrt{17}}{\\sqrt{338}/\\sqrt{17}} = \\frac{17}{\\sqrt{338}} \\approx 0.924688$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Calcula el cociente de Rayleigh $\\lambda^{(2)} = (x^{(2)})^T A x^{(2)}$.",
+          "correctValue": 4.559172,
+          "tolerance": 0.001,
+          "explanation": "El cociente es $(x^{(2)})^T A x^{(2)} = \\frac{1}{338} \\begin{pmatrix} 17 & 7 \\end{pmatrix} \\begin{pmatrix} 4 & 1 \\\\ 1 & 3 \\end{pmatrix} \\begin{pmatrix} 17 \\\\ 7 \\end{pmatrix} = \\frac{1}{338} \\begin{pmatrix} 17 & 7 \\end{pmatrix} \\begin{pmatrix} 75 \\\\ 38 \n\\end{pmatrix} = \\frac{1275 + 266}{338} = \\frac{1541}{338} \\approx 4.559172$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Iteración de Jacobi en sistema tridiagonal",
+      "context": "Dado el sistema lineal tridiagonal:\\n$$\\begin{cases} 4x - y = 3 \\\\ -x + 4y - z = 2 \\\\ -y + 4z = 3 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0, y^{(0)} = 0, z^{(0)} = 0$ aplicando el método de Jacobi.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = \\frac{3 + y^{(0)}}{4} = 0.75$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\frac{2 + x^{(0)} + z^{(0)}}{4} = 0.5$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula $z^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "$z^{(1)} = \\frac{3 + y^{(0)}}{4} = 0.75$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Utilizando los valores anteriores, calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.875,
+          "tolerance": 0.001,
+          "explanation": "Con $y^{(1)} = 0.5$, calculamos $x^{(2)} = \\frac{3 + 0.5}{4} = 0.875$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Iteración de Gauss-Seidel en sistema tridiagonal",
+      "context": "Dado el mismo sistema lineal tridiagonal:\\n$$\\begin{cases} 4x - y = 3 \\\\ -x + 4y - z = 2 \\\\ -y + 4z = 3 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0, y^{(0)} = 0, z^{(0)} = 0$ aplicando el método de Gauss-Seidel.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = \\frac{3 + y^{(0)}}{4} = 0.75$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración (usando el nuevo $x^{(1)}$).",
+          "correctValue": 0.6875,
+          "tolerance": 0.0001,
+          "explanation": "Usamos $x^{(1)} = 0.75$: $y^{(1)} = \\frac{2 + x^{(1)} + z^{(0)}}{4} = \\frac{2 + 0.75 + 0}{4} = 0.6875$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcula $z^{(1)}$ tras la primera iteración (usando el nuevo $y^{(1)}$).",
+          "correctValue": 0.921875,
+          "tolerance": 0.0001,
+          "explanation": "Usamos $y^{(1)} = 0.6875$: $z^{(1)} = \\frac{3 + y^{(1)}}{4} = \\frac{3 + 0.6875}{4} = 0.921875$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.921875,
+          "tolerance": 0.0001,
+          "explanation": "Usamos el valor actualizado $y^{(1)} = 0.6875$: $x^{(2)} = \\frac{3 + y^{(1)}}{4} = \\frac{3 + 0.6875}{4} = 0.921875$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Matriz de iteración de Jacobi en sistema tridiagonal",
+      "context": "Dado el sistema lineal tridiagonal:\\n$$\\begin{cases} 4x - y = 3 \\\\ -x + 4y - z = 2 \\\\ -y + 4z = 3 \\end{cases}$$\\nanalizamos la matriz de iteración de Jacobi $B_J$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz de iteración de Jacobi $B_J$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0001,
+          "explanation": "La diagonal de la matriz de iteración de Jacobi siempre es nula, por lo que su traza es exactamente 0.0."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcula la norma infinito de la matriz $B_J$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0001,
+          "explanation": "La matriz es $B_J = \\begin{pmatrix} 0 & 0.25 & 0 \\\\ 0.25 & 0 & 0.25 \\\\ 0 & 0.25 & 0 \\end{pmatrix}$. Fila 1 suma 0.25, Fila 2 suma 0.5, Fila 3 suma 0.25. El máximo es 0.5."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcula el mayor autovalor positivo de la matriz $B_J$.",
+          "correctValue": 0.353553,
+          "tolerance": 0.001,
+          "explanation": "Los autovalores se obtienen de $\\det(\\lambda I - B_J) = \\lambda(\\lambda^2 - 0.125) = 0 \\implies \\lambda = \\pm \\sqrt{0.125} \\approx \\pm 0.353553$. El mayor positivo es $\\sqrt{0.125} \\approx 0.353553$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcula el radio espectral de la matriz $B_J$.",
+          "correctValue": 0.353553,
+          "tolerance": 0.001,
+          "explanation": "El radio espectral es el autovalor máximo en módulo, que coincide con el mayor positivo: $\\rho(B_J) = \\sqrt{0.125} \\approx 0.353553$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Gauss-Seidel y comparación de convergencia",
+      "context": "Para la matriz tridiagonal analizada, comparamos el comportamiento asintótico de los dos métodos.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Usando la relación para matrices tridiagonales, calcula el radio espectral de Gauss-Seidel $\\rho(B_{GS})$.",
+          "correctValue": 0.125,
+          "tolerance": 0.0001,
+          "explanation": "Por teorema de matrices tridiagonales consistentemente ordenadas, $\\rho(B_{GS}) = (\\rho(B_J))^2 = (\\sqrt{0.125})^2 = 0.125$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcula la velocidad asintótica de convergencia de Jacobi $R(B_J)$.",
+          "correctValue": 1.039721,
+          "tolerance": 0.001,
+          "explanation": "$R(B_J) = -\\ln(\\sqrt{0.125}) \\approx 1.039721$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcula la velocidad asintótica de convergencia de Gauss-Seidel $R(B_{GS})$.",
+          "correctValue": 2.079442,
+          "tolerance": 0.001,
+          "explanation": "$R(B_{GS}) = -\\ln(0.125) \\approx 2.079442$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcula el cociente $R(B_{GS}) / R(B_J)$ para comprobar cuántas veces es más rápido Gauss-Seidel en este caso.",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "El cociente de velocidades es $R(B_{GS}) / R(B_J) = 2.079442 / 1.039721 = 2.0$, lo que confirma que Gauss-Seidel es exactamente el doble de rápido."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Iteración de Jacobi en sistema 2x2 (Ejemplo 2)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 3x - y = 2 \\\\ -x + 3y = 2 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0$ e $y^{(0)} = 0$ aplicando el método de Jacobi.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcula el valor aproximado de la primera componente $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.666667,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = \\frac{2 + y^{(0)}}{3} = 2/3 \\approx 0.666667$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Calcula el valor aproximado de la segunda componente $y^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.666667,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\frac{2 + x^{(0)}}{3} = 2/3 \\approx 0.666667$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Utilizando los valores anteriores, calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.888889,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)} = \\frac{2 + y^{(1)}}{3} = \\frac{2 + 2/3}{3} = 8/9 \\approx 0.888889$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.888889,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)} = \\frac{2 + x^{(1)}}{3} = \\frac{2 + 2/3}{3} = 8/9 \\approx 0.888889$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Iteración de Gauss-Seidel en sistema 2x2 (Ejemplo 2)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 3x - y = 2 \\\\ -x + 3y = 2 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0$ e $y^{(0)} = 0$ aplicando el método de Gauss-Seidel.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 0.666667,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = \\frac{2 + y^{(0)}}{3} = 2/3 \\approx 0.666667$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración usando el nuevo $x^{(1)}$.",
+          "correctValue": 0.888889,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\frac{2 + x^{(1)}}{3} = \\frac{2 + 2/3}{3} = 8/9 \\approx 0.888889$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.962963,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)} = \\frac{2 + y^{(1)}}{3} = \\frac{2 + 8/9}{3} = 26/27 \\approx 0.962963$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.987654,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)} = \\frac{2 + x^{(2)}}{3} = \\frac{2 + 26/27}{3} = 80/81 \\approx 0.987654$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Matriz de iteración de Jacobi en sistema 2x2 (Ejemplo 2)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 3x - y = 2 \\\\ -x + 3y = 2 \\end{cases}$$\\nanalizamos la matriz de iteración de Jacobi $B_J$.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcula el determinante de la matriz $(\\lambda I - B_J)$ expresado como $\\lambda^2 - c$. ¿Cuánto vale la constante $c$?",
+          "correctValue": 0.111111,
+          "tolerance": 0.001,
+          "explanation": "La matriz es $B_J = \\begin{pmatrix} 0 & 1/3 \\\\ 1/3 & 0 \\end{pmatrix}$. El determinante de $\\lambda I - B_J$ es $\\lambda^2 - 1/9$. Así, $c = 1/9 \\approx 0.111111$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Calcula el radio espectral $\\rho(B_J)$.",
+          "correctValue": 0.333333,
+          "tolerance": 0.001,
+          "explanation": "Los autovalores son $\\pm 1/3$, de modo que el radio espectral es $1/3 \\approx 0.333333$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcula la norma infinito de la matriz $B_J$.",
+          "correctValue": 0.333333,
+          "tolerance": 0.001,
+          "explanation": "La suma absoluta de los elementos de cada fila de $B_J$ es exactamente $1/3$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Calcula la velocidad asintótica de convergencia $R(B_J) = -\\ln(\\rho(B_J))$.",
+          "correctValue": 1.098612,
+          "tolerance": 0.001,
+          "explanation": "$R(B_J) = -\\ln(1/3) = \\ln(3) \\approx 1.098612$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Matriz de iteración de Gauss-Seidel en sistema 2x2 (Ejemplo 2)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 3x - y = 2 \\\\ -x + 3y = 2 \\end{cases}$$\\nanalizamos la matriz de iteración de Gauss-Seidel $B_{GS}$.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz de iteración de Gauss-Seidel $B_{GS}$.",
+          "correctValue": 0.111111,
+          "tolerance": 0.001,
+          "explanation": "La matriz es $B_{GS} = \\begin{pmatrix} 0 & 1/3 \\\\ 0 & 1/9 \\end{pmatrix}$. La diagonal tiene elementos 0 y $1/9$, por lo que su traza es $1/9 \\approx 0.111111$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Determina el autovalor no nulo de $B_{GS}$.",
+          "correctValue": 0.111111,
+          "tolerance": 0.001,
+          "explanation": "Los autovalores son 0 y $1/9$. El no nulo es $1/9 \\approx 0.111111$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcula el radio espectral $\\rho(B_{GS})$.",
+          "correctValue": 0.111111,
+          "tolerance": 0.001,
+          "explanation": "$\\rho(B_{GS}) = \\max(\\{0, 1/9\\}) = 1/9 \\approx 0.111111$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcula la velocidad asintótica de convergencia $R(B_{GS}) = -\\ln(\\rho(B_{GS}))$.",
+          "correctValue": 2.197225,
+          "tolerance": 0.001,
+          "explanation": "$R(B_{GS}) = -\\ln(1/9) = \\ln(9) \\approx 2.197225$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Método de las Potencias con Matriz Diagonal - Paso 1",
+      "context": "Sea la matriz diagonal $A = \\begin{pmatrix} 5 & 0 \\\\ 0 & 2 \\end{pmatrix}$. Aplicamos el método de las potencias a partir de $x^{(0)} = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, usando la norma 2.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula el valor de la primera componente del vector sin normalizar $y^{(1)} = A x^{(0)}$.",
+          "correctValue": 5.0,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\begin{pmatrix} 5 & 0 \\\\ 0 & 2 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 2 \\end{pmatrix}$. La primera componente es 5.0."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcula la norma 2 del vector $y^{(1)}$.",
+          "correctValue": 5.385165,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(1)}\\|_2 = \\sqrt{5^2 + 2^2} = \\sqrt{29} \\approx 5.385165$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(1)}$.",
+          "correctValue": 0.928477,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)}_1 = 5 / \\sqrt{29} \\approx 0.928477$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcula el cociente de Rayleigh $\\lambda^{(1)}$.",
+          "correctValue": 4.586207,
+          "tolerance": 0.001,
+          "explanation": "$(x^{(1)})^T A x^{(1)} = \\frac{1}{29} \\begin{pmatrix} 5 & 2 \\end{pmatrix} \\begin{pmatrix} 5 & 0 \\\\ 0 & 2 \\end{pmatrix} \\begin{pmatrix} 5 \\\\ 2 \\end{pmatrix} = \\frac{5 \\cdot 25 + 2 \\cdot 4}{29} = \\frac{133}{29} \\approx 4.586207$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Método de las Potencias con Matriz Diagonal - Paso 2",
+      "context": "Continuamos el método de las potencias para $A = \\begin{pmatrix} 5 & 0 \\\\ 0 & 2 \\end{pmatrix}$ a partir del vector $x^{(1)} = \\frac{1}{\\sqrt{29}} \\begin{pmatrix} 5 \\\\ 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula la primera componente del vector sin normalizar $y^{(2)} = A x^{(1)}$.",
+          "correctValue": 4.642383,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)}_1 = 5 \\cdot (5/\\sqrt{29}) = 25/\\sqrt{29} \\approx 4.642384$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcula la norma 2 de $y^{(2)}$.",
+          "correctValue": 4.70143,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(2)}\\|_2 = \\sqrt{\\frac{25^2 + 4^2}{29}} = \\sqrt{\\frac{641}{29}} \\approx 4.701390$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(2)}$.",
+          "correctValue": 0.987441,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)}_1 = \\frac{25/\\sqrt{29}}{\\sqrt{641}/\\sqrt{29}} = \\frac{25}{\\sqrt{641}} \\approx 0.987414$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula el cociente de Rayleigh $\\lambda^{(2)}$ en este paso.",
+          "correctValue": 4.925117,
+          "tolerance": 0.001,
+          "explanation": "$(x^{(2)})^T A x^{(2)} = \\frac{1}{641} \\begin{pmatrix} 25 & 4 \\end{pmatrix} \\begin{pmatrix} 5 & 0 \\\\ 0 & 2 \\end{pmatrix} \\begin{pmatrix} 25 \\\\ 4 \\end{pmatrix} = \\frac{5 \\cdot 625 + 2 \\cdot 16}{641} = \\frac{3157}{641} \\approx 4.925117$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Jacobi en sistema 3x3 simétrico",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 8x + y + z = 10 \\\\ x + 8y + z = 10 \\\\ x + y + 8z = 10 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0, y^{(0)} = 0, z^{(0)} = 0$ aplicando el método de Jacobi.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = \\frac{10 - y^{(0)} - z^{(0)}}{8} = 10/8 = 1.25$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "Por simetría, $y^{(1)} = \\frac{10 - x^{(0)} - z^{(0)}}{8} = 1.25$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.9375,
+          "tolerance": 0.001,
+          "explanation": "Con $y^{(1)} = 1.25$ y $z^{(1)} = 1.25$, obtenemos $x^{(2)} = \\frac{10 - 1.25 - 1.25}{8} = 7.5/8 = 0.9375$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.9375,
+          "tolerance": 0.001,
+          "explanation": "Por simetría, $y^{(2)} = 0.9375$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Gauss-Seidel en sistema 3x3 simétrico",
+      "context": "Dado el mismo sistema lineal:\\n$$\\begin{cases} 8x + y + z = 10 \\\\ x + 8y + z = 10 \\\\ x + y + 8z = 10 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0, y^{(0)} = 0, z^{(0)} = 0$ aplicando el método de Gauss-Seidel.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = \\frac{10 - y^{(0)} - z^{(0)}}{8} = 1.25$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración (usando el nuevo $x^{(1)}$).",
+          "correctValue": 1.09375,
+          "tolerance": 0.0001,
+          "explanation": "$y^{(1)} = \\frac{10 - x^{(1)} - z^{(0)}}{8} = \\frac{10 - 1.25 - 0}{8} = 1.09375$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcula $z^{(1)}$ tras la primera iteración (usando los nuevos $x^{(1)}$ e $y^{(1)}$).",
+          "correctValue": 0.95703125,
+          "tolerance": 1e-05,
+          "explanation": "$z^{(1)} = \\frac{10 - x^{(1)} - y^{(1)}}{8} = \\frac{10 - 1.25 - 1.09375}{8} = 7.65625/8 = 0.95703125$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.99365234,
+          "tolerance": 1e-05,
+          "explanation": "Usando $y^{(1)} = 1.09375$ y $z^{(1)} = 0.95703125$, obtenemos $x^{(2)} = \\frac{10 - 1.09375 - 0.95703125}{8} = 7.94921875/8 = 0.99365234375$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Propiedades espectrales de Jacobi en sistema simétrico",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 8x + y + z = 10 \\\\ x + 8y + z = 10 \\\\ x + y + 8z = 10 \\end{cases}$$\\nanalizamos la matriz de iteración de Jacobi $B_J$.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz de iteración de Jacobi $B_J$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0001,
+          "explanation": "La diagonal de $B_J$ es nula, por lo que su traza es 0.0."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcula la norma infinito de la matriz $B_J$.",
+          "correctValue": 0.25,
+          "tolerance": 0.0001,
+          "explanation": "Cada fila contiene dos elementos iguales a $-1/8 = -0.125$. La suma de sus valores absolutos es $2/8 = 0.25$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Determina el autovalor negativo de la matriz $B_J$.",
+          "correctValue": -0.25,
+          "tolerance": 0.0001,
+          "explanation": "Los autovalores de la matriz de iteración $B_J = -\\frac{1}{8} \\begin{pmatrix} 0 & 1 & 1 \\\\ 1 & 0 & 1 \\\\ 1 & 1 & 0 \\end{pmatrix}$ son $\\lambda_1 = -0.25$ (simple) y $\\lambda_2 = 0.125$ (doble). El autovalor negativo es $-0.25$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula el radio espectral de la matriz $B_J$.",
+          "correctValue": 0.25,
+          "tolerance": 0.0001,
+          "explanation": "El radio espectral es el máximo de los módulos de los autovalores: $\\rho(B_J) = \\max(\\{|-0.25|, |0.125|\\}) = 0.25$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Matriz de iteración de Gauss-Seidel en sistema simétrico",
+      "context": "Analizamos la matriz de iteración de Gauss-Seidel $B_{GS}$ para el sistema anterior.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $B_{GS}$.",
+          "correctValue": 0.044922,
+          "use_calc": "p23a",
+          "tolerance": 0.0001,
+          "explanation": "La matriz de iteración de Gauss-Seidel es $B_{GS} = \\\\begin{pmatrix} 0 & -0.125 & -0.125 \\\\\\\\ 0 & 0.015625 & -0.109375 \\\\\\\\ 0 & 0.013672 & 0.029297 \\\\end{pmatrix}$. La suma de sus elementos diagonales es $0 + 0.015625 + 0.029296875 = 0.044921875 \\\\approx 0.044922$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Determina el valor absoluto del determinante de $B_{GS}$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0001,
+          "explanation": "Al ser $U$ triangular superior estricta, $\\det(U) = 0 \\implies \\det(B_{GS}) = 0$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcula la mayor parte real de los autovalores de $B_{GS}$.",
+          "correctValue": 0.022461,
+          "use_calc": "p23c",
+          "tolerance": 0.0001,
+          "explanation": "Los autovalores son las raíces del polinomio característico de $B_{GS}$, resultando en $\\\\lambda_1 = 0$ y la pareja compleja conjugada $\\\\lambda_{2,3} = \\\\frac{23 \\\\pm i\\\\sqrt{1519}}{1024} \\\\approx 0.022461 \\\\pm 0.038061i$. El autovalor con la mayor parte real tiene parte real $23/1024 \\\\approx 0.022461$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Calcula el radio espectral de $B_{GS}$.",
+          "correctValue": 0.044194,
+          "use_calc": "p23d",
+          "tolerance": 0.0001,
+          "explanation": "El radio espectral es el módulo máximo de los autovalores de $B_{GS}$. Para el par complejo conjugado, el módulo es $\\\\sqrt{1/512} = \\\\frac{\\\\sqrt{2}}{32} \\\\approx 0.044194$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Método de las Potencias - Matriz Simétrica General",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & 2 \\\\ 2 & 6 \\end{pmatrix}$. Iniciamos el método de las potencias con el vector normalizado $x^{(0)} = \\frac{1}{\\sqrt{2}} \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcula el valor de la primera componente del vector sin normalizar $y^{(1)} = A x^{(0)}$.",
+          "correctValue": 3.535534,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)}_1 = \\frac{3 \\cdot 1 + 2 \\cdot 1}{\\sqrt{2}} = 5/\\sqrt{2} \\approx 3.535534$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Calcula la norma 2 del vector $y^{(1)}$.",
+          "correctValue": 6.670832,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(1)}\\|_2 = \\sqrt{\\frac{5^2 + 8^2}{2}} = \\sqrt{\\frac{89}{2}} = \\sqrt{44.5} \\approx 6.670832$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(1)}$.",
+          "correctValue": 0.529999,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)}_1 = \\frac{5/\\sqrt{2}}{\\sqrt{89}/\\sqrt{2}} = \\frac{5}{\\sqrt{89}} \\approx 0.529999$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Calcula la estimación del autovalor $\\lambda^{(1)}$ mediante el cociente de Rayleigh $(x^{(1)})^T A x^{(1)}$.",
+          "correctValue": 6.955056,
+          "tolerance": 0.001,
+          "explanation": "$(x^{(1)})^T A x^{(1)} = \\frac{1}{89} \\begin{pmatrix} 5 & 8 \\end{pmatrix} \\begin{pmatrix} 3 & 2 \\\\ 2 & 6 \\end{pmatrix} \\begin{pmatrix} 5 \\\\ 8 \\end{pmatrix} = \\frac{1}{89} \\begin{pmatrix} 5 & 8 \\end{pmatrix} \\begin{pmatrix} 31 \\\\ 58 \\end{pmatrix} = \\frac{155 + 464}{89} = \\frac{619}{89} \\approx 6.955056$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Iteración de Jacobi en sistema 2x2 (Ejemplo 3)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 6x + 2y = 8 \\\\ x + 5y = 6 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0$ e $y^{(0)} = 0$ aplicando el método de Jacobi.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.333333,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = 8/6 = 4/3 \\approx 1.333333$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.2,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = 6/5 = 1.2$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.933333,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)} = \\frac{8 - 2(1.2)}{6} = \\frac{5.6}{6} \\approx 0.933333$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.933333,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)} = \\frac{6 - (4/3)}{5} = \\frac{14/3}{5} = 14/15 \\approx 0.933333$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Iteración de Gauss-Seidel en sistema 2x2 (Ejemplo 3)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 6x + 2y = 8 \\\\ x + 5y = 6 \\end{cases}$$\\nComenzamos con la aproximación inicial $x^{(0)} = 0$ e $y^{(0)} = 0$ aplicando el método de Gauss-Seidel.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcula $x^{(1)}$ tras la primera iteración.",
+          "correctValue": 1.333333,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)} = 8/6 = 4/3 \\approx 1.333333$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcula $y^{(1)}$ tras la primera iteración usando el nuevo $x^{(1)}$.",
+          "correctValue": 0.933333,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\frac{6 - 4/3}{5} = \\frac{14/3}{5} = 14/15 \\approx 0.933333$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Calcula $x^{(2)}$ en la segunda iteración.",
+          "correctValue": 1.022222,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)} = \\frac{8 - 2(14/15)}{6} = \\frac{92/15}{6} = 92/90 = 46/45 \\approx 1.022222$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcula $y^{(2)}$ en la segunda iteración.",
+          "correctValue": 0.995556,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)} = \\frac{6 - 46/45}{5} = \\frac{224/45}{5} = 224/225 \\approx 0.995556$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Matriz de iteración de Jacobi en sistema 2x2 (Ejemplo 3)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 6x + 2y = 8 \\\\ x + 5y = 6 \\end{cases}$$\\nanalizamos la matriz de iteración de Jacobi $B_J$.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcula la constante $c$ de la ecuación característica de $B_J$: $\\lambda^2 - c = 0$.",
+          "correctValue": 0.066667,
+          "tolerance": 0.001,
+          "explanation": "$B_J = \\begin{pmatrix} 0 & -1/3 \\\\ -1/5 & 0 \\end{pmatrix}$. Su ecuación es $\\lambda^2 - (-1/3 \\cdot -1/5) = \\lambda^2 - 1/15 = 0 \\implies c = 1/15 \\approx 0.066667$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula el radio espectral $\\rho(B_J)$.",
+          "correctValue": 0.258199,
+          "tolerance": 0.001,
+          "explanation": "$\\rho(B_J) = \\sqrt{1/15} \\approx 0.258199$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcula la norma infinito de la matriz $B_J$.",
+          "correctValue": 0.333333,
+          "tolerance": 0.001,
+          "explanation": "Las sumas de las filas son $1/3$ y $1/5$. El máximo es $1/3 \\approx 0.333333$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcula la velocidad asintótica de convergencia $R(B_J)$.",
+          "correctValue": 1.354025,
+          "tolerance": 0.001,
+          "explanation": "$R(B_J) = -\\ln(0.258199) \\approx 1.353982$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Matriz de iteración de Gauss-Seidel (Ejemplo 3)",
+      "context": "Dado el sistema lineal:\\n$$\\begin{cases} 6x + 2y = 8 \\\\ x + 5y = 6 \\end{cases}$$\\nanalizamos la matriz de iteración de Gauss-Seidel $B_{GS}$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $B_{GS}$.",
+          "correctValue": 0.066667,
+          "tolerance": 0.001,
+          "explanation": "$B_{GS} = \\begin{pmatrix} 0 & -1/3 \\\\ 0 & 1/15 \\end{pmatrix}$. La diagonal tiene 0 y $1/15$. La traza es $1/15 \\approx 0.066667$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Determina el autovalor no nulo de $B_{GS}$.",
+          "correctValue": 0.066667,
+          "tolerance": 0.001,
+          "explanation": "Los autovalores son 0 y $1/15$. El no nulo es $1/15 \\approx 0.066667$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcula el radio espectral $\\rho(B_{GS})$.",
+          "correctValue": 0.066667,
+          "tolerance": 0.001,
+          "explanation": "$\\rho(B_{GS}) = 1/15 \\approx 0.066667$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcula la velocidad asintótica de convergencia $R(B_{GS})$.",
+          "correctValue": 2.70805,
+          "tolerance": 0.001,
+          "explanation": "$R(B_{GS}) = -\\ln(1/15) \\approx 2.708050$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Método de las Potencias con Matriz de Laplace 1D - Paso 1",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$. Aplicamos el método de las potencias a partir de $x^{(0)} = \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$, usando la norma 2.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula la primera componente del vector sin normalizar $y^{(1)} = A x^{(0)}$.",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "$y^{(1)} = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix}$. La primera componente es 2.0."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Calcula la norma 2 del vector $y^{(1)}$.",
+          "correctValue": 2.236068,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(1)}\\|_2 = \\sqrt{2^2 + (-1)^2} = \\sqrt{5} \\approx 2.236068$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(1)}$.",
+          "correctValue": 0.894427,
+          "tolerance": 0.001,
+          "explanation": "$x^{(1)}_1 = 2 / \\sqrt{5} \\approx 0.894427$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcula el cociente de Rayleigh $\\lambda^{(1)}$.",
+          "correctValue": 2.8,
+          "tolerance": 0.001,
+          "explanation": "$(x^{(1)})^T A x^{(1)} = \\frac{1}{5} \\begin{pmatrix} 2 & -1 \\end{pmatrix} \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix} \\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix} = \\frac{1}{5} \\begin{pmatrix} 2 & -1 \\end{pmatrix} \\begin{pmatrix} 5 \\\\ -4 \\end{pmatrix} = \\frac{10 + 4}{5} = 2.8$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Método de las Potencias con Matriz de Laplace 1D - Paso 2",
+      "context": "Continuamos el método de las potencias para $A = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$ a partir de $x^{(1)} = \\frac{1}{\\sqrt{5}} \\begin{pmatrix} 2 \\\\ -1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcula la primera componente del vector sin normalizar $y^{(2)} = A x^{(1)}$.",
+          "correctValue": 2.236068,
+          "tolerance": 0.001,
+          "explanation": "$y^{(2)}_1 = \\frac{2 \\cdot 2 - 1 \\cdot (-1)}{\\sqrt{5}} = 5/\\sqrt{5} = \\sqrt{5} \\approx 2.236068$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula la norma 2 del vector $y^{(2)}$.",
+          "correctValue": 2.863564,
+          "tolerance": 0.001,
+          "explanation": "$\\|y^{(2)}\\|_2 = \\sqrt{\\frac{5^2 + (-4)^2}{5}} = \\sqrt{\\frac{41}{5}} \\approx 2.863564$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcula la primera componente del vector normalizado $x^{(2)}$.",
+          "correctValue": 0.780869,
+          "tolerance": 0.001,
+          "explanation": "$x^{(2)}_1 = \\frac{5/\\sqrt{5}}{\\sqrt{41}/\\sqrt{5}} = \\frac{5}{\\sqrt{41}} \\approx 0.780869$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcula el cociente de Rayleigh $\\lambda^{(2)}$ en esta iteración.",
+          "correctValue": 2.97561,
+          "tolerance": 0.001,
+          "explanation": "$(x^{(2)})^T A x^{(2)} = \\frac{1}{41} \\begin{pmatrix} 5 & -4 \\end{pmatrix} \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix} \\begin{pmatrix} 5 \\\\ -4 \\end{pmatrix} = \\frac{1}{41} \\begin{pmatrix} 5 & -4 \\end{pmatrix} \\begin{pmatrix} 14 \\\\ -13 \\end{pmatrix} = \\frac{70 + 52}{41} = \\frac{122}{41} \\approx 2.975610$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuación iterativa general",
+      "tex": "$$x^{(k+1)} = B \\cdot x^{(k)} + c$$"
+    },
+    {
+      "name": "Matriz de iteración de Jacobi",
+      "tex": "$$B_J = D^{-1}(L + U)$$"
+    },
+    {
+      "name": "Matriz de iteración de Gauss-Seidel",
+      "tex": "$$B_{GS} = (D - L)^{-1} U$$"
+    },
+    {
+      "name": "Radio espectral",
+      "tex": "$$\\rho(B) = \\max \\{|\\lambda_i| : \\lambda_i \\text{ es autovalor de } B\\}$$"
+    },
+    {
+      "name": "Condición necesaria y suficiente de convergencia",
+      "tex": "$$\\rho(B) < 1$$"
+    },
+    {
+      "name": "Condición de dominancia diagonal estricta por filas",
+      "tex": "$$|a_{ii}| > \\sum_{j \\ne i} |a_{ij}| \\quad \\forall i$$"
+    },
+    {
+      "name": "Método de las potencias para autovalores",
+      "tex": "$$y^{(k+1)} = A \\cdot x^{(k)}, \\quad x^{(k+1)} = \\frac{y^{(k+1)}}{\\|y^{(k+1)}\\|}$$"
+    },
+    {
+      "name": "Cociente de Rayleigh",
+      "tex": "$$\\lambda_1^{(k)} \\approx \\frac{(x^{(k)})^T A x^{(k)}}{(x^{(k)})^T x^{(k)}}$$"
+    }
+  ]
+}

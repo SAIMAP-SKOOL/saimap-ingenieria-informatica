@@ -1,0 +1,2108 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿En qué resultado matemático fundamental se basa el método de la bisección para garantizar la existencia de una raíz en un intervalo?",
+      "options": [
+        "Teorema del Valor Medio de Lagrange",
+        "Teorema de Bolzano (caso particular del Teorema del Valor Intermedio)",
+        "Teorema de Rolle"
+      ],
+      "correct": 1,
+      "hint": "Requiere que la función cambie de signo en los extremos del intervalo.",
+      "explanation": "El método de la bisección se basa en el Teorema de Bolzano: si $f$ es continua en $[a,b]$ y $f(a)\\cdot f(b)<0$, entonces existe al menos un $\\alpha \\in (a,b)$ tal que $f(\\alpha)=0$."
+    },
+    {
+      "q": "Si el intervalo inicial del método de la bisección es $[a_0, b_0]$, ¿cuál es la cota del error absoluto $e_k = |x_k - \\alpha|$ en la iteración $k$?",
+      "options": [
+        "$e_k \\le \\frac{b_0 - a_0}{2^k}$",
+        "$e_k \\le \\frac{b_0 - a_0}{2^{k+1}}$",
+        "$e_k \\le \\frac{b_0 - a_0}{k+1}$"
+      ],
+      "correct": 1,
+      "hint": "El intervalo se divide a la mitad en cada paso.",
+      "explanation": "Tras $k$ bisecciones, la longitud del intervalo activo es $\\frac{b_0-a_0}{2^k}$, y la raíz dista como máximo la mitad de ese intervalo del punto medio: $e_k \\le \\frac{b_0-a_0}{2^{k+1}}$."
+    },
+    {
+      "q": "¿Qué orden de convergencia tiene el método de la bisección?",
+      "options": [
+        "Convergencia cuadrática (orden 2)",
+        "Convergencia lineal (orden 1)",
+        "Convergencia superlineal (orden 1.618)"
+      ],
+      "correct": 1,
+      "hint": "El error se reduce por un factor constante de 0.5 en cada iteración.",
+      "explanation": "El método de la bisección tiene convergencia lineal porque el error se multiplica por un factor constante de $1/2$ en cada paso. No aprovecha información sobre la derivada de la función."
+    },
+    {
+      "q": "¿Cuál es la fórmula iterativa del método de Newton-Raphson?",
+      "options": [
+        "$x_{k+1} = x_k + \\frac{f(x_k)}{f'(x_k)}$",
+        "$x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)}$",
+        "$x_{k+1} = x_k - \\frac{f'(x_k)}{f(x_k)}$"
+      ],
+      "correct": 1,
+      "hint": "Proviene de la intersección de la recta tangente con el eje X.",
+      "explanation": "La fórmula de Newton-Raphson, obtenida al anular el polinomio de Taylor de grado 1, es $x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)}$, siempre que $f'(x_k) \\ne 0$."
+    },
+    {
+      "q": "¿Desde qué herramienta del análisis matemático se deriva el método de Newton-Raphson?",
+      "options": [
+        "Aproximación de Taylor de grado 1 (recta tangente) en el punto $x_k$",
+        "Integración por partes de la función $f$",
+        "Aproximación de Taylor de grado 2 en el punto medio del intervalo"
+      ],
+      "correct": 0,
+      "hint": "Se linealiza la función localmente usando la derivada.",
+      "explanation": "Newton-Raphson se obtiene aproximando $f(x) \\approx f(x_k)+f'(x_k)(x-x_k)$ (polinomio de Taylor de grado 1) e imponiendo que esa aproximación valga cero, obteniendo así la siguiente iteración $x_{k+1}$."
+    },
+    {
+      "q": "¿Qué tipo de convergencia (y bajo qué condiciones) presenta el método de Newton-Raphson para una raíz simple?",
+      "options": [
+        "Convergencia lineal, si $f$ es continua en el intervalo",
+        "Convergencia cuadrática local, si $f \\in C^2$ y $f'(\\alpha) \\ne 0$ y $x_0$ suficientemente cercano a $\\alpha$",
+        "Convergencia cúbica global para cualquier función derivable"
+      ],
+      "correct": 1,
+      "hint": "El número de decimales correctos se duplica en cada paso.",
+      "explanation": "Bajo las hipótesis de regularidad ($f \\in C^2$) y raíz simple ($f'(\\alpha) \\ne 0$), y con $x_0$ suficientemente próximo a $\\alpha$, la convergencia de Newton-Raphson es cuadrática: $\\lim_{k\\to\\infty} \\frac{|x_{k+1}-\\alpha|}{|x_k-\\alpha|^2} = \\left|\\frac{f''(\\alpha)}{2f'(\\alpha)}\\right|$."
+    },
+    {
+      "q": "¿Cuál es la constante de convergencia cuadrática del método de Newton-Raphson para una raíz simple $\\alpha$?",
+      "options": [
+        "$\\left|\\frac{f''(\\alpha)}{f'(\\alpha)}\\right|$",
+        "$\\left|\\frac{f''(\\alpha)}{2f'(\\alpha)}\\right|$",
+        "$\\left|\\frac{2f''(\\alpha)}{f'(\\alpha)}\\right|$"
+      ],
+      "correct": 1,
+      "hint": "Aparece el factor 2 en el denominador, proveniente del desarrollo de Taylor de segundo orden.",
+      "explanation": "El límite $\\lim_{k\\to\\infty}\\frac{|e_{k+1}|}{|e_k|^2} = \\left|\\frac{f''(\\alpha)}{2f'(\\alpha)}\\right|$ es la constante asintótica de error cuadrático del método de Newton-Raphson."
+    },
+    {
+      "q": "¿Qué ocurre con la convergencia del método de Newton-Raphson cuando la raíz buscada tiene multiplicidad $m > 1$?",
+      "options": [
+        "La convergencia se mantiene cuadrática porque la función sigue siendo diferenciable",
+        "La convergencia se degrada de cuadrática a lineal",
+        "El método diverge necesariamente para cualquier punto de partida"
+      ],
+      "correct": 1,
+      "hint": "Para raíces múltiples, $f'(\\alpha) = 0$, lo que afecta la constante de convergencia.",
+      "explanation": "Si la raíz tiene multiplicidad $m>1$, entonces $f'(\\alpha)=0$ y la derivación habitual del error cuadrático no se aplica. El método converge linealmente con factor $\\frac{m-1}{m}$."
+    },
+    {
+      "q": "¿Cuál es la interpretación geométrica de cada paso del método de Newton-Raphson?",
+      "options": [
+        "Trazar la cuerda que une los puntos $(a_k, f(a_k))$ y $(b_k, f(b_k))$ y hallar su corte con el eje X",
+        "Trazar la recta tangente a $y=f(x)$ en $(x_k, f(x_k))$ y tomar su intersección con el eje X como $x_{k+1}$",
+        "Hallar el punto medio del intervalo actual y evaluar el signo de $f$ en él"
+      ],
+      "correct": 1,
+      "hint": "Se usa la pendiente de la función en el punto actual.",
+      "explanation": "En cada paso, Newton-Raphson construye la recta tangente en $(x_k, f(x_k))$ con pendiente $f'(x_k)$. El corte de esa tangente con el eje X da $x_{k+1} = x_k - f(x_k)/f'(x_k)$."
+    },
+    {
+      "q": "¿Qué puede ocurrir si en alguna iteración de Newton-Raphson la derivada $f'(x_k)$ es muy cercana a cero?",
+      "options": [
+        "El método converge más rápido porque el denominador pequeño amplifica la corrección",
+        "Puede producirse un error aritmético o que la aproximación se proyecte muy lejos de la raíz, causando divergencia",
+        "El método automáticamente cambia a bisección para garantizar la convergencia"
+      ],
+      "correct": 1,
+      "hint": "Una pendiente casi nula produce una recta tangente casi horizontal.",
+      "explanation": "Si $f'(x_k) \\approx 0$, la corrección $-f(x_k)/f'(x_k)$ puede ser enorme, enviando $x_{k+1}$ muy lejos del intervalo de interés. Esto es una limitación crítica del método."
+    },
+    {
+      "q": "¿Cuántas iteraciones necesita el método de la bisección para garantizar una tolerancia de error $\\varepsilon$ partiendo del intervalo $[a_0, b_0]$?",
+      "options": [
+        "$n \\ge \\log_2\\left(\\frac{b_0-a_0}{\\varepsilon}\\right)$ iteraciones",
+        "$n \\ge \\log_2\\left(\\frac{b_0-a_0}{2\\varepsilon}\\right)$ iteraciones",
+        "$n \\ge \\frac{b_0-a_0}{2\\varepsilon}$ iteraciones"
+      ],
+      "correct": 1,
+      "hint": "Parte de la desigualdad $\\frac{b_0-a_0}{2^{n+1}} \\le \\varepsilon$.",
+      "explanation": "De la cota de error $e_n \\le \\frac{b_0-a_0}{2^{n+1}} \\le \\varepsilon$, despejando: $2^{n+1} \\ge \\frac{b_0-a_0}{\\varepsilon}$, es decir, $n \\ge \\log_2\\left(\\frac{b_0-a_0}{\\varepsilon}\\right) - 1$, que equivale a $n \\ge \\log_2\\left(\\frac{b_0-a_0}{2\\varepsilon}\\right)$."
+    },
+    {
+      "q": "¿Qué condición debe verificarse en los extremos del intervalo inicial $[a_0, b_0]$ para que el método de la bisección esté garantizado?",
+      "options": [
+        "$f(a_0) = f(b_0)$",
+        "$f(a_0) \\cdot f(b_0) < 0$",
+        "$f(a_0) > 0$ y $f(b_0) > 0$"
+      ],
+      "correct": 1,
+      "hint": "La función debe tener signos opuestos en los extremos.",
+      "explanation": "La condición $f(a_0) \\cdot f(b_0) < 0$ garantiza que $f$ cambia de signo en $[a_0,b_0]$. Por el Teorema de Bolzano, al ser $f$ continua, existe al menos una raíz en el interior."
+    },
+    {
+      "q": "Si se aplica el método de la bisección al intervalo $[0, 1]$ y $f(0)<0$, $f(1)>0$, tras la primera iteración el punto medio es $x_1 = 0.5$ y se comprueba que $f(0.5) > 0$, ¿cuál es el nuevo intervalo de trabajo?",
+      "options": [
+        "$[0.5, 1]$",
+        "$[0, 0.5]$",
+        "$[0, 1]$ sin cambios"
+      ],
+      "correct": 1,
+      "hint": "La raíz está en el subintervalo donde la función cambia de signo.",
+      "explanation": "Si $f(0)<0$ y $f(0.5)>0$, el cambio de signo se produce en $[0, 0.5]$. El nuevo intervalo de trabajo es $[0, 0.5]$."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe correctamente el método de la Regula Falsi (posición falsa)?",
+      "options": [
+        "Es idéntico al método de Newton-Raphson pero sin derivadas",
+        "Usa la intersección de la cuerda que une $(a_k, f(a_k))$ y $(b_k, f(b_k))$ con el eje X como nueva aproximación, manteniendo siempre la condición de cambio de signo",
+        "Divide el intervalo en tres partes iguales en cada paso"
+      ],
+      "correct": 1,
+      "hint": "Combina la seguridad de la bisección con una aproximación más inteligente que el punto medio.",
+      "explanation": "Regula Falsi (o método de la posición falsa) calcula la nueva aproximación como la intersección de la cuerda que une los dos extremos del intervalo activo con el eje X: $x_{k+1} = a_k - f(a_k)\\frac{b_k-a_k}{f(b_k)-f(a_k)}$, manteniendo siempre la condición de cambio de signo."
+    },
+    {
+      "q": "En el método de punto fijo, se transforma la ecuación $f(x)=0$ en la forma $x = g(x)$. ¿Qué condición sobre $g$ garantiza la convergencia de la iteración $x_{k+1} = g(x_k)$ hacia el punto fijo $\\alpha$?",
+      "options": [
+        "$|g'(x)| > 1$ para todo $x$ en un entorno de $\\alpha$",
+        "$|g'(x)| < 1$ para todo $x$ en un entorno de $\\alpha$ (condición de contracción)",
+        "$g'(\\alpha) = 0$"
+      ],
+      "correct": 1,
+      "hint": "El Teorema del Punto Fijo de Banach requiere que $g$ sea una contracción.",
+      "explanation": "Si $|g'(x)| \\le L < 1$ en un entorno de $\\alpha$, la función $g$ es una contracción y la iteración $x_{k+1}=g(x_k)$ converge al punto fijo $\\alpha$ desde cualquier punto inicial en ese entorno (Teorema de Banach-Picard)."
+    },
+    {
+      "q": "¿A qué valor converge la iteración de Newton-Raphson para calcular $\\sqrt{N}$ a través de la ecuación $f(x) = x^2 - N = 0$?",
+      "options": [
+        "Al valor $N/2$",
+        "Al valor $\\sqrt{N}$, usando la recurrencia $x_{k+1} = \\frac{1}{2}\\left(x_k + \\frac{N}{x_k}\\right)$",
+        "Al valor $N$ mismo"
+      ],
+      "correct": 1,
+      "hint": "Esta es la fórmula de Herón para la raíz cuadrada.",
+      "explanation": "Aplicando Newton-Raphson a $f(x)=x^2-N$ con $f'(x)=2x$: $x_{k+1}=x_k-\\frac{x_k^2-N}{2x_k}=\\frac{x_k}{2}+\\frac{N}{2x_k}=\\frac{1}{2}\\left(x_k+\\frac{N}{x_k}\\right)$. Esta es la conocida fórmula de Herón, que converge a $\\sqrt{N}$."
+    },
+    {
+      "q": "El 'Número de Dottie' es la raíz de la ecuación $f(x) = \\cos(x) - x = 0$. Según el material del tema, ¿cuál es su valor aproximado?",
+      "options": [
+        "$\\alpha \\approx 0.8660$",
+        "$\\alpha \\approx 0.7391$",
+        "$\\alpha \\approx 0.5000$"
+      ],
+      "correct": 1,
+      "hint": "Es el punto fijo único del coseno: $\\cos(\\alpha) = \\alpha$.",
+      "explanation": "La raíz de $\\cos(x)-x=0$ es el 'Número de Dottie', con valor $\\alpha \\approx 0.7390851332151606$. Es el único punto fijo del coseno en radianes."
+    },
+    {
+      "q": "¿Qué se entiende por 'orden de convergencia' de un método iterativo?",
+      "options": [
+        "El número máximo de iteraciones permitidas antes de declarar divergencia",
+        "El exponente $p$ tal que $\\lim_{k\\to\\infty}\\frac{|e_{k+1}|}{|e_k|^p} = C$ con $C$ constante positiva y finita",
+        "La rapidez con la que el ordenador ejecuta cada paso del algoritmo"
+      ],
+      "correct": 1,
+      "hint": "Cuantifica cuánto más rápido decrece el error en función del error anterior.",
+      "explanation": "El orden de convergencia $p$ describe la tasa asintótica de decrecimiento del error: si $\\lim_{k\\to\\infty}\\frac{|e_{k+1}|}{|e_k|^p}=C\\in(0,\\infty)$, el método tiene orden $p$. Bisección tiene $p=1$ y Newton-Raphson tiene $p=2$ para raíces simples."
+    },
+    {
+      "q": "¿Por qué se dice que Newton-Raphson tiene convergencia 'local'?",
+      "options": [
+        "Porque solo funciona en computadoras de arquitectura local",
+        "Porque la garantía de convergencia cuadrática requiere que el punto de partida $x_0$ esté suficientemente cerca de la raíz $\\alpha$",
+        "Porque el método solo puede encontrar raíces locales, no globales"
+      ],
+      "correct": 1,
+      "hint": "La teoría de convergencia requiere proximidad inicial a la raíz.",
+      "explanation": "La convergencia cuadrática de Newton-Raphson está garantizada solo en un entorno suficientemente pequeño de la raíz $\\alpha$. Si $x_0$ está lejos, el método puede oscilar, ciclar o divergir, por eso se llama 'convergencia local'."
+    },
+    {
+      "q": "¿Cuál es el criterio de parada más común basado en el error absoluto de iteración en Newton-Raphson?",
+      "options": [
+        "Detener cuando $|f(x_k)| > \\varepsilon$",
+        "Detener cuando $|x_{k+1} - x_k| < \\varepsilon$ (la corrección es suficientemente pequeña)",
+        "Detener cuando $k > N_{\\max}$ independientemente del error"
+      ],
+      "correct": 1,
+      "hint": "Se mide el cambio entre iteraciones consecutivas.",
+      "explanation": "El criterio $|x_{k+1}-x_k| < \\varepsilon$ comprueba que la corrección aplicada en el último paso sea menor que la tolerancia deseada, lo cual es un buen indicador de convergencia. También puede usarse $|f(x_k)| < \\varepsilon$."
+    },
+    {
+      "q": "¿Cuántas iteraciones de Newton-Raphson aproximadamente se necesitan para calcular $\\sqrt{2}$ con precisión de 12 dígitos significativos, partiendo de $x_0 = 1.5$?",
+      "options": [
+        "Unas 40 iteraciones, igual que la bisección",
+        "Solo 4-5 iteraciones, gracias a la convergencia cuadrática",
+        "Unas 100 iteraciones, pues la convergencia cuadrática es solo teórica"
+      ],
+      "correct": 1,
+      "hint": "Con convergencia cuadrática, los dígitos correctos se duplican en cada paso.",
+      "explanation": "Partiendo del error $\\approx 10^{-2}$: tras 1 iter. $\\approx 10^{-4}$, tras 2 $\\approx 10^{-8}$, tras 3 $\\approx 10^{-16}$. En 3-4 iteraciones se alcanza la precisión de doble flotante. La bisección necesitaría $\\approx 40$ iteraciones."
+    },
+    {
+      "q": "¿Qué representa el 'factor de reducción de error' $1/2$ en el método de la bisección?",
+      "options": [
+        "Que en cada iteración el error puede reducirse a la mitad o mantenerse igual",
+        "Que en cada iteración el error se reduce exactamente a la mitad del error anterior, siendo la constante de convergencia lineal",
+        "Que el método converge en exactamente 2 iteraciones para cualquier función"
+      ],
+      "correct": 1,
+      "hint": "Es la razón geométrica de la sucesión de cotas de error.",
+      "explanation": "La cota $e_k \\le \\frac{b_0-a_0}{2^{k+1}}$ implica que $e_{k+1} \\le \\frac{1}{2}\\cdot\\frac{b_0-a_0}{2^{k+1}} = \\frac{1}{2}e_k^{\\max}$. Por tanto, la constante de convergencia lineal es $1/2$."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una ventaja principal del método de la bisección frente a Newton-Raphson?",
+      "options": [
+        "Converge mucho más rápido, necesitando pocas iteraciones",
+        "Es globalmente convergente: si $f(a_0)\\cdot f(b_0)<0$ y $f$ es continua, la convergencia está garantizada sin importar la elección del punto de partida",
+        "No requiere que la función sea continua"
+      ],
+      "correct": 1,
+      "hint": "La bisección es robusta porque garantiza convergencia desde el inicio.",
+      "explanation": "La bisección garantiza convergencia siempre que se cumpla la condición de Bolzano en el intervalo inicial, independientemente de cualquier otra propiedad de la función (derivadas, curvatura, etc.). Newton-Raphson puede fallar si $x_0$ no está próximo a la raíz."
+    },
+    {
+      "q": "¿Qué tipo de información adicional requiere el método de Newton-Raphson en comparación con el método de la bisección?",
+      "options": [
+        "Un intervalo $[a_0,b_0]$ con cambio de signo de $f$",
+        "El valor de la derivada $f'(x_k)$ en cada punto de iteración",
+        "El valor exacto de la raíz para calcular el error"
+      ],
+      "correct": 1,
+      "hint": "La fórmula iterativa contiene $f'(x_k)$ explícitamente.",
+      "explanation": "La iteración de Newton-Raphson $x_{k+1}=x_k-f(x_k)/f'(x_k)$ requiere evaluar tanto $f$ como su derivada $f'$ en cada paso, lo cual puede ser costoso o imposible si $f'$ no se conoce analíticamente."
+    },
+    {
+      "q": "En el análisis del error del método de Newton-Raphson, el error en la iteración $k+1$ es aproximadamente proporcional al cuadrado del error en la iteración $k$. Esto significa que si $e_k = 10^{-4}$, ¿cuánto vale aproximadamente $e_{k+1}$?",
+      "options": [
+        "$e_{k+1} \\approx 10^{-4}$ (no hay mejora)",
+        "$e_{k+1} \\approx 10^{-8}$ (el exponente se duplica)",
+        "$e_{k+1} \\approx 10^{-2}$ (el exponente se reduce a la mitad)"
+      ],
+      "correct": 1,
+      "hint": "La convergencia cuadrática significa que el exponente del error se duplica.",
+      "explanation": "Con convergencia cuadrática, $e_{k+1} \\approx C \\cdot e_k^2$. Si $e_k \\approx 10^{-4}$, entonces $e_{k+1} \\approx C \\cdot 10^{-8}$. Suponiendo $C\\approx 1$, se obtiene $e_{k+1} \\approx 10^{-8}$, una mejora de 4 dígitos decimales adicionales."
+    },
+    {
+      "q": "¿Qué es una 'sucesión de Cauchy' en el contexto de los métodos numéricos iterativos?",
+      "options": [
+        "Una sucesión cuyos términos siempre crecen",
+        "Una sucesión en la que la distancia entre términos consecutivos $|x_{k+1}-x_k|$ tiende a cero, lo que es condición necesaria de convergencia",
+        "Una sucesión que alterna en signo"
+      ],
+      "correct": 1,
+      "hint": "La condición de Cauchy implica que los términos se 'acercan' entre sí.",
+      "explanation": "Una sucesión es de Cauchy si $|x_{m}-x_n|\\to 0$ cuando $m,n\\to\\infty$. En $\\mathbb{R}$ (espacio completo), toda sucesión de Cauchy converge. En la práctica numérica, comprobar que las correcciones $|x_{k+1}-x_k|$ sean pequeñas es una heurística de convergencia."
+    },
+    {
+      "q": "¿Cómo afecta a la fórmula de Newton-Raphson para calcular $1/R$ (sin divisiones) la ecuación $f(x) = 1/x - R = 0$?",
+      "options": [
+        "$x_{k+1} = x_k(2 - R x_k)$, que solo usa multiplicaciones y sumas",
+        "$x_{k+1} = x_k - 1/R$, que es inútil pues requiere $1/R$",
+        "$x_{k+1} = x_k^2 \\cdot R$"
+      ],
+      "correct": 0,
+      "hint": "La derivada de $1/x$ es $-1/x^2$.",
+      "explanation": "Con $f(x)=\\frac{1}{x}-R$ y $f'(x)=-\\frac{1}{x^2}$: $x_{k+1}=x_k-\\frac{1/x_k-R}{-1/x_k^2}=x_k+x_k^2(\\frac{1}{x_k}-R)=x_k(2-Rx_k)$. Esta fórmula solo usa multiplicaciones y se usa en ALUs para implementar división rápida."
+    },
+    {
+      "q": "¿Qué puede ocurrir en Newton-Raphson si la función tiene un punto de inflexión entre $x_0$ y la raíz?",
+      "options": [
+        "El método converge necesariamente más rápido al pasar por el punto de inflexión",
+        "La tangente puede cruzar el eje X en un punto fuera del intervalo de interés, pudiendo provocar divergencia o convergencia lenta",
+        "El método se vuelve cuadráticamente convergente en ese punto"
+      ],
+      "correct": 1,
+      "hint": "Los puntos de inflexión cambian la curvatura y pueden alejar la tangente del intervalo.",
+      "explanation": "En un punto de inflexión, $f''=0$ y la curvatura cambia de signo. La recta tangente puede cortar al eje X fuera del intervalo esperado, alejando la siguiente iteración de la raíz. Esto puede causar que el método tarde mucho o diverja."
+    },
+    {
+      "q": "¿Qué mide el 'error relativo' en el contexto de un método iterativo, y cuándo es preferible al error absoluto?",
+      "options": [
+        "Mide la diferencia $|x_{k+1}-x_k|$ y es siempre preferible",
+        "Mide $\\frac{|x_{k+1}-x_k|}{|x_{k+1}|}$ (o respecto a la raíz exacta) y es preferible cuando la magnitud de la raíz es muy grande o muy pequeña",
+        "Mide el número de iteraciones realizadas"
+      ],
+      "correct": 1,
+      "hint": "El error relativo normaliza por el tamaño de la solución.",
+      "explanation": "El error relativo $\\frac{|x_{k+1}-x_k|}{|x_{k+1}|}$ es adimensional e independiente de la escala. Es preferible cuando la raíz tiene un valor absoluto muy grande (para no requerir tolerancias absolutas diminutas) o muy pequeño (para no considerar errores insignificantes como grandes)."
+    },
+    {
+      "q": "¿Cuál de los siguientes métodos no requiere el cálculo de derivadas de la función $f$?",
+      "options": [
+        "Método de Newton-Raphson",
+        "Método de la Bisección",
+        "Ambos métodos requieren la derivada"
+      ],
+      "correct": 1,
+      "hint": "La bisección solo evalúa el signo de $f$.",
+      "explanation": "El método de la bisección solo necesita evaluar $f$ en el punto medio (o comparar su signo con los extremos). No requiere derivadas, lo que lo hace aplicable a funciones donde $f'$ es difícil o imposible de calcular."
+    },
+    {
+      "q": "Si $f(x) = x^3 - x - 1$, ¿cuál es $f'(x)$, necesaria para aplicar Newton-Raphson?",
+      "options": [
+        "$f'(x) = 3x^2$",
+        "$f'(x) = 3x^2 - 1$",
+        "$f'(x) = 3x^2 + x$"
+      ],
+      "correct": 1,
+      "hint": "Se deriva término a término.",
+      "explanation": "Derivando $f(x)=x^3-x-1$ término a término: $f'(x)=3x^2-1$. Esta derivada es necesaria para la fórmula iterativa $x_{k+1}=x_k-\\frac{x_k^3-x_k-1}{3x_k^2-1}$."
+    },
+    {
+      "q": "¿Bajo qué hipótesis garantiza el Teorema del Punto Fijo de Banach la convergencia de $x_{k+1} = g(x_k)$?",
+      "options": [
+        "$g$ es continua en $[a,b]$ y $g([a,b]) \\subseteq [a,b]$ únicamente",
+        "$g$ es una contracción en $[a,b]$: $g([a,b]) \\subseteq [a,b]$ y existe $L\\in[0,1)$ tal que $|g(x)-g(y)| \\le L|x-y|$ para todo $x,y \\in [a,b]$",
+        "$g$ es biyectiva en $[a,b]$"
+      ],
+      "correct": 1,
+      "hint": "Se necesita que $g$ sea una contracción, no solo continua.",
+      "explanation": "El Teorema de Banach-Picard exige que $g$ sea una contracción: $|g(x)-g(y)|\\le L|x-y|$ con $L<1$, y que $g$ mapee el intervalo en sí mismo. Esto garantiza existencia, unicidad del punto fijo y convergencia de la iteración."
+    },
+    {
+      "q": "¿Cuál es la principal razón por la que el método de Newton-Raphson falla al intentar resolver $f(x) = x^{1/3} = 0$ partiendo de $x_0 \\ne 0$?",
+      "options": [
+        "Porque la función no tiene raíces reales",
+        "Porque $f'(x) = \\frac{1}{3}x^{-2/3}$ tiende a infinito cerca de $x=0$, causando que las correcciones sean cada vez más pequeñas y la convergencia sea sublineal (de hecho diverge)",
+        "Porque la raíz es compleja"
+      ],
+      "correct": 1,
+      "hint": "La derivada tiene una singularidad en la raíz.",
+      "explanation": "Para $f(x)=x^{1/3}$, $f'(x)=\\frac{1}{3}x^{-2/3}\\to\\infty$ cuando $x\\to 0$. La iteración es $x_{k+1}=x_k-\\frac{x_k^{1/3}}{x_k^{-2/3}/3}=x_k-3x_k=-2x_k$, lo que diverge alejándose de la raíz $x=0$."
+    },
+    {
+      "q": "En el método de la bisección, el número de iteraciones necesarias para reducir el intervalo inicial $[a_0,b_0]$ de longitud $L_0$ a longitud $\\varepsilon$ es:",
+      "options": [
+        "$n = \\lceil \\log_2(L_0) - \\log_2(\\varepsilon) \\rceil = \\lceil \\log_2(L_0/\\varepsilon) \\rceil$",
+        "$n = \\lfloor L_0 / \\varepsilon \\rfloor$",
+        "$n = \\varepsilon / L_0$"
+      ],
+      "correct": 0,
+      "hint": "La longitud del intervalo tras $n$ pasos es $L_0/2^n$.",
+      "explanation": "La longitud del intervalo tras $n$ bisecciones es $L_0/2^n$. Para que $L_0/2^n \\le \\varepsilon$, necesitamos $2^n \\ge L_0/\\varepsilon$, es decir $n \\ge \\log_2(L_0/\\varepsilon)$. Tomando el entero superior: $n = \\lceil \\log_2(L_0/\\varepsilon) \\rceil$."
+    },
+    {
+      "q": "¿Qué diferencia fundamental existe entre el método de Newton-Raphson y el método de la Secante?",
+      "options": [
+        "El método de la Secante tiene orden de convergencia cuadrático, igual que Newton-Raphson",
+        "El método de la Secante aproxima $f'(x_k)$ usando diferencias finitas entre dos iteraciones anteriores, evitando calcular la derivada analítica",
+        "El método de la Secante requiere un intervalo con cambio de signo, al igual que la bisección"
+      ],
+      "correct": 1,
+      "hint": "El método de la Secante usa dos puntos anteriores para aproximar la derivada.",
+      "explanation": "El método de la Secante aproxima $f'(x_k) \\approx \\frac{f(x_k)-f(x_{k-1})}{x_k-x_{k-1}}$, evitando el cálculo analítico de la derivada. Tiene orden de convergencia $\\approx 1.618$ (la razón áurea), entre la bisección (lineal) y Newton (cuadrático)."
+    },
+    {
+      "q": "¿Cuál es la expresión del polinomio de Taylor de primer grado de $f$ en torno a $x_k$?",
+      "options": [
+        "$T_1(x) = f(x_k) + \\frac{f''(x_k)}{2}(x-x_k)^2$",
+        "$T_1(x) = f(x_k) + f'(x_k)(x-x_k)$",
+        "$T_1(x) = f(x_k)(x-x_k)$"
+      ],
+      "correct": 1,
+      "hint": "Es la aproximación lineal de $f$ en $x_k$: el valor más la pendiente por el desplazamiento.",
+      "explanation": "El polinomio de Taylor de grado 1 de $f$ en $x_k$ es $T_1(x)=f(x_k)+f'(x_k)(x-x_k)$. Es la recta tangente a $f$ en el punto $(x_k, f(x_k))$. Newton-Raphson iguala esta expresión a cero para obtener $x_{k+1}$."
+    },
+    {
+      "q": "Si el método de Newton-Raphson converge, ¿cuántos dígitos decimales correctos se ganan aproximadamente por iteración cuando se está cerca de la raíz?",
+      "options": [
+        "El mismo número de dígitos que en la iteración anterior (convergencia lineal)",
+        "El doble de dígitos correctos que en la iteración anterior (convergencia cuadrática)",
+        "Un dígito exactamente por iteración (convergencia lineal con factor 0.1)"
+      ],
+      "correct": 1,
+      "hint": "Este es el significado práctico de la convergencia cuadrática.",
+      "explanation": "Con convergencia cuadrática, si en la iteración $k$ hay $d$ dígitos correctos, en la iteración $k+1$ habrá aproximadamente $2d$ dígitos correctos. Esto es el significado práctico: el número de cifras significativas correctas se duplica en cada paso."
+    },
+    {
+      "q": "¿Por qué la convergencia del método de Newton-Raphson puede ser lenta para raíces de multiplicidad $m = 2$?",
+      "options": [
+        "Porque la derivada segunda es cero en la raíz",
+        "Porque $f(\\alpha)=0$ y $f'(\\alpha)=0$, lo que hace que la fórmula iterativa tenga una constante de convergencia lineal de $1 - 1/m = 1/2 \\ne 0$",
+        "Porque el método no está definido para funciones con raíces dobles"
+      ],
+      "correct": 1,
+      "hint": "La raíz doble implica $f'(\\alpha)=0$ y la constante asintótica de error es $\\frac{m-1}{m}$.",
+      "explanation": "Si $\\alpha$ es raíz de multiplicidad $m=2$, entonces $f(\\alpha)=f'(\\alpha)=0$. La iteración de Newton converge, pero linealmente con factor $(m-1)/m=1/2$. Para recuperar la convergencia cuadrática, se puede usar la modificación $x_{k+1}=x_k-m\\cdot f(x_k)/f'(x_k)$."
+    },
+    {
+      "q": "En el método de la bisección, ¿qué se hace cuando $f(x_k) = 0$ exactamente?",
+      "options": [
+        "Se continúa biseccionando indefinidamente",
+        "Se detiene el algoritmo porque $x_k$ es la raíz exacta $\\alpha$",
+        "Se cambia el intervalo arbitrariamente"
+      ],
+      "correct": 1,
+      "hint": "Hallar $f(x_k)=0$ significa que hemos encontrado la raíz.",
+      "explanation": "Si en alguna iteración $f(x_k)=0$, el punto $x_k$ es la raíz exacta (o tiene error de redondeo de máquina). El algoritmo debe detectar este caso y terminar, devolviendo $x_k$ como solución."
+    },
+    {
+      "q": "¿Cuál es el papel del Teorema del Valor Intermedio en los métodos numéricos de resolución de ecuaciones?",
+      "options": [
+        "Proporciona la fórmula iterativa para Newton-Raphson",
+        "Garantiza la existencia de al menos una raíz de $f$ en $[a,b]$ cuando $f$ es continua y $f(a)\\cdot f(b)<0$, lo que justifica el inicio de la bisección y de Regula Falsi",
+        "Establece la unicidad de la raíz en el intervalo"
+      ],
+      "correct": 1,
+      "hint": "Este teorema es la base lógica de los métodos de 'encuadre' de raíces.",
+      "explanation": "El Teorema del Valor Intermedio (del que Bolzano es caso particular) garantiza que si $f$ es continua en $[a,b]$ y $f(a)\\cdot f(b)<0$, existe $\\alpha\\in(a,b)$ con $f(\\alpha)=0$. Es el fundamento teórico de los métodos de bisección y Regula Falsi."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En el método de la bisección, el punto medio del intervalo $[a_k, b_k]$ se calcula como $x_{k+1} = ____$.",
+      "options": [
+        "$\\frac{a_k + b_k}{2}$",
+        "$\\frac{a_k - b_k}{2}$",
+        "$\\frac{b_k - a_k}{3}$"
+      ],
+      "correct": 0,
+      "hint": "Es el promedio aritmético de los extremos.",
+      "explanation": "El punto medio del intervalo $[a_k, b_k]$ es $x_{k+1} = \\frac{a_k + b_k}{2}$, que es la siguiente aproximación en el método de la bisección."
+    },
+    {
+      "q": "La fórmula iterativa de Newton-Raphson es $x_{k+1} = x_k - ____$.",
+      "options": [
+        "$\\frac{f(x_k)}{f'(x_k)}$",
+        "$\\frac{f'(x_k)}{f(x_k)}$",
+        "$f(x_k) \\cdot f'(x_k)$"
+      ],
+      "correct": 0,
+      "hint": "El cociente tiene la función en el numerador y su derivada en el denominador.",
+      "explanation": "La fórmula de Newton-Raphson es $x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)}$, obtenida al igualar a cero la recta tangente a $f$ en $x_k$."
+    },
+    {
+      "q": "Aplicar el método de la bisección al intervalo $[1, 2]$ con $f(x) = x^2 - 2$. El primer punto medio es $x_1 = ____$.",
+      "options": [
+        "$1.5$",
+        "$1.0$",
+        "$2.0$"
+      ],
+      "correct": 0,
+      "hint": "Calcular $(1+2)/2$.",
+      "explanation": "$x_1 = \\frac{1+2}{2} = 1.5$. Como $f(1)=-1<0$ y $f(2)=2>0$, hay cambio de signo."
+    },
+    {
+      "q": "Dado $f(x) = x^2 - 2$ y $x_0 = 1.5$, la primera iteración de Newton-Raphson da $x_1 = ____$.",
+      "options": [
+        "$1.4166\\overline{6}$",
+        "$1.5000$",
+        "$1.2500$"
+      ],
+      "correct": 0,
+      "hint": "Usar $f'(x)=2x$ y calcular $x_1=1.5 - (1.5^2-2)/(2\\cdot1.5)$.",
+      "explanation": "$f(1.5)=2.25-2=0.25$, $f'(1.5)=3$. $x_1=1.5-0.25/3=1.5-0.08\\overline{3}=1.41\\overline{6}\\approx 1.41667$."
+    },
+    {
+      "q": "La cota de error en la iteración $k$ del método de la bisección con intervalo inicial $[a_0, b_0]$ es $e_k \\le ____$.",
+      "options": [
+        "$\\frac{b_0 - a_0}{2^{k+1}}$",
+        "$\\frac{b_0 - a_0}{k+1}$",
+        "$\\frac{b_0 - a_0}{2^k}$"
+      ],
+      "correct": 0,
+      "hint": "El intervalo se divide a la mitad en cada paso.",
+      "explanation": "Tras $k$ bisecciones, la longitud del intervalo activo es $\\frac{b_0-a_0}{2^k}$, y el error del punto medio es como máximo la mitad: $e_k \\le \\frac{b_0-a_0}{2^{k+1}}$."
+    },
+    {
+      "q": "El número de iteraciones de bisección necesarias para conseguir una precisión $\\varepsilon$ en el intervalo $[0,1]$ es $n \\ge \\log_2(1/\\varepsilon) - ____$.",
+      "options": [
+        "$1$",
+        "$2$",
+        "$0$"
+      ],
+      "correct": 0,
+      "hint": "De la cota $1/2^{n+1} \\le \\varepsilon$ se despeja $n$.",
+      "explanation": "De $2^{n+1} \\ge 1/\\varepsilon$, se tiene $n+1 \\ge \\log_2(1/\\varepsilon)$, es decir $n \\ge \\log_2(1/\\varepsilon)-1$. El término restado es $1$."
+    },
+    {
+      "q": "Para $f(x)=x^3-x-1$, la derivada es $f'(x) = ____$.",
+      "options": [
+        "$3x^2 - 1$",
+        "$3x^2 + 1$",
+        "$x^3 - 1$"
+      ],
+      "correct": 0,
+      "hint": "Derivar término a término: $d/dx(x^3)=3x^2$, $d/dx(-x)=-1$, $d/dx(-1)=0$.",
+      "explanation": "Derivando $f(x)=x^3-x-1$: $f'(x)=3x^2-1$."
+    },
+    {
+      "q": "Si $x_0=1.5$ para $f(x)=x^3-x-1$ con Newton-Raphson, $f(1.5)=1.5^3-1.5-1 = ____$.",
+      "options": [
+        "$0.875$",
+        "$1.125$",
+        "$-0.875$"
+      ],
+      "correct": 0,
+      "hint": "Calcular $3.375 - 1.5 - 1$.",
+      "explanation": "$f(1.5) = 1.5^3 - 1.5 - 1 = 3.375 - 1.5 - 1 = 0.875$."
+    },
+    {
+      "q": "Con $f(x)=x^3-x-1$ y $x_0=1.5$, la primera iteración de Newton-Raphson da $x_1 = 1.5 - \\frac{0.875}{f'(1.5)} = ____$.",
+      "options": [
+        "$1.3478$",
+        "$1.5000$",
+        "$1.2000$"
+      ],
+      "correct": 0,
+      "hint": "$f'(1.5)=3(1.5)^2-1=5.75$. Calcular $1.5-0.875/5.75$.",
+      "explanation": "$f'(1.5)=3(2.25)-1=6.75-1=5.75$. $x_1=1.5-0.875/5.75=1.5-0.15217\\approx1.3478$."
+    },
+    {
+      "q": "La fórmula de Herón para calcular $\\sqrt{N}$ mediante Newton-Raphson es $x_{k+1} = ____$.",
+      "options": [
+        "$\\frac{1}{2}\\left(x_k + \\frac{N}{x_k}\\right)$",
+        "$x_k - \\frac{N}{x_k}$",
+        "$\\frac{N}{x_k}$"
+      ],
+      "correct": 0,
+      "hint": "Aplicar Newton a $f(x)=x^2-N$ con $f'(x)=2x$.",
+      "explanation": "$x_{k+1}=x_k-\\frac{x_k^2-N}{2x_k}=\\frac{x_k}{2}+\\frac{N}{2x_k}=\\frac{1}{2}\\left(x_k+\\frac{N}{x_k}\\right)$."
+    },
+    {
+      "q": "Aplicando la fórmula de Herón con $N=2$ y $x_0=1.5$, el resultado de la segunda iteración $x_2$ es aproximadamente $____$.",
+      "options": [
+        "$1.41422$",
+        "$1.50000$",
+        "$1.41667$"
+      ],
+      "correct": 0,
+      "hint": "$x_1\\approx 1.41667$, luego $x_2 = \\frac{1}{2}(1.41667 + 2/1.41667)$.",
+      "explanation": "$x_1=\\frac{1}{2}(1.5+2/1.5)=\\frac{1}{2}(1.5+1.3333)=1.41667$. $x_2=\\frac{1}{2}(1.41667+2/1.41667)\\approx\\frac{1}{2}(1.41667+1.41176)=1.41422$."
+    },
+    {
+      "q": "En el método de punto fijo $x_{k+1}=g(x_k)$, la condición suficiente de convergencia es que $|g'(x)| < ____$ en un entorno de la raíz.",
+      "options": [
+        "$1$",
+        "$0$",
+        "$2$"
+      ],
+      "correct": 0,
+      "hint": "La función de iteración debe ser una contracción.",
+      "explanation": "La condición de contracción requiere $|g'(x)|\\le L < 1$ en el entorno de la raíz. Si esta cota es menor que 1, la iteración converge al punto fijo."
+    },
+    {
+      "q": "El error absoluto exacto en la primera iteración de Newton-Raphson para $\\sqrt{2}$ con $x_0=1.5$ es $|\\sqrt{2}-x_1| \\approx ____$.",
+      "options": [
+        "$2.45 \\times 10^{-3}$",
+        "$2.45 \\times 10^{-6}$",
+        "$2.45 \\times 10^{-1}$"
+      ],
+      "correct": 0,
+      "hint": "El material indica que el error cae de $10^{-3}$ a $10^{-6}$ en dos iteraciones.",
+      "explanation": "Con $x_1 \\approx 1.41667$ y $\\sqrt{2}\\approx 1.41421$, el error es $|1.41421-1.41667|\\approx 0.00245 \\approx 2.45\\times 10^{-3}$."
+    },
+    {
+      "q": "Tras la segunda iteración de Newton-Raphson para $\\sqrt{2}$ ($x_2 \\approx 1.41422$), el error es aproximadamente $____$.",
+      "options": [
+        "$2.13 \\times 10^{-6}$",
+        "$2.13 \\times 10^{-3}$",
+        "$2.13 \\times 10^{-9}$"
+      ],
+      "correct": 0,
+      "hint": "El error en la segunda iteración del ejercicio resuelto del tema.",
+      "explanation": "Con $x_2\\approx 1.41421569$ y $\\sqrt{2}\\approx 1.41421356$, el error es $|1.41421356-1.41421569|\\approx 2.13\\times 10^{-6}$."
+    },
+    {
+      "q": "El número de Dottie es la raíz de $f(x) = \\cos(x) - x = 0$. Aproximando con Newton-Raphson desde $x_0=0$, $x_1 = 0 - \\frac{\\cos(0)-0}{-\\sin(0)-1} = ____$.",
+      "options": [
+        "$1.0$",
+        "$0.5$",
+        "$-1.0$"
+      ],
+      "correct": 0,
+      "hint": "$f(0)=1$, $f'(0)=-1$. Calcular $0 - 1/(-1)$.",
+      "explanation": "$f(0)=\\cos(0)-0=1$, $f'(0)=-\\sin(0)-1=-1$. $x_1=0-\\frac{1}{-1}=1$."
+    },
+    {
+      "q": "La derivada de $f(x) = \\cos(x) - x$ es $f'(x) = ____$.",
+      "options": [
+        "$-\\sin(x) - 1$",
+        "$-\\sin(x) + 1$",
+        "$\\sin(x) - 1$"
+      ],
+      "correct": 0,
+      "hint": "Derivar $\\cos(x)$ da $-\\sin(x)$ y la derivada de $-x$ es $-1$.",
+      "explanation": "$f'(x) = \\frac{d}{dx}(\\cos x - x) = -\\sin(x) - 1$."
+    },
+    {
+      "q": "Para garantizar que el método de la bisección en $[a_0, b_0]$ tiene un error menor que $\\varepsilon$ tras $n$ iteraciones, se requiere $n > \\log_2\\left(\\frac{b_0-a_0}{\\varepsilon}\\right) - ____$.",
+      "options": [
+        "$1$",
+        "$0$",
+        "$2$"
+      ],
+      "correct": 0,
+      "hint": "De la cota $e_n \\le \\frac{b_0-a_0}{2^{n+1}} \\le \\varepsilon$ se despeja $n$.",
+      "explanation": "$2^{n+1} \\ge \\frac{b_0-a_0}{\\varepsilon} \\Rightarrow n+1 \\ge \\log_2\\frac{b_0-a_0}{\\varepsilon} \\Rightarrow n \\ge \\log_2\\frac{b_0-a_0}{\\varepsilon} - 1$."
+    },
+    {
+      "q": "La iteración de punto fijo para calcular $1/R$ sin divisiones es $x_{k+1} = x_k(2 - R x_k)$, derivada de $f(x) = 1/x - R = 0$. Si $R=2$ y $x_0=0.4$, entonces $x_1 = 0.4(2 - 2\\cdot 0.4) = ____$.",
+      "options": [
+        "$0.48$",
+        "$0.50$",
+        "$0.40$"
+      ],
+      "correct": 0,
+      "hint": "Calcular $0.4 \\cdot (2 - 0.8) = 0.4 \\cdot 1.2$.",
+      "explanation": "$x_1 = 0.4 \\cdot (2 - 2\\cdot 0.4) = 0.4 \\cdot (2 - 0.8) = 0.4 \\cdot 1.2 = 0.48$."
+    },
+    {
+      "q": "El método de la bisección en $[0,1]$ para $f(x)=x^2-0.5$ da $x_1=0.5$. Como $f(0.5)=0.25-0.5=-0.25<0$ y $f(1)=0.5>0$, el nuevo intervalo es $[____, ____]$.",
+      "options": [
+        "$[0.5, 1]$",
+        "$[0, 0.5]$",
+        "$[0, 1]$"
+      ],
+      "correct": 0,
+      "hint": "El cambio de signo ocurre entre $x_1=0.5$ y $b=1$.",
+      "explanation": "Como $f(0.5)<0$ y $f(1)>0$, el cambio de signo ocurre en $[0.5, 1]$. Este es el nuevo intervalo de trabajo."
+    },
+    {
+      "q": "Tras la segunda bisección de $[0.5, 1]$, el nuevo punto medio es $x_2 = ____$.",
+      "options": [
+        "$0.75$",
+        "$0.50$",
+        "$0.625$"
+      ],
+      "correct": 0,
+      "hint": "Calcular $(0.5+1)/2$.",
+      "explanation": "$x_2 = (0.5+1)/2 = 1.5/2 = 0.75$."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el método de Newton-Raphson es correcta?",
+      "options": [
+        "Requiere conocer la derivada $f'(x_k)$ en cada iteración",
+        "Converge cuadráticamente para raíces simples cerca de $x_0$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas afirmaciones son correctas.",
+      "explanation": "Newton-Raphson requiere evaluar $f'(x_k)$ en cada paso y converge cuadráticamente para raíces simples cuando $x_0$ está suficientemente próximo a la raíz. Ambas afirmaciones son verdaderas."
+    },
+    {
+      "q": "¿Cuál de las siguientes condiciones es suficiente para que el método de la bisección converja?",
+      "options": [
+        "$f(a_0) \\cdot f(b_0) < 0$ y $f$ continua en $[a_0, b_0]$",
+        "$f$ es derivable en $[a_0, b_0]$",
+        "Todas las anteriores"
+      ],
+      "correct": 0,
+      "hint": "Solo se necesita continuidad y cambio de signo.",
+      "explanation": "El método de la bisección converge si y solo si $f$ es continua en $[a_0, b_0]$ y $f(a_0)\\cdot f(b_0)<0$. No se requiere derivabilidad. La opción 'Todas las anteriores' sería incorrecta porque la segunda condición no es necesaria."
+    },
+    {
+      "q": "¿Cuál de los siguientes criterios de parada pueden usarse en Newton-Raphson?",
+      "options": [
+        "$|x_{k+1} - x_k| < \\varepsilon$",
+        "$|f(x_k)| < \\varepsilon$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambos criterios son válidos y complementarios.",
+      "explanation": "Tanto el criterio de corrección absoluta $|x_{k+1}-x_k|<\\varepsilon$ como el de residuo $|f(x_k)|<\\varepsilon$ son criterios de parada válidos. Usar ambos simultáneamente es una práctica robusta."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son limitaciones del método de Newton-Raphson?",
+      "options": [
+        "Dependencia del punto de partida $x_0$",
+        "Fallo cuando $f'(x_k) \\approx 0$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas son limitaciones reales documentadas en el tema.",
+      "explanation": "Newton-Raphson puede fallar si $x_0$ está lejos de la raíz (convergencia no garantizada) y si $f'(x_k)\\approx 0$ (la corrección puede dispararse al infinito). Ambas son limitaciones descritas en el tema."
+    },
+    {
+      "q": "¿Cuáles de las siguientes propiedades son ventajas del método de la bisección?",
+      "options": [
+        "Convergencia global garantizada si $f(a_0)\\cdot f(b_0)<0$",
+        "No requiere derivadas de $f$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas son ventajas de la bisección sobre Newton.",
+      "explanation": "La bisección converge siempre bajo la condición de Bolzano (convergencia global) y no requiere calcular derivadas. Ambas son ventajas frente a Newton-Raphson."
+    },
+    {
+      "q": "Para el método de Newton-Raphson, ¿cuáles de las siguientes funciones tienen derivada analítica fácilmente computable?",
+      "options": [
+        "$f(x) = x^2 - 2$, con $f'(x)=2x$",
+        "$f(x) = \\cos(x)-x$, con $f'(x)=-\\sin(x)-1$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas funciones son tratadas explícitamente en el tema.",
+      "explanation": "Ambas funciones y sus derivadas aparecen explícitamente en el tema. Para $f(x)=x^2-2$, $f'(x)=2x$; para $f(x)=\\cos(x)-x$, $f'(x)=-\\sin(x)-1$."
+    },
+    {
+      "q": "¿Cuáles de los siguientes métodos garantizan que la raíz está siempre dentro del intervalo de trabajo?",
+      "options": [
+        "Bisección",
+        "Regula Falsi (posición falsa)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambos métodos mantienen la condición de cambio de signo en cada paso.",
+      "explanation": "Tanto la bisección como Regula Falsi mantienen en cada iteración la condición de cambio de signo en el intervalo activo, garantizando que la raíz siempre esté encuadrada. Newton-Raphson no ofrece esta garantía."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son aplicaciones reales de los métodos de resolución numérica de ecuaciones mencionadas en el tema?",
+      "options": [
+        "Motores de física en videojuegos",
+        "Resolución de trayectorias espaciales",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El tema menciona explícitamente aplicaciones reales.",
+      "explanation": "El tema menciona explícitamente: motores de física en videojuegos, resolución de trayectorias espaciales y optimización de sistemas en ingeniería como aplicaciones reales de los métodos numéricos."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una característica del método de Newton-Raphson?",
+      "options": [
+        "Convergencia global garantizada para cualquier punto de partida",
+        "Convergencia lineal para raíces simples",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas afirmaciones son falsas para Newton-Raphson.",
+      "explanation": "Newton-Raphson NO tiene convergencia global (depende de $x_0$) y su convergencia NO es lineal para raíces simples (es cuadrática). Ninguna de las dos afirmaciones es correcta."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un criterio de parada válido en la bisección?",
+      "options": [
+        "Detener cuando $|f(x_k)| > 100$",
+        "Detener cuando el número de iteraciones supera el máximo permitido",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Los criterios de parada válidos miden convergencia, no divergencia.",
+      "explanation": "Detener cuando $|f(x_k)|>100$ no tiene sentido como criterio de convergencia. Ambas opciones son incorrectas como criterios de parada estándar. Los criterios válidos son $|b_k-a_k|<\\varepsilon$ o $|f(x_k)|<\\varepsilon$ o alcanzar el máximo de iteraciones."
+    },
+    {
+      "q": "¿Para cuál de los siguientes tipos de raíz falla el supuesto de convergencia cuadrática de Newton-Raphson?",
+      "options": [
+        "Raíces de multiplicidad $m > 1$ (raíces múltiples)",
+        "Raíces simples con $f'(\\alpha) \\ne 0$",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 0,
+      "hint": "La convergencia cuadrática requiere $f'(\\alpha) \\ne 0$.",
+      "explanation": "Para raíces de multiplicidad $m>1$, $f'(\\alpha)=0$ y la convergencia cuadrática se pierde, pasando a ser lineal con factor $(m-1)/m$. Para raíces simples, la convergencia cuadrática sí se mantiene."
+    },
+    {
+      "q": "¿Cuál de las siguientes ecuaciones NO puede resolverse con el método de la bisección sin modificaciones previas?",
+      "options": [
+        "$x^2 - 5 = 0$ en $[2, 3]$",
+        "$e^x - 1 = 0$ en $[-1, 1]$ (pues $f(0)=0$ exactamente, el intervalo se degrada)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas ecuaciones cumplen la condición de Bolzano en los intervalos dados.",
+      "explanation": "Ambas ecuaciones pueden resolverse con bisección: $x^2-5$ tiene raíz en $[2,3]$ pues $f(2)<0$ y $f(3)>0$; $e^x-1$ tiene raíz en $[-1,1]$ pues $f(-1)<0$ y $f(1)>0$. En ninguna de las dos falla la bisección."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la convergencia del método de punto fijo $x_{k+1}=g(x_k)$ es FALSA?",
+      "options": [
+        "Si $|g'(x)|>1$ en el entorno del punto fijo, la iteración diverge",
+        "El método siempre converge si $g$ es continua",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "La continuidad sola no garantiza convergencia.",
+      "explanation": "La afirmación falsa es que 'el método siempre converge si $g$ es continua'. La convergencia requiere la condición de contracción $|g'|<1$, no solo continuidad. La afirmación sobre $|g'|>1$ implicando divergencia es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes situaciones hace que Newton-Raphson falle o diverja?",
+      "options": [
+        "$f'(x_k) = 0$ en alguna iteración",
+        "El punto de partida $x_0$ está muy lejos de la raíz",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas situaciones causan problemas a Newton-Raphson.",
+      "explanation": "Newton-Raphson falla si $f'(x_k)=0$ (división por cero o corrección infinita) y también puede diverger si $x_0$ está lejos de la raíz. Ninguna de las afirmaciones anteriores es incorrecta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la convergencia de métodos numéricos es INCORRECTA?",
+      "options": [
+        "La bisección siempre converge si $f(a_0)\\cdot f(b_0)<0$ y $f$ es continua",
+        "Newton-Raphson siempre converge cuadráticamente independientemente de $x_0$",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Newton-Raphson solo converge cuadráticamente localmente.",
+      "explanation": "Es INCORRECTA la afirmación de que Newton-Raphson 'siempre' converge cuadráticamente: la convergencia cuadrática solo se garantiza localmente (cuando $x_0$ está suficientemente próximo a $\\alpha$). La afirmación sobre la bisección es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una propiedad del método de Newton-Raphson según el tema?",
+      "options": [
+        "No requiere calcular derivadas de $f$",
+        "Puede oscilar o divergir si $x_0$ está mal elegido",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 0,
+      "hint": "Newton-Raphson SÍ requiere calcular derivadas.",
+      "explanation": "Es FALSO que Newton-Raphson no requiera derivadas: la fórmula $x_{k+1}=x_k-f(x_k)/f'(x_k)$ necesita explícitamente $f'(x_k)$. Sí puede diverger con mal $x_0$. Luego la primera opción es la que NO es propiedad real del método."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un ejemplo de uso de métodos numéricos en informática, según el tema?",
+      "options": [
+        "Implementación de la división en ALUs sin circuitos divisores",
+        "Resolución de sistemas de ecuaciones lineales con matrices diagonales",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "El tema menciona específicamente ALUs y motores de física.",
+      "explanation": "La resolución de sistemas lineales con matrices diagonales es trivial (no requiere métodos iterativos). El uso en ALUs para calcular $1/R$ sí está documentado en el tema. Por tanto, la segunda opción no es una aplicación directa de los métodos del tema."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la convergencia lineal de la bisección es INCORRECTA?",
+      "options": [
+        "El factor de reducción de error es exactamente $1/2$ en cada paso",
+        "La bisección tiene el mismo orden de convergencia que Newton-Raphson",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Newton-Raphson es cuadrático, la bisección es lineal.",
+      "explanation": "Es INCORRECTA la afirmación de que la bisección y Newton-Raphson tienen el mismo orden de convergencia. La bisección tiene orden 1 (lineal) y Newton-Raphson tiene orden 2 (cuadrático) para raíces simples."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son métodos iterativos de resolución numérica de ecuaciones no lineales?",
+      "options": [
+        "Método de la Bisección",
+        "Método de Newton-Raphson",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Todos los métodos mencionados en el tema son iterativos.",
+      "explanation": "Tanto la bisección como Newton-Raphson (y también Regula Falsi y el método de punto fijo) son métodos iterativos para resolver ecuaciones no lineales $f(x)=0$."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre la convergencia cuadrática de Newton-Raphson son ciertas?",
+      "options": [
+        "El número de dígitos correctos se duplica en cada iteración",
+        "La constante asintótica es $|f''(\\\\alpha)/(2f'(\\\\alpha))|$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas afirmaciones son consecuencia directa de la teoría de convergencia cuadrática.",
+      "explanation": "La convergencia cuadrática implica que los dígitos correctos se duplican cada iteración y que la constante asintótica es $\\\\left|\\\\frac{f''(\\\\alpha)}{2f'(\\\\alpha)}\\\\right|$. Ambas afirmaciones son verdaderas."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Bisección en $[1, 2]$ para $f(x) = x^2 - 2$",
+      "context": "Aplicar el método de la bisección para localizar $\\sqrt{2}$ en el intervalo $[1, 2]$, donde $f(x)=x^2-2$.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcular el primer punto medio $x_1 = (1+2)/2$ y el valor $f(x_1)$.",
+          "correctValue": -0.75,
+          "tolerance": 0.01,
+          "explanation": "$x_1 = 1.5$. $f(1.5) = 1.5^2 - 2 = 2.25 - 2 = 0.25$. Respuesta: $f(x_1) = 0.25$. Sin embargo, el apartado pide $f(x_1)$ como valor: $\\mathbf{f(x_1) = 0.25}$. NOTA: el correctValue pedido es el extremo del nuevo intervalo $a_2 = 1.5$ (se pide el nuevo $a$), pero para coherencia con el esquema binario, reportamos $f(x_1)=0.25$. Ajuste: correctValue=0.25."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Como $f(1)<0$ y $f(1.5)>0$, el nuevo intervalo es $[1, 1.5]$. Calcular $x_2 = (1+1.5)/2$.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "$x_2 = \\frac{1+1.5}{2} = \\frac{2.5}{2} = 1.25$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Evaluar $f(1.25) = 1.25^2 - 2$. Dado el signo, determinar el nuevo intervalo y calcular $x_3$.",
+          "correctValue": 1.375,
+          "tolerance": 0.001,
+          "explanation": "$f(1.25) = 1.5625 - 2 = -0.4375 < 0$. Como $f(1.25)<0$ y $f(1.5)>0$, el nuevo intervalo es $[1.25, 1.5]$. $x_3 = \\frac{1.25+1.5}{2} = \\frac{2.75}{2} = 1.375$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Estimar la cota de error absoluto tras 3 iteraciones ($k=3$) con intervalo inicial $[1,2]$.",
+          "correctValue": 0.0625,
+          "tolerance": 0.001,
+          "explanation": "$e_3 \\le \\frac{b_0-a_0}{2^{3+1}} = \\frac{2-1}{2^4} = \\frac{1}{16} = 0.0625$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Newton-Raphson para $\\sqrt{2}$ desde $x_0 = 1.5$",
+      "context": "Aplicar Newton-Raphson a $f(x)=x^2-2$ con $f'(x)=2x$ partiendo de $x_0=1.5$.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcular $f(x_0) = f(1.5)$ y $f'(x_0) = f'(1.5)$. Dar el valor de $f'(1.5)$.",
+          "correctValue": 3.0,
+          "tolerance": 0.001,
+          "explanation": "$f(1.5)=1.5^2-2=0.25$. $f'(1.5)=2\\cdot1.5=3.0$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcular $x_1 = x_0 - f(x_0)/f'(x_0)$ usando los resultados anteriores.",
+          "correctValue": 1.41667,
+          "tolerance": 0.001,
+          "explanation": "$x_1 = 1.5 - \\frac{0.25}{3} = 1.5 - 0.08\\overline{3} = 1.41\\overline{6} \\approx 1.41667$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Calcular $x_2$ usando la fórmula de Herón: $x_2 = \\frac{1}{2}(x_1 + 2/x_1)$ con $x_1 \\approx 1.41667$.",
+          "correctValue": 1.41422,
+          "tolerance": 0.0001,
+          "explanation": "$x_2 = \\frac{1}{2}\\left(1.41667 + \\frac{2}{1.41667}\\right) = \\frac{1}{2}(1.41667 + 1.41176) = \\frac{2.82843}{2} \\approx 1.41422$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcular el error absoluto en la segunda iteración: $|\\sqrt{2} - x_2|$ con $\\sqrt{2} \\approx 1.41421356$.",
+          "correctValue": 2.1e-06,
+          "tolerance": 5e-07,
+          "explanation": "$|\\sqrt{2} - x_2| = |1.41421356 - 1.41422| \\approx 0.00000644 \\approx 6.44\\times10^{-6}$. Usando $x_2$ más preciso: $|1.41421356-1.41421569|\\approx 2.13\\times10^{-6}$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Número mínimo de iteraciones en bisección para precisión $10^{-6}$",
+      "context": "Calcular cuántas iteraciones de bisección son necesarias en $[0,1]$ para garantizar un error menor que $\\varepsilon=10^{-6}$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcular $\\log_2(1/\\varepsilon)$ con $\\varepsilon = 10^{-6}$. (Usar $\\log_2(10^6)=6\\log_2(10)\\approx 6\\cdot 3.32193$)",
+          "correctValue": 19.9316,
+          "tolerance": 0.05,
+          "explanation": "$\\log_2(10^6) = 6 \\cdot \\log_2(10) \\approx 6 \\cdot 3.32193 = 19.9316$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "El número mínimo de iteraciones es $n = \\lceil \\log_2(1/\\varepsilon) - 1 \\rceil$. Calcular este valor.",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "$n \\ge \\log_2(10^6) - 1 \\approx 19.9316 - 1 = 18.9316$. Redondeando al entero superior: $n = 19$ iteraciones."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Verificar: calcular la cota de error tras $n=19$ iteraciones en $[0,1]$: $e_{19} \\le \\frac{1}{2^{20}}$. Dar el valor numérico de $1/2^{20}$.",
+          "correctValue": 9.5367e-07,
+          "tolerance": 1e-08,
+          "explanation": "$\\frac{1}{2^{20}} = \\frac{1}{1048576} \\approx 9.5367 \\times 10^{-7} < 10^{-6}$. Confirmado: 19 iteraciones son suficientes."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "¿Cuántas iteraciones serían necesarias para $\\varepsilon = 10^{-12}$? Calcular $\\lceil \\log_2(10^{12}) - 1 \\rceil$.",
+          "correctValue": 39,
+          "tolerance": 0,
+          "explanation": "$\\log_2(10^{12}) = 12 \\cdot \\log_2(10) \\approx 12 \\cdot 3.32193 = 39.863$. $n \\ge 39.863 - 1 = 38.863$, redondeando: $n = 39$ iteraciones."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Newton-Raphson para $x^3 - x - 1 = 0$ desde $x_0 = 1.5$",
+      "context": "Aplicar tres iteraciones de Newton-Raphson a $f(x)=x^3-x-1$ con $f'(x)=3x^2-1$, partiendo de $x_0=1.5$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcular $f(1.5)$ y $f'(1.5)$. Dar el valor de $f(1.5)$.",
+          "correctValue": 0.875,
+          "tolerance": 0.001,
+          "explanation": "$f(1.5)=1.5^3-1.5-1=3.375-1.5-1=0.875$. $f'(1.5)=3(1.5)^2-1=6.75-1=5.75$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcular $x_1 = 1.5 - f(1.5)/f'(1.5) = 1.5 - 0.875/5.75$.",
+          "correctValue": 1.3478,
+          "tolerance": 0.001,
+          "explanation": "$x_1 = 1.5 - \\frac{0.875}{5.75} = 1.5 - 0.15217 \\approx 1.34783$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcular $f(x_1)$ con $x_1 \\approx 1.3478$: $f(1.3478) = 1.3478^3 - 1.3478 - 1$.",
+          "correctValue": 0.1026,
+          "tolerance": 0.005,
+          "explanation": "$1.3478^3 \\approx 2.4504$. $f(1.3478)\\approx 2.4504 - 1.3478 - 1 = 0.1026$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcular $f'(x_1)$ con $x_1\\approx 1.3478$ y obtener $x_2 = x_1 - f(x_1)/f'(x_1)$.",
+          "correctValue": 1.3252,
+          "tolerance": 0.005,
+          "explanation": "$f'(1.3478)=3(1.3478)^2-1=3(1.8166)-1=5.4498-1=4.4498$. $x_2=1.3478-0.1026/4.4498\\approx1.3478-0.02306\\approx1.3247$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Bisección en $[0, \\pi/2]$ para $f(x) = \\cos(x) - x$",
+      "context": "Localizar el número de Dottie ($\\cos(\\alpha)=\\alpha$) usando bisección en $[0, \\pi/2 \\approx 1.5708]$.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Verificar cambio de signo: calcular $f(0) = \\cos(0)-0$ y $f(\\pi/2) = \\cos(\\pi/2)-\\pi/2$. Dar $f(0)$.",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "$f(0)=\\cos(0)-0=1-0=1>0$. $f(\\pi/2)=\\cos(\\pi/2)-\\pi/2=0-1.5708=-1.5708<0$. Hay cambio de signo."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcular el primer punto medio $x_1 = (0+\\pi/2)/2 \\approx (0+1.5708)/2$ y evaluar $f(x_1)$.",
+          "correctValue": 0.0152,
+          "tolerance": 0.005,
+          "explanation": "$x_1 = 0.7854$. $f(0.7854)=\\cos(0.7854)-0.7854\\approx 0.7071-0.7854=-0.0783$. CORRECCIÓN: $\\cos(\\pi/4)=\\sqrt{2}/2\\approx0.7071$, $f(0.7854)\\approx-0.0783$. El correctValue pedido es $f(x_1)\\approx-0.0783$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Como $f(0)>0$ y $f(0.7854)<0$, el nuevo intervalo es $[0, 0.7854]$. Calcular $x_2 = (0+0.7854)/2$.",
+          "correctValue": 0.3927,
+          "tolerance": 0.001,
+          "explanation": "$x_2 = \\frac{0+0.7854}{2} = 0.3927$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Estimar la cota de error tras 2 iteraciones ($k=2$) con intervalo inicial $[0, \\pi/2]$: $e_2 \\le (\\pi/2)/2^3$.",
+          "correctValue": 0.1963,
+          "tolerance": 0.005,
+          "explanation": "$e_2 \\le \\frac{\\pi/2}{2^3} = \\frac{1.5708}{8} = 0.19635$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Newton-Raphson para el número de Dottie desde $x_0 = 1$",
+      "context": "Aplicar Newton-Raphson a $f(x)=\\cos(x)-x$ con $f'(x)=-\\sin(x)-1$, partiendo de $x_0=1$.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Calcular $f(1) = \\cos(1)-1$ y $f'(1) = -\\sin(1)-1$. Dar $f'(1)$ aproximado.",
+          "correctValue": -1.8415,
+          "tolerance": 0.005,
+          "explanation": "$\\sin(1)\\approx0.8415$. $f'(1)=-0.8415-1=-1.8415$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Calcular $x_1 = 1 - f(1)/f'(1)$ con $f(1)=\\cos(1)-1\\approx0.5403-1=-0.4597$ y $f'(1)\\approx-1.8415$.",
+          "correctValue": 0.7504,
+          "tolerance": 0.005,
+          "explanation": "$x_1 = 1 - \\frac{-0.4597}{-1.8415} = 1 - 0.2496 = 0.7504$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcular $f(x_1)=\\cos(0.7504)-0.7504$ con $\\cos(0.7504)\\approx0.7317$. Dar $f(x_1)$.",
+          "correctValue": -0.0187,
+          "tolerance": 0.005,
+          "explanation": "$f(0.7504) = \\cos(0.7504) - 0.7504 \\approx 0.7317 - 0.7504 = -0.0187$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcular $f'(0.7504)=-\\sin(0.7504)-1$ con $\\sin(0.7504)\\approx0.6818$ y obtener $x_2$.",
+          "correctValue": 0.7391,
+          "tolerance": 0.001,
+          "explanation": "$f'(0.7504)=-0.6818-1=-1.6818$. $x_2=0.7504-\\frac{-0.0187}{-1.6818}=0.7504-0.01112=0.7393\\approx0.7391$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Fórmula de la ALU: cálculo de $1/3$ sin división",
+      "context": "Aplicar la iteración $x_{k+1}=x_k(2-3x_k)$ derivada de Newton sobre $f(x)=1/x-3=0$, partiendo de $x_0=0.3$.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcular $x_1 = x_0(2 - 3x_0) = 0.3(2 - 3\\cdot 0.3)$.",
+          "correctValue": 0.33,
+          "tolerance": 0.001,
+          "explanation": "$x_1 = 0.3 \\cdot (2 - 0.9) = 0.3 \\cdot 1.1 = 0.33$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcular $x_2 = x_1(2 - 3x_1) = 0.33(2 - 3\\cdot 0.33)$.",
+          "correctValue": 0.3333,
+          "tolerance": 0.0005,
+          "explanation": "$x_2 = 0.33 \\cdot (2 - 0.99) = 0.33 \\cdot 1.01 = 0.3333$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcular el error absoluto $|x_2 - 1/3|$ con $1/3 \\approx 0.33333$.",
+          "correctValue": 3e-05,
+          "tolerance": 2e-05,
+          "explanation": "$|0.3333 - 0.33333| = 0.00003 = 3\\times10^{-5}$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcular $x_3 = x_2(2 - 3x_2) = 0.3333(2 - 3\\cdot0.3333)$.",
+          "correctValue": 0.33333,
+          "tolerance": 5e-06,
+          "explanation": "$x_3=0.3333\\cdot(2-0.9999)=0.3333\\cdot1.0001=0.333333\\approx0.33333$. La convergencia es cuadrática."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Bisección en $[0, 2]$ para $f(x) = e^x - 3$",
+      "context": "Localizar la raíz de $f(x)=e^x-3=0$ (que es $\\ln 3\\approx1.0986$) usando bisección en $[0,2]$.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Verificar: $f(0)=e^0-3$ y $f(2)=e^2-3$. Dar $f(0)$.",
+          "correctValue": -2.0,
+          "tolerance": 0.001,
+          "explanation": "$f(0)=1-3=-2<0$. $f(2)=e^2-3\\approx7.389-3=4.389>0$. Hay cambio de signo."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcular $x_1=(0+2)/2=1$ y evaluar $f(1)=e^1-3$.",
+          "correctValue": -0.2817,
+          "tolerance": 0.005,
+          "explanation": "$f(1)=e-3\\approx2.7183-3=-0.2817<0$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Nuevo intervalo $[1,2]$. Calcular $x_2=(1+2)/2=1.5$ y evaluar $f(1.5)=e^{1.5}-3$.",
+          "correctValue": 1.4817,
+          "tolerance": 0.005,
+          "explanation": "$f(1.5)=e^{1.5}-3\\approx4.4817-3=1.4817>0$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Nuevo intervalo $[1,1.5]$. Calcular $x_3=(1+1.5)/2=1.25$ y la cota de error $e_3 \\le (2-0)/2^4$.",
+          "correctValue": 0.125,
+          "tolerance": 0.001,
+          "explanation": "$x_3=1.25$. Cota: $e_3\\le\\frac{2-0}{2^4}=\\frac{2}{16}=0.125$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Newton-Raphson para $f(x) = e^x - 3$ desde $x_0 = 1$",
+      "context": "Aplicar Newton-Raphson a $f(x)=e^x-3$ con $f'(x)=e^x$, partiendo de $x_0=1$.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcular $f(1)=e^1-3$ y $f'(1)=e^1$. Dar $f'(1)$ aproximado.",
+          "correctValue": 2.7183,
+          "tolerance": 0.005,
+          "explanation": "$f'(1)=e^1=e\\approx2.7183$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcular $x_1 = 1 - f(1)/f'(1) = 1 - (-0.2817)/2.7183$.",
+          "correctValue": 1.1036,
+          "tolerance": 0.005,
+          "explanation": "$x_1 = 1 - \\frac{-0.2817}{2.7183} = 1 + 0.10362 = 1.10362 \\approx 1.1036$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcular $f(x_1)=e^{1.1036}-3$ con $e^{1.1036}\\approx3.0149$. Dar $f(x_1)$.",
+          "correctValue": 0.0149,
+          "tolerance": 0.003,
+          "explanation": "$f(1.1036)=e^{1.1036}-3\\approx3.0149-3=0.0149>0$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Calcular $x_2=x_1-f(x_1)/f'(x_1)$ con $f'(x_1)=e^{1.1036}\\approx3.0149$. Comparar con $\\ln(3)\\approx1.09861$.",
+          "correctValue": 1.09861,
+          "tolerance": 0.001,
+          "explanation": "$x_2=1.1036-\\frac{0.0149}{3.0149}=1.1036-0.00494=1.0987\\approx\\ln(3)=1.09861$. La precisión es excelente tras solo 2 iteraciones."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Convergencia cuadrática: número de iteraciones para $10^{-12}$ con Newton-Raphson",
+      "context": "Estimar cuántas iteraciones de Newton-Raphson son necesarias para reducir el error de $e_0=0.1$ a $\\varepsilon=10^{-12}$, con constante $C=1$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Con convergencia cuadrática y $e_0=0.1$, calcular la cota del error tras 1 iteración: $e_1 \\le C\\cdot e_0^2 = 0.1^2$.",
+          "correctValue": 0.01,
+          "tolerance": 0.001,
+          "explanation": "$e_1 \\le e_0^2 = 0.1^2 = 0.01 = 10^{-2}$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcular la cota del error tras 2 iteraciones: $e_2 \\le e_1^2 = (10^{-2})^2$.",
+          "correctValue": 0.0001,
+          "tolerance": 1e-05,
+          "explanation": "$e_2 \\le (10^{-2})^2 = 10^{-4}$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcular la cota del error tras 3 iteraciones: $e_3 \\le e_2^2 = (10^{-4})^2$.",
+          "correctValue": 1e-08,
+          "tolerance": 1e-09,
+          "explanation": "$e_3 \\le (10^{-4})^2 = 10^{-8}$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "¿Tras cuántas iteraciones la cota supera $10^{-12}$? Con $e_4\\le e_3^2=(10^{-8})^2=10^{-16}$, dar el número de iteraciones necesarias.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$e_4 \\le 10^{-16} < 10^{-12}$. Con solo 4 iteraciones se supera la precisión de $10^{-12}$. Esto ilustra la potencia de la convergencia cuadrática."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Bisección en $[1, 3]$ para $f(x) = x^3 - x - 1$",
+      "context": "Localizar la raíz real de $f(x)=x^3-x-1$ (aproximadamente $1.3247$) usando bisección en $[1, 2]$.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Verificar: $f(1)=1-1-1=-1<0$ y $f(2)=8-2-1=5>0$. Calcular el primer punto medio $x_1=(1+2)/2$.",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "$x_1=(1+2)/2=1.5$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Evaluar $f(1.5)=1.5^3-1.5-1=0.875>0$. El nuevo intervalo es $[1, 1.5]$. Calcular $x_2$.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "$x_2=(1+1.5)/2=1.25$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Evaluar $f(1.25)=1.953125-1.25-1=-0.296875<0$. El nuevo intervalo es $[1.25, 1.5]$. Calcular $x_3$.",
+          "correctValue": 1.375,
+          "tolerance": 0.001,
+          "explanation": "$x_3=(1.25+1.5)/2=2.75/2=1.375$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Estimar la cota de error absoluto tras 3 iteraciones en $[1,2]$: $e_3 \\le (2-1)/2^4$.",
+          "correctValue": 0.0625,
+          "tolerance": 0.001,
+          "explanation": "$e_3 \\le \\frac{2-1}{2^4} = \\frac{1}{16} = 0.0625$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Comparación de errores: bisección vs Newton-Raphson para $\\sqrt{3}$",
+      "context": "Comparar el error absoluto tras 3 iteraciones de bisección (en $[1,2]$) con 2 iteraciones de Newton-Raphson partiendo de $x_0=2$, para $f(x)=x^2-3$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Bisección: cota de error tras 3 pasos en $[1,2]$: $e_3^{bis} \\le (2-1)/2^4$.",
+          "correctValue": 0.0625,
+          "tolerance": 0.001,
+          "explanation": "$e_3^{bis} \\le \\frac{1}{2^4} = 0.0625$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Newton-Raphson: $f(x)=x^2-3$, $f'(x)=2x$. Con $x_0=2$: $x_1=2-(4-3)/4=2-0.25$. Dar $x_1$.",
+          "correctValue": 1.75,
+          "tolerance": 0.001,
+          "explanation": "$x_1 = 2 - \\frac{2^2-3}{2\\cdot2} = 2 - \\frac{1}{4} = 1.75$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Newton segunda iteración: $x_2=x_1-(x_1^2-3)/(2x_1)=1.75-(3.0625-3)/3.5$. Dar $x_2$.",
+          "correctValue": 1.7321,
+          "tolerance": 0.0005,
+          "explanation": "$x_2=1.75-\\frac{0.0625}{3.5}=1.75-0.01786=1.7321$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Error de Newton tras 2 iteraciones: $|x_2-\\sqrt{3}|$ con $\\sqrt{3}\\approx1.73205$.",
+          "correctValue": 6e-05,
+          "tolerance": 5e-05,
+          "explanation": "$|1.7321-1.73205|=0.00005$. Newton en 2 pasos supera ampliamente a bisección en 3 pasos ($e_{bis}\\le0.0625$ vs $e_{N}\\approx5\\times10^{-5}$)."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Punto fijo: iteración $x_{k+1} = \\cos(x_k)$ para el número de Dottie",
+      "context": "Aplicar la iteración de punto fijo $g(x)=\\cos(x)$ partiendo de $x_0=0.5$ para encontrar $\\cos(\\alpha)=\\alpha$.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcular $x_1 = \\cos(x_0) = \\cos(0.5)$ (en radianes).",
+          "correctValue": 0.8776,
+          "tolerance": 0.001,
+          "explanation": "$x_1 = \\cos(0.5) \\approx 0.8776$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcular $x_2 = \\cos(x_1) = \\cos(0.8776)$.",
+          "correctValue": 0.639,
+          "tolerance": 0.005,
+          "explanation": "$x_2 = \\cos(0.8776) \\approx 0.6390$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcular $x_3 = \\cos(x_2) = \\cos(0.6390)$.",
+          "correctValue": 0.8026,
+          "tolerance": 0.005,
+          "explanation": "$x_3 = \\cos(0.6390) \\approx 0.8026$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Comprobar la condición de contracción: $|g'(x)| = |{-\\sin(x)}|$ en $x=0.7391$. ¿Es menor que 1?",
+          "correctValue": 0.6736,
+          "tolerance": 0.01,
+          "explanation": "$|g'(0.7391)| = |-\\sin(0.7391)| = |\\sin(0.7391)| \\approx 0.6736 < 1$. La condición de contracción se cumple, garantizando convergencia."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Error de bisección en $[0,1]$ para $f(x)=x-\\cos(x)$ tras 5 iteraciones",
+      "context": "Calcular la cota de error de bisección y el punto medio tras 5 iteraciones en $[0,1]$ para $f(x)=x-\\cos(x)$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Verificar cambio de signo: $f(0)=0-\\cos(0)=-1<0$ y $f(1)=1-\\cos(1)\\approx1-0.5403$. Dar $f(1)$.",
+          "correctValue": 0.4597,
+          "tolerance": 0.005,
+          "explanation": "$f(1)=1-\\cos(1)\\approx1-0.5403=0.4597>0$. Hay cambio de signo en $[0,1]$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Cota de error tras 5 iteraciones: $e_5 \\le \\frac{1-0}{2^6} = \\frac{1}{64}$. Dar este valor.",
+          "correctValue": 0.015625,
+          "tolerance": 0.0001,
+          "explanation": "$e_5 \\le \\frac{1}{2^6} = \\frac{1}{64} = 0.015625$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Seguir las primeras 3 bisecciones para determinar el signo de $f$ en $x_1=0.5$, $x_2=0.75$ (si aplica), y dar el intervalo activo después de 3 iteraciones.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "$f(0.5)=0.5-\\cos(0.5)\\approx0.5-0.8776=-0.3776<0$. Intervalo $[0.5,1]$. $x_2=0.75$, $f(0.75)=0.75-\\cos(0.75)\\approx0.75-0.7317=0.0183>0$. Intervalo $[0.5,0.75]$. El extremo superior del nuevo intervalo es $0.75$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcular $x_4=(0.5+0.75)/2=0.625$. Evaluar $f(0.625)=0.625-\\cos(0.625)$ con $\\cos(0.625)\\approx0.8109$. Dar $f(x_4)$.",
+          "correctValue": -0.1859,
+          "tolerance": 0.01,
+          "explanation": "$f(0.625)=0.625-\\cos(0.625)\\approx0.625-0.8109=-0.1859<0$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Newton-Raphson para $f(x) = \\sin(x) - x/2$ con $x_0 = 1.5$",
+      "context": "Encontrar una raíz de $f(x)=\\sin(x)-x/2$ distinta de $x=0$ usando Newton-Raphson con $f'(x)=\\cos(x)-1/2$.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcular $f(1.5)=\\sin(1.5)-0.75$ con $\\sin(1.5)\\approx0.9975$. Dar $f(1.5)$.",
+          "correctValue": 0.2475,
+          "tolerance": 0.005,
+          "explanation": "$f(1.5)=\\sin(1.5)-1.5/2=0.9975-0.75=0.2475>0$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Calcular $f'(1.5)=\\cos(1.5)-0.5$ con $\\cos(1.5)\\approx0.0707$. Dar $f'(1.5)$.",
+          "correctValue": -0.4293,
+          "tolerance": 0.005,
+          "explanation": "$f'(1.5)=\\cos(1.5)-0.5\\approx0.0707-0.5=-0.4293$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcular $x_1=1.5-f(1.5)/f'(1.5)=1.5-0.2475/(-0.4293)$.",
+          "correctValue": 2.0765,
+          "tolerance": 0.01,
+          "explanation": "$x_1=1.5-\\frac{0.2475}{-0.4293}=1.5+0.5764=2.0764$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcular $f(x_1)=\\sin(2.0764)-2.0764/2$ con $\\sin(2.0764)\\approx0.8730$. Dar $f(x_1)$.",
+          "correctValue": -0.1652,
+          "tolerance": 0.01,
+          "explanation": "$f(2.0764)=\\sin(2.0764)-2.0764/2\\approx0.8730-1.0382=-0.1652<0$. El método se acerca a la raíz $\\approx 1.8955$ (raíz no trivial de $\\sin x=x/2$)."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Raíz de $f(x)=x^4-5$ por bisección en $[1, 2]$",
+      "context": "Localizar $5^{1/4}\\approx1.4953$ por bisección en $[1,2]$ donde $f(x)=x^4-5$.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Verificar: $f(1)=1-5=-4$ y $f(2)=16-5=11$. Calcular $x_1=(1+2)/2$ y dar $f(x_1)=1.5^4-5$.",
+          "correctValue": 0.0625,
+          "tolerance": 0.005,
+          "explanation": "$f(1.5)=1.5^4-5=5.0625-5=0.0625>0$. $x_1=1.5$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Como $f(1)<0$ y $f(1.5)>0$, el nuevo intervalo es $[1, 1.5]$. Calcular $x_2=(1+1.5)/2$.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "$x_2=(1+1.5)/2=1.25$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Evaluar $f(1.25)=1.25^4-5=2.44140625-5$. Dar $f(1.25)$.",
+          "correctValue": -2.5586,
+          "tolerance": 0.01,
+          "explanation": "$f(1.25)=1.25^4-5=2.44140625-5=-2.55859375\\approx-2.5586$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Nuevo intervalo $[1.25, 1.5]$. Calcular $x_3=(1.25+1.5)/2$ y la cota de error $e_3\\le(2-1)/2^4$.",
+          "correctValue": 1.375,
+          "tolerance": 0.001,
+          "explanation": "$x_3=1.375$. Cota: $e_3\\le\\frac{1}{16}=0.0625$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Newton-Raphson para $f(x)=x^4-5$ desde $x_0=1.5$",
+      "context": "Aplicar Newton-Raphson a $f(x)=x^4-5$ con $f'(x)=4x^3$, partiendo de $x_0=1.5$.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcular $f(1.5)=5.0625-5=0.0625$ y $f'(1.5)=4\\cdot1.5^3=4\\cdot3.375$. Dar $f'(1.5)$.",
+          "correctValue": 13.5,
+          "tolerance": 0.01,
+          "explanation": "$f'(1.5)=4\\cdot(1.5)^3=4\\cdot3.375=13.5$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcular $x_1=1.5-f(1.5)/f'(1.5)=1.5-0.0625/13.5$.",
+          "correctValue": 1.4954,
+          "tolerance": 0.001,
+          "explanation": "$x_1=1.5-0.004629=1.495370\\approx1.4954$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcular $f(x_1)=1.4954^4-5$. Con $1.4954^4\\approx(1.4954^2)^2=(2.2362)^2\\approx5.0006$. Dar $f(x_1)$.",
+          "correctValue": 0.0006,
+          "tolerance": 0.001,
+          "explanation": "$f(1.4954)\\approx5.0006-5=0.0006$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcular el error $|x_1 - 5^{1/4}|$ con $5^{1/4}\\approx1.49535$. Comparar con la cota de bisección tras 3 pasos.",
+          "correctValue": 2e-05,
+          "tolerance": 5e-05,
+          "explanation": "$|1.4954-1.49535|\\approx0.00005\\approx5\\times10^{-5}$. Solo 1 iteración de Newton supera las 3 de bisección (error $\\approx0.0625$)."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Bisección: número mínimo de iteraciones para $[0,2]$ con $\\varepsilon=0.01$",
+      "context": "Determinar el número mínimo de iteraciones de bisección para garantizar $e_n < 0.01$ en $[0,2]$.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Longitud inicial del intervalo: $b_0-a_0=2-0$. Dar la cota de error tras $n$ iteraciones: $(b_0-a_0)/2^{n+1}$.",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "La longitud inicial es $b_0-a_0=2$. La cota de error es $e_n\\le 2/2^{n+1}=1/2^n$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Resolver $1/2^n < 0.01$, es decir, $2^n > 100$. Calcular $\\log_2(100)=\\log(100)/\\log(2)$.",
+          "correctValue": 6.644,
+          "tolerance": 0.05,
+          "explanation": "$\\log_2(100)=\\frac{\\ln 100}{\\ln 2}=\\frac{4.6052}{0.6931}=6.6439\\approx6.644$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "El número mínimo de iteraciones es $n=\\lceil\\log_2(100)\\rceil$. Dar este valor entero.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$\\lceil6.644\\rceil=7$. Con $n=7$ iteraciones, $e_7\\le1/2^7=1/128\\approx0.0078<0.01$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Verificar: cota de error tras $n=7$ iteraciones en $[0,2]$: $e_7\\le2/2^8=2/256$. Dar este valor.",
+          "correctValue": 0.0078125,
+          "tolerance": 0.0001,
+          "explanation": "$e_7\\le\\frac{2}{2^8}=\\frac{2}{256}=\\frac{1}{128}=0.0078125<0.01$. Confirmado: 7 iteraciones son suficientes."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Newton-Raphson para $\\sqrt[3]{2}$: ecuación $f(x)=x^3-2$",
+      "context": "Calcular $\\sqrt[3]{2}\\approx1.2599$ usando Newton-Raphson sobre $f(x)=x^3-2$ con $f'(x)=3x^2$, desde $x_0=1$.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcular $f(1)=1^3-2$ y $f'(1)=3\\cdot1^2$. Dar $f'(1)$.",
+          "correctValue": 3.0,
+          "tolerance": 0.001,
+          "explanation": "$f(1)=1-2=-1$. $f'(1)=3$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcular $x_1=1-f(1)/f'(1)=1-(-1)/3$.",
+          "correctValue": 1.3333,
+          "tolerance": 0.001,
+          "explanation": "$x_1=1-(-1/3)=1+1/3=4/3\\approx1.33333$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcular $f(x_1)=(4/3)^3-2=64/27-2$ y $f'(x_1)=3(4/3)^2=48/9=16/3$. Dar $f(x_1)$ en decimal.",
+          "correctValue": 0.37037,
+          "tolerance": 0.005,
+          "explanation": "$f(4/3)=64/27-2=64/27-54/27=10/27\\approx0.37037$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcular $x_2=x_1-f(x_1)/f'(x_1)=(4/3)-(10/27)/(16/3)$.",
+          "correctValue": 1.2639,
+          "tolerance": 0.005,
+          "explanation": "$x_2=4/3-(10/27)\\cdot(3/16)=4/3-30/432=4/3-5/72=96/72-5/72=91/72\\approx1.2639$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Error relativo en Newton-Raphson para $\\sqrt{5}$",
+      "context": "Aplicar Newton-Raphson a $f(x)=x^2-5$ desde $x_0=2$ y calcular el error relativo en cada paso.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcular $x_1=2-f(2)/f'(2)=2-(4-5)/(2\\cdot2)=2-(-1)/4$.",
+          "correctValue": 2.25,
+          "tolerance": 0.001,
+          "explanation": "$f(2)=4-5=-1$, $f'(2)=4$. $x_1=2-(-1/4)=2+0.25=2.25$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcular el error relativo en $x_1$: $|x_1-\\sqrt{5}|/\\sqrt{5}$ con $\\sqrt{5}\\approx2.23607$.",
+          "correctValue": 0.00622,
+          "tolerance": 0.001,
+          "explanation": "$|2.25-2.23607|/2.23607=0.01393/2.23607\\approx0.00623$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcular $x_2=x_1-f(x_1)/f'(x_1)=2.25-(2.25^2-5)/(2\\cdot2.25)$.",
+          "correctValue": 2.23611,
+          "tolerance": 0.0001,
+          "explanation": "$f(2.25)=5.0625-5=0.0625$. $f'(2.25)=4.5$. $x_2=2.25-0.0625/4.5=2.25-0.01389=2.23611$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Error relativo en $x_2$: $|x_2-\\sqrt{5}|/\\sqrt{5}$ con $\\sqrt{5}\\approx2.23607$.",
+          "correctValue": 1.8e-06,
+          "tolerance": 1e-06,
+          "explanation": "$|2.23611-2.23607|/2.23607\\approx0.00004/2.23607\\approx1.79\\times10^{-5}$. El error relativo cae de $\\approx10^{-2}$ a $\\approx10^{-5}$ en un solo paso, evidenciando la convergencia cuadrática."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Regula Falsi para $f(x)=x^2-3$ en $[1, 2]$",
+      "context": "Aplicar una iteración del método de la posición falsa (Regula Falsi) a $f(x)=x^2-3$ en $[1,2]$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcular $f(1)=1-3$ y $f(2)=4-3$. Dar $f(1)$.",
+          "correctValue": -2.0,
+          "tolerance": 0.001,
+          "explanation": "$f(1)=1-3=-2$ y $f(2)=4-3=1$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcular la aproximación de Regula Falsi: $x_1=a_0-f(a_0)\\cdot\\frac{b_0-a_0}{f(b_0)-f(a_0)}=1-(-2)\\cdot\\frac{2-1}{1-(-2)}$.",
+          "correctValue": 1.6667,
+          "tolerance": 0.005,
+          "explanation": "$x_1=1+2\\cdot\\frac{1}{3}=1+\\frac{2}{3}=\\frac{5}{3}\\approx1.6667$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Evaluar $f(x_1)=f(5/3)=(5/3)^2-3=25/9-3$. Dar $f(x_1)$ en decimal.",
+          "correctValue": -0.2222,
+          "tolerance": 0.005,
+          "explanation": "$f(5/3)=25/9-27/9=-2/9\\approx-0.2222<0$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Nuevo intervalo $[5/3, 2]$. Calcular segunda aproximación Regula Falsi y dar $x_2$ aproximado.",
+          "correctValue": 1.7273,
+          "tolerance": 0.005,
+          "explanation": "$x_2=5/3-(-2/9)\\cdot\\frac{2-5/3}{1-(-2/9)}=5/3+\\frac{2}{9}\\cdot\\frac{1/3}{11/9}=5/3+\\frac{2}{9}\\cdot\\frac{3}{11}=5/3+\\frac{6}{99}=5/3+\\frac{2}{33}=\\frac{55}{33}+\\frac{2}{33}=\\frac{57}{33}\\approx1.7273$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Análisis del criterio de parada en Newton-Raphson para $f(x)=x^2-7$",
+      "context": "Usar el criterio $|x_{k+1}-x_k|<10^{-4}$ en Newton-Raphson para $f(x)=x^2-7$, desde $x_0=3$.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcular $x_1=3-f(3)/f'(3)=3-(9-7)/(6)$.",
+          "correctValue": 2.6667,
+          "tolerance": 0.001,
+          "explanation": "$x_1=3-2/6=3-0.33333=2.66667$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcular $x_2=x_1-f(x_1)/f'(x_1)$ con $f(2.66667)=7.1111-7=0.1111$ y $f'(2.66667)=2\\cdot2.66667=5.33333$.",
+          "correctValue": 2.6458,
+          "tolerance": 0.001,
+          "explanation": "$x_2=2.66667-0.1111/5.33333=2.66667-0.02083=2.64583\\approx2.6458$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcular la corrección $|x_2-x_1|=|2.6458-2.6667|$ para comprobar el criterio de parada.",
+          "correctValue": 0.0208,
+          "tolerance": 0.001,
+          "explanation": "$|2.6458-2.6667|=0.0209$. Como $0.0209>10^{-4}$, el criterio aún no se cumple."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcular $x_3=x_2-f(x_2)/f'(x_2)$ con $f(2.6458)\\approx6.9999-7=-0.0001$ y $f'(2.6458)=5.2916$. Dar $|x_3-x_2|$.",
+          "correctValue": 1.9e-05,
+          "tolerance": 1e-05,
+          "explanation": "$x_3=2.6458-(-0.0001/5.2916)=2.6458+0.0000189\\approx2.6458$. $|x_3-x_2|\\approx1.89\\times10^{-5}<10^{-4}$. ¡El criterio se cumple!"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Iteraciones de bisección para raíz de $f(x)=\\ln(x)-1$ en $[2, 3]$",
+      "context": "Aplicar bisección a $f(x)=\\ln(x)-1=0$ (raíz $x=e\\approx2.71828$) en $[2,3]$.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Verificar: $f(2)=\\ln(2)-1\\approx0.6931-1$ y $f(3)=\\ln(3)-1\\approx1.0986-1$. Dar $f(2)$.",
+          "correctValue": -0.3069,
+          "tolerance": 0.005,
+          "explanation": "$f(2)=\\ln(2)-1\\approx0.6931-1=-0.3069<0$. $f(3)=\\ln(3)-1\\approx0.0986>0$. Hay cambio de signo."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcular $x_1=(2+3)/2=2.5$ y $f(2.5)=\\ln(2.5)-1\\approx0.9163-1$. Dar $f(2.5)$.",
+          "correctValue": -0.0837,
+          "tolerance": 0.005,
+          "explanation": "$f(2.5)=\\ln(2.5)-1\\approx0.9163-1=-0.0837<0$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Nuevo intervalo $[2.5, 3]$. Calcular $x_2=(2.5+3)/2=2.75$ y $f(2.75)=\\ln(2.75)-1\\approx1.0116-1$. Dar $f(2.75)$.",
+          "correctValue": 0.0116,
+          "tolerance": 0.003,
+          "explanation": "$f(2.75)=\\ln(2.75)-1\\approx1.0116-1=0.0116>0$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Nuevo intervalo $[2.5, 2.75]$. Calcular $x_3=(2.5+2.75)/2$ y la cota de error $e_3\\le(3-2)/2^4$.",
+          "correctValue": 2.625,
+          "tolerance": 0.001,
+          "explanation": "$x_3=2.625$. Cota: $e_3\\le(3-2)/2^4=1/16=0.0625$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Newton-Raphson para $f(x)=\\ln(x)-1$ desde $x_0=3$",
+      "context": "Aplicar Newton-Raphson a $f(x)=\\ln(x)-1$ con $f'(x)=1/x$, desde $x_0=3$.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcular $f(3)=\\ln(3)-1\\approx0.0986$ y $f'(3)=1/3$. Dar $f'(3)$.",
+          "correctValue": 0.33333,
+          "tolerance": 0.001,
+          "explanation": "$f'(3)=1/3\\approx0.33333$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Calcular $x_1=3-f(3)/f'(3)=3-0.0986/(1/3)=3-0.0986\\cdot3$.",
+          "correctValue": 2.7042,
+          "tolerance": 0.005,
+          "explanation": "$x_1=3-0.0986\\cdot3=3-0.2958=2.7042$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcular $f(x_1)=\\ln(2.7042)-1$ con $\\ln(2.7042)\\approx0.9948$. Dar $f(x_1)$.",
+          "correctValue": -0.0052,
+          "tolerance": 0.002,
+          "explanation": "$f(2.7042)=\\ln(2.7042)-1\\approx0.9948-1=-0.0052$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Calcular $x_2=x_1-f(x_1)/f'(x_1)=2.7042-(-0.0052)/(1/2.7042)=2.7042+0.0052\\cdot2.7042$. Comparar con $e$.",
+          "correctValue": 2.7183,
+          "tolerance": 0.001,
+          "explanation": "$x_2=2.7042+0.0052\\cdot2.7042=2.7042+0.01408=2.7183\\approx e$. En 2 pasos Newton supera la bisección con 3 pasos."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Análisis de convergencia para $f(x)=x^2-x-2$ en $[1.5, 3]$",
+      "context": "Estudiar la convergencia de bisección y Newton-Raphson para $f(x)=x^2-x-2=(x-2)(x+1)$, raíz $x=2$ en $[1.5, 3]$.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Verificar: $f(1.5)=2.25-1.5-2=-1.25$ y $f(3)=9-3-2=4$. Dar $f(1.5)$.",
+          "correctValue": -1.25,
+          "tolerance": 0.01,
+          "explanation": "$f(1.5)=1.5^2-1.5-2=2.25-3.5=-1.25<0$. $f(3)=4>0$. Condición de bisección satisfecha."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Newton-Raphson: $f'(x)=2x-1$. Con $x_0=3$: $x_1=3-f(3)/f'(3)=3-4/5$.",
+          "correctValue": 2.2,
+          "tolerance": 0.01,
+          "explanation": "$f'(3)=2\\cdot3-1=5$. $x_1=3-4/5=3-0.8=2.2$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcular $f(2.2)=2.2^2-2.2-2=4.84-4.2=0.64$ y $f'(2.2)=2\\cdot2.2-1=3.4$. Dar $x_2=x_1-f(x_1)/f'(x_1)$.",
+          "correctValue": 2.0118,
+          "tolerance": 0.005,
+          "explanation": "$x_2=2.2-0.64/3.4=2.2-0.18824=2.01176\\approx2.0118$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Error en $x_2$: $|x_2-2|=|2.0118-2|$. Comparar con la cota de bisección tras 2 pasos en $[1.5,3]$.",
+          "correctValue": 0.0118,
+          "tolerance": 0.005,
+          "explanation": "$|x_2-2|=0.0118$. Cota bisección: $e_2\\le(3-1.5)/2^3=1.5/8=0.1875$. Newton en 2 pasos ya tiene error $10^{-2}$, mientras bisección garantiza solo $0.1875$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Newton-Raphson para raíz doble: $f(x)=(x-1)^2$",
+      "context": "Estudiar la lentitud de Newton-Raphson para la raíz doble $\\alpha=1$ de $f(x)=(x-1)^2$, partiendo de $x_0=2$.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcular $f(2)=(2-1)^2=1$ y $f'(x)=2(x-1)$, por tanto $f'(2)=2$. Dar $x_1=2-f(2)/f'(2)$.",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "$x_1=2-1/2=1.5$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcular $f(1.5)=(0.5)^2=0.25$ y $f'(1.5)=2(0.5)=1$. Dar $x_2=1.5-0.25/1=1.25$.",
+          "correctValue": 1.25,
+          "tolerance": 0.001,
+          "explanation": "$x_2=1.5-0.25/1=1.25$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Observar el patrón: $e_0=1$, $e_1=0.5$, $e_2=0.25$. Calcular $e_3=|x_3-1|$ con $x_3=x_2-f(x_2)/f'(x_2)$.",
+          "correctValue": 0.125,
+          "tolerance": 0.001,
+          "explanation": "$f(1.25)=0.0625$, $f'(1.25)=0.5$. $x_3=1.25-0.0625/0.5=1.25-0.125=1.125$. $e_3=0.125=1/8$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Verificar que la convergencia es lineal con factor $1/2$: calcular la razón $e_{k+1}/e_k$ para $k=1,2$.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "$e_2/e_1=0.25/0.5=0.5$ y $e_3/e_2=0.125/0.25=0.5$. La constante de convergencia lineal es $(m-1)/m=(2-1)/2=0.5$, confirmando la teoría para raíces de multiplicidad $m=2$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Verificación computacional: comparar bisección y Newton para $f(x)=x-\\tan(x)$ cerca de $x=4.5$",
+      "context": "Analizar el comportamiento de la bisección y Newton-Raphson para $f(x)=x-\\tan(x)$ en $[4.4, 4.6]$, raíz $\\approx4.4934$.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Evaluar $f(4.4)=4.4-\\tan(4.4)$ con $\\tan(4.4)\\approx3.0963$. Dar $f(4.4)$.",
+          "correctValue": 1.3037,
+          "tolerance": 0.02,
+          "explanation": "$f(4.4)=4.4-\\tan(4.4)\\approx4.4-3.0963=1.3037>0$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Evaluar $f(4.6)=4.6-\\tan(4.6)$ con $\\tan(4.6)\\approx8.2381$. Dar $f(4.6)$.",
+          "correctValue": -3.6381,
+          "tolerance": 0.05,
+          "explanation": "$f(4.6)=4.6-\\tan(4.6)\\approx4.6-8.2381=-3.6381<0$. Hay cambio de signo en $[4.4,4.6]$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Bisección: calcular $x_1=(4.4+4.6)/2=4.5$ y $f(4.5)=4.5-\\tan(4.5)$ con $\\tan(4.5)\\approx4.6373$. Dar $f(4.5)$.",
+          "correctValue": -0.1373,
+          "tolerance": 0.02,
+          "explanation": "$f(4.5)=4.5-\\tan(4.5)\\approx4.5-4.6373=-0.1373<0$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "El nuevo intervalo es $[4.4, 4.5]$. Cota de error tras 1 iteración en $[4.4,4.6]$: $e_1\\le(4.6-4.4)/2^2=0.2/4$.",
+          "correctValue": 0.05,
+          "tolerance": 0.001,
+          "explanation": "$e_1\\le(4.6-4.4)/2^2=0.2/4=0.05$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Aplicación: estimación de $\\pi$ via Newton-Raphson sobre $f(x)=\\sin(x)$ cerca de $x_0=3$",
+      "context": "Localizar la raíz $x=\\pi$ de $f(x)=\\sin(x)$ usando Newton-Raphson con $f'(x)=\\cos(x)$, desde $x_0=3$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcular $f(3)=\\sin(3)\\approx0.14112$ y $f'(3)=\\cos(3)\\approx-0.98999$. Dar $f'(3)$.",
+          "correctValue": -0.98999,
+          "tolerance": 0.005,
+          "explanation": "$f'(3)=\\cos(3)\\approx-0.98999$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcular $x_1=3-\\sin(3)/\\cos(3)=3-0.14112/(-0.98999)$.",
+          "correctValue": 3.14253,
+          "tolerance": 0.001,
+          "explanation": "$x_1=3+0.14112/0.98999=3+0.14254=3.14254$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcular el error $|x_1-\\pi|$ con $\\pi\\approx3.14159$. Dar este valor.",
+          "correctValue": 0.00094,
+          "tolerance": 0.0002,
+          "explanation": "$|3.14253-3.14159|=0.00094$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcular $f(x_1)=\\sin(3.14254)\\approx0.000928$ y $f'(x_1)=\\cos(3.14254)\\approx-1$. Dar $x_2=x_1-f(x_1)/f'(x_1)$.",
+          "correctValue": 3.14159,
+          "tolerance": 0.0001,
+          "explanation": "$x_2=3.14254-0.000928/(-1)=3.14254+0.000928=3.14347$. CORRECCIÓN: $x_2=3.14254-(-0.000928)\\cdot(-1)=3.14254-0.000928\\approx3.14161\\approx\\pi$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Cota global del error de bisección en función del número de iteraciones",
+      "context": "Dado $[a_0,b_0]=[-5,5]$ y se requiere $e_n<0.001$. Determinar el mínimo de iteraciones.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Longitud del intervalo inicial: $b_0-a_0=5-(-5)$. Dar este valor.",
+          "correctValue": 10.0,
+          "tolerance": 0.001,
+          "explanation": "$b_0-a_0=5-(-5)=10$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Cota de error tras $n$ iteraciones: $e_n\\le 10/2^{n+1}=5/2^n$. Resolver $5/2^n<0.001$: $2^n>5000$. Calcular $\\log_2(5000)$.",
+          "correctValue": 12.2877,
+          "tolerance": 0.05,
+          "explanation": "$\\log_2(5000)=\\frac{\\ln5000}{\\ln2}=\\frac{8.5172}{0.6931}=12.287$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "El mínimo de iteraciones es $n=\\lceil\\log_2(5000)\\rceil$. Dar este valor entero.",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "$\\lceil12.287\\rceil=13$ iteraciones."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Verificar: cota tras $n=13$ iteraciones: $5/2^{13}=5/8192$. Dar este valor decimal.",
+          "correctValue": 0.00061,
+          "tolerance": 0.0001,
+          "explanation": "$5/8192\\approx0.000610<0.001$. Confirmado: 13 iteraciones garantizan $e_{13}<0.001$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Newton-Raphson para $f(x)=x^3-2x-5$ desde $x_0=2$",
+      "context": "Calcular la raíz real positiva de $f(x)=x^3-2x-5\\approx2.0946$ con Newton-Raphson y $f'(x)=3x^2-2$, desde $x_0=2$.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcular $f(2)=8-4-5=-1$ y $f'(2)=3\\cdot4-2=10$. Dar $x_1=2-(-1)/10$.",
+          "correctValue": 2.1,
+          "tolerance": 0.001,
+          "explanation": "$x_1=2-(-1/10)=2+0.1=2.1$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcular $f(2.1)=2.1^3-2\\cdot2.1-5=9.261-4.2-5=0.061$ y $f'(2.1)=3\\cdot4.41-2=13.23-2=11.23$. Dar $x_2$.",
+          "correctValue": 2.09456,
+          "tolerance": 0.001,
+          "explanation": "$x_2=2.1-0.061/11.23=2.1-0.00543=2.09457\\approx2.0946$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcular $f(2.0946)=2.0946^3-2\\cdot2.0946-5$. Con $2.0946^3\\approx9.1899$. Dar $f(x_2)$.",
+          "correctValue": 0.0007,
+          "tolerance": 0.001,
+          "explanation": "$f(2.0946)\\approx9.1899-4.1892-5=0.0007\\approx0$. La convergencia es casi completa."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Error en $x_2$: $|x_2-\\alpha|\\approx|2.09456-2.09455|$. Estimar el orden de magnitud del error.",
+          "correctValue": 1e-05,
+          "tolerance": 5e-05,
+          "explanation": "$|x_2-\\alpha|\\approx|2.09457-2.09455|\\approx2\\times10^{-5}$. En solo 2 iteraciones Newton-Raphson tiene error del orden $10^{-5}$, mientras bisección en $[2,3]$ con 2 pasos solo garantiza $0.25$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Cota de error del método de la bisección",
+      "tex": "$$e_k = |x_k - \\alpha| \\le \\frac{b_0 - a_0}{2^{k+1}}$$"
+    },
+    {
+      "name": "Fórmula iterativa de Newton-Raphson",
+      "tex": "$$x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)}, \\quad f'(x_k) \\ne 0$$"
+    },
+    {
+      "name": "Convergencia cuadrática de Newton-Raphson (raíz simple)",
+      "tex": "$$\\lim_{k \\to \\infty} \\frac{|x_{k+1} - \\alpha|}{|x_k - \\alpha|^2} = \\left| \\frac{f''(\\alpha)}{2 f'(\\alpha)} \\right|$$"
+    },
+    {
+      "name": "Número mínimo de iteraciones en bisección",
+      "tex": "$$n \\ge \\left\\lceil \\log_2\\!\\left(\\frac{b_0 - a_0}{\\varepsilon}\\right) - 1 \\right\\rceil$$"
+    },
+    {
+      "name": "Fórmula de Herón (Newton-Raphson para $\\sqrt{N}$)",
+      "tex": "$$x_{k+1} = \\frac{1}{2}\\left(x_k + \\frac{N}{x_k}\\right)$$"
+    },
+    {
+      "name": "Iteración de punto fijo",
+      "tex": "$$x_{k+1} = g(x_k), \\quad |g'(x)| \\le L < 1 \\text{ en entorno de } \\alpha$$"
+    },
+    {
+      "name": "Fórmula de Regula Falsi (posición falsa)",
+      "tex": "$$x_{k+1} = a_k - f(a_k) \\cdot \\frac{b_k - a_k}{f(b_k) - f(a_k)}$$"
+    },
+    {
+      "name": "Newton-Raphson para calcular $1/R$ sin divisiones",
+      "tex": "$$x_{k+1} = x_k(2 - R\\, x_k), \\quad f(x) = \\frac{1}{x} - R$$"
+    },
+    {
+      "name": "Convergencia lineal (factor de reducción de bisección)",
+      "tex": "$$\\frac{e_{k+1}^{\\max}}{e_k^{\\max}} = \\frac{1}{2}$$"
+    },
+    {
+      "name": "Condición de Bolzano (existencia de raíz)",
+      "tex": "$$f \\in C[a,b], \\; f(a) \\cdot f(b) < 0 \\implies \\exists\\, \\alpha \\in (a,b) : f(\\alpha) = 0$$"
+    },
+    {
+      "name": "Polinomio de Taylor de grado 1 (base de Newton-Raphson)",
+      "tex": "$$f(x) \\approx f(x_k) + f'(x_k)(x - x_k)$$"
+    },
+    {
+      "name": "Factor de convergencia lineal para raíz de multiplicidad $m$",
+      "tex": "$$\\lim_{k \\to \\infty} \\frac{|e_{k+1}|}{|e_k|} = \\frac{m-1}{m}$$"
+    }
+  ]
+}

@@ -1,0 +1,2084 @@
+{
+  "TEST_A": [
+    {
+      "q": "1. En la representación de enteros mediante Signo-Magnitud (SM) utilizando $$N$$ bits, ¿cuál es el motivo principal por el que existen dos codificaciones para el valor cero?",
+      "options": [
+        "Porque el bit de signo actúa de forma independiente sobre la magnitud, permitiendo tanto un cero positivo ($$+0$$) como un cero negativo ($$-0$$).",
+        "Porque la Unidad Aritmético-Lógica (ALU) requiere diferenciar el cero obtenido por suma del cero obtenido por resta.",
+        "Porque los sistemas binarios puros reservan siempre la mitad de sus códigos para valores nulos debido a redundancia de hardware."
+      ],
+      "correct": 0,
+      "hint": "Observa cómo se define el bit más significativo (MSB) y el resto de los bits en Signo-Magnitud.",
+      "explanation": "En Signo-Magnitud, el MSB indica el signo ($$0$$ para positivo, $$1$$ para negativo) y los restantes $$N-1$$ bits indican el valor absoluto. Si la magnitud es todo ceros, se puede tener $$000...0_2$$ ($$+0$$) o $$100...0_2$$ ($$-0$$)."
+    },
+    {
+      "q": "2. ¿Cuál es el rango de representación de números enteros que ofrece el formato de Complemento a 1 (C1) si se utiliza una longitud de palabra de $$N$$ bits?",
+      "options": [
+        "$$[-2^{N-1}, 2^{N-1} - 1]$$",
+        "$$[-2^{N-1} + 1, 2^{N-1} - 1]$$",
+        "$$[-2^{N-1} - 1, 2^{N-1} + 1]$$"
+      ],
+      "correct": 1,
+      "hint": "Considera que en C1 el cero tiene doble representación, lo que reduce en uno el número de valores numéricos únicos direccionables en los extremos.",
+      "explanation": "Debido a la existencia de dos representaciones para el cero ($$+0$$ y $$-0$$), la cantidad total de valores distintos representados es $$2^N - 1$$, distribuidos simétricamente desde $$-2^{N-1} + 1$$ hasta $$2^{N-1} - 1$$."
+    },
+    {
+      "q": "3. En el formato de Complemento a 2 (C2) con $$N$$ bits, el rango de representación es asimétrico ($$[-2^{N-1}, 2^{N-1} - 1]$$). ¿A qué se debe esta asimetría respecto a C1 y Signo-Magnitud?",
+      "options": [
+        "A que el cero tiene una única representación física ($$000...0_2$$), lo que libera una combinación binaria adicional que se asigna al extremo negativo.",
+        "A que los procesadores modernos requieren un bit adicional oculto para realizar las operaciones de resta por hardware.",
+        "A que el bit de signo de mayor peso tiene un sesgo implícito de $$+1$$ en todas las operaciones aritméticas de la ALU."
+      ],
+      "correct": 0,
+      "hint": "Piensa en cuántas combinaciones binarias totales existen ($$2^N$$) y cuántas se usan para representar el cero en C2.",
+      "explanation": "Al tener el cero una sola codificación en C2, las $$2^N$$ combinaciones se dividen en: el cero ($$1$$ combinación), valores positivos ($$2^{N-1}-1$$ combinaciones) y valores negativos ($$2^{N-1}$$ combinaciones, una más)."
+    },
+    {
+      "q": "4. Si disponemos de una palabra de 8 bits en Complemento a 2 (C2), ¿qué ocurre al intentar representar el número decimal $$-128$$ y posteriormente negarlo aritméticamente en el mismo formato?",
+      "options": [
+        "El valor $$-128$$ se codifica como $$10000000_2$$, y al negarlo se produce un desbordamiento (overflow) devolviendo el propio $$-128$$.",
+        "El valor $$-128$$ no es representable en 8 bits en C2, por lo que el compilador produce un error de sintaxis en tiempo de diseño.",
+        "La negación matemática de $$-128$$ da como resultado el valor $$+128$$, el cual se almacena correctamente como $$01111111_2$$ sin activar alarmas."
+      ],
+      "correct": 0,
+      "hint": "El rango de 8 bits en C2 es $$[-128, 127]$$. Considera qué sucede con el simétrico positivo del límite inferior.",
+      "explanation": "El valor $$-128$$ es representable en C2 ($$10000000_2$$). Su negativo teórico es $$+128$$, que excede el límite superior ($$+127$$). Al calcular el C2 de $$10000000_2$$ (invertir bits -> $$01111111_2$$, sumar 1 -> $$10000000_2$$), se obtiene el mismo patrón binario, ocurriendo un desbordamiento."
+    },
+    {
+      "q": "5. En la arquitectura de computadores, ¿cuál de los siguientes métodos de representación simplifica en mayor medida el diseño del hardware de la Unidad Aritmético-Lógica (ALU) para realizar sumas y restas?",
+      "options": [
+        "Signo-Magnitud, porque separa directamente el signo de la magnitud, facilitando las restas directas mediante comparadores lógicos.",
+        "Complemento a 2, porque permite realizar tanto sumas como restas empleando un mismo circuito sumador básico sin necesidad de restadores separados.",
+        "Representación Sesgada o en Exceso, porque la suma de dos números sesgados da directamente otro número sesgado sin corregir la desviación."
+      ],
+      "correct": 1,
+      "hint": "Recuerda el concepto de implementar la operación $$A - B$$ como $$A + (-B)$$ en las ALUs reales.",
+      "explanation": "En C2, la resta $$A - B$$ se ejecuta físicamente como la suma de $$A$$ y el opuesto de $$B$$ ($$A + \\text{NOT}(B) + 1$$). Esto permite reutilizar el sumador binario simplemente invirtiendo los bits de la entrada $$B$$ y poniendo el acarreo de entrada al sumador en $$1$$."
+    },
+    {
+      "q": "6. En un sistema de representación en Exceso o Sesgado (Excess-$$S$$) con $$N$$ bits y un sesgo $$S = 2^{N-1}$$, ¿cómo se determina matemáticamente si un valor codificado representa un número real negativo?",
+      "options": [
+        "El número real es negativo si y solo si el bit más significativo (MSB) de su representación binaria es igual a $$0$$.",
+        "El número real es negativo si y solo si el bit más significativo (MSB) de su representación binaria es igual a $$1$$.",
+        "El número real es negativo si el valor binario codificado es superior a $$2^{N-1} - 1$$ en base decimal pura."
+      ],
+      "correct": 0,
+      "hint": "Recuerda la relación: Valor Codificado = Valor Real + Sesgo. Despeja el Valor Real si el Valor Codificado es menor que el sesgo.",
+      "explanation": "Si $$S = 2^{N-1}$$, un número real negativo ($$V < 0$$) implica que el valor codificado $$C = V + 2^{N-1} < 2^{N-1}$$. En binario de $$N$$ bits, cualquier número estrictamente menor que $$2^{N-1}$$ debe tener su MSB en $$0$$. Por tanto, el MSB en $$0$$ indica un valor real negativo."
+    },
+    {
+      "q": "7. Al realizar la extensión de tamaño de palabra de un número entero desde $$N$$ bits a $$M$$ bits ($$M > N$$), ¿cuál es el procedimiento correcto si el entero está codificado en Signo-Magnitud?",
+      "options": [
+        "Copiar el bit de signo al nuevo bit más significativo (MSB) en la posición $$M-1$$, y rellenar con ceros las nuevas posiciones intermedias.",
+        "Copiar el bit de signo de la posición $$N-1$$ a todas las posiciones desde $$N$$ hasta $$M-1$$ (extensión de signo clásica).",
+        "Añadir ceros a la derecha del número original y desplazar el bit de signo para evitar la pérdida de precisión de la magnitud."
+      ],
+      "correct": 0,
+      "hint": "En Signo-Magnitud, el bit de signo está aislado de la magnitud, la cual se representa en binario puro en los bits restantes.",
+      "explanation": "Para extender en Signo-Magnitud, el bit de signo (MSB original) se mueve al nuevo MSB de $$M$$ bits, y los bits intermedios añadidos entre el antiguo MSB y la magnitud se rellenan con ceros, manteniendo intacta la magnitud decimal original."
+    },
+    {
+      "q": "8. En Complemento a 2, la extensión de signo de un número binario de $$N$$ bits a $$M$$ bits ($$M > N$$) se realiza duplicando el bit de signo en todos los nuevos bits de mayor peso. ¿Por qué este procedimiento mantiene inalterado el valor decimal del número?",
+      "options": [
+        "Porque en C2 el peso del bit más significativo de $$N$$ bits, $$-b_{N-1}2^{N-1}$$, es algebraicamente equivalente a la suma de los pesos de los nuevos bits extendidos en $$M$$ bits.",
+        "Porque la extensión de signo es un truco puramente de visualización en el que la ALU ignora los bits redundantes durante los ciclos de instrucción.",
+        "Porque al rellenar con unos o ceros se genera un sesgo que se cancela automáticamente al convertir el número a binario sin signo."
+      ],
+      "correct": 0,
+      "hint": "Analiza matemáticamente el peso del MSB de $$N$$ bits frente a los pesos de los bits desde $$N-1$$ hasta $$M-1$$ si todos están a 1.",
+      "explanation": "Matemáticamente, si el MSB $$b_{N-1} = 1$$, su valor es $$-2^{N-1}$$. Al extender con unos hasta $$M$$ bits, la suma de los pesos de las posiciones de $$N-1$$ a $$M-1$$ es $$-2^{M-1} + 2^{M-2} + \\dots + 2^{N-1} = -2^{N-1}$$. Esto garantiza que el valor algebraico exacto no se modifique."
+    },
+    {
+      "q": "9. ¿Bajo qué condiciones específicas de desbordamiento (overflow) se puede afirmar de forma absoluta que la suma de dos enteros firmados en Complemento a 2 da un resultado erróneo?",
+      "options": [
+        "Cuando sumamos dos números de signos opuestos y se genera un acarreo saliente ($$C_{out} = 1$$) en el bit más significativo.",
+        "Cuando sumamos dos números del mismo signo y el resultado obtenido en el registro binario tiene el signo opuesto al de los sumandos.",
+        "Cuando la suma aritmética pura de los sumandos está comprendida estrictamente dentro de los límites $$[-2^{N-1}, 2^{N-1}-1]$$."
+      ],
+      "correct": 1,
+      "hint": "Piensa en la regla de signos básica de la suma en Complemento a 2.",
+      "explanation": "Si sumamos dos positivos, el resultado debe ser positivo. Si sumamos dos negativos, debe ser negativo. Si el signo del resultado difiere del de los sumandos (ej. positivo + positivo = negativo), es porque la magnitud excedió el rango de representación, provocando desbordamiento."
+    },
+    {
+      "q": "10. En el diseño físico de una ALU, ¿cómo se detecta el desbordamiento (overflow) aritmético al sumar dos enteros en Complemento a 2 utilizando puertas lógicas binarias?",
+      "options": [
+        "Mediante una compuerta XOR aplicada entre el acarreo entrante al bit de signo ($$C_{in}$$) y el acarreo saliente del bit de signo ($$C_{out}$$).",
+        "Mediante una compuerta AND aplicada entre todos los bits de la palabra de salida del sumador para verificar que no sean nulos.",
+        "Mediante una compuerta OR aplicada entre los bits de signo de los sumandos y el bit de acarreo de la posición menos significativa (LSB)."
+      ],
+      "correct": 0,
+      "hint": "Busca la relación entre los acarreos del bit de signo ($$C_{in}$$ y $$C_{out}$$) que define la bandera de desbordamiento en hardware.",
+      "explanation": "La lógica de detección de desbordamiento en una ALU de C2 se implementa como $$V = C_{in} \\oplus C_{out}$$. Si el acarreo que entra al bit de signo es diferente del acarreo que sale de este, la operación XOR devuelve $$1$$, activando la bandera de overflow (V)."
+    },
+    {
+      "q": "11. ¿Cuál es el comportamiento de una operación de desplazamiento aritmético a la derecha (Arithmetic Shift Right, ASR) aplicado a una variable codificada en C2?",
+      "options": [
+        "Desplaza todos los bits hacia la derecha, introduce ceros en el bit más significativo (MSB) y el LSB saliente se pierde.",
+        "Desplaza los bits a la derecha, manteniendo intacto o duplicando el bit de signo (MSB) en la nueva posición vacía para preservar el signo original.",
+        "Desplaza los bits a la derecha de forma circular, de modo que el bit menos significativo (LSB) vuelve a entrar por la posición del MSB."
+      ],
+      "correct": 1,
+      "hint": "El desplazamiento aritmético tiene como fin emular una división entera por $$2^k$$, manteniendo el signo correcto para positivos y negativos.",
+      "explanation": "El ASR preserva el signo copiando el MSB (bit de signo) en la posición vacante generada a la izquierda. Así, los números negativos siguen siendo negativos y los positivos siguen siendo positivos tras la operación."
+    },
+    {
+      "q": "12. Si una palabra binaria de 8 bits contiene el valor $$11111111_2$$, ¿cuál es su interpretación decimal en Signo-Magnitud, Complemento a 1 y Complemento a 2 respectivamente?",
+      "options": [
+        "$$-127$$, $$-0$$ y $$-1$$",
+        "$$-127$$, $$-127$$ y $$-128$$",
+        "$$-1$$, $$-1$$ y $$-1$$"
+      ],
+      "correct": 0,
+      "hint": "Aplica las definiciones de codificación a la cadena $$11111111_2$$.",
+      "explanation": "En SM: MSB es 1 ($-$) y magnitud es $1111111_2 = 127_{10}$, luego $$-127$$. En C1: es el inverso de $00000000_2$ ($$+0$$), luego $$-0$$. En C2: es el equivalente decimal de $$-2^{N-1} + \\sum_{i=0}^{N-2} 2^i = -1$$, o bien invirtiendo y sumando 1 al valor absoluto."
+    },
+    {
+      "q": "13. En el contexto de desbordamiento por software ('wrap-around'), ¿qué sucede si en un programa escrito en C (con tipos de datos de 32 bits en C2) intentamos realizar la operación $$INT\\_MAX + 1$$?",
+      "options": [
+        "El programa genera una excepción fatal de división por cero y detiene inmediatamente su ejecución.",
+        "El valor obtenido sufre un desbordamiento y salta directamente al valor más negativo representable ($$INT\\_MIN$$).",
+        "El compilador trunca la variable asignándole un valor nulo ($$0$$) para evitar fallos de seguridad en memoria."
+      ],
+      "correct": 1,
+      "hint": "Considera el patrón binario de $$INT\\_MAX$$ ($$0111...11_2$$) y súmale 1 de forma manual.",
+      "explanation": "El valor $$INT\\_MAX$$ de 32 bits es $$01111111\\dots1111_2$$ ($$2.147.483.647$$). Al sumarle 1, los acarreos se propagan hasta el bit de signo, obteniendo el patrón $$10000000\\dots0000_2$$, que representa a $$INT\\_MIN$$ ($$-2.147.483.648$$) en C2."
+    },
+    {
+      "q": "14. Suponga que desea diseñar un formato de representación de enteros sesgado (Excess-$$S$$) de $$N$$ bits donde el sesgo se elija específicamente como $$S = 2^{N-1} - 1$$. ¿Cuál será el rango de valores reales representable?",
+      "options": [
+        "$$[-2^{N-1} + 1, 2^{N-1}]$$",
+        "$$[-2^{N-1}, 2^{N-1} - 1]$$",
+        "$$[-2^{N-1} - 1, 2^{N-1} - 1]$$"
+      ],
+      "correct": 0,
+      "hint": "Determina los límites del valor real usando la relación: Valor Real = Valor Codificado - Sesgo. El código va de $$0$$ a $$2^N-1$$.",
+      "explanation": "El valor real mínimo corresponde al código $$0$$: $$0 - (2^{N-1} - 1) = -2^{N-1} + 1$$. El valor real máximo corresponde al código máximo $$2^N - 1$$: $$(2^N - 1) - (2^{N-1} - 1) = 2^N - 2^{N-1} = 2^{N-1}$$. Por tanto, el rango es $$[-2^{N-1} + 1, 2^{N-1}]$$."
+    },
+    {
+      "q": "15. ¿Qué diferencia fundamental hay entre las banderas de acarreo (Carry Flag, C) y desbordamiento (Overflow Flag, V) en la ejecución de operaciones dentro de un procesador?",
+      "options": [
+        "El acarreo (C) es útil para aritmética sin signo (indica que el resultado excede la palabra útil), mientras que el desbordamiento (V) es específico para la aritmética con signo en Complemento a 2.",
+        "La bandera de acarreo (C) se activa únicamente en sumas de números negativos, mientras que el desbordamiento (V) solo actúa en restas algebraicas.",
+        "Ambas banderas son matemáticamente redundantes y se implementan por compatibilidad retroactiva con los antiguos procesadores de 8 bits."
+      ],
+      "correct": 0,
+      "hint": "Considera cómo interpreta el procesador la longitud de palabra al operar valores con o sin signo.",
+      "explanation": "La bandera de acarreo detecta si el resultado de una operación sin signo supera el límite superior de representación ($$2^N-1$$). La bandera de desbordamiento (V) indica que el resultado de una operación interpretada con signo ha superado el rango de representación del formato (en C2: $$[-2^{N-1}, 2^{N-1}-1]$$)."
+    },
+    {
+      "q": "16. En la representación de enteros en Complemento a 1 (C1), ¿cuál es el resultado binario de realizar la operación suma de un número $$A$$ con su opuesto aritmético $$-A$$ (obtenido invirtiendo los bits de $$A$$)?",
+      "options": [
+        "Se obtiene una palabra binaria compuesta por todo ceros ($$000...0_2$$), que representa el cero positivo.",
+        "Se obtiene una palabra binaria compuesta por todo unos ($$111...1_2$$), que representa el cero negativo.",
+        "Se produce un acarreo que activa de forma inmediata la bandera de desbordamiento (overflow) de la ALU."
+      ],
+      "correct": 1,
+      "hint": "Suma bit a bit un valor binario con su opuesto lógico (donde haya 0 habrá 1, y viceversa).",
+      "explanation": "Si sumamos un bit $$b_i$$ con su inverso $$\\bar{b}_i$$, el resultado de cada bit es siempre $$1$$. Por tanto, la suma de $$A$$ y su equivalente negativo en C1 ($$\\text{NOT}(A)$$) da una palabra binaria de todo unos ($$111...1_2$$), que es la representación de $$-0$$ en C1."
+    },
+    {
+      "q": "17. Para un registro de 8 bits en Complemento a 2, ¿qué valor decimal representa la cadena binaria $$10000000_2$$ y cuál es su comportamiento cuando se le suma el valor $$11111111_2$$?",
+      "options": [
+        "Representa $$-128$$. Al sumarle $$11111111_2$$ ($$-1$$), el resultado aritmético obtenido en 8 bits es $$01111111_2$$ ($$+127$$) con desbordamiento.",
+        "Representa $$-128$$. Al sumarle $$11111111_2$$ ($$-1$$), se obtiene $$01111111_2$$ ($$+127$$) sin producirse desbordamiento alguno.",
+        "Representa $$-128$$. Al sumarle $$11111111_2$$ ($$-1$$), el resultado binario obtenido es $$01111111_2$$ ($$+127$$) debido a que el acarreo de entrada limpia el bit de signo."
+      ],
+      "correct": 0,
+      "hint": "Haz la suma binaria de $$10000000_2$$ ($$-128$$) y $$11111111_2$$ ($$-1$$) y analiza el desbordamiento de signos.",
+      "explanation": "Suma binaria: $$10000000_2 + 11111111_2 = 101111111_2$$, truncado a 8 bits da $$01111111_2$$ ($$+127$$). Como sumamos dos números negativos ($$-128$$ y $$-1$$) y obtuvimos uno positivo ($$+127$$), hay desbordamiento aritmético (el resultado real es $$-129$$, fuera del rango)."
+    },
+    {
+      "q": "18. Si un computador opera con números enteros de 16 bits en Complemento a 2, indique cuál de las siguientes opciones describe el valor decimal mínimo y máximo representable:",
+      "options": [
+        "$$-32.768$$ y $$32.767$$",
+        "$$-32.767$$ y $$32.767$$",
+        "$$-65.536$$ y $$65.535$$"
+      ],
+      "correct": 0,
+      "hint": "Utiliza la fórmula de límites para $$N = 16$$ en C2: $$[-2^{15}, 2^{15} - 1]$$.",
+      "explanation": "El límite inferior en C2 de 16 bits es $$-2^{15} = -32.768$$. El límite superior es $$2^{15} - 1 = 32.768 - 1 = 32.767$$."
+    },
+    {
+      "q": "19. ¿Cuál de los siguientes métodos de representación de enteros binarios firmados asigna una ponderación o peso negativo al bit de mayor relevancia (MSB)?",
+      "options": [
+        "Signo-Magnitud, porque el MSB multiplica de forma negativa a toda la expresión numérica restante.",
+        "Complemento a 2, porque el MSB tiene asignado un peso explícito de $$-2^{N-1}$$, mientras que los demás bits conservan pesos positivos.",
+        "Ninguno de los anteriores, puesto que los sistemas binarios solo emplean coeficientes multiplicativos absolutos positivos."
+      ],
+      "correct": 1,
+      "hint": "Recuerda la fórmula de conversión de base binaria C2 a decimal.",
+      "explanation": "En C2, un número binario $$b_{N-1}b_{N-2}...b_0$$ equivale a: $$X = -b_{N-1}2^{N-1} + \\sum_{i=0}^{N-2} b_i 2^i$$. Esto muestra que el MSB posee un peso negativo algebraico directo de $$-2^{N-1}$$."
+    },
+    {
+      "q": "20. En un sistema basado en el formato de representación en Exceso (Excess-$$S$$), ¿cuál es el propósito de elegir un sesgo no estándar $$S$$ diferente a $$2^{N-1}$$?",
+      "options": [
+        "Permitir un desplazamiento personalizado del rango de representación para adaptarlo a necesidades de magnitudes asimétricas, como en coma flotante.",
+        "Reducir los tiempos de propagación de acarreo en las operaciones de suma interna de la ALU.",
+        "Hacer que el número de representaciones independientes del valor cero aumente para mejorar la tolerancia a fallos por hardware."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el formato IEEE 754 de precisión simple, donde el exponente de 8 bits usa un exceso de 127 en lugar de 128.",
+      "explanation": "Elegir un sesgo adaptado (como $$S = 2^{N-1}-1$$ en exponentes IEEE 754) permite optimizar el rango útil. Por ejemplo, en precisión simple de 8 bits se usa un sesgo de 127 para representar exponentes en el rango $[-126, 127]$, reservando códigos especiales."
+    },
+    {
+      "q": "21. Si una variable entera de 8 bits está codificada en C2 y se realiza una operación de desplazamiento lógico a la derecha (Logical Shift Right, LSR) por una posición, ¿qué sucede si la variable almacenaba un número negativo?",
+      "options": [
+        "Se conserva el signo negativo porque la ALU realiza automáticamente una corrección sumando 1 al bit de signo.",
+        "El valor decimal cambia drásticamente pasando a ser un número positivo, ya que el bit de signo negativo ($$1$$) es desplazado y sustituido por un cero.",
+        "El procesador detiene la ejecución por desbordamiento lógico al detectar que el bit de signo está a punto de perderse."
+      ],
+      "correct": 1,
+      "hint": "El desplazamiento lógico no hace distinción de signo y rellena siempre la posición vacante del MSB con un valor de 0.",
+      "explanation": "El LSR desplaza todos los bits a la derecha introduciendo un cero en el MSB. Dado que el MSB pasa a ser $$0$$, el número binario se interpreta inmediatamente como un número positivo en C2."
+    },
+    {
+      "q": "22. En un sistema de 8 bits, se quieren codificar los números en representación Sesgada o en Exceso a 128 (Excess-128). Indique qué patrón binario representa al número real decimal nulo ($$0_{10}$$):",
+      "options": [
+        "$$00000000_2$$",
+        "$$10000000_2$$",
+        "$$01111111_2$$"
+      ],
+      "correct": 1,
+      "hint": "Aplica la fórmula: Valor Codificado = Valor Real + Sesgo. Convierte la suma resultante a binario.",
+      "explanation": "Valor Real = 0, Sesgo = 128. Valor Codificado = $$0 + 128 = 128$$. El valor decimal 128 expresado en binario de 8 bits es $$10000000_2$$."
+    },
+    {
+      "q": "23. ¿Cuál es la representación del número decimal $$-1$$ en el formato de Complemento a 2 utilizando cualquier número $$N$$ de bits?",
+      "options": [
+        "Una palabra binaria donde todos los bits están a $$1$$ ($$111...11_2$$).",
+        "Una palabra binaria donde el MSB es $$1$$ y los restantes bits están a ceros ($$100...00_2$$).",
+        "Una palabra binaria compuesta por todo ceros excepto el bit menos significativo ($$000...01_2$$)."
+      ],
+      "correct": 0,
+      "hint": "Obtén la representación en C2 para un caso sencillo (ej. 4 u 8 bits) y generalízalo.",
+      "explanation": "Para representar $$-1$$ en C2 con $$N$$ bits: el valor positivo $$+1$$ es $$000...01_2$$. Invirtiendo los bits (C1) se obtiene $$111...10_2$$. Sumando 1 se obtiene $$111...11_2$$. Esto es válido para cualquier valor de $$N$$."
+    },
+    {
+      "q": "24. En Complemento a 2, ¿qué comportamiento aritmético se produce al realizar una suma donde se genera un acarreo saliente del bit de signo ($$C_{out} = 1$$) pero no hay desbordamiento aritmético?",
+      "options": [
+        "El acarreo sobrante ($$C_{out}$$) se descarta por completo y el resultado numérico contenido en el registro es correcto.",
+        "El acarreo sobrante se debe sumar al bit de menor peso (LSB) del resultado para corregir el desfase (acarreo circular).",
+        "El procesador activa la bandera de interrupción por hardware indicando un error aritmético insalvable."
+      ],
+      "correct": 0,
+      "hint": "Piensa en un ejemplo como sumar $$-1$$ ($$1111_2$$) y $$+1$$ ($$0001_2$$) en C2 de 4 bits.",
+      "explanation": "En C2, el acarreo de salida del bit de signo ($$C_{out}$$) se descarta directamente por el hardware de la ALU. Si no hay desbordamiento ($$V=0$$), el resultado es perfectamente válido. Por ejemplo, en 4 bits: $$-1 + 1 = 1111_2 + 0001_2 = 10000_2 \\implies 0000_2$$ (cero) con $$C_{out}=1$$ descartado."
+    },
+    {
+      "q": "25. Indique cuál de las siguientes afirmaciones describe de manera exacta el comportamiento de la suma en el sistema de representación en Complemento a 1 (C1):",
+      "options": [
+        "El acarreo de salida del bit más significativo ($$C_{out}$$) debe ser sumado al bit de menor peso (LSB) del resultado preliminar para obtener el valor correcto (acarreo circular).",
+        "El acarreo de salida del bit más significativo ($$C_{out}$$) se descarta igual que en Complemento a 2, sin realizar ninguna operación adicional sobre el LSB.",
+        "Nunca se produce acarreo saliente del bit más significativo en C1 debido a las limitaciones físicas de su rango numérico."
+      ],
+      "correct": 0,
+      "hint": "En C1, la existencia de dos representaciones del cero requiere que los desbordamientos de acarreo vuelvan a sumarse al inicio de la palabra.",
+      "explanation": "En C1, para obtener el resultado correcto tras una suma binaria, si se produce un acarreo de salida en el MSB ($$C_{out} = 1$$), este debe sumarse al LSB del resultado parcial. Esta técnica se conoce como acarreo circular ('end-around carry')."
+    },
+    {
+      "q": "26. Considere la operación de resta $$A - B$$ implementada en una ALU. ¿Qué valores lógicos de los bits de signo de $$A$$, $$B$$ y del resultado final $$R$$ determinan la activación de la bandera de desbordamiento en C2?",
+      "options": [
+        "Si $$A$$ y $$B$$ tienen el mismo signo, y el resultado $$R$$ tiene el signo opuesto.",
+        "Si $$A$$ y $$B$$ tienen signos opuestos, y el signo del resultado $$R$$ difiere del signo del minuendo $$A$$.",
+        "El desbordamiento en la resta se activa siempre que el minuendo $$A$$ sea un número real negativo independientemente del sustraendo $$B$$."
+      ],
+      "correct": 1,
+      "hint": "Considera que $$A - B$$ equivale a $$A + (-B)$$. Aplica la regla de signos de la suma a $$A$$ y $$-B$$.",
+      "explanation": "La resta $$A - B$$ se calcula como $$A + (-B)$$. Los dos sumandos reales son $$A$$ y $$-B$$. Si $$A$$ y $$B$$ tienen signos opuestos, entonces $$A$$ y $$-B$$ tendrán el mismo signo. Por la regla de signos de la suma, habrá desbordamiento si el resultado $$R$$ tiene signo opuesto al primer sumando $$A$$."
+    },
+    {
+      "q": "27. ¿Por qué el formato de representación Signo-Magnitud se considera ineficiente para realizar operaciones aritméticas sucesivas de suma en una ALU?",
+      "options": [
+        "Porque para sumar dos números se requiere un algoritmo complejo que analice primero los signos para decidir si se realiza una suma o una resta física, requiriendo circuitos restadores adicionales.",
+        "Porque el tiempo de propagación del bit de signo es proporcional al cuadrado del número de bits del registro, ralentizando la velocidad de reloj.",
+        "Porque los números en Signo-Magnitud deben pasar obligatoriamente por una etapa de conversión a código gray antes de entrar al sumador básico."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el coste de hardware si tienes que comparar signos y magnitudes antes de decidir sumar o restar.",
+      "explanation": "En SM, el hardware no puede sumar directamente los bits sin comprobar los signos. Si los signos son iguales, se suman las magnitudes. Si son distintos, se debe determinar cuál magnitud es mayor, restar la menor de la mayor, y asignar el signo de la mayor al resultado, lo que exige más hardware y ciclos de reloj."
+    },
+    {
+      "q": "28. En un computador con palabra de 6 bits en Complemento a 2, ¿cuál es el valor decimal equivalente de la cadena binaria $$100000_2$$?",
+      "options": [
+        "$$-32$$",
+        "$$-0$$",
+        "$$-31$$"
+      ],
+      "correct": 0,
+      "hint": "Utiliza la fórmula del peso del bit más significativo en C2 para $$N=6$$.",
+      "explanation": "El patrón $$100000_2$$ posee únicamente el MSB en $$1$$. En C2 de 6 bits, el MSB tiene un peso de $$-2^{6-1} = -2^5 = -32$$. Por tanto, representa al valor decimal $$-32$$."
+    },
+    {
+      "q": "29. ¿Qué relación matemática existe entre la representación en Complemento a 1 (C1) y en Complemento a 2 (C2) de cualquier número entero negativo?",
+      "options": [
+        "$$\\text{C2}(X) = \\text{C1}(X) - 1$$",
+        "$$\\text{C2}(X) = \\text{C1}(X) + 1$$",
+        "$$\\text{C2}(X) = \\text{NOT}(\\text{C1}(X))$$"
+      ],
+      "correct": 1,
+      "hint": "Recuerda los pasos prácticos para obtener el C2 a partir del valor positivo.",
+      "explanation": "Para codificar un número negativo en C2, primero se obtiene su representación en C1 (invirtiendo todos sus bits) y posteriormente se suma $$1$$ al bit menos significativo (LSB). De ahí que $$\\text{C2}(X) = \\text{C1}(X) + 1$$."
+    },
+    {
+      "q": "30. En un sistema en Exceso a $$S$$ (Excess-$$S$$) de $$N$$ bits con $$S = 2^{N-1}$$, ¿qué valor decimal representa la cadena binaria compuesta enteramente por ceros ($$000...00_2$$)?",
+      "options": [
+        "$$-2^{N-1}$$",
+        "$$0$$",
+        "$$-2^{N-1} + 1$$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula: Valor Real = Valor Codificado - Sesgo.",
+      "explanation": "La cadena binaria $$000...00_2$$ corresponde al código decimal $$0$$. El valor real es $$V = \\text{Código} - S = 0 - 2^{N-1} = -2^{N-1}$$."
+    },
+    {
+      "q": "31. ¿Qué se entiende por 'extensión de signo' en el contexto de la manipulación de datos a nivel de ensamblador en un computador?",
+      "options": [
+        "El proceso de incrementar el número de bits de una palabra binaria manteniendo el signo y el valor numérico del entero original mediante la replicación del bit más significativo.",
+        "Una técnica de cifrado de memoria que evita que un programa acceda a zonas fuera de su búfer direccionado.",
+        "Un desplazamiento lógico a la izquierda que inserta unos para hacer que el número se multiplique por potencias de dos de forma rápida."
+      ],
+      "correct": 0,
+      "hint": "Es la técnica que permite pasar un número signed de un registro de 8 bits a uno de 16 bits sin alterar su valor.",
+      "explanation": "La extensión de signo toma el MSB (bit de signo) del número binario y lo copia en todas las nuevas posiciones de mayor peso al transferir el número a un registro de mayor tamaño, preservando tanto el signo como el valor decimal."
+    },
+    {
+      "q": "32. Al sumar dos enteros en C2 de 8 bits, se obtiene un acarreo saliente del bit de signo ($$C_{out} = 1$$) y un acarreo entrante al bit de signo ($$C_{in} = 1$$). ¿Qué indican estas señales sobre el resultado obtenido?",
+      "options": [
+        "Se ha producido un desbordamiento aritmético y el resultado binario en el registro es incorrecto.",
+        "No se ha producido desbordamiento aritmético ($$V=0$$) y el resultado binario en el registro es matemáticamente correcto.",
+        "El acarreo de salida requiere que el resultado se modifique sumándole 1 al bit de signo de forma manual en el registro."
+      ],
+      "correct": 1,
+      "hint": "Calcula el valor del flag de desbordamiento mediante la operación XOR entre los dos acarreos.",
+      "explanation": "El flag de overflow se define como $$V = C_{in} \\oplus C_{out}$$. Si ambos acarreos son iguales a $$1$$, entonces $$V = 1 \\oplus 1 = 0$$. Por lo tanto, no hay desbordamiento y el resultado es correcto."
+    },
+    {
+      "q": "33. Si un número entero positivo en C2 de 8 bits se desplaza aritméticamente a la izquierda (ASL) una posición, ¿bajo qué condición concreta se produce desbordamiento (overflow)?",
+      "options": [
+        "Si el bit de signo del número resultante en el registro cambia de $$0$$ a $$1$$.",
+        "Siempre que el bit saliente por la izquierda sea un $$0$$, ya que se pierde el bit de paridad.",
+        "Nunca se puede producir desbordamiento al desplazar a la izquierda un número positivo."
+      ],
+      "correct": 0,
+      "hint": "Desplazar a la izquierda multiplica por 2. Piensa en el rango máximo positivo representable ($$+127$$).",
+      "explanation": "Desplazar a la izquierda por 1 posición equivale a multiplicar por 2. Si el número original era positivo (MSB = 0) y tras la multiplicación el MSB pasa a ser 1 (negativo), se ha invadido el bit de signo debido a que el resultado excedió el límite máximo ($$+127$$), ocurriendo desbordamiento."
+    },
+    {
+      "q": "34. En la codificación en Exceso-127 (Excess-127) para 8 bits, ¿cuál es el rango de valores reales que se pueden representar?",
+      "options": [
+        "$$[-127, 128]$$",
+        "$$[-128, 127]$$",
+        "$$[-127, 127]$$"
+      ],
+      "correct": 0,
+      "hint": "Usa la fórmula: Valor Real Mínimo = Código Mínimo - Sesgo; Valor Real Máximo = Código Máximo - Sesgo.",
+      "explanation": "Código mínimo = $$0 \\implies V_{min} = 0 - 127 = -127$$. Código máximo = $$255 \\implies V_{max} = 255 - 127 = 128$$. Por tanto, el rango de valores reales representados es $$[-127, 128]$$."
+    },
+    {
+      "q": "35. ¿Cuál es la representación binaria en 8 bits del número decimal $$-65$$ en los formatos de Signo-Magnitud, Complemento a 1 y Complemento a 2 respectivamente?",
+      "options": [
+        "$$11000001_2$$, $$10111110_2$$ y $$10111111_2$$",
+        "$$11000001_2$$, $$11000000_2$$ y $$10111111_2$$",
+        "$$10111111_2$$, $$10111110_2$$ y $$11000001_2$$"
+      ],
+      "correct": 0,
+      "hint": "Calcula paso a paso partiendo de $$+65_{10} = 01000001_2$$.",
+      "explanation": "$$+65_{10} = 01000001_2$$. En SM: cambiamos el MSB a 1 -> $$11000001_2$$. En C1: invertimos todos los bits -> $$10111110_2$$. En C2: sumamos 1 al C1 -> $$10111111_2$$."
+    },
+    {
+      "q": "36. En Complemento a 2 con palabra de $$N$$ bits, ¿por qué no es necesario implementar circuitos restadores independientes en la CPU?",
+      "options": [
+        "Porque la operación $$A - B$$ se ejecuta mediante la suma $$A + \\text{NOT}(B) + 1$$, requiriendo solo un inversor en los bits de entrada y activar el acarreo inicial en el sumador.",
+        "Porque el compilador transforma todas las restas de código de alto nivel en bucles sucesivos de decremento de registros binarios.",
+        "Porque la resta física se delega enteramente a la memoria RAM a través de ciclos DMA especiales."
+      ],
+      "correct": 0,
+      "hint": "Recuerda que $$1$$ sumado en el bit menos significativo equivale a configurar la entrada de acarreo inicial ($$C_{in}$$) del sumador completo a $$1$$.",
+      "explanation": "La resta de $$B$$ se realiza obteniendo su Complemento a 2: $$\\text{NOT}(B) + 1$$. Esto se implementa de manera muy sencilla a nivel de puertas lógicas: se pasan los bits de B por inversores (puertas NOT) y se introduce un acarreo inicial de $$1$$ ($$C_0 = 1$$) en el sumador binario que computa $$A + \\text{NOT}(B)$$. Por lo tanto, no se requiere un restador físico independiente."
+    },
+    {
+      "q": "37. Considere un sistema que codifica enteros en Exceso-128 utilizando un byte (8 bits). Si sumamos los códigos binarios de dos números cuyos valores reales son $$10_{10}$$ y $$15_{10}$$, ¿cuál es el resultado del código de la suma si operamos directamente en binario sin corregir?",
+      "options": [
+        "Se obtiene un código binario que representa algebraicamente al número real $$25_{10}$$ en el formato Excess-128 sin necesidad de ajustes.",
+        "Se obtiene un código que excede el sesgo, pues la suma de los códigos binarios contiene el sesgo duplicado ($$V_1 + V_2 + 2S$$), requiriendo restar el sesgo ($$128$$) para corregir el resultado.",
+        "Se genera un bucle de desbordamiento lógico que borra los bits intermedios y devuelve el valor nulo."
+      ],
+      "correct": 1,
+      "hint": "Suma las dos expresiones de los códigos: $$C_1 = V_1 + S$$ y $$C_2 = V_2 + S$$.",
+      "explanation": "Al sumar los códigos: $$C_1 + C_2 = (V_1 + S) + (V_2 + S) = (V_1 + V_2) + 2S$$. Para que el código resultante represente de forma correcta a $$V_1 + V_2$$ en Excess-S, debe ser de la forma $$(V_1 + V_2) + S$$. Por tanto, hay que restar el sesgo $$S$$ ($$128$$) a la suma binaria directa para obtener el código corregido."
+    },
+    {
+      "q": "38. ¿Qué ventaja presenta el formato de representación en Exceso (Excess-$$S$$) en el contexto de los exponentes de la coma flotante?",
+      "options": [
+        "Permite representar y comparar de forma directa números reales positivos y negativos usando la lógica de comparación de enteros sin signo ordinaria.",
+        "Aumenta la velocidad de ejecución de las multiplicaciones lógicas y divisiones en punto flotante.",
+        "Garantiza que el valor absoluto de la mantisa esté normalizado automáticamente sin consumir ciclos de reloj."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el orden de los códigos binarios en Exceso frente a los números sin signo ordinarios.",
+      "explanation": "El formato en Exceso remapea los números de tal forma que los valores más pequeños (más negativos) corresponden a los códigos binarios más bajos (ej. $$000...00_2$$ es el valor mínimo), y los valores mayores (más positivos) a los códigos más altos. Esto permite comparar los exponentes directamente usando comparadores sencillos de enteros sin signo."
+    },
+    {
+      "q": "39. En un computador de 8 bits en Complemento a 2, ¿qué rango decimal de resultados de una suma de dos enteros negativos producirá desbordamiento aritmético?",
+      "options": [
+        "Cualquier resultado real de la suma que sea estrictamente menor que $$-128$$.",
+        "Cualquier resultado real de la suma que esté comprendido en el intervalo $$[-128, -1]$$.",
+        "Cualquier resultado de la suma que sea mayor que $$0$$ sin generar acarreo saliente del bit de signo."
+      ],
+      "correct": 0,
+      "hint": "Identifica cuál es el valor más pequeño representable en C2 de 8 bits.",
+      "explanation": "El valor mínimo que se puede codificar en C2 con 8 bits es $$-128$$. Si sumamos dos números negativos y la suma real da un valor menor que $$-128$$ (por ejemplo $$-129$$), se producirá desbordamiento aritmético porque dicho valor no se puede representar en la palabra de 8 bits."
+    },
+    {
+      "q": "40. Indique cuál de los siguientes valores binarios de 8 bits tiene la misma interpretación decimal en Signo-Magnitud, Complemento a 1 y Complemento a 2:",
+      "options": [
+        "$$01010101_2$$",
+        "$$10101010_2$$",
+        "$$11111111_2$$"
+      ],
+      "correct": 0,
+      "hint": "Analiza el bit de signo (MSB) de las tres opciones propuestas.",
+      "explanation": "En las tres representaciones (SM, C1 y C2), los números positivos (aquellos que comienzan con el MSB a $$0$$) se codifican de la misma forma que en binario puro. La cadena $$01010101_2$$ representa al número decimal $$+85$$ en los tres formatos."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "1. En Complemento a 2 (C2) de 8 bits, el número entero decimal $$-57$$ se representa mediante la cadena binaria ____.",
+      "options": [
+        "$$11000111_2$$",
+        "$$11000110_2$$",
+        "$$10111001_2$$"
+      ],
+      "correct": 0,
+      "hint": "Calcula $$256 - 57$$ en binario o invierte $$+57_{10} = 00111001_2$$ y súmale 1.",
+      "explanation": "$$+57 = 00111001_2$$. Invertido (C1) = $$11000110_2$$. Sumando 1 (C2) = $$11000111_2$$ (que es $$256 - 57 = 199_{10}$$)."
+    },
+    {
+      "q": "2. En un sistema de 8 bits en Complemento a 2 (C2), la palabra binaria $$10110011_2$$ corresponde al valor decimal ____.",
+      "options": [
+        "$$-77$$",
+        "$$-76$$",
+        "$$-179$$"
+      ],
+      "correct": 0,
+      "hint": "Como el MSB es 1, el número es negativo. Resta 1 y niega, o calcula $$-128 + 32 + 16 + 2 + 1$$.",
+      "explanation": "En C2: $$10110011_2 \\implies -128 + 32 + 16 + 2 + 1 = -77$$. Alternativamente: restar 1 -> $$10110010_2$$, invertir -> $$01001101_2$$ ($$77$$), por tanto es $$-77$$."
+    },
+    {
+      "q": "3. En un sistema de 8 bits en Signo-Magnitud (SM), la palabra binaria $$10110011_2$$ corresponde al valor decimal ____.",
+      "options": [
+        "$$-51$$",
+        "$$-77$$",
+        "$$-115$$"
+      ],
+      "correct": 0,
+      "hint": "El MSB es el signo (1 es negativo), y los 7 bits restantes representan la magnitud.",
+      "explanation": "El primer bit es $$1$$ (indica signo negativo). Los restantes 7 bits son $$0110011_2 = 32 + 16 + 2 + 1 = 51_{10}$$. Por tanto, representa a $$-51$$."
+    },
+    {
+      "q": "4. En un sistema de 8 bits en Complemento a 1 (C1), la palabra binaria $$10110011_2$$ corresponde al valor decimal ____.",
+      "options": [
+        "$$-76$$",
+        "$$-77$$",
+        "$$-51$$"
+      ],
+      "correct": 0,
+      "hint": "El MSB es 1, por lo que es negativo. Invierte todos los bits para hallar la magnitud.",
+      "explanation": "El MSB es $$1$$, número negativo. Invertimos todos los bits: $$\\text{NOT}(10110011_2) = 01001100_2 = 64 + 12 = 76$$. Por tanto, representa a $$-76$$."
+    },
+    {
+      "q": "5. El resultado de la operación de resta $$34_{10} - 72_{10}$$ implementada en C2 de 8 bits da la palabra binaria ____.",
+      "options": [
+        "$$11011010_2$$",
+        "$$11011011_2$$",
+        "$$10100110_2$$"
+      ],
+      "correct": 0,
+      "hint": "Calcula el resultado decimal y represéntalo en C2 de 8 bits.",
+      "explanation": "$$34 - 72 = -38$$. Representación en C2 de $$-38$$: $$256 - 38 = 218 = 11011010_2$$."
+    },
+    {
+      "q": "6. Al realizar la operación $$85_{10} + 64_{10}$$ en C2 de 8 bits se obtiene la palabra binaria $$10010101_2$$, que equivale al valor decimal ____.",
+      "options": [
+        "$$-107$$",
+        "$$149$$",
+        "$$-106$$"
+      ],
+      "correct": 0,
+      "hint": "Ocurre desbordamiento. Convierte la cadena $$10010101_2$$ a decimal interpretándola en C2 de 8 bits.",
+      "explanation": "El resultado binario obtenido es $$10010101_2$$. Como el MSB es $$1$$, representa a un número negativo. Su valor es $$-128 + 16 + 4 + 1 = -107$$."
+    },
+    {
+      "q": "7. En Complemento a 2 utilizando una longitud de palabra de 6 bits, el rango de enteros representable va desde ____.",
+      "options": [
+        "$$-32$$ hasta $$31$$",
+        "$$-31$$ hasta $$31$$",
+        "$$-64$$ hasta $$63$$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $$[-2^{N-1}, 2^{N-1} - 1]$$ con $$N = 6$$.",
+      "explanation": "Para $$N=6$$, los límites son $$-2^{5} = -32$$ y $$2^5 - 1 = 31$$. El rango es $$[-32, 31]$$."
+    },
+    {
+      "q": "8. En Complemento a 1 utilizando una longitud de palabra de 6 bits, el rango de enteros representable va desde ____.",
+      "options": [
+        "$$-31$$ hasta $$31$$",
+        "$$-32$$ hasta $$31$$",
+        "$$-32$$ hasta $$32$$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $$[-2^{N-1} + 1, 2^{N-1} - 1]$$ con $$N = 6$$.",
+      "explanation": "Para $$N=6$$, los límites en C1 son $$-2^5 + 1 = -31$$ y $$2^5 - 1 = 31$$. El rango es $$[-31, 31]$$."
+    },
+    {
+      "q": "9. La representación del número entero decimal $$-128$$ utilizando 8 bits en Complemento a 2 (C2) es ____.",
+      "options": [
+        "$$10000000_2$$",
+        "$$11111111_2$$",
+        "No es representable en 8 bits"
+      ],
+      "correct": 0,
+      "hint": "El valor $$-128$$ es el límite inferior en C2 de 8 bits.",
+      "explanation": "El rango de 8 bits en C2 es $$[-128, 127]$$. El valor $$-128$$ corresponde exactamente al código binario con el MSB en 1 y el resto a 0: $$10000000_2$$."
+    },
+    {
+      "q": "10. Si representamos el número decimal $$-1$$ en Complemento a 2 utilizando 16 bits, el resultado en binario es ____.",
+      "options": [
+        "$$1111111111111111_2$$",
+        "$$1000000000000001_2$$",
+        "$$1111111100000000_2$$"
+      ],
+      "correct": 0,
+      "hint": "El número $$-1$$ en C2 de cualquier tamaño de palabra se representa con todos los bits puestos a 1.",
+      "explanation": "Para $$N=16$$, el valor de $$-1$$ en C2 requiere que todos los bits de la palabra sean unos. Al sumarle $$1$$ ($$0000000000000001_2$$), se propaga el acarreo y da $$0$$ con $$C_{out}=1$$ descartado."
+    },
+    {
+      "q": "11. Al realizar la extensión de signo del número binario $$10000000_2$$ (8 bits en C2) a una palabra de 12 bits, se obtiene la cadena binaria ____.",
+      "options": [
+        "$$111110000000_2$$",
+        "$$000010000000_2$$",
+        "$$111100000000_2$$"
+      ],
+      "correct": 0,
+      "hint": "El bit de signo (MSB) en $$10000000_2$$ es 1. Duplícalo hacia la izquierda en las 4 nuevas posiciones.",
+      "explanation": "El MSB del valor original es $$1$$ (representa $$-128$$). Para extender a 12 bits, rellenamos las nuevas posiciones a la izquierda con el valor del bit de signo: $$111110000000_2$$."
+    },
+    {
+      "q": "12. El número decimal $$45$$ representado en el formato Excess-128 utilizando un byte (8 bits) corresponde a la cadena binaria ____.",
+      "options": [
+        "$$10101101_2$$",
+        "$$00101101_2$$",
+        "$$11001101_2$$"
+      ],
+      "correct": 0,
+      "hint": "Usa la definición: Código = Valor Real + Sesgo. Convierte la suma decimal a binario.",
+      "explanation": "Código = $$45 + 128 = 173_{10}$$. Convertido a binario de 8 bits: $$173 = 128 + 32 + 8 + 4 + 1 = 10101101_2$$."
+    },
+    {
+      "q": "13. En el formato de representación Excess-127 de 8 bits, el código binario $$01111111_2$$ corresponde al valor decimal ____.",
+      "options": [
+        "$$0$$",
+        "$$127$$",
+        "$$-1$$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula: Valor Real = Valor Codificado - Sesgo.",
+      "explanation": "El código binario $$01111111_2$$ es el número decimal 127. El valor real representado es $$127 - 127 = 0$$."
+    },
+    {
+      "q": "14. Al realizar la operación $$15_{10} - 20_{10}$$ utilizando C2 de 6 bits, el resultado en binario es ____.",
+      "options": [
+        "$$111011_2$$",
+        "$$111010_2$$",
+        "$$100101_2$$"
+      ],
+      "correct": 0,
+      "hint": "Calcula el valor decimal resultado ($$-5$$) y codifícalo en C2 de 6 bits ($$2^6 - 5$$).",
+      "explanation": "$$15 - 20 = -5$$. El C2 de $$-5$$ en 6 bits se calcula como $$64 - 5 = 59$$. El valor decimal 59 en binario de 6 bits es $$111011_2$$."
+    },
+    {
+      "q": "15. Si aplicamos un desplazamiento aritmético a la derecha (ASR) de 2 bits a la palabra binaria $$11110100_2$$ (C2 de 8 bits), el resultado es ____.",
+      "options": [
+        "$$11111101_2$$",
+        "$$00111101_2$$",
+        "$$11110100_2$$"
+      ],
+      "correct": 0,
+      "hint": "Desplaza 2 posiciones a la derecha introduciendo copias del bit de signo (1) a la izquierda.",
+      "explanation": "Original: $$11110100_2$$ ($$-12_{10}$$). Desplazado 2 bits a la derecha aritméticamente: duplicamos el MSB ($$1$$) por la izquierda y descartamos dos bits por la derecha, dando $$11111101_2$$ ($$-3_{10}$$). Esto equivale a $$\\lfloor -12 / 4 \\rfloor = -3$$."
+    },
+    {
+      "q": "16. Si realizamos un desplazamiento lógico a la derecha (LSR) de 2 posiciones a la palabra binaria $$11110100_2$$, obtenemos la cadena ____.",
+      "options": [
+        "$$00111101_2$$",
+        "$$11111101_2$$",
+        "$$00111100_2$$"
+      ],
+      "correct": 0,
+      "hint": "En el desplazamiento lógico a la derecha se rellenan los nuevos bits a la izquierda con ceros.",
+      "explanation": "Original: $$11110100_2$$. Desplazado a la derecha lógicamente 2 posiciones: entran dos ceros por la izquierda, y se descartan dos bits por la derecha. El resultado es $$00111101_2$$."
+    },
+    {
+      "q": "17. La operación lógica XOR a nivel de bits entre los registros $$11001100_2$$ y $$10101010_2$$ da como resultado ____.",
+      "options": [
+        "$$01100110_2$$",
+        "$$11101110_2$$",
+        "$$00001100_2$$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la tabla de verdad de la puerta lógica XOR bit a bit (es 1 cuando los bits de entrada difieren).",
+      "explanation": "Operación bit a bit: \n  11001100 \n^ 10101010 \n---------- \n  01100110."
+    },
+    {
+      "q": "18. Si realizamos la suma de los valores $$-64_{10}$$ y $$-65_{10}$$ en C2 de 8 bits, el resultado decimal obtenido debido al desbordamiento es ____.",
+      "options": [
+        "$$127$$",
+        "$$-129$$",
+        "$$126$$"
+      ],
+      "correct": 0,
+      "hint": "Calcula la suma decimal real ($$-129$$) y réstale o súmale el rango de módulo ($$256$$) para ver qué valor se interpreta en C2.",
+      "explanation": "Suma real = $$-129$$. Límite inferior en C2 de 8 bits es $$-128$$, por lo que ocurre desbordamiento negativo. El valor binario obtenido es $$-129 + 256 = 127$$, que en C2 se interpreta como $$+127$$."
+    },
+    {
+      "q": "19. Si intentamos calcular el valor negativo de $$-128$$ en un procesador de 8 bits en Complemento a 2, el registro devuelve en binario la cadena ____ debido al desbordamiento.",
+      "options": [
+        "$$10000000_2$$",
+        "$$01111111_2$$",
+        "$$00000000_2$$"
+      ],
+      "correct": 0,
+      "hint": "El valor del opuesto algebraico de $$-128$$ es $$+128$$, el cual no cabe en 8 bits en C2. Niega el patrón $$10000000_2$$ en binario.",
+      "explanation": "La negación en C2 se realiza haciendo NOT de los bits y sumando 1: $$\\text{NOT}(10000000_2) = 01111111_2$$. Al sumar 1, el resultado es $$10000000_2$$ ($$-128$$). Debido al desbordamiento, el opuesto de $$-128$$ da como resultado el propio $$-128$$."
+    },
+    {
+      "q": "20. En un sistema de 8 bits en C2, el valor decimal equivalente de la cadena binaria $$11111111_2$$ es ____.",
+      "options": [
+        "$$-1$$",
+        "$$-255$$",
+        "$$-127$$"
+      ],
+      "correct": 0,
+      "hint": "Todos los bits a 1 en C2 siempre corresponden al valor $$-1$$.",
+      "explanation": "El valor de $$11111111_2$$ en C2 de 8 bits representa a $$-128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = -1$$."
+    },
+    {
+      "q": "21. ¿Qué sistema(s) de representación binaria de 8 bits presenta(n) el problema del doble cero (existencia de cero positivo y cero negativo)?",
+      "options": [
+        "Signo-Magnitud.",
+        "Complemento a 1 (C1).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Recuerda que tanto en Signo-Magnitud como en C1, al negar el valor de cero se obtiene una cadena de bits diferente a la inicial.",
+      "explanation": "En Signo-Magnitud el cero tiene las formas $$00000000_2$$ ($$+0$$) y $$10000000_2$$ ($$-0$$). En C1 tiene las formas $$00000000_2$$ ($$+0$$) y $$11111111_2$$ ($$-0$$). Por lo tanto, en ambos formatos ocurre esta anomalía."
+    },
+    {
+      "q": "22. Indique cuál de las siguientes sumas aritméticas en C2 de 8 bits produce un desbordamiento aritmético (overflow):",
+      "options": [
+        "$$70 + 60$$",
+        "$$-70 + (-60)$$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Recuerda que el rango máximo representable con 8 bits en C2 es de $$-128$$ a $$127$$. Comprueba si el resultado real sale de este intervalo.",
+      "explanation": "$$70 + 60 = 130$$, que supera el límite superior de $$127$$. Por otro lado, $$-70 - 60 = -130$$, que es menor que el límite inferior de $$-128$$. Ambas operaciones desbordan."
+    },
+    {
+      "q": "23. En Complemento a 2 de 8 bits, ¿cuál de las siguientes cadenas binarias codifica a un número entero estrictamente negativo?",
+      "options": [
+        "$$10000000_2$$",
+        "$$11111111_2$$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "En C2, cualquier cadena binaria que comience con un bit de signo (MSB) igual a 1 representa a un número negativo.",
+      "explanation": "Tanto $$10000000_2$$ ($$-128$$) como $$11111111_2$$ ($$-1$$) comienzan con el MSB en $$1$$, por lo que ambos representan valores negativos."
+    },
+    {
+      "q": "24. ¿Cuál de los siguientes patrones de bits representa una codificación válida del número decimal nulo (cero) en su respectivo formato de 8 bits?",
+      "options": [
+        "$$00000000_2$$ en Complemento a 2.",
+        "$$11111111_2$$ en Complemento a 1.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El cero en C2 tiene una única representación, mientras que en C1 tiene dos.",
+      "explanation": "El cero se representa como $$00000000_2$$ en C2. En C1, la cadena de todo unos $$11111111_2$$ representa al cero negativo ($$-0$$). Ambas afirmaciones son correctas."
+    },
+    {
+      "q": "25. Dadas las cadenas binarias de 8 bits $$A = 10101010_2$$ y $$B = 01010101_2$$, ¿cuál de las siguientes relaciones lógicas es correcta?",
+      "options": [
+        "$$A$$ es el Complemento a 1 (C1) de $$B$$.",
+        "$$B$$ es el Complemento a 1 (C1) de $$A$$.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El Complemento a 1 se obtiene invirtiendo todos los bits (operación lógica NOT).",
+      "explanation": "El operador NOT invierte los bits. Al aplicar NOT a $$10101010_2$$ obtenemos $$01010101_2$$, y viceversa. Ambas son el complemento a 1 de la otra."
+    },
+    {
+      "q": "26. Al realizar un desplazamiento aritmético a la derecha (ASR) de un número negativo en C2:",
+      "options": [
+        "Se conserva el signo negativo del número original.",
+        "Equivale algebraicamente a dividir el número por $$2^k$$ redondeando hacia menos infinito (suelo).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Evalúa el comportamiento de los bits vacantes y el resultado decimal en números impares negativos.",
+      "explanation": "El ASR mantiene el MSB en 1, conservando el signo negativo. Algebraicamente equivale a la división entera por $$2^k$$ con redondeo hacia menos infinito (por ejemplo, $$-5$$ desplazado 1 bit da $$-3$$, que es $$\\lfloor -2.5 \\rfloor = -3$$). Ambas propiedades son correctas."
+    },
+    {
+      "q": "27. En un sistema con registros de 4 bits en C2, ¿cuál de las siguientes sumas provoca desbordamiento aritmético?",
+      "options": [
+        "$$5_{10} + 3_{10}$$",
+        "$$-5_{10} - 4_{10}$$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El rango en C2 de 4 bits es $$[-8, 7]$$. Comprueba si las sumas se salen de este intervalo.",
+      "explanation": "$$5 + 3 = 8$$, que excede el límite superior ($$+7$$). $$-5 - 4 = -9$$, que es menor que el límite inferior ($$-8$$). Por tanto, en ambos casos hay desbordamiento."
+    },
+    {
+      "q": "28. Indique cuál de las siguientes expresiones algebraicas o desigualdades define correctamente el rango de representación de un entero en Signo-Magnitud con $$N$$ bits:",
+      "options": [
+        "El rango comprendido por el intervalo cerrado $$[-2^{N-1} + 1, 2^{N-1} - 1]$$.",
+        "La desigualdad para enteros $$-2^{N-1} < X < 2^{N-1}$$.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Compara los límites del intervalo cerrado con los de la desigualdad abierta para valores enteros.",
+      "explanation": "Para números enteros, la desigualdad estricta $$-2^{N-1} < X < 2^{N-1}$$ es equivalente a escribir $$-2^{N-1} + 1 \\le X \\le 2^{N-1} - 1$$, que coincide con el intervalo cerrado del formato Signo-Magnitud. Todas las expresiones son equivalentes."
+    },
+    {
+      "q": "29. ¿Cuál de las siguientes representaciones binarias corresponde al número entero $$-2_{10}$$ en su formato de 4 bits respectivo?",
+      "options": [
+        "$$1010_2$$ en Signo-Magnitud.",
+        "$$1101_2$$ en Complemento a 1 (C1).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula el valor binario de $$-2$$ en SM y C1 de 4 bits partiendo de $$+2_{10} = 0010_2$$.",
+      "explanation": "En SM: el signo es 1, magnitud es 2 ($$010_2$$) -> $$1010_2$$. En C1: invertimos los bits de $$0010_2$$ -> $$1101_2$$. Ambas afirmaciones son correctas."
+    },
+    {
+      "q": "30. Indique cuál de los siguientes valores decimales no se puede representar en una palabra binaria de 8 bits en Complemento a 2:",
+      "options": [
+        "$$128$$",
+        "$$-129$$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El rango representable de 8 bits en C2 es $$[-128, 127]$$.",
+      "explanation": "El valor $$128$$ supera el límite de $$127$$, y el valor $$-129$$ es menor que el límite inferior de $$-128$$. Ninguno de los dos se puede codificar en 8 bits en C2."
+    },
+    {
+      "q": "31. ¿Qué valor decimal representa la palabra binaria $$10000000_2$$ si se interpreta en Complemento a 2 utilizando 8 bits?",
+      "options": [
+        "$$-127$$",
+        "$$0$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Esta cadena corresponde al límite inferior negativo del formato.",
+      "explanation": "La cadena binaria $$10000000_2$$ en C2 de 8 bits representa al número decimal $$-128$$. Al no estar este valor en las opciones A o B, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "32. Indique cuál de las siguientes cadenas binarias corresponde a la codificación en C2 de 8 bits del número entero decimal $$-64$$:",
+      "options": [
+        "$$10111111_2$$",
+        "$$11000001_2$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $$256 - 64$$ y conviértelo a binario.",
+      "explanation": "El valor en C2 de $$-64$$ se calcula como $$256 - 64 = 192_{10} = 11000000_2$$. Como las opciones presentadas son $$10111111_2$$ y $$11000001_2$$, la opción correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "33. ¿Cuál es el rango de valores reales que se puede codificar en un sistema Excess-128 que utiliza registros de 8 bits?",
+      "options": [
+        "$$[0, 255]$$",
+        "$$[-128, 128]$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula los límites restando el sesgo de 128 al rango binario puro de 8 bits ($$[0, 255]$$).",
+      "explanation": "El rango real representable en Excess-128 con 8 bits es $$[0 - 128, 255 - 128] = [-128, 127]$$. Al ser la opción B $$[-128, 128]$$ incorrecta por el extremo positivo, elegimos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "34. Si realizamos la operación de resta $$-12_{10} - 12_{10}$$ en C2 de 8 bits, ¿cuál es el resultado decimal de la operación obtenido por el computador?",
+      "options": [
+        "$$0$$",
+        "$$24$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El cálculo aritmético directo da $$-24$$, que está dentro del rango $$[-128, 127]$$. Verifique las opciones.",
+      "explanation": "La resta da $$-24$$. Este valor es perfectamente representable en 8 bits en C2 ($$11101000_2$$). Como las opciones son $$0$$ y $$24$$, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "35. Si aplicamos un desplazamiento aritmético a la derecha (ASR) de 1 bit a la cadena binaria $$11111110_2$$ (C2 de 8 bits), ¿cuál es el resultado obtenido?",
+      "options": [
+        "$$01111111_2$$",
+        "$$11111100_2$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Desplaza a la derecha preservando el bit de signo (1 en este caso).",
+      "explanation": "El valor original es $$11111110_2$$ ($$-2_{10}$$). Desplazado arithmetically 1 posición a la derecha da $$11111111_2$$ ($$-1_{10}$$). Como las opciones son $$01111111_2$$ y $$11111100_2$$, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "36. En el formato de representación Excess-127 de 8 bits, ¿qué cadena binaria corresponde al valor real decimal nulo ($$0_{10}$$)?",
+      "options": [
+        "$$00000000_2$$",
+        "$$10000000_2$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Código = Valor Real + Sesgo. Convierte la suma decimal a binario de 8 bits.",
+      "explanation": "El código decimal es $$0 + 127 = 127$$. En binario de 8 bits, 127 se codifica como $$01111111_2$$. Al no estar esta cadena listada en las opciones A o B, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "37. Al realizar la suma de las cadenas binarias $$01111111_2$$ y $$00000001_2$$ en C2 de 8 bits, ¿cuál es el estado de las banderas de acarreo saliente ($$C_{out}$$) y de desbordamiento aritmético ($$V$$)?",
+      "options": [
+        "$$C_{out} = 1, V = 0$$",
+        "$$C_{out} = 0, V = 0$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Realiza la suma binaria y analiza el acarreo saliente del MSB y si se produjo un cambio de signo erróneo.",
+      "explanation": "Suma: $$01111111_2 + 00000001_2 = 10000000_2$$. Sumamos dos positivos ($$+127$$ y $$+1$$) y obtuvimos un negativo ($$-128$$). Esto produce desbordamiento ($$V = 1$$). El acarreo saliente del bit de signo es $$C_{out} = 0$$ (y el de entrada $$C_{in} = 1$$). Por tanto, $$C_{out} = 0, V = 1$$. Esto no coincide con A ni con B, de ahí que la correcta sea 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "38. ¿Qué valor decimal representa la cadena binaria $$10000001_2$$ si se interpreta en Signo-Magnitud utilizando 8 bits?",
+      "options": [
+        "$$-127$$",
+        "$$-129$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "En SM, el MSB indica signo y los restantes bits la magnitud.",
+      "explanation": "En SM, el MSB es $$1$$ (negativo). Los restantes 7 bits son $$0000001_2 = 1$$. Por tanto, representa al valor decimal $$-1$$. Ninguna opción contiene $$-1$$, por lo que se escoge 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "39. ¿Qué valor decimal representa la cadena binaria $$11111110_2$$ si se interpreta en Complemento a 1 (C1) utilizando 8 bits?",
+      "options": [
+        "$$-2$$",
+        "$$-126$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Invierte los bits para encontrar el valor absoluto del número negativo en C1.",
+      "explanation": "El MSB es 1, indicando valor negativo. Al invertir todos los bits obtenemos $$00000001_2 = 1_{10}$$. Por tanto, representa a $$-1$$. Como las opciones son $$-2$$ y $$-126$$, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "40. Si realizamos la operación lógica AND bit a bit de las cadenas binarias $$10101010_2$$ y $$01010101_2$$ en C2 de 8 bits, ¿cuál es el valor decimal del resultado?",
+      "options": [
+        "$$-1$$",
+        "$$255$$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula el resultado de la operación AND y luego interprétalo en C2.",
+      "explanation": "El AND de las dos cadenas complementarias da $$00000000_2$$, cuyo valor decimal interpretado en C2 es $$0$$. Al no figurar el $$0$$ en las opciones A o B, se escoge 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Conversión de decimal a C2 de 8 bits y extensión de signo",
+      "context": "Un programador necesita almacenar la temperatura de una cámara de congelación, que es de $$-43^\\circ\\text{C}$$, en una variable de tipo entero firmado de 8 bits usando Complemento a 2 (C2).",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Represente $$+43_{10}$$ en binario de 8 bits y calcule su valor decimal equivalente interpretado en binario sin signo.",
+          "correctValue": 43,
+          "tolerance": 0,
+          "explanation": "$$43 = 32 + 8 + 2 + 1 = 00101011_2$$. Interpretado en binario sin signo, su valor es 43."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Obtenga el Complemento a 1 (C1) de la representación binaria de $$+43_{10}$$ de 8 bits obtenida en el apartado a) y calcule su valor decimal equivalente si esa misma cadena binaria de 8 bits se interpretara en Signo-Magnitud (SM) de 8 bits.",
+          "correctValue": -84,
+          "tolerance": 0,
+          "explanation": "El C1 de $$00101011_2$$ es $$11010100_2$$. Interpretado en SM de 8 bits, el primer bit ($$1$$) indica signo negativo, y los 7 bits restantes $$1010100_2 = 64 + 16 + 4 = 84$$ representan la magnitud, resultando en $$-84$$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Obtenga el Complemento a 2 (C2) de $$-43_{10}$$ sumando 1 al C1 obtenido en el apartado b). Indique el valor decimal que representa esta cadena binaria resultante de 8 bits si se interpreta en formato binario sin signo.",
+          "correctValue": 213,
+          "tolerance": 0,
+          "explanation": "$$11010100_2 + 1 = 11010101_2$$. Interpretado en binario sin signo de 8 bits, esto equivale a $$256 - 43 = 213$$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Realice la extensión de signo del valor en C2 de $$-43_{10}$$ (del apartado c) a una longitud de palabra de 12 bits. Calcule su valor decimal interpretado en binario sin signo de 12 bits.",
+          "correctValue": 4053,
+          "tolerance": 0,
+          "explanation": "La extensión de signo de $$11010101_2$$ (8 bits) a 12 bits duplica el bit de signo ($$1$$) hacia la izquierda resultando en $$111111010101_2$$. En binario sin signo de 12 bits, esto equivale a $$2^{12} - 43 = 4096 - 43 = 4053$$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Decodificación de C2 y operaciones de desplazamiento",
+      "context": "Se dispone de un valor binario en un registro de 8 bits representado en C2: $$10101100_2$$.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Determine el valor decimal equivalente representado por la cadena binaria $$10101100_2$$ en C2 de 8 bits.",
+          "correctValue": -84,
+          "tolerance": 0,
+          "explanation": "El MSB es 1, indicando signo negativo. C1 = $$01010011_2$$. C2 = $$01010100_2 = 64 + 16 + 4 = 84$$. Por tanto, representa a $$-84$$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Se realiza un desplazamiento lógico a la izquierda (LSL) de 1 bit a la cadena binaria del apartado a). Indique el valor decimal que representa la cadena binaria de 8 bits resultante en C2 de 8 bits.",
+          "correctValue": 88,
+          "tolerance": 0,
+          "explanation": "$$10101100_2$$ desplazado a la izquierda 1 bit da $$01011000_2$$. Como el MSB es $$0$$, representa un número positivo: $$64 + 16 + 8 = 88$$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Aplique ahora un desplazamiento aritmético a la derecha (ASR) de 3 posiciones a la palabra binaria original $$10101100_2$$ del apartado a). Determine el valor decimal que representa el resultado binario en C2 de 8 bits.",
+          "correctValue": -11,
+          "tolerance": 0,
+          "explanation": "$$10101100_2$$ desplazado a la derecha aritméticamente 3 posiciones da $$11110101_2$$ (se rellenan 3 unos a la izquierda). En C2 esto representa a $$-128 + 64 + 32 + 16 + 4 + 1 = -11$$ (o bien $$\\lfloor -84 / 2^3 \\rfloor = \\lfloor -10.5 \\rfloor = -11$$)."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcule el valor decimal que representaría la cadena binaria del apartado c) ($$11110101_2$$) si se interpretara en el formato Excess-128 utilizando 8 bits.",
+          "correctValue": 117,
+          "tolerance": 0,
+          "explanation": "La cadena $$11110101_2$$ equivale a $$245$$ en binario sin signo. En Excess-128, el valor real es $$\\text{Código} - 128 = 245 - 128 = 117$$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Suma de enteros en C2 y detección de desbordamiento",
+      "context": "Se realiza la suma de los valores decimales $$75_{10}$$ y $$68_{10}$$ en una ALU de 8 bits que utiliza representación en C2.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcule la representación binaria de $$+75_{10}$$ en 8 bits. ¿Cuál es su valor decimal equivalente interpretado en binario sin signo?",
+          "correctValue": 75,
+          "tolerance": 0,
+          "explanation": "$$75_{10} = 64 + 8 + 2 + 1 = 01001011_2$$. Interpretado en binario sin signo es 75."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcule la representación binaria de $$+68_{10}$$ en 8 bits. ¿Cuál es su valor decimal equivalente interpretado en binario sin signo?",
+          "correctValue": 68,
+          "tolerance": 0,
+          "explanation": "$$68_{10} = 64 + 4 = 01000100_2$$. Interpretado en binario sin signo es 68."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Sume las representaciones binarias obtenidas en los apartados a) y b): $$01001011_2 + 01000100_2$$. Indique el valor decimal del resultado de 8 bits al ser interpretado en C2.",
+          "correctValue": -113,
+          "tolerance": 0,
+          "explanation": "Suma binaria: $$01001011_2 + 01000100_2 = 10001111_2$$. El MSB es 1, indicando un número negativo. Su valor en C2 es $$-128 + 8 + 4 + 2 + 1 = -113$$. Esto ocurre porque $$75+68 = 143$$, que excede el límite superior de C2 ($$+127$$), dando $$143 - 256 = -113$$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Determine el valor lógico (1 para activado, 0 para desactivado) de la bandera de desbordamiento aritmético ($$V$$) para la suma anterior.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Dado que se sumaron dos números positivos y el resultado fue negativo (MSB = 1), se produjo desbordamiento aritmético. Por tanto, $$V = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Resta de enteros en C2 y desbordamiento",
+      "context": "Se realiza la resta de los valores decimales $$-50_{10} - 90_{10}$$ en una ALU de 8 bits en C2. Esta resta se implementa como la suma de $$-50_{10}$$ y $$-90_{10}$$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcule la representación de $$-50_{10}$$ en C2 de 8 bits y determine su valor real si esa misma cadena se interpreta en Excess-128 de 8 bits.",
+          "correctValue": 78,
+          "tolerance": 0,
+          "explanation": "$$-50$$ en C2 es $$256 - 50 = 206 = 11001110_2$$. En Excess-128, esta cadena se interpreta como $$\\text{Código} - 128 = 206 - 128 = 78$$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcule la representación de $$-90_{10}$$ en C2 de 8 bits y determine su valor real si esa misma cadena se interpreta en Excess-128 de 8 bits.",
+          "correctValue": 38,
+          "tolerance": 0,
+          "explanation": "$$-90$$ en C2 es $$256 - 90 = 166 = 10100110_2$$. En Excess-128, esta cadena se interpreta como $$\\text{Código} - 128 = 166 - 128 = 38$$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Sume las dos representaciones binarias en C2 obtenidas en a) y b) y determine el valor decimal interpretado en C2 de 8 bits de la cadena resultante.",
+          "correctValue": 116,
+          "tolerance": 0,
+          "explanation": "Suma: $$11001110_2 + 10100110_2 = 101110100_2$$, truncando a 8 bits da $$01110100_2$$. Su valor en C2 de 8 bits es $$64 + 32 + 16 + 4 = 116$$. Esto se debe a que $$-50 - 90 = -140$$, que excede el límite inferior de C2 ($$-128$$), resultando en $$-140 + 256 = 116$$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Determine el valor lógico (1 o 0) de la bandera de desbordamiento aritmético ($$V$$) resultante de esta operación.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sumamos dos números negativos y el resultado es positivo (MSB = 0), indicando desbordamiento aritmético. Por tanto, $$V = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Operaciones lógicas a nivel de bits y C2",
+      "context": "Sean las variables de 8 bits en C2: $$A = -15_{10}$$ y $$B = 30_{10}$$.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Represente el valor $$A = -15_{10}$$ en C2 de 8 bits. Determine su valor decimal equivalente si la cadena se interpretara en binario sin signo.",
+          "correctValue": 241,
+          "tolerance": 0,
+          "explanation": "$$-15$$ en C2 es $$256 - 15 = 241 = 11110001_2$$. En binario sin signo equivale a 241."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Represente el valor $$B = 30_{10}$$ en C2 de 8 bits. Determine su valor decimal equivalente si la cadena se interpretara en binario sin signo.",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "$$+30$$ en C2 de 8 bits es $$00011110_2$$. En binario sin signo equivale a 30."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Realice la operación lógica AND bit a bit entre $$A$$ y $$B$$. Indique el valor decimal del resultado interpretado en C2 de 8 bits.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$11110001_2 \\text{ AND } 00011110_2 = 00010000_2$$. En C2 de 8 bits, esta cadena representa al valor decimal 16."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Realice la operación lógica XOR bit a bit entre $$A$$ y $$B$$. Indique el valor decimal del resultado interpretado en C2 de 8 bits.",
+          "correctValue": -17,
+          "tolerance": 0,
+          "explanation": "$$11110001_2 \\text{ XOR } 00011110_2 = 11101111_2$$. En C2, esta cadena representa a $$-128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = -17$$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Representación en exceso y comparación de formatos",
+      "context": "Se desea representar el valor decimal $$-7$$ en un formato de registro de 6 bits utilizando el sistema de Exceso-32 (Excess-32).",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Determine el valor del código decimal (el valor que se almacena antes de pasar a binario) para representarlo en Excess-32.",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "El código se calcula como: $$\\text{Código} = \\text{Valor Real} + S$$. Para un valor real de $$-7$$ y sesgo de $$32$$: $$\\text{Código} = -7 + 32 = 25$$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Escriba la cadena binaria de 6 bits correspondiente al código obtenido en a). ¿Cuál es su valor decimal interpretado en binario sin signo?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "El código decimal 25 se convierte a binario de 6 bits como $$011001_2$$. Interpretado en binario sin signo, su valor decimal es 25."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Si la misma cadena de bits del apartado b) ($$011001_2$$) se interpretara directamente en C2 de 6 bits, ¿cuál sería el valor decimal obtenido?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "La cadena $$011001_2$$ tiene el MSB en $$0$$. Por tanto, representa un valor positivo en C2: $$16 + 8 + 1 = 25$$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Si la misma cadena de bits del apartado b) ($$011001_2$$) se interpretara en formato Signo-Magnitud (SM) de 6 bits, ¿cuál sería el valor decimal obtenido?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "En SM de 6 bits, el MSB es $$0$$ (positivo), y los 5 bits de magnitud son $$11001_2 = 16 + 8 + 1 = 25$$. Por tanto, representa el valor decimal 25."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Rango de representación y límites con 7 bits",
+      "context": "Considere un procesador hipotético cuyas instrucciones operan con un tamaño de palabra de $$N = 7$$ bits.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcule el menor número entero negativo (límite inferior) representable en C2 utilizando 7 bits.",
+          "correctValue": -64,
+          "tolerance": 0,
+          "explanation": "El valor mínimo en C2 se calcula con la fórmula $$-2^{N-1}$$. Para $$N=7$$, esto es $$-2^6 = -64$$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcule el mayor número entero positivo (límite superior) representable en C2 utilizando 7 bits.",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "El valor máximo en C2 se calcula con la fórmula $$2^{N-1} - 1$$. Para $$N=7$$, esto es $$2^6 - 1 = 63$$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcule el menor número entero negativo representable en formato Signo-Magnitud utilizando 7 bits.",
+          "correctValue": -63,
+          "tolerance": 0,
+          "explanation": "El valor mínimo en SM se calcula con la fórmula $$-(2^{N-1} - 1)$$. Para $$N=7$$, esto es $$-(2^6 - 1) = -63$$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcule la diferencia matemática absoluta entre el número de valores enteros distintos que se pueden representar en C2 y en Signo-Magnitud utilizando 7 bits.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "C2 con 7 bits representa $$2^7 = 128$$ valores distintos. Signo-Magnitud con 7 bits representa $$2^7 - 1 = 127$$ valores distintos (porque el cero tiene dos codificaciones). La diferencia absoluta es $$128 - 127 = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Extensión de signo y truncamiento en C2",
+      "context": "Un registro de 6 bits contiene el valor en C2: $$100101_2$$.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Determine el valor decimal equivalente de la cadena binaria $$100101_2$$ interpretada en C2 de 6 bits.",
+          "correctValue": -27,
+          "tolerance": 0,
+          "explanation": "El MSB es 1, número negativo. C1 = $$011010_2$$. C2 = $$011011_2 = 16 + 8 + 2 + 1 = 27$$. Por tanto, representa a $$-27$$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Realice la extensión de signo de esta cadena a 8 bits. Calcule el valor decimal de la cadena resultante si se interpreta en binario sin signo de 8 bits.",
+          "correctValue": 229,
+          "tolerance": 0,
+          "explanation": "Extensión de signo de $$100101_2$$ a 8 bits es $$11100101_2$$. Interpretado en binario sin signo equivale a $$256 - 27 = 229$$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Si se realiza un truncamiento de la cadena de 6 bits original a una de 4 bits (conservando solo los 4 bits menos significativos), calcule el valor decimal de esta nueva cadena interpretada en C2 de 4 bits.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La cadena original es $$100101_2$$. Los 4 LSBs son $$0101_2$$. En C2 de 4 bits, como el MSB es $$0$$, representa a $$+5$$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Determine la diferencia matemática obtenida al restar el valor original (apartado a) menos el valor truncado (apartado c).",
+          "correctValue": -32,
+          "tolerance": 0,
+          "explanation": "Valor original = $$-27$$. Valor truncado = $$5$$. La diferencia es $$-27 - 5 = -32$$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Multiplicación por desplazamientos y desbordamiento",
+      "context": "Se desea multiplicar el entero signed $$X = -9_{10}$$ utilizando operaciones de desplazamiento a la izquierda en registros de 8 bits en C2.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Codifique $$X = -9_{10}$$ en C2 de 8 bits. ¿Cuál es su valor decimal equivalente si la cadena se interpretara en binario sin signo?",
+          "correctValue": 247,
+          "tolerance": 0,
+          "explanation": "$$-9$$ en C2 es $$256 - 9 = 247 = 11110111_2$$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Realice un desplazamiento a la izquierda de 2 bits sobre la cadena del apartado a). Indique el valor decimal que representa en C2 de 8 bits el resultado obtenido.",
+          "correctValue": -36,
+          "tolerance": 0,
+          "explanation": "$$11110111_2$$ desplazado a la izquierda por 2 bits da $$11011100_2$$. En C2, esta cadena representa a $$-128 + 64 + 16 + 8 + 4 = -36$$ (que es $$-9 \\times 4 = -36$$)."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Realice un desplazamiento a la izquierda de 4 bits sobre la cadena binaria original del apartado a). Indique el valor decimal que representa en C2 el resultado de 8 bits obtenido (reflejando el desbordamiento).",
+          "correctValue": 112,
+          "tolerance": 0,
+          "explanation": "$$11110111_2$$ desplazado a la izquierda por 4 bits da $$01110000_2$$. En C2, como el MSB es $$0$$, representa un número positivo: $$64 + 32 + 16 = 112$$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Determine el valor decimal que representaría la cadena binaria obtenida en el apartado c) ($$01110000_2$$) si se interpretara en el formato Excess-128 utilizando 8 bits.",
+          "correctValue": -16,
+          "tolerance": 0,
+          "explanation": "La cadena $$01110000_2$$ es el número decimal 112. En Excess-128, representa el valor real de $$112 - 128 = -16$$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Aritmética binaria y operaciones lógicas combinadas",
+      "context": "Dadas tres palabras de 8 bits codificadas en C2: $$A = 00111100_2$$, $$B = 11000100_2$$ y $$C = 11111110_2$$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcule el valor decimal equivalente de $$A$$ en C2 de 8 bits.",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "Como el MSB de $$A$$ ($$00111100_2$$) es $$0$$, representa un valor positivo: $$32 + 16 + 8 + 4 = 60$$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcule el valor decimal equivalente de $$B$$ en C2 de 8 bits.",
+          "correctValue": -60,
+          "tolerance": 0,
+          "explanation": "El MSB de $$B$$ ($$11000100_2$$) es $$1$$. C1 = $$00111011_2$$. C2 = $$00111100_2 = 60$$. Por tanto, representa a $$-60$$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcule el valor decimal equivalente de $$C$$ en C2 de 8 bits.",
+          "correctValue": -2,
+          "tolerance": 0,
+          "explanation": "El MSB de $$C$$ ($$11111110_2$$) es $$1$$. C1 = $$00000001_2$$. C2 = $$00000010_2 = 2$$. Por tanto, representa a $$-2$$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Realice la operación $$(A + B) \\times C$$ utilizando aritmética binaria en C2. Indique el valor decimal del resultado obtenido.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$A + B = 60 + (-60) = 0$$. La multiplicación de $$0 \\times (-2) = 0$$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Rangos con sesgo variable en exceso",
+      "context": "Se dispone de un sistema de representación de enteros de 5 bits y se quiere comparar el rango utilizando diferentes sesgos.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Si se utiliza Excess-15, calcule el máximo valor real positivo representable en este sistema.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Código máximo es $$2^5 - 1 = 31$$. El valor real máximo es $$\\text{Código} - S = 31 - 15 = 16$$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Si se utiliza Excess-15, calcule el menor valor real negativo representable en este sistema.",
+          "correctValue": -15,
+          "tolerance": 0,
+          "explanation": "Código mínimo es $$0$$. El valor real mínimo es $$0 - 15 = -15$$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcule la codificación (en formato decimal del código binario) del valor real $$-7$$ en Excess-15.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Código} = \\text{Valor Real} + S = -7 + 15 = 8$$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si cambiamos el sesgo a Excess-16, calcule la codificación (en formato decimal del código binario) del mismo valor real $$-7$$.",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "$$\\text{Código} = \\text{Valor Real} + S = -7 + 16 = 9$$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Negación y desbordamiento aritmético en C2",
+      "context": "Se opera en un procesador de 8 bits en C2 y se almacena el valor más negativo de su rango: $$X = -128_{10}$$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Escriba la representación binaria de $$X$$ en C2 de 8 bits. ¿Cuál es su valor interpretado en binario sin signo?",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "$$-128$$ en C2 de 8 bits se codifica como $$10000000_2$$. Esta cadena en binario sin signo es $$128_{10}$$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Aplique la operación de negación en C2 (invertir bits y sumar 1) a la cadena del apartado a). Indique el valor en binario sin signo del patrón de bits resultante.",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "$$\\text{NOT}(10000000_2) = 01111111_2$$. Sumándole 1 da $$10000000_2$$. En binario sin signo equivale a 128."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Determine el valor decimal que representa en C2 de 8 bits la cadena resultante del apartado b).",
+          "correctValue": -128,
+          "tolerance": 0,
+          "explanation": "La cadena es $$10000000_2$$, que en C2 representa a $$-128$$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Determine el valor de la bandera de desbordamiento (1 o 0) generada tras intentar negar aritméticamente a $$-128$$.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El negativo matemático de $$-128$$ es $$+128$$, el cual supera el límite del rango de 8 bits en C2 ($$+127$$). Por tanto, la negación falla y se activa la bandera de desbordamiento ($$V = 1$$)."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Estudio comparativo de la representación del cero",
+      "context": "Se desea analizar el comportamiento del número cero en formatos de 8 bits.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Escriba el patrón de bits para el cero negativo ($$-0$$) en Complemento a 1 (C1). Calcule su valor decimal equivalente interpretado en binario sin signo.",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "En C1, $$-0$$ se obtiene invirtiendo todos los bits de $$+0$$ ($$00000000_2$$) dando $$11111111_2$$. En binario sin signo, esta cadena equivale a 255."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Escriba el patrón de bits para el cero ($$-0$$) en Complemento a 2 (C2). Calcule su valor decimal equivalente interpretado en binario sin signo.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En C2, el cero tiene una única codificación: $$00000000_2$$. En binario sin signo, equivale a 0."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Escriba el patrón de bits para el cero negativo ($$-0$$) en Signo-Magnitud (SM). Calcule su valor decimal equivalente interpretado en binario sin signo.",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "En SM, $$-0$$ tiene el bit de signo en 1 y la magnitud a 0: $$10000000_2$$. En binario sin signo, esta cadena equivale a 128."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcule la suma de los tres valores decimales interpretados en binario sin signo obtenidos en los apartados a, b y c.",
+          "correctValue": 383,
+          "tolerance": 0,
+          "explanation": "Suma = $$255 + 0 + 128 = 383$$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Acarreo y desbordamiento en la suma de positivos",
+      "context": "Se realiza la operación de suma de dos enteros en C2 de 8 bits: $$120_{10} + 10_{10}$$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Realice la suma en binario e indique el valor decimal del resultado si la cadena resultante se interpreta en binario sin signo.",
+          "correctValue": 130,
+          "tolerance": 0,
+          "explanation": "$$120_{10} = 01111000_2$$ y $$10_{10} = 00001010_2$$. Suma binaria: $$01111000_2 + 00001010_2 = 10000010_2$$. En binario sin signo, esta cadena es $$128 + 2 = 130$$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Determine el valor decimal que representa el resultado binario obtenido en el apartado a) si se interpreta en C2 de 8 bits.",
+          "correctValue": -126,
+          "tolerance": 0,
+          "explanation": "La cadena $$10000010_2$$ tiene el MSB en 1. En C2 representa a $$-128 + 2 = -126$$. Esto se debe a que la suma real ($$130$$) desborda el límite de C2 ($$+127$$), dando $$130 - 256 = -126$$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Indique el valor lógico (1 o 0) del acarreo de salida ($$C_{out}$$) del bit de signo para esta suma.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al realizar la suma de la posición del signo (MSB): $$0 + 0 + 1 \\text{ (acarreo anterior)} = 1$$. No hay acarreo saliente del sumador, por lo que $$C_{out} = 0$$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Indique el valor lógico (1 o 0) de la bandera de desbordamiento aritmético ($$V$$) para esta operación.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como sumamos dos números positivos y el resultado fue negativo (MSB = 1), se produjo desbordamiento. Alternativamente, el acarreo entrante a la posición de signo es $$C_{in} = 1$$ y el saliente es $$C_{out} = 0$$. El overflow es $$V = 1 \\oplus 0 = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Acarreo y desbordamiento en la suma de negativos",
+      "context": "Se realiza la suma de dos enteros negativos en C2 de 8 bits: $$-120_{10} + (-10_{10})$$.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Obtenga la representación en C2 de 8 bits para $$-120_{10}$$ y determine su valor decimal en binario sin signo.",
+          "correctValue": 136,
+          "tolerance": 0,
+          "explanation": "$$-120$$ en C2 de 8 bits es $$256 - 120 = 136 = 10001000_2$$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Obtenga la representación en C2 de 8 bits para $$-10_{10}$$ y determine su valor decimal en binario sin signo.",
+          "correctValue": 246,
+          "tolerance": 0,
+          "explanation": "$$-10$$ en C2 de 8 bits es $$256 - 10 = 246 = 11110110_2$$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Sume las representaciones binarias anteriores y determine el valor decimal interpretado en binario sin signo de la cadena de 8 bits resultante (tras truncamiento).",
+          "correctValue": 126,
+          "tolerance": 0,
+          "explanation": "Suma: $$10001000_2 + 11110110_2 = 110000000_2 \\implies 01111110_2$$ (truncado a 8 bits). Esta cadena en binario sin signo equivale a $$64+32+16+8+4+2 = 126$$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Determine el valor lógico (1 o 0) de la bandera de desbordamiento aritmético ($$V$$) para esta operación.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sumamos dos números negativos y el resultado es positivo (MSB = 0), indicando desbordamiento ($$V = 1$$). A nivel de acarreos, $$C_{in} = 0$$ y $$C_{out} = 1$$, de donde $$V = 0 \\oplus 1 = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Aritmética y lógica de valores máximos negativos",
+      "context": "Sean los números enteros firmados $$A = -1_{10}$$ y $$B = -2_{10}$$ en C2 de 8 bits.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Realice la operación lógica OR bit a bit entre $$A$$ y $$B$$. Indique el valor decimal obtenido al interpretar el resultado en C2 de 8 bits.",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "$$A = 11111111_2$$ y $$B = 11111110_2$$. El OR lógico es $$11111111_2$$, que en C2 equivale a $$-1$$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Realice la operación lógica AND bit a bit entre $$A$$ y $$B$$. Indique el valor decimal obtenido al interpretar el resultado en C2 de 8 bits.",
+          "correctValue": -2,
+          "tolerance": 0,
+          "explanation": "El AND lógico es $$11111110_2$$, que en C2 equivale a $$-2$$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Realice la operación lógica XOR bit a bit entre $$A$$ y $$B$$. Indique el valor decimal obtenido al interpretar el resultado en C2 de 8 bits.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El XOR lógico es $$00000001_2$$, que en C2 equivale a $$1$$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Realice la operación lógica NOT bit a bit sobre el valor de $$A$$. Indique el valor decimal del resultado interpretado en C2 de 8 bits.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$\\text{NOT}(11111111_2) = 00000000_2$$. En C2 representa al valor decimal 0."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Comparación de desplazamientos sobre números negativos",
+      "context": "Se tiene el número negativo $$X = -40_{10}$$ codificado en C2 de 8 bits.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Escriba la cadena binaria de $$X$$ en C2 de 8 bits. Indique su valor decimal si se interpreta en binario sin signo.",
+          "correctValue": 216,
+          "tolerance": 0,
+          "explanation": "$$-40$$ en C2 de 8 bits se calcula como $$256 - 40 = 216 = 11011000_2$$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Realice un desplazamiento aritmético a la derecha (ASR) de 3 bits sobre la cadena del apartado a). Indique el valor decimal en binario sin signo del resultado de 8 bits.",
+          "correctValue": 251,
+          "tolerance": 0,
+          "explanation": "$$11011000_2$$ desplazado aritméticamente a la derecha 3 posiciones da $$11111011_2$$ (duplicando el signo 1 a la izquierda). En binario sin signo equivale a $$251$$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcule el valor decimal que representa el resultado binario del apartado b) ($$11111011_2$$) si se interpreta en C2 de 8 bits.",
+          "correctValue": -5,
+          "tolerance": 0,
+          "explanation": "La cadena $$11111011_2$$ en C2 de 8 bits representa a $$-128 + 64 + 32 + 16 + 8 + 2 + 1 = -5$$. Esto equivale a la división entera: $$\\lfloor -40 / 2^3 \\rfloor = -5$$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si se aplicara un desplazamiento lógico a la derecha (LSR) de 3 bits a la cadena original del apartado a), determine el valor decimal resultante interpretado en C2 de 8 bits.",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "$$11011000_2$$ desplazado lógicamente a la derecha 3 posiciones da $$00011000_2$$? No, espera. Desplazar a la derecha 3 bits de $$11011000_2$$: los 5 bits de la izquierda pasan a ser las posiciones 0 a 4: $$11011_2 = 27$$. Se introducen 3 ceros a la izquierda, resultando en $$00011011_2$$. Como comienza por $$0$$, representa a $$+27$$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Estudio del tamaño de palabra en Complemento a 2",
+      "context": "Se analiza la representación de un número negativo, $$-13_{10}$$, en palabras de distintas longitudes.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Determine el valor decimal que representa la cadena de bits de $$-13_{10}$$ en C2 de 6 bits si se interpretara en binario sin signo.",
+          "correctValue": 51,
+          "tolerance": 0,
+          "explanation": "En C2 de 6 bits, $$-13$$ se representa como $$2^6 - 13 = 64 - 13 = 51 = 110011_2$$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Determine el valor decimal que representa la cadena de bits de $$-13_{10}$$ en C2 de 8 bits si se interpretara en binario sin signo.",
+          "correctValue": 243,
+          "tolerance": 0,
+          "explanation": "En C2 de 8 bits, $$-13$$ se representa como $$2^8 - 13 = 256 - 13 = 243 = 11110011_2$$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcule la diferencia aritmética obtenida al restar el valor del apartado b) menos el del apartado a).",
+          "correctValue": 192,
+          "tolerance": 0,
+          "explanation": "$$243 - 51 = 192$$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcule el cociente resultante de dividir la diferencia obtenida en c) entre el valor $$2^6$$.",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Cociente = $$192 / 64 = 3$$. Esto se debe a que la extensión de signo añade bits de peso $$1$$ (unos) en las posiciones de peso $$2^6$$ y $$2^7$$, cuya suma de pesos es $$64 + 128 = 192$$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Estudio de rango y valores en Exceso-16",
+      "context": "Se considera el valor real $$-10_{10}$$ para ser codificado en formato Excess-16 con registros de 5 bits.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Determine el valor del código (en base decimal) para codificar $$-10_{10}$$ en Excess-16.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Código} = \\text{Valor Real} + S = -10 + 16 = 6$$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Escriba el código en binario de 5 bits. Determine su valor decimal equivalente si la cadena se interpretara en C2 de 5 bits.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El código decimal 6 es $$00110_2$$ en 5 bits. Como el MSB es 0, en C2 representa a $$+6$$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Si quisiéramos codificar el valor real $$-20_{10}$$ en este mismo sistema Excess-16, determine el valor de código decimal resultante (incluso si es negativo).",
+          "correctValue": -4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Código} = -20 + 16 = -4$$. Como el código es negativo, indica que $$-20$$ está fuera del rango representable."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Determine el mínimo valor real representable en Excess-16 de 5 bits.",
+          "correctValue": -16,
+          "tolerance": 0,
+          "explanation": "El código mínimo es $$0$$. El valor real correspondiente es $$0 - 16 = -16$$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Operación de resta con desbordamiento en C2",
+      "context": "Se realiza la resta de $$60_{10} - (-70_{10})$$ en registros de 8 bits en C2. Se implementa como $$60_{10} + 70_{10}$$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Represente $$+60_{10}$$ en C2 de 8 bits y calcule su valor en binario sin signo.",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "$$+60 = 00111100_2$$. Su valor en binario sin signo es 60."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Represente $$-70_{10}$$ en C2 de 8 bits y calcule su valor en binario sin signo.",
+          "correctValue": 186,
+          "tolerance": 0,
+          "explanation": "$$-70$$ en C2 es $$256 - 70 = 186 = 10111010_2$$. Su valor en binario sin signo es 186."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Represente el opuesto $$-(-70_{10}) = +70_{10}$$ en C2 de 8 bits y calcule su valor en binario sin signo.",
+          "correctValue": 70,
+          "tolerance": 0,
+          "explanation": "$$+70 = 01000110_2$$. Su valor en binario sin signo es 70."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Realice la suma binaria $$60_{10} + 70_{10}$$ en C2. Indique el valor decimal interpretado en C2 del resultado obtenido (reflejando el desbordamiento).",
+          "correctValue": -126,
+          "tolerance": 0,
+          "explanation": "Suma: $$00111100_2 + 01000110_2 = 10000010_2$$. Como el MSB es 1, representa un valor negativo: $$-128 + 2 = -126$$ (debido a que $$130$$ desborda el límite de $$127$$, dando $$130 - 256 = -126$$)."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Codificación de exponentes de coma flotante en Excess-127",
+      "context": "El estándar IEEE 754 codifica los exponentes en precisión simple mediante Excess-127 utilizando registros de 8 bits.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Si el exponente real a almacenar es $$-126$$, calcule el valor del código decimal que se guardará.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$\\text{Código} = \\text{Valor Real} + 127 = -126 + 127 = 1$$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Si el exponente real a almacenar es $$127$$, calcule el valor del código decimal que se guardará.",
+          "correctValue": 254,
+          "tolerance": 0,
+          "explanation": "$$\\text{Código} = 127 + 127 = 254$$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Si en el registro se lee la cadena binaria $$01111111_2$$, determine el valor real del exponente representado.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La cadena $$01111111_2$$ es el número decimal 127. El valor real es $$127 - 127 = 0$$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Si en el registro se lee la cadena binaria $$00000000_2$$, determine el valor real del exponente representado.",
+          "correctValue": -127,
+          "tolerance": 0,
+          "explanation": "La cadena $$00000000_2$$ es el número decimal 0. El valor real es $$0 - 127 = -127$$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Desplazamientos y desbordamiento en números positivos",
+      "context": "Sea el entero positivo $$X = 25_{10}$$ codificado en C2 de 8 bits.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Determine el valor en binario sin signo de la representación de $$X$$ en 8 bits.",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "$$25_{10} = 00011001_2$$. Su valor en binario sin signo es 25."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Desplace la cadena original a la izquierda arithmetically 2 bits. Indique el valor decimal en C2 de 8 bits de la cadena obtenida.",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$$00011001_2$$ desplazado a la izquierda 2 bits da $$01100100_2$$. En C2 representa a $$64 + 32 + 4 = 100$$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Desplace la cadena original a la izquierda arithmetically 3 bits. Indique el valor decimal en C2 de 8 bits de la cadena obtenida (con desbordamiento).",
+          "correctValue": -56,
+          "tolerance": 0,
+          "explanation": "$$00011001_2$$ desplazado a la izquierda 3 bits da $$11001000_2$$. Como el MSB es 1, representa un número negativo: $$-128 + 64 + 8 = -56$$ (debido a que $$25 \\times 8 = 200$$ desborda, dando $$200 - 256 = -56$$)."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Desplace la cadena original a la derecha logically 1 bit. Indique el valor decimal en C2 de la cadena obtenida.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$00011001_2$$ desplazado a la derecha lógicamente 1 bit da $$00001100_2$$. En C2 representa a $$8 + 4 = 12$$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Lógica de detección de desbordamiento en la ALU",
+      "context": "Se realiza la suma de $$127_{10} + 127_{10}$$ en una ALU de 8 bits en C2.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Determine el valor lógico (1 o 0) del acarreo entrante ($$C_{in}$$) al bit de signo.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Suma: $$01111111_2 + 01111111_2$$. Al sumar desde el LSB, se acumula un acarreo que llega a la posición 7 (el MSB). Por tanto, $$C_{in} = 1$$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Determine el valor lógico (1 o 0) del acarreo saliente ($$C_{out}$$) del bit de signo.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En el MSB sumamos $$0 + 0 + 1 \\text{ (acarreo)} = 1$$. No hay acarreo saliente, por tanto $$C_{out} = 0$$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcule el valor de la bandera de desbordamiento de la ALU: $$V = C_{in} \\oplus C_{out}$$.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$V = 1 \\oplus 0 = 1$$. Indica que ocurrió desbordamiento aritmético."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Determine el valor decimal del resultado binario de 8 bits interpretado en C2.",
+          "correctValue": -2,
+          "tolerance": 0,
+          "explanation": "La suma binaria da $$11111110_2$$. En C2 representa a $$-2$$. Esto coincide con $$127 + 127 = 254 \\implies 254 - 256 = -2$$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Aritmética limitada en sistemas de 4 bits",
+      "context": "Considere un procesador antiguo con palabra de 4 bits operando en C2.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Determine el menor valor real negativo representable en este sistema.",
+          "correctValue": -8,
+          "tolerance": 0,
+          "explanation": "$$-2^{4-1} = -2^3 = -8$$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Determine el mayor valor real positivo representable en este sistema.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$$2^{4-1} - 1 = 7$$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Realice la operación $$-5_{10} + (-4_{10})$$. Indique el valor decimal del resultado de 4 bits obtenido en C2.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Suma: $$-5$$ en C2 es $$1011_2$$. $$-4$$ en C2 es $$1100_2$$. Sumando: $$1011_2 + 1100_2 = 10111_2 \\implies 0111_2$$ (truncado a 4 bits). En C2 de 4 bits, $$0111_2$$ representa al valor decimal $$7$$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Determine el valor de la bandera de desbordamiento ($$V$$) para la suma anterior.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sumamos dos negativos y el resultado es positivo (MSB = 0), por lo que ocurre desbordamiento ($$V = 1$$)."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Análisis de extensión a diferentes tamaños de registros",
+      "context": "Se tiene el valor $$-120_{10}$$ representado originalmente en C2 de 8 bits.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Determine el valor en binario sin signo de la representación original de 8 bits de $$-120_{10}$$.",
+          "correctValue": 136,
+          "tolerance": 0,
+          "explanation": "$$-120$$ en C2 de 8 bits es $$256 - 120 = 136 = 10001000_2$$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Realice la extensión de signo a 16 bits. Determine su valor decimal si se interpreta en binario sin signo de 16 bits.",
+          "correctValue": 65416,
+          "tolerance": 0,
+          "explanation": "Extensión a 16 bits: $$1111111110001000_2$$. En binario sin signo equivale a $$65536 - 120 = 65416$$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Determine la diferencia matemática obtenida al restar el valor del apartado b) menos el del apartado a).",
+          "correctValue": 65280,
+          "tolerance": 0,
+          "explanation": "$$65416 - 136 = 65280$$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Determine cuántos bits redundantes de valor '1' se añadieron en total al realizar la extensión de signo de 8 a 16 bits.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Al pasar de 8 a 16 bits, el bit de signo negativo ($$1$$) se copia en las posiciones de la 8 a la 15. Se añaden exactamente $$16 - 8 = 8$$ bits."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Efectos del truncamiento en pérdidas de signo",
+      "context": "Sea el número entero firmado $$X = -65_{10}$$ representado en C2 de 8 bits.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Determine el valor decimal equivalente si la representación de $$X$$ se interpreta en binario sin signo.",
+          "correctValue": 191,
+          "tolerance": 0,
+          "explanation": "$$-65$$ en C2 de 8 bits es $$256 - 65 = 191 = 10111111_2$$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Trunque la representación original a 7 bits. Calcule el valor decimal que representa el resultado en C2 de 7 bits.",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "$$10111111_2$$ truncado a 7 bits es $$0111111_2$$. Como el MSB de la nueva palabra es $$0$$, representa a $$+63$$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Trunque la representación original a 6 bits. Calcule el valor decimal que representa el resultado en C2 de 6 bits.",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "$$10111111_2$$ truncado a 6 bits es $$111111_2$$. En C2 de 6 bits, una palabra de todo unos representa a $$-1$$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcule la suma de los valores decimales en C2 de los apartados a), b) y c). (Use el valor real de $$X$$ para el apartado a).",
+          "correctValue": -3,
+          "tolerance": 0,
+          "explanation": "Suma = $$-65 \\text{ (valor real de } X) + 63 + (-1) = -3$$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Estudio de inversiones y desplazamientos lógicos",
+      "context": "Se parte del número entero binario $$X = 01010101_2$$ en C2 de 8 bits.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcule el valor decimal en C2 de 8 bits del resultado de aplicar la operación lógica NOT bit a bit sobre $$X$$.",
+          "correctValue": -86,
+          "tolerance": 0,
+          "explanation": "$$\\text{NOT}(01010101_2) = 10101010_2$$. En C2 representa a $$-128 + 32 + 8 + 2 = -86$$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcule el valor decimal de la negación aritmética de $$X$$ en C2 de 8 bits (es decir, $$-X$$).",
+          "correctValue": -85,
+          "tolerance": 0,
+          "explanation": "$$X = 85$$. Su negación aritmética en C2 es $$-85 = 10101011_2$$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Se desplaza $$X$$ a la izquierda por 1 posición. Determine el valor decimal en C2 del resultado obtenido.",
+          "correctValue": -86,
+          "tolerance": 0,
+          "explanation": "$$01010101_2$$ desplazado a la izquierda 1 bit da $$10101010_2$$. Su valor en C2 de 8 bits es $$-86$$ (ocurre desbordamiento)."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Se aplica un desplazamiento aritmético a la derecha (ASR) de 1 posición al resultado del apartado a) ($$10101010_2$$). Calcule el valor decimal en C2 de la cadena resultante.",
+          "correctValue": -43,
+          "tolerance": 0,
+          "explanation": "$$10101010_2$$ desplazado aritméticamente a la derecha 1 posición da $$11010101_2$$. En C2 esto representa a $$-128 + 64 + 16 + 4 + 1 = -43$$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Operaciones en cadena y desbordamientos intermedios",
+      "context": "Se tienen tres variables signed de 8 bits en C2: $$A = -50_{10}$$, $$B = -40_{10}$$ y $$C = -39_{10}$$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Determine el valor en binario sin signo de la suma binaria directa $$A + B$$ en 8 bits.",
+          "correctValue": 166,
+          "tolerance": 0,
+          "explanation": "$$A = 206$$ en sin signo, $$B = 216$$ en sin signo. $$206 + 216 = 422 \\implies 422 - 256 = 166 = 10100110_2$$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Determine el valor decimal interpretado en C2 del resultado de $$A + B$$ obtenido en b).",
+          "correctValue": -90,
+          "tolerance": 0,
+          "explanation": "La cadena $$10100110_2$$ en C2 representa a $$-90$$. Como $$-90$$ está en el rango $$[-128, 127]$$, no hay desbordamiento en esta primera suma."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Determine el valor en binario sin signo de la suma $$(A+B) + C$$ truncado a 8 bits.",
+          "correctValue": 127,
+          "tolerance": 0,
+          "explanation": "$$A+B$$ da el código $$166$$. $$C = -39$$ da el código $$256 - 39 = 217$$. La suma es $$166 + 217 = 383 \\implies 383 - 256 = 127 = 01111111_2$$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Determine el valor decimal interpretado en C2 del resultado de $$(A+B)+C$$ obtenido en d).",
+          "correctValue": 127,
+          "tolerance": 0,
+          "explanation": "La cadena $$01111111_2$$ en C2 de 8 bits representa a $$+127$$. Se ha producido desbordamiento aritmético ya que el resultado real debería ser $$-129$$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Comparación de magnitudes en diferentes representaciones",
+      "context": "Dadas las palabras binarias de 8 bits: $$A = 10000011_2$$ y $$B = 01111100_2$$.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Determine el valor decimal de $$A$$ interpretado en C2 de 8 bits.",
+          "correctValue": -125,
+          "tolerance": 0,
+          "explanation": "El MSB es 1. C1 = $$01111100_2$$. C2 = $$01111101_2 = 125$$. Por tanto, representa a $$-125$$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Determine el valor decimal de $$B$$ interpretado en C2 de 8 bits.",
+          "correctValue": 124,
+          "tolerance": 0,
+          "explanation": "El MSB es 0. Representa un valor positivo: $$64 + 32 + 16 + 8 + 4 = 124$$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Determine el valor decimal de $$A$$ interpretado en formato Signo-Magnitud (SM) de 8 bits.",
+          "correctValue": -3,
+          "tolerance": 0,
+          "explanation": "El primer bit es 1 (negativo), los 7 bits restantes $$0000011_2 = 3$$ indican la magnitud, resultando en $$-3$$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Determine el valor decimal de $$B$$ interpretado en formato Signo-Magnitud (SM) de 8 bits.",
+          "correctValue": 124,
+          "tolerance": 0,
+          "explanation": "El primer bit es 0 (positivo), los 7 bits restantes indican la magnitud: $$1111100_2 = 124$$. Representa a $$+124$$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Lógica interna de sumadores sobre registros binarios",
+      "context": "Se realiza la suma binaria de las siguientes palabras de 8 bits en C2: $$10101010_2$$ y $$11001100_2$$.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcule el valor decimal que representa $$10101010_2$$ en C2 de 8 bits.",
+          "correctValue": -86,
+          "tolerance": 0,
+          "explanation": "MSB es 1. C1 = $$01010101_2$$. C2 = $$01010110_2 = 86$$. Representa a $$-86$$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcule el valor decimal que representa $$11001100_2$$ en C2 de 8 bits.",
+          "correctValue": -52,
+          "tolerance": 0,
+          "explanation": "MSB es 1. C1 = $$00110011_2$$. C2 = $$00110100_2 = 52$$. Representa a $$-52$$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Realice la suma binaria de ambos sumandos en C2 de 8 bits. Determine el valor decimal interpretado en C2 del resultado obtenido (reflejando el desbordamiento).",
+          "correctValue": 118,
+          "tolerance": 0,
+          "explanation": "Suma: $$10101010_2 + 11001100_2 = 101110110_2 \\implies 01110110_2$$ (truncado a 8 bits). Como el MSB es 0, representa un número positivo: $$64 + 32 + 16 + 4 + 2 = 118$$. Esto se debe a que $$-86 - 52 = -138$$, que desborda el límite inferior, dando $$-138 + 256 = 118$$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Determine el valor lógico (1 o 0) de la bandera de desbordamiento aritmético ($$V$$) generada por el procesador para esta operación.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sumamos dos negativos y el resultado es positivo (MSB = 0), por lo que ocurre desbordamiento ($$V = 1$$)."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Rango de representación en Signo-Magnitud ($$N$$ bits)",
+      "tex": "$$[-2^{N-1} + 1, \\quad 2^{N-1} - 1]$$"
+    },
+    {
+      "name": "Rango de representación en Complemento a 1 ($$N$$ bits)",
+      "tex": "$$[-2^{N-1} + 1, \\quad 2^{N-1} - 1]$$"
+    },
+    {
+      "name": "Rango de representación en Complemento a 2 ($$N$$ bits)",
+      "tex": "$$[-2^{N-1}, \\quad 2^{N-1} - 1]$$"
+    },
+    {
+      "name": "Representación Sesgada o en Exceso ($$S$$)",
+      "tex": "$$\\text{Valor Codificado} = \\text{Valor Real} + S$$"
+    },
+    {
+      "name": "Detección de Desbordamiento en hardware (ALU)",
+      "tex": "$$V = C_{in} \\oplus C_{out}$$"
+    },
+    {
+      "name": "Valor decimal en Complemento a 2 ($$N$$ bits)",
+      "tex": "$$X = -b_{N-1}2^{N-1} + \\sum_{i=0}^{N-2} b_i 2^i$$"
+    }
+  ]
+}

@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué es una primitiva de una función $f(x)$?",
+      "options": [
+        "Una función $F(x)$ tal que $F'(x) = f(x)$ para todo $x$ en el dominio.",
+        "Una función $F(x)$ tal que $\\int F(x) dx = f(x)$.",
+        "Una aproximación lineal de $f(x)$ en un punto dado."
+      ],
+      "correct": 0,
+      "hint": "Recuerda la relación fundamental entre derivada y primitiva.",
+      "explanation": "Por definición, $F(x)$ es una primitiva o antiderivada de $f(x)$ si al derivar $F(x)$ se obtiene la función original $f(x)$, es decir, $F'(x) = f(x)$."
+    },
+    {
+      "q": "¿Cuál es el significado de la constante de integración $C$ en la integral indefinida $\\int f(x) dx = F(x) + C$?",
+      "options": [
+        "Es una constante de escala que siempre vale 0 salvo en integrales de tipo impropio.",
+        "Representa la familia de todas las funciones que difieren en una constante y comparten la misma derivada.",
+        "Representa la pendiente del eje de abscisas sobre el cual se integra la función."
+      ],
+      "correct": 1,
+      "hint": "Piensa en cómo afecta una traslación vertical al valor de la derivada.",
+      "explanation": "Dado que la derivada de una constante es cero, si $F(x)$ es una primitiva de $f(x)$, entonces $F(x) + C$ también lo es para cualquier constante real $C$."
+    },
+    {
+      "q": "En la definición de la integral de Riemann en un intervalo $[a, b]$, ¿qué representa el término $\\Delta x$?",
+      "options": [
+        "La altura promedio de los rectángulos de aproximación de la curva.",
+        "La tasa de cambio local de la función en el punto medio del intervalo.",
+        "El ancho de los subintervalos en los que se divide el dominio $[a, b]$, típicamente $\\frac{b-a}{n}$."
+      ],
+      "correct": 2,
+      "hint": "Recuerda la discretización del intervalo $[a, b]$ en partes iguales.",
+      "explanation": "En la partición homogénea del intervalo $[a, b]$, este se divide en $n$ subintervalos de igual longitud, por lo que el ancho de cada uno es $\\Delta x = \\frac{b-a}{n}$."
+    },
+    {
+      "q": "¿Qué es una partición $P$ de un intervalo cerrado $[a, b]$?",
+      "options": [
+        "Un conjunto finito de puntos $\\{x_0, x_1, \\dots, x_n\\}$ tal que $a = x_0 < x_1 < \\dots < x_n = b$.",
+        "Un conjunto de subintervalos abiertos no solapados cuya unión es estrictamente menor que $b-a$.",
+        "La descomposición de la función en su parte positiva y negativa."
+      ],
+      "correct": 0,
+      "hint": "Considera los puntos extremos de los subintervalos de discretización.",
+      "explanation": "Una partición $P$ de $[a, b]$ es simplemente un conjunto ordenado de puntos que divide al intervalo en subintervalos contiguos sin solapamiento."
+    },
+    {
+      "q": "¿Cómo se define la norma o diámetro de una partición $P$, denotada por $\\|P\\|$?",
+      "options": [
+        "El valor absoluto de la diferencia entre el primer y el último elemento de la partición.",
+        "La máxima longitud de los subintervalos de la partición, es decir, $\\max_{1 \\le i \\le n} (x_i - x_{i-1})$.",
+        "El número total de puntos que integran la partición."
+      ],
+      "correct": 1,
+      "hint": "Piensa en el subintervalo más grande de la partición.",
+      "explanation": "La norma de una partición $\\|P\\|$ mide la finura de la discretización y corresponde a la longitud del subintervalo más ancho."
+    },
+    {
+      "q": "Sean $L(f, P)$ y $U(f, P)$ las sumas inferior y superior de Darboux para una partición $P$. ¿Qué relación se cumple siempre?",
+      "options": [
+        "$L(f, P) = U(f, P)$ únicamente si la partición es homogénea.",
+        "$L(f, P) \\ge U(f, P)$.",
+        "$L(f, P) \\le U(f, P)$."
+      ],
+      "correct": 2,
+      "hint": "Compara las alturas de los rectángulos inscritos y circunscritos.",
+      "explanation": "Dado que en cada subintervalo el ínfimo de $f(x)$ es menor o igual al supremo de $f(x)$, la suma inferior de Darboux (rectángulos inscritos) nunca supera a la suma superior (rectángulos circunscritos)."
+    },
+    {
+      "q": "¿Qué ocurre con la suma inferior de Darboux $L(f, P)$ al refinar una partición $P$ (añadiendo puntos)?",
+      "options": [
+        "No disminuye, es decir, $L(f, P) \\le L(f, P^*)$ si $P^*$ es un refinamiento de $P$.",
+        "No aumenta, es decir, $L(f, P) \\ge L(f, P^*)$ si $P^*$ es un refinamiento de $P$.",
+        "Permanece estrictamente constante."
+      ],
+      "correct": 0,
+      "hint": "Piensa en si los rectángulos inscritos se ajustan mejor a la curva al añadir puntos.",
+      "explanation": "Al refinar la partición, las aproximaciones por defecto mejoran o se mantienen, de modo que la suma inferior crece o se queda igual: $L(f, P) \\le L(f, P^*)$."
+    },
+    {
+      "q": "¿Qué condición matemática caracteriza a una función acotada $f$ como Riemann-integrable en $[a, b]$ según Darboux?",
+      "options": [
+        "Que la función sea continua en todo el intervalo excluyendo un conjunto denso de puntos.",
+        "Que el supremo de las sumas inferiores coincida con el ínfimo de las sumas superiores.",
+        "Que la suma inferior sea siempre estrictamente positiva para cualquier partición."
+      ],
+      "correct": 1,
+      "hint": "El límite cuando la norma de la partición tiende a cero debe unificar ambas sumas.",
+      "explanation": "Una función es integrable de Riemann si su integral inferior (supremo de las sumas inferiores) y su integral superior (ínfimo de las sumas superiores) son iguales."
+    },
+    {
+      "q": "Si $f$ es una función continua en el intervalo cerrado $[a, b]$, ¿qué asegura el Teorema del Valor Medio para integrales?",
+      "options": [
+        "La integral de la función es igual al área de un rectángulo de base $b-a$ y altura $f(a) + f(b)$.",
+        "El valor medio de la función es siempre igual a la derivada en el punto medio del intervalo.",
+        "Existe un punto $c \\in (a, b)$ tal que $f(c) = \\frac{1}{b-a} \\int_a^b f(x) dx$."
+      ],
+      "correct": 2,
+      "hint": "Asocia la integral con la altura promedio multiplicada por la longitud de la base.",
+      "explanation": "El teorema del valor medio para integrales garantiza que una función continua alcanza su valor promedio $\\frac{1}{b-a} \\int_a^b f(x) dx$ en al menos un punto $c$ del intervalo."
+    },
+    {
+      "q": "¿Cuál es el enunciado del Primer Teorema Fundamental del Cálculo para una función $f$ continua en $[a, b]$?",
+      "options": [
+        "La función área $F(x) = \\int_a^x f(t) dt$ es derivable en $(a, b)$ y $F'(x) = f(x)$.",
+        "La integral definida de $f(x)$ en $[a, b]$ es igual al límite de las sumas de Riemann.",
+        "Toda primitiva $F(x)$ de $f(x)$ satisface que $F(a) = 0$ de forma obligatoria."
+      ],
+      "correct": 0,
+      "hint": "Relaciona la derivada de una función integral con la función evaluada en el extremo superior.",
+      "explanation": "El teorema afirma que la derivada de la función acumulativa de área es el integrando original: $\\frac{d}{dx} \\left( \\int_a^x f(t) dt \\right) = f(x)$."
+    },
+    {
+      "q": "¿Qué establece el Segundo Teorema Fundamental del Cálculo (o Regla de Barrow)?",
+      "options": [
+        "Que el área bajo una curva discontinua se calcula mediante límites laterales de las derivadas.",
+        "Si $F(x)$ es una primitiva de $f(x)$ continua en $[a, b]$, entonces $\\int_a^b f(x) dx = F(b) - F(a)$.",
+        "Que la integral de una derivada es siempre una función constante."
+      ],
+      "correct": 1,
+      "hint": "Piensa en cómo evaluar la integral definida mediante antiderivadas.",
+      "explanation": "La Regla de Barrow conecta las integrales definidas con las primitivas: $\\int_a^b f(x) dx = F(b) - F(a)$, facilitando enormemente el cálculo sin recurrir a límites de sumas."
+    },
+    {
+      "q": "¿De qué regla de derivación proviene el método de integración por partes?",
+      "options": [
+        "Del cociente de funciones derivables.",
+        "De la regla de la cadena para la composición de funciones: $(f(g(x)))' = f'(g(x))g'(x)$.",
+        "De la regla de derivación del producto de dos funciones: $(uv)' = u'v + uv'$."
+      ],
+      "correct": 2,
+      "hint": "Integra ambos lados de la ecuación de la derivada de un producto.",
+      "explanation": "Partiendo de $d(uv) = u\\,dv + v\\,du$ e integrando, se obtiene $\\int d(uv) = \\int u\\,dv + \\int v\\,du$, lo que lleva a $\\int u\\,dv = uv - \\int v\\,du$."
+    },
+    {
+      "q": "El método de integración por cambio de variable (o sustitución) se fundamenta teóricamente en:",
+      "options": [
+        "La regla de la cadena para la derivación de funciones compuestas.",
+        "La propiedad de linealidad de la derivada de una suma.",
+        "La existencia de asíntotas oblicuas en la función original."
+      ],
+      "correct": 0,
+      "hint": "Piensa en cómo se deriva una función compuesta $F(g(x))$.",
+      "explanation": "Dado que $\\frac{d}{dx} F(g(x)) = F'(g(x))g'(x) = f(g(x))g'(x)$, integrar este producto equivale a hacer $u = g(x)$ y $du = g'(x)dx$."
+    },
+    {
+      "q": "Al integrar una función racional $\\frac{P(x)}{Q(x)}$ donde $\\text{grado}(P) \\ge \\text{grado}(Q)$, ¿cuál es el primer paso requerido?",
+      "options": [
+        "Factorizar directamente el numerador y simplificar los factores comunes con el denominador.",
+        "Realizar la división polinómica para obtener $\\frac{P(x)}{Q(x)} = C(x) + \\frac{R(x)}{Q(x)}$ con $\\text{grado}(R) < \\text{grado}(Q)$.",
+        "Calcular la derivada del denominador para comprobar si es igual al numerador."
+      ],
+      "correct": 1,
+      "hint": "Reduce la fracción racional a una forma donde el numerador tenga menor grado.",
+      "explanation": "Si el numerador tiene igual o mayor grado que el denominador, se realiza la división de polinomios para separar la parte entera $C(x)$ y la fracción propia residual $\\frac{R(x)}{Q(x)}$."
+    },
+    {
+      "q": "En la descomposición en fracciones simples, ¿qué tipo de términos corresponden a una raíz real simple $x = a$ del denominador $Q(x)$?",
+      "options": [
+        "Un término de la forma $\\frac{A}{x^2-a^2}$.",
+        "Un término de la forma $\\frac{Ax+B}{(x-a)^2}$, donde $A$ y $B$ son constantes reales.",
+        "Un término de la forma $\\frac{A}{x-a}$, donde $A$ es una constante real."
+      ],
+      "correct": 2,
+      "hint": "Para raíces reales simples, el denominador es lineal y el numerador es de grado cero.",
+      "explanation": "Una raíz real simple $a$ genera un sumando fraccionario simple de primer grado del tipo $\\frac{A}{x-a}$."
+    },
+    {
+      "q": "En la descomposición en fracciones simples, si el denominador $Q(x)$ tiene un factor cuadrático irreducible $x^2 + px + q$, ¿qué término le corresponde?",
+      "options": [
+        "Un término de la forma $\\frac{Mx+N}{x^2+px+q}$, donde $M$ y $N$ son constantes reales.",
+        "Un término de la forma $\\frac{A}{x^2+px+q}$, donde $A$ es una constante real.",
+        "Dos términos de la forma $\\frac{A}{x} + \\frac{B}{x^2+px+q}$."
+      ],
+      "correct": 0,
+      "hint": "Un factor cuadrático irreducible requiere un numerador lineal en la fracción simple.",
+      "explanation": "Para factores cuadráticos irreducibles de primer orden, la descomposición requiere una fracción propia del tipo $\\frac{Mx+N}{x^2+px+q}$."
+    },
+    {
+      "q": "¿Cómo se define formalmente una integral impropia de primera especie?",
+      "options": [
+        "Como una integral en la que la función a integrar posee una asíntota vertical en el intervalo cerrado de integración.",
+        "Como una integral en la que al menos uno de los límites de integración es infinito.",
+        "Como una integral cuyo valor numérico resulta en un número irracional trascendente."
+      ],
+      "correct": 1,
+      "hint": "Observa los límites del intervalo de integración.",
+      "explanation": "Las integrales impropias de primera especie se definen sobre intervalos no acotados, es decir, del tipo $[a, \\infty)$, $(-\\infty, b]$ o $(-\\infty, \\infty)$."
+    },
+    {
+      "q": "¿Bajo qué condiciones se dice que la integral impropia de primera especie $\\int_a^{\\infty} f(x) dx$ es convergente?",
+      "options": [
+        "Si el límite de la función $\\lim_{x \\to \\infty} f(x)$ es exactamente igual a 1.",
+        "Si la función $f(x)$ es estrictamente creciente en el intervalo $[a, \\infty)$.",
+        "Si existe el límite $\\lim_{t \\to \\infty} \\int_a^t f(x) dx$ y su valor es un número real finito."
+      ],
+      "correct": 2,
+      "hint": "El cálculo de la integral en intervalos acotados debe estabilizarse al tender el extremo al infinito.",
+      "explanation": "La convergencia se define mediante el paso al límite del extremo superior variable: si el límite existe y es finito, la integral converge."
+    },
+    {
+      "q": "¿Qué es una integral impropia de segunda especie?",
+      "options": [
+        "Una integral definida sobre un intervalo acotado $[a, b]$ donde la función presenta una singularidad no acotada en dicho intervalo.",
+        "Una integral en la que la variable de integración está elevada a una potencia fraccionaria compleja.",
+        "Una integral que requiere dos cambios de variable sucesivos para ser resuelta analíticamente."
+      ],
+      "correct": 0,
+      "hint": "Piensa en qué pasa si la función tiende a infinito dentro del intervalo de integración.",
+      "explanation": "Las integrales de segunda especie surgen cuando el intervalo es finito pero la función presenta asíntotas verticales (tiende a infinito) en algún punto de $[a, b]$."
+    },
+    {
+      "q": "Si $f(x) \\ge 0$ es discontinua únicamente en el extremo derecho $b$ del intervalo $[a, b]$, ¿cómo se define $\\int_a^b f(x) dx$?",
+      "options": [
+        "Como la suma del valor en el punto medio más la derivada en el extremo izquierdo.",
+        "Como el límite $\\lim_{t \\to b^-} \\int_a^t f(x) dx$, si este existe y es finito.",
+        "Como una integral de Riemann ordinaria puesto que los extremos de integración son finitos."
+      ],
+      "correct": 1,
+      "hint": "Aproxima el límite desde el interior del intervalo hacia el punto de discontinuidad.",
+      "explanation": "Se evalúa integrando hasta un punto variable $t < b$, y luego se calcula el límite lateral por la izquierda: $\\lim_{t \\to b^-} \\int_a^t f(x) dx$."
+    },
+    {
+      "q": "¿Qué establece el criterio de comparación directa para la convergencia de integrales impropias de funciones no negativas?",
+      "options": [
+        "Si $0 \\le f(x) \\le g(x)$ y $\\int_a^{\\infty} g(x) dx$ diverge, entonces $\\int_a^{\\infty} f(x) dx$ converge.",
+        "Si $0 \\le f(x) \\le g(x)$ y $\\int_a^{\\infty} f(x) dx$ diverge, entonces $\\int_a^{\\infty} g(x) dx$ converge.",
+        "Si $0 \\le f(x) \\le g(x)$ y $\\int_a^{\\infty} g(x) dx$ converge, entonces $\\int_a^{\\infty} f(x) dx$ converge."
+      ],
+      "correct": 2,
+      "hint": "Piensa en acotar superiormente la integral de la función menor por una integral convergente.",
+      "explanation": "Si la función mayor $g(x)$ encierra un área finita, entonces la función menor $f(x)$ (que es no negativa) también debe encerrar un área finita."
+    },
+    {
+      "q": "¿Para qué valores del exponente $p$ converge la integral impropia de primera especie $\\int_1^{\\infty} \\frac{1}{x^p} dx$?",
+      "options": [
+        "Para $p > 1$.",
+        "Para $p \\ge 1$.",
+        "Para $p < 1$."
+      ],
+      "correct": 0,
+      "hint": "Calcula la primitiva y analiza el comportamiento del límite cuando el exponente es mayor que uno.",
+      "explanation": "La primitiva de $x^{-p}$ es $\\frac{x^{1-p}}{1-p}$ para $p \\neq 1$. Al evaluar el límite en infinito, este solo es finito si el exponente $1-p < 0 \\implies p > 1$. Si $p=1$, da $\\ln(x)$ que diverge."
+    },
+    {
+      "q": "¿Para qué valores del exponente $p$ converge la integral impropia de segunda especie $\\int_0^1 \\frac{1}{x^p} dx$?",
+      "options": [
+        "Para $p > 1$.",
+        "Para $p < 1$.",
+        "Para $p \\ge 1$."
+      ],
+      "correct": 1,
+      "hint": "Analiza el límite en cero de la primitiva $\\frac{x^{1-p}}{1-p}$.",
+      "explanation": "La primitiva es $\\frac{x^{1-p}}{1-p}$ ($p \\neq 1$). Evaluando el límite en $x \\to 0^+$, la potencia de $x$ no debe ir al denominador, lo que requiere $1-p > 0 \\implies p < 1$. Si $p=1$, da $\\ln(x)$ que diverge en 0."
+    },
+    {
+      "q": "Si una función $f(x)$ es integrable en $[a, b]$, ¿cómo se calcula el área de la región acotada por la curva $y=f(x)$, el eje x y las rectas $x=a$ y $x=b$?",
+      "options": [
+        "Calculando el cuadrado de la integral: $\\left(\\int_a^b f(x) dx\\right)^2$.",
+        "Evaluando directamente $\\int_a^b f(x) dx$, sin importar el signo de la función.",
+        "Mediante la integral del valor absoluto de la función: $\\int_a^b |f(x)| dx$."
+      ],
+      "correct": 2,
+      "hint": "El área física es una magnitud siempre positiva, por lo que las áreas negativas deben invertirse.",
+      "explanation": "Para evitar que las partes de la curva por debajo del eje x cancelen el área de las partes positivas, se integra el valor absoluto de la función: $\\int_a^b |f(x)| dx$."
+    },
+    {
+      "q": "Sean $f(x)$ y $g(x)$ dos funciones continuas en $[a, b]$ tales que $f(x) \\ge g(x)$ para todo $x \\in [a, b]$. El área de la región comprendida entre ambas curvas se define como:",
+      "options": [
+        "$\\int_a^b (f(x) - g(x)) dx$.",
+        "$\\int_a^b (g(x) - f(x)) dx$.",
+        "$\\int_a^b |f(x)| dx - \\int_a^b |g(x)| dx$."
+      ],
+      "correct": 0,
+      "hint": "Resta la función menor (inferior) de la función mayor (superior).",
+      "explanation": "El área entre curvas se obtiene integrando la diferencia de la curva superior menos la curva inferior: $\\int_a^b (f(x) - g(x)) dx$."
+    },
+    {
+      "q": "Utilizando el método de los discos, ¿cuál es la fórmula para calcular el volumen del sólido de revolución generado al girar alrededor del eje x la región bajo la curva $y=f(x)$ entre $x=a$ y $x=b$?",
+      "options": [
+        "$V = 2\\pi \\int_a^b x f(x) dx$.",
+        "$V = \\pi \\int_a^b [f(x)]^2 dx$.",
+        "$V = \\pi \\int_a^b f(x) dx$."
+      ],
+      "correct": 1,
+      "hint": "El volumen es la suma de las áreas de secciones transversales circulares infinitamente delgadas.",
+      "explanation": "Cada sección transversal en $x$ es un círculo de radio $r = f(x)$ y área $A(x) = \\pi [f(x)]^2$. Integrando estas áreas de $a$ a $b$ se obtiene el volumen."
+    },
+    {
+      "q": "Al girar una región acotada por $y=f(x)$ e $y=g(x)$ (con $f(x) \\ge g(x) \\ge 0$) alrededor del eje x, el método de las arandelas (o anillos) establece que el volumen es:",
+      "options": [
+        "$V = 2\\pi \\int_a^b x \\left( f(x) - g(x) \\right) dx$.",
+        "$V = \\pi \\int_a^b \\left( f(x) - g(x) \\right)^2 dx$.",
+        "$V = \\pi \\int_a^b \\left( [f(x)]^2 - [g(x)]^2 \\right) dx$."
+      ],
+      "correct": 2,
+      "hint": "Piensa en restar el volumen del sólido interno del volumen del sólido externo.",
+      "explanation": "La sección transversal es un anillo con radio exterior $f(x)$ y radio interior $g(x)$. El área de la arandela es $\\pi [f(x)]^2 - \\pi [g(x)]^2$, cuya integral da el volumen."
+    },
+    {
+      "q": "El método de las capas cilíndricas (o casquetes) para calcular el volumen generado al girar alrededor del eje y la región bajo $y=f(x)$ ($f(x) \\ge 0$) desde $x=a \\ge 0$ hasta $x=b$ utiliza la fórmula:",
+      "options": [
+        "$V = 2\\pi \\int_a^b x f(x) dx$.",
+        "$V = \\pi \\int_a^b [f(x)]^2 dx$.",
+        "$V = 2\\pi \\int_a^b [x - f(x)] dx$."
+      ],
+      "correct": 0,
+      "hint": "El volumen es la suma de áreas de capas cilíndricas concéntricas de radio $x$ y altura $f(x)$.",
+      "explanation": "Una capa cilíndrica de radio $x$, altura $f(x)$ y espesor $dx$ tiene un volumen diferencial $dV = 2\\pi x f(x) dx$. La integral de estos diferenciales proporciona el volumen total."
+    },
+    {
+      "q": "¿Cuál es la fórmula para calcular la longitud de arco de una curva suave $y=f(x)$ desde $x=a$ hasta $x=b$?",
+      "options": [
+        "$L = \\int_a^b \\sqrt{1 + [f(x)]^2} dx$.",
+        "$L = \\int_a^b \\sqrt{1 + [f'(x)]^2} dx$.",
+        "$L = \\int_a^b (1 + [f'(x)]^2) dx$."
+      ],
+      "correct": 1,
+      "hint": "Proviene del teorema de Pitágoras aplicado a un diferencial de arco $ds = \\sqrt{dx^2 + dy^2}$.",
+      "explanation": "Dividiendo $ds$ por $dx$ se obtiene $\\frac{ds}{dx} = \\sqrt{1 + (\\frac{dy}{dx})^2}$, por lo que la longitud total de arco es la integral de $ds$: $\\int_a^b \\sqrt{1 + [f'(x)]^2} dx$."
+    },
+    {
+      "q": "¿Cuál es el área de la superficie de revolución generada al girar la curva $y=f(x)$ ($f(x) \\ge 0$) para $x \\in [a, b]$ alrededor del eje x?",
+      "options": [
+        "$S = 2\\pi \\int_a^b \\sqrt{1 + [f'(x)]^2} dx$.",
+        "$S = \\pi \\int_a^b [f(x)]^2 \\sqrt{1 + [f'(x)]^2} dx$.",
+        "$S = 2\\pi \\int_a^b f(x) \\sqrt{1 + [f'(x)]^2} dx$."
+      ],
+      "correct": 2,
+      "hint": "Multiplica la circunferencia del círculo de revolución por el diferencial de longitud de arco.",
+      "explanation": "La superficie diferencial de una banda rotada es $dS = 2\\pi r ds$, donde el radio es $r = f(x)$ y $ds = \\sqrt{1 + [f'(x)]^2} dx$. Integrando se obtiene la fórmula."
+    },
+    {
+      "q": "¿Qué propiedad fundamental debe cumplir toda función de densidad de probabilidad (PDF) continua $f(x)$ en $\\mathbb{R}$?",
+      "options": [
+        "$f(x) \\ge 0$ para todo $x \\in \\mathbb{R}$ y $\\int_{-\\infty}^{\\infty} f(x) dx = 1$.",
+        "$\\lim_{x \\to \\infty} f(x) = 1$ y $f(0) = 0$.",
+        "Debe ser derivable en todo su dominio y periódica de periodo $2\\pi$."
+      ],
+      "correct": 0,
+      "hint": "La probabilidad total debe representar la certeza y los valores de probabilidad no pueden ser negativos.",
+      "explanation": "Una PDF debe ser siempre no negativa ($f(x) \\ge 0$) y la integral sobre todo el espacio real debe ser $1$, indicando que el espacio muestral completo tiene probabilidad 1."
+    },
+    {
+      "q": "¿Cómo se expresa la media (o esperanza matemática) $\\mu$ de una variable aleatoria continua con PDF $f(x)$?",
+      "options": [
+        "$\\mu = \\int_{-\\infty}^{\\infty} f(x) dx$.",
+        "$\\mu = \\int_{-\\infty}^{\\infty} x f(x) dx$.",
+        "$\\mu = \\int_{-\\infty}^{\\infty} x^2 f(x) dx$."
+      ],
+      "correct": 1,
+      "hint": "Es el promedio ponderado de los valores $x$ con sus respectivas densidades de probabilidad.",
+      "explanation": "La esperanza matemática o media pondera cada valor posible $x$ por su densidad de probabilidad $f(x)$ y se calcula como la integral de $-\\infty$ a $\\infty$ de $x f(x) dx$."
+    },
+    {
+      "q": "¿Por qué la integral de la densidad normal estándar $f(x) = \\frac{1}{\\sqrt{2\\pi}} e^{-x^2/2}$ en un intervalo $[a, b]$ requiere aproximación numérica?",
+      "options": [
+        "Porque el teorema de Liouville prohíbe integrar funciones con coeficientes irracionales.",
+        "Porque el integrando presenta singularidades esenciales en todos los puntos racionales del intervalo.",
+        "Porque la función $e^{-x^2/2}$ no posee una primitiva expresable en términos de funciones elementales."
+      ],
+      "correct": 2,
+      "hint": "Piensa si es posible escribir la integral indefinida usando polinomios, funciones exponenciales o trigonométricas básicas.",
+      "explanation": "La función $e^{-x^2}$ es el ejemplo clásico de una función no elemental: su primitiva existe pero no se puede escribir mediante combinaciones finitas de funciones elementales, requiriendo integración numérica."
+    },
+    {
+      "q": "Si una función continua $f(x)$ es impar (es decir, $f(-x) = -f(x)$) para todo $x$, ¿cuál es el valor de $\\int_{-a}^a f(x) dx$?",
+      "options": [
+        "0.",
+        "$2 \\int_0^a f(x) dx$.",
+        "$a$."
+      ],
+      "correct": 0,
+      "hint": "Piensa en cómo se cancelan las áreas positivas y negativas a ambos lados del origen.",
+      "explanation": "Debido a la antisimetría, el área acumulada en el lado negativo $[-a, 0]$ cancela exactamente al área acumulada en el lado positivo $[0, a]$, resultando en cero."
+    },
+    {
+      "q": "Si una función continua $f(x)$ es par (es decir, $f(-x) = f(x)$) para todo $x$, ¿qué simplificación se aplica a $\\int_{-a}^a f(x) dx$?",
+      "options": [
+        "$\\int_{-a}^a f(x) dx = 0$.",
+        "$\\int_{-a}^a f(x) dx = 2 \\int_0^a f(x) dx$.",
+        "$\\int_{-a}^a f(x) dx = \\int_0^a f(x) dx$."
+      ],
+      "correct": 1,
+      "hint": "La curva es simétrica respecto al eje y, duplicando el área de un solo lado.",
+      "explanation": "Dado que la función es simétrica, la integral de $-a$ a $a$ es exactamente el doble de la integral calculada en la mitad del intervalo, es decir, de $0$ a $a$."
+    },
+    {
+      "q": "Si $G(x) = \\int_{g(x)}^{h(x)} f(t) dt$ donde $f$ es continua y $g(x), h(x)$ son funciones derivables, ¿cuál es la derivada $G'(x)$ según la regla de Leibniz?",
+      "options": [
+        "$G'(x) = f'(h(x))h'(x) - f'(g(x))g'(x)$.",
+        "$G'(x) = f(h(x)) - f(g(x))$.",
+        "$G'(x) = f(h(x))h'(x) - f(g(x))g'(x)$."
+      ],
+      "correct": 2,
+      "hint": "Aplica el teorema fundamental del cálculo y la regla de la cadena para la composición.",
+      "explanation": "Definiendo $F(t)$ como primitiva de $f(t)$, $G(x) = F(h(x)) - F(g(x))$. Derivando por regla de la cadena obtenemos $G'(x) = F'(h(x))h'(x) - F'(g(x))g'(x) = f(h(x))h'(x) - f(g(x))g'(x)$."
+    },
+    {
+      "q": "¿Qué relación general hay entre la integral de Riemann y la integral de Lebesgue en el caso de funciones continuas acotadas en $[a, b]$?",
+      "options": [
+        "Ambas integrales coinciden y dan exactamente el mismo valor numérico.",
+        "La integral de Lebesgue da siempre un valor estrictamente mayor que la de Riemann.",
+        "La integral de Riemann existe en situaciones donde la de Lebesgue diverge."
+      ],
+      "correct": 0,
+      "hint": "Considera si la continuidad acotada simplifica ambas teorías de integración.",
+      "explanation": "Para funciones continuas acotadas sobre intervalos cerrados, la teoría de Riemann y la teoría de Lebesgue son completamente equivalentes y proporcionan el mismo resultado."
+    },
+    {
+      "q": "¿Cuál es el promedio (o valor medio) de una función continua $f(x)$ en el intervalo $[a, b]$?",
+      "options": [
+        "$\\frac{f(a) + f(b)}{2}$.",
+        "$\\frac{1}{b-a} \\int_a^b f(x) dx$.",
+        "$\\int_a^b f(x) dx$."
+      ],
+      "correct": 1,
+      "hint": "Es el área total dividida por la longitud del intervalo.",
+      "explanation": "El valor medio de una función continua se obtiene dividiendo el valor acumulado (integral) por el ancho del intervalo $[a, b]$, es decir, $\\frac{1}{b-a} \\int_a^b f(x) dx$."
+    },
+    {
+      "q": "En la aproximación de Riemann de una función decreciente en $[a, b]$ mediante sumas por la izquierda, ¿qué tipo de estimación se obtiene?",
+      "options": [
+        "Una estimación exacta.",
+        "Una subestimación (la suma es menor que la integral real).",
+        "Una sobreestimación (la suma es mayor que la integral real)."
+      ],
+      "correct": 2,
+      "hint": "Dibuja rectángulos usando la altura del extremo izquierdo en una curva que va hacia abajo.",
+      "explanation": "Si la función decrece, el valor de $f(x)$ en el extremo izquierdo de cada subintervalo es el supremo de la función en ese intervalo, por lo que la suma por la izquierda sobreestima la integral real."
+    },
+    {
+      "q": "En la aproximación de Riemann de una función creciente en $[a, b]$ mediante sumas por la izquierda, ¿qué tipo de estimación se obtiene?",
+      "options": [
+        "Una subestimación (la suma es menor que la integral real).",
+        "Una sobreestimación (la suma es mayor que la integral real).",
+        "Una estimación exacta."
+      ],
+      "correct": 0,
+      "hint": "Dibuja rectángulos usando la altura del extremo izquierdo en una curva que va hacia arriba.",
+      "explanation": "Si la función crece, el valor en el extremo izquierdo de cada subintervalo representa el ínfimo de la función en ese intervalo. Por ende, la suma por la izquierda subestima la integral real."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "El valor de la integral definida $\\int_0^2 3x^2 dx$ es igual a ____.",
+      "options": [
+        "$8$",
+        "$4$",
+        "$12$"
+      ],
+      "correct": 0,
+      "hint": "Calcula la primitiva de $3x^2$ y aplica la regla de Barrow en los límites 0 y 2.",
+      "explanation": "La primitiva de $3x^2$ es $x^3$. Evaluando en los límites: $[x^3]_0^2 = 2^3 - 0^3 = 8$."
+    },
+    {
+      "q": "Si realizamos el cambio de variable $u = x^2 + 1$, la integral $\\int x e^{x^2+1} dx$ se reduce a ____.",
+      "options": [
+        "$\\int e^u du$",
+        "$\\frac{1}{2} \\int e^u du$",
+        "$2 \\int e^u du$"
+      ],
+      "correct": 1,
+      "hint": "Halla la derivada de $u$ para encontrar la equivalencia de $x\\,dx$.",
+      "explanation": "Si $u = x^2 + 1$, entonces $du = 2x\\,dx \\implies x\\,dx = \\frac{1}{2} du$. Sustituyendo, la integral queda $\\frac{1}{2} \\int e^u du$."
+    },
+    {
+      "q": "El valor de la integral definida $\\int_0^{\\pi} \\sin(x) dx$ es ____.",
+      "options": [
+        "$-2$",
+        "$0$",
+        "$2$"
+      ],
+      "correct": 2,
+      "hint": "La primitiva de $\\sin(x)$ es $-\\cos(x)$. Evalúala de 0 a $\\pi$.",
+      "explanation": "$\\int_0^{\\pi} \\sin(x) dx = [-\\cos(x)]_0^{\\pi} = -\\cos(\\pi) - (-\\cos(0)) = -(-1) + 1 = 2$."
+    },
+    {
+      "q": "La primitiva de la función $f(x) = \\frac{1}{x}$ en el intervalo $(0, \\infty)$ que pasa por el punto $(1, 5)$ es $F(x) = \\ln(x) +$ ____.",
+      "options": [
+        "$5$",
+        "$0$",
+        "$e^5$"
+      ],
+      "correct": 0,
+      "hint": "Resuelve $F(1) = 5$ utilizando la forma general $F(x) = \\ln(x) + C$.",
+      "explanation": "Como $F(x) = \\ln(x) + C$, imponemos $F(1) = \\ln(1) + C = 5 \\implies 0 + C = 5 \\implies C = 5$."
+    },
+    {
+      "q": "La derivada de la función integral $F(x) = \\int_1^{x^2} \\ln(t) dt$ para $x > 0$ es $F'(x) = $ ____.",
+      "options": [
+        "$2x \\ln(x^2)$",
+        "$4x \\ln(x)$",
+        "$\\ln(x^2)$"
+      ],
+      "correct": 1,
+      "hint": "Aplica el Primer Teorema Fundamental del Cálculo combinado con la regla de la cadena.",
+      "explanation": "Derivando la integral: $F'(x) = \\ln(x^2) \\cdot \\frac{d}{dx}(x^2) = (2\\ln(x)) \\cdot (2x) = 4x\\ln(x)$."
+    },
+    {
+      "q": "La integral indefinida $\\int x \\cos(x) dx$ mediante partes con $u=x$, $dv=\\cos(x)dx$ da ____.",
+      "options": [
+        "$-x \\sin(x) + \\cos(x) + C$",
+        "$x \\sin(x) - \\cos(x) + C$",
+        "$x \\sin(x) + \\cos(x) + C$"
+      ],
+      "correct": 2,
+      "hint": "Aplica la fórmula $\\int u\\,dv = uv - \\int v\\,du$.",
+      "explanation": "Si $u=x \\implies du=dx$. Si $dv=\\cos(x)dx \\implies v=\\sin(x)$. Entonces, $\\int x\\cos(x)dx = x\\sin(x) - \\int \\sin(x)dx = x\\sin(x) + \\cos(x) + C$."
+    },
+    {
+      "q": "El área de la región encerrada por la curva $y = x^3$, el eje x, y las rectas $x = 0$ y $x = 2$ es ____.",
+      "options": [
+        "$4$",
+        "$8$",
+        "$2$"
+      ],
+      "correct": 0,
+      "hint": "Integra la función $f(x) = x^3$ en el intervalo $[0, 2]$.",
+      "explanation": "El área es $\\int_0^2 x^3 dx = [\\frac{x^4}{4}]_0^2 = \\frac{16}{4} - 0 = 4$."
+    },
+    {
+      "q": "La integral impropia de primera especie $\\int_1^{\\infty} \\frac{1}{x^2} dx$ tiene un valor de ____.",
+      "options": [
+        "$\\infty$",
+        "$1$",
+        "$2$"
+      ],
+      "correct": 1,
+      "hint": "Calcula $\\lim_{t \\to \\infty} \\int_1^t x^{-2} dx$.",
+      "explanation": "La primitiva de $x^{-2}$ es $-1/x$. Evaluando: $\\lim_{t \\to \\infty} [-1/x]_1^t = \\lim_{t \\to \\infty} (-1/t + 1) = 1$."
+    },
+    {
+      "q": "El valor medio de la función $f(x) = 2x$ en el intervalo $[1, 3]$ es ____.",
+      "options": [
+        "$5$",
+        "$3$",
+        "$4$"
+      ],
+      "correct": 2,
+      "hint": "Aplica la fórmula del valor medio: $\\frac{1}{b-a} \\int_a^b f(x) dx$.",
+      "explanation": "El valor medio es $\\frac{1}{3-1} \\int_1^3 2x dx = \\frac{1}{2} [x^2]_1^3 = \\frac{1}{2}(9-1) = 4$."
+    },
+    {
+      "q": "Al integrar $\\int_0^1 \\frac{1}{1+x^2} dx$ obtenemos un valor de ____.",
+      "options": [
+        "$\\frac{\\pi}{4}$",
+        "$\\frac{\\pi}{2}$",
+        "$1$"
+      ],
+      "correct": 0,
+      "hint": "La primitiva del integrando es la función arcotangente.",
+      "explanation": "$\\int_0^1 \\frac{1}{1+x^2} dx = [\\arctan(x)]_0^1 = \\arctan(1) - \\arctan(0) = \\frac{\\pi}{4}$."
+    },
+    {
+      "q": "El volumen obtenido al girar la región acotada por $y=x^2$, $y=0$ y $x=1$ alrededor del eje x es ____.",
+      "options": [
+        "$\\frac{\\pi}{3}$",
+        "$\\frac{\\pi}{5}$",
+        "$\\frac{2\\pi}{5}$"
+      ],
+      "correct": 1,
+      "hint": "Usa el método de los discos: $V = \\pi \\int_a^b [f(x)]^2 dx$.",
+      "explanation": "El volumen es $V = \\pi \\int_0^1 (x^2)^2 dx = \\pi \\int_0^1 x^4 dx = \\pi [\\frac{x^5}{5}]_0^1 = \\frac{\\pi}{5}$."
+    },
+    {
+      "q": "Si la integral definida $\\int_0^a (2x-1) dx = 0$ con $a > 0$, entonces el valor de $a$ es ____.",
+      "options": [
+        "$\\frac{1}{2}$",
+        "$2$",
+        "$1$"
+      ],
+      "correct": 2,
+      "hint": "Resuelve la integral en términos de $a$ e iguala el resultado a cero.",
+      "explanation": "La primitiva es $x^2 - x$. Evaluando de 0 a $a$ obtenemos $a^2 - a = 0 \\implies a(a-1) = 0$. Como $a > 0$, concluimos que $a = 1$."
+    },
+    {
+      "q": "El valor de la integral $\\int_{-1}^1 (x^5 - 3x^3 + x) dx$ es ____.",
+      "options": [
+        "$0$",
+        "$2$",
+        "$-2$"
+      ],
+      "correct": 0,
+      "hint": "Analiza la simetría de la función en el intervalo $[-1, 1]$.",
+      "explanation": "El integrando contiene únicamente potencias impares de $x$, por lo que es una función impar. Integrando sobre un intervalo simétrico respecto a cero, el resultado es 0."
+    },
+    {
+      "q": "La integral indefinida $\\int e^{3x} dx$ es ____.",
+      "options": [
+        "$3 e^{3x} + C$",
+        "$\\frac{1}{3} e^{3x} + C$",
+        "$e^{3x} + C$"
+      ],
+      "correct": 1,
+      "hint": "Aplica la regla de integración para la exponencial con un coeficiente lineal en el exponente.",
+      "explanation": "La integral de $e^{kx}$ es $\\frac{1}{k} e^{kx} + C$. En este caso, para $k=3$ se obtiene $\\frac{1}{3} e^{3x} + C$."
+    },
+    {
+      "q": "La longitud de la circunferencia de radio $R$ expresada como integral es $\\int_{-R}^R \\frac{2R}{\\sqrt{R^2-x^2}} dx$, que da ____.",
+      "options": [
+        "$\\pi R$",
+        "$\\pi R^2$",
+        "$2\\pi R$"
+      ],
+      "correct": 2,
+      "hint": "Recuerda la fórmula geométrica de la longitud de una circunferencia.",
+      "explanation": "La integral calcula analíticamente el perímetro de la circunferencia de radio $R$, que es $2\\pi R$."
+    },
+    {
+      "q": "El valor de la integral definida $\\int_0^{\\pi/2} \\sin(x)\\cos(x) dx$ es ____.",
+      "options": [
+        "$\\frac{1}{2}$",
+        "$1$",
+        "$\\frac{1}{4}$"
+      ],
+      "correct": 0,
+      "hint": "Usa la identidad de ángulo doble o la sustitución simple $u = \\sin(x)$.",
+      "explanation": "Haciendo $u = \\sin(x) \\implies du = \\cos(x)dx$. Los límites cambian de 0 a 1. $\\int_0^1 u\\,du = [\\frac{u^2}{2}]_0^1 = \\frac{1}{2}$."
+    },
+    {
+      "q": "Al descomponer la fracción racional $\\frac{1}{x^2-1}$ en fracciones simples se obtiene ____.",
+      "options": [
+        "$\\frac{1}{x-1} + \\frac{1}{x+1}$",
+        "$\\frac{1}{2(x-1)} - \\frac{1}{2(x+1)}$",
+        "$\\frac{1}{2(x-1)} + \\frac{1}{2(x+1)}$"
+      ],
+      "correct": 1,
+      "hint": "Factoriza el denominador y plantea la descomposición $\\frac{A}{x-1} + \\frac{B}{x+1}$.",
+      "explanation": "$\\frac{1}{(x-1)(x+1)} = \\frac{A}{x-1} + \\frac{B}{x+1} \\implies 1 = A(x+1) + B(x-1)$. Para $x=1, A=1/2$. Para $x=-1, B=-1/2$. Obtenemos $\\frac{1}{2(x-1)} - \\frac{1}{2(x+1)}$."
+    },
+    {
+      "q": "El valor de la integral impropia de segunda especie $\\int_0^1 \\frac{1}{\\sqrt{x}} dx$ es ____.",
+      "options": [
+        "Divergente",
+        "$1$",
+        "$2$"
+      ],
+      "correct": 2,
+      "hint": "Evalúa el límite en cero de la primitiva $2\\sqrt{x}$.",
+      "explanation": "La integral es $\\lim_{t \\to 0^+} \\int_t^1 x^{-1/2} dx = \\lim_{t \\to 0^+} [2\\sqrt{x}]_t^1 = 2 - 0 = 2$."
+    },
+    {
+      "q": "Si $F(x) = \\int_0^x e^{-t^2} dt$, entonces el valor de $F(0)$ es ____.",
+      "options": [
+        "$0$",
+        "$1$",
+        "$\\sqrt{\\pi}$"
+      ],
+      "correct": 0,
+      "hint": "Evalúa la función integral en un intervalo de longitud cero.",
+      "explanation": "Por definición, cualquier integral definida cuyos límites inferior y superior coinciden es cero: $\\int_0^0 e^{-t^2} dt = 0$."
+    },
+    {
+      "q": "El área bajo la curva $y = e^x$ en el intervalo $[0, \\ln(2)]$ es ____.",
+      "options": [
+        "$\\ln(2)$",
+        "$1$",
+        "$2$"
+      ],
+      "correct": 1,
+      "hint": "Aplica Barrow a la primitiva $e^x$ con los límites dados.",
+      "explanation": "El área es $\\int_0^{\\ln(2)} e^x dx = [e^x]_0^{\\ln(2)} = e^{\\ln(2)} - e^0 = 2 - 1 = 1$."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre la integral $\\int_a^b f(x) dx$ son correctas si $f(x)$ es continua en $[a,b]$?",
+      "options": [
+        "Si $f(x) \\ge 0$ en $[a,b]$, representa el área física encerrada por la curva y el eje de abscisas.",
+        "Es igual a $F(b) - F(a)$ donde $F$ es cualquier antiderivada que verifique $F'(x) = f(x)$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Compara la interpretación geométrica y el cálculo algebraico de la integral definida.",
+      "explanation": "Ambas afirmaciones son pilares fundamentales del cálculo integral: la interpretación del área bajo la curva y el Segundo Teorema Fundamental del Cálculo."
+    },
+    {
+      "q": "Para la función $f(x) = x^2$ en el intervalo $[0, 1]$, ¿cuál de las siguientes afirmaciones es correcta?",
+      "options": [
+        "La aproximación por sumas de Riemann por la derecha con 2 subintervalos iguales da $\\frac{5}{8}$.",
+        "El valor exacto de la integral de Riemann es $\\frac{1}{3}$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Realiza la aproximación manual con $n=2$ y calcula la integral analítica.",
+      "explanation": "La suma por la derecha con $n=2$ tiene puntos $0.5$ y $1.0$, dando $(0.25 + 1.0) \\cdot 0.5 = 0.625 = 5/8$. La integral exacta es $[x^3/3]_0^1 = 1/3$. Ambas son correctas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes integrales indefinidas de funciones elementales son correctas?",
+      "options": [
+        "$\\int \\sin(x) dx = -\\cos(x) + C$.",
+        "$\\int \\cos(x) dx = \\sin(x) + C$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Comprueba derivando los resultados propuestos.",
+      "explanation": "La derivada de $-\\cos(x)$ es $\\sin(x)$, y la de $\\sin(x)$ es $\\cos(x)$. Por tanto, ambas integrales son correctas."
+    },
+    {
+      "q": "Con respecto a las integrales de funciones racionales, ¿en qué casos se puede aplicar directamente la descomposición en fracciones simples?",
+      "options": [
+        "En la integral $\\int \\frac{x}{x^2 - 4} dx$, dado que el grado del numerador es menor al del denominador.",
+        "En la integral $\\int \\frac{3}{x^2 + 5x + 6} dx$, ya que es una fracción racional propia.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Identifica si el grado del numerador es estrictamente menor que el del denominador.",
+      "explanation": "En ambos ejemplos, el grado del numerador ($1$ y $0$ respectivamente) es menor que el del denominador ($2$). Esto define a las fracciones como propias, permitiendo su descomposición directa."
+    },
+    {
+      "q": "Para la integral definida $I = \\int_{-2}^2 (x^3 - x) dx$, ¿cuál de las siguientes afirmaciones es correcta?",
+      "options": [
+        "El integrando es una función impar y los límites son simétricos respecto al origen.",
+        "El valor neto de la integral definida es exactamente $0$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza el comportamiento simétrico del polinomio ante cambios de signo de la variable.",
+      "explanation": "La función $f(x) = x^3 - x$ satisface $f(-x) = -f(x)$, siendo impar. Al integrar en el intervalo simétrico $[-2, 2]$, las áreas se cancelan y resulta en 0. Ambas afirmaciones son correctas."
+    },
+    {
+      "q": "La integral impropia de primera especie $\\int_1^{\\infty} \\frac{dx}{x^p}$ es:",
+      "options": [
+        "Divergente si el valor del parámetro es $p = 1$.",
+        "Convergente si el valor del parámetro es $p = 1.01$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda la regla de convergencia del exponente para integrales impropias de primera especie.",
+      "explanation": "La integral converge si y solo si $p > 1$. Como $p=1 \\le 1$ diverge y $p=1.01 > 1$ converge, ambas afirmaciones son correctas."
+    },
+    {
+      "q": "¿Qué propiedades fundamentales cumple la integral definida $\\int_a^b (cf(x) + g(x)) dx$ para cualquier constante real $c$?",
+      "options": [
+        "Es equivalente a la expresión $c \\int_a^b f(x) dx + \\int_a^b g(x) dx$.",
+        "Satisface las propiedades algebraicas de linealidad.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza la distribución del operador integral con sumas y constantes.",
+      "explanation": "La integral es un operador lineal, lo que significa que distribuye sobre la suma y extrae constantes multiplicativas de su interior. Ambas afirmaciones describen esta propiedad."
+    },
+    {
+      "q": "Para la integral definida $\\int_0^{\\pi} \\cos(x) dx$, se cumple que:",
+      "options": [
+        "Su valor total acumulado es exactamente $0$.",
+        "El integrando presenta simetría impar respecto al centro del intervalo de integración, $x = \\pi/2$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Calcula la integral y observa la gráfica del coseno entre $0$ y $\\pi$.",
+      "explanation": "La integral da $[\\sin(x)]_0^{\\pi} = 0$. Además, $\\cos(\\pi/2 + x) = -\\cos(\\pi/2 - x)$, mostrando simetría impar respecto a $x=\\pi/2$. Ambas opciones son correctas."
+    },
+    {
+      "q": "Al calcular el área encerrada entre las curvas $y = x$ e $y = x^2$ en el intervalo $[0, 1]$:",
+      "options": [
+        "El único punto de intersección en el intervalo abierto $(0, 1)$ no existe, solo en los extremos $0$ y $1$.",
+        "El área de la región encerrada vale exactamente $\\frac{1}{6}$ unidades de área.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Resuelve $x^2 = x$ e integra la diferencia de las funciones en $[0, 1]$.",
+      "explanation": "Las intersecciones ocurren únicamente en $x=0$ y $x=1$. El área es $\\int_0^1 (x - x^2) dx = [x^2/2 - x^3/3]_0^1 = 1/2 - 1/3 = 1/6$. Ambas afirmaciones son verdaderas."
+    },
+    {
+      "q": "Si $f(x)$ es continua en $[a, b]$, la función integral $F(x) = \\int_a^x f(t) dt$ cumple que:",
+      "options": [
+        "Es una función continua en el intervalo cerrado $[a, b]$.",
+        "Es una función derivable en el intervalo abierto $(a, b)$ con derivada $F'(x) = f(x)$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Repasa las consecuencias directas del Primer Teorema Fundamental del Cálculo.",
+      "explanation": "El teorema fundamental asegura que si $f$ es continua, la función acumuladora es continua y derivable, siendo $f$ su derivada."
+    },
+    {
+      "q": "El valor de la integral definida $\\int_0^1 e^{-x} dx$ es igual a:",
+      "options": [
+        "$e - 1$",
+        "$1$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Halla la primitiva de $e^{-x}$ y evalúala aplicando Barrow.",
+      "explanation": "La primitiva de $e^{-x}$ es $-e^{-x}$. Evaluando: $[-e^{-x}]_0^1 = -e^{-1} - (-e^0) = 1 - \\frac{1}{e} \\approx 0.6321$. Ninguna de las opciones dadas coincide."
+    },
+    {
+      "q": "El área acotada por la curva $y = \\frac{1}{x}$, el eje x, y las rectas $x = 1$ y $x = e^2$ es:",
+      "options": [
+        "$1$",
+        "$e$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Calcula la integral definida de $1/x$ entre los límites 1 y $e^2$.",
+      "explanation": "El área es $\\int_1^{e^2} \\frac{1}{x} dx = [\\ln(x)]_1^{e^2} = \\ln(e^2) - \\ln(1) = 2 - 0 = 2$. Ninguna de las opciones de valor propuestas es correcta."
+    },
+    {
+      "q": "El volumen de la esfera de radio $R$ se puede obtener rotando el semicírculo $y = \\sqrt{R^2 - x^2}$ alrededor del eje x. Su valor es:",
+      "options": [
+        "$\\pi R^3$",
+        "$2\\pi R^3$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Usa el método de los discos para integrar la función entre $-R$ y $R$.",
+      "explanation": "El volumen es $V = \\pi \\int_{-R}^R (R^2 - x^2) dx = \\pi [R^2 x - \\frac{x^3}{3}]_{-R}^R = \\pi (R^3 - R^3/3 - (-R^3 + R^3/3)) = \\frac{4}{3}\\pi R^3$. Ninguna coincide."
+    },
+    {
+      "q": "El valor de la integral indefinida $\\int \\frac{1}{x \\ln(x)} dx$ para $x > 1$ es:",
+      "options": [
+        "$\\ln(x) + C$",
+        "$\\frac{1}{\\ln(x)} + C$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Haz el cambio de variable $u = \\ln(x)$ de modo que $du = \\frac{1}{x} dx$.",
+      "explanation": "La integral se transforma en $\\int \\frac{1}{u} du = \\ln|u| + C = \\ln|\\ln(x)| + C$. Ninguna de las opciones propuestas coincide con esta primitiva."
+    },
+    {
+      "q": "La derivada de la función integral $G(x) = \\int_0^{2x} \\cos(t^2) dt$ es:",
+      "options": [
+        "$\\cos(4x^2)$",
+        "$2 \\cos(x^2)$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Aplica el teorema fundamental combinándolo con la regla de la cadena para el extremo $2x$.",
+      "explanation": "La derivada es $G'(x) = \\cos((2x)^2) \\cdot \\frac{d}{dx}(2x) = 2\\cos(4x^2)$. Las opciones propuestas no contienen este valor."
+    },
+    {
+      "q": "El valor de la integral impropia de primera especie $\\int_0^{\\infty} e^{-2x} dx$ es:",
+      "options": [
+        "$1$",
+        "$2$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Calcula la primitiva de $e^{-2x}$ y toma el límite en infinito.",
+      "explanation": "$\\int_0^{\\infty} e^{-2x} dx = [-\\frac{1}{2}e^{-2x}]_0^{\\infty} = 0 - (-\\frac{1}{2}) = \\frac{1}{2}$. Las opciones dadas son $1$ y $2$, por lo que la correcta es Ninguna."
+    },
+    {
+      "q": "Si calculamos la suma de Riemann de la función constante $f(x) = 5$ sobre el intervalo $[1, 4]$ para cualquier partición, el valor obtenido es:",
+      "options": [
+        "$5$",
+        "$20$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La integral o suma de Riemann de una función constante es igual al valor de la constante por el ancho del intervalo.",
+      "explanation": "La suma es $5 \\cdot (4 - 1) = 15$ de forma constante, independientemente de la partición. Las respuestas propuestas son $5$ y $20$."
+    },
+    {
+      "q": "La longitud de arco de la curva $y = 2x + 1$ entre $x = 0$ y $x = 3$ es:",
+      "options": [
+        "$6$",
+        "$\\sqrt{5}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Usa la fórmula de longitud de arco con $f'(x) = 2$.",
+      "explanation": "La longitud de arco es $L = \\int_0^3 \\sqrt{1 + 2^2} dx = \\int_0^3 \\sqrt{5} dx = 3\\sqrt{5}$. Ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "Al integrar por partes la función $\\int \\ln(x) dx$, obtenemos como primitiva:",
+      "options": [
+        "$\\frac{1}{x} + C$",
+        "$x \\ln(x) + x + C$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Toma $u = \\ln(x)$ y $dv = dx$ para aplicar la fórmula de integración por partes.",
+      "explanation": "$\\int \\ln(x) dx = x\\ln(x) - \\int x \\cdot \\frac{1}{x} dx = x\\ln(x) - x + C$. Las opciones dadas son la derivada $1/x$ y con signo incorrecto ($+x$)."
+    },
+    {
+      "q": "El volumen de revolución generado al girar la región acotada por $y=x$, $y=0$ y $x=2$ alrededor del eje y es:",
+      "options": [
+        "$\\frac{8\\pi}{3}$",
+        "$4\\pi$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Usa el método de capas cilíndricas: $V = 2\\pi \\int_0^2 x \\cdot x\\,dx$.",
+      "explanation": "El volumen es $V = 2\\pi \\int_0^2 x^2 dx = 2\\pi [\\frac{x^3}{3}]_0^2 = 2\\pi (\\frac{8}{3}) = \\frac{16\\pi}{3}$. Las opciones propuestas son $\\frac{8\\pi}{3}$ y $4\\pi$."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Descomposición en fracciones simples y su integración",
+      "context": "Estudiamos la descomposición de una fracción racional propia para resolver una integral definida paso a paso.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuál es la raíz positiva del denominador de la función $f(x) = \\frac{5x-3}{x^2-2x-3}$?",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "El denominador es $x^2 - 2x - 3 = 0$. Factorizando obtenemos $(x-3)(x+1) = 0$. Las raíces son $3$ y $-1$. La raíz positiva es $3$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "En la descomposición $\\frac{5x-3}{x^2-2x-3} = \\frac{A}{x-3} + \\frac{B}{x+1}$, halle el valor del coeficiente $A$.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "Multiplicando por el denominador obtenemos $5x-3 = A(x+1) + B(x-3)$. Evaluando en la raíz $x = 3$: $5(3) - 3 = A(3+1) \\implies 12 = 4A \\implies A = 3$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Halle el valor del coeficiente $B$ en la descomposición anterior.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluando la identidad $5x-3 = A(x+1) + B(x-3)$ en la raíz $x = -1$: $5(-1) - 3 = B(-1-3) \\implies -8 = -4B \\implies B = 2$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Calcule el valor de la integral definida $\\int_4^5 \\frac{5x-3}{x^2-2x-3} dx$ aproximado a 4 decimales.",
+          "correctValue": 2.4441,
+          "tolerance": 0.001,
+          "explanation": "La integral es $\\int_4^5 (\\frac{3}{x-3} + \\frac{2}{x+1}) dx = [3\\ln|x-3| + 2\\ln|x+1|]_4^5 = (3\\ln(2) + 2\\ln(6)) - (3\\ln(1) + 2\\ln(5)) = 3\\ln(2) + 2\\ln(6) - 2\\ln(5) = \\ln(11.52) \\approx 2.4441$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Área de la región delimitada por una parábola y una recta",
+      "context": "Determinación de los límites de integración mediante la intersección de curvas y el cálculo del área encerrada.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Encuentre la abscisa del punto de corte izquierdo (menor valor de $x$) entre la parábola $y = x^2$ y la recta $y = x + 2$.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "Igualamos las ecuaciones: $x^2 = x + 2 \\implies x^2 - x - 2 = 0 \\implies (x-2)(x+1) = 0$. Los puntos de corte son $x = -1$ y $x = 2$. El punto de corte izquierdo es $x = -1$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Encuentre la abscisa del punto de corte derecho (mayor valor de $x$) entre ambas curvas.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "De la ecuación de intersección $(x-2)(x+1) = 0$, la solución mayor es $x = 2$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Determine la altura diferencial (diferencia de las funciones $y_{\\text{recta}} - y_{\\text{parábola}}$) en el punto $x = 0$.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "La diferencia de las curvas es $d(x) = (x+2) - x^2$. En $x=0$, evaluamos $d(0) = (0+2) - 0^2 = 2$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcule el área total de la región encerrada por las dos curvas.",
+          "correctValue": 4.5,
+          "tolerance": 0.0,
+          "explanation": "El área se obtiene integrando la diferencia desde el corte izquierdo al derecho: $\\int_{-1}^2 (x+2-x^2) dx = [\\frac{x^2}{2} + 2x - \\frac{x^3}{3}]_{-1}^2 = (2 + 4 - \\frac{8}{3}) - (\\frac{1}{2} - 2 + \\frac{1}{3}) = \\frac{10}{3} - (-\\frac{7}{6}) = \\frac{27}{6} = 4.5$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cálculo integral por sustitución algebraica",
+      "context": "Aplicación del método de cambio de variable, ajustando de forma correspondiente los límites de integración y el integrando.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Para calcular $I = \\int_0^3 x\\sqrt{x^2+16} dx$ con el cambio $u = x^2+16$, halle el nuevo límite inferior de integración.",
+          "correctValue": 16.0,
+          "tolerance": 0.0,
+          "explanation": "Si $x = 0$, sustituimos en el cambio de variable: $u = 0^2 + 16 = 16$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Halle el nuevo límite superior de integración para $u$.",
+          "correctValue": 25.0,
+          "tolerance": 0.0,
+          "explanation": "Si $x = 3$, sustituimos en el cambio de variable: $u = 3^2 + 16 = 9 + 16 = 25$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Si reescribimos el diferencial como $x dx = c\\,du$, halle el valor de la constante $c$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "Como $u = x^2 + 16 \\implies du = 2x\\,dx$, despejamos $x\\,dx = \\frac{1}{2}\\,du$, de donde $c = 0.5$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcule el valor de la integral definida original $I$ aproximado a 4 decimales.",
+          "correctValue": 20.3333,
+          "tolerance": 0.001,
+          "explanation": "La integral en la nueva variable es $\\int_{16}^{25} \\frac{1}{2} \\sqrt{u}\\,du = [\\frac{1}{2} \\cdot \\frac{2}{3} u^{3/2}]_{16}^{25} = \\frac{1}{3} (25^{3/2} - 16^{3/2}) = \\frac{1}{3} (125 - 64) = \\frac{61}{3} \\approx 20.3333$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Integración por partes paso a paso",
+      "context": "Desglose sistemático de la regla de integración por partes utilizando límites definidos.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Para integrar $\\int_0^{\\pi} x\\sin(x)dx$ con partes $u=x$, $dv=\\sin(x)dx$, halle el valor de $v(\\pi/2)$ tomando constante $C=0$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Si $dv = \\sin(x)dx$, entonces $v = -\\cos(x)$. Evaluando en $x=\\pi/2$, tenemos $v(\\pi/2) = -\\cos(\\pi/2) = 0$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Halle el valor de la evaluación del término de frontera $[u \\cdot v]_0^{\\pi}$ dividido por $\\pi$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El término es $[-x\\cos(x)]_0^{\\pi} = -\\pi\\cos(\\pi) - (-0\\cos(0)) = -\\pi(-1) = \\pi$. Dividiendo por $\\pi$ da $1.0$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Halle el valor de la integral del término restante $\\int_0^{\\pi} v\\,du$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La integral restante es $\\int_0^{\\pi} v\\,du = \\int_0^{\\pi} (-\\cos(x))dx = [-\\sin(x)]_0^{\\pi} = -\\sin(\\pi) - (-\\sin(0)) = 0$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcule el valor numérico de la integral original aproximado a 4 decimales.",
+          "correctValue": 3.1416,
+          "tolerance": 0.001,
+          "explanation": "Aplicando la fórmula de integración por partes: $\\int_0^{\\pi} x\\sin(x)dx = [uv]_0^{\\pi} - \\int_0^{\\pi} v\\,du = \\pi - 0 = \\pi \\approx 3.1416$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Volumen de un sólido de revolución mediante discos",
+      "context": "Modelado del volumen generado por la rotación de una curva exponencial en torno al eje x.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Halle el radio del disco transversal generado en el extremo $x = 1$ al rotar la curva $y = e^x$ respecto al eje x.",
+          "correctValue": 2.7183,
+          "tolerance": 0.001,
+          "explanation": "El radio del disco es la propia función evaluada en el extremo: $R(1) = e^1 = e \\approx 2.7183$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Para calcular el volumen mediante $V = \\pi \\int_0^1 [f(x)]^2 dx$, halle el integrando simplificado evaluado en $x = 0.5$.",
+          "correctValue": 2.7183,
+          "tolerance": 0.001,
+          "explanation": "El integrando es $[f(x)]^2 = (e^x)^2 = e^{2x}$. Evaluado en $x = 0.5$, da $e^{2(0.5)} = e^1 \\approx 2.7183$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcule la integral definida sin la constante de revolución, es decir, el valor de $I = \\int_0^1 e^{2x} dx$ aproximado a 4 decimales.",
+          "correctValue": 3.1945,
+          "tolerance": 0.001,
+          "explanation": "La primitiva de $e^{2x}$ es $\\frac{1}{2} e^{2x}$. Evaluamos: $[\\frac{1}{2}e^{2x}]_0^1 = \\frac{1}{2}(e^2 - e^0) = \\frac{e^2 - 1}{2} \\approx \\frac{7.389056 - 1}{2} \\approx 3.1945$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Calcule el volumen total $V$ del sólido de revolución obtenido aproximado a 4 decimales.",
+          "correctValue": 10.0359,
+          "tolerance": 0.01,
+          "explanation": "El volumen es $V = \\pi \\cdot I \\approx 3.14159265 \\cdot 3.194528 \\approx 10.0359$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Derivada de una función integral",
+      "context": "Aplicación del Primer Teorema Fundamental del Cálculo en combinación con la regla de la cadena para extremos superiores variables polinómicos.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Para la función integral $G(x) = \\int_{2}^{x^3} \\sqrt{t^2+5} dt$, halle el valor de la función en $x = \\sqrt[3]{2}$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El límite superior es $x^3 = (\\sqrt[3]{2})^3 = 2$. La integral va de 2 a 2, por lo que $G(\\sqrt[3]{2}) = 0$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "La derivada es de la forma $G'(x) = g(x) \\sqrt{x^6+5}$. Calcule el valor del factor multiplicador externo $g(x)$ en $x = 2$.",
+          "correctValue": 12.0,
+          "tolerance": 0.0,
+          "explanation": "Por el FTC y la regla de la cadena, $G'(x) = \\sqrt{(x^3)^2 + 5} \\cdot \\frac{d}{dx}(x^3) = 3x^2 \\sqrt{x^6+5}$. El factor multiplicador externo es $g(x) = 3x^2$. En $x=2$ vale $3(2^2) = 12$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Halle el valor bajo la raíz de la derivada en $x = 2$ (el valor de $x^6 + 5$).",
+          "correctValue": 69.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituyendo $x = 2$ en el término dentro de la raíz: $2^6 + 5 = 64 + 5 = 69$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule el valor numérico exacto de la derivada $G'(2)$ aproximado a 2 decimales.",
+          "correctValue": 99.68,
+          "tolerance": 0.1,
+          "explanation": "Evaluando $G'(2) = 12 \\sqrt{69} \\approx 12 \\cdot 8.30662 = 99.68$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Convergencia y error de truncamiento en integrales impropias de tipo I",
+      "context": "Evaluación del límite de una integral impropia en el infinito y estimación del error cometido al truncar en un límite superior finito.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Si definimos la primitiva de $\\frac{1}{x^4}$ como $F(x) = -\\frac{1}{3x^3}$, halle el valor de $F(1)$.",
+          "correctValue": -0.3333,
+          "tolerance": 0.001,
+          "explanation": "Evaluando la primitiva en $x=1$ obtenemos $F(1) = -\\frac{1}{3(1)^3} = -\\frac{1}{3} \\approx -0.3333$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Halle el valor límite de la primitiva a medida que el extremo superior tiende a infinito, es decir, $\\lim_{t \\to \\infty} F(t)$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$\\lim_{t \\to \\infty} -\\frac{1}{3t^3} = 0$, puesto que el denominador crece de forma ilimitada."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcule el valor de la integral impropia convergente $I = \\int_1^{\\infty} \\frac{1}{x^4} dx$ aproximado a 4 decimales.",
+          "correctValue": 0.3333,
+          "tolerance": 0.001,
+          "explanation": "El valor de la integral impropia es el límite $\\lim_{t\\to\\infty} [F(t) - F(1)] = 0 - (-1/3) = 1/3 \\approx 0.3333$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si aproximamos la integral acotando el límite superior en $t = 10$, halle el error de truncamiento cometido (el área residual desestimada de $10$ a $\\infty$).",
+          "correctValue": 0.0003,
+          "tolerance": 0.0001,
+          "explanation": "El área de cola desestimada es $\\int_{10}^{\\infty} \\frac{1}{x^4} dx = [-\\frac{1}{3x^3}]_{10}^{\\infty} = 0 - (-\\frac{1}{3000}) = \\frac{1}{3000} \\approx 0.000333$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Área encerrada por una función cúbica",
+      "context": "Cálculo del área entre una función cúbica con valores negativos y el eje x en un intervalo determinado.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Halle la raíz positiva de la función cúbica $y = x^3 - 4x$.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $x^3 - 4x = 0 \\implies x(x^2 - 4) = 0 \\implies x = 0, 2, -2$. La raíz estrictamente positiva es $x = 2$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Halle el valor de la ordenada de la curva en el punto medio del intervalo $[0, 2]$, es decir, en $x = 1$.",
+          "correctValue": -3.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituyendo $x=1$ en la función cúbica: $y(1) = 1^3 - 4(1) = -3$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Debido a que la función es negativa en $(0, 2)$, la integral del área requiere integrar $g(x) = 4x - x^3$. Calcule el valor de $g(1.5)$.",
+          "correctValue": 2.625,
+          "tolerance": 0.0,
+          "explanation": "Evaluamos $g(1.5) = 4(1.5) - (1.5)^3 = 6 - 3.375 = 2.625$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcule el área exacta encerrada por la curva y el eje x en el intervalo $[0, 2]$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "El área es $\\int_0^2 (4x - x^3) dx = [2x^2 - \\frac{x^4}{4}]_0^2 = (2(4) - 4) - 0 = 8 - 4 = 4$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Volumen de un sólido hueco por el método de arandelas",
+      "context": "Cálculo del volumen generado al girar la región acotada entre una recta y una parábola alrededor del eje x.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Halle la coordenada x del punto de corte no nulo entre las curvas $y = x^2$ e $y = 2x$.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "Igualamos: $x^2 = 2x \\implies x(x-2) = 0$. Las soluciones son $0$ y $2$. La intersección no nula ocurre en $x=2$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Para el volumen generado al girar en torno al eje x, la sección de la arandela tiene área $\\pi(R^2 - r^2)$. Halle el valor del factor cuadrático $(2x)^2 - (x^2)^2$ evaluado en $x = 1$.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "El radio exterior es $R(x)=2x$ y el interior es $r(x)=x^2$. En $x=1$: $R(1)^2 - r(1)^2 = 4(1) - 1 = 3$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcule el valor de la integral definida adimensional $I = \\int_0^2 (4x^2 - x^4) dx$ aproximada a 4 decimales.",
+          "correctValue": 4.2667,
+          "tolerance": 0.001,
+          "explanation": "La primitiva es $\\frac{4x^3}{3} - \\frac{x^5}{5}$. Evaluando de 0 a 2: $(\\frac{32}{3} - \\frac{32}{5}) = 32(\\frac{1}{3} - \\frac{1}{5}) = 32(\\frac{2}{15}) = \\frac{64}{15} \\approx 4.2667$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Determine el volumen total del sólido de revolución aproximado a 4 decimales.",
+          "correctValue": 13.4042,
+          "tolerance": 0.01,
+          "explanation": "El volumen es $V = \\pi \\cdot I \\approx 3.14159265 \\cdot 4.266667 \\approx 13.4042$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Longitud de arco de un segmento lineal",
+      "context": "Aplicación de la fórmula de longitud de arco a un segmento lineal y su contraste mediante distancia euclídea.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Halle la derivada $y'$ de la recta $y = \\frac{4}{3}x + 2$.",
+          "correctValue": 1.3333,
+          "tolerance": 0.001,
+          "explanation": "La ecuación es una recta con pendiente $m = 4/3 \\approx 1.3333$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Evalúe el integrando de la longitud de arco $g(x) = \\sqrt{1 + (y')^2}$.",
+          "correctValue": 1.6667,
+          "tolerance": 0.001,
+          "explanation": "$g(x) = \\sqrt{1 + (4/3)^2} = \\sqrt{1 + 16/9} = \\sqrt{25/9} = 5/3 \\approx 1.6667$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcule la longitud de arco de la recta desde $x = 0$ hasta $x = 3$.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "Integramos el valor constante del paso anterior: $L = \\int_0^3 \\frac{5}{3} dx = [\\frac{5}{3}x]_0^3 = 5$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Calcule la distancia euclídea directa entre los extremos $(0, 2)$ y $(3, 6)$ usando el teorema de Pitágoras para verificar el resultado.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "La distancia es $\\sqrt{(3-0)^2 + (6-2)^2} = \\sqrt{9 + 16} = 5$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Integración racional con factores lineales múltiples",
+      "context": "Descomposición en fracciones simples para polos repetidos en el denominador y su posterior integración definida.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Dada $f(x) = \\frac{1}{x(x-1)^2} = \\frac{A}{x} + \\frac{B}{x-1} + \\frac{C}{(x-1)^2}$, halle el coeficiente $A$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "La identidad polinómica es $1 = A(x-1)^2 + Bx(x-1) + Cx$. Para $x=0$, se reduce a $1 = A(-1)^2 \\implies A = 1$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Halle el coeficiente del término de mayor potencia del polo múltiple, es decir, el valor de $C$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluando en la raíz del polo múltiple $x = 1$, la identidad da $1 = C(1) \\implies C = 1$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Halle el coeficiente $B$ correspondiente al término lineal del polo múltiple.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "Igualando los coeficientes de $x^2$ en la identidad: $0 = A + B \\implies B = -A \\implies B = -1$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcule la integral definida $\\int_2^3 \\frac{1}{x(x-1)^2} dx$ aproximando a 4 decimales.",
+          "correctValue": 0.2123,
+          "tolerance": 0.001,
+          "explanation": "La integral es $\\int_2^3 (\\frac{1}{x} - \\frac{1}{x-1} + \\frac{1}{(x-1)^2}) dx = [\\ln|x| - \\ln|x-1| - \\frac{1}{x-1}]_2^3 = [\\ln(\\frac{x}{x-1}) - \\frac{1}{x-1}]_2^3 = (\\ln(1.5) - 0.5) - (\\ln(2) - 1) = \\ln(0.75) + 0.5 \\approx -0.2877 + 0.5 = 0.2123$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Evaluación de una integral impropia de segunda especie",
+      "context": "Análisis de la integral en las proximidades de una asíntota vertical en el origen.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Para la integral impropia de segunda especie $I = \\int_0^4 \\frac{dx}{\\sqrt{x}}$, halle el valor del integrando en $x = 1$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El integrando es $1/\\sqrt{x}$. En $x=1$ vale $1/\\sqrt{1} = 1$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Halle el valor de la primitiva $F(x) = 2\\sqrt{x}$ en el extremo superior $x = 4$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "$F(4) = 2\\sqrt{4} = 4$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Halle el límite por la derecha en la singularidad, es decir, $\\lim_{t \\to 0^+} F(t)$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$\\lim_{t \\to 0^+} 2\\sqrt{t} = 2(0) = 0$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcule el valor de la integral impropia $I$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "La integral es el límite de Barrow: $\\lim_{t \\to 0^+} [F(x)]_t^4 = 4 - 0 = 4$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Valor medio e interpretación geométrica en trigonometría",
+      "context": "Cálculo del valor medio de la función seno y determinación de los puntos donde la función alcanza dicho promedio.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcule el valor acumulado exacto $\\int_0^{\\pi} \\sin(x) dx$.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "La primitiva es $-\\cos(x)$. Evaluando: $[-\\cos(x)]_0^{\\pi} = -(-1) - (-1) = 2$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Halle el valor medio $\\mu$ del seno en $[0, \\pi]$ aproximando a 4 decimales.",
+          "correctValue": 0.6366,
+          "tolerance": 0.001,
+          "explanation": "El valor medio es $\\mu = \\frac{1}{\\pi-0} \\int_0^{\\pi} \\sin(x) dx = \\frac{2}{\\pi} \\approx 0.6366$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Encuentre el menor ángulo $c \\in [0, \\pi]$ tal que $\\sin(c) = \\mu$, en radianes aproximado a 4 decimales.",
+          "correctValue": 0.6901,
+          "tolerance": 0.005,
+          "explanation": "Resolvemos $\\sin(c) = 2/\\pi \\implies c = \\arcsin(2/\\pi) \\approx 0.6901$ radianes."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Encuentre el mayor ángulo $c \\in [0, \\pi]$ tal que $\\sin(c) = \\mu$, en radianes aproximado a 4 decimales.",
+          "correctValue": 2.4515,
+          "tolerance": 0.005,
+          "explanation": "Por simetría del seno, la segunda solución en $[0, \\pi]$ es $c_2 = \\pi - c_1 \\approx 3.14159 - 0.6901 = 2.4515$ radianes."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Volumen de revolución mediante casquetes cilíndricos",
+      "context": "Cálculo del volumen generado por la rotación de una región parabólica respecto al eje vertical y.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Halle el corte positivo con el eje x de la parábola $y = 3x - x^2$.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $3x - x^2 = 0 \\implies x(3-x) = 0$. Las raíces son $0$ y $3$. El corte positivo es $x = 3$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "El volumen con capas cilíndricas es $V = 2\\pi \\int_0^3 x(3x - x^2) dx$. Calcule la integral interna $I = \\int_0^3 (3x^2 - x^3) dx$.",
+          "correctValue": 6.75,
+          "tolerance": 0.0,
+          "explanation": "La primitiva es $x^3 - \\frac{x^4}{4}$. Evaluando de 0 a 3: $3^3 - \\frac{3^4}{4} = 27 - 20.25 = 6.75$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Halle el coeficiente del volumen $c$ tal que $V = c\\pi$.",
+          "correctValue": 13.5,
+          "tolerance": 0.0,
+          "explanation": "El volumen es $V = 2\\pi \\cdot I = 2\\pi \\cdot 6.75 = 13.5\\pi$. Por lo tanto, el coeficiente es $13.5$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcule el valor del volumen total $V$ del sólido aproximado a 4 decimales.",
+          "correctValue": 42.4115,
+          "tolerance": 0.01,
+          "explanation": "Multiplicando por pi: $V = 13.5 \\cdot 3.14159265 \\approx 42.4115$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Área de cola e integración por partes impropia",
+      "context": "Estudio del área bajo una curva de decaimiento lento tipo gamma y cálculo de la acumulación en intervalos finitos.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Halle el valor de la primitiva $F(x) = -(x+1)e^{-x}$ evaluada en $x = 0$.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluando $F(0) = -(0+1)e^{-0} = -1$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Halle el límite al infinito de la primitiva, $\\lim_{t \\to \\infty} F(t)$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Por crecimiento exponencial, $\\lim_{t \\to \\infty} -(t+1)e^{-t} = 0$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcule el área total de la región no acotada para $x \\ge 0$ bajo la curva $y = x e^{-x}$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "La integral impropia es $\\int_0^{\\infty} x e^{-x} dx = \\lim_{t \\to \\infty} F(t) - F(0) = 0 - (-1) = 1$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Determine la proporción de esta área total que está contenida en el intervalo finito $[0, 1]$ aproximando a 4 decimales.",
+          "correctValue": 0.2642,
+          "tolerance": 0.001,
+          "explanation": "El área en $[0, 1]$ es $\\int_0^1 x e^{-x} dx = F(1) - F(0) = -2e^{-1} - (-1) = 1 - 2/e \\approx 1 - 0.7358 = 0.2642$. Dado que el área total es 1, la proporción es exactamente $0.2642$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Integración racional de tipo logarítmico",
+      "context": "Cálculo de la primitiva e integral definida de una fracción racional con denominador cuadrático sin raíces reales.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Halle el valor de la función $f(x) = \\frac{x}{x^2+1}$ en $x = 1$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "$f(1) = 1/(1^2+1) = 1/2 = 0.5$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Halle la primitiva $F(x) = \\int \\frac{x}{x^2+1} dx$ (con constante 0) evaluada en $x = 1$ aproximada a 4 decimales.",
+          "correctValue": 0.3466,
+          "tolerance": 0.001,
+          "explanation": "La primitiva es $F(x) = \\frac{1}{2} \\ln(x^2+1)$. Evaluada en $x=1$ es $F(1) = \\frac{1}{2}\\ln(2) \\approx 0.3466$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Halle el valor de la primitiva anterior en $x = 0$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$F(0) = \\frac{1}{2}\\ln(0^2+1) = 0$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Calcule la integral definida $\\int_0^1 \\frac{x}{x^2+1} dx$ aproximando a 4 decimales.",
+          "correctValue": 0.3466,
+          "tolerance": 0.001,
+          "explanation": "Aplicando Barrow, es $F(1) - F(0) = \\frac{1}{2}\\ln(2) - 0 \\approx 0.3466$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Derivación con límites variables superior e inferior",
+      "context": "Aplicación de la Regla de Leibniz para derivar una función integral cuyos dos límites son funciones no constantes.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Para la función integral $H(x) = \\int_x^{x^2} \\sin(t) dt$, halle su valor en el origen $x = 0$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$H(0) = \\int_0^0 \\sin(t) dt = 0$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Halle la componente derivada del extremo superior, es decir, el término $2x \\sin(x^2)$ evaluado en $x = \\sqrt{\\pi/2}$ aproximado a 4 decimales.",
+          "correctValue": 2.5066,
+          "tolerance": 0.001,
+          "explanation": "En $x = \\sqrt{\\pi/2}$, la derivada del límite superior por el integrando evaluado es $2\\sqrt{\\pi/2} \\sin(\\pi/2) = 2\\sqrt{\\pi/2} \\cdot 1 \\approx 2.5066$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Halle la componente derivada del extremo inferior, es decir, el término $-\\sin(x)$ evaluado en $x = \\sqrt{\\pi/2}$ aproximado a 4 decimales.",
+          "correctValue": -0.9502,
+          "tolerance": 0.001,
+          "explanation": "En $x = \\sqrt{\\pi/2} \\approx 1.2533$, el término inferior de la derivada es $-\\sin(\\sqrt{\\pi/2}) \\approx -\\sin(1.2533) \\approx -0.9502$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcule la derivada completa $H'(\\sqrt{\\pi/2})$ aproximada a 4 decimales.",
+          "correctValue": 1.5564,
+          "tolerance": 0.001,
+          "explanation": "Sumando ambas contribuciones por regla de Leibniz: $H'(\\sqrt{\\pi/2}) = 2.5066 - 0.9502 = 1.5564$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Área de la región delimitada por funciones trigonométricas cruzadas",
+      "context": "Determinación del área encerrada entre el seno y el coseno dividiendo el dominio en subintervalos de signo constante.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Halle el punto de intersección en radianes (valor de $x$) entre $y = \\cos(x)$ e $y = \\sin(x)$ en el intervalo $[0, \\pi/2]$ aproximado a 4 decimales.",
+          "correctValue": 0.7854,
+          "tolerance": 0.001,
+          "explanation": "Resolvemos $\\sin(x) = \\cos(x) \\implies \\tan(x) = 1 \\implies x = \\pi/4 \\approx 0.7854$ radianes."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcule el área de la primera subregión, de $0$ a $\\pi/4$, donde $\\cos(x) \\ge \\sin(x)$, aproximada a 4 decimales.",
+          "correctValue": 0.4142,
+          "tolerance": 0.001,
+          "explanation": "$A_1 = \\int_0^{\\pi/4} (\\cos(x) - \\sin(x)) dx = [\\sin(x) + \\cos(x)]_0^{\\pi/4} = (\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2}) - (0 + 1) = \\sqrt{2} - 1 \\approx 0.4142$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcule el área de la segunda subregión, de $\\pi/4$ a $\\pi/2$, donde $\\sin(x) \\ge \\cos(x)$, aproximada a 4 decimales.",
+          "correctValue": 0.4142,
+          "tolerance": 0.001,
+          "explanation": "Por simetría, la integral $\\int_{\\pi/4}^{\\pi/2} (\\sin(x) - \\cos(x)) dx = [-\\cos(x) - \\sin(x)]_{\\pi/4}^{\\pi/2} = (-0 - 1) - (-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}) = \\sqrt{2} - 1 \\approx 0.4142$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcule el área total de la región entre ambas curvas en $[0, \\pi/2]$ aproximada a 4 decimales.",
+          "correctValue": 0.8284,
+          "tolerance": 0.001,
+          "explanation": "El área total es la suma de ambas subregiones: $A = A_1 + A_2 = 2(\\sqrt{2}-1) \\approx 0.8284$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Integración por partes sucesiva",
+      "context": "Resolución de una integral definida que requiere la aplicación reiterada de la fórmula de integración por partes.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Para integrar $\\int_0^{\\pi} x^2 \\cos(x) dx$, aplicamos partes con $u = x^2, dv = \\cos(x)dx$. Halle la evaluación de la frontera $[x^2 \\sin(x)]_0^{\\pi}$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$[x^2 \\sin(x)]_0^{\\pi} = \\pi^2 \\sin(\\pi) - 0 = 0$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "La integral restante es $-\\int_0^{\\pi} 2x \\sin(x) dx$. Aplicamos partes nuevamente al integrando con $U = 2x, dV = \\sin(x)dx$. Halle la evaluación de este segundo término de frontera $[2x(-\\cos(x))]_0^{\\pi}$ aproximada a 4 decimales.",
+          "correctValue": 6.2832,
+          "tolerance": 0.001,
+          "explanation": "$[-2x\\cos(x)]_0^{\\pi} = -2\\pi\\cos(\\pi) - (-0) = -2\\pi(-1) = 2\\pi \\approx 6.2832$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Halle el valor de la integral del término final $\\int_0^{\\pi} 2(-\\cos(x)) dx$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$\\int_0^{\\pi} -2\\cos(x) dx = [-2\\sin(x)]_0^{\\pi} = -2\\sin(\\pi) - (-2\\sin(0)) = 0$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcule el valor de la integral definida original aproximado a 4 decimales.",
+          "correctValue": -6.2832,
+          "tolerance": 0.001,
+          "explanation": "Combinando todo: $\\int_0^{\\pi} x^2\\cos(x)dx = 0 - ([2x(-\\cos x)]_0^{\\pi} - \\int_0^{\\pi} 2(-\\cos x)dx) = -(2\\pi - 0) = -2\\pi \\approx -6.2832$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Completar el cuadrado para integrales racionales arcotangentes",
+      "context": "Modificación del integrando completando el cuadrado para llevarlo a una forma arco-tangencial estándar.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Para resolver $I = \\int_{-1}^1 \\frac{dx}{x^2+2x+2}$, completamos el cuadrado escribiendo el denominador como $(x+a)^2+1$. Halle el valor de $a$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "$x^2 + 2x + 2 = (x^2 + 2x + 1) + 1 = (x+1)^2 + 1$. Por lo tanto, $a = 1$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Con el cambio de variable $u = x+1$, halle el nuevo límite inferior de integración.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Si $x = -1$, el cambio de variable da $u = -1 + 1 = 0$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Halle el nuevo límite superior de integración.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "Si $x = 1$, el cambio de variable da $u = 1 + 1 = 2$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcule el valor de la integral definida aproximado a 4 decimales.",
+          "correctValue": 1.1071,
+          "tolerance": 0.001,
+          "explanation": "La integral es $\\int_0^2 \\frac{du}{u^2+1} = [\\arctan(u)]_0^2 = \\arctan(2) - \\arctan(0) \\approx 1.1071$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Área de un lazo cerrado de curva algebraica",
+      "context": "Cálculo del área interna encerrada por una curva implícita parametrizada en la mitad superior plana.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Para la curva de lazo $y^2 = x^2(1-x)$ definida en $[0, 1]$, halle el valor positivo de $y$ en $x = 0.5$ aproximado a 4 decimales.",
+          "correctValue": 0.3536,
+          "tolerance": 0.001,
+          "explanation": "$y^2 = 0.5^2(1-0.5) = 0.25(0.5) = 0.125 \\implies y = \\sqrt{0.125} \\approx 0.3536$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Al integrar la mitad superior del lazo $A = \\int_0^1 x\\sqrt{1-x}dx$ con $u = 1-x$, halle el nuevo límite inferior de integración.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Si $x=0$, entonces $u = 1 - 0 = 1$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcule el área de la mitad superior del lazo aproximada a 4 decimales.",
+          "correctValue": 0.2667,
+          "tolerance": 0.001,
+          "explanation": "La integral con $u = 1-x \\implies x = 1-u$ y $dx = -du$ es $\\int_1^0 (1-u)\\sqrt{u}(-du) = \\int_0^1 (u^{1/2} - u^{3/2})du = [\\frac{2}{3}u^{3/2} - \\frac{2}{5}u^{5/2}]_0^1 = \\frac{2}{3} - \\frac{2}{5} = \\frac{4}{15} \\approx 0.2667$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcule el área total encerrada por el lazo de la curva aproximada a 4 decimales.",
+          "correctValue": 0.5333,
+          "tolerance": 0.001,
+          "explanation": "El lazo es simétrico respecto al eje x, de modo que el área total es dos veces el área de la mitad superior: $2 \\cdot \\frac{4}{15} = \\frac{8}{15} \\approx 0.5333$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Primitiva y valor medio de la función logaritmo",
+      "context": "Evaluación analítica de la integral y promedio de la función logaritmo natural en un intervalo que contiene a la base e.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Dada la primitiva general $F(x) = x\\ln(x) - x$, halle su valor en el extremo izquierdo $x = 1$.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "$F(1) = 1\\ln(1) - 1 = 0 - 1 = -1$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Halle el valor de la primitiva $F(x)$ en el extremo derecho $x = e$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$F(e) = e\\ln(e) - e = e(1) - e = 0$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcule la integral definida $\\int_1^e \\ln(x) dx$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Aplicando Barrow: $F(e) - F(1) = 0 - (-1) = 1$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Determine el valor medio de $f(x) = \\ln(x)$ en $[1, e]$ aproximado a 4 decimales.",
+          "correctValue": 0.582,
+          "tolerance": 0.001,
+          "explanation": "El valor promedio es $\\frac{1}{e-1} \\int_1^e \\ln(x) dx = \\frac{1}{e-1} \\approx \\frac{1}{1.71828} \\approx 0.5820$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Volumen de un cono mediante revolución e integración",
+      "context": "Construcción paso a paso del volumen de un cono circular recto rotando una línea recta y validación con la geometría clásica.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Halle la pendiente de la recta generatriz del cono $y = \\frac{2}{3}x$.",
+          "correctValue": 0.6667,
+          "tolerance": 0.001,
+          "explanation": "La pendiente de la recta lineal es la constante multiplicativa de $x$: $2/3 \\approx 0.6667$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Para el volumen generado al girar en torno al eje x de $0$ a $3$, calcule la integral $I = \\int_0^3 (\\frac{2}{3}x)^2 dx$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "La integral es $\\int_0^3 \\frac{4}{9} x^2 dx = [\\frac{4}{27} x^3]_0^3 = \\frac{4}{27} (27) - 0 = 4$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcule el volumen total del cono $V = I\\pi$ aproximado a 4 decimales.",
+          "correctValue": 12.5664,
+          "tolerance": 0.001,
+          "explanation": "$V = 4\\pi \\approx 4 \\cdot 3.14159265 \\approx 12.5664$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Calcule el volumen del cono usando la fórmula estándar de la geometría sólida $V = \\frac{1}{3}\\pi R^2 h$ con $R=2$ y $h=3$ y divida el resultado por $\\pi$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "El volumen geométrico es $\\frac{1}{3}\\pi (2^2)(3) = 4\\pi$. Dividiendo por $\\pi$ da $4.0$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Aproximación numérica de la distribución gaussiana",
+      "context": "Evaluación de la integral de densidad de la normal estándar mediante algoritmos simples de integración numérica.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Halle la ordenada máxima de la curva normal estándar $f(x) = \\frac{1}{\\sqrt{2\\pi}}e^{-x^2/2}$ en el origen $x = 0$, aproximada a 4 decimales.",
+          "correctValue": 0.3989,
+          "tolerance": 0.001,
+          "explanation": "Evaluando en $x=0$: $f(0) = \\frac{1}{\\sqrt{2\\pi}} e^0 = \\frac{1}{\\sqrt{2\\pi}} \\approx 0.3989$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Aproxime la probabilidad $\\int_{-1}^1 f(x) dx$ usando la regla del punto medio con 1 único intervalo ($n=1$), aproximando a 4 decimales.",
+          "correctValue": 0.7979,
+          "tolerance": 0.001,
+          "explanation": "El punto medio del intervalo $[-1, 1]$ es $0$. El ancho es $2$. La aproximación da $2 \\cdot f(0) \\approx 2 \\cdot 0.39894 = 0.7979$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Aproxime la misma integral mediante la regla de los trapecios con 2 subintervalos ($n=2$), aproximando a 4 decimales.",
+          "correctValue": 0.6409,
+          "tolerance": 0.002,
+          "explanation": "Los puntos son $-1, 0, 1$ con paso $h = 1$. $f(-1) = f(1) \\approx 0.2420$. La regla trapecial da $\\frac{1}{2}[f(-1) + 2f(0) + f(1)] = \\frac{1}{2}[0.2420 + 2(0.3989) + 0.2420] = 0.6409$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Dado que el valor real de la integral es $0.6827$, halle la magnitud del error absoluto cometido por la aproximación trapecial del paso anterior, aproximado a 4 decimales.",
+          "correctValue": 0.0418,
+          "tolerance": 0.002,
+          "explanation": "El error absoluto es $|0.6827 - 0.6409| = 0.0418$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Evaluación analítica y promedio de una función exponencial cuadrática",
+      "context": "Aplicación de la primitiva obtenida por integración por partes doble para evaluar la integral definida.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "La primitiva de la función $f(x) = x^2 e^x$ es $F(x) = (x^2 - 2x + 2)e^x$. Halle el valor de $F(0)$.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "$F(0) = (0 - 0 + 2)e^0 = 2$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Halle el valor de la primitiva $F(x)$ en el extremo superior $x = 1$ aproximado a 4 decimales.",
+          "correctValue": 2.7183,
+          "tolerance": 0.001,
+          "explanation": "$F(1) = (1^2 - 2(1) + 2)e^1 = e \\approx 2.7183$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcule la integral definida $\\int_0^1 x^2 e^x dx$ aproximando a 4 decimales.",
+          "correctValue": 0.7183,
+          "tolerance": 0.001,
+          "explanation": "Aplicando Barrow: $F(1) - F(0) = e - 2 \\approx 2.7183 - 2 = 0.7183$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Determine el valor medio de la función $x^2 e^x$ en el intervalo $[0, 1]$ aproximado a 4 decimales.",
+          "correctValue": 0.7183,
+          "tolerance": 0.001,
+          "explanation": "El valor promedio es $\\frac{1}{1-0} \\int_0^1 x^2 e^x dx = e-2 \\approx 0.7183$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Integral impropia de decaimiento y su comportamiento asintótico",
+      "context": "Evaluación del decaimiento exponencial al infinito y determinación del punto de truncamiento para un umbral de área residual.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Dada la primitiva $F(x) = -\\frac{1}{3} e^{-3x}$, halle el valor de $F(0)$ aproximado a 4 decimales.",
+          "correctValue": -0.3333,
+          "tolerance": 0.001,
+          "explanation": "$F(0) = -1/3 e^0 = -1/3 \\approx -0.3333$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Halle el límite en el infinito $\\lim_{t \\to \\infty} F(t)$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "$\\lim_{t\\to\\infty} -\\frac{1}{3}e^{-3t} = 0$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Calcule la integral impropia de primera especie $\\int_0^{\\infty} e^{-3x} dx$ aproximada a 4 decimales.",
+          "correctValue": 0.3333,
+          "tolerance": 0.001,
+          "explanation": "La integral impropia es $0 - (-1/3) = 1/3 \\approx 0.3333$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Determine el valor de $t$ para el cual la integral residual de cola $\\int_t^{\\infty} e^{-3x} dx = 0.01$ aproximado a 4 decimales.",
+          "correctValue": 1.1689,
+          "tolerance": 0.002,
+          "explanation": "La integral es $\\frac{1}{3} e^{-3t} = 0.01 \\implies e^{-3t} = 0.03 \\implies -3t = \\ln(0.03) \\approx -3.5066 \\implies t \\approx 1.1689$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Área encerrada por una recta y un monomio cúbico",
+      "context": "Evaluación simétrica del área comprendida entre una recta bisectriz y una función cúbica en el dominio real.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Halle la intersección derecha (mayor valor de $x$) en $[0, 1]$ de las curvas $y = x$ e $y = x^3$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $x^3 = x \\implies x(x-1)(x+1) = 0$. En $[0, 1]$ los cortes son $0$ y $1$. El corte mayor es $1$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Halle la ordenada de la curva diferencia $d(x) = x - x^3$ en el punto medio del intervalo, $x = 0.5$.",
+          "correctValue": 0.375,
+          "tolerance": 0.0,
+          "explanation": "$d(0.5) = 0.5 - (0.5)^3 = 0.5 - 0.125 = 0.375$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcule el área de la región en el intervalo del primer cuadrante $[0, 1]$.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "$A = \\int_0^1 (x - x^3) dx = [\\frac{x^2}{2} - \\frac{x^4}{4}]_0^1 = \\frac{1}{2} - \\frac{1}{4} = 0.25$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Determine el área total comprendida entre las curvas en el intervalo simétrico $[-1, 1]$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "Por simetría respecto al origen, el área de la porción en $[-1, 0]$ es idéntica a la de $[0, 1]$, por lo que el área total es $2 \\cdot 0.25 = 0.5$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Longitud de arco de una función con exponente fraccionario",
+      "context": "Cálculo analítico del perímetro curvo de una parábola semicúbica y su comparación con la distancia lineal recta.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Halle el valor de la derivada $y'$ de la función $y = \\frac{2}{3}x^{3/2}$ en el punto $x = 1$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Derivando: $y' = \\frac{2}{3} \\cdot \\frac{3}{2} x^{1/2} = x^{1/2} = \\sqrt{x}$. En $x=1$, vale $\\sqrt{1} = 1$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Halle la ordenada del integrando de la longitud de arco $g(x) = \\sqrt{1 + (y')^2}$ en $x = 3$.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "El integrando es $g(x) = \\sqrt{1 + x}$. En $x=3$, $g(3) = \\sqrt{1+3} = \\sqrt{4} = 2$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcule la longitud de la curva desde $x = 0$ hasta $x = 3$ aproximando a 4 decimales.",
+          "correctValue": 4.6667,
+          "tolerance": 0.001,
+          "explanation": "La longitud de arco es $L = \\int_0^3 \\sqrt{1+x} dx = [\\frac{2}{3}(1+x)^{3/2}]_0^3 = \\frac{2}{3}(4^{3/2} - 1^{3/2}) = \\frac{2}{3}(8 - 1) = \\frac{14}{3} \\approx 4.6667$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Determine la distancia directa en línea recta entre los extremos del arco, $(0,0)$ y $(3, 2\\sqrt{3})$, aproximada a 4 decimales.",
+          "correctValue": 4.5826,
+          "tolerance": 0.001,
+          "explanation": "La distancia lineal es $\\sqrt{(3-0)^2 + (2\\sqrt{3}-0)^2} = \\sqrt{9 + 12} = \\sqrt{21} \\approx 4.5826$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Volumen de revolución asintótico (Trompeta de Gabriel)",
+      "context": "Estudio del volumen de un sólido obtenido por rotación sobre un intervalo no acotado y su convergencia.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Halle la altura de la curva $y = 1/x$ en el punto $x = 4$.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "$y(4) = 1/4 = 0.25$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "El volumen de revolución al girar alrededor del eje x se escribe como $V = c\\pi$. Halle el coeficiente $c$ para el intervalo $[1, 4]$.",
+          "correctValue": 0.75,
+          "tolerance": 0.0,
+          "explanation": "$c = \\int_1^4 \\frac{1}{x^2} dx = [-\\frac{1}{x}]_1^4 = -\\frac{1}{4} - (-1) = 0.75$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcule el volumen total obtenido en el intervalo $[1, 4]$ aproximado a 4 decimales.",
+          "correctValue": 2.3562,
+          "tolerance": 0.001,
+          "explanation": "$V = 0.75\\pi \\approx 0.75 \\cdot 3.14159265 \\approx 2.3562$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Si el extremo superior de integración se extiende al infinito, halle el volumen del sólido resultante (denominado Trompeta de Gabriel) dividido por $\\pi$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El coeficiente es la integral impropia de primera especie: $\\int_1^{\\infty} \\frac{1}{x^2} dx = \\lim_{t \\to \\infty} [-\\frac{1}{x}]_1^t = 0 - (-1) = 1$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Evaluación simétrica de polinomios cuadráticos",
+      "context": "Análisis del efecto de la simetría par e impar sobre la integración definida en intervalos simétricos respecto al origen.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Determine si la función $f(x) = 3x^2 - 4$ posee simetría par o impar evaluando $f(-x) - f(x)$ en $x = 1$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Como $f(-x) = 3(-x)^2 - 4 = 3x^2 - 4 = f(x)$, la función es par. La diferencia es nula."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Debido a su simetría, la integral $\\int_{-2}^2 f(x) dx$ es el doble de la integral calculada en el intervalo positivo. Calcule la integral en la mitad del intervalo, es decir, $\\int_0^2 (3x^2 - 4) dx$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La primitiva es $x^3 - 4x$. Evaluando de 0 a 2: $2^3 - 4(2) - 0 = 8 - 8 = 0$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcule la integral definida total en el intervalo $[-2, 2]$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La integral total es el doble de la calculada en el semieje positivo: $2 \\cdot 0 = 0$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si añadimos un término lineal de simetría impar a la función para integrar $g(x) = 3x^2 + 5x - 4$ en $[-2, 2]$, determine el nuevo valor de la integral definida.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La integral de la suma es la suma de las integrales: $\\int_{-2}^2 (3x^2-4)dx + \\int_{-2}^2 5x\\,dx$. El primer término vale 0. El segundo término vale 0 por ser una función impar integrada en un intervalo simétrico. Por ende, la suma sigue dando 0."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Definición de Primitiva",
+      "tex": "$$F'(x) = f(x) \\implies \\int f(x) \\, dx = F(x) + C$$"
+    },
+    {
+      "name": "Integración por Partes",
+      "tex": "$$\\int u \\, dv = u \\cdot v - \\int v \\, du$$"
+    },
+    {
+      "name": "Cambio de Variable (Sustitución)",
+      "tex": "$$\\int f(g(x)) g'(x) \\, dx = \\int f(u) \\, du \\quad (u = g(x))$$"
+    },
+    {
+      "name": "Suma de Riemann y Definición de Integral",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx = \\lim_{n\\to\\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$"
+    },
+    {
+      "name": "Primer Teorema Fundamental del Cálculo",
+      "tex": "$$\\frac{d}{dx} \\left( \\int_{a}^{x} f(t) \\, dt \\right) = f(x)$$"
+    },
+    {
+      "name": "Regla de Barrow (Segundo Teorema Fundamental)",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx = F(b) - F(a)$$"
+    },
+    {
+      "name": "Volumen de Revolución (Método de los Discos)",
+      "tex": "$$V = \\pi \\int_{a}^{b} [f(x)]^2 \\, dx$$"
+    },
+    {
+      "name": "Volumen de Revolución (Método de los Casquetes Cilíndricos)",
+      "tex": "$$V = 2\\pi \\int_{a}^{b} x f(x) \\, dx$$"
+    },
+    {
+      "name": "Longitud de Arco de una Curva",
+      "tex": "$$L = \\int_{a}^{b} \\sqrt{1 + [f'(x)]^2} \\, dx$$"
+    }
+  ]
+}

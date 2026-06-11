@@ -1,0 +1,2100 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la diferencia fundamental en la generación de salidas entre una máquina de Moore y una máquina de Mealy?",
+      "options": [
+        "En la máquina de Moore las salidas dependen únicamente del estado actual, mientras que en la de Mealy dependen del estado actual y de las entradas presentes.",
+        "En la máquina de Moore las salidas dependen de las entradas actuales y del estado anterior, mientras que en la de Mealy dependen únicamente de la señal de reloj.",
+        "En la máquina de Moore las salidas se generan de manera asíncrona mediante lógica combinacional pura, mientras que en la de Mealy se registran directamente."
+      ],
+      "correct": 0,
+      "hint": "Recuerde las fórmulas matemáticas que rigen cada modelo para las salidas Y(t).",
+      "explanation": "En el modelo de Moore, la salida es una función exclusiva del estado actual: $Y(t) = f(Q(t))$. En el modelo de Mealy, la salida depende del estado y de la entrada actual: $Y(t) = f(Q(t), X(t))$."
+    },
+    {
+      "q": "¿Qué implicación temporal tiene que las salidas de una máquina de Mealy dependan directamente de las entradas externas?",
+      "options": [
+        "Las salidas pueden presentar variaciones transitorias (glitches) ante cambios en las entradas y pueden responder antes del flanco activo del reloj.",
+        "Las salidas siempre cambian en perfecta sincronía con el flanco de reloj activo, eliminando cualquier peligro de desadaptación temporal.",
+        "Las salidas se vuelven completamente estables y no requieren una etapa de sincronización posterior para evitar riesgos de carrera."
+      ],
+      "correct": 0,
+      "hint": "Piense en cómo los caminos lógicos combinacionales desde la entrada hasta la salida puentean los flip-flops.",
+      "explanation": "Como la lógica combinacional de salida en Mealy se conecta directamente a la entrada, cualquier transitorio o ruido en la entrada se propaga inmediatamente a la salida, provocando 'glitches'. Además, los cambios de entrada modifican la salida de inmediato, sin esperar al reloj."
+    },
+    {
+      "q": "Al realizar la detección de una secuencia binaria de longitud $N$, ¿cómo se compara generalmente el número de estados requerido por un modelo de Moore con respecto a uno de Mealy?",
+      "options": [
+        "El modelo de Moore suele requerir al menos un estado adicional ($N+1$) en comparación con el modelo de Mealy ($N$) para completar el ciclo de detección.",
+        "El modelo de Mealy siempre requiere exactamente el doble de estados que el de Moore debido a las transiciones condicionadas por las salidas.",
+        "Ambos modelos requieren de forma estricta y matemática el mismo número de estados ($N$) independientemente de si el solapamiento de bits está permitido."
+      ],
+      "correct": 0,
+      "hint": "En Moore, el estado final que indica detección exitosa debe mantener la salida activa en el siguiente ciclo.",
+      "explanation": "Una máquina de Moore necesita un estado específico para representar que se ha detectado la secuencia completa (salida Y=1 asociada a ese estado). En Mealy, la salida de detección se activa en la transición que lleva al último estado, requiriendo un estado menos (típicamente $N$ estados frente a $N+1$ en Moore)."
+    },
+    {
+      "q": "En el contexto de la síntesis de FSM, ¿cuál es el objetivo del proceso de reducción o minimización de estados?",
+      "options": [
+        "Eliminar estados equivalentes para simplificar la lógica combinacional de excitación y, eventualmente, reducir el número de flip-flops necesarios.",
+        "Reemplazar todos los flip-flops de tipo JK por flip-flops D para disminuir el área total del circuito combinacional de realimentación.",
+        "Asegurar que todas las transiciones del circuito secuencial se realicen empleando códigos Gray para evitar riesgos lógicos combinacionales."
+      ],
+      "correct": 0,
+      "hint": "Menos estados equivalentes significan una tabla de transición más pequeña y optimizable.",
+      "explanation": "La reducción de estados busca fusionar estados que presentan idéntico comportamiento externo (mismas salidas y transiciones equivalentes ante las mismas entradas). Esto simplifica la lógica de estado siguiente y salidas, y puede disminuir los flip-flops si cruzamos una potencia de dos."
+    },
+    {
+      "q": "¿Qué condición deben cumplir dos estados $S_i$ y $S_j$ de una FSM completamente especificada para ser considerados formalmente equivalentes?",
+      "options": [
+        "Producir exactamente las mismas salidas para cada combinación de entrada y transicionar a estados equivalentes ante esas mismas entradas.",
+        "Tener la misma codificación binaria en sus bits de estado y activarse mediante el mismo flanco del reloj del sistema secuencial síncrono.",
+        "Compartir el mismo número de transiciones entrantes y salientes en el diagrama de estados sin importar el valor lógico de las salidas."
+      ],
+      "correct": 0,
+      "hint": "Considere la definición de equivalencia de estados basada en respuestas idénticas para cualquier secuencia de entrada futura.",
+      "explanation": "Dos estados $S_i$ y $S_j$ son equivalentes si y solo si, para cualquier secuencia de entrada, la máquina produce exactamente las mismas salidas partiendo de cualquiera de ellos y transiciona a estados que también son equivalentes entre sí."
+    },
+    {
+      "q": "En la codificación de estados One-Hot para una FSM de $M$ estados, ¿cuántos flip-flops se requieren y cuál es la propiedad fundamental de sus vectores de estado?",
+      "options": [
+        "Se requieren exactamente $M$ flip-flops, y en cualquier instante de tiempo activo solo un flip-flop puede estar a nivel lógico 1.",
+        "Se requieren $\\lceil \\log_2 M \\rceil$ flip-flops, y los vectores de estado minimizan el número de transiciones simultáneas de bits.",
+        "Se requieren $2M$ flip-flops, y la mitad de ellos almacena el estado actual mientras que la otra mitad guarda el estado siguiente."
+      ],
+      "correct": 0,
+      "hint": "One-Hot significa literalmente 'uno activo'.",
+      "explanation": "La codificación One-Hot utiliza un flip-flop por cada estado del sistema (total $M$). El vector de estado tiene la propiedad de que solo un bit es igual a 1 (el estado activo) y todos los demás son 0."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja técnica de la codificación One-Hot frente a la codificación binaria natural en FSMs complejas?",
+      "options": [
+        "Simplifica significativamente las funciones de excitación y salida, lo que permite implementar lógica de control más rápida a mayores frecuencias.",
+        "Reduce drásticamente el consumo de potencia del circuito al disminuir a la mitad el número total de flip-flops físicos integrados.",
+        "Elimina por completo la necesidad de definir estados de reset o de controlar las transiciones desde estados no válidos en el hardware."
+      ],
+      "correct": 0,
+      "hint": "Piense en la decodificación de estados. Para saber si estamos en un estado con One-Hot, solo miramos un bit.",
+      "explanation": "Como cada estado está representado por un solo flip-flop, la lógica combinacional para determinar el estado siguiente y las salidas no requiere decodificación compleja (compuertas AND de múltiples entradas). Esto reduce la profundidad de compuertas lógicas y acelera el circuito."
+    },
+    {
+      "q": "¿Qué riesgo potencial se introduce al utilizar codificación binaria natural en una FSM con $M$ estados cuando $2^k > M$?",
+      "options": [
+        "La existencia de $2^k - M$ estados no utilizados que, si no se gestionan, pueden provocar que la FSM quede bloqueada si entra en ellos por ruido.",
+        "Un aumento exponencial en el número de flip-flops necesarios que satura la capacidad del área de silicio disponible en el integrado.",
+        "La generación obligatoria de un retardo de propagación asimétrico que destruye el sincronismo de los flip-flops D."
+      ],
+      "correct": 0,
+      "hint": "Piense en qué ocurre con las combinaciones binarias que no representan a ningún estado formal.",
+      "explanation": "Cuando $2^k > M$, existen estados lógicos en los flip-flops que no corresponden a estados de la FSM (estados huérfanos o no utilizados). Si debido a una perturbación o ruido la máquina entra en uno de estos estados y no se ha diseñado una transición de seguridad (típicamente al estado de Reset), el sistema puede quedar bloqueado ('lock-up')."
+    },
+    {
+      "q": "¿Cómo se representa la salida en el diagrama de transiciones de una FSM de Moore?",
+      "options": [
+        "Dentro del círculo que representa el estado, separada de la etiqueta del estado por una barra diagonal (ej. S0 / Y=0).",
+        "Sobre las flechas que indican las transiciones de estado, junto al valor de la entrada correspondiente (ej. X / Y=0).",
+        "En una tabla independiente conectada de forma asíncrona a las señales de reloj sin interactuar con los estados."
+      ],
+      "correct": 0,
+      "hint": "Moore asocia la salida únicamente a la ubicación interna.",
+      "explanation": "Puesto que en el modelo de Moore la salida depende exclusivamente del estado actual, se representa gráficamente dentro del círculo del estado (ej. S0/0), indicando que estar en ese estado garantiza ese valor de salida."
+    },
+    {
+      "q": "¿Qué describe exactamente la tabla de excitación de un flip-flop?",
+      "options": [
+        "Los valores que deben aplicarse a las entradas del flip-flop para provocar una transición deseada del estado actual al estado siguiente.",
+        "El comportamiento combinacional de las compuertas lógicas internas del flip-flop ante variaciones térmicas o de voltaje.",
+        "La correspondencia directa entre los flancos de subida del reloj y la corriente de polarización de los transistores del circuito."
+      ],
+      "correct": 0,
+      "hint": "Es la herramienta que usamos para diseñar la lógica que alimenta a los flip-flops.",
+      "explanation": "La tabla de excitación es fundamental para la síntesis de FSMs: dada una transición de estado $Q_n \\to Q_{n+1}$, la tabla indica los valores específicos que se deben presentar en las entradas del biestable (D, JK, T) para forzar dicha transición en el siguiente flanco activo."
+    },
+    {
+      "q": "Para un flip-flop JK, ¿cuáles son los valores de excitación necesarios para realizar una transición de estado de $Q_n = 0$ a $Q_{n+1} = 0$?",
+      "options": [
+        "J = 0, K = X (indiferente).",
+        "J = 0, K = 1.",
+        "J = X (indiferente), K = 0."
+      ],
+      "correct": 0,
+      "hint": "Considere qué entradas del JK provocan que el estado se mantenga en 0 o se fuerce a 0.",
+      "explanation": "Para pasar de 0 a 0, se puede mantener el estado (J=0, K=0) o forzar a cero (J=0, K=1). Por lo tanto, J debe ser obligatoriamente 0, mientras que K puede ser 0 o 1, representándose como J = 0, K = X."
+    },
+    {
+      "q": "Para un flip-flop JK, ¿cuáles son los valores de excitación necesarios para realizar una transición de estado de $Q_n = 1$ a $Q_{n+1} = 0$?",
+      "options": [
+        "J = X (indiferente), K = 1.",
+        "J = 0, K = 1.",
+        "J = 1, K = X (indiferente)."
+      ],
+      "correct": 0,
+      "hint": "Se busca resetear el flip-flop (K=1) o conmutarlo (J=1, K=1).",
+      "explanation": "Para pasar de 1 a 0, se puede realizar un reset (J=0, K=1) o una conmutación (J=1, K=1). Por lo tanto, K debe ser obligatoriamente 1, mientras que J puede ser 0 o 1, lo que da J = X, K = 1."
+    },
+    {
+      "q": "¿Qué método sistemático se basa en el uso de celdas bidimensionales para encontrar pares de estados compatibles e incompatibles durante la reducción de FSMs?",
+      "options": [
+        "La tabla de implicación.",
+        "El mapa de Karnaugh.",
+        "El algoritmo de Quine-McCluskey."
+      ],
+      "correct": 0,
+      "hint": "Este método descarta pares cruzando celdas que implican condiciones incompatibles.",
+      "explanation": "La tabla de implicación es una herramienta sistemática para FSMs donde se evalúa la compatibilidad de cada par de estados. Si un par tiene salidas diferentes, se marca con una cruz (incompatible); si tienen salidas iguales, se anotan las condiciones de estado siguiente (implicaciones) que deben cumplirse para su equivalencia."
+    },
+    {
+      "q": "En el diseño de la Unidad de Control de una CPU como una FSM, ¿qué elemento de hardware representa la entrada principal que determina el camino de transición de estados?",
+      "options": [
+        "El código de operación (OPCode) cargado en el Registro de Instrucción (IR).",
+        "La dirección de memoria almacenada en el Contador de Programa (PC).",
+        "El bit de acarreo (Carry) del Registro de Banderas de la Unidad Aritmético Lógica."
+      ],
+      "correct": 0,
+      "hint": "Es la parte de la instrucción que define qué operación debe ejecutarse.",
+      "explanation": "El OPCode (código de operación) indica qué instrucción se está ejecutando (ej. ADD, JMP, LOAD). La Unidad de Control lee este código y, según su estado actual (decodificación), transiciona a los estados adecuados para generar las señales de control de dicha instrucción."
+    },
+    {
+      "q": "Durante la síntesis de una FSM con flip-flops D, ¿cuál es la relación directa entre la lógica de estado siguiente y las entradas de los biestables?",
+      "options": [
+        "La función lógica combinacional del estado siguiente para cada variable de estado es idéntica a la ecuación de excitación de su respectivo flip-flop D ($D_i = Q_{i,next}$).",
+        "La función lógica combinacional de estado siguiente debe invertirse mediante puertas NOT para poder excitar las entradas de los flip-flops D.",
+        "Las entradas de los flip-flops D deben conectarse a través de un codificador de prioridad que filtre los transitorios del reloj."
+      ],
+      "correct": 0,
+      "hint": "Recuerde la ecuación característica del flip-flop D: Q(t+1) = D(t).",
+      "explanation": "Dado que la ecuación característica de un biestable D es $Q_{next} = D$, la lógica de excitación combinacional necesaria en la entrada del flip-flop es exactamente la misma función que define el estado siguiente deseado para ese bit."
+    },
+    {
+      "q": "¿Por qué la codificación Gray se considera ventajosa para la asignación de estados en ciertas aplicaciones de FSMs?",
+      "options": [
+        "Porque minimiza el número de transiciones simultáneas de bits de estado a uno solo, reduciendo el consumo energético y la generación de ruido.",
+        "Porque permite reducir a la mitad el número de flip-flops requeridos en comparación con la codificación binaria natural.",
+        "Porque garantiza que todas las funciones combinacionales resultantes en el mapa de Karnaugh se sinteticen únicamente con compuertas XOR."
+      ],
+      "correct": 0,
+      "hint": "En el código Gray, la distancia de Hamming entre valores adyacentes es siempre 1.",
+      "explanation": "La codificación Gray asegura que entre estados consecutivos de una secuencia solo cambie un bit de estado. Esto reduce las transiciones simultáneas en las líneas físicas, disminuyendo el consumo de potencia dinámico y mitigando picos de ruido en la alimentación."
+    },
+    {
+      "q": "¿Qué función cumple un 'sincronizador de entrada' en el diseño físico de una FSM síncrona?",
+      "options": [
+        "Alinear las señales de entrada asíncronas con el reloj de la FSM para evitar problemas de metaestabilidad en los flip-flops de estado.",
+        "Amplificar la corriente eléctrica de las entradas para que puedan excitar múltiples compuertas lógicas simultáneamente.",
+        "Retardar la señal de reloj principal para compensar el retraso de propagación de la lógica de salida combinacional."
+      ],
+      "correct": 0,
+      "hint": "Las entradas que provienen del mundo exterior no saben cuándo va a pulsar el reloj de la FSM.",
+      "explanation": "Si una entrada externa cambia justo en la ventana del tiempo de establecimiento (setup) o mantenimiento (hold) de los flip-flops de estado, estos pueden entrar en metaestabilidad. Los sincronizadores (generalmente dos flip-flops D en cascada) mitigan este riesgo sincronizando la entrada con el reloj local."
+    },
+    {
+      "q": "¿Qué sucede con el tamaño de la máquina de estados y las salidas lógicas al convertir una máquina de Mealy a una equivalente de Moore?",
+      "options": [
+        "La máquina de Moore resultante tiene típicamente más estados y sus salidas se retrasan un ciclo de reloj en responder a los cambios de entrada.",
+        "La máquina de Moore resultante tiene exactamente la mitad de estados y la salida responde instantáneamente ante las entradas.",
+        "La máquina de Moore resultante elimina la necesidad de realimentar el estado y reduce la FSM a un circuito puramente combinacional."
+      ],
+      "correct": 0,
+      "hint": "Moore requiere asociar la salida al estado, lo que divide estados de transición condicionales en estados con salidas específicas.",
+      "explanation": "La conversión de Mealy a Moore requiere a menudo 'desdoblar' estados para asociar las salidas a los estados mismos en lugar de a las transiciones, incrementando el número de estados. Las salidas cambian de forma síncrona en el flanco de reloj, introduciendo un desfase de un ciclo en la respuesta a la entrada."
+    },
+    {
+      "q": "En el diseño de FSMs, ¿a qué se refiere el término 'autocorrección' o 'autorecuperación'?",
+      "options": [
+        "A la capacidad del circuito de transicionar hacia el estado de reset o un estado seguro si por ruido entra en un estado no asignado.",
+        "A la corrección automática de errores en los flip-flops mediante códigos redundantes de Hamming integrados en el reloj.",
+        "Al ajuste dinámico de la frecuencia del reloj para compensar variaciones de retardo por temperatura en la lógica."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con la seguridad del hardware frente a estados inválidos.",
+      "explanation": "Una FSM es autocorrectora si, al entrar accidentalmente en un estado no utilizado (debido a transitorios o ruido), las funciones de estado siguiente están diseñadas para redirigir la máquina a un estado seguro (como el de reposo) en los siguientes ciclos de reloj, en lugar de quedarse bloqueada."
+    },
+    {
+      "q": "¿Qué ventaja tiene usar flip-flops JK en lugar de D en la implementación de la lógica de excitación de una FSM?",
+      "options": [
+        "Se generan más condiciones de 'indiferencia' (don't cares) en las tablas de verdad, lo que suele simplificar las expresiones combinacionales resultantes.",
+        "Se elimina por completo el tiempo de establecimiento (setup time) requerido antes del flanco activo del reloj del sistema.",
+        "Se reduce a la mitad el número de compuertas lógicas de salida porque el flip-flop JK incluye un decodificador interno."
+      ],
+      "correct": 0,
+      "hint": "Considere la abundancia de valores 'X' en la tabla de excitación del flip-flop JK.",
+      "explanation": "El flip-flop JK posee una tabla de excitación con muchos estados indiferentes (X). Estos don't cares en los mapas de Karnaugh permiten agrupaciones más grandes y, por consiguiente, expresiones lógicas simplificadas para las entradas J y K con respecto a las de un flip-flop D."
+    },
+    {
+      "q": "¿Qué representa la partición de primer orden ($P_1$) en el método de partición para la reducción de estados de una FSM?",
+      "options": [
+        "El agrupamiento de estados que son 1-equivalentes, es decir, que producen la misma salida y cuyos estados siguientes pertenecen al mismo bloque de $P_0$.",
+        "La codificación de los estados mediante un bit único para verificar si la máquina posee simetrías cíclicas complejas.",
+        "El conjunto de transiciones de estado que solo requieren una compuerta inversora para conectarse a las entradas de reloj."
+      ],
+      "correct": 0,
+      "hint": "El método es iterativo: $P_k$ refina los bloques de $P_{k-1}$.",
+      "explanation": "En el método de partición, $P_0$ agrupa los estados según su salida (0-equivalencia). La partición $P_1$ agrupa los estados que, además de tener la misma salida, transicionan ante cualquier entrada a estados que están en el mismo bloque de $P_0$. Este proceso se repite hasta que $P_k = P_{k+1}$."
+    },
+    {
+      "q": "¿Bajo qué circunstancia es obligatorio que una máquina de Mealy tenga sus salidas libres de glitches?",
+      "options": [
+        "Cuando las salidas de la FSM actúan directamente como señales de reloj o habilitación asíncrona de otros registros del sistema.",
+        "Cuando la frecuencia de reloj de la máquina es inferior a 1 MHz y el ruido térmico del silicio es despreciable.",
+        "Cuando el circuito de estado siguiente utiliza flip-flops JK con entradas controladas por nivel en lugar de por flanco."
+      ],
+      "correct": 0,
+      "hint": "Piense en qué ocurre si una señal con picos transitorios excita un pin de reloj de otro dispositivo.",
+      "explanation": "Si una salida con transitorios (glitches) se conecta a la entrada de reloj de otro chip o a pines de habilitación/escritura asíncronos (como el Write Enable de una RAM), los glitches serán interpretados como pulsos válidos de control, corrompiendo los datos. En esos casos, las salidas deben registrarse."
+    },
+    {
+      "q": "En el diseño de un contador síncrono (que carece de entradas externas), ¿a qué modelo de FSM corresponde y por qué?",
+      "options": [
+        "Corresponde al modelo de Moore, porque las salidas (que suelen ser los propios estados) dependen únicamente del estado actual almacenado.",
+        "Corresponde al modelo de Mealy, porque la señal de reloj actúa como una entrada externa que modifica la salida instantáneamente.",
+        "Corresponde a un modelo híbrido síncrono-asíncrono que no requiere lógica de excitación combinacional para sus flip-flops."
+      ],
+      "correct": 0,
+      "hint": "No hay entradas lógicas externas condicionado las salidas de forma asíncrona en un contador estándar.",
+      "explanation": "Un contador síncrono avanza de estado de forma autónoma con el reloj. Al no poseer entradas combinacionales que alteren la salida en el transcurso del ciclo, sus salidas dependen exclusivamente del estado actual, adaptándose perfectamente al modelo de Moore."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos aplicar el método de reducción de estados a una máquina de estados que ya es mínima?",
+      "options": [
+        "El método finalizará devolviendo una máquina con el mismo número exacto de estados, sin cambios en su comportamiento.",
+        "El algoritmo entrará en un bucle infinito al no poder converger la tabla de implicación hacia un conjunto consistente de equivalencias.",
+        "La máquina se simplificará erróneamente eliminando estados necesarios para la detección de secuencias críticas."
+      ],
+      "correct": 0,
+      "hint": "La máquina mínima es única en términos de comportamiento externo.",
+      "explanation": "Si la FSM ya es mínima, no existen estados equivalentes que puedan fusionarse. Por tanto, el método de partición o de tabla de implicación concluirá que cada estado forma su propio bloque independiente, resultando en la misma máquina original."
+    },
+    {
+      "q": "Al implementar una FSM en VHDL o Verilog, ¿por qué es una buena práctica describir la lógica en procesos separados (dos o tres procesos)?",
+      "options": [
+        "Para separar limpiamente la lógica secuencial (los flip-flops de estado) de la lógica combinacional (estado siguiente y salidas).",
+        "Para forzar al compilador a utilizar diferentes fuentes de reloj para las señales combinacionales y los registros de estado.",
+        "Para disminuir el número de líneas de código y obligar al sintetizador a aplicar codificación One-Hot de manera predeterminada."
+      ],
+      "correct": 0,
+      "hint": "Esta técnica mejora la legibilidad y previene la inferencia accidental de latches indeseados.",
+      "explanation": "La descripción típica de dos procesos separa la lógica secuencial (sensible al flanco del reloj, encargada de la actualización del estado: `actual <= siguiente`) de la lógica combinacional (sensible a las entradas y al estado actual, encargada de calcular `siguiente` y las salidas). Esto previene la creación accidental de latches combinacionales."
+    },
+    {
+      "q": "En una máquina de Mealy, ¿cómo se dibuja la flecha de transición en el diagrama de estados?",
+      "options": [
+        "Con una etiqueta que muestra el valor de la entrada que provoca la transición y la salida asociada separadas por una barra (ej. X/Y).",
+        "Con el valor de la entrada solamente, ya que la salida se dibuja obligatoriamente dentro del círculo del estado destino.",
+        "Con una línea doble que indica la existencia de un retardo de propagación combinacional para sincronizar la salida."
+      ],
+      "correct": 0,
+      "hint": "Mealy asocia la salida a la transición completa.",
+      "explanation": "En el modelo de Mealy, al depender la salida tanto del estado actual como de la entrada, se representa sobre la flecha que une los estados, junto con el valor de la entrada que causa dicha transición (formato Entrada / Salida)."
+    },
+    {
+      "q": "Si una FSM tiene 10 estados, ¿cuál es la diferencia en el número de flip-flops requeridos entre una codificación binaria natural y una One-Hot?",
+      "options": [
+        "La codificación binaria requiere 4 flip-flops y la One-Hot requiere 10, lo que supone una diferencia de 6 flip-flops.",
+        "La codificación binaria requiere 10 flip-flops y la One-Hot requiere 1024, lo que supone una diferencia de 1014 flip-flops.",
+        "La codificación binaria requiere 3 flip-flops y la One-Hot requiere 10, lo que supone una diferencia de 7 flip-flops."
+      ],
+      "correct": 0,
+      "hint": "Calcule $2^k \\ge 10$ para el caso binario, y aplique la definición de One-Hot.",
+      "explanation": "Para la codificación binaria, necesitamos $k$ flip-flops tal que $2^k \\ge 10$, lo que da $k=4$ ($2^4 = 16$). Para One-Hot, necesitamos exactamente 10 flip-flops (uno por estado). La diferencia es $10 - 4 = 6$ flip-flops."
+    },
+    {
+      "q": "¿Qué es una FSM incompleta o parcialmente especificada?",
+      "options": [
+        "Aquella en la que no se definen las transiciones o las salidas para todas las posibles combinaciones de entrada y estados actuales.",
+        "Aquella que carece de estado de reset y requiere una señal analógica externa para estabilizar sus biestables.",
+        "Aquella que se implementa utilizando únicamente compuertas lógicas sin ningún elemento de memoria física."
+      ],
+      "correct": 0,
+      "hint": "Pensemos en los términos 'don't care' en la tabla de transición.",
+      "explanation": "Una FSM está parcialmente especificada si para ciertos estados algunas entradas no pueden presentarse en condiciones normales, por lo que sus transiciones de estado siguiente o sus salidas correspondientes no están definidas (son 'don't cares')."
+    },
+    {
+      "q": "En el proceso de reducción de estados, ¿qué significa que dos estados sean incompatibles?",
+      "options": [
+        "Que existe al menos una secuencia de entrada para la cual los dos estados producen salidas diferentes o transicionan a estados no equivalentes.",
+        "Que sus asignaciones binarias difieren en más de un bit, impidiendo una transición directa por código Gray.",
+        "Que se implementan con tecnologías de flip-flops diferentes (por ejemplo, uno con D y otro con JK)."
+      ],
+      "correct": 0,
+      "hint": "Es la negación exacta de la equivalencia o compatibilidad de estados.",
+      "explanation": "Dos estados son incompatibles si se puede demostrar que bajo alguna condición de entrada sus salidas inmediatas difieren, o si conducen a estados cuyo comportamiento futuro difiere (estados ya identificados como incompatibles)."
+    },
+    {
+      "q": "¿Cuál es la ecuación característica que define el comportamiento del flip-flop T?",
+      "options": [
+        "$Q_{n+1} = T \\oplus Q_n$",
+        "$Q_{n+1} = T \\cdot \\bar{Q}_n$",
+        "$Q_{n+1} = T + Q_n$"
+      ],
+      "correct": 0,
+      "hint": "El flip-flop T conmuta (toggle) cuando T = 1 y mantiene su estado cuando T = 0.",
+      "explanation": "La ecuación característica del flip-flop T es $Q_{n+1} = T \\oplus Q_n$. Si $T=0$, $Q_{n+1} = 0 \\oplus Q_n = Q_n$ (mantiene). Si $T=1$, $Q_{n+1} = 1 \\oplus Q_n = \\bar{Q}_n$ (conmuta)."
+    },
+    {
+      "q": "En el diseño de una FSM, ¿qué papel juega el tiempo de establecimiento ('setup time') del flip-flop?",
+      "options": [
+        "Es el tiempo mínimo que los datos en la entrada del flip-flop deben permanecer estables antes del flanco activo del reloj.",
+        "Es el tiempo que transcurre desde que cambia la señal de reloj hasta que la salida del flip-flop se estabiliza.",
+        "Es el tiempo que tarda el flip-flop en volver a su estado de reposo tras pulsar la línea de reset global."
+      ],
+      "correct": 0,
+      "hint": "Es un requisito de temporización crítico previo al flanco de reloj.",
+      "explanation": "El tiempo de establecimiento ($t_{su}$) es un parámetro físico de los flip-flops. Si la señal combinacional de entrada cambia demasiado cerca del flanco de reloj (violando $t_{su}$), el biestable no podrá capturar el dato de forma fiable y entrará en metaestabilidad."
+    },
+    {
+      "q": "En el diseño de una FSM, ¿qué papel juega el tiempo de mantenimiento ('hold time') del flip-flop?",
+      "options": [
+        "Es el tiempo mínimo que la señal de entrada al flip-flop debe permanecer estable después del flanco activo del reloj.",
+        "Es el tiempo que se debe presionar la señal de inicialización (clear) para borrar toda la memoria del circuito.",
+        "Es la duración máxima permitida para los transitorios combinacionales antes de que el reloj cambie de estado."
+      ],
+      "correct": 0,
+      "hint": "Es un requisito de estabilidad que se aplica inmediatamente después del flanco de reloj.",
+      "explanation": "El tiempo de mantenimiento ($t_h$) define cuánto tiempo debe sostenerse el nivel lógico en la entrada del flip-flop una vez que ha ocurrido el flanco de reloj para garantizar que la transición interna se complete con éxito."
+    },
+    {
+      "q": "Al utilizar la tabla de implicación para reducir estados de una FSM, ¿cuándo se puede concluir que el proceso de tachado ha finalizado?",
+      "options": [
+        "Cuando se realiza una pasada completa por toda la tabla sin que se tache ninguna celda nueva en esa iteración.",
+        "Cuando todas las celdas de la tabla han sido marcadas con al menos una cruz de incompatibilidad.",
+        "Cuando el número de estados se reduce a una potencia exacta de dos para coincidir con los flip-flops."
+      ],
+      "correct": 0,
+      "hint": "Se busca alcanzar un punto fijo en la iteración de compatibilidades.",
+      "explanation": "El proceso es iterativo. En cada pasada, revisamos las celdas no tachadas; si sus condiciones de equivalencia (implicaciones) se refieren a celdas que ya han sido tachadas como incompatibles, procedemos a tachar la celda actual. Finaliza cuando una pasada entera no genera nuevos tachados."
+    },
+    {
+      "q": "En la síntesis de FSMs, ¿qué son las variables de estado secundarias?",
+      "options": [
+        "Las salidas físicas de los flip-flops ($Q_i$) que codifican los estados internos del sistema.",
+        "Las entradas analógicas de habilitación que controlan la velocidad de conmutación del reloj principal.",
+        "Las señales internas de las compuertas de salida que no se realimentan al circuito de estado siguiente."
+      ],
+      "correct": 0,
+      "hint": "Tienen que ver con el almacenamiento de la información de historia de la FSM.",
+      "explanation": "En la jerga de diseño digital, las variables de estado secundarias (o simplemente variables de estado) son los bits de salida de los flip-flops ($Q_i$) que representan la codificación del estado actual de la máquina."
+    },
+    {
+      "q": "¿Por qué es fundamental que una FSM posea un estado de inicio (Reset) claramente definido en el hardware?",
+      "options": [
+        "Porque al encender el circuito, el estado inicial de los flip-flops es impredecible y la FSM debe forzarse a un punto de partida conocido.",
+        "Porque el estado de Reset descarga los condensadores de acoplamiento de la placa para evitar interferencias de radiofrecuencia.",
+        "Porque sin un estado de Reset, la señal de reloj no podría oscilar y el circuito combinacional quedaría bloqueado."
+      ],
+      "correct": 0,
+      "hint": "Piense en las condiciones de encendido físico del chip de memoria.",
+      "explanation": "Físicamente, al aplicar alimentación a los biestables, estos pueden arrancar aleatoriamente en 0 o en 1 debido a imperfecciones microscópicas. Es imprescindible una señal de Reset (síncrona o asíncrona) que fuerce a los registros a un estado inicial coherente para iniciar la operación del sistema."
+    },
+    {
+      "q": "¿Qué caracteriza a una señal de Reset asíncrona en una FSM?",
+      "options": [
+        "Fuerza el estado inicial de forma inmediata e independiente del reloj cuando se activa la línea de reset.",
+        "Espera hasta el siguiente flanco activo del reloj para borrar el valor de las salidas y de los flip-flops de estado.",
+        "Requiere una compuerta AND externa conectada a la entrada de datos del flip-flop para poder funcionar."
+      ],
+      "correct": 0,
+      "hint": "Asíncrono significa 'sin sincronización' con el reloj.",
+      "explanation": "Un reset asíncrono actúa directamente sobre los terminales de borrado físico del flip-flop (como CLEAR o PRESET). Por tanto, inicializa el circuito de manera instantánea cuando se activa la señal de control, sin importar el estado o el flanco del reloj."
+    },
+    {
+      "q": "¿Qué caracteriza a una señal de Reset síncrona en una FSM?",
+      "options": [
+        "El estado inicial se carga únicamente en el flanco activo del reloj si la línea de reset se encuentra activa.",
+        "La inicialización se produce mediante un retardo analógico sin requerir flancos del reloj del sistema.",
+        "Es inmune a variaciones de temperatura y se implementa exclusivamente mediante codificación Gray."
+      ],
+      "correct": 0,
+      "hint": "Síncrono significa que está coordinado con el reloj.",
+      "explanation": "Un reset síncrono se trata como una condición más en la lógica combinacional de estado siguiente. Los flip-flops solo cambiarán al estado inicial (00...0) en el flanco activo del reloj cuando la entrada de reset esté activada."
+    },
+    {
+      "q": "En la teoría de FSM, ¿cuál es el número máximo teórico de estados equivalentes que se pueden reducir en una máquina de $N$ estados?",
+      "options": [
+        "Hasta $N-1$ estados, reduciendo la FSM a un único estado final equivalente en el caso extremo.",
+        "Exactamente $\\lfloor N/2 \\rfloor$ estados, pues los estados solo se pueden simplificar por parejas simétricas.",
+        "Ninguno, puesto que el número de estados siempre debe ser una potencia de dos para que el circuito funcione."
+      ],
+      "correct": 0,
+      "hint": "Piense en una máquina donde todos los estados se comportan de forma idéntica.",
+      "explanation": "En el caso extremo en que todos los estados produzcan la misma salida y transicionen de igual forma ante las entradas, todos ellos son equivalentes entre sí. Se pueden fusionar los $N$ estados en un único estado equivalente, reduciéndose $N-1$ estados."
+    },
+    {
+      "q": "En el método de particiones para la reducción de estados, ¿cuándo se detiene la subdivisión iterativa de los bloques de la partición?",
+      "options": [
+        "Cuando al calcular la partición $P_{k+1}$ se obtiene exactamente el mismo resultado que en la partición anterior $P_k$.",
+        "Cuando todos los bloques contienen exactamente un único estado, impidiendo subdivisiones adicionales.",
+        "Cuando el número de bloques de la partición coincide con una potencia de dos menor que el número de flip-flops."
+      ],
+      "correct": 0,
+      "hint": "El proceso converge cuando no hay más cambios.",
+      "explanation": "La subdivisión se detiene cuando la partición de un paso ($P_{k+1}$) es idéntica a la del paso anterior ($P_k$). En este punto de convergencia, los bloques finales representan los estados equivalentes de la máquina mínima."
+    },
+    {
+      "q": "Si una FSM tiene 4 estados y se decide utilizar la asignación de estados 'Almost One-Hot', ¿qué define a esta técnica?",
+      "options": [
+        "Se usan $M-1$ flip-flops para representar $M$ estados, asignando el vector nulo (todos ceros) al estado de reposo.",
+        "Se utilizan codificaciones binarias donde cambian máximo dos bits por cada flanco activo del reloj.",
+        "Se duplica el número de flip-flops para almacenar tanto el valor de estado actual como el complemento de salida."
+      ],
+      "correct": 0,
+      "hint": "El estado de reset tiene una representación especial sin activar ninguna línea.",
+      "explanation": "La codificación 'Almost One-Hot' (casi uno activo) utiliza $M-1$ flip-flops para $M$ estados. El estado inicial o de reposo se codifica con todos ceros ($00...0$), y los otros $M-1$ estados se representan con un único '1' en su respectivo bit de registro. Esto ahorra un flip-flop frente a One-Hot estándar."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si una FSM de Moore tiene 5 estados, se requieren como mínimo ____ flip-flops para realizar su codificación binaria.",
+      "options": [
+        "2 flip-flops",
+        "3 flip-flops",
+        "4 flip-flops"
+      ],
+      "correct": 1,
+      "hint": "Use la fórmula de codificación de estados $2^k \\ge M$.",
+      "explanation": "Para $M=5$ estados, buscamos el menor entero $k$ tal que $2^k \\ge 5$. Con $k=2$, $2^2 = 4 < 5$. Con $k=3$, $2^3 = 8 \\ge 5$. Por lo tanto, se necesitan 3 flip-flops."
+    },
+    {
+      "q": "Para una FSM de Moore encargada de detectar la secuencia '1010' con solapamiento permitido, el número mínimo de estados necesarios en su diagrama de transición es de ____ estados.",
+      "options": [
+        "4 estados",
+        "5 estados",
+        "6 estados"
+      ],
+      "correct": 1,
+      "hint": "En Moore, detectar una secuencia de longitud $N$ requiere $N+1$ estados.",
+      "explanation": "Para el detector de secuencia de longitud $N=4$ ('1010') en modelo Moore se requieren $N+1 = 5$ estados: reposo, '1', '10', '101' y '1010' (estado de detección activa)."
+    },
+    {
+      "q": "Para una FSM de Mealy encargada de detectar la secuencia '1010' con solapamiento permitido, el número mínimo de estados necesarios en su diagrama de transición es de ____ estados.",
+      "options": [
+        "4 estados",
+        "5 estados",
+        "6 estados"
+      ],
+      "correct": 0,
+      "hint": "En Mealy, la salida de detección se asocia a la transición y no a un estado final, requiriendo $N$ estados.",
+      "explanation": "Para el detector de secuencia de longitud $N=4$ ('1010') en modelo Mealy se requieren $N = 4$ estados: reposo, '1', '10', '101'. La transición de vuelta al detectar un '0' en el estado '101' genera la salida '1' en la propia flecha y vuelve al estado '10'."
+    },
+    {
+      "q": "Si una FSM posee 8 estados diferentes y se implementa empleando la codificación One-Hot, el número de flip-flops físicos requeridos en el circuito será de ____.",
+      "options": [
+        "3 flip-flops",
+        "8 flip-flops",
+        "16 flip-flops"
+      ],
+      "correct": 1,
+      "hint": "One-Hot asigna un biestable único a cada estado.",
+      "explanation": "En la codificación One-Hot, el número de flip-flops es exactamente igual al número de estados, es decir, para 8 estados se requieren 8 flip-flops."
+    },
+    {
+      "q": "En la tabla de excitación de un flip-flop JK, para efectuar una transición del estado actual $Q_n = 0$ al estado siguiente $Q_{n+1} = 1$, las entradas deben fijarse en $J = 1$ y $K = ____$.",
+      "options": [
+        "0",
+        "1",
+        "X (indiferente)"
+      ],
+      "correct": 2,
+      "hint": "Para pasar de 0 a 1, se puede poner set (J=1, K=0) o conmutar (J=1, K=1).",
+      "explanation": "La transición $0 \\to 1$ se logra con J=1 y K=0 (Set) o J=1 y K=1 (Togle). Esto implica que J debe ser 1 y K es indiferente (X)."
+    },
+    {
+      "q": "En la tabla de excitación de un flip-flop JK, para efectuar una transición del estado actual $Q_n = 1$ al estado siguiente $Q_{n+1} = 1$, las entradas deben fijarse en $J = ____$ y $K = 0$.",
+      "options": [
+        "0",
+        "1",
+        "X (indiferente)"
+      ],
+      "correct": 2,
+      "hint": "Para pasar de 1 a 1, se puede mantener el estado (J=0, K=0) o aplicar set (J=1, K=0).",
+      "explanation": "La transición $1 \\to 1$ se logra con J=0 y K=0 (mantener) o J=1 y K=0 (Set). K debe ser obligatoriamente 0 y J puede tomar cualquier valor (X)."
+    },
+    {
+      "q": "Si una FSM dispone de 3 señales de entrada externas y 4 flip-flops para codificar sus estados internos, la tabla de verdad de la lógica de estado siguiente tendrá ____ filas.",
+      "options": [
+        "16 filas",
+        "128 filas",
+        "256 filas"
+      ],
+      "correct": 1,
+      "hint": "Calcule el número total de combinaciones posibles de variables de estado y entradas.",
+      "explanation": "El número de filas en la tabla de verdad combinacional que calcula el estado siguiente es $2^{\\text{entradas} + \\text{flip-flops}} = 2^{3 + 4} = 2^7 = 128$ filas."
+    },
+    {
+      "q": "Si una FSM de Mealy cuenta con 2 entradas externas, 3 flip-flops de estado y 2 salidas, la tabla de verdad completa para la lógica combinacional de salida poseerá ____ filas.",
+      "options": [
+        "8 filas",
+        "32 filas",
+        "64 filas"
+      ],
+      "correct": 1,
+      "hint": "En Mealy, las salidas dependen tanto del estado actual como de las entradas.",
+      "explanation": "Puesto que la lógica de salida en una máquina de Mealy es función de las variables de estado y de las entradas, la tabla de verdad combinacional de salida tendrá $2^{\\text{entradas} + \\text{flip-flops}} = 2^{2+3} = 2^5 = 32$ filas."
+    },
+    {
+      "q": "Una FSM de Moore tiene 6 estados definidos. Si se utiliza codificación binaria natural, existirán ____ estados no utilizados en el espacio de estados binario.",
+      "options": [
+        "0 estados",
+        "2 estados",
+        "4 estados"
+      ],
+      "correct": 1,
+      "hint": "Calcule la capacidad total del registro de estado menos los estados asignados.",
+      "explanation": "Para 6 estados se necesitan 3 flip-flops, que proporcionan un espacio de $2^3 = 8$ estados posibles. Los estados no utilizados son $8 - 6 = 2$ estados."
+    },
+    {
+      "q": "Un contador síncrono que sigue la secuencia cíclica en código Gray 00 -> 01 -> 11 -> 10 -> 00... requiere un total de ____ flip-flops de tipo D.",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "El contador tiene 4 estados diferentes y las variables están codificadas en 2 bits.",
+      "explanation": "Dado que el contador cicla por 4 estados codificados con 2 bits ($Q_1Q_0$), se requieren exactamente 2 flip-flops para almacenar los estados lógicos."
+    },
+    {
+      "q": "En una FSM con variables de estado $Q_1Q_0$ y entrada $X$, si la ecuación de excitación para el biestable D0 es $D_0 = Q_0 \\oplus X$, el estado siguiente $Q_{0,next}$ tras estar en $Q_1Q_0 = 10$ con entrada $X = 1$ será ____.",
+      "options": [
+        "0",
+        "1",
+        "indeterminado debido a Q1"
+      ],
+      "correct": 1,
+      "hint": "Aplique los valores de las variables a la ecuación booleana de excitación.",
+      "explanation": "Para $Q_1Q_0 = 10$, tenemos $Q_0 = 0$. Con $X = 1$, la ecuación es $D_0 = Q_0 \\oplus X = 0 \\oplus 1 = 1$. Dado que $Q_{0,next} = D_0$, el estado siguiente del bit 0 será 1."
+    },
+    {
+      "q": "Si una FSM de Moore parte del estado $A=00$ y recibe la secuencia de entradas serie 1, 0, 1, transicionando $00 \\xrightarrow{1} 01 \\xrightarrow{0} 11 \\xrightarrow{1} 10$, el estado final en el que se ubicará tras estas transiciones es ____.",
+      "options": [
+        "01",
+        "11",
+        "10"
+      ],
+      "correct": 2,
+      "hint": "Siga el último paso del encadenamiento de transiciones provisto.",
+      "explanation": "La secuencia de transiciones descrita lleva al sistema de $00$ a $01$ (con entrada 1), luego a $11$ (con entrada 0) y finalmente a $10$ (con entrada 1). El estado de llegada es $10$."
+    },
+    {
+      "q": "En un detector de la secuencia '110' tipo Moore con solapamiento, si se introduce la entrada binaria serie '1110', el número total de veces que la salida se activará a 1 es ____.",
+      "options": [
+        "0 veces",
+        "1 vez",
+        "2 veces"
+      ],
+      "correct": 1,
+      "hint": "Analice cuándo se completa la secuencia '110' dentro del flujo de bits.",
+      "explanation": "En el flujo '1110', la secuencia '110' se completa únicamente al recibir el último bit '0' (en el cuarto ciclo). Los bits anteriores ('111') no completan la secuencia, por lo que la salida se activa solo 1 vez."
+    },
+    {
+      "q": "En un detector de la secuencia '101' tipo Mealy con solapamiento, si la entrada serie es '10101', la secuencia de salida generada bit a bit alineada a la entrada es ____.",
+      "options": [
+        "00101",
+        "00100",
+        "01010"
+      ],
+      "correct": 0,
+      "hint": "Mealy evalúa la salida inmediatamente con el estado actual y el bit de entrada presente.",
+      "explanation": "Entrada: 1 -> Salida 0 (Estado transiciona a '1'). Entrada: 0 -> Salida 0 (Estado transiciona a '10'). Entrada: 1 -> Salida 1 (Detecta '101', estado transiciona a '101'/'1' por solapamiento). Entrada: 0 -> Salida 0 (Transiciona a '10'). Entrada: 1 -> Salida 1 (Detecta de nuevo). Salida: '00101'."
+    },
+    {
+      "q": "Para una FSM de Moore con ecuación de salida combinacional $Y = Q_1 \\cdot Q_0$, si el estado actual del registro es $Q_1Q_0 = 10$, el valor de la salida $Y$ es ____.",
+      "options": [
+        "0",
+        "1",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "Sustituya $Q_1 = 1$ y $Q_0 = 0$ en el producto lógico.",
+      "explanation": "Evaluando la ecuación de salida: $Y = Q_1 \\cdot Q_0 = 1 \\cdot 0 = 0$. La salida es un cero lógico."
+    },
+    {
+      "q": "Si en una FSM con codificación One-Hot de 4 estados ($Q_3Q_2Q_1Q_0$) el estado actual es 0010, tras un flanco de reloj válido el número total de bits en '1' del vector de estado siguiente deberá ser de ____.",
+      "options": [
+        "exactamente 1",
+        "entre 1 y 2",
+        "exactamente 4"
+      ],
+      "correct": 0,
+      "hint": "Considere la restricción de codificación One-Hot en condiciones normales.",
+      "explanation": "En codificación One-Hot, por definición, siempre existe exactamente un único flip-flop activo (en 1) a la vez en cualquier estado válido. Por tanto, el estado siguiente también tendrá exactamente un bit en 1."
+    },
+    {
+      "q": "Para un flip-flop de tipo T, con el fin de efectuar una transición de estado de $Q_n = 1$ a $Q_{n+1} = 0$, la entrada $T$ debe alimentarse con ____.",
+      "options": [
+        "0",
+        "1",
+        "X (indiferente)"
+      ],
+      "correct": 1,
+      "hint": "Para cambiar de 1 a 0 se requiere una conmutación del estado.",
+      "explanation": "El flip-flop T conmuta su estado de salida cuando $T=1$. Como queremos cambiar de 1 a 0, se trata de una conmutación, por lo que $T$ debe valer 1."
+    },
+    {
+      "q": "En una FSM de Moore, si el retraso de la lógica combinacional de estado siguiente es de 5 ns, el retraso de conmutación de los flip-flops es de 2 ns, y el de la lógica combinacional de salida es de 3 ns, el tiempo mínimo de ciclo de reloj (periodo mínimo) es de ____ ns.",
+      "options": [
+        "5 ns",
+        "7 ns",
+        "10 ns"
+      ],
+      "correct": 1,
+      "hint": "El camino crítico del bucle de realimentación determina la frecuencia del reloj.",
+      "explanation": "El bucle de realimentación secuencial está compuesto por la salida de los flip-flops, que pasa por la lógica de estado siguiente y llega a la entrada de los mismos flip-flops. El retardo de este bucle es $t_{co} + t_{comb} = 2 + 5 = 7$ ns. La lógica de salida no forma parte del bucle de realimentación del estado siguiente."
+    },
+    {
+      "q": "Si una FSM posee originalmente 4 estados y se reduce mediante minimización a 3 estados, el número de flip-flops requeridos empleando codificación binaria natural cambia de ____.",
+      "options": [
+        "2 a 2 flip-flops",
+        "3 a 2 flip-flops",
+        "2 a 1 flip-flops"
+      ],
+      "correct": 0,
+      "hint": "Evalúe el número de bits necesarios para codificar 4 estados y 3 estados.",
+      "explanation": "Tanto para 4 estados como para 3 estados se cumple que la potencia mínima de dos mayor o igual al número de estados es 4 ($2^2 \\ge 4$ y $2^2 \\ge 3$). En ambos casos se necesitan exactamente 2 flip-flops, por lo que no hay reducción en el número de registros."
+    },
+    {
+      "q": "En un detector de secuencia de Moore, si la salida activa $Y=1$ está asociada al estado $S_3$ y la secuencia de estados recorrida en el tiempo es $S_0 \\to S_1 \\to S_2 \\to S_3 \\to S_0$, el número total de ciclos en los que la salida es 1 es de ____.",
+      "options": [
+        "1 ciclo",
+        "2 ciclos",
+        "3 ciclos"
+      ],
+      "correct": 0,
+      "hint": "Cuente cuántas veces aparece el estado $S_3$ en la secuencia descrita.",
+      "explanation": "Dado que es una máquina de Moore, la salida es 1 solo cuando la máquina se encuentra en el estado $S_3$. En la secuencia dada, el sistema está en $S_3$ durante exactamente 1 ciclo de reloj."
+    },
+    {
+      "q": "¿Qué ventajas ofrece el modelo de Moore frente al modelo de Mealy en diseños secuenciales?",
+      "options": [
+        "Las salidas están sincronizadas con el reloj y no se ven afectadas por ruidos transitorios directos de las entradas.",
+        "Facilita el análisis de tiempos y la separación de caminos críticos de temporización combinacionales.",
+        "Todas las opciones anteriores son correctas y representan ventajas del modelo de Moore."
+      ],
+      "correct": 2,
+      "hint": "Considere la inmunidad a glitches y la simplificación del análisis temporal.",
+      "explanation": "El modelo de Moore protege las salidas de los ruidos en las entradas (glitches) porque la salida depende solo de los flip-flops de estado, los cuales cambian de forma síncrona en el flanco del reloj. Además, simplifica el análisis de tiempos al aislar el camino de entrada del de salida."
+    },
+    {
+      "q": "¿Cuáles de los siguientes esquemas de codificación se utilizan habitualmente para la asignación de estados de una FSM?",
+      "options": [
+        "Codificación binaria natural, que minimiza el número total de flip-flops.",
+        "Codificación One-Hot, que asigna un flip-flop a cada estado, y codificación Gray.",
+        "Todas las opciones anteriores son correctas y representan esquemas válidos de codificación."
+      ],
+      "correct": 2,
+      "hint": "Repase las técnicas estándar para representar estados discretos mediante variables booleanas.",
+      "explanation": "En la síntesis de FSMs, es común elegir entre codificación binaria natural (mínimos bits), One-Hot (mínima lógica combinacional y máxima velocidad) o Gray (un bit de cambio por transición, ideal para reducir glitches y consumo)."
+    },
+    {
+      "q": "En el proceso de diseño y síntesis de una FSM, la tabla de transición de estados:",
+      "options": [
+        "Define la correspondencia del estado siguiente en función del estado actual y los valores de entrada.",
+        "Especifica el valor de las salidas para cada combinación de estado (Moore) o estado y entrada (Mealy).",
+        "Todas las opciones anteriores son correctas y forman parte de la información de la tabla."
+      ],
+      "correct": 2,
+      "hint": "La tabla de transición es el paso intermedio entre el diagrama y las ecuaciones booleanas.",
+      "explanation": "La tabla de transición sistematiza el diagrama de estados recopilando toda la lógica del sistema secuencial: asocia el estado actual ($Q_n$) y las entradas ($X$) con el estado siguiente ($Q_{n+1}$) y las salidas del circuito ($Y$)."
+    },
+    {
+      "q": "Al realizar el análisis lógico de un circuito secuencial síncrono para reconstruir su FSM, es necesario obtener:",
+      "options": [
+        "Las ecuaciones de excitación para las entradas de todos los flip-flops instalados.",
+        "Las ecuaciones combinacionales de salida del circuito y la tabla de transición resultante.",
+        "Todas las opciones anteriores son correctas y necesarias para el análisis."
+      ],
+      "correct": 2,
+      "hint": "El análisis inverso consiste en ir del esquema de compuertas lógicas al diagrama de estados.",
+      "explanation": "Para analizar una FSM, primero debemos deducir las ecuaciones de excitación de los flip-flops a partir del circuito. Luego, con sus tablas de transición, hallamos el estado siguiente y, finalmente, derivamos las ecuaciones de salida y el diagrama de estados completo."
+    },
+    {
+      "q": "La minimización o reducción de estados en una FSM síncrona nos permite lograr:",
+      "options": [
+        "La reducción del número de flip-flops en el registro de estado si logramos cruzar un límite de potencia de dos.",
+        "Una simplificación general de la lógica combinacional de estado siguiente y de salida al reducir las filas de la tabla.",
+        "Todas las opciones anteriores son correctas y representan beneficios de la minimización."
+      ],
+      "correct": 2,
+      "hint": "Piense en el impacto de tener una tabla con menos estados lógicos.",
+      "explanation": "Reducir los estados elimina la redundancia del diseño. Esto disminuye el número de flip-flops necesarios (si pasamos, por ejemplo, de 5 estados a 4, requeriremos 2 flip-flops en lugar de 3) y simplifica los mapas de Karnaugh, abaratando la implementación en hardware."
+    },
+    {
+      "q": "¿Qué parámetros temporales limitan físicamente la frecuencia máxima de reloj a la que puede operar una FSM?",
+      "options": [
+        "El retraso de propagación reloj-a-salida ($t_{co}$) de los flip-flops de estado.",
+        "El tiempo de establecimiento ($t_{su}$) de los flip-flops y el retraso de la lógica combinacional de estado siguiente.",
+        "Todas las opciones anteriores son correctas y limitan conjuntamente la frecuencia máxima."
+      ],
+      "correct": 2,
+      "hint": "Considere la suma de retardos en la trayectoria crítica de realimentación.",
+      "explanation": "La frecuencia máxima de reloj está limitada por el periodo mínimo: $T_{min} = t_{co} + t_{comb} + t_{su}$. Cualquier incremento en el retardo de los flip-flops ($t_{co}$), de la lógica de realimentación ($t_{comb}$), o en el tiempo de setup ($t_{su}$) reduce la velocidad máxima del sistema."
+    },
+    {
+      "q": "¿Qué criterios se pueden aplicar para realizar la asignación de estados en una FSM con el fin de optimizar el diseño?",
+      "options": [
+        "Asignar códigos adyacentes (que difieran en 1 bit) a estados que transicionan al mismo estado siguiente ante una entrada.",
+        "Utilizar codificación One-Hot para FSMs complejas que se implementen en FPGAs con abundantes recursos de memoria.",
+        "Todas las opciones anteriores son correctas y representan criterios válidos de diseño."
+      ],
+      "correct": 2,
+      "hint": "Existen heurísticas clásicas para simplificar el hardware combinacional resultante.",
+      "explanation": "La asignación de estados influye directamente en la complejidad de las ecuaciones. Reglas heurísticas sugieren dar códigos adyacentes a estados con transiciones comunes para simplificar mapas de Karnaugh. En FPGAs, donde los flip-flops abundan pero la lógica de enrutamiento es costosa, se prefiere One-Hot."
+    },
+    {
+      "q": "El uso de flip-flops D en la síntesis de una FSM síncrona destaca por:",
+      "options": [
+        "Simplificar el proceso de diseño ya que no se requiere una tabla de excitación compleja en la transición.",
+        "Hacer que la función combinacional de entrada al flip-flop sea idéntica al valor del estado siguiente.",
+        "Todas las opciones anteriores son correctas y caracterizan la síntesis con flip-flops D."
+      ],
+      "correct": 2,
+      "hint": "Recuerde cómo se comporta un flip-flop D frente a sus homólogos JK o T.",
+      "explanation": "El flip-flop D tiene la propiedad de que su entrada $D_i$ es exactamente el estado siguiente $Q_{i,next}$. Esto agiliza enormemente la síntesis, ya que la tabla de transiciones nos da directamente las funciones para las entradas D de los registros."
+    },
+    {
+      "q": "Las salidas de una máquina de estados de Mealy pueden experimentar cambios en los siguientes momentos:",
+      "options": [
+        "En el flanco activo del reloj del sistema, debido a un cambio en las variables de estado internas.",
+        "Entre los flancos activos del reloj, si se produce alguna variación en las señales lógicas de entrada externa.",
+        "Todas las opciones anteriores son correctas, indicando la naturaleza asíncrona de las salidas en Mealy."
+      ],
+      "correct": 2,
+      "hint": "Mealy tiene una dependencia combinacional directa con las entradas y secuencial con los flip-flops.",
+      "explanation": "Como la salida de Mealy es $Y = f(Q, X)$, esta cambiará si cambia el estado $Q$ (esto ocurre en el flanco de reloj) o si cambia la entrada externa $X$ (esto puede ocurrir en cualquier instante intermedio entre ciclos de reloj)."
+    },
+    {
+      "q": "¿Qué consecuencias negativas pueden presentarse si una FSM entra en un estado no asignado (inválido)?",
+      "options": [
+        "El sistema secuencial puede quedar atrapado en un bucle infinito del que no puede salir de forma autónoma (bloqueo).",
+        "Las salidas lógicas del circuito pueden activarse erróneamente, provocando fallos de control en otros componentes.",
+        "Todas las opciones anteriores son correctas, de ahí la importancia del diseño con autocorrección."
+      ],
+      "correct": 2,
+      "hint": "Pensemos en qué ocurre cuando la lógica combinacional de estado siguiente para códigos no válidos no está definida.",
+      "explanation": "Si una perturbación induce un estado inválido y la lógica combinacional para esa combinación binaria no está implementada de forma segura, la FSM puede comportarse de manera errática, activando salidas espurias o entrando en ciclos cerrados de estados huérfanos."
+    },
+    {
+      "q": "Si una FSM posee 9 estados diferentes, ¿cuál es el número mínimo de flip-flops necesarios si se utiliza la codificación One-Hot?",
+      "options": [
+        "4 flip-flops",
+        "5 flip-flops",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En One-Hot, el número de flip-flops coincide exactamente con el número de estados.",
+      "explanation": "Para 9 estados en One-Hot se requieren exactamente 9 flip-flops. Las opciones A (4) y B (5) son incorrectas (4 y 5 corresponden a codificación binaria natural para 9 a 16 estados)."
+    },
+    {
+      "q": "Para un flip-flop JK, si el estado actual es $Q_n = 0$ y el estado siguiente debe ser $Q_{n+1} = 0$, ¿cuál de las siguientes combinaciones de excitación es correcta?",
+      "options": [
+        "J = 1, K = X",
+        "J = X, K = 0",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Busque los valores en la tabla de excitación JK para la transición $0 \\to 0$.",
+      "explanation": "Para transicionar de $0 \\to 0$, el flip-flop JK requiere $J = 0$ y $K = X$ (indiferente). Ninguna de las opciones A o B coincide con este par, por lo que la opción correcta es C."
+    },
+    {
+      "q": "Si una FSM de Moore tiene 16 estados, ¿cuántos flip-flops se requieren como mínimo si se utiliza codificación binaria natural?",
+      "options": [
+        "3 flip-flops",
+        "5 flip-flops",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Resuelva la inecuación de codificación de estados para $M=16$.",
+      "explanation": "Buscamos $k$ tal que $2^k \\ge 16$. Dado que $2^4 = 16$, se requieren exactamente 4 flip-flops. Como las opciones A (3) y B (5) son incorrectas, la opción C es la adecuada."
+    },
+    {
+      "q": "En una FSM de Mealy con 1 entrada y 1 salida, ¿cuál es la longitud máxima de la secuencia que puede detectar con un diagrama de transición de solo 2 estados?",
+      "options": [
+        "Una secuencia de longitud 5",
+        "Una secuencia de longitud 4",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Considere la relación entre el número de estados en una máquina de Mealy y la secuencia detectable.",
+      "explanation": "Con una máquina de Mealy de 2 estados se pueden detectar secuencias de longitud máxima de 2 bits (por ejemplo, '11' o '10'). Para secuencias más largas se requieren más estados. Ninguna de las opciones A (5) o B (4) es correcta."
+    },
+    {
+      "q": "Si una FSM posee 4 estados codificados como $S_0=00, S_1=01, S_2=10, S_3=11$ y transiciona cíclicamente como $S_0 \\to S_1 \\to S_2 \\to S_3 \\to S_0$ de forma autónoma con el reloj, ¿qué tipo de contador es?",
+      "options": [
+        "Un contador Gray de 2 bits.",
+        "Un contador Johnson de 2 bits.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Observe la secuencia binaria directa y compárela con las codificaciones Gray o Johnson.",
+      "explanation": "La secuencia $00 \\to 01 \\to 10 \\to 11 \\to 00$ corresponde a un contador binario natural de 2 bits. No es Gray (en Gray, de 01 pasa a 11) ni Johnson (en Johnson, de 01 pasa a 11). Por tanto, es correcta la opción C."
+    },
+    {
+      "q": "Si minimizamos una FSM de Moore con 7 estados y logramos reducirla a una máquina equivalente de 4 estados, el número de flip-flops necesarios con codificación binaria:",
+      "options": [
+        "Aumenta en 1 flip-flop.",
+        "Se mantiene exactamente igual.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Calcule el número de flip-flops antes (7 estados) y después (4 estados) de la minimización.",
+      "explanation": "Para 7 estados se necesitan $\\lceil \\log_2 7 \\rceil = 3$ flip-flops. Para 4 estados se necesitan $\\lceil \\log_2 4 \\rceil = 2$ flip-flops. El número de flip-flops disminuye en 1. Ninguna de las opciones A (aumenta) o B (mantiene) es correcta."
+    },
+    {
+      "q": "En una máquina de Moore, si la ecuación combinacional de salida es $Y = Q_1 + \\bar{Q}_0$ y el estado actual es $Q_1Q_0 = 01$, el valor de la salida $Y$ es:",
+      "options": [
+        "1",
+        "X (indiferente / indeterminado)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Evalúe la función lógica booleana con los bits de estado dados.",
+      "explanation": "Sustituyendo $Q_1=0$ y $Q_0=1$ en la ecuación: $Y = Q_1 + \\bar{Q}_0 = 0 + \\bar{1} = 0 + 0 = 0$. Dado que la salida es 0, y las opciones A y B indican 1 y X respectivamente, la opción correcta es la C."
+    },
+    {
+      "q": "En una máquina de Mealy, si la ecuación de salida es $Y = (Q_0 \\oplus X) \\cdot Q_1$ y el estado actual es $Q_1Q_0 = 01$ con entrada $X = 0$, el valor de la salida es:",
+      "options": [
+        "1",
+        "X (indiferente / indeterminado)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Sustituya $Q_1 = 0$, $Q_0 = 1$ y $X = 0$ en la fórmula lógica dada.",
+      "explanation": "Evaluando la salida: $Y = (Q_0 \\oplus X) \\cdot Q_1 = (1 \\oplus 0) \\cdot 0 = 1 \\cdot 0 = 0$. Como el valor correcto es 0 y no coincide con 1 o X, la opción C es la adecuada."
+    },
+    {
+      "q": "Para un flip-flop de tipo T, si el estado actual es $Q_n = 0$ y el estado siguiente debe ser $Q_{n+1} = 0$, la entrada de control $T$ debe alimentarse con:",
+      "options": [
+        "1",
+        "X (indiferente / indeterminado)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Determine la condición en la entrada T para mantener el valor en 0.",
+      "explanation": "Para mantener el estado actual en 0 ($0 \\to 0$), el flip-flop T no debe conmutar, lo que requiere $T = 0$. Dado que las opciones presentadas son 1 y X, la respuesta correcta es la C (T = 0)."
+    },
+    {
+      "q": "Si una FSM posee 5 estados y 3 entradas externas, ¿cuántos bits en total se necesitan para codificar conjuntamente el estado actual y las entradas si se emplea codificación One-Hot para el estado?",
+      "options": [
+        "15 bits",
+        "6 bits",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Sume los bits del vector de estado en One-Hot y los bits de las variables de entrada.",
+      "explanation": "Con 5 estados en One-Hot se necesitan 5 bits de estado. Las 3 entradas externas ocupan 3 bits. En total, se necesitan $5 + 3 = 8$ bits para codificar ambos conjuntos de información. La opción C es correcta ya que las opciones A (15) y B (6) no son correctas."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Diseño de un contador síncrono binario de 3 bits",
+      "context": "Se desea diseñar un contador binario ascendente síncrono de 3 bits ($Q_2Q_1Q_0$) que cicla por todos los estados posibles del $0$ al $7$ en base a flip-flops D.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops D se necesitan como mínimo para albergar los estados de este contador?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para representar 8 estados distintos ($2^3 = 8$), se necesitan exactamente $k = 3$ flip-flops, puesto que $2^3 \\ge 8$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops hallado por el número total de estados del contador. ¿Qué valor resulta?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El número de flip-flops es $3$ y el número de estados es $8$. Su producto es $3 \\times 8 = 24$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "A partir de la respuesta anterior (24), si sumamos el número de filas de la tabla de transición completa del contador, ¿qué valor obtenemos?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "La tabla de transición para un contador autónomo de 8 estados tiene exactamente 8 filas (una por cada combinación de estado actual). Por lo tanto, $24 + 8 = 32$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si dividimos el resultado anterior (32) entre el número de variables que cambian de estado simultáneamente en la transición del estado 3 (011) al estado 4 (100), ¿qué valor resulta?",
+          "correctValue": 10.67,
+          "tolerance": 0.01,
+          "explanation": "En la transición de $011_2$ (3) a $100_2$ (4), cambian los tres bits de estado (el bit 0 pasa de 1 a 0, el bit 1 de 1 a 0, y el bit 2 de 0 a 1). El número de variables que cambian es 3. El resultado es $\\frac{32}{3} \\approx 10.67$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Detector de secuencia de Moore '1101'",
+      "context": "Se diseña una FSM de Moore para detectar la secuencia binaria '1101' con solapamiento permitido.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de estados necesarios en el diagrama de Moore?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Una máquina de Moore para detectar una secuencia de longitud $N=4$ requiere como mínimo $N+1 = 5$ estados."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Si restamos el número de estados mínimo (5) al número total de estados posibles si codificamos la máquina con el menor número de flip-flops binarios, ¿cuánto resulta?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Con 5 estados se requieren $3$ flip-flops. El número de estados posibles con 3 bits es $2^3 = 8$. La diferencia es $8 - 5 = 3$ estados no utilizados."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Si multiplicamos estos estados no utilizados (3) por el número de filas de la tabla de transición completa (considerando 1 entrada externa), ¿qué valor da?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "La FSM tiene 5 estados activos y 1 entrada externa, por lo que la tabla de transición completa tiene $5 \\times 2^1 = 10$ filas. El producto es $3 \\times 10 = 30$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Si al valor obtenido (30) le restamos el número de flip-flops del diseño (3), ¿qué número se obtiene?",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "Restando los $3$ flip-flops del diseño al resultado anterior: $30 - 3 = 27$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Detector de secuencia de Mealy '1101'",
+      "context": "Se analiza el detector de la secuencia binaria '1101' empleando una máquina de Mealy con solapamiento.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de estados en el diagrama de transiciones de Mealy?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Una máquina de Mealy para detectar una secuencia de longitud $N=4$ requiere exactamente $N=4$ estados."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Si codificamos estos estados en binario natural, ¿cuántos flip-flops D se necesitan?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para $4$ estados se requieren $\\lceil \\log_2 4 \\rceil = 2$ flip-flops."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Multiplique el número de flip-flops (2) por el número de filas de la tabla de transición completa (considerando 1 entrada). ¿Cuánto resulta?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Con 4 estados y 1 entrada, hay $4 \\times 2 = 8$ filas de transición. Multiplicado por 2 flip-flops da $2 \\times 8 = 16$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Divida el resultado anterior (16) entre el número de estados no utilizados. Si es 0, sume 10. ¿Cuál es el valor final?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "El número de estados no utilizados es $2^2 - 4 = 0$. Como es 0, le sumamos 10 al valor anterior (16), resultando $16 + 10 = 26$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Análisis de un contador Gray de 3 bits",
+      "context": "Un contador Gray de 3 bits sigue la secuencia: 000 -> 001 -> 011 -> 010 -> 110 -> 111 -> 101 -> 100 -> 000...",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuántas transiciones de estado ocurren en un ciclo completo de conteo?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El ciclo contiene 8 estados distintos, por lo que hay exactamente 8 transiciones para volver al estado inicial."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Si usamos flip-flops T, sume el número de entradas T que deben ponerse a 1 en todo el ciclo (cada transición del código Gray cambia exactamente 1 bit). ¿Cuánto es esta suma?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "En un código Gray de 3 bits, exactamente una sola variable cambia en cada paso. Como cada cambio de bit requiere que la entrada $T$ correspondiente sea 1 (y las que no cambian sean 0), en cada una de las 8 transiciones del ciclo se activa exactamente un 1 en total entre las entradas $T_2, T_1, T_0$. Por tanto, la suma sobre las 8 transiciones es $8 \\times 1 = 8$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Si multiplicamos la suma de las entradas T (8) por el número de bits de estado (3), ¿qué valor obtenemos?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Multiplicando $8 \\times 3 = 24$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "A este valor (24) réstele la suma de los valores decimales de los estados donde el bit más significativo ($Q_2$) es igual a 1. ¿Cuánto resulta?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los estados con $Q_2 = 1$ en la secuencia son: 110 (6), 111 (7), 101 (5) y 100 (4). La suma de sus valores decimales es $6 + 7 + 5 + 4 = 22$. Restando al valor anterior: $24 - 22 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Contador síncrono Módulo-5",
+      "context": "Se diseña un contador síncrono módulo-5 que cuenta de 0 a 4 (000 -> 001 -> 010 -> 011 -> 100 -> 000) usando flip-flops D.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de flip-flops D requeridos?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para representar 5 estados (0 a 4) se requiere que $2^k \\ge 5$, por lo que $k = 3$ flip-flops."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops (3) por el número de estados inválidos o no utilizados del contador. ¿Qué valor resulta?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Con 3 flip-flops tenemos $2^3 = 8$ estados posibles. Al ser un contador módulo-5, los estados inválidos son $8 - 5 = 3$. Su producto es $3 \\times 3 = 9$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (9) el valor decimal del estado máximo en el ciclo normal de conteo. ¿Qué valor se obtiene?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "El estado máximo en el conteo es 4 ($100_2$). Sumando: $9 + 4 = 13$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si multiplicamos el resultado anterior (13) por el número de transiciones en las que el bit menos significativo ($Q_0$) pasa a valer 0 en el ciclo normal, ¿cuál es el valor final?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "Las transiciones del ciclo son: 000->001 ($Q_0$: 0->1), 001->010 ($Q_0$: 1->0), 010->011 ($Q_0$: 0->1), 011->100 ($Q_0$: 1->0), 100->000 ($Q_0$: 0->0). Las transiciones donde $Q_0$ pasa a valer 0 (de 1 a 0) son 001->010 y 011->100, es decir, ocurre 2 veces en el ciclo. Multiplicando $13 \\times 2 = 26$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "FSM One-Hot de 6 estados",
+      "context": "Se analiza una FSM con 6 estados lógicos implementada con codificación One-Hot.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops de estado se utilizan en esta codificación?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "En la codificación One-Hot se necesita exactamente un flip-flop para cada estado. Para 6 estados, se usan 6 flip-flops."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Sume al número de flip-flops (6) el número total de estados no válidos del espacio de estados. ¿Cuánto resulta?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "El espacio de estados con 6 bits tiene $2^6 = 64$ estados en total. Al tener 6 estados válidos, los inválidos son $64 - 6 = 58$. Sumando: $6 + 58 = 64$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Divida el resultado obtenido (64) entre el número de bits en '1' que tiene cualquier vector de estado válido en One-Hot. ¿Qué valor resulta?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "En codificación One-Hot, todo vector de estado válido tiene exactamente un único bit en 1. Dividiendo: $64 / 1 = 64$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Al resultado (64) réstele el número de entradas externas si la tabla de transición completa de la FSM One-Hot (incluyendo todos los estados de 6 bits y 2 entradas externas) tiene $2^N$ filas. ¿Qué valor final resulta?",
+          "correctValue": 56,
+          "tolerance": 0,
+          "explanation": "La tabla completa considera el espacio de direccionamiento de los 6 bits de estado y las 2 entradas externas, es decir, $N = 6 + 2 = 8$ bits en total. Así, $2^8 = 256$ filas. La potencia $N$ es 8. Restando 8 al valor anterior: $64 - 8 = 56$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Análisis de tiempos en una FSM síncrona",
+      "context": "Se dispone de una FSM caracterizada por flip-flops con $t_{co} = 1.6$ ns, $t_{su} = 0.9$ ns y un retardo en la lógica combinacional de estado siguiente de $t_{comb} = 3.5$ ns.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Cuál es el tiempo de ciclo de reloj mínimo (periodo mínimo) admisible en ns?",
+          "correctValue": 6.0,
+          "tolerance": 0,
+          "explanation": "El periodo mínimo de reloj está dado por la fórmula $T_{min} = t_{co} + t_{comb} + t_{su} = 1.6 + 3.5 + 0.9 = 6.0$ ns."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "A partir del periodo mínimo en ns (6.0), calcule la frecuencia de reloj máxima correspondiente en MHz.",
+          "correctValue": 166.67,
+          "tolerance": 0.05,
+          "explanation": "La frecuencia máxima de reloj es $f_{max} = \\frac{1}{T_{min}} = \\frac{1}{6.0 \\text{ ns}} = \\frac{1000}{6.0} \\approx 166.67$ MHz."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si añadimos un margen de seguridad (jitter y degradación) que aumenta el periodo mínimo de reloj en un 10%, ¿cuál es el nuevo periodo mínimo de reloj en ns?",
+          "correctValue": 6.6,
+          "tolerance": 0.01,
+          "explanation": "El periodo original es 6.0 ns. Con un incremento del 10%, el nuevo periodo mínimo es $6.0 \\times 1.1 = 6.6$ ns."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcule la nueva frecuencia de reloj máxima en MHz con el nuevo periodo (6.6 ns).",
+          "correctValue": 151.52,
+          "tolerance": 0.05,
+          "explanation": "La nueva frecuencia de reloj máxima es $f'_{max} = \\frac{1000}{6.6} \\approx 151.52$ MHz."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Reducción de estados en una FSM de Moore",
+      "context": "Se tiene una FSM con 8 estados iniciales ($S_0 \\dots S_7$). Mediante el algoritmo de partición, se busca la máquina equivalente mínima.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Si la partición de salida ($P_0$) divide los estados en 2 bloques diferenciados por el valor de su salida, ¿cuál es el número de bloques en $P_0$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al dividirse según los valores de la salida, y siendo esta binaria, la 0-partición consta de exactamente 2 bloques."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Si en la partición $P_1$ los bloques se subdividen quedando un total de 5 bloques distintos, multiplique este número de bloques por el número de estados iniciales (8). ¿Qué se obtiene?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "Tenemos 5 bloques en $P_1$ y 8 estados originales. El producto es $5 \\times 8 = 40$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Si la partición $P_2$ vuelve a arrojar 5 bloques (indicando convergencia del algoritmo), ¿cuántos flip-flops D se necesitan para implementar la FSM mínima resultante?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los 5 bloques finales indican que la FSM mínima tiene 5 estados. Para 5 estados se requieren $k$ flip-flops tales que $2^k \\ge 5$, lo que da $k = 3$ flip-flops."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Si restamos el número de flip-flops necesarios en la FSM mínima (3) al número de flip-flops necesarios en la máquina original (8 estados), ¿cuál es la diferencia?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Para la máquina original de 8 estados se necesitan $\\lceil \\log_2 8 \\rceil = 3$ flip-flops. Para la máquina mínima de 5 estados también se necesitan 3 flip-flops. La diferencia en ahorro de registros es $3 - 3 = 0$ flip-flops."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Tabla de excitación JK para un contador cíclico",
+      "context": "Diseñamos un contador síncrono módulo-4 (00 -> 01 -> 10 -> 11 -> 00) empleando flip-flops JK.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "¿Cuántas entradas de control en total (J y K combinadas de todos los flip-flops) posee el circuito secuencial?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para 4 estados se necesitan 2 flip-flops ($Q_1Q_0$). Cada uno de los 2 flip-flops tiene 2 entradas ($J$ y $K$), sumando un total de $2 \\times 2 = 4$ entradas de control."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Multiplique el número de entradas (4) por el número de filas de la tabla de excitación del contador. ¿Cuánto da?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El contador tiene 4 estados, por lo que su tabla de transición tiene 4 filas. El producto es $4 \\times 4 = 16$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "A partir de la tabla de excitación, cuente el número total de estados indiferentes (don't cares, representados por X) en las columnas de J y K para todo el ciclo. ¿Cuál es este valor?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "En la tabla de excitación de un flip-flop JK, cada transición individual contiene exactamente un valor indiferente 'X' en una de sus dos entradas (J o K). Al tener 2 flip-flops y 4 filas en la tabla de transiciones, el número total de 'X' en las columnas de control es $2 \\times 4 = 8$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Divida el resultado anterior (8) entre el número de flip-flops JK (2). ¿Qué se obtiene?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Dividimos 8 entre los 2 flip-flops, resultando $8 / 2 = 4$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Detector de secuencia Mealy '10'",
+      "context": "Se analiza una FSM de Mealy diseñada para detectar la secuencia '10' con solapamiento y activar una salida $Y=1$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de estados de la FSM de Mealy?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para detectar una secuencia de longitud $N=2$ en Mealy, se necesitan exactamente 2 estados."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Si la secuencia de entrada es '101010', sume el número de estados de la FSM (2) al número de veces que se activa la salida. ¿Qué valor resulta?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "En la entrada '101010', la secuencia '10' ocurre en los índices (1-2), (3-4) y (5-6), es decir, 3 veces con solapamiento. Sumando al número de estados: $2 + 3 = 5$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Multiplique el resultado anterior (5) por el número de flip-flops requeridos en codificación binaria natural. ¿Cuánto da?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para 2 estados se necesita $\\lceil \\log_2 2 \\rceil = 1$ flip-flop. El producto es $5 \\times 1 = 5$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Añada al resultado (5) el número de filas de la tabla de transición completa (considerando 1 entrada). ¿Cuál es el resultado final?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Con 2 estados y 1 entrada, la tabla de transición tiene $2 \\times 2^1 = 4$ filas. Sumando: $5 + 4 = 9$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Registro de desplazamiento de 4 bits como FSM",
+      "context": "Se analiza un registro de desplazamiento de 4 bits ($Q_3Q_2Q_1Q_0$) con entrada serie $X$ que actúa como una FSM.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuál es el número de flip-flops del registro?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Un registro de desplazamiento de 4 bits requiere exactamente 4 flip-flops lógicos."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops (4) por el número de estados posibles de la FSM. ¿Qué valor da?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "Con 4 flip-flops, el número de estados posibles es $2^4 = 16$. El producto es $4 \\times 16 = 64$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Si el estado inicial es 0000 y la entrada serie se fija permanentemente en 1, sume el resultado anterior (64) al número de ciclos de reloj necesarios para que el registro alcance el estado 1111. ¿Cuánto resulta?",
+          "correctValue": 68,
+          "tolerance": 0,
+          "explanation": "Partiendo de 0000, los estados en cada ciclo con entrada 1 son: 0001 (1 ciclo), 0011 (2 ciclos), 0111 (3 ciclos), 1111 (4 ciclos). Se necesitan 4 ciclos. Sumando: $64 + 4 = 68$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si al resultado anterior (68) le restamos el número de filas de la tabla de transición completa de esta FSM (considerando 1 entrada $X$), ¿cuál es el valor final?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "El espacio de estados es de 4 bits (16 estados) y hay 1 entrada, lo que genera $16 \\times 2 = 32$ filas en la tabla de transición completa. Restando al valor obtenido: $68 - 32 = 36$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Contador en anillo de 4 bits",
+      "context": "Un contador en anillo de 4 bits cicla la secuencia: 1000 -> 0100 -> 0010 -> 0001 -> 1000...",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops utiliza este contador?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El contador en anillo de 4 bits requiere exactamente 4 flip-flops para almacenar la posición del bit activo."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops (4) por el número de estados inválidos en el espacio de direccionamiento de 4 bits. ¿Qué valor resulta?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "El número total de estados con 4 bits es $2^4 = 16$. Los estados válidos en el anillo son 4. Los inválidos son $16 - 4 = 12$. El producto es $4 \\times 12 = 48$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (48) el valor decimal del estado inicial si el '1' está en el bit más significativo ($Q_3$ es el bit de mayor peso, es decir, 1000). ¿Qué valor da?",
+          "correctValue": 56,
+          "tolerance": 0,
+          "explanation": "El estado $1000_2$ equivale al número decimal 8. Sumando: $48 + 8 = 56$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Si dividimos el resultado (56) entre el número de ciclos de reloj que tarda el contador en volver a su estado inicial, ¿cuál es el resultado final?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "El contador en anillo tiene un periodo de 4 ciclos de reloj para volver a su estado inicial. Dividiendo: $56 / 4 = 14$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Contador Johnson de 4 bits",
+      "context": "Un contador Johnson de 4 bits sigue la secuencia cíclica: 0000 -> 1000 -> 1100 -> 1110 -> 1111 -> 0111 -> 0011 -> 0001 -> 0000...",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuántos estados válidos componen el ciclo completo de este contador?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Un contador Johnson de $N$ flip-flops tiene un periodo de $2N$ estados. Para $N=4$ flip-flops, tiene exactamente $2 \\times 4 = 8$ estados válidos."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Sume al número de estados válidos (8) el número de flip-flops utilizados en el diseño. ¿Cuánto resulta?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El contador Johnson utiliza 4 flip-flops para representar los estados. Sumando: $8 + 4 = 12$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Multiplique el resultado anterior (12) por el número de estados inválidos fuera de su ciclo de conteo en un espacio de 4 bits. ¿Qué valor resulta?",
+          "correctValue": 96,
+          "tolerance": 0,
+          "explanation": "El número total de estados posibles con 4 bits es 16. Los válidos son 8. Los inválidos son $16 - 8 = 8$. Multiplicando: $12 \\times 8 = 96$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Reste al valor obtenido (96) la suma de los valores decimales de los estados lógicos del contador donde el número de bits a '1' es impar. ¿Cuál es el resultado final?",
+          "correctValue": 66,
+          "tolerance": 0,
+          "explanation": "Los estados en el ciclo con número impar de bits en 1 son: 1000 (decimal 8), 1110 (decimal 14), 0111 (decimal 7) y 0001 (decimal 1). La suma de sus valores decimales es $8 + 14 + 7 + 1 = 30$. Restando al resultado anterior: $96 - 30 = 66$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Contador Módulo-12 con Reset Síncrono",
+      "context": "Se implementa un contador módulo-12 que cuenta de 0 a 11 (0000 -> ... -> 1011 -> 0000) usando flip-flops D.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de flip-flops D requeridos para este diseño?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para contar hasta 12 estados se requiere que $2^k \\ge 12$, por lo que $k = 4$ flip-flops."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Sume al número de flip-flops (4) el número de estados que no se utilizan en el espacio de direccionamiento. ¿Qué valor resulta?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Con 4 flip-flops el espacio total es $2^4 = 16$. El contador utiliza 12. Los no utilizados son $16 - 12 = 4$. Sumando: $4 + 4 = 8$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Multiplique el resultado anterior (8) por el número de bits en '1' que tiene la representación binaria del estado límite 11 ($1011_2$). ¿Qué se obtiene?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "La representación binaria de 11 es $1011_2$, la cual posee exactamente 3 bits a 1. El producto es $8 \\times 3 = 24$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Si restamos al resultado (24) el valor del bit más significativo en binario de la salida del contador cuando se encuentra en el estado 5 (0101), ¿cuál es el resultado final?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "En el estado 5 ($0101_2$), el bit más significativo $Q_3$ es 0. Restando: $24 - 0 = 24$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Análisis de FSM con múltiples entradas y salidas",
+      "context": "Una FSM dispone de 2 entradas ($X_1, X_0$), 3 variables de estado ($Q_2, Q_1, Q_0$) y 2 salidas ($Y_1, Y_0$).",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuántas columnas tendrá la tabla de transición y salidas completa del circuito si listamos: Estado Actual, Entradas, Estado Siguiente y Salidas?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Las columnas son: Estado Actual (3 bits: $Q_2, Q_1, Q_0$), Entradas (2 bits: $X_1, X_0$), Estado Siguiente (3 bits: $Q_{2,next}, Q_{1,next}, Q_{0,next}$) y Salidas (2 bits: $Y_1, Y_0$). En total sumamos $3 + 2 + 3 + 2 = 10$ columnas."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Multiplique el número de columnas (10) por el número de filas de la tabla de transición completa. ¿Qué valor resulta?",
+          "correctValue": 320,
+          "tolerance": 0,
+          "explanation": "El número de filas está determinado por todas las combinaciones de estado actual (3 bits) y entradas (2 bits), es decir, $2^{3+2} = 32$ filas. El producto es $10 \\times 32 = 320$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Si la máquina es de Moore, las salidas solo dependen del estado. ¿Cuántas filas tendrá su tabla simplificada de salidas? Súmela al resultado anterior (320). ¿Cuánto resulta?",
+          "correctValue": 328,
+          "tolerance": 0,
+          "explanation": "La tabla de salidas de Moore solo tiene filas para los estados del sistema. Con 3 bits de estado, hay $2^3 = 8$ filas posibles. Sumando al resultado anterior: $320 + 8 = 328$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Si la máquina es de Mealy, las salidas dependen del estado y de la entrada. Reste al valor obtenido (328) el número de filas de su tabla de salidas. ¿Cuál es el valor final?",
+          "correctValue": 296,
+          "tolerance": 0,
+          "explanation": "En una máquina de Mealy, la tabla de salidas completa tiene una fila por cada combinación de estado y entrada, lo que da $2^{3+2} = 32$ filas. Restando al resultado anterior: $328 - 32 = 296$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Diseño de un contador Gray de 4 bits",
+      "context": "Se desea implementar un contador Gray síncrono de 4 bits ($Q_3Q_2Q_1Q_0$) con ciclo completo de 16 estados.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuántas transiciones de estado ocurren en un ciclo completo?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El ciclo completo del contador Gray de 4 bits recorre exactamente 16 estados, lo que implica 16 transiciones para retornar al inicio."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Multiplique el número de transiciones (16) por el número mínimo de flip-flops necesarios. ¿Qué valor resulta?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "Para representar 16 estados se requieren exactamente 4 flip-flops ($2^4 = 16$). El producto es $16 \\times 4 = 64$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "En un ciclo completo, ¿en cuántas transiciones cambia más de 1 bit de estado simultáneamente? Súmelo al valor anterior (64). ¿Cuánto resulta?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "Por definición del código Gray, en cada transición cambia exactamente 1 solo bit de estado. Por tanto, el número de transiciones en las que cambia más de 1 bit es 0. Sumando: $64 + 0 = 64$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si dividimos el resultado obtenido (64) entre la cantidad de flip-flops requeridos (4), ¿cuál es el valor final?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Dividimos 64 entre los 4 flip-flops del circuito, resultando $64 / 4 = 16$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Detector de secuencia '0110' (Moore sin solapamiento)",
+      "context": "Se implementa un detector de la secuencia binaria '0110' tipo Moore sin permitir solapamiento.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de estados de la FSM de Moore?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para detectar una secuencia de longitud $N=4$ en Moore, se necesitan $N+1 = 5$ estados: reposo, '0', '01', '011' y '0110' (estado activo)."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Si la secuencia de entrada es '0110110', multiplique el número de estados (5) por el número de veces que la salida se pone a 1. ¿Cuánto resulta?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "En la entrada '0110110' sin solapamiento: la secuencia '0110' se completa al recibir el cuarto bit. Como no hay solapamiento, el sistema reinicia en reposo y recibe '110', lo cual no forma la secuencia de nuevo. La salida se activa 1 vez. El producto es $5 \\times 1 = 5$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (5) el número de flip-flops D necesarios en codificación binaria natural. ¿Qué valor da?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Para 5 estados se requieren 3 flip-flops. Sumando: $5 + 3 = 8$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Reste al resultado (8) los estados no utilizados en la asignación binaria del registro. ¿Cuál es el resultado final?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El espacio con 3 flip-flops es de 8 estados. Los no utilizados son $8 - 5 = 3$. Restando: $8 - 3 = 5$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Detector de secuencia '0110' (Moore con solapamiento)",
+      "context": "Se implementa un detector de la secuencia binaria '0110' tipo Moore permitiendo solapamiento de bits.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de estados de la FSM de Moore?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La máquina de Moore para detectar una secuencia de 4 bits con o sin solapamiento requiere la misma cantidad inicial de estados para el camino directo, es decir, $N+1 = 5$ estados."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Si la secuencia de entrada es '0110110', multiplique el número de estados (5) por el número de veces que la salida se pone a 1 con solapamiento. ¿Qué valor se obtiene?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "En '0110110' con solapamiento: la primera secuencia '0110' termina en la posición 4. El último '0' actúa como primer '0' del siguiente tramo '0110', que se completa en la posición 7 (entrada: 0-1-1-0-1-1-0). La secuencia ocurre 2 veces. El producto es $5 \\times 2 = 10$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (10) el número de flip-flops D necesarios. ¿Cuánto resulta?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Se necesitan 3 flip-flops para codificar 5 estados. Sumando: $10 + 3 = 13$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Divida el resultado obtenido (13) por el número de entradas externas de la FSM. ¿Cuál es el valor final?",
+          "correctValue": 13.0,
+          "tolerance": 0,
+          "explanation": "El detector recibe un flujo de bits serie, por lo que tiene 1 entrada externa. Dividiendo: $13 / 1 = 13.0$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Análisis de excitación con Flip-Flop T",
+      "context": "Se diseña un circuito secuencial con un flip-flop T tal que la transición de estado siguiente es $Q_{next} = Q \\oplus X$, donde $X$ es la entrada externa.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Si la ecuación del flip-flop T es $T = Q \\oplus Q_{next}$, y sustituimos $Q_{next}$ por su expresión, ¿cuál es el valor lógico simplificado de la entrada $T$ cuando la entrada externa $X = 1$?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sustituyendo: $T = Q \\oplus (Q \\oplus X) = (Q \\oplus Q) \\oplus X = 0 \\oplus X = X$. Si $X = 1$, entonces $T = 1$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Si multiplicamos el valor de T anterior (1) por el número de combinaciones de $(Q, X)$ para las cuales $T = 1$, ¿qué obtenemos?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Dado que $T = X$, $T$ depende únicamente de $X$. Las combinaciones de $(Q,X)$ son: $(0,0), (0,1), (1,0), (1,1)$. De estas 4 combinaciones, $X=1$ en dos de ellas ($(0,1)$ y $(1,1)$). Por lo tanto, hay 2 combinaciones donde $T=1$. El producto es $1 \\times 2 = 2$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (2) el número de flip-flops T que posee este circuito.",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El circuito está constituido por un único flip-flop de tipo T. Sumando: $2 + 1 = 3$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Multiplique el resultado anterior (3) por el número de filas de la tabla de transición de este circuito. ¿Cuál es el resultado final?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Con 1 bit de estado y 1 entrada, la tabla de transición tiene $2^{1+1} = 4$ filas. Multiplicando: $3 \\times 4 = 12$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Complejidad de una FSM de Mealy de 3 estados",
+      "context": "Se analiza una FSM de Mealy de 3 estados, con 1 entrada externa y una salida calculada como $Y = Q_1 \\cdot X$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuál es el número de flip-flops requeridos para codificar los 3 estados en binario natural?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para 3 estados se requiere que $2^k \\ge 3$, por lo que $k = 2$ flip-flops."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops (2) por el número de filas en la tabla de transición completa (considerando la entrada). ¿Qué valor se obtiene?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "La FSM tiene 3 estados lógicos y 1 entrada, lo que genera $3 \\times 2^1 = 6$ filas en la tabla de transición. Multiplicando por los 2 flip-flops: $2 \\times 6 = 12$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "De las 8 combinaciones posibles de $(Q_1, Q_0, X)$ del espacio binario completo, ¿en cuántas de ellas la salida de Mealy $Y = Q_1 \\cdot X$ es igual a 1? Sume este valor al resultado anterior (12). ¿Cuánto resulta?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "La salida es $Y = Q_1 \\cdot X$. Para que sea 1, se requiere obligatoriamente que $Q_1 = 1$ y $X = 1$. Las combinaciones $(Q_1, Q_0, X)$ son: $(1, 0, 1)$ y $(1, 1, 1)$, que son exactamente 2 combinaciones. Sumando al valor anterior: $12 + 2 = 14$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Si del resultado obtenido (14) restamos los estados no utilizados en el espacio binario de los flip-flops, ¿cuál es el valor final?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Con 2 flip-flops hay 4 estados disponibles. Al tener 3 estados activos, los no utilizados son $4 - 3 = 1$. Restando: $14 - 1 = 13$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "FSM de Moore con salidas compuestas",
+      "context": "Se analiza una FSM de Moore con 4 estados ($A=00, B=01, C=10, D=11$) y salidas definidas por $Y_1 = Q_1$ e $Y_2 = \\bar{Q}_0$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Para el estado C (10), calcule el valor binario concatenado de las salidas $Y_1Y_2$ interpretado como número decimal.",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "En el estado $C = 10_2$, tenemos $Q_1 = 1$ y $Q_0 = 0$. Por lo tanto, $Y_1 = 1$ e $Y_2 = \\bar{0} = 1$. Concatenado, $Y_1Y_2 = 11_2 = 3$ en decimal."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Multiplique el valor decimal obtenido (3) por el valor binario concatenado de las salidas $Y_1Y_2$ en el estado B (01) interpretado como decimal. ¿Qué resulta?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En el estado $B = 01_2$, tenemos $Q_1 = 0$ y $Q_0 = 1$. Entonces, $Y_1 = 0$ e $Y_2 = \\bar{1} = 0$. Concatenado, $Y_1Y_2 = 00_2 = 0$ en decimal. El producto es $3 \\times 0 = 0$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (0) la suma de los valores decimales de las salidas $Y_1Y_2$ para todos los 4 estados de la máquina ($A, B, C, D$). ¿Qué valor resulta?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Calculemos las salidas para cada estado:\n- A (00): $Q_1=0, Q_0=0 \\implies Y_1=0, Y_2=1 \\implies 01_2 = 1$.\n- B (01): $Q_1=0, Q_0=1 \\implies Y_1=0, Y_2=0 \\implies 00_2 = 0$.\n- C (10): $Q_1=1, Q_0=0 \\implies Y_1=1, Y_2=1 \\implies 11_2 = 3$.\n- D (11): $Q_1=1, Q_0=1 \\implies Y_1=1, Y_2=0 \\implies 10_2 = 2$.\nLa suma de las salidas decimales es $1 + 0 + 3 + 2 = 6$. Sumado al valor anterior: $0 + 6 = 6$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Multiplique el resultado obtenido (6) por el número de flip-flops del circuito. ¿Cuál es el valor final?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El circuito tiene 4 estados, lo que requiere 2 flip-flops. Multiplicando: $6 \\times 2 = 12$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Transiciones en un contador Gray con flip-flops JK",
+      "context": "Se analiza un contador síncrono que sigue la secuencia Gray 000 -> 001 -> 011 -> 010 -> 110 -> 111 -> 101 -> 100 -> 000... usando flip-flops JK.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿En qué índice de bit (0 para el menos significativo $Q_0$, 1 para $Q_1$ y 2 para $Q_2$) ocurre la conmutación al transicionar del estado 010 al estado 110?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "De $010_2$ a $110_2$, el único bit que cambia es el bit más significativo (pasa de 0 a 1). El índice de este bit es 2."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Multiplique el índice de bit (2) por el valor obligatorio de la entrada $J_2$ necesario para realizar esta transición de conmutación. ¿Qué valor resulta?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para pasar de $Q_2 = 0$ a $Q_2 = 1$, la entrada $J_2$ debe ser 1 (y $K_2 = X$). El producto es $2 \\times 1 = 2$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (2) el número de flip-flops JK que componen este contador de 3 bits.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al ser un contador de 3 bits, se utilizan 3 flip-flops JK. Sumando: $2 + 3 = 5$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Multiplique el resultado (5) por el número de estados en el ciclo de conteo en el que el bit $Q_1$ vale 1. ¿Cuál es el resultado final?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Los estados en el ciclo son: 000, 001, 011, 010, 110, 111, 101, 100. Los estados en los que $Q_1 = 1$ son: 011, 010, 110, 111 (4 estados). Multiplicando: $5 \\times 4 = 20$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Contador de décadas (Módulo-10)",
+      "context": "Se analiza un contador síncrono que cuenta cíclicamente del 0 al 9 en binario empleando flip-flops D.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops D se necesitan como mínimo para codificar el rango de estados de este contador?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para codificar 10 estados distintos se necesitan $k$ flip-flops tal que $2^k \\ge 10$, lo que requiere $k = 4$ flip-flops."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops (4) por el número de estados inválidos fuera del ciclo de conteo de décadas. ¿Qué resulta?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Con 4 flip-flops, hay $2^4 = 16$ estados en el espacio. El contador de décadas ocupa 10 estados lógicos. Los estados no utilizados o inválidos son $16 - 10 = 6$. El producto es $4 \\times 6 = 24$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (24) el estado decimal final en el que se detiene el contador si arranca en 0 y recibe exactamente 12 pulsos de reloj válidos.",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "Al ser un contador módulo-10 que inicia en 0, tras 12 pulsos el estado será $12 \\pmod{10} = 2$. Sumando al valor anterior: $24 + 2 = 26$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Multiplique el resultado (26) por la cantidad de bits en '1' que tiene la representación binaria del número decimal obtenido en el inciso c (2). ¿Cuál es el resultado final?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "El valor decimal obtenido es 2, cuya representación binaria es $0010_2$, la cual tiene exactamente 1 bit en 1. El producto es $26 \\times 1 = 26$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Análisis de FSM basada en puerta XOR y D-FF",
+      "context": "Se analiza un circuito con un flip-flop D donde la entrada de excitación es $D = Q \\oplus X$, siendo $X$ la entrada externa. El estado inicial es $Q=0$.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Si la secuencia de entrada externa ciclo a ciclo es $X = [1, 0, 1, 0]$, ¿cuál es el estado $Q$ tras el primer ciclo de reloj?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Con $Q=0$ y $X=1$, la entrada del flip-flop es $D = 0 \\oplus 1 = 1$. Tras el flanco de reloj, el estado pasa a ser $Q = 1$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Multiplique el estado tras el primer ciclo (1) por el estado $Q$ obtenido tras el segundo ciclo de reloj (entrada $X = 0$). ¿Qué resulta?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el estado actual $Q=1$ y con entrada $X=0$, la excitación es $D = 1 \\oplus 0 = 1$. Tras el reloj, el estado sigue siendo $Q = 1$. El producto es $1 \\times 1 = 1$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (1) el estado $Q$ obtenido tras el tercer ciclo de reloj (entrada $X = 1$). ¿Cuánto resulta?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el estado actual $Q=1$ y con entrada $X=1$, la excitación es $D = 1 \\oplus 1 = 0$. Tras el reloj, el estado pasa a ser $Q = 0$. Sumando: $1 + 0 = 1$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Sume al resultado anterior (1) el estado $Q$ obtenido tras el cuarto ciclo de reloj (entrada $X = 0$). ¿Cuál es el resultado final?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el estado actual $Q=0$ y con entrada $X=0$, la excitación es $D = 0 \\oplus 0 = 0$. Tras el reloj, el estado se mantiene en $Q = 0$. Sumando: $1 + Q = 1 + 0 = 1$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Simplificación por particiones lógicas",
+      "context": "Una FSM con 6 estados iniciales ($S_0 \\dots S_5$) se reduce mediante el método de partición. La partición de salida es $P_0 = \\{(S_0, S_1, S_2), (S_3, S_4, S_5)\\}$.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuál es el número de bloques de equivalencia que contiene la partición $P_0$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La partición $P_0$ agrupa los estados según su salida, resultando en exactamente 2 bloques diferenciados."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Si al calcular $P_1$ el primer bloque se divide, quedando $P_1 = \\{(S_0, S_1), (S_2), (S_3, S_4, S_5)\\}$, multiplique el número de bloques de $P_1$ por el de $P_0$. ¿Qué resulta?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La partición $P_1$ tiene 3 bloques. El producto de los bloques de $P_1$ y $P_0$ es $3 \\times 2 = 6$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Si $P_2 = P_1$, indicando que el algoritmo ha convergido, sume el número final de estados mínimos de la FSM simplificada al número de flip-flops D necesarios en binario natural para implementarla. ¿Qué valor da?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El número final de estados mínimos es 3 (los 3 bloques estables de la partición). Para 3 estados se requieren $\\lceil \\log_2 3 \\rceil = 2$ flip-flops. Sumando ambos valores: $3 + 2 = 5$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Multiplique el resultado anterior (5) por el número de estados no utilizados en el registro de estado de la máquina simplificada. ¿Cuál es el valor final?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Con 2 flip-flops el espacio binario es de 4 estados. Como la máquina simplificada tiene 3 estados, los no utilizados son $4 - 3 = 1$. Multiplicando: $5 \\times 1 = 5$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Análisis de FSM One-Hot de 5 estados",
+      "context": "Se analiza una FSM con 5 estados lógicos implementada mediante codificación One-Hot en un registro de 5 flip-flops ($Q_4Q_3Q_2Q_1Q_0$).",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuál es el número de flip-flops que posee este circuito secuencial?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al usar la codificación One-Hot para 5 estados se requieren exactamente 5 flip-flops."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Multiplique el número de flip-flops (5) por el número de estados inválidos del espacio digital de 5 bits. ¿Qué valor resulta?",
+          "correctValue": 135,
+          "tolerance": 0,
+          "explanation": "El número total de estados lógicos con 5 bits es $2^5 = 32$. Al ser 5 los estados válidos de la FSM, los estados inválidos son $32 - 5 = 27$. El producto es $5 \\times 27 = 135$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Si sumamos al resultado anterior (135) el número de bits que están a nivel lógico 0 en un vector de estado válido cualquiera en One-Hot, ¿qué valor resulta?",
+          "correctValue": 139,
+          "tolerance": 0,
+          "explanation": "En un estado One-Hot de 5 bits, exactamente un bit es 1 y los restantes $5 - 1 = 4$ bits son 0. Sumando: $135 + 4 = 139$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Si dividimos el resultado anterior (139) entre la suma del número de flip-flops del circuito (5) y el número de entradas externas (1), ¿cuál es el resultado final?",
+          "correctValue": 23.17,
+          "tolerance": 0.01,
+          "explanation": "Dividimos 139 entre la suma de flip-flops (5) y entradas (1), es decir, $139 / 6 \\approx 23.17$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Detector de flancos de subida (Modelo de Mealy)",
+      "context": "Se diseña una máquina de Mealy para detectar el flanco de subida de una señal de entrada $X$ (secuencia '01') y activar la salida a 1 de forma síncrona.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "¿Cuál es el número de estados mínimos en el modelo de Mealy?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para detectar un flanco de subida ('01') usando Mealy basta con 2 estados: S0 (último bit fue 0 o reposo) y S1 (último bit fue 1)."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Si la entrada es '0011010', multiplique el número de estados (2) por el número de veces que se activa la salida. ¿Qué valor resulta?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La entrada es '0011010'. Los flancos de subida ('01') ocurren en los ciclos 3 y 6. La salida se activa 2 veces. El producto es $2 \\times 2 = 4$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (4) el número de flip-flops D requeridos en la codificación binaria natural de este circuito.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para 2 estados se necesita $\\lceil \\log_2 2 \\rceil = 1$ flip-flop D. Sumando: $4 + 1 = 5$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Multiplique el resultado anterior (5) por el número de filas de la tabla de transición completa (considerando la entrada). ¿Cuál es el resultado final?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Con 2 estados y 1 entrada, la tabla de transición completa posee $2 \\times 2^1 = 4$ filas. El producto es $5 \\times 4 = 20$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Detector de flancos de subida (Modelo de Moore)",
+      "context": "Se diseña una máquina de Moore para detectar el flanco de subida de una señal de entrada $X$ (secuencia '01') y activar la salida a 1.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "¿Cuál es el número de estados mínimos en el modelo de Moore?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El modelo de Moore requiere 3 estados para detectar el flanco '01': S0 (reposo/último bit 1), S1 (último bit fue 0) y S2 (secuencia detectada, salida 1)."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Si la entrada es '0011010', multiplique el número de estados (3) por el número de veces que se activa la salida. ¿Qué valor resulta?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La secuencia '01' se produce 2 veces en '0011010'. Al ser Moore, la salida se activa a 1 en el estado S2 que se alcanza un ciclo después, manteniéndose activa durante 1 ciclo por cada detección. Ocurre 2 veces. El producto es $3 \\times 2 = 6$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (6) el número de flip-flops necesarios con codificación binaria natural.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Para 3 estados se necesitan $\\lceil \\log_2 3 \\rceil = 2$ flip-flops. Sumando: $6 + 2 = 8$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Multiplique el resultado anterior (8) por el número de estados no utilizados en el espacio binario. ¿Cuál es el resultado final?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Con 2 flip-flops el espacio binario es de 4 estados. Los no utilizados son $4 - 3 = 1$. El producto es $8 \\times 1 = 8$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Detector de paridad par de flujo de bits",
+      "context": "Se implementa una FSM que analiza un flujo de bits serie y activa su salida $Y=1$ únicamente cuando el número total de bits '1' recibidos es par (incluyendo cero '1's como par).",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuál es el número mínimo de estados requerido para modelar esta máquina?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Solo se necesitan 2 estados: S0 (paridad par de '1's, salida Y=1) y S1 (paridad impar de '1's, salida Y=0)."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Si la secuencia de entrada es '110101', multiplique el número de estados (2) por la salida final de la máquina $Y$ tras procesar el último bit. ¿Qué resulta?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La secuencia '110101' tiene exactamente cuatro '1's, lo cual es una cantidad par. Por lo tanto, tras procesar toda la cadena, la FSM finaliza en el estado S0 y la salida Y es 1. El producto es $2 \\times 1 = 2$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (2) el número de filas de la tabla de transición completa (considerando 1 entrada). ¿Cuánto da?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Con 2 estados y 1 entrada, la tabla completa tiene $2 \\times 2 = 4$ filas. Sumando: $2 + 4 = 6$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Divida el resultado (6) por el número de flip-flops D necesarios para implementarla. ¿Cuál es el valor final?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Para 2 estados se necesita exactly 1 flip-flop. Dividiendo: $6 / 1 = 6$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "FSM de control de contador síncrono con habilitación",
+      "context": "Se analiza un contador síncrono de 3 bits ($Q_2Q_1Q_0$) dotado de una entrada de habilitación $EN$. Si $EN=1$, el contador avanza. Si $EN=0$, retiene su estado actual.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Si el estado actual es 5 ($101_2$) y la habilitación es $EN=0$, ¿cuál será el estado siguiente en binario interpretado como valor decimal?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Dado que $EN=0$, el contador retiene su estado, por lo que el estado siguiente vuelve a ser 5 ($101_2$)."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Sume al resultado anterior (5) el estado siguiente en decimal si el estado actual es 5 ($101_2$) y la habilitación se activa a $EN=1$.",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Con $EN=1$, el contador avanza de 5 al estado 6 ($110_2$). Sumando al valor anterior: $5 + 6 = 11$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Sume al resultado anterior (11) el estado siguiente en decimal si el estado actual es el máximo 7 ($111_2$) y $EN=1$.",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Al ser un contador de 3 bits, del estado 7 con $EN=1$ pasa cíclicamente al estado 0 ($000_2$). Sumando al valor anterior: $11 + 0 = 11$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Divida el resultado (11) entre el número de flip-flops que componen este contador de 3 bits. ¿Cuál es el valor final?",
+          "correctValue": 3.67,
+          "tolerance": 0.01,
+          "explanation": "El contador de 3 bits tiene 3 flip-flops. Dividiendo: $11 / 3 \\approx 3.67$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuación de Salida en el Modelo de Moore",
+      "tex": "$$Y(t) = f(Q(t))$$"
+    },
+    {
+      "name": "Ecuación de Salida en el Modelo de Mealy",
+      "tex": "$$Y(t) = f(Q(t), X(t))$$"
+    },
+    {
+      "name": "Lógica de Estado Siguiente (FSM Síncrona)",
+      "tex": "$$Q(t+1) = g(Q(t), X(t))$$"
+    },
+    {
+      "name": "Relación entre número de estados (M) y flip-flops necesarios (k)",
+      "tex": "$$2^k \\ge M \\implies k \\ge \\lceil \\log_2 M \\rceil$$"
+    },
+    {
+      "name": "Ecuación característica del Flip-Flop D",
+      "tex": "$$Q(t+1) = D(t)$$"
+    },
+    {
+      "name": "Ecuación característica del Flip-Flop JK",
+      "tex": "$$Q(t+1) = J(t) \\cdot \\bar{Q}(t) + \\bar{K}(t) \\cdot Q(t)$$"
+    },
+    {
+      "name": "Ecuación característica del Flip-Flop T",
+      "tex": "$$Q(t+1) = T(t) \\oplus Q(t)$$"
+    },
+    {
+      "name": "Frecuencia Máxima de Reloj admisible (Margen de Tiempos)",
+      "tex": "$$f_{\\text{max}} = \\frac{1}{T_{\\text{min}}} = \\frac{1}{t_{co} + t_{comb} + t_{su}}$$"
+    },
+    {
+      "name": "Espacio de estados no asignados (estados inválidos)",
+      "tex": "$$E_{\\text{inv}} = 2^k - M$$"
+    },
+    {
+      "name": "Número de flip-flops en codificación One-Hot para M estados",
+      "tex": "$$k_{\\text{one-hot}} = M$$"
+    }
+  ]
+}

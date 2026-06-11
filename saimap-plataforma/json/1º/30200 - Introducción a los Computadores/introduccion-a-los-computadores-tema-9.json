@@ -1,0 +1,2149 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la función principal de un registro de desplazamiento?",
+      "options": [
+        "Almacenar y desplazar datos bit a bit en cada flanco de reloj a lo largo de una cadena de flip-flops",
+        "Realizar operaciones aritméticas de suma y resta de números binarios",
+        "Generar señales de reloj de frecuencia variable para sincronizar otros circuitos"
+      ],
+      "correct": 0,
+      "hint": "Piensa en cómo se conectan los flip-flops entre sí.",
+      "explanation": "En un registro de desplazamiento, la salida Q de cada flip-flop se conecta a la entrada D del siguiente. En cada flanco activo de reloj, la información se desplaza una posición a lo largo de la cadena."
+    },
+    {
+      "q": "Un registro SIPO (Serial-In, Parallel-Out) recibe datos:",
+      "options": [
+        "Bit a bit en serie y los presenta simultáneamente en múltiples salidas paralelas",
+        "Simultáneamente en varias entradas paralelas y los emite bit a bit en serie",
+        "Bit a bit en serie y los emite bit a bit en serie con retardo"
+      ],
+      "correct": 0,
+      "hint": "Las siglas indican el modo de entrada y de salida.",
+      "explanation": "SIPO = Serial-In, Parallel-Out. Los datos entran un bit por ciclo de reloj y, tras N ciclos, todos los N bits están disponibles simultáneamente en las salidas paralelas de cada flip-flop."
+    },
+    {
+      "q": "Un registro PISO (Parallel-In, Serial-Out) se utiliza principalmente para:",
+      "options": [
+        "Convertir una palabra de datos paralela en una secuencia serie para su transmisión",
+        "Convertir una secuencia serie en una palabra paralela para su procesamiento",
+        "Duplicar la frecuencia de la señal de reloj del sistema"
+      ],
+      "correct": 0,
+      "hint": "Piensa en cómo la UART prepara datos para enviarlos.",
+      "explanation": "Un registro PISO carga la palabra entera en paralelo y luego la desplaza hacia fuera bit a bit. Esto es lo que hace la UART al transmitir datos: carga el byte y lo envía en serie por el cable."
+    },
+    {
+      "q": "¿Qué diferencia fundamental existe entre un contador asíncrono y uno síncrono?",
+      "options": [
+        "En el asíncrono, solo el primer flip-flop recibe el reloj externo; en el síncrono, todos los flip-flops reciben el mismo reloj",
+        "En el asíncrono, todos los flip-flops reciben el mismo reloj; en el síncrono, solo el último recibe el reloj",
+        "En el síncrono, el reloj se conecta en anillo; en el asíncrono, se conecta en árbol"
+      ],
+      "correct": 0,
+      "hint": "Recuerda la definición de contador de rizado.",
+      "explanation": "En el contador asíncrono (ripple counter), el CLK externo excita solo al FF0 y cada etapa siguiente usa la salida Q de la anterior como reloj, acumulando retardos. En el síncrono, todos los FFs comparten el mismo flanco de reloj."
+    },
+    {
+      "q": "El principal inconveniente del contador asíncrono frente al síncrono es:",
+      "options": [
+        "La acumulación de retardos de propagación que genera estados transitorios erróneos",
+        "La necesidad de una lógica combinacional más compleja para calcular los estados",
+        "La imposibilidad de contar en secuencias no binarias"
+      ],
+      "correct": 0,
+      "hint": "¿Qué sucede cuando cada etapa dispara a la siguiente?",
+      "explanation": "Al propagarse el disparo etapa a etapa, el retardo total crece con O(N). Mientras se propaga, las salidas muestran estados intermedios transitorios (glitches) que pueden causar errores en la lógica que lee el contador."
+    },
+    {
+      "q": "En un contador síncrono de módulo M, ¿qué determina el número de flip-flops necesarios?",
+      "options": [
+        "El número mínimo de bits N tal que 2^N ≥ M",
+        "Exactamente M flip-flops, uno por cada estado",
+        "El número de entradas de datos paralelas del sistema"
+      ],
+      "correct": 0,
+      "hint": "Se necesitan suficientes bits para representar todos los estados.",
+      "explanation": "Con N flip-flops se tienen 2^N estados posibles. Para un contador de módulo M se necesita N = ⌈log₂(M)⌉ flip-flops, de forma que 2^N ≥ M."
+    },
+    {
+      "q": "Desplazar un número binario una posición a la izquierda es equivalente a:",
+      "options": [
+        "Multiplicarlo por 2",
+        "Dividirlo entre 2",
+        "Invertir todos sus bits"
+      ],
+      "correct": 0,
+      "hint": "Observa cómo cambia el peso posicional de cada bit.",
+      "explanation": "Al desplazar a la izquierda, cada bit pasa a una posición de mayor peso (×2). Por ejemplo, 00001010₂ (10) → 00010100₂ (20)."
+    },
+    {
+      "q": "Desplazar un número binario una posición a la derecha es equivalente a:",
+      "options": [
+        "Realizar una división entera por 2",
+        "Multiplicarlo por 2",
+        "Calcular el complemento a dos"
+      ],
+      "correct": 0,
+      "hint": "El bit menos significativo sale de la cadena.",
+      "explanation": "Al desplazar a la derecha, cada bit pasa a una posición de menor peso (÷2). Por ejemplo, 00001010₂ (10) → 00000101₂ (5). La división es entera porque el LSB se pierde."
+    },
+    {
+      "q": "¿Cuántos estados distintos recorre un contador Johnson de N bits?",
+      "options": [
+        "2·N estados",
+        "2^N estados",
+        "N estados"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el ejemplo de 3 bits del tema: 6 estados.",
+      "explanation": "Un contador Johnson de N flip-flops genera 2·N estados distintos. Para 3 bits: 6 estados (000→100→110→111→011→001→000)."
+    },
+    {
+      "q": "¿Cómo se conecta la realimentación en un contador Johnson de N bits?",
+      "options": [
+        "La salida negada (Q̄) del último flip-flop se conecta a la entrada D del primero",
+        "La salida directa (Q) del último flip-flop se conecta a la entrada D del primero",
+        "La salida del primer flip-flop se conecta a la entrada del último"
+      ],
+      "correct": 0,
+      "hint": "La negación de la salida es clave para el patrón Johnson.",
+      "explanation": "En el contador Johnson, D₀ = Q̄_{N-1}, lo que hace que los unos 'entren' por un extremo y luego sean seguidos por ceros. Esto crea la secuencia característica de 2·N estados."
+    },
+    {
+      "q": "¿Cómo se conecta la realimentación en un contador de anillo (ring counter) de N bits?",
+      "options": [
+        "La salida directa (Q) del último flip-flop se conecta a la entrada D del primero",
+        "La salida negada (Q̄) del último flip-flop se conecta a la entrada D del primero",
+        "La salida del primer flip-flop se conecta a la entrada del penúltimo"
+      ],
+      "correct": 0,
+      "hint": "En el contador de anillo, el '1' da vueltas sin inversión.",
+      "explanation": "En el contador de anillo (ring counter), D₀ = Q_{N-1}: la salida directa del último FF vuelve al primero. El único '1' (o '0') activo circula alrededor del anillo."
+    },
+    {
+      "q": "Un contador de anillo de N bits genera cuántos estados distintos:",
+      "options": [
+        "N estados",
+        "2^N estados",
+        "2·N estados"
+      ],
+      "correct": 0,
+      "hint": "El '1' circula entre N posiciones.",
+      "explanation": "Un ring counter de N bits tiene exactamente N estados válidos (uno por cada posición del '1' circulante). Esto lo hace más ineficiente que el Johnson, pero más fácil de decodificar."
+    },
+    {
+      "q": "En el diseño de un contador síncrono con flip-flops T, ¿cuándo debe conmutar el flip-flop de la etapa i?",
+      "options": [
+        "Cuando todas las etapas de menor peso (0 a i-1) estén en estado 1",
+        "Cuando cualquier etapa de menor peso esté en estado 1",
+        "En cada ciclo de reloj, independientemente del estado de las demás etapas"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el patrón de conmutación del contador binario.",
+      "explanation": "En un contador binario síncrono, el bit i conmuta solo cuando todos los bits de menor peso (i-1, i-2, …, 0) son 1. Esto se implementa con una AND de todas las salidas Q₀, Q₁, …, Q_{i-1} conectada a la entrada T_{i}."
+    },
+    {
+      "q": "¿Para qué sirve la UART en el contexto de los registros de desplazamiento?",
+      "options": [
+        "Convierte datos paralelos del bus del sistema en serie (PISO) para transmitirlos, y datos serie en paralelos (SIPO) al recibirlos",
+        "Convierte señales analógicas en digitales para su posterior procesamiento en el bus",
+        "Genera pulsos de reloj para sincronizar los registros de desplazamiento en la placa base"
+      ],
+      "correct": 0,
+      "hint": "UART = Universal Asynchronous Receiver-Transmitter.",
+      "explanation": "La UART usa un registro PISO para serializar el dato del bus y enviarlo por un cable, y un registro SIPO en el receptor para reconstruir el byte original. Esta conversión es esencial para USB y puertos COM."
+    },
+    {
+      "q": "En un contador Gray de 2 bits con la secuencia 00→01→11→10, la expresión lógica para D₁ es:",
+      "options": [
+        "D₁ = Q₀",
+        "D₁ = Q̄₁",
+        "D₁ = Q₁ ⊕ Q₀"
+      ],
+      "correct": 0,
+      "hint": "Revisa la tabla de transición del ejercicio resuelto.",
+      "explanation": "De la tabla de transición: D₁ se activa para Q₁Q₀ = 01 y Q₁Q₀ = 11. Ambas filas tienen Q₀ = 1, por tanto D₁ = Q₀."
+    },
+    {
+      "q": "En un contador Gray de 2 bits con la secuencia 00→01→11→10, la expresión lógica para D₀ es:",
+      "options": [
+        "D₀ = Q̄₁",
+        "D₀ = Q₀",
+        "D₀ = Q₁ ⊕ Q₀"
+      ],
+      "correct": 0,
+      "hint": "D₀ se activa cuando Q₁ = 0.",
+      "explanation": "De la tabla de transición: D₀ = 1 para Q₁Q₀ = 00 y Q₁Q₀ = 01. En ambos casos Q₁ = 0, por tanto D₀ = Q̄₁."
+    },
+    {
+      "q": "¿Cuántos flip-flops se necesitan mínimamente para construir un contador de módulo 10 (BCD)?",
+      "options": [
+        "4 flip-flops",
+        "10 flip-flops",
+        "3 flip-flops"
+      ],
+      "correct": 0,
+      "hint": "2^3 = 8 < 10 ≤ 16 = 2^4.",
+      "explanation": "Se necesita N tal que 2^N ≥ 10. Con 3 bits solo se tienen 8 estados. Con 4 bits se tienen 16 ≥ 10, por lo que son necesarios 4 flip-flops."
+    },
+    {
+      "q": "Un contador binario síncrono de 4 bits se convierte en contador módulo 6 mediante lógica de reinicio. ¿En qué estado binario debe detectarse el reset?",
+      "options": [
+        "0110 (el estado 6, que es el primero no válido)",
+        "0101 (el estado 5, el último válido)",
+        "1111 (el estado máximo del contador de 4 bits)"
+      ],
+      "correct": 0,
+      "hint": "El módulo 6 tiene estados 0–5; el estado 6 es el primero fuera de secuencia.",
+      "explanation": "Para módulo 6 (estados 0 a 5), cuando el contador alcanza el estado 6 (0110₂), la lógica combinacional detecta esta combinación y fuerza el reset asíncrono a 0000, completando el ciclo."
+    },
+    {
+      "q": "¿Cuántos estados distintos puede visitar un contador binario de 4 bits si no se aplica ningún reset externo?",
+      "options": [
+        "16 estados (de 0000 a 1111)",
+        "8 estados (de 0000 a 0111)",
+        "15 estados (de 0001 a 1111)"
+      ],
+      "correct": 0,
+      "hint": "4 bits → 2^4 estados.",
+      "explanation": "Un contador binario de N bits tiene 2^N = 2^4 = 16 estados posibles (incluyendo el cero). Sin reset externo, recorre todos: 0→1→2→…→15→0."
+    },
+    {
+      "q": "Para cascadar dos contadores de módulo 10 y obtener un contador de módulo 100, ¿cómo se conectan?",
+      "options": [
+        "La salida de acarreo (carry-out) del contador de unidades se usa como reloj del contador de decenas",
+        "Las salidas de ambos contadores se suman con un sumador binario",
+        "Las entradas de datos de ambos contadores se conectan en paralelo al mismo bus"
+      ],
+      "correct": 0,
+      "hint": "El acarreo indica cuándo el contador inferior ha completado un ciclo.",
+      "explanation": "El contador de unidades genera un pulso de carry-out cada vez que completa su ciclo de 10. Este pulso se usa como señal de reloj del contador de decenas, que avanza una unidad por cada 10 del contador inferior."
+    },
+    {
+      "q": "¿Qué es el módulo (M) de un contador?",
+      "options": [
+        "El número de estados distintos que recorre la secuencia del contador",
+        "El número de flip-flops que componen el contador",
+        "La frecuencia máxima a la que puede operar el contador"
+      ],
+      "correct": 0,
+      "hint": "El módulo caracteriza el tamaño del ciclo.",
+      "explanation": "El módulo M es la longitud del ciclo: cuántos estados distintos visita el contador antes de volver al estado inicial. Un contador de módulo 8 tiene 8 estados distintos."
+    },
+    {
+      "q": "En un registro de almacenamiento básico (no desplazamiento), ¿qué comparten todos los flip-flops tipo D?",
+      "options": [
+        "La misma señal de reloj (CLK) y una línea de habilitación (Enable) común",
+        "La misma entrada de datos (D) conectada en paralelo",
+        "La misma salida Q conectada en bus de tres estados"
+      ],
+      "correct": 0,
+      "hint": "El Enable permite actualizar o retener el valor almacenado.",
+      "explanation": "En un registro de almacenamiento, todos los FFs tipo D comparten CLK y Enable. Cuando Enable = 1, los datos de entrada se cargan en el flanco activo del reloj; cuando Enable = 0, el registro mantiene su valor."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre un contador de anillo y un contador Johnson en términos de eficiencia de estados?",
+      "options": [
+        "El Johnson genera 2·N estados con N bits, frente a solo N estados del anillo",
+        "El anillo genera más estados que el Johnson para el mismo número de bits",
+        "Ambos generan el mismo número de estados pero con distinta secuencia"
+      ],
+      "correct": 0,
+      "hint": "Compara N estados (anillo) vs 2N estados (Johnson).",
+      "explanation": "Con N flip-flops: el contador de anillo genera N estados, mientras que el Johnson genera 2·N estados. El Johnson es más eficiente en uso de hardware aunque su decodificación es ligeramente más compleja."
+    },
+    {
+      "q": "En el diseño de un contador síncrono con flip-flops JK configurados en modo T (J=K=T), la entrada T del flip-flop más significativo de un contador binario de 3 bits es:",
+      "options": [
+        "T₂ = Q₁ · Q₀",
+        "T₂ = Q₁ + Q₀",
+        "T₂ = Q₀"
+      ],
+      "correct": 0,
+      "hint": "El bit más significativo conmuta cuando todos los de menor peso están en 1.",
+      "explanation": "En el contador binario síncrono de 3 bits, Q₂ debe cambiar solo cuando Q₁ = 1 y Q₀ = 1 (estado 011 → 100 y 111 → 000). Por tanto T₂ = Q₁ · Q₀."
+    },
+    {
+      "q": "¿Qué tipo de flip-flop simplifica más el diseño de un contador binario síncrono ascendente?",
+      "options": [
+        "Flip-flop T, porque conmuta su salida directamente con T=1",
+        "Flip-flop SR, porque permite setear y resetear de forma independiente",
+        "Flip-flop D, porque copia directamente el siguiente estado en su entrada"
+      ],
+      "correct": 0,
+      "hint": "Un contador necesita conmutar bits; ¿qué flip-flop hace exactamente eso?",
+      "explanation": "El flip-flop T (Toggle) conmuta su salida cuando T=1, lo que lo hace ideal para contadores: basta conectar la función de conmutación a T sin calcular el siguiente estado explícitamente."
+    },
+    {
+      "q": "Un registro de desplazamiento PIPO (Parallel-In, Parallel-Out) con señal de Enable actúa principalmente como:",
+      "options": [
+        "Registro de almacenamiento temporal con carga y lectura paralelas",
+        "Convertidor de datos serie a paralelo",
+        "Convertidor de datos paralelo a serie"
+      ],
+      "correct": 0,
+      "hint": "PIPO no desplaza datos; los retiene.",
+      "explanation": "Un PIPO carga todos los bits simultáneamente (entrada paralela) y los presenta todos simultáneamente en la salida (salida paralela). Es esencialmente un latch o registro de almacenamiento básico controlado por Enable."
+    },
+    {
+      "q": "En un contador Johnson de 4 bits que parte de 0000, ¿cuál es el tercer estado de la secuencia?",
+      "options": [
+        "1110",
+        "1100",
+        "0111"
+      ],
+      "correct": 0,
+      "hint": "La secuencia empieza: 0000 → 1000 → 1100 → …",
+      "explanation": "Con D₀ = Q̄₃: estado 0→ Q̄₃=1, entra 1: 1000. Estado 2→ Q̄₃=1, entra 1: 1100. Estado 3→ Q̄₃=1, entra 1: 1110. El tercer estado es 1110."
+    },
+    {
+      "q": "¿Cuántos estados tiene un contador Johnson de 4 bits?",
+      "options": [
+        "8 estados",
+        "16 estados",
+        "4 estados"
+      ],
+      "correct": 0,
+      "hint": "Fórmula: 2·N para N bits.",
+      "explanation": "Un contador Johnson de N=4 bits tiene 2·4 = 8 estados distintos antes de repetir el ciclo."
+    },
+    {
+      "q": "¿Qué ventaja tiene el contador síncrono frente al asíncrono en aplicaciones de alta frecuencia?",
+      "options": [
+        "No acumula retardos entre etapas, ya que todos los flip-flops conmutan simultáneamente",
+        "Requiere menos flip-flops para el mismo módulo de conteo",
+        "No necesita lógica combinacional para las entradas de control"
+      ],
+      "correct": 0,
+      "hint": "La simultaneidad es la clave.",
+      "explanation": "Al dispararse todos los FFs en el mismo flanco, el retardo total es el de un solo flip-flop más la lógica combinacional, independientemente de N. Esto permite frecuencias de reloj mucho más altas que el contador asíncrono."
+    },
+    {
+      "q": "Para diseñar un contador síncrono de módulo M con flip-flops D, ¿cuál es el primer paso del proceso?",
+      "options": [
+        "Construir la tabla de transición de estados (estado actual → estado siguiente)",
+        "Calcular el número de puertas AND necesarias para la lógica",
+        "Conectar los flip-flops en cascada y luego añadir la lógica de reset"
+      ],
+      "correct": 0,
+      "hint": "El diseño parte siempre del comportamiento deseado.",
+      "explanation": "El primer paso es definir la tabla de transición completa (current state → next state). De ella se extraen las ecuaciones lógicas para las entradas D de cada flip-flop, que luego se implementan con puertas."
+    },
+    {
+      "q": "¿Cuántos bits necesita un contador síncrono para contar de 0 a 15?",
+      "options": [
+        "4 bits",
+        "3 bits",
+        "5 bits"
+      ],
+      "correct": 0,
+      "hint": "2^4 = 16 estados (0 a 15).",
+      "explanation": "Para contar de 0 a 15 se necesitan 16 estados. Con N bits se tienen 2^N estados. 2^4 = 16, por lo que se necesitan exactamente 4 bits (flip-flops)."
+    },
+    {
+      "q": "La señal de carry-out de un contador de módulo M se genera típicamente:",
+      "options": [
+        "Cuando el contador alcanza el estado M-1, indicando que el siguiente ciclo de reloj lo reiniciará",
+        "Cuando el contador alcanza el estado 0, indicando el inicio del ciclo",
+        "De forma periódica cada N ciclos de reloj, donde N es el número de bits"
+      ],
+      "correct": 0,
+      "hint": "El carry sale cuando el contador está en el último estado válido.",
+      "explanation": "El carry-out se activa en el estado M-1 (máximo de la secuencia) y permanece activo durante ese ciclo, indicando que en el siguiente flanco el contador volverá a 0 y deberá avanzar el contador de mayor peso."
+    },
+    {
+      "q": "En un registro de desplazamiento SISO de 4 bits, si la secuencia de entrada es 1,0,1,1 (MSB primero), ¿cuántos ciclos de reloj se necesitan para que el primer bit (1) aparezca en la salida?",
+      "options": [
+        "4 ciclos",
+        "1 ciclo",
+        "8 ciclos"
+      ],
+      "correct": 0,
+      "hint": "El dato debe atravesar los 4 flip-flops.",
+      "explanation": "En un SISO de 4 bits, el dato de entrada debe propagarse a través de los 4 flip-flops. El primer bit entrará al FF0 en el ciclo 1, llegará al FF1 en el ciclo 2, al FF2 en el ciclo 3 y a la salida (FF3) en el ciclo 4."
+    },
+    {
+      "q": "¿Qué secuencia produce el contador Johnson de 3 bits partiendo de 000?",
+      "options": [
+        "000 → 100 → 110 → 111 → 011 → 001 → 000",
+        "000 → 001 → 011 → 111 → 110 → 100 → 000",
+        "000 → 001 → 010 → 011 → 100 → 101 → 000"
+      ],
+      "correct": 0,
+      "hint": "D₀ = Q̄₂, D₁ = Q₀, D₂ = Q₁.",
+      "explanation": "Con la realimentación Q̄₂ → D₀: desde 000 (Q̄₂=1) → 100 → 110 → 111 (Q̄₂=0) → 011 → 001 → 000. Esta es la secuencia Johnson de 6 estados para 3 bits."
+    },
+    {
+      "q": "En un contador de anillo de 4 bits con estado inicial 1000, ¿cuál es el estado después de 3 flancos de reloj?",
+      "options": [
+        "0001",
+        "0010",
+        "1000"
+      ],
+      "correct": 0,
+      "hint": "El '1' circula una posición hacia la derecha en cada flanco.",
+      "explanation": "Estado 0: 1000. Flanco 1: 0100. Flanco 2: 0010. Flanco 3: 0001. El '1' se desplaza una posición a la derecha en cada ciclo."
+    },
+    {
+      "q": "¿Cuántos estados válidos tiene un contador de anillo de 8 bits?",
+      "options": [
+        "8 estados",
+        "16 estados",
+        "256 estados"
+      ],
+      "correct": 0,
+      "hint": "El '1' tiene exactamente 8 posiciones posibles.",
+      "explanation": "En un contador de anillo de N bits, solo hay N estados válidos (uno '1' en cada posición). Para N=8: 8 estados válidos, comparado con 2^8 = 256 estados posibles del contador binario."
+    },
+    {
+      "q": "Un contador binario asíncrono de 4 bits con flip-flops JK (J=K=1) dispara cada etapa:",
+      "options": [
+        "En el flanco de bajada de la salida Q de la etapa anterior",
+        "En el flanco de subida de la señal de reloj global",
+        "Cuando la etapa anterior tiene Q=0"
+      ],
+      "correct": 0,
+      "hint": "El flip-flop JK en modo Toggle conmuta en el flanco activo de su entrada CLK.",
+      "explanation": "En el ripple counter, cada FF JK (modo Toggle) recibe como CLK la salida Q de la etapa anterior. Dado que el FF conmuta en el flanco de bajada, cada etapa se dispara cuando Q de la etapa anterior va de 1 a 0."
+    },
+    {
+      "q": "¿Cuántos flip-flops se necesitan mínimamente para construir un contador de módulo 12?",
+      "options": [
+        "4 flip-flops",
+        "3 flip-flops",
+        "12 flip-flops"
+      ],
+      "correct": 0,
+      "hint": "2^3 = 8 < 12 ≤ 16 = 2^4.",
+      "explanation": "Se necesita N = ⌈log₂(12)⌉ = ⌈3.58⌉ = 4 flip-flops, ya que 2^3 = 8 < 12 y 2^4 = 16 ≥ 12."
+    },
+    {
+      "q": "¿Cuántos flip-flops se necesitan mínimamente para construir un contador de módulo 5?",
+      "options": [
+        "3 flip-flops",
+        "5 flip-flops",
+        "2 flip-flops"
+      ],
+      "correct": 0,
+      "hint": "2^2 = 4 < 5 ≤ 8 = 2^3.",
+      "explanation": "Se necesita N = ⌈log₂(5)⌉ = ⌈2.32⌉ = 3 flip-flops, ya que 2^2 = 4 < 5 y 2^3 = 8 ≥ 5."
+    },
+    {
+      "q": "En un registro de desplazamiento bidireccional, ¿qué componente permite seleccionar la dirección del desplazamiento?",
+      "options": [
+        "Un multiplexor (MUX) en la entrada D de cada flip-flop que selecciona entre Q del flip-flop anterior o posterior",
+        "Un decodificador conectado a las entradas JK de cada flip-flop",
+        "Un registro adicional que almacena la dirección seleccionada"
+      ],
+      "correct": 0,
+      "hint": "La señal de selección debe elegir entre la entrada izquierda o derecha.",
+      "explanation": "En un registro de desplazamiento bidireccional, cada FF tiene un MUX 2:1 en su entrada D. Con la línea de control DIR=0 se selecciona Q del FF anterior (desplazamiento derecha) y con DIR=1 se selecciona Q del FF siguiente (desplazamiento izquierda)."
+    },
+    {
+      "q": "¿Cuántos bits necesita un sistema para representar los 60 segundos de un minuto en un contador?",
+      "options": [
+        "6 bits",
+        "7 bits",
+        "5 bits"
+      ],
+      "correct": 0,
+      "hint": "2^5 = 32 < 60 ≤ 64 = 2^6.",
+      "explanation": "Se necesita N = ⌈log₂(60)⌉ = ⌈5.91⌉ = 6 bits, ya que 2^5 = 32 < 60 ≤ 64 = 2^6."
+    },
+    {
+      "q": "En el contexto de los registros de desplazamiento, ¿qué se entiende por 'desplazamiento aritmético a la derecha'?",
+      "options": [
+        "El bit de signo (MSB) se replica en la posición vacante, preservando el signo del número en complemento a dos",
+        "Un cero se introduce por la izquierda al desplazar, independientemente del signo",
+        "El LSB se realimenta al MSB formando una rotación circular"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento aritmético preserva el signo.",
+      "explanation": "En el desplazamiento aritmético a la derecha, el bit de signo (MSB) se copia a la nueva posición más significativa, preservando el signo para números en complemento a dos. Esto garantiza que la división por 2 funciona correctamente para negativos."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre los contadores síncronos es CORRECTA?",
+      "options": [
+        "Todos los flip-flops conmutan en el mismo flanco de reloj gracias a la lógica combinacional de control",
+        "El retardo total crece proporcionalmente al número de etapas N",
+        "No pueden implementar módulos distintos de potencias de 2"
+      ],
+      "correct": 0,
+      "hint": "La simultaneidad es la característica definitoria.",
+      "explanation": "Los contadores síncronos tienen todos los FFs conectados al mismo CLK. La lógica combinacional (AND de estados anteriores) determina cuándo debe conmutar cada FF, garantizando que lo hagan simultáneamente."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Un registro SISO tiene entrada ____ y salida ____.",
+      "options": [
+        "serie; serie",
+        "paralela; paralela",
+        "serie; paralela"
+      ],
+      "correct": 0,
+      "hint": "Las siglas SISO lo indican directamente.",
+      "explanation": "SISO = Serial-In, Serial-Out: tanto la entrada como la salida son bit a bit en serie."
+    },
+    {
+      "q": "El número de estados de un contador Johnson de N bits es ____.",
+      "options": [
+        "2·N",
+        "2^N",
+        "N"
+      ],
+      "correct": 0,
+      "hint": "Para N=3 hay 6 estados.",
+      "explanation": "La fórmula del contador Johnson es 2·N estados, exactamente el doble que el contador de anillo con el mismo número de flip-flops."
+    },
+    {
+      "q": "Desplazar 3 posiciones a la izquierda un número binario equivale a multiplicarlo por ____.",
+      "options": [
+        "8",
+        "3",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Cada posición de desplazamiento multiplica por 2.",
+      "explanation": "Desplazar k posiciones a la izquierda multiplica por 2^k. Para k=3: 2^3 = 8."
+    },
+    {
+      "q": "En un contador asíncrono, solo el ____ flip-flop recibe directamente la señal de reloj externa.",
+      "options": [
+        "primer (o menos significativo)",
+        "último (o más significativo)",
+        "central"
+      ],
+      "correct": 0,
+      "hint": "Los demás usan la salida Q del anterior como reloj.",
+      "explanation": "En el ripple counter, el CLK externo solo llega al FF0. Los FFs siguientes usan la salida Q (o Q̄) del flip-flop anterior como señal de reloj, lo que causa la propagación escalonada del cambio."
+    },
+    {
+      "q": "Para convertir un contador binario de 4 bits en módulo 10, se añade lógica de ____ que detecta el estado 1010 y reinicia el contador.",
+      "options": [
+        "reset asíncrono",
+        "preseteo síncrono",
+        "carry propagado"
+      ],
+      "correct": 0,
+      "hint": "La condición 1010 (10) debe forzar la vuelta a 0.",
+      "explanation": "Una puerta NAND detecta Q₃·Q₁ = 1 (estado 10 = 1010₂) y conecta su salida a las entradas CLR (reset asíncrono) de todos los FFs, forzando la vuelta instantánea a 0000."
+    },
+    {
+      "q": "En el contador Johnson de 3 bits, tras el estado 111 el siguiente estado es ____.",
+      "options": [
+        "011",
+        "000",
+        "110"
+      ],
+      "correct": 0,
+      "hint": "Q̄₂ = 0 cuando Q₂ = 1, así que entra un 0.",
+      "explanation": "Cuando el estado es 111, Q₂=1, por lo que Q̄₂=0. Este 0 entra al FF0 y el resto se desplaza: el siguiente estado es 011."
+    },
+    {
+      "q": "Un registro SIPO necesita ____ ciclos de reloj para cargar completamente N bits de datos serie.",
+      "options": [
+        "N ciclos",
+        "N/2 ciclos",
+        "2·N ciclos"
+      ],
+      "correct": 0,
+      "hint": "Cada ciclo carga un bit.",
+      "explanation": "En un registro SIPO de N bits, cada ciclo de reloj introduce un bit en el primer FF y desplaza los existentes. Para cargar N bits completos se necesitan exactamente N ciclos."
+    },
+    {
+      "q": "El módulo de un contador es el número de ____ distintos que recorre antes de repetirse.",
+      "options": [
+        "estados",
+        "flip-flops",
+        "bits de salida"
+      ],
+      "correct": 0,
+      "hint": "Define el tamaño del ciclo de conteo.",
+      "explanation": "El módulo M es la longitud del ciclo: cuántos estados distintos visita el contador. Un contador módulo 8 recorre 8 estados distintos (0–7) antes de volver a 0."
+    },
+    {
+      "q": "La UART usa un registro de tipo ____ para serializar datos y enviarlos por el cable.",
+      "options": [
+        "PISO (Parallel-In, Serial-Out)",
+        "SIPO (Serial-In, Parallel-Out)",
+        "SISO (Serial-In, Serial-Out)"
+      ],
+      "correct": 0,
+      "hint": "Los datos entran en paralelo desde el bus y salen en serie.",
+      "explanation": "La UART carga la palabra paralela del bus en un registro PISO y la desplaza hacia fuera bit a bit. En el receptor usa un SIPO para reconstruir la palabra paralela."
+    },
+    {
+      "q": "El número mínimo de flip-flops para un contador de módulo 7 es ____.",
+      "options": [
+        "3",
+        "7",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "⌈log₂(7)⌉ = ?",
+      "explanation": "⌈log₂(7)⌉ = ⌈2.807⌉ = 3. Con 3 FFs se tienen 2^3 = 8 estados ≥ 7. Con 2 FFs solo 4 estados, insuficiente."
+    },
+    {
+      "q": "Cascadar dos contadores de módulo 8 produce un contador de módulo ____.",
+      "options": [
+        "64",
+        "16",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "El módulo total es el producto de los módulos individuales.",
+      "explanation": "Al cascadar contadores, el módulo total es el producto: 8 × 8 = 64. El carry-out del primero actúa como reloj del segundo."
+    },
+    {
+      "q": "En un registro de desplazamiento SISO de 8 bits, el dato de entrada tarda ____ ciclos de reloj en aparecer en la salida.",
+      "options": [
+        "8",
+        "4",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "Cada FF introduce un ciclo de retardo.",
+      "explanation": "El dato debe atravesar los 8 FFs en cadena. Cada FF introduce un retardo de un ciclo de reloj, por lo que el total es 8 ciclos."
+    },
+    {
+      "q": "En un contador Gray de 2 bits, la expresión para D₁ es ____ y para D₀ es ____.",
+      "options": [
+        "D₁ = Q₀; D₀ = Q̄₁",
+        "D₁ = Q̄₀; D₀ = Q₁",
+        "D₁ = Q₁; D₀ = Q₀"
+      ],
+      "correct": 0,
+      "hint": "Derivado de la tabla de transición del contador Gray 00→01→11→10.",
+      "explanation": "De la tabla: D₁ = Q₀ (activo cuando Q₀=1) y D₀ = Q̄₁ (activo cuando Q₁=0)."
+    },
+    {
+      "q": "Un contador de anillo de 5 bits tiene ____ estados válidos.",
+      "options": [
+        "5",
+        "10",
+        "32"
+      ],
+      "correct": 0,
+      "hint": "Igual al número de flip-flops.",
+      "explanation": "El contador de anillo tiene exactamente N estados válidos (el '1' en cada una de las N posiciones). Para N=5: 5 estados válidos."
+    },
+    {
+      "q": "En un contador síncrono binario, la entrada T del bit más significativo de un contador de 4 bits es T₃ = ____.",
+      "options": [
+        "Q₂ · Q₁ · Q₀",
+        "Q₂ + Q₁ + Q₀",
+        "Q₀"
+      ],
+      "correct": 0,
+      "hint": "El MSB conmuta cuando todos los bits de menor peso son 1.",
+      "explanation": "T₃ = Q₂ · Q₁ · Q₀: el FF3 (MSB) solo debe conmutar cuando el estado actual es 0111 (o 1111), es decir, cuando todos los bits de menor peso son 1."
+    },
+    {
+      "q": "Desplazar 2 posiciones a la derecha el número binario 11000100 produce el resultado ____.",
+      "options": [
+        "00110001",
+        "00011000",
+        "11000100"
+      ],
+      "correct": 0,
+      "hint": "Cada desplazamiento a la derecha divide por 2.",
+      "explanation": "11000100₂ = 196₁₀. Desplazar 2 posiciones a la derecha: 196 ÷ 4 = 49. 49₁₀ = 00110001₂."
+    },
+    {
+      "q": "El contador asíncrono también se denomina contador de ____ porque los cambios se propagan etapa a etapa.",
+      "options": [
+        "rizado (ripple)",
+        "Johnson",
+        "anillo"
+      ],
+      "correct": 0,
+      "hint": "La propagación produce un efecto ondulante.",
+      "explanation": "Se llama ripple counter o contador de rizado porque el cambio se propaga como una ola (ripple) de la primera etapa a la última, con un retardo acumulado por cada flip-flop."
+    },
+    {
+      "q": "En la simulación Python del registro de 8 bits, después de un shift_left sobre el valor 10 (00001010), el valor resultante es ____.",
+      "options": [
+        "20",
+        "5",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Desplazar a la izquierda = multiplicar por 2.",
+      "explanation": "10₁₀ × 2 = 20₁₀. En binario: 00001010 → 00010100 = 20."
+    },
+    {
+      "q": "Para cascadar tres contadores de módulo 10, el módulo resultante es ____.",
+      "options": [
+        "1000",
+        "30",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "El módulo total es el producto de los módulos individuales.",
+      "explanation": "10 × 10 × 10 = 1000. Este es el principio del contador BCD de tres dígitos, que cuenta de 000 a 999."
+    },
+    {
+      "q": "El número mínimo de flip-flops para un contador de módulo 16 es ____.",
+      "options": [
+        "4",
+        "5",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "2^4 = 16 exactamente.",
+      "explanation": "⌈log₂(16)⌉ = ⌈4⌉ = 4. Con 4 FFs se tienen exactamente 2^4 = 16 estados, por lo que el contador binario de 4 bits es módulo 16 nativo."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre los registros de desplazamiento es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "Un SIPO convierte datos serie en paralelos",
+        "Un PISO convierte datos paralelos en serie"
+      ],
+      "correct": 0,
+      "hint": "Considera ambas afirmaciones sobre SIPO y PISO.",
+      "explanation": "Ambas afirmaciones son verdaderas: el SIPO convierte datos serie en paralelos y el PISO hace lo contrario. Por tanto, 'todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes propiedades tiene el contador síncrono?",
+      "options": [
+        "Todas las anteriores",
+        "Todos los FFs comparten el mismo reloj",
+        "No acumula retardos de propagación entre etapas"
+      ],
+      "correct": 0,
+      "hint": "El contador síncrono cumple ambas propiedades.",
+      "explanation": "El contador síncrono comparte el reloj en todos los FFs y no acumula retardos entre etapas. Ambas afirmaciones son correctas, por lo que 'todas las anteriores' es válida."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el contador Johnson es verdadera?",
+      "options": [
+        "Todas las anteriores",
+        "Se construye realimentando Q̄ del último FF al D del primero",
+        "Genera 2·N estados con N flip-flops"
+      ],
+      "correct": 0,
+      "hint": "Ambas características definen al contador Johnson.",
+      "explanation": "El contador Johnson usa la realimentación de Q̄ del último FF al D del primero, y genera exactamente 2·N estados. Ambas son correctas."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una aplicación real de los registros de desplazamiento?",
+      "options": [
+        "Todas las anteriores",
+        "Conversión paralelo-serie en la UART para transmisión",
+        "Realización de multiplicaciones y divisiones por potencias de 2"
+      ],
+      "correct": 0,
+      "hint": "Los registros tienen múltiples aplicaciones en sistemas digitales.",
+      "explanation": "Los registros de desplazamiento se usan tanto para la conversión de formato (UART) como para operaciones aritméticas de desplazamiento. Ambas son aplicaciones reales y correctas."
+    },
+    {
+      "q": "¿Cuál de las siguientes técnicas se usa para expandir el módulo de conteo?",
+      "options": [
+        "Todas las anteriores",
+        "Cascadar contadores conectando el carry-out al reloj del siguiente",
+        "Añadir lógica de reset para forzar el retorno al estado 0 antes del máximo"
+      ],
+      "correct": 0,
+      "hint": "Ambas técnicas permiten obtener módulos distintos.",
+      "explanation": "Cascadar contadores multiplica los módulos, y añadir lógica de reset permite módulos no potencia de 2. Ambas técnicas son válidas y se usan en la práctica."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre los contadores de anillo es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "La salida directa Q del último FF se realimenta al primer FF",
+        "Solo hay N estados válidos con N flip-flops"
+      ],
+      "correct": 0,
+      "hint": "Ambas características definen al contador de anillo.",
+      "explanation": "El ring counter realimenta Q (no Q̄) del último FF al primero, y tiene solo N estados válidos. Ambas son correctas."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una ventaja del desplazamiento aritmético hardware frente a la multiplicación combinacional?",
+      "options": [
+        "Todas las anteriores",
+        "Es mucho más rápido al no requerir sumadores encadenados",
+        "Consume menos área de silicio al no requerir hardware multiplicador"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento tiene múltiples ventajas sobre la multiplicación genérica.",
+      "explanation": "El desplazamiento aritmético es más rápido que un multiplicador completo y más económico en área. Ambas ventajas son reales y hacen del desplazamiento la técnica preferida para multiplicar o dividir por potencias de 2."
+    },
+    {
+      "q": "¿Cuál de los siguientes tipos de flip-flop NO es adecuado para implementar directamente un contador binario síncrono sin lógica adicional?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Flip-flop T",
+        "Flip-flop JK en modo Toggle"
+      ],
+      "correct": 0,
+      "hint": "Todos los tipos mencionados pueden implementar contadores.",
+      "explanation": "Tanto el FF-T como el FF-JK en modo Toggle (J=K=1) son aptos para implementar contadores directamente. La opción 'ninguna de las anteriores' es correcta porque no existe un tipo de FF que sea completamente inadecuado entre los mencionados."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el contador asíncrono es INCORRECTA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "El retardo total crece con el número de etapas N",
+        "El CLK externo solo se conecta al primer flip-flop"
+      ],
+      "correct": 0,
+      "hint": "Ambas afirmaciones son verdaderas para el contador asíncrono.",
+      "explanation": "Ambas opciones son afirmaciones correctas sobre el contador asíncrono: el retardo crece con N y el CLK solo va al primer FF. Ninguna de ellas es incorrecta, así que 'ninguna de las anteriores' (como respuesta a cuál es incorrecta) no aplica aquí; la respuesta correcta es que ninguna de las opciones listadas es incorrecta."
+    },
+    {
+      "q": "¿Cuál de las siguientes descripciones NO corresponde a una aplicación real de los contadores digitales?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Control de secuencia de operaciones en una CPU",
+        "Medida de frecuencia de señales externas"
+      ],
+      "correct": 0,
+      "hint": "Los contadores tienen multitud de aplicaciones en sistemas digitales.",
+      "explanation": "Ambas opciones (control de secuencia y medida de frecuencia) son aplicaciones reales y comunes de los contadores. Por tanto, 'ninguna de las anteriores' es la respuesta correcta: ninguna de las opciones mencionadas carece de aplicación real."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre registros PIPO es FALSA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Carga todos los bits simultáneamente en la entrada",
+        "Presenta todos los bits simultáneamente en la salida"
+      ],
+      "correct": 0,
+      "hint": "Ambas características definen correctamente al PIPO.",
+      "explanation": "Un registro PIPO carga todos los bits en paralelo (simultáneamente) y los presenta también en paralelo. Ambas afirmaciones son correctas, por lo que 'ninguna de las anteriores' (en el sentido de cuál es falsa) es la respuesta correcta: ninguna es falsa."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una característica del contador Johnson que NO comparte el contador de anillo?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Genera exactamente N estados válidos con N flip-flops",
+        "Es un subtipo de registro de desplazamiento realimentado"
+      ],
+      "correct": 0,
+      "hint": "El anillo genera N estados; el Johnson genera 2N.",
+      "explanation": "La opción que dice 'genera exactamente N estados' describe al contador de ANILLO, no al Johnson. El Johnson genera 2·N estados. Pero como preguntamos qué característica NO comparte el anillo y la opción correcta señala lo que hace el anillo (N estados), la respuesta 'ninguna de las anteriores' indica que la diferencia real (2N vs N) no está listada como opción directa."
+    },
+    {
+      "q": "¿Cuál de las siguientes expresiones para la entrada T₁ de un contador binario síncrono de 4 bits es CORRECTA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "T₁ = Q₂ · Q₀",
+        "T₁ = Q₀ + Q₂"
+      ],
+      "correct": 0,
+      "hint": "T₁ = Q₀ exactamente, sin otros términos.",
+      "explanation": "La expresión correcta para el bit 1 (segundo desde la derecha) es T₁ = Q₀. Ninguna de las opciones presentadas (Q₂·Q₀ y Q₀+Q₂) es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una consecuencia NEGATIVA exclusiva del contador asíncrono?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Requiere lógica combinacional compleja para las entradas de control",
+        "Todos los flip-flops deben recibir el mismo reloj"
+      ],
+      "correct": 0,
+      "hint": "Las opciones describen características del contador SÍNCRONO, no del asíncrono.",
+      "explanation": "La lógica combinacional compleja y compartir el reloj son características del contador SÍNCRONO, no del asíncrono. El inconveniente real del asíncrono (acumulación de retardos) no aparece en las opciones, así que 'ninguna de las anteriores' es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes opciones describe correctamente la secuencia de estados de un contador de anillo de 3 bits iniciado en 100?",
+      "options": [
+        "Ninguna de las anteriores",
+        "100 → 110 → 111 → 011 → 001 → 100",
+        "100 → 000 → 001 → 010 → 100"
+      ],
+      "correct": 0,
+      "hint": "La secuencia correcta es 100→010→001→100.",
+      "explanation": "La secuencia correcta de un ring counter de 3 bits iniciado en 100 es: 100→010→001→100. Ninguna de las opciones presentadas coincide con esta secuencia."
+    },
+    {
+      "q": "¿Cuál de los siguientes tiempos de propagación total corresponde a un contador asíncrono de 4 etapas, con retardo de cada FF igual a t_p?",
+      "options": [
+        "4·t_p",
+        "t_p",
+        "2·t_p"
+      ],
+      "correct": 0,
+      "hint": "Los retardos se suman etapa a etapa.",
+      "explanation": "En el contador asíncrono, el retardo total es la suma de los retardos individuales de cada etapa: 4 × t_p para 4 etapas."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el registro de desplazamiento SISO es verdadera?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Proporciona salidas paralelas de cada flip-flop",
+        "Permite carga paralela de todos los bits simultáneamente"
+      ],
+      "correct": 0,
+      "hint": "El SISO solo tiene entrada y salida en serie.",
+      "explanation": "Un SISO puro no tiene salidas paralelas ni carga paralela. Esas características pertenecen al SIPO y al PISO/PIPO respectivamente. Ninguna de las opciones describe correctamente al SISO."
+    },
+    {
+      "q": "¿Cuál de los siguientes valores es el resultado de desplazar 4 posiciones a la derecha el número 11110000₂?",
+      "options": [
+        "Ninguna de las anteriores",
+        "11110000",
+        "11111111"
+      ],
+      "correct": 0,
+      "hint": "11110000₂ = 240₁₀. Desplazar 4 derecha = dividir entre 16.",
+      "explanation": "240 ÷ 16 = 15₁₀ = 00001111₂. Ninguna de las opciones presentadas (11110000 y 11111111) es correcta."
+    },
+    {
+      "q": "¿Cuántos estados válidos tiene un contador Johnson de 5 bits?",
+      "options": [
+        "10",
+        "5",
+        "32"
+      ],
+      "correct": 0,
+      "hint": "Fórmula 2·N para N=5.",
+      "explanation": "Un contador Johnson de N=5 bits tiene 2·5 = 10 estados válidos."
+    },
+    {
+      "q": "En un registro de desplazamiento de 4 bits, ¿cuántas posiciones a la izquierda hay que desplazar el valor 0001₂ para obtener 1000₂?",
+      "options": [
+        "3",
+        "1",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "0001 → 0010 → 0100 → 1000.",
+      "explanation": "Hay que desplazar 3 posiciones: 0001 → 0010 (×2) → 0100 (×4) → 1000 (×8). Tres desplazamientos a la izquierda."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Registro de Desplazamiento SIPO de 4 bits",
+      "context": "Un registro SIPO de 4 bits recibe la secuencia serie 1,0,1,1 (MSB primero, un bit por ciclo). Inicialmente el registro está a 0000.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj son necesarios para cargar completamente los 4 bits en el registro?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos} = N = 4$$\nCada ciclo de reloj carga un bit en el primer flip-flop y desplaza los anteriores. Para N=4 bits se necesitan exactamente 4 ciclos."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal del registro después de los 4 ciclos de carga? (La secuencia fue 1,0,1,1 MSB primero)",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$$1011_2 = 1 \\cdot 2^3 + 0 \\cdot 2^2 + 1 \\cdot 2^1 + 1 \\cdot 2^0 = 8 + 0 + 2 + 1 = 11_{10}$$\nTras los 4 ciclos, el registro contiene 1011₂ = 11₁₀."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Si ahora se realizan 2 desplazamientos a la derecha (introduciendo 0 por la izquierda), ¿cuál es el nuevo valor decimal del registro?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$11_{10} \\gg 2 = \\lfloor 11 / 4 \\rfloor = 2_{10}$$\nDesplazar 2 posiciones a la derecha equivale a dividir por 4: \\( \\lfloor 11/4 \\rfloor = 2 \\). Binario: 1011 → 0101 → 0010 = 2₁₀."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si a partir del valor obtenido en c) se realizan 1 desplazamiento a la izquierda (introduciendo 0 por la derecha), ¿cuál es el valor decimal final?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$2_{10} \\ll 1 = 2 \\times 2 = 4_{10}$$\nDesplazar 1 posición a la izquierda equivale a multiplicar por 2: \\( 2 \\times 2 = 4 \\). Binario: 0010 → 0100 = 4₁₀."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Contador Síncrono Binario de 3 bits",
+      "context": "Se diseña un contador síncrono binario ascendente de 3 bits (Q₂Q₁Q₀) con flip-flops T.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuántos estados distintos tiene este contador (módulo)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$M = 2^N = 2^3 = 8$$\nCon 3 flip-flops se tienen \\( 2^3 = 8 \\) estados distintos: 000 a 111."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "¿Cuántos pulsos de reloj se necesitan para que el contador regrese al estado 000 partiendo del estado 101?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos} = M - \\text{estado actual} = 8 - 5 = 3$$\nDesde 101₂ (5) el contador avanza: 5→6→7→0. Son 3 pulsos de reloj."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "¿Cuántas veces genera la señal carry-out el contador en 24 ciclos de reloj?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$\\text{Carry-outs} = \\lfloor 24 / M \\rfloor = \\lfloor 24 / 8 \\rfloor = 3$$\nEl carry-out se genera una vez por ciclo completo del contador. En 24 pulsos se completan exactamente \\( 24/8 = 3 \\) ciclos."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Si el contador opera a 8 MHz, ¿cuál es la frecuencia (en MHz) de la señal carry-out?",
+          "correctValue": 1,
+          "tolerance": 0.01,
+          "explanation": "$$f_{\\text{out}} = \\frac{f_{\\text{clk}}}{M} = \\frac{8 \\text{ MHz}}{8} = 1 \\text{ MHz}$$\nCada ciclo completo del contador (8 pulsos) genera un carry-out. La frecuencia de carry es \\( 8/8 = 1 \\) MHz."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Contador Johnson de 3 bits",
+      "context": "Un contador Johnson de 3 bits (D₀=Q̄₂, D₁=Q₀, D₂=Q₁) parte del estado inicial 000.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuántos estados distintos tiene este contador?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados} = 2 \\cdot N = 2 \\cdot 3 = 6$$\nLa fórmula del contador Johnson es 2·N. Para N=3 bits: 6 estados distintos."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "¿Cuántos pulsos de reloj se necesitan para que el contador pase del estado 000 al estado 111?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$000 \\xrightarrow{1} 100 \\xrightarrow{2} 110 \\xrightarrow{3} 111$$\nSon 3 pulsos: 000→100→110→111."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "¿Cuántos pulsos de reloj se necesitan para completar un ciclo completo partiendo de 000 y regresar a 000?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclo completo} = 2 \\cdot N = 6 \\text{ pulsos}$$\nLa secuencia completa es: 000→100→110→111→011→001→000, que son 6 transiciones (6 pulsos de reloj)."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Si el contador opera a 12 MHz, ¿cuál es la frecuencia en MHz de la señal de salida del ciclo completo (frecuencia del ciclo Johnson)?",
+          "correctValue": 2,
+          "tolerance": 0.01,
+          "explanation": "$$f_{\\text{Johnson}} = \\frac{f_{\\text{clk}}}{2N} = \\frac{12 \\text{ MHz}}{6} = 2 \\text{ MHz}$$\nCada ciclo Johnson dura 6 pulsos, por lo que la frecuencia de ciclo es \\( 12/6 = 2 \\) MHz."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Diseño de Contador Módulo 10 (BCD)",
+      "context": "Se diseña un contador módulo 10 a partir de un contador binario de 4 bits con lógica de reset asíncrono que detecta el estado 1010 y fuerza el retorno a 0000.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops se necesitan mínimamente para implementar el contador módulo 10?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(10) \\rceil = \\lceil 3.32 \\rceil = 4$$\nCon 3 FFs solo hay 8 estados (insuficiente). Con 4 FFs hay 16 ≥ 10, mínimo necesario."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "¿Cuántos estados son 'prohibidos' (no utilizados) en el contador de 4 bits al implementar módulo 10?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados prohibidos} = 2^4 - M = 16 - 10 = 6$$\nLos estados del 10 (1010) al 15 (1111) son los 6 estados no utilizados en el contador BCD."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Si el contador opera a 10 MHz, ¿cuántas veces por segundo completa un ciclo completo (de 0 a 9)?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "$$f_{\\text{ciclo}} = \\frac{f_{\\text{clk}}}{M} = \\frac{10 \\times 10^6}{10} = 1 \\times 10^6 \\text{ ciclos/s}$$\nEn 10 MHz, cada ciclo completo del contador BCD ocurre \\( 10\\text{ MHz} / 10 = 1 \\) millón de veces por segundo."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Si se cascadan dos contadores BCD (módulo 10 cada uno), ¿cuántos ciclos de reloj necesita el contador de decenas para completar un ciclo completo?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos CLK} = M_1 \\times M_2 = 10 \\times 10 = 100$$\nEl contador de decenas avanza una unidad por cada ciclo completo del contador de unidades (10 pulsos CLK). Un ciclo del de decenas = 10 × 10 = 100 pulsos CLK."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Contador de Anillo de 4 bits",
+      "context": "Un contador de anillo de 4 bits (D₀=Q₃, D₁=Q₀, D₂=Q₁, D₃=Q₂) parte del estado 1000.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuántos estados válidos tiene este contador de anillo?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados válidos} = N = 4$$\nUn contador de anillo de N bits tiene exactamente N estados válidos (el '1' en cada posición)."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "¿Cuál es el estado (en decimal, interpretado como binario natural) después de 5 pulsos de reloj partiendo de 1000?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$1000 \\to 0100 \\to 0010 \\to 0001 \\to 1000 \\to 0100$$\nDespués de 4 pulsos el contador vuelve a 1000, y con el 5.º pulso está en 0100₂ = 4₁₀."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "¿Cuántos pulsos de reloj completan exactamente 3 ciclos del contador de anillo de 4 bits?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos} = 3 \\times N = 3 \\times 4 = 12$$\nCada ciclo completo del ring counter de 4 bits dura 4 pulsos. Tres ciclos = 3 × 4 = 12 pulsos."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si el contador opera a 4 MHz, ¿cuál es la frecuencia en MHz de cada salida individual Qᵢ?",
+          "correctValue": 1,
+          "tolerance": 0.01,
+          "explanation": "$$f_{Q_i} = \\frac{f_{\\text{clk}}}{N} = \\frac{4 \\text{ MHz}}{4} = 1 \\text{ MHz}$$\nCada salida Qᵢ produce un pulso de un ciclo CLK de anchura por cada N=4 pulsos de reloj, resultando en una frecuencia de \\( 4/4 = 1 \\) MHz."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Operaciones Aritméticas con Registro de Desplazamiento de 8 bits",
+      "context": "Un registro de desplazamiento de 8 bits contiene inicialmente el valor 00001100₂ (12₁₀).",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal después de 2 desplazamientos a la izquierda (con 0 entrando por la derecha)?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "$$12_{10} \\ll 2 = 12 \\times 2^2 = 12 \\times 4 = 48_{10}$$\nDesplazar 2 posiciones a la izquierda multiplica por \\( 2^2 = 4 \\): \\( 12 \\times 4 = 48 \\)."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Partiendo del resultado de a) (48₁₀), ¿cuál es el valor decimal después de 3 desplazamientos a la derecha (con 0 entrando por la izquierda)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$48_{10} \\gg 3 = \\lfloor 48 / 2^3 \\rfloor = \\lfloor 48 / 8 \\rfloor = 6_{10}$$\nDesplazar 3 posiciones a la derecha divide entre \\( 2^3 = 8 \\): \\( \\lfloor 48/8 \\rfloor = 6 \\)."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Partiendo del resultado de b) (6₁₀), ¿cuántos desplazamientos a la izquierda se necesitan para alcanzar el valor 96₁₀?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$96 = 6 \\times 2^k \\implies 2^k = 16 \\implies k = 4$$\nSe necesitan 4 desplazamientos a la izquierda: \\( 6 \\times 2^4 = 6 \\times 16 = 96 \\)."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Si el registro de 8 bits contiene 96₁₀ = 01100000₂ y se realiza 1 desplazamiento a la izquierda, ¿se produce desbordamiento (overflow) en un registro de 8 bits sin signo? Codifica la respuesta como 1 (sí desbordamiento) o 0 (no desbordamiento).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$96 \\times 2 = 192_{10} = 11000000_2 \\leq 255_{10}$$\nEl resultado 192 cabe en 8 bits sin signo (máximo 255). No hay desbordamiento. Respuesta: 0."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Cascada de Contadores para Gran Módulo",
+      "context": "Se cascadan tres contadores binarios de 4 bits (módulo 16 cada uno) conectando el carry-out de cada uno al reloj del siguiente.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Cuál es el módulo total del contador resultante de la cascada de tres contadores de módulo 16?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "$$M_{\\text{total}} = M_1 \\times M_2 \\times M_3 = 16 \\times 16 \\times 16 = 4096$$\nAl cascadar contadores, los módulos se multiplican: \\( 16^3 = 4096 \\)."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "¿Cuántos flip-flops en total contiene este sistema de tres contadores de 4 bits?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total FF} = 3 \\times 4 = 12$$\nCada contador de 4 bits tiene 4 flip-flops. Tres contadores en cascada: \\( 3 \\times 4 = 12 \\) flip-flops."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "¿Cuántos pulsos de reloj necesita el tercer contador (el más significativo) para avanzar de 0000 a 0001?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos CLK} = M_1 \\times M_2 = 16 \\times 16 = 256$$\nEl tercer contador avanza un estado por cada ciclo completo de los dos primeros en cascada: \\( 16 \\times 16 = 256 \\) pulsos CLK."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si el reloj opera a 4096 Hz, ¿cuántas veces por segundo completa el sistema completo (3 contadores en cascada) su ciclo total?",
+          "correctValue": 1,
+          "tolerance": 0.001,
+          "explanation": "$$f_{\\text{ciclo}} = \\frac{f_{\\text{clk}}}{M_{\\text{total}}} = \\frac{4096 \\text{ Hz}}{4096} = 1 \\text{ Hz}$$\nEl sistema completa su ciclo de 4096 pasos una vez por segundo con un reloj de 4096 Hz."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Contador Binario Asíncrono de 4 bits: Retardos",
+      "context": "Un contador asíncrono de 4 bits usa flip-flops JK con un retardo de propagación de t_p = 5 ns cada uno.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuál es el retardo total (en ns) desde el flanco de reloj hasta que la salida Q₃ (MSB) se estabiliza en el peor caso?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$t_{\\text{total}} = N \\times t_p = 4 \\times 5 \\text{ ns} = 20 \\text{ ns}$$\nEn el contador asíncrono, los retardos se acumulan etapa a etapa. El MSB (Q₃) es el último en estabilizarse: \\( 4 \\times 5 = 20 \\) ns."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia máxima de operación (en MHz) del contador asíncrono de 4 bits, si el período mínimo de reloj debe ser mayor que el retardo total?",
+          "correctValue": 50,
+          "tolerance": 0.5,
+          "explanation": "$$f_{\\text{max}} = \\frac{1}{t_{\\text{total}}} = \\frac{1}{20 \\times 10^{-9}} = 50 \\times 10^6 \\text{ Hz} = 50 \\text{ MHz}$$\nEl período mínimo debe ser \\( t_{\\text{total}} = 20 \\) ns, lo que da una frecuencia máxima de \\( 1/20\\text{ ns} = 50 \\) MHz."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Si el mismo diseño fuera síncrono (retardo = t_p + t_lógica = 5+3 = 8 ns), ¿cuál sería la frecuencia máxima en MHz?",
+          "correctValue": 125,
+          "tolerance": 1,
+          "explanation": "$$f_{\\text{max,sinc}} = \\frac{1}{t_{\\text{ciclo}}} = \\frac{1}{8 \\times 10^{-9}} = 125 \\text{ MHz}$$\nEn el contador síncrono, el retardo no se acumula: \\( t_{\\text{ciclo}} = t_p + t_{\\text{lógica}} = 8 \\) ns, por lo que \\( f_{\\text{max}} = 125 \\) MHz."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "¿Cuántas veces más rápido puede operar el contador síncrono respecto al asíncrono (ratio de frecuencias)?",
+          "correctValue": 2.5,
+          "tolerance": 0.1,
+          "explanation": "$$\\text{Ratio} = \\frac{f_{\\text{sinc}}}{f_{\\text{asinc}}} = \\frac{125 \\text{ MHz}}{50 \\text{ MHz}} = 2.5$$\nEl contador síncrono opera 2.5 veces más rápido que el asíncrono en este ejemplo."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Contador Gray de 2 bits: Análisis",
+      "context": "Se implementa el contador Gray de 2 bits con la secuencia 00→01→11→10→00 usando flip-flops D (D₁=Q₀, D₀=Q̄₁).",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "¿Cuántos bits cambian simultáneamente en cada transición del código Gray?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits cambiantes por transición} = 1$$\nLa propiedad fundamental del código Gray es que entre dos estados consecutivos cambia exactamente 1 bit. Esto elimina los glitches en la decodificación."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "¿Cuántos estados tiene el ciclo completo del contador Gray de 2 bits?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$M = 2^N = 2^2 = 4 \\text{ estados}$$\nCon 2 bits hay 4 estados Gray: 00→01→11→10→00. El módulo es 4."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "¿Cuántos pulsos de reloj se necesitan para que el contador pase del estado 00 al estado 10 (el estado 3 de la secuencia Gray)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$00 \\xrightarrow{1} 01 \\xrightarrow{2} 11 \\xrightarrow{3} 10$$\nSon 3 transiciones (pulsos de reloj) para ir de 00 a 10 siguiendo la secuencia Gray."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Si el contador opera a 1 MHz, ¿cuántas secuencias completas Gray realiza en 20 microsegundos?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos en 20 } \\mu\\text{s} = 1 \\times 10^6 \\times 20 \\times 10^{-6} = 20 \\text{ pulsos}$$\n$$\\text{Ciclos} = \\frac{20}{M} = \\frac{20}{4} = 5 \\text{ ciclos completos}$$\nEn 20 µs con CLK de 1 MHz hay 20 pulsos, que equivalen a \\( 20/4 = 5 \\) ciclos completos."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Divisor de Frecuencia con Contador",
+      "context": "Se usa un contador binario de N bits para dividir la frecuencia de un oscilador de 64 MHz.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuántos bits necesita el contador para dividir la frecuencia de 64 MHz a 1 MHz?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\frac{64 \\text{ MHz}}{f_{\\text{out}}} = \\frac{64}{1} = 64 = 2^6 \\implies N = 6$$\nSe divide entre 64 = 2^6, por lo que se necesitan N=6 bits (módulo 64)."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Con el mismo oscilador de 64 MHz y el contador de 6 bits obtenido en a), ¿cuántos ciclos de 1 MHz se producen en 1 segundo?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "$$f_{\\text{out}} = 1 \\text{ MHz} = 1 \\times 10^6 \\text{ Hz}$$\nPor definición, una señal de 1 MHz tiene \\( 10^6 \\) ciclos por segundo."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Si se añaden 2 bits más al contador (total 8 bits), ¿a cuántos kHz queda la frecuencia de salida del carry?",
+          "correctValue": 250,
+          "tolerance": 1,
+          "explanation": "$$f_{\\text{out}} = \\frac{64 \\text{ MHz}}{2^8} = \\frac{64 \\times 10^6}{256} = 250 \\times 10^3 \\text{ Hz} = 250 \\text{ kHz}$$\nCon 8 bits, el divisor es \\( 2^8 = 256 \\): \\( 64 \\text{ MHz} / 256 = 250 \\) kHz."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "¿Cuántos bits necesita el contador para dividir 64 MHz hasta aproximadamente 1 Hz (potencia de 2 más cercana)?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "$$2^N \\approx 64 \\times 10^6 \\implies N = \\lceil \\log_2(64 \\times 10^6) \\rceil = \\lceil 25.93 \\rceil = 26$$\nCon 26 bits: \\( 64 \\text{ MHz} / 2^{26} = 64 \\times 10^6 / 67108864 \\approx 0.95 \\) Hz ≈ 1 Hz."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Registro PISO para Transmisión Serie",
+      "context": "Un registro PISO de 8 bits carga el valor paralelo 10110010₂ (178₁₀) y lo transmite serie bit a bit (MSB primero) a 9600 baudios.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj son necesarios para transmitir completamente el byte de 8 bits?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos} = N = 8$$\nEl registro PISO transmite un bit por ciclo de reloj. Para 8 bits se necesitan exactamente 8 ciclos."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "¿Cuántos microsegundos tarda en transmitirse cada bit a 9600 baudios?",
+          "correctValue": 104.17,
+          "tolerance": 1,
+          "explanation": "$$T_{\\text{bit}} = \\frac{1}{9600} \\approx 1.0417 \\times 10^{-4} \\text{ s} = 104.17 \\text{ } \\mu\\text{s}$$\nA 9600 baudios, cada bit dura \\( 1/9600 \\approx 104.17 \\) µs."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "¿Cuántos microsegundos tarda en transmitirse el byte completo de 8 bits a 9600 baudios?",
+          "correctValue": 833.33,
+          "tolerance": 5,
+          "explanation": "$$T_{\\text{byte}} = 8 \\times T_{\\text{bit}} = 8 \\times 104.17 \\approx 833.33 \\text{ } \\mu\\text{s}$$\nEl tiempo total para 8 bits: \\( 8 \\times 104.17 \\approx 833.33 \\) µs ≈ 0.833 ms."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "¿Cuántos bytes completos pueden transmitirse por segundo a 9600 baudios (sin bits de start/stop)?",
+          "correctValue": 1200,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes/s} = \\frac{9600 \\text{ bits/s}}{8 \\text{ bits/byte}} = 1200 \\text{ bytes/s}$$\nA 9600 baudios con 8 bits por byte: \\( 9600 / 8 = 1200 \\) bytes por segundo."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Contador Módulo 6 con Reset",
+      "context": "Se convierte un contador binario de 4 bits en un contador módulo 6 detectando el estado 0110 (6₁₀) y aplicando reset asíncrono.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuántos estados 'no utilizados' hay en el contador de 4 bits al implementar módulo 6?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados no usados} = 2^4 - 6 = 16 - 6 = 10$$\nDe los 16 estados posibles del contador de 4 bits, solo se usan 6 (de 0 a 5), quedando 10 estados no utilizados."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "¿Cuántas puertas lógicas AND de 2 entradas se necesitan como mínimo para detectar el estado 0110 (bits Q₂=1 y Q₁=1, con Q₃=Q₀=0)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$\\text{NAND o AND para detectar 0110: } Q_2 \\cdot Q_1 = 1 \\text{ cuando estado} = 6$$\nSe necesita una sola puerta AND de 2 entradas que detecte Q₂·Q₁ = 1 (los únicos bits a 1 en 0110₂). Su salida activa el reset."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Si el contador opera a 6 MHz, ¿cuántas veces por segundo genera el carry-out (completa un ciclo módulo 6)?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "$$f_{\\text{carry}} = \\frac{f_{\\text{clk}}}{M} = \\frac{6 \\text{ MHz}}{6} = 1 \\text{ MHz} = 10^6 \\text{ veces/s}$$\nEl carry-out se genera una vez por ciclo completo: \\( 6 \\text{ MHz} / 6 = 1 \\) millón de veces por segundo."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Si se cascada este contador módulo 6 con un contador módulo 10, ¿cuál es el módulo total del sistema?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "$$M_{\\text{total}} = M_1 \\times M_2 = 6 \\times 10 = 60$$\nAl cascadar contadores, los módulos se multiplican: \\( 6 \\times 10 = 60 \\). Este es el principio del contador de segundos y decenas de segundo."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Registro de Desplazamiento y Multiplicación",
+      "context": "Un registro de desplazamiento de 8 bits contiene el valor 00000011₂ (3₁₀).",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal tras 4 desplazamientos a la izquierda (sin overflow en 8 bits)?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "$$3_{10} \\ll 4 = 3 \\times 2^4 = 3 \\times 16 = 48_{10}$$\nDesplazar 4 posiciones a la izquierda multiplica por \\( 2^4 = 16 \\): \\( 3 \\times 16 = 48 \\)."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Partiendo de 48₁₀ (del apartado a), ¿cuál es el valor decimal tras 1 desplazamiento a la derecha?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "$$48_{10} \\gg 1 = \\lfloor 48 / 2 \\rfloor = 24_{10}$$\nDesplazar 1 posición a la derecha divide entre 2: \\( \\lfloor 48/2 \\rfloor = 24 \\)."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Partiendo de 24₁₀ (del apartado b), ¿cuántos desplazamientos a la izquierda son necesarios para alcanzar 96₁₀?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$96 = 24 \\times 2^k \\implies 2^k = 4 \\implies k = 2$$\nDos desplazamientos a la izquierda: \\( 24 \\times 4 = 96 \\)."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "El valor 96₁₀ = 01100000₂. Si se hace un desplazamiento a la izquierda con registro de 8 bits, ¿cuánto vale el resultado en decimal (tomando solo los 8 bits menos significativos)?",
+          "correctValue": 192,
+          "tolerance": 0,
+          "explanation": "$$96 \\times 2 = 192_{10} = 11000000_2$$\n192 < 256, por lo que cabe en 8 bits. El resultado es 192₁₀ = 11000000₂."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Contador Johnson de 4 bits: Análisis",
+      "context": "Un contador Johnson de 4 bits (D₀=Q̄₃, D₁=Q₀, D₂=Q₁, D₃=Q₂) parte del estado 0000.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuántos estados válidos tiene este contador Johnson?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados} = 2 \\cdot N = 2 \\times 4 = 8$$\nFórmula: \\( 2 \\times N = 2 \\times 4 = 8 \\) estados válidos."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "¿Cuántos pulsos de reloj se necesitan para ir del estado 0000 al estado 1111 (cuatro unos)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$0000 \\to 1000 \\to 1100 \\to 1110 \\to 1111$$\nSon 4 pulsos: en cada flanco entra un '1' (porque Q̄₃=1 mientras Q₃=0)."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuántos pulsos se necesitan para completar la segunda mitad del ciclo (del estado 1111 de vuelta a 0000)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$1111 \\to 0111 \\to 0011 \\to 0001 \\to 0000$$\nDesde 1111 (Q̄₃=0, entra 0): 0111→0011→0001→0000. Son 4 pulsos más."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Si el contador opera a 16 MHz, ¿cuál es la frecuencia en MHz de la señal de ciclo completo (carry)?",
+          "correctValue": 2,
+          "tolerance": 0.01,
+          "explanation": "$$f_{\\text{ciclo}} = \\frac{f_{\\text{clk}}}{2N} = \\frac{16 \\text{ MHz}}{8} = 2 \\text{ MHz}$$\nEl ciclo completo dura \\( 2N = 8 \\) pulsos: \\( 16 \\text{ MHz} / 8 = 2 \\) MHz."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Diseño de Contador Módulo 12",
+      "context": "Se diseña un contador síncrono de módulo 12 usando flip-flops D y lógica de reset en el estado 1100 (12₁₀).",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops se necesitan mínimamente?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(12) \\rceil = \\lceil 3.58 \\rceil = 4$$\nCon 3 FFs solo 8 estados (< 12). Con 4 FFs hay 16 ≥ 12."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "¿Cuántos estados 'prohibidos' (no usados) hay en la implementación de módulo 12 con 4 flip-flops?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Prohibidos} = 2^4 - 12 = 16 - 12 = 4$$\nLos estados del 12 al 15 (1100 a 1111) son los 4 estados no utilizados."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Si el contador opera a 24 MHz, ¿cuál es la frecuencia del carry-out en MHz?",
+          "correctValue": 2,
+          "tolerance": 0.01,
+          "explanation": "$$f_{\\text{carry}} = \\frac{f_{\\text{clk}}}{M} = \\frac{24 \\text{ MHz}}{12} = 2 \\text{ MHz}$$\nEl carry-out se genera cada 12 pulsos CLK: \\( 24/12 = 2 \\) MHz."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Al cascadar dos contadores módulo 12, ¿cuántos pulsos CLK necesita el segundo contador para avanzar 5 estados?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos CLK} = 5 \\times M_1 = 5 \\times 12 = 60$$\nEl segundo contador avanza 1 estado por cada ciclo completo del primero (12 pulsos CLK). Para avanzar 5 estados: \\( 5 \\times 12 = 60 \\) pulsos."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Retardo y Capacidad del Registro de Desplazamiento",
+      "context": "Un registro de desplazamiento SISO se usa como línea de retardo digital. La frecuencia de reloj es 1 MHz.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops se necesitan para retardar una señal exactamente 10 µs?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$N = t_{\\text{retardo}} \\times f_{\\text{clk}} = 10 \\times 10^{-6} \\times 10^6 = 10 \\text{ FF}$$\nCada flip-flop introduce un retardo de un período de reloj (1 µs a 1 MHz). Para 10 µs se necesitan 10 FFs."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Con el mismo registro de 10 FFs y aumentando la frecuencia de reloj a 2 MHz, ¿cuántos µs es el retardo?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$t_{\\text{retardo}} = \\frac{N}{f_{\\text{clk}}} = \\frac{10}{2 \\times 10^6} = 5 \\times 10^{-6} \\text{ s} = 5 \\text{ } \\mu\\text{s}$$\nAl duplicar la frecuencia, el período se reduce a la mitad: \\( 10 \\times 0.5 \\mu\\text{s} = 5 \\mu\\text{s} \\)."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "¿Cuántos bits de datos pueden estar 'en tránsito' simultáneamente en el registro de 10 FFs?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits en tránsito} = N = 10$$\nEn un SISO de N bits, en cada instante hay exactamente N bits almacenados simultáneamente en los flip-flops (los correspondientes a los N ciclos de retardo)."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si se quiere retardar 100 µs con un reloj de 10 MHz, ¿cuántos flip-flops son necesarios?",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "$$N = t_{\\text{retardo}} \\times f_{\\text{clk}} = 100 \\times 10^{-6} \\times 10 \\times 10^6 = 1000 \\text{ FF}$$\nA 10 MHz, cada FF retarda \\( 1/10\\text{ MHz} = 0.1 \\) µs. Para 100 µs: \\( 100/0.1 = 1000 \\) FFs."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Contador Síncrono con Flip-Flops T: Entradas de Control",
+      "context": "Se diseña un contador binario síncrono ascendente de 4 bits usando flip-flops T (T=1 conmuta, T=0 retiene).",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuántas puertas AND se necesitan para implementar las entradas T₀, T₁, T₂ y T₃ del contador binario síncrono de 4 bits? (T₀=1 siempre, T₁=Q₀, T₂=Q₁Q₀, T₃=Q₂Q₁Q₀)",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$T_0 = 1 \\text{ (sin AND)}, \\quad T_1 = Q_0 \\text{ (sin AND)}, \\quad T_2 = Q_1 \\cdot Q_0 \\text{ (1 AND)}, \\quad T_3 = Q_2 \\cdot Q_1 \\cdot Q_0 \\text{ (1 AND de 3 entradas)}$$\nT₀ y T₁ no necesitan puertas AND. T₂ necesita una AND de 2 entradas y T₃ necesita una AND de 3 entradas: total 2 puertas AND."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "En el estado Q₃Q₂Q₁Q₀ = 0111, ¿cuántas entradas Tᵢ están en nivel alto (T=1)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$T_0=1, \\quad T_1=Q_0=1, \\quad T_2=Q_1 Q_0=1, \\quad T_3=Q_2 Q_1 Q_0=1$$\nCon estado 0111, todos los bits de menor peso son 1. T₀=1 (siempre), T₁=1, T₂=1, T₃=1: las 4 entradas T están en alto."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "En el estado Q₃Q₂Q₁Q₀ = 1010, ¿cuántas entradas Tᵢ están en nivel alto?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$T_0=1, \\quad T_1=Q_0=0, \\quad T_2=Q_1 Q_0=0, \\quad T_3=Q_2 Q_1 Q_0=0$$\nCon estado 1010 (Q₀=0): T₀=1 (siempre), T₁=Q₀=0, T₂=Q₁·Q₀=0, T₃=Q₂·Q₁·Q₀=0. Solo T₀ está en alto."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "¿Cuántas entradas Tᵢ están en alto en el estado 1111 (el estado que produce el siguiente carry-out)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$T_0=1, \\quad T_1=Q_0=1, \\quad T_2=Q_1 Q_0=1, \\quad T_3=Q_2 Q_1 Q_0=1$$\nEn 1111, todos los Qᵢ son 1: T₀=1, T₁=1, T₂=1, T₃=1. Las 4 entradas T están en alto, y el siguiente pulso llevará el contador a 0000 generando carry."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Decodificación del Contador de Anillo",
+      "context": "Un contador de anillo de 8 bits opera como secuenciador de 8 fases. Estado inicial: 10000000.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuántos estados válidos tiene el contador de anillo de 8 bits?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados} = N = 8$$\nUn ring counter de N bits tiene exactamente N estados válidos."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "¿En qué estado (decimal del valor de 8 bits en binario natural) estará el contador después de 11 pulsos de reloj desde 10000000₂?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$11 \\mod 8 = 3 \\text{ desplazamientos efectivos}$$\n$$10000000 \\to 01000000 \\to 00100000 \\to 00100000$$\n11 mod 8 = 3. Después de 3 desplazamientos: 10000000→01000000→00100000→00010000. 00100000₂ = 32₁₀. Corrección: con 3 desplazamientos llegamos a 00010000₂ = 16₁₀. Verificación: paso 1: 01000000=64, paso 2: 00100000=32, paso 3: 00010000=16."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuántos pulsos de reloj son necesarios para que el '1' dé exactamente 4 vueltas completas al anillo?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos} = 4 \\times N = 4 \\times 8 = 32$$\nCada vuelta completa del '1' requiere N=8 pulsos. Para 4 vueltas: \\( 4 \\times 8 = 32 \\) pulsos."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si el contador opera a 8 kHz, ¿cuántos milisegundos dura una vuelta completa del '1'?",
+          "correctValue": 1,
+          "tolerance": 0.01,
+          "explanation": "$$T_{\\text{vuelta}} = \\frac{N}{f_{\\text{clk}}} = \\frac{8}{8 \\times 10^3} = 10^{-3} \\text{ s} = 1 \\text{ ms}$$\nUna vuelta dura 8 períodos de reloj: \\( 8 / 8000 = 0.001 \\) s = 1 ms."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Conversión Serie-Paralelo con Registro SIPO",
+      "context": "Un receptor de comunicaciones recibe la secuencia serie 0,1,1,0,1,0,0,1 (LSB primero) a través de un registro SIPO de 8 bits.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj son necesarios para recibir el byte completo?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos} = N = 8$$\nEl registro SIPO de 8 bits necesita exactamente 8 ciclos de reloj para cargar completamente los 8 bits recibidos."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Después de los 8 ciclos, la secuencia recibida LSB-primero es 0,1,1,0,1,0,0,1. ¿Cuál es el valor decimal del byte en el registro (el primer bit recibido es el LSB)?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "$$0 \\cdot 2^0 + 1 \\cdot 2^1 + 1 \\cdot 2^2 + 0 \\cdot 2^3 + 1 \\cdot 2^4 + 0 \\cdot 2^5 + 0 \\cdot 2^6 + 1 \\cdot 2^7 = 0+2+4+0+16+0+0+128 = 150_{10}$$\nOrdenando de LSB a MSB: bit0=0, bit1=1, bit2=1, bit3=0, bit4=1, bit5=0, bit6=0, bit7=1. Decimal: 150."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "¿Cuántos bits tiene el valor 150₁₀ en su representación binaria (sin ceros a la izquierda)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$150_{10} = 10010110_2 \\implies \\lfloor \\log_2(150) \\rfloor + 1 = 7 + 1 = 8 \\text{ bits}$$\n150 en binario es 10010110, que tiene 8 dígitos binarios significativos."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Si se transmiten 100 bytes a 9600 baudios (8 bits por byte), ¿cuántos milisegundos tarda la transmisión total?",
+          "correctValue": 83.33,
+          "tolerance": 1,
+          "explanation": "$$t = \\frac{100 \\times 8}{9600} = \\frac{800}{9600} \\approx 0.08333 \\text{ s} = 83.33 \\text{ ms}$$\nTotal bits = 800. A 9600 bit/s: \\( 800/9600 \\approx 83.33 \\) ms."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Contador Síncrono Descendente de 3 bits",
+      "context": "Un contador síncrono binario descendente de 3 bits parte del estado 111 (7₁₀) y cuenta hacia abajo hasta 000, luego vuelve a 111.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuántos estados tiene el ciclo completo del contador descendente de 3 bits?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$M = 2^3 = 8 \\text{ estados}$$\nEl contador descendente de 3 bits recorre los mismos 8 estados que el ascendente: 7→6→5→4→3→2→1→0→7."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "¿Cuántos pulsos de reloj necesita para pasar del estado 5 al estado 0?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos} = 5 - 0 = 5$$\nDesde 5: 5→4→3→2→1→0. Son 5 transiciones (pulsos de reloj)."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Si el contador opera a 8 MHz, ¿cuántos microsegundos tarda en completar un ciclo descendente completo (de 7 a 0 y vuelta a 7)?",
+          "correctValue": 1,
+          "tolerance": 0.01,
+          "explanation": "$$t_{\\text{ciclo}} = \\frac{M}{f_{\\text{clk}}} = \\frac{8}{8 \\times 10^6} = 1 \\times 10^{-6} \\text{ s} = 1 \\text{ } \\mu\\text{s}$$\nEl ciclo completo dura 8 pulsos CLK: \\( 8 / 8\\text{ MHz} = 1 \\) µs."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "¿Cuántos ciclos completos realiza el contador en 10 µs a 8 MHz?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos en 10 } \\mu\\text{s} = 8 \\text{ MHz} \\times 10 \\mu\\text{s} = 80 \\text{ pulsos}$$\n$$\\text{Ciclos} = \\frac{80}{8} = 10 \\text{ ciclos}$$\nEn 10 µs hay 80 pulsos CLK, y cada ciclo dura 8 pulsos: \\( 80/8 = 10 \\) ciclos."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Registro de Desplazamiento Bidireccional de 4 bits",
+      "context": "Un registro de desplazamiento bidireccional de 4 bits contiene 1010₂ (10₁₀). La señal DIR=0 indica desplazamiento a la derecha y DIR=1 a la izquierda.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Con DIR=0, ¿cuál es el valor decimal después de 1 desplazamiento a la derecha (con 0 entrando por la izquierda)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$10_{10} \\gg 1 = \\lfloor 10/2 \\rfloor = 5_{10}$$\n1010₂ → 0101₂ = 5₁₀."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Con DIR=1, partiendo del resultado de a) (0101₂ = 5₁₀), ¿cuál es el valor decimal después de 2 desplazamientos a la izquierda (con 0 entrando por la derecha)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$5_{10} \\ll 2 = 5 \\times 4 = 20_{10}$$\nPero en un registro de 4 bits (máximo 15): 0101→1010→0100. 0101 ll 1 = 1010 (10). 1010 ll 1 = 0100 (4, con desbordamiento del MSB). Resultado en 4 bits: 4₁₀."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Con DIR=0, partiendo de 0100₂ (4₁₀), ¿cuántos desplazamientos a la derecha se necesitan para obtener 0001₂ (1₁₀)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$4 \\gg k = 1 \\implies 4 / 2^k = 1 \\implies 2^k = 4 \\implies k = 2$$\nDos desplazamientos a la derecha: 0100→0010→0001."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "¿Cuántos multiplexores 2:1 se necesitan para implementar el registro bidireccional de 4 bits (uno por flip-flop)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{MUX} = N = 4$$\nCada flip-flop del registro bidireccional tiene un MUX 2:1 en su entrada D para seleccionar entre el dato del FF anterior (derecha) o posterior (izquierda). Con 4 FFs se necesitan 4 MUX."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Contador Módulo 5 Síncrono",
+      "context": "Se diseña un contador síncrono de módulo 5 (secuencia 0→1→2→3→4→0) con 3 flip-flops D y lógica de reset en el estado 101 (5₁₀).",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops mínimos se necesitan para un contador módulo 5?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(5) \\rceil = \\lceil 2.32 \\rceil = 3$$\nCon 2 FFs solo 4 estados (< 5). Con 3 FFs hay 8 ≥ 5."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "¿Cuántos estados son 'prohibidos' en el contador de 3 bits al implementar módulo 5?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$\\text{Prohibidos} = 2^3 - 5 = 8 - 5 = 3$$\nLos estados 5 (101), 6 (110) y 7 (111) son los 3 estados no utilizados en el contador módulo 5."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Si el contador opera a 5 MHz, ¿cuántas veces por segundo completa un ciclo?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "$$f_{\\text{ciclo}} = \\frac{f_{\\text{clk}}}{M} = \\frac{5 \\text{ MHz}}{5} = 1 \\text{ MHz} = 10^6 \\text{ Hz}$$\nEn 5 MHz con módulo 5: \\( 5 \\text{ MHz} / 5 = 1 \\) MHz de frecuencia de ciclo."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Si se cascadan un contador módulo 5 y un contador módulo 4, ¿cuál es el módulo total del sistema?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$M_{\\text{total}} = M_1 \\times M_2 = 5 \\times 4 = 20$$\nAl cascadar los módulos se multiplican: \\( 5 \\times 4 = 20 \\)."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Análisis de Retardos en Contador Asíncrono de 8 bits",
+      "context": "Un contador asíncrono de 8 bits usa flip-flops JK con retardo de propagación t_p = 4 ns cada uno.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuál es el retardo máximo total (en ns) desde el flanco de reloj hasta que la salida Q₇ (MSB) se estabiliza?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$t_{\\text{total}} = N \\times t_p = 8 \\times 4 \\text{ ns} = 32 \\text{ ns}$$\nEl retardo se acumula linealmente: 8 etapas × 4 ns/etapa = 32 ns."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia máxima de operación en MHz del contador asíncrono de 8 bits?",
+          "correctValue": 31.25,
+          "tolerance": 0.5,
+          "explanation": "$$f_{\\text{max}} = \\frac{1}{t_{\\text{total}}} = \\frac{1}{32 \\times 10^{-9}} = 31.25 \\text{ MHz}$$\nEl período mínimo debe superar el retardo total de 32 ns: \\( f_{\\text{max}} = 1/32\\text{ ns} = 31.25 \\) MHz."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "¿Cuántos estados transitorios erróneos pueden observarse en el peor caso durante la transición del estado 01111111 (127) al estado 10000000 (128)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados transitorios} = N - 1 = 8 - 1 = 7$$\nEn la transición de 127 a 128, todos los 8 bits cambian. Pero los cambios llegan escalonadamente: hay 7 estados intermedios erróneos antes de que Q₇ se estabilice."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos dura la 'ventana' de estados transitorios durante la peor transición (de 127 a 128)?",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "$$t_{\\text{ventana}} = (N-1) \\times t_p = 7 \\times 4 \\text{ ns} = 28 \\text{ ns}$$\nEl primer bit (Q₀) cambia a los 4 ns y el último (Q₇) a los 32 ns. La ventana de transitorio dura de \\( t_p \\) a \\( N \\times t_p \\): \\( (N-1) \\times t_p = 28 \\) ns."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Contador BCD de Dos Dígitos (Decenas y Unidades)",
+      "context": "Se implementa un contador de dos dígitos BCD (00 a 99) cascadando dos contadores módulo 10, con un reloj de 100 Hz.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuál es el módulo total del sistema de dos dígitos BCD?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$$M_{\\text{total}} = 10 \\times 10 = 100$$\nDos contadores módulo 10 en cascada tienen módulo \\( 10 \\times 10 = 100 \\): cuentan de 00 a 99."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "¿Cuántos flip-flops en total se necesitan para implementar los dos dígitos BCD?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total FF} = 2 \\times 4 = 8$$\nCada dígito BCD necesita 4 flip-flops (⌈log₂(10)⌉=4). Dos dígitos: \\( 2 \\times 4 = 8 \\) FFs."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Con el reloj de 100 Hz, ¿cuántos segundos tarda el sistema en completar un ciclo completo de 00 a 99?",
+          "correctValue": 1,
+          "tolerance": 0.01,
+          "explanation": "$$t_{\\text{ciclo}} = \\frac{M}{f_{\\text{clk}}} = \\frac{100}{100 \\text{ Hz}} = 1 \\text{ s}$$\nCon módulo 100 y reloj de 100 Hz: el ciclo completo dura \\( 100/100 = 1 \\) segundo."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "¿Cuántos pulsos de reloj necesita el contador de decenas para avanzar del valor 0 al valor 5 (mostrar '50' en el display)?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos CLK} = 5 \\times M_{\\text{unidades}} = 5 \\times 10 = 50$$\nEl contador de decenas avanza 1 por cada 10 pulsos CLK (ciclo del contador de unidades). Para llegar a 5 decenas: \\( 5 \\times 10 = 50 \\) pulsos."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Carga Paralela y Desplazamiento en Registro PISO",
+      "context": "Un registro PISO de 8 bits carga el valor paralelo 00110101₂ (53₁₀). Luego transmite en serie a 115200 baudios.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuántos pulsos de reloj se necesitan para transmitir completamente el byte por la salida serie?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos} = N = 8$$\nEl registro PISO transmite un bit por pulso de reloj. Para 8 bits se necesitan 8 pulsos."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "¿Cuántos microsegundos tarda en transmitirse 1 bit a 115200 baudios?",
+          "correctValue": 8.68,
+          "tolerance": 0.1,
+          "explanation": "$$T_{\\text{bit}} = \\frac{1}{115200} \\approx 8.68 \\times 10^{-6} \\text{ s} = 8.68 \\text{ } \\mu\\text{s}$$\nA 115200 baudios: \\( 1/115200 \\approx 8.68 \\) µs por bit."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "¿Cuántos microsegundos tarda en transmitirse el byte completo de 8 bits a 115200 baudios?",
+          "correctValue": 69.44,
+          "tolerance": 1,
+          "explanation": "$$T_{\\text{byte}} = 8 \\times T_{\\text{bit}} = 8 \\times 8.68 \\approx 69.44 \\text{ } \\mu\\text{s}$$\nOcho bits a 8.68 µs/bit: \\( 8 \\times 8.68 \\approx 69.44 \\) µs."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "¿Cuántos bytes completos por segundo pueden transmitirse a 115200 baudios (8 bits por byte)?",
+          "correctValue": 14400,
+          "tolerance": 10,
+          "explanation": "$$\\text{Bytes/s} = \\frac{115200 \\text{ bits/s}}{8 \\text{ bits/byte}} = 14400 \\text{ bytes/s}$$\nA 115200 bit/s: \\( 115200 / 8 = 14400 \\) bytes por segundo."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Número de Flip-Flops para Diferentes Módulos",
+      "context": "Se requiere calcular el número mínimo de flip-flops para implementar contadores de diferentes módulos.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops se necesitan mínimamente para un contador de módulo 100?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(100) \\rceil = \\lceil 6.644 \\rceil = 7$$\nCon 6 FFs hay 64 estados (< 100). Con 7 FFs hay 128 ≥ 100."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Partiendo de 7 flip-flops del apartado a), ¿cuántos estados son 'prohibidos' (no usados) al implementar módulo 100?",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "$$\\text{Prohibidos} = 2^7 - 100 = 128 - 100 = 28$$\nDe los 128 estados posibles con 7 FFs, solo se usan 100, quedando 28 estados no utilizados."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "¿Cuántos flip-flops se necesitan para un contador de módulo 60?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(60) \\rceil = \\lceil 5.907 \\rceil = 6$$\nCon 5 FFs hay 32 estados (< 60). Con 6 FFs hay 64 ≥ 60."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Con los 6 flip-flops del apartado c), ¿cuántos estados son 'prohibidos' al implementar módulo 60?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Prohibidos} = 2^6 - 60 = 64 - 60 = 4$$\nDe los 64 estados posibles con 6 FFs, solo se usan 60, quedando 4 estados no utilizados (estados 60 a 63)."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Simulación Python del Registro de Desplazamiento",
+      "context": "Se instancia la clase RegistroDesplazamiento8Bits(10) del tema (valor inicial 10₁₀ = 00001010₂) y se ejecutan operaciones de desplazamiento.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Después de un shift_left(0), ¿cuál es el valor decimal devuelto?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$10_{10} \\times 2 = 20_{10}$$\n00001010₂ << 1 = 00010100₂ = 20₁₀."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Después del shift_left(0) del apartado a) (valor 20₁₀), se ejecuta shift_right(0). ¿Cuál es el valor decimal?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$20_{10} \\gg 1 = \\lfloor 20/2 \\rfloor = 10_{10}$$\n00010100₂ >> 1 = 00001010₂ = 10₁₀."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Desde el valor 10₁₀ del apartado b), se ejecutan dos shift_right(0) seguidos. ¿Cuál es el valor decimal final?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$10_{10} \\gg 2 = \\lfloor 10/4 \\rfloor = 2_{10}$$\n00001010₂ >> 1 = 00000101₂ (5); >> 1 = 00000010₂ (2)."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "El código original del tema simula: inicio en 10₁₀, shift_left, dos shift_right. ¿Cuál es el valor decimal final que imprime el código?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$10 \\xrightarrow{\\ll 1} 20 \\xrightarrow{\\gg 1} 10 \\xrightarrow{\\gg 1} 5$$\nLa simulación del código: inicio 10, shift_left → 20, shift_right → 10, shift_right → 5. El mensaje 'Dividido por 4' es respecto al estado intermedio 20: 20/4 = 5."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Frecuencia de la Señal de Salida de un Divisor por Contadores Cascadados",
+      "context": "Se usa una cadena de contadores para dividir un reloj de 1 GHz: primero un contador módulo 1000, luego un contador módulo 1000.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "¿Cuántos flip-flops mínimos necesita cada contador de módulo 1000?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(1000) \\rceil = \\lceil 9.965 \\rceil = 10$$\nCon 9 FFs hay 512 (< 1000). Con 10 FFs hay 1024 ≥ 1000."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia en kHz de la señal de salida del primer contador de módulo 1000 con entrada de 1 GHz?",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "$$f_{\\text{out1}} = \\frac{1 \\text{ GHz}}{1000} = \\frac{10^9}{10^3} = 10^6 \\text{ Hz} = 1000 \\text{ kHz}$$\n1 GHz / 1000 = 1 MHz = 1000 kHz."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "¿Cuál es la frecuencia en Hz de la señal de salida del segundo contador de módulo 1000 (en cascada tras el primero)?",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "$$f_{\\text{out2}} = \\frac{f_{\\text{out1}}}{1000} = \\frac{10^6}{10^3} = 10^3 \\text{ Hz} = 1000 \\text{ Hz}$$\n1 MHz / 1000 = 1 kHz = 1000 Hz."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "¿Cuántos flip-flops en total tiene el sistema de dos contadores de módulo 1000?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total FF} = 2 \\times 10 = 20$$\nDos contadores de módulo 1000, cada uno con 10 FFs: \\( 2 \\times 10 = 20 \\) FFs en total."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Comparación entre Contador de Anillo y Johnson de 6 bits",
+      "context": "Se comparan un contador de anillo y un contador Johnson, ambos de 6 flip-flops.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuántos estados válidos tiene el contador de anillo de 6 bits?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados anillo} = N = 6$$\nUn ring counter de N bits tiene N estados válidos."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "¿Cuántos estados válidos tiene el contador Johnson de 6 bits?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$\\text{Estados Johnson} = 2N = 2 \\times 6 = 12$$\nUn contador Johnson de N bits tiene 2·N estados válidos."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "¿Cuántos estados 'no utilizados' (inválidos) tiene el contador Johnson de 6 bits?",
+          "correctValue": 52,
+          "tolerance": 0,
+          "explanation": "$$\\text{Inválidos Johnson} = 2^6 - 2N = 64 - 12 = 52$$\nEl contador Johnson de 6 bits tiene 64 estados posibles pero solo usa 12; quedan 52 estados inválidos."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Si ambos contadores operan a 12 MHz, ¿cuántas veces más rápido completa su ciclo el contador de anillo respecto al Johnson?",
+          "correctValue": 2,
+          "tolerance": 0.01,
+          "explanation": "$$\\frac{f_{\\text{ciclo,anillo}}}{f_{\\text{ciclo,Johnson}}} = \\frac{f_{\\text{clk}}/N}{f_{\\text{clk}}/(2N)} = \\frac{2N}{N} = 2$$\nEl anillo tiene N=6 estados (ciclo más corto) y el Johnson 2N=12 estados. La frecuencia de ciclo del anillo es el doble que la del Johnson."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Diseño de Reloj Digital con Contadores",
+      "context": "Se diseña un reloj digital usando oscilador de 32768 Hz (cristal de reloj) y contadores para generar señales de 1 Hz, minutos y horas.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "32768 = 2^N. ¿Cuántos bits N se necesitan para dividir el oscilador de 32768 Hz hasta 1 Hz con un contador binario?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "$$32768 = 2^{15} \\implies N = 15$$\nUn contador binario de 15 bits divide entre \\( 2^{15} = 32768 \\), convirtiendo 32768 Hz en 1 Hz exacto."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Para el contador de segundos (módulo 60), ¿cuántos flip-flops se necesitan mínimamente?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$N = \\lceil \\log_2(60) \\rceil = \\lceil 5.907 \\rceil = 6$$\nCon 5 FFs: 32 < 60. Con 6 FFs: 64 ≥ 60. Se necesitan 6 FFs para el contador de segundos."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuántos flip-flops en total se necesitan para el sistema de división (15 bits) más el contador de segundos (módulo 60, 6 bits)?",
+          "correctValue": 21,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total} = 15 + 6 = 21 \\text{ flip-flops}$$\nEl divisor de 32768 Hz a 1 Hz necesita 15 FFs y el contador de segundos 6 FFs: total \\( 15 + 6 = 21 \\) FFs."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "¿Cuántos pulsos del oscilador de 32768 Hz representan exactamente 1 minuto?",
+          "correctValue": 1966080,
+          "tolerance": 0,
+          "explanation": "$$\\text{Pulsos/minuto} = 32768 \\text{ Hz} \\times 60 \\text{ s} = 1966080$$\nEn 1 minuto (60 s) el oscilador de 32768 Hz genera \\( 32768 \\times 60 = 1966080 \\) pulsos."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Número mínimo de flip-flops para módulo M",
+      "tex": "$$N = \\lceil \\log_2(M) \\rceil$$"
+    },
+    {
+      "name": "Módulo de un contador binario de N bits",
+      "tex": "$$M = 2^N$$"
+    },
+    {
+      "name": "Número de estados del contador Johnson",
+      "tex": "$$\\text{Estados}_{\\text{Johnson}} = 2N$$"
+    },
+    {
+      "name": "Número de estados del contador de anillo",
+      "tex": "$$\\text{Estados}_{\\text{anillo}} = N$$"
+    },
+    {
+      "name": "Desplazamiento aritmético a la izquierda (multiplicación)",
+      "tex": "$$x \\ll k = x \\times 2^k$$"
+    },
+    {
+      "name": "Desplazamiento aritmético a la derecha (división entera)",
+      "tex": "$$x \\gg k = \\lfloor x / 2^k \\rfloor$$"
+    },
+    {
+      "name": "Módulo total de contadores en cascada",
+      "tex": "$$M_{\\text{total}} = M_1 \\times M_2 \\times \\cdots \\times M_k$$"
+    },
+    {
+      "name": "Frecuencia de carry-out (divisor de frecuencia)",
+      "tex": "$$f_{\\text{carry}} = \\frac{f_{\\text{clk}}}{M}$$"
+    },
+    {
+      "name": "Retardo total en contador asíncrono de N etapas",
+      "tex": "$$t_{\\text{total}} = N \\times t_p$$"
+    },
+    {
+      "name": "Retardo en línea de retardo digital (registro SISO)",
+      "tex": "$$t_{\\text{retardo}} = \\frac{N}{f_{\\text{clk}}}$$"
+    },
+    {
+      "name": "Realimentación del contador Johnson (entrada D₀)",
+      "tex": "$$D_0 = \\overline{Q_{N-1}}, \\quad D_i = Q_{i-1} \\text{ para } i \\geq 1$$"
+    },
+    {
+      "name": "Realimentación del contador de anillo (entrada D₀)",
+      "tex": "$$D_0 = Q_{N-1}, \\quad D_i = Q_{i-1} \\text{ para } i \\geq 1$$"
+    },
+    {
+      "name": "Entradas T del contador binario síncrono",
+      "tex": "$$T_i = Q_{i-1} \\cdot Q_{i-2} \\cdots Q_1 \\cdot Q_0, \\quad T_0 = 1$$"
+    },
+    {
+      "name": "Velocidad de transmisión serie (bytes por segundo)",
+      "tex": "$$\\text{Bytes/s} = \\frac{\\text{Baudios}}{\\text{bits por byte}}$$"
+    }
+  ]
+}

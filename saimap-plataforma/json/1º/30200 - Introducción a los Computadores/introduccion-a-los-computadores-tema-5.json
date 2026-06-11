@@ -1,0 +1,2088 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el propósito principal de la salida de validación $V$ (Valid) en un codificador con prioridad MSI como el 74148?",
+      "options": [
+        "Indicar que ha ocurrido un error de colisión debido a la activación simultánea de múltiples entradas.",
+        "Indicar si al menos una de las entradas de datos está activa, diferenciando el estado en el que la entrada con índice 0 está activa de aquel en el que no hay ninguna entrada activa.",
+        "Habilitar en cascada al siguiente bloque de codificación desactivando las salidas de datos."
+      ],
+      "correct": 1,
+      "hint": "Permite distinguir entre ninguna entrada activa y la entrada de menor prioridad activa.",
+      "explanation": "El codificador de prioridad tiene la salida $V$ para indicar validez. Si no hay entradas activas, la salida de datos suele ser $000$ (en lógica negativa), lo mismo que si la entrada 0 estuviera activa. $V$ permite discriminar estos dos casos."
+    },
+    {
+      "q": "En un codificador con prioridad de 8 a 3 con entradas activas a nivel bajo (como el 74148), si las entradas $\\bar{I}_7$ e $\\bar{I}_3$ están a nivel lógico 0 (activas) simultáneamente, ¿cuál será el valor de las salidas de datos activas a nivel bajo ($\\bar{Y}_2, \\bar{Y}_1, \\bar{Y}_0$)?",
+      "options": [
+        "$\\bar{Y}_2\\bar{Y}_1\\bar{Y}_0 = 000$, que corresponde en lógica negativa al valor decimal 7.",
+        "$\\bar{Y}_2\\bar{Y}_1\\bar{Y}_0 = 100$, que corresponde en lógica negativa al valor decimal 3.",
+        "$\\bar{Y}_2\\bar{Y}_1\\bar{Y}_0 = 111$, indicando estado de error o indeterminación."
+      ],
+      "correct": 0,
+      "hint": "Recuerda que la prioridad la tiene el índice más alto (7) y las salidas están invertidas.",
+      "explanation": "La entrada de mayor prioridad activa es $\\bar{I}_7$. El código binario de 7 es $111_2$. Como las salidas son activas a nivel bajo, se complementa a $000_2$."
+    },
+    {
+      "q": "Si queremos implementar una función lógica de 4 variables utilizando un único decodificador de 3 a 8 y puertas lógicas externas elementales (AND, OR, NOT), ¿cuál es la técnica estándar para incluir la cuarta variable?",
+      "options": [
+        "Conectar la cuarta variable a las tres líneas de selección mediante un multiplexor previo.",
+        "Los decodificadores de 3 a 8 generan 8 minterms, por lo que resulta físicamente imposible implementar una función de 4 variables sin duplicar el número de salidas a 16.",
+        "Utilizar la entrada de habilitación (Enable) del decodificador como la cuarta variable lógica, de forma que el decodificador se active o desactive dinámicamente."
+      ],
+      "correct": 2,
+      "hint": "La entrada Enable actúa como un multiplicador del mapa de Karnaugh.",
+      "explanation": "Al conectar la cuarta variable a la patilla de Enable, podemos habilitar el decodificador cuando dicha variable sea 1 (o 0 según sea activa a nivel alto o bajo), permitiendo implementar minterms de 4 variables al combinarse con las otras tres entradas."
+    },
+    {
+      "q": "Para decodificar una dirección de memoria en un sistema de microprocesadores, ¿qué ventaja presenta el direccionamiento por decodificación completa frente a la decodificación parcial?",
+      "options": [
+        "Garantiza que cada celda de memoria o registro tenga asignada una única dirección unívoca en el mapa de memoria, evitando el fenómeno de 'imágenes' o alias de memoria.",
+        "Reduce significativamente el número de puertas lógicas y el tiempo de propagación del circuito decodificador.",
+        "Permite direccionar un espacio de memoria mayor utilizando un bus de direcciones físico con menos líneas."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el solapamiento de direcciones y la redundancia.",
+      "explanation": "La decodificación completa utiliza todos los bits de direcciones del bus que no van directamente al chip. Esto evita alias o direcciones espejo donde un mismo chip responde a múltiples direcciones diferentes."
+    },
+    {
+      "q": "¿Cómo se puede transformar un decodificador de $n$ entradas a $2^n$ salidas que dispone de una entrada de habilitación (Enable) en un demultiplexor de 1 entrada de datos a $2^n$ salidas?",
+      "options": [
+        "Conectando la línea de entrada de datos al pin de habilitación (Enable) y utilizando las $n$ entradas de selección del decodificador como las líneas de selección del demultiplexor.",
+        "Realizando un bucle de realimentación entre la salida de mayor peso y la entrada de menor peso.",
+        "Invirtiendo la lógica de todas las salidas mediante puertas NOT y aplicando el dato directamente a la entrada de menor peso."
+      ],
+      "correct": 0,
+      "hint": "Un demultiplexor distribuye una entrada a una de las múltiples salidas.",
+      "explanation": "Si la entrada de datos se aplica al pin de Enable, esta señal se propaga únicamente a la salida seleccionada por las líneas de dirección del decodificador, lo que equivale exactamente al comportamiento de un demultiplexor."
+    },
+    {
+      "q": "En la cascada de decodificadores para construir un decodificador de 4 a 16 a partir de dos decodificadores de 3 a 8 con entradas de habilitación activas a nivel alto ($E$), ¿cómo se conecta la variable de mayor peso ($A_3$)?",
+      "options": [
+        "Se conecta en paralelo a las entradas de selección de menor peso de ambos decodificadores.",
+        "Se conecta directamente a la entrada $E$ de un decodificador y, a través de un inversor NOT, a la entrada $E$ del otro decodificador.",
+        "Se conecta a una compuerta OR cuyas entradas sean las salidas de validación de ambos dispositivos."
+      ],
+      "correct": 1,
+      "hint": "Se busca habilitar un bloque para el rango 0-7 y el otro para el rango 8-15.",
+      "explanation": "La variable de mayor peso $A_3$ vale 0 para direcciones 0-7 (habilitando el primer decodificador a través de un inversor) y vale 1 para direcciones 8-15 (habilitando directamente el segundo decodificador)."
+    },
+    {
+      "q": "Cuando se utiliza un multiplexor de 8 a 1 para implementar una función lógica de 4 variables $F(A,B,C,D)$ donde $A,B,C$ se conectan a las entradas de selección $S_2, S_1, S_0$, ¿cuál de las siguientes afirmaciones describe correctamente el comportamiento de las entradas de datos $D_i$?",
+      "options": [
+        "Cada entrada $D_i$ del multiplexor debe conectarse a $D$, $\\bar{D}$, 0 o 1, dependiendo de la relación entre el minterm asociado y la función $F$.",
+        "Las entradas $D_i$ deben fijarse únicamente a valores constantes 0 o 1, por lo que no es posible implementar la función sin un multiplexor de 16 a 1.",
+        "Cada entrada $D_i$ debe recibir la suma lógica de las variables $A, B$ y $C$ ponderada por el valor de $D$."
+      ],
+      "correct": 0,
+      "hint": "Este es el método de Shannon para reducción de variables en MUX.",
+      "explanation": "Al conectar 3 de las 4 variables a los selectores, la salida se determina en función de la cuarta variable ($D$, $\\bar{D}$, 0 o 1) para cada combinación de los selectores."
+    },
+    {
+      "q": "¿Cuál es el comportamiento de un codificador con prioridad si todas sus entradas se encuentran inactivas (por ejemplo, todas a 0 en lógica activa a nivel alto)?",
+      "options": [
+        "Las salidas de datos quedan en alta impedancia (tri-state) y la salida $V$ permanece a 1 para avisar al sistema de una lectura indeterminada.",
+        "Las salidas de datos y la salida $V$ oscilan automáticamente para indicar que el circuito se encuentra en un estado inestable.",
+        "Las salidas de datos toman el código correspondiente a la entrada 0 (normalmente $00\\dots0$), pero la salida de validación $V$ se pone a 0 (inactiva) para indicar que el código de salida no es válido."
+      ],
+      "correct": 2,
+      "hint": "Analiza la salida de validación $V$.",
+      "explanation": "Cuando ninguna entrada está activa, la salida de datos toma un valor por defecto (habitualmente 0), pero la señal de validación $V$ se pone a 0 para indicar que el dato de salida no representa ninguna entrada activa real."
+    },
+    {
+      "q": "En el diseño de un árbol de multiplexores para construir un multiplexor de 16 a 1 a partir de multiplexores de 4 a 1, ¿cuántos multiplexores de 4 a 1 se necesitan en total y cómo se distribuyen por niveles?",
+      "options": [
+        "Se necesitan 5 multiplexores de 4 a 1: 4 en el primer nivel (para procesar las 16 entradas) y 1 en el segundo nivel (para multiplexar las salidas del primer nivel).",
+        "Se necesitan 4 multiplexores de 4 a 1 colocados en un único nivel en paralelo, sumando sus salidas mediante una puerta OR externa de 4 entradas.",
+        "Se necesitan 8 multiplexores de 4 a 1 en el primer nivel y 2 en el segundo nivel, sumando 10 en total para garantizar la redundancia de datos."
+      ],
+      "correct": 0,
+      "hint": "Divide las entradas entre el número de canales de cada multiplexor intermedio.",
+      "explanation": "El primer nivel necesita $16 / 4 = 4$ multiplexores de 4 a 1. El segundo nivel necesita 1 multiplexor de 4 a 1 para seleccionar entre las 4 salidas del primer nivel. En total: 5 multiplexores."
+    },
+    {
+      "q": "¿Por qué es común que las entradas y salidas de habilitación (como Chip Select, OE, WE) en los circuitos MSI de memoria y decodificadores reales estén diseñadas de forma activa a nivel bajo?",
+      "options": [
+        "Para permitir que se puedan conectar directamente a las líneas de alimentación positiva sin necesidad de resistencias de pull-up externas.",
+        "Porque los transistores de tecnología bipolar y MOS presentan mayor inmunidad al ruido y menor consumo de energía en estado de conducción a nivel bajo (saturación a tierra).",
+        "Porque la lógica positiva no permite la transmisión de señales lógicas binarias a través de buses bidireccionales multiplexados."
+      ],
+      "correct": 1,
+      "hint": "Tiene que ver con la física del semiconductor y el consumo eléctrico en conducción.",
+      "explanation": "Físicamente, en muchas familias lógicas (como TTL), la corriente necesaria para forzar un nivel bajo es más fácil de manejar y tiene mejor inmunidad al ruido. Además, reduce el consumo en reposo."
+    },
+    {
+      "q": "Al diseñar un sistema de memoria de 64 KB utilizando chips de 16 KB, ¿cuál es el número mínimo de líneas del bus de direcciones que deben destinarse al decodificador de direcciones para generar las señales de Chip Select (CS) correspondientes?",
+      "options": [
+        "2 líneas, correspondientes a los dos bits más significativos del bus de direcciones necesario para direccionar 64 KB ($A_{15}$ y $A_{14}$ en un bus de 16 bits).",
+        "4 líneas, una para cada uno de los chips de memoria que componen el bloque principal.",
+        "14 líneas, ya que cada chip de 16 KB requiere direccionamiento individualizado bit a bit."
+      ],
+      "correct": 0,
+      "hint": "Piensa en cuántas combinaciones distintas de bloques de 16 KB hay en 64 KB.",
+      "explanation": "64 KB requiere 16 líneas de dirección ($A_{15}\\dots A_0$). Un chip de 16 KB requiere 14 líneas de dirección ($A_{13}\\dots A_0$). Por lo tanto, los dos bits superiores $A_{15}$ y $A_{14}$ definen cuál de los 4 chips de 16 KB se activa ($2^2 = 4$ combinaciones)."
+    },
+    {
+      "q": "Si se utiliza un multiplexor de 2 a 1 para implementar la compuerta lógica XOR ($Y = A \\oplus B$), conectando la variable $A$ a la entrada de selección $S_0$, ¿qué señales deben conectarse a las entradas de datos $I_0$ e $I_1$?",
+      "options": [
+        "$I_0 = \\bar{B}$ e $I_1 = B$.",
+        "$I_0 = B$ e $I_1 = \\bar{B}$.",
+        "$I_0 = 0$ e $I_1 = 1$."
+      ],
+      "correct": 1,
+      "hint": "Analiza los valores de la XOR para $A=0$ y $A=1$.",
+      "explanation": "Si $A=0$, la salida es $Y = 0 \\oplus B = B$. Si $A=1$, la salida es $Y = 1 \\oplus B = \\bar{B}$. Por lo tanto, $I_0$ (seleccionada cuando $A=0$) se conecta a $B$ e $I_1$ (cuando $A=1$) a $\\bar{B}$."
+    },
+    {
+      "q": "¿Qué representa físicamente un término de salida individual $Y_k$ de un decodificador binario de $n$ a $2^n$ cuando la entrada de habilitación (Enable) está activa?",
+      "options": [
+        "El minterm elemental $m_k$ asociado a las variables de entrada del decodificador, expresado en lógica positiva o negativa.",
+        "La suma lógica (maxterm) de todas las variables de entrada excluyendo la de menor peso.",
+        "El bit de paridad correspondiente a la representación en código Gray del índice de entrada."
+      ],
+      "correct": 0,
+      "hint": "Cada salida se activa para una única combinación de entrada.",
+      "explanation": "Un decodificador activa una sola salida para cada combinación de entrada. Físicamente, esto representa el minterm correspondiente a dicha combinación binaria de las entradas."
+    },
+    {
+      "q": "Un multiplexor de 4 a 1 se configura de forma que sus entradas de selección son $S_1 = A$ y $S_0 = B$. Las entradas de datos se configuran como $I_0 = C$, $I_1 = 0$, $I_2 = \\bar{C}$, $I_3 = 1$. ¿Cuál es la expresión lógica simplificada de la salida $Y$?",
+      "options": [
+        "$Y = \\bar{A}BC + A\\bar{B}C + AB\\bar{C}$.",
+        "$Y = \\bar{A}\\bar{B}\\bar{C} + ABC$.",
+        "$Y = \\bar{A}\\bar{B}C + A\\bar{B}\\bar{C} + AB$."
+      ],
+      "correct": 2,
+      "hint": "Suma los términos del multiplexor multiplicados por sus respectivas entradas de datos.",
+      "explanation": "La salida es $Y = \\bar{A}\\bar{B}I_0 + \\bar{A}BI_1 + A\\bar{B}I_2 + ABI_3$. Reemplazando: $Y = \\bar{A}\\bar{B}C + \\bar{A}B(0) + A\\bar{B}\\bar{C} + AB(1) = \\bar{A}\\bar{B}C + A\\bar{B}\\bar{C} + AB$."
+    },
+    {
+      "q": "En el contexto de los bloques lógicos MSI, ¿cuál es la diferencia fundamental entre un codificador clásico sin prioridad y un codificador con prioridad?",
+      "options": [
+        "El codificador sin prioridad genera salidas incorrectas cuando más de una entrada se activa simultáneamente, mientras que el codificador con prioridad prioriza la entrada de mayor índice y lo indica con la salida $V$.",
+        "El codificador sin prioridad requiere compuertas NOT en todas sus entradas, mientras que el codificador con prioridad funciona exclusivamente con compuertas AND-OR.",
+        "El codificador con prioridad incluye un reloj interno (CLK) para sincronizar las señales de entrada, mientras que el clásico es asíncrono."
+      ],
+      "correct": 0,
+      "hint": "Piensa en qué sucede si presionas dos teclas a la vez.",
+      "explanation": "El codificador clásico asume que solo una entrada está activa a la vez. El de prioridad resuelve la ambigüedad seleccionando la entrada activa con el índice más alto y validando la operación."
+    },
+    {
+      "q": "Suponga que desea decodificar una dirección de 16 bits para un chip de memoria RAM que ocupa el rango de direcciones desde $0x8000$ hasta $0xBFFF$. ¿Qué ecuación lógica define la señal de habilitación $\\bar{CS}$ (activa a nivel bajo) de este chip utilizando los bits del bus de direcciones $A_{15}\\dots A_0$?",
+      "options": [
+        "$\\bar{CS} = A_{15} + \\bar{A}_{14}$.",
+        "$\\bar{CS} = \\overline{A_{15} \\cdot \\bar{A}_{14}}$.",
+        "$\\bar{CS} = \\overline{A_{15} \\cdot A_{14}}$."
+      ],
+      "correct": 1,
+      "hint": "El rango corresponde a binario $1000\\,0000\\,0000\\,0000$ a $1011\\,1111\\,1111\\,1111$.",
+      "explanation": "Para este rango, los dos bits superiores deben ser $A_{15} = 1$ y $A_{14} = 0$. Por tanto, la decodificación lógica es $A_{15} \\cdot \\bar{A}_{14} = 1$. Como la señal $\\bar{CS}$ es activa a nivel bajo (0), se toma el complemento: $\\bar{CS} = \\overline{A_{15} \\cdot \\bar{A}_{14}}$."
+    },
+    {
+      "q": "¿Qué función realiza un demultiplexor cuando se le aplica un nivel lógico constante de '1' en su entrada de datos?",
+      "options": [
+        "Genera una secuencia de pulsos de reloj alternados en cada una de sus salidas.",
+        "Se comporta exactamente como un decodificador activo a nivel alto, donde las líneas de selección actúan como las entradas del decodificador.",
+        "Se comporta como un codificador con prioridad invertido donde todas las salidas están siempre activas."
+      ],
+      "correct": 1,
+      "hint": "Un decodificador activa la salida seleccionada, un demux encauza el dato de entrada.",
+      "explanation": "Al fijar la entrada de datos a 1, la salida seleccionada tomará el valor 1 (activa) y las demás se mantendrán a 0 (inactivas). Esto es exactamente el comportamiento de un decodificador binario."
+    },
+    {
+      "q": "¿Cuál es el inconveniente de utilizar decodificadores y puertas OR externas para implementar funciones lógicas con gran número de minterms frente al uso de multiplexores?",
+      "options": [
+        "El decodificador presenta mayor retardo de propagación acumulado debido a la conversión analógica interna de los minterms.",
+        "El decodificador requiere una puerta OR con tantas entradas como minterms tenga la función, lo que puede resultar en un circuito voluminoso, mientras que el multiplexor no requiere compuertas externas adicionales.",
+        "Las salidas del decodificador no toleran corrientes de cortocircuito cuando se combinan con compuertas OR del mismo tipo."
+      ],
+      "correct": 1,
+      "hint": "Cuenta el número de circuitos integrados y conexiones físicas necesarias.",
+      "explanation": "Implementar una función lógica con decodificadores requiere colocar compuertas lógicas externas (OR) para agrupar los minterms, lo que encarece y complica el diseño físico en comparación con el uso directo de un multiplexor."
+    },
+    {
+      "q": "En un codificador con prioridad 74148 (8 a 3), ¿para qué sirve la patilla de entrada de habilitación $EI$ (Enable Input) y la patilla de salida de habilitación $EO$ (Enable Output)?",
+      "options": [
+        "Para conectar múltiples integrados en cascada, permitiendo desactivar los codificadores de menor prioridad si se activa alguna entrada en un codificador de mayor prioridad.",
+        "Para controlar la velocidad de propagación de las señales internas y reducir el consumo térmico.",
+        "Para realimentar las salidas binarias y convertirlas en señales Gray estables."
+      ],
+      "correct": 0,
+      "hint": "Estas patillas se usan para interconectar múltiples chips en paralelo.",
+      "explanation": "$EI$ habilita el chip para funcionar. Si no se activan entradas en este chip, se activa $EO$ para habilitar el siguiente chip de menor prioridad conectado en cascada."
+    },
+    {
+      "q": "Si un decodificador de 3 a 8 tiene salidas activas a nivel bajo, ¿qué tipo de puerta lógica elemental se debe emplear para implementar una función lógica expresada como suma de minterms, si no se desea colocar inversores entre el decodificador y la puerta?",
+      "options": [
+        "Una compuerta AND, ya que la multiplicación de niveles bajos produce siempre un nivel bajo.",
+        "Una compuerta NAND, ya que por el teorema de De Morgan equivale a una suma lógica de entradas invertidas.",
+        "Una compuerta NOR, ya que invierte la suma de los valores lógicos resultantes."
+      ],
+      "correct": 1,
+      "hint": "Aplica De Morgan: la suma de variables directas es equivalente a la NAND de variables negadas.",
+      "explanation": "Las salidas activas del decodificador están en 0 (negadas). Una puerta NAND sobre estas salidas realiza la operación: $\\overline{\\bar{m}_a \\cdot \\bar{m}_b \\dots} = m_a + m_b \\dots$ que es exactamente la suma de minterms requerida."
+    },
+    {
+      "q": "¿Qué combinación de entradas de selección $S_2S_1S_0$ en un multiplexor de 8 a 1 conectará la entrada de datos $I_5$ a la salida $Y$?",
+      "options": [
+        "$S_2 = 1, S_1 = 0, S_0 = 1$.",
+        "$S_2 = 1, S_1 = 1, S_0 = 0$.",
+        "$S_2 = 0, S_1 = 1, S_0 = 1$."
+      ],
+      "correct": 0,
+      "hint": "El decimal 5 en binario puro de 3 bits.",
+      "explanation": "El índice 5 se codifica en binario de 3 bits como $101_2$. Por lo tanto, $S_2 = 1$, $S_1 = 0$, $S_0 = 1$."
+    },
+    {
+      "q": "En un sistema digital combinacional MSI, ¿cuál es la principal limitación del direccionamiento de memoria por decodificación parcial (donde no se usan todos los bits del bus de direcciones)?",
+      "options": [
+        "La memoria funciona a la mitad de la velocidad máxima permitida por el procesador.",
+        "Se desperdicia espacio en el mapa de direcciones porque un mismo chip de memoria responde a múltiples rangos de direcciones diferentes (direcciones espejo o alias).",
+        "Los bits no decodificados provocan que el bus de datos entre en un estado permanente de alta impedancia."
+      ],
+      "correct": 1,
+      "hint": "Los bits flotantes o no conectados multiplican el número de accesos válidos a un mismo chip.",
+      "explanation": "Al no conectar todos los bits de direcciones del bus al decodificador, varias combinaciones diferentes del bus activan el mismo Chip Select, inutilizando esos rangos de memoria para otros dispositivos."
+    },
+    {
+      "q": "Queremos implementar la función lógica $F(A,B) = A \\cdot \\bar{B}$ con un multiplexor de 2 a 1, usando $A$ como variable de selección $S_0$. ¿Qué entradas debemos conectar a las líneas de datos $I_0$ e $I_1$?",
+      "options": [
+        "$I_0 = B$, $I_1 = 0$.",
+        "$I_0 = 0$, $I_1 = \\bar{B}$.",
+        "$I_0 = \\bar{B}$, $I_1 = 1$."
+      ],
+      "correct": 1,
+      "hint": "Analiza la función para $A=0$ e $A=1$.",
+      "explanation": "Si $S_0 = A = 0$, la función es $F = 0 \\cdot \\bar{B} = 0$. Si $S_0 = A = 1$, la función es $F = 1 \\cdot \\bar{B} = \\bar{B}$. Así, $I_0 = 0$ e $I_1 = \\bar{B}$."
+    },
+    {
+      "q": "¿Qué ocurre con la salida de validación $V$ en un codificador con prioridad 74148 si la entrada $EI$ (Enable Input) está a nivel alto (inactiva)?",
+      "options": [
+        "La salida $V$ se pone a nivel alto (inactiva, en lógica negativa de este integrado) independientemente del estado de las entradas de datos.",
+        "La salida $V$ oscila a alta frecuencia indicando que el dispositivo está en modo de espera.",
+        "La salida $V$ se pone a nivel bajo reflejando la última entrada que estuvo activa antes de desactivar el integrado."
+      ],
+      "correct": 0,
+      "hint": "Si un integrado está deshabilitado, sus salidas de control reflejan inactividad.",
+      "explanation": "En el 74148, si $EI$ es alto (deshabilitado), las salidas de datos y de control de validación ($GS/V$ y $EO$) toman su nivel lógico inactivo (alto en este circuito integrado activo a nivel bajo)."
+    },
+    {
+      "q": "Si implementamos una función lógica con un decodificador de salidas activas a nivel bajo, y sabemos que la función tiene como maxterms (términos producto de la suma en forma canónica) los índices $M_0, M_3$ y $M_5$, ¿cómo podemos obtener la función lógica directa con una compuerta?",
+      "options": [
+        "Conectando las salidas $Y_0, Y_3, Y_5$ del decodificador a una compuerta AND externa.",
+        "Conectando las salidas $Y_0, Y_3, Y_5$ del decodificador a una compuerta OR externa.",
+        "Conectando todas las salidas excepto $Y_0, Y_3, Y_5$ a una compuerta NAND de 5 entradas."
+      ],
+      "correct": 0,
+      "hint": "Una función expresada como producto de maxterms requiere multiplicar los maxterms individuales.",
+      "explanation": "Dado que las salidas del decodificador representan directamente los maxterms si éstas son activas a nivel bajo (puesto que están negadas y representan el complemento del minterm), conectarlas a una compuerta AND implementa directamente el producto de maxterms."
+    },
+    {
+      "q": "Un multiplexor de 8 a 1 está controlado por las variables de selección $S_2 = A$, $S_1 = B$ y $S_0 = C$. Si se quiere implementar la función canónica $F(A,B,C) = \\sum m(0, 3, 5)$, ¿cuáles deben ser las conexiones de las entradas de datos $I_0$ a $I_7$?",
+      "options": [
+        "$I_0 = I_3 = I_5 = 1$; y las demás $I_1 = I_2 = I_4 = I_6 = I_7 = 0$.",
+        "$I_0 = I_3 = I_5 = 0$; y las demás $I_1 = I_2 = I_4 = I_6 = I_7 = 1$.",
+        "$I_1 = I_2 = I_4 = I_6 = I_7 = 1$; y las demás $I_0 = I_3 = I_5 = 0$."
+      ],
+      "correct": 0,
+      "hint": "Los minterms presentes en la suma lógica corresponden a entradas en '1' lógico.",
+      "explanation": "Para los minterms 0, 3 y 5 la función vale 1. Así, las entradas asociadas a estos minterms en el multiplexor deben conectarse a nivel alto (1) y el resto a nivel bajo (0)."
+    },
+    {
+      "q": "¿Qué función matemática/lógica realiza un multiplexor de 4 a 1 configurado con $S_1 = A, S_0 = B$ y las entradas $I_0 = 0, I_1 = 1, I_2 = 1, I_3 = 0$?",
+      "options": [
+        "La función XNOR de dos variables, es decir, $\\overline{A \\oplus B}$.",
+        "La función XOR de dos variables, es decir, $A \\oplus B$.",
+        "La función NAND de dos variables, es decir, $\\overline{A \\cdot B}$."
+      ],
+      "correct": 1,
+      "hint": "Sustituye la ecuación y simplifica.",
+      "explanation": "La ecuación es $Y = \\bar{A}B(1) + A\\bar{B}(1) = \\bar{A}B + A\\bar{B} = A \\oplus B$. Esto implementa la XOR."
+    },
+    {
+      "q": "En los circuitos integrados de decodificadores MSI, como el 74138 (decodificador de 3 a 8), ¿por qué se incluyen tres entradas de habilitación diferentes (dos activas a nivel bajo y una activa a nivel alto)?",
+      "options": [
+        "Para facilitar la conexión de múltiples decodificadores en cascada para formar decodificadores mayores sin necesidad de compuertas inversoras externas.",
+        "Para permitir la decodificación simultánea en tres formatos numéricos diferentes (BCD, Binario y Gray).",
+        "Para poder alimentar eléctricamente el chip a través de los pines de habilitación en caso de fallo de $V_{CC}$."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el direccionamiento de rangos de memoria usando bits superiores y sus negaciones.",
+      "explanation": "Disponer de habilitaciones cruzadas (activas a niveles alto y bajo) permite habilitar directamente un chip de rango superior y otro de inferior conectando la misma línea de dirección de control sin intercalar inversores."
+    },
+    {
+      "q": "Si tenemos un demultiplexor de 1 a 4 con líneas de selección $S_1S_0$ y queremos enrutar la señal de datos $D$ hacia la salida $Y_2$, ¿qué valores deben tomar $S_1$ y $S_0$?",
+      "options": [
+        "$S_1 = 0, S_0 = 1$.",
+        "$S_1 = 1, S_0 = 0$.",
+        "$S_1 = 1, S_0 = 1$."
+      ],
+      "correct": 1,
+      "hint": "El número decimal 2 expresado en binario de dos bits.",
+      "explanation": "La salida $Y_2$ corresponde al índice decimal 2, que en binario de dos bits es $10_2$. Por tanto, $S_1 = 1$ y $S_0 = 0$."
+    },
+    {
+      "q": "Para implementar la función lógica de tres variables $F(A,B,C) = A \\cdot B + \\bar{A} \\cdot C$ con un multiplexor de 2 a 1, usando $A$ como la línea de selección $S_0$, ¿cuáles deben ser las señales en las entradas $I_0$ e $I_1$?",
+      "options": [
+        "$I_0 = C$, $I_1 = B$.",
+        "$I_0 = B$, $I_1 = C$.",
+        "$I_0 = \\bar{C}$, $I_1 = \\bar{B}$."
+      ],
+      "correct": 0,
+      "hint": "Analiza qué sucede cuando $A=0$ y cuando $A=1$ en la expresión original.",
+      "explanation": "Cuando $S_0 = A = 0$, la función se reduce a $F = 0 \\cdot B + 1 \\cdot C = C \\implies I_0 = C$. Cuando $S_0 = A = 1$, la función se reduce a $F = 1 \\cdot B + 0 \\cdot C = B \\implies I_1 = B$."
+    },
+    {
+      "q": "¿Qué es un decodificador de BCD a 7 segmentos en términos de clasificación MSI?",
+      "options": [
+        "Un decodificador que toma una entrada de 4 bits en código BCD y activa combinaciones específicas de sus 7 salidas para encender los segmentos correspondientes de un visor numérico.",
+        "Un convertidor analógico a digital de alta precisión con entrada de tensión y salida de corriente continua.",
+        "Un multiplexor especializado que selecciona cíclicamente entre 7 fuentes de datos analógicas."
+      ],
+      "correct": 0,
+      "hint": "Es el circuito clásico que se usa para mostrar números en displays led.",
+      "explanation": "Toma un código binario decimal (BCD) de 4 bits y genera las 7 señales para activar los leds correspondientes (a-g) y dibujar los caracteres del 0 al 9 en pantalla."
+    },
+    {
+      "q": "Si se diseña un codificador con prioridad de 4 a 2 (con entradas de $I_0$ a $I_3$ donde $I_3$ es la de mayor prioridad), y las entradas tienen los valores binarios $I_3I_2I_1I_0 = 0101$, ¿cuál será la salida binaria $Y_1Y_0$ y el estado de la salida de validación $V$?",
+      "options": [
+        "$Y_1Y_0 = 11$, $V = 1$.",
+        "$Y_1Y_0 = 10$, $V = 1$.",
+        "$Y_1Y_0 = 01$, $V = 1$."
+      ],
+      "correct": 1,
+      "hint": "La entrada de mayor peso activa es $I_2$.",
+      "explanation": "La entrada activa con mayor índice es $I_2$. La salida codificada para 2 es $10_2$ ($Y_1 = 1$, $Y_0 = 0$). Como al menos una entrada está activa, la salida de validación $V$ es 1."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de utilizar multiplexores para la síntesis de funciones lógicas combinacionales en comparación con la síntesis basada en puertas lógicas individuales?",
+      "options": [
+        "Permite cambiar la función lógica implementada modificando únicamente los niveles de tensión aplicados a las entradas de datos, sin alterar el cableado de las variables de selección.",
+        "Reduce a cero el retraso de propagación de las señales a través del circuito impreso.",
+        "Elimina por completo la disipación térmica por efecto Joule al carecer de resistencias internas de compuerta."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con la reconfigurabilidad y flexibilidad del circuito.",
+      "explanation": "Los multiplexores actúan como bloques universales configurables por software/hardware. Al cambiar los bits aplicados a sus entradas de datos ($D_i$), cambia la función implementada sin cambiar el tendido eléctrico del bus de control."
+    },
+    {
+      "q": "En una decodificación de direcciones parcial, ¿cuál de los siguientes problemas puede surgir en el bus de datos del sistema?",
+      "options": [
+        "Las tensiones lógicas en el bus de datos disminuyen a la mitad debido al efecto resistivo de la decodificación.",
+        "Dos direcciones lógicas distintas escritas por el procesador pueden activar físicamente el mismo dispositivo de memoria, provocando colisión si se intenta leer dispositivos diferentes en el mismo rango duplicado.",
+        "El procesador interpreta de manera automática cualquier instrucción de lectura como una instrucción de escritura."
+      ],
+      "correct": 1,
+      "hint": "Piensa en el alias de memoria cuando dos chips intentan escribir simultáneamente en el bus.",
+      "explanation": "Si dos dispositivos responden a la misma dirección porque las líneas superiores de direcciones no están completamente decodificadas, ambos intentarán poner sus datos en el bus simultáneamente, provocando un cortocircuito lógico (colisión)."
+    },
+    {
+      "q": "Al expandir un multiplexor de 8 a 1 a partir de dos de 4 a 1 y un multiplexor de 2 a 1 en cascada, ¿cómo se distribuyen las señales de selección de 3 bits ($S_2S_1S_0$)?",
+      "options": [
+        "Los bits de menor peso $S_1S_0$ controlan los dos multiplexores de 4 a 1 en paralelo, y el bit de mayor peso $S_2$ controla el multiplexor de 2 a 1 de la salida.",
+        "El bit de mayor peso $S_2$ controla los dos de 4 a 1, y los bits de menor peso $S_1S_0$ controlan en paralelo el de 2 a 1 de la salida.",
+        "Los tres bits de selección se conectan directamente a las entradas de habilitación (Enable) de los tres dispositivos."
+      ],
+      "correct": 0,
+      "hint": "Los niveles inferiores decodifican los bits menos significativos del índice de entrada.",
+      "explanation": "Los bits $S_1S_0$ direccionan en paralelo las entradas de cada bloque de 4. El de mayor peso $S_2$ selecciona en el nivel de salida cuál de los dos bloques de 4 es el correcto."
+    },
+    {
+      "q": "¿Qué función combinacional básica realiza un circuito comercial codificador con prioridad 74147?",
+      "options": [
+        "Codificación de 16 líneas analógicas de entrada a 4 líneas binarias digitales de salida.",
+        "Decodificación binaria pura de 4 bits de entrada a 16 salidas independientes.",
+        "Codificación de prioridad de decimal a BCD (10 entradas activas a nivel bajo a 4 salidas binarias)."
+      ],
+      "correct": 2,
+      "hint": "74147 es el codificador BCD clásico de prioridad.",
+      "explanation": "El chip comercial 74147 toma 9 entradas activas a nivel bajo (representando los números decimales del 1 al 9, la entrada 0 no es necesaria ya que es la salida por defecto) y genera su código BCD de 4 bits con prioridad."
+    },
+    {
+      "q": "Al implementar una función lógica mediante el teorema de expansión de Shannon usando un multiplexor de 4 a 1 para una función de 3 variables $F(A,B,C)$, seleccionando $A$ y $B$ para controlar $S_1$ y $S_0$ respectively, ¿cuál de los siguientes es el valor posible para una entrada de datos $I_k$?",
+      "options": [
+        "Debe ser siempre la suma exclusiva $A \\oplus B \\oplus C$.",
+        "Puede ser una constante (0 o 1) o la variable restante $C$ o su complemento $\\bar{C}$.",
+        "Únicamente puede tomar valores de tensión variables dependientes de la señal de reloj principal."
+      ],
+      "correct": 1,
+      "hint": "Es el método habitual de Shannon reduciendo un grado en las variables de control.",
+      "explanation": "Al derivar los coeficientes para la expansión con respecto a $A$ y $B$, el residuo de la función lógica sólo puede depender de la variable restante $C$. Así, $I_k \\in \\{0, 1, C, \\bar{C}\\}$."
+    },
+    {
+      "q": "Si se conectan en cascada dos decodificadores de 2 a 4 para formar un decodificador de 3 a 8, ¿qué lógica externa mínima se requiere para gestionar las entradas de habilitación?",
+      "options": [
+        "Un único inversor (puerta NOT) aplicado sobre la variable de mayor peso de entrada para alternar la habilitación entre ambos integrados.",
+        "Un par de compuertas AND de tres entradas para sincronizar la transferencia de datos.",
+        "Ninguna, ya que la conexión directa de las salidas del primero a las entradas del segundo realiza la decodificación automáticamente."
+      ],
+      "correct": 0,
+      "hint": "Un integrado atiende al rango 0-3 y el otro al rango 4-7.",
+      "explanation": "La variable de mayor peso determina cuál de los dos bloques se activa. Un inversor NOT sobre esta variable permite que cuando sea 0 se active un chip y cuando sea 1 se active el otro."
+    },
+    {
+      "q": "¿Cuál es la función del pin 'Chip Select' (CS) o 'Chip Enable' (CE) en una memoria semiconductora RAM o ROM conectada a un bus de direcciones?",
+      "options": [
+        "Habilitar o deshabilitar las salidas del chip (tri-state) y su circuitería interna para que solo responda a los datos del bus cuando su rango de direccionamiento es seleccionado.",
+        "Incrementar la capacidad de almacenamiento de cada celda individual duplicando la tensión del bus.",
+        "Convertir los datos leídos de serie a paralelo de forma automática en cada ciclo de bus."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con la prevención de colisiones en el bus compartido.",
+      "explanation": "La señal CS desactiva las salidas del integrado poniéndolas en alta impedancia cuando el procesador accede a otro rango de memoria, lo que permite que varios chips compartan el mismo bus de datos físico."
+    },
+    {
+      "q": "En un multiplexor MSI con salida invertida (como algunos modelos comerciales), si se seleccionan las variables de control y la entrada de datos seleccionada tiene un valor lógico de 1, ¿qué valor se presentará en la salida física del dispositivo?",
+      "options": [
+        "Un valor lógico 0, debido a la inversión en la etapa de salida del multiplexor.",
+        "Un valor lógico 1, porque la selección siempre mantiene la fase del dato de entrada.",
+        "Estado de alta impedancia, ya que la inversión de un nivel alto desactiva la compuerta de paso de salida."
+      ],
+      "correct": 0,
+      "hint": "Salida invertida significa que pasa por un inversor al final de la lógica del multiplexor.",
+      "explanation": "Si la salida está invertida, cualquier dato seleccionado $D$ se presentará complementado a la salida, es decir, $\\bar{D}$. Si el dato es 1, la salida es 0."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Un microprocesador con un bus de direcciones de 16 bits tiene un chip de RAM direccionado mediante un decodificador. Si la señal $\\bar{CS}$ se activa cuando $A_{15}A_{14}A_{13} = 101_2$, el rango de direcciones hexadecimales que ocupa dicho chip es `____`.",
+      "options": [
+        "$0xA000$ a $0xBFFF$.",
+        "$0x8000$ a $0x9FFF$.",
+        "$0xC000$ a $0xDFFF$."
+      ],
+      "correct": 0,
+      "hint": "El código $101_2$ corresponde al 5 octal.",
+      "explanation": "$A_{15}A_{14}A_{13} = 101_2$ fija los tres bits superiores. Los 13 bits inferiores varían libremente de 0 a 1. Esto da el rango binario desde $1010\\,0000\\,0000\\,0000_2$ ($0xA000$) hasta $1011\\,1111\\,1111\\,1111_2$ ($0xBFFF$)."
+    },
+    {
+      "q": "Si implementamos un decodificador de 4 a 16 utilizando decodificadores de 2 a 4 con habilitación activa en alto, se requerirá un total de `____` decodificadores de 2 a 4.",
+      "options": [
+        "3.",
+        "4.",
+        "5."
+      ],
+      "correct": 2,
+      "hint": "Necesitas decodificadores para las salidas y otro para seleccionar qué decodificador se activa.",
+      "explanation": "Hacen falta 4 decodificadores en el nivel de salida para obtener las 16 salidas, y 1 decodificador en el nivel de entrada para distribuir la habilitación entre los otros 4 según los dos bits más significativos. Total: 5."
+    },
+    {
+      "q": "Un codificador de prioridad de 8 a 3 con entradas activas a nivel alto tiene activos los pines $I_2, I_5$ e $I_6$ simultáneamente. Las salidas de datos $Y_2Y_1Y_0$ representarán el código binario `____`.",
+      "options": [
+        "101.",
+        "110.",
+        "010."
+      ],
+      "correct": 1,
+      "hint": "Aplica prioridad a la entrada con mayor índice.",
+      "explanation": "La entrada activa con el índice más alto es $I_6$. Su valor en binario es $110_2$, por lo que las salidas de datos reflejarán este valor."
+    },
+    {
+      "q": "En un sistema de memoria de 20 bits de direcciones ($A_{19}\\dots A_0$), un chip de 128 KB se mapea a partir de la dirección inicial $0x20000$. El rango final de esta memoria en hexadecimal es `____`.",
+      "options": [
+        "$0x3FFFF$.",
+        "$0x2FFFF$.",
+        "$0x4FFFF$."
+      ],
+      "correct": 0,
+      "hint": "Suma el tamaño de 128 KB en bytes (convertido a hexadecimal) a la dirección de inicio y resta 1.",
+      "explanation": "128 KB equivalen a $131072$ bytes, que en hexadecimal es $0x20000$. La dirección final es $0x20000 + 0x20000 - 1 = 0x3FFFF$."
+    },
+    {
+      "q": "Se implementa la función lógica $F(A,B,C) = \\sum m(1, 4)$ usando un multiplexor de 4 a 1 con selectores $S_1 = A, S_0 = B$. Las entradas de datos $I_0, I_1, I_2, I_3$ se conectan respectivamente a `____`.",
+      "options": [
+        "$C, 0, \\bar{C}, 0$.",
+        "$C, 1, \\bar{C}, 0$.",
+        "$0, C, \\bar{C}, C$."
+      ],
+      "correct": 0,
+      "hint": "Obtén los minterms para cada combinación de los selectores $A$ y $B$.",
+      "explanation": "Para $AB=00$, $F = m(1) = \\bar{A}\\bar{B}C \\implies I_0 = C$. Para $AB=01$, $F = 0 \\implies I_1 = 0$. Para $AB=10$, $F = m(4) = A\\bar{B}\\bar{C} \\implies I_2 = \\bar{C}$. Para $AB=11$, $F = 0 \\implies I_3 = 0$."
+    },
+    {
+      "q": "Si un multiplexor de 8 a 1 tiene aplicadas las entradas de selección $S_2S_1S_0 = 101_2$, y las entradas de datos están conectadas de tal forma que $I_k = k \\pmod 3$, la salida $Y$ tomará el valor numérico decimal `____`.",
+      "options": [
+        "1.",
+        "2.",
+        "0."
+      ],
+      "correct": 1,
+      "hint": "Determina qué pin de entrada $I_k$ se selecciona y calcula su valor.",
+      "explanation": "El valor $101_2$ selecciona la entrada de datos $I_5$. Como $I_5 = 5 \\pmod 3 = 2$, la salida tomará el valor 2 (que en el MUX corresponde a la opción con valor 2, correcta en el índice 1)."
+    },
+    {
+      "q": "Un descodificador de 3 a 8 con salidas activas a nivel bajo ($\\bar{Y}_0\\dots\\bar{Y}_7$) tiene en sus entradas de selección el valor binario 011. Si la entrada de habilitación $E$ está activa, el vector de salida $(\bar{Y}_7, \\dots, \\bar{Y}_0)$ es `____`.",
+      "options": [
+        "$11110111$.",
+        "$00001000$.",
+        "$11111011$."
+      ],
+      "correct": 0,
+      "hint": "La entrada $011_2$ corresponde al 3 decimal. La salida $\\bar{Y}_3$ estará activa.",
+      "explanation": "Como la entrada es 3 y la salida es activa a nivel bajo, $\\bar{Y}_3$ se pone a 0 y todas las demás salidas del decodificador permanecen en 1. Así, el vector de salida de MSB a LSB es $11110111$."
+    },
+    {
+      "q": "En un bus de direcciones de 16 bits, deseamos colocar una memoria EPROM de 8 KB en la parte más alta del mapa de memoria (hasta $0xFFFF$). El rango de direcciones ocupado por este chip es `____`.",
+      "options": [
+        "$0xF000$ a $0xFFFF$.",
+        "$0xE000$ a $0xFFFF$.",
+        "$0xC000$ a $0xFFFF$."
+      ],
+      "correct": 1,
+      "hint": "8 KB equivale a $2000$ direcciones hexadecimales.",
+      "explanation": "8 KB = $8192$ direcciones, es decir, $0x2000$ en hexadecimal. Si el límite superior es $0xFFFF$, la dirección inicial es $0xFFFF - 0x2000 + 1 = 0xE000$."
+    },
+    {
+      "q": "Si una función lógica de 5 variables se implementa utilizando un multiplexor de 16 a 1 y un inversor, conectando 4 variables a los selectores, cada entrada de datos del multiplexor requerirá una de entre `____` posibles conexiones de señales lógicas.",
+      "options": [
+        "4 (es decir: 0, 1, la quinta variable, o su complemento).",
+        "2 (es decir: 0 o 1 únicamente).",
+        "8 (es decir: combinaciones lógicas de dos variables)."
+      ],
+      "correct": 0,
+      "hint": "Método de Shannon reduciendo variables con multiplexores.",
+      "explanation": "Con 4 variables en selección, la función se reduce a una sola variable restante ($E$). Cada entrada de datos del multiplexor de 16 a 1 se conectará a '0', '1', $E$ o $\\bar{E}$ (usando el inversor)."
+    },
+    {
+      "q": "Un decodificador de 3 a 8 tiene activadas sus entradas de selección en $CBA = 110_2$. Si este decodificador se utiliza como demultiplexor de 1 a 8, la entrada de datos se aplica al pin de habilitación activa a nivel alto, y tiene un valor lógico de 0, la salida activa a nivel alto que se seleccionará presentará un nivel lógico de `____`.",
+      "options": [
+        "1.",
+        "0.",
+        "Alta impedancia."
+      ],
+      "correct": 1,
+      "hint": "El demultiplexor transfiere el dato de la entrada a la salida seleccionada.",
+      "explanation": "Las entradas de selección especifican la salida $Y_6$ (ya que $110_2 = 6$). Al comportarse como demultiplexor, la salida $Y_6$ tomará el valor exacto de la entrada de datos, que es 0."
+    },
+    {
+      "q": "Se desea construir un decodificador de 5 a 32 utilizando decodificadores comerciales de 3 a 8 con entradas de habilitación. Se necesitarán en total `____` decodificadores de 3 a 8.",
+      "options": [
+        "4.",
+        "8.",
+        "5."
+      ],
+      "correct": 2,
+      "hint": "Divide las 32 salidas finales en grupos de 8.",
+      "explanation": "Se necesitan 4 decodificadores de 3 a 8 en paralelo para dar las 32 salidas, y un 5º decodificador de 3 a 8 actuando como decodificador de selección utilizando 2 de sus 3 entradas para habilitar uno de los 4 integrados de salida."
+    },
+    {
+      "q": "Un codificador de prioridad de 4 a 2 con entradas activas a nivel alto tiene $I_3I_2I_1I_0 = 0010$. Si se duplica el número de entradas activas poniendo a 1 también la entrada $I_0$, la salida binaria $Y_1Y_0$ pasará a ser `____`.",
+      "options": [
+        "01.",
+        "00.",
+        "10."
+      ],
+      "correct": 0,
+      "hint": "La prioridad favorece a la entrada de mayor índice.",
+      "explanation": "El vector de entrada pasa a ser $0011$. La entrada de mayor prioridad activa sigue siendo $I_1$. Por lo tanto, la salida binaria codificada se mantiene en $01_2$ (1 decimal)."
+    },
+    {
+      "q": "Si se implementa un multiplexor de 32 a 1 utilizando un árbol de multiplexores de 8 a 1, el número mínimo de multiplexores de 8 a 1 necesarios en el primer nivel es `____`.",
+      "options": [
+        "5.",
+        "4.",
+        "8."
+      ],
+      "correct": 1,
+      "hint": "Divide el número de canales totales por el número de entradas de cada bloque.",
+      "explanation": "Para procesar 32 entradas con bloques de 8 entradas, necesitamos $32 / 8 = 4$ multiplexores en el primer nivel de entrada."
+    },
+    {
+      "q": "En una placa de computador con un bus de direcciones de 16 bits, un chip de RAM estática de 4 KB está direccionado de manera que su señal $\\bar{CS}$ se activa cuando $A_{15}A_{12} = 10_2$. El número de direcciones espejo o 'alias' que posee este chip en el mapa de memoria es `____`.",
+      "options": [
+        "2.",
+        "8.",
+        "4."
+      ],
+      "correct": 2,
+      "hint": "Calcula el número de bits del bus de direcciones que no están conectados al chip ni a la lógica de selección.",
+      "explanation": "4 KB de RAM requieren 12 bits de dirección ($A_{11}\\dots A_0$). Los bits decodificados son $A_{15}$ y $A_{12}$. Quedan $A_{14}$ y $A_{13}$ libres (2 bits sin decodificar). Esto genera $2^2 = 4$ alias en el mapa de memoria."
+    },
+    {
+      "q": "Un multiplexor de 4 a 1 tiene selectores $S_1S_0$ y entradas de datos $I_3I_2I_1I_0$. Si queremos implementar la función lógica AND de tres variables $F(A,B,C) = A \\cdot B \\cdot C$ eligiendo $S_1 = A$ y $S_0 = B$, la entrada de datos $I_3$ debe conectarse a `____`.",
+      "options": [
+        "$C$.",
+        "1.",
+        "0."
+      ],
+      "correct": 0,
+      "hint": "Analiza la salida cuando los selectores $A$ y $B$ están en 1.",
+      "explanation": "Cuando $S_1S_0 = AB = 11$, la salida selecciona $I_3$. Como la función es $F = A \\cdot B \\cdot C$, en este caso $F = 1 \\cdot 1 \\cdot C = C$. Así, $I_3$ debe conectarse a $C$."
+    },
+    {
+      "q": "Un decodificador de 4 a 16 tiene sus salidas activas a nivel bajo. Si introducimos en las entradas de selección el valor binario $1010_2$, la salida activa se pondrá a nivel lógico `____`.",
+      "options": [
+        "1.",
+        "0.",
+        "Alta impedancia."
+      ],
+      "correct": 1,
+      "hint": "Las salidas activas en este circuito integrado están en nivel lógico bajo.",
+      "explanation": "La combinación binaria $1010_2$ equivale al número 10 decimal. Por tanto, la salida $Y_{10}$ se activará. Dado que son activas a nivel bajo, tomará un nivel lógico 0."
+    },
+    {
+      "q": "Si se conectan dos multiplexores de 4 a 1 para formar un multiplexor de 8 a 1 sin usar compuertas externas, aplicando la señal de control de mayor peso a las entradas de habilitación activas a nivel opuesto, la salida final se obtiene uniendo directamente las salidas de ambos multiplexores mediante una conexión `____` (siempre que tengan salidas en colector abierto o tri-state).",
+      "options": [
+        "Cableada (Wired-OR/AND o tercer estado).",
+        "De realimentación asíncrona.",
+        "De suma en paralelo resistiva."
+      ],
+      "correct": 0,
+      "hint": "Es la técnica clásica de unión de salidas tri-state compartiendo el bus de salida.",
+      "explanation": "Si los multiplexores disponen de salidas tri-state (tercer estado), podemos cortocircuitar físicamente las salidas. Al habilitar solo un multiplexor a la vez, el activo gobernará el cable sin conflicto eléctrico (conexión cableada)."
+    },
+    {
+      "q": "Para implementar la función OR de 4 variables $F(A,B,C,D) = A+B+C+D$ con un multiplexor de 8 a 1, usando $A, B, C$ como selectores $S_2, S_1, S_0$, la entrada $I_0$ debe estar conectada a `____`.",
+      "options": [
+        "0.",
+        "$D$.",
+        "1."
+      ],
+      "correct": 1,
+      "hint": "Evalúa la función cuando los selectores $A, B$ y $C$ son todos 0.",
+      "explanation": "Cuando $S_2S_1S_0 = ABC = 000$, seleccionamos la entrada $I_0$. Sustituyendo en la función: $F = 0 + 0 + 0 + D = D$. Por tanto, $I_0 = D$."
+    },
+    {
+      "q": "Un decodificador con habilitación (Enable) y salidas activas a nivel bajo funciona como demultiplexor de forma que la salida seleccionada presenta un nivel lógico bajo cuando la entrada de datos en Enable está `____`.",
+      "options": [
+        "Activa.",
+        "Inactiva.",
+        "En alta impedancia."
+      ],
+      "correct": 0,
+      "hint": "Para que la salida seleccionada tome el valor activo, la habilitación debe permitir la operación.",
+      "explanation": "El decodificador se activa cuando la entrada de datos en Enable está activa. La salida seleccionada reflejará este estado tomando el nivel lógico de activación (bajo)."
+    },
+    {
+      "q": "Un sistema de direccionamiento de memoria completa utiliza un bus de direcciones de 16 bits para un único chip de RAM de 32 KB. El decodificador de direcciones utilizará exactamente `____` bits del bus de direcciones para generar la señal de Chip Select.",
+      "options": [
+        "2.",
+        "3.",
+        "1 (por ejemplo, $A_{15}$)."
+      ],
+      "correct": 2,
+      "hint": "Determina cuántos bits requiere internamente el chip de 32 KB.",
+      "explanation": "32 KB requiere 15 bits de dirección ($2^{15} = 32768$ bytes). Como el bus tiene 16 bits, sobra exactamente 1 bit ($A_{15}$), el cual se conectará al decodificador de direcciones para generar $\\bar{CS}$."
+    },
+    {
+      "q": "En el diseño de sistemas lógicos con multiplexores (MUX), ¿cuál de los siguientes métodos es correcto para implementar funciones de $n$ variables utilizando un MUX de $2^{n-1}$ entradas de datos?",
+      "options": [
+        "Conectar $n-1$ variables a las entradas de selección del MUX y derivar las señales de entrada de datos ($0, 1$, la variable restante o su complemento) mediante inspección de la tabla de verdad.",
+        "Utilizar el método del árbol de selección o expansión de Shannon.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos enunciados describen el mismo principio matemático de reducción de variables.",
+      "explanation": "La expansión de Shannon y el análisis por tabla de verdad para el mapeo de entradas con una variable de datos son dos aproximaciones metodológicas equivalentes para resolver este diseño."
+    },
+    {
+      "q": "¿Cuáles de las siguientes condiciones pueden causar que la salida de validación $V$ de un codificador con prioridad permanezca en nivel lógico inactivo (0)?",
+      "options": [
+        "Que todas las entradas de datos del codificador estén en nivel inactivo.",
+        "Que la patilla de habilitación de entrada (Enable Input, EI) se encuentre en estado inactivo.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La salida de validación indica que el circuito está habilitado y procesando una entrada válida.",
+      "explanation": "Tanto la ausencia de entradas activas como la desactivación general del integrado ($EI$ inactivo) provocan que la salida de validación $V$ se mantenga inactiva."
+    },
+    {
+      "q": "En la implementación física de un decodificador binario comercial (como el 74138), las señales de habilitación (Enable) sirven para:",
+      "options": [
+        "Facilitar la expansión a decodificadores de mayor número de entradas conectándolos en cascada.",
+        "Desactivar todas las salidas del chip poniéndolas a su nivel inactivo para el ahorro de energía o control de bus.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Habilitar un decodificador permite su uso en cascada o apagar sus salidas.",
+      "explanation": "Las patillas de Enable permiten conectar múltiples decodificadores en cascada y controlar de forma dinámica la activación de salidas para evitar colisiones en sistemas de bus."
+    },
+    {
+      "q": "¿Qué ventajas presenta el uso de bloques MSI combinacionales (como decodificadores o multiplexores) en comparación con el diseño exclusivo mediante compuertas lógicas discretas (AND, OR, NOT)?",
+      "options": [
+        "Reducción del área física de circuito impreso, simplificación del cableado y menor tiempo de diseño.",
+        "Facilidad de prueba y mantenimiento del sistema digital gracias a la estandarización de componentes.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La integración a mediana escala (MSI) reduce la complejidad de diseño e interconexión física.",
+      "explanation": "Los integrados MSI agrupan decenas de compuertas lógicas elementales, lo que reduce costes de fabricación, conexiones físicas en placa, tamaño del PCB y tiempo de diseño del ingeniero."
+    },
+    {
+      "q": "Al realizar el análisis de un rango de memoria direccionado mediante un decodificador, ¿qué variables determinan los límites inferior y superior del espacio asignado a un chip?",
+      "options": [
+        "El valor constante de los bits superiores del bus de direcciones que activan el Chip Select.",
+        "El rango completo de variación de los bits inferiores conectados directamente al direccionamiento interno del chip.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Para calcular el rango de direcciones se combinan la dirección de base fija y el rango del bus interno del chip.",
+      "explanation": "Los límites se calculan fijando los bits superiores seleccionados por la lógica de decodificación (dirección base) y variando desde todos ceros a todos unos los bits inferiores (desplazamiento interno)."
+    },
+    {
+      "q": "Un multiplexor comercial de 16 a 1 puede utilizarse de forma directa para:",
+      "options": [
+        "Implementar cualquier función combinacional de 4 variables de entrada sin compuertas adicionales.",
+        "Implementar cualquier función combinacional de 5 variables si se dispone de una puerta NOT externa.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Depende de la relación entre el número de variables de la función y las entradas de selección.",
+      "explanation": "Con 4 variables de selección se implementan funciones de 4 variables directamente. Con 5 variables, se puede aplicar la variable restante y su complemento a las entradas de datos, requiriendo un inversor NOT."
+    },
+    {
+      "q": "Si se conectan las salidas de un decodificador de 3 a 8 activo a nivel bajo a compuertas externas para implementar funciones lógicas, ¿cuál de los siguientes esquemas es equivalente a una suma de minterms?",
+      "options": [
+        "Una compuerta NAND conectada a las salidas activas del decodificador correspondientes a los minterms de la función.",
+        "Una compuerta AND con inversores en cada una de sus entradas conectada a las salidas seleccionadas.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Aplica leyes lógicas de equivalencia con inversores (De Morgan).",
+      "explanation": "Las salidas de un decodificador activo a nivel bajo están negadas. La NAND de señales negadas equivale a la OR de señales directas (suma de minterms). Un AND con inversores en sus entradas realiza la misma función."
+    },
+    {
+      "q": "En relación con las señales de Chip Select ($\\bar{CS}$) de los chips de memoria de un computador, ¿cuáles de las siguientes afirmaciones son correctas?",
+      "options": [
+        "Suelen ser activas a nivel bajo para integrarse mejor con los decodificadores estándar y mejorar la inmunidad al ruido.",
+        "Si la señal $\\bar{CS}$ está inactiva (nivel alto), las salidas de datos del chip entran en estado de alta impedancia (tri-state).",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El pin Chip Select controla la conexión de salida y la polaridad lógica clásica.",
+      "explanation": "La activación a nivel bajo es el estándar industrial. Además, la desactivación de CS pone las líneas del bus de datos en tri-state para evitar conflictos de bus."
+    },
+    {
+      "q": "Al expandir la capacidad de un codificador con prioridad (por ejemplo, para construir un codificador de 16 a 4 a partir de dos de 8 a 3), ¿qué señales del primer integrado se deben conectar al segundo integrado?",
+      "options": [
+        "La salida de habilitación $EO$ (Enable Output) del codificador de mayor prioridad a la entrada de habilitación $EI$ del codificador de menor prioridad.",
+        "Las salidas de datos de ambos integrados se combinan mediante puertas lógicas OR (o NAND según la polaridad) para formar el bus de salida común.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El encadenamiento requiere interconectar habilitaciones y agrupar salidas de datos.",
+      "explanation": "Para la cascada, el pin $EO$ desactiva el segundo integrado si hay entradas activas en el primero. Asimismo, se debe realizar la suma lógica de las salidas de datos correspondientes."
+    },
+    {
+      "q": "En un demultiplexor, las salidas no seleccionadas por las entradas de control toman:",
+      "options": [
+        "El nivel lógico inactivo (0 en lógica activa a nivel alto).",
+        "El nivel lógico inactivo (1 en lógica activa a nivel bajo).",
+        "Todas las anteriores son correctas, dependiendo del diseño específico de polaridad del circuito."
+      ],
+      "correct": 2,
+      "hint": "El valor por defecto de las salidas inactivas depende del integrado (lógica directa o invertida).",
+      "explanation": "Si el demultiplexor tiene salidas activas a nivel alto, las inactivas se ponen a 0. Si tiene salidas activas a nivel bajo, las no seleccionadas toman valor 1. Ambos son correctos."
+    },
+    {
+      "q": "Un decodificador de 3 a 8 tiene entradas de selección $CBA$ y habilitación activa en alto. Si $CBA = 111$ y la habilitación está inactiva (0), ¿cuál de las salidas de lógica activa a nivel alto estará activa?",
+      "options": [
+        "La salida $Y_7$.",
+        "La salida $Y_0$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La habilitación inactiva anula el funcionamiento de todas las salidas.",
+      "explanation": "Si la habilitación está inactiva, todas las salidas del decodificador se mantienen inactivas (0 en lógica activa a nivel alto), sin importar el valor de selección $CBA$."
+    },
+    {
+      "q": "Un multiplexor de 4 a 1 tiene las entradas $I_0 = 1, I_1 = 0, I_2 = 1, I_3 = 0$. ¿Qué función lógica de los selectores $S_1, S_0$ implementa este circuito en su salida?",
+      "options": [
+        "$S_1 \\oplus S_0$.",
+        "$S_1 + S_0$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Escribe la ecuación lógica y simplifica la función.",
+      "explanation": "La ecuación es $Y = \\bar{S}_1\\bar{S}_0(1) + \\bar{S}_1S_0(0) + S_1\\bar{S}_0(1) + S_1S_0(0) = \\bar{S}_1\\bar{S}_0 + S_1\\bar{S}_0 = \\bar{S}_0$. La función resultante es $\\bar{S}_0$ (el NOT de $S_0$). Ninguna de las opciones de compuertas XOR o OR dadas coincide."
+    },
+    {
+      "q": "En un codificador con prioridad sin salida de validación $V$, si la salida de datos es $00_2$, ¿cómo distingue el sistema receptor si la entrada $I_0$ está activa o si ninguna entrada está activa?",
+      "options": [
+        "El sistema lee una señal analógica de corriente residual del chip.",
+        "El sistema asume siempre que la entrada $I_0$ está activa por defecto.",
+        "Ninguna de las anteriores es correcta, ya que sin la salida de validación $V$ es imposible distinguir ambos estados lógicos."
+      ],
+      "correct": 2,
+      "hint": "Ambos estados lógicos producen la misma salida de datos binaria.",
+      "explanation": "La salida de datos para la entrada 0 activa es $00_2$. Cuando no hay entradas activas, las salidas también se ponen a $00_2$. Sin la salida de control $V$, ambos estados son indistinguibles digitalmente."
+    },
+    {
+      "q": "Se conecta un bus de direcciones de 16 bits a un chip de memoria de 64 KB. ¿Qué combinación de bits de dirección superiores se debe decodificar para generar la señal de Chip Select?",
+      "options": [
+        "$A_{15}$.",
+        "$A_{15}$ y $A_{14}$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Determina cuántos bits del bus requiere una memoria de 64 KB.",
+      "explanation": "64 KB requiere $2^{16}$ direcciones binarias, lo que significa que utiliza las 16 líneas de direcciones completas ($A_{15}\\dots A_0$). No sobran líneas superiores para decodificar, por lo que la señal $\\bar{CS}$ se conecta a nivel constante."
+    },
+    {
+      "q": "Si un decodificador de 4 a 16 tiene salidas activas a nivel alto y todas sus entradas de selección son 0, la salida $Y_0$ es 1. Si cambiamos todas las compuertas AND internas por compuertas OR, ¿cuál será el comportamiento del decodificador?",
+      "options": [
+        "El circuito continuará funcionando de manera idéntica debido a la dualidad lógica.",
+        "Se convertirá de forma automática en un codificador con prioridad de 16 a 4.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La función lógica de decodificación clásica de minterms requiere compuertas AND.",
+      "explanation": "Sustituir las compuertas AND por OR en la etapa de decodificación desvirtúa por completo el comportamiento del decodificador, destruyendo la propiedad de activar una sola salida exclusiva."
+    },
+    {
+      "q": "Un multiplexor de 8 a 1 con selectores $S_2S_1S_0$ implementa una función. Si se sabe que $S_2 = A, S_1 = B, S_0 = C$, y que las entradas de datos están conectadas como $I_0 = I_1 = I_2 = I_3 = I_4 = I_5 = I_6 = I_7 = C$, ¿cuál es la función de salida resultante?",
+      "options": [
+        "$F(A,B,C) = A \\cdot B$.",
+        "$F(A,B,C) = A + B$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Si todas las entradas de datos están puenteadas a la misma señal, ¿qué sale?",
+      "explanation": "Dado que todas las entradas están conectadas a la variable $C$, no importa qué combinación tengan los selectores; la salida seleccionada siempre tomará el valor de $C$. Así, $F(A,B,C) = C$."
+    },
+    {
+      "q": "Suponga que desea mapear una memoria RAM de 16 KB en el rango de direcciones de $0x4000$ a $0x7FFF$ en un espacio de direcciones de 16 bits. ¿Cuál es el bit o bits que deben usarse para la señal de decodificación Chip Select activa a nivel bajo $\\bar{CS}$?",
+      "options": [
+        "$\\bar{CS} = A_{15} + A_{14}$.",
+        "$\\bar{CS} = \\overline{A_{15} \\cdot A_{14}}$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Para este rango de direcciones, en binario los bits superiores son $A_{15} = 0, A_{14} = 1$.",
+      "explanation": "16 KB requiere 14 líneas de dirección ($A_{13}\\dots A_0$). Los bits a decodificar son $A_{15}$ y $A_{14}$. El rango $0x4000$-$0x7FFF$ tiene $A_{15}=0$ y $A_{14}=1$. La ecuación de $\\bar{CS}$ activa a nivel bajo es $\\bar{CS} = A_{15} + \\bar{A}_{14}$. Ninguna de las opciones propuestas coincide."
+    },
+    {
+      "q": "En un codificador con prioridad 74148 (salidas activas a nivel bajo), si la entrada activa de mayor prioridad es $\\bar{I}_5$ (es decir, está a 0), ¿cuál de las siguientes combinaciones de salidas de datos es la correcta?",
+      "options": [
+        "$Y_2Y_1Y_0 = 101$.",
+        "$Y_2Y_1Y_0 = 111$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerda que las salidas en este integrado MSI también están invertidas.",
+      "explanation": "La entrada activa de mayor prioridad es 5. En binario puro esto es $101_2$. Como las salidas de datos están negadas en el 74148, el valor de salida es $\\overline{101} = 010_2$. Ninguna opción coincide."
+    },
+    {
+      "q": "Un demultiplexor de 1 a 16 se diseña con un árbol de demultiplexores de 1 a 4. ¿Cuántos demultiplexores de 1 a 4 se necesitan en total?",
+      "options": [
+        "4.",
+        "6.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Hacen falta demultiplexores de salida y de entrada de habilitación.",
+      "explanation": "Se necesitan 4 demultiplexores en el nivel de salidas para dar soporte a las 16 salidas finales, y 1 demultiplexor intermedio para controlar el direccionamiento del enable. En total se necesitan 5 demultiplexores de 1 a 4."
+    },
+    {
+      "q": "Si una función lógica de 3 variables se implementa con un multiplexor de 2 a 1, y se selecciona la variable $A$ como selector, ¿a qué se conectan las entradas de datos $I_0$ e $I_1$?",
+      "options": [
+        "Siempre se conectan únicamente a valores constantes de 0 o 1.",
+        "A combinaciones lógicas sumadas de las tres variables.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Piensa en el método de Shannon para un multiplexor de 2 a 1.",
+      "explanation": "Las entradas $I_0$ e $I_1$ se conectan a funciones de las variables restantes ($B$ y $C$), las cuales pueden tomar valores como $B, \\bar{B}, C, \\bar{C}, 0, 1, B\\cdot C, B+\\bar{C}$, etc., no limitándose a constantes ni a sumas de las tres variables."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Decodificación de Direcciones SRAM de 8 KB",
+      "context": "Un chip de memoria RAM estática de 8 KB se coloca en un sistema con un bus de direcciones de 16 bits ($A_{15} \\dots A_0$). Se utiliza decodificación completa y la dirección inicial es $0x4000$.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de dirección internas requiere el chip para direccionar sus celdas?",
+          "correctValue": 13,
+          "tolerance": 0.0,
+          "explanation": "Un tamaño de 8 KB equivale a $8 \\times 1024 = 8192$ bytes. Como $2^{13} = 8192$, el chip requiere exactamente 13 líneas de direccionamiento interno ($A_{12} \\dots A_0$)."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "¿Cuántas líneas de dirección del bus se conectan al decodificador de direcciones para generar la señal $\\bar{CS}$?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El bus de direcciones total es de 16 bits. El chip utiliza 13 bits para su direccionamiento interno. Las líneas restantes se conectan al decodificador: $16 - 13 = 3$ líneas ($A_{15}, A_{14}, A_{13}$)."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección decimal correspondiente a la dirección de memoria final del chip?",
+          "correctValue": 24575,
+          "tolerance": 0.0,
+          "explanation": "La dirección inicial es $0x4000$ (16384 en decimal). Al sumarle la capacidad del chip ($8192$ bytes) y restar 1, obtenemos la dirección final: $16384 + 8192 - 1 = 24575$ (en hexadecimal $0x5FFF$)."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si cambiamos el chip por uno de 16 KB con la misma dirección inicial $0x4000$, ¿cuál es la nueva dirección final en decimal?",
+          "correctValue": 32767,
+          "tolerance": 0.0,
+          "explanation": "Un chip de 16 KB tiene $16384$ bytes. Iniciando en la dirección decimal 16384 ($0x4000$), la dirección final decimal será $16384 + 16384 - 1 = 32767$ (en hexadecimal $0x7FFF$)."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Codificador con Prioridad de 8 a 3",
+      "context": "Un codificador con prioridad de 8 a 3 tiene entradas activas a nivel alto ($I_7$ mayor prioridad, $I_0$ menor prioridad) y salidas de datos $Y_2Y_1Y_0$ activas en alto.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Si las entradas activas son $I_1, I_3, I_4$, ¿cuál es el valor decimal de la salida binaria $Y_2Y_1Y_0$?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "El codificador de prioridad selecciona la entrada activa de mayor índice. Entre 1, 3 y 4, la entrada prioritaria es $I_4$. La salida binaria es $100_2$, que equivale a 4 decimal."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Si ahora se activa adicionalmente la entrada $I_7$, ¿cuál es la nueva salida binaria expresada en decimal?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Al activarse $I_7$, al ser ésta la de mayor prioridad del integrado, la salida pasa a ser $111_2$, que es 7 decimal."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Si la salida de validación $V$ es activa a nivel alto, ¿cuál es el valor lógico de $V$ si todas las entradas son 0?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La salida de validación $V$ se pone a 0 si no hay ninguna entrada activa."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Si la salida de validación $V$ es activa a nivel alto y las entradas del codificador son únicamente $I_0 = 1$, ¿cuál es el producto del valor lógico de $V$ por el valor decimal de la salida $Y$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Como la entrada activa es $I_0$, la salida decimal es 0. La salida $V = 1$. El producto es $1 \\times 0 = 0$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Implementación de Función con Multiplexor de 4 a 1",
+      "context": "Se desea implementar la función $F(A,B,C) = \\sum m(0, 2, 5, 7)$ utilizando un multiplexor de 4 a 1 con selectores $S_1 = A, S_0 = B$. Las entradas de datos son $I_0, I_1, I_2, I_3$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Para la combinación de control $AB = 00$, ¿cuál es el valor lógico de la entrada de datos $I_0$ cuando la variable restante $C$ es igual a 0?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para $AB = 00$, evaluamos los minterms $m_0$ ($C=0$) y $m_1$ ($C=1$). Como $m_0$ está presente en la función y $m_1$ no, la entrada $I_0 = \\bar{C}$. Cuando $C=0$, $I_0 = 1$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Para $AB = 01$, ¿cuál es el valor lógico de la entrada $I_1$ cuando $C = 1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para $AB=01$, evaluamos los minterms $m_2$ ($C=0$) y $m_3$ ($C=1$). Como $m_2$ está en la función y $m_3$ no, $I_1 = \\bar{C}$. Para $C=1$, $I_1 = 0$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Para $AB = 10$, ¿cuál es el valor lógico de la entrada $I_2$ cuando $C = 1$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para $AB=10$, evaluamos $m_4$ ($C=0$) y $m_5$ ($C=1$). Minterm $m_5$ está en la función y $m_4$ no, por lo que $I_2 = C$. Para $C=1$, $I_2 = 1$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcular el valor de la suma aritmética de todas las entradas del multiplexor $I_0 + I_1 + I_2 + I_3$ cuando $C = 1$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Cuando $C=1$: $I_0 = \\bar{C} = 0$, $I_1 = \\bar{C} = 0$, $I_2 = C = 1$, $I_3 = C = 1$ (ya que $AB=11$ cubre $m_6$ (no en F) y $m_7$ (en F), dando $I_3 = C$). La suma es $0 + 0 + 1 + 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Mapeo de Espacio de Direcciones de 512 KB",
+      "context": "Un procesador con un bus de direcciones de 20 bits ($A_{19}\\dots A_0$) direcciona un rango continuo de memoria de 512 KB que inicia en $0x00000$. Se emplean chips de 64 KB.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuántos chips de 64 KB se necesitan en total para cubrir ese espacio continuo?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "512 KB divididos por 64 KB de capacidad de cada chip da exactamente $512 / 64 = 8$ chips."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "¿Cuántas líneas de dirección del procesador se conectan en paralelo a las patillas de direccionamiento interno de cada chip de 64 KB?",
+          "correctValue": 16,
+          "tolerance": 0.0,
+          "explanation": "Un chip de 64 KB requiere $64 \\times 1024 = 65536$ bytes. Como $2^{16} = 65536$, requiere 16 líneas de dirección ($A_{15} \\dots A_0$)."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "¿Cuántas salidas distintas de un decodificador de direcciones se utilizarán para habilitar las señales Chip Select de estos chips?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Cada uno de los 8 chips requiere su propia señal de selección única para activarse de forma exclusiva en su propio rango."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "¿Cuál es el número de bits del bus de direcciones que entran al decodificador de direcciones para generar estas señales de selección?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "El bus tiene 20 bits. Cada chip utiliza 16 bits internamente. Las líneas superiores destinadas a seleccionar el chip en el decodificador son $20 - 16 = 4$ líneas ($A_{19} \\dots A_{16}$)."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Cascada de Decodificadores de 2 a 4",
+      "context": "Se desea construir un decodificador de 4 a 16 utilizando decodificadores comerciales de 2 a 4 con habilitación activa a nivel alto.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuántos decodificadores de 2 a 4 se necesitan en el nivel de salida para proporcionar las 16 salidas?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Cada decodificador de 2 a 4 proporciona 4 salidas. Para 16 salidas se necesitan $16 / 4 = 4$ decodificadores."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "¿Cuántos decodificadores de 2 a 4 se necesitan en total (incluyendo el nivel de selección)?",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Además de los 4 de salida, se necesita 1 decodificador de 2 a 4 intermedio para dirigir la habilitación según las 2 variables superiores. Total: $4 + 1 = 5$ decodificadores."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Si la entrada del sistema de 4 bits es $A_3A_2A_1A_0 = 1011_2$, ¿cuál es el índice decimal de la única salida de todo el sistema que se pondrá a nivel alto?",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "El código de entrada en binario es $1011_2$. En decimal, este código corresponde al número 11, por lo que se activa la salida número 11."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si desactivamos la habilitación general del primer decodificador (nivel de selección) poniéndola a 0, ¿cuántas salidas de las 16 estarán a nivel alto?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Al deshabilitar el decodificador de selección, ninguno de los 4 de salida recibe habilitación, por lo que todas las 16 salidas del sistema general serán 0."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Árbol de Multiplexores de 64 a 1",
+      "context": "Un diseñador construye un multiplexor de 64 a 1 a partir de multiplexores comerciales de 8 a 1.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuántos multiplexores de 8 a 1 se necesitan en el primer nivel (entradas)?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Las 64 entradas de datos se dividen en grupos de 8. Por tanto, se requieren $64 / 8 = 8$ multiplexores en la primera etapa."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "¿Cuántos multiplexores de 8 a 1 se necesitan en el segundo nivel para seleccionar entre las salidas del primer nivel?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Las 8 salidas de la primera etapa entran al multiplexor final de la segunda etapa. Por tanto, se necesita exactamente 1 multiplexor final."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "¿Cuántas entradas de selección (en total) tiene el multiplexor de 64 a 1 equivalente?",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Un multiplexor de 64 entradas de datos requiere $\\log_2(64) = 6$ variables de control para direccionar las entradas."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Si cada multiplexor de 8 a 1 introduce un retardo de propagación de 3.5 ns, ¿cuál es el retardo total en ns a través del árbol de dos niveles?",
+          "correctValue": 7.0,
+          "tolerance": 0.01,
+          "explanation": "El dato de entrada cruza dos etapas de multiplexación en serie. El retardo acumulado es $2 \\times 3.5\\text{ ns} = 7.0\\text{ ns}$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Codificador de Prioridad 74148",
+      "context": "Se tiene un codificador de prioridad de 8 a 3 activo a nivel bajo (como el 74148). Las entradas son $\\bar{I}_7\\dots\\bar{I}_0$ y las salidas de datos son $\\bar{Y}_2\\bar{Y}_1\\bar{Y}_0$.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Si la entrada de mayor prioridad activa es $\\bar{I}_5 = 0$, ¿cuál es el valor binario del índice 5 expresado en decimal?",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El índice correspondiente a la entrada física número 5 es simplemente el número 5 en decimal."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal equivalente obtenido al leer directamente las salidas físicas $\\bar{Y}_2\\bar{Y}_1\\bar{Y}_0$ si se interpretan como lógica positiva?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El índice 5 es $101_2$ en binario. Dado que las salidas del chip están negadas, se genera $\\overline{101} = 010_2$, que leído en lógica positiva equivale a 2 decimal."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si se activa adicionalmente la entrada $\\bar{I}_7 = 0$, ¿cuál es el nuevo valor decimal equivalente que se leerá directamente en las salidas físicas $\\bar{Y}_2\\bar{Y}_1\\bar{Y}_0$ interpretadas en lógica positiva?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Al activarse $\\bar{I}_7$, esta entrada tiene prioridad sobre $I_5$. El código binario de 7 es $111_2$. Al negarse, la salida es $000_2$, que es 0 decimal."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si ninguna entrada está activa, las salidas del codificador son todas 1 y la salida de validación $\\bar{V}$ se pone a 1. Si interpretamos $\\bar{V}$ en lógica positiva, su valor es 1. ¿Cuál es el producto de $\\bar{V} \\times \\bar{Y}_{decimal}$ en este estado?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Cuando ninguna entrada está activa, la salida de datos física es $111_2$ (7 decimal) y la de validación física es 1 (lógica positiva). El producto es $1 \\times 7 = 7$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Decodificación Parcial de RAM de 2 KB",
+      "context": "En un procesador con un bus de direcciones de 16 bits, un chip de RAM de 2 KB se conecta de forma que solo se decodifican las líneas $A_{15} = 1$ y $A_{14} = 0$.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de dirección internas requiere el chip de 2 KB?",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "2 KB = $2048$ bytes. Como $2^{11} = 2048$, el chip requiere 11 líneas de direccionamiento interno ($A_{10} \\dots A_0$)."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "¿Cuántas líneas de dirección quedan sin decodificar (ni conectadas al chip ni al decodificador)?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El bus total es de 16. El chip usa 11 bits internos y la lógica de decodificación usa 2 bits ($A_{15}, A_{14}$). Quedan libres: $16 - 11 - 2 = 3$ bits ($A_{13}, A_{12}, A_{11}$)."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "¿Cuántos rangos de memoria (alias o imágenes) diferentes activarán este chip de 2 KB en el mapa de memoria?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Las 3 líneas no decodificadas pueden tomar cualquier valor sin afectar la selección del chip. Esto genera $2^3 = 8$ alias posibles."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "¿Cuál es el tamaño total del espacio de memoria virtual (en KB) desperdiciado por estas imágenes de este único chip?",
+          "correctValue": 16,
+          "tolerance": 0.0,
+          "explanation": "Cada una de las 8 imágenes responde con el chip de 2 KB en el bus. El rango total asignado e inutilizable es $8 \\times 2\\text{ KB} = 16\\text{ KB}$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Expansión de Shannon para la función F(A,B,C,D)",
+      "context": "Se desea implementar la función $F(A,B,C,D) = \\sum m(1, 3, 5, 8, 12, 15)$ utilizando un multiplexor de 8 a 1 con variables de selección $S_2 = A, S_1 = B, S_0 = C$, y la variable restante $D$.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Para la entrada $I_0$ (asociada a $ABC = 000$, que cubre $m_0$ y $m_1$), ¿cuál es el valor lógico de $I_0$ cuando $D = 1$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para $ABC=000$, evaluamos $m_0$ ($D=0$) y $m_1$ ($D=1$). $m_1$ está en la función y $m_0$ no, por lo que $I_0 = D$. Evaluado en $D=1$, $I_0 = 1$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Para la entrada $I_2$ ($ABC = 010$, que cubre $m_4$ y $m_5$), ¿cuál es el valor lógico de $I_2$ cuando $D = 0$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para $ABC=010$, cubrimos $m_4$ ($D=0$) y $m_5$ ($D=1$). $m_5$ está en la función y $m_4$ no, por lo que $I_2 = D$. Evaluado en $D=0$, $I_2 = 0$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Para la entrada $I_4$ ($ABC = 100$, que cubre $m_8$ y $m_9$), ¿cuál es el valor lógico de $I_4$ cuando $D = 0$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para $ABC=100$, cubrimos $m_8$ ($D=0$) y $m_9$ ($D=1$). $m_8$ está en la función y $m_9$ no, por lo que $I_4 = \\bar{D}$. Evaluado en $D=0$, $I_4 = 1$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "¿Cuál es el valor de la suma aritmética de las señales de entrada del multiplexor ($I_0 + \\dots + I_7$) cuando $D = 1$?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Derivamos todas las entradas: $I_0=D=1$, $I_1=D=1$ (minterms 2,3), $I_2=D=1$ (minterms 4,5), $I_3=0$ (minterms 6,7), $I_4=\\bar{D}=0$ (minterms 8,9), $I_5=0$ (minterms 10,11), $I_6=\\bar{D}=0$ (minterms 12,13), $I_7=D=1$ (minterms 14,15). Sumando para $D=1$: $1+1+1+0+0+0+0+1 = 4$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Función XOR implementada mediante MUX 4 a 1",
+      "context": "Se implementa la función lógica XOR de 3 variables $F(A,B,C) = A \\oplus B \\oplus C$ utilizando un multiplexor de 4 a 1 con selectores $S_1 = A, S_0 = B$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Si $AB = 00$, ¿cuál es el valor lógico de la entrada de datos $I_0$ cuando la variable restante $C$ es igual a 1?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para $AB = 00$, la función es $0 \\oplus 0 \\oplus C = C$. Así, $I_0 = C$. Evaluado para $C=1$, $I_0 = 1$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Si $AB = 01$, ¿cuál es el valor lógico de la entrada $I_1$ cuando $C = 1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para $AB = 01$, la función es $0 \\oplus 1 \\oplus C = \\bar{C}$. Así, $I_1 = \\bar{C}$. Evaluado para $C=1$, $I_1 = 0$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Si $AB = 10$, ¿cuál es el valor lógico de la entrada $I_2$ cuando $C = 1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para $AB = 10$, la función es $1 \\oplus 0 \\oplus C = \\bar{C}$. Así, $I_2 = \\bar{C}$. Evaluado para $C=1$, $I_2 = 0$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Si sumamos aritméticamente los valores de las cuatro entradas $I_0, I_1, I_2, I_3$ cuando la variable $C$ está a nivel lógico 0, ¿cuál es el resultado?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Las entradas son: $I_0=C$, $I_1=\\bar{C}$, $I_2=\\bar{C}$, $I_3=C$. Si $C=0$, los valores son $0, 1, 1, 0$. La suma aritmética de estos valores es $0 + 1 + 1 + 0 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Decodificador de 3 a 8 como Compuerta OR de 3 Entradas",
+      "context": "Un decodificador de 3 a 8 se puede emplear para implementar funciones lógicas sumando sus salidas correspondientes a los minterms de la función.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuántos minterms distintos genera el decodificador de 3 a 8 en sus salidas?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Un decodificador de 3 a 8 tiene 3 entradas de selección, generando $2^3 = 8$ minterms independientes."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Si implementamos una compuerta OR de 3 variables ($A+B+C$) sobre sus salidas activas a nivel alto, ¿cuántas salidas del decodificador debemos conectar a la compuerta OR externa?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "La función OR de 3 variables es 1 para todos los minterms excepto el $m_0$ ($000_2$). Se deben conectar las 7 salidas restantes ($Y_1$ a $Y_7$)."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Si la entrada del decodificador es $ABC = 000_2$, ¿cuál será el valor lógico de la salida de la compuerta OR?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para la entrada $000_2$, solo se activa la salida $Y_0$, la cual no está conectada a la puerta OR. Por lo tanto, la salida de la puerta OR será 0."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si la entrada del decodificador es $ABC = 101_2$, ¿cuál será el valor lógico de la salida de la compuerta OR?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para la entrada $101_2$ (5 decimal), se activa la salida $Y_5$, la cual está conectada a la puerta OR, por lo que la salida de la puerta OR será 1."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Mapa de Memoria Consecutivo con 4 Chips de 8 KB",
+      "context": "Se tiene un procesador con un bus de direcciones de 16 bits y un bloque consecutivo de memoria RAM formado por 4 chips de 8 KB cada uno, comenzando en la dirección decimal 0.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuál es la capacidad total del bloque de memoria expresada en KB?",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Tenemos 4 chips de 8 KB cada uno, lo que equivale a $4 \\times 8 = 32$ KB de memoria total."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "¿Cuántas líneas del bus de direcciones se conectan en paralelo como direccionamiento interno en cada chip de 8 KB?",
+          "correctValue": 13,
+          "tolerance": 0.0,
+          "explanation": "Un chip de 8 KB tiene $8192$ celdas de memoria. Esto requiere $\\log_2(8192) = 13$ líneas de dirección ($A_{12} \\dots A_0$)."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "¿Cuántas líneas superiores del bus de direcciones debe decodificar el sistema para habilitar exclusivamente uno de los 4 chips de memoria?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El bus tiene 16 líneas y los chips usan 13. Las líneas restantes a decodificar son $16 - 13 = 3$ líneas ($A_{15}, A_{14}, A_{13}$)."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "¿Cuál es la dirección decimal correspondiente al primer byte direccionable del tercer chip de memoria?",
+          "correctValue": 16384,
+          "tolerance": 0.0,
+          "explanation": "Cada chip ocupa 8192 bytes. El primer chip ocupa de 0 a 8191. El segundo de 8192 a 16383. El tercero comienza exactamente en la dirección decimal 16384."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Encauzamiento de Datos mediante Demultiplexor",
+      "context": "Un demultiplexor de 1 a 8 tiene una entrada única de datos $D$, 3 selectores $S_2S_1S_0$ y salidas activas a nivel alto $Y_7 \\dots Y_0$.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Si las líneas de selección se configuran como $S_2S_1S_0 = 110_2$, ¿cuál es el índice decimal de la salida por la que se enruta el dato?",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La combinación binaria $110_2$ equivale a 6 en decimal, por lo que el dato de la entrada se dirige hacia la salida $Y_6$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Si el dato de entrada $D$ es constante en 1 lógico y los selectores tienen valor 110, ¿cuál es la suma aritmética de los valores lógicos de todas las salidas inactivas?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "En un demultiplexor activo a nivel alto, la única salida seleccionada ($Y_6$) toma el valor de $D$ (1). El resto de salidas inactivas se mantienen a 0, por lo que su suma es 0."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Si se cambia a $S_2S_1S_0 = 101_2$ y la entrada de datos se pone a 0, ¿cuál será el nivel lógico digital de la salida $Y_5$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La selección $101_2$ apunta a la salida $Y_5$. El dato se enruta directamente, por lo que si $D=0$, la salida $Y_5$ es 0."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Si el demultiplexor se deshabilita por completo mediante su pin de Enable, ¿cuántas salidas presentarán un nivel lógico de 1?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Al deshabilitarse el integrado, todas sus salidas se fuerzan al nivel inactivo (0)."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Cascada de Decodificadores para 3 a 8",
+      "context": "Se conectan en cascada dos decodificadores de 2 a 4 con habilitación activa en alto ($E$) para formar un decodificador de 3 a 8. La variable de mayor peso $A_2$ controla la habilitación.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Si $A_2 = 0$ y se conecta mediante un inversor NOT a la habilitación del segundo decodificador (el que maneja salidas 4-7), ¿cuál es el número máximo de salidas que pueden estar activas en ese segundo decodificador?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Si $A_2=0$, la entrada de habilitación del segundo decodificador será 0, manteniéndolo completamente inactivo y con todas sus salidas a 0."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Si la entrada del sistema de 3 bits es $A_2A_1A_0 = 011_2$, ¿cuál es el número de la salida activa de todo el conjunto de 3 a 8?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La combinación binaria es $011_2$ (3 decimal). Como el primer decodificador (salidas 0-3) está habilitado por $A_2=0$, se activa su tercera salida, que corresponde al minterm 3 general."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Si la entrada cambia a $111_2$, ¿cuál es el número de la salida activa de todo el conjunto?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "La entrada es $111_2$ (7 decimal). $A_2=1$ habilita el segundo decodificador (que mapea salidas 4-7). La selección de menor peso $11_2$ (3 decimal en su bloque) activa su salida de mayor peso, correspondiente al minterm 7."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Si invertimos el conexionado del inversor de forma que ahora se coloque en la habilitación del primer decodificador, y la entrada es $A_2A_1A_0 = 011_2$, ¿cuál es el número de la salida activa de todo el conjunto?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Al mover el inversor, el primer decodificador se habilita con $A_2=1$ y el segundo con $A_2=0$. Con la entrada $011_2$, $A_2=0$ habilita el segundo decodificador (salidas 4-7). La selección $A_1A_0 = 11_2$ activa la salida número 3 de ese bloque, que equivale físicamente a la salida 7 general."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Árbol de Multiplexores de 4 a 1 usando MUX de 2 a 1",
+      "context": "Se construye un multiplexor de 4 a 1 utilizando únicamente multiplexores de 2 a 1 en cascada.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuántos multiplexores de 2 a 1 se necesitan en la primera etapa del árbol?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Las 4 entradas del sistema general se dividen en dos grupos de 2 entradas. Por tanto, se necesitan 2 multiplexores de 2 a 1 en el primer nivel."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "¿Cuántos multiplexores de 2 a 1 se necesitan en total para obtener la única salida final?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Hacen falta 2 multiplexores en la primera etapa y 1 multiplexor en la segunda etapa para seleccionar entre las dos salidas anteriores. Total: $2 + 1 = 3$ multiplexores."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Si los selectores generales son $S_1S_0 = 10_2$, ¿cuál es el índice decimal de la entrada de datos ($I_0, I_1, I_2, I_3$) que se conectará a la salida?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El valor binario $10_2$ equivale a 2 en decimal, de modo que la entrada de datos $I_2$ se conecta a la salida."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Si cada multiplexor de 2 a 1 tiene un retardo de propagación de 1.8 ns, ¿cuál es el retardo de propagación total del árbol en ns?",
+          "correctValue": 3.6,
+          "tolerance": 0.01,
+          "explanation": "La señal cruza exactamente 2 niveles de multiplexación en serie. El retardo acumulado es $2 \\times 1.8\\text{ ns} = 3.6\\text{ ns}$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Mapeo de Memoria RAM de 4 KB a partir de 0x8000",
+      "context": "En un procesador con bus de direcciones de 16 bits, se desea colocar una memoria RAM de 4 KB a partir de la dirección hexadecimal $0x8000$.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuál es el número de líneas de dirección necesarias para direccionar internamente los 4 KB de RAM?",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "4 KB = $4096$ bytes. Como $2^{12} = 4096$, la memoria RAM requiere exactamente 12 líneas de direccionamiento interno ($A_{11} \\dots A_0$)."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección decimal inicial de este rango de memoria?",
+          "correctValue": 32768,
+          "tolerance": 0.0,
+          "explanation": "La dirección hexadecimal inicial es $0x8000$, que equivale a $8 \\times 16^3 = 8 \\times 4096 = 32768$ en decimal."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección decimal final de este rango?",
+          "correctValue": 36863,
+          "tolerance": 0.0,
+          "explanation": "La dirección final decimal se obtiene sumando el tamaño (4096) a la dirección inicial (32768) y restando 1: $32768 + 4096 - 1 = 36863$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del código binario que deben tomar los 4 bits superiores del bus de direcciones ($A_{15}A_{14}A_{13}A_{12}$) para activar el chip en decodificación completa?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "La dirección inicial es $0x8000$, que en binario es $1000\\,0000\\,0000\\,0000_2$. Los 4 bits superiores del bus son $1000_2$, que corresponde al número decimal 8."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Codificador con Prioridad de 16 a 4 en Cascada",
+      "context": "Se construye un codificador de prioridad de 16 a 4 a partir de dos codificadores comerciales de 8 a 3 (74148, activos a nivel bajo) y lógica adicional.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuántas salidas de datos presenta en total el codificador combinacional de 16 a 4 resultante?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Un codificador de 16 a 4 tiene exactamente 4 líneas de salida binaria para codificar las 16 posibles entradas."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Si las entradas activas del sistema general son 3, 7 y 12 (siendo la 15 la de mayor prioridad), ¿cuál es el valor decimal de la salida binaria resultante?",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "La entrada con prioridad más alta que se encuentra activa es la 12, por lo que la salida reflejará el código de 12 decimal."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Si se desactivan todas las entradas superiores (8 a 15) y permanece activa únicamente la entrada 7, ¿cuál es el valor decimal de la salida?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Al no haber entradas activas en el rango superior, el codificador da paso a las entradas inferiores por medio de la patilla de habilitación de cascada. La entrada activa prioritaria en este rango es la 7, resultando la salida en 7 decimal."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si no hay ninguna entrada activa en todo el sistema, ¿cuál es el valor lógico (en lógica positiva) de la salida de validación general $V$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Si ninguna de las 16 entradas de datos está activa, la salida de validación general $V$ toma el valor lógico 0, indicando que el dato de salida no es válido."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Síntesis de Función con MUX de 8 a 1",
+      "context": "Se sintetiza la función lógica $F(A,B,C,D) = \\sum m(0, 2, 4, 6, 8, 10, 12, 14)$ utilizando un multiplexor de 8 a 1. Las variables de selección son $S_2 = A, S_1 = B, S_0 = C$, y la entrada restante es $D$.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuál es el valor lógico al que se conecta la entrada $I_0$ del multiplexor cuando $D = 0$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La entrada $I_0$ está asociada a $ABC = 000$ (minterms 0 y 1). El minterm 0 está en la función y el 1 no. Por tanto, $I_0 = \\bar{D}$. Si $D=0$, $I_0 = 1$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "¿Cuál es el valor lógico al que se conecta la entrada $I_0$ cuando $D = 1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Dado que $I_0 = \\bar{D}$, si evaluamos para la condición $D = 1$, la entrada $I_0$ vale 0."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuál es el valor lógico de la salida de datos $Y$ para la combinación de entrada $ABCD = 1100_2$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La combinación $ABCD = 1100_2$ equivale al número decimal 12. Como 12 es un minterm presente en la lista de la función, la salida del multiplexor será 1."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "¿Cuál es el valor de la suma aritmética de los valores lógicos en todas las entradas del multiplexor ($I_0 + \\dots + I_7$) si la variable $D = 1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La función tiene solo minterms pares. Por tanto, cada entrada del multiplexor se conecta a $I_k = \\bar{D}$. Si $D=1$, todas las entradas toman el valor lógico 0, sumando $0$ en total."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Síntesis de XOR usando Decodificador de 2 a 4",
+      "context": "Se implementa la función lógica XOR de dos variables $F(A,B) = A \\oplus B$ mediante un decodificador de 2 a 4 activo a nivel alto y una compuerta OR externa.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuántos minterms componen la función lógica XOR de dos variables?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La función XOR de dos variables toma el valor 1 para dos combinaciones binarias: $01_2$ y $10_2$, sumando 2 minterms."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "¿Cuál es el valor resultante de la suma aritmética de los índices de las salidas del decodificador que deben conectarse a la puerta OR externa?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los minterms de la XOR son $m_1$ y $m_2$. Se deben conectar las salidas $Y_1$ e $Y_2$ a la puerta OR. La suma de sus índices es $1 + 2 = 3$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Si la puerta OR externa tiene un retardo de 2 ns y el decodificador tiene un retardo de 4 ns, ¿cuál es el retardo de propagación total en ns de la función implementada?",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "Las señales atraviesan primero el decodificador y luego la puerta OR. El retardo acumulado es $4\\text{ ns} + 2\\text{ ns} = 6.0\\text{ ns}$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Si en lugar de una puerta OR se utiliza una puerta NOR de dos entradas conectada a las mismas salidas, ¿cuál será el valor lógico de la salida XOR simulada para la combinación de entrada $AB = 01$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para la entrada $AB=01$, la salida $Y_1$ del decodificador es 1 e $Y_2$ es 0. Al entrar a la puerta NOR, el resultado es $\\overline{1 + 0} = 0$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Decodificación Completa RAM y ROM en Bus de 16 bits",
+      "context": "Un sistema con bus de direcciones de 16 bits tiene dos chips: una memoria RAM de 8 KB que comienza en la dirección $0x0000$ y una memoria ROM de 8 KB que comienza en la dirección $0xE000$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de dirección internas requiere el chip de RAM?",
+          "correctValue": 13,
+          "tolerance": 0.0,
+          "explanation": "8 KB = $8192$ bytes. Como $2^{13} = 8192$, el chip de RAM requiere exactamente 13 líneas de dirección ($A_{12} \\dots A_0$)."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "¿Cuál es el valor binario que debe tener el bit del bus de direcciones $A_{15}$ para poder activar el chip de ROM en su rango?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La ROM se mapea desde $0xE000$ ($1110\\,0000\\,0000\\,0000_2$ en binario). En este rango, el bit de direcciones $A_{15}$ es 1."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección decimal correspondiente al último byte direccionable en el chip de la memoria RAM?",
+          "correctValue": 8191,
+          "tolerance": 0.0,
+          "explanation": "La RAM comienza en la dirección 0 y tiene una capacidad de 8192 bytes. Por tanto, el último byte está en la dirección decimal $8192 - 1 = 8191$ (hexadecimal $0x1FFF$)."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "¿Cuál es la dirección decimal correspondiente al primer byte direccionable en el chip de la memoria ROM?",
+          "correctValue": 57344,
+          "tolerance": 0.0,
+          "explanation": "La ROM comienza en la dirección hexadecimal $0xE000$, lo que equivale en decimal a $14 \\times 4096 = 57344$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Síntesis de Función de 5 Variables con MUX de 16 a 1",
+      "context": "Se implementa la función lógica de 5 variables $F(A,B,C,D,E) = A \\cdot B \\cdot C \\cdot D \\cdot E$ utilizando un multiplexor de 16 a 1. Las variables de selección son $S_3 = A, S_2 = B, S_1 = C, S_0 = D$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "¿Cuál es el índice decimal de la única entrada de datos del multiplexor ($I_0 \\dots I_{15}$) que no se conecta de forma fija a un nivel de '0' lógico?",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "La función solo puede ser 1 cuando $ABCD = 1111_2$. Por tanto, la única entrada de datos que puede activarse es la $I_{15}$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "¿Cuál es el valor lógico de esta entrada ($I_{15}$) cuando la variable restante $E$ está a nivel de '1' lógico?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La entrada $I_{15}$ se conecta directamente a la variable $E$, ya que $F(1,1,1,1,E) = E$. Por tanto, si $E=1$, la entrada vale 1."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "¿Cuál es el valor lógico de la salida del multiplexor para la combinación de entrada de variables $ABCDE = 11110_2$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La combinación binaria selecciona la entrada $I_{15}$. Como $E = 0$, la entrada $I_{15}$ está en 0, y por tanto la salida del multiplexor es 0."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "¿Cuántas entradas de datos del multiplexor de 16 a 1 están conectadas a GND ('0' lógico) en esta implementación?",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "Para las 15 combinaciones restantes de $ABCD$, la función es siempre 0. Por tanto, 15 entradas ($I_0$ a $I_{14}$) se conectan directamente a tierra."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Decodificador Activo a Nivel Bajo y Compuerta NAND",
+      "context": "Se utiliza un decodificador de 3 a 8 con salidas activas a nivel bajo para implementar la función $F(A,B,C) = \\sum m(1, 3, 6)$.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿Cuál es el número de salidas activadas a nivel lógico bajo (es decir, en 0) del decodificador cuando el vector de entrada es $CBA = 011_2$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Para cualquier combinación de entrada válida, el decodificador activa exactamente una salida. Con la entrada $011_2$, solo la salida $Y_3$ se pone a 0."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Si conectamos las salidas $Y_1, Y_3, Y_6$ a una puerta NAND de 3 entradas, ¿cuál será el valor lógico de la salida de la puerta NAND para $CBA = 011_2$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Las salidas de datos del decodificador son $Y_1 = 1$, $Y_3 = 0$ y $Y_6 = 1$. La salida de la puerta NAND es $\\overline{Y_1 \\cdot Y_3 \\cdot Y_6} = \\overline{1 \\cdot 0 \\cdot 1} = 1$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Si la entrada cambia a $CBA = 100_2$ (minterm 4, no presente en la función), ¿cuál será el valor lógico de la salida de la misma puerta NAND?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Para $100_2$, se activa la salida $Y_4$. Las entradas de la puerta NAND son $Y_1 = 1$, $Y_3 = 1$ e $Y_6 = 1$. Su salida es $\\overline{1 \\cdot 1 \\cdot 1} = 0$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "¿Cuál es el número de minterms de la función complementaria $\\bar{F}(A,B,C)$?",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La función de 3 variables tiene en total $2^3 = 8$ minterms. Como $F$ tiene 3 minterms, su complementario $\\bar{F}$ tiene $8 - 3 = 5$ minterms."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Decodificación Parcial de 1 KB en Bus de 16 bits",
+      "context": "Un microcontrolador con un bus de direcciones de 16 bits accede a un chip de memoria de 1 KB. Se realiza decodificación parcial, utilizando solo el bit $A_{15} = 0$ para activar $\\bar{CS}$.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de dirección del bus requiere internamente el chip de 1 KB?",
+          "correctValue": 10,
+          "tolerance": 0.0,
+          "explanation": "1 KB = $1024$ bytes. Como $2^{10} = 1024$, el chip de memoria RAM utiliza 10 líneas ($A_9 \\dots A_0$)."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "¿Cuántas líneas de dirección del bus quedan sin decodificar?",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El bus tiene 16 líneas. El chip usa 10 líneas y la lógica de decodificación usa 1 línea ($A_{15}$). Quedan sin decodificar: $16 - 10 - 1 = 5$ líneas ($A_{14} \\dots A_{10}$)."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "¿Cuántas direcciones de copia o imágenes del chip aparecen en el mapa de memoria del sistema?",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Las 5 líneas sin decodificar pueden combinarse libremente, generando un total de $2^5 = 32$ copias de la misma memoria física."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si la dirección base física comienza en $0x0000$, ¿cuál es el valor decimal de la dirección inicial de la segunda copia de la memoria?",
+          "correctValue": 1024,
+          "tolerance": 0.0,
+          "explanation": "La primera copia empieza en 0. La segunda copia ocurre cuando el primer bit no decodificado ($A_{10}$) se pone a 1, lo cual equivale a $2^{10} = 1024$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Diseño de Árbol de MUX de 256 a 1",
+      "context": "Se desea construir un multiplexor de 256 a 1 utilizando únicamente multiplexores comerciales de 16 a 1.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuántos multiplexores de 16 a 1 se necesitan en la primera etapa para conectar las 256 entradas de datos?",
+          "correctValue": 16,
+          "tolerance": 0.0,
+          "explanation": "Cada multiplexor maneja 16 entradas. Para 256 entradas en la primera etapa se necesitan $256 / 16 = 16$ multiplexores."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "¿Cuántos niveles de multiplexación se necesitan para reducir las 256 entradas a una única salida?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El primer nivel reduce de 256 a 16 líneas. El segundo nivel utiliza 1 multiplexor final para reducir de 16 a 1 línea. Se necesitan 2 niveles en total."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "¿Cuál es el número total de multiplexores de 16 a 1 requeridos en todo el diseño?",
+          "correctValue": 17,
+          "tolerance": 0.0,
+          "explanation": "Se necesitan 16 multiplexores en la primera etapa y 1 en la segunda etapa. El total es $16 + 1 = 17$ multiplexores."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Si cada multiplexor de 16 a 1 introduce un retardo de propagación de 4.2 ns, ¿cuál es el retardo de propagación total del árbol en ns?",
+          "correctValue": 8.4,
+          "tolerance": 0.01,
+          "explanation": "La señal de datos viaja a través de 2 niveles de multiplexores. El retardo total de propagación es $2 \\times 4.2\\text{ ns} = 8.4\\text{ ns}$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Ecuaciones del Codificador con Prioridad de 4 a 2",
+      "context": "Se analiza un codificador con prioridad de 4 a 2 con entradas activas a nivel alto ($I_3, I_2, I_1, I_0$) y salidas $Y_1, Y_0$ y validación $V$.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Si las entradas son $I_3I_2I_1I_0 = 0011_2$, ¿cuál es el valor lógico de la salida $Y_0$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La entrada activa de mayor prioridad es $I_1$. La salida binaria codificada es $01_2$. Por tanto, $Y_1 = 0$ e $Y_0 = 1$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "En el caso anterior, ¿cuál es el valor lógico de la salida $Y_1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Como la entrada prioritaria activa es $I_1$, la salida binaria codificada es $01_2$, por lo que $Y_1 = 0$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Si la ecuación lógica de la salida de validación es $V = I_3 + I_2 + I_1 + I_0$, ¿cuál será el valor lógico de $V$ si todas las entradas están a 0?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Si todas las entradas son 0, la suma lógica (OR) es 0, lo que indica que no hay ningún dato de salida válido."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Si cambiamos las entradas de $I_3I_2I_1I_0 = 0100_2$ (salida 2 decimal) a $1100_2$, ¿cuál es el nuevo valor decimal de la salida?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Para $1100_2$, la entrada activa de mayor peso es $I_3$. Su código de salida correspondiente es $11_2$, que equivale a 3 decimal."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Construcción de Demultiplexor de 1 a 16",
+      "context": "Se desea construir un demultiplexor de 1 a 16 combinando varios demultiplexores de 1 a 4.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de salida tiene un demultiplexor de 1 a 4?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Un demultiplexor de 1 a 4 tiene exactamente 4 líneas de salida física."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "¿Cuántos demultiplexores de 1 a 4 se necesitan en la etapa de entrada (primer nivel)?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "En el primer nivel se requiere 1 demultiplexor de 1 a 4 para distribuir la señal de entrada a las 4 subetapas del segundo nivel."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "¿Cuántos demultiplexores de 1 a 4 se necesitan en la etapa de salida (segundo nivel)?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Cada uno de los 4 canales de la primera etapa alimenta a un demultiplexor de 1 a 4 de salida. Se necesitan 4 demultiplexores en este nivel."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Si la entrada de datos $D$ del demultiplexor de 1 a 16 es igual a 1, ¿cuántas salidas de las 16 de salida estarán a nivel lógico 1?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Un demultiplexor direcciona la entrada a una única salida seleccionada. Si la entrada es 1, solo la salida seleccionada será 1, el resto serán 0."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Síntesis de Función con MUX de 2 a 1",
+      "context": "Se implementa la función lógica $F(A,B,C) = A \\cdot B + \\bar{C}$ utilizando un multiplexor de 2 a 1, seleccionando la variable $B$ como control ($S_0 = B$). Las entradas de datos son $I_0$ e $I_1$.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Si $B = 0$, la función se reduce a $F(A,0,C) = \\bar{C}$. ¿Cuál es el valor lógico de la entrada de datos $I_0$ cuando $C = 0$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Cuando $S_0=B=0$, seleccionamos la entrada $I_0$. La expresión reducida es $\\bar{C}$. Si $C=0$, entonces $I_0 = \\bar{0} = 1$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Si $B = 1$, la función se reduce a $F(A,1,C) = A + \\bar{C}$. ¿Cuál es el valor lógico de la entrada $I_1$ si las variables restantes son $A = 0$ y $C = 1$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Cuando $S_0=B=1$, seleccionamos la entrada $I_1$. La expresión reducida es $A + \\bar{C}$. Sustituyendo para $A=0$ y $C=1$: $I_1 = 0 + \\bar{1} = 0$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Para $B = 1$, ¿cuál es el valor lógico de la entrada $I_1$ si las variables restantes son $A = 1$ y $C = 1$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Sustituyendo en la expresión $A + \\bar{C}$ para $A=1$ y $C=1$: $I_1 = 1 + \\bar{1} = 1$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Si sumamos los valores lógicos de las entradas $I_0$ e $I_1$ cuando $A = 0$ y $C = 0$, ¿cuál es el resultado?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Si $C=0$, $I_0 = \\bar{C} = 1$. Si $A=0$ y $C=0$, $I_1 = A + \\bar{C} = 0 + 1 = 1$. La suma es $I_0 + I_1 = 1 + 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Decodificación de Memoria RAM de 2 MB en Bus de 24 bits",
+      "context": "Un procesador con un bus de direcciones de 24 bits ($A_{23} \\dots A_0$) direcciona un rango de memoria RAM de 2 MB a partir de la dirección hexadecimal inicial $0x200000$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de dirección del bus se conectan directamente al chip para su direccionamiento interno?",
+          "correctValue": 21,
+          "tolerance": 0.0,
+          "explanation": "2 MB = $2 \\times 1024 \\times 1024 = 2097152$ bytes. Como $2^{21} = 2097152$, el chip requiere 21 líneas de direccionamiento interno ($A_{20} \\dots A_0$)."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "¿Cuántas líneas de dirección del bus intervienen en el decodificador de direcciones para generar el Chip Select?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El bus total es de 24 bits. El direccionamiento interno utiliza 21. La lógica de decodificación utiliza las $24 - 21 = 3$ líneas restantes ($A_{23}, A_{22}, A_{21}$)."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "¿Cuál es el valor decimal de la dirección de memoria final del chip?",
+          "correctValue": 4194303,
+          "tolerance": 0.0,
+          "explanation": "La dirección inicial es $0x200000$ (2097152 en decimal). Sumándole la capacidad (2097152) y restando 1: $2097152 + 2097152 - 1 = 4194303$ (en hexadecimal $0x3FFFFF$)."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Si la dirección inicial del bloque cambiara a $0x400000$, ¿cuál sería el valor entero decimal de la nueva dirección final?",
+          "correctValue": 6291455,
+          "tolerance": 0.0,
+          "explanation": "La nueva dirección inicial es $0x400000$ (4194304 en decimal). Sumándole la capacidad (2097152) y restando 1: $4194304 + 2097152 - 1 = 6291455$ (en hexadecimal $0x5FFFFF$)."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Decodificación de RAM de 16 KB con Puerta NAND",
+      "context": "Un procesador con un bus de direcciones de 16 bits tiene un chip de RAM de 16 KB que se activa cuando los bits superiores son $A_{15}A_{14} = 10_2$.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección decimal correspondiente a la dirección de inicio del chip?",
+          "correctValue": 32768,
+          "tolerance": 0.0,
+          "explanation": "El bit $A_{15} = 1$ y $A_{14} = 0$, con los 14 bits restantes a 0, produce en binario $1000\\,0000\\,0000\\,0000_2$, que es $32768$ en decimal ($0x8000$)."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección decimal correspondiente a la dirección de fin del chip?",
+          "correctValue": 49151,
+          "tolerance": 0.0,
+          "explanation": "El chip de 16 KB tiene 16384 bytes. Iniciando en 32768, la dirección final es $32768 + 16384 - 1 = 49151$ (hexadecimal $0xBFFF$)."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Si implementamos la decodificación para la señal $\\bar{CS}$ (activa a nivel bajo) con una sola puerta lógica básica, ¿cuál es el número de entradas que debe tener dicha puerta si conectamos directamente las líneas del bus?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Necesitamos que $\\bar{CS} = 0$ cuando $A_{15} = 1$ y $A_{14} = 0$. La ecuación es $\\bar{CS} = \\overline{A_{15} \\cdot \\bar{A}_{14}}$. Usando una puerta NAND de 2 entradas con las señales $A_{15}$ y $\\bar{A}_{14}$ lo implementamos directamente."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Si cambiamos el chip por uno de 8 KB que comienza en la misma dirección, ¿cuál es la dirección decimal final de este nuevo rango?",
+          "correctValue": 40959,
+          "tolerance": 0.0,
+          "explanation": "8 KB tiene 8192 bytes. La dirección inicial sigue siendo 32768. La dirección final en decimal es $32768 + 8192 - 1 = 40959$ (hexadecimal $0x9FFF$)."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Cascada de Codificadores de 8 a 3",
+      "context": "Se conectan dos codificadores con prioridad de 8 a 3 (74148, activos a nivel bajo) para formar uno de 16 a 4. El integrado de mayor peso recibe las entradas 8-15, y el de menor peso recibe las entradas 0-7.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Si la entrada 14 está activa (nivel lógico bajo en $\\bar{I}_{14} = 0$) y la entrada 3 está activa ($\\bar{I}_3 = 0$), ¿cuál es el valor decimal de la entrada seleccionada por prioridad?",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "La entrada de mayor prioridad activa es la 14, por lo que el sistema selecciona y procesa la entrada 14."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Si la entrada general de habilitación $EI$ está a nivel activo (0), ¿cuál será el valor lógico (en lógica positiva) de la señal de validación de entradas activas de este primer integrado?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como hay al menos una entrada activa en este integrado de mayor prioridad, su salida de validación física $GS$ se activa (se pone a 0, lo que en lógica positiva equivale a 1)."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuál será el valor lógico (en lógica positiva) de la señal de habilitación de salida $EO$ del primer integrado?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Como el primer integrado tiene entradas activas, no debe dar paso al segundo integrado. Por tanto, su salida $EO$ se mantiene inactiva (se pone a 1 en lógica negativa, que en lógica positiva equivale a 0)."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si desactivamos la entrada 14 (poniéndola a 1), quedando solo activa la entrada 3, ¿cuál será el valor decimal de la salida binaria resultante de 4 bits del codificador general?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Al no haber entradas activas en el rango superior (8-15), la habilitación pasa al segundo integrado. La única entrada activa es la 3. Por lo tanto, el sistema de 4 bits genera el código correspondiente al 3 decimal."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Relación de Líneas en un Decodificador Binario",
+      "tex": "$$N_{salidas} = 2^{N_{entradas}}$$"
+    },
+    {
+      "name": "Relación de Líneas en un Multiplexor (MUX)",
+      "tex": "$$N_{entradas\\_datos} = 2^{N_{entradas\\_seleccion}}$$"
+    },
+    {
+      "name": "Expansión de Shannon para un MUX",
+      "tex": "$$F(X_1, X_2, \\dots, X_n) = \\bar{X}_1 \\cdot F(0, X_2, \\dots, X_n) + X_1 \\cdot F(1, X_2, \\dots, X_n)$$"
+    },
+    {
+      "name": "Ecuación de Direccionamiento Interno de Memoria",
+      "tex": "$$N_{lineas\\_direccion} = \\log_2(\\text{Tamaño de Memoria en Bytes})$$"
+    },
+    {
+      "name": "Líneas del Bus para Decodificación de Chip Select",
+      "tex": "$$N_{lineas\\_decodificacion} = N_{bus\\_total} - N_{lineas\\_internas}$$"
+    },
+    {
+      "name": "Ecuaciones de Salida de un Codificador con Prioridad 4 a 2",
+      "tex": "$$Y_1 = I_3 + I_2 \\quad \\text{y} \\quad Y_0 = I_3 + \\bar{I}_2 \\cdot I_1$$"
+    },
+    {
+      "name": "Señal de Habilitación de Salida en Cascada de Codificadores",
+      "tex": "$$EO = EI \\cdot \\bar{I}_0 \\cdot \\bar{I}_1 \\dots \\bar{I}_{n-1}$$"
+    }
+  ]
+}

@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la condición necesaria y suficiente para que un escalar $\\lambda \\in \\mathbb{K}$ sea un valor propio de una matriz cuadrada $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{K})$?",
+      "options": [
+        "Existe un vector no nulo $v \\in \\mathcal{M}_{n \\times 1}(\\mathbb{K})$ tal que la ecuación matricial $A v = \\lambda v$ se satisface.",
+        "El sistema homogéneo asociado $(A - \\lambda I_n)v = 0$ es compatible determinado, admitiendo únicamente la solución trivial.",
+        "La matriz de coeficientes $A - \\lambda I_n$ es invertible y su determinante asociado es estrictamente mayor que cero."
+      ],
+      "correct": 0,
+      "hint": "Recuerde la definición de autovector, el cual debe ser no nulo para evitar soluciones triviales del sistema homogéneo.",
+      "explanation": "Un escalar $\\lambda$ es autovalor de $A$ si existe un vector no nulo $v$ tal que $A v = \\lambda v$. Esto equivale a decir que el sistema $(A - \\lambda I_n)v = 0$ es compatible indeterminado (tiene soluciones no nulas), lo cual requiere $\\det(A - \\lambda I_n) = 0$."
+    },
+    {
+      "q": "Si $\\lambda$ es un autovalor de la matriz invertible $A$, ¿cuál es el autovalor correspondiente a la matriz inversa $A^{-1}$?",
+      "options": [
+        "El escalar $\\lambda^{-1}$, ya que al aplicar la inversa a la ecuación propia $A v = \\lambda v$ se obtiene $A^{-1} v = \\lambda^{-1} v$.",
+        "El escalar $-\\lambda$, puesto que la inversión matricial invierte el signo algebraico de las raíces del polinomio característico.",
+        "El escalar $1 - \\lambda$, derivado de la identidad de Cayley-Hamilton para la traza de la matriz inversa unitaria."
+      ],
+      "correct": 0,
+      "hint": "Multiplique a la izquierda por la inversa de la matriz en la ecuación definitoria del autovalor.",
+      "explanation": "Partiendo de $A v = \\lambda v$ con $v \\ne 0$, multiplicamos por $A^{-1}$ a la izquierda: $v = A^{-1} (\\lambda v) = \\lambda (A^{-1} v)$. Dado que $A$ es invertible, $\\lambda \\ne 0$, por lo que dividiendo entre $\\lambda$ resulta $A^{-1} v = \\lambda^{-1} v$."
+    },
+    {
+      "q": "¿Qué relación general existe entre el polinomio característico de una matriz cuadrada $A$ y el de su traspuesta $A^T$?",
+      "options": [
+        "Son estrictamente idénticos para cualquier cuerpo $\\mathbb{K}$, debido a que el determinante es invariante bajo la operación de trasposición.",
+        "Son opuestos si el orden $n$ de la matriz es impar, y coinciden únicamente cuando el orden de la matriz es par.",
+        "Difieren en sus coeficientes intermedios, aunque comparten las raíces reales correspondientes a los autovalores principales."
+      ],
+      "correct": 0,
+      "hint": "Recuerde cómo afecta la trasposición al determinante de una matriz.",
+      "explanation": "El polinomio característico de $A^T$ es $p(\\lambda) = \\det(A^T - \\lambda I_n) = \\det((A - \\lambda I_n)^T) = \\det(A - \\lambda I_n)$, que es exactamente el polinomio característico de $A$."
+    },
+    {
+      "q": "Sea $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{K})$ una matriz cuadrada. Si todos sus autovalores $\\lambda_1, \\dots, \\lambda_n$ (contando multiplicidades) son conocidos, ¿cómo se expresa el determinante de $A$?",
+      "options": [
+        "Es igual al producto de todos sus autovalores, es decir, $\\det(A) = \\prod_{i=1}^n \\lambda_i$.",
+        "Es igual a la suma ponderada de todos sus autovalores, equivalente a la traza algebraica de la matriz.",
+        "Es igual al autovalor de mayor valor absoluto, multiplicado por el rango de la matriz original."
+      ],
+      "correct": 0,
+      "hint": "Considere la evaluación del polinomio característico en el punto cero.",
+      "explanation": "El polinomio característico es $p(\\lambda) = \\det(A - \\lambda I) = (\\lambda_1 - \\lambda)\\cdots(\\lambda_n - \\lambda)$. Si evaluamos en $\\lambda = 0$, obtenemos $p(0) = \\det(A) = \\lambda_1 \\lambda_2 \\dots \\lambda_n$, que es el producto de todos los autovalores."
+    },
+    {
+      "q": "¿Cómo se define la multiplicidad geométrica ($m_{\\text{geom}}$) de un autovalor $\\lambda_i$ de una matriz $A$?",
+      "options": [
+        "Como la dimensión del subespacio propio asociado, $V_{\\lambda_i} = \\ker(A - \\lambda_i I_n)$, dada por $n - \\text{rango}(A - \\lambda_i I_n)$.",
+        "Como la potencia del factor $(\\lambda - \\lambda_i)$ en la factorización final sobre el cuerpo del polinomio característico.",
+        "Como el número total de columnas de la matriz de paso que contienen valores no nulos correspondientes al autovalor $\\lambda_i$."
+      ],
+      "correct": 0,
+      "hint": "La multiplicidad geométrica indica el número de autovectores linealmente independientes asociados a ese autovalor.",
+      "explanation": "La multiplicidad geométrica de $\\lambda_i$ es la dimensión del subespacio propio asociado $V_{\\lambda_i}$, que coincide con el núcleo de $A - \\lambda_i I_n$. Usando el teorema del rango, esta dimensión es $n - \\text{rango}(A - \\lambda_i I_n)$."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe la relación fundamental entre la multiplicidad geométrica ($m_{\\text{geom}}$) y algebraica ($m_{\\text{alg}}$) de un autovalor?",
+      "options": [
+        "Para cualquier autovalor $\\lambda$, siempre se cumple la desigualdad estricta u holgada $1 \\le m_{\\text{geom}}(\\lambda) \\le m_{\\text{alg}}(\\lambda)$.",
+        "La multiplicidad geométrica siempre es estrictamente mayor que la multiplicidad algebraica si la matriz no es diagonalizable.",
+        "Ambas multiplicidades coinciden siempre y cuando el autovalor $\\lambda$ sea igual a cero o sea de signo negativo."
+      ],
+      "correct": 0,
+      "hint": "Revise la sección de Multiplicidades en los apuntes del Tema 5.",
+      "explanation": "Para cualquier autovalor $\\lambda$ de una matriz, siempre se verifica que la multiplicidad geométrica es al menos 1 (pues existe al menos un autovector no nulo) y está acotada superiormente por la multiplicidad algebraica: $1 \\le m_{\\text{geom}}(\\lambda) \\le m_{\\text{alg}}(\\lambda)$."
+    },
+    {
+      "q": "¿Cuándo se dice que una matriz cuadrada $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{K})$ es diagonalizable sobre el cuerpo $\\mathbb{K}$?",
+      "options": [
+        "Si existe una matriz invertible $P$ y una matriz diagonal $D$ tales que $P^{-1} A P = D$.",
+        "Si su determinante es no nulo y todos los elementos de la diagonal principal son estrictamente positivos.",
+        "Si la matriz es simétrica y todos sus autovalores son números complejos con parte imaginaria no nula."
+      ],
+      "correct": 0,
+      "hint": "La diagonalización busca una representación simple mediante cambio de base.",
+      "explanation": "Por definición, una matriz $A$ es diagonalizable si es semejante a una matriz diagonal $D$, lo que equivale a la existencia de una matriz de paso invertible $P$ tal que $P^{-1} A P = D$, o equivalentemente $A = P D P^{-1}$."
+    },
+    {
+      "q": "¿Cuál es el criterio fundamental de diagonalización basado en las multiplicidades de los autovalores?",
+      "options": [
+        "El polinomio característico se factoriza completamente en el cuerpo $\\mathbb{K}$ y $m_{\\text{geom}}(\\lambda_i) = m_{\\text{alg}}(\\lambda_i)$ para todo autovalor.",
+        "La matriz tiene al menos un autovalor nulo y todos los demás autovalores tienen multiplicidad algebraica unitaria.",
+        "La suma de las multiplicidades algebraicas de todos los autovalores es estrictamente menor que el rango de la matriz."
+      ],
+      "correct": 0,
+      "hint": "Ambas condiciones sobre los autovalores y sus correspondientes multiplicidades geométricas deben cumplirse simultáneamente.",
+      "explanation": "Una matriz es diagonalizable sobre $\\mathbb{K}$ si y solo si el polinomio característico descompone completamente en $\\mathbb{K}$ y para cada autovalor su multiplicidad geométrica coincide con la algebraica."
+    },
+    {
+      "q": "Si una matriz $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{K})$ posee $n$ autovalores distintos en el cuerpo $\\mathbb{K}$, ¿qué podemos concluir con certeza?",
+      "options": [
+        "La matriz $A$ es necesariamente diagonalizable sobre el cuerpo $\\mathbb{K}$.",
+        "La matriz $A$ es simétrica y sus autovectores asociados son ortogonales.",
+        "La matriz $A$ es invertible y no posee ningún autovalor igual a cero."
+      ],
+      "correct": 0,
+      "hint": "Analice qué límites impone esto sobre las multiplicidades algebraicas y geométricas.",
+      "explanation": "Si tiene $n$ autovalores distintos, cada uno debe tener multiplicidad algebraica de 1. Dado que $1 \\le m_{\\text{geom}}(\\lambda_i) \\le m_{\\text{alg}}(\\lambda_i) = 1$, se deduce que $m_{\\text{geom}}(\\lambda_i) = m_{\\text{alg}}(\\lambda_i) = 1$ para todo $i$. Al cumplirse la igualdad para todos los autovalores, la matriz es diagonalizable."
+    },
+    {
+      "q": "Si un vector $v$ es un autovector de la matriz $A$ asociado al autovalor $\\lambda$, ¿cuál es el resultado de aplicar $A^k$ sobre dicho vector $v$?",
+      "options": [
+        "El vector resultante es $A^k v = \\lambda^k v$, lo que demuestra que los autovectores permanecen invariantes.",
+        "El vector resultante es $A^k v = k \\lambda v$, lo que implica un crecimiento lineal respecto al exponente.",
+        "El vector resultante es $A^k v = \\lambda v^k$, lo que genera un vector cuyas componentes están elevadas a la potencia."
+      ],
+      "correct": 0,
+      "hint": "Proceda por inducción matemática aplicando la definición de autovalor de manera sucesiva.",
+      "explanation": "Para $k=1$, $A v = \\lambda v$. Para $k=2$, $A^2 v = A(A v) = A(\\lambda v) = \\lambda (A v) = \\lambda^2 v$. Por inducción, $A^k v = \\lambda^k v$."
+    },
+    {
+      "q": "En el contexto de la diagonalización, ¿qué representan físicamente las columnas de la matriz de paso $P$ en la relación $A = P D P^{-1}$?",
+      "options": [
+        "Representan una base del espacio formada exclusivamente por autovectores linealmente independientes de la matriz $A$.",
+        "Representan las proyecciones ortogonales de los vectores de la base canónica sobre el espacio nulo de la matriz.",
+        "Representan los coeficientes del polinomio característico de $A$ ordenados de forma decreciente."
+      ],
+      "correct": 0,
+      "hint": "Recuerde cómo se construye la matriz de cambio de base usando los autovectores correspondientes a cada autovalor de la diagonal.",
+      "explanation": "La matriz de paso $P$ se construye situando en sus columnas los autovectores linealmente independientes de $A$. Para que $P$ sea invertible, estos autovectores deben formar una base de $\\mathbb{K}^n$."
+    },
+    {
+      "q": "Si la matriz $A$ es diagonalizable con $A = P D P^{-1}$, ¿cómo se simplifica el cálculo de la potencia $k$-ésima de la matriz $A^k$?",
+      "options": [
+        "Se calcula como $A^k = P D^k P^{-1}$, reduciendo el coste a potenciar únicamente los elementos de la diagonal de $D$.",
+        "Se calcula como $A^k = P^k D^k (P^{-1})^k$, requiriendo potenciar cada matriz componente de forma independiente.",
+        "Se calcula como $A^k = D^k (P P^{-1})$, lo cual es equivalente a la potencia directa de la matriz diagonal únicamente."
+      ],
+      "correct": 0,
+      "hint": "Escriba el producto repetido $A \\cdot A \\dots A$ y simplifique los términos intermedios de la forma $P^{-1} P$.",
+      "explanation": "Multiplicando repetidamente: $A^k = (P D P^{-1})(P D P^{-1})\\dots(P D P^{-1})$. Los términos intermedios $P^{-1}P$ se cancelan convirtiéndose en la identidad $I$. Esto resulta en $A^k = P D^k P^{-1}$."
+    },
+    {
+      "q": "¿Cuál es la propiedad fundamental de los autovalores de una matriz simétrica real $A = A^T \\in \\mathcal{M}_{n \\times n}(\\mathbb{R})$?",
+      "options": [
+        "Todos sus autovalores son necesariamente números reales y la matriz siempre es diagonalizable ortogonalmente.",
+        "Posee al menos un autovalor complejo conjugado de parte imaginaria no nula si la traza es igual a cero.",
+        "Sus autovalores son todos nulos o iguales a uno, correspondiendo siempre a proyecciones ortogonales."
+      ],
+      "correct": 0,
+      "hint": "Es una de las propiedades más importantes del teorema espectral para matrices reales.",
+      "explanation": "El Teorema Espectral establece que toda matriz simétrica real tiene todos sus autovalores reales y es diagonalizable ortogonalmente, lo que significa que existe una matriz ortogonal $Q$ ($Q^T = Q^{-1}$) tal que $Q^T A Q = D$."
+    },
+    {
+      "q": "Si dos autovectores de una matriz simétrica real $A$ están asociados a autovalores distintos, ¿qué relación geométrica guardan entre sí?",
+      "options": [
+        "Son estrictamente ortogonales, es decir, su producto escalar es nulo.",
+        "Son linealmente dependientes, por lo que determinan la misma dirección en el espacio.",
+        "Forman un ángulo de 45 grados y poseen la misma norma euclídea."
+      ],
+      "correct": 0,
+      "hint": "Considere el producto escalar $\\langle A u, v \\rangle$ y aplique la simetría de la matriz.",
+      "explanation": "Si $A u = \\lambda_1 u$ y $A v = \\lambda_2 v$ con $\\lambda_1 \\ne \\lambda_2$ y $A$ simétrica: $\\lambda_1 \\langle u, v \\rangle = \\langle A u, v \\rangle = \\langle u, A^T v \\rangle = \\langle u, A v \\rangle = \\lambda_2 \\langle u, v \\rangle$. Como $\\lambda_1 \\ne \\lambda_2$, debe cumplirse $\\langle u, v \\rangle = 0$."
+    },
+    {
+      "q": "¿Qué podemos afirmar acerca de los autovalores de una matriz nilpotente (existe $k \\ge 1$ tal que $A^k = 0$)?",
+      "options": [
+        "El único autovalor posible de la matriz es el cero.",
+        "Sus autovalores son raíces de la unidad distintas de cero.",
+        "La matriz no posee autovalores ya que no es invertible."
+      ],
+      "correct": 0,
+      "hint": "Si $A^k = 0$ y $v$ es un autovector asociado a $\\lambda$, aplique la potencia a la ecuación propia.",
+      "explanation": "Si $A^k = 0$ y $A v = \\lambda v$ ($v \\ne 0$), entonces $A^k v = \\lambda^k v$. Como $A^k = 0$, se tiene $0 = \\lambda^k v$. Como $v \\ne 0$, se deduce que $\\lambda^k = 0 \\implies \\lambda = 0$."
+    },
+    {
+      "q": "¿Qué valores propios puede tener una matriz idempotente (aquella que cumple $A^2 = A$)?",
+      "options": [
+        "Únicamente los valores 0 y 1.",
+        "Cualquier número real no nulo en el intervalo $[-1, 1]$.",
+        "Únicamente el valor propio nulo debido a la proyección lineal."
+      ],
+      "correct": 0,
+      "hint": "Aplique la condición $A^2 = A$ sobre la relación $A v = \\lambda v$.",
+      "explanation": "Si $A v = \\lambda v$ ($v \\ne 0$), entonces $A^2 v = A(\\lambda v) = \\lambda^2 v$. Como $A^2 = A$, se cumple $\\lambda^2 v = \\lambda v \\implies (\\lambda^2 - \\lambda)v = 0$. Al ser $v \\ne 0$, debe cumplirse $\\lambda^2 - \\lambda = 0 \\implies \\lambda(\\lambda - 1) = 0$, de donde $\\lambda = 0$ o $\\lambda = 1$."
+    },
+    {
+      "q": "¿Cómo se comporta la traza de una matriz cuadrada en relación con sus autovalores?",
+      "options": [
+        "La traza de la matriz es igual a la suma de todos sus autovalores, contados con sus multiplicidades algebraicas.",
+        "La traza de la matriz es igual al producto de sus autovalores no nulos divididos por el rango.",
+        "La traza de la matriz equivale al valor absoluto del autovalor dominante de la matriz diagonalizada."
+      ],
+      "correct": 0,
+      "hint": "Es una propiedad fundamental invariante por semejanza matricial.",
+      "explanation": "La traza de una matriz (suma de los elementos de su diagonal principal) es un invariante algebraico y equivale exactamente a la suma de todos sus autovalores, considerando sus multiplicidades algebraicas."
+    },
+    {
+      "q": "¿Qué es la Matriz de Transición de Google ($G$) en el algoritmo PageRank y qué propiedad fundamental posee?",
+      "options": [
+        "Es una matriz estocástica por columnas (la suma de los elementos de cada columna es igual a 1).",
+        "Es una matriz simétrica real definida positiva cuyos elementos son todos números enteros.",
+        "Es una matriz nilpotente que modela el decaimiento exponencial de las visitas de los usuarios."
+      ],
+      "correct": 0,
+      "hint": "Representa probabilidades de transición entre páginas web.",
+      "explanation": "La matriz de transición de Google $G$ es una matriz estocástica por columnas, lo que significa que cada columna representa una distribución de probabilidad de transición y, por tanto, sus componentes son no negativas y suman 1."
+    },
+    {
+      "q": "En el PageRank de Google, ¿a qué corresponde matemáticamente el vector de importancia de las páginas web?",
+      "options": [
+        "Al vector propio asociado al autovalor dominante $\\lambda = 1$ de la matriz estocástica de Google $G$.",
+        "Al vector propio asociado al menor autovalor no nulo de la matriz de adyacencia del grafo.",
+        "A los coeficientes del polinomio característico de la matriz de covarianza de la red de enlaces."
+      ],
+      "correct": 0,
+      "hint": "Es la solución al sistema estacionario $G v = 1 v$.",
+      "explanation": "El vector de PageRank es el vector de estado estacionario que satisface $G v = v$. Esto representa un autovector asociado al autovalor dominante $\\lambda = 1$ de la matriz estocástica $G$."
+    },
+    {
+      "q": "¿Qué método numérico se emplea comúnmente para calcular el vector propio del PageRank en grafos a gran escala?",
+      "options": [
+        "El Método de las Potencias, debido a que calcula iterativamente el autovector dominante sin necesidad de resolver sistemas directos.",
+        "La descomposición LU directa con pivotaje parcial, por su bajo coste temporal para matrices densas de gran tamaño.",
+        "El método de Gauss-Seidel acelerado por relajación simétrica para matrices no cuadradas."
+      ],
+      "correct": 0,
+      "hint": "Permite encontrar el autovector correspondiente al autovalor dominante de forma iterativa multiplicando repetidamente por la matriz.",
+      "explanation": "El Método de las Potencias consiste en calcular de forma iterativa $x^{(k+1)} = G x^{(k)}$. Para una matriz con un autovalor estrictamente dominante como el $\\lambda = 1$ en PageRank, este método converge al autovector asociado, lo cual es ideal para matrices gigantescas y dispersas."
+    },
+    {
+      "q": "En el Análisis de Componentes Principales (PCA), ¿qué matriz se analiza para extraer las direcciones de máxima variabilidad de los datos?",
+      "options": [
+        "La Matriz de Covarianza (o de correlación) de las variables del conjunto de datos.",
+        "La Matriz de Transición de probabilidad estocástica asociada a los patrones de muestreo.",
+        "La Matriz triangular superior obtenida mediante la descomposición de Cholesky del conjunto de datos."
+      ],
+      "correct": 0,
+      "hint": "Esta matriz mide la dispersión conjunta y las relaciones lineales entre los distintos atributos.",
+      "explanation": "En PCA, se analiza la Matriz de Covarianza de las variables. Los autovectores de esta matriz proporcionan las componentes principales (direcciones de máxima varianza) y los autovalores indican la cantidad de varianza explicada por cada una."
+    },
+    {
+      "q": "¿Qué representan los autovalores obtenidos al realizar el Análisis de Componentes Principales (PCA) sobre un conjunto de datos?",
+      "options": [
+        "La cantidad de varianza de los datos explicada por cada una de las componentes principales correspondientes.",
+        "Las frecuencias de muestreo de los patrones de ruido en el subespacio ortogonal complementario.",
+        "La distancia euclídea media entre los centroides de los grupos de clasificación automática."
+      ],
+      "correct": 0,
+      "hint": "Cada componente principal es un autovector. El autovalor asociado nos indica la importancia de dicha componente.",
+      "explanation": "Los autovalores de la matriz de covarianza en PCA cuantifican la varianza de los datos en la dirección de sus autovectores correspondientes. A mayor autovalor, mayor es la varianza explicada por esa componente."
+    },
+    {
+      "q": "Si dos matrices cuadradas $A$ y $B$ de orden $n$ son semejantes ($B = P^{-1} A P$), ¿qué propiedad se conserva con seguridad?",
+      "options": [
+        "Comparten exactamente el mismo polinomio característico y, por ende, los mismos autovalores con idénticas multiplicidades algebraicas.",
+        "Poseen exactamente los mismos autovectores asociados en las mismas coordenadas espaciales.",
+        "La matriz de paso $P$ es necesariamente una matriz diagonal o una matriz simétrica real."
+      ],
+      "correct": 0,
+      "hint": "Considere la ecuación $\\det(B - \\lambda I)$ e inserte la identidad escrita como $P^{-1} P$.",
+      "explanation": "$\\det(B - \\lambda I) = \\det(P^{-1} A P - \\lambda P^{-1} I P) = \\det(P^{-1}(A - \\lambda I)P) = \\det(P^{-1})\\det(A - \\lambda I)\\det(P) = \\det(A - \\lambda I)$. Al tener el mismo polinomio característico, sus raíces (autovalores) y multiplicidades algebraicas son idénticas."
+    },
+    {
+      "q": "Si una matriz $A \\in \\mathcal{M}_{3 \\times 3}(\\mathbb{R})$ tiene un autovalor complejo $\\lambda_1 = a + bi$ ($b \\ne 0$), ¿qué podemos afirmar sobre sus otros autovalores?",
+      "options": [
+        "Uno de los autovalores restantes es obligatoriamente el conjugado complejo $\\lambda_2 = a - bi$, y el tercero debe ser real.",
+        "Los otros dos autovalores deben ser complejos conjugados puros sin parte real.",
+        "Los otros dos autovalores son necesariamente idénticos y reales de signo opuesto al valor de la parte real $a$."
+      ],
+      "correct": 0,
+      "hint": "Los coeficientes del polinomio característico son reales, por lo que las raíces complejas deben venir en parejas.",
+      "explanation": "Dado que el polinomio característico tiene coeficientes reales (pues la matriz es real), cualquier raíz compleja debe aparecer junto a su conjugada compleja. Como la matriz es de orden 3, el polinomio característico es de grado 3; así, dos raíces son complejas conjugadas y la tercera es necesariamente real."
+    },
+    {
+      "q": "¿Cuál es la función del 'damping factor' (factor de amortiguación) en la matriz de Google del PageRank?",
+      "options": [
+        "Asegura la ergodicidad del grafo eliminando los problemas de nodos sumidero ('spider traps') y garantizando un autovalor dominante único $\\lambda = 1$.",
+        "Reduce el tamaño de la matriz de transición para agilizar las iteraciones numéricas por el método de las potencias.",
+        "Modifica los autovalores de la matriz para que todos sean estrictamente negativos y acelerar la convergencia hacia cero."
+      ],
+      "correct": 0,
+      "hint": "El factor de amortiguación modela la probabilidad de que un usuario salte a una página aleatoria en lugar de seguir los enlaces.",
+      "explanation": "El factor de amortiguación (típicamente $d = 0.85$) convierte la matriz en estrictamente positiva (todos sus elementos son $>0$). Esto asegura, por el teorema de Perron-Frobenius, que exista un único autovalor dominante $\\lambda=1$ cuya multiplicidad algebraica es 1, garantizando la convergencia única del método de las potencias."
+    },
+    {
+      "q": "Si una matriz $A$ de orden $n$ es diagonalizable, ¿cuál es la relación entre la suma de las multiplicidades algebraicas de sus autovalores y el orden de la matriz?",
+      "options": [
+        "La suma de las multiplicidades algebraicas de todos sus autovalores es exactamente igual a $n$ sobre su cuerpo de definición.",
+        "La suma de las multiplicidades algebraicas de sus autovalores es menor que $n$, compensada por el rango de la matriz.",
+        "La suma de las multiplicidades algebraicas debe ser igual al doble del orden de la matriz menos el número de autovectores nulos."
+      ],
+      "correct": 0,
+      "hint": "La diagonalización requiere que el polinomio característico se factorice completamente en factores lineales sobre el cuerpo.",
+      "explanation": "Para que una matriz sea diagonalizable, su polinomio característico debe descomponerse por completo sobre el cuerpo $\\mathbb{K}$, lo que implica que la suma de las multiplicidades algebraicas de todas sus raíces (autovalores) es exactamente igual al grado del polinomio, que es $n$."
+    },
+    {
+      "q": "Si una matriz $A$ tiene un autovalor $\\lambda = 0$, ¿qué implicación directa tiene esto sobre sus propiedades algebraicas?",
+      "options": [
+        "La matriz no es invertible, su determinante es nulo y el sistema homogéneo $A x = 0$ tiene soluciones no triviales.",
+        "La matriz es diagonalizable de forma obligatoria y sus columnas son todas ortogonales.",
+        "La traza de la matriz es necesariamente nula ya que el núcleo del operador es de dimensión cero."
+      ],
+      "correct": 0,
+      "hint": "Considere la relación entre el determinante de una matriz y el producto de sus autovalores.",
+      "explanation": "Si $\\lambda = 0$ es autovalor, entonces $\\det(A - 0 I) = \\det(A) = 0$. Por lo tanto, la matriz no es invertible y existe al menos un vector no nulo $v$ tal que $A v = 0$, lo que significa que el sistema $A x = 0$ tiene soluciones no triviales."
+    },
+    {
+      "q": "En Matlab, ¿qué comando calcula únicamente el vector conteniendo los autovalores de una matriz $A$?",
+      "options": [
+        "El comando `eig(A)` asignado a una sola variable, por ejemplo, `valores = eig(A)`.",
+        "El comando `poly(A)`, que devuelve los autovalores directamente ordenados de mayor a menor.",
+        "El comando `diag(A)`, que extrae los autovalores calculados tras realizar una descomposición LU de la matriz."
+      ],
+      "correct": 0,
+      "hint": "La función `eig` tiene comportamientos diferentes según el número de variables de salida que se especifiquen.",
+      "explanation": "En Matlab/Octave, si se invoca `eig(A)` con una sola variable de retorno, esta devuelve un vector columna con todos los autovalores de la matriz $A$. Si se invoca como `[P, D] = eig(A)`, devuelve la matriz de autovectores y la matriz diagonal de autovalores."
+    },
+    {
+      "q": "Si una matriz $A$ es triangular (superior o inferior), ¿cuáles son sus autovalores?",
+      "options": [
+        "Los elementos situados en la diagonal principal de la matriz.",
+        "Los elementos de la primera fila si es triangular superior, o de la primera columna si es inferior.",
+        "El determinante de la matriz dividido por cada uno de los elementos de su diagonal principal."
+      ],
+      "correct": 0,
+      "hint": "Piense en cómo se calcula el determinante de una matriz triangular.",
+      "explanation": "El polinomio característico es $p(\\lambda) = \\det(A - \\lambda I)$. Si $A$ es triangular, la matriz $A - \\lambda I$ también lo es. El determinante de una matriz triangular es el producto de sus elementos de la diagonal principal: $p(\\lambda) = (a_{11}-\\lambda)(a_{22}-\\lambda)\\dots(a_{nn}-\\lambda)$. Por tanto, las raíces son $\\lambda_i = a_{ii}$."
+    },
+    {
+      "q": "Si una matriz $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{K})$ es diagonalizable, ¿cuál es la relación entre el rango de la matriz y sus autovalores?",
+      "options": [
+        "El rango de $A$ es igual al número de autovalores no nulos, contados con sus respectivas multiplicidades.",
+        "El rango de $A$ es siempre igual al orden $n$ de la matriz, independientemente de la existencia de autovalores nulos.",
+        "El rango de $A$ equivale a la suma de las multiplicidades geométricas de los autovalores negativos de la matriz."
+      ],
+      "correct": 0,
+      "hint": "Una matriz diagonalizable es semejante a una matriz diagonal, y el rango es un invariante por semejanza.",
+      "explanation": "Como $A$ es diagonalizable, es semejante a $D$, por lo que tienen el mismo rango. El rango de una matriz diagonal es igual al número de elementos no nulos en su diagonal principal, que corresponde al número de autovalores no nulos de $A$ (contando multiplicidades)."
+    },
+    {
+      "q": "Sea $A$ una matriz diagonalizable. Si sumamos un múltiplo de la identidad $c I$ a la matriz $A$, ¿cuál de las siguientes opciones describe el efecto sobre su diagonalización?",
+      "options": [
+        "La matriz $A + c I$ sigue siendo diagonalizable con la misma matriz de paso $P$, y sus autovalores se desplazan a $\\lambda_i + c$.",
+        "La matriz $A + c I$ deja de ser diagonalizable a menos que $c = 0$, debido a la alteración de los subespacios propios.",
+        "La matriz de paso se convierte en $P + c I$ y la matriz diagonal pasa a ser $D^2 + c I$."
+      ],
+      "correct": 0,
+      "hint": "Aplique la relación $A = P D P^{-1}$ y sume $c I$ a ambos lados de la ecuación.",
+      "explanation": "$A + c I = P D P^{-1} + c P I P^{-1} = P (D + c I) P^{-1}$. Dado que $D + c I$ es una matriz diagonal con elementos $\\lambda_i + c$ en la diagonal, la matriz $A + c I$ es diagonalizable mediante la misma matriz de paso $P$."
+    },
+    {
+      "q": "Si $v$ es un autovector de la matriz $A$ asociado al autovalor $\\lambda$, ¿qué ocurre si multiplicamos $v$ por un escalar no nulo $k \\in \\mathbb{K}$?",
+      "options": [
+        "El vector $k v$ sigue siendo un autovector de $A$ asociado al mismo autovalor $\\lambda$.",
+        "El vector $k v$ se convierte en autovector asociado al autovalor alternativo $k \\lambda$.",
+        "El vector $k v$ deja de ser autovector ya que altera la dirección del espacio tridimensional."
+      ],
+      "correct": 0,
+      "hint": "Use la linealidad del producto matriz-vector en la ecuación definitoria.",
+      "explanation": "Si $A v = \\lambda v$, entonces para cualquier escalar $k$, se tiene $A (k v) = k (A v) = k (\\lambda v) = \\lambda (k v)$. Como $k \\ne 0$ y $v \\ne 0$, el vector $k v$ es no nulo y cumple la ecuación, por lo que es autovector asociado al mismo autovalor $\\lambda$."
+    },
+    {
+      "q": "¿Qué podemos decir acerca de los autovectores asociados a autovalores distintos de una matriz cualquiera?",
+      "options": [
+        "Son linealmente independientes entre sí, independientemente de que la matriz sea diagonalizable o no.",
+        "Son linealmente dependientes, por lo que definen el mismo subespacio propio en el espacio vectorial.",
+        "Son mutuamente ortogonales para cualquier matriz cuadrada, sin requerir propiedades adicionales de simetría."
+      ],
+      "correct": 0,
+      "hint": "Es un teorema básico de álgebra lineal sobre familias de autovectores de autovalores distintos.",
+      "explanation": "Un teorema fundamental del álgebra lineal establece que si $v_1, v_2, \\dots, v_r$ son autovectores asociados a autovalores distintos $\\lambda_1, \\dots, \\lambda_r$ de una matriz $A$, entonces el conjunto $\\{v_1, \\dots, v_r\\}$ es linealmente independiente."
+    },
+    {
+      "q": "Si una matriz real $A$ es diagonalizable sobre los números complejos ($\\mathbb{C}$) pero no sobre los reales ($\\mathbb{R}$), ¿cuál es el motivo principal?",
+      "options": [
+        "El polinomio característico tiene raíces complejas no reales, de modo que no todos los autovalores pertenecen a $\\mathbb{R}$.",
+        "La matriz de paso tiene determinante nulo cuando se restringe al campo de los números reales.",
+        "La multiplicidad geométrica de los autovalores reales es estrictamente menor que cero."
+      ],
+      "correct": 0,
+      "hint": "Recuerde el primer requisito del Teorema Fundamental de Diagonalización sobre la existencia de raíces del polinomio en el cuerpo de definición.",
+      "explanation": "Para que una matriz sea diagonalizable sobre $\\mathbb{R}$, es necesario que todas las raíces de su polinomio característico pertenezcan a $\\mathbb{R}$. Si el polinomio tiene raíces complejas con parte imaginaria no nula, la matriz solo será diagonalizable sobre $\\mathbb{C}$, no sobre $\\mathbb{R}$."
+    },
+    {
+      "q": "¿Cómo se relaciona la multiplicidad geométrica de un autovalor $\\lambda$ de la matriz $A$ con el rango de la matriz $A - \\lambda I$?",
+      "options": [
+        "La multiplicidad geométrica es la diferencia entre el tamaño $n$ de la matriz y el rango de $A - \\lambda I$.",
+        "La multiplicidad geométrica es directamente igual al rango de la matriz $A - \\lambda I$.",
+        "La multiplicidad geométrica es igual a la suma del rango de la matriz y la dimensión de su espacio fila."
+      ],
+      "correct": 0,
+      "hint": "Es una consecuencia directa de la definición del subespacio propio como núcleo de $A - \\lambda I$ y del teorema del rango-nulidad.",
+      "explanation": "El subespacio propio $V_\\lambda$ es el núcleo de $A - \\lambda I$. Por el teorema del rango-nulidad, $\\dim(\\ker(A - \\lambda I)) + \\text{rango}(A - \\lambda I) = n$. Así, $m_{\\text{geom}}(\\lambda) = \\dim(V_\\lambda) = n - \\text{rango}(A - \\lambda I)$."
+    },
+    {
+      "q": "Si una matriz $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{K})$ es semejante a una matriz diagonal $D$, ¿qué podemos afirmar de los elementos de la diagonal de $D$?",
+      "options": [
+        "Son los autovalores de $A$, ordenados de acuerdo con la disposición de sus respectivos autovectores en las columnas de la matriz de paso $P$.",
+        "Son las sumas acumuladas de las filas de la matriz original, independientemente de la base elegida.",
+        "Son los inversos multiplicativos de los coeficientes del polinomio característico de $A$."
+      ],
+      "correct": 0,
+      "hint": "Analice la relación $A P = P D$ igualando columna a columna.",
+      "explanation": "Si $A P = P D$, denotando por $v_i$ la columna $i$ de $P$ y por $d_i$ el elemento diagonal $(i,i)$ de $D$, la igualdad columna a columna resulta en $A v_i = d_i v_i$. Como $v_i$ es columna de una matriz invertible, $v_i \\ne 0$. Por lo tanto, $d_i$ es el autovalor asociado al autovector $v_i$."
+    },
+    {
+      "q": "Dada una matriz no diagonalizable $A \\in \\mathcal{M}_{2 \\times 2}(\\mathbb{R})$ con un único autovalor real $\\lambda_1$ de multiplicidad algebraica 2, ¿cuál es la dimensión de su subespacio propio asociado?",
+      "options": [
+        "La dimensión de su subespacio propio es obligatoriamente igual a 1.",
+        "La dimensión de su subespacio propio es 2, aunque la matriz no sea diagonalizable.",
+        "La dimensión del subespacio propio es nula, conteniendo únicamente al vector cero."
+      ],
+      "correct": 0,
+      "hint": "Para que una raíz tenga multiplicidad algebraica 2 y la matriz sea NO diagonalizable, ¿cuál debe ser su multiplicidad geométrica?",
+      "explanation": "Dado que $\\lambda_1$ es un autovalor, $m_{\\text{geom}}(\\lambda_1) \\ge 1$. Dado que la matriz no es diagonalizable y $m_{\\text{alg}}(\\lambda_1) = 2$, necesariamente la multiplicidad geométrica debe ser estrictamente menor que la algebraica: $m_{\\text{geom}}(\\lambda_1) < 2 \\implies m_{\\text{geom}}(\\lambda_1) = 1$."
+    },
+    {
+      "q": "Si una matriz $A$ es semejante a otra matriz $B$ y $A$ es diagonalizable, ¿cuál es el estado de diagonalizabilidad de $B$?",
+      "options": [
+        "La matriz $B$ es necesariamente diagonalizable, ya que la diagonalizabilidad es una propiedad intrínseca de la clase de semejanza.",
+        "La matriz $B$ puede no ser diagonalizable si la matriz de paso intermedia tiene coeficientes reales negativos.",
+        "La matriz $B$ solo es diagonalizable si es simétrica, independientemente de que $A$ lo sea."
+      ],
+      "correct": 0,
+      "hint": "Piense en la transitividad de la semejanza de matrices.",
+      "explanation": "Si $A$ es diagonalizable, existe $P$ tal que $P^{-1} A P = D$. Como $B$ es semejante a $A$, existe $Q$ tal que $B = Q^{-1} A Q$. Sustituyendo $A = P D P^{-1}$ se obtiene $B = Q^{-1} P D P^{-1} Q = (P^{-1} Q)^{-1} D (P^{-1} Q)$, lo que demuestra que $B$ es diagonalizable."
+    },
+    {
+      "q": "Si $p(\\lambda)$ es el polinomio característico de una matriz cuadrada $A$, ¿qué resultado predice el Teorema de Cayley-Hamilton al evaluar la propia matriz $A$ en su polinomio característico?",
+      "options": [
+        "El resultado es la matriz nula, es decir, $p(A) = 0$.",
+        "El resultado es la matriz identidad multiplicada por la traza de $A$, es decir, $p(A) = \\text{tr}(A) I$.",
+        "El resultado es una matriz diagonal con los autovalores elevados a la potencia del orden de la matriz."
+      ],
+      "correct": 0,
+      "hint": "El teorema de Cayley-Hamilton establece que toda matriz cuadrada anula su propio polinomio característico.",
+      "explanation": "El Teorema de Cayley-Hamilton establece que toda matriz cuadrada $A$ satisface su propia ecuación característica: si $p(\\lambda) = \\det(A - \\lambda I)$, entonces $p(A) = 0$ (la matriz nula)."
+    },
+    {
+      "q": "Para una matriz cuadrada de orden $n$, ¿cuál es el coeficiente principal (el término asociado a $\\lambda^n$) en la definición estándar del polinomio característico $p(\\lambda) = \\det(A - \\lambda I_n)$?",
+      "options": [
+        "El coeficiente principal es $(-1)^n$.",
+        "El coeficiente principal es siempre $+1$, independientemente del orden de la matriz.",
+        "El coeficiente principal es igual al determinante de la matriz, $\\det(A)$."
+      ],
+      "correct": 0,
+      "hint": "Analice el desarrollo del determinante de la diagonal de la matriz $A - \\lambda I_n$.",
+      "explanation": "En el cálculo de $\\det(A - \\lambda I_n)$, el término de mayor grado proviene del producto de los elementos de la diagonal $(a_{11}-\\lambda)(a_{22}-\\lambda)\\dots(a_{nn}-\\lambda)$, cuyo coeficiente líder en $\\lambda^n$ es $(-1)^n$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "El polinomio característico de una matriz de orden 2 con traza 5 y determinante 6 es $p(\\lambda) = \\lambda^2 - 5\\lambda + ____$.",
+      "options": [
+        "6",
+        "5",
+        "11"
+      ],
+      "correct": 0,
+      "hint": "El polinomio característico de una matriz $2 \\times 2$ es $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A)$.",
+      "explanation": "El término independiente del polinomio característico de una matriz de orden 2 es el determinante de la matriz. Por lo tanto, el valor que falta en el hueco es 6."
+    },
+    {
+      "q": "Si una matriz $A$ de tamaño $3 \\times 3$ tiene autovalores $1, 2, 3$, entonces el determinante de $A$ es ____.",
+      "options": [
+        "6",
+        "0",
+        "1.5"
+      ],
+      "correct": 0,
+      "hint": "El determinante es igual al producto de los autovalores de la matriz.",
+      "explanation": "El producto de los autovalores es $1 \\cdot 2 \\cdot 3 = 6$. Por lo tanto, el determinante de la matriz es 6."
+    },
+    {
+      "q": "Si $A$ es una matriz $4 \\times 4$ y su polinomio característico es $p(\\lambda) = (\\lambda - 2)^3(\\lambda - 5)$, la multiplicidad algebraica del autovalor 2 es ____.",
+      "options": [
+        "3",
+        "1",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "La multiplicidad algebraica corresponde al exponente del factor lineal asociado al autovalor en el polinomio característico.",
+      "explanation": "El factor lineal asociado a $\\lambda = 2$ es $(\\lambda - 2)^3$. El exponente es 3, por lo que su multiplicidad algebraica es 3."
+    },
+    {
+      "q": "Si $A$ es diagonalizable y $A = P D P^{-1}$, entonces $A^4 = P D^4 ____$.",
+      "options": [
+        "P^{-1}",
+        "P",
+        "I"
+      ],
+      "correct": 0,
+      "hint": "Use la propiedad de potencias de matrices diagonalizadas $A^k = P D^k P^{-1}$.",
+      "explanation": "Al multiplicar sucesivamente $A = P D P^{-1}$, los términos intermedios de paso se cancelan, resultando en $A^4 = P D^4 P^{-1}$."
+    },
+    {
+      "q": "Para la matriz $A = \\begin{pmatrix} 2 & 0 \\\\ 1 & 2 \\end{pmatrix}$, la multiplicidad geométrica de $\\lambda = 2$ es ____.",
+      "options": [
+        "1",
+        "2",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Calcule la dimensión de $\\ker(A - 2I)$, que equivale a $2 - \\text{rango}(A - 2I)$.",
+      "explanation": "$A - 2I = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$. El rango de esta matriz es 1. Por tanto, la multiplicidad geométrica es $2 - 1 = 1$."
+    },
+    {
+      "q": "En Matlab, si ejecutamos `[P, D] = eig(A)`, la matriz diagonal $D$ contiene ____ en su diagonal principal.",
+      "options": [
+        "los autovalores",
+        "los autovectores",
+        "los coeficientes del polinomio característico"
+      ],
+      "correct": 0,
+      "hint": "La función `eig` devuelve dos matrices: la de paso y la diagonal con la información espectral.",
+      "explanation": "La matriz diagonal $D$ contiene los autovalores de la matriz original en su diagonal principal, ordenados en correspondencia con los autovectores de las columnas de $P$."
+    },
+    {
+      "q": "En el algoritmo PageRank, el vector de importancia de las páginas es el vector propio correspondiente al autovalor dominante $\\lambda = ____$.",
+      "options": [
+        "1",
+        "0",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "La matriz de transición de Google es estocástica y su autovalor mayor es siempre 1.",
+      "explanation": "El vector de PageRank es la distribución estacionaria de una cadena de Markov, que cumple la ecuación $G v = v$. Esto equivale a ser un autovector para $\\lambda = 1$."
+    },
+    {
+      "q": "Si $A = \\begin{pmatrix} 3 & 4 \\\\ 4 & -3 \\end{pmatrix}$, la suma de sus autovalores es ____.",
+      "options": [
+        "0",
+        "6",
+        "-6"
+      ],
+      "correct": 0,
+      "hint": "La suma de los autovalores de una matriz es igual a su traza.",
+      "explanation": "La traza de $A$ es la suma de los elementos de su diagonal principal: $3 + (-3) = 0$. Por lo tanto, la suma de los autovalores es 0."
+    },
+    {
+      "q": "Si una matriz diagonalizable $A$ tiene por autovalores a 1 y -1, entonces $A^2 = ____$.",
+      "options": [
+        "I",
+        "-I",
+        "A"
+      ],
+      "correct": 0,
+      "hint": "Si $A = P D P^{-1}$, calcule $A^2 = P D^2 P^{-1}$ sabiendo que $D^2 = \\text{diag}(\\lambda_1^2, \\lambda_2^2)$.",
+      "explanation": "Como los autovalores son $1$ y $-1$, sus cuadrados son $1^2 = 1$ y $(-1)^2 = 1$. Así, $D^2 = \\text{diag}(1, 1) = I$, y por tanto $A^2 = P I P^{-1} = I$."
+    },
+    {
+      "q": "En PCA, las direcciones de las componentes principales son los ____ de la matriz de covarianza.",
+      "options": [
+        "autovectores",
+        "autovalores",
+        "coeficientes característicos"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que las componentes principales determinan ejes espaciales de proyección.",
+      "explanation": "En PCA, los autovectores de la matriz de covarianza representan las direcciones de las componentes principales, a lo largo de las cuales se proyectan los datos."
+    },
+    {
+      "q": "La multiplicidad geométrica de un autovalor siempre es menor o igual que su multiplicidad ____.",
+      "options": [
+        "algebraica",
+        "característica",
+        "dimensional"
+      ],
+      "correct": 0,
+      "hint": "Revise la desigualdad básica de multiplicidades en la teoría de diagonalización.",
+      "explanation": "Para cualquier autovalor $\\lambda$ de una matriz, se verifica que la multiplicidad geométrica es menor o igual que su multiplicidad algebraica ($m_{\\text{geom}} \\le m_{\\text{alg}}$)."
+    },
+    {
+      "q": "Si una matriz $3 \\times 3$ tiene rango $A - 2I = 1$, la multiplicidad geométrica de $\\lambda = 2$ es ____.",
+      "options": [
+        "2",
+        "1",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Utilice la fórmula de la multiplicidad geométrica: $m_{\\text{geom}}(\\lambda) = n - \\text{rango}(A - \\lambda I)$.",
+      "explanation": "La multiplicidad geométrica es $m_{\\text{geom}}(2) = 3 - \\text{rango}(A - 2I) = 3 - 1 = 2$."
+    },
+    {
+      "q": "Si $v$ es un autovector de $A$ asociado a $\\lambda = 3$, entonces $A^2 v = ____ v$.",
+      "options": [
+        "9",
+        "3",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Use la propiedad de las potencias de autovalores: $A^k v = \\lambda^k v$.",
+      "explanation": "Para $k = 2$ y $\\lambda = 3$, tenemos $A^2 v = 3^2 v = 9 v$. Por lo tanto, el coeficiente que falta es 9."
+    },
+    {
+      "q": "Si el polinomio característico de $A$ es $p(\\lambda) = \\lambda^2 - 4\\lambda + 3$, los autovalores de $A$ son 1 y ____.",
+      "options": [
+        "3",
+        "4",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Los autovalores son las raíces de la ecuación característica $p(\\lambda) = 0$.",
+      "explanation": "Resolviendo $\\lambda^2 - 4\\lambda + 3 = 0$ obtenemos $\\lambda = \\frac{4 \\pm \\sqrt{16 - 12}}{2} = \\frac{4 \\pm 2}{2}$, lo que da las raíces 3 y 1."
+    },
+    {
+      "q": "El subespacio propio $V_{\\lambda}$ asociado al autovalor $\\lambda$ de $A$ se define como el núcleo de la matriz ____.",
+      "options": [
+        "$A - \\lambda I$",
+        "$A + \\lambda I$",
+        "$A^2 - \\lambda I$"
+      ],
+      "correct": 0,
+      "hint": "La ecuación definitoria es $(A - \\lambda I)v = 0$.",
+      "explanation": "El subespacio propio $V_{\\lambda}$ es el conjunto de todos los vectores $v$ que cumplen $(A - \\lambda I)v = 0$, lo que coincide exactamente con el núcleo de la matriz $A - \\lambda I$."
+    },
+    {
+      "q": "Si una matriz real $A$ es simétrica, entonces sus autovalores son siempre números ____.",
+      "options": [
+        "reales",
+        "complejos no reales",
+        "irracionales puros"
+      ],
+      "correct": 0,
+      "hint": "Es la consecuencia principal del teorema espectral sobre matrices reales simétricas.",
+      "explanation": "Toda matriz simétrica con coeficientes reales tiene todos sus autovalores reales, garantizando que sea diagonalizable en $\\mathbb{R}$."
+    },
+    {
+      "q": "Si $A$ y $B$ son matrices semejantes, entonces tienen el mismo ____ característico.",
+      "options": [
+        "polinomio",
+        "vector propio",
+        "subespacio propio"
+      ],
+      "correct": 0,
+      "hint": "Esta propiedad compartida garantiza que tengan los mismos autovalores con las mismas multiplicidades algebraicas.",
+      "explanation": "Las matrices semejantes comparten exactamente el mismo polinomio característico, lo que implica que sus determinantes, trazas y autovalores son idénticos."
+    },
+    {
+      "q": "Si una matriz $A$ es nilpotente, entonces todos sus autovalores son ____.",
+      "options": [
+        "0",
+        "1",
+        "no existen"
+      ],
+      "correct": 0,
+      "hint": "Una matriz es nilpotente si $A^k = 0$ para algún entero $k$.",
+      "explanation": "Si $A^k = 0$ y $A v = \\lambda v$ ($v \\ne 0$), entonces $A^k v = \\lambda^k v = 0$, lo cual obliga a que $\\lambda = 0$ sea el único autovalor."
+    },
+    {
+      "q": "Si una matriz $A$ tiene un autovalor igual a ____, entonces la matriz no es invertible.",
+      "options": [
+        "0",
+        "1",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "El determinante es igual al producto de los autovalores de la matriz.",
+      "explanation": "Si uno de los autovalores de la matriz es 0, su producto (que equivale al determinante) es cero, haciendo que la matriz sea singular (no invertible)."
+    },
+    {
+      "q": "Si los autovalores de $A$ son $2$ y $3$, los de la matriz $5A$ son $10$ y ____.",
+      "options": [
+        "15",
+        "8",
+        "25"
+      ],
+      "correct": 0,
+      "hint": "Si multiplicamos una matriz por un escalar $c$, sus autovalores quedan multiplicados por dicho escalar.",
+      "explanation": "Los autovalores de $5A$ son $5 \\cdot 2 = 10$ y $5 \\cdot 3 = 15$."
+    },
+    {
+      "q": "¿Qué propiedades algebraicas se conservan idénticas entre dos matrices semejantes $A$ y $B$?",
+      "options": [
+        "El determinante y la traza de la matriz.",
+        "El polinomio característico y los autovalores con sus multiplicidades algebraicas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La semejanza de matrices representa un cambio de base, que preserva los invariantes algebraicos de la transformación.",
+      "explanation": "Dos matrices semejantes representan el mismo operador en bases distintas. Por tanto, conservan el polinomio característico, los autovalores, las multiplicidades, el determinante y la traza."
+    },
+    {
+      "q": "Si $A \\in \\mathcal{M}_{n \\times n}(\\mathbb{R})$ es una matriz simétrica real, ¿cuáles de las siguientes afirmaciones son correctas?",
+      "options": [
+        "Todos sus autovalores son números reales.",
+        "Los autovectores asociados a autovalores distintos son mutuamente ortogonales.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise el enunciado del Teorema Espectral para operadores autoadjuntos en espacios euclídeos.",
+      "explanation": "El Teorema Espectral garantiza que una matriz simétrica real tiene autovalores reales y que existe una base ortonormal de autovectores, lo que implica la ortogonalidad entre subespacios propios distintos."
+    },
+    {
+      "q": "¿Cuál de las siguientes condiciones es suficiente para garantizar que una matriz cuadrada $A$ de orden $n$ sea diagonalizable?",
+      "options": [
+        "La matriz posee $n$ autovalores reales y distintos.",
+        "El polinomio característico se factoriza completamente y $m_{\\text{geom}}(\\lambda_i) = m_{\\text{alg}}(\\lambda_i)$ para todo autovalor.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Existen tanto criterios suficientes particulares (autovalores distintos) como el teorema fundamental (igualdad de multiplicidades).",
+      "explanation": "Tanto tener $n$ autovalores distintos (que fuerza a que cada multiplicidad geométrica y algebraica sea 1) como la igualdad general $m_{\\text{geom}}(\\lambda) = m_{\\text{alg}}(\\lambda)$ son condiciones de diagonalizabilidad."
+    },
+    {
+      "q": "El subespacio propio $V_{\\lambda}$ asociado a un autovalor $\\lambda$ cumple que:",
+      "options": [
+        "Es el núcleo (ker) de la matriz de coeficientes $A - \\lambda I$.",
+        "Contiene todos los autovectores asociados a $\\lambda$ junto con el vector nulo.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El subespacio propio es el conjunto de soluciones del sistema lineal homogéneo $(A - \\lambda I)v = 0$.",
+      "explanation": "Por definición, $V_\\lambda = \\{v \\in \\mathbb{K}^n : A v = \\lambda v\\} = \\ker(A - \\lambda I)$, el cual contiene a todos los autovectores y al vector nulo."
+    },
+    {
+      "q": "En el contexto del algoritmo PageRank de Google:",
+      "options": [
+        "La Web se modela mediante un grafo dirigido donde los nodos son páginas y las aristas son enlaces.",
+        "El PageRank de las páginas web corresponde al autovector asociado al autovalor dominante $\\lambda = 1$ de la matriz estocástica $G$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde el modelado matemático del motor de búsqueda descrito en los apuntes del Tema 5.",
+      "explanation": "PageRank modela la web como un grafo dirigido, define una matriz de transición de probabilidad estocástica $G$, y calcula su vector estacionario, que es el autovector para $\\lambda = 1$."
+    },
+    {
+      "q": "Si $v$ es un autovector de una matriz $A$ asociado al autovalor $\\lambda$, entonces $v$ también es un autovector de:",
+      "options": [
+        "La matriz potencia $A^2$ asociado al autovalor $\\lambda^2$.",
+        "La matriz desplazada $A + 3I$ asociado al autovalor $\\lambda + 3$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Aplique las propiedades operacionales básicas de las ecuaciones de autovalores.",
+      "explanation": "Se cumple $A^2 v = \\lambda^2 v$ y $(A + 3I)v = A v + 3 v = \\lambda v + 3 v = (\\lambda + 3)v$. Así, $v$ es autovector de ambas con los respectivos autovalores descritos."
+    },
+    {
+      "q": "En el Análisis de Componentes Principales (PCA), se cumple que:",
+      "options": [
+        "Las componentes principales se obtienen a partir de los autovectores de la matriz de covarianza de los datos.",
+        "Los autovalores asociados miden la varianza explicada por cada una de las componentes principales.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise la sección de aplicaciones informáticas sobre reducción de dimensionalidad.",
+      "explanation": "En PCA, la descomposición en autovalores/autovectores de la matriz de covarianza nos da los ejes de máxima variabilidad (autovectores) y la cantidad de variabilidad capturada por cada uno (autovalores)."
+    },
+    {
+      "q": "Si una matriz cuadrada $A$ de orden $n$ es diagonalizable, entonces:",
+      "options": [
+        "Existe una base de $\\mathbb{K}^n$ formada íntegramente por autovectores de $A$.",
+        "Existe una matriz invertible $P$ tal que $P^{-1} A P = D$ es una matriz diagonal.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere la equivalencia entre diagonalizabilidad matricial y existencia de una base propia del espacio.",
+      "explanation": "Que $A$ sea diagonalizable equivale a que exista una matriz de paso $P$ tal que $P^{-1} A P = D$, cuyas columnas son $n$ autovectores linealmente independientes, formando una base del espacio."
+    },
+    {
+      "q": "Para cualquier autovalor $\\lambda$ de una matriz cuadrada de tamaño $n \\times n$, se cumple algebraicamente que:",
+      "options": [
+        "Su multiplicidad geométrica $m_{\\text{geom}}(\\lambda)$ es como mínimo 1.",
+        "La multiplicidad geométrica es menor o igual a su multiplicidad algebraica, $m_{\\text{geom}}(\\lambda) \\le m_{\\text{alg}}(\\lambda)$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde los límites inferiores y superiores de la multiplicidad geométrica.",
+      "explanation": "La multiplicidad geométrica siempre está acotada por: $1 \\le m_{\\text{geom}}(\\lambda) \\le m_{\\text{alg}}(\\lambda)$. Por tanto, ambas afirmaciones son verdaderas."
+    },
+    {
+      "q": "El polinomio característico $p(\\lambda) = \\det(A - \\lambda I_n)$ de una matriz de tamaño $n \\times n$:",
+      "options": [
+        "Es un polinomio de grado $n$ en la variable escalar $\\lambda$.",
+        "Tiene por raíces exactamente a los autovalores de la matriz $A$ en el cuerpo algebraico correspondiente.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Repase la definición y propiedades del polinomio característico en el apartado 1 de los apuntes.",
+      "explanation": "El polinomio característico de una matriz $n \\times n$ tiene siempre grado $n$ y sus raíces son, por definición de la ecuación característica, los autovalores de la matriz."
+    },
+    {
+      "q": "Sea $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$. ¿Cuáles son sus autovectores linealmente independientes?",
+      "options": [
+        "Dos autovectores linealmente independientes formados por la base canónica.",
+        "No tiene ningún autovector no nulo puesto que la matriz no es diagonalizable.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Calcule los autovectores para el autovalor $\\lambda = 1$.",
+      "explanation": "La matriz solo tiene un autovalor $\\lambda = 1$ con $m_{\\text{alg}}=2$. Su subespacio propio es $\\ker(A - I) = \\ker\\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\text{span}\\{\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}\\}$. Por tanto, solo tiene un autovector linealmente independiente (salvo múltiplos). Así, las opciones de que tiene dos o de que no tiene ninguno no nulo son falsas; la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si una matriz $A$ de orden $3 \\times 3$ tiene un único autovalor $\\lambda = 0$ con multiplicidad algebraica 3, entonces:",
+      "options": [
+        "La matriz $A$ es diagonalizable sobre los números reales.",
+        "La matriz $A$ es necesariamente la matriz nula de orden 3.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Piense en matrices triangulares con ceros en la diagonal que tengan elementos no nulos arriba.",
+      "explanation": "Una matriz como $A = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$ tiene autovalores $\\lambda=0$ con $m_{\\text{alg}}=3$, pero no es la matriz nula ni es diagonalizable (su rango es 2, luego $m_{\\text{geom}} = 3 - 2 = 1 \\ne 3$). Por tanto, ninguna de las dos primeras opciones es correcta."
+    },
+    {
+      "q": "Si $A$ es una matriz invertible con autovalores $\\lambda_1 = 2$ y $\\lambda_2 = 5$, entonces los autovalores de la matriz inversa $A^{-1}$ son:",
+      "options": [
+        "Los valores $2$ y $5$, pues la inversión no afecta a la magnitud escalar.",
+        "Los valores $-2$ y $-5$, debido al cambio de signo de la inversión del operador.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los autovalores de la inversa son los recíprocos de los autovalores de la matriz original.",
+      "explanation": "Los autovalores de $A^{-1}$ son $\\lambda^{-1}$, es decir, $1/2$ y $1/5$. Ninguna de las opciones dadas ofrece estos valores, por lo que la opción correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Para la matriz $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 3 \\end{pmatrix}$, una matriz diagonal semejante $D$ es:",
+      "options": [
+        "La matriz diagonal $\\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$.",
+        "La matriz diagonal $\\begin{pmatrix} 1 & 0 \\\\ 0 & 2 \\end{pmatrix}$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los elementos de la diagonal de $D$ deben ser los autovalores de la matriz $A$.",
+      "explanation": "La matriz es triangular superior, por lo que sus autovalores son sus elementos diagonales: 1 y 3. La matriz diagonal semejante $D$ debe ser $\\begin{pmatrix} 1 & 0 \\\\ 0 & 3 \\end{pmatrix}$ (o con el orden cambiado $\\begin{pmatrix} 3 & 0 \\\\ 0 & 1 \\end{pmatrix}$). Las opciones dadas muestran autovalores erróneos (1 y 2, o 2 y 1), por lo que es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si una matriz $A$ de orden $3$ tiene traza igual a $6$, entonces sus autovalores son necesariamente:",
+      "options": [
+        "Los enteros $1, 2$ y $3$.",
+        "Los enteros $2, 2$ y $2$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La traza es la suma de los autovalores, pero esta suma puede obtenerse de infinitas combinaciones de números.",
+      "explanation": "La traza es la suma de los autovalores: $\\lambda_1 + \\lambda_2 + \\lambda_3 = 6$. Esto no obliga a que sean $\\{1, 2, 3\\}$ o $\\{2, 2, 2\\}$; podrían ser $\\{0, 0, 6\\}$ o $\\{-1, 2, 5\\}$, etc. Por lo tanto, ninguna de las afirmaciones específicas es correcta."
+    },
+    {
+      "q": "Si el rango de la matriz $A - 4I$ para una matriz cuadrada de orden $n$ es igual a $n$, entonces:",
+      "options": [
+        "El valor $\\lambda = 4$ es un autovalor de la matriz con multiplicidad geométrica 1.",
+        "La multiplicidad algebraica de $\\lambda = 4$ es obligatoriamente igual a $n$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Si el rango de $A - \\lambda I$ es $n$, entonces la matriz $A - \\lambda I$ es invertible.",
+      "explanation": "Si $\\text{rango}(A - 4I) = n$, la matriz $A - 4I$ es regular (invertible) y su determinante es no nulo. Esto significa que $\\lambda = 4$ no es raíz del polinomio característico y, por tanto, no es autovalor de $A$. Las dos primeras afirmaciones asumen que sí lo es, por lo que son falsas."
+    },
+    {
+      "q": "Si una matriz $A$ de tamaño $2 \\times 2$ es tal que $A^2 = -I$, entonces sus autovalores reales son:",
+      "options": [
+        "Los valores $1$ y $-1$.",
+        "Los valores complejos puros $i$ y $-i$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Preste atención a que la pregunta interroga sobre los autovalores REALES de la matriz.",
+      "explanation": "Los autovalores complejos son $\\pm i$, obtenidos de la ecuación característica $\\lambda^2 = -1$. Sin embargo, la pregunta pide los autovalores reales, y la matriz no posee ningún autovalor real. Por lo tanto, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, la matriz de paso $P$ que diagonaliza a $A$ puede ser:",
+      "options": [
+        "La matriz no invertible $\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$.",
+        "La matriz identidad $\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los autovectores asociados a los autovalores 1 y -1 de esta matriz son $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ y $\\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix}$.",
+      "explanation": "Los autovalores son 1 y -1, con autovectores correspondientes $v_1 = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ y $v_2 = \\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix}$. Una matriz de paso válida es $P = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Las opciones propuestas son incorrectas (la primera no es invertible, la segunda no diagonaliza $A$), por lo que la opción correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál es el polinomio característico de la matriz de orden 2 dada por $A = \\begin{pmatrix} 2 & 3 \\\\ 0 & 2 \\end{pmatrix}$?",
+      "options": [
+        "El polinomio cuadrático $p(\\lambda) = (\\lambda - 2)(\\lambda - 3)$.",
+        "El polinomio cuadrático $p(\\lambda) = \\lambda^2 - 2\\lambda + 4$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La matriz es triangular, por lo que sus autovalores son sus elementos diagonales.",
+      "explanation": "Dado que es triangular superior, su único autovalor es 2 con multiplicidad algebraica 2. Su polinomio característico es $p(\\lambda) = (\\lambda - 2)^2 = \\lambda^2 - 4\\lambda + 4$. Ninguna de las opciones dadas coincide con este polinomio."
+    },
+    {
+      "q": "Si los autovectores de una matriz cuadrada real $A$ son todos mutuamente ortogonales, entonces la matriz $A$ debe ser obligatoriamente:",
+      "options": [
+        "Una matriz estrictamente diagonal.",
+        "Una matriz antisimétrica real.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Pensemos en qué tipo de matrices son diagonalizables ortogonalmente.",
+      "explanation": "Por el teorema espectral, una matriz real es diagonalizable ortogonalmente si y solo si es simétrica. No tiene por qué ser diagonal ni antisimétrica. Por lo tanto, es 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Problema 1: Análisis espectral de matriz triangular de orden 2",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La traza de la matriz es la suma de los elementos de su diagonal principal: $\\text{tr}(A) = 3 + 2 = 5$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Al ser una matriz triangular, el determinante es el producto de los elementos de la diagonal principal: $\\det(A) = 3 \\cdot 2 = 6$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Calcula el autovalor dominante (el de mayor valor absoluto) de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores de una matriz triangular son sus elementos de la diagonal: $\\lambda_1 = 3$ y $\\lambda_2 = 2$. El mayor en valor absoluto es 3."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Calcula el elemento en la posición (1,2) de la matriz potencia $A^3$.",
+          "correctValue": 19,
+          "tolerance": 0.0,
+          "explanation": "Calculamos las potencias sucesivas: $A^2 = A \\cdot A = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix} \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix} = \\begin{pmatrix} 9 & 5 \\\\ 0 & 4 \\end{pmatrix}$. Luego $A^3 = A^2 \\cdot A = \\begin{pmatrix} 9 & 5 \\\\ 0 & 4 \\end{pmatrix} \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix} = \\begin{pmatrix} 27 & 19 \\\\ 0 & 8 \\end{pmatrix}$. El elemento en la posición (1,2) es 19."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Problema 2: Autovalores y traza de una matriz 2x2 no diagonal",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 5 & -4 \\\\ 2 & -1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "La traza es la suma de los elementos de la diagonal: $\\text{tr}(A) = 5 + (-1) = 4$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $\\det(A) = 5 \\cdot (-1) - (-4) \\cdot 2 = -5 + 8 = 3$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de la matriz $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $p(\\lambda) = \\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = \\lambda^2 - 4\\lambda + 3 = 0$. Las raíces son $\\lambda = \\frac{4 \\pm \\sqrt{16-12}}{2} = 1, 3$. El menor autovalor es 1."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcula la suma de los dos autovalores de la matriz $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "La suma de los autovalores es $\\lambda_1 + \\lambda_2 = 1 + 3 = 4$, que coincide exactamente con la traza de la matriz."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Problema 3: Autovalores y autovectores de una matriz simétrica real",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcula el menor autovalor de la matriz $A$.",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $p(\\lambda) = (1-\\lambda)^2 - 4 = \\lambda^2 - 2\\lambda - 3 = 0$. Las raíces son $\\lambda = \\frac{2 \\pm \\sqrt{4+12}}{2} = \\frac{2 \\pm 4}{2} = 3, -1$. El menor autovalor es -1."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcula el autovalor dominante de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 3 y -1. El mayor en valor absoluto es 3."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Para el autovalor menor $\\lambda = -1$, calcula la segunda componente del autovector $v = \\begin{pmatrix} 1 \\\\ x_2 \\end{pmatrix}$.",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $(A - (-1)I)v = 0 \\implies \\begin{pmatrix} 2 & 2 \\\\ 2 & 2 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ x_2 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix} \\implies 2 + 2x_2 = 0 \\implies x_2 = -1$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Para el autovalor dominante $\\lambda = 3$, calcula la segunda componente del autovector $w = \\begin{pmatrix} 1 \\\\ y_2 \\end{pmatrix}$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $(A - 3I)w = 0 \\implies \\begin{pmatrix} -2 & 2 \\\\ 2 & -2 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ y_2 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix} \\implies -2 + 2y_2 = 0 \\implies y_2 = 1$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Problema 4: Diagonalización y potencias de matrices",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 4 & 2 \\\\ 3 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $\\det(A) = 4 \\cdot 3 - 2 \\cdot 3 = 12 - 6 = 6$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcula el autovalor menor de $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La traza es $4+3=7$. El polinomio característico es $\\lambda^2 - 7\\lambda + 6 = 0$, cuyas raíces son $\\lambda = 1$ y $\\lambda = 6$. El menor es 1."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcula el autovalor mayor de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 1 y 6. El mayor es 6."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcula el elemento en la posición (2,1) de la matriz potencia $A^2$.",
+          "correctValue": 21,
+          "tolerance": 0.0,
+          "explanation": "$A^2 = \\begin{pmatrix} 4 & 2 \\\\ 3 & 3 \\end{pmatrix} \\begin{pmatrix} 4 & 2 \\\\ 3 & 3 \\end{pmatrix} = \\begin{pmatrix} 16+6 & 8+6 \\\\ 12+9 & 6+9 \\end{pmatrix} = \\begin{pmatrix} 22 & 14 \\\\ 21 & 15 \\end{pmatrix}$. El elemento (2,1) es 21."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Problema 5: Análisis espectral de una matriz de covarianza simplificada",
+      "context": "Considere la matriz de covarianza de dos variables $C = \\begin{pmatrix} 2 & 2 \\\\ 2 & 5 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $C$.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "La traza es la suma de los elementos de la diagonal principal: $\\text{tr}(C) = 2 + 5 = 7$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcula el menor autovalor de la matriz $C$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $\\det(C) = 2 \\cdot 5 - 4 = 6$. El polinomio característico es $\\lambda^2 - 7\\lambda + 6 = 0$. Las raíces son $\\lambda = 1, 6$. El menor es 1."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcula el autovalor dominante de la matriz $C$ (que corresponde a la componente principal de máxima varianza).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 1 y 6. La de mayor varianza explicada corresponde al autovalor 6."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Calcula el porcentaje (como decimal entre 0 y 1, p.ej. 0.85) de varianza explicada por el primer componente principal.",
+          "correctValue": 0.8571,
+          "tolerance": 0.001,
+          "explanation": "La varianza total es la traza (7). La varianza explicada por la primera componente principal es el autovalor dominante (6). El porcentaje es $6 / 7 \\approx 0.85714$"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Problema 6: Análisis de multiplicidades y rango",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 2 & 3 \\\\ 4 & 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La traza es $\\text{tr}(A) = 2 + 1 = 3$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": -10,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $\\det(A) = 2 \\cdot 1 - 3 \\cdot 4 = 2 - 12 = -10$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula el autovalor menor de la matriz $A$.",
+          "correctValue": -2,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 3\\lambda - 10 = 0$, cuyas raíces son $\\lambda = 5$ y $\\lambda = -2$. El menor es -2."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcula el autovalor dominante de la matriz $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 5 y -2. El mayor es 5."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Problema 7: Potencia de matriz diagonalizable",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": -6,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $\\det(A) = 0 \\cdot 1 - 2 \\cdot 3 = -6$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcula el autovalor menor de la matriz $A$.",
+          "correctValue": -2,
+          "tolerance": 0.0,
+          "explanation": "La traza es 1. El polinomio característico es $\\lambda^2 - \\lambda - 6 = 0$. Sus raíces son $\\lambda = 3, -2$. El menor es -2."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcula el autovalor dominante de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 3 y -2. El dominante es 3."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcula el elemento en la posición (1,1) de la potencia $A^3$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $A^2 = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix} \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix} = \\begin{pmatrix} 6 & 2 \\\\ 3 & 7 \\end{pmatrix}$. Luego $A^3 = A^2 \\cdot A = \\begin{pmatrix} 6 & 2 \\\\ 3 & 7 \\end{pmatrix} \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix} = \\begin{pmatrix} 6 & 14 \\\\ 21 & 13 \\end{pmatrix}$. El elemento en la posición (1,1) de $A^3$ es 6."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Problema 8: Diagonalización y verificación",
+      "context": "Considere la matriz $A = \\begin{pmatrix} 7 & -3 \\\\ 4 & -1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La traza es $7 + (-1) = 6$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $7 \\cdot (-1) - (-3) \\cdot 4 = -7 + 12 = 5$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 6\\lambda + 5 = 0$, cuyas raíces son $\\lambda = 1, 5$. El menor autovalor es 1."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 1 y 5. El mayor autovalor es 5."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Problema 9: Autovalores y autovectores en el plano",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & -1 \\\\ -2 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula el autovalor menor de $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La traza es 5 y el determinante es $6-2 = 4$. El polinomio característico es $\\lambda^2 - 5\\lambda + 4 = 0$, cuyas raíces son $\\lambda = 1, 4$. El menor es 1."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula el autovalor dominante de $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 1 y 4. El dominante es 4."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Para el autovalor menor $\\lambda = 1$, calcula la segunda componente de su autovector $v = \\begin{pmatrix} 1 \\\\ x_2 \\end{pmatrix}$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $(A - I)v = 0 \\implies \\begin{pmatrix} 2 & -1 \\\\ -2 & 1 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ x_2 \\end{pmatrix} = 0 \\implies 2 - x_2 = 0 \\implies x_2 = 2$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Para el autovalor mayor $\\lambda = 4$, calcula la segunda componente de su autovector $w = \\begin{pmatrix} 1 \\\\ y_2 \\end{pmatrix}$.",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $(A - 4I)w = 0 \\implies \\begin{pmatrix} -1 & -1 \\\\ -2 & -2 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ y_2 \\end{pmatrix} = 0 \\implies -1 - y_2 = 0 \\implies y_2 = -1$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Problema 10: Diagonalización de una matriz de transición simplificada",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 0.8 & 0.3 \\\\ 0.2 & 0.7 \\end{pmatrix}$, que es una matriz estocástica por columnas.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $\\det(A) = 0.8 \\cdot 0.7 - 0.3 \\cdot 0.2 = 0.56 - 0.06 = 0.5$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcula el autovalor dominante $\\lambda_1$ de la matriz $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como la matriz es estocástica por columnas, obligatoriamente posee un autovalor dominante igual a 1."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula el segundo autovalor $\\lambda_2$ de la matriz $A$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "La traza es $0.8 + 0.7 = 1.5$. Dado que $\\lambda_1 + \\lambda_2 = 1.5$ y $\\lambda_1 = 1$, el segundo autovalor es $\\lambda_2 = 1.5 - 1 = 0.5$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Para el autovalor dominante $\\lambda = 1$, calcula la segunda componente de su autovector de estado estacionario $v = \\begin{pmatrix} 1.5 \\\\ x_2 \\end{pmatrix}$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Resolvemos $(A - I)v = 0 \\implies \\begin{pmatrix} -0.2 & 0.3 \\\\ 0.2 & -0.3 \\end{pmatrix} \\begin{pmatrix} 1.5 \\\\ x_2 \\end{pmatrix} = 0 \\implies -0.2(1.5) + 0.3 x_2 = 0 \\implies -0.3 + 0.3 x_2 = 0 \\implies x_2 = 1$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Problema 11: Multiplicidad geométrica de autovalor en matriz 3x3 no diagonalizable",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 2 & 1 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $A$.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "La traza de $A$ es la suma de los elementos de su diagonal: $\\text{tr}(A) = 2 + 2 + 3 = 7$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "Al ser triangular superior (en realidad, de bloques), el determinante es el producto de los elementos de la diagonal principal: $\\det(A) = 2 \\cdot 2 \\cdot 3 = 12$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Identifique el autovalor repetido de $A$ y calcule su multiplicidad algebraica.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son 2 (con multiplicidad algebraica 2) y 3 (con multiplicidad algebraica 1). El autovalor repetido es 2, y su multiplicidad algebraica es 2."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica del autovalor repetido $\\lambda = 2$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Calculamos el rango de $A - 2I$: $A - 2I = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 1 \\end{pmatrix}$. Esta matriz tiene rango 2. Por tanto, la multiplicidad geométrica de $\\lambda = 2$ es $m_{\\text{geom}} = 3 - \\text{rango}(A - 2I) = 3 - 2 = 1$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Problema 12: Subespacio propio de una matriz 3x3",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & 0 & 1 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 27,
+          "tolerance": 0.0,
+          "explanation": "Dado que es una matriz triangular superior, el determinante es el producto de su diagonal: $\\det(A) = 3^3 = 27$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcula la multiplicidad algebraica del único autovalor $\\lambda = 3$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La única raíz de $p(\\lambda) = (3-\\lambda)^3 = 0$ es $\\lambda = 3$, con multiplicidad algebraica 3."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcula el rango de la matriz $A - 3I_3$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$A - 3I_3 = \\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Esta matriz tiene una única fila no nula, por lo que su rango es 1."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica del autovalor $\\lambda = 3$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La multiplicidad geométrica se calcula como $m_{\\text{geom}}(3) = 3 - \\text{rango}(A - 3I_3) = 3 - 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Problema 13: Diagonalización de una matriz de orden 3 con autovalores distintos",
+      "context": "Dada la matriz diagonal por bloques $A = \\begin{pmatrix} 3 & 0 & 0 \\\\ 0 & 2 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La traza es la suma de los elementos de la diagonal principal: $3 + 2 + 1 = 6$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Al ser triangular superior, su determinante es el producto de su diagonal: $3 \\cdot 2 \\cdot 1 = 6$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de la matriz $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son los valores diagonales: 3, 2 y 1. El menor es 1."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son 3, 2 y 1. El mayor es 3."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Problema 14: Espectro de una matriz 3x3 no diagonal",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 4 & 0 & 0 \\\\ 0 & 3 & 0 \\\\ 0 & 1 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "La traza es la suma de la diagonal: $4 + 3 + 2 = 9$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 24,
+          "tolerance": 0.0,
+          "explanation": "Al ser triangular inferior, el determinante es el producto de la diagonal: $4 \\cdot 3 \\cdot 2 = 24$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Calcula el autovalor intermedio de la matriz $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son 4, 3, 2. El valor intermedio es 3."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcula el rango de la matriz $A - 3I_3$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$A - 3I_3 = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 1 & -1 \\end{pmatrix}$. Las filas 1 y 3 son linealmente independientes, por lo que el rango es 2."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Problema 15: Autovalores de una matriz con traza negativa",
+      "context": "Dada la matriz $A = \\begin{pmatrix} -1 & 4 \\\\ 1 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La traza es $-1 + 2 = 1$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": -6,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $-1 \\cdot 2 - 4 \\cdot 1 = -2 - 4 = -6$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": -2,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - \\lambda - 6 = 0$, cuyas raíces son $\\lambda = 3, -2$. El menor es -2."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 3 y -2. El mayor es 3."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Problema 16: Autovalores y determinante de matriz 2x2",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 8 & -9 \\\\ 2 & -3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La traza es $8 - 3 = 5$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": -6,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $8 \\cdot (-3) - (-9) \\cdot 2 = -24 + 18 = -6$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 5\\lambda - 6 = 0$. Sus raíces son $\\lambda = 6, -1$. El menor autovalor es -1."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 6 y -1. El mayor autovalor es 6."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Problema 17: Análisis espectral de una matriz con traza y det iguales",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 5 & -3 \\\\ 2 & 0 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La traza es $5 + 0 = 5$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $5 \\cdot 0 - (-3) \\cdot 2 = 6$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 5\\lambda + 6 = 0$, cuyas raíces son 2 y 3. El menor es 2."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 2 y 3. El mayor es 3."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Problema 18: Autovalores de matriz simétrica de traza 11",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 4 & -2 \\\\ 1 & 7 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "La traza es $4 + 7 = 11$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 30,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $4 \\cdot 7 - (-2) \\cdot 1 = 28 + 2 = 30$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 11\\lambda + 30 = 0$, cuyas raíces son 5 y 6. El menor es 5."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 5 y 6. El mayor es 6."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Problema 19: Comprobación de matriz diagonalizable con autovalores duplicados",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 2 & 0 & 1 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La traza es $2 + 2 + 2 = 6$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Al ser triangular superior, su determinante es $2^3 = 8$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcula la multiplicidad algebraica de su único autovalor $\\lambda = 2$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El único autovalor es 2, y al ser de orden 3, su multiplicidad algebraica es 3."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica de su autovalor $\\lambda = 2$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$A - 2I = \\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$, que claramente tiene rango 1. Por tanto, $m_{\\text{geom}} = 3 - 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Problema 20: Diagonalización de una matriz de paso",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 4 & 1 & 2 \\\\ 0 & 3 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 36,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $4 \\cdot 3 \\cdot 3 = 36$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcula el autovalor dominante de la matriz $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son 4 (multiplicidad 1) y 3 (multiplicidad 2). El dominante es 4."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcula el rango de la matriz $A - 3I$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$A - 3I = \\begin{pmatrix} 1 & 1 & 2 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Esta matriz tiene una única fila no nula, por lo que su rango es 1."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica del menor autovalor $\\lambda = 3$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La multiplicidad geométrica de $\\lambda = 3$ es $m_{\\text{geom}} = 3 - \\text{rango}(A - 3I) = 3 - 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Problema 21: Espectro de una matriz triangular inferior",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 4 & 0 & 0 \\\\ 1 & 4 & 0 \\\\ 2 & 0 & 4 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $A$.",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "La traza es $4 + 4 + 4 = 12$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 64,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $4^3 = 64$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcula el rango de la matriz $A - 4I$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$A - 4I = \\begin{pmatrix} 0 & 0 & 0 \\\\ 1 & 0 & 0 \\\\ 2 & 0 & 0 \\end{pmatrix}$. La primera columna es la única no nula, por lo que el rango es 1."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica del único autovalor $\\lambda = 4$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La multiplicidad geométrica es $3 - \\text{rango}(A - 4I) = 3 - 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Problema 22: Autovalores y autovectores en matriz de paso invertible",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 0 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La traza de la matriz es $3 + 0 = 3$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $3 \\cdot 0 - (-2) \\cdot 1 = 2$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 3\\lambda + 2 = 0$, con raíces $\\lambda = 1, 2$. El menor es 1."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 1 y 2. El mayor es 2."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Problema 23: Matriz con traza nula",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 1 & 2 \\\\ 1 & -1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La traza es $1 + (-1) = 0$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": -3,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $1 \\cdot (-1) - 2 \\cdot 1 = -3$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcula el término independiente del polinomio característico $p(\\lambda) = \\lambda^2 - \\text{tr}(A)\\lambda - c$. Escribe el valor de $c$ sabiendo que $p(\\lambda) = \\lambda^2 + c$.",
+          "correctValue": -3,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $p(\\lambda) = \\det(A - \\lambda I) = \\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) = \\lambda^2 - 3$. Así, el término independiente es -3."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Calcula el valor del cuadrado del autovalor positivo, es decir, $\\lambda^2$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Dado que el polinomio característico es $\\lambda^2 - 3 = 0$, los autovalores son $\\pm \\sqrt{3}$. El cuadrado de cualquiera de ellos es 3."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Problema 24: Cálculo espectral en matriz diagonalizable 2x2",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 6 & -4 \\\\ 1 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "La traza es $6 + 2 = 8$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 16,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $6 \\cdot 2 - (-4) \\cdot 1 = 12 + 4 = 16$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcula el autovalor único de la matriz $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 8\\lambda + 16 = (\\lambda - 4)^2 = 0$. El único autovalor es 4."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica de dicho autovalor $\\lambda = 4$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $A - 4I = \\begin{pmatrix} 2 & -4 \\\\ 1 & -2 \\end{pmatrix}$, que tiene rango 1. Por tanto, $m_{\\text{geom}} = 2 - 1 = 1$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Problema 25: Autovalores y autovectores en matriz de paso",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 5 & -1 \\\\ 3 & 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La traza es $5 + 1 = 6$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $5 \\cdot 1 - (-1) \\cdot 3 = 8$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 6\\lambda + 8 = 0$, cuyas raíces son 2 y 4. El menor es 2."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Las raíces del polinomio característico son 2 y 4. El mayor es 4."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Problema 26: Matriz simétrica real 2x2",
+      "context": "Dada la matriz simétrica $A = \\begin{pmatrix} 3 & 2 \\\\ 2 & 0 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La traza es $3 + 0 = 3$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": -4,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $3 \\cdot 0 - 2 \\cdot 2 = -4$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 3\\lambda - 4 = 0$, con raíces $\\lambda = 4, -1$. El menor es -1."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 4 y -1. El mayor es 4."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Problema 27: Autovalores y traza de una matriz 3x3 diagonal",
+      "context": "Dada la matriz diagonal $A = \\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 5 & 0 \\\\ 0 & 0 & 5 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcula la traza de la matriz $A$.",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "La traza es la suma de los elementos de su diagonal: $5 + 5 + 5 = 15$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula el determinante de la matriz $A$.",
+          "correctValue": 125,
+          "tolerance": 0.0,
+          "explanation": "El determinante de la matriz diagonal es el producto de su diagonal principal: $5^3 = 125$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcula la multiplicidad algebraica de su único autovalor $\\lambda = 5$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Al ser de orden 3 y diagonal con todos los elementos iguales a 5, el polinomio característico es $(5-\\lambda)^3=0$. Su multiplicidad algebraica es 3."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcula la multiplicidad geométrica del autovalor $\\lambda = 5$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La matriz $A - 5I$ es la matriz nula de orden 3, que tiene rango 0. Por tanto, la multiplicidad geométrica de $\\lambda = 5$ es $3 - 0 = 3$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Problema 28: Espectro de matriz triangular superior de orden 3",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 1 & -1 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La traza es $1 + 2 + 3 = 6$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $1 \\cdot 2 \\cdot 3 = 6$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Al ser triangular superior, sus autovalores son los elementos diagonales: 1, 2 y 3. El menor es 1."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son 1, 2 y 3. El mayor es 3."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Problema 29: Diagonalización de una matriz de rango deficiente",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 1 & 3 \\\\ 1 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "La traza es $1 + 3 = 4$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $1 \\cdot 3 - 3 \\cdot 1 = 0$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el determinante es 0, un autovalor es 0. Como la traza es 4, el otro es 4. El menor es 0."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Los autovalores son 0 y 4. El mayor es 4."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Problema 30: Espectro y traza de una matriz simétrica real 2x2",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcula la traza de $A$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La traza es $3 + 3 = 6$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula el determinante de $A$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "El determinante es $3 \\cdot 3 - 1 \\cdot 1 = 9 - 1 = 8$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcula el menor autovalor de $A$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El polinomio característico es $\\lambda^2 - 6\\lambda + 8 = 0$, cuyas raíces son 2 y 4. El menor es 2."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcula el mayor autovalor de $A$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Las raíces son 2 y 4. El mayor es 4."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Definición de valor y vector propio",
+      "tex": "$$A \\cdot v = \\lambda \\cdot v, \\quad v \\neq 0$$"
+    },
+    {
+      "name": "Ecuación y polinomio característico",
+      "tex": "$$p(\\lambda) = \\det(A - \\lambda \\cdot I_n) = 0$$"
+    },
+    {
+      "name": "Multiplicidad geométrica de un autovalor",
+      "tex": "$$m_{\\text{geom}}(\\lambda_i) = \\dim(\\ker(A - \\lambda_i \\cdot I_n)) = n - \\text{rango}(A - \\lambda_i \\cdot I_n)$$"
+    },
+    {
+      "name": "Desigualdad de multiplicidades",
+      "tex": "$$1 \\le m_{\\text{geom}}(\\lambda_i) \\le m_{\\text{alg}}(\\lambda_i)$$"
+    },
+    {
+      "name": "Diagonalización por semejanza",
+      "tex": "$$A = P \\cdot D \\cdot P^{-1}$$"
+    },
+    {
+      "name": "Potencia de una matriz diagonalizable",
+      "tex": "$$A^k = P \\cdot D^k \\cdot P^{-1}$$"
+    },
+    {
+      "name": "Traza como suma de autovalores",
+      "tex": "$$\\text{tr}(A) = \\sum_{i=1}^n \\lambda_i$$"
+    },
+    {
+      "name": "Determinante como producto de autovalores",
+      "tex": "$$\\det(A) = \\prod_{i=1}^n \\lambda_i$$"
+    }
+  ]
+}

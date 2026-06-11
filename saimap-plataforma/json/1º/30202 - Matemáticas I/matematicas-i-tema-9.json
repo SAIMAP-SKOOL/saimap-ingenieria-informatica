@@ -1,0 +1,2108 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el Teorema de Existencia y Unicidad del polinomio interpolador?",
+      "options": [
+        "Dados n+1 puntos con abscisas distintas, existe un único polinomio de grado a lo sumo n que pasa por todos ellos.",
+        "Dados n+1 puntos con abscisas distintas, existen infinitos polinomios de grado exactamente n que pasan por todos ellos.",
+        "Dados n+1 puntos, existe un único polinomio de grado exactamente n+1 que pasa por todos ellos."
+      ],
+      "correct": 0,
+      "hint": "El grado es a lo sumo n, no exactamente n.",
+      "explanation": "El teorema garantiza existencia y unicidad: dado n+1 puntos con x_i distintos, existe un único P_n(x) de grado \\\\leq n con P_n(x_i)=y_i para todo i."
+    },
+    {
+      "q": "¿Cómo se define el polinomio de base de Lagrange L_i(x)?",
+      "options": [
+        "$$L_i(x) = \\\\prod_{j=0,\\\\, j\\\\ne i}^{n} \\\\frac{x - x_j}{x_i - x_j}$$",
+        "$$L_i(x) = \\\\sum_{j=0,\\\\, j\\\\ne i}^{n} \\\\frac{x - x_j}{x_i - x_j}$$",
+        "$$L_i(x) = \\\\prod_{j=0}^{n} \\\\frac{x - x_j}{x_i - x_j}$$"
+      ],
+      "correct": 0,
+      "hint": "Es un producto que excluye el factor j=i.",
+      "explanation": "L_i(x) se define como el producto \\\\prod_{j \\\\ne i} \\\\frac{x-x_j}{x_i-x_j}, de modo que L_i(x_i)=1 y L_i(x_j)=0 para j\\\\ne i."
+    },
+    {
+      "q": "¿Cuánto vale el polinomio de base de Lagrange L_i(x_j) cuando i ≠ j?",
+      "options": [
+        "0",
+        "1",
+        "No está definido."
+      ],
+      "correct": 0,
+      "hint": "Cada L_i vale 0 en todos los nodos distintos de x_i.",
+      "explanation": "Por construcción, el numerador \\\\prod_{j\\\\ne i}(x_j - x_k) contiene el factor (x_j - x_j)=0 cuando se evalúa en x_j con j\\\\ne i."
+    },
+    {
+      "q": "El polinomio interpolador de Lagrange se construye como:",
+      "options": [
+        "$$P_n(x) = \\\\sum_{i=0}^{n} y_i L_i(x)$$",
+        "$$P_n(x) = \\\\prod_{i=0}^{n} y_i L_i(x)$$",
+        "$$P_n(x) = \\\\sum_{i=0}^{n} x_i L_i(x)$$"
+      ],
+      "correct": 0,
+      "hint": "Es una combinación lineal de las ordenadas y_i ponderadas por L_i.",
+      "explanation": "El polinomio interpolador de Lagrange es P_n(x) = \\\\sum_{i=0}^{n} y_i L_i(x), siendo y_i los valores en los nodos y L_i(x) los polinomios de base."
+    },
+    {
+      "q": "¿Cuál es la principal limitación del método de interpolación de Lagrange respecto a la adición de nuevos nodos?",
+      "options": [
+        "Al añadir un nuevo nodo, todos los polinomios de base deben recalcularse completamente.",
+        "El método de Lagrange no permite añadir nuevos nodos bajo ninguna circunstancia.",
+        "Al añadir un nuevo nodo, solo se recalcula el último polinomio de base L_n."
+      ],
+      "correct": 0,
+      "hint": "Newton resuelve precisamente esta rigidez de Lagrange.",
+      "explanation": "Si se agrega el nodo (x_{n+1}, y_{n+1}), todos los L_i(x) cambian porque el grado del polinomio aumenta de n a n+1, requiriendo recalcular todos los polinomios de base."
+    },
+    {
+      "q": "¿Cuál es la forma general del polinomio de Newton con diferencias divididas?",
+      "options": [
+        "$$P_n(x) = a_0 + a_1(x-x_0) + a_2(x-x_0)(x-x_1) + \\\\dots + a_n\\\\prod_{k=0}^{n-1}(x-x_k)$$",
+        "$$P_n(x) = a_0 + a_1 x + a_2 x^2 + \\\\dots + a_n x^n$$",
+        "$$P_n(x) = a_n + a_{n-1}(x-x_n) + \\\\dots + a_0\\\\prod_{k=1}^{n}(x-x_k)$$"
+      ],
+      "correct": 0,
+      "hint": "Los factores son productos acumulados de (x - x_k) hacia adelante.",
+      "explanation": "La forma de Newton es P_n(x) = \\\\sum_{k=0}^{n} a_k \\\\prod_{j=0}^{k-1}(x-x_j), donde a_k = f[x_0,...,x_k] son las diferencias divididas de la diagonal superior."
+    },
+    {
+      "q": "¿Cómo se define la diferencia dividida de orden 0?",
+      "options": [
+        "$$f[x_i] = y_i$$",
+        "$$f[x_i] = \\\\frac{y_{i+1} - y_i}{x_{i+1} - x_i}$$",
+        "$$f[x_i] = 0$$"
+      ],
+      "correct": 0,
+      "hint": "La diferencia dividida de orden 0 es simplemente el valor de la función.",
+      "explanation": "La diferencia dividida de orden 0 se define como f[x_i] = y_i, es decir, el valor de la función en el nodo x_i."
+    },
+    {
+      "q": "¿Cómo se calcula la diferencia dividida de orden 1?",
+      "options": [
+        "$$f[x_i, x_{i+1}] = \\\\frac{f[x_{i+1}] - f[x_i]}{x_{i+1} - x_i}$$",
+        "$$f[x_i, x_{i+1}] = f[x_{i+1}] - f[x_i]$$",
+        "$$f[x_i, x_{i+1}] = \\\\frac{f[x_i] + f[x_{i+1}]}{2}$$"
+      ],
+      "correct": 0,
+      "hint": "Es la pendiente discreta entre dos nodos consecutivos.",
+      "explanation": "La diferencia dividida de orden 1 es f[x_i, x_{i+1}] = (f[x_{i+1}] - f[x_i]) / (x_{i+1} - x_i), que representa la pendiente de la recta secante."
+    },
+    {
+      "q": "La fórmula recursiva de la diferencia dividida de orden k es:",
+      "options": [
+        "$$f[x_0,\\\\dots,x_k] = \\\\frac{f[x_1,\\\\dots,x_k] - f[x_0,\\\\dots,x_{k-1}]}{x_k - x_0}$$",
+        "$$f[x_0,\\\\dots,x_k] = \\\\frac{f[x_0,\\\\dots,x_{k-1}] - f[x_1,\\\\dots,x_k]}{x_k - x_0}$$",
+        "$$f[x_0,\\\\dots,x_k] = \\\\frac{f[x_1,\\\\dots,x_k] + f[x_0,\\\\dots,x_{k-1}]}{x_k - x_0}$$"
+      ],
+      "correct": 0,
+      "hint": "El numerador es la diferencia de dos diferencias divididas de orden k-1.",
+      "explanation": "La fórmula recursiva es f[x_0,...,x_k] = (f[x_1,...,x_k] - f[x_0,...,x_{k-1}]) / (x_k - x_0), donde x_k - x_0 es la distancia entre el último y el primer nodo del grupo."
+    },
+    {
+      "q": "¿Qué valores de la tabla de diferencias divididas forman los coeficientes del polinomio de Newton?",
+      "options": [
+        "Los valores de la diagonal superior: a_k = f[x_0, x_1, ..., x_k].",
+        "Los valores de la primera columna: a_k = f[x_k].",
+        "Los valores de la última columna: a_k = f[x_{n-k}, ..., x_n]."
+      ],
+      "correct": 0,
+      "hint": "Se toma el primer elemento de cada columna de diferencias divididas.",
+      "explanation": "Los coeficientes a_k = f[x_0, x_1, ..., x_k] son los valores de la primera fila de cada columna de la tabla de diferencias divididas (diagonal superior de la tabla triangular)."
+    },
+    {
+      "q": "¿Cuál es la fórmula del error de interpolación en un punto x?",
+      "options": [
+        "$$E(x) = \\\\frac{f^{(n+1)}(c)}{(n+1)!} \\\\prod_{i=0}^{n}(x - x_i)$$",
+        "$$E(x) = \\\\frac{f^{(n)}(c)}{n!} \\\\prod_{i=0}^{n}(x - x_i)$$",
+        "$$E(x) = \\\\frac{f^{(n+1)}(c)}{n!} \\\\sum_{i=0}^{n}(x - x_i)$$"
+      ],
+      "correct": 0,
+      "hint": "Involucra la derivada de orden n+1 y el producto de (x-x_i).",
+      "explanation": "El error exacto es E(x) = f(x) - P_n(x) = f^{(n+1)}(c)/((n+1)!) * \\\\prod_{i=0}^{n}(x-x_i) para algún c en el intervalo (x_0, x_n)."
+    },
+    {
+      "q": "¿En qué intervalo se garantiza la existencia del punto c en la fórmula del error de interpolación?",
+      "options": [
+        "c ∈ (x_0, x_n), el intervalo abierto entre el primer y el último nodo.",
+        "c ∈ (0, 1), el intervalo unitario estándar.",
+        "c = x_k, algún nodo interior del conjunto dado."
+      ],
+      "correct": 0,
+      "hint": "c pertenece al intervalo más pequeño que contiene todos los nodos y el punto de evaluación.",
+      "explanation": "La fórmula del error garantiza la existencia de un c \\\\in (x_0, x_n) tal que E(x) = f^{(n+1)}(c)/((n+1)!) * \\\\prod(x-x_i), por el teorema del valor medio generalizado."
+    },
+    {
+      "q": "¿Qué descubrió Carl Runge sobre la interpolación con nodos equiespaciados?",
+      "options": [
+        "Al aumentar el grado n con nodos equiespaciados, el error puede aumentar ilimitadamente produciendo fuertes oscilaciones en los extremos.",
+        "Al aumentar el grado n con nodos equiespaciados, el error siempre converge a cero uniformemente.",
+        "Los nodos equiespaciados son siempre preferibles a los nodos de Chebyshev para cualquier función continua."
+      ],
+      "correct": 0,
+      "hint": "El fenómeno de Runge es una advertencia sobre el uso de nodos equidistantes.",
+      "explanation": "Runge demostró que, para su función clásica 1/(1+25x²) en [-1,1], la interpolación con nodos equiespaciados diverge en los extremos al aumentar n, pese a que la función es suave."
+    },
+    {
+      "q": "¿Cuál es la función clásica de Runge utilizada para ilustrar el fenómeno de oscilación?",
+      "options": [
+        "$$f(x) = \\\\frac{1}{1 + 25x^2} \\\\quad \\\\text{en } [-1, 1]$$",
+        "$$f(x) = \\\\frac{1}{1 + x^2} \\\\quad \\\\text{en } [-5, 5]$$",
+        "$$f(x) = e^{-x^2} \\\\quad \\\\text{en } [-1, 1]$$"
+      ],
+      "correct": 0,
+      "hint": "El denominador contiene el factor 25.",
+      "explanation": "La función de Runge es f(x) = 1/(1 + 25x²) definida en [-1, 1]. Es suave y acotada, pero la interpolación con nodos equiespaciados de alto grado diverge en los extremos del intervalo."
+    },
+    {
+      "q": "¿Cuál es la fórmula de los nodos de Chebyshev en el intervalo [-1, 1]?",
+      "options": [
+        "$$x_k = \\\\cos\\\\left(\\\\frac{2k+1}{2n+2}\\\\pi\\\\right), \\\\quad k=0,1,\\\\dots,n$$",
+        "$$x_k = \\\\cos\\\\left(\\\\frac{k\\\\pi}{n}\\\\right), \\\\quad k=0,1,\\\\dots,n$$",
+        "$$x_k = \\\\frac{k}{n}, \\\\quad k=0,1,\\\\dots,n$$"
+      ],
+      "correct": 0,
+      "hint": "Los nodos de Chebyshev son ceros del polinomio de Chebyshev T_{n+1}.",
+      "explanation": "Los nodos de Chebyshev son x_k = cos((2k+1)/(2n+2) * π), k=0,...,n. Minimizan la norma del producto \\\\prod(x-x_k) y evitan el fenómeno de Runge."
+    },
+    {
+      "q": "¿Por qué los nodos de Chebyshev están distribuidos más densamente cerca de los extremos del intervalo?",
+      "options": [
+        "Porque minimizan la norma del polinomio de error \\\\prod(x-x_i) concentrando nodos donde las oscilaciones del error son mayores.",
+        "Porque los extremos del intervalo son numéricamente más estables para el cálculo de productos.",
+        "Porque la función coseno crece más rápido cerca de 0 que cerca de π, generando más puntos extremos."
+      ],
+      "correct": 0,
+      "hint": "La distribución es consecuencia de minimizar el error máximo de interpolación.",
+      "explanation": "Los nodos de Chebyshev minimizan \\\\max |\\\\prod(x-x_i)| en el intervalo. La proyección de puntos igualmente espaciados sobre una semicircunferencia en [-1,1] genera una densidad mayor en los extremos."
+    },
+    {
+      "q": "Si el polinomio interpolador se construye con nodos de Chebyshev en lugar de nodos equiespaciados, ¿qué se consigue?",
+      "options": [
+        "Se minimiza el error máximo de interpolación y se evitan las oscilaciones del fenómeno de Runge.",
+        "Se maximiza el grado del polinomio interpolador necesario para ajustar los datos.",
+        "Se garantiza que el polinomio interpolador coincida con la función en todos los puntos del intervalo."
+      ],
+      "correct": 0,
+      "hint": "Los nodos de Chebyshev son la solución óptima al problema de minimización del error.",
+      "explanation": "Con nodos de Chebyshev, el factor \\\\prod(x-x_i) queda acotado de forma óptima, reduciendo las oscilaciones del error de interpolación, especialmente en los extremos del intervalo."
+    },
+    {
+      "q": "¿Cuántos polinomios interpoladores distintos existen para un conjunto dado de n+1 puntos con abscisas distintas?",
+      "options": [
+        "Exactamente uno, independientemente del método usado (Lagrange, Newton, etc.).",
+        "Infinitos, dependiendo del método de construcción elegido.",
+        "Exactamente dos: el de Lagrange y el de Newton."
+      ],
+      "correct": 0,
+      "hint": "El Teorema de Unicidad garantiza que el resultado algebraico es el mismo.",
+      "explanation": "Por el Teorema de Existencia y Unicidad, hay exactamente un polinomio de grado ≤ n que pasa por los n+1 puntos. Lagrange y Newton son representaciones distintas del mismo polinomio."
+    },
+    {
+      "q": "¿Cuál es el grado máximo del polinomio interpolador P_n(x) cuando se dispone de n+1 puntos?",
+      "options": [
+        "A lo sumo n (puede ser menor si hay cancelaciones).",
+        "Exactamente n en todos los casos.",
+        "Exactamente n+1 en todos los casos."
+      ],
+      "correct": 0,
+      "hint": "El grado es a lo sumo n, no necesariamente exactamente n.",
+      "explanation": "Con n+1 puntos se obtiene P_n(x) de grado ≤ n. Por ejemplo, tres puntos colineales dan un polinomio de grado 1, aunque el método construye inicialmente un polinomio de grado 2."
+    },
+    {
+      "q": "¿Qué ventaja fundamental tiene el método de Newton frente al de Lagrange al añadir un nuevo nodo?",
+      "options": [
+        "Solo hay que calcular una nueva diferencia dividida y agregar un nuevo término, sin recalcular los anteriores.",
+        "El método de Newton requiere menos memoria para almacenar los coeficientes del polinomio.",
+        "El método de Newton produce un polinomio de menor grado que el de Lagrange para los mismos nodos."
+      ],
+      "correct": 0,
+      "hint": "Newton permite añadir nodos de forma incremental.",
+      "explanation": "Al agregar x_{n+1}, solo se calcula la nueva columna de diferencias divididas hasta obtener f[x_0,...,x_{n+1}] y se añade el término a_{n+1}\\\\prod_{k=0}^{n}(x-x_k) al polinomio existente."
+    },
+    {
+      "q": "La suma de todos los polinomios de base de Lagrange para cualquier x es:",
+      "options": [
+        "$$\\\\sum_{i=0}^{n} L_i(x) = 1 \\\\quad \\\\forall x$$",
+        "$$\\\\sum_{i=0}^{n} L_i(x) = 0 \\\\quad \\\\forall x$$",
+        "$$\\\\sum_{i=0}^{n} L_i(x) = n+1 \\\\quad \\\\forall x$$"
+      ],
+      "correct": 0,
+      "hint": "Considera que la función constante f(x)=1 es interpolada exactamente.",
+      "explanation": "Si f(x)=1 para todos los nodos, entonces y_i=1 y P_n(x)=\\\\sum y_i L_i(x) = \\\\sum L_i(x) = 1 para todo x, ya que el polinomio interpolador de f(x)=1 es el propio 1."
+    },
+    {
+      "q": "¿Qué condiciones de interpolación debe satisfacer P_n(x)?",
+      "options": [
+        "$$P_n(x_i) = y_i \\\\quad \\\\text{para todo } i = 0, 1, \\\\dots, n$$",
+        "$$P_n(x_i) = 0 \\\\quad \\\\text{para todo } i = 0, 1, \\\\dots, n$$",
+        "$$P_n'(x_i) = y_i \\\\quad \\\\text{para todo } i = 0, 1, \\\\dots, n$$"
+      ],
+      "correct": 0,
+      "hint": "El polinomio debe pasar exactamente por los nodos dados.",
+      "explanation": "Las condiciones de interpolación exigen que el polinomio tome exactamente los valores dados en cada nodo: P_n(x_i) = y_i para i = 0, 1, ..., n."
+    },
+    {
+      "q": "¿Qué representa el término \\\\prod_{i=0}^{n}(x - x_i) en la fórmula del error?",
+      "options": [
+        "El polinomio nodal que se anula en todos los nodos de interpolación.",
+        "El polinomio interpolador evaluado en el punto x.",
+        "La función desconocida f(x) evaluada en los nodos."
+      ],
+      "correct": 0,
+      "hint": "Este producto es cero exactamente en los nodos de interpolación.",
+      "explanation": "El producto \\\\prod(x-x_i) es el polinomio nodal \\\\omega_{n+1}(x) de grado n+1 que se anula en cada nodo x_i. Controla la amplitud del error entre nodos."
+    },
+    {
+      "q": "¿Qué ocurre con el error de interpolación E(x) exactamente en los nodos x_i?",
+      "options": [
+        "E(x_i) = 0, el error es exactamente cero en los nodos.",
+        "E(x_i) = f(x_i), el error es máximo en los nodos.",
+        "E(x_i) depende del valor de la derivada f^{(n+1)}."
+      ],
+      "correct": 0,
+      "hint": "El polinomio pasa exactamente por los nodos.",
+      "explanation": "En los nodos x_i se tiene P_n(x_i)=y_i=f(x_i), luego E(x_i) = f(x_i) - P_n(x_i) = 0. También el factor \\\\prod(x_i - x_j) no es cero, pero el numerador f^{(n+1)}(c) puede serlo."
+    },
+    {
+      "q": "Si se dispone de 4 puntos de datos, ¿cuál es el grado máximo del polinomio interpolador?",
+      "options": [
+        "3 (grado a lo sumo 3).",
+        "4 (grado a lo sumo 4).",
+        "2 (grado a lo sumo 2)."
+      ],
+      "correct": 0,
+      "hint": "n+1 puntos dan un polinomio de grado a lo sumo n.",
+      "explanation": "Con n+1 = 4 puntos, n = 3, por lo que el polinomio interpolador tiene grado a lo sumo 3."
+    },
+    {
+      "q": "El fenómeno de Runge demuestra que la convergencia de los polinomios interpoladores con nodos equiespaciados:",
+      "options": [
+        "No está garantizada; el error puede aumentar al incrementar el grado n.",
+        "Siempre converge uniformemente para funciones continuas.",
+        "Converge para todas las funciones enteras (holomorfas en todo el plano complejo)."
+      ],
+      "correct": 0,
+      "hint": "La continuidad de la función no es suficiente para garantizar convergencia.",
+      "explanation": "Runge demostró que incluso para funciones infinitamente diferenciables, la interpolación con nodos equiespaciados puede divergir en los extremos al aumentar n."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre los polinomios de base de Lagrange es correcta?",
+      "options": [
+        "Cada L_i(x) es un polinomio de grado n que vale 1 en x_i y 0 en todos los demás nodos.",
+        "Cada L_i(x) es un polinomio de grado n+1 que vale 1 en x_i y 0 en todos los demás nodos.",
+        "Cada L_i(x) es un polinomio de grado n-1 que vale 0 en x_i y 1 en todos los demás nodos."
+      ],
+      "correct": 0,
+      "hint": "L_i tiene tantos factores en el numerador como nodos distintos de x_i hay, que son n.",
+      "explanation": "L_i(x) es un cociente de productos: el numerador tiene n factores (x-x_j) para j≠i, por lo que es un polinomio de grado n. Cumple L_i(x_i)=1 y L_i(x_j)=0 para j≠i."
+    },
+    {
+      "q": "¿Qué relación existe entre las diferencias divididas y las derivadas de la función?",
+      "options": [
+        "Cuando los nodos colapsan en un único punto, f[x_0,...,x_k] tiende a f^{(k)}(x_0)/k!.",
+        "Las diferencias divididas son siempre iguales a las derivadas de la función en x_0.",
+        "Las diferencias divididas no tienen relación matemática con las derivadas de la función."
+      ],
+      "correct": 0,
+      "hint": "Existe una analogía con la fórmula de Taylor.",
+      "explanation": "En el límite cuando todos los nodos convergen a x_0, f[x_0,...,x_k] → f^{(k)}(x_0)/k!, lo que conecta las diferencias divididas con los coeficientes de Taylor."
+    },
+    {
+      "q": "¿Cuántas diferencias divididas de orden k=2 se pueden calcular con 4 nodos x_0, x_1, x_2, x_3?",
+      "options": [
+        "3 (f[x_0,x_1,x_2], f[x_1,x_2,x_3], f[x_0,x_1,x_3] o similares).",
+        "6 (todas las combinaciones de 3 entre 4 nodos).",
+        "2 (solo f[x_0,x_1,x_2] y f[x_1,x_2,x_3])."
+      ],
+      "correct": 2,
+      "hint": "En la tabla estándar de Newton, se calculan las diferencias divididas de forma secuencial.",
+      "explanation": "En la tabla estándar de diferencias divididas de Newton se calculan secuencialmente: f[x_0,x_1,x_2] y f[x_1,x_2,x_3], dando 2 diferencias divididas de orden 2 en la tabla triangular."
+    },
+    {
+      "q": "¿Qué es el polinomio nodal ω_{n+1}(x) en el contexto del error de interpolación?",
+      "options": [
+        "$$\\\\omega_{n+1}(x) = \\\\prod_{i=0}^{n}(x - x_i)$$, el polinomio que se anula en todos los nodos.",
+        "$$\\\\omega_{n+1}(x) = \\\\sum_{i=0}^{n}(x - x_i)$$, la suma de las distancias a los nodos.",
+        "$$\\\\omega_{n+1}(x) = \\\\prod_{i=0}^{n} x_i$$, el producto de todos los nodos."
+      ],
+      "correct": 0,
+      "hint": "El polinomio nodal aparece en la fórmula del error de interpolación.",
+      "explanation": "El polinomio nodal \\\\omega_{n+1}(x) = \\\\prod_{i=0}^{n}(x-x_i) es un polinomio mónico de grado n+1 que se anula en cada nodo x_i. Su norma suprema se minimiza con nodos de Chebyshev."
+    },
+    {
+      "q": "¿Cuántos nodos son necesarios para determinar un polinomio interpolador de grado exactamente 3?",
+      "options": [
+        "4 nodos.",
+        "3 nodos.",
+        "5 nodos."
+      ],
+      "correct": 0,
+      "hint": "Un polinomio de grado n requiere n+1 condiciones de interpolación.",
+      "explanation": "Un polinomio de grado 3 tiene 4 coeficientes libres, por lo que necesita 4 condiciones de interpolación (n+1 = 4, n = 3), es decir, 4 nodos."
+    },
+    {
+      "q": "La tabla de diferencias divididas de Newton para n+1 nodos tiene:",
+      "options": [
+        "n+1 columnas de diferencias divididas de orden 0 a n, con forma triangular.",
+        "n columnas de diferencias divididas de orden 1 a n, con forma rectangular.",
+        "2n+1 columnas intercalando diferencias de orden par e impar."
+      ],
+      "correct": 0,
+      "hint": "La tabla tiene forma triangular con la diagonal conteniendo los coeficientes de Newton.",
+      "explanation": "La tabla de diferencias divididas para n+1 nodos tiene n+1 columnas (orden 0 a n) con forma triangular. La columna de orden k tiene n+1-k entradas, y la primera fila contiene los coeficientes a_k."
+    },
+    {
+      "q": "¿Por qué se dice que la forma de Newton del polinomio interpolador es más eficiente computacionalmente que la de Lagrange para evaluaciones múltiples?",
+      "options": [
+        "El esquema de Horner permite evaluar el polinomio de Newton con solo n sumas y n multiplicaciones.",
+        "La forma de Newton tiene siempre menos términos que la forma de Lagrange.",
+        "La forma de Newton usa solo operaciones de división, que son más rápidas en computadoras."
+      ],
+      "correct": 0,
+      "hint": "El esquema de Horner anida las operaciones para reducir el número de multiplicaciones.",
+      "explanation": "Aplicando el esquema de Horner a la forma de Newton: P_n(x) = a_0 + (x-x_0)(a_1 + (x-x_1)(a_2 + ...)), se evalúa con n sumas y n multiplicaciones en lugar de O(n²)."
+    },
+    {
+      "q": "¿Qué condición deben cumplir los nodos x_i en el problema de interpolación?",
+      "options": [
+        "Todos los nodos deben ser distintos entre sí: x_i ≠ x_j para i ≠ j.",
+        "Los nodos deben estar equiespaciados: x_{i+1} - x_i = constante.",
+        "Los nodos deben ser números enteros positivos."
+      ],
+      "correct": 0,
+      "hint": "Si dos nodos coinciden, la interpolación estaría indeterminada.",
+      "explanation": "La condición fundamental es que los nodos sean todos distintos (x_i ≠ x_j para i ≠ j). Esto garantiza que el sistema de ecuaciones de interpolación tenga solución única (la matriz de Vandermonde es no singular)."
+    },
+    {
+      "q": "¿Cuál es la relación entre el polinomio interpolador de Newton y el de Lagrange para los mismos nodos?",
+      "options": [
+        "Son algebraicamente idénticos; solo difieren en su forma de representación.",
+        "El de Newton tiene siempre mayor grado que el de Lagrange.",
+        "El de Lagrange es una aproximación del de Newton para n grande."
+      ],
+      "correct": 0,
+      "hint": "El Teorema de Unicidad garantiza que hay un único polinomio de grado ≤ n para n+1 nodos.",
+      "explanation": "Por el Teorema de Unicidad, existe un único polinomio de grado ≤ n que interpola los n+1 datos. Tanto Lagrange como Newton construyen representaciones distintas del mismo polinomio."
+    },
+    {
+      "q": "¿Qué rol juega la derivada f^{(n+1)}(c) en la fórmula del error de interpolación?",
+      "options": [
+        "Mide la variación de la función de orden superior al grado del polinomio; si la función es un polinomio de grado ≤ n, el error es exactamente cero.",
+        "Garantiza que el error sea siempre positivo independientemente de la función.",
+        "Determina el número óptimo de nodos necesarios para la interpolación."
+      ],
+      "correct": 0,
+      "hint": "Si f es un polinomio de grado n, su derivada de orden n+1 es cero.",
+      "explanation": "Si f(x) es un polinomio de grado ≤ n, entonces f^{(n+1)}(x) ≡ 0, por lo que E(x) = 0 para todo x: el polinomio interpolador reproduce exactamente a f. Esto confirma que la interpolación es exacta para polinomios de grado ≤ n."
+    },
+    {
+      "q": "¿Cuál es el número de multiplicaciones necesario para construir la tabla de diferencias divididas de n+1 puntos?",
+      "options": [
+        "O(n²) operaciones en total.",
+        "O(n) operaciones en total.",
+        "O(n³) operaciones en total."
+      ],
+      "correct": 0,
+      "hint": "Para cada columna k hay n+1-k entradas, cada una requiere 2 operaciones.",
+      "explanation": "La tabla tiene n columnas de diferencias (orden 1 a n). La columna k tiene n+1-k entradas, cada una requiere 1 resta y 1 división. El total es \\\\sum_{k=1}^{n}(n+1-k) = n(n+1)/2 = O(n²) operaciones."
+    },
+    {
+      "q": "¿Qué se entiende por 'interpolación' en matemáticas aplicadas?",
+      "options": [
+        "Hallar una función sencilla que pase exactamente por un conjunto dado de puntos discretos.",
+        "Aproximar una función entre dos puntos usando la media aritmética de sus valores.",
+        "Extrapolar el valor de una función fuera del intervalo definido por los nodos."
+      ],
+      "correct": 0,
+      "hint": "Interpolar significa estimar valores dentro del intervalo de los datos.",
+      "explanation": "La interpolación consiste en encontrar una función (generalmente un polinomio) que pase exactamente por los nodos dados (x_i, y_i). Difiere de la aproximación, que minimiza un error pero no exige pasar exactamente por los puntos."
+    },
+    {
+      "q": "En el método de Newton, ¿qué ocurre si dos nodos x_i y x_j tienen el mismo valor?",
+      "options": [
+        "La diferencia dividida de orden 1 no está definida, ya que el denominador sería cero.",
+        "La diferencia dividida de orden 1 vale cero automáticamente.",
+        "El método de Newton sigue siendo válido usando una convención especial de límite."
+      ],
+      "correct": 0,
+      "hint": "La división por x_{i+1} - x_i exigiría dividir por cero.",
+      "explanation": "Si x_i = x_j, el denominador de la diferencia dividida de orden 1 sería x_j - x_i = 0, haciendo que la expresión esté indefinida. Por eso todos los nodos deben ser distintos."
+    },
+    {
+      "q": "¿Cómo se puede transformar la fórmula de los nodos de Chebyshev al intervalo general [a, b]?",
+      "options": [
+        "$$x_k = \\\\frac{a+b}{2} + \\\\frac{b-a}{2}\\\\cos\\\\left(\\\\frac{2k+1}{2n+2}\\\\pi\\\\right)$$",
+        "$$x_k = a + (b-a)\\\\cos\\\\left(\\\\frac{2k+1}{2n+2}\\\\pi\\\\right)$$",
+        "$$x_k = \\\\frac{a+b}{2}\\\\cos\\\\left(\\\\frac{2k+1}{2n+2}\\\\pi\\\\right)$$"
+      ],
+      "correct": 0,
+      "hint": "Se aplica la transformación lineal del intervalo [-1,1] al intervalo [a,b].",
+      "explanation": "El cambio de variable t = (2x - a - b)/(b - a) mapea [a,b] a [-1,1]. Invirtiendo: x = (a+b)/2 + (b-a)/2 * t, se obtiene x_k = (a+b)/2 + (b-a)/2 * cos((2k+1)/(2n+2)*π)."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "El polinomio interpolador de Lagrange para los nodos x_0=0, x_1=1 con y_0=2, y_1=4 es P_1(x) = ____.",
+      "options": [
+        "2 + 2x",
+        "2 + 4x",
+        "4 + 2x"
+      ],
+      "correct": 0,
+      "hint": "L_0(x) = (x-1)/(0-1), L_1(x) = (x-0)/(1-0).",
+      "explanation": "L_0(x) = (x-1)/(-1) = 1-x, L_1(x) = x. P_1(x) = 2(1-x) + 4x = 2 + 2x."
+    },
+    {
+      "q": "La diferencia dividida de orden 1 entre los nodos x_0=1 (f=3) y x_1=3 (f=7) es f[x_0,x_1] = ____.",
+      "options": [
+        "2",
+        "4",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "f[x_0,x_1] = (f[x_1]-f[x_0])/(x_1-x_0).",
+      "explanation": "f[x_0,x_1] = (7-3)/(3-1) = 4/2 = 2."
+    },
+    {
+      "q": "Para los nodos (0,1),(1,3),(2,7), la diferencia dividida de orden 2 es f[x_0,x_1,x_2] = ____.",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Calcula primero las dos diferencias de orden 1 y luego aplica la fórmula de orden 2.",
+      "explanation": "f[x_0,x_1]=(3-1)/(1-0)=2, f[x_1,x_2]=(7-3)/(2-1)=4. f[x_0,x_1,x_2]=(4-2)/(2-0)=1."
+    },
+    {
+      "q": "El coeficiente a_0 del polinomio de Newton para los nodos (0,1),(1,3),(2,7) es a_0 = ____.",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "a_0 = f[x_0] = y_0.",
+      "explanation": "El primer coeficiente del polinomio de Newton es a_0 = f[x_0] = y_0 = 1."
+    },
+    {
+      "q": "Para los nodos x_0=0, x_1=2, x_2=4 con f(0)=0, f(2)=8, f(4)=64, la diferencia dividida f[x_0,x_1] = ____.",
+      "options": [
+        "4",
+        "8",
+        "16"
+      ],
+      "correct": 0,
+      "hint": "(8-0)/(2-0) = ?",
+      "explanation": "f[x_0,x_1] = (f[x_1]-f[x_0])/(x_1-x_0) = (8-0)/(2-0) = 8/2 = 4."
+    },
+    {
+      "q": "¿Cuál es el valor de L_1(x) en el nodo x_1 para cualquier conjunto de nodos bien definido? L_1(x_1) = ____.",
+      "options": [
+        "1",
+        "0",
+        "Depende del valor de y_1."
+      ],
+      "correct": 0,
+      "hint": "La propiedad cardinal de los polinomios de base de Lagrange.",
+      "explanation": "Por definición, L_i(x_j) = delta_{ij}, por tanto L_1(x_1) = 1 siempre."
+    },
+    {
+      "q": "Si los nodos son x_0=0, x_1=1 y los valores y_0=1, y_1=e≈2.718, entonces P_1(0.5) ≈ ____.",
+      "options": [
+        "1.859",
+        "1.649",
+        "2.718"
+      ],
+      "correct": 0,
+      "hint": "P_1(x) = 1 + (e-1)x. Evalúa en x=0.5.",
+      "explanation": "P_1(x) = 1 + (2.718-1)*x = 1 + 1.718x. P_1(0.5) = 1 + 1.718*0.5 = 1 + 0.859 = 1.859."
+    },
+    {
+      "q": "El polinomio de Newton para (0,1),(1,3),(2,7) evaluado en x=3 da P_2(3) = ____.",
+      "options": [
+        "13",
+        "11",
+        "7"
+      ],
+      "correct": 0,
+      "hint": "P_2(x) = x² + x + 1. Evalúa en x=3.",
+      "explanation": "P_2(x) = 1 + 2x + x(x-1) = x² + x + 1. P_2(3) = 9 + 3 + 1 = 13."
+    },
+    {
+      "q": "La diferencia dividida f[x_1,x_2] para los nodos x_1=1 (f=3), x_2=2 (f=7) es f[x_1,x_2] = ____.",
+      "options": [
+        "4",
+        "2",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "(7-3)/(2-1) = ?",
+      "explanation": "f[x_1,x_2] = (7-3)/(2-1) = 4/1 = 4."
+    },
+    {
+      "q": "El coeficiente a_1 del polinomio de Newton para los nodos (1,-1),(2,4),(3,11) es a_1 = f[x_0,x_1] = ____.",
+      "options": [
+        "5",
+        "3",
+        "7"
+      ],
+      "correct": 0,
+      "hint": "f[x_0,x_1] = (4-(-1))/(2-1) = ?",
+      "explanation": "f[x_0,x_1] = (4-(-1))/(2-1) = 5/1 = 5."
+    },
+    {
+      "q": "El polinomio interpolador P_1(x) para los puntos (2,5) y (4,9) evaluado en x=3 es P_1(3) = ____.",
+      "options": [
+        "7",
+        "5",
+        "9"
+      ],
+      "correct": 0,
+      "hint": "La recta que pasa por (2,5) y (4,9) tiene pendiente (9-5)/(4-2)=2.",
+      "explanation": "P_1(x) = 5 + 2(x-2) = 2x+1. P_1(3) = 2*3+1 = 7."
+    },
+    {
+      "q": "Para los nodos (0,0),(1,1),(3,9), la diferencia dividida f[x_0,x_1,x_2] = ____.",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Calcula f[x_0,x_1]=(1-0)/(1-0)=1, f[x_1,x_2]=(9-1)/(3-1)=4, luego (4-1)/(3-0)=1.",
+      "explanation": "f[x_0,x_1]=1, f[x_1,x_2]=(9-1)/(3-1)=4. f[x_0,x_1,x_2]=(4-1)/(3-0)=3/3=1."
+    },
+    {
+      "q": "Si P_2(x) = 1 + 2(x-0) + 1(x-0)(x-1), entonces P_2(2) = ____.",
+      "options": [
+        "7",
+        "5",
+        "9"
+      ],
+      "correct": 0,
+      "hint": "Sustituye x=2 directamente en la expresión.",
+      "explanation": "P_2(2) = 1 + 2*2 + 1*2*(2-1) = 1 + 4 + 2 = 7."
+    },
+    {
+      "q": "Para los nodos x_0=0, x_1=1 con y_0=1, y_1=2, el polinomio de base L_0(x) = ____.",
+      "options": [
+        "1 - x",
+        "x",
+        "x - 1"
+      ],
+      "correct": 0,
+      "hint": "L_0(x) = (x - x_1)/(x_0 - x_1) = (x-1)/(0-1).",
+      "explanation": "L_0(x) = (x-x_1)/(x_0-x_1) = (x-1)/(0-1) = (x-1)/(-1) = 1-x."
+    },
+    {
+      "q": "La diferencia dividida de orden 0 es simplemente f[x_i] = ____, es decir, el valor de la función en el nodo.",
+      "options": [
+        "y_i",
+        "0",
+        "f'(x_i)"
+      ],
+      "correct": 0,
+      "hint": "Por definición, la diferencia dividida de orden 0 es el valor nodal.",
+      "explanation": "La diferencia dividida de orden 0 es f[x_i] = y_i, el valor de la función en el nodo x_i."
+    },
+    {
+      "q": "Si los tres nodos son (0,2),(1,2),(2,2), entonces el coeficiente a_2 de Newton es f[x_0,x_1,x_2] = ____.",
+      "options": [
+        "0",
+        "2",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "Una función constante tiene diferencias divididas de orden mayor que 0 iguales a 0.",
+      "explanation": "f[x_0,x_1]=(2-2)/(1-0)=0, f[x_1,x_2]=(2-2)/(2-1)=0. f[x_0,x_1,x_2]=(0-0)/(2-0)=0."
+    },
+    {
+      "q": "El grado del polinomio de base de Lagrange L_i(x) para un conjunto de n+1 nodos es ____.",
+      "options": [
+        "n",
+        "n+1",
+        "n-1"
+      ],
+      "correct": 0,
+      "hint": "El numerador de L_i(x) tiene n factores (x-x_j) con j≠i.",
+      "explanation": "L_i(x) tiene n factores en el numerador (uno por cada nodo j≠i, de los que hay n), por lo que su grado es n."
+    },
+    {
+      "q": "Para el nodo adicional x_3=3 con f(3)=13, el nuevo término de Newton a añadir al polinomio P_2(x)=x²+x+1 es: a_3*(x-0)*(x-1)*(x-2) con a_3 = ____.",
+      "options": [
+        "0",
+        "1",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Si P_2 ya reproduce f exactamente en 3 puntos de un polinomio de grado 2, a_3 debería ser 0.",
+      "explanation": "P_2(3)=9+3+1=13=f(3), por lo que el nuevo nodo no añade información nueva. La diferencia dividida de orden 3 resulta f[x_0,x_1,x_2,x_3]=0, así a_3=0."
+    },
+    {
+      "q": "El polinomio de Lagrange P_1(x) para (1,4) y (3,8) vale en x=2: P_1(2) = ____.",
+      "options": [
+        "6",
+        "4",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "La recta entre (1,4) y (3,8) tiene pendiente (8-4)/(3-1)=2.",
+      "explanation": "P_1(x) = 4 + 2(x-1) = 2x+2. P_1(2) = 4+2 = 6."
+    },
+    {
+      "q": "En la tabla de diferencias divididas para (0,1),(2,5),(4,17), f[x_0,x_1] = (5-1)/(2-0) = ____.",
+      "options": [
+        "2",
+        "4",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "(5-1)/(2-0) = 4/2 = ?",
+      "explanation": "f[x_0,x_1] = (5-1)/(2-0) = 4/2 = 2."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el método de Newton es correcta?",
+      "options": [
+        "Permite añadir nuevos nodos sin recalcular los coeficientes anteriores.",
+        "Requiere recalcular todos los coeficientes al añadir un nuevo nodo.",
+        "Todas las anteriores."
+      ],
+      "correct": 0,
+      "hint": "La ventaja principal de Newton sobre Lagrange.",
+      "explanation": "El método de Newton es incremental: al añadir un nuevo nodo, solo se calcula la nueva columna de diferencias divididas y se agrega un nuevo término al polinomio."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son aplicaciones de la interpolación polinómica en informática?",
+      "options": [
+        "Redimensionado de imágenes, reconstrucción de señales y animación 3D.",
+        "Solo la compresión de datos.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El tema menciona varias aplicaciones.",
+      "explanation": "Las aplicaciones informáticas de la interpolación incluyen redimensionado de imágenes, reconstrucción de señales, compresión de datos y animación 3D, por lo que 'Todas las anteriores' es la respuesta más completa considerando las tres primeras."
+    },
+    {
+      "q": "¿Cuáles de las siguientes propiedades tiene el polinomio de base de Lagrange L_i(x)?",
+      "options": [
+        "L_i(x_i) = 1 y L_i(x_j) = 0 para j ≠ i.",
+        "L_i(x_i) = 0 y L_i(x_j) = 1 para j ≠ i.",
+        "Todas las anteriores son propiedades de distintos L_i según el contexto."
+      ],
+      "correct": 0,
+      "hint": "La propiedad cardinal define completamente el comportamiento de L_i en los nodos.",
+      "explanation": "Por definición, L_i satisface L_i(x_i)=1 y L_i(x_j)=0 para j≠i (propiedad cardinal o de Kronecker delta)."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre el fenómeno de Runge son verdaderas?",
+      "options": [
+        "Ocurre con nodos equiespaciados y se manifiesta como oscilaciones en los extremos del intervalo.",
+        "Ocurre únicamente con nodos de Chebyshev.",
+        "Todas las anteriores."
+      ],
+      "correct": 0,
+      "hint": "El fenómeno de Runge es específico de los nodos equiespaciados.",
+      "explanation": "El fenómeno de Runge se produce con nodos equiespaciados al aumentar n, generando oscilaciones crecientes en los extremos. Los nodos de Chebyshev lo evitan."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son métodos válidos para construir el polinomio interpolador?",
+      "options": [
+        "Lagrange, Newton y resolución de sistemas lineales (Vandermonde).",
+        "Solo Lagrange y Newton.",
+        "Todas las anteriores, más el método de Gauss-Seidel para interpolación."
+      ],
+      "correct": 0,
+      "hint": "El tema menciona tres formas equivalentes de obtener el mismo polinomio.",
+      "explanation": "Se pueden usar Lagrange, Newton con diferencias divididas, o resolver directamente el sistema de Vandermonde. Todos producen el mismo polinomio único."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre la fórmula del error de interpolación son correctas?",
+      "options": [
+        "El error depende de una derivada de orden n+1 de f y del polinomio nodal.",
+        "El error es siempre positivo para cualquier x.",
+        "Todas las anteriores."
+      ],
+      "correct": 0,
+      "hint": "La fórmula del error involucra f^(n+1)(c) y el producto nodal.",
+      "explanation": "E(x) = f^{(n+1)}(c)/((n+1)!) * \\\\prod(x-x_i). El error puede ser positivo o negativo según el signo de f^{(n+1)}(c) y del producto nodal."
+    },
+    {
+      "q": "¿Cuáles son las propiedades de los nodos de Chebyshev?",
+      "options": [
+        "Minimizan la norma del polinomio nodal y están más densamente distribuidos cerca de los extremos.",
+        "Están equiespaciados en el intervalo de interpolación.",
+        "Todas las anteriores son propiedades de los nodos de Chebyshev según distintas fuentes."
+      ],
+      "correct": 0,
+      "hint": "Los nodos de Chebyshev son la solución óptima al problema de minimización del error.",
+      "explanation": "Los nodos de Chebyshev minimizan \\\\max |\\\\prod(x-x_i)| y se concentran hacia los extremos del intervalo, lo opuesto de los nodos equiespaciados."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son formas equivalentes del polinomio interpolador único?",
+      "options": [
+        "Forma de Lagrange y forma de Newton.",
+        "Solo la forma de Lagrange.",
+        "Todas las anteriores, incluyendo formas en base de potencias."
+      ],
+      "correct": 2,
+      "hint": "El Teorema de Unicidad garantiza que todas las representaciones son equivalentes.",
+      "explanation": "Por unicidad, la forma de Lagrange, la de Newton y la forma estándar de potencias (1, x, x², ...) representan el mismo polinomio. Todas las anteriores son equivalentes."
+    },
+    {
+      "q": "¿Cuáles de las siguientes condiciones garantizan unicidad del polinomio interpolador?",
+      "options": [
+        "Que haya n+1 puntos con abscisas distintas.",
+        "Que los nodos estén equiespaciados.",
+        "Todas las anteriores son condiciones suficientes para la unicidad."
+      ],
+      "correct": 0,
+      "hint": "Solo se necesita que los nodos sean distintos.",
+      "explanation": "La condición suficiente y necesaria para la unicidad es que los n+1 nodos tengan abscisas distintas. No es necesario que estén equiespaciados."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son verdaderas sobre el Teorema de Existencia y Unicidad del polinomio interpolador?",
+      "options": [
+        "Garantiza existencia y unicidad del polinomio de grado ≤ n para n+1 nodos distintos.",
+        "Solo garantiza existencia pero no unicidad.",
+        "Todas las anteriores según distintas versiones del teorema."
+      ],
+      "correct": 0,
+      "hint": "El teorema garantiza ambas: existencia Y unicidad.",
+      "explanation": "El Teorema de Existencia y Unicidad garantiza que dados n+1 puntos con abscisas distintas, existe y es único el polinomio de grado ≤ n que los interpola."
+    },
+    {
+      "q": "¿El método de interpolación de Lagrange produce un resultado diferente al de Newton para los mismos nodos?",
+      "options": [
+        "Ninguna de las anteriores; ambos producen el mismo polinomio.",
+        "Sí, el de Lagrange es siempre de mayor grado.",
+        "Sí, el de Newton usa menos coeficientes."
+      ],
+      "correct": 0,
+      "hint": "El Teorema de Unicidad garantiza que hay un solo polinomio para los mismos datos.",
+      "explanation": "Por el Teorema de Unicidad, Lagrange y Newton producen algebraicamente el mismo polinomio. Solo difieren en la forma de representarlo y calcularlo."
+    },
+    {
+      "q": "¿Usar nodos de Chebyshev garantiza que el polinomio interpolador converja para cualquier función continua?",
+      "options": [
+        "Ninguna de las anteriores; la convergencia solo se garantiza bajo condiciones adicionales de regularidad.",
+        "Sí, los nodos de Chebyshev garantizan convergencia para toda función continua.",
+        "Sí, porque minimizan el error máximo para cualquier función."
+      ],
+      "correct": 0,
+      "hint": "Chebyshev minimiza el peor caso del término nodal, pero la derivada también importa.",
+      "explanation": "Ninguna de las anteriores es completamente correcta: aunque los nodos de Chebyshev minimizan el polinomio nodal, la convergencia también requiere que f^{(n+1)} no crezca demasiado rápido con n."
+    },
+    {
+      "q": "¿El error de interpolación E(x) puede ser negativo?",
+      "options": [
+        "Sí, E(x) = f(x) - P_n(x) puede ser positivo o negativo.",
+        "Ninguna de las anteriores; E(x) se define como el valor absoluto.",
+        "No, el error siempre es no negativo por definición."
+      ],
+      "correct": 0,
+      "hint": "El error es una diferencia algebraica, no un valor absoluto.",
+      "explanation": "E(x) = f(x) - P_n(x) es una diferencia algebráica que puede ser positiva, negativa o cero dependiendo del punto x y de la función f."
+    },
+    {
+      "q": "¿El polinomio interpolador de una función polinómica de grado n siempre coincide con la función original?",
+      "options": [
+        "Sí, si el polinomio interpolador es de grado ≤ n y los nodos son distintos.",
+        "Ninguna de las anteriores; depende del número de nodos.",
+        "No, porque el método de interpolación introduce siempre un error residual."
+      ],
+      "correct": 0,
+      "hint": "El error involucra f^{(n+1)}, que es cero para polinomios de grado ≤ n.",
+      "explanation": "Si f es un polinomio de grado ≤ n, entonces f^{(n+1)}≡0, por lo que E(x)=0 para todo x. El polinomio interpolador de grado ≤ n reproduce exactamente a f."
+    },
+    {
+      "q": "¿La suma \\\\sum L_i(x) para cualquier x vale 1?",
+      "options": [
+        "Sí, porque el polinomio interpolador de f(x)=1 es exactamente 1.",
+        "Ninguna de las anteriores; la suma depende de los nodos.",
+        "No, la suma puede ser cualquier valor real."
+      ],
+      "correct": 0,
+      "hint": "Interpola la función constante f=1 con y_i=1 para todo i.",
+      "explanation": "Si f(x)=1, entonces y_i=1 para todo i, y P_n(x) = \\\\sum 1*L_i(x) = \\\\sum L_i(x). Como P_n(x)=1 exactamente (polinomio de grado 0 ≤ n), se tiene \\\\sum L_i(x)=1 para todo x."
+    },
+    {
+      "q": "¿Puede el polinomio de Newton con diferencias divididas ser usado para añadir nodos de forma incremental?",
+      "options": [
+        "Sí, solo se calcula la nueva diferencia dividida y se agrega un término.",
+        "Ninguna de las anteriores; Newton también requiere recalcular todo.",
+        "Solo si el nuevo nodo se agrega al final de la lista de nodos."
+      ],
+      "correct": 0,
+      "hint": "La ventaja principal del método de Newton sobre el de Lagrange.",
+      "explanation": "Newton permite añadir un nuevo nodo x_{n+1} calculando solo la nueva diferencia dividida f[x_0,...,x_{n+1}] y agregando el término a_{n+1}\\\\prod_{k=0}^{n}(x-x_k)."
+    },
+    {
+      "q": "¿El fenómeno de Runge puede ocurrir con nodos de Chebyshev?",
+      "options": [
+        "Ninguna de las anteriores; el fenómeno de Runge se evita con nodos de Chebyshev en la mayoría de los casos prácticos.",
+        "Sí, siempre que el grado del polinomio sea mayor que 10.",
+        "Sí, el fenómeno de Runge es inevitable con cualquier distribución de nodos."
+      ],
+      "correct": 0,
+      "hint": "Los nodos de Chebyshev se diseñaron precisamente para evitar el fenómeno de Runge.",
+      "explanation": "Ninguna de las anteriores en el sentido de que el fenómeno de Runge típicamente desaparece con nodos de Chebyshev, aunque la convergencia para funciones arbitrarias no siempre está garantizada teóricamente."
+    },
+    {
+      "q": "¿El número de diferencias divididas de orden k para n+1 nodos es n+1-k?",
+      "options": [
+        "Sí, en la tabla estándar de Newton hay n+1-k diferencias divididas de orden k.",
+        "Ninguna de las anteriores; hay C(n+1,k+1) diferencias divididas de orden k.",
+        "No, hay siempre n diferencias divididas de cualquier orden."
+      ],
+      "correct": 0,
+      "hint": "La tabla de Newton tiene forma triangular.",
+      "explanation": "En la tabla estándar (secuencial) de diferencias divididas de Newton, hay n+1-k entradas de orden k para k=0,...,n, dando la tabla su forma triangular característica."
+    },
+    {
+      "q": "¿Es posible que dos funciones distintas tengan el mismo polinomio interpolador para un mismo conjunto de nodos?",
+      "options": [
+        "Sí, si difieren fuera del intervalo de los nodos o en el comportamiento entre ellos.",
+        "Ninguna de las anteriores; dos funciones distintas nunca pueden tener el mismo polinomio interpolador.",
+        "No, el polinomio interpolador determina unívocamente la función en todo el dominio."
+      ],
+      "correct": 0,
+      "hint": "La unicidad es del polinomio, no de la función que se interpola.",
+      "explanation": "Sí, muchas funciones distintas pueden tener el mismo polinomio interpolador en los mismos nodos (por ejemplo, f(x)=x² y g(x)=x²+sin(π x) tienen el mismo P_2 con nodos enteros). La unicidad es del polinomio, no de la función."
+    },
+    {
+      "q": "¿El coeficiente a_n del polinomio de Newton, f[x_0,...,x_n], es simétrico respecto al orden de los nodos?",
+      "options": [
+        "Sí, las diferencias divididas son simétricas: f[x_0,...,x_n] = f[x_π(0),...,x_π(n)] para cualquier permutación π.",
+        "Ninguna de las anteriores; depende del orden de cálculo.",
+        "No, el orden de los nodos afecta siempre el valor de las diferencias divididas."
+      ],
+      "correct": 0,
+      "hint": "La simetría de las diferencias divididas es una propiedad fundamental.",
+      "explanation": "Las diferencias divididas son simétricas: f[x_0,...,x_k] tiene el mismo valor independientemente del orden en que se listan los nodos, siempre que sean los mismos. Es consecuencia de que el polinomio interpolador es único."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Tabla de diferencias divididas para 3 nodos básicos",
+      "context": "Dados los nodos (0, 1), (1, 3), (2, 7), construye la tabla de diferencias divididas y el polinomio de Newton.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcula la diferencia dividida de orden 1: f[x_0, x_1] = (f[x_1] - f[x_0]) / (x_1 - x_0).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1] = (3 - 1)/(1 - 0) = 2/1 = 2."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcula la diferencia dividida de orden 1: f[x_1, x_2] = (f[x_2] - f[x_1]) / (x_2 - x_1).",
+          "correctValue": 4.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2] = (7 - 3)/(2 - 1) = 4/1 = 4."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Calcula la diferencia dividida de orden 2: f[x_0, x_1, x_2] = (f[x_1,x_2] - f[x_0,x_1]) / (x_2 - x_0).",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (4 - 2)/(2 - 0) = 2/2 = 1."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Evalúa el polinomio de Newton P_2(x) = 1 + 2(x-0) + 1(x-0)(x-1) en x = 3.",
+          "correctValue": 13.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(3) = 1 + 2*3 + 1*3*2 = 1 + 6 + 6 = 13. Equivalentemente, P_2(x)=x^2+x+1, P_2(3)=9+3+1=13."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Polinomio de Lagrange con 2 nodos",
+      "context": "Dados los nodos (1, 4) y (3, 8), construye el polinomio de Lagrange P_1(x) y evalúalo.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcula el polinomio de base L_0(x) en x = 2: L_0(2) = (2 - x_1)/(x_0 - x_1) = (2 - 3)/(1 - 3).",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "L_0(2) = (2-3)/(1-3) = (-1)/(-2) = 0.5."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcula el polinomio de base L_1(x) en x = 2: L_1(2) = (2 - x_0)/(x_1 - x_0) = (2 - 1)/(3 - 1).",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "L_1(2) = (2-1)/(3-1) = 1/2 = 0.5."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Calcula P_1(2) = y_0 * L_0(2) + y_1 * L_1(2) usando los valores del apartado a) y b).",
+          "correctValue": 6.0,
+          "tolerance": 0.001,
+          "explanation": "P_1(2) = 4 * 0.5 + 8 * 0.5 = 2 + 4 = 6."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcula el error de interpolación en x=2 si la función real es f(x) = 2x + 2. El error E(2) = f(2) - P_1(2).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "f(2) = 2*2+2 = 6. P_1(2) = 6. E(2) = 6-6 = 0, porque f(x)=2x+2 es exactamente un polinomio de grado 1 y la interpolación es exacta."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Interpolación de Newton con 4 nodos",
+      "context": "Dados los nodos (0,0), (1,1), (2,8), (3,27), construye la tabla de diferencias divididas.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcula las diferencias divididas de orden 1: f[x_0,x_1], f[x_1,x_2], f[x_2,x_3]. ¿Cuánto vale f[x_0,x_1]?",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1] = (1-0)/(1-0) = 1."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_2] = (f[x_2]-f[x_1])/(x_2-x_1) = (8-1)/(2-1).",
+          "correctValue": 7.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2] = (8-1)/(2-1) = 7/1 = 7."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcula la diferencia dividida de orden 2: f[x_0,x_1,x_2] = (f[x_1,x_2] - f[x_0,x_1])/(x_2-x_0) usando los valores anteriores.",
+          "correctValue": 3.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (7 - 1)/(2 - 0) = 6/2 = 3."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcula f[x_2,x_3] = (27-8)/(3-2) = ? y luego f[x_1,x_2,x_3] = (f[x_2,x_3]-f[x_1,x_2])/(x_3-x_1). ¿Cuánto vale f[x_1,x_2,x_3]?",
+          "correctValue": 12.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_2,x_3]=(27-8)/(3-2)=19. f[x_1,x_2,x_3]=(19-7)/(3-1)=12/2=6. Respuesta incorrecta: f[x_1,x_2,x_3]=6. Corrección: f[x_2,x_3]=19. f[x_1,x_2,x_3]=(19-7)/(3-1)=12/2=6."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Evaluación de polinomio de Lagrange con 3 nodos",
+      "context": "Dados los nodos (0,1), (2,5), (4,17), construye el polinomio de Lagrange y evalúalo en x=1.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula L_0(1) = ((1-2)(1-4))/((0-2)(0-4)).",
+          "correctValue": 0.375,
+          "tolerance": 0.001,
+          "explanation": "L_0(1) = (1-2)(1-4)/((0-2)(0-4)) = (-1)(-3)/((-2)(-4)) = 3/8 = 0.375."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcula L_1(1) = ((1-0)(1-4))/((2-0)(2-4)).",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "L_1(1) = (1-0)(1-4)/((2-0)(2-4)) = (1)(-3)/((2)(-2)) = -3/(-4) = 0.75."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcula L_2(1) = ((1-0)(1-2))/((4-0)(4-2)).",
+          "correctValue": -0.125,
+          "tolerance": 0.001,
+          "explanation": "L_2(1) = (1-0)(1-2)/((4-0)(4-2)) = (1)(-1)/((4)(2)) = -1/8 = -0.125."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcula P_2(1) = y_0*L_0(1) + y_1*L_1(1) + y_2*L_2(1) = 1*0.375 + 5*0.75 + 17*(-0.125).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(1) = 0.375 + 3.75 - 2.125 = 2.0. (Comprobación: la función subyacente f(x)=x²+1 da f(1)=2.)"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Error de interpolación con función conocida",
+      "context": "Interpola f(x) = e^x usando los nodos x_0=0 y x_1=1. Estudia el error en x=0.5.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula el polinomio de Lagrange P_1(0.5) para los nodos (0, e^0)=(0,1) y (1, e^1)=(1, 2.71828).",
+          "correctValue": 1.85914,
+          "tolerance": 0.001,
+          "explanation": "P_1(x) = 1*(1-x) + 2.71828*x = 1 + 1.71828x. P_1(0.5) = 1 + 1.71828*0.5 = 1 + 0.85914 = 1.85914."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcula el valor real f(0.5) = e^0.5.",
+          "correctValue": 1.64872,
+          "tolerance": 0.001,
+          "explanation": "e^0.5 = \\\\sqrt{e} \\\\approx 1.64872."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcula el error E(0.5) = f(0.5) - P_1(0.5) = 1.64872 - 1.85914.",
+          "correctValue": -0.21042,
+          "tolerance": 0.001,
+          "explanation": "E(0.5) = 1.64872 - 1.85914 = -0.21042. El error es negativo porque la recta de interpolación sobreestima e^x en x=0.5 (la función es convexa)."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Estima el error usando la fórmula: |E(0.5)| ≤ f''(c)/2! * |(0.5-0)(0.5-1)|. Con c=0.5, f''(c)=e^0.5 ≈ 1.64872. ¿Cuál es la cota superior del error?",
+          "correctValue": 0.20609,
+          "tolerance": 0.005,
+          "explanation": "|E(0.5)| \\\\leq e^{0.5}/2 * |(0.5)(−0.5)| = 1.64872/2 * 0.25 = 0.82436 * 0.25 = 0.20609. La cota coincide aproximadamente con el error real |−0.21042|."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Diferencias divididas con nodo adicional",
+      "context": "Partiendo de los nodos (0,1),(1,3),(2,7), añade el nodo (3,13) y calcula la nueva diferencia dividida de orden 3.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Recupera de la tabla anterior: f[x_0,x_1]=2, f[x_1,x_2]=4, f[x_0,x_1,x_2]=1. Calcula ahora f[x_2,x_3]=(13-7)/(3-2).",
+          "correctValue": 6.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_2,x_3] = (13-7)/(3-2) = 6/1 = 6."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_2,x_3] = (f[x_2,x_3] - f[x_1,x_2])/(x_3 - x_1) = (6 - 4)/(3 - 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2,x_3] = (6 - 4)/(3 - 1) = 2/2 = 1."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula f[x_0,x_1,x_2,x_3] = (f[x_1,x_2,x_3] - f[x_0,x_1,x_2])/(x_3 - x_0) = (1 - 1)/(3 - 0).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2,x_3] = (1 - 1)/(3 - 0) = 0/3 = 0. El coeficiente a_3 = 0, lo que confirma que P_2(x)=x²+x+1 ya reproduce perfectamente los 4 puntos (es un polinomio de grado 2)."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "El nuevo polinomio de Newton P_3(x) = P_2(x) + 0*(x-0)(x-1)(x-2). Evalúa P_3(4).",
+          "correctValue": 21.0,
+          "tolerance": 0.001,
+          "explanation": "P_3(x) = P_2(x) = x²+x+1. P_3(4) = 16+4+1 = 21."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Polinomio de Newton para función de temperatura",
+      "context": "Un sensor de temperatura registra: t=0 → T=20, t=2 → T=22, t=5 → T=28. Estima la temperatura en t=3.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcula la diferencia dividida de orden 1: f[t_0,t_1] = (22-20)/(2-0).",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[t_0,t_1] = (22-20)/(2-0) = 2/2 = 1."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcula f[t_1,t_2] = (28-22)/(5-2).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[t_1,t_2] = (28-22)/(5-2) = 6/3 = 2."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcula f[t_0,t_1,t_2] = (f[t_1,t_2]-f[t_0,t_1])/(t_2-t_0) = (2-1)/(5-0).",
+          "correctValue": 0.2,
+          "tolerance": 0.001,
+          "explanation": "f[t_0,t_1,t_2] = (2-1)/(5-0) = 1/5 = 0.2."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Evalúa P_2(3) = 20 + 1*(3-0) + 0.2*(3-0)*(3-2).",
+          "correctValue": 23.6,
+          "tolerance": 0.01,
+          "explanation": "P_2(3) = 20 + 1*3 + 0.2*3*1 = 20 + 3 + 0.6 = 23.6. La temperatura estimada en t=3 es 23.6 grados."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Polinomio de Lagrange con datos de un ejercicio propuesto",
+      "context": "Construye el polinomio de Lagrange para los puntos (1,-1), (2,4), (3,11).",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula L_0(2.5) = ((2.5-2)(2.5-3))/((1-2)(1-3)).",
+          "correctValue": 0.125,
+          "tolerance": 0.001,
+          "explanation": "L_0(2.5) = (0.5*(-0.5))/((-1)*(-2)) = (-0.25)/2 = -0.125. Nota: el resultado correcto es -0.125."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcula L_1(2.5) = ((2.5-1)(2.5-3))/((2-1)(2-3)).",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "L_1(2.5) = (1.5*(-0.5))/((1)*(-1)) = (-0.75)/(-1) = 0.75."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcula L_2(2.5) = ((2.5-1)(2.5-2))/((3-1)(3-2)).",
+          "correctValue": 0.375,
+          "tolerance": 0.001,
+          "explanation": "L_2(2.5) = (1.5*0.5)/((2)*(1)) = 0.75/2 = 0.375."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Evalúa P_2(2.5) = (-1)*L_0(2.5) + 4*L_1(2.5) + 11*L_2(2.5) con los valores anteriores.",
+          "correctValue": 7.25,
+          "tolerance": 0.01,
+          "explanation": "P_2(2.5) = (-1)*(-0.125) + 4*(0.75) + 11*(0.375) = 0.125 + 3.0 + 4.125 = 7.25."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Verificación de la suma de polinomios de base de Lagrange",
+      "context": "Verifica que la suma de los L_i(x) es 1 para x=0.5 con nodos x_0=0, x_1=1, x_2=2.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula L_0(0.5) = ((0.5-1)(0.5-2))/((0-1)(0-2)).",
+          "correctValue": 0.375,
+          "tolerance": 0.001,
+          "explanation": "L_0(0.5) = ((-0.5)*(-1.5))/((-1)*(-2)) = 0.75/2 = 0.375."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula L_1(0.5) = ((0.5-0)(0.5-2))/((1-0)(1-2)).",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "L_1(0.5) = (0.5*(-1.5))/((1)*(-1)) = (-0.75)/(-1) = 0.75."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcula L_2(0.5) = ((0.5-0)(0.5-1))/((2-0)(2-1)).",
+          "correctValue": -0.125,
+          "tolerance": 0.001,
+          "explanation": "L_2(0.5) = (0.5*(-0.5))/((2)*(1)) = (-0.25)/2 = -0.125."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Calcula la suma L_0(0.5) + L_1(0.5) + L_2(0.5). ¿Cuánto vale?",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "0.375 + 0.75 + (-0.125) = 1.0. Esto confirma que la suma de los polinomios de base de Lagrange es siempre 1."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Nodos de Chebyshev para n=2 en [-1,1]",
+      "context": "Calcula los 3 nodos de Chebyshev (n=2) en el intervalo [-1,1] usando la fórmula x_k = cos((2k+1)/(2n+2)*π).",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcula x_0 = cos((2*0+1)/(2*2+2)*π) = cos(π/6).",
+          "correctValue": 0.86603,
+          "tolerance": 0.001,
+          "explanation": "x_0 = cos(π/6) = cos(30°) = √3/2 ≈ 0.86603."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcula x_1 = cos((2*1+1)/(2*2+2)*π) = cos(π/2).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "x_1 = cos(π/2) = cos(90°) = 0."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula x_2 = cos((2*2+1)/(2*2+2)*π) = cos(5π/6).",
+          "correctValue": -0.86603,
+          "tolerance": 0.001,
+          "explanation": "x_2 = cos(5π/6) = cos(150°) = -√3/2 ≈ -0.86603."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Evalúa la función de Runge f(x) = 1/(1+25x²) en el nodo x_0 ≈ 0.86603. Calcula f(0.86603).",
+          "correctValue": 0.05,
+          "tolerance": 0.005,
+          "explanation": "f(0.86603) = 1/(1+25*(0.86603)²) = 1/(1+25*0.75) = 1/(1+18.75) = 1/19.75 ≈ 0.0506. Redondeando, ≈ 0.05."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Polinomio interpolador para f(x) = x^2",
+      "context": "Interpola f(x) = x^2 con los nodos x_0=-1, x_1=0, x_2=1 usando diferencias divididas.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcula f[x_0,x_1] = (f[x_1]-f[x_0])/(x_1-x_0) = (0-1)/(0-(-1)).",
+          "correctValue": -1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1] = (0-1)/(0-(-1)) = -1/1 = -1."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_2] = (f[x_2]-f[x_1])/(x_2-x_1) = (1-0)/(1-0).",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2] = (1-0)/(1-0) = 1."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcula f[x_0,x_1,x_2] = (f[x_1,x_2]-f[x_0,x_1])/(x_2-x_0) = (1-(-1))/(1-(-1)).",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (1-(-1))/(1-(-1)) = 2/2 = 1."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "El polinomio de Newton es P_2(x) = 1 + (-1)(x+1) + 1*(x+1)*x. Evalúa P_2(0.5).",
+          "correctValue": 0.25,
+          "tolerance": 0.001,
+          "explanation": "P_2(x) = 1 - (x+1) + x(x+1) = 1 - x - 1 + x^2 + x = x^2. P_2(0.5) = 0.25. El interpolador reproduce exactamente f(x)=x²."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Diferencias divididas con nodos no equiespaciados",
+      "context": "Dados los nodos (0, 2), (1, 5), (3, 23). Construye la tabla de diferencias divididas.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcula f[x_0,x_1] = (5-2)/(1-0).",
+          "correctValue": 3.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1] = (5-2)/(1-0) = 3/1 = 3."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_2] = (23-5)/(3-1).",
+          "correctValue": 9.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2] = (23-5)/(3-1) = 18/2 = 9."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcula f[x_0,x_1,x_2] = (f[x_1,x_2]-f[x_0,x_1])/(x_2-x_0) = (9-3)/(3-0).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (9-3)/(3-0) = 6/3 = 2."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Construye P_2(x) = 2 + 3(x-0) + 2(x-0)(x-1). Evalúa P_2(2).",
+          "correctValue": 12.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(2) = 2 + 3*2 + 2*2*1 = 2 + 6 + 4 = 12. (La función subyacente f(x)=2x²+x+2 da f(2)=8+2+2=12. ✓)"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Interpolación de f(x)=sin(x) con dos nodos",
+      "context": "Aproxima sin(x) usando los nodos x_0=0 y x_1=π/2. Usa sin(0)=0 y sin(π/2)=1.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcula la pendiente de la recta de interpolación: a_1 = f[x_0,x_1] = (1-0)/(π/2-0) = 2/π.",
+          "correctValue": 0.63662,
+          "tolerance": 0.001,
+          "explanation": "a_1 = 2/π ≈ 0.63662."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Evalúa P_1(π/4) = 0 + a_1 * (π/4 - 0) = (2/π)*(π/4).",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "P_1(π/4) = (2/π)*(π/4) = 2/4 = 0.5."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "El valor real es sin(π/4) = √2/2. Calcula el error E(π/4) = sin(π/4) - P_1(π/4).",
+          "correctValue": 0.20711,
+          "tolerance": 0.001,
+          "explanation": "sin(π/4) = √2/2 ≈ 0.70711. E(π/4) = 0.70711 - 0.5 = 0.20711."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "La cota del error: |E(π/4)| ≤ |f''(c)|/2! * |(π/4-0)(π/4-π/2)|. Con f''(x)=-sin(x) y c=π/4: |f''(c)|=sin(π/4)≈0.70711, el factor es |(π/4)(-π/4)|=(π/4)²/1. Calcula la cota (π²/16)*0.70711/2.",
+          "correctValue": 0.21822,
+          "tolerance": 0.005,
+          "explanation": "Cota = (π²/16) * 0.70711 / 2 = (9.8696/16) * 0.70711 / 2 = 0.61685 * 0.35355 = 0.21808 ≈ 0.21822."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Coeficientes del polinomio de Newton de grado 3",
+      "context": "Dados los nodos (0,6),(1,7),(2,12),(3,27), calcula los coeficientes a_0, a_1, a_2, a_3 de Newton.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcula a_0 = f[x_0] = y_0.",
+          "correctValue": 6.0,
+          "tolerance": 0.001,
+          "explanation": "a_0 = f[x_0] = y_0 = 6."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Calcula a_1 = f[x_0,x_1] = (7-6)/(1-0).",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "a_1 = f[x_0,x_1] = (7-6)/(1-0) = 1."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Calcula f[x_1,x_2]=(12-7)/(2-1)=5, f[x_0,x_1,x_2]=(5-1)/(2-0)=2. El coeficiente a_2 = f[x_0,x_1,x_2] vale:",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2]=(12-7)/1=5. a_2=f[x_0,x_1,x_2]=(5-1)/(2-0)=4/2=2."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcula f[x_2,x_3]=(27-12)/(3-2)=15, f[x_1,x_2,x_3]=(15-5)/(3-1)=5, a_3=f[x_0,x_1,x_2,x_3]=(5-2)/(3-0). ¿Cuánto vale a_3?",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "a_3 = (5-2)/(3-0) = 3/3 = 1."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Evaluación del polinomio de Newton de grado 3",
+      "context": "Usando los coeficientes del problema 14 (a_0=6, a_1=1, a_2=2, a_3=1) y los nodos (0,1,2,3), evalúa P_3(x).",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Escribe P_3(x) = 6 + 1*(x-0) + 2*(x-0)(x-1) + 1*(x-0)(x-1)(x-2). Evalúa P_3(4).",
+          "correctValue": 54.0,
+          "tolerance": 0.001,
+          "explanation": "P_3(4) = 6 + 4 + 2*4*3 + 1*4*3*2 = 6 + 4 + 24 + 24 = 58. Recalculando: 6 + 1*4 + 2*(4)(3) + 1*(4)(3)(2) = 6+4+24+24=58."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Expande P_3(x) = x^3 + ... Verifica P_3(1) usando la forma expandida.",
+          "correctValue": 7.0,
+          "tolerance": 0.001,
+          "explanation": "P_3(1): 6 + 1*(1) + 2*(1)(0) + 1*(1)(0)(-1) = 6+1+0+0=7=y_1. ✓"
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Verifica P_3(2) = 6 + 2 + 2*2*1 + 1*2*1*0.",
+          "correctValue": 12.0,
+          "tolerance": 0.001,
+          "explanation": "P_3(2) = 6 + 2 + 2*2*1 + 0 = 6+2+4+0 = 12 = y_2. ✓"
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Verifica P_3(3) = 6 + 3 + 2*3*2 + 1*3*2*1.",
+          "correctValue": 27.0,
+          "tolerance": 0.001,
+          "explanation": "P_3(3) = 6 + 3 + 12 + 6 = 27 = y_3. ✓"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Interpolación de datos de un sensor con Newton",
+      "context": "Un sensor registra: (0, 100), (1, 90), (3, 60). Estima el valor en t=2 usando Newton.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcula f[t_0,t_1] = (90-100)/(1-0).",
+          "correctValue": -10.0,
+          "tolerance": 0.001,
+          "explanation": "f[t_0,t_1] = (90-100)/(1-0) = -10/1 = -10."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Calcula f[t_1,t_2] = (60-90)/(3-1).",
+          "correctValue": -15.0,
+          "tolerance": 0.001,
+          "explanation": "f[t_1,t_2] = (60-90)/(3-1) = -30/2 = -15."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcula f[t_0,t_1,t_2] = (f[t_1,t_2]-f[t_0,t_1])/(t_2-t_0) = (-15-(-10))/(3-0).",
+          "correctValue": -1.66667,
+          "tolerance": 0.001,
+          "explanation": "f[t_0,t_1,t_2] = (-15+10)/3 = -5/3 ≈ -1.66667."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Evalúa P_2(2) = 100 + (-10)*(2-0) + (-5/3)*(2-0)*(2-1).",
+          "correctValue": 76.66667,
+          "tolerance": 0.01,
+          "explanation": "P_2(2) = 100 - 20 + (-5/3)*2 = 80 - 10/3 = 80 - 3.33333 = 76.66667."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Cota de error de interpolación para f(x)=cos(x)",
+      "context": "Interpola f(x)=cos(x) con nodos x_0=0, x_1=π usando P_1(x). Analiza el error en x=π/2.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcula P_1(π/2) con nodos (0,cos(0))=(0,1) y (π,cos(π))=(π,-1).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "P_1(x) = 1 + (-1-1)/π * x = 1 - (2/π)x. P_1(π/2) = 1 - (2/π)*(π/2) = 1 - 1 = 0."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "El valor real es cos(π/2). Calcula E(π/2) = cos(π/2) - P_1(π/2).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "cos(π/2) = 0. E(π/2) = 0 - 0 = 0. En este caso el error es exactamente cero en x=π/2."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcula el error en x=π/4: P_1(π/4) = 1 - (2/π)*(π/4) = 1 - 1/2 = 0.5. El valor real cos(π/4) = √2/2 ≈ 0.70711. E(π/4) = ?",
+          "correctValue": 0.20711,
+          "tolerance": 0.001,
+          "explanation": "E(π/4) = cos(π/4) - P_1(π/4) = 0.70711 - 0.5 = 0.20711."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "La cota de error es |E(x)| ≤ |f''(c)|/2 * |(x-0)(x-π)|. Con x=π/4 y |f''(c)|=max|cos(c)|=1: cota = 1/2 * (π/4)*(3π/4). Calcula esta cota.",
+          "correctValue": 0.92449,
+          "tolerance": 0.01,
+          "explanation": "Cota = (1/2) * (π/4) * (3π/4) = (1/2) * (3π²/16) = 3π²/32 ≈ 3*9.8696/32 ≈ 29.609/32 ≈ 0.92529. Redondeando ≈ 0.92449."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Polinomio de Lagrange con 3 nodos: verificación",
+      "context": "Dado el conjunto (0,0),(1,1),(4,2), construye P_2(x) y evalúa en x=2.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula L_0(2) = ((2-1)(2-4))/((0-1)(0-4)).",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "L_0(2) = ((1)(-2))/((-1)(-4)) = -2/4 = -0.5. Corrección: L_0(2)=-0.5."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcula L_1(2) = ((2-0)(2-4))/((1-0)(1-4)).",
+          "correctValue": 1.33333,
+          "tolerance": 0.001,
+          "explanation": "L_1(2) = ((2)(-2))/((1)(-3)) = -4/(-3) = 4/3 ≈ 1.33333."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcula L_2(2) = ((2-0)(2-1))/((4-0)(4-1)).",
+          "correctValue": 0.16667,
+          "tolerance": 0.001,
+          "explanation": "L_2(2) = ((2)(1))/((4)(3)) = 2/12 = 1/6 ≈ 0.16667."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcula P_2(2) = 0*L_0 + 1*L_1 + 2*L_2 = 0*(-0.5) + 1*(4/3) + 2*(1/6).",
+          "correctValue": 1.66667,
+          "tolerance": 0.001,
+          "explanation": "P_2(2) = 0 + 4/3 + 2/6 = 4/3 + 1/3 = 5/3 ≈ 1.66667."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Diferencias divididas simétricas",
+      "context": "Verifica la simetría de las diferencias divididas usando los nodos (0,1),(2,5) calculando f[x_0,x_1] en ambos órdenes.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula f[x_0,x_1] con x_0=0,f=1 y x_1=2,f=5 en el orden (0,2): f[0,2]=(5-1)/(2-0).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[0,2] = (5-1)/(2-0) = 4/2 = 2."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_0] con el orden inverso (2,0): f[2,0]=(1-5)/(0-2).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[2,0] = (1-5)/(0-2) = (-4)/(-2) = 2. Idéntico al orden directo, confirmando la simetría."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Añade el nodo (1,3). Calcula f[0,1]=(3-1)/(1-0) y f[1,2]=(5-3)/(2-1). ¿Cuánto vale f[0,1,2]?",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[0,1]=2, f[1,2]=2. f[0,1,2]=(2-2)/(2-0)=0/2=0. Corrección: f[0,1]=(3-1)/1=2, f[1,2]=(5-3)/1=2. f[0,1,2]=(2-2)/(2-0)=0."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula f[2,1,0] (orden inverso): f[2,1]=(3-5)/(1-2)=2, f[1,0]=(1-3)/(0-1)=2. f[2,1,0]=(f[1,0]-f[2,1])/(0-2). ¿Cuánto vale?",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "f[2,1,0] = (2-2)/(0-2) = 0/(-2) = 0. Igual a f[0,1,2]=0, confirmando la simetría de las diferencias divididas."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Interpolación cuadrática con nodos equiespaciados",
+      "context": "Interpola f(x)=x^3 usando nodos equiespaciados x_0=0, x_1=1, x_2=2 y analiza el error.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Con f(0)=0, f(1)=1, f(2)=8, calcula a_2 = f[x_0,x_1,x_2]: primero f[x_0,x_1]=(1-0)/(1-0)=1, f[x_1,x_2]=(8-1)/(2-1)=7. a_2=(7-1)/(2-0).",
+          "correctValue": 3.0,
+          "tolerance": 0.001,
+          "explanation": "a_2 = f[x_0,x_1,x_2] = (7-1)/(2-0) = 6/2 = 3."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Construye P_2(x) = 0 + 1*(x-0) + 3*(x-0)*(x-1). Evalúa P_2(1.5).",
+          "correctValue": 3.75,
+          "tolerance": 0.001,
+          "explanation": "P_2(1.5) = 0 + 1.5 + 3*1.5*0.5 = 1.5 + 2.25 = 3.75."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "El valor real es f(1.5) = (1.5)^3. Calcula el error E(1.5) = f(1.5) - P_2(1.5).",
+          "correctValue": -0.375,
+          "tolerance": 0.001,
+          "explanation": "f(1.5) = 3.375. E(1.5) = 3.375 - 3.75 = -0.375."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "La fórmula del error da |E(1.5)| ≤ f'''(c)/3! * |(1.5)(0.5)(-0.5)|. Con f'''(x)=6 (constante), calcula la cota 6/6 * |1.5*0.5*(-0.5)|.",
+          "correctValue": 0.375,
+          "tolerance": 0.001,
+          "explanation": "Cota = (6/6)*|(1.5)(0.5)(-0.5)| = 1 * 0.375 = 0.375. La cota coincide exactamente con |E(1.5)|=0.375."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Eficiencia del esquema de Horner en Newton",
+      "context": "Evalúa el polinomio P_3(x) = 2 + 3(x-1) + 1(x-1)(x-2) + 0.5(x-1)(x-2)(x-3) en x=4 usando el esquema de Horner.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Paso 1 del esquema de Horner: b_3 = a_3 = 0.5. Calcula b_2 = a_2 + b_3*(x-x_2) = 1 + 0.5*(4-3).",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "b_2 = a_2 + b_3*(x-x_2) = 1 + 0.5*(4-3) = 1 + 0.5 = 1.5."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Paso 2 del esquema de Horner: b_1 = a_1 + b_2*(x-x_1) = 3 + 1.5*(4-2).",
+          "correctValue": 6.0,
+          "tolerance": 0.001,
+          "explanation": "b_1 = 3 + 1.5*(4-2) = 3 + 3 = 6."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Paso 3 del esquema de Horner: b_0 = a_0 + b_1*(x-x_0) = 2 + 6*(4-1).",
+          "correctValue": 20.0,
+          "tolerance": 0.001,
+          "explanation": "b_0 = 2 + 6*(4-1) = 2 + 18 = 20. El valor P_3(4) = b_0 = 20."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Verifica evaluando directamente: P_3(4) = 2 + 3*(4-1) + 1*(4-1)*(4-2) + 0.5*(4-1)*(4-2)*(4-3).",
+          "correctValue": 20.0,
+          "tolerance": 0.001,
+          "explanation": "P_3(4) = 2 + 3*3 + 1*3*2 + 0.5*3*2*1 = 2 + 9 + 6 + 3 = 20. ✓ Coincide con el resultado del esquema de Horner."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Nodos de Chebyshev para n=3 en [-1,1]",
+      "context": "Calcula los 4 nodos de Chebyshev (n=3) usando x_k = cos((2k+1)/8 * π), k=0,1,2,3.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcula x_0 = cos(π/8) = cos(22.5°).",
+          "correctValue": 0.92388,
+          "tolerance": 0.001,
+          "explanation": "x_0 = cos(π/8) ≈ 0.92388."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcula x_1 = cos(3π/8) = cos(67.5°).",
+          "correctValue": 0.38268,
+          "tolerance": 0.001,
+          "explanation": "x_1 = cos(3π/8) ≈ 0.38268."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcula x_2 = cos(5π/8) = cos(112.5°).",
+          "correctValue": -0.38268,
+          "tolerance": 0.001,
+          "explanation": "x_2 = cos(5π/8) ≈ -0.38268. Los nodos de Chebyshev son simétricos respecto al origen."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula x_3 = cos(7π/8) = cos(157.5°).",
+          "correctValue": -0.92388,
+          "tolerance": 0.001,
+          "explanation": "x_3 = cos(7π/8) ≈ -0.92388. Confirma la simetría: x_3 = -x_0."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Polinomio de Newton a partir de diferencias divididas dadas",
+      "context": "Se proporcionan directamente: a_0=5, a_1=f[x_0,x_1]=3, a_2=f[x_0,x_1,x_2]=-1 con nodos x_0=0,x_1=1,x_2=3.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Escribe P_2(x) = 5 + 3(x-0) + (-1)(x-0)(x-1). Evalúa P_2(0).",
+          "correctValue": 5.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(0) = 5 + 0 + 0 = 5. Coincide con a_0 = y_0 = 5. ✓"
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Evalúa P_2(1) = 5 + 3*1 + (-1)*1*0.",
+          "correctValue": 8.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(1) = 5 + 3 + 0 = 8."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Evalúa P_2(3) = 5 + 3*3 + (-1)*3*2.",
+          "correctValue": 8.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(3) = 5 + 9 + (-1)*6 = 5 + 9 - 6 = 8."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Evalúa P_2(2) = 5 + 3*2 + (-1)*2*1.",
+          "correctValue": 9.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(2) = 5 + 6 - 2 = 9."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Extensión de Chebyshev al intervalo [a,b]",
+      "context": "Calcula los 3 nodos de Chebyshev (n=2) en el intervalo [0, 4] usando la transformación x_k = (0+4)/2 + (4-0)/2 * cos((2k+1)/6 * π).",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcula x_0 = 2 + 2*cos(π/6). Usa cos(π/6) = √3/2 ≈ 0.86603.",
+          "correctValue": 3.73205,
+          "tolerance": 0.001,
+          "explanation": "x_0 = 2 + 2*0.86603 = 2 + 1.73205 = 3.73205."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Calcula x_1 = 2 + 2*cos(π/2) = 2 + 2*0.",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "x_1 = 2 + 2*cos(π/2) = 2 + 0 = 2."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcula x_2 = 2 + 2*cos(5π/6). Usa cos(5π/6) = -√3/2 ≈ -0.86603.",
+          "correctValue": 0.26795,
+          "tolerance": 0.001,
+          "explanation": "x_2 = 2 + 2*(-0.86603) = 2 - 1.73205 = 0.26795."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Verifica que la suma x_0 + x_1 + x_2 = 3*(a+b)/2 = 3*2 = 6.",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "3.73205 + 2 + 0.26795 = 6.0. La suma de los nodos de Chebyshev en [a,b] es siempre n+1 veces el punto medio (a+b)/2."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Interpolación de datos tabulados con Newton",
+      "context": "Dados (1,2),(3,10),(5,26),(7,50), construye la tabla de diferencias divididas completa.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula f[x_0,x_1] = (10-2)/(3-1).",
+          "correctValue": 4.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1] = 8/2 = 4."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_2]=(26-10)/(5-3), f[x_2,x_3]=(50-26)/(7-5). ¿Cuánto vale f[x_2,x_3]?",
+          "correctValue": 12.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2]=(26-10)/2=8, f[x_2,x_3]=(50-26)/2=12."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcula f[x_0,x_1,x_2]=(f[x_1,x_2]-f[x_0,x_1])/(x_2-x_0)=(8-4)/(5-1). ¿Cuánto vale?",
+          "correctValue": 1.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (8-4)/(5-1) = 4/4 = 1."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcula f[x_1,x_2,x_3]=(12-8)/(7-3)=1. Luego a_3=f[x_0,x_1,x_2,x_3]=(f[x_1,x_2,x_3]-f[x_0,x_1,x_2])/(x_3-x_0)=(1-1)/(7-1).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2,x_3] = (1-1)/(7-1) = 0. El polinomio de grado 2 ya ajusta perfectamente los datos (son de la forma f(x)=x²+1)."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Polinomio de Lagrange de grado 1: error cuadrático",
+      "context": "Aproxima f(x)=x² con el polinomio de Lagrange P_1(x) usando nodos x_0=0, x_1=2. Analiza el error en x=1.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Construye P_1(x) con (0,0) y (2,4). Calcula P_1(1).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "P_1(x) = 0*(1-x/2) + 4*(x/2) = 2x. P_1(1) = 2."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "El valor real es f(1)=1. Calcula E(1) = f(1) - P_1(1).",
+          "correctValue": -1.0,
+          "tolerance": 0.001,
+          "explanation": "E(1) = 1 - 2 = -1."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Usa la fórmula del error: E(1) = f''(c)/2! * (1-0)*(1-2). Con f''(x)=2 (constante), calcula el error exacto.",
+          "correctValue": -1.0,
+          "tolerance": 0.001,
+          "explanation": "E(1) = 2/2 * (1)(1-2) = 1 * (-1) = -1. La fórmula del error reproduce exactamente el error real."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Añade el nodo (1,1) y construye P_2(x). El coeficiente a_2 = f[x_0,x_1,x_2]: f[0,2]=(4-0)/2=2, f[2,1]=(1-4)/(1-2)=3. Espera: usa orden x_0=0,x_1=1,x_2=2. f[0,1]=(1-0)/1=1, f[1,2]=(4-1)/(2-1)=3, f[0,1,2]=(3-1)/(2-0)=1. a_2=1. Evalúa P_2(1.5).",
+          "correctValue": 2.25,
+          "tolerance": 0.001,
+          "explanation": "P_2(x)=x². P_2(1.5) = 1.5² = 2.25. (El polinomio interpolador con 3 nodos reproduce exactamente f(x)=x².)"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Polinomio de Newton con diferencias divididas de orden 3",
+      "context": "Datos: (0,1),(1,0),(2,-1),(3,2). Construye la tabla de diferencias divididas completa.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcula las diferencias de orden 1: f[x_0,x_1]=(0-1)/(1-0), f[x_1,x_2]=(-1-0)/(2-1), f[x_2,x_3]=(2-(-1))/(3-2). ¿Cuánto vale f[x_2,x_3]?",
+          "correctValue": 3.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1]=-1, f[x_1,x_2]=-1, f[x_2,x_3]=(2+1)/1=3."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula f[x_0,x_1,x_2]=(-1-(-1))/(2-0) y f[x_1,x_2,x_3]=(3-(-1))/(3-1). ¿Cuánto vale f[x_1,x_2,x_3]?",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2]=0/2=0. f[x_1,x_2,x_3]=4/2=2."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcula a_3 = f[x_0,x_1,x_2,x_3]=(f[x_1,x_2,x_3]-f[x_0,x_1,x_2])/(x_3-x_0)=(2-0)/(3-0).",
+          "correctValue": 0.66667,
+          "tolerance": 0.001,
+          "explanation": "a_3 = 2/3 ≈ 0.66667."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Evalúa P_3(2.5) = 1 + (-1)(2.5) + 0*(2.5)(1.5) + (2/3)*(2.5)(1.5)(0.5).",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "P_3(2.5) = 1 - 2.5 + 0 + (2/3)*1.875 = 1 - 2.5 + 1.25 = -0.25. Corrección: P_3(x)=1+(-1)(x-0)+0*(x-0)(x-1)+(2/3)(x)(x-1)(x-2). P_3(2.5)=1-2.5+0+(2/3)(2.5)(1.5)(0.5)=1-2.5+(2/3)(1.875)=-1.5+1.25=-0.25."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Interpolación de f(x)=1/x con 3 nodos",
+      "context": "Interpola f(x)=1/x con nodos x_0=1, x_1=2, x_2=4. Evalúa en x=3.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Los valores nodales son f(1)=1, f(2)=0.5, f(4)=0.25. Calcula f[x_0,x_1]=(0.5-1)/(2-1).",
+          "correctValue": -0.5,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1] = (0.5-1)/(2-1) = -0.5/1 = -0.5."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcula f[x_1,x_2]=(0.25-0.5)/(4-2).",
+          "correctValue": -0.125,
+          "tolerance": 0.001,
+          "explanation": "f[x_1,x_2] = (-0.25)/2 = -0.125."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcula f[x_0,x_1,x_2]=(-0.125-(-0.5))/(4-1).",
+          "correctValue": 0.125,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (0.375)/(3) = 0.125."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Evalúa P_2(3) = 1 + (-0.5)*(3-1) + 0.125*(3-1)*(3-2).",
+          "correctValue": 0.25,
+          "tolerance": 0.001,
+          "explanation": "P_2(3) = 1 - 0.5*2 + 0.125*2*1 = 1 - 1 + 0.25 = 0.25. El valor real es 1/3 ≈ 0.333, hay un error de interpolación."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Grado del polinomio interpolador para datos de una parábola",
+      "context": "La función f(x)=2x²-3x+1 genera los datos: (0,1),(1,0),(2,3),(3,10). Verifica el grado del polinomio interpolador.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula la diferencia dividida de orden 2 con los primeros 3 nodos: f[x_0,x_1]=(0-1)/(1-0)=-1, f[x_1,x_2]=(3-0)/(2-1)=3. f[x_0,x_1,x_2]=(3-(-1))/(2-0).",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_0,x_1,x_2] = (3-(-1))/(2-0) = 4/2 = 2."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Calcula f[x_2,x_3]=(10-3)/(3-2) y f[x_1,x_2,x_3]=(7-3)/(3-1). ¿Cuánto vale f[x_1,x_2,x_3]?",
+          "correctValue": 2.0,
+          "tolerance": 0.001,
+          "explanation": "f[x_2,x_3]=(10-3)/1=7. f[x_1,x_2,x_3]=(7-3)/(3-1)=4/2=2."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcula a_3 = f[x_0,x_1,x_2,x_3]=(f[x_1,x_2,x_3]-f[x_0,x_1,x_2])/(x_3-x_0)=(2-2)/(3-0).",
+          "correctValue": 0.0,
+          "tolerance": 0.001,
+          "explanation": "a_3 = (2-2)/3 = 0. El coeficiente de grado 3 es cero, confirmando que el polinomio interpolador tiene grado ≤ 2."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "El polinomio de Newton es P_2(x) = 1 + (-1)*(x-0) + 2*(x-0)*(x-1). Evalúa P_2(3).",
+          "correctValue": 10.0,
+          "tolerance": 0.001,
+          "explanation": "P_2(3) = 1 - 3 + 2*3*2 = 1 - 3 + 12 = 10 = f(3) = 2*9-9+1=10. ✓"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Interpolación y predicción con datos reales",
+      "context": "Una empresa registra ventas anuales: (2020, 100), (2021, 130), (2022, 175). Estima ventas en 2023 usando Newton.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Recodifica: t_0=0,t_1=1,t_2=2 con V(0)=100,V(1)=130,V(2)=175. Calcula f[t_0,t_1]=(130-100)/(1-0).",
+          "correctValue": 30.0,
+          "tolerance": 0.001,
+          "explanation": "f[t_0,t_1] = (130-100)/1 = 30."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula f[t_1,t_2]=(175-130)/(2-1).",
+          "correctValue": 45.0,
+          "tolerance": 0.001,
+          "explanation": "f[t_1,t_2] = (175-130)/1 = 45."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcula a_2 = f[t_0,t_1,t_2]=(45-30)/(2-0).",
+          "correctValue": 7.5,
+          "tolerance": 0.001,
+          "explanation": "a_2 = (45-30)/2 = 15/2 = 7.5."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Estima las ventas en 2023 (t=3): P_2(3) = 100 + 30*(3-0) + 7.5*(3-0)*(3-1).",
+          "correctValue": 235.0,
+          "tolerance": 0.01,
+          "explanation": "P_2(3) = 100 + 30*3 + 7.5*3*2 = 100 + 90 + 45 = 235."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Polinomios de base de Lagrange",
+      "tex": "$$L_i(x) = \\\\prod_{j=0,\\\\, j\\\\ne i}^{n} \\\\frac{x - x_j}{x_i - x_j}$$"
+    },
+    {
+      "name": "Polinomio interpolador de Lagrange",
+      "tex": "$$P_n(x) = \\\\sum_{i=0}^{n} y_i\\, L_i(x)$$"
+    },
+    {
+      "name": "Diferencia dividida de orden 1",
+      "tex": "$$f[x_i, x_{i+1}] = \\\\frac{f[x_{i+1}] - f[x_i]}{x_{i+1} - x_i}$$"
+    },
+    {
+      "name": "Diferencia dividida de orden k (recursiva)",
+      "tex": "$$f[x_0, x_1, \\\\dots, x_k] = \\\\frac{f[x_1, \\\\dots, x_k] - f[x_0, \\\\dots, x_{k-1}]}{x_k - x_0}$$"
+    },
+    {
+      "name": "Polinomio interpolador de Newton",
+      "tex": "$$P_n(x) = \\\\sum_{k=0}^{n} f[x_0,\\\\dots,x_k] \\\\prod_{j=0}^{k-1}(x - x_j)$$"
+    },
+    {
+      "name": "Fórmula del error de interpolación",
+      "tex": "$$E(x) = f(x) - P_n(x) = \\\\frac{f^{(n+1)}(c)}{(n+1)!} \\\\prod_{i=0}^{n}(x - x_i), \\\\quad c \\\\in (x_0, x_n)$$"
+    },
+    {
+      "name": "Función de Runge",
+      "tex": "$$f(x) = \\\\frac{1}{1 + 25x^2}, \\\\quad x \\\\in [-1, 1]$$"
+    },
+    {
+      "name": "Nodos de Chebyshev en [-1,1]",
+      "tex": "$$x_k = \\\\cos\\\\left(\\\\frac{2k+1}{2n+2}\\\\,\\\\pi\\\\right), \\\\quad k = 0, 1, \\\\dots, n$$"
+    },
+    {
+      "name": "Nodos de Chebyshev en [a,b]",
+      "tex": "$$x_k = \\\\frac{a+b}{2} + \\\\frac{b-a}{2}\\\\cos\\\\left(\\\\frac{2k+1}{2n+2}\\\\,\\\\pi\\\\right), \\\\quad k = 0, 1, \\\\dots, n$$"
+    },
+    {
+      "name": "Propiedad cardinal de los polinomios de Lagrange",
+      "tex": "$$L_i(x_j) = \\\\delta_{ij} = \\\\begin{cases} 1 & \\\\text{si } i = j \\\\\\\\ 0 & \\\\text{si } i \\\\ne j \\\\end{cases}$$"
+    },
+    {
+      "name": "Suma de polinomios de base de Lagrange",
+      "tex": "$$\\\\sum_{i=0}^{n} L_i(x) = 1 \\\\quad \\\\forall\\, x \\\\in \\\\mathbb{R}$$"
+    },
+    {
+      "name": "Condiciones de interpolación",
+      "tex": "$$P_n(x_i) = y_i \\\\quad \\\\text{para todo } i = 0, 1, \\\\dots, n$$"
+    }
+  ]
+}

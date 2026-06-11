@@ -1,0 +1,2084 @@
+{
+  "TEST_A": [
+    {
+      "q": "1. En el estándar IEEE 754 de precisión simple (32 bits), ¿cómo se distribuyen los bits correspondientes al signo (S), exponente (E) y mantisa (M) respectivamente?",
+      "options": [
+        "1 bit para signo, 8 bits para exponente y 23 bits para mantisa.",
+        "1 bit para signo, 11 bits para exponente y 52 bits para mantisa.",
+        "1 bit para signo, 8 bits para exponente y 24 bits para mantisa."
+      ],
+      "correct": 0,
+      "hint": "La suma total de los bits debe ser exactamente 32 para precisión simple.",
+      "explanation": "El estándar IEEE 754 para precisión simple de 32 bits especifica: bit 31 para el signo ($$S$$), bits 23 a 30 (8 bits) para el exponente sesgado ($$E$$) y bits 0 a 22 (23 bits) para la mantisa fraccionaria ($$M$$)."
+    },
+    {
+      "q": "2. En el formato de precisión doble de IEEE 754 (64 bits), ¿cuál es el sesgo (bias) utilizado para representar el exponente?",
+      "options": [
+        "127",
+        "1023",
+        "2047"
+      ],
+      "correct": 1,
+      "hint": "El sesgo en precisión doble se calcula como $$2^{11-1} - 1$$.",
+      "explanation": "Para precisión doble, el campo de exponente tiene 11 bits, lo que da un sesgo de $$2^{11-1} - 1 = 2^{10} - 1 = 1023$$."
+    },
+    {
+      "q": "3. ¿Cuál es el propósito fundamental de utilizar un exponente sesgado (con exceso) en lugar de un entero con signo en formato de complemento a dos?",
+      "options": [
+        "Facilitar la comparación de magnitudes de los números al tratarse como enteros sin signo.",
+        "Aumentar el rango de representación del exponente en un factor de dos.",
+        "Evitar el desbordamiento de mantisa en operaciones de multiplicación."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el orden en que se comparan los exponentes de dos números.",
+      "explanation": "Al sumar un sesgo positivo, todos los exponentes se convierten en enteros positivos (sin signo). Esto permite al hardware comparar el tamaño de dos números flotantes usando comparadores de enteros rápidos, sin lógica adicional para signos."
+    },
+    {
+      "q": "4. Para un número normalizado en precisión simple, ¿cuál es la fórmula matemática de su valor real?",
+      "options": [
+        "$$V = (-1)^S \\cdot (1.M) \\cdot 2^{E - 127}$$",
+        "$$V = (-1)^S \\cdot (0.M) \\cdot 2^{E - 127}$$",
+        "$$V = (-1)^S \\cdot (1.M) \\cdot 2^{E - 126}$$"
+      ],
+      "correct": 0,
+      "hint": "Recuerda la presencia del bit implícito a la izquierda de la coma.",
+      "explanation": "Para números normalizados, el bit oculto (implícito) es siempre $$1$$. El exponente real $$e$$ es $$E - 127$$. Por tanto, el valor es $$V = (-1)^S \\cdot (1 + M) \\cdot 2^{E - 127}$$."
+    },
+    {
+      "q": "5. ¿Qué combinación de campos en precisión simple representa al número cero ($$+0.0$$ o $$-0.0$$)?",
+      "options": [
+        "$$E = 0, M = 0$$",
+        "$$E = 0, M \\neq 0$$",
+        "$$E = 255, M = 0$$"
+      ],
+      "correct": 0,
+      "hint": "Tanto el exponente como la mantisa deben estar al mínimo valor posible.",
+      "explanation": "El estándar reserva $$E = 0$$ y $$M = 0$$ para el valor cero. El bit de signo $$S$$ distingue entre $$+0.0$$ ($$S=0$$) y $$-0.0$$ ($$S=1$$)."
+    },
+    {
+      "q": "6. ¿Cómo se interpreta en IEEE 754 de precisión simple una palabra con exponente $$E = 255$$ y mantisa $$M \\neq 0$$?",
+      "options": [
+        "Un valor infinito ($$\\pm\\infty$$)",
+        "Un número denormalizado",
+        "Un valor no numérico o indeterminación (NaN)"
+      ],
+      "correct": 2,
+      "hint": "Corresponde al resultado de operaciones matemáticamente indeterminadas.",
+      "explanation": "Cuando el exponente $$E$$ toma su valor máximo ($$255$$ en precisión simple) y la mantisa fraccionaria $$M$$ no es cero, la palabra codifica un NaN (Not a Number)."
+    },
+    {
+      "q": "7. ¿Cuál es la representación del valor infinito ($$+\\infty$$ o $$-\\infty$$) en precisión simple?",
+      "options": [
+        "$$E = 255$$ y $$M = 0$$",
+        "$$E = 255$$ y $$M \\neq 0$$",
+        "$$E = 0$$ y $$M = 0$$"
+      ],
+      "correct": 0,
+      "hint": "El exponente está al máximo valor y la mantisa no contiene cifras significativas.",
+      "explanation": "El infinito se representa con el exponente en su valor extremo ($$E=255$$) y una mantisa completamente vacía ($$M=0$$). El bit de signo determina el sentido de infinito."
+    },
+    {
+      "q": "8. En los números denormalizados de precisión simple ($$E = 0, M \\neq 0$$), ¿cuál es el valor de su exponente real?",
+      "options": [
+        "$$-127$$",
+        "$$-126$$",
+        "$$0$$"
+      ],
+      "correct": 1,
+      "hint": "El estándar fija este exponente para asegurar una transición suave con los números normalizados.",
+      "explanation": "Para números denormalizados ($$E=0$$), el exponente real se fija en $$-126$$ (que es $$1 - \\text{bias}$$) en lugar de $$-127$$ ($$0 - \\text{bias}$$) para mantener la continuidad en la resolución numérica con el número normalizado más pequeño."
+    },
+    {
+      "q": "9. ¿Cuál es la ventaja primordial de la representación de números denormalizados en el estándar IEEE 754?",
+      "options": [
+        "Permitir una degradación gradual de la precisión (underflow gradual) cerca del cero.",
+        "Duplicar la precisión de los números fraccionarios muy grandes.",
+        "Simplificar el hardware encargado de la suma y resta de reales."
+      ],
+      "correct": 0,
+      "hint": "Evita que operaciones cuyo resultado es muy pequeño salten bruscamente a cero.",
+      "explanation": "Los denormalizados permiten representar números extremadamente pequeños situados entre cero y el menor número normalizado mediante la pérdida gradual de bits significativos (underflow gradual)."
+    },
+    {
+      "q": "10. ¿Por qué el bit más significativo de la mantisa (el bit oculto o implícito) no se almacena en memoria para números normalizados?",
+      "options": [
+        "Porque siempre vale 1 en la notación normalizada binaria y se ahorra un bit de almacenamiento.",
+        "Porque su valor cambia dinámicamente según el signo del exponente.",
+        "Porque la ALU puede calcularlo mediante interpolación lineal de la mantisa."
+      ],
+      "correct": 0,
+      "hint": "Cualquier número binario normalizado en notación científica siempre empieza por 1.algo.",
+      "explanation": "En binario, el único dígito distinto de cero es el $$1$$. Por ende, cualquier número normalizado tiene la forma $$1.M$$. Al no almacenar el $$1$$ a la izquierda de la coma, ganamos un bit adicional de precisión."
+    },
+    {
+      "q": "11. Para un número denormalizado, ¿cuál es el valor del bit implícito a la izquierda de la coma decimal?",
+      "options": [
+        "Siempre es 1.",
+        "Siempre es 0.",
+        "Depende del bit de signo S."
+      ],
+      "correct": 1,
+      "hint": "Los denormalizados ya no están en formato estándar de notación científica con un 1 inicial.",
+      "explanation": "Para representar valores menores que el menor normalizado, se desnormaliza la mantisa y su formato pasa a ser $$0.M$$. Así, el bit implícito a la izquierda es siempre $$0$$."
+    },
+    {
+      "q": "12. ¿Qué ocurre con la comparación `+0.0 == -0.0` según las especificaciones del estándar IEEE 754?",
+      "options": [
+        "Se evalúa como verdadera.",
+        "Se evalúa como falsa.",
+        "Produce una excepción de tipo NaN."
+      ],
+      "correct": 0,
+      "hint": "A pesar de tener signos opuestos, representan el mismo punto límite matemático.",
+      "explanation": "El estándar IEEE 754 establece explícitamente que el cero con signo positivo y el cero con signo negativo deben ser comparados como iguales."
+    },
+    {
+      "q": "13. ¿Qué resultado produce la operación $$1.0 / (-0.0)$$ según el estándar IEEE 754?",
+      "options": [
+        "$$-\\infty$$",
+        "$$+\\infty$$",
+        "NaN"
+      ],
+      "correct": 0,
+      "hint": "El signo se propaga mediante reglas convencionales algebraicas y el denominador tiende a cero.",
+      "explanation": "Dividir un valor positivo distinto de cero por un cero negativo produce infinito con signo negativo ($$-\\infty$$) de acuerdo a las propiedades algebraicas definidas en la FPU."
+    },
+    {
+      "q": "14. ¿Qué ocurre cuando realizamos la comparación de igualdad `NaN == NaN` en un lenguaje compatible con IEEE 754?",
+      "options": [
+        "Se evalúa como verdadera.",
+        "Se evalúa como falsa.",
+        "Produce un error en tiempo de ejecución."
+      ],
+      "correct": 1,
+      "hint": "Una indeterminación no es necesariamente idéntica a otra indeterminación.",
+      "explanation": "IEEE 754 define que NaN no es igual a ningún valor, incluido el propio NaN. Para verificar si una variable es NaN, se debe utilizar funciones especiales como `isnan()`."
+    },
+    {
+      "q": "15. ¿Cuál es el modo de redondeo por defecto en el estándar IEEE 754?",
+      "options": [
+        "Redondeo al más cercano, con empates al valor que tenga el bit menos significativo par (Round to Nearest, Ties to Even).",
+        "Redondeo hacia cero o truncamiento directo.",
+        "Redondeo hacia más infinito."
+      ],
+      "correct": 0,
+      "hint": "Este modo minimiza el sesgo de redondeo acumulado en operaciones estadísticas repetitivas.",
+      "explanation": "El modo por defecto es al más cercano. Si hay un empate exacto, se redondea al número representable cuyo bit menos significativo (LSB) sea par (cero)."
+    },
+    {
+      "q": "16. Si sumamos un número real muy pequeño a uno extremadamente grande (por ejemplo, $$2^{24} + 1$$ en precisión simple), el resultado vuelve a ser el número grande. ¿Cómo se conoce este fenómeno?",
+      "options": [
+        "Cancelación catastrófica.",
+        "Absorción.",
+        "Desbordamiento de exponente."
+      ],
+      "correct": 1,
+      "hint": "El número pequeño es desplazado tanto hacia la derecha para alinear exponentes que desaparece.",
+      "explanation": "La absorción ocurre cuando dos números de magnitudes muy diferentes se suman o restan. Para alinearlos, el exponente menor se incrementa, lo que desplaza la mantisa del menor fuera del rango de 24 bits significativos."
+    },
+    {
+      "q": "17. ¿Qué es la \"cancelación catastrófica\" en aritmética de coma flotante?",
+      "options": [
+        "La pérdida drástica de dígitos significativos al restar dos números muy cercanos entre sí.",
+        "El redondeo sistemático hacia el infinito negativo.",
+        "La conversión automática de un número denormalizado en cero."
+      ],
+      "correct": 0,
+      "hint": "Ocurre cuando restamos números casi idénticos y la diferencia expone los errores de redondeo previos.",
+      "explanation": "Al restar dos números casi iguales, los bits más significativos se cancelan y el resultado final se compone en su mayor parte de los bits menos significativos que arrastran errores de redondeo."
+    },
+    {
+      "q": "18. ¿Cuál de los siguientes números decimales no se puede representar de forma exacta en binario de coma flotante, independientemente de la precisión utilizada?",
+      "options": [
+        "0.2",
+        "0.25",
+        "0.75"
+      ],
+      "correct": 0,
+      "hint": "Busca la fracción cuyo denominador no sea una potencia exacta de 2.",
+      "explanation": "$$0.2 = \\frac{1}{5}$$. En binario, los denominadores deben ser potencias de 2. Su representación binaria es periódica e infinita ($$0.001100110011..._2$$) y se trunca con pérdida de precisión."
+    },
+    {
+      "q": "19. ¿Cuál de los siguientes números decimales sí se puede de representar de forma exacta en el formato IEEE 754 de precisión simple?",
+      "options": [
+        "0.1",
+        "0.375",
+        "0.3"
+      ],
+      "correct": 1,
+      "hint": "$$0.375$$ equivale a $$\\frac{3}{8}$$, la cual es una suma de potencias negativas de 2.",
+      "explanation": "$$0.375 = \\frac{1}{4} + \\frac{1}{8} = 2^{-2} + 2^{-3} = 0.011_2$$. Como es una fracción binaria finita que cabe holgadamente en 23 bits de mantisa, se representa con precisión exacta."
+    },
+    {
+      "q": "20. En precisión simple, ¿cuál es el menor valor positivo normalizado representable?",
+      "options": [
+        "$$2^{-126}$$",
+        "$$2^{-127}$$",
+        "$$2^{-149}$$"
+      ],
+      "correct": 0,
+      "hint": "Se obtiene cuando $$E = 1$$ y la mantisa $$M = 0$$.",
+      "explanation": "El exponente mínimo para números normalizados es $$E = 1$$. Con $$M = 0$$, la mantisa real es $$1.0$$. Por tanto: $$V = 1.0 \\cdot 2^{1 - 127} = 2^{-126} \\approx 1.175 \\cdot 10^{-38}$$."
+    },
+    {
+      "q": "21. En precisión simple, ¿cuál es el menor valor positivo denormalizado representable (el límite absoluto de la precisión)?",
+      "options": [
+        "$$2^{-126}$$",
+        "$$2^{-149}$$",
+        "$$2^{-150}$$"
+      ],
+      "correct": 1,
+      "hint": "Ocurre cuando $$E = 0$$ y la mantisa contiene únicamente un $$1$$ en su bit menos significativo (bit 0).",
+      "explanation": "Con $$E = 0$$, el exponente real es $$-126$$. La mantisa fraccionaria con solo el LSB en 1 es $$M = 2^{-23}$$. El valor es $$V = 0.M \\cdot 2^{-126} = 2^{-23} \\cdot 2^{-126} = 2^{-149} \\approx 1.4 \\cdot 10^{-45}$$."
+    },
+    {
+      "q": "22. ¿Cuál es la diferencia principal entre un Quiet NaN (QNaN) y un Signaling NaN (SNaN)?",
+      "options": [
+        "QNaN se propaga silenciosamente a través de la mayoría de las operaciones, mientras que SNaN lanza una excepción de hardware inmediatamente.",
+        "QNaN representa errores de desbordamiento de pila y SNaN representa divisiones por cero.",
+        "QNaN es exclusivo del formato de precisión simple de 32 bits."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el significado de 'Quiet' (silencioso) y 'Signaling' (señalizador).",
+      "explanation": "Quiet NaN permite continuar los cálculos sin interrumpir el flujo del programa, propagándose en el resultado. Signaling NaN interrumpe lanzando una trampa o excepción de coma flotante de inmediato."
+    },
+    {
+      "q": "23. ¿Qué resultado produce la operación de división de indeterminación $$0.0 / 0.0$$ en IEEE 754?",
+      "options": [
+        "$$0.0$$",
+        "$$+\\infty$$",
+        "NaN"
+      ],
+      "correct": 2,
+      "hint": "No hay un resultado numérico coherente para la división de cero entre cero.",
+      "explanation": "La operación $$0.0 / 0.0$$ no está definida matemáticamente y devuelve NaN (Not a Number) según las especificaciones del estándar."
+    },
+    {
+      "q": "24. ¿Qué resultado produce la resta infinita de indeterminación $$\\infty - \\infty$$?",
+      "options": [
+        "$$0.0$$",
+        "NaN",
+        "$$\\infty$$"
+      ],
+      "correct": 1,
+      "hint": "Restar infinitos del mismo signo no permite determinar una magnitud numérica real.",
+      "explanation": "$$\\infty - \\infty$$ es otra indeterminación clásica en la FPU, resultando siempre en un valor NaN."
+    },
+    {
+      "q": "25. ¿Cuál es el valor del épsilon de máquina ($$\\epsilon$$) en precisión simple (32 bits)?",
+      "options": [
+        "$$2^{-23} \\approx 1.19 \\cdot 10^{-7}$$",
+        "$$2^{-24} \\approx 5.96 \\cdot 10^{-8}$$",
+        "$$2^{-52} \\approx 2.22 \\cdot 10^{-16}$$"
+      ],
+      "correct": 0,
+      "hint": "Es la distancia entre el 1.0 y el siguiente número representable mayor que 1.0.",
+      "explanation": "El épsilon se define como la diferencia entre $$1.0$$ (que es $$1.000...0 \\cdot 2^0$$) y el siguiente número flotante normalizado ($$1.000...01_2 \\cdot 2^0$$), lo que da un incremento de $$2^{-23}$$."
+    },
+    {
+      "q": "26. Si ejecutamos la operación $$\\sqrt{-0.0}$$ en un sistema compatible con IEEE 754, ¿cuál es el resultado obtenido?",
+      "options": [
+        "NaN (Not a Number).",
+        "$$-0.0$$",
+        "$$0.0$$"
+      ],
+      "correct": 1,
+      "hint": "Aunque la raíz de un número negativo suele dar NaN, el cero negativo es un caso especial.",
+      "explanation": "El estándar IEEE 754 define de manera particular que $$\\sqrt{-0.0} = -0.0$$, para mantener consistencia con otras operaciones límite."
+    },
+    {
+      "q": "27. En precisión doble (64 bits), ¿cuántos bits se dedican físicamente al almacenamiento del campo mantisa (fracción)?",
+      "options": [
+        "23 bits",
+        "52 bits",
+        "64 bits"
+      ],
+      "correct": 1,
+      "hint": "Suma 1 bit de signo y 11 de exponente para deducir el sobrante.",
+      "explanation": "La palabra completa de precisión doble tiene 64 bits. Al restar 1 bit de signo y 11 bits del exponente sesgado quedan exactamente 52 bits para la mantisa."
+    },
+    {
+      "q": "28. Si sumamos $$+0.0$$ y $$-0.0$$ bajo el modo de redondeo estándar (al más cercano), ¿cuál es el signo del cero resultante?",
+      "options": [
+        "Siempre positivo ($$+0.0$$).",
+        "Siempre negativo ($$-0.0$$).",
+        "Es aleatorio según la arquitectura interna de la FPU."
+      ],
+      "correct": 0,
+      "hint": "La suma solo resulta en un cero negativo si ambos operandos son negativos en una suma o bajo modos de redondeo especiales.",
+      "explanation": "Bajo redondeo al más cercano, $$+0.0 + (-0.0) = +0.0$$. El resultado solo sería negativo si la operación fuera $$-0.0 + (-0.0)$$ o si se redondease hacia menos infinito."
+    },
+    {
+      "q": "29. ¿Qué define la operación FMA (Fused Multiply-Add)?",
+      "options": [
+        "Una multiplicación y una suma combinadas en una única instrucción con un solo redondeo final.",
+        "Un algoritmo de redondeo que evita la aparición de números denormalizados.",
+        "Una técnica de compresión para guardar dobles en espacios de float."
+      ],
+      "correct": 0,
+      "hint": "Realiza la operación $$A \\cdot B + C$$ con gran precisión.",
+      "explanation": "La instrucción FMA realiza la multiplicación $$A \\cdot B$$ y luego suma $$C$$ de manera atómica, ejecutando un único redondeo al final. Esto reduce los errores acumulados y mejora la velocidad."
+    },
+    {
+      "q": "30. ¿Qué se entiende por \"underflow\" (subdesbordamiento) en coma flotante?",
+      "options": [
+        "Cuando el resultado de una operación es distinto de cero pero menor que el mínimo valor denormalizado positivo representable.",
+        "Cuando un número negativo se convierte en positivo debido a errores de signo.",
+        "Cuando el exponente supera el valor de 127 en precisión simple."
+      ],
+      "correct": 0,
+      "hint": "El valor absoluto es tan pequeño que ya no se puede representar en el formato.",
+      "explanation": "El underflow ocurre cuando la magnitud de un resultado no nulo es menor que el menor número denormalizado representable ($$2^{-149}$$ en precisión simple), forzando a que se redondee típicamente a cero."
+    },
+    {
+      "q": "31. ¿Qué se entiende por \"overflow\" (desbordamiento) en coma flotante?",
+      "options": [
+        "Cuando el resultado de una operación es demasiado grande en magnitud para ser representado como un número real finito.",
+        "Cuando el denominador en una división es menor que el épsilon de máquina.",
+        "Cuando los bits de mantisa son todos unos y se suma una unidad."
+      ],
+      "correct": 0,
+      "hint": "El valor numérico supera al máximo normalizado representable.",
+      "explanation": "El overflow ocurre cuando el valor absoluto de una operación excede el valor máximo representable en el estándar ($$3.4028235 \\cdot 10^{38}$$ en precisión simple), resultando comúnmente en infinito con el signo adecuado."
+    },
+    {
+      "q": "32. ¿Qué ocurre al realizar la operación $$x / 0.0$$, siendo $$x$$ un número real positivo normalizado?",
+      "options": [
+        "Produce un valor NaN.",
+        "Produce $$+\\infty$$",
+        "Provoca una detención inmediata del programa mediante una interrupción fatal."
+      ],
+      "correct": 1,
+      "hint": "El numerador es un valor positivo constante y el denominador es un límite nulo positivo.",
+      "explanation": "Dividir un número positivo entre $$0.0$$ produce infinito positivo ($$+\\infty$$) sin detener la ejecución en FPU compatibles con IEEE 754."
+    },
+    {
+      "q": "33. ¿Por qué la suma de coma flotante no cumple la propiedad asociativa, es decir, $$(a + b) + c \\neq a + (b + c)$$ en todos los casos?",
+      "options": [
+        "Debido a que el redondeo introduce pequeños errores en cada paso que dependen de la alineación de exponentes.",
+        "Porque el bit de signo cambia aleatoriamente durante las alineaciones de las mantisas.",
+        "Porque los números denormalizados están prohibidos como resultados intermedios de operaciones aritméticas."
+      ],
+      "correct": 0,
+      "hint": "Considere la absorción de términos pequeños cuando se emparejan primero con términos grandes.",
+      "explanation": "Debido a las pérdidas por alineación de exponentes y redondeo en cada etapa de cálculo, el orden en que se agrupan las sumas altera el resultado final, rompiendo la asociatividad clásica."
+    },
+    {
+      "q": "34. ¿Cuál de los siguientes modos de redondeo de IEEE 754 asegura que el valor redondeado sea menor o igual que el valor real original?",
+      "options": [
+        "Redondeo hacia menos infinito ($$-\\infty$$).",
+        "Redondeo hacia cero.",
+        "Redondeo al más cercano."
+      ],
+      "correct": 0,
+      "hint": "Este modo desplaza todos los valores numéricos hacia la izquierda en la recta real.",
+      "explanation": "El redondeo hacia menos infinito ($$-\\infty$$) siempre redondea al menor entero o flotante representable en la dirección negativa, garantizando que $$x_{\\text{redondeado}} \\le x_{\\text{real}}$$."
+    },
+    {
+      "q": "35. ¿Cuál es el exponente sesgado $$E$$ (en binario de 8 bits) correspondiente al exponente real $$e = 0$$ en precisión simple?",
+      "options": [
+        "$$01111111$$",
+        "$$10000000$$",
+        "$$01111110$$"
+      ],
+      "correct": 0,
+      "hint": "Se calcula sumando el exponente real al sesgo de 127, y convirtiendo a binario.",
+      "explanation": "$$E = e + 127 = 0 + 127 = 127$$. En binario de 8 bits sin signo, el número $$127$$ se codifica como $$01111111_2$$."
+    },
+    {
+      "q": "36. ¿Cuál es la representación hexadecimal típica de un Quiet NaN (QNaN) estándar en precisión simple?",
+      "options": [
+        "0x7FC00000",
+        "0x7F800000",
+        "0x00800000"
+      ],
+      "correct": 0,
+      "hint": "El exponente es de todo unos y el bit más significativo de la mantisa es 1.",
+      "explanation": "Un QNaN tiene $$E = 255$$ (`11111111`) y el primer bit de la mantisa en 1 (bits de mantisa: `100 0000 ...`). En binario: `0111 1111 1100 0000 ...` = `0x7FC00000`."
+    },
+    {
+      "q": "37. En la multiplicación de coma flotante de IEEE 754, ¿cómo se calcula el signo del resultado final?",
+      "options": [
+        "Aplicando la operación lógica XOR entre los bits de signo de ambos operandos.",
+        "Aplicando la operación lógica AND entre los bits de signo.",
+        "Tomando siempre el signo del operando con mayor exponente."
+      ],
+      "correct": 0,
+      "hint": "Sigue las reglas algebraicas: signos iguales dan positivo, distintos dan negativo.",
+      "explanation": "La multiplicación de signos sigue la regla de la suma binaria XOR: si los signos son iguales ($$0 \\oplus 0 = 0$$ o $$1 \\oplus 1 = 0$$) el resultado es positivo ($$0$$). Si son opuestos ($$0 \\oplus 1 = 1$$) da negativo ($$1$$)."
+    },
+    {
+      "q": "38. En precisión doble (64 bits), ¿cuál es el rango de exponentes reales para números normalizados?",
+      "options": [
+        "De $$-1022$$ a $$1023$$",
+        "De $$-1023$$ a $$1024$$",
+        "De $$-126$$ a $$127$$"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que el exponente sesgado $$E$$ oscila de 1 a 2046 para normalizados.",
+      "explanation": "Para números normalizados, $$1 \\le E \\le 2046$$. El exponente real $$e = E - 1023$$ va desde $$1 - 1023 = -1022$$ hasta $$2046 - 1023 = 1023$$."
+    },
+    {
+      "q": "39. Para comparar la igualdad de dos flotantes de forma segura en un programa de software, ¿cuál es la mejor práctica?",
+      "options": [
+        "Comprobar si la diferencia absoluta entre ambos es menor que un umbral de tolerancia predefinido (épsilon).",
+        "Utilizar el operador convencional de igualdad doble (`==`).",
+        "Convertir ambos números a enteros mediante truncamiento y luego compararlos."
+      ],
+      "correct": 0,
+      "hint": "Evite comparaciones binarias exactas que puedan diferir en el bit menos significativo.",
+      "explanation": "Dadas las inexactitudes de redondeo, la forma estándar de comparar si $$a$$ y $$b$$ son iguales es verificar si $$|a - b| < \\epsilon$$, donde $$\\epsilon$$ es una pequeña tolerancia adecuada para el cálculo."
+    },
+    {
+      "q": "40. Si representamos un número fraccionario en coma fija con 4 bits de parte entera y 4 bits de parte fraccionaria, ¿cuál es el paso constante (resolución) entre dos valores consecutivos?",
+      "options": [
+        "$$2^{-4} = 0.0625$$",
+        "$$2^{-8} = 0.00390625$$",
+        "$$2^{-1} = 0.5$$"
+      ],
+      "correct": 0,
+      "hint": "El bit menos significativo representa la menor potencia de dos fraccionaria.",
+      "explanation": "Al tener 4 bits para la parte fraccionaria, el bit menos significativo tiene un peso de $$2^{-4}$$. Por tanto, el paso mínimo representable es de $$2^{-4} = 0.0625$$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "1. El número decimal representado por la palabra hexadecimal de 32 bits `0x3F800000` en el estándar IEEE 754 es ____.",
+      "options": [
+        "1.0",
+        "0.5",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "Decodifica los campos: signo S=0, exponente sesgado E=127, mantisa M=0.",
+      "explanation": "El exponente es $$127 - 127 = 0$$. La mantisa real es $$1.0$$. El valor es $$(-1)^0 \\cdot 1.0 \\cdot 2^0 = 1.0$$."
+    },
+    {
+      "q": "2. La palabra hexadecimal de 32 bits que codifica al número real $$-1.0$$ según el estándar IEEE 754 es ____.",
+      "options": [
+        "0xBF800000",
+        "0x3F800000",
+        "0xFF800000"
+      ],
+      "correct": 0,
+      "hint": "Es idéntico a +1.0, pero con el bit de signo S=1.",
+      "explanation": "El valor absoluto $$1.0$$ se representa como `0x3F800000` (binario: `0 01111111 000...`). Al activar el bit 31 de signo ($$S=1$$), la palabra pasa a ser `1 01111111 000...` = `0xBF800000`."
+    },
+    {
+      "q": "3. El exponente sesgado $$E$$ en base decimal para el número real $$0.25$$ representado en precisión simple es ____.",
+      "options": [
+        "125",
+        "127",
+        "126"
+      ],
+      "correct": 0,
+      "hint": "$$0.25 = 2^{-2}$$. Calcula $$E = e + 127$$.",
+      "explanation": "El exponente real es $$e = -2$$. El exponente sesgado es $$E = -2 + 127 = 125$$."
+    },
+    {
+      "q": "4. Si decodificamos el valor hexadecimal `0x40000000` en precisión simple, obtenemos el valor real ____.",
+      "options": [
+        "2.0",
+        "1.0",
+        "4.0"
+      ],
+      "correct": 0,
+      "hint": "S=0, exponente sesgado E=128 (exponente real e=1), mantisa M=0.",
+      "explanation": "$$E = 128 \\implies e = 1$$. La mantisa es $$1.0$$. El valor es $$1.0 \\cdot 2^1 = 2.0$$."
+    },
+    {
+      "q": "5. Si decodificamos el valor hexadecimal `0xC0000000` en precisión simple, obtenemos el valor real ____.",
+      "options": [
+        "-2.0",
+        "-1.0",
+        "-4.0"
+      ],
+      "correct": 0,
+      "hint": "Es el negativo de la palabra `0x40000000`.",
+      "explanation": "S=1 (negativo), E=128 ($$e=1$$), M=0. El valor es $$-1.0 \\cdot 2^1 = -2.0$$."
+    },
+    {
+      "q": "6. El número real codificado por la palabra hexadecimal `0x3FC00000` en precisión simple es ____.",
+      "options": [
+        "1.5",
+        "0.75",
+        "1.25"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=127 (e=0), mantisa fraccionaria M=0.5 (en binario `0.100...`).",
+      "explanation": "$$e = 127 - 127 = 0$$. La mantisa real es $$1.0 + M = 1.5$$. El valor es $$1.5 \\cdot 2^0 = 1.5$$."
+    },
+    {
+      "q": "7. Representando el número decimal $$3.0$$ en precisión simple, el valor de la fracción de la mantisa $$M$$ en decimal es ____.",
+      "options": [
+        "0.5",
+        "0.0",
+        "0.25"
+      ],
+      "correct": 0,
+      "hint": "$$3.0 = 1.5 \\cdot 2^1$$. Deducir la fracción.",
+      "explanation": "Normalizando: $$3_{10} = 11_2 = 1.1_2 \\cdot 2^1$$. La mantisa real es $$1.5$$, por lo que la parte fraccionaria es $$M = 0.5$$."
+    },
+    {
+      "q": "8. La representación hexadecimal de la constante decimal $$0.5$$ en precisión simple de 32 bits es ____.",
+      "options": [
+        "0x3F000000",
+        "0x3E800000",
+        "0x3F800000"
+      ],
+      "correct": 0,
+      "hint": "$$0.5 = 1.0 \\cdot 2^{-1}$$. Calcula el exponente sesgado.",
+      "explanation": "$$e = -1 \\implies E = -1 + 127 = 126$$ (`01111110`). La mantisa $$M = 0$$. La palabra es `0 01111110 000...` = `0x3F000000`."
+    },
+    {
+      "q": "9. La palabra hexadecimal `0x40400000` en precisión simple codifica al número decimal ____.",
+      "options": [
+        "3.0",
+        "2.0",
+        "2.5"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=128 (e=1), M = 0.5 (binario `0.1`).",
+      "explanation": "$$V = 1.5 \\cdot 2^1 = 3.0$$."
+    },
+    {
+      "q": "10. El exponente sesgado $$E$$ (en binario de 8 bits) para el número real $$-6.625$$ en precisión simple es ____.",
+      "options": [
+        "10000001",
+        "10000000",
+        "01111111"
+      ],
+      "correct": 0,
+      "hint": "El exponente real tras normalizar es e = 2.",
+      "explanation": "$$6.625 = 1.65625 \\cdot 2^2 \\implies e = 2$$. El exponente sesgado es $$2 + 127 = 129$$. En binario: `10000001`."
+    },
+    {
+      "q": "11. El valor decimal de la fracción de mantisa $$M$$ correspondiente al decimal $$-6.625$$ en precisión simple es ____.",
+      "options": [
+        "0.65625",
+        "0.10101",
+        "0.625"
+      ],
+      "correct": 0,
+      "hint": "Divida la mantisa normalizada entre la potencia del exponente sin el bit implícito.",
+      "explanation": "$$6.625_{10} = 110.101_2 = 1.10101_2 \\cdot 2^2$$. La fracción binaria es $$.10101_2$$ que equivale en decimal a $$0.5 + 0.125 + 0.03125 = 0.65625$$."
+    },
+    {
+      "q": "12. El valor hexadecimal `0x40A00000` representa al número real ____.",
+      "options": [
+        "5.0",
+        "2.5",
+        "10.0"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=129 (e=2), M=0.25 (binario `0.01`).",
+      "explanation": "$$V = (1 + 0.25) \\cdot 2^2 = 1.25 \\cdot 4 = 5.0$$."
+    },
+    {
+      "q": "13. La palabra hexadecimal `0x41200000` representa al número real ____.",
+      "options": [
+        "10.0",
+        "5.0",
+        "8.0"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=130 (e=3), M=0.25 (binario `0.01`).",
+      "explanation": "$$V = (1 + 0.25) \\cdot 2^3 = 1.25 \\cdot 8 = 10.0$$."
+    },
+    {
+      "q": "14. El valor decimal real codificado en precisión simple por `0x40200000` es ____.",
+      "options": [
+        "2.5",
+        "1.25",
+        "5.0"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=128 (e=1), M=0.25 (binario `0.01`).",
+      "explanation": "$$V = (1 + 0.25) \\cdot 2^1 = 1.25 \\cdot 2 = 2.5$$."
+    },
+    {
+      "q": "15. La representación hexadecimal del número real $$-10.0$$ en precisión simple es ____.",
+      "options": [
+        "0xC1200000",
+        "0x41200000",
+        "0xC0A00000"
+      ],
+      "correct": 0,
+      "hint": "Es el negativo de 10.0 (`0x41200000`).",
+      "explanation": "Para $$-10.0$$, cambiamos el bit 31 a 1 en `0x41200000` (que es `0100 0001 0010 ...`), resultando en `1100 0001 0010 ...` = `0xC1200000`."
+    },
+    {
+      "q": "16. La palabra hexadecimal `0x00800000` en precisión simple de 32 bits codifica al número decimal real ____.",
+      "options": [
+        "$$2^{-126}$$",
+        "$$2^{-127}$$",
+        "$$2^{-149}$$"
+      ],
+      "correct": 0,
+      "hint": "Es el menor número positivo normalizado: E=1, M=0.",
+      "explanation": "$$E = 1 \\implies e = -126$$. Mantisa $$M = 0$$. El valor es $$1.0 \\cdot 2^{-126}$$."
+    },
+    {
+      "q": "17. El valor decimal real correspondiente a la palabra `0x00000001` (el menor denormalizado positivo) es ____.",
+      "options": [
+        "$$2^{-149}$$",
+        "$$2^{-126}$$",
+        "$$2^{-150}$$"
+      ],
+      "correct": 0,
+      "hint": "E=0, M=1 (bit menos significativo en 1).",
+      "explanation": "Para $$E=0$$ la fórmula es $$0.M \\cdot 2^{-126}$$. Con $$M = 2^{-23}$$, obtenemos $$2^{-23} \\cdot 2^{-126} = 2^{-149}$$."
+    },
+    {
+      "q": "18. La palabra hexadecimal `0x7F800000` representa al valor especial de la FPU ____.",
+      "options": [
+        "$$+\\infty$$",
+        "$$-\\infty$$",
+        "NaN"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=255, M=0.",
+      "explanation": "Al tener signo positivo, exponente al máximo ($$255$$) y mantisa nula, representa el infinito positivo ($$+\\infty$$)."
+    },
+    {
+      "q": "19. La palabra hexadecimal `0xFF800000` representa al valor especial de la FPU ____.",
+      "options": [
+        "$$-\\infty$$",
+        "$$+\\infty$$",
+        "NaN"
+      ],
+      "correct": 0,
+      "hint": "S=1, E=255, M=0.",
+      "explanation": "Al tener signo negativo, exponente al máximo ($$255$$) y mantisa nula, representa el infinito negativo ($$-\\infty$$)."
+    },
+    {
+      "q": "20. La palabra hexadecimal `0x7FC00000` representa al valor especial de la FPU ____.",
+      "options": [
+        "NaN (Not a Number)",
+        "$$+\\infty$$",
+        "Cero"
+      ],
+      "correct": 0,
+      "hint": "S=0, E=255, y mantisa no nula.",
+      "explanation": "El exponente es $$255$$ y la mantisa contiene bits activos, por lo que es un NaN (específicamente un Quiet NaN)."
+    },
+    {
+      "q": "21. ¿Cuáles de los siguientes valores especiales se representan con el exponente sesgado $$E = 255$$ en precisión simple?",
+      "options": [
+        "Infinito positivo ($$+\\infty$$).",
+        "Not a Number (NaN).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Repase la tabla de valores especiales de exponentes extremos.",
+      "explanation": "Tanto el infinito (con $$M=0$$) como el NaN (con $$M \\neq 0$$) emplean el exponente máximo reservado $$E = 255$$."
+    },
+    {
+      "q": "22. ¿Cuáles de las siguientes operaciones lógicas o aritméticas sobre números flotantes pueden producir un valor NaN?",
+      "options": [
+        "La división indeterminada $$0.0 / 0.0$$.",
+        "La resta indeterminada $$\\infty - \\infty$$.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "NaN representa cualquier operación matemática sin un resultado real definido.",
+      "explanation": "Ambas operaciones carecen de sentido matemático en la recta real y producen NaN."
+    },
+    {
+      "q": "23. ¿Qué valores del campo exponente $$E$$ (en binario de 8 bits) corresponden a interpretaciones especiales fuera de los números normalizados?",
+      "options": [
+        "$$E = 00000000_2$$",
+        "$$E = 11111111_2$$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Los exponentes mínimo y máximo están reservados por el estándar.",
+      "explanation": "$$E = 0$$ se reserva para el cero y denormalizados, y $$E = 255$$ ($$11111111_2$$) para infinito y NaN."
+    },
+    {
+      "q": "24. ¿Cuáles de las siguientes constantes se pueden representar exactamente en el estándar IEEE 754 de precisión simple?",
+      "options": [
+        "$$0.75$$",
+        "$$0.125$$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Ambos números tienen denominadores que son potencias puras de dos.",
+      "explanation": "$$0.75 = 2^{-1} + 2^{-2}$$ y $$0.125 = 2^{-3}$$. Al ser sumas finitas de potencias negativas de dos, se codifican de forma exacta sin errores de redondeo."
+    },
+    {
+      "q": "25. ¿Qué efectos lógicos o computacionales puede causar la pérdida de precisión en operaciones repetidas de coma flotante?",
+      "options": [
+        "Fallo de convergencia en algoritmos iterativos.",
+        "Inestabilidad en comparaciones directas de igualdad (`==`).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Considere las implicaciones de arrastrar pequeños errores en el último bit significativo.",
+      "explanation": "Los errores acumulados impiden que los bucles de optimización converjan de forma exacta y hacen que comparaciones sencillas como `x == 0.3` fallen."
+    },
+    {
+      "q": "26. El comportamiento de los números denormalizados ($$E = 0, M \\neq 0$$) incluye las siguientes características:",
+      "options": [
+        "La ausencia de bit implícito igual a 1 (el bit implícito es 0).",
+        "Un exponente real fijo de $$-126$$ en precisión simple.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Revise la definición matemática del valor real denormalizado.",
+      "explanation": "En denormalizados, el bit implícito es 0 y el exponente real está fijado a $$-126$$ para evitar discontinuidades de espaciado."
+    },
+    {
+      "q": "27. En relación con el valor especial NaN (Not a Number), ¿cuáles de las siguientes comparaciones lógicas devuelven Falso?",
+      "options": [
+        "`NaN == NaN`",
+        "`NaN == 5.0`",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "NaN no es comparable en igualdad con ningún valor del sistema.",
+      "explanation": "Tanto la comparación de NaN consigo mismo como con cualquier otro número real devuelve siempre Falso."
+    },
+    {
+      "q": "28. ¿Qué características definen a la precisión doble (64 bits) de IEEE 754 frente a la precisión simple (32 bits)?",
+      "options": [
+        "Mayor cantidad de bits en la mantisa fraccionaria (52 bits frente a 23 bits).",
+        "Mayor rango de exponentes y sesgo (1023 frente a 127).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La precisión doble expande el ancho de palabra de todos los campos excepto el signo.",
+      "explanation": "El formato doble utiliza 11 bits de exponente (sesgo 1023) y 52 de mantisa, mejorando sustancialmente el rango y la precisión dinámica."
+    },
+    {
+      "q": "29. ¿Cuáles de los siguientes son modos de redondeo válidos contemplados en el estándar IEEE 754?",
+      "options": [
+        "Redondeo hacia más infinito ($$+\\infty$$).",
+        "Redondeo hacia el cero (truncamiento).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Hay cuatro modos de redondeo principales.",
+      "explanation": "Los modos son: Round to Nearest (Ties to Even), Round toward $$+\\infty$$, Round toward $$-\\infty$$ y Round toward Zero."
+    },
+    {
+      "q": "30. ¿Qué propiedades de codificación comparten el cero positivo ($$+0.0$$) y el cero negativo ($$-0.0$$)?",
+      "options": [
+        "Tienen el mismo exponente sesgado $$E = 0$$.",
+        "Tienen la misma mantisa fraccionaria $$M = 0$$.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La única diferencia entre ambos es un solo bit de la palabra de 32 bits.",
+      "explanation": "Ambos ceros comparten $$E=0$$ y $$M=0$$, difiriendo únicamente en el bit 31 de signo ($$S=0$$ frente a $$S=1$$)."
+    },
+    {
+      "q": "31. Si decodificamos la palabra hexadecimal `0x3F800000` en precisión simple, ¿cuál de los siguientes es su valor real?",
+      "options": [
+        "0.5",
+        "2.0",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El valor real representado es la unidad.",
+      "explanation": "La palabra `0x3F800000` representa exactamente el valor decimal $$1.0$$. Al no estar en las opciones A o B, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "32. ¿Cuál es el valor del exponente sesgado $$E$$ (en base decimal) para el número real $$0.0625$$ ($$2^{-4}$$) en precisión simple?",
+      "options": [
+        "127",
+        "120",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El exponente real es -4. Sume el sesgo.",
+      "explanation": "$$E = -4 + 127 = 123$$. Dado que las opciones muestran 127 y 120, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "33. ¿Cuál es la representación hexadecimal en precisión simple del número real decimal $$-3.0$$?",
+      "options": [
+        "0x40400000",
+        "0xBF800000",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "$$3.0 = 1.5 \\cdot 2^1$$. Duzca el signo y ensamble.",
+      "explanation": "El valor $$+3.0$$ es `0x40400000`. Al poner el bit de signo negativo ($$S=1$$), obtenemos `0xC0400000`. Al no figurar, marcamos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "34. Al realizar la operación de división $$5.0 / 0.0$$, ¿qué valor se obtiene según el estándar IEEE 754?",
+      "options": [
+        "0.0",
+        "NaN",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Dividir un número positivo entre cero tiende al límite infinito.",
+      "explanation": "El resultado de $$5.0 / 0.0$$ es $$+\\infty$$. Al no estar listado en las opciones A ni B, elegimos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "35. ¿Cuál es el exponente sesgado $$E$$ de los números denormalizados en precisión simple?",
+      "options": [
+        "1",
+        "127",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Revise el valor del campo exponente reservado para denormalizados.",
+      "explanation": "El exponente sesgado de los denormalizados es siempre $$E = 0$$. Como la opción A es 1 y la B es 127, marcamos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "36. ¿Cuál es el valor de la mantisa real (con el bit implícito incluido) para el valor del cero positivo ($$+0.0$$)?",
+      "options": [
+        "1.0",
+        "0.5",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Los ceros usan la representación denormalizada ($$E=0$$) con mantisa fraccionaria nula.",
+      "explanation": "El cero usa $$E=0$$, lo que implica un bit oculto igual a $$0$$. Su mantisa real es $$0.0$$. Al no ser ni 1.0 ni 0.5, la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "37. Si ejecutamos la operación `abs(-0.0)` en un sistema compatible con IEEE 754, el resultado es:",
+      "options": [
+        "-0.0",
+        "NaN",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La función absoluto limpia el bit de signo.",
+      "explanation": "`abs(-0.0)` produce el cero con signo positivo, es decir, $$+0.0$$. Al no figurar en A ni B, elegimos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "38. En precisión simple, ¿cuántos bits de la mantisa ($$M$$) se almacenan físicamente en la memoria para un número normalizado?",
+      "options": [
+        "24 bits",
+        "32 bits",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Recuerde el bit que se ahorra gracias a la normalización.",
+      "explanation": "Se almacenan exactamente 23 bits (el bit 24 es el implícito y no ocupa memoria). Ninguna de las opciones propuestas (24 o 32) es correcta."
+    },
+    {
+      "q": "39. ¿Qué valor decimal real se almacena en la palabra hexadecimal `0x3E800000` en precisión simple?",
+      "options": [
+        "0.5",
+        "1.0",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "S=0, E=125 (e=-2), M=0.",
+      "explanation": "$$V = 1.0 \\cdot 2^{-2} = 0.25$$. Al no coincidir con 0.5 o 1.0, la opción correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "40. Si el exponente real de un número de precisión simple es $$e = -127$$, ¿de qué tipo de número se trata en el estándar IEEE 754?",
+      "options": [
+        "Un número normalizado estándar.",
+        "Un valor infinito.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Para normalizados, el exponente mínimo real es -126.",
+      "explanation": "El exponente real mínimo para normalizados es $$-126$$. Los denormalizados tienen un exponente real efectivo fijado en $$-126$$. No hay ningún número con exponente real de $$-127$$, por lo que la respuesta es 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Representación de +0.75 en Precisión Simple",
+      "context": "Se requiere codificar el número real fraccionario $$+0.75_{10}$$ en el estándar IEEE 754 de precisión simple.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$ del número tras normalizarlo.",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "$$0.75_{10} = 0.11_2 = 1.1_2 \\cdot 2^{-1}$$. Por lo tanto, el exponente real es $$e = -1$$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ en base decimal.",
+          "correctValue": 126,
+          "tolerance": 0.0,
+          "explanation": "$$E = e + 127 = -1 + 127 = 126$$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Determine el valor decimal de la fracción de mantisa $$M$$ almacenada en memoria.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "La mantisa normalizada es $$1.1_2$$, por lo que la parte fraccionaria es $$.1_2$$ que equivale en decimal a $$0.5$$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Calcule el valor decimal entero sin signo de la palabra de 32 bits resultante (codificada en hex como `0x3F400000`).",
+          "correctValue": 1061158912,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0 01111110 10000000000000000000000` = `0x3F400000` en hexadecimal. Convertido a entero: $$3 \\cdot 16^7 + 15 \\cdot 16^6 + 4 \\cdot 16^5 = 1061158912$$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Codificación del valor -6.625 en Precisión Simple",
+      "context": "Codifique paso a paso el número real negativo $$-6.625_{10}$$ según el estándar IEEE 754.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Escriba el bit de signo $$S$$ (0 para positivo, 1 para negativo).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Dado que el número es negativo, el bit de signo es $$S = 1$$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ en base decimal.",
+          "correctValue": 129,
+          "tolerance": 0.0,
+          "explanation": "$$6.625_{10} = 110.101_2 = 1.10101_2 \\cdot 2^2 \\implies e = 2$$. El exponente sesgado es $$E = 2 + 127 = 129$$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Determine el valor decimal de la fracción de mantisa $$M$$.",
+          "correctValue": 0.65625,
+          "tolerance": 0.0,
+          "explanation": "La fracción binaria es $$.10101_2 = 2^{-1} + 2^{-3} + 2^{-5} = 0.5 + 0.125 + 0.03125 = 0.65625$$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Determine el valor decimal del entero sin signo de la palabra de 32 bits resultante (`0xC0D40000`).",
+          "correctValue": 3235053568,
+          "tolerance": 0.0,
+          "explanation": "La palabra binaria es `1 10000001 10101000000000000000000` = `0xC0D40000`. Convertido a entero: $$12 \\cdot 16^7 + 13 \\cdot 16^5 = 3235053568$$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Decodificación de la palabra 0x40B00000",
+      "context": "Se analiza el contenido de un registro de coma flotante que contiene el valor `0x40B00000` en precisión simple.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Obtenga el bit de signo $$S$$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "`0x40B00000` comienza con el bit binario $$0$$, por lo que es positivo."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Obtenga el exponente sesgado $$E$$ en base decimal.",
+          "correctValue": 129,
+          "tolerance": 0.0,
+          "explanation": "Los bits de exponente son `10000001` que equivalen a $$129$$ en decimal."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcule el exponente real $$e$$ del número.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$$e = E - 127 = 129 - 127 = 2$$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcule el valor decimal real codificado por el registro.",
+          "correctValue": 5.5,
+          "tolerance": 0.0,
+          "explanation": "La mantisa fraccionaria es `011000...` = $$0.375$$. El valor es $$(1 + 0.375) \\cdot 2^2 = 1.375 \\cdot 4 = 5.5$$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Decodificación de la palabra 0xC1200000",
+      "context": "Decodifique el número real contenido en la palabra de 32 bits `0xC1200000`.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Determine el bit de signo $$S$$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "`0xC` en binario es `1100`, el bit más significativo es $$1$$ (negativo)."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ en base decimal.",
+          "correctValue": 130,
+          "tolerance": 0.0,
+          "explanation": "Los 8 bits de exponente son `10000010` que corresponden a $$130$$ en decimal."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "$$e = E - 127 = 130 - 127 = 3$$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcule el valor decimal real final representado.",
+          "correctValue": -10.0,
+          "tolerance": 0.0,
+          "explanation": "La mantisa es $$.0100..._2 = 0.25$$. El valor es $$-1 \\cdot (1 + 0.25) \\cdot 2^3 = -1.25 \\cdot 8 = -10.0$$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Representación de 0.15625 (5/32)",
+      "context": "Se desea codificar el número real positivo $$0.15625_{10}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": -3,
+          "tolerance": 0.0,
+          "explanation": "$$0.15625 = 2^{-3} + 2^{-5} = 0.00101_2 = 1.01_2 \\cdot 2^{-3}$$. Por tanto, $$e = -3$$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ en base decimal.",
+          "correctValue": 124,
+          "tolerance": 0.0,
+          "explanation": "$$E = e + 127 = -3 + 127 = 124$$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Determine el valor decimal de la fracción de mantisa $$M$$.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "La fracción binaria es $$.01_2$$ que equivale a $$2^{-2} = 0.25$$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Determine el valor decimal de la palabra de 32 bits (hex: `0x3E200000`).",
+          "correctValue": 1042284544,
+          "tolerance": 0.0,
+          "explanation": "La palabra binaria es `0 01111100 01000000000000000000000` = `0x3E200000`. Convertido a entero: $$3 \\cdot 16^7 + 14 \\cdot 16^6 + 2 \\cdot 16^5 = 1042284544$$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Análisis del Menor Positivo Normalizado",
+      "context": "Encuentre los campos del menor número real positivo normalizado representable en precisión simple.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$ mínimo permitido para números normalizados.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El exponente $$E=0$$ está reservado para el cero y denormalizados, por lo que el mínimo normalizado es $$E = 1$$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Determine el exponente real $$e$$ correspondiente.",
+          "correctValue": -126,
+          "tolerance": 0.0,
+          "explanation": "$$e = 1 - 127 = -126$$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Determine la fracción de mantisa $$M$$ en decimal para lograr el mínimo valor posible.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Para minimizar el número, la mantisa debe ser nula, $$M = 0.0$$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule el entero sin signo equivalente a la palabra de 32 bits resultante (`0x00800000`).",
+          "correctValue": 8388608,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0 00000001 00000000000000000000000` = `0x00800000`. En decimal: $$8 \\cdot 16^5 = 8388608$$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Análisis del Menor Positivo Denormalizado",
+      "context": "Se estudia el límite de subdesbordamiento absoluto en precisión simple (menor número positivo denormalizado).",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Los números denormalizados se identifican con un exponente sesgado de $$E = 0$$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Determine el exponente real $$e$$ aplicable para el cálculo según el estándar.",
+          "correctValue": -126,
+          "tolerance": 0.0,
+          "explanation": "Por definición, el exponente real para números denormalizados en precisión simple es fijo y vale $$-126$$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Determine la fracción de la mantisa $$M$$ en decimal para el menor denormalizado ($$2^{-23}$$).",
+          "correctValue": 1.1920928955078125e-07,
+          "tolerance": 1e-12,
+          "explanation": "El menor valor denormalizado tiene el bit menos significativo en 1, lo que da $$M = 2^{-23} \\approx 1.1920928955 \\cdot 10^{-7}$$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Obtenga el valor entero sin signo de la palabra de 32 bits resultante (`0x00000001`).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0 00000000 00000000000000000000001` = `0x00000001` = $$1$$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Análisis del Mayor Normalizado Finito",
+      "context": "Encuentre la codificación y los valores correspondientes al mayor número real finito representable en precisión simple.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$ máximo permitido para números normalizados finitos.",
+          "correctValue": 254,
+          "tolerance": 0.0,
+          "explanation": "$$E=255$$ está reservado para infinito y NaN, por lo que el máximo finito es $$E = 254$$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Determine el exponente real $$e$$ correspondiente.",
+          "correctValue": 127,
+          "tolerance": 0.0,
+          "explanation": "$$e = E - 127 = 254 - 127 = 127$$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Determine el valor de la fracción de mantisa $$M$$ en decimal (todos los bits en 1).",
+          "correctValue": 0.9999998807907104,
+          "tolerance": 1e-09,
+          "explanation": "La fracción máxima es $$1 - 2^{-23} \\approx 0.99999988079$$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcule el entero sin signo equivalente a la palabra de 32 bits resultante (`0x7F7FFFFF`).",
+          "correctValue": 2139095039,
+          "tolerance": 0.0,
+          "explanation": "La palabra de 32 bits es `0 11111110 11111111111111111111111` = `0x7F7FFFFF` que equivale en decimal a $$2139095039$$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Codificación del valor -0.375",
+      "context": "Codifique el número real negativo $$-0.375_{10}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Determine el bit de signo $$S$$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como es negativo, el bit de signo es $$S = 1$$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ decimal.",
+          "correctValue": 125,
+          "tolerance": 0.0,
+          "explanation": "$$0.375 = 0.011_2 = 1.1_2 \\cdot 2^{-2} \\implies e = -2$$. El exponente sesgado es $$E = -2 + 127 = 125$$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcule el valor decimal de la fracción de mantisa $$M$$.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "La mantisa es $$1.1_2$$, por tanto la parte fraccionaria es $$M = 0.5$$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Determine el valor de la palabra de 32 bits como un entero sin signo (`0xBEC00000`).",
+          "correctValue": 3200253952,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `1 01111101 10000000000000000000000` = `0xBEC00000`. Convertido a entero: $$11 \\cdot 16^7 + 14 \\cdot 16^6 + 12 \\cdot 16^5 = 3200253952$$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Codificación del entero positivo +120.0",
+      "context": "Se requiere codificar $$+120.0_{10}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "$$120_{10} = 1111000_2 = 1.111_2 \\cdot 2^6 \\implies e = 6$$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ decimal.",
+          "correctValue": 133,
+          "tolerance": 0.0,
+          "explanation": "$$E = 6 + 127 = 133$$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcule el valor decimal de la fracción de mantisa $$M$$.",
+          "correctValue": 0.875,
+          "tolerance": 0.0,
+          "explanation": "La parte fraccionaria de la mantisa es $$.111_2 = 0.5 + 0.25 + 0.125 = 0.875$$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Determine el valor entero sin signo de la palabra de 32 bits resultante (`0x42F00000`).",
+          "correctValue": 1123024896,
+          "tolerance": 0.0,
+          "explanation": "La palabra binaria es `0 10000101 11100000000000000000000` = `0x42F00000` = $$1123024896$$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Estudio de Épsilon de Máquina",
+      "context": "Analice matemáticamente el épsilon de máquina $$\\epsilon = 2^{-23}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Escriba la potencia de 2 correspondiente a $$\\epsilon$$ (es decir, el exponente de $$2^{-23}$$, indicando sólo el entero).",
+          "correctValue": -23,
+          "tolerance": 0.0,
+          "explanation": "El épsilon se define como $$2^{-23}$$, por lo que la potencia es $$-23$$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcule el valor decimal numérico de $$\\epsilon$$.",
+          "correctValue": 1.1920928955078125e-07,
+          "tolerance": 1e-12,
+          "explanation": "$$2^{-23} \\approx 1.1920928955 \\cdot 10^{-7}$$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Determine el exponente sesgado $$E$$ (en base decimal) del número real $$(1 + \\epsilon)$$.",
+          "correctValue": 127,
+          "tolerance": 0.0,
+          "explanation": "$$1 + \\epsilon = 1.00000000000000000000001_2 \\cdot 2^0$$. El exponente real es $$0$$, por lo que el sesgado es $$E = 0 + 127 = 127$$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Determine el valor decimal de la fracción de mantisa $$M$$ para el número $$(1 + \\epsilon)$$.",
+          "correctValue": 1.1920928955078125e-07,
+          "tolerance": 1e-12,
+          "explanation": "La fracción es de $$2^{-23}$$, la cual vale aproximadamente $$1.1920928955 \\cdot 10^{-7}$$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Estructura del Formato de Precisión Doble",
+      "context": "Se analiza el formato de precisión doble de 64 bits.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuántos bits se reservan para el exponente sesgado?",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "En precisión doble se reservan exactamente 11 bits para el exponente."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "¿Cuántos bits se reservan para la mantisa fraccionaria?",
+          "correctValue": 52,
+          "tolerance": 0.0,
+          "explanation": "Se reservan exactamente 52 bits para la mantisa fraccionaria."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del sesgo (bias) para este formato?",
+          "correctValue": 1023,
+          "tolerance": 0.0,
+          "explanation": "El sesgo es de $$2^{11-1} - 1 = 1023$$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Determine el exponente sesgado $$E$$ (en base decimal) del número real $$2.0$$ en precisión doble.",
+          "correctValue": 1024,
+          "tolerance": 0.0,
+          "explanation": "$$2.0 = 1.0 \\cdot 2^1 \\implies e = 1$$. El exponente sesgado es $$1 + 1023 = 1024$$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "El cero negativo y su comportamiento",
+      "context": "Estudiamos la representación del cero negativo $$-0.0$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Escriba el bit de signo $$S$$ de $$-0.0$$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Al ser negativo, el bit de signo es $$S = 1$$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Obtenga el exponente sesgado $$E$$ decimal de $$-0.0$$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Cero tiene un exponente de $$E = 0$$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Determine la mantisa fraccionaria $$M$$ en decimal.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La mantisa fraccionaria para el cero es nula ($$M = 0.0$$)."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Determine el signo del resultado del límite $$1.0 / (-0.0)$$ como entero ($$-1$$ para negativo, $$1$$ para positivo).",
+          "correctValue": -1,
+          "tolerance": 0.0,
+          "explanation": "$$1.0 / (-0.0) = -\\infty$$, el cual es negativo, codificado por $$-1$$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Codificación aproximada de +0.1",
+      "context": "El número decimal $$+0.1_{10}$$ presenta una secuencia binaria periódica infinita y se almacena de forma aproximada.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$ del número tras normalizarlo en binario.",
+          "correctValue": -4,
+          "tolerance": 0.0,
+          "explanation": "$$0.1_{10} = 0.00011001100..._2 = 1.10011001..._2 \\cdot 2^{-4}$$. Por tanto, el exponente real es $$e = -4$$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ decimal.",
+          "correctValue": 123,
+          "tolerance": 0.0,
+          "explanation": "$$E = -4 + 127 = 123$$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Determine la mantisa fraccionaria decimal $$M$$ tras redondear a 23 bits al más cercano.",
+          "correctValue": 0.6000000238418579,
+          "tolerance": 1e-08,
+          "explanation": "La secuencia binaria redondeada es $$.10011001100110011001101_2$$, que en decimal es exactamente $$0.6000000238418579$$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Determine el valor entero sin signo de la palabra de 32 bits resultante (`0x3DCCCCCD`).",
+          "correctValue": 1036831949,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0 01111011 10011001100110011001101` = `0x3DCCCCCD` = $$1036831949$$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Codificación aproximada de +0.2",
+      "context": "El número decimal $$+0.2_{10}$$ se almacena con el doble de magnitud que $$0.1$$ pero con idéntica mantisa.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": -3,
+          "tolerance": 0.0,
+          "explanation": "$$0.2 = 1.1001100..._2 \\cdot 2^{-3} \\implies e = -3$$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Obtenga el exponente sesgado $$E$$ decimal.",
+          "correctValue": 124,
+          "tolerance": 0.0,
+          "explanation": "$$E = -3 + 127 = 124$$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Determine la mantisa fraccionaria decimal $$M$$ tras el redondeo de precisión simple.",
+          "correctValue": 0.6000000238418579,
+          "tolerance": 1e-08,
+          "explanation": "La fracción de la mantisa es la misma que la del $$0.1$$, es decir, $$0.6000000238418579$$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Determine el valor decimal del entero de 32 bits de la palabra resultante (`0x3E4CCCCD`).",
+          "correctValue": 1045220557,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0x3E4CCCCD` que equivale en decimal a $$1045220557$$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Suma inexacta de 0.1 y 0.2",
+      "context": "Se realiza la suma de $$0.1 + 0.2$$ en aritmética de precisión simple y se observa la propagación del redondeo.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$ del resultado de la suma.",
+          "correctValue": -2,
+          "tolerance": 0.0,
+          "explanation": "El resultado ronda los $$0.3$$, cuya normalización es $$1.2_2 \\cdot 2^{-2} \\implies e = -2$$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ del resultado.",
+          "correctValue": 125,
+          "tolerance": 0.0,
+          "explanation": "$$E = -2 + 127 = 125$$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcule el valor real decimal almacenado en la variable resultante de la suma.",
+          "correctValue": 0.30000001192092896,
+          "tolerance": 1e-10,
+          "explanation": "La suma en binario resulta en la palabra `0x3E99999A` que representa exactamente $$0.30000001192092896$$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Determine el valor entero sin signo de la palabra de 32 bits resultante de la suma (`0x3E99999A`).",
+          "correctValue": 1050253722,
+          "tolerance": 0.0,
+          "explanation": "La palabra `0x3E99999A` es $$1050253722$$ en base decimal."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Decodificación de 0x41C80000",
+      "context": "Se analiza el registro de memoria `0x41C80000`.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Determine el bit de signo $$S$$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "El bit 31 es $$0$$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ decimal.",
+          "correctValue": 131,
+          "tolerance": 0.0,
+          "explanation": "Los bits de exponente son `10000011` que es $$131$$ en decimal."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Obtenga el exponente real $$e$$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$$e = 131 - 127 = 4$$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcule el valor decimal real representado.",
+          "correctValue": 25.0,
+          "tolerance": 0.0,
+          "explanation": "La mantisa fraccionaria es `100100...` en binario = $$0.5 + 0.0625 = 0.5625$$. El valor real es $$(1 + 0.5625) \\cdot 2^4 = 1.5625 \\cdot 16 = 25.0$$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Codificación de -15.0",
+      "context": "Represente el entero negativo $$-15.0_{10}$$ en el estándar de precisión simple.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "$$15_{10} = 1111_2 = 1.111_2 \\cdot 2^3 \\implies e = 3$$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ decimal.",
+          "correctValue": 130,
+          "tolerance": 0.0,
+          "explanation": "$$E = 3 + 127 = 130$$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Determine la mantisa fraccionaria $$M$$ en decimal.",
+          "correctValue": 0.875,
+          "tolerance": 0.0,
+          "explanation": "$$.111_2 = 0.5 + 0.25 + 0.125 = 0.875$$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Determine el valor entero sin signo de la palabra de 32 bits resultante (`0xC1700000`).",
+          "correctValue": 3245342720,
+          "tolerance": 0.0,
+          "explanation": "La palabra binaria es `1 10000010 11100000000000000000000` = `0xC1700000` = $$3245342720$$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Codificación del valor 2^-4",
+      "context": "Codifique la constante real $$0.0625_{10}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": -4,
+          "tolerance": 0.0,
+          "explanation": "$$0.0625 = 2^{-4} \\implies e = -4$$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ decimal.",
+          "correctValue": 123,
+          "tolerance": 0.0,
+          "explanation": "$$E = -4 + 127 = 123$$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Determine la fracción de la mantisa $$M$$ en decimal.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La mantisa es una potencia exacta de dos, por lo que su fracción es $$0.0$$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcule el valor decimal entero de la palabra de 32 bits (`0x3D800000`).",
+          "correctValue": 1031798784,
+          "tolerance": 0.0,
+          "explanation": "La palabra binaria es `0 01111011 00000000000000000000000` = `0x3D800000` = $$1031798784$$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Codificación de -1.0",
+      "context": "Represente el entero negativo $$-1.0$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Determine el bit de signo $$S$$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Al ser negativo, el bit de signo es $$S = 1$$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcule el exponente sesgado $$E$$ decimal.",
+          "correctValue": 127,
+          "tolerance": 0.0,
+          "explanation": "$$1.0 = 1.0 \\cdot 2^0 \\implies e = 0$$. El exponente sesgado es $$E = 0 + 127 = 127$$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "El exponente real es $$e = 0$$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Determine el valor decimal del entero de 32 bits de la palabra resultante (`0xBF800000`).",
+          "correctValue": 3212836864,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0xBF800000` que equivale en decimal a $$3212836864$$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Absorción con la constante 2^24",
+      "context": "En un sistema de precisión simple se realiza la suma $$2^{24} + 1.0$$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Determine el exponente real $$e$$ del operando $$2^{24}$$.",
+          "correctValue": 24,
+          "tolerance": 0.0,
+          "explanation": "$$2^{24} = 1.0 \\cdot 2^{24} \\implies e = 24$$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcule el valor real que devuelve la FPU tras realizar la operación $$16777216.0 + 1.0$$.",
+          "correctValue": 16777216.0,
+          "tolerance": 0.0,
+          "explanation": "Debido a que $$1.0$$ requiere un desplazamiento de 24 posiciones a la derecha para alinearse con el exponente 24, su mantisa se sale por completo del registro de 24 bits y es absorbida por el valor mayor."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Determine el valor decimal entero de la palabra de 32 bits resultante (`0x4B800000`).",
+          "correctValue": 1266679808,
+          "tolerance": 0.0,
+          "explanation": "La palabra de 32 bits de $$2^{24}$$ es `0x4B800000` = $$1266679808$$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcule el valor del error absoluto cometido por la FPU en esta operación.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El valor matemático exacto es $$16777217.0$$, pero la FPU devolvió $$16777216.0$$, por lo que el error absoluto es $$1.0$$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Precisión límite con la constante 2^23",
+      "context": "Se analiza el límite inferior de la absorción sumando $$2^{23} + 1.0$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$ de $$2^{23}$$.",
+          "correctValue": 23,
+          "tolerance": 0.0,
+          "explanation": "$$2^{23} = 1.0 \\cdot 2^{23} \\implies e = 23$$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcule el valor real que devuelve la FPU para la suma.",
+          "correctValue": 8388609.0,
+          "tolerance": 0.0,
+          "explanation": "El desplazamiento de $$1.0$$ para alinear exponentes es de 23 posiciones, por lo que el bit de la mantisa cae justo en la última posición almacenable (bit 0), representándose de forma exacta."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Obtenga el valor decimal entero de la palabra de 32 bits de este resultado (`0x4B000001`).",
+          "correctValue": 1258291201,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0 10010110 00000000000000000000001` = `0x4B000001` = $$1258291201$$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Determine el error absoluto cometido en esta operación.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Al ser la suma exacta en FPU, el error es de $$0.0$$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Cruce del Límite de Normalización",
+      "context": "Se divide el menor número positivo normalizado $$2^{-126}$$ por 2.0.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$ del resultado.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "El resultado es $$2^{-127}$$, el cual ya no puede representarse de forma normalizada, por lo que se desnormaliza tomando $$E = 0$$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Obtenga el exponente real matemático $$e$$ que se aplica al decodificar este resultado.",
+          "correctValue": -126,
+          "tolerance": 0.0,
+          "explanation": "Para números denormalizados ($$E=0$$), el exponente real es de $$-126$$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Obtenga la mantisa fraccionaria $$M$$ en decimal.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "$$2^{-127} = 0.5 \\cdot 2^{-126} \\implies M = 0.5$$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Determine el valor decimal de la palabra de 32 bits resultante (`0x00400000`).",
+          "correctValue": 4194304,
+          "tolerance": 0.0,
+          "explanation": "La palabra binaria es `0 00000000 10000000000000000000000` = `0x00400000` = $$4194304$$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Comparación Simple vs Doble Precisión",
+      "context": "Se codifica la constante $$+1.5$$ en simple y doble precisión.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$ en precisión simple.",
+          "correctValue": 127,
+          "tolerance": 0.0,
+          "explanation": "$$1.5 = 1.5 \\cdot 2^0 \\implies e = 0$$. Exponente sesgado simple = $$0 + 127 = 127$$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ en precisión doble.",
+          "correctValue": 1023,
+          "tolerance": 0.0,
+          "explanation": "Exponente sesgado doble = $$0 + 1023 = 1023$$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Obtenga el valor decimal de la fracción de mantisa $$M$$ (que es la misma en ambos formatos).",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "La mantisa es $$1.5$$, por lo que la parte fraccionaria es $$M = 0.5$$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Determine el valor real representado en precisión doble.",
+          "correctValue": 1.5,
+          "tolerance": 0.0,
+          "explanation": "El número codificado es $$1.5$$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Codificación del valor -0.125",
+      "context": "Represente $$-0.125_{10}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcule el exponente real $$e$$.",
+          "correctValue": -3,
+          "tolerance": 0.0,
+          "explanation": "$$-0.125 = -1.0 \\cdot 2^{-3} \\implies e = -3$$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Obtenga el exponente sesgado $$E$$ decimal.",
+          "correctValue": 124,
+          "tolerance": 0.0,
+          "explanation": "$$E = -3 + 127 = 124$$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Determine la fracción de la mantisa $$M$$ en decimal.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Como es una potencia exacta de dos, la fracción es nula."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Determine el valor decimal de la palabra de 32 bits resultante (`0xBE000000`).",
+          "correctValue": 3187671040,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `1 01111100 00000000000000000000000` = `0xBE000000` = $$3187671040$$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Análisis del Mayor Denormalizado Positivo",
+      "context": "Estudiamos la palabra que codifica el mayor número denormalizado positivo en precisión simple.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Los denormalizados se representan siempre con $$E = 0$$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Determine el exponente real $$e$$ de la fórmula.",
+          "correctValue": -126,
+          "tolerance": 0.0,
+          "explanation": "El exponente real para denormalizados se fija en $$-126$$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Determine el valor entero sin signo correspondiente a la palabra de 32 bits (`0x007FFFFF`).",
+          "correctValue": 8388607,
+          "tolerance": 0.0,
+          "explanation": "La mantisa máxima denormalizada tiene todos sus bits en 1 (`0x007FFFFF` = $$8388607$$)."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcule la cantidad de bits en cero presentes en la palabra de 32 bits resultante (incluyendo signo, exponente y mantisa).",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "La palabra tiene: 1 bit de signo en 0, 8 bits de exponente en 0 y 23 bits de mantisa en 1. Total ceros = $$1 + 8 + 0 = 9$$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Decodificación de la palabra 0x42200000",
+      "context": "Se decodifica la palabra `0x42200000` de 32 bits.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Determine el exponente real $$e$$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Los bits de exponente son `10000100` = $$132 \\implies e = 132 - 127 = 5$$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ decimal.",
+          "correctValue": 132,
+          "tolerance": 0.0,
+          "explanation": "El exponente sesgado es $$132$$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcule el valor decimal de la fracción de mantisa $$M$$.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "Los bits de mantisa son `01000...` en binario = $$0.25$$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcule el valor real decimal.",
+          "correctValue": 40.0,
+          "tolerance": 0.0,
+          "explanation": "$$V = (1 + 0.25) \\cdot 2^5 = 1.25 \\cdot 32 = 40.0$$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Codificación del valor 2^-5",
+      "context": "Represente la constante $$0.03125_{10}$$ en precisión simple.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Determine el exponente real $$e$$.",
+          "correctValue": -5,
+          "tolerance": 0.0,
+          "explanation": "$$0.03125 = 2^{-5} \\implies e = -5$$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Determine el exponente sesgado $$E$$ decimal.",
+          "correctValue": 122,
+          "tolerance": 0.0,
+          "explanation": "$$E = -5 + 127 = 122$$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Obtenga la fracción de la mantisa $$M$$ en decimal.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La fracción es nula al ser una potencia exacta."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcule el valor decimal de la palabra de 32 bits resultante (`0x3D000000`).",
+          "correctValue": 1023410176,
+          "tolerance": 0.0,
+          "explanation": "La palabra es `0 01111010 00000000000000000000000` = `0x3D000000` = $$1023410176$$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Operación de Desbordamiento",
+      "context": "Se estudia el comportamiento del mayor número finito normalizado al multiplicarlo por 2.0.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Determine el exponente sesgado $$E$$ de este mayor número finito normalizado.",
+          "correctValue": 254,
+          "tolerance": 0.0,
+          "explanation": "El mayor exponente normalizado es $$E = 254$$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Determine el exponente real $$e$$ correspondiente.",
+          "correctValue": 127,
+          "tolerance": 0.0,
+          "explanation": "$$e = 254 - 127 = 127$$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Al multiplicar por 2.0, se produce overflow, resultando en $$+\\infty$$. Escriba el exponente sesgado $$E$$ del infinito.",
+          "correctValue": 255,
+          "tolerance": 0.0,
+          "explanation": "El infinito se representa con el exponente máximo reservado, $$E = 255$$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Determine la fracción de la mantisa $$M$$ del resultado final ($$+\\infty$$).",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La mantisa de infinito es nula ($$M = 0.0$$)."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Estudio del Modo de Redondeo hacia Cero",
+      "context": "Se analizan los resultados de redondear valores reales a enteros usando truncamiento (hacia cero) y hacia infinitos.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcule el valor resultante al redondear hacia cero el número real $$+3.9$$.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "El truncamiento hacia cero simplemente elimina la parte fraccionaria, dando $$3.0$$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcule el valor resultante al redondear hacia cero el número real $$-3.9$$.",
+          "correctValue": -3.0,
+          "tolerance": 0.0,
+          "explanation": "De forma análoga, el truncamiento de $$-3.9$$ hacia cero da $$-3.0$$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Si redondeamos el número $$-3.1$$ hacia menos infinito ($$-\\infty$$), obtenga el resultado.",
+          "correctValue": -4.0,
+          "tolerance": 0.0,
+          "explanation": "Redondear hacia menos infinito significa elegir el número representable menor o igual, que para $$-3.1$$ es $$-4.0$$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si redondeamos el número $$-3.1$$ hacia más infinito ($$+\\infty$$), obtenga el resultado.",
+          "correctValue": -3.0,
+          "tolerance": 0.0,
+          "explanation": "Redondear hacia más infinito significa elegir el número mayor o igual, que para $$-3.1$$ es $$-3.0$$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Representación de Números Normalizados (Precisión Simple)",
+      "tex": "$$V = (-1)^S \\cdot (1 + M) \\cdot 2^{E - 127}$$"
+    },
+    {
+      "name": "Representación de Números Denormalizados (Precisión Simple)",
+      "tex": "$$V = (-1)^S \\cdot (0 + M) \\cdot 2^{-126}$$"
+    },
+    {
+      "name": "Exponente Real (Precisión Simple)",
+      "tex": "$$e = E - 127$$"
+    },
+    {
+      "name": "Representación de Números Normalizados (Precisión Doble)",
+      "tex": "$$V = (-1)^S \\cdot (1 + M) \\cdot 2^{E - 1023}$$"
+    },
+    {
+      "name": "Representación de Números Denormalizados (Precisión Doble)",
+      "tex": "$$V = (-1)^S \\cdot (0 + M) \\cdot 2^{-1022}$$"
+    },
+    {
+      "name": "Exponente Real (Precisión Doble)",
+      "tex": "$$e = E - 1023$$"
+    }
+  ]
+}

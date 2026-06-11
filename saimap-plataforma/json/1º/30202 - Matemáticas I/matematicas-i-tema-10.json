@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el principio de diseño fundamental en el que se basan las fórmulas de cuadratura de Newton-Cotes?",
+      "options": [
+        "Aproximar el integrando mediante un polinomio que interpola a la función en puntos equiespaciados.",
+        "Aproximar el integrando mediante un polinomio que minimiza el error cuadrático medio en todo el dominio.",
+        "Aproximar el integrando mediante funciones trigonométricas ortogonales muestreadas aleatoriamente."
+      ],
+      "correct": 0,
+      "hint": "Piense en el tipo de funciones interpolantes y la distribución de sus nodos.",
+      "explanation": "Las fórmulas de Newton-Cotes se basan en sustituir el integrando por un polinomio interpolador de Lagrange cuyos nodos de interpolación están distribuidos de manera equidistante en el intervalo de integración."
+    },
+    {
+      "q": "¿Qué distingue esencialmente a una fórmula de Newton-Cotes de tipo abierto de una de tipo cerrado?",
+      "options": [
+        "Las abiertas no evalúan la función en los extremos del intervalo, mientras que las cerradas sí los incluyen.",
+        "Las abiertas se utilizan para intervalos de longitud infinita y las cerradas para intervalos compactos.",
+        "Las abiertas emplean polinomios de grado impar y las cerradas únicamente polinomios de grado par."
+      ],
+      "correct": 0,
+      "hint": "Considere la inclusión o exclusión de los puntos extremos a y b del intervalo de integración.",
+      "explanation": "Las fórmulas cerradas de Newton-Cotes incluyen los extremos del intervalo $a$ y $b$ como nodos de integración (por ejemplo, la regla del Trapecio o la de Simpson), mientras que las fórmulas abiertas no evalúan la función en dichos extremos (por ejemplo, la regla del punto medio)."
+    },
+    {
+      "q": "¿Cuál es el grado de precisión de la regla del punto medio simple?",
+      "options": [
+        "Tiene un grado de precisión igual a 1, siendo exacta para cualquier polinomio lineal.",
+        "Tiene un grado de precisión igual a 0, siendo exacta únicamente para funciones constantes.",
+        "Tiene un grado de precisión igual a 2, siendo exacta para parábolas de segundo grado."
+      ],
+      "correct": 0,
+      "hint": "Recuerde que el error de la regla del punto medio depende de la segunda derivada del integrando.",
+      "explanation": "Aunque la regla del punto medio simple utiliza una aproximación constante (grado 0), por simetría el término de error con la primera derivada se anula, resultando exacta para polinomios de grado hasta 1 (funciones lineales)."
+    },
+    {
+      "q": "Si aumentamos al doble el número de subintervalos en la regla del punto medio compuesta, ¿cómo se modifica el error de truncamiento global?",
+      "options": [
+        "El error de truncamiento se reduce teóricamente a la cuarta parte de su valor anterior.",
+        "El error de truncamiento se reduce teóricamente a la mitad de su valor anterior.",
+        "El error de truncamiento permanece inalterado al no variar el grado del polinomio."
+      ],
+      "correct": 0,
+      "hint": "Considere la relación del error compuesto con el tamaño de paso h, sabiendo que h se reduce a la mitad.",
+      "explanation": "La regla del punto medio compuesta posee un error global de orden $O(h^2)$. Al duplicar el número de intervalos, el tamaño del paso $h$ se reduce a la mitad, lo que disminuye el error en un factor de $(1/2)^2 = 1/4$."
+    },
+    {
+      "q": "Para una función continua con segunda derivada estrictamente positiva en el intervalo de integración, ¿qué se puede afirmar sobre la regla del punto medio simple?",
+      "options": [
+        "Subestima siempre el valor real de la integral de la función.",
+        "Sobreestima siempre el valor real de la integral de la función.",
+        "Produce un error que es idénticamente igual a cero debido a la convexidad."
+      ],
+      "correct": 0,
+      "hint": "Considere la interpretación geométrica de la regla del punto medio como la integral de la recta tangente en el centro del intervalo.",
+      "explanation": "Dado que $f''(x) > 0$, la función es convexa. La regla del punto medio equivale a integrar la recta tangente a la función en el punto medio. Dado que una función convexa siempre queda por encima de sus rectas tangentes, la integral de la tangente subestima la integral real."
+    },
+    {
+      "q": "¿Qué tipo de aproximación geométrica se realiza al aplicar la regla del Trapecio simple en un intervalo $[a,b]$?",
+      "options": [
+        "Se aproxima el área bajo la curva mediante el área de un trapecio delimitado por la secante entre los extremos.",
+        "Se aproxima el área bajo la curva mediante la suma de rectángulos cuyas alturas son los extremos.",
+        "Se aproxima el área bajo la curva mediante el área delimitada por una parábola que interseca tres puntos."
+      ],
+      "correct": 0,
+      "hint": "Piense en la forma geométrica formada por la recta que une los extremos (a, f(a)) y (b, f(b)).",
+      "explanation": "La regla del Trapecio simple aproxima la función mediante un polinomio lineal (una recta secante) que conecta los puntos $(a, f(a))$ y $(b, f(b))$, formando un trapecio bajo esta línea recta cuya área es fácil de calcular."
+    },
+    {
+      "q": "¿De qué derivada de la función $f(x)$ depende directamente el error de truncamiento en la regla del Trapecio simple?",
+      "options": [
+        "De la segunda derivada, $f''(c)$, para algún punto $c$ perteneciente al intervalo.",
+        "De la primera derivada, $f'(c)$, que define la pendiente de la recta secante interpoladora.",
+        "De la tercera derivada, $f'''(c)$, asociada al término de error del residuo polinómico."
+      ],
+      "correct": 0,
+      "hint": "El error del Trapecio simple es E_T = -((b-a)^3 / 12) * f''(c).",
+      "explanation": "El error de truncamiento de la regla del Trapecio simple viene dado por $E_T = -\\frac{(b-a)^3}{12} f''(c)$, por lo que depende directamente de la segunda derivada del integrando en un punto intermedio $c$ del intervalo."
+    },
+    {
+      "q": "Si aproximamos la integral de una función afín $f(x) = \\alpha x + \\beta$ usando la regla del Trapecio compuesta, el error absoluto cometido es:",
+      "options": [
+        "Exactamente cero, independientemente del número de subintervalos escogido.",
+        "Diferente de cero, decreciendo de forma cuadrática al aumentar los subintervalos.",
+        "Proporcional a la pendiente de la recta e inversamente proporcional al paso."
+      ],
+      "correct": 0,
+      "hint": "Considere la segunda derivada de una función lineal o afín.",
+      "explanation": "Para cualquier función lineal o afín, la segunda derivada es idénticamente cero en todo el dominio ($f''(x) = 0$). Como el error de la regla del Trapecio depende de la segunda derivada, el error cometido es exactamente cero."
+    },
+    {
+      "q": "¿Cuál es el orden de convergencia de la regla del Trapecio compuesta con respecto al tamaño de paso $h$?",
+      "options": [
+        "Es de orden 2, lo que significa que el error está acotado por una constante multiplicada por $h^2$.",
+        "Es de orden 1, lo que significa que el error disminuye de forma estrictamente lineal con $h$.",
+        "Es de orden 4, lo que implica una convergencia extremadamente rápida al disminuir el paso."
+      ],
+      "correct": 0,
+      "hint": "Examine la expresión del error compuesto de la regla del Trapecio: E_comp = -((b-a)*h^2 / 12) * f''(c).",
+      "explanation": "La regla del Trapecio compuesta tiene un error de truncamiento global acotado por $E_{T,comp} = -\\frac{(b-a)h^2}{12} f''(c)$, lo que determina un orden de convergencia $O(h^2)$."
+    },
+    {
+      "q": "Para una función continua con $f''(x) > 0$ en todo el dominio de integración $[a,b]$, ¿cómo se comporta la aproximación de la regla del Trapecio compuesta?",
+      "options": [
+        "Sobreestima el valor real de la integral en todos los casos.",
+        "Subestima el valor real de la integral en todos los casos.",
+        "Proporciona una aproximación exacta debido a la linealidad por tramos."
+      ],
+      "correct": 0,
+      "hint": "Considere la relación geométrica entre una curva convexa (curvada hacia arriba) y los segmentos secantes que la aproximan.",
+      "explanation": "Como la segunda derivada es positiva, la función es convexa. Las secantes que conectan los puntos $(x_i, f(x_i))$ quedan siempre por encima de la curva. Por tanto, el área bajo las secantes (la regla del Trapecio) es mayor que el área bajo la curva real, sobreestimando la integral."
+    },
+    {
+      "q": "¿Qué aproximación matemática realiza la regla de Simpson 1/3 simple en el intervalo de integración $[a,b]$?",
+      "options": [
+        "Interpola la función mediante un polinomio cuadrático que coincide en los extremos y en el punto medio del intervalo.",
+        "Interpola la función mediante una recta secante que une el extremo izquierdo con el punto medio.",
+        "Aproxima la función mediante tres rectángulos cuyas alturas se evalúan en nodos distribuidos uniformemente."
+      ],
+      "correct": 0,
+      "hint": "Simpson 1/3 utiliza 3 nodos equiespaciados para construir un polinomio interpolador de segundo grado.",
+      "explanation": "La regla de Simpson 1/3 simple sustituye la función por un polinomio cuadrático (parábola) que pasa por los tres puntos de interpolación equiespaciados: el extremo izquierdo $a$, el punto medio $\\frac{a+b}{2}$, y el extremo derecho $b$."
+    },
+    {
+      "q": "¿Cuál es la explicación de que la regla de Simpson 1/3 simple sea exacta para polinomios de grado 3, a pesar de basarse en interpolación cuadrática?",
+      "options": [
+        "Por simetría, los términos de error de tercer orden se cancelan al integrar en el intervalo simétrico.",
+        "Porque el teorema de Taylor establece que todo polinomio cúbico puede reducirse a uno cuadrático.",
+        "Porque el peso asignado al punto medio anula de manera artificial las contribuciones de grado impar."
+      ],
+      "correct": 0,
+      "hint": "Piense en la cancelación del término de error de tercer orden en la deducción mediante el polinomio de interpolación.",
+      "explanation": "Aunque la interpolación es de grado 2, la integración de la diferencia entre el polinomio cúbico y el interpolador cuadrático sobre un intervalo simétrico resulta en una integral nula, cancelando el error para polinomios de grado 3."
+    },
+    {
+      "q": "El error de truncamiento de la regla de Simpson 1/3 simple en $[a,b]$ es proporcional a qué derivada del integrando?",
+      "options": [
+        "A la cuarta derivada, $f^{(4)}(c)$, para algún punto $c$ en el intervalo.",
+        "A la tercera derivada, $f'''(c)$, debido a la aproximación cúbica implicada.",
+        "A la quinta derivada, $f^{(5)}(c)$, que surge de la simetría de los residuos."
+      ],
+      "correct": 0,
+      "hint": "La fórmula del error de Simpson simple es E_S = -((b-a)^5 / 2880) * f^(4)(c).",
+      "explanation": "El error de truncamiento de la regla de Simpson 1/3 simple depende directamente de la cuarta derivada de la función, siendo $E_S = -\\frac{(b-a)^5}{2880} f^{(4)}(c)$ para algún $c \\in (a, b)$."
+    },
+    {
+      "q": "¿Cuál es el orden de convergencia de la regla de Simpson 1/3 compuesta con respecto al tamaño de paso $h$?",
+      "options": [
+        "Es de orden 4, denotado como $O(h^4)$, lo que representa una convergencia significativamente más rápida que la del Trapecio.",
+        "Es de orden 3, denotado como $O(h^3)$, ya que el polinomio aproximante es cuadrático.",
+        "Es de orden 2, denotado como $O(h^2)$, debido a que se promedian las aproximaciones trapezoidales."
+      ],
+      "correct": 0,
+      "hint": "El error compuesto de Simpson es E_comp = -((b-a)*h^4 / 180) * f^(4)(c).",
+      "explanation": "La regla de Simpson 1/3 compuesta presenta un error de truncamiento global acotado por $E_{S,comp} = -\\frac{(b-a)h^4}{180} f^{(4)}(c)$, lo que corresponde a un orden de convergencia de $O(h^4)$."
+    },
+    {
+      "q": "¿Qué restricción fundamental se debe cumplir sobre el número de subintervalos $n$ al aplicar la regla de Simpson 1/3 compuesta?",
+      "options": [
+        "El número de subintervalos $n$ debe ser estrictamente par.",
+        "El número de subintervalos $n$ debe ser un número impar.",
+        "El número de subintervalos $n$ debe ser un múltiplo de tres."
+      ],
+      "correct": 0,
+      "hint": "Cada aplicación de la regla de Simpson simple cubre dos subintervalos adyacentes.",
+      "explanation": "Dado que cada aplicación individual de la regla de Simpson 1/3 requiere tres nodos (lo que equivale a dos subintervalos contiguos de ancho $h$), la regla compuesta exige que el número total de subintervalos $n$ sea par."
+    },
+    {
+      "q": "¿Cuántos subintervalos y cuántos nodos requiere la regla de Simpson 3/8 simple para ser aplicada?",
+      "options": [
+        "Requiere 3 subintervalos uniformes y 4 nodos de integración.",
+        "Requiere 2 subintervalos uniformes y 3 nodos de integración.",
+        "Requiere 4 subintervalos uniformes y 5 nodos de integración."
+      ],
+      "correct": 0,
+      "hint": "La regla de Simpson 3/8 se deduce integrando un polinomio de grado 3.",
+      "explanation": "La regla de Simpson 3/8 simple aproxima la función mediante un polinomio cúbico (grado 3), lo que requiere interpolar en 4 nodos equiespaciados, definiendo un total de 3 subintervalos."
+    },
+    {
+      "q": "¿Cuál es el grado del polinomio interpolador en el que se basa la regla de Simpson 3/8 simple?",
+      "options": [
+        "Grado 3 (cúbico), evaluado en cuatro puntos equiespaciados del intervalo.",
+        "Grado 2 (cuadrático), evaluado en tres puntos no equiespaciados del intervalo.",
+        "Grado 4 (cuártico), evaluado en cinco puntos distribuidos simétricamente."
+      ],
+      "correct": 0,
+      "hint": "Asocie los 4 nodos necesarios de la regla simple con el grado del polinomio interpolador.",
+      "explanation": "La regla de Simpson 3/8 simple se basa en aproximar el integrando mediante un polinomio interpolador de Lagrange de grado 3 que pasa por los cuatro nodos equidistantes."
+    },
+    {
+      "q": "El error de truncamiento de la regla de Simpson 3/8 simple es proporcional a qué potencia de la longitud del intervalo $(b-a)$?",
+      "options": [
+        "A la quinta potencia del intervalo, $(b-a)^5$.",
+        "A la cuarta potencia del intervalo, $(b-a)^4$.",
+        "A la sexta potencia del intervalo, $(b-a)^6$."
+      ],
+      "correct": 0,
+      "hint": "Piense en la relación con el tamaño de paso h, donde h = (b-a)/3, y la potencia de h en el error.",
+      "explanation": "El error de truncamiento de la regla de Simpson 3/8 simple es $E = -\\frac{3h^5}{80} f^{(4)}(c)$. Al sustituir $h = \\frac{b-a}{3}$, se obtiene que el error es proporcional a $(b-a)^5$."
+    },
+    {
+      "q": "¿Cuál es el orden de convergencia de la regla de Simpson 3/8 compuesta con respecto al tamaño de paso $h$?",
+      "options": [
+        "Es de orden 4 ($O(h^4)$), igual al orden de la regla de Simpson 1/3 compuesta.",
+        "Es de orden 3 ($O(h^3)$), al tratarse de una interpolación de orden impar.",
+        "Es de orden 5 ($O(h^5)$), debido al grado superior del polinomio aproximante."
+      ],
+      "correct": 0,
+      "hint": "Tanto Simpson 1/3 como Simpson 3/8 tienen el mismo orden de convergencia global.",
+      "explanation": "A pesar de usar un polinomio interpolador de mayor grado (grado 3), la regla de Simpson 3/8 compuesta mantiene un orden de convergencia $O(h^4)$, igual al de Simpson 1/3 compuesta, aunque con constantes de error diferentes."
+    },
+    {
+      "q": "¿Qué condición debe cumplir el número de subintervalos $n$ para poder aplicar la regla de Simpson 3/8 compuesta?",
+      "options": [
+        "El número de subintervalos $n$ debe ser obligatoriamente un múltiplo de 3.",
+        "El número de subintervalos $n$ debe ser obligatoriamente un número par.",
+        "El número de subintervalos $n$ debe ser una potencia de 2 en todo caso."
+      ],
+      "correct": 0,
+      "hint": "Cada bloque de Simpson 3/8 simple requiere exactamente 3 subintervalos.",
+      "explanation": "Puesto que cada aplicación de la regla de Simpson 3/8 simple abarca 3 subintervalos adyacentes, para aplicar la regla de forma compuesta el número total de subintervalos $n$ debe ser múltiplo de 3."
+    },
+    {
+      "q": "¿Qué fenómeno problemático ocurre con las fórmulas cerradas de Newton-Cotes de orden alto ($n \\ge 8$)?",
+      "options": [
+        "Aparecen coeficientes con pesos negativos y oscilaciones extremas por el fenómeno de Runge.",
+        "El error de redondeo decrece linealmente haciendo la computación extremadamente lenta.",
+        "Se viola el teorema fundamental del cálculo al requerir nodos imaginarios."
+      ],
+      "correct": 0,
+      "hint": "Piense en la inestabilidad de interpolar con polinomios de alto grado en nodos equiespaciados.",
+      "explanation": "Al aumentar el grado del polinomio en nodos equidistantes, surge el fenómeno de Runge, produciendo oscilaciones extremas cerca de los bordes. Computacionalmente esto se traduce en coeficientes de cuadratura negativos y grandes que amplifican dramáticamente los errores de redondeo."
+    },
+    {
+      "q": "¿Cuál de las siguientes fórmulas de integración es un ejemplo clásico de fórmula de Newton-Cotes abierta?",
+      "options": [
+        "La regla del punto medio, que evalúa la función únicamente en el centro del intervalo.",
+        "La regla de Simpson 1/3, que evalúa en el punto medio y en ambos extremos.",
+        "La regla del Trapecio, que evalúa la función exclusivamente en los dos extremos."
+      ],
+      "correct": 0,
+      "hint": "Las fórmulas abiertas no incluyen a ni b como nodos.",
+      "explanation": "La regla del punto medio es la fórmula abierta de Newton-Cotes más sencilla. Utiliza como nodo únicamente el punto medio del intervalo y no evalúa la función en los extremos del intervalo."
+    },
+    {
+      "q": "En las fórmulas cerradas de Newton-Cotes con un número par $n$ de intervalos, ¿cuál es el grado de precisión alcanzado?",
+      "options": [
+        "El grado de precisión es exactamente igual a $n+1$.",
+        "El grado de precisión es exactamente igual a $n$.",
+        "El grado de precisión es exactamente igual a $n-1$."
+      ],
+      "correct": 0,
+      "hint": "Considere la regla de Simpson simple (n=2 intervalos), que tiene grado de precisión 3 (n+1).",
+      "explanation": "Para fórmulas de Newton-Cotes cerradas basadas en polinomios interpoladores de grado $n$ (con $n$ par), la simetría del intervalo cancela el error de la siguiente potencia impar del monomio, elevando el grado de precisión a $n+1$."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja práctica de usar fórmulas compuestas en lugar de polinomios interpoladores de alto grado?",
+      "options": [
+        "Permiten obtener alta precisión reduciendo el paso $h$ sin introducir inestabilidades oscilatorias.",
+        "Evitan la necesidad de evaluar la función en el interior del intervalo de integración.",
+        "Garantizan que el número de subintervalos siempre sea par para cualquier tipo de función."
+      ],
+      "correct": 0,
+      "hint": "Piense en la combinación de polinomios simples de bajo grado (lineal, cuadrático) en subintervalos pequeños.",
+      "explanation": "Al usar fórmulas compuestas, aproximamos la función localmente en subintervalos pequeños con polinomios de grado bajo (1 o 2). Esto evita las oscilaciones catastróficas (fenómeno de Runge) de polinomios globales de alto grado, manteniendo la estabilidad numérica."
+    },
+    {
+      "q": "¿Cuál es la característica distintiva y ventaja de la cuadratura de Gauss frente a las fórmulas de Newton-Cotes?",
+      "options": [
+        "Los nodos y pesos se seleccionan óptimamente para maximizar el grado de precisión con el menor número de puntos.",
+        "Los nodos se distribuyen uniformemente a lo largo del intervalo para simplificar la evaluación de la función.",
+        "Se elimina por completo el término de error de redondeo para cualquier tipo de función integrable."
+      ],
+      "correct": 0,
+      "hint": "La cuadratura de Gauss tiene $2n$ grados de libertad (n nodos y n pesos).",
+      "explanation": "A diferencia de Newton-Cotes (donde los nodos son prefijados de forma equidistante), la cuadratura de Gauss trata tanto los nodos como los pesos como incógnitas optimizables. Esto permite duplicar aproximadamente el grado de precisión, logrando exactitud para polinomios de grado hasta $2n-1$ con solo $n$ puntos."
+    },
+    {
+      "q": "Con un número de $n$ nodos, ¿cuál es el grado de precisión máximo teórico que puede alcanzar una regla de cuadratura general?",
+      "options": [
+        "El grado de precisión máximo teórico es $2n-1$.",
+        "El grado de precisión máximo teórico es $2n$.",
+        "El grado de precisión máximo teórico es $n-1$."
+      ],
+      "correct": 0,
+      "hint": "Piense en el número de parámetros libres en la suma de cuadratura (n nodos y n pesos).",
+      "explanation": "Con $n$ nodos, una fórmula de integración tiene $2n$ parámetros libres (los $n$ nodos $x_i$ y los $n$ pesos $w_i$). Esto permite satisfacer exactamente el sistema de ecuaciones para los monomios $x^0, x^1, \\dots, x^{2n-1}$, dando un grado de precisión de $2n-1$."
+    },
+    {
+      "q": "Los nodos de la cuadratura de Gauss-Legendre en el intervalo de referencia $[-1, 1]$ coinciden matemáticamente con:",
+      "options": [
+        "Las raíces de los polinomios ortogonales de Legendre de grado correspondiente.",
+        "Las raíces de los polinomios de Chebyshev de primera especie para dicho orden.",
+        "Nodos uniformemente espaciados calculados mediante la regla trapezoidal abierta."
+      ],
+      "correct": 0,
+      "hint": "Piense en la familia de polinomios ortogonales asociados con el peso uniforme w(x)=1 en [-1,1].",
+      "explanation": "Para la cuadratura de Gauss-Legendre (donde la función de peso es $w(x)=1$ en el intervalo $[-1, 1]$), los nodos óptimos de integración son las raíces de los polinomios ortogonales de Legendre de grado $n$."
+    },
+    {
+      "q": "¿Cómo se transforman los nodos $t_i$ del intervalo estándar $[-1, 1]$ al intervalo general de integración $[a, b]$?",
+      "options": [
+        "Mediante el cambio de variable afín lineal $x_i = \\frac{b-a}{2} t_i + \\frac{a+b}{2}$.",
+        "Multiplicando directamente cada nodo estándar por la longitud del intervalo, $x_i = (b-a) t_i$.",
+        "No es posible realizar una transformación lineal directa; los polinomios de Legendre deben ser recalculados."
+      ],
+      "correct": 0,
+      "hint": "Es necesario mapear linealmente el intervalo [-1, 1] al intervalo [a, b].",
+      "explanation": "Para adaptar los nodos de cuadratura calculados en $[-1, 1]$ a un intervalo de integración general $[a, b]$, se utiliza la transformación lineal afín $x = \\frac{b-a}{2} t + \\frac{a+b}{2}$, lo que también escala los pesos correspondientes en un factor de $\\frac{b-a}{2}$."
+    },
+    {
+      "q": "¿Qué propiedad crucial presentan los pesos $w_i$ de la cuadratura de Gauss-Legendre para cualquier orden de integración?",
+      "options": [
+        "Son todos estrictamente positivos, lo que garantiza una excelente estabilidad frente al error de redondeo.",
+        "Pueden ser negativos para órdenes $n \\ge 8$, requiriendo control de cancelación numérica.",
+        "Son todos idénticamente iguales entre sí a fin de mantener la simetría del intervalo."
+      ],
+      "correct": 0,
+      "hint": "Considere la estabilidad de la suma de cuadratura cuando los pesos son positivos.",
+      "explanation": "A diferencia de las reglas de Newton-Cotes de alto orden, los pesos de la cuadratura de Gauss son estrictamente positivos para cualquier número de nodos $n$. Esto evita la cancelación catastrófica de dígitos y dota al método de una robusta estabilidad numérica."
+    },
+    {
+      "q": "¿Para qué tipo de funciones está especialmente recomendada la cuadratura de Gauss-Legendre?",
+      "options": [
+        "Funciones muy suaves y analíticas que se aproximan bien mediante polinomios de alto grado.",
+        "Funciones discretas tabuladas resultantes de mediciones experimentales equiespaciadas.",
+        "Funciones continuas con múltiples puntos de no derivabilidad o picos pronunciados."
+      ],
+      "correct": 0,
+      "hint": "La precisión de Gauss-Legendre explota la ortogonalidad polinómica.",
+      "explanation": "Dado que la cuadratura de Gauss aproxima de manera excelente polinomios de grado muy elevado, es sumamente eficiente y precisa para funciones muy suaves (clase $C^\\infty$ o analíticas). No es adecuada para datos tabulados puesto que los nodos requeridos no son equiespaciados."
+    },
+    {
+      "q": "Si un método de cuadratura compuesta posee un orden de convergencia de $O(h^k)$, ¿qué sucede con el error de truncamiento si se reduce a la mitad el tamaño del paso $h$?",
+      "options": [
+        "El error de truncamiento disminuye dividiéndose por un factor de $2^k$.",
+        "El error de truncamiento disminuye de forma cuadrática independientemente del valor del orden $k$.",
+        "El error de truncamiento se incrementa exponencialmente debido a la inestabilidad del paso."
+      ],
+      "correct": 0,
+      "hint": "Considere la relación (h_nuevo)^k = (h/2)^k = (1/2^k) * h^k.",
+      "explanation": "Un orden de convergencia $O(h^k)$ implica que el error es proporcional a $h^k$. Si el paso $h$ se reduce a la mitad ($h/2$), el error resultante se escala por $(1/2)^k$, es decir, disminuye dividiéndose por un factor de $2^k$."
+    },
+    {
+      "q": "¿Cuál es la expresión exacta que acota superiormente el error absoluto de la regla del Trapecio compuesta?",
+      "options": [
+        "$\\frac{(b-a)h^2}{12} \\max_{x \\in [a,b]} |f''(x)|$",
+        "$\\frac{(b-a)h^4}{180} \\max_{x \\in [a,b]} |f^{(4)}(x)|$",
+        "$\\frac{(b-a)^3}{24} \\max_{x \\in [a,b]} |f''(x)|$"
+      ],
+      "correct": 0,
+      "hint": "Recuerde el error compuesto del Trapecio y que involucra la segunda derivada de f.",
+      "explanation": "El error global de la regla del Trapecio compuesta es $E_{T,comp} = -\\frac{(b-a)h^2}{12} f''(c)$. Al tomar el valor absoluto, la cota superior del error es $\\frac{(b-a)h^2}{12} \\max_{x \\in [a,b]} |f''(x)|$."
+    },
+    {
+      "q": "Al integrar $f(x) = \\cos(x)$ en el intervalo $[0, \\pi/2]$ mediante la regla del Trapecio simple, el signo del error de truncamiento definido como $I_{real} - I_{aprox}$ es:",
+      "options": [
+        "Positivo, indicando que el valor aproximado subestima el valor real de la integral.",
+        "Negativo, indicando que el valor aproximado sobreestima el valor real de la integral.",
+        "Exactamente cero, ya que los nodos extremos anulan las derivadas impares."
+      ],
+      "correct": 0,
+      "hint": "Analice la concavidad de cos(x) en el intervalo [0, pi/2].",
+      "explanation": "Para $f(x) = \\cos(x)$, la segunda derivada es $f''(x) = -\\cos(x)$, la cual es negativa en $(0, \\pi/2)$. Dado que $E_T = -\\frac{(b-a)^3}{12} f''(c)$ y $f''(c) < 0$, el error $E_T = I_{real} - I_{aprox}$ es positivo, lo que significa que el valor aproximado subestima el real."
+    },
+    {
+      "q": "¿Qué método numérico clásico de alta precisión se obtiene al aplicar de forma recursiva la extrapolación de Richardson sobre la regla del Trapecio compuesta?",
+      "options": [
+        "La integración de Romberg.",
+        "La cuadratura adaptativa de Gauss-Kronrod.",
+        "La regla compuesta de Simpson 3/8."
+      ],
+      "correct": 0,
+      "hint": "La extrapolación de Richardson elimina sistemáticamente términos del error de orden h^2, h^4, h^6...",
+      "explanation": "La integración de Romberg es un método que genera una tabla triangular de aproximaciones. Aplica de manera sistemática la extrapolación de Richardson partiendo de la regla del Trapecio compuesta con pasos $h, h/2, h/4, \\dots$ para eliminar términos del error de orden $h^2$, luego $h^4$, $h^6$, etc."
+    },
+    {
+      "q": "¿Cuál es la característica principal de convergencia de la integración de Romberg?",
+      "options": [
+        "Permite acelerar la convergencia eliminando sistemáticamente los términos de error de orden inferior.",
+        "Limita la convergencia a funciones polinómicas de grado par sin admitir funciones trascendentes.",
+        "Garantiza la convergencia de forma estrictamente monótona, evitando errores de redondeo acumulativos."
+      ],
+      "correct": 0,
+      "hint": "Piense en el efecto de la extrapolación en los términos de la serie de potencias del error.",
+      "explanation": "La integración de Romberg acelera la convergencia eliminando sucesivamente los términos del error de la fórmula de Euler-Maclaurin. Esto incrementa drásticamente la tasa de convergencia teórica conforme se calculan más columnas de la tabla de Romberg."
+    },
+    {
+      "q": "Si una fórmula de integración numérica posee un grado de precisión $d$, ¿qué se puede asegurar respecto al error al integrar la función monómica $f(x) = x^{d+1}$?",
+      "options": [
+        "El error absoluto cometido al integrar es estrictamente diferente de cero.",
+        "El error absoluto cometido al integrar es exactamente cero por definición de precisión.",
+        "El error absoluto cometido es siempre menor que la precisión del redondeo de la máquina."
+      ],
+      "correct": 0,
+      "hint": "El grado de precisión es el mayor exponente para el cual el error es nulo.",
+      "explanation": "Por definición, el grado de precisión $d$ es el mayor entero positivo para el cual la regla de integración aproximada integra con error cero todos los polinomios de grado menor o igual a $d$. Por lo tanto, el monomio $x^{d+1}$ (de grado $d+1$) ya no se integrará de forma exacta, dando un error diferente de cero."
+    },
+    {
+      "q": "Si la cuarta derivada de una función $f(x)$ es constante e igual a 24 en todo el dominio $[a,b]$, ¿qué relación existe entre el error de truncamiento real cometido por la regla de Simpson y el teórico?",
+      "options": [
+        "El error de truncamiento real es idéntico al calculado teóricamente de manera exacta en cualquier punto del intervalo.",
+        "El error de truncamiento real difiere significativamente del teórico al no poder determinarse el punto intermedio $c$.",
+        "El error de truncamiento real es siempre la mitad del valor teórico debido a la simetría par del integrando."
+      ],
+      "correct": 0,
+      "hint": "El error teórico de Simpson involucra a f^(4)(c) evaluada en algún punto intermedio c.",
+      "explanation": "El error de truncamiento real viene dado por $E_S = -\\frac{(b-a)^5}{2880} f^{(4)}(c)$. Si la cuarta derivada es constante e igual a 24, entonces $f^{(4)}(c) = 24$ para cualquier elección de $c$. Así, el error de truncamiento real coincide con el error teórico de forma exacta."
+    },
+    {
+      "q": "Al implementar integración numérica compuesta, ¿qué fenómeno ocurre al disminuir indefinidamente el paso $h$ ($h \\to 0$) en aritmética de coma flotante?",
+      "options": [
+        "El error de redondeo crece debido al gran número de operaciones aritméticas y acaba superando al error de truncamiento.",
+        "El error total de aproximación tiende estrictamente a cero al cancelarse los errores de truncamiento.",
+        "La inestabilidad matemática anula el valor de la función en los nodos interiores de manera simétrica."
+      ],
+      "correct": 0,
+      "hint": "Considere la acumulación de errores al sumar miles de valores pequeños en precisión finita.",
+      "explanation": "Al reducir $h$, el error de truncamiento teórico decrece ($O(h^2)$ o $O(h^4)$), pero el número de subintervalos $n$ crece exponencialmente. En aritmética de precisión finita, realizar millones de sumas acumula errores de redondeo por coma flotante, incrementando el error total para pasos excesivamente pequeños."
+    },
+    {
+      "q": "¿Cuál es la diferencia fundamental en la precisión entre la regla del rectángulo por la izquierda y la regla del punto medio?",
+      "options": [
+        "El punto medio tiene grado de precisión 1 y convergencia $O(h^2)$, mientras que la izquierda tiene grado 0 y convergencia $O(h)$.",
+        "El punto medio tiene grado de precisión 2 y convergencia $O(h^3)$, mientras que la izquierda tiene grado 1 y convergencia $O(h^2)$.",
+        "Ambas reglas son matemáticamente equivalentes al utilizar un único nodo por cada subintervalo."
+      ],
+      "correct": 0,
+      "hint": "Piense en la cancelación del término lineal en la regla del punto medio debido a la simetría.",
+      "explanation": "La regla del rectángulo izquierdo utiliza el extremo izquierdo (grado de precisión 0, error global $O(h)$). La regla del punto medio utiliza el centro del subintervalo; por simetría, los errores de grado 1 se cancelan, alcanzando grado de precisión 1 y error global $O(h^2)$."
+    },
+    {
+      "q": "En cualquier fórmula de integración numérica consistente de la forma $\\sum_{i=0}^n w_i f(x_i)$ en el intervalo $[a,b]$, ¿cuánto debe valer la suma de los pesos $w_i$?",
+      "options": [
+        "Debe ser exactamente igual al ancho del intervalo de integración, $b-a$.",
+        "Debe ser exactamente igual a uno para normalizar la distribución de los nodos.",
+        "Debe ser exactamente cero para asegurar la cancelación de la primera derivada."
+      ],
+      "correct": 0,
+      "hint": "Pruebe a integrar la función constante f(x) = 1 usando la regla.",
+      "explanation": "Toda regla de integración numérica consistente debe ser exacta para la función constante $f(x) = 1$. Dado que $\\int_a^b 1 \\, dx = b-a$, la regla aproximada $\\sum_{i=0}^n w_i \\cdot 1$ debe dar $b-a$, de donde $\\sum_{i=0}^n w_i = b-a$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si aproximamos la integral $\\int_{0}^{2} 3x^2 dx$ mediante la regla del Trapecio simple, el valor de área estimado es ____.",
+      "options": [
+        "12.0",
+        "8.0",
+        "6.0"
+      ],
+      "correct": 0,
+      "hint": "Aplique la fórmula de Trapecio simple: (b-a)/2 * [f(a) + f(b)].",
+      "explanation": "Con $f(x)=3x^2$ en $[0,2]$, tenemos $f(0)=0$ y $f(2)=12$. La regla da $\\frac{2-0}{2} (0 + 12) = 12.0$."
+    },
+    {
+      "q": "La regla de Simpson 1/3 simple aplicada a la integral $\\int_{0}^{4} x^2 dx$ con nodos en $0$, $2$ y $4$ resulta en el valor ____.",
+      "options": [
+        "21.333",
+        "16.000",
+        "24.500"
+      ],
+      "correct": 0,
+      "hint": "Simpson 1/3 simple es (b-a)/6 * [f(a) + 4f(m) + f(b)].",
+      "explanation": "Con $f(x)=x^2$, $f(0)=0, f(2)=4, f(4)=16$. La aproximación es $\\frac{4}{6} (0 + 4(4) + 16) = \\frac{2}{3} (32) = 21.3333$."
+    },
+    {
+      "q": "Queremos estimar la integral de una función $f(x)$ en $[0, 1]$ usando Trapecio compuesto con $n=2$ y $h=0.5$. Sabiendo que $f(0)=1$, $f(0.5)=2$ y $f(1)=3$, el resultado de la integración es ____.",
+      "options": [
+        "2.0",
+        "1.5",
+        "2.5"
+      ],
+      "correct": 0,
+      "hint": "Trapecio compuesto es h/2 * [f(0) + 2f(0.5) + f(1)].",
+      "explanation": "La regla del Trapecio compuesta da: $\\frac{0.5}{2} [1 + 2(2) + 3] = 0.25 [8] = 2.0$."
+    },
+    {
+      "q": "Se estima $\\int_{0}^{2} x^3 dx$ mediante la regla de Simpson 1/3 simple con nodos en $0$, $1$ y $2$. La aproximación calculada es ____.",
+      "options": [
+        "4.0",
+        "3.0",
+        "5.0"
+      ],
+      "correct": 0,
+      "hint": "Simpson simple es exacto para polinomios de grado hasta 3.",
+      "explanation": "Puesto que la regla de Simpson 1/3 simple tiene grado de precisión 3, es exacta para $f(x)=x^3$. La integral exacta es $[x^4/4]_0^2 = 4.0$, que coincide con el valor aproximado."
+    },
+    {
+      "q": "Al aproximar la integral $\\int_{0}^{1.2} f(x) dx$ con la regla del Trapecio compuesta y $n=4$ subintervalos, el valor de paso $h$ es de ____.",
+      "options": [
+        "0.3",
+        "0.4",
+        "0.2"
+      ],
+      "correct": 0,
+      "hint": "El paso h viene dado por (b-a)/n.",
+      "explanation": "Sustituyendo los valores: $h = \\frac{1.2 - 0}{4} = 0.3$."
+    },
+    {
+      "q": "Una función tabulada posee los valores $f(1)=2$, $f(2)=4$ y $f(3)=8$. La regla de Simpson 1/3 compuesta aplicada en el intervalo $[1,3]$ con $h=1$ arroja ____.",
+      "options": [
+        "8.667",
+        "7.333",
+        "9.000"
+      ],
+      "correct": 0,
+      "hint": "Aplique la regla simple en [1,3] que tiene tres puntos equiespaciados.",
+      "explanation": "La aproximación es $\\frac{h}{3}[f(1) + 4f(2) + f(3)] = \\frac{1}{3}[2 + 4(4) + 8] = \\frac{26}{3} \\approx 8.667$. Oh wait! The option is 8.667? Let's check: 26/3 = 8.6667. Let's fix the options to ['8.667', '7.333', '9.000'] with correct=0."
+    },
+    {
+      "q": "La regla del punto medio compuesta con $n=2$ para $\\int_{0}^{2} x^3 dx$ (nodos medios evaluados en $0.5$ y $1.5$, con paso $h=1$) da una aproximación de ____.",
+      "options": [
+        "3.5",
+        "4.0",
+        "3.0"
+      ],
+      "correct": 0,
+      "hint": "Sume las evaluaciones en los puntos medios multiplicadas por h.",
+      "explanation": "El área aproximada es $h \\cdot [f(0.5) + f(1.5)] = 1 \\cdot [0.5^3 + 1.5^3] = 0.125 + 3.375 = 3.5$."
+    },
+    {
+      "q": "Al aproximar $\\int_{1}^{5} f(x) dx$ mediante la regla del Trapecio simple se obtiene un valor de $12.0$. Si conocemos que $f(1)=2.0$, entonces el valor de $f(5)$ en el extremo derecho debe ser ____.",
+      "options": [
+        "4.0",
+        "6.0",
+        "3.0"
+      ],
+      "correct": 0,
+      "hint": "Despeje f(b) en la ecuación: (b-a)/2 * (f(a) + f(b)) = 12.",
+      "explanation": "Tenemos $\\frac{5-1}{2} (2 + f(5)) = 12 \\implies 2(2 + f(5)) = 12 \\implies 2 + f(5) = 6 \\implies f(5) = 4.0$."
+    },
+    {
+      "q": "Dada la tabla: $x=[0, 0.5, 1.0]$ y $y=[1.0, 2.0, 5.0]$. La aproximación de la integral de $y$ en $[0, 1]$ mediante la regla del Trapecio compuesta es ____.",
+      "options": [
+        "2.5",
+        "3.0",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "Trapecio compuesto con n=2 es h/2 * [y[0] + 2y[1] + y[2]].",
+      "explanation": "Con $h=0.5$, la aproximación es $\\frac{0.5}{2} [1.0 + 2(2.0) + 5.0] = 0.25 [10.0] = 2.5$."
+    },
+    {
+      "q": "Para una función con $f(0)=1$, $f(1)=3$, $f(2)=9$, la regla del Trapecio compuesta en $[0, 2]$ con $n=2$ y paso $h=1$ proporciona una aproximación de ____.",
+      "options": [
+        "8.0",
+        "9.0",
+        "7.0"
+      ],
+      "correct": 0,
+      "hint": "Trapecio compuesto es h/2 * [f(0) + 2f(1) + f(2)].",
+      "explanation": "Con $h=1$, calculamos $\\frac{1}{2} [1 + 2(3) + 9] = \\frac{16}{2} = 8.0$."
+    },
+    {
+      "q": "La aproximación de $\\int_{0}^{3} f(x) dx$ usando la regla de Simpson 3/8 simple con $f(0)=1$, $f(1)=2$, $f(2)=4$, $f(3)=8$ es ____.",
+      "options": [
+        "10.125",
+        "11.250",
+        "9.875"
+      ],
+      "correct": 0,
+      "hint": "La fórmula de Simpson 3/8 simple es 3h/8 * [f(0) + 3f(1) + 3f(2) + f(3)] con h=1.",
+      "explanation": "Sustituyendo los valores: $\\frac{3(1)}{8} [1 + 3(2) + 3(4) + 8] = \\frac{3}{8} [1 + 6 + 12 + 8] = \\frac{3}{8} [27] = 10.125$."
+    },
+    {
+      "q": "Si aproximamos $\\int_{-1}^{1} (x^2 + 1) dx$ con la regla de Simpson 1/3 simple con nodos en $-1$, $0$ y $1$, la estimación resulta ____.",
+      "options": [
+        "2.667",
+        "2.000",
+        "2.333"
+      ],
+      "correct": 0,
+      "hint": "Simpson 1/3 simple para f(x)=x^2+1 en [-1, 1].",
+      "explanation": "Con $h=1$, la regla da $\\frac{1}{3} [f(-1) + 4f(0) + f(1)] = \\frac{1}{3} [2 + 4(1) + 2] = \\frac{8}{3} \\approx 2.667$."
+    },
+    {
+      "q": "Si la integral aproximada por Trapecio simple en $[a,b]$ da $5.0$ y por Simpson 1/3 simple da $6.0$, sabiendo que $f(a)=2.0$ y $f(b)=8.0$, el valor evaluado en el punto medio $f(\\frac{a+b}{2})$ es ____.",
+      "options": [
+        "6.5",
+        "5.0",
+        "5.5"
+      ],
+      "correct": 0,
+      "hint": "Escriba las fórmulas de Trapecio simple y Simpson simple, despejando b-a en la primera.",
+      "explanation": "Trapecio simple: $\\frac{b-a}{2} (2 + 8) = 5.0 \\implies b-a = 1.0$. Simpson simple: $\\frac{b-a}{6} (2 + 4 f(m) + 8) = 6.0 \\implies \\frac{1}{6} (10 + 4f(m)) = 6.0 \\implies 10 + 4f(m) = 36 \\implies f(m) = 6.5$."
+    },
+    {
+      "q": "Al aplicar la regla del Trapecio compuesta con $h=0.5$ a la función $f(x)=e^x$ en $[0, 1]$, el valor estimado es ____.",
+      "options": [
+        "1.7539",
+        "1.7183",
+        "1.6842"
+      ],
+      "correct": 0,
+      "hint": "Los nodos son 0, 0.5 y 1. Evalúe f(x) en cada uno y aplique la regla compuesta.",
+      "explanation": "Los valores de la función son $f(0)=1$, $f(0.5)=e^{0.5} \\approx 1.6487$ y $f(1)=e \\approx 2.7183$. Trapecio compuesto: $\\frac{0.5}{2} [1 + 2(1.6487) + 2.7183] \\approx 1.7539$."
+    },
+    {
+      "q": "La regla de Simpson 1/3 compuesta con $n=4$ para $\\int_{0}^{2} x^4 dx$ (con nodos en $0$, $0.5$, $1.0$, $1.5$ y $2.0$ y paso $h=0.5$) proporciona un valor aproximado de ____.",
+      "options": [
+        "6.4167",
+        "6.4000",
+        "6.5000"
+      ],
+      "correct": 0,
+      "hint": "Aplique la fórmula de Simpson compuesta para n=4 con h=0.5.",
+      "explanation": "Calculando: $\\frac{0.5}{3} [0^4 + 4(0.5^4 + 1.5^4) + 2(1.0^4) + 2.0^4] = \\frac{1}{6} [0 + 4(0.0625 + 5.0625) + 2(1) + 16] = \\frac{1}{6} [20.5 + 18] = \\frac{38.5}{6} \\approx 6.4167$."
+    },
+    {
+      "q": "Aproximando $\\int_{0}^{\\pi} \\sin(x) dx$ con Simpson 1/3 simple ($n=2$, nodos en $0$, $\\pi/2$, $\\pi$), el valor obtenido es ____.",
+      "options": [
+        "2.0944",
+        "2.0000",
+        "1.9781"
+      ],
+      "correct": 0,
+      "hint": "Use la regla simple: (pi - 0)/6 * [sin(0) + 4sin(pi/2) + sin(pi)].",
+      "explanation": "Sustituyendo: $\\frac{\\pi}{6} [0 + 4(1) + 0] = \\frac{2\\pi}{3} \\approx 2.0944$."
+    },
+    {
+      "q": "El error absoluto cometido al aproximar $\\int_{0}^{2} x^3 dx$ por la regla del Trapecio simple en $[0, 2]$ es de ____.",
+      "options": [
+        "4.0",
+        "8.0",
+        "0.0"
+      ],
+      "correct": 0,
+      "hint": "Calcule el valor analítico real de la integral y restelo de la aproximación por Trapecio simple.",
+      "explanation": "Valor real: $[x^4/4]_0^2 = 4.0$. Trapecio simple: $\\frac{2-0}{2} (0^3 + 2^3) = 8.0$. Error absoluto: $|4.0 - 8.0| = 4.0$."
+    },
+    {
+      "q": "El error absoluto cometido al aproximar $\\int_{0}^{2} x^3 dx$ por la regla de Simpson 1/3 simple en el intervalo $[0, 2]$ es de ____.",
+      "options": [
+        "0.0",
+        "1.0",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "Recuerde el grado de precisión de la regla de Simpson.",
+      "explanation": "Dado que la regla de Simpson 1/3 simple es exacta para polinomios de grado hasta 3, la aproximación es exacta y el error absoluto es exactamente 0.0."
+    },
+    {
+      "q": "Si aproximamos $\\int_{0}^{1} (x^4 + x) dx$ con la regla del Trapecio simple en $[0, 1]$, la estimación del área bajo la curva es ____.",
+      "options": [
+        "1.0",
+        "0.7",
+        "1.2"
+      ],
+      "correct": 0,
+      "hint": "Aplique la regla de Trapecio simple: (1-0)/2 * [f(0) + f(1)].",
+      "explanation": "Con $f(x)=x^4+x$, $f(0)=0$ y $f(1)=2$. La regla da $\\frac{1}{2} (0 + 2) = 1.0$."
+    },
+    {
+      "q": "Si una función $f(x)$ satisface $f''(x) = -6.0$ de manera constante en todo el intervalo $[0, 2]$, el error de truncamiento real $E_T = I_{real} - I_{trap}$ de la regla del Trapecio simple será exactamente ____.",
+      "options": [
+        "4.0",
+        "-4.0",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "Aplique la fórmula de error del Trapecio: E = -((b-a)^3 / 12) * f''(c).",
+      "explanation": "Sustituyendo los valores: $E_T = -\\frac{(2-0)^3}{12} (-6.0) = -\\frac{8}{12} (-6.0) = 4.0$."
+    },
+    {
+      "q": "¿Qué factor influye directamente en la precisión final obtenida mediante la regla del Trapecio compuesta aplicada a una función suave?",
+      "options": [
+        "El número de subintervalos $n$ en los que se divide el dominio de integración.",
+        "La magnitud de la segunda derivada del integrando en dicho dominio.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde la fórmula del error de la regla del Trapecio compuesta.",
+      "explanation": "El error compuesto depende de $\\frac{(b-a)h^2}{12} f''(c)$. Puesto que $h = (b-a)/n$, el número de intervalos $n$ y la segunda derivada influyen directamente."
+    },
+    {
+      "q": "Para garantizar que el error de integración de una regla de Newton-Cotes compuesta disminuya al refinar la malla de nodos, es suficiente con:",
+      "options": [
+        "Que la función sea continuamente diferenciable hasta el orden del error del método.",
+        "Que el tamaño de paso $h$ disminuya de forma constante hacia cero.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en las hipótesis matemáticas de convergencia.",
+      "explanation": "La convergencia de los métodos compuestos requiere que la función posea derivadas continuas del orden correspondiente y que el paso de malla $h$ tienda a cero."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la regla de Simpson 1/3 es correcta?",
+      "options": [
+        "Su regla simple integra de manera exacta polinomios de grado menor o igual a 3.",
+        "Su regla compuesta requiere un número par de subintervalos uniformes.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Repase la teoría básica de nodos e integrales exactas de la regla de Simpson.",
+      "explanation": "La regla de Simpson posee grado de precisión 3 (integra exacto polinomios cúbicos) y su versión compuesta requiere subdividir el intervalo en un número par de tramos de paso $h$."
+    },
+    {
+      "q": "Las fórmulas cerradas de Newton-Cotes se caracterizan por incluir como nodos de integración:",
+      "options": [
+        "El extremo izquierdo del intervalo de integración $a$.",
+        "El extremo derecho del intervalo de integración $b$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Diferencie entre fórmulas cerradas y abiertas.",
+      "explanation": "Las fórmulas cerradas por definición incluyen los dos extremos del intervalo de integración, $[a,b]$, como nodos evaluables."
+    },
+    {
+      "q": "¿Qué ventajas aporta el uso de fórmulas compuestas (como la regla del Trapecio) en comparación con las de orden muy alto?",
+      "options": [
+        "Evitan el fenómeno de Runge y oscilaciones extremas asociadas a polinomios de alto grado.",
+        "Aseguran la estabilidad numérica y previenen el uso de pesos negativos gigantescos.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere los problemas de interpolación de Lagrange globales frente a interpolación local por tramos.",
+      "explanation": "Las reglas compuestas evitan oscilaciones espurias (Runge) al aproximar localmente por tramos con polinomios de bajo grado, manteniendo la estabilidad numérica y los pesos positivos."
+    },
+    {
+      "q": "La cuadratura de Gauss-Legendre destaca por:",
+      "options": [
+        "No requerir que los nodos estén distribuidos equiespaciadamente.",
+        "Maximizar el grado de precisión de la integral con el menor número de nodos.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere la optimización de los nodos y pesos.",
+      "explanation": "Gauss-Legendre sitúa los nodos de forma no uniforme (en las raíces de polinomios de Legendre) logrando grado de precisión de $2n-1$ con $n$ puntos."
+    },
+    {
+      "q": "En el análisis del error de la regla del Trapecio simple, este es nulo si la función en el intervalo $[a,b]$ es:",
+      "options": [
+        "Una función constante.",
+        "Una función lineal de la forma $f(x) = \\alpha x + \\beta$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere el grado de precisión de la regla del Trapecio.",
+      "explanation": "La regla del Trapecio posee un grado de precisión 1, siendo exacta tanto para funciones lineales como constantes (que son polinomios de grado 1 y 0 respectivamente)."
+    },
+    {
+      "q": "Si programamos la regla de Simpson 1/3 compuesta en Python, es buena práctica comprobar que:",
+      "options": [
+        "El número de subintervalos $n$ introducido sea par.",
+        "El paso $h$ sea constante y los nodos equiespaciados.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere las precondiciones necesarias en el código para Simpson compuesto.",
+      "explanation": "El algoritmo estándar requiere que el espaciamiento sea uniforme (paso $h$ constante) y que el número de subintervalos $n$ sea obligatoriamente par."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son aplicaciones reales de la integración numérica en la computación e ingeniería informática?",
+      "options": [
+        "Cálculo del área bajo la curva (AUC) para métricas de modelos de aprendizaje automático.",
+        "Simulación de físicas en motores de videojuegos resolviendo las ecuaciones de movimiento de Newton.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en campos de la informática que integren datos muestreados o ecuaciones diferenciales.",
+      "explanation": "Tanto el cálculo de métricas en IA (como el AUC en curvas ROC) como la integración temporal de la velocidad y posición en motores de físicas son aplicaciones esenciales."
+    },
+    {
+      "q": "¿Qué puede provocar que el error total medido en ordenador aumente si disminuimos el tamaño de paso $h$ de forma indefinida?",
+      "options": [
+        "La acumulación excesiva de errores de redondeo por representación de coma flotante.",
+        "El número masivo de sumas aritméticas que propaga imprecisiones numéricas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en los límites de la precisión finita (IEEE 754).",
+      "explanation": "Al reducir $h$ demasiado, el número de iteraciones aumenta masivamente, y la acumulación de errores de redondeo por coma flotante en la máquina sobrepasa y anula los beneficios de reducir el paso."
+    },
+    {
+      "q": "¿Cuál es el grado de precisión exacto de la regla de Simpson 3/8 simple?",
+      "options": [
+        "Grado 4",
+        "Grado 5",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Considere qué polinomios integra de forma exacta.",
+      "explanation": "La regla de Simpson 3/8 simple integra de manera exacta polinomios de grado hasta 3, por lo que su grado de precisión es 3. Ninguna de las opciones (4 o 5) es correcta."
+    },
+    {
+      "q": "¿Qué tipo de interpolación polinómica subyace a la regla del punto medio compuesta?",
+      "options": [
+        "Interpolación mediante spline cúbico por tramos.",
+        "Interpolación polinómica cuadrática de Lagrange.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde el grado del polinomio en cada subintervalo en el punto medio.",
+      "explanation": "La regla del punto medio compuesta aproxima la función por una constante (polinomio de grado 0) en cada subintervalo. Por lo tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "Si aproximamos la integral de $f(x) = x^4$ en el intervalo $[0, 1]$ con la regla del Trapecio simple, el error de truncamiento global es:",
+      "options": [
+        "Exactamente cero.",
+        "Negativo, lo que indica que el método subestima el valor real.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La integral real es 0.2 y la aproximada es 0.5.",
+      "explanation": "El valor real de la integral es $0.2$, y la aproximación trapezoidal es $\\frac{1}{2}(0^4 + 1^4) = 0.5$. El error real $I - I_{aprox}$ es $0.2 - 0.5 = -0.3$ (negativo), lo que significa que el método sobreestima el valor real (y no subestima). Por ende, ninguna opción es correcta."
+    },
+    {
+      "q": "La regla de Simpson 1/3 simple aproxima la integral de una función $f(x)$ en $[a, b]$ evaluando la función únicamente en:",
+      "options": [
+        "Los extremos $a$ y $b$ y los puntos situados a un tercio y dos tercios del intervalo.",
+        "El extremo izquierdo $a$ y el punto medio $\\frac{a+b}{2}$ únicamente.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Repase cuántos y cuáles puntos evalúa la regla de Simpson 1/3 simple.",
+      "explanation": "La regla de Simpson 1/3 simple evalúa la función en tres puntos: el extremo izquierdo $a$, el punto medio $\\frac{a+b}{2}$ y el extremo derecho $b$. Por lo tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "Si aplicamos una regla de integración numérica compuesta y se obtiene teóricamente un orden de convergencia de $O(h^6)$, esto corresponde a:",
+      "options": [
+        "La regla del Trapecio compuesta estándar.",
+        "La regla de Simpson 1/3 compuesta estándar.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde los órdenes de convergencia clásicos.",
+      "explanation": "El Trapecio compuesto tiene orden $O(h^2)$ y Simpson compuesto tiene orden $O(h^4)$. Ninguno de los dos tiene orden $O(h^6)$. Por ende, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "La fórmula del error de la regla del Trapecio compuesta es $E = -\\frac{b-a}{12} h^2 f''(c)$. ¿Qué valor de $c \\in (a, b)$ garantiza esta igualdad a priori?",
+      "options": [
+        "El punto medio exacto del intervalo de integración, $c = \\frac{a+b}{2}$.",
+        "El extremo izquierdo del intervalo $a$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Piense en el teorema del valor medio para integrales y la naturaleza de c.",
+      "explanation": "El teorema del valor medio nos asegura la existencia de un punto $c \\in (a, b)$ que satisface la igualdad, pero su valor exacto no se conoce de antemano y depende de la función y del intervalo. Por tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "En la cuadratura de Gauss con 2 nodos en $[-1, 1]$, los nodos óptimos de integración son:",
+      "options": [
+        "$x_0 = -0.5$ y $x_1 = 0.5$.",
+        "$x_0 = -1.0$ y $x_1 = 1.0$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Considere la raíz de un polinomio de Legendre de grado 2.",
+      "explanation": "Los nodos óptimos para la cuadratura de Gauss con 2 nodos en $[-1, 1]$ son $x = \\pm \\frac{1}{\\sqrt{3}} \\approx \\pm 0.57735$. Por lo tanto, ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "La regla de Weddle es una fórmula de Newton-Cotes cerrada con $n=6$. ¿Cuál es su orden de convergencia global con respecto a $h$?",
+      "options": [
+        "Es de orden 2 ($O(h^2)$).",
+        "Es de orden 4 ($O(h^4)$).",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La regla de Weddle integra exactamente polinomios de grado 5 (y por simetría de grado 7).",
+      "explanation": "La regla de Weddle posee un orden de convergencia global de $O(h^6)$ o superior, por lo que ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "Al calcular la integral de $f(x) = \\sin(x)$ en el intervalo $[0, 2\\pi]$ mediante la regla de Simpson 1/3 compuesta con $n=2$ (h=pi), la aproximación resulta:",
+      "options": [
+        "2.0",
+        "3.1416",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los nodos evaluados son 0, pi, y 2pi. Piense en el valor de la función en esos puntos.",
+      "explanation": "Los nodos evaluados son $0$, $\\pi$ y $2\\pi$, donde $\\sin(0) = \\sin(\\pi) = \\sin(2\\pi) = 0$. Por lo tanto, la aproximación es exactamente $0$. Ninguna de las opciones (2.0 o 3.1416) es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes condiciones es estrictamente necesaria para poder aplicar la regla de Simpson 3/8 compuesta?",
+      "options": [
+        "El número de subintervalos $n$ debe ser un número impar.",
+        "El número de subintervalos $n$ debe ser par.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Piense en los múltiplos requeridos para los subintervalos.",
+      "explanation": "Para la regla de Simpson 3/8 compuesta, el número de subintervalos $n$ debe ser obligatoriamente un múltiplo de 3. Por lo tanto, ninguna de las anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Integración de f(x) = x^2 mediante Trapecio Simple",
+      "context": "Considere la integral definida $I = \\int_{0}^{3} x^2 \\, dx$. Deseamos evaluar la integral analíticamente y luego estimarla mediante la regla del Trapecio simple.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcule el valor analítico exacto de la integral $I$ mediante la regla de Barrow.",
+          "correctValue": 9.0,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{0}^{3} x^2 \\, dx = \\left[ \\frac{x^3}{3} \\right]_0^3 = \\frac{27}{3} - 0 = 9.0$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla del Trapecio simple en el intervalo $[0,3]$.",
+          "correctValue": 13.5,
+          "tolerance": 0.01,
+          "explanation": "La aproximación por Trapecio simple con $a=0$ y $b=3$ es: $I_{trap} = \\frac{3-0}{2} (f(0) + f(3)) = 1.5 \\cdot (0^2 + 3^2) = 1.5 \\cdot 9 = 13.5$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la regla del Trapecio simple en valor absoluto ($|I_{real} - I_{aprox}|$).",
+          "correctValue": 4.5,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es la diferencia en valor absoluto entre el resultado real y el aproximado: $E_{abs} = |9.0 - 13.5| = 4.5$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Determine el error relativo cometido por la aproximación del Trapecio simple como fracción decimal (tanto por uno).",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "El error relativo (tanto por uno) es el error absoluto dividido por el valor real exacto: $E_{rel} = \\frac{E_{abs}}{I_{real}} = \\frac{4.5}{9.0} = 0.5$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Integración de f(x) = x^2 mediante Trapecio Compuesto (n=3)",
+      "context": "Continuando con la integral $I = \\int_{0}^{3} x^2 \\, dx = 9.0$, aplicaremos ahora la regla del Trapecio compuesta dividiendo el intervalo $[0,3]$ en $n=3$ subintervalos de paso $h=1.0$.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Indique el valor real exacto de la integral (calculado en el problema anterior).",
+          "correctValue": 9.0,
+          "tolerance": 0.01,
+          "explanation": "El valor real de la integral es $9.0$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcule la aproximación de la integral usando la regla del Trapecio compuesta con $n=3$ (paso $h=1.0$).",
+          "correctValue": 9.5,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $x = [0, 1, 2, 3]$ con $h=1$. Evaluando: $f(0)=0, f(1)=1, f(2)=4, f(3)=9$. Trapecio compuesto: $I_{trap,comp} = \\frac{1}{2} [f(0) + 2f(1) + 2f(2) + f(3)] = 0.5 \\cdot [0 + 2(1) + 2(4) + 9] = 0.5 \\cdot 19 = 9.5$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la regla compuesta ($|I_{real} - I_{aprox}|$).",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto de la regla compuesta es: $E_{abs} = |9.0 - 9.5| = 0.5$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcule el error relativo cometido por esta aproximación (redondear a 6 decimales).",
+          "correctValue": 0.055556,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.5}{9.0} = \\frac{1}{18} \\approx 0.055556$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Integración de f(x) = x^3 mediante Simpson 1/3 Simple",
+      "context": "Analizaremos la integral definida $I = \\int_{0}^{2} x^3 \\, dx$ y su aproximación por la regla de Simpson 1/3 simple.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Determine analíticamente la integral exacta $I$ usando la regla de Barrow.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{0}^{2} x^3 \\, dx = \\left[ \\frac{x^4}{4} \\right]_0^2 = \\frac{16}{4} - 0 = 4.0$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla de Simpson 1/3 simple en $[0,2]$ (nodos en $0$, $1$ y $2$).",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "Simpson 1/3 simple tiene nodos en $a=0$, $m=1$, $b=2$. La aproximación es: $I_{simp} = \\frac{2-0}{6} [f(0) + 4f(1) + f(2)] = \\frac{1}{3} [0^3 + 4(1^3) + 2^3] = \\frac{1}{3} [12] = 4.0$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de la aproximación.",
+          "correctValue": 0.0,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |4.0 - 4.0| = 0.0$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Explique el error relativo obtenido de la regla de Simpson en este caso.",
+          "correctValue": 0.0,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es exactamente $0.0$ porque el grado de precisión de Simpson es 3, por lo que es exacta para cualquier polinomio cúbico."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Integración de f(x) = x^3 mediante Trapecio Compuesto (n=2)",
+      "context": "Usando la misma integral $I = \\int_{0}^{2} x^3 \\, dx = 4.0$, realizamos ahora la estimación mediante la regla del Trapecio compuesta con $n=2$ subintervalos ($h=1.0$).",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Indique el valor analítico real exacto de la integral.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "El valor exacto de la integral es $4.0$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Aproxime la integral por la regla del Trapecio compuesta con $n=2$ ($h=1$).",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $x = [0, 1, 2]$ con $h=1$. $f(0)=0$, $f(1)=1$, $f(2)=8$. La regla compuesta del Trapecio da: $I_{trap,comp} = \\frac{1}{2} [0 + 2(1) + 8] = 5.0$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la regla del Trapecio compuesta.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |4.0 - 5.0| = 1.0$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcule el error relativo (tanto por uno) de esta aproximación.",
+          "correctValue": 0.25,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{1.0}{4.0} = 0.25$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Integración de f(x) = e^x mediante Trapecio Simple",
+      "context": "Estudiaremos la integral de la función exponencial $I = \\int_{0}^{1} e^x \\, dx$ aplicando la regla del Trapecio simple.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcule el valor analítico real de la integral $I$.",
+          "correctValue": 1.718281828459045,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica es: $\\int_{0}^{1} e^x \\, dx = [e^x]_0^1 = e - 1 \\approx 1.718282$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcule la aproximación por la regla del Trapecio simple en $[0,1]$.",
+          "correctValue": 1.8591409142295225,
+          "tolerance": 0.01,
+          "explanation": "La regla del Trapecio simple da: $I_{trap} = \\frac{1-0}{2} [f(0) + f(1)] = 0.5 \\cdot (1 + e) \\approx 1.859141$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Encuentre el error absoluto de esta aproximación.",
+          "correctValue": 0.14085908577047745,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |(e - 1) - 0.5(1+e)| = 0.5e - 1.5 \\approx 0.140859$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.08197670686932647,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.5e - 1.5}{e - 1} \\approx 0.081977$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Integración de f(x) = e^x mediante Trapecio Compuesto (n=2)",
+      "context": "Para mejorar la precisión de la integral $I = \\int_{0}^{1} e^x \\, dx \\approx 1.718282$, aplicamos ahora la regla del Trapecio compuesta con $n=2$ y $h=0.5$.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Escriba el valor analítico exacto de la integral de referencia.",
+          "correctValue": 1.718281828459045,
+          "tolerance": 0.01,
+          "explanation": "El valor de referencia es $e - 1 \\approx 1.718282$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Obtenga la aproximación de la integral por Trapecio compuesto con $n=2$ ($h=0.5$).",
+          "correctValue": 1.7539310924648253,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $[0, 0.5, 1]$ con $h=0.5$. La aproximación es: $I_{trap,comp} = \\frac{0.5}{2} [e^0 + 2e^{0.5} + e^1] = 0.25 \\cdot (1 + 2\\sqrt{e} + e) \\approx 1.753931$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto cometido.",
+          "correctValue": 0.03564926400578017,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |1.718282 - 1.753931| \\approx 0.035649$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule el error relativo (tanto por uno) de esta aproximación.",
+          "correctValue": 0.020747041268399154,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.035649}{1.718282} \\approx 0.020747$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Integración de f(x) = e^x mediante Simpson 1/3 Simple",
+      "context": "Aproximamos ahora la integral $I = \\int_{0}^{1} e^x \\, dx \\approx 1.718282$ usando la regla de Simpson 1/3 simple (que requiere nodos en $0$, $0.5$ y $1$).",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Indique el valor exacto de la integral analítica.",
+          "correctValue": 1.718281828459045,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica exacta es $e - 1 \\approx 1.718282$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Aproxime la integral por la regla de Simpson 1/3 simple.",
+          "correctValue": 1.7188611518765928,
+          "tolerance": 0.01,
+          "explanation": "La regla de Simpson 1/3 simple da: $I_{simp} = \\frac{1-0}{6} [e^0 + 4e^{0.5} + e^1] = \\frac{1}{6} (1 + 4\\sqrt{e} + e) \\approx 1.718861$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la regla de Simpson simple.",
+          "correctValue": 0.0005793234175477391,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |1.718282 - 1.718861| \\approx 0.000579$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.00033715273475671696,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.000579}{1.718282} \\approx 0.000337$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Cota de Error y n necesario para Trapecio Compuesto",
+      "context": "Para la función $f(x) = e^x$ en el intervalo $[0, 1]$, queremos acotar el error de la regla del Trapecio compuesta y determinar el número mínimo de intervalos $n$ para asegurar un error menor que $10^{-4}$.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Encuentre la cota superior de la segunda derivada, $M_2 = \\max_{x \\in [0,1]} |f''(x)|$.",
+          "correctValue": 2.718281828459045,
+          "tolerance": 0.01,
+          "explanation": "La segunda derivada de $f(x)=e^x$ es $f''(x)=e^x$. En el intervalo $[0,1]$, el máximo de $|f''(x)|$ se alcanza en el extremo derecho $x=1$, valiendo $M_2 = e^1 \\approx 2.718282$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcule el valor mínimo que debe cumplir $n^2$ según la fórmula de la cota: $n^2 > \\frac{(b-a)^3 M_2}{12 \\cdot 10^{-4}}$.",
+          "correctValue": 2265.405,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo en la fórmula del error: $\\frac{1 \\cdot (1/n)^2}{12} e < 10^{-4} \\implies n^2 > \\frac{e \\cdot 10^4}{12} \\approx \\frac{27182.818}{12} \\approx 2265.235$. (Calculado exactamente: 2265.2348)."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Indique el menor número entero de subintervalos $n$ que garantiza un error menor que $10^{-4}$.",
+          "correctValue": 48.0,
+          "tolerance": 0.01,
+          "explanation": "Calculando la raíz de $2265.235$, obtenemos $n > 47.59$. Por lo tanto, el número entero mínimo es $n = 48$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Indique el paso de malla $h$ correspondiente a este número de intervalos $n$.",
+          "correctValue": 0.020833333333333332,
+          "tolerance": 0.01,
+          "explanation": "El paso de malla es $h = \\frac{b-a}{n} = \\frac{1}{48} \\approx 0.020833$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Integración de f(x) = 1/x mediante Trapecio Simple",
+      "context": "Estudiamos ahora la integral de la función hiperbólica $I = \\int_{1}^{2} \\frac{1}{x} \\, dx$ aplicando la regla del Trapecio simple.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcule el valor analítico exacto de la integral.",
+          "correctValue": 0.6931471805599453,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{1}^{2} \\frac{1}{x} \\, dx = [\\ln x]_1^2 = \\ln 2 - \\ln 1 = \\ln 2 \\approx 0.693147$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla del Trapecio simple.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "La aproximación por Trapecio simple es: $I_{trap} = \\frac{2-1}{2} (f(1) + f(2)) = 0.5 \\cdot (1 + 0.5) = 0.75$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Encuentre el error absoluto de esta aproximación.",
+          "correctValue": 0.056852819440054714,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |0.693147 - 0.75| = 0.056853$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.0820212806667226,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.056853}{0.693147} \\approx 0.082021$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Integración de f(x) = 1/x mediante Trapecio Compuesto (n=2)",
+      "context": "Continuando con la integral $I = \\int_{1}^{2} \\frac{1}{x} \\, dx \\approx 0.693147$, aproximaremos mediante Trapecio compuesto con $n=2$ subintervalos ($h=0.5$).",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Indique el valor de la integral real exacta.",
+          "correctValue": 0.6931471805599453,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta vale $\\ln 2 \\approx 0.693147$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Aproxime la integral por Trapecio compuesto con $n=2$.",
+          "correctValue": 0.7083333333333333,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $1.0$, $1.5$ y $2.0$ con $h=0.5$. La aproximación es: $I_{trap,comp} = \\frac{0.5}{2} [f(1) + 2f(1.5) + f(2)] = 0.25 [1 + 2(2/3) + 0.5] = 0.25 [1.5 + 4/3] = 0.25 [17/6] = 17/24 \\approx 0.708333$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de esta aproximación compuesta.",
+          "correctValue": 0.015186152773387973,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto de la aproximación es: $E_{abs} = |\\ln 2 - 17/24| \\approx 0.015186$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Determine el error relativo (tanto por uno) de esta aproximación.",
+          "correctValue": 0.02190898729634901,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.015186}{\\ln 2} \\approx 0.021909$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Integración de f(x) = 1/x mediante Simpson 1/3 Simple",
+      "context": "Estudiamos la integral $I = \\int_{1}^{2} \\frac{1}{x} \\, dx \\approx 0.693147$ usando la regla de Simpson 1/3 simple con nodos en $1$, $1.5$ y $2$.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Indique el valor exacto de la integral de referencia.",
+          "correctValue": 0.6931471805599453,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica de referencia es $\\ln 2 \\approx 0.693147$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante la regla de Simpson 1/3 simple.",
+          "correctValue": 0.6944444444444443,
+          "tolerance": 0.01,
+          "explanation": "La regla de Simpson simple da: $I_{simp} = \\frac{2-1}{6} [f(1) + 4f(1.5) + f(2)] = \\frac{1}{6} [1 + 4(2/3) + 0.5] = \\frac{1}{6} [1.5 + 8/3] = 25/36 \\approx 0.694444$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcule el error absoluto de la aproximación por Simpson.",
+          "correctValue": 0.0012972638844990225,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |\\ln 2 - 25/36| \\approx 0.001297$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Determine el error relativo (tanto por uno) correspondiente.",
+          "correctValue": 0.0018715561728910928,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.001297}{\\ln 2} \\approx 0.001872$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Integración de f(x) = sin(x) mediante Trapecio Compuesto (n=2)",
+      "context": "Aproximamos la integral definida $I = \\int_{0}^{\\pi} \\sin(x) \\, dx$ mediante la regla del Trapecio compuesta con $n=2$ y paso $h = \\pi/2$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcule el valor real de la integral analítica.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La integral real exacta es: $\\int_{0}^{\\pi} \\sin(x) \\, dx = [-\\cos x]_0^{\\pi} = -(-1) - (-1) = 2.0$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Aproxime la integral por Trapecio compuesto con $n=2$.",
+          "correctValue": 1.5707963267948966,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $0$, $\\pi/2$, $\\pi$ con $h=\\pi/2$. La regla da: $I_{trap,comp} = \\frac{\\pi/2}{2} [\\sin(0) + 2\\sin(\\pi/2) + \\sin(\\pi)] = \\frac{\\pi}{4} [0 + 2(1) + 0] = \\frac{\\pi}{2} \\approx 1.570796$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido en la aproximación.",
+          "correctValue": 0.42920367320510344,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto cometido es: $E_{abs} = |2.0 - \\pi/2| \\approx 0.429204$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Determine el error relativo cometido (tanto por uno).",
+          "correctValue": 0.21460183660255172,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.429204}{2.0} \\approx 0.214602$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Integración de f(x) = sin(x) mediante Simpson Compuesto (n=2)",
+      "context": "Continuando con $I = \\int_{0}^{\\pi} \\sin(x) \\, dx = 2.0$, la aproximaremos ahora mediante la regla de Simpson compuesta con $n=2$ (que es idéntica a Simpson simple con $h = \\pi/2$).",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Indique el valor de la integral exacta.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El valor exacto de la integral de $\\sin(x)$ en $[0,\\pi]$ es $2.0$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Aproxime la integral usando la regla de Simpson 1/3 simple ($n=2$, paso $h = \\pi/2$).",
+          "correctValue": 2.0943951023931953,
+          "tolerance": 0.01,
+          "explanation": "La regla de Simpson 1/3 simple da: $I_{simp} = \\frac{\\pi/2}{3} [\\sin(0) + 4\\sin(\\pi/2) + \\sin(\\pi)] = \\frac{\\pi}{6} [0 + 4(1) + 0] = \\frac{4\\pi}{6} = \\frac{2\\pi}{3} \\approx 2.094395$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de esta aproximación.",
+          "correctValue": 0.09439510239319526,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |2.0 - 2\\pi/3| \\approx 0.094395$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcule el error relativo cometido (tanto por uno).",
+          "correctValue": 0.04719755119659763,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.094395}{2.0} \\approx 0.047198$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Integración de f(x) = ln(x) mediante Trapecio Compuesto (n=2)",
+      "context": "Considere la integral definida $I = \\int_{1}^{3} \\ln(x) \\, dx$. Aproximaremos su valor mediante la regla del Trapecio compuesta con $n=2$ y paso $h = 1.0$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcule el valor analítico real exacto de la integral usando integración por partes.",
+          "correctValue": 1.2958368660043291,
+          "tolerance": 0.01,
+          "explanation": "La primitiva es $x\\ln x - x$. Sustituyendo: $[x\\ln x - x]_1^3 = (3\\ln 3 - 3) - (1\\ln 1 - 1) = 3\\ln 3 - 2 \\approx 1.295837$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla del Trapecio compuesta con $n=2$ ($h=1.0$).",
+          "correctValue": 1.2424533248940002,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $1$, $2$ y $3$ con $h=1$. La regla compuesta del Trapecio da: $I_{trap,comp} = \\frac{1}{2} [\\ln(1) + 2\\ln(2) + \\ln(3)] = 0.5 [0 + 2(0.693147) + 1.098612] = 0.5 [2.484907] \\approx 1.242453$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la aproximación.",
+          "correctValue": 0.05338354111032895,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |1.295837 - 1.242453| \\approx 0.053384$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.041196189513372436,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.053384}{1.295837} \\approx 0.041196$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Integración de f(x) = ln(x) mediante Simpson Compuesto (n=2)",
+      "context": "Usando la misma integral de la función logaritmo $I = \\int_{1}^{3} \\ln(x) \\, dx \\approx 1.295837$, aplicamos ahora la regla de Simpson 1/3 simple ($n=2$, paso $h = 1.0$).",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Indique el valor analítico real exacto de la integral.",
+          "correctValue": 1.2958368660043291,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica de referencia calculada es $3\\ln 3 - 2 \\approx 1.295837$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla de Simpson 1/3 simple en $[1,3]$.",
+          "correctValue": 1.290400336969297,
+          "tolerance": 0.01,
+          "explanation": "La regla de Simpson 1/3 simple da: $I_{simp} = \\frac{1}{3} [\\ln(1) + 4\\ln(2) + \\ln(3)] = \\frac{1}{3} [0 + 4(0.693147) + 1.098612] = \\frac{3.871201}{3} \\approx 1.290400$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto cometido por la regla de Simpson.",
+          "correctValue": 0.005436529035032223,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |1.295837 - 1.290400| \\approx 0.005437$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcule el error relativo (tanto por uno) de esta aproximación.",
+          "correctValue": 0.004195380744024966,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.005437}{1.295837} \\approx 0.004196$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Integración de f(x) = x^4 mediante Trapecio Simple",
+      "context": "Considere la integral definida $I = \\int_{0}^{1} x^4 \\, dx$. La aproximamos mediante la regla del Trapecio simple.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Obtenga el valor exacto de la integral analítica.",
+          "correctValue": 0.2,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{0}^{1} x^4 \\, dx = \\left[ \\frac{x^5}{5} \\right]_0^1 = 0.2$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante la regla del Trapecio simple.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "La regla del Trapecio simple con $a=0$ y $b=1$ da: $I_{trap} = \\frac{1-0}{2} (0^4 + 1^4) = 0.5$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido en la aproximación.",
+          "correctValue": 0.3,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |0.2 - 0.5| = 0.3$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 1.4999999999999998,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.3}{0.2} = 1.5$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Integración de f(x) = x^4 mediante Trapecio Compuesto (n=2)",
+      "context": "Con la misma integral $I = \\int_{0}^{1} x^4 \\, dx = 0.2$, realizamos la estimación mediante la regla del Trapecio compuesta con $n=2$ y $h=0.5$.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Escriba el valor de la integral real exacta.",
+          "correctValue": 0.2,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta vale $0.2$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Aproxime la integral usando la regla del Trapecio compuesta con $n=2$.",
+          "correctValue": 0.28125,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $0$, $0.5$ y $1$ con $h=0.5$. Evaluando: $f(0)=0, f(0.5)=0.0625, f(1)=1$. La regla compuesta da: $I_{trap,comp} = \\frac{0.5}{2} [0 + 2(0.0625) + 1] = 0.25 [1.125] = 0.28125$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la regla compuesta.",
+          "correctValue": 0.08124999999999999,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |0.2 - 0.28125| = 0.08125$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.40624999999999994,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.08125}{0.2} = 0.40625$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Integración de f(x) = x^4 mediante Simpson 1/3 Simple",
+      "context": "Aproximamos la integral $I = \\int_{0}^{1} x^4 \\, dx = 0.2$ aplicando la regla de Simpson 1/3 simple (nodos en $0$, $0.5$ y $1$).",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Indique el valor exacto de la integral analítica.",
+          "correctValue": 0.2,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica de referencia vale $0.2$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Aproxime la integral por la regla de Simpson 1/3 simple.",
+          "correctValue": 0.20833333333333331,
+          "tolerance": 0.01,
+          "explanation": "La regla de Simpson simple da: $I_{simp} = \\frac{1-0}{6} [f(0) + 4f(0.5) + f(1)] = \\frac{1}{6} [0 + 4(0.0625) + 1] = \\frac{1.25}{6} \\approx 0.208333$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcule el error absoluto de la aproximación por Simpson.",
+          "correctValue": 0.008333333333333304,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |0.2 - 0.208333| \\approx 0.008333$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.04166666666666652,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.008333}{0.2} \\approx 0.041667$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Integración de f(x) = 1/(1+x^2) mediante Trapecio Simple",
+      "context": "Aproximamos la integral $I = \\int_{0}^{1} \\frac{1}{1+x^2} \\, dx$ aplicando la regla del Trapecio simple.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcule el valor analítico exacto de la integral de referencia.",
+          "correctValue": 0.7853981633974483,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta vale: $\\int_{0}^{1} \\frac{1}{1+x^2} \\, dx = [\\arctan x]_0^1 = \\arctan 1 - \\arctan 0 = \\pi/4 \\approx 0.785398$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla del Trapecio simple.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "La aproximación por Trapecio simple es: $I_{trap} = \\frac{1-0}{2} (f(0) + f(1)) = 0.5 \\cdot (1 + 0.5) = 0.75$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido por la aproximación.",
+          "correctValue": 0.03539816339744828,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |\\pi/4 - 0.75| \\approx 0.035398$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.04507034144862795,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.035398}{\\pi/4} \\approx 0.045070$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Integración de f(x) = 1/(1+x^2) mediante Trapecio Compuesto (n=2)",
+      "context": "Continuando con la integral $I = \\int_{0}^{1} \\frac{1}{1+x^2} \\, dx \\approx 0.785398$, la estimamos con Trapecio compuesto con $n=2$ ($h=0.5$).",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Indique el valor real de la integral exacta.",
+          "correctValue": 0.7853981633974483,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta vale $\\pi/4 \\approx 0.785398$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Aproxime la integral por la regla del Trapecio compuesta con $n=2$.",
+          "correctValue": 0.775,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $0$, $0.5$ y $1$ con $h=0.5$. $f(0)=1, f(0.5)=0.8, f(1)=0.5$. La regla da: $I_{trap,comp} = \\frac{0.5}{2} [1 + 2(0.8) + 0.5] = 0.25 [3.1] = 0.775$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de la aproximación compuesta.",
+          "correctValue": 0.010398163397448257,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |\\pi/4 - 0.775| \\approx 0.010398$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.013239352830248852,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.010398}{\\pi/4} \\approx 0.013239$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Integración de f(x) = 1/(1+x^2) mediante Simpson 1/3 Simple",
+      "context": "Aproximamos ahora la integral $I = \\int_{0}^{1} \\frac{1}{1+x^2} \\, dx \\approx 0.785398$ usando la regla de Simpson 1/3 simple (nodos en $0$, $0.5$ y $1$).",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Indique el valor de la integral real exacta.",
+          "correctValue": 0.7853981633974483,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica de referencia vale $\\pi/4 \\approx 0.785398$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante la regla de Simpson 1/3 simple.",
+          "correctValue": 0.7833333333333333,
+          "tolerance": 0.01,
+          "explanation": "La regla de Simpson simple da: $I_{simp} = \\frac{1-0}{6} [f(0) + 4f(0.5) + f(1)] = \\frac{1}{6} [1 + 4(0.8) + 0.5] = \\frac{4.7}{6} \\approx 0.783333$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido.",
+          "correctValue": 0.002064830064114953,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |\\pi/4 - 4.7/6| \\approx 0.002065$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.0026290232907892,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.002065}{\\pi/4} \\approx 0.002629$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Integración de f(x) = sqrt(x) mediante Trapecio Simple",
+      "context": "Considere la integral de la función raíz cuadrada $I = \\int_{0}^{1} \\sqrt{x} \\, dx$. Deseamos evaluar la aproximación obtenida mediante el Trapecio simple.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcule la integral exacta por analítica.",
+          "correctValue": 0.6666666666666666,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{0}^{1} x^{1/2} \\, dx = \\left[ \\frac{2}{3} x^{3/2} \\right]_0^1 = 2/3 \\approx 0.666667$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Aproxime la integral usando la regla del Trapecio simple.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "Trapecio simple da: $I_{trap} = 0.5 \\cdot (0 + 1) = 0.5$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de la aproximación.",
+          "correctValue": 0.16666666666666663,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |2/3 - 0.5| = 1/6 \\approx 0.166667$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Obtenga el error relativo correspondiente (tanto por uno).",
+          "correctValue": 0.24999999999999994,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{1/6}{2/3} = 0.25$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Integración de f(x) = sqrt(x) mediante Simpson 1/3 Simple",
+      "context": "Usando la misma integral $I = \\int_{0}^{1} \\sqrt{x} \\, dx = 2/3$, calculamos la estimación con la regla de Simpson 1/3 simple (nodos en $0$, $0.5$ y $1.0$).",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Indique el valor analítico real exacto de la integral.",
+          "correctValue": 0.6666666666666666,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta vale $2/3 \\approx 0.666667$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Aproxime la integral aplicando la regla de Simpson 1/3 simple.",
+          "correctValue": 0.6380711874576983,
+          "tolerance": 0.01,
+          "explanation": "La aproximación por Simpson simple da: $I_{simp} = \\frac{1}{6} [\\sqrt{0} + 4\\sqrt{0.5} + \\sqrt{1}] = \\frac{1 + 4\\sqrt{0.5}}{6} \\approx \\frac{3.828427}{6} \\approx 0.638071$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto cometido.",
+          "correctValue": 0.028595479208968322,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |2/3 - 0.638071| \\approx 0.028596$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.04289321881345248,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.028596}{2/3} \\approx 0.042894$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Integración de f(x) = cos(x) mediante Trapecio Simple en [-pi/2, pi/2]",
+      "context": "Estudiamos la integral de la función coseno en el intervalo simétrico $I = \\int_{-\\pi/2}^{\\pi/2} \\cos(x) \\, dx$ aplicando la regla del Trapecio simple.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcule el valor analítico exacto de la integral de referencia.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La integral analítica es: $\\int_{-\\pi/2}^{\\pi/2} \\cos(x) \\, dx = [\\sin x]_{-\\pi/2}^{\\pi/2} = 1 - (-1) = 2.0$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante la regla del Trapecio simple.",
+          "correctValue": 1.9236706937217898e-16,
+          "tolerance": 0.01,
+          "explanation": "La regla del Trapecio simple con $a=-\\pi/2$ y $b=\\pi/2$ es: $I_{trap} = \\frac{\\pi/2 - (-\\pi/2)}{2} (\\cos(-\\pi/2) + \\cos(\\pi/2)) = \\frac{\\pi}{2} (0 + 0) = 0.0$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcule el error absoluto cometido en la aproximación.",
+          "correctValue": 1.9999999999999998,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |2.0 - 0.0| = 2.0$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Determine el error relativo (tanto por uno) cometido.",
+          "correctValue": 0.9999999999999999,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{2.0}{2.0} = 1.0$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Integración de f(x) = cos(x) mediante Simpson 1/3 Simple en [-pi/2, pi/2]",
+      "context": "Utilizando la misma integral de la función coseno $I = \\int_{-\\pi/2}^{\\pi/2} \\cos(x) \\, dx = 2.0$, la estimamos mediante Simpson 1/3 simple (nodos en $-\\pi/2$, $0$ y $\\pi/2$).",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Indique el valor analítico de referencia.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El valor exacto vale $2.0$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Aproxime la integral utilizando la regla de Simpson 1/3 simple.",
+          "correctValue": 2.0943951023931953,
+          "tolerance": 0.01,
+          "explanation": "Simpson simple en $[-\\pi/2, \\pi/2]$ es: $I_{simp} = \\frac{\\pi/2 - (-\\pi/2)}{6} [\\cos(-\\pi/2) + 4\\cos(0) + \\cos(\\pi/2)] = \\frac{\\pi}{6} [0 + 4(1) + 0] = \\frac{2\\pi}{3} \\approx 2.094395$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Determine el error absoluto cometido por la regla de Simpson simple.",
+          "correctValue": 0.09439510239319526,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |2.0 - 2\\pi/3| \\approx 0.094395$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.04719755119659763,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.094395}{2.0} \\approx 0.047198$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Integración de f(x) = 1/(x+1) mediante Trapecio Simple",
+      "context": "Evaluamos la integral $I = \\int_{0}^{1} \\frac{1}{x+1} \\, dx$ analíticamente y luego mediante Trapecio simple.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Encuentre el valor exacto analítico.",
+          "correctValue": 0.6931471805599453,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{0}^{1} \\frac{1}{x+1} \\, dx = [\\ln(x+1)]_0^1 = \\ln 2 \\approx 0.693147$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante Trapecio simple.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "La regla del Trapecio simple da: $I_{trap} = 0.5 \\cdot (1 + 0.5) = 0.75$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Determine el error absoluto de la regla del Trapecio simple.",
+          "correctValue": 0.056852819440054714,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |\\ln 2 - 0.75| \\approx 0.056853$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Determine el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.0820212806667226,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.056853}{\\ln 2} \\approx 0.082021$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Integración de f(x) = 1/(x+1) mediante Trapecio Compuesto (n=2)",
+      "context": "Continuando con la integral $I = \\int_{0}^{1} \\frac{1}{x+1} \\, dx \\approx 0.693147$, aproximamos mediante Trapecio compuesto con $n=2$ ($h=0.5$).",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Indique el valor analítico real exacto de la integral de referencia.",
+          "correctValue": 0.6931471805599453,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta vale $\\ln 2 \\approx 0.693147$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Aproxime la integral por la regla del Trapecio compuesta con $n=2$.",
+          "correctValue": 0.7083333333333333,
+          "tolerance": 0.01,
+          "explanation": "Los nodos son $0$, $0.5$ y $1$ con $h=0.5$. La aproximación es: $I_{trap,comp} = \\frac{0.5}{2} [f(0) + 2f(0.5) + f(1)] = 0.25 [1 + 2(2/3) + 0.5] = 17/24 \\approx 0.708333$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de esta aproximación.",
+          "correctValue": 0.015186152773387973,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |\\ln 2 - 17/24| \\approx 0.015186$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.02190898729634901,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.015186}{\\ln 2} \\approx 0.021909$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Integración de f(x) = x e^-x mediante Trapecio Simple",
+      "context": "Considere la integral definida $I = \\int_{0}^{1} x e^{-x} \\, dx$. Aproximamos la integral por Trapecio simple.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcule el valor exacto por analítica utilizando integración por partes.",
+          "correctValue": 0.26424111765711533,
+          "tolerance": 0.01,
+          "explanation": "Por partes, la primitiva es $-(x+1)e^{-x}$. Evaluando: $[-(x+1)e^{-x}]_0^1 = -2e^{-1} - (-1) = 1 - 2/e \\approx 0.264241$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante la regla del Trapecio simple.",
+          "correctValue": 0.18393972058572117,
+          "tolerance": 0.01,
+          "explanation": "Trapecio simple da: $I_{trap} = 0.5 \\cdot (f(0) + f(1)) = 0.5 \\cdot (0 + e^{-1}) = 0.5 e^{-1} \\approx 0.183940$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de la aproximación.",
+          "correctValue": 0.08030139707139416,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto es: $E_{abs} = |(1-2/e) - 0.5/e| = |1 - 2.5/e| \\approx 0.080301$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.30389440441133353,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.080301}{0.264241} \\approx 0.303894$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Integración de f(x) = x e^-x mediante Simpson 1/3 Simple",
+      "context": "Usando la misma integral $I = \\int_{0}^{1} x e^{-x} \\, dx \\approx 0.264241$, la aproximamos con la regla de Simpson 1/3 simple (nodos en $0$, $0.5$ y $1.0$).",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Indique el valor real analítico de la integral.",
+          "correctValue": 0.26424111765711533,
+          "tolerance": 0.01,
+          "explanation": "El valor exacto de la integral es $1 - 2e^{-1} \\approx 0.264241$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Aproxime la integral por la regla de Simpson 1/3 simple.",
+          "correctValue": 0.26349012676611816,
+          "tolerance": 0.01,
+          "explanation": "Simpson simple da: $I_{simp} = \\frac{1}{6} [0 + 4(0.5e^{-0.5}) + e^{-1}] = \\frac{2e^{-0.5} + e^{-1}}{6} \\approx \\frac{1.213061 + 0.367879}{6} \\approx 0.263490$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Determine el error absoluto cometido en la aproximación.",
+          "correctValue": 0.0007509908909971719,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto cometido es: $E_{abs} = |0.264241 - 0.263490| \\approx 0.000751$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.0028420667368341704,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{0.000751}{0.264241} \\approx 0.002842$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Integración de f(x) = x^5 mediante Simpson 1/3 Simple",
+      "context": "Analizamos la integral de quinto grado $I = \\int_{0}^{2} x^5 \\, dx$ aplicando la regla de Simpson 1/3 simple.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Obtenga el valor analítico real exacto de la integral.",
+          "correctValue": 10.666666666666666,
+          "tolerance": 0.01,
+          "explanation": "La integral exacta es: $\\int_{0}^{2} x^5 \\, dx = \\left[ \\frac{x^6}{6} \\right]_0^2 = \\frac{64}{6} \\approx 10.666667$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Aproxime la integral mediante la regla de Simpson 1/3 simple.",
+          "correctValue": 12.0,
+          "tolerance": 0.01,
+          "explanation": "Simpson simple con $a=0$ y $b=2$ es: $I_{simp} = \\frac{2}{6} (f(0) + 4f(1) + f(2)) = \\frac{1}{3} (0 + 4(1) + 32) = \\frac{36}{3} = 12.0$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Obtenga el error absoluto de la aproximación.",
+          "correctValue": 1.333333333333334,
+          "tolerance": 0.01,
+          "explanation": "El error absoluto cometido es: $E_{abs} = |10.666667 - 12.0| = 1.333333$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcule el correspondiente error relativo (tanto por uno).",
+          "correctValue": 0.12500000000000006,
+          "tolerance": 0.01,
+          "explanation": "El error relativo es: $E_{rel} = \\frac{1.333333}{10.666667} = 0.125$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Regla del Trapecio Simple",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx \\approx \\frac{b-a}{2} \\Big( f(a) + f(b) \\Big)$$"
+    },
+    {
+      "name": "Error de la Regla del Trapecio Simple",
+      "tex": "$$E_T = -\\frac{(b-a)^3}{12} f''(c)$$"
+    },
+    {
+      "name": "Regla del Trapecio Compuesta",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx \\approx \\frac{h}{2} \\left[ f(x_0) + 2\\sum_{i=1}^{n-1} f(x_i) + f(x_n) \\right]$$"
+    },
+    {
+      "name": "Regla de Simpson 1/3 Simple",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx \\approx \\frac{b-a}{6} \\left[ f(a) + 4f\\left(\\frac{a+b}{2}\\right) + f(b) \\right]$$"
+    },
+    {
+      "name": "Error de la Regla de Simpson 1/3 Simple",
+      "tex": "$$E_S = -\\frac{(b-a)^5}{2880} f^{(4)}(c)$$"
+    },
+    {
+      "name": "Regla de Simpson 1/3 Compuesta",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx \\approx \\frac{h}{3} \\left[ f(x_0) + 4\\sum_{i=1,3,\\dots}^{n-1} f(x_i) + 2\\sum_{j=2,4,\\dots}^{n-2} f(x_j) + f(x_n) \\right]$$"
+    },
+    {
+      "name": "Regla de Simpson 3/8 Simple",
+      "tex": "$$\\int_{a}^{b} f(x) \\, dx \\approx \\frac{3h}{8} \\Big[ f(a) + 3f(x_1) + 3f(x_2) + f(b) \\Big]$$"
+    },
+    {
+      "name": "Orden de Convergencia del Trapecio Compuesto",
+      "tex": "$$E_{T,comp} = O(h^2)$$"
+    },
+    {
+      "name": "Orden de Convergencia de Simpson Compuesto",
+      "tex": "$$E_{S,comp} = O(h^4)$$"
+    }
+  ]
+}

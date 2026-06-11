@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "En el contexto de la descomposición LU de una matriz invertible $A$, ¿cuál es la diferencia fundamental entre los algoritmos de Doolittle y Crout?",
+      "options": [
+        "Doolittle impone que los elementos de la diagonal principal de $L$ sean iguales a 1, mientras que Crout lo impone sobre la diagonal de $U$.",
+        "Doolittle impone que los elementos de la diagonal principal de $U$ sean iguales a 1, mientras que Crout lo impone sobre la diagonal de $L$.",
+        "Doolittle realiza eliminación por columnas para obtener $U$, mientras que Crout emplea reflexiones ortogonales para obtener $L$."
+      ],
+      "correct": 0,
+      "hint": "Recuerde cuál de las matrices es triangular unitaria en cada método.",
+      "explanation": "El algoritmo de Doolittle factoriza $A = LU$ de forma que la matriz triangular inferior $L$ es unitaria (unos en la diagonal, $l_{ii}=1$), mientras que el método de Crout define la matriz triangular superior $U$ como unitaria ($u_{ii}=1$)."
+    },
+    {
+      "q": "¿Bajo qué condiciones matemáticas estrictas se garantiza la existencia y unicidad de la descomposición $A = LU$ (con $L$ triangular inferior unitaria)?",
+      "options": [
+        "Que todos los menores principales líderes de la matriz $A$ sean no singulares.",
+        "Que la matriz $A$ sea simétrica y todos sus valores propios sean no negativos.",
+        "Que la matriz $A$ sea estrictamente dominante por filas o columnas y singular."
+      ],
+      "correct": 0,
+      "hint": "Piense en la invertibilidad de las submatrices obtenidas al truncar las primeras $k$ filas y columnas.",
+      "explanation": "La factorización $LU$ existe y es única si y solo si todas las submatrices principales líderes $A_k$ de tamaño $k \\times k$ (para $k = 1, \\dots, n-1$) tienen determinante distinto de cero (son no singulares)."
+    },
+    {
+      "q": "Cuando resolvemos un sistema $Ax = b$ mediante la factorización $A = LU$, ¿cuál es el orden correcto de resolución de los sistemas triangulares auxiliares?",
+      "options": [
+        "Primero se resuelve $Ly = b$ por sustitución directa, y luego $Ux = y$ por sustitución regresiva.",
+        "Primero se resuelve $Ux = y$ por sustitución regresiva, y luego $Ly = b$ por sustitución directa.",
+        "Primero se resuelve $Ly = b$ por sustitución regresiva, y luego $Ux = y$ por sustitución directa."
+      ],
+      "correct": 0,
+      "hint": "Sustituya $A = LU$ en el sistema $Ax = b$ y agrupe los términos asociados a $Ux$.",
+      "explanation": "Como $Ax = b$ y $A = LU$, se tiene $L(Ux) = b$. Definiendo $y = Ux$, resolvemos en primer lugar el sistema triangular inferior $Ly = b$ mediante sustitución directa, y seguidamente el sistema triangular superior $Ux = y$ por sustitución regresiva."
+    },
+    {
+      "q": "¿Cuál es el propósito principal de implementar la estrategia de pivotaje parcial al calcular la factorización de una matriz?",
+      "options": [
+        "Evitar divisiones por cero o por valores cercanos a cero que amplifiquen drásticamente los errores de redondeo.",
+        "Reducir el coste computacional de la factorización de $O(n^3)$ a $O(n^2)$ operaciones de punto flotante.",
+        "Garantizar que la matriz resultante $L$ conserve la simetría y sea siempre definida positiva."
+      ],
+      "correct": 0,
+      "hint": "Piense en el efecto de dividir por un pivote extremadamente pequeño en la precisión de la máquina.",
+      "explanation": "El pivotaje parcial busca colocar en la diagonal el elemento de mayor valor absoluto de la columna actual. Esto previene la división por coeficientes muy pequeños, reduciendo el error numérico y la inestabilidad."
+    },
+    {
+      "q": "¿En qué se diferencia la estrategia de pivotaje completo de la de pivotaje parcial durante la eliminación gaussiana?",
+      "options": [
+        "El pivotaje completo busca el máximo en toda la submatriz restante intercambiando filas y columnas; el parcial solo busca en la columna actual intercambiando filas.",
+        "El pivotaje completo busca el máximo intercambiando columnas únicamente; el parcial busca en toda la matriz intercambiando filas.",
+        "El pivotaje completo requiere $O(n^2)$ comparaciones en total; el parcial requiere $O(n^3)$ comparaciones."
+      ],
+      "correct": 0,
+      "hint": "El pivotaje completo busca en dos dimensiones (filas y columnas) para maximizar el pivote.",
+      "explanation": "El pivotaje parcial realiza búsquedas unidimensionales (intercambio de filas $PA = LU$), mientras que el pivotaje completo busca en toda la submatriz activa, intercambiando tanto filas como columnas ($PAQ = LU$), lo cual es numéricamente más robusto pero costoso."
+    },
+    {
+      "q": "Si $P$ es una matriz de permutación obtenida mediante intercambios sucesivos de filas de la identidad, ¿cuál de las siguientes propiedades es correcta?",
+      "options": [
+        "Es una matriz ortogonal, por lo que su inversa es igual a su traspuesta ($P^{-1} = P^T$).",
+        "Su determinante es siempre estrictamente mayor que cero ($\\det(P) = 1$).",
+        "Es una matriz simétrica y siempre coincide con su propia traspuesta ($P = P^T$)."
+      ],
+      "correct": 0,
+      "hint": "Analice el producto de una matriz de permutación por su traspuesta.",
+      "explanation": "Una matriz de permutación $P$ es ortogonal ya que sus columnas (o filas) son una base ortonormal de $\\mathbb{R}^n$. Por ende, satisface $P^T P = I$, lo que implica $P^{-1} = P^T$."
+    },
+    {
+      "q": "¿Qué impacto tiene multiplicar una matriz $A$ por una matriz de permutación $P$ por la izquierda ($P \\cdot A$) frente a multiplicarla por la derecha ($A \\cdot P$)?",
+      "options": [
+        "$P \\cdot A$ permuta las filas de $A$, mientras que $A \\cdot P$ permuta las columnas de $A$.",
+        "$P \\cdot A$ permuta las columnas de $A$, mientras que $A \\cdot P$ permuta las filas de $A$.",
+        "$P \\cdot A$ calcula la traspuesta de $A$, mientras que $A \\cdot P$ calcula la inversa de $A$."
+      ],
+      "correct": 0,
+      "hint": "Piense en cómo actúa la multiplicación de matrices fila por columna según el orden.",
+      "explanation": "La multiplicación por la izquierda por una matriz de permutación aplica operaciones fila sobre la matriz $A$, mientras que la multiplicación por la derecha realiza operaciones columna."
+    },
+    {
+      "q": "¿Cuál es la condición necesaria y suficiente para que una matriz simétrica real $A$ admita una factorización de Cholesky $A = L \\cdot L^T$ con diagonal de $L$ real y positiva?",
+      "options": [
+        "Que la matriz $A$ sea definida positiva.",
+        "Que la matriz $A$ tenga determinante strictly no nulo.",
+        "Que la matriz $A$ sea dominante por diagonal estricta y singular."
+      ],
+      "correct": 0,
+      "hint": "Considere la definición cuadrática del producto $x^T A x$.",
+      "explanation": "La factorización de Cholesky $A = LL^T$ (donde $L$ es triangular inferior con elementos reales y positivos en la diagonal) existe si y solo si la matriz real $A$ es simétrica y definida positiva."
+    },
+    {
+      "q": "¿Por qué la descomposición de Cholesky es computacionalmente preferible a la descomposición LU cuando la matriz es simétrica y definida positiva?",
+      "options": [
+        "Requiere aproximadamente la mitad de operaciones en punto flotante ($\\|\\frac{1}{3}n^3\\|$ FLOPs frente a $\\|\\frac{2}{3}n^3\\|$ FLOPs).",
+        "Evita el uso de sustituciones hacia atrás en la resolución final, reduciendo la complejidad a $O(n)$.",
+        "Permite obtener soluciones exactas sin errores de redondeo en aritmética finita."
+      ],
+      "correct": 0,
+      "hint": "Compare el coste algorítmico de ambas factorizaciones en el caso simétrico.",
+      "explanation": "La descomposición de Cholesky aprovecha la simetría de la matriz para calcular únicamente la mitad de los elementos, lo que reduce el coste de $\\frac{2}{3}n^3$ (de LU) a $\\frac{1}{3}n^3$ FLOPs."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe con precisión la estabilidad numérica de la descomposición de Cholesky?",
+      "options": [
+        "Es numéricamente muy estable y no requiere pivotaje para acotar los errores de redondeo.",
+        "Es intrínsecamente inestable si la matriz posee valores propios grandes y cercanos entre sí.",
+        "Requiere obligatoriamente pivotaje parcial para asegurar que el determinante no sea nulo."
+      ],
+      "correct": 0,
+      "hint": "Considere la acotación de los elementos de la matriz triangular $L$ en términos de los elementos de $A$.",
+      "explanation": "Para una matriz definida positiva, los elementos de la diagonal de $L$ cumplen $l_{ii} = \\sqrt{a_{ii} - \\sum_{k=1}^{i-1} l_{ik}^2}$, lo que acota superiormente todos los elementos de $L$ por los de $A$. Esto previene el crecimiento incontrolado de errores sin necesidad de pivotar."
+    },
+    {
+      "q": "La factorización QR de una matriz real $A \\in \\mathcal{M}_{m \\times n}(\\mathbb{R})$ con $m \\ge n$ de rango completo consiste en descomponerla en el producto:",
+      "options": [
+        "De una matriz ortogonal $Q \\in \\mathcal{M}_{m \\times n}(\\mathbb{R})$ y una matriz triangular superior $R \\in \\mathcal{M}_{n \\times n}(\\mathbb{R})$.",
+        "De una matriz simétrica $Q \\in \\mathcal{M}_{m \\times m}(\\mathbb{R})$ y una matriz triangular inferior $R \\in \\mathcal{M}_{m \\times n}(\\mathbb{R})$.",
+        "De una matriz normal $Q \\in \\mathcal{M}_{m \\times n}(\\mathbb{R})$ y una matriz diagonal $R \\in \\mathcal{M}_{n \\times n}(\\mathbb{R})$."
+      ],
+      "correct": 0,
+      "hint": "Recuerde las dimensiones y propiedades fundamentales de las matrices resultantes en la versión reducida (thin QR).",
+      "explanation": "La factorización QR descompone una matriz en una con columnas ortonormales ($Q^T Q = I_n$) y otra triangular superior $R$ con elementos positivos en la diagonal si queremos garantizar la unicidad."
+    },
+    {
+      "q": "¿Qué inconveniente numérico presenta el método clásico de Gram-Schmidt para calcular la factorización QR?",
+      "options": [
+        "Los errores de redondeo provocan una pérdida progresiva de la ortogonalidad entre los vectores calculados.",
+        "Tiene una complejidad computacional prohibitiva de $O(n^4)$ FLOPs para matrices densas.",
+        "Requiere obligatoriamente que la matriz original sea cuadrada y simétrica para converger."
+      ],
+      "correct": 0,
+      "hint": "Piense en la acumulación de errores de punto flotante al proyectar sucesivamente los vectores.",
+      "explanation": "El método de Gram-Schmidt clásico sufre de inestabilidad numérica porque los pequeños errores de redondeo acumulados en las sucesivas proyecciones destruyen la propiedad de ortogonalidad de las columnas de $Q$."
+    },
+    {
+      "q": "¿Cómo resuelve el método Modificado de Gram-Schmidt (MGS) el problema de inestabilidad del método clásico?",
+      "options": [
+        "Proyecta los vectores restantes sobre el nuevo vector ortogonalizado de forma secuencial en cada paso intermedio.",
+        "Introduce matrices de permutación para ordenar las columnas de mayor a menor norma antes de proyectar.",
+        "Sustituye todas las proyecciones ortogonales por rotaciones planas de Givens bidimensionales."
+      ],
+      "correct": 0,
+      "hint": "Compare cómo se actualizan los vectores restantes en el algoritmo clásico versus el modificado.",
+      "explanation": "En el Gram-Schmidt Modificado, tan pronto como se obtiene un nuevo vector de la base ortonormal, se proyectan todos los vectores restantes de la matriz sobre él. Esto minimiza el impacto de los errores acumulados."
+    },
+    {
+      "q": "¿Qué es una matriz de Householder y cuál es su principal propiedad algebraica?",
+      "options": [
+        "Es una matriz de la forma $H = I - 2 \\frac{v v^T}{\\|v\\|^2}$, que es simétrica y ortogonal.",
+        "Es una matriz triangular unitaria que realiza rotaciones locales en planos bidimensionales.",
+        "Es una matriz de permutación simétrica cuya inversa es igual a su determinante negativo."
+      ],
+      "correct": 0,
+      "hint": "Compruebe que $H^T = H$ y que $H^T H = I$.",
+      "explanation": "Una transformación o reflector de Householder se define como $H = I - 2\\frac{vv^T}{v^Tv}$. Es simétrica ($H^T = H$) y ortogonal ($H^T H = I$), lo que significa que su propia inversa es ella misma ($H^{-1} = H$)."
+    },
+    {
+      "q": "¿Cuál es la ventaja de utilizar transformaciones de Householder frente a rotaciones de Givens en la descomposición QR de una matriz densa?",
+      "options": [
+        "Las reflexiones de Householder eliminan simultáneamente todos los elementos subdiagonales de una columna, resultando más eficientes.",
+        "Las reflexiones de Householder requieren la mitad de operaciones de punto flotante que la factorización de Cholesky.",
+        "Las reflexiones de Householder son aplicables únicamente a matrices dispersas y de gran escala."
+      ],
+      "correct": 0,
+      "hint": "Considere la cantidad de elementos que se anulan en cada paso elemental del algoritmo.",
+      "explanation": "Las transformaciones de Householder anulan todos los elementos debajo de la diagonal en una columna de una sola vez. Las rotaciones de Givens anulan elementos uno a uno, lo que es menos eficiente para matrices densas."
+    },
+    {
+      "q": "¿Cuándo se prefiere el uso de rotaciones de Givens sobre las transformaciones de Householder para calcular la factorización QR?",
+      "options": [
+        "Cuando la matriz original es dispersa o tiene una estructura de bandas, permitiendo anular elementos selectivos.",
+        "Cuando la matriz original es simétrica y definida positiva de gran escala.",
+        "Cuando se busca minimizar la complejidad temporal a $O(n^2)$ FLOPs en matrices densas."
+      ],
+      "correct": 0,
+      "hint": "Piense en qué tipo de transformaciones operan localmente sobre filas específicas.",
+      "explanation": "Las rotaciones de Givens son rotaciones de planos que afectan únicamente a dos filas a la vez. Esto permite anular elementos aislados de forma eficiente sin destruir la estructura dispersa de la matriz."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal asintótica (en número de FLOPs) de la multiplicación de dos matrices densas de tamaño $n \\times n$ utilizando el algoritmo clásico?",
+      "options": [
+        "$2n^3$ FLOPs, con una complejidad temporal de $O(n^3)$.",
+        "$\\frac{2}{3}n^3$ FLOPs, con una complejidad temporal de $O(n^3)$.",
+        "$n^2$ FLOPs, con una complejidad temporal de $O(n^2)$."
+      ],
+      "correct": 0,
+      "hint": "Considere que para cada uno de los $n^2$ elementos del producto, se realiza un producto escalar de longitud $n$.",
+      "explanation": "Para calcular cada celda de la matriz producto se requieren $n$ multiplicaciones y $n-1$ sumas (aproximadamente $2n$ operaciones). Multiplicado por los $n^2$ elementos resultantes, se obtiene un coste aproximado de $2n^3$ FLOPs."
+    },
+    {
+      "q": "¿Por qué es una mala práctica resolver un sistema lineal $Ax = b$ calculando explícitamente $A^{-1}$ y multiplicando $x = A^{-1}b$?",
+      "options": [
+        "Es numéricamente inestable y requiere aproximadamente el triple de FLOPs que la resolución mediante factorización LU.",
+        "Es inviable a menos que la matriz $A$ sea triangular o diagonal estricta.",
+        "La complejidad de calcular la inversa es de $O(n^4)$, mientras que LU es $O(n^3)$."
+      ],
+      "correct": 0,
+      "hint": "Compare el coste computacional ($2n^3$ FLOPs) y el comportamiento frente a errores numéricos.",
+      "explanation": "Calcular la inversa requiere $2n^3$ operaciones (como realizar eliminación gaussiana para $n$ columnas de la identidad), mientras que LU requiere $\\frac{2}{3}n^3$. Además, la inversión explícita amplifica exponencialmente los errores de redondeo."
+    },
+    {
+      "q": "Si se dispone de una matriz $A$ de tamaño $n \\times n$ y se debe resolver el sistema $Ax = b$ para $k$ vectores $b$ distintos de forma sucesiva, ¿cuál es la estrategia óptima?",
+      "options": [
+        "Factorizar $A = LU$ una sola vez ($O(n^3)$) y resolver mediante sustituciones rápidas ($O(n^2)$) para cada vector $b$.",
+        "Calcular la inversa de $A$ en cada paso intermedio para evitar la acumulación de errores de sustitución.",
+        "Realizar una nueva eliminación gaussiana completa sobre la matriz aumentada $[A \\| b]$ para cada vector $b$."
+      ],
+      "correct": 0,
+      "hint": "Piense en separar la etapa de tratamiento de la matriz del tratamiento de los términos independientes.",
+      "explanation": "La factorización LU se calcula una sola vez con un coste de $\\frac{2}{3}n^3$ FLOPs. A partir de ahí, resolver cada sistema cuesta solo $2n^2$ FLOPs (sustitución directa y regresiva), lo cual es sumamente rápido."
+    },
+    {
+      "q": "¿Cuál es el comando en Matlab/Octave para obtener la matriz triangular inferior de Cholesky $L$ (tal que $A = L \\cdot L^T$)?",
+      "options": [
+        "`L = chol(A, 'lower')`",
+        "`L = chol(A)`",
+        "`L = lu(A)`"
+      ],
+      "correct": 0,
+      "hint": "Por defecto, `chol` en Matlab devuelve una matriz triangular superior. Busque el argumento de configuración.",
+      "explanation": "Por defecto, `chol(A)` devuelve la matriz triangular superior $U$ tal que $A = U^T U$. Para obtener la versión triangular inferior $L$ tal que $A = L L^T$, se debe especificar `chol(A, 'lower')`."
+    },
+    {
+      "q": "Si ejecutamos `[L, U, P] = lu(A)` en Matlab/Octave, ¿qué relación matemática exacta se cumple?",
+      "options": [
+        "$P \\cdot A = L \\cdot U$",
+        "$A \\cdot P = L \\cdot U$",
+        "$A = P \\cdot L \\cdot U$"
+      ],
+      "correct": 0,
+      "hint": "Recuerde dónde se aplica la matriz de permutación al permutar las filas del sistema original.",
+      "explanation": "La función `lu(A)` de Matlab realiza la descomposición LU con pivotaje parcial, de modo que la matriz de permutación $P$ satisface la igualdad clásica $PA = LU$."
+    },
+    {
+      "q": "¿Qué complejidad temporal tiene la resolución de un sistema triangular mediante el algoritmo de sustitución directa o regresiva?",
+      "options": [
+        "$O(n^2)$ operaciones, con un coste de $n^2$ FLOPs.",
+        "$O(n^3)$ operaciones, con un coste de $\\frac{2}{3}n^3$ FLOPs.",
+        "$O(n)$ operaciones, con un coste de $2n$ FLOPs."
+      ],
+      "correct": 0,
+      "hint": "Considere la estructura triangular de las ecuaciones y el número de sustituciones necesarias.",
+      "explanation": "Resolver un sistema triangular de tamaño $n$ requiere del orden de $n^2$ operaciones de suma y producto (sustitución directa o regresiva), lo que equivale a una complejidad de $O(n^2)$."
+    },
+    {
+      "q": "Si $A$ es una matriz simétrica y definida positiva de tamaño $n \\times n$, ¿qué se puede afirmar sobre los determinantes de sus submatrices principales líderes?",
+      "options": [
+        "Todos los determinantes de las submatrices principales líderes son estrictamente mayores que cero.",
+        "Solo el determinante de la matriz completa $A$ debe ser estrictamente mayor que cero.",
+        "Los determinantes son de signo alterno comenzando con un valor negativo."
+      ],
+      "correct": 0,
+      "hint": "Recuerde el criterio de Sylvester para la caracterización de matrices definidas positivas.",
+      "explanation": "El criterio de Sylvester establece que una matriz simétrica real es definida positiva si y solo si los determinantes de todos sus menores principales líderes (submatrices principales de tamaño $1 \\times 1$, $2 \\times 2$, $\\dots$, $n \\times n$) son estrictamente positivos."
+    },
+    {
+      "q": "¿Cuál es la relación entre el determinante de una matriz $A$ y las matrices de su descomposición $PA = LU$?",
+      "options": [
+        "$\\det(A) = \\det(P) \\cdot \\prod_{i=1}^n u_{ii}$",
+        "$\\det(A) = \\prod_{i=1}^n l_{ii} \\cdot u_{ii}$",
+        "$\\det(A) = \\det(P) \\cdot \\sum_{i=1}^n u_{ii}$"
+      ],
+      "correct": 0,
+      "hint": "Aplique las propiedades del determinante de productos de matrices, recordando que $\\det(L) = 1$.",
+      "explanation": "De $PA = LU$ se deduce $\\det(P)\\det(A) = \\det(L)\\det(U)$. Como $L$ es triangular unitaria, $\\det(L) = 1$. Dado que $\\det(P) = \\det(P)^{-1} = \\det(P)^T$, se tiene $\\det(A) = \\det(P)^T \\det(U) = \\det(P) \\prod u_{ii}$."
+    },
+    {
+      "q": "Si una matriz $A$ se factoriza mediante Cholesky como $A = L \\cdot L^T$, ¿cómo se calcula el determinante de $A$ a partir de la diagonal de $L$?",
+      "options": [
+        "Como el cuadrado del producto de los elementos diagonales de $L$.",
+        "Como la suma de los cuadrados de los elementos diagonales de $L$.",
+        "Como el producto simple de los elementos de la diagonal de $L$ sin elevar al cuadrado."
+      ],
+      "correct": 0,
+      "hint": "Recuerde que $\\det(A) = \\det(L) \\cdot \\det(L^T)$ y que $\\det(L) = \\det(L^T)$.",
+      "explanation": "Puesto que $\\det(A) = \\det(L \\cdot L^T) = \\det(L) \\cdot \\det(L^T) = (\\det(L))^2$, y siendo $L$ triangular inferior, su determinante es el producto de su diagonal: $\\det(A) = (\\prod_{i=1}^n l_{ii})^2$."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos aplicar la descomposición de Cholesky a una matriz simétrica que no es definida positiva?",
+      "options": [
+        "El algoritmo fallará al intentar calcular la raíz cuadrada de un número negativo o realizar una división por cero.",
+        "El algoritmo se completará con éxito pero devolverá una matriz $L$ que no es triangular inferior.",
+        "El algoritmo recurrirá automáticamente a un pivotaje completo de filas y columnas para estabilizar el cálculo."
+      ],
+      "correct": 0,
+      "hint": "Considere la ecuación recursiva para obtener $l_{ii}$ en el algoritmo de Cholesky.",
+      "explanation": "En el cálculo de los elementos diagonales $l_{ii} = \\sqrt{a_{ii} - \\sum l_{ik}^2}$, si la matriz no es definida positiva, el valor bajo la raíz puede volverse negativo o cero, interrumpiendo el cómputo en números reales."
+    },
+    {
+      "q": "En el contexto de la descomposición QR, ¿qué propiedad geométrica fundamental tiene la matriz $Q$?",
+      "options": [
+        "Preserva la norma euclídea de los vectores y los ángulos entre ellos (es una isometría).",
+        "Proyecta ortogonalmente todos los vectores del espacio sobre el hiperplano nulo.",
+        "Amplifica los autovalores de la matriz original en proporción a su determinante."
+      ],
+      "correct": 0,
+      "hint": "Analice el producto escalar $\\langle Qx, Qy \\rangle$ para una matriz ortogonal.",
+      "explanation": "Dado que $Q^T Q = I$, el producto escalar se preserva: $(Qx)^T (Qy) = x^T Q^T Q y = x^T y$. Esto significa que conserva la norma euclídea y los ángulos."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal asintótica del cálculo de la descomposición QR mediante transformaciones de Householder para una matriz cuadrada?",
+      "options": [
+        "$\\frac{4}{3}n^3$ FLOPs, con complejidad $O(n^3)$.",
+        "$\\frac{2}{3}n^3$ FLOPs, con complejidad $O(n^3)$.",
+        "$2n^3$ FLOPs, con complejidad $O(n^3)$."
+      ],
+      "correct": 0,
+      "hint": "Considere que el coste es aproximadamente el doble que el de la eliminación gaussiana estándar.",
+      "explanation": "La factorización QR por Householder es muy estable pero computacionalmente más exigente que LU, requiriendo aproximadamente $\\frac{4}{3}n^3$ FLOPs."
+    },
+    {
+      "q": "¿Qué estructura tiene el producto de matrices de permutación $P_2 \\cdot P_1$?",
+      "options": [
+        "Es siempre otra matriz de permutación.",
+        "Es una matriz diagonal con valores propios negativos.",
+        "Es una matriz triangular superior unitaria."
+      ],
+      "correct": 0,
+      "hint": "Considere si el conjunto de matrices de permutación de tamaño $n$ forma un grupo algebraico bajo el producto.",
+      "explanation": "El conjunto de las matrices de permutación de tamaño $n \\times n$ forma un grupo finito bajo la multiplicación de matrices, por lo que el producto de dos matrices de permutación es siempre una matriz de permutación."
+    },
+    {
+      "q": "¿Bajo qué circunstancias la descomposición QR de una matriz real $A$ es única?",
+      "options": [
+        "Cuando la matriz $A$ es de rango completo y se impone que los elementos diagonales de $R$ sean estrictamente positivos.",
+        "Cuando la matriz $A$ es simétrica y no singular, sin requerir condiciones adicionales sobre $R$.",
+        "Cuando la matriz $A$ es triangular superior de partida."
+      ],
+      "correct": 0,
+      "hint": "Piense en la libertad de cambiar de signo simultáneamente una columna de $Q$ y una fila de $R$.",
+      "explanation": "Si $A$ tiene rango completo, podemos cambiar el signo de una columna de $Q$ y la correspondiente fila de $R$ sin alterar el producto. Para asegurar unicidad, se debe exigir que todos los $r_{ii}$ sean estrictamente positivos."
+    },
+    {
+      "q": "¿Qué ventaja tiene el pivotaje parcial respecto al pivotaje completo en términos de coste computacional de búsqueda?",
+      "options": [
+        "El parcial busca en $O(n)$ elementos por paso, mientras que el completo requiere buscar en $O(n^2)$ elementos por paso.",
+        "El parcial no requiere intercambiar columnas y por tanto reduce el coste asintótico a $O(n^2)$ FLOPs.",
+        "El parcial es el único que puede implementarse de forma paralela en hilos de CPU autónomos."
+      ],
+      "correct": 0,
+      "hint": "Compare el tamaño del conjunto donde se busca el pivote máximo en cada paso.",
+      "explanation": "En el paso $k$ de la eliminación gaussiana, el pivotaje parcial busca el máximo en la columna $k$ (desde la fila $k$ a $n$, lo que implica $n-k+1$ elementos). El completo busca en toda la submatriz de tamaño $(n-k+1) \\times (n-k+1)$."
+    },
+    {
+      "q": "¿Qué relación existe entre la diagonal de la matriz $U$ en la factorización Doolittle y los valores propios de la matriz original $A$?",
+      "options": [
+        "No hay relación directa; los elementos diagonales de $U$ no coinciden en general con los valores propios de $A$.",
+        "Los elementos diagonales de $U$ son exactamente los valores propios de $A$ multiplicados por el determinante de $L$.",
+        "La suma de los elementos diagonales de $U$ es igual al producto de los valores propios de $A$ elevados al cuadrado."
+      ],
+      "correct": 0,
+      "hint": "Considere que los valores propios se conservan mediante transformaciones de semejanza, mientras que la eliminación gaussiana no lo es.",
+      "explanation": "La eliminación gaussiana ($A = LU$) conserva el determinante (el producto de los elementos diagonales de $U$ es $\\det(A)$), pero altera los valores propios. No hay coincidencia entre la diagonal de $U$ y los autovalores."
+    },
+    {
+      "q": "Al resolver $Ax = b$ mediante descomposición QR ($A = QR$), ¿cuál es el sistema resultante que se debe resolver en la última fase?",
+      "options": [
+        "El sistema triangular superior $Rx = Q^T b$.",
+        "El sistema triangular inferior $L x = Q b$.",
+        "El sistema diagonal $R x = Q^{-1} b^T$."
+      ],
+      "correct": 0,
+      "hint": "Sustituya $A = QR$ en el sistema original y multiplique por $Q^T$ por la izquierda.",
+      "explanation": "Como $QRx = b$, multiplicamos por la izquierda por $Q^T$ (siendo $Q^T = Q^{-1}$). Esto nos da $Q^T Q R x = Q^T b$, lo que se simplifica a $Rx = Q^T b$."
+    },
+    {
+      "q": "¿Qué sucede con los multiplicadores $m_{ij}$ de la eliminación gaussiana si se realiza pivotaje parcial?",
+      "options": [
+        "Se garantiza que todos cumplan con la condición $|m_{ij}| \\le 1$, acotando el crecimiento de errores.",
+        "Todos los multiplicadores se vuelven estrictamente positivos y menores que 0.5.",
+        "Se reducen a valores nulos debido a los sucesivos intercambios con la matriz de permutación."
+      ],
+      "correct": 0,
+      "hint": "Piense en cómo se define $m_{ij} = a_{ij} / a_{jj}$ cuando $a_{jj}$ es el elemento máximo absoluto de la columna.",
+      "explanation": "Como el elemento de la diagonal $a_{jj}$ (pivote) es seleccionado para ser el máximo en valor absoluto de la columna por debajo de la diagonal, el cociente $m_{ij} = a_{ij}/a_{jj}$ cumple siempre que $|m_{ij}| \\le 1$."
+    },
+    {
+      "q": "¿Qué representa físicamente una transformación de Householder aplicada a un vector en el espacio euclídeo?",
+      "options": [
+        "Una reflexión simétrica respecto a un hiperplano ortogonal al vector de dirección $v$.",
+        "Una rotación rígida de un ángulo fijo respecto al origen de coordenadas.",
+        "Una proyección paralela sobre un subespacio de dimensión unitaria."
+      ],
+      "correct": 0,
+      "hint": "Analice la forma geométrica de la operación $x - 2\\text{proy}_v(x)$.",
+      "explanation": "La matriz $H = I - 2\\frac{vv^T}{v^Tv}$ resta al vector $x$ el doble de su proyección sobre la dirección de $v$. Esto equivale geométricamente a reflejar el vector $x$ respecto al hiperplano perpendicular a $v$."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal asintótica del cálculo de la descomposición de Cholesky?",
+      "options": [
+        "$\\frac{1}{3}n^3$ FLOPs, con complejidad $O(n^3)$.",
+        "$\\frac{2}{3}n^3$ FLOPs, con complejidad $O(n^3)$.",
+        "$n^3$ FLOPs, con complejidad $O(n^3)$."
+      ],
+      "correct": 0,
+      "hint": "Considere que requiere exactamente la mitad de operaciones que la descomposición LU clásica.",
+      "explanation": "Debido a la simetría de la matriz, solo se calcula la mitad inferior de los coeficientes, lo que reduce el coste computacional a la mitad del coste de LU: $\\frac{1}{3}n^3$ FLOPs."
+    },
+    {
+      "q": "¿Cuál es el coste computacional de calcular la matriz inversa $A^{-1}$ mediante la resolución de $n$ sistemas lineales tras la factorización LU?",
+      "options": [
+        "El coste es de aproximadamente $2n^3$ FLOPs.",
+        "El coste es de aproximadamente $\\frac{2}{3}n^3$ FLOPs.",
+        "El coste es de aproximadamente $\\frac{4}{3}n^3$ FLOPs."
+      ],
+      "correct": 0,
+      "hint": "Sume el coste de la factorización inicial de $A$ y el coste de resolver $n$ veces las sustituciones para las columnas de la identidad.",
+      "explanation": "Factorizar $A$ cuesta $\\frac{2}{3}n^3$ FLOPs. Resolver $n$ sistemas mediante sustitución directa y regresiva cuesta $n \\times (2n^2) = 2n^3$ FLOPs. El coste total es $\\frac{2}{3}n^3 + 2n^3 \\approx 2n^3$ FLOPs si se optimiza el proceso aprovechando la estructura de los vectores unitarios."
+    },
+    {
+      "q": "¿Bajo qué condiciones la matriz $Q$ de la factorización QR es de tamaño $m \\times m$ y $R$ es de tamaño $m \\times n$ con $m > n$?",
+      "options": [
+        "En la factorización QR completa (Full QR).",
+        "En la factorización QR reducida (Thin QR o de rango reducido).",
+        "En ninguna de las opciones anteriores ya que las dimensiones no son compatibles."
+      ],
+      "correct": 0,
+      "hint": "Piense en la distinción entre la factorización QR de tamaño completo y la factorización reducida para matrices rectangulares.",
+      "explanation": "La factorización QR completa (Full QR) produce una matriz ortogonal $Q$ cuadrada de tamaño $m \\times m$ y una matriz triangular superior extendida $R$ de tamaño $m \\times n$. La versión reducida (Thin QR) da $Q$ de $m \\times n$ y $R$ de $n \\times n$."
+    },
+    {
+      "q": "Si realizamos la factorización QR de una matriz $A$ por Givens, ¿cómo se anulan los elementos?",
+      "options": [
+        "Se anulan de forma individual mediante rotaciones sucesivas que actúan sobre parejas de filas.",
+        "Se anulan columnas completas mediante reflexiones ortogonales en hiperplanos del espacio.",
+        "Se eliminan alternativamente filas y columnas usando matrices de permutación parcial."
+      ],
+      "correct": 0,
+      "hint": "Considere la definición de la matriz de rotación plana bidimensional.",
+      "explanation": "Las rotaciones de Givens operan localmente sobre parejas de filas seleccionadas para anular un elemento específico en cada paso, lo que las hace muy eficientes en matrices con patrones de dispersión."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de la estabilidad numérica del pivotaje parcial en comparación con la ausencia de pivotaje?",
+      "options": [
+        "Acota el crecimiento de los elementos de la matriz activa durante la eliminación gaussiana.",
+        "Reduce el número de operaciones aritméticas en punto flotante a la mitad.",
+        "Asegura la convergencia lineal del método multiplicativo de Gauss-Seidel."
+      ],
+      "correct": 0,
+      "hint": "Considere qué ocurre con la magnitud de los elementos de las filas modificadas al aplicar multiplicadores menores que 1.",
+      "explanation": "El pivotaje parcial asegura que los multiplicadores cumplan $|m_{ij}| \\le 1$. Esto evita el crecimiento desmedido de los elementos de la matriz durante el proceso de eliminación, lo que acota la propagación del error numérico."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Dada la matriz $A = \\begin{pmatrix} 4 & 2 \\\\ 2 & 10 \\end{pmatrix}$, si se descompone como $A = L \\cdot L^T$ mediante Cholesky, el elemento $l_{22}$ de la matriz triangular inferior $L$ es igual a ____.",
+      "options": [
+        "3",
+        "2",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "Calcule los elementos de la diagonal de la matriz triangular inferior paso a paso.",
+      "explanation": "$l_{11} = \\sqrt{4} = 2$. Luego, $l_{21} = 2/l_{11} = 1$. Finalmente, $l_{22} = \\sqrt{10 - l_{21}^2} = \\sqrt{10 - 1} = 3$."
+    },
+    {
+      "q": "Al resolver el sistema triangular $L y = b$ con $L = \\begin{pmatrix} 1 & 0 \\\\ 3 & 1 \\end{pmatrix}$ y $b = \\begin{pmatrix} 2 \\\\ 7 \\end{pmatrix}$ por sustitución directa, el valor de $y_2$ es ____.",
+      "options": [
+        "1",
+        "3",
+        "5"
+      ],
+      "correct": 0,
+      "hint": "Resuelva las ecuaciones del sistema una a una desde arriba hacia abajo.",
+      "explanation": "La primera ecuación da $y_1 = 2$. La segunda ecuación es $3y_1 + y_2 = 7$, lo que nos da $3(2) + y_2 = 7 \\implies y_2 = 1$."
+    },
+    {
+      "q": "Para la matriz $A = \\begin{pmatrix} 3 & 1 \\\\ 6 & 7 \\end{pmatrix}$, el elemento $u_{22}$ obtenido en su descomposición LU (Doolittle, sin pivotaje) es igual a ____.",
+      "options": [
+        "5",
+        "3",
+        "7"
+      ],
+      "correct": 0,
+      "hint": "Calcule el multiplicador $m_{21}$ y aplique la operación fila correspondiente.",
+      "explanation": "El multiplicador es $m_{21} = 6/3 = 2$. Al aplicar $F_2 \\leftarrow F_2 - 2F_1$, obtenemos el elemento $u_{22} = 7 - 2(1) = 5$."
+    },
+    {
+      "q": "El coste computacional asintótico exacto (en FLOPs) de resolver un sistema triangular de tamaño $n = 100$ mediante sustitución regresiva es ____ FLOPs.",
+      "options": [
+        "10000",
+        "20000",
+        "5000"
+      ],
+      "correct": 0,
+      "hint": "El coste de resolver un sistema triangular mediante sustitución es de $n^2$ operaciones.",
+      "explanation": "La complejidad de las sustituciones directa o regresiva es de $n^2$ FLOPs. Para $n = 100$, el coste es $100^2 = 10000$ FLOPs."
+    },
+    {
+      "q": "Si una matriz real simétrica $A = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix}$ se factoriza con Cholesky, el elemento $l_{22}$ de $L$ es ____.",
+      "options": [
+        "2",
+        "1",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Determine primero $l_{11}$ y luego $l_{21}$ antes de hallar $l_{22}$.",
+      "explanation": "$l_{11} = \\sqrt{4} = 2$. Luego $l_{21} = 2/2 = 1$. Entonces $l_{22} = \\sqrt{5 - 1^2} = 2$."
+    },
+    {
+      "q": "Para una matriz de tamaño $n = 10$, realizar una multiplicación de matrices clásica $A \\cdot B$ requiere ____ FLOPs.",
+      "options": [
+        "2000",
+        "1000",
+        "3000"
+      ],
+      "correct": 0,
+      "hint": "La fórmula de FLOPs para la multiplicación matricial clásica de matrices cuadradas es $2n^3$.",
+      "explanation": "El coste es $2n^3$. Reemplazando $n=10$, tenemos $2 \\cdot 10^3 = 2000$ FLOPs."
+    },
+    {
+      "q": "Si realizamos la descomposición QR de la matriz $A = \\begin{pmatrix} 3 & 0 \\\\ 4 & 5 \\end{pmatrix}$ usando Gram-Schmidt, el elemento $r_{11}$ de $R$ es ____.",
+      "options": [
+        "5",
+        "3",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que $r_{11}$ es la norma euclídea del primer vector columna de $A$.",
+      "explanation": "El primer vector columna es $a_1 = \\begin{pmatrix} 3 \\\\ 4 \\end{pmatrix}$. Su norma euclídea es $r_{11} = \\|a_1\\|_2 = \\sqrt{3^2 + 4^2} = 5$."
+    },
+    {
+      "q": "Si en la factorización con pivotaje parcial $P A = L U$, la matriz de permutación es $P = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ y $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$, el producto $P A$ es igual a ____.",
+      "options": [
+        "\\begin{pmatrix} 3 & 4 \\\\ 1 & 2 \\end{pmatrix}",
+        "\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}",
+        "\\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}"
+      ],
+      "correct": 0,
+      "hint": "La matriz de permutación dada intercambia la fila 1 y la fila 2 de la matriz $A$.",
+      "explanation": "Al multiplicar $P \\cdot A$ por la izquierda con $P$ que intercambia las filas 1 y 2, obtenemos la matriz con las filas invertidas: $\\begin{pmatrix} 3 & 4 \\\\ 1 & 2 \\end{pmatrix}$."
+    },
+    {
+      "q": "Si la factorización LU (sin pivotaje) de una matriz $A$ es $L = \\begin{pmatrix} 1 & 0 \\\\ 4 & 1 \\end{pmatrix}$ y $U = \\begin{pmatrix} 2 & 3 \\\\ 0 & 5 \\end{pmatrix}$, el elemento $a_{21}$ de $A$ es ____.",
+      "options": [
+        "8",
+        "4",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Calcule el elemento de la segunda fila y primera columna del producto matricial $L \\cdot U$.",
+      "explanation": "$a_{21} = l_{21} u_{11} + l_{22} u_{21} = 4 \\cdot 2 + 1 \\cdot 0 = 8$."
+    },
+    {
+      "q": "El número de comparaciones necesarias para realizar pivotaje parcial en la primera columna de una matriz de tamaño $n = 5$ es de ____.",
+      "options": [
+        "4",
+        "5",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Se busca el máximo absoluto entre los $n$ elementos de la primera columna.",
+      "explanation": "Para encontrar el elemento de mayor valor absoluto entre 5 elementos de la primera columna, se deben realizar exactamente $5 - 1 = 4$ comparaciones."
+    },
+    {
+      "q": "Si una matriz de tamaño $200 \\times 200$ se descompone usando Cholesky, el número aproximado de FLOPs requeridos es de ____ FLOPs.",
+      "options": [
+        "2.67 \\times 10^6",
+        "8.00 \\times 10^6",
+        "1.33 \\times 10^6"
+      ],
+      "correct": 0,
+      "hint": "La descomposición de Cholesky tiene un coste aproximado de $\\frac{1}{3}n^3$ operaciones.",
+      "explanation": "Sustituyendo $n = 200$ en la fórmula $\\frac{1}{3}n^3$, obtenemos $\\frac{200^3}{3} = \\frac{8000000}{3} \\approx 2.67 \\times 10^6$ FLOPs."
+    },
+    {
+      "q": "En la descomposición QR por rotaciones de Givens de una matriz, si $Q = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$, el determinante de $Q$ es igual a ____.",
+      "options": [
+        "1",
+        "-1",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Calcule el determinante de la matriz usando la identidad trigonométrica fundamental.",
+      "explanation": "$\\det(Q) = (\\cos\\theta)(\\cos\\theta) - (-\\sin\\theta)(\\sin\\theta) = \\cos^2\\theta + \\sin^2\\theta = 1$."
+    },
+    {
+      "q": "En la factorización LU (sin pivotaje) de la matriz $A = \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$, el elemento $u_{22}$ de la matriz triangular superior $U$ es ____.",
+      "options": [
+        "1.5",
+        "2.0",
+        "1.0"
+      ],
+      "correct": 0,
+      "hint": "Calcule el multiplicador $m_{21}$ de la primera columna y actualice la segunda fila.",
+      "explanation": "$m_{21} = -1/2 = -0.5$. La segunda fila actualizada es $F_2 \\leftarrow F_2 - m_{21}F_1 \\implies u_{22} = 2 - (-0.5)(-1) = 2 - 0.5 = 1.5$."
+    },
+    {
+      "q": "Al resolver el sistema $A x = b$ mediante LU con $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 3 \\end{pmatrix}$ y $y = \\begin{pmatrix} 4 \\\\ 6 \\end{pmatrix}$ (donde $U x = y$), el valor de $x_2$ es ____.",
+      "options": [
+        "2",
+        "4",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Resuelva el sistema triangular superior $Ux = y$ de abajo hacia arriba.",
+      "explanation": "Como $U = A$ (ya que $L$ es la identidad en este caso), la segunda ecuación de $Ux = y$ es $3x_2 = 6 \\implies x_2 = 2$."
+    },
+    {
+      "q": "En la factorización QR de la matriz $A = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, el primer vector columna de la matriz $Q$ es ____.",
+      "options": [
+        "\\begin{pmatrix} 1/\\sqrt{2} \\\\ 1/\\sqrt{2} \\end{pmatrix}",
+        "\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}",
+        "\\begin{pmatrix} 0 \\\\ 1 \\end{pmatrix}"
+      ],
+      "correct": 0,
+      "hint": "Normalice el primer vector columna $a_1$ de la matriz $A$.",
+      "explanation": "El primer vector es $a_1 = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. Su norma es $\\sqrt{1^2 + 1^2} = \\sqrt{2}$. Al normalizar obtenemos $q_1 = \\begin{pmatrix} 1/\\sqrt{2} \\\\ 1/\\sqrt{2} \\end{pmatrix}$."
+    },
+    {
+      "q": "Si una matriz simétrica $A$ es definida positiva, el determinante de dicha matriz es siempre ____.",
+      "options": [
+        "estrictamente positivo",
+        "estrictamente negativo",
+        "igual a cero"
+      ],
+      "correct": 0,
+      "hint": "Recuerde el criterio de los menores principales o la relación con los valores propios.",
+      "explanation": "El determinante de una matriz simétrica definida positiva es el producto de sus valores propios (que son todos estrictamente positivos) o su menor principal líder final, por tanto, siempre es estrictamente positivo."
+    },
+    {
+      "q": "Para poder aplicar la descomposición de Cholesky a $A = \\begin{pmatrix} 1 & \\alpha \\\\ \\alpha & 4 \\end{pmatrix}$, el parámetro $\\alpha$ debe cumplir obligatoriamente ____.",
+      "options": [
+        "|\\alpha| < 2",
+        "|\\alpha| > 2",
+        "\\alpha > 0"
+      ],
+      "correct": 0,
+      "hint": "Para ser definida positiva, el determinante de la matriz completa debe ser estrictamente positivo.",
+      "explanation": "Los menores principales líderes deben ser positivos. $H_1 = 1 > 0$ y $H_2 = \\det(A) = 4 - \\alpha^2 > 0 \\implies \\alpha^2 < 4 \\implies |\\alpha| < 2$."
+    },
+    {
+      "q": "Si $A = L L^T$ es la descomposición de Cholesky de una matriz de tamaño $3 \\times 3$ y los elementos de la diagonal de $L$ son $l_{11}=2, l_{22}=3, l_{33}=4$, el determinante de $A$ es ____.",
+      "options": [
+        "576",
+        "24",
+        "144"
+      ],
+      "correct": 0,
+      "hint": "El determinante de $A$ es el cuadrado del determinante de $L$.",
+      "explanation": "$\\det(L) = 2 \\cdot 3 \\cdot 4 = 24$. Por tanto, $\\det(A) = (\\det(L))^2 = 24^2 = 576$."
+    },
+    {
+      "q": "En la factorización con pivotaje parcial $P A = L U$, si no se realiza ningún intercambio de filas en la eliminación gaussiana, la matriz de permutación $P$ es ____.",
+      "options": [
+        "la matriz identidad",
+        "la matriz nula",
+        "una matriz de ceros y unos alternados"
+      ],
+      "correct": 0,
+      "hint": "La matriz que representa la ausencia de permutaciones es el elemento neutro del producto de matrices.",
+      "explanation": "Si no hay intercambios de filas, la matriz de permutación asociada es la matriz identidad $I$, ya que no se alteran las posiciones originales de las ecuaciones."
+    },
+    {
+      "q": "Si factorizar una matriz por LU cuesta 12 segundos para $n = 1000$, el tiempo estimado para $n = 2000$ (asumiendo complejidad $O(n^3)$) es de ____ segundos.",
+      "options": [
+        "96",
+        "48",
+        "24"
+      ],
+      "correct": 0,
+      "hint": "Considere la relación cúbica del incremento del coste computacional al duplicar el tamaño.",
+      "explanation": "Al duplicar el tamaño de la matriz de $n$ a $2n$, el tiempo se multiplica por $2^3 = 8$. Por tanto, el tiempo estimado es $12 \\cdot 8 = 96$ segundos."
+    },
+    {
+      "q": "¿Cuáles son las ventajas de utilizar la factorización LU en lugar de resolver un sistema mediante el cálculo de la inversa clásica de una matriz?",
+      "options": [
+        "Menor número de operaciones elementales en punto flotante (FLOPs).",
+        "Mayor estabilidad numérica y reducción de los errores de redondeo.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en las operaciones computacionales y en los errores acumulados por la inversa.",
+      "explanation": "La factorización LU es más eficiente ($\\frac{2}{3}n^3$ frente a $2n^3$ FLOPs) y numéricamente mucho más estable que el cálculo de la inversa explícita."
+    },
+    {
+      "q": "¿Qué herramientas se pueden utilizar para calcular de manera estable la factorización QR de una matriz en la práctica computacional?",
+      "options": [
+        "Transformaciones o reflectores de Householder.",
+        "Rotaciones de planos bidimensionales de Givens.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde los métodos descritos para realizar la factorización ortogonal QR.",
+      "explanation": "Tanto las transformaciones de Householder como las rotaciones de Givens son métodos numéricamente estables que permiten calcular la descomposición QR."
+    },
+    {
+      "q": "Para que una matriz simétrica real $A$ admita una descomposición de Cholesky con elementos reales positivos en su diagonal principal, se requiere que:",
+      "options": [
+        "Todos los valores propios de la matriz sean estrictamente positivos.",
+        "Todos los menores principales líderes tengan determinante mayor que cero.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere las diferentes formas equivalentes de definir una matriz definida positiva.",
+      "explanation": "Tener valores propios estrictamente positivos y cumplir el criterio de Sylvester (menores líderes positivos) son condiciones equivalentes para que la matriz sea definida positiva."
+    },
+    {
+      "q": "La matriz ortogonal $Q$ obtenida a partir de la factorización QR de una matriz $A$ cumple con las siguientes propiedades algebraicas:",
+      "options": [
+        "Su inversa coincide con su propia matriz traspuesta ($Q^{-1} = Q^T$).",
+        "Conserva intacta la norma euclídea del vector al que multiplica ($||Qx||_2 = ||x||_2$).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise la definición formal y consecuencias de que una matriz sea ortogonal.",
+      "explanation": "Una matriz ortogonal satisface $Q^T Q = I$, lo que implica $Q^{-1} = Q^T$ y que preserva normas y productos escalares."
+    },
+    {
+      "q": "Al implementar la eliminación gaussiana con la estrategia de pivotaje parcial, la matriz de permutación $P$ resultante:",
+      "options": [
+        "Asegura que el elemento pivote en cada paso de eliminación sea el máximo en valor absoluto de su columna.",
+        "Es una matriz ortogonal cuyo determinante toma valores dentro del conjunto $\\{1, -1\\}$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere las propiedades de los intercambios de filas y sus determinantes.",
+      "explanation": "El pivotaje parcial maximiza el pivote en valor absoluto columna por columna. La matriz de permutación $P$ resultante de dichos intercambios es ortogonal y su determinante es $\\pm 1$."
+    },
+    {
+      "q": "¿Qué factores pueden generar graves problemas de inestabilidad numérica al resolver sistemas de ecuaciones lineales?",
+      "options": [
+        "La ausencia de pivotaje cuando existen elementos diagonales muy pequeños.",
+        "El uso del método de Gram-Schmidt clásico en lugar del modificado para QR.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde los principales focos de inestabilidad numérica analizados en el tema.",
+      "explanation": "Tanto no usar pivotaje con pivotes pequeños en LU, como emplear Gram-Schmidt clásico en QR, causan pérdida de precisión y problemas numéricos debido a redondeo."
+    },
+    {
+      "q": "En el entorno informático de Matlab o Octave, ¿cuáles de las siguientes funciones nativas permiten resolver factorizaciones?",
+      "options": [
+        "La función `lu(A)` para calcular la descomposición LU con pivotaje.",
+        "La función `chol(A)` para calcular la descomposición de Cholesky.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Identifique los comandos estándares del software utilizados en la sección práctica.",
+      "explanation": "Tanto `lu` como `chol` son funciones integradas en Matlab/Octave para la factorización directa de matrices."
+    },
+    {
+      "q": "La descomposición de una matriz invertible en la forma $A = L \\cdot U$ existe y es totalmente única si:",
+      "options": [
+        "Los menores principales de la matriz son no singulares y fijamos la diagonal $l_{ii} = 1$.",
+        "La matriz es diagonalizable y tiene valores propios reales y no nulos.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 0,
+      "hint": "Analice con cuidado cuál de las opciones es una condición suficiente de unicidad matemática.",
+      "explanation": "La existencia y unicidad se garantizan si y solo si todos los menores principales líderes son no singulares y se define una convención como $l_{ii}=1$ (Doolittle) o $u_{ii}=1$ (Crout)."
+    },
+    {
+      "q": "La justificación del uso de métodos de descomposición matricial (como LU, Cholesky o QR) frente a la inversión directa radica en:",
+      "options": [
+        "Una mayor eficiencia en la resolución de sistemas para múltiples vectores $b$ distintos.",
+        "Una mayor precisión numérica al disminuir el efecto de la propagación del redondeo.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en las ventajas de resolver sistemas mediante sustituciones y el control de errores.",
+      "explanation": "Las factorizaciones matriciales combinan menor coste computacional para múltiples términos independientes y un mejor comportamiento numérico."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones son correctas en relación con la descomposición de Cholesky $A = L \\cdot L^T$?",
+      "options": [
+        "La matriz triangular inferior $L$ tiene elementos estrictamente positivos en su diagonal.",
+        "La matriz original $A$ debe ser real, simétrica y definida positiva.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Repase la definición de la factorización de Cholesky y sus propiedades.",
+      "explanation": "La factorización de Cholesky se define solo para matrices simétricas y definidas positivas, dando una matriz $L$ triangular inferior única con elementos diagonales positivos."
+    },
+    {
+      "q": "Si una matriz real simétrica $A$ posee al menos un valor propio negativo, ¿qué ocurre al intentar calcular su descomposición de Cholesky?",
+      "options": [
+        "Se obtiene una matriz $L$ puramente real sin inconvenientes.",
+        "Los elementos de la diagonal de $L$ serán todos nulos.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde qué tipo de números aparecen bajo el radical si la matriz no es definida positiva.",
+      "explanation": "Si tiene un autovalor negativo, la matriz no es definida positiva. Cholesky fallará en el campo de los números reales (aparecerán raíces de números negativos), por lo que ninguna afirmación anterior es correcta."
+    },
+    {
+      "q": "Para una matriz de tamaño $n \\times n$, ¿cuál es el coste exacto de calcular la matriz inversa $A^{-1}$ mediante Gauss-Jordan?",
+      "options": [
+        "El coste computacional es de $\\frac{1}{3}n^3$ FLOPs.",
+        "El coste computacional es de $n^2$ FLOPs.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El cálculo de la inversa de una matriz por Gauss-Jordan requiere del orden de $2n^3$ operaciones.",
+      "explanation": "El coste de calcular la inversa de una matriz densa es de $2n^3$ FLOPs. Como las opciones son $\\frac{1}{3}n^3$ y $n^2$, la opción correcta es la que indica que ninguna es correcta."
+    },
+    {
+      "q": "En la factorización QR calculada mediante rotaciones de Givens, la matriz resultante $R$ se caracteriza por ser:",
+      "options": [
+        "Una matriz triangular inferior con unos en su diagonal principal.",
+        "Una matriz puramente ortogonal cuya inversa es igual a su traspuesta.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde qué estructura tiene la matriz $R$ en cualquier descomposición QR.",
+      "explanation": "La matriz $R$ es triangular superior, no inferior, y no es ortogonal. Por lo tanto, ninguna de las afirmaciones dadas es correcta."
+    },
+    {
+      "q": "Si realizamos la descomposición LU con pivotaje completo de una matriz $A$, la formulación matemática se expresa de la forma:",
+      "options": [
+        "$P A = L U$",
+        "$A P = L U$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde que el pivotaje completo intercambia tanto filas como columnas de la matriz.",
+      "explanation": "El pivotaje completo requiere dos matrices de permutación, una para filas ($P$) y otra para columnas ($Q$), por lo que la forma correcta es $PAQ = LU$. Ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "Si una matriz $A$ de tamaño $3 \\times 3$ tiene menores principales líderes de valores $H_1 = 4$, $H_2 = -2$, y $H_3 = 6$, ¿qué ocurre con su factorización de Cholesky?",
+      "options": [
+        "La factorización existe y es única con diagonal real.",
+        "La factorización se estabiliza de forma automática mediante pivotaje parcial.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Compruebe si se cumple el criterio de Sylvester para matrices definidas positivas.",
+      "explanation": "Como $H_2 = -2 < 0$, la matriz no es definida positiva y por tanto la factorización de Cholesky real no existe. Ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "En el método clásico de Gram-Schmidt para calcular la factorización QR de una matriz $A$, si sus columnas son linealmente dependientes, entonces:",
+      "options": [
+        "El algoritmo genera una matriz $Q$ de rango completo sin divisiones por cero.",
+        "La matriz $R$ será necesariamente la identidad.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Piense en qué ocurre al normalizar un vector de proyección si el vector es combinación lineal de los anteriores.",
+      "explanation": "Si hay columnas linealmente dependientes, al proyectar se obtendrá un vector nulo cuya norma es cero, provocando una división por cero insalvable en el algoritmo estándar. Ninguna es correcta."
+    },
+    {
+      "q": "En la descomposición QR, si la matriz original $A$ es de tamaño $m \\times n$ con $m > n$, la matriz ortogonal $Q$ en la versión reducida tiene tamaño:",
+      "options": [
+        "$n \\times n$",
+        "$n \\times m$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En la factorización reducida o Thin QR, la matriz $Q$ tiene el mismo tamaño que la matriz $A$.",
+      "explanation": "En la Thin QR, la matriz $Q$ es de tamaño $m \\times n$. Al no estar listada esta dimensión, la respuesta correcta es que ninguna es correcta."
+    },
+    {
+      "q": "Si realizamos la descomposición de una matriz invertible como $A = L \\cdot U$ mediante el algoritmo de Doolittle, ¿qué se puede afirmar sobre los elementos diagonales de $U$?",
+      "options": [
+        "Todos los elementos de la diagonal de $U$ deben ser iguales a 1.",
+        "Todos los elementos de la diagonal de $U$ deben ser iguales a 0.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde a cuál de las matrices de la descomposición se le imponen unos en la diagonal en Doolittle.",
+      "explanation": "En el algoritmo de Doolittle, se le imponen unos en la diagonal a la matriz triangular inferior $L$. Los de $U$ son los pivotes resultantes y no tienen por qué ser 1 o 0. Por ende, ninguna es correcta."
+    },
+    {
+      "q": "Para una matriz simétrica real definida positiva $A$, ¿cuándo se requiere obligatoriamente aplicar pivotaje parcial al calcular su factorización de Cholesky?",
+      "options": [
+        "Cuando la diagonal tiene elementos muy pequeños en comparación con los de fuera.",
+        "Cuando la matriz tiene un número de condición superior a $10^5$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La descomposición de Cholesky es intrínsecamente estable. ¿Requiere pivotaje?",
+      "explanation": "La factorización de Cholesky es numéricamente estable por diseño y no requiere pivotaje bajo ninguna circunstancia. Por lo tanto, ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "Si multiplicamos una matriz de permutación $P$ a la derecha de la matriz $A$ ($A \\cdot P$), el efecto resultante es:",
+      "options": [
+        "El intercambio de las filas correspondientes de la matriz $A$.",
+        "La obtención de la traspuesta de la matriz $A$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Considere la diferencia entre multiplicar una matriz de permutación por la izquierda o por la derecha.",
+      "explanation": "Multiplicar por $P$ a la derecha provoca la permutación de las columnas de $A$, no de las filas ni su traspuesta. Ninguna de las de arriba es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Factorización LU de una matriz de tamaño 3x3 sin pivotaje",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 4 & 5 & 4 \\\\ 6 & 9 & 12 \\end{pmatrix}$. Calculamos su factorización $A = L \\cdot U$ de forma manual mediante eliminación gaussiana sin pivotaje.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcule el multiplicador $m_{21}$ (que corresponde a $l_{21}$ de la matriz $L$) para anular el elemento en la posición (2,1).",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El multiplicador $m_{21}$ se calcula como $a_{21}/a_{11} = 4/2 = 2.0$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcule el multiplicador $m_{32}$ (que corresponde a $l_{32}$ de la matriz $L$) usado para anular el elemento en la posición (3,2) después de la primera etapa de eliminación.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Tras la primera etapa, la fila 2 se transforma en $F_2 \\leftarrow F_2 - 2F_1 = (0, 3, 2)$ y la fila 3 se transforma en $F_3 \\leftarrow F_3 - 3F_1 = (0, 6, 9)$. El pivote actual es $3$, y el elemento a anular es $6$, por lo que $m_{32} = 6/3 = 2.0$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Calcule el elemento $u_{33}$ de la matriz triangular superior $U$ resultante.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "Tras anular el elemento en la posición (3,2) aplicando $F_3 \\leftarrow F_3 - 2F_2$, el elemento de la posición (3,3) de la matriz $U$ pasa a ser $9 - 2(2) = 5.0$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Resuelva el sistema auxiliar $L y = b$ para $b = \\begin{pmatrix} 4 \\\\ 11 \\\\ 23 \\end{pmatrix}$ y proporcione el valor de la componente $y_3$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "El sistema es $\\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ 3 & 2 & 1 \\end{pmatrix} \\begin{pmatrix} y_1 \\\\ y_2 \\\\ y_3 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 11 \\\\ 23 \\end{pmatrix}$. Por sustitución directa: $y_1 = 4$; $2(4) + y_2 = 11 \\implies y_2 = 3$; y $3(4) + 2(3) + y_3 = 23 \\implies 12 + 6 + y_3 = 23 \\implies y_3 = 5.0$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Resolución del sistema triangular superior Ux = y",
+      "context": "Con la matriz triangular superior $U = \\begin{pmatrix} 2 & 1 & 1 \\\\ 0 & 3 & 2 \\\\ 0 & 0 & 5 \\end{pmatrix}$ calculada previamente y el vector de términos intermedios $y = \\begin{pmatrix} 5 \\\\ 7 \\\\ 10 \\end{pmatrix}$, resolvemos $Ux = y$ mediante sustitución regresiva.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Determine el valor de la incógnita $x_3$ resolviendo el sistema de abajo hacia arriba.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La última ecuación es $5x_3 = 10$, lo que da inmediatamente $x_3 = 2.0$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Determine el valor de la incógnita $x_2$ usando la sustitución regresiva con el valor de $x_3$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "La segunda ecuación es $3x_2 + 2x_3 = 7 \\implies 3x_2 + 2(2) = 7 \\implies 3x_2 = 3 \\implies x_2 = 1.0$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Determine el valor de la incógnita $x_1$ usando los valores ya obtenidos.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "La primera ecuación es $2x_1 + x_2 + x_3 = 5 \\implies 2x_1 + 1 + 2 = 5 \\implies 2x_1 = 2 \\implies x_1 = 1.0$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcule el producto de todas las componentes de la solución obtenida, es decir, $x_1 \\cdot x_2 \\cdot x_3$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El producto es $x_1 \\cdot x_2 \\cdot x_3 = 1.0 \\cdot 1.0 \\cdot 2.0 = 2.0$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Factorización de Cholesky de una matriz 2x2",
+      "context": "Sea la matriz simétrica y definida positiva $A = \\begin{pmatrix} 9 & 6 \\\\ 6 & 20 \\end{pmatrix}$. Buscamos su descomposición de Cholesky $A = L \\cdot L^T$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Encuentre el elemento diagonal $l_{11}$ de la matriz triangular inferior $L$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "El elemento $l_{11}$ se calcula como $\\sqrt{a_{11}} = \\sqrt{9} = 3.0$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Encuentre el elemento $l_{21}$ de la matriz triangular inferior $L$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El elemento $l_{21}$ es $a_{21}/l_{11} = 6/3 = 2.0$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Encuentre el elemento diagonal $l_{22}$ de la matriz triangular inferior $L$.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "Se tiene $l_{21}^2 + l_{22}^2 = a_{22} \\implies 2^2 + l_{22}^2 = 20 \\implies l_{22} = \\sqrt{20 - 4} = 4.0$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Calcule el determinante de la matriz triangular inferior $L$.",
+          "correctValue": 12.0,
+          "tolerance": 0.01,
+          "explanation": "Dado que $L$ es triangular inferior, su determinante es el producto de su diagonal principal: $\\det(L) = l_{11} \\cdot l_{22} = 3 \\cdot 4 = 12.0$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Factorización de Cholesky de una matriz 3x3",
+      "context": "Dada la matriz simétrica y definida positiva $A = \\begin{pmatrix} 4 & 6 & 2 \\\\ 6 & 18 & 9 \\\\ 2 & 9 & 14 \\end{pmatrix}$, calcule su factorización $A = L \\cdot L^T$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcule el valor del elemento $l_{21}$ de la matriz $L$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Primero, $l_{11} = \\sqrt{4} = 2.0$. Luego, $l_{21} = a_{21}/l_{11} = 6/2 = 3.0$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcule el valor del elemento diagonal $l_{22}$ de la matriz $L$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Se cumple $l_{21}^2 + l_{22}^2 = a_{22} \\implies 3^2 + l_{22}^2 = 18 \\implies l_{22} = \\sqrt{18 - 9} = 3.0$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcule el valor del elemento $l_{32}$ de la matriz $L$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Sabemos que $l_{31} = a_{31}/l_{11} = 2/2 = 1.0$. Luego, $l_{31}l_{21} + l_{32}l_{22} = a_{32} \\implies 1.0(3.0) + l_{32}(3.0) = 9 \\implies 3.0 l_{32} = 6 \\implies l_{32} = 2.0$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcule el valor del elemento diagonal $l_{33}$ de la matriz $L$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Se cumple $l_{31}^2 + l_{32}^2 + l_{33}^2 = a_{33} \\implies 1^2 + 2^2 + l_{33}^2 = 14 \\implies 5 + l_{33}^2 = 14 \\implies l_{33} = 3.0$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Resolución de sistemas usando la factorización de Cholesky",
+      "context": "Con la matriz triangular de Cholesky $L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 3 & 3 & 0 \\\\ 1 & 2 & 3 \\end{pmatrix}$ del ejercicio anterior, resolvemos $Ax = b$ para $b = \\begin{pmatrix} 12 \\\\ 33 \\\\ 25 \\end{pmatrix}$ resolviendo $Ly = b$ y $L^T x = y$.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Determine el valor de la componente $y_1$ del vector intermedio $y$.",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "De la ecuación $2y_1 = 12$, se obtiene $y_1 = 6.0$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Determine el valor de la componente $y_3$ del vector intermedio $y$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Por sustitución directa: $3y_1 + 3y_2 = 33 \\implies 18 + 3y_2 = 33 \\implies y_2 = 5$. Luego, $y_1 + 2y_2 + 3y_3 = 25 \\implies 6 + 10 + 3y_3 = 25 \\implies 3y_3 = 9 \\implies y_3 = 3.0$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Resuelva para $x_2$ en el sistema $L^T x = y$ con el vector $y = \\begin{pmatrix} 6 \\\\ 5 \\\\ 3 \\end{pmatrix}$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El sistema es $\\begin{pmatrix} 2 & 3 & 1 \\\\ 0 & 3 & 2 \\\\ 0 & 0 & 3 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix} 6 \\\\ 5 \\\\ 3 \\end{pmatrix}$. De la última fila: $3x_3 = 3 \\implies x_3 = 1$. De la segunda fila: $3x_2 + 2x_3 = 5 \\implies 3x_2 + 2 = 5 \\implies x_2 = 1.0$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Determine el valor final de la componente $x_1$ de la solución del sistema.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "De la primera ecuación de $L^T x = y$: $2x_1 + 3x_2 + x_3 = 6 \\implies 2x_1 + 3(1) + 1 = 6 \\implies 2x_1 = 2 \\implies x_1 = 1.0$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Factorización PLU con pivotaje parcial",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 2 & 8 & 11 \\\\ 4 & 12 & 22 \\end{pmatrix}$, realizamos la factorización $P A = L U$ mediante eliminación gaussiana con pivotaje parcial de filas.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Determine el valor del elemento pivote seleccionado en el primer paso en la columna 1.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "En la primera columna de $A$, los elementos son 1, 2, 4. El de mayor valor absoluto es 4, por lo que se elige como pivote tras intercambiar la fila 1 y la fila 3."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Determine el multiplicador $l_{21}$ utilizado en la eliminación tras el primer intercambio de filas.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "La matriz con las filas 1 y 3 intercambiadas es $\\begin{pmatrix} 4 & 12 & 22 \\\\ 2 & 8 & 11 \\\\ 1 & 2 & 3 \\end{pmatrix}$. El multiplicador para la fila 2 es $m_{21} = 2/4 = 0.5$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Determine el multiplicador $l_{32}$ utilizado en el segundo paso de eliminación.",
+          "correctValue": -0.5,
+          "tolerance": 0.01,
+          "explanation": "Tras la primera etapa de eliminación, las filas 2 y 3 quedan: $F_2 \\leftarrow F_2 - 0.5 F_1 = (0, 2, 0)$ y $F_3 \\leftarrow F_3 - 0.25 F_1 = (0, -1, -2.5)$. El pivote en la columna 2 es 2, y el elemento a eliminar en la fila 3 es -1. El multiplicador es $m_{32} = -1/2 = -0.5$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Encuentre el elemento $u_{33}$ de la matriz triangular superior $U$ resultante.",
+          "correctValue": -2.5,
+          "tolerance": 0.01,
+          "explanation": "Aplicando $F_3 \\leftarrow F_3 - (-0.5) F_2$, obtenemos el elemento de la posición (3,3) de la matriz $U$, que se mantiene como $-2.5 - (-0.5)(0) = -2.5$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Coste computacional en FLOPs para n = 30",
+      "context": "Analice el número exacto o aproximado de operaciones en punto flotante (FLOPs) para realizar las siguientes descomposiciones de una matriz cuadrada de dimensión $n = 30$.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcule el número de FLOPs requeridos para la multiplicación de dos matrices densas utilizando el coste clásico de $2n^3$ FLOPs.",
+          "correctValue": 54000.0,
+          "tolerance": 0.1,
+          "explanation": "El coste es $2n^3 = 2 \\cdot (30)^3 = 2 \\cdot 27000 = 54000.0$ FLOPs."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcule el coste computacional aproximado (en FLOPs) de la descomposición LU mediante la fórmula estándar $\\frac{2}{3}n^3$.",
+          "correctValue": 18000.0,
+          "tolerance": 0.1,
+          "explanation": "El coste es $\\frac{2}{3}n^3 = \\frac{2}{3} \\cdot 27000 = 18000.0$ FLOPs."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcule el coste computacional aproximado (en FLOPs) de la descomposición de Cholesky mediante la fórmula estándar $\\frac{1}{3}n^3$.",
+          "correctValue": 9000.0,
+          "tolerance": 0.1,
+          "explanation": "El coste es $\\frac{1}{3}n^3 = \\frac{1}{3} \\cdot 27000 = 9000.0$ FLOPs."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcule el coste computacional aproximado (en FLOPs) de la descomposición QR mediante transformaciones de Householder utilizando la fórmula estándar $\\frac{4}{3}n^3$.",
+          "correctValue": 36000.0,
+          "tolerance": 0.1,
+          "explanation": "El coste es $\\frac{4}{3}n^3 = \\frac{4}{3} \\cdot 27000 = 36000.0$ FLOPs."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Factorización QR mediante Gram-Schmidt",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 3 & 1 \\\\ 4 & 2 \\end{pmatrix}$, calcule su factorización $A = Q \\cdot R$ mediante el método de ortogonalización clásica de Gram-Schmidt.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcule el elemento $r_{11}$ de la matriz triangular superior $R$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "Corresponde a la norma del primer vector columna $a_1 = \\begin{pmatrix} 3 \\\\ 4 \\end{pmatrix}$, que es $\\sqrt{3^2 + 4^2} = 5.0$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcule el elemento $r_{12}$ de la matriz triangular superior $R$, definido por el producto escalar $\\langle q_1, a_2 \\rangle$.",
+          "correctValue": 2.2,
+          "tolerance": 0.01,
+          "explanation": "El vector ortonormalizado es $q_1 = \\begin{pmatrix} 0.6 \\\\ 0.8 \\end{pmatrix}$ y $a_2 = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$. El producto escalar es $r_{12} = 0.6(1) + 0.8(2) = 2.2$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcule el elemento $r_{22}$ de la matriz $R$.",
+          "correctValue": 0.4,
+          "tolerance": 0.01,
+          "explanation": "Calculamos $v_2 = a_2 - r_{12}q_1 = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} - 2.2\\begin{pmatrix} 0.6 \\\\ 0.8 \\end{pmatrix} = \\begin{pmatrix} -0.32 \\\\ 0.24 \\end{pmatrix}$. El valor de $r_{22}$ es la norma de $v_2$: $\\sqrt{(-0.32)^2 + (0.24)^2} = \\sqrt{0.1024 + 0.0576} = \\sqrt{0.16} = 0.4$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcule la suma de los elementos de la segunda columna de la matriz ortogonal $Q$ (es decir, $q_{12} + q_{22}$).",
+          "correctValue": -0.2,
+          "tolerance": 0.01,
+          "explanation": "La columna $q_2$ es $v_2/r_{22} = \\begin{pmatrix} -0.32 \\\\ 0.24 \\end{pmatrix} / 0.4 = \\begin{pmatrix} -0.8 \\\\ 0.6 \\end{pmatrix}$. La suma de sus elementos es $-0.8 + 0.6 = -0.2$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Transformaciones de Householder en 2D",
+      "context": "Dado el vector $x = \\begin{pmatrix} 3 \\\\ 4 \\end{pmatrix}$, deseamos construir un reflector de Householder $H = I - 2\\frac{vv^T}{\\|v\\|^2}$ que asocie $x$ con el vector de la dirección del primer eje coordenado $\\begin{pmatrix} -5 \\\\ 0 \\end{pmatrix}$. Elegimos el vector $v = x - (-\\|x\\|_2 e_1) = \\begin{pmatrix} 8 \\\\ 4 \\end{pmatrix}$, o de forma simplificada $v = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Determine el valor de la primera componente del vector de dirección no simplificado $v = x + 5e_1$.",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "El vector $v = x + \\|x\\|_2 e_1 = \\begin{pmatrix} 3 \\\\ 4 \\end{pmatrix} + 5\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 8 \\\\ 4 \\end{pmatrix}$. Su primera componente es 8.0."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcule el elemento de la posición (1,1) de la matriz de Householder $H$ utilizando el vector $v = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$.",
+          "correctValue": -0.6,
+          "tolerance": 0.01,
+          "explanation": "$H = I - 2\\frac{vv^T}{v^Tv} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix} - \\frac{2}{5}\\begin{pmatrix} 4 & 2 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} -0.6 & -0.8 \\\\ -0.8 & 0.6 \\end{pmatrix}$. El elemento (1,1) es $-0.6$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcule el elemento de la posición (2,2) de la misma matriz $H$.",
+          "correctValue": 0.6,
+          "tolerance": 0.01,
+          "explanation": "Del cálculo anterior, el elemento de la posición (2,2) es $1 - 2(1)/5 = 0.6$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Calcule el determinante de la matriz de Householder $H$.",
+          "correctValue": -1.0,
+          "tolerance": 0.01,
+          "explanation": "Cualquier matriz de Householder es un reflector ortogonal y su determinante es siempre exactamente $-1.0$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Rotaciones de Givens en 2D",
+      "context": "Dado el vector $x = \\begin{pmatrix} 3 \\\\ 4 \\end{pmatrix}$, deseamos anular su segunda componente mediante una rotación de Givens $G = \\begin{pmatrix} c & s \\\\ -s & c \\end{pmatrix}$ tal que $G x = \\begin{pmatrix} r \\\\ 0 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Encuentre el valor del coseno $c$ necesario para realizar la rotación.",
+          "correctValue": 0.6,
+          "tolerance": 0.01,
+          "explanation": "El valor del coseno se calcula como $x_1/\\sqrt{x_1^2 + x_2^2} = 3/5 = 0.6$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Encuentre el valor del seno $s$ necesario para realizar la rotación.",
+          "correctValue": 0.8,
+          "tolerance": 0.01,
+          "explanation": "El valor del seno se calcula como $x_2/\\sqrt{x_1^2 + x_2^2} = 4/5 = 0.8$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Determine el elemento en la posición (2,1) de la matriz de rotación de Givens $G$.",
+          "correctValue": -0.8,
+          "tolerance": 0.01,
+          "explanation": "La matriz es $G = \\begin{pmatrix} c & s \\\\ -s & c \\end{pmatrix} = \\begin{pmatrix} 0.6 & 0.8 \\\\ -0.8 & 0.6 \\end{pmatrix}$. El elemento (2,1) es $-s = -0.8$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Calcule el determinante de la matriz de Givens $G$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "Al tratarse de una matriz de rotación plana pura, su determinante es $c^2 + s^2 = (0.6)^2 + (0.8)^2 = 0.36 + 0.64 = 1.0$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Descomposición de Cholesky de una matriz 3x3 (Ejemplo II)",
+      "context": "Dada la matriz simétrica y definida positiva $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 5 & 3 \\\\ 1 & 3 & 11 \\end{pmatrix}$, calcule los elementos de su matriz de Cholesky $L$.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcule el elemento de la diagonal $l_{22}$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Tenemos $l_{11} = 1.0$, $l_{21} = a_{21}/l_{11} = 1.0$. Luego, $l_{21}^2 + l_{22}^2 = a_{22} \\implies 1 + l_{22}^2 = 5 \\implies l_{22} = 2.0$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcule el elemento de la posición $l_{32}$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "Sabemos que $l_{31} = a_{31}/l_{11} = 1.0$. Además, $l_{31}l_{21} + l_{32}l_{22} = a_{32} \\implies 1(1) + l_{32}(2.0) = 3 \\implies 2 l_{32} = 2 \\implies l_{32} = 1.0$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcule el elemento de la diagonal $l_{33}$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Se tiene $l_{31}^2 + l_{32}^2 + l_{33}^2 = a_{33} \\implies 1^2 + 1^2 + l_{33}^2 = 11 \\implies 2 + l_{33}^2 = 11 \\implies l_{33} = 3.0$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Determine el determinante de la matriz original $A$ a partir del determinante de $L$.",
+          "correctValue": 36.0,
+          "tolerance": 0.01,
+          "explanation": "$\\det(L) = l_{11} \\cdot l_{22} \\cdot l_{33} = 1 \\cdot 2 \\cdot 3 = 6.0$. Por tanto, $\\det(A) = (\\det(L))^2 = 6^2 = 36.0$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Comparativa Doolittle y Crout en 2x2",
+      "context": "Consideremos la matriz $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 13 \\end{pmatrix}$. Analizamos los elementos de sus factorizaciones de Doolittle y Crout.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "En la descomposición de Doolittle $A = L_D U_D$, calcule el elemento $u_{22}$ de la matriz $U_D$.",
+          "correctValue": 7.0,
+          "tolerance": 0.01,
+          "explanation": "$L_D$ tiene unos en la diagonal, por lo que $l_{21} = 3/2 = 1.5$. Aplicando $F_2 \\leftarrow F_2 - 1.5 F_1$, obtenemos $u_{22} = 13 - 1.5(4) = 7.0$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "En la descomposición de Doolittle, determine el elemento $l_{21}$ de la matriz $L_D$.",
+          "correctValue": 1.5,
+          "tolerance": 0.01,
+          "explanation": "El multiplicador de la eliminación es $m_{21} = 3/2 = 1.5$, que corresponde exactamente al término $l_{21}$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "En la descomposición de Crout $A = L_C U_C$ (donde la diagonal de $U_C$ tiene unos), calcule el elemento $u_{12}$ de la matriz $U_C$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "$l_{11} = a_{11} = 2$. Como $l_{11} u_{12} = a_{12} \\implies 2 u_{12} = 4 \\implies u_{12} = 2.0$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "En la descomposición de Crout, determine el elemento diagonal $l_{22}$ de la matriz $L_C$.",
+          "correctValue": 7.0,
+          "tolerance": 0.01,
+          "explanation": "Se tiene $l_{21} = a_{21} = 3$. Luego $l_{21}u_{12} + l_{22}u_{22} = a_{22} \\implies 3(2) + l_{22}(1) = 13 \\implies l_{22} = 7.0$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Resolución mediante sustitución con Doolittle",
+      "context": "Usando las matrices de Doolittle calculadas en el ejercicio anterior: $L_D = \\begin{pmatrix} 1 & 0 \\\\ 1.5 & 1 \\end{pmatrix}$ y $U_D = \\begin{pmatrix} 2 & 4 \\\\ 0 & 7 \\end{pmatrix}$, resolvemos el sistema para $b = \\begin{pmatrix} 8 \\\\ 19 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "En el sistema auxiliar $L_D y = b$, determine el valor del elemento $y_1$.",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "De la primera ecuación, $1 \\cdot y_1 = 8 \\implies y_1 = 8.0$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Determine el valor del elemento $y_2$ resolviendo la segunda fila de $L_D y = b$.",
+          "correctValue": 7.0,
+          "tolerance": 0.01,
+          "explanation": "La segunda ecuación es $1.5 y_1 + y_2 = 19 \\implies 1.5(8) + y_2 = 19 \\implies 12 + y_2 = 19 \\implies y_2 = 7.0$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "En el sistema $U_D x = y$, determine la incógnita $x_2$ mediante sustitución regresiva.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "La última ecuación de $U_D x = y$ es $7x_2 = y_2 \\implies 7x_2 = 7 \\implies x_2 = 1.0$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Determine la incógnita $x_1$ de la solución.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La primera ecuación de $U_D x = y$ es $2x_1 + 4x_2 = y_1 \\implies 2x_1 + 4(1) = 8 \\implies 2x_1 = 4 \\implies x_1 = 2.0$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Coste de sustitución directa para diversos tamaños de matriz",
+      "context": "Evaluamos el coste computacional exacto en FLOPs para resolver sistemas triangulares inferiores utilizando el algoritmo de sustitución directa, cuya complejidad teórica exacta es $n^2$ operaciones para una matriz de tamaño $n$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Determine el número de FLOPs para resolver un sistema triangular de dimensión $n = 5$.",
+          "correctValue": 25.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo $n=5$ en la fórmula $n^2$, se obtienen $5^2 = 25.0$ FLOPs."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Determine el número de FLOPs para resolver un sistema triangular de dimensión $n = 10$.",
+          "correctValue": 100.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo $n=10$ en la fórmula $n^2$, se obtienen $10^2 = 100.0$ FLOPs."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Determine el número de FLOPs para resolver un sistema triangular de dimensión $n = 20$.",
+          "correctValue": 400.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo $n=20$ en la fórmula $n^2$, se obtienen $20^2 = 400.0$ FLOPs."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Determine el número de FLOPs para resolver un sistema triangular de dimensión $n = 50$.",
+          "correctValue": 2500.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo $n=50$ en la fórmula $n^2$, se obtienen $50^2 = 2500.0$ FLOPs."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Coste global de resolución mediante LU",
+      "context": "Consideremos la resolución de un sistema de ecuaciones lineales $A x = b$ de tamaño $n = 30$ mediante factorización LU. La descomposición requiere $\\frac{2}{3}n^3$ FLOPs, y cada una de las dos sustituciones (directa e inversa) requiere $n^2$ FLOPs.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Determine el número de operaciones en punto flotante (FLOPs) para realizar únicamente el paso de factorización de la matriz $A$.",
+          "correctValue": 18000.0,
+          "tolerance": 0.01,
+          "explanation": "El coste de factorización es $\\frac{2}{3}n^3 = \\frac{2}{3} (30)^3 = 18000.0$ FLOPs."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Determine el número de FLOPs combinados requeridos únicamente para las fases de sustitución directa y regresiva.",
+          "correctValue": 1800.0,
+          "tolerance": 0.01,
+          "explanation": "Cada sustitución cuesta $n^2 = 30^2 = 900$ FLOPs. Para ambas sustituciones, el coste es $2 \\cdot n^2 = 1800.0$ FLOPs."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcule el coste total en FLOPs para resolver un único sistema lineal.",
+          "correctValue": 19800.0,
+          "tolerance": 0.01,
+          "explanation": "El coste total es la suma del coste de factorización más el de las sustituciones: $18000 + 1800 = 19800.0$ FLOPs."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcule el coste total en FLOPs si se mantiene la misma matriz $A$ y se deben resolver 10 sistemas con distintos vectores $b$.",
+          "correctValue": 36000.0,
+          "tolerance": 0.01,
+          "explanation": "La factorización se calcula una única vez ($18000$ FLOPs) y las sustituciones se repiten 10 veces ($10 \\cdot 1800 = 18000$ FLOPs). El total es $18000 + 18000 = 36000.0$ FLOPs."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Factorización QR de una matriz rectangular",
+      "context": "Considere la matriz rectangular $A = \\begin{pmatrix} 3 & 3 \\\\ 0 & 5 \\\\ 4 & 4 \\end{pmatrix}$. Calculamos su factorización QR por el método de Gram-Schmidt.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Determine el elemento $r_{11}$ de la matriz triangular superior $R$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "El primer vector de $A$ es $a_1 = \\begin{pmatrix} 3 \\\\ 0 \\\\ 4 \\end{pmatrix}$. Su norma es $r_{11} = \\sqrt{3^2 + 0^2 + 4^2} = 5.0$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Determine el elemento $r_{12}$ de la matriz $R$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "El primer vector de la base es $q_1 = a_1/5 = \\begin{pmatrix} 0.6 \\\\ 0 \\\\ 0.8 \\end{pmatrix}$. El término $r_{12}$ es $\\langle q_1, a_2 \\rangle = 0.6(3) + 0(5) + 0.8(4) = 1.8 + 3.2 = 5.0$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Determine el elemento $r_{22}$ de la matriz $R$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "Calculamos $v_2 = a_2 - r_{12}q_1 = \\begin{pmatrix} 3 \\\\ 5 \\\\ 4 \\end{pmatrix} - 5\\begin{pmatrix} 0.6 \\\\ 0 \\\\ 0.8 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 0 \\end{pmatrix}$. La norma de $v_2$ es $r_{22} = 5.0$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Determine la suma de los elementos del segundo vector columna de la matriz $Q$ (es decir, $q_{12} + q_{22} + q_{32}$).",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El segundo vector columna $q_2$ es $v_2 / r_{22} = \\begin{pmatrix} 0 \\\\ 5 \\\\ 0 \\end{pmatrix}/5 = \\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$. La suma de sus elementos es $0 + 1 + 0 = 1.0$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Propiedades de las matrices de permutación",
+      "context": "Sea la matriz de permutación $P$ de tamaño 4x4 que intercambia simultáneamente la fila 1 con la 3 y la fila 2 con la 4.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcule el determinante de la matriz de permutación $P$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "Intercambiar la fila 1 y 3 multiplica el determinante por -1. Intercambiar la fila 2 y 4 multiplica nuevamente por -1. El determinante final es $(-1) \\cdot (-1) = 1.0$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcule la traza de la matriz de permutación $P$.",
+          "correctValue": 0.0,
+          "tolerance": 0.01,
+          "explanation": "Como la matriz intercambia todas sus filas y no mantiene ningún elemento original en su diagonal, todos los elementos diagonales son nulos. La traza es 0.0."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Si $A$ es la matriz con entradas secuenciales $a_{ij} = (i-1)\\cdot 4 + j$ (para $1 \\le i, j \\le 4$), determine la entrada (1,1) de la matriz resultante del producto $P \\cdot A$.",
+          "correctValue": 9.0,
+          "tolerance": 0.01,
+          "explanation": "La matriz $A$ es $\\begin{pmatrix} 1 & 2 & 3 & 4 \\\\ 5 & 6 & 7 & 8 \\\\ 9 & 10 & 11 & 12 \\\\ 13 & 14 & 15 & 16 \\end{pmatrix}$. Como $P$ intercambia las filas 1 y 3, la primera fila de $PA$ es la tercera de $A$, lo que da un elemento (1,1) igual a 9.0."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Determine la entrada (1,1) de la matriz resultante del producto a la derecha $A \\cdot P$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Multiplicar a la derecha por $P$ aplica la misma permutación sobre las columnas. La primera columna de $AP$ será la tercera columna de $A$. Por tanto, el elemento (1,1) es $a_{13} = 3.0$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Determinante obtenido de la diagonal de U",
+      "context": "Sea una matriz $A$ de tamaño 3x3 que admite descomposición LU sin pivotaje, de forma que $L$ es triangular inferior unitaria y $U = \\begin{pmatrix} 3 & 5 & 2 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 5 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Determine el determinante de la matriz triangular superior $U$.",
+          "correctValue": -30.0,
+          "tolerance": 0.01,
+          "explanation": "Al ser triangular, su determinante es el producto de su diagonal: $3 \\cdot (-2) \\cdot 5 = -30.0$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Determine el determinante de la matriz $L$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "Dado que $L$ es una matriz triangular unitaria (diagonal con unos), su determinante es siempre exactamente 1.0."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Determine el determinante de la matriz original $A$.",
+          "correctValue": -30.0,
+          "tolerance": 0.01,
+          "explanation": "Como $A = LU$, por las propiedades de los determinantes: $\\det(A) = \\det(L) \\cdot \\det(U) = 1.0 \\cdot (-30.0) = -30.0$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Determine el valor del determinante del producto $A^3$.",
+          "correctValue": -27000.0,
+          "tolerance": 1.0,
+          "explanation": "Usando la propiedad de la potencia de determinantes: $\\det(A^3) = (\\det(A))^3 = (-30.0)^3 = -27000.0$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Análisis de definición positiva mediante menores",
+      "context": "Sea la matriz simétrica $A = \\begin{pmatrix} 2 & 2 & 0 \\\\ 2 & 5 & 3 \\\\ 0 & 3 & \\alpha \\end{pmatrix}$. Analizamos las condiciones sobre el parámetro real $\\alpha$ mediante menores principales líderes.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Determine el valor del primer menor principal líder $H_1$ de la matriz.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El primer menor $H_1$ es el elemento $a_{11}$, que vale 2.0."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Determine el valor del segundo menor principal líder $H_2$ de la matriz.",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "El segundo menor es el determinante de la submatriz líder $2 \\times 2$: $\\det \\begin{pmatrix} 2 & 2 \\\\ 2 & 5 \\end{pmatrix} = 2(5) - 2(2) = 6.0$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Determine el valor de $\\alpha$ para el cual el determinante de la matriz $A$ se anula por completo.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "El determinante es $2(5\\alpha - 9) - 2(2\\alpha) = 10\\alpha - 18 - 4\\alpha = 6\\alpha - 18$. Para anularse, se requiere $6\\alpha - 18 = 0 \\implies \\alpha = 3.0$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcule el determinante de la matriz $A$ en el caso particular de que el parámetro tome el valor $\\alpha = 5$.",
+          "correctValue": 12.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo $\\alpha = 5$ en el determinante $6\\alpha - 18$, obtenemos $6(5) - 18 = 12.0$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Construcción manual de la matriz triangular de Cholesky",
+      "context": "Dada la matriz simétrica definida positiva $A = \\begin{pmatrix} 4 & 4 & 4 \\\\ 4 & 8 & 6 \\\\ 4 & 6 & 14 \\end{pmatrix}$, calculamos paso a paso los coeficientes de su descomposición de Cholesky $A = L \\cdot L^T$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Determine el elemento de la diagonal $l_{11}$ de la matriz $L$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Se tiene $l_{11} = \\sqrt{a_{11}} = \\sqrt{4} = 2.0$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Determine el elemento de la diagonal $l_{22}$ de la matriz $L$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Primero, $l_{21} = a_{21}/l_{11} = 4/2 = 2.0$. Luego, $l_{21}^2 + l_{22}^2 = a_{22} \\implies 2^2 + l_{22}^2 = 8 \\implies l_{22} = \\sqrt{8 - 4} = 2.0$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Determine el elemento $l_{32}$ de la matriz $L$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "Sabemos que $l_{31} = a_{31}/l_{11} = 4/2 = 2.0$. Luego, $l_{31}l_{21} + l_{32}l_{22} = a_{32} \\implies 2.0(2.0) + l_{32}(2.0) = 6 \\implies 4.0 + 2.0 l_{32} = 6 \\implies l_{32} = 1.0$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Determine el último elemento diagonal $l_{33}$ de la matriz $L$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Se cumple $l_{31}^2 + l_{32}^2 + l_{33}^2 = a_{33} \\implies 2^2 + 1^2 + l_{33}^2 = 14 \\implies 5 + l_{33}^2 = 14 \\implies l_{33} = 3.0$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Resolución de sistema por Cholesky (Ejemplo II)",
+      "context": "Con la matriz triangular de Cholesky $L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 2 & 2 & 0 \\\\ 2 & 1 & 3 \\end{pmatrix}$ obtenida previamente, resolvemos el sistema lineal $Ax = b$ para el vector $b = \\begin{pmatrix} 16 \\\\ 26 \\\\ 30 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Resuelva para la primera incógnita $y_1$ en el sistema auxiliar $L y = b$.",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "De la primera ecuación, $2y_1 = 16 \\implies y_1 = 8.0$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Resuelva para la componente $y_2$ en el sistema auxiliar $L y = b$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "La segunda ecuación es $2y_1 + 2y_2 = 26 \\implies 2(8) + 2y_2 = 26 \\implies 16 + 2y_2 = 26 \\implies y_2 = 5.0$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Determine la incógnita $x_2$ resolviendo el sistema $L^T x = y$ con el vector de paso $y = \\begin{pmatrix} 8 \\\\ 5 \\\\ 3 \\end{pmatrix}$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El sistema es $\\begin{pmatrix} 2 & 2 & 2 \\\\ 0 & 2 & 1 \\\\ 0 & 0 & 3 \\end{pmatrix} \\begin{pmatrix} x_1 \\\\ x_2 \\\\ x_3 \\end{pmatrix} = \\begin{pmatrix} 8 \\\\ 5 \\\\ 3 \\end{pmatrix}$. De la última fila: $3x_3 = 3 \\implies x_3 = 1$. De la segunda fila: $2x_2 + x_3 = 5 \\implies 2x_2 + 1 = 5 \\implies x_2 = 2.0$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Determine la incógnita $x_1$ resolviendo la primera ecuación de $L^T x = y$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "La primera ecuación es $2x_1 + 2x_2 + 2x_3 = 8 \\implies 2x_1 + 2(2) + 2(1) = 8 \\implies 2x_1 + 6 = 8 \\implies x_1 = 1.0$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Intercambios de filas y pivotes en PLU",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 2 & 2 & 7 \\\\ 4 & 2 & 6 \\\\ 2 & 3 & 7 \\end{pmatrix}$. Se realiza la descomposición $P A = L U$ mediante eliminación gaussiana con pivotaje parcial de filas.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Determine el valor numérico del primer pivote seleccionado de la primera columna.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "Los elementos de la primera columna son 2, 4, 2. El máximo absoluto es 4, por lo que se intercambia la fila 1 y la fila 2, fijando el pivote en 4.0."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Tras realizar la primera etapa de eliminación, determine el pivote de la columna 2 antes del segundo paso de eliminación pero después del intercambio correspondiente.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La matriz permutada tras el primer paso y la eliminación queda con filas 2 y 3: $F_2 \\leftarrow F_2 - 0.5 F_1 = (0, 1, 4)$ y $F_3 \\leftarrow F_3 - 0.5 F_1 = (0, 2, 4)$. Los elementos de la columna 2 son 1 y 2. El mayor es 2, por lo que se realiza un nuevo intercambio y el pivote pasa a ser 2.0."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Determine el multiplicador $m_{32}$ utilizado en la eliminación del segundo paso.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "Tras intercambiar las filas 2 y 3, el elemento pivote en la diagonal es 2, y el de abajo es 1. El multiplicador es $1/2 = 0.5$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcule el elemento de la posición (3,3) de la matriz triangular superior $U$ resultante.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La fila 3 modificada es $(0, 1, 4) - 0.5 \\cdot (0, 2, 4) = (0, 0, 2)$, por lo que $u_{33} = 2.0$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Determinante a partir de descomposición PLU",
+      "context": "Con la descomposición $P A = L U$ obtenida en el problema anterior, donde las operaciones arrojaron una matriz de permutación $P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$ y la matriz $U = \\begin{pmatrix} 4 & 2 & 6 \\\\ 0 & 2 & 4 \\\\ 0 & 0 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Determine el determinante de la matriz de permutación $P$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El determinante es $0(0) - 1(0 - 1) + 0 = 1.0$. Equivalente a realizar dos intercambios de fila a partir de la identidad."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcule el determinante de la matriz triangular superior $U$.",
+          "correctValue": 16.0,
+          "tolerance": 0.01,
+          "explanation": "El determinante de $U$ es el producto de su diagonal principal: $4 \\cdot 2 \\cdot 2 = 16.0$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcule el determinante de la matriz original $A$.",
+          "correctValue": 16.0,
+          "tolerance": 0.01,
+          "explanation": "De la relación $\\det(P)\\det(A) = \\det(L)\\det(U)$, y siendo $\\det(L)=1$ y $\\det(P)=1$, tenemos $\\det(A) = 16.0$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Calcule el determinante de la matriz inversa $A^{-1}$.",
+          "correctValue": 0.0625,
+          "tolerance": 0.001,
+          "explanation": "$\\det(A^{-1}) = 1/\\det(A) = 1/16 = 0.0625$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Evaluación del coste computacional de factorizaciones LU",
+      "context": "Evaluamos el coste computacional exacto de la descomposición LU mediante el algoritmo de Crout (o Doolittle), aproximado asintóticamente como $\\frac{2}{3}n^3$ FLOPs.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Determine los FLOPs requeridos para factorizar una matriz de tamaño $n = 6$.",
+          "correctValue": 144.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo en la fórmula: $\\frac{2}{3} \\cdot 6^3 = \\frac{2}{3} \\cdot 216 = 144.0$ FLOPs."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Determine los FLOPs requeridos para factorizar una matriz de tamaño $n = 12$.",
+          "correctValue": 1152.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo en la fórmula: $\\frac{2}{3} \\cdot 12^3 = \\frac{2}{3} \\cdot 1728 = 1152.0$ FLOPs."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Determine los FLOPs requeridos para factorizar una matriz de tamaño $n = 15$.",
+          "correctValue": 2250.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo en la fórmula: $\\frac{2}{3} \\cdot 15^3 = \\frac{2}{3} \\cdot 3375 = 2250.0$ FLOPs."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Determine los FLOPs requeridos para factorizar una matriz de tamaño $n = 30$.",
+          "correctValue": 18000.0,
+          "tolerance": 0.01,
+          "explanation": "Sustituyendo en la fórmula: $\\frac{2}{3} \\cdot 30^3 = 18000.0$ FLOPs."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Rotaciones de Givens aplicadas a matrices",
+      "context": "Sea la matriz $A = \\begin{pmatrix} 3 & 5 \\\\ 4 & 2 \\end{pmatrix}$. Se desea calcular su descomposición QR aplicando una matriz de rotación de Givens $G = \\begin{pmatrix} c & s \\\\ -s & c \\end{pmatrix}$ para anular el elemento de la posición (2,1).",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcule el valor del coseno $c$ de la rotación de Givens.",
+          "correctValue": 0.6,
+          "tolerance": 0.01,
+          "explanation": "El valor del coseno se halla mediante $a_{11}/\\sqrt{a_{11}^2 + a_{21}^2} = 3/\\sqrt{3^2 + 4^2} = 3/5 = 0.6$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Calcule el valor del seno $s$ de la rotación de Givens.",
+          "correctValue": 0.8,
+          "tolerance": 0.01,
+          "explanation": "El valor del seno se halla mediante $a_{21}/\\sqrt{a_{11}^2 + a_{21}^2} = 4/\\sqrt{3^2 + 4^2} = 4/5 = 0.8$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcule el elemento de la posición (1,2) de la matriz triangular superior $R = G \\cdot A$.",
+          "correctValue": 4.6,
+          "tolerance": 0.01,
+          "explanation": "La primera fila de $R$ es $c \\cdot F_1(A) + s \\cdot F_2(A)$. En el elemento (1,2) esto es $0.6(5) + 0.8(2) = 3 + 1.6 = 4.6$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcule el elemento de la posición (2,2) de la matriz $R$.",
+          "correctValue": -2.8,
+          "tolerance": 0.01,
+          "explanation": "La segunda fila de $R$ es $-s \\cdot F_1(A) + c \\cdot F_2(A)$. El elemento (2,2) es $-0.8(5) + 0.6(2) = -4.0 + 1.2 = -2.8$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Comparativa de FLOPs en QR: Givens vs Householder",
+      "context": "Evaluamos el coste computacional asintótico de realizar la descomposición QR sobre una matriz densa de tamaño $n = 30$. Empleamos los costes asintóticos aproximados de $\\frac{4}{3}n^3$ FLOPs para Householder y $2n^3$ FLOPs para Givens.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcule el número de FLOPs teóricos si se utiliza el método de Householder.",
+          "correctValue": 36000.0,
+          "tolerance": 0.1,
+          "explanation": "El coste es $\\frac{4}{3}n^3 = \\frac{4}{3} (30)^3 = 36000.0$ FLOPs."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcule el número de FLOPs teóricos si se utiliza el método de Givens para la matriz densa.",
+          "correctValue": 54000.0,
+          "tolerance": 0.1,
+          "explanation": "El coste es $2n^3 = 2 \\cdot (30)^3 = 54000.0$ FLOPs."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Calcule la diferencia absoluta en FLOPs entre ambos métodos (Givens - Householder).",
+          "correctValue": 18000.0,
+          "tolerance": 0.1,
+          "explanation": "La diferencia es $54000 - 36000 = 18000.0$ FLOPs."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Determine la razón aritmética del coste de Givens frente al coste de Householder (Givens / Householder).",
+          "correctValue": 1.5,
+          "tolerance": 0.01,
+          "explanation": "La razón es $54000/36000 = 1.5$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Factorización LU dependiente de un parámetro",
+      "context": "Dada la matriz $A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 5 & 3 \\\\ 1 & 1 & \\beta \\end{pmatrix}$, aplicamos la eliminación de Gauss sin pivotaje.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Determine el valor del multiplicador $m_{21}$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "El multiplicador de la primera etapa es $m_{21} = a_{21}/a_{11} = 2/1 = 2.0$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Determine el valor del multiplicador $m_{32}$ empleado en el segundo paso de eliminación.",
+          "correctValue": -1.0,
+          "tolerance": 0.01,
+          "explanation": "Tras el primer paso: $F_2 \\leftarrow F_2 - 2F_1 = (0, 1, 1)$ y $F_3 \\leftarrow F_3 - F_1 = (0, -1, \\beta-1)$. El pivote es 1, y el término a eliminar es -1. El multiplicador es $m_{32} = -1/1 = -1.0$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcule el valor del elemento $u_{33}$ si el parámetro toma el valor $\\beta = 4$.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "La operación es $F_3 \\leftarrow F_3 - (-1) F_2 \\implies u_{33} = (\\beta-1) + 1 = \\beta$. Si $\\beta = 4$, entonces $u_{33} = 4.0$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcule el determinante de la matriz $A$ en el caso de que $\\beta = 4$.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "El determinante es el producto de la diagonal de $U$: $u_{11}u_{22}u_{33} = 1 \\cdot 1 \\cdot \\beta = \\beta$. Para $\\beta = 4$, el determinante es 4.0."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Propiedades métricas de matrices simétricas definidas positivas",
+      "context": "Dada la matriz de estructura tridiagonal $A = \\begin{pmatrix} 2 & -1 & 0 \\\\ -1 & 2 & -1 \\\\ 0 & -1 & 2 \\end{pmatrix}$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Determine el valor del primer menor principal líder $H_1$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "$H_1 = a_{11} = 2.0$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Determine el valor del segundo menor principal líder $H_2$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "$H_2 = \\det \\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix} = 2(2) - (-1)(-1) = 3.0$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Determine el valor del determinante de la matriz completa $A$ (menor $H_3$).",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "$\\det(A) = 2(2(2) - 1) - (-1)(-1(2) - 0) = 2(3) - 2 = 4.0$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcule la traza de la matriz $A$.",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "La traza es la suma de los elementos de su diagonal principal: $2 + 2 + 2 = 6.0$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Cálculo de Cholesky con coeficientes enteros",
+      "context": "Dada la matriz simétrica definida positiva $A = \\begin{pmatrix} 1 & 2 & 1 \\\\ 2 & 13 & 8 \\\\ 1 & 8 & 21 \\end{pmatrix}$, resolvemos los coeficientes de su descomposición de Cholesky $A = L \\cdot L^T$.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Determine el elemento $l_{21}$ de la matriz triangular inferior $L$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Sabiendo que $l_{11} = \\sqrt{1} = 1.0$, se tiene $l_{21} = a_{21}/l_{11} = 2/1 = 2.0$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Determine el elemento diagonal $l_{22}$ de la matriz $L$.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "Se cumple $l_{21}^2 + l_{22}^2 = a_{22} \\implies 2^2 + l_{22}^2 = 13 \\implies l_{22} = \\sqrt{13 - 4} = 3.0$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Determine el elemento $l_{32}$ de la matriz $L$.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "Calculamos $l_{31} = a_{31}/l_{11} = 1/1 = 1.0$. Luego, $l_{31}l_{21} + l_{32}l_{22} = a_{32} \\implies 1(2) + l_{32}(3) = 8 \\implies 3l_{32} = 6 \\implies l_{32} = 2.0$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Determine el último elemento diagonal $l_{33}$ de la matriz $L$.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "Se cumple $l_{31}^2 + l_{32}^2 + l_{33}^2 = a_{33} \\implies 1^2 + 2^2 + l_{33}^2 = 21 \\implies 5 + l_{33}^2 = 21 \\implies l_{33} = 4.0$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Factorización QR con componentes negativas",
+      "context": "Dada la matriz de entradas mixtas $A = \\begin{pmatrix} -3 & 4 \\\\ 4 & 3 \\end{pmatrix}$, calculamos su descomposición $A = Q \\cdot R$ mediante Gram-Schmidt.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Determine el elemento diagonal $r_{11}$ de la matriz triangular superior $R$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "$r_{11} = \\|a_1\\|_2 = \\sqrt{(-3)^2 + 4^2} = 5.0$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Determine el elemento de acoplamiento $r_{12}$ de la matriz $R$.",
+          "correctValue": 0.0,
+          "tolerance": 0.01,
+          "explanation": "El primer vector de la base ortogonal es $q_1 = \\begin{pmatrix} -0.6 \\\\ 0.8 \\end{pmatrix}$. El término $r_{12} = \\langle q_1, a_2 \\rangle = -0.6(4) + 0.8(3) = 0.0$. Esto indica que las columnas originales ya son ortogonales."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Determine el elemento diagonal $r_{22}$ de la matriz $R$.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "Como $r_{12} = 0$, el vector $v_2 = a_2 = \\begin{pmatrix} 4 \\\\ 3 \\end{pmatrix}$. Su norma es $r_{22} = \\sqrt{4^2 + 3^2} = 5.0$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Determine el elemento de la posición (1,1) de la matriz ortogonal $Q$.",
+          "correctValue": -0.6,
+          "tolerance": 0.01,
+          "explanation": "El elemento $q_{11}$ corresponde a la primera componente de $q_1 = a_1/5$, que es $-3/5 = -0.6$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Descomposición LU estándar",
+      "tex": "$$\\mathbf{A} = \\mathbf{L} \\cdot \\mathbf{U}$$"
+    },
+    {
+      "name": "Factorización LU con pivotaje parcial (PLU)",
+      "tex": "$$\\mathbf{P} \\cdot \\mathbf{A} = \\mathbf{L} \\cdot \\mathbf{U}$$"
+    },
+    {
+      "name": "Factorización de Cholesky",
+      "tex": "$$\\mathbf{A} = \\mathbf{L} \\cdot \\mathbf{L}^T$$"
+    },
+    {
+      "name": "Factorización QR",
+      "tex": "$$\\mathbf{A} = \\mathbf{Q} \\cdot \\mathbf{R}$$"
+    },
+    {
+      "name": "Reflector de Householder",
+      "tex": "$$\\mathbf{H} = \\mathbf{I} - 2 \\frac{\\mathbf{v} \\mathbf{v}^T}{\\|\\mathbf{v}\\|_2^2}$$"
+    },
+    {
+      "name": "Matriz de rotación elemental de Givens",
+      "tex": "$$\\mathbf{G}(i, k, \\theta) = \\begin{pmatrix} \\cos\\theta & \\sin\\theta \\\\ -\\sin\\theta & \\cos\\theta \\end{pmatrix}$$"
+    },
+    {
+      "name": "Coste computacional asintótico de factorización LU",
+      "tex": "$$\\text{FLOPs}_{\\text{LU}} \\approx \\frac{2}{3} n^3$$"
+    },
+    {
+      "name": "Coste computacional asintótico de descomposición de Cholesky",
+      "tex": "$$\\text{FLOPs}_{\\text{Cholesky}} \\approx \\frac{1}{3} n^3$$"
+    },
+    {
+      "name": "Coste computacional asintótico de factorización QR (Householder)",
+      "tex": "$$\\text{FLOPs}_{\\text{QR}} \\approx \\frac{4}{3} n^3$$"
+    }
+  ]
+}

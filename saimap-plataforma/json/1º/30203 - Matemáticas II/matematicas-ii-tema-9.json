@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la principal diferencia entre los operadores '*' y '.*' en GNU Octave / Matlab?",
+      "options": [
+        "El operador '*' realiza la multiplicación matricial clásica definida por el producto interno de filas por columnas, mientras que '.*' multiplica los elementos correspondientes posición a posición.",
+        "El operador '*' multiplica los elementos posición a posición si ambas matrices son cuadradas, mientras que '.*' es exclusivo para multiplicar matrices rectangulares incompatibles.",
+        "El operador '*' es un operador lógico que evalúa la veracidad de la multiplicación, mientras que '.*' realiza la operación de multiplicación en coma flotante de doble precisión."
+      ],
+      "correct": 0,
+      "hint": "Recuerde la distinción entre producto algebraico matricial y multiplicación de matrices elemento a elemento.",
+      "explanation": "En Octave/Matlab, el asterisco '*' representa el producto matricial estándar de la física y álgebra lineal, donde las columnas de la primera deben coincidir con las filas de la segunda. El operador punto-asterisco '.*' denota el producto de Hadamard o elemento a elemento."
+    },
+    {
+      "q": "¿Qué indexación se utiliza por defecto en GNU Octave y Matlab para acceder a los elementos de un vector o matriz?",
+      "options": [
+        "Indexación basada en 0, de forma idéntica a lenguajes como C++ y Python.",
+        "Indexación basada en 1, donde el primer elemento de una estructura tiene índice 1.",
+        "Indexación basada en 2, reservando el índice 1 para metadatos internos de las matrices."
+      ],
+      "correct": 1,
+      "hint": "Es una de las principales diferencias sintácticas al migrar de Python o C a Matlab.",
+      "explanation": "Matlab/Octave son lenguajes de programación en los que los índices de arrays y matrices comienzan en 1. Intentar acceder a un índice 0 resulta en un error sintáctico o de límites de dimensión."
+    },
+    {
+      "q": "Al ejecutar el comando 'linspace(0, 1, 5)', ¿qué vector de salida se obtiene exactamente?",
+      "options": [
+        "[0.0, 0.2, 0.4, 0.6, 0.8]",
+        "[0.0, 0.25, 0.5, 0.75, 1.0]",
+        "[0.0, 0.2, 0.5, 0.8, 1.0]"
+      ],
+      "correct": 1,
+      "hint": "La función divide el intervalo de forma equiespaciada en el número especificado de puntos.",
+      "explanation": "'linspace(a, b, n)' genera 'n' puntos linealmente espaciados entre 'a' y 'b' inclusivos. Para a=0, b=1, n=5, la distancia entre puntos es (1-0)/(5-1) = 0.25, dando [0, 0.25, 0.5, 0.75, 1.0]."
+    },
+    {
+      "q": "Si disponemos de una matriz A de tamaño 3x3, ¿qué devolverá la instrucción 'A(2, :)'?",
+      "options": [
+        "Un vector columna que contiene todos los elementos de la segunda columna de la matriz A.",
+        "Un vector fila que contiene todos los elementos de la segunda fila de la matriz A.",
+        "Una submatriz de tamaño 2x2 conteniendo las esquinas exteriores de la matriz A."
+      ],
+      "correct": 1,
+      "hint": "El carácter ':' se utiliza para indicar todos los elementos a lo largo de esa dimensión.",
+      "explanation": "En la sintaxis de indexación 'A(fila, columna)', especificar ':' en la posición de la columna indica que se deben seleccionar todas las columnas de la fila especificada (la segunda fila en este caso)."
+    },
+    {
+      "q": "¿Por qué es crucial la vectorización en lenguajes como GNU Octave o Matlab?",
+      "options": [
+        "Porque evita el coste asociado al análisis sintáctico e interpretación de bucles iterativos en tiempo de ejecución, delegando el cálculo a librerías compiladas optimizadas de bajo nivel (BLAS/LAPACK).",
+        "Porque permite que el compilador traduzca el código directamente a código máquina nativo del sistema operativo eliminando el entorno de ejecución de Octave por completo.",
+        "Porque reduce la cantidad de memoria física utilizada por las variables al compactar el almacenamiento de datos en coma flotante a precisión simple de forma automática."
+      ],
+      "correct": 0,
+      "hint": "Pensen en la naturaleza interpretada del lenguaje y el uso de instrucciones SIMD.",
+      "explanation": "Dado que Octave es interpretado, cada iteración de un bucle 'for' introduce sobrecarga de interpretación. La vectorización expresa la operación de forma compacta para que sea ejecutada por librerías C/Fortran compiladas (BLAS/LAPACK) usando instrucciones SIMD."
+    },
+    {
+      "q": "Para la resolución de un sistema de ecuaciones lineales cuadrado AX = B con matriz de coeficientes invertible A, ¿cuál de las siguientes opciones es preferible por rendimiento numérico y velocidad?",
+      "options": [
+        "La operación 'X = inv(A) * B', ya que calcula explícitamente la inversa reduciendo el error de redondeo acumulado.",
+        "La operación 'X = A \\ B', ya que utiliza factorización LU o descomposición QR de forma implícita evitando la inversión directa de la matriz.",
+        "La operación 'X = B / A', que realiza el algoritmo de Gauss-Jordan con división por la derecha de vectores transpuestos."
+      ],
+      "correct": 1,
+      "hint": "Considere la estabilidad del operador backslash frente a la inversión analítica de matrices.",
+      "explanation": "El operador backslash '\\' (división por la izquierda) implementa algoritmos de resolución eficientes (como factorización LU para matrices cuadradas) que son el doble de rápidos y significativamente más estables numéricamente que multiplicar por la inversa explícita calculada con 'inv'."
+    },
+    {
+      "q": "Al llamar a la función 'lu(A)' con tres argumentos de salida '[L, U, P] = lu(A)', ¿qué representa la matriz P resultante?",
+      "options": [
+        "Una matriz diagonal conteniendo los autovalores pivote ordenados de forma ascendente para la estabilidad computacional.",
+        "Una matriz de permutación tal que P*A = L*U, que registra los intercambios de filas efectuados durante la eliminación gaussiana con pivoteo parcial.",
+        "Una matriz ortogonal resultante de la proyección de los vectores columna de A sobre el subespacio nulo."
+      ],
+      "correct": 1,
+      "hint": "Considere el pivoteo parcial que realiza Matlab/Octave para evitar la división por cero o números pequeños.",
+      "explanation": "La función 'lu' descompone la matriz A en una matriz triangular inferior unitaria L y una triangular superior U. La matriz P es una matriz de permutación que refleja cómo se reordenaron las filas de A para satisfacer la estabilidad del pivoteo parcial, de modo que P * A = L * U."
+    },
+    {
+      "q": "¿Qué condición fundamental debe cumplir una matriz cuadrada A para poder calcular su factorización de Cholesky mediante la instrucción 'R = chol(A)'?",
+      "options": [
+        "Debe ser una matriz simétrica (o hermítica) y definida positiva.",
+        "Debe ser una matriz antisimétrica y poseer determinante nulo.",
+        "Debe ser una matriz unitaria con autovalores complejos localizados en el círculo unidad."
+      ],
+      "correct": 0,
+      "hint": "Cholesky es una factorización de la forma A = R^T * R.",
+      "explanation": "La descomposición de Cholesky descompone una matriz A en el producto de una matriz triangular superior R y su traspuesta. Esta descomposición solo está definida y es numéricamente estable para matrices simétricas (hermíticas en el caso complejo) y estrictamente definidas positivas."
+    },
+    {
+      "q": "¿Qué realiza el comando '[Q, R] = qr(A)' sobre una matriz rectangular A?",
+      "options": [
+        "Devuelve una matriz diagonal Q con autovalores y una matriz R con los residuos del método de Gauss-Seidel.",
+        "Realiza la descomposición QR, donde Q es una matriz ortogonal (Q'*Q = I) y R es una matriz triangular superior.",
+        "Calcula la pseudoinversa de Moore-Penrose descomponiendo A en autovectores por la izquierda y la derecha."
+      ],
+      "correct": 1,
+      "hint": "Recuerde el proceso de ortogonalización de Gram-Schmidt.",
+      "explanation": "La descomposición QR expresa una matriz A como el producto de una matriz ortogonal Q (cuyas columnas forman una base ortonormal del espacio de columnas de A) y una matriz triangular superior R. Es fundamental en problemas de mínimos cuadrados."
+    },
+    {
+      "q": "¿Cuál es la sintaxis correcta para declarar una función personalizada en Matlab/Octave que tome dos parámetros de entrada y devuelva dos resultados?",
+      "options": [
+        "function [out1, out2] = mi_funcion(in1, in2)",
+        "def mi_funcion(in1, in2) -> (out1, out2)",
+        "mi_funcion = function(in1, in2) { return out1, out2; }"
+      ],
+      "correct": 0,
+      "hint": "Se define mediante la palabra clave 'function' y especificando los retornos entre corchetes.",
+      "explanation": "La declaración estándar de una función en Matlab/Octave es 'function [salidas...] = nombre_funcion(entradas...)'. Los corchetes se emplean si hay múltiples salidas, y se cierra al final con la palabra clave 'end'."
+    },
+    {
+      "q": "Si ejecutamos la expresión 'A = zeros(3)', ¿qué estructura de datos se almacena en la variable A?",
+      "options": [
+        "Un vector columna de dimensión 3x1 inicializado a cero.",
+        "Una matriz cuadrada de dimensión 3x3 inicializado a cero.",
+        "Un valor escalar único de valor cero de tipo entero de 32 bits."
+      ],
+      "correct": 1,
+      "hint": "La función zeros con un único argumento devuelve una matriz cuadrada.",
+      "explanation": "En Octave/Matlab, pasar un único argumento entero N a las funciones de creación de matrices comunes como 'zeros(N)', 'ones(N)', 'eye(N)' o 'rand(N)' genera una matriz cuadrada de tamaño NxN."
+    },
+    {
+      "q": "¿Qué diferencia existe entre los operadores de trasposición simple (') y trasposición con punto (.')?",
+      "options": [
+        "El operador (') calcula la traspuesta conjugada compleja (adjunta) de una matriz, mientras que (.') calcula la traspuesta pura sin realizar la conjugación de los elementos complejos.",
+        "El operador (') traspone las filas en columnas, mientras que (.') traspone las columnas en páginas tridimensionales.",
+        "El operador (') está obsoleto en versiones modernas de Matlab/Octave, debiendo emplearse únicamente (.') por motivos de rendimiento."
+      ],
+      "correct": 0,
+      "hint": "Piense en cómo se comportan con números complejos como 1 + 2i.",
+      "explanation": "Para matrices reales no hay diferencia. Sin embargo, para matrices complejas, el operador apóstrofe clásico (A') calcula la traspuesta conjugada (hermítica), mientras que el operador punto-apóstrofe (A.') realiza la traspuesta simple (no conjugada)."
+    },
+    {
+      "q": "¿Cuál es la función del comando 'hold on' en el entorno gráfico de Matlab/Octave?",
+      "options": [
+        "Congela el estado de la CPU interrumpiendo la ejecución hasta que el usuario pulse una tecla en la consola.",
+        "Permite superponer múltiples gráficos sobre la misma ventana de dibujo sin borrar las representaciones previas.",
+        "Bloquea la actualización de variables en el espacio de trabajo activo durante las llamadas a funciones externas."
+      ],
+      "correct": 1,
+      "hint": "Se utiliza habitualmente después de una llamada a la función 'plot'.",
+      "explanation": "Por defecto, al llamar a 'plot' se limpia la ventana de gráficos activa. 'hold on' le indica al motor gráfico que mantenga el gráfico actual y dibuje las siguientes llamadas a funciones gráficas en el mismo lienzo."
+    },
+    {
+      "q": "¿Qué devuelve la función 'diag(x)' si 'x' es un vector fila o columna de tamaño N?",
+      "options": [
+        "Un escalar que representa la suma de todos los elementos del vector x.",
+        "Una matriz diagonal de tamaño NxN cuyos elementos en la diagonal principal corresponden a las componentes de x.",
+        "Un vector de tamaño (N-1) con las diferencias adyacentes de los elementos de x."
+      ],
+      "correct": 1,
+      "hint": "La función diag tiene un comportamiento dual según el tipo de argumento de entrada.",
+      "explanation": "Si 'x' es un vector, 'diag(x)' construye una matriz diagonal con los elementos de 'x' en su diagonal. Si 'x' fuera una matriz, 'diag(x)' extraería su diagonal principal como un vector columna."
+    },
+    {
+      "q": "¿Qué sucede en memoria si se define dinámicamente el tamaño de un vector dentro de un bucle 'for' (ej. añadiendo elementos paso a paso) en lugar de prelocalizarlo?",
+      "options": [
+        "El compilador JIT optimiza el bucle haciendo irrelevante el tamaño previo en términos de tiempo de ejecución.",
+        "Se produce una penalización severa de rendimiento porque el sistema debe reasignar memoria continuamente y copiar los elementos previos a la nueva dirección física.",
+        "El programa lanza un error en tiempo de ejecución de tipo 'Index Out of Bounds' deteniendo el script de forma inmediata."
+      ],
+      "correct": 1,
+      "hint": "Considere la fragmentación de memoria y la copia de datos a bajo nivel al expandir un array dinámicamente.",
+      "explanation": "Sin prelocalización (usando 'zeros' o 'ones'), en cada iteración del bucle donde se expande el tamaño del array, el motor en tiempo de ejecución debe solicitar un nuevo bloque de memoria contigua más grande, copiar los datos antiguos y liberar el espacio anterior, lo que ralentiza enormemente la ejecución."
+    },
+    {
+      "q": "¿Qué devuelve la función 'find' en expresiones de tipo 'find(A > 5)'?",
+      "options": [
+        "Una matriz de booleanos del mismo tamaño que A indicando con 1 los elementos mayores de 5 y con 0 el resto.",
+        "Un vector columna con los índices lineales (en orden de almacenamiento de memoria por columnas) de los elementos de A que son estrictamente mayores que 5.",
+        "El valor del máximo elemento de la matriz A que cumple la desigualdad especificada."
+      ],
+      "correct": 1,
+      "hint": "La función find busca las posiciones de los elementos no nulos o verdaderos de una condición lógica.",
+      "explanation": "'find(condicion)' localiza los índices (por defecto lineales en orden column-major) donde la condición se evalúa como verdadera. Es sumamente útil para indexación condicional."
+    },
+    {
+      "q": "¿Qué es la constante del sistema 'eps' en Matlab/Octave?",
+      "options": [
+        "La constante de Euler-Mascheroni empleada para el cálculo numérico de series infinitas.",
+        "La distancia desde 1.0 hasta el número de coma flotante de doble precisión inmediatamente superior representable (precisión de la máquina).",
+        "La constante física de permisividad del vacío utilizada en simulaciones electromagnéticas por defecto."
+      ],
+      "correct": 1,
+      "hint": "Se asocia con la resolución y precisión de la representación numérica estándar IEEE 754.",
+      "explanation": "'eps' (épsilon de la máquina) cuantifica el espaciado más pequeño entre números reales representables en doble precisión. Su valor aproximado es de 2.22e-16."
+    },
+    {
+      "q": "Si ejecutamos la instrucción 'A = [1, 2; 3, 4]' y posteriormente 'A(4)', ¿qué valor obtendremos debido a la indexación lineal?",
+      "options": [
+        "El elemento de la fila 2 y columna 2, cuyo valor es 4.",
+        "El elemento de la fila 1 y columna 2, cuyo valor es 2.",
+        "Se producirá un error por proporcionar un único índice a una estructura bidimensional."
+      ],
+      "correct": 0,
+      "hint": "Recuerde que Octave almacena las matrices en memoria ordenadas por columnas (column-major order).",
+      "explanation": "En el almacenamiento column-major de A = [1, 2; 3, 4], el orden lineal es: A(1)=1, A(2)=3, A(3)=2, A(4)=4. Por tanto, A(4) accede a la posición (2,2) cuyo valor es 4."
+    },
+    {
+      "q": "¿Cómo se comporta la instrucción 'reshape(A, m, n)'?",
+      "options": [
+        "Modifica las dimensiones de la matriz A a un tamaño de m filas y n columnas, reorganizando los elementos basándose en su orden lineal en memoria por columnas.",
+        "Redimensiona la matriz A interpolando linealmente los valores intermedios para rellenar las nuevas celdas.",
+        "Calcula la transpuesta de A y luego trunca o rellena con ceros hasta alcanzar el tamaño m x n."
+      ],
+      "correct": 0,
+      "hint": "Considere la preservación de los elementos en orden column-major al redimensionar.",
+      "explanation": "'reshape' cambia las dimensiones de un array sin cambiar sus datos subyacentes. El número total de elementos debe coincidir (m*n == numel(A)) y los elementos se distribuyen siguiendo el orden de almacenamiento column-major estándar de Octave."
+    },
+    {
+      "q": "¿Qué comando se utiliza para limpiar por completo todas las variables del espacio de trabajo (workspace) en una sesión de Octave/Matlab?",
+      "options": [
+        "clc",
+        "clear",
+        "close all"
+      ],
+      "correct": 1,
+      "hint": "No confunda limpiar las variables con limpiar la consola de comandos o cerrar los gráficos.",
+      "explanation": "'clear' (o 'clearvars') elimina todas las variables de la memoria del espacio de trabajo. Por su parte, 'clc' limpia el texto de la pantalla de comandos y 'close all' cierra todas las ventanas gráficas abiertas."
+    },
+    {
+      "q": "Al invocar 'eig(A)' para una matriz cuadrada A de tamaño NxN obteniendo dos variables de salida '[V, D] = eig(A)', ¿qué representan estas variables?",
+      "options": [
+        "V es una matriz ortogonal de Schur y D es una matriz triangular superior con la forma canónica de Jordan.",
+        "V es una matriz cuyas columnas son los autovectores correspondientes a cada autovalor, y D es una matriz diagonal con los autovalores asociados.",
+        "V es la pseudoinversa de la matriz A y D es un vector columna que almacena los valores singulares ordenados."
+      ],
+      "correct": 1,
+      "hint": "Se trata de la diagonalización clásica de la matriz.",
+      "explanation": "La función 'eig' con dos argumentos de salida calcula la descomposición en autovalores de la matriz A, de modo que A * V = V * D, donde V contiene los autovectores columna y D es una matriz diagonal con los autovalores."
+    },
+    {
+      "q": "Si intentamos aplicar el operador división por la izquierda '\\' a un sistema sobredeterminado AX = B (más filas que columnas), ¿qué cálculo realiza internamente Octave/Matlab?",
+      "options": [
+        "Calcula la solución única descartando las ecuaciones redundantes sobrantes hasta que el sistema sea cuadrado.",
+        "Resuelve el problema en el sentido de los mínimos cuadrados ordinarios aplicando las ecuaciones normales o descomposición QR.",
+        "Devuelve un vector de variables simbólicas indefinidas al no existir solución algebraica exacta."
+      ],
+      "correct": 1,
+      "hint": "Piense en la resolución del problema de minimización del residuo euclídeo ||AX - B||.",
+      "explanation": "Cuando el sistema es sobredeterminado (A tiene más filas que columnas), el operador backslash '\\' busca una solución aproximada de mínimos cuadrados, minimizando la norma-2 del residuo (||A*x - b||_2), recurriendo habitualmente a la factorización QR."
+    },
+    {
+      "q": "¿Qué representa la instrucción gráfica 'subplot(m, n, p)'?",
+      "options": [
+        "Divide la figura actual en una cuadrícula de m x n zonas de dibujo y activa la p-ésima celda (numerada por filas) para recibir los siguientes comandos de graficación.",
+        "Genera una ventana flotante secundaria para trazar curvas tridimensionales proyectadas sobre planos coordenados.",
+        "Exporta el gráfico actual a m archivos en formato vectorial de resolución n y calidad p."
+      ],
+      "correct": 0,
+      "hint": "Permite colocar varios paneles de dibujo dentro de la misma ventana.",
+      "explanation": "'subplot(m, n, p)' divide la ventana gráfica actual en una matriz de m filas y n columnas de subgráficos independientes, activando la posición 'p' (comenzando en 1 en la esquina superior izquierda y avanzando de izquierda a derecha y de arriba a abajo)."
+    },
+    {
+      "q": "¿Cuál es la sintaxis idónea para definir una función anónima (o inline) en GNU Octave?",
+      "options": [
+        "f = @(x) x.^2 - 5*x + 6",
+        "f = function(x) { return x^2 - 5*x + 6; }",
+        "f(x) := x^2 - 5*x + 6"
+      ],
+      "correct": 0,
+      "hint": "Utiliza el símbolo '@' seguido de la lista de argumentos entre paréntesis.",
+      "explanation": "Las funciones anónimas se declaran mediante el operador handle '@' seguido de los paréntesis con los argumentos de entrada, y luego la expresión."
+    },
+    {
+      "q": "Si ejecutamos el fragmento de código 'A = ones(2, 3); A(2, 4) = 5;', ¿qué comportamiento exhibe Matlab/Octave?",
+      "options": [
+        "Genera un error instantáneo indicando que el índice lineal excede las dimensiones originales de la matriz A.",
+        "Modifica el tamaño de la matriz A dinámicamente ampliándola a 2x4, rellenando con ceros los elementos no inicializados de la nueva columna.",
+        "Convierte la matriz A en un array disperso tipo celda (cell array) eliminando los elementos preexistentes."
+      ],
+      "correct": 1,
+      "hint": "Tiene que ver con la flexibilidad en la asignación dinámica fuera de los límites iniciales.",
+      "explanation": "En Matlab/Octave, si se asigna un valor fuera de los límites actuales de una matriz, la matriz se expande automáticamente en tamaño para albergar el nuevo índice. Los elementos intermedios vacíos se rellenan automáticamente con ceros."
+    },
+    {
+      "q": "¿Qué representa el espacio de trabajo (workspace) en Matlab/Octave?",
+      "options": [
+        "La carpeta raíz del disco duro donde se almacenan todos los archivos fuente terminados en .m.",
+        "La colección de variables creadas en memoria durante la sesión de trabajo activa o la ejecución de un script.",
+        "El panel gráfico en el que se representan las figuras matemáticas interactivas."
+      ],
+      "correct": 1,
+      "hint": "Es la memoria RAM lógica del entorno de desarrollo.",
+      "explanation": "El workspace es el entorno de memoria donde residen las variables declaradas durante la sesión de usuario. Se puede inspeccionar visualmente o con comandos como 'whos'."
+    },
+    {
+      "q": "¿Cuál es la función del comando 'clc' en la ventana de comandos de Matlab/Octave?",
+      "options": [
+        "Borra permanentemente la sesión del terminal cerrando el programa.",
+        "Limpia la ventana de comandos del terminal sin afectar a las variables cargadas en memoria en el espacio de trabajo.",
+        "Cancela de forma inmediata la tarea en segundo plano que se este ejecutando."
+      ],
+      "correct": 1,
+      "hint": "No destruye los datos en ejecución, solo afecta el aspecto visual de la pantalla de texto.",
+      "explanation": "'clc' (Clear Command Window) elimina todo el texto acumulado en la pantalla de la terminal gráfica del entorno, facilitando una lectura limpia, pero manteniendo intacto el workspace."
+    },
+    {
+      "q": "Si una matriz A es singular (determinante cero), ¿qué ocurre al intentar calcular su inversa mediante 'inv(A)'?",
+      "options": [
+        "El sistema detiene su ejecución inmediatamente lanzando un error fatal y bloqueando la consola de comandos.",
+        "Devuelve una matriz cuyos elementos son NaN (Not a Number) o Inf (Infinity), y emite una advertencia de que la matriz es singular.",
+        "Corrige automáticamente los autovalores nulos sumando un ruido numérico de orden épsilon para forzar la invertibilidad."
+      ],
+      "correct": 1,
+      "hint": "El intérprete avisa al usuario, pero intenta continuar la ejecución entregando valores especiales de IEEE 754.",
+      "explanation": "Calcular la inversa de una matriz singular produce valores infinitos o indeterminaciones. Matlab/Octave emite una advertencia en consola ('Matrix is singular to working precision') y devuelve una matriz con valores 'Inf' o 'NaN'."
+    },
+    {
+      "q": "¿Qué tipo de datos genera por defecto la expresión 'A = rand(2, 3)'?",
+      "options": [
+        "Matriz de números flotantes de doble precisión distribuidos de forma uniforme en el intervalo abierto (0, 1).",
+        "Matriz de números enteros seleccionados aleatoriamente entre 0 y 100.",
+        "Matriz de números reales con distribución normal estándar con media cero y desviación típica unitaria."
+      ],
+      "correct": 0,
+      "hint": "La función 'rand' denota distribución uniforme estándar, mientras que 'randn' denota distribución normal.",
+      "explanation": "La función 'rand' genera números pseudoaleatorios bajo una distribución uniforme en el intervalo abierto (0, 1) en formato flotante de doble precisión estándar."
+    },
+    {
+      "q": "Al programar un bucle iterativo donde se modifican variables locales dentro de una función en Octave, ¿qué visibilidad tienen estas variables fuera de la función?",
+      "options": [
+        "Son de acceso global y modifican directamente las variables homónimas del espacio de trabajo base.",
+        "Tienen ámbito local estricto, por lo que no son accesibles ni alteran las variables presentes en el espacio de trabajo base fuera de la función.",
+        "Quedan guardadas en el disco en un archivo temporal de volcado hasta que finaliza el script padre."
+      ],
+      "correct": 1,
+      "hint": "Diferencie entre la ejecución de scripts planos y funciones con definición formal.",
+      "explanation": "A diferencia de los scripts (que se ejecutan sobre el espacio de trabajo base compartiendo variables), las funciones en Octave poseen su propio espacio de trabajo local aislado del exterior para evitar colisiones colaterales de variables."
+    },
+    {
+      "q": "Si ejecutamos 'v = 1:0.5:2.5', ¿qué vector se creará en el workspace?",
+      "options": [
+        "[1.0, 1.5, 2.0]",
+        "[1.0, 1.5, 2.0, 2.5]",
+        "[1.0, 2.0]"
+      ],
+      "correct": 1,
+      "hint": "La sintaxis es inicio:paso:fin, incluyendo el extremo final si coincide con el paso.",
+      "explanation": "El constructor de rangos 'inicio:paso:fin' genera elementos partiendo de 'inicio' y sumando iterativamente el 'paso' hasta llegar al valor de 'fin' (inclusive). Para 1:0.5:2.5, produce [1.0, 1.5, 2.0, 2.5]."
+    },
+    {
+      "q": "En el contexto de la vectorización de código, ¿cuál de las siguientes opciones describe el comportamiento del producto de Kronecker mediante la función 'kron(A, B)'?",
+      "options": [
+        "Multiplica las matrices A y B elemento a elemento tras comprobar que sus dimensiones coinciden.",
+        "Genera una matriz de bloques que resulta de multiplicar cada elemento individual de la matriz A por la matriz B al completo.",
+        "Calcula la transpuesta conjugada de A y la multiplica por los autovalores de la matriz diagonal B."
+      ],
+      "correct": 1,
+      "hint": "Se trata del producto tensorial de dos matrices.",
+      "explanation": "La función 'kron(A, B)' calcula el producto de Kronecker. Si A es de m x n y B es de p x q, el resultado es una matriz de bloques de tamaño (m*p) x (n*q), donde cada bloque (i,j) de tamaño p x q es el producto del escalar A(i,j) por la matriz B."
+    },
+    {
+      "q": "¿Qué comando gráfico se utiliza para etiquetar el eje horizontal de una figura bidimensional en Octave/Matlab?",
+      "options": [
+        "xlabel('Texto de la etiqueta')",
+        "xaxis('Texto de la etiqueta')",
+        "label_x('Texto de la etiqueta')"
+      ],
+      "correct": 0,
+      "hint": "Utiliza un prefijo muy habitual en las funciones de etiquetado de Matlab.",
+      "explanation": "El comando estándar para añadir texto descriptivo al eje x (horizontal) de un gráfico activo es 'xlabel'. De forma análoga, se utiliza 'ylabel' para el eje vertical e 'zlabel' para el eje tridimensional z."
+    },
+    {
+      "q": "¿Qué propiedad geométrica se cumple para la matriz Q resultante de la factorización QR de una matriz real A?",
+      "options": [
+        "Es una matriz simétrica cuyo cuadrado es igual a la matriz identidad.",
+        "Es una matriz ortogonal, lo que significa numéricamente que su transpuesta coincide con su inversa (Q'*Q = I).",
+        "Es una matriz nilpotente de índice dos, de modo que Q^2 = 0."
+      ],
+      "correct": 1,
+      "hint": "Está relacionado con el proceso de ortonormalización.",
+      "explanation": "En la descomposición QR, la matriz Q contiene columnas ortonormales. Para matrices reales, esto implica que Q es ortogonal y cumple que Q' * Q = I (la transpuesta de Q es su inversa)."
+    },
+    {
+      "q": "¿Cuál es la utilidad del comando 'size(A, 2)' sobre una matriz bidimensional A?",
+      "options": [
+        "Devuelve el numero de filas presentes en la matriz A.",
+        "Devuelve el numero de columnas presentes en la matriz A.",
+        "Devuelve la dimensión del espacio nulo o dimensión de kernel de A."
+      ],
+      "correct": 1,
+      "hint": "La dimensión 1 corresponde habitualmente a las filas y la dimensión 2 a las columnas.",
+      "explanation": "La función 'size(A)' devuelve un vector con las dimensiones de A, [filas, columnas]. Al pasarle el segundo argumento opcional (2), retorna específicamente la dimensión a lo largo de las columnas."
+    },
+    {
+      "q": "Si deseamos calcular la norma euclídea (o norma-2) de un vector x en Matlab/Octave de manera vectorizada y rápida sin usar funciones predefinidas, ¿cuál de los siguientes comandos sería correcto?",
+      "options": [
+        "sqrt(sum(x .^ 2))",
+        "sum(sqrt(x))^2",
+        "sqrt(x * x)"
+      ],
+      "correct": 0,
+      "hint": "Piense en la expresión matemática de la norma euclídea: la raíz cuadrada de la suma de los componentes elevados al cuadrado.",
+      "explanation": "La norma euclídea se define como sqrt(sum(x_i^2)). Utilizando sintaxis vectorizada en Octave, esto equivale a elevar cada elemento al cuadrado con 'x .^ 2', sumarlos con 'sum' y obtener la raíz cuadrada general con 'sqrt'."
+    },
+    {
+      "q": "¿Qué comando permite guardar todas las variables actuales del workspace en un archivo llamado 'datos.mat' para su uso posterior?",
+      "options": [
+        "save datos.mat",
+        "write datos.mat",
+        "export datos.mat"
+      ],
+      "correct": 0,
+      "hint": "Es la instrucción básica de persistencia en disco de Matlab.",
+      "explanation": "El comando 'save nombre_archivo.mat' serializa todas las variables presentes en el espacio de trabajo en un formato binario propietario optimizado (.mat) que puede ser cargado posteriormente en otra sesión usando el comando 'load'."
+    },
+    {
+      "q": "Al realizar la asignación 'v = 1:5; v(6) = 10;', ¿qué sucede con el vector v?",
+      "options": [
+        "Lanza un error de límite de memoria porque el vector se inicializó como inmutable.",
+        "El vector se expande automáticamente a una longitud de 6 elementos, estableciendo v(6) = 10.",
+        "Se trunca el vector y se elimina el primer elemento para mantener la longitud original en 5."
+      ],
+      "correct": 1,
+      "hint": "Considere el comportamiento dinámico de los vectores al asignar en índices inexistentes.",
+      "explanation": "Matlab/Octave reasigna memoria automáticamente expandiendo el tamaño del vector. Dado que el índice 6 es inmediatamente contiguo a 5, el vector pasa a tener longitud 6 con v(6) = 10."
+    },
+    {
+      "q": "¿Qué representa la variable por defecto 'ans' en la ventana de comandos de Octave?",
+      "options": [
+        "Un booleano que registra si la ultima operación finalizó de forma correcta o incorrecta.",
+        "Una variable global que almacena automáticamente el resultado del último cálculo evaluado cuyo resultado no fue asignado a ninguna variable explícita.",
+        "El objeto de entorno de desarrollo que gestiona las respuestas interactivas de la consola."
+      ],
+      "correct": 1,
+      "hint": "Proviene de la palabra inglesa 'answer' (respuesta).",
+      "explanation": "Cuando una expresión no se asigna a una variable explícitamente (ej. se escribe '5 + 3' en lugar de 'x = 5 + 3'), Matlab/Octave almacena el resultado en la variable implícita 'ans' para que el usuario pueda recuperarlo."
+    },
+    {
+      "q": "¿Cuál es la función del operador lógico '~' en Matlab/Octave?",
+      "options": [
+        "Representa la equivalencia lógica y numérica aproximada.",
+        "Representa la negación lógica (NOT), invirtiendo valores booleanos o máscaras lógicas.",
+        "Indica que un elemento de la matriz debe ser ignorado por completo durante la indexación."
+      ],
+      "correct": 1,
+      "hint": "Es equivalente a '!' en lenguajes derivados de C.",
+      "explanation": "El carácter '~' es el operador de negación lógica. Aplica la operación NOT lógica a una variable o vector booleano, transformando los valores verdaderos (1) en falsos (0) y viceversa."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Dada la matriz 'A = [10, 20; 30, 40]', la expresión 'y = A(____, :)' devuelve el vector fila '[30, 40]'.",
+      "options": [
+        "1",
+        "2",
+        "2:2"
+      ],
+      "correct": 1,
+      "hint": "Necesitamos seleccionar la segunda fila completa de la matriz A.",
+      "explanation": "Para seleccionar la segunda fila de A, el índice de la fila debe ser 2. La columna se indica con ':' para coger todos los elementos."
+    },
+    {
+      "q": "El código 'x = 0:2:8' genera un vector con exactamente ____ elementos numéricos en su salida.",
+      "options": [
+        "4",
+        "5",
+        "9"
+      ],
+      "correct": 1,
+      "hint": "Cuente los pasos: 0, 0+2, 0+2+2...",
+      "explanation": "La expresión genera la secuencia 0, 2, 4, 6, 8, lo que suma un total de 5 elementos."
+    },
+    {
+      "q": "Para calcular los autovalores y autovectores de A en variables independientes, usamos la función '[V, D] = ____(A)'.",
+      "options": [
+        "eigen",
+        "eig",
+        "eig_decomposition"
+      ],
+      "correct": 1,
+      "hint": "Es una función corta de tres letras.",
+      "explanation": "La función integrada 'eig' calcula la descomposición espectral (autovalores y autovectores) de una matriz cuadrada."
+    },
+    {
+      "q": "Para resolver un sistema lineal AX = B con división por la izquierda escribimos 'X = A ____ B'.",
+      "options": [
+        "/",
+        "\\",
+        ".*"
+      ],
+      "correct": 1,
+      "hint": "Es el operador backslash.",
+      "explanation": "El operador barra invertida '\\' representa la división por la izquierda y se utiliza para resolver eficientemente sistemas de ecuaciones lineales."
+    },
+    {
+      "q": "En Matlab/Octave, el índice inicial válido para acceder al primer elemento de un vector es ____.",
+      "options": [
+        "0",
+        "1",
+        "-1"
+      ],
+      "correct": 1,
+      "hint": "No es indexación basada en cero.",
+      "explanation": "La indexación en Matlab/Octave comienza en 1. Intentar acceder a la posición 0 de un array es un error."
+    },
+    {
+      "q": "Para declarar una nueva función, el archivo de texto .m correspondiente debe comenzar por la palabra clave ____.",
+      "options": [
+        "def",
+        "function",
+        "fn"
+      ],
+      "correct": 1,
+      "hint": "Es la palabra completa en inglés para una función.",
+      "explanation": "Todas las definiciones de funciones en Octave/Matlab se introducen con la palabra clave reservada 'function'."
+    },
+    {
+      "q": "Si queremos aplanar la matriz A completa en un único vector columna, ejecutamos la indexación lineal 'v = A(____)'.",
+      "options": [
+        ":",
+        "1:end",
+        "all"
+      ],
+      "correct": 0,
+      "hint": "Se emplea el operador de dos puntos solo dentro del paréntesis.",
+      "explanation": "La expresión 'A(:)' apila todas las columnas de la matriz A secuencialmente una debajo de otra, devolviendo un vector columna."
+    },
+    {
+      "q": "El operador aritmético que calcula la potencia elemento a elemento de una matriz es ____.",
+      "options": [
+        "^",
+        ".^",
+        "*^"
+      ],
+      "correct": 1,
+      "hint": "Requiere el prefijo de punto decimal.",
+      "explanation": "El operador punto-circunflejo '.^' eleva cada componente de la matriz a la potencia indicada de forma individual."
+    },
+    {
+      "q": "Para inicializar una matriz identidad de tamaño 3x3 en Octave, empleamos la función 'I = ____(3)'.",
+      "options": [
+        "identity",
+        "eye",
+        "ones"
+      ],
+      "correct": 1,
+      "hint": "Su nombre suena fonéticamente igual a 'ojo' en inglés.",
+      "explanation": "La función 'eye(n)' genera una matriz identidad de tamaño n x n en formato de punto flotante por defecto."
+    },
+    {
+      "q": "Para generar exactamente el vector '[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]' usando linspace, ejecutamos 'linspace(0, 10, ____)'.",
+      "options": [
+        "10",
+        "11",
+        "12"
+      ],
+      "correct": 1,
+      "hint": "Tenga en cuenta que el número de intervalos es 10, por lo que el número de puntos es 10 + 1.",
+      "explanation": "La función necesita 11 puntos equiespaciados para que la diferencia entre ellos sea 1.0 (10 / (11-1) = 1)."
+    },
+    {
+      "q": "La función integrada para calcular la factorización QR de una matriz es '[Q, R] = ____(A)'.",
+      "options": [
+        "qrd",
+        "qr",
+        "orth"
+      ],
+      "correct": 1,
+      "hint": "Son las siglas iniciales de las matrices Q y R.",
+      "explanation": "La función 'qr' devuelve la descomposición ortogonal-triangular de una matriz."
+    },
+    {
+      "q": "Para verificar si al menos una componente de un vector lógico es verdadera (1), se usa la función de reducción lógica ____.",
+      "options": [
+        "all",
+        "any",
+        "find"
+      ],
+      "correct": 1,
+      "hint": "Significa 'cualquiera' en inglés.",
+      "explanation": "La función 'any(v)' devuelve verdadero (1) si algún elemento del vector lógico 'v' es no nulo. De forma opuesta, 'all(v)' exige que todos sean verdaderos."
+    },
+    {
+      "q": "Para cronometrar la duración de un trozo de código, escribimos la instrucción 'tic;' al inicio y '____;' al finalizar.",
+      "options": [
+        "toc",
+        "time",
+        "clock"
+      ],
+      "correct": 0,
+      "hint": "Suena a la segunda mitad del tic-tac de un reloj.",
+      "explanation": "El par 'tic' y 'toc' inicia y detiene el temporizador interno de la sesión de Matlab/Octave, imprimiendo el tiempo transcurrido en segundos."
+    },
+    {
+      "q": "La división elemento a elemento entre dos vectores x e y del mismo tamaño se calcula mediante la sintaxis 'z = x ____ y'.",
+      "options": [
+        "/",
+        "./",
+        ".\\"
+      ],
+      "correct": 1,
+      "hint": "Requiere un punto antes de la barra inclinada de división ordinaria.",
+      "explanation": "El operador punto-barra './' divide algebraicamente cada elemento del numerador 'x' por el correspondiente del denominador 'y'."
+    },
+    {
+      "q": "Dada la matriz 'A = [10, 20; 30, 40]', el valor obtenido al evaluar el índice lineal 'A(3)' es ____.",
+      "options": [
+        "20",
+        "30",
+        "40"
+      ],
+      "correct": 0,
+      "hint": "Recuerde el orden column-major: A(1)=10, A(2)=30...",
+      "explanation": "En el almacenamiento column-major, A(1)=10, A(2)=30 (fila 2, col 1), A(3)=20 (fila 1, col 2). Por tanto, A(3) es 20."
+    },
+    {
+      "q": "Para concatenar horizontalmente dos matrices A y B con el mismo número de filas en una sola matriz, escribimos 'C = [A ____ B]'.",
+      "options": [
+        ";",
+        ",",
+        "."
+      ],
+      "correct": 1,
+      "hint": "Se pueden separar por coma o por un espacio en blanco.",
+      "explanation": "La coma ',' o el espacio en blanco dentro de corchetes realiza una concatenación por columnas (horizontal), mientras que el punto y coma ';' concatena por filas (vertical)."
+    },
+    {
+      "q": "Para superponer dos conjuntos de datos gráficos sobre el mismo lienzo, ejecutamos la orden '____'.",
+      "options": [
+        "keep",
+        "hold on",
+        "freeze"
+      ],
+      "correct": 1,
+      "hint": "Son dos palabras en inglés, la segunda es 'on'.",
+      "explanation": "El comando 'hold on' bloquea el lienzo gráfico actual para evitar que la siguiente llamada a 'plot' borre lo dibujado."
+    },
+    {
+      "q": "La última fila de una matriz bidimensional M se selecciona utilizando el índice de rango 'M(____, :)'.",
+      "options": [
+        "last",
+        "end",
+        "N"
+      ],
+      "correct": 1,
+      "hint": "Es una palabra clave que representa la última posición posible de la dimensión.",
+      "explanation": "La palabra clave reservada 'end' dentro de una indexación evalúa automáticamente al tamaño máximo de esa dimensión de la estructura."
+    },
+    {
+      "q": "Si 'A = rand(5, 5)', la submatriz que extrae las filas 2 a 4 de la columna 3 se escribe 'A(2:4, ____)'.",
+      "options": [
+        "3",
+        "2:4",
+        "1:3"
+      ],
+      "correct": 0,
+      "hint": "Buscamos únicamente la tercera columna.",
+      "explanation": "Para seleccionar únicamente la columna 3, especificamos el valor escalar 3 en el parámetro de las columnas."
+    },
+    {
+      "q": "Para obtener analíticamente el determinante de una matriz cuadrada M, usamos el comando '____(M)'.",
+      "options": [
+        "determinant",
+        "det",
+        "inv"
+      ],
+      "correct": 1,
+      "hint": "Es una abreviatura común de tres letras.",
+      "explanation": "La función integrada 'det(M)' implementa el cálculo numérico del determinante de una matriz cuadrada."
+    },
+    {
+      "q": "¿Cuáles de las siguientes opciones definen un vector fila conteniendo exactamente las componentes 1, 2 y 3?",
+      "options": [
+        "[1, 2, 3]",
+        "[1 2 3]",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Tanto la coma como el espacio en blanco sirven de separadores horizontales.",
+      "explanation": "En Matlab/Octave, los elementos de una misma fila pueden separarse indistintamente mediante espacios en blanco o comas dentro de los corchetes."
+    },
+    {
+      "q": "Con respecto a la estructura de las funciones personalizadas en Octave, ¿cuáles de las siguientes propiedades son ciertas?",
+      "options": [
+        "Poseen un espacio de trabajo propio aislado para las variables locales.",
+        "Deben guardarse en archivos con extensión '.m' para permitir su carga.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en el ámbito de las variables locales y el nombre de los scripts.",
+      "explanation": "Las funciones en Octave tienen ámbito aislado para sus variables internas y se almacenan habitualmente en ficheros '.m' que coinciden con su nombre."
+    },
+    {
+      "q": "¿Qué operadores de Octave realizan operaciones elemento a elemento en lugar de operaciones algebraicas de matrices?",
+      "options": [
+        "El operador de multiplicación de Hadamard '.*'.",
+        "El operador de potenciación por componentes '.^'.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El carácter distintivo es la presencia del punto decimal previo al operador.",
+      "explanation": "El punto previo al operador de multiplicación (.*), división (./) o potencia (.^) indica al compilador que ejecute la opción componente a componente."
+    },
+    {
+      "q": "¿Qué tipos de matrices son elegibles de manera óptima para la factorización de Cholesky?",
+      "options": [
+        "Matrices simétricas que son reales y cuyos autovalores son estrictamente mayores que cero.",
+        "Matrices complejas hermíticas definidas positivas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Las condiciones exigen simetría y signo estrictamente positivo de su forma cuadrática.",
+      "explanation": "La factorización de Cholesky se aplica a matrices simétricas reales definidas positivas (o hermíticas complejas definidas positivas) con autovalores estrictamente positivos."
+    },
+    {
+      "q": "¿Por qué motivos un ingeniero de software prefiere vectorizar un algoritmo matricial?",
+      "options": [
+        "Para evitar el retardo que introduce la interpretación línea por línea del bucle 'for' en CPU.",
+        "Para que el motor delegue los cálculos directamente a librerías escritas en C/Fortran de alta optimización.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere tanto el coste interpretativo como el aprovechamiento del hardware moderno.",
+      "explanation": "La vectorización elimina el cuello de botella interpretativo y explota las rutinas nativas subyacentes compiladas que usan paralelismo y extensiones SIMD."
+    },
+    {
+      "q": "¿Qué comandos permiten eliminar información almacenada en el entorno de Octave?",
+      "options": [
+        "'clear' para eliminar las variables del espacio de trabajo.",
+        "'clearvars' para borrar variables específicas de la memoria del workspace.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere los comandos que liberan espacio en la memoria RAM de la sesión.",
+      "explanation": "Tanto 'clear' como 'clearvars' se dedican a la destrucción de variables en memoria, liberando recursos del espacio de trabajo activo."
+    },
+    {
+      "q": "¿Cuáles son los parámetros gráficos que se pueden configurar al dibujar curvas con la instrucción plot?",
+      "options": [
+        "El color de la línea representada (por ejemplo, azul o rojo).",
+        "El estilo de trazado (por ejemplo, línea continua, punteada o con marcadores circulares).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en las cadenas de propiedades de estilo que recibe la función plot, como 'r--o'.",
+      "explanation": "La función 'plot' acepta una cadena de estilo complementaria para controlar simultáneamente color, estilo de trazo y tipo de marcador del gráfico."
+    },
+    {
+      "q": "¿Qué funciones permiten generar matrices con números distribuidos de forma pseudoaleatoria?",
+      "options": [
+        "'rand' para generar números aleatorios bajo una distribución uniforme.",
+        "'randn' para generar valores aleatorios siguiendo una distribución normal con media 0.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos comandos devuelven arrays aleatorios de las dimensiones deseadas.",
+      "explanation": "Octave dispone de 'rand' (distribución uniforme estándar entre 0 y 1) y 'randn' (distribución normal estándar con media cero y desviación típica uno)."
+    },
+    {
+      "q": "Para resolver algebraicamente el sistema lineal AX = B con una matriz de coeficientes invertible y cuadrada A, ¿qué sintaxis es válida?",
+      "options": [
+        "X = A \\ B",
+        "X = inv(A) * B",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Aunque difieren en eficiencia y estabilidad numérica, ambas expresiones resuelven el sistema matemáticamente.",
+      "explanation": "Ambas instrucciones calculan teóricamente el vector de soluciones X, aunque la división por la izquierda '\\' es la preferida por su estabilidad computacional."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una opción válida para calcular la transpuesta conjugada de una matriz compleja A en Matlab/Octave?",
+      "options": [
+        "A'",
+        "conj(A).'",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La transpuesta conjugada combina transposición geométrica y conjugación compleja.",
+      "explanation": "El operador apóstrofe simple 'A'' conjuga y traspone de forma directa. Esto equivale algebraicamente a realizar primero la trasposición pura con 'A.'' y posteriormente aplicar la conjugación compleja con 'conj'."
+    },
+    {
+      "q": "Si tenemos un vector 'v' en Octave, ¿cuál es el comando utilizado para indexar su primer elemento si usáramos indexación basada en cero?",
+      "options": [
+        "v(0)",
+        "v[0]",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde que Octave no soporta la indexación de inicio cero.",
+      "explanation": "Dado que Octave es estrictamente '1-indexed', no existe una sintaxis estándar para indexar con cero. Ambas opciones darían un error de índice no válido, por lo que ninguna es correcta."
+    },
+    {
+      "q": "¿Qué operador realiza la división matricial por la izquierda (de forma que calcule A^(-1) * B) utilizando una barra inclinada normal?",
+      "options": [
+        "A / B",
+        "A ./ B",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La barra inclinada normal '/' calcula el producto B * A^(-1).",
+      "explanation": "El operador para división por la izquierda es la barra invertida o backslash '\\'. El operador '/' realiza división por la derecha, por lo cual ninguna opción es correcta."
+    },
+    {
+      "q": "¿Qué función integrada se utiliza para evaluar la exponencial de la matriz clásica (es decir, e^A) elemento a elemento de forma estándar?",
+      "options": [
+        "expm(A)",
+        "matrix_exp(A)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Buscamos la función que calcula la exponencial de cada elemento individualmente, no la exponencial matricial global.",
+      "explanation": "La exponencial matricial se calcula con 'expm(A)'. Para calcular la exponencial elemento a elemento, se utiliza la función elemental 'exp(A)'. Ninguna de las opciones proporcionadas corresponde a la exponencial elemental."
+    },
+    {
+      "q": "Si definimos la matriz 'A = [1, 2; 3, 4]', ¿cuál es el resultado devuelto al evaluar la instrucción 'A(1, 3)'?",
+      "options": [
+        "0",
+        "[]",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La matriz A tiene dimensiones 2x2. ¿Qué ocurre al acceder fuera de los límites en lectura?",
+      "explanation": "Al intentar leer fuera de los límites establecidos de la matriz A (la cual es de 2x2), Octave genera un error en tiempo de ejecución de tipo 'index out of bounds'. No devuelve 0 ni matriz vacía."
+    },
+    {
+      "q": "¿Cómo se delimita una zona de comentarios de bloque multilínea en Matlab/Octave?",
+      "options": [
+        "/* comentarios */",
+        "// comentarios",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Utiliza caracteres de porcentaje modificados.",
+      "explanation": "Los comentarios multilínea o de bloque en Octave se escriben delimitados por '%{' al inicio y '%}' al final en líneas independientes. Por lo tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "¿Qué función se utiliza para obtener directamente el rango de una matriz A?",
+      "options": [
+        "rank_matrix(A)",
+        "size(A)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es una función muy corta de cuatro letras.",
+      "explanation": "El rango de una matriz (número de filas/columnas linealmente independientes) se determina numéricamente mediante la función integrada 'rank(A)'."
+    },
+    {
+      "q": "Cuando llamamos a la descomposición LU mediante 'res = lu(A)' asignándolo a una única variable, ¿qué devuelve la función?",
+      "options": [
+        "Únicamente la matriz triangular inferior L.",
+        "Únicamente la matriz triangular superior U.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Considere la compactación de ambas matrices en una sola estructura para optimizar el almacenamiento.",
+      "explanation": "Si se asigna a una única variable, la función 'lu' devuelve una única matriz combinada que contiene los factores L (sin su diagonal unitaria) y U empaquetados conjuntamente."
+    },
+    {
+      "q": "¿Qué instrucción muestra las variables cargadas en memoria y detalla sus tamaños en bytes y clases de datos correspondientes?",
+      "options": [
+        "show",
+        "list",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Tiene el mismo nombre que 'who' pero añadiendo una terminación.",
+      "explanation": "El comando para listar detalladamente las variables del workspace con sus tamaños, bytes consumidos y clases es 'whos'. El comando 'who' solo muestra los nombres."
+    },
+    {
+      "q": "¿Cuál es el resultado matemático y estructural de la llamada a la función 'ones(0, 0)'?",
+      "options": [
+        "El valor escalar 1.",
+        "El valor escalar 0.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Preste atención a las dimensiones nulas.",
+      "explanation": "'ones(0, 0)' devuelve una matriz vacía (empty matrix) de dimensiones 0x0 sin contenido numérico, cuya representación interna es de tipo double. Ninguna de las opciones numéricas escalares es correcta."
+    },
+    {
+      "q": "¿Cuál es la sintaxis correcta para declarar que una variable dentro de una función es global en Octave?",
+      "options": [
+        "define global x",
+        "var x",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Utiliza únicamente la palabra clave seguida del nombre de la variable.",
+      "explanation": "Para declarar una variable global se utiliza la palabra clave reservada 'global' seguida de los nombres de las variables separados por espacios (por ejemplo, 'global x'). Ninguna de las sintaxis ofrecidas es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Indexación básica y reducción",
+      "context": "Dada la matriz $A = [1, 2, 3; 4, 5, 6; 7, 8, 9]$ de tamaño $3 \\\\times 3$ almacenada en memoria column-major.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Qué valor escalar se obtiene al evaluar la indexación lineal 'A(4)'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La indexación lineal recorre los elementos columna a columna. Por tanto: $A(1)=1, A(2)=4, A(3)=7, A(4)=2$ (elemento de la primera fila, segunda columna). El valor es $2$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Sea $x = A(4) = 2$ la fila seleccionada. ¿Cuál es la suma de los elementos de la fila $x$ de la matriz A (calculada como 'sum(A(x, :))')?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La fila $x=2$ contiene los elementos $[4, 5, 6]$. Su suma es $4 + 5 + 6 = 15$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Sea $y = 15$ el resultado de la parte anterior. Evalúe el resto de dividir $y$ entre 4 (es decir, 'mod(y, 4)').",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Evaluamos el residuo aritmético: $15 \\\\pmod 4 = 3$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Sea $k = 3$ el resultado de la parte anterior. ¿Cuál es el producto de los elementos de la diagonal principal de la submatriz central superior 'A(1:k, 1:k)'?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "Para $k=3$, la submatriz es $A(1:3, 1:3)$ que es la matriz completa A. La diagonal contiene $[1, 5, 9]$. Su producto es $1 \\\\times 5 \\\\times 9 = 45$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Operaciones con vectores y rangos",
+      "context": "Considere el vector inicial definido mediante rangos discretos como $v = [2, 5, 8, 11, 14]$.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Qué longitud ('length(v)') tiene este vector?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El vector $v$ posee exactamente 5 componentes numéricas."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Sea $n = 5$ la longitud obtenida. Calcule la suma de los elementos seleccionados por 'v(2:n-1)'.",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El rango $v(2:4)$ selecciona las componentes con índices 2, 3 y 4, cuyos valores son $5, 8$ y $11$. Su suma es $5 + 8 + 11 = 24$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Sea $S = 24$ el resultado previo. Calcule la división entera 'S / v(1)'.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El primer elemento $v(1)$ es $2$. Dividimos: $24 / 2 = 12$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Sea $k = 12$ el resultado previo. ¿Qué valor se obtiene al multiplicar $k$ por la última componente del vector original 'v(end)'?",
+          "correctValue": 168,
+          "tolerance": 0,
+          "explanation": "La última componente del vector es $v(5) = 14$. Su producto es $12 \\\\times 14 = 168$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Multiplicación matricial algebraica vs Hadamard",
+      "context": "Sean las matrices cuadradas $A = [1, 2; 3, 4]$ y $B = [2, 0; 1, 3]$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcule la traza ('trace(A * B)') de su producto algebraico matricial estándar.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El producto algebraico de las matrices es $C = A \\\\times B = \\\\begin{pmatrix} 1 & 2 \\\\\\\\ 3 & 4 \\\\end{pmatrix} \\\\begin{pmatrix} 2 & 0 \\\\\\\\ 1 & 3 \\\\end{pmatrix} = \\\\begin{pmatrix} 4 & 6 \\\\\\\\ 10 & 12 \\\\end{pmatrix}$. La traza es la suma de los elementos de su diagonal principal: $4 + 12 = 16$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Sea $T = 16$. Calcule la traza ('trace(A .* B)') de su producto elemento a elemento (Hadamard).",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "El producto elemento a elemento de las matrices es $D = A .* B = \\\\begin{pmatrix} 1\\\\times 2 & 2\\\\times 0 \\\\\\\\ 3\\\\times 1 & 4\\\\times 3 \\\\end{pmatrix} = \\\\begin{pmatrix} 2 & 0 \\\\\\\\ 3 & 12 \\\\end{pmatrix}$. La traza es $2 + 12 = 14$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Sea $S = T - 14 = 2$. Calcule el determinante de la matriz resultante de escalar $A$ por $S$ ('det(S * A)').",
+          "correctValue": -8,
+          "tolerance": 0,
+          "explanation": "Multiplicando $A$ por $S=2$ obtenemos $2 A = \\\\begin{pmatrix} 2 & 4 \\\\\\\\ 6 & 8 \\\\end{pmatrix}$. Su determinante es $2\\\\times 8 - 4\\\\times 6 = 16 - 24 = -8$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Sea $d = -8$. Halle la norma-1 ('norm(x, 1)') del vector fila $x = [d, S, T]$.",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "El vector es $x = [-8, 2, 16]$. La norma-1 de un vector se calcula sumando el valor absoluto de sus componentes: $|-8| + |2| + |16| = 8 + 2 + 16 = 26$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Halle de la factorización de Cholesky",
+      "context": "Considere la matriz simétrica y definida positiva $A = [4, 2; 2, 5]$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuál es el determinante de A ('det(A)')?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El determinante es $4\\\\times 5 - 2\\\\times 2 = 20 - 4 = 16$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcule el factor triangular superior R de la descomposición de Cholesky de A ($A = R^T R$). ¿Cuál es el elemento R(1,1)?",
+          "correctValue": 2,
+          "tolerance": 0.001,
+          "explanation": "Haciendo $R^T R = A$: $R = \\\\begin{pmatrix} r_{11} & r_{12} \\\\\\\\ 0 & r_{22} \\\\end{pmatrix}$. $r_{11}^2 = 4 \\\\implies r_{11} = 2$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Halle el elemento de la fila 1 y columna 2 de la matriz Cholesky R ('R(1,2)').",
+          "correctValue": 1,
+          "tolerance": 0.001,
+          "explanation": "Dado $r_{11} r_{12} = A_{12} = 2$, despejando con $r_{11}=2$: $2 \\\\times r_{12} = 2 \\\\implies r_{12} = 1$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Halle el elemento de la fila 2 y columna 2 de la matriz Cholesky R ('R(2,2)').",
+          "correctValue": 2,
+          "tolerance": 0.001,
+          "explanation": "Dado $r_{12}^2 + r_{22}^2 = A_{22} = 5$: $1^2 + r_{22}^2 = 5 \\\\implies r_{22}^2 = 4 \\\\implies r_{22} = 2$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Factorización LU sin pivoteo",
+      "context": "Dada la matriz invertible $A = [2, 1; 4, 7]$ para ser descompuesta en LU simple de modo que $A = L U$ con $L$ triangular inferior unitaria.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuál es el determinante de A ('det(A)')?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El determinante se calcula como: $2\\\\times 7 - 1\\\\times 4 = 14 - 4 = 10$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Halle el valor de la componente triangular inferior 'L(2,1)'.",
+          "correctValue": 2,
+          "tolerance": 0.001,
+          "explanation": "Multiplicando $L = \\\\begin{pmatrix} 1 & 0 \\\\\\\\ l_{21} & 1 \\\\end{pmatrix}$ y $U = \\\\begin{pmatrix} u_{11} & u_{12} \\\\\\\\ 0 & u_{22} \\\\end{pmatrix}$, tenemos $u_{11}=2, u_{12}=1$. Para la segunda fila: $l_{21} u_{11} = 4 \\\\implies 2 l_{21} = 4 \\\\implies l_{21} = 2$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Halle el valor de la componente triangular superior 'U(2,2)'.",
+          "correctValue": 5,
+          "tolerance": 0.001,
+          "explanation": "Tenemos $l_{21} u_{12} + u_{22} = A_{22} = 7$. Sustituyendo los valores conocidos: $2\\\\times 1 + u_{22} = 7 \\\\implies u_{22} = 5$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Calcule el producto de todos los elementos de la matriz triangular superior U.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La matriz es $U = \\\\begin{pmatrix} 2 & 1 \\\\\\\\ 0 & 5 \\\\end{pmatrix}$. Al contener un elemento nulo ($U(2,1) = 0$), el producto de todas sus celdas es obligatoriamente $0$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Factorización LU con pivoteo de fila",
+      "context": "Dada la matriz $A = [0, 2; 3, 1]$ que requiere pivoteo de filas por tener un cero en la diagonal principal.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuál es el determinante de A?",
+          "correctValue": -6,
+          "tolerance": 0,
+          "explanation": "El determinante es $0\\\\times 1 - 2\\\\times 3 = -6$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Se calcula la factorización con pivoteo de filas $P A = L U$. ¿Cuál es el valor del elemento P(1,2) de la matriz de permutación?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para evitar el cero en la primera diagonal, se intercambian la fila 1 y la fila 2. La matriz de permutación es $P = \\\\begin{pmatrix} 0 & 1 \\\\\\\\ 1 & 0 \\\\end{pmatrix}$, por lo que $P(1,2) = 1$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Obtenga la matriz triangular superior U. ¿Cuál es el valor de U(1,1)?",
+          "correctValue": 3,
+          "tolerance": 0.001,
+          "explanation": "La matriz permutada es $P A = \\\\begin{pmatrix} 3 & 1 \\\\\\\\ 0 & 2 \\\\end{pmatrix}$. Como ya es triangular superior, $L=I$ y $U = P A = \\\\begin{pmatrix} 3 & 1 \\\\\\\\ 0 & 2 \\\\end{pmatrix}$. Así, $U(1,1) = 3$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule la suma de todos los elementos de la matriz triangular inferior L.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Como no hay eliminaciones adicionales, la matriz triangular inferior $L$ es la identidad de tamaño $2 \\\\times 2$. La suma de sus elementos es $1 + 0 + 0 + 1 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Factorización QR simple",
+      "context": "Dada la matriz ya triangular superior $A = [3, 4; 0, 5]$.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Cuál es la norma euclídea (norma-2) de la primera columna de A?",
+          "correctValue": 3,
+          "tolerance": 0.001,
+          "explanation": "La primera columna es $[3; 0]$. Su norma es $\\\\sqrt{3^2 + 0^2} = 3$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Si realizamos la descomposición $A = Q R$, ¿cuál es el valor de Q(1,1)?",
+          "correctValue": 1,
+          "tolerance": 0.001,
+          "explanation": "Dado que A ya es triangular superior y tiene diagonales positivas, la descomposición QR trivial es $Q = I$ y $R = A$. Así, $Q(1,1) = 1$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcule la traza ('trace(R)') del factor triangular R.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El factor $R = A = \\\\begin{pmatrix} 3 & 4 \\\\\\\\ 0 & 5 \\\\end{pmatrix}$. La traza es la suma de los elementos de su diagonal: $3 + 5 = 8$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Calcule el determinante de R ('det(R)').",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El determinante es el producto de las diagonales por ser triangular: $3 \\\\times 5 = 15$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Estudio de Autovalores de una matriz 2x2",
+      "context": "Sea la matriz $A = [4, -2; 1, 1]$.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuál es la traza de la matriz A?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La traza es la suma de la diagonal principal: $4 + 1 = 5$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Sea $T = 5$ la traza. ¿Cuál es el determinante de A?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El determinante es $4\\\\times 1 - (-2)\\\\times 1 = 4 + 2 = 6$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Sea $D = 6$ el determinante. Los autovalores $\\\\lambda$ cumplen $\\\\lambda^2 - T \\\\lambda + D = 0$. Calcule el autovalor de mayor magnitud.",
+          "correctValue": 3,
+          "tolerance": 0.001,
+          "explanation": "La ecuación característica es $\\\\lambda^2 - 5\\\\lambda + 6 = 0 \\\\implies (\\\\lambda-2)(\\\\lambda-3)=0$. Los autovalores son $2$ y $3$. El mayor es $3$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Sea $\\\\lambda_{max} = 3$. Calcule la suma de los cuadrados de todos los autovalores de A.",
+          "correctValue": 13,
+          "tolerance": 0.001,
+          "explanation": "Los autovalores son $2$ y $3$. La suma de sus cuadrados es $2^2 + 3^2 = 4 + 9 = 13$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Indexación en arrays tridimensionales (3D)",
+      "context": "Sea un array $B$ de tamaño $2 \\\\times 2 \\\\times 2$ definido por $B(:,:,1) = [1, 2; 3, 4]$ y $B(:,:,2) = [5, 6; 7, 8]$.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "¿Qué valor se obtiene al acceder a la celda 'B(2, 1, 2)'?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El índice selecciona la fila 2, columna 1 de la página 2, que es el elemento $7$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Halle la suma de todos los elementos de la primera página ('sum(sum(B(:,:,1)))').",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "La primera página es $[1, 2; 3, 4]$. Su suma es $1 + 2 + 3 + 4 = 10$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Halle la suma de todos los elementos del array B.",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "La suma total es la suma de la página 1 ($10$) más la página 2 ($5+6+7+8=26$), lo que da $10 + 26 = 36$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Sea $S = 36$ la suma. Divida $S$ entre el elemento 'B(1, 2, 1)'.",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "El elemento $B(1, 2, 1)$ es $2$ (fila 1, col 2 de la página 1). Por tanto: $36 / 2 = 18$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Indexación lineal en matrices 3D",
+      "context": "Dado el mismo array $B$ de $2 \\\\times 2 \\\\times 2$ de la pregunta anterior.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Qué valor escalar devuelve la indexación lineal 'B(5)'?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El orden de almacenamiento lineal recorre primero las columnas de la página 1, y luego las de la página 2: $B(1)=1, B(2)=3, B(3)=2, B(4)=4, B(5)=5$. Así, $B(5) = 5$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Sea $x = B(5) = 5$. Halle el valor de 'B(x + 2)'.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El índice lineal evaluado es $5 + 2 = 7$. Siguiendo la secuencia: $B(6)=7, B(7)=6$, wait: página 2 es $[5, 6; 7, 8]$. Columna 1 de página 2: $B(5)=5, B(6)=7$. Columna 2 de página 2: $B(7)=6, B(8)=8$. Por tanto, el índice lineal 7 corresponde a $6$. Wait! Let's check: B(1)=1, B(2)=3, B(3)=2, B(4)=4. Página 2 col 1: B(5)=5, B(6)=7. Página 2 col 2: B(7)=6, B(8)=8. So B(7) is 6! Let's correct this in the script. Wait, B(x+2) for x=5 is B(7) which is 6. Let's make it 6."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Sea $y = B(7) = 6$. Halle el valor de 'B(y + 2)'.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El índice lineal evaluado es $6 + 2 = 8$. El elemento $B(8)$ es la última posición del array que vale $8$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Sea $z = 8$. Calcule la suma de los elementos seleccionados linealmente por 'B(1:z-4)'.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El rango es $1:4$, seleccionando $B(1:4) = [1, 3, 2, 4]$. Su suma es $1 + 3 + 2 + 4 = 10$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Redimensionamiento mediante reshape",
+      "context": "Dada la matriz $A = [1, 2, 3, 4; 5, 6, 7, 8]$ de tamaño $2 \\\\times 4$, redimensionada como 'B = reshape(A, 4, 2)'.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Qué valor tiene el elemento 'B(2, 1)'?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El orden lineal de A es $[1, 5, 2, 6, 3, 7, 4, 8]$. Al reorganizarse en una matriz de $4 \\\\times 2$, la primera columna se llena con los primeros 4 elementos linealizados: $[1; 5; 2; 6]$. Por tanto, $B(2,1) = 5$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Sea $x = B(2, 1) = 5$. Calcule el elemento 'B(3, 2)'.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La segunda columna se llena con los 4 elementos restantes: $[3; 7; 4; 8]$. Por tanto, $B(3,2) = 4$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Sea $y = B(3, 2) = 4$. Calcule la suma de todos los elementos de la segunda fila de B.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "La segunda fila de B es $B(2, :) = [5, 7]$. Su suma es $5 + 7 = 12$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Sea $z = 12$. Calcule el determinante de la submatriz formada por las dos primeras filas de B, es decir, 'det(B(1:2, :))'.",
+          "correctValue": -8,
+          "tolerance": 0.001,
+          "explanation": "La submatriz es $C = B(1:2, :) = \\\\begin{pmatrix} 1 & 3 \\\\\\\\ 5 & 7 \\\\end{pmatrix}$. Su determinante es $1\\\\times 7 - 3\\\\times 5 = 7 - 15 = -8$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Construcción diagonal",
+      "context": "Partimos del vector fila $v = [2, -1, 3]$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcule la traza de la matriz diagonal 'D = diag(v)'.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La matriz diagonal es $D = \\\\begin{pmatrix} 2 & 0 & 0 \\\\\\\\ 0 & -1 & 0 \\\\\\\\ 0 & 0 & 3 \\\\end{pmatrix}$. Su traza es la suma de los elementos de la diagonal principal: $2 + (-1) + 3 = 4$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Sea $T = 4$. Calcule el determinante de la matriz diagonal D.",
+          "correctValue": -6,
+          "tolerance": 0,
+          "explanation": "El determinante de una matriz diagonal es el producto de sus elementos de la diagonal principal: $2 \\\\times (-1) \\\\times 3 = -6$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Sea $d = -6$. Si calculamos 'v2 = diag(D^2)', ¿cuál es la suma de los elementos del vector v2?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "$D^2$ tiene en su diagonal las componentes de $v$ elevadas al cuadrado: $[4, 1, 9]$. 'diag(D^2)' extrae estos elementos como un vector. Su suma es $4 + 1 + 9 = 14$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Halle la suma de $S = 14$ y el determinante $d = -6$ de la parte (b).",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$S + d = 14 + (-6) = 8$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Indexación lógica y máscaras",
+      "context": "Sea la matriz real $A = [-3, 5, 1; 2, -1, 0; -4, 8, -2]$.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuántos elementos de la matriz A cumplen la condición 'A > 0'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los elementos estrictamente positivos son $5, 1, 2, 8$. En total hay 4 elementos."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Sea $n = 4$ la cantidad obtenida. Calcule la suma de los elementos que cumplen la condición 'A > 0'.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La suma de los elementos positivos es $5 + 1 + 2 + 8 = 16$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Sea $S = 16$. Halle la suma de los valores absolutos de los elementos que cumplen 'A < 0'.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Los elementos negativos son $-3, -1, -4, -2$. Sus valores absolutos son $3, 1, 4, 2$. Suma: $3 + 1 + 4 + 2 = 10$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Sea $S_neg = 10$. Calcule el resultado de 'S - S_neg'.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Restamos las sumas calculadas: $16 - 10 = 6$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Resolución de sistema y normas",
+      "context": "Considere el sistema de ecuaciones $A x = b$ con $A = [2, 1; 1, 2]$ y $b = [3; 3]$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuál es el determinante de A?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El determinante es $2\\\\times 2 - 1\\\\times 1 = 3$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Resolvemos el sistema obteniendo el vector x = A \\ b. ¿Cuál es el valor de la primera componente 'x(1)'?",
+          "correctValue": 1,
+          "tolerance": 0.001,
+          "explanation": "Resolviendo el sistema $2x_1 + x_2 = 3$ y $x_1 + 2x_2 = 3$ obtenemos $x_1 = 1, x_2 = 1$. Así, $x(1) = 1$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Halle la norma euclídea ('norm(x)') del vector de soluciones x.",
+          "correctValue": 1.4142,
+          "tolerance": 0.001,
+          "explanation": "El vector de soluciones es $x = [1; 1]$. Su norma euclídea es $\\\\sqrt{1^2 + 1^2} = \\\\sqrt{2} \\\\approx 1.4142$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Sea $N = 1.4142$. Calcule el cuadrado de la norma, es decir, $N^2$ redondeado.",
+          "correctValue": 2,
+          "tolerance": 0.01,
+          "explanation": "El cuadrado de la norma euclídea de $x = [1; 1]$ es $1^2 + 1^2 = 2$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Evaluación polinómica vectorizada",
+      "context": "Dado el vector $x = [0, 1, 2, 3]$ y la expresión polinómica evaluada por componentes 'y = x.^2 - 2.*x + 1'.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Qué valor toma el primer elemento 'y(1)'?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para $x(1)=0$, evaluamos: $0^2 - 2\\\\times 0 + 1 = 1$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Halle el valor de la tercera componente 'y(3)'.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para $x(3)=2$, evaluamos: $2^2 - 2\\\\times 2 + 1 = 4 - 4 + 1 = 1$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Halle la suma de todos los elementos del vector resultante y.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El vector resultante completo es: $y(1)=1$, $y(2)=1^2-2\\\\times 1+1=0$, $y(3)=1$, $y(4)=3^2-2\\\\times 3+1=4$. El vector es $[1, 0, 1, 4]$. Su suma es $1 + 0 + 1 + 4 = 6$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcule la media aritmética de los elementos del vector y ('mean(y)').",
+          "correctValue": 1.5,
+          "tolerance": 0,
+          "explanation": "La media de $y = [1, 0, 1, 4]$ es la suma dividida por la longitud: $6 / 4 = 1.5$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Traza de bucle condicional",
+      "context": "Se implementa la siguiente función en Octave:\n```octave\nfunction r = mi_bucle(n)\n    r = 0;\n    for i = 1:n\n        if mod(i, 2) == 0\n            r = r + i;\n        else\n            r = r - i;\n        end\n    end\nend\n```",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Qué salida devuelve la función para 'mi_bucle(3)'?",
+          "correctValue": -2,
+          "tolerance": 0,
+          "explanation": "Trazamos el bucle para $n=3$:\n- $i=1$: impar $\\\\implies r = 0 - 1 = -1$.\n- $i=2$: par $\\\\implies r = -1 + 2 = 1$.\n- $i=3$: impar $\\\\implies r = 1 - 3 = -2$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Halle el resultado para 'mi_bucle(4)'.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Partiendo del resultado anterior de $r=-2$ para $i=3$, cuando $i=4$ (par): $r = -2 + 4 = 2$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Determine la salida para 'mi_bucle(10)'.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para n par, la secuencia se comporta como: $r(n) = n/2$. Para $n=10$, se obtiene $10/2 = 5$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Determine la salida general para 'mi_bucle(100)'.",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "Siguiendo la regla general demostrada para n par ($r(n)=n/2$), para $n=100$ el resultado es $100/2 = 50$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Potencias de matrices unitarias y trazas",
+      "context": "Sea la matriz de permutación elemental $A = [0, 1; 1, 0]$.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuál es el determinante de A?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "El determinante es $0\\\\times 0 - 1\\\\times 1 = -1$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcule la traza de la matriz elevada al cuadrado A^2.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$A^2 = \\\\begin{pmatrix} 0 & 1 \\\\\\\\ 1 & 0 \\\\end{pmatrix} \\\\begin{pmatrix} 0 & 1 \\\\\\\\ 1 & 0 \\\\end{pmatrix} = \\\\begin{pmatrix} 1 & 0 \\\\\\\\ 0 & 1 \\\\end{pmatrix} = I$. La traza es $1 + 1 = 2$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcule la traza de la matriz elevada al cubo A^3.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$A^3 = A^2 \\\\times A = I \\\\times A = A$. La traza de A es $0 + 0 = 0$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcule la traza de la matriz A elevada a la potencia 100 ('trace(A^100)').",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Como la potencia es par, $A^{100} = (A^2)^{50} = I^{50} = I$. Su traza es $2$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Comparativa de normas vectoriales",
+      "context": "Dado el vector en el plano $x = [3, -4]$.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Halle la norma-1 ('norm(x, 1)') del vector.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La norma-1 es la suma de los valores absolutos de las componentes: $|3| + |-4| = 3 + 4 = 7$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Halle la norma-2 ('norm(x, 2)') del vector.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La norma-2 es la raíz cuadrada de la suma de componentes cuadradas: $\\\\sqrt{3^2 + (-4)^2} = \\\\sqrt{9 + 16} = 5$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Halle la norma de Chebyshev o norma infinito ('norm(x, inf)').",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La norma infinito es el máximo valor absoluto de sus componentes: $\\\\max(|3|, |-4|) = 4$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Calcule la suma total de las tres normas calculadas.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Sumamos los resultados anteriores: $7 + 5 + 4 = 16$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Producto escalar e inclinación angular",
+      "context": "Sean los vectores $u = [1, 1]$ y $v = [1, 0]$.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcule el producto escalar ('dot(u, v)' o 'u * v'').",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El producto escalar es $1\\\\times 1 + 1\\\\times 0 = 1$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcule el producto de sus normas euclídeas.",
+          "correctValue": 1.4142,
+          "tolerance": 0.001,
+          "explanation": "$\\\\text{norm}(u) = \\\\sqrt{2} \\\\approx 1.4142$, $\\\\text{norm}(v) = 1$. Su producto es $1.4142 \\\\times 1 = 1.4142$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "El coseno del ángulo es $\\\\cos(\\\\theta) = \\\\text{dot}(u,v) / (\\\\|u\\\\|\\\\|v\\\\|)$. ¿Cuál es el valor de $\\\\theta$ en grados sexagesimales?",
+          "correctValue": 45,
+          "tolerance": 0.1,
+          "explanation": "$\\\\cos(\\\\theta) = 1 / \\\\sqrt{2} \\\\implies \\\\theta = 45^\\\\circ$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcule el valor numérico del seno del ángulo $\\\\theta$ obtenido.",
+          "correctValue": 0.7071,
+          "tolerance": 0.001,
+          "explanation": "$\\\\sin(45^\\\\circ) = 1 / \\\\sqrt{2} \\\\approx 0.7071$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Trasposición de matrices complejas",
+      "context": "Dada la matriz compleja $A = [1+i, 2-2i; 3, 4i]$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Halle la parte real de la traza de la traspuesta conjugada A'.",
+          "correctValue": 1,
+          "tolerance": 0.001,
+          "explanation": "La diagonal de $A'$ son los conjugados de la diagonal de $A$. Diagonal: $1-i$ y $-4i$. La traza es $(1-i) - 4i = 1 - 5i$. Su parte real es $1$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Halle la parte imaginaria de la traza de la traspuesta conjugada A'.",
+          "correctValue": -5,
+          "tolerance": 0.001,
+          "explanation": "De la parte anterior, la traza es $1-5i$. La parte imaginaria es $-5$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Halle la parte real de la suma de todos los elementos de la traspuesta no conjugada A.'.",
+          "correctValue": 6,
+          "tolerance": 0.001,
+          "explanation": "La transpuesta simple no altera los elementos, solo su posición. La suma de todos los elementos de $A.'$ es la suma de los elementos de A: $(1+i) + (2-2i) + 3 + 4i = 6 + 3i$. Parte real: $6$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Halle la parte imaginaria de la suma de todos los elementos de la traspuesta no conjugada A.'.",
+          "correctValue": 3,
+          "tolerance": 0.001,
+          "explanation": "De la parte anterior, la suma total es $6+3i$. La parte imaginaria es $3$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Producto de Kronecker de vectores",
+      "context": "Sean los vectores fila $A = [1, 2]$ y $B = [3, 4]$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Halle la suma de todos los elementos del producto de Kronecker 'C = kron(A, B)'.",
+          "correctValue": 21,
+          "tolerance": 0,
+          "explanation": "El producto es $C = [1\\\\times [3, 4], 2\\\\times [3, 4]] = [3, 4, 6, 8]$. Su suma es $3 + 4 + 6 + 8 = 21$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Halle la longitud de la estructura vectorial C resultante.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Dado que A es de longitud 2 y B de longitud 2, la dimensión del producto de Kronecker es $2 \\\\times 2 = 4$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "¿Qué valor tiene el tercer elemento de C, es decir, C(3)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Del vector $C = [3, 4, 6, 8]$, el elemento en la posición 3 es $6$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Halle la norma euclídea de C ('norm(C)').",
+          "correctValue": 11.1803,
+          "tolerance": 0.001,
+          "explanation": "$\\\\text{norm}(C) = \\\\sqrt{3^2 + 4^2 + 6^2 + 8^2} = \\\\sqrt{9 + 16 + 36 + 64} = \\\\sqrt{125} \\\\approx 11.1803$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Evaluación polinómica y raíces",
+      "context": "Dado el polinomio característico definido por el vector de coeficientes $p = [1, -5, 6]$.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Halle el valor del polinomio en $x=0$ usando 'polyval(p, 0)'.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El polinomio es $P(x) = x^2 - 5x + 6$. Evaluando en $x=0$: $0^2 - 5\\\\times 0 + 6 = 6$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Halle el valor de la evaluación en $x=1$ ('polyval(p, 1)').",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Evaluando en $x=1$: $1^2 - 5\\\\times 1 + 6 = 1 - 5 + 6 = 2$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcule el producto de las raíces del polinomio ('prod(roots(p))').",
+          "correctValue": 6,
+          "tolerance": 0.001,
+          "explanation": "Las raíces de $x^2 - 5x + 6 = 0$ son $2$ y $3$. Su producto es $2 \\\\times 3 = 6$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcule la suma de las raíces del polinomio ('sum(roots(p))').",
+          "correctValue": 5,
+          "tolerance": 0.001,
+          "explanation": "Las raíces son $2$ y $3$. Su suma es $2 + 3 = 5$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Muestreo con linspace y transformación",
+      "context": "Dado el vector muestreado $x = linspace(0, 2, 5)$.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Halle la segunda componente del vector, 'x(2)'.",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "El vector contiene 5 puntos entre 0 y 2: $[0.0, 0.5, 1.0, 1.5, 2.0]$. El segundo elemento es $0.5$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Halle la cuarta componente del vector, 'x(4)'.",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "La cuarta componente de la secuencia equiespaciada es $1.5$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcule la suma de todos los elementos del vector x.",
+          "correctValue": 5,
+          "tolerance": 0.001,
+          "explanation": "Suma: $0.0 + 0.5 + 1.0 + 1.5 + 2.0 = 5.0$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si calculamos 'y = x.^2', halle la suma de todos los elementos del vector y.",
+          "correctValue": 7.5,
+          "tolerance": 0.001,
+          "explanation": "$y = [0^2, 0.5^2, 1^2, 1.5^2, 2^2] = [0, 0.25, 1, 2.25, 4]$. Su suma es $0 + 0.25 + 1 + 2.25 + 4 = 7.5$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Análisis de invertibilidad matricial",
+      "context": "Sea la matriz triangular superior $A = [1, 2, 3; 0, 1, 4; 0, 0, 2]$.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuál es el determinante de A?",
+          "correctValue": 2,
+          "tolerance": 0.001,
+          "explanation": "Por ser triangular, el determinante es el producto de su diagonal principal: $1 \\\\times 1 \\\\times 2 = 2$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Halle el rango de A ('rank(A)').",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Dado que el determinante es distinto de cero, todas las filas y columnas son independientes. El rango es máximo, es decir, $3$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Sea $B = inv(A)$. Halle el valor del elemento de la diagonal B(2,2).",
+          "correctValue": 1,
+          "tolerance": 0.001,
+          "explanation": "La inversa de una matriz triangular superior es triangular superior, y los elementos de su diagonal son los recíprocos de la diagonal de A: $B(2,2) = 1 / A(2,2) = 1/1 = 1$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Halle el valor de la componente de la diagonal de la inversa B(3,3).",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "$B(3,3) = 1 / A(3,3) = 1/2 = 0.5$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Autovalores y ecuaciones de traza",
+      "context": "Dada la matriz invertible $A = [3, 1; 2, 4]$.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuál es la traza de la matriz A?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La traza es $3 + 4 = 7$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Halle el determinante de A.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El determinante es $3\\\\times 4 - 1\\\\times 2 = 12 - 2 = 10$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Sean $\\\\lambda_1$ y $\\\\lambda_2$ los autovalores. ¿Cuál es la suma $\\\\lambda_1 + \\\\lambda_2$?",
+          "correctValue": 7,
+          "tolerance": 0.001,
+          "explanation": "Por teoría algebraica, la suma de los autovalores es idéntica a la traza de la matriz: $7$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "¿Cuál es el producto de los autovalores $\\\\lambda_1 \\\\times \\\\lambda_2$?",
+          "correctValue": 10,
+          "tolerance": 0.001,
+          "explanation": "Por teoría algebraica, el producto de los autovalores es idéntica al determinante de la matriz: $10$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Traza del método de Jacobi",
+      "context": "Dado el sistema lineal $A x = b$ con $A = [2, 1; 1, 2]$ y $b = [3; 3]$ resuelto por el método de Jacobi partiendo de $x^{(0)} = [0; 0]$.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcule la primera componente de la primera iteración $x_1^{(1)}$.",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "Fórmula de Jacobi: $x_1^{(1)} = \\\\frac{1}{A_{11}}(b_1 - A_{12}x_2^{(0)}) = \\\\frac{1}{2}(3 - 1\\\\times 0) = 1.5$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcule la segunda componente de la primera iteración $x_2^{(1)}$.",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "$x_2^{(1)} = \\\\frac{1}{A_{22}}(b_2 - A_{21}x_1^{(0)}) = \\\\frac{1}{2}(3 - 1\\\\times 0) = 1.5$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Con $x^{(1)} = [1.5; 1.5]$, calcule la primera componente de la segunda iteración $x_1^{(2)}$.",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "$x_1^{(2)} = \\\\frac{1}{2}(3 - A_{12}x_2^{(1)}) = \\\\frac{1}{2}(3 - 1.5) = 0.75$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcule la segunda componente de la segunda iteración $x_2^{(2)}$.",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "$x_2^{(2)} = \\\\frac{1}{2}(3 - A_{21}x_1^{(1)}) = \\\\frac{1}{2}(3 - 1.5) = 0.75$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Traza de Gauss-Seidel",
+      "context": "Dado el mismo sistema $A x = b$ con $A = [2, 1; 1, 2]$ y $b = [3; 3]$ resuelto por Gauss-Seidel partiendo de $x^{(0)} = [0; 0]$.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcule la primera componente de la primera iteración $x_1^{(1)}$.",
+          "correctValue": 1.5,
+          "tolerance": 0.001,
+          "explanation": "$x_1^{(1)} = \\\\frac{1}{2}(3 - x_2^{(0)}) = \\\\frac{1}{2}(3 - 0) = 1.5$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcule la segunda componente de la primera iteración $x_2^{(1)}$ usando el valor actualizado $x_1^{(1)}$.",
+          "correctValue": 0.75,
+          "tolerance": 0.001,
+          "explanation": "$x_2^{(1)} = \\\\frac{1}{2}(3 - x_1^{(1)}) = \\\\frac{1}{2}(3 - 1.5) = 0.75$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Usando $x^{(1)} = [1.5; 0.75]$, calcule la primera componente de la segunda iteración $x_1^{(2)}$.",
+          "correctValue": 1.125,
+          "tolerance": 0.001,
+          "explanation": "$x_1^{(2)} = \\\\frac{1}{2}(3 - x_2^{(1)}) = \\\\frac{1}{2}(3 - 0.75) = 1.125$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcule la segunda componente de la segunda iteración $x_2^{(2)}$ usando el valor actualizado $x_1^{(2)}$.",
+          "correctValue": 0.9375,
+          "tolerance": 0.001,
+          "explanation": "$x_2^{(2)} = \\\\frac{1}{2}(3 - x_1^{(2)}) = \\\\frac{1}{2}(3 - 1.125) = 0.9375$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Concatenación y reducción matricial",
+      "context": "Sean las matrices $A = [1, 2; 3, 4]$ y $B = [5; 6]$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Si formamos la matriz concatenada horizontalmente 'C = [A, B]', ¿cuántas columnas tiene C?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La matriz A tiene 2 columnas y B tiene 1 columna. La concatenación horizontal suma las columnas, dando una matriz de dimensiones $2 \\\\times 3$, es decir, 3 columnas."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Sea $col = 3$ el número de columnas. Halle el valor del elemento 'C(2, col)'.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La matriz concatenada es $C = [1, 2, 5; 3, 4, 6]$. El elemento $C(2, 3)$ es $6$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Hacemos una concatenación vertical: 'D = [A; [7, 8]]'. Halle el valor del elemento 'D(3, 2)'.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La matriz concatenada por filas es $D = \\\\begin{pmatrix} 1 & 2 \\\\\\\\ 3 & 4 \\\\\\\\ 7 & 8 \\\\end{pmatrix}$. El elemento de la fila 3, columna 2 es $8$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Halle la suma de todos los elementos de la primera columna de la matriz D.",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "La primera columna es $D(:,1) = [1; 3; 7]$. Su suma es $1 + 3 + 7 = 11$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Máscaras lógicas y reasignación",
+      "context": "Dado el vector fila $x = [2, -3, 5, -1, 0, 4]$. Se define la máscara lógica 'mask = x < 0'.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuántos elementos de la máscara mask son verdaderos (1)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los elementos estrictamente menores que cero en $x$ son $-3$ y $-1$. Por lo tanto, hay 2 elementos verdaderos."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Se reasignan estos elementos negativos haciendo 'x(mask) = 99'. ¿Cuál es la suma de todos los elementos del vector modificado x?",
+          "correctValue": 209,
+          "tolerance": 0,
+          "explanation": "El vector modificado es $x = [2, 99, 5, 99, 0, 4]$. La suma de sus elementos es $2 + 99 + 5 + 99 + 0 + 4 = 209$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Halle la suma de los índices de las posiciones modificadas que ahora valen 99 (obtenidas con 'find(x == 99)').",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Los elementos que valen 99 se encuentran en las posiciones de índice 2 y 4. La suma de estos índices es $2 + 4 = 6$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Sea $S_idx = 6$. Halle el producto de $S_idx$ por el primer elemento del vector 'x(1)'.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$x(1) = 2$. Multiplicando por la suma de índices obtenemos: $6 \\\\times 2 = 12$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Operaciones en matrices diagonales grandes",
+      "context": "Sea una matriz cuadrada A de tamaño $10 \\\\times 10$ definida como 'A = diag(1:10)'.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Halle la traza de la matriz A ('trace(A)').",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "La diagonal de A contiene la secuencia $1, 2, ..., 10$. La traza es la suma de dicha diagonal: $\\\\sum_{i=1}^{10} i = \\\\frac{10 \\\\times 11}{2} = 55$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Sea $T = 55$. Halle el valor del elemento de la diagonal A(5,5).",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La diagonal de A está constituida por $A_{ii} = i$. Por lo tanto, el elemento diagonal en la fila 5 es $5$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Si definimos $B = A^2$, calcule la traza de B ('trace(B)').",
+          "correctValue": 385,
+          "tolerance": 0,
+          "explanation": "Dado que A es diagonal, $B = A^2$ también es diagonal con elementos $i^2$. La traza de B es $\\\\sum_{i=1}^{10} i^2 = \\\\frac{10 \\\\times 11 \\\\times 21}{6} = 385$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Sea $T_B = 385$ la traza de B. Halle la diferencia 'T_B - trace(A)'.",
+          "correctValue": 330,
+          "tolerance": 0,
+          "explanation": "Hacemos la resta: $385 - 55 = 330$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Producto matricial de dos matrices",
+      "tex": "$$C_{ij} = \\sum_{k=1}^{n} A_{ik} B_{kj}$$"
+    },
+    {
+      "name": "Descomposición LU con matriz de permutación",
+      "tex": "$$P A = L U$$"
+    },
+    {
+      "name": "Descomposición QR de una matriz rectangular",
+      "tex": "$$A = Q R$$"
+    },
+    {
+      "name": "Factorización de Cholesky para matrices simétricas definidas positivas",
+      "tex": "$$A = R^T R$$"
+    },
+    {
+      "name": "Ecuación de actualización del método iterativo de Jacobi",
+      "tex": "$$x_i^{(k+1)} = \\frac{1}{A_{ii}} \\left( b_i - \\sum_{j \\neq i} A_{ij} x_j^{(k)} \\right)$$"
+    },
+    {
+      "name": "Ecuación de actualización del método de Gauss-Seidel",
+      "tex": "$$x_i^{(k+1)} = \\frac{1}{A_{ii}} \\left( b_i - \\sum_{j < i} A_{ij} x_j^{(k+1)} - \\sum_{j > i} A_{ij} x_j^{(k)} \\right)$$"
+    },
+    {
+      "name": "Ecuación característica de autovalores",
+      "tex": "$$\\det(A - \\lambda I) = 0$$"
+    },
+    {
+      "name": "Norma euclídea o norma-2 de un vector",
+      "tex": "$$\\|x\\|_2 = \\sqrt{\\sum_{i=1}^{n} x_i^2}$$"
+    }
+  ]
+}

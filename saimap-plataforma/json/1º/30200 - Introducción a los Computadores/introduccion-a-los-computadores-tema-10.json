@@ -1,0 +1,2130 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la idea central del concepto de 'Programa Almacenado' introducido por Von Neumann?",
+      "options": [
+        "Las instrucciones del programa se codifican numéricamente y se almacenan en la misma memoria que los datos",
+        "Las instrucciones se almacenan en una memoria ROM separada e inalterable",
+        "El programa se configura físicamente mediante cables e interruptores en cada ejecución"
+      ],
+      "correct": 0,
+      "hint": "Piensa en lo que diferencia a los computadores modernos de las máquinas de propósito único previas a 1945.",
+      "explanation": "El concepto de Programa Almacenado propuesto por Von Neumann establece que las instrucciones del programa, codificadas numéricamente, residen en la misma memoria física que los datos. Esto permite cambiar de programa sin reconfigurar el hardware."
+    },
+    {
+      "q": "¿Cuántos subsistemas principales define la arquitectura de Von Neumann?",
+      "options": [
+        "Dos: CPU y Memoria",
+        "Tres: CPU, Memoria Principal y Subsistema de E/S",
+        "Cuatro: UC, ALU, Memoria y Buses"
+      ],
+      "correct": 1,
+      "hint": "El modelo divide el computador en tres bloques funcionales interconectados por los buses.",
+      "explanation": "La arquitectura de Von Neumann define tres subsistemas principales: la CPU (que incluye UC y ALU), la Memoria Principal y el Subsistema de Entrada/Salida. Los buses son el medio de interconexión, no un subsistema independiente."
+    },
+    {
+      "q": "¿Qué función realiza la Unidad de Control (UC) dentro de la CPU?",
+      "options": [
+        "Ejecuta operaciones aritméticas y lógicas sobre los datos",
+        "Almacena operandos temporales en celdas internas ultrarrápidas",
+        "Interpreta y secuencia las instrucciones del programa almacenado"
+      ],
+      "correct": 2,
+      "hint": "La UC 'dirige' la orquesta del procesador, no 'toca' ningún instrumento.",
+      "explanation": "La Unidad de Control interpreta el código de operación de cada instrucción y genera las señales de control necesarias para secuenciar su ejecución. La ALU es quien realiza los cálculos; los registros almacenan operandos temporales."
+    },
+    {
+      "q": "¿Qué función realiza la ALU dentro de la CPU?",
+      "options": [
+        "Realiza los cálculos aritméticos y lógicos sobre los datos",
+        "Interpreta los códigos de operación y genera señales de control",
+        "Gestiona las interrupciones procedentes del subsistema de E/S"
+      ],
+      "correct": 0,
+      "hint": "Su nombre completo es Unidad Aritmético-Lógica.",
+      "explanation": "La ALU (Arithmetic Logic Unit) es el componente de la CPU que ejecuta todas las operaciones aritméticas (suma, resta, multiplicación) y lógicas (AND, OR, NOT, comparaciones) sobre los datos."
+    },
+    {
+      "q": "¿Qué son los registros del banco de registros de la CPU?",
+      "options": [
+        "Celdas de memoria principal de acceso rápido situadas fuera del chip",
+        "Celdas de memoria internas ultrarrápidas para almacenar operandos inmediatos",
+        "Posiciones de memoria caché de Nivel 2 compartidas entre núcleos"
+      ],
+      "correct": 1,
+      "hint": "Están dentro de la CPU y son la memoria más rápida del sistema.",
+      "explanation": "El banco de registros está integrado dentro del chip de la CPU y contiene celdas de memoria ultrarrápidas que almacenan los operandos y resultados intermedios que la ALU necesita de forma inmediata, evitando accesos lentos a la memoria principal."
+    },
+    {
+      "q": "En el modelo de Von Neumann, ¿cómo conviven datos e instrucciones en la Memoria Principal?",
+      "options": [
+        "En zonas físicamente separadas con controladores de acceso independientes",
+        "De forma indistinta en el mismo array de celdas direccionables linealmente",
+        "Los datos en RAM dinámica y las instrucciones en RAM estática"
+      ],
+      "correct": 1,
+      "hint": "Esto es precisamente lo que distingue Von Neumann de Harvard.",
+      "explanation": "La Memoria Principal en Von Neumann es un array lineal de celdas, todas del mismo tipo, donde datos e instrucciones coexisten de forma indistinta. La CPU los distingue según el contexto de uso (fase Fetch vs. fase Execute), no por su ubicación física."
+    },
+    {
+      "q": "¿Cuál es la dirección del Bus de Direcciones en la arquitectura Von Neumann?",
+      "options": [
+        "Bidireccional: tanto la CPU como la memoria pueden colocar direcciones",
+        "Unidireccional: solo la CPU escribe las direcciones en el bus",
+        "Bidireccional para datos, unidireccional para instrucciones"
+      ],
+      "correct": 1,
+      "hint": "Solo un componente 'decide' a qué posición de memoria acceder.",
+      "explanation": "El Bus de Direcciones es unidireccional: únicamente la CPU coloca en él la dirección de memoria a la que desea acceder. La memoria y los dispositivos de E/S no necesitan generar direcciones, solo responder a ellas."
+    },
+    {
+      "q": "¿Qué parámetro del Bus de Direcciones determina el espacio máximo de direccionamiento?",
+      "options": [
+        "La frecuencia de reloj del bus",
+        "El ancho del bus en bits (número de líneas)",
+        "La velocidad de propagación de la señal eléctrica"
+      ],
+      "correct": 1,
+      "hint": "Más líneas = más combinaciones de 0s y 1s posibles.",
+      "explanation": "Con N líneas de dirección, la CPU puede generar 2^N combinaciones únicas de dirección, por lo que el espacio máximo de direccionamiento es 2^N posiciones. Por ejemplo, 32 líneas permiten direccionar 2^32 = 4 GB."
+    },
+    {
+      "q": "Un procesador tiene un bus de direcciones de 32 líneas. ¿Cuánta memoria RAM puede direccionar como máximo?",
+      "options": [
+        "2 GB",
+        "4 GB",
+        "8 GB"
+      ],
+      "correct": 1,
+      "hint": "Calcula 2^32 bytes y convierte a GB (1 GB = 2^30 bytes).",
+      "explanation": "Con 32 líneas de dirección se tienen 2^32 = 4.294.967.296 posiciones. Si cada posición almacena 1 byte, la capacidad máxima es 2^32 bytes = 2^2 × 2^30 bytes = 4 GB."
+    },
+    {
+      "q": "¿Qué tipo de señales transporta el Bus de Control?",
+      "options": [
+        "Los datos de las operaciones y los códigos de instrucción",
+        "Las direcciones físicas de memoria a las que se accede",
+        "Señales de temporización, sincronización, lectura/escritura e interrupciones"
+      ],
+      "correct": 2,
+      "hint": "El bus de control 'coordina' las acciones de todos los subsistemas.",
+      "explanation": "El Bus de Control transporta señales de gobierno: líneas de lectura/escritura (R/W), señales de reloj del sistema, señales de interrupción de dispositivos de E/S, y otras señales de sincronización que coordinan las operaciones entre CPU, memoria y E/S."
+    },
+    {
+      "q": "¿Cuál es la dirección del Bus de Datos?",
+      "options": [
+        "Unidireccional: solo de memoria hacia la CPU",
+        "Bidireccional: puede transportar datos en ambos sentidos",
+        "Unidireccional: solo de CPU hacia memoria"
+      ],
+      "correct": 1,
+      "hint": "En una operación de lectura fluye en un sentido; en escritura, en el otro.",
+      "explanation": "El Bus de Datos es bidireccional porque en operaciones de lectura (load) los datos viajan de memoria a CPU, y en operaciones de escritura (store) los datos viajan de CPU a memoria. El Bus de Control indica en cada ciclo cuál es el sentido activo."
+    },
+    {
+      "q": "¿Qué determina el ancho del Bus de Datos de un procesador?",
+      "options": [
+        "El espacio de direccionamiento máximo",
+        "La longitud de palabra nativa del procesador",
+        "El número máximo de dispositivos de E/S conectables"
+      ],
+      "correct": 1,
+      "hint": "Un bus de datos de 64 bits implica que el procesador opera nativamente con palabras de 64 bits.",
+      "explanation": "El ancho del Bus de Datos (en bits) define la longitud de palabra nativa del procesador: cuántos bits puede transferir en un solo ciclo de bus. Un bus de datos de 32 bits corresponde a un procesador de 32 bits; uno de 64 bits, a un procesador de 64 bits."
+    },
+    {
+      "q": "¿En qué se diferencia la Arquitectura Harvard de la Arquitectura Von Neumann?",
+      "options": [
+        "Harvard usa un único bus compartido para datos e instrucciones",
+        "Harvard dispone de dos memorias físicas separadas con buses independientes para datos e instrucciones",
+        "Harvard elimina la ALU y delega los cálculos a coprocesadores externos"
+      ],
+      "correct": 1,
+      "hint": "La palabra clave es 'separadas': memorias y buses distintos.",
+      "explanation": "La Arquitectura Harvard usa dos memorias físicas completamente separadas (Memoria de Instrucciones y Memoria de Datos) con sus propios buses de direcciones y datos independientes. Esto permite accesos concurrentes a instrucciones y datos, eliminando el cuello de botella."
+    },
+    {
+      "q": "¿Cuál es el principal inconveniente de la Arquitectura Harvard frente a Von Neumann?",
+      "options": [
+        "No puede ejecutar programas de propósito general",
+        "Mayor complejidad física: duplicación de pines, buses y controladores de memoria",
+        "La CPU no puede modificar el código del programa en tiempo de ejecución"
+      ],
+      "correct": 1,
+      "hint": "Tener todo por duplicado implica un coste físico mayor.",
+      "explanation": "La Arquitectura Harvard exige duplicar el número de pines de dirección y datos en la CPU, duplicar las pistas de cobre en la placa base y duplicar los controladores de bus de memoria. Esto incrementa significativamente el área del circuito integrado y el coste de fabricación."
+    },
+    {
+      "q": "¿Qué es el 'Cuello de Botella de Von Neumann'?",
+      "options": [
+        "La limitación de velocidad impuesta por el número de registros internos de la CPU",
+        "La imposibilidad de la CPU de leer una instrucción y acceder a un dato en memoria simultáneamente por compartir el mismo bus",
+        "La reducción del rendimiento causada por las operaciones de punto flotante en la ALU"
+      ],
+      "correct": 1,
+      "hint": "El problema surge porque datos e instrucciones comparten el MISMO bus físico.",
+      "explanation": "El Cuello de Botella de Von Neumann se produce porque la CPU no puede ejecutar simultáneamente la fase Fetch (leer instrucción de memoria) y la fase Execute que requiere acceso a datos en memoria, ya que ambas operaciones usan el mismo bus de datos y bus de direcciones."
+    },
+    {
+      "q": "¿Qué solución adoptan los microprocesadores modernos (Intel Core, AMD Ryzen, Apple M1) para mitigar el cuello de botella de Von Neumann?",
+      "options": [
+        "Aumentan la frecuencia del bus del sistema para reducir el tiempo de acceso",
+        "Emplean un diseño híbrido: arquitectura Harvard internamente (caché L1I y L1D separadas) y Von Neumann externamente (RAM)",
+        "Eliminan el bus de datos compartido sustituyéndolo por conexiones punto a punto dedicadas"
+      ],
+      "correct": 1,
+      "hint": "Lo importante es qué ocurre DENTRO del núcleo versus lo que ocurre FUERA del chip.",
+      "explanation": "Los procesadores modernos usan un diseño híbrido: dentro del núcleo (hacia el interior) adoptan arquitectura Harvard con dos cachés L1 separadas (L1I para instrucciones y L1D para datos), permitiendo acceso concurrente. Hacia el exterior (RAM principal), mantienen la arquitectura Von Neumann unificada por simplicidad."
+    },
+    {
+      "q": "¿Qué son la Caché L1I y la Caché L1D en los procesadores modernos?",
+      "options": [
+        "Memorias caché de Nivel 1 unificadas que almacenan indistintamente datos e instrucciones",
+        "Memorias caché de Nivel 1 separadas: L1I para instrucciones y L1D para datos, siguiendo el principio Harvard",
+        "Memorias de acceso aleatorio estática integradas en la placa base"
+      ],
+      "correct": 1,
+      "hint": "La 'I' y la 'D' en el nombre son las claves.",
+      "explanation": "La L1I (Level 1 Instruction Cache) y L1D (Level 1 Data Cache) son dos cachés de Nivel 1 físicamente independientes dentro del núcleo del procesador. Siguen el principio Harvard permitiendo que la CPU busque la próxima instrucción (L1I) mientras ejecuta la instrucción actual accediendo a datos (L1D)."
+    },
+    {
+      "q": "¿Cuántas combinaciones de direcciones únicas puede generar un bus de direcciones de 20 líneas?",
+      "options": [
+        "20.000 posiciones",
+        "1.048.576 posiciones",
+        "2.097.152 posiciones"
+      ],
+      "correct": 1,
+      "hint": "Aplica la fórmula: número de posiciones = 2^N, donde N es el número de líneas.",
+      "explanation": "Con 20 líneas de dirección, cada línea puede ser 0 o 1, generando 2^20 = 1.048.576 combinaciones únicas de dirección, equivalente a 1 MB de espacio de direccionamiento si cada posición almacena 1 byte."
+    },
+    {
+      "q": "Un microcontrolador tiene un bus de direcciones de 16 líneas y un bus de datos de 8 líneas. ¿Cuál es el tamaño máximo de su memoria física?",
+      "options": [
+        "32 KB",
+        "64 KB",
+        "128 KB"
+      ],
+      "correct": 1,
+      "hint": "Número de posiciones = 2^16; tamaño por posición = 1 byte (bus de datos de 8 bits).",
+      "explanation": "Con 16 líneas de dirección: 2^16 = 65.536 posiciones únicas. Con bus de datos de 8 bits, cada posición almacena 1 byte. Capacidad total = 65.536 × 1 byte = 65.536 B = 64 KB."
+    },
+    {
+      "q": "¿Qué característica de la Memoria Principal en Von Neumann permite acceder a cualquier posición de forma independiente?",
+      "options": [
+        "Su organización en páginas contiguas de tamaño fijo",
+        "Su acceso aleatorio: cada celda tiene una dirección única y es accesible directamente",
+        "Su fabricación con tecnología SRAM que garantiza latencia constante"
+      ],
+      "correct": 1,
+      "hint": "Cada celda tiene su propia 'etiqueta' numérica: su dirección.",
+      "explanation": "La Memoria Principal está organizada como un array de celdas, cada una con una dirección única. Gracias al Bus de Direcciones, la CPU puede acceder directamente a cualquier posición en tiempo constante (acceso aleatorio), sin necesidad de recorrer posiciones previas."
+    },
+    {
+      "q": "¿Qué tipo de arquitectura utiliza la RAM principal en los computadores modernos?",
+      "options": [
+        "Arquitectura Harvard pura, con buses físicamente separados",
+        "Arquitectura Von Neumann unificada, datos e instrucciones en el mismo espacio de memoria",
+        "Arquitectura RISC con memoria distribuida en nodos independientes"
+      ],
+      "correct": 1,
+      "hint": "Piensa en qué tipo de arquitectura se usa 'hacia el exterior de la CPU'.",
+      "explanation": "La RAM principal sigue la arquitectura Von Neumann unificada: un único espacio de memoria donde coexisten datos e instrucciones, accesible a través de un bus compartido. Esta simplicidad reduce el coste de fabricación de la placa base y del módulo de memoria."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es uno de los tres buses principales del sistema Von Neumann?",
+      "options": [
+        "Bus de Instrucciones",
+        "Bus de Datos",
+        "Bus de Control"
+      ],
+      "correct": 0,
+      "hint": "Los tres buses son: Datos, Direcciones y Control.",
+      "explanation": "Los tres buses del sistema Von Neumann son: Bus de Datos (transporta datos e instrucciones), Bus de Direcciones (transporta la dirección de acceso) y Bus de Control (transporta señales de gobierno). No existe un 'Bus de Instrucciones' separado en el modelo Von Neumann puro."
+    },
+    {
+      "q": "¿Por qué en la arquitectura Von Neumann la CPU no puede realizar simultáneamente un Fetch y un acceso a datos en memoria?",
+      "options": [
+        "Porque la ALU bloquea la Unidad de Control durante los cálculos",
+        "Porque ambas operaciones requieren usar el mismo bus de datos y el mismo bus de direcciones compartido",
+        "Porque el bus de control solo puede emitir una señal de lectura o escritura a la vez por diseño eléctrico"
+      ],
+      "correct": 1,
+      "hint": "El recurso compartido crítico es el bus físico, no la lógica de la CPU.",
+      "explanation": "En Von Neumann, tanto la instrucción como los datos residen en la misma memoria y se acceden a través del mismo bus. Por tanto, una operación Fetch (leer instrucción) y una operación de acceso a datos en memoria no pueden ocurrir simultáneamente; deben secuenciarse, creando el cuello de botella."
+    },
+    {
+      "q": "¿Qué ventaja de rendimiento ofrece la Arquitectura Harvard sobre la Von Neumann según el tema?",
+      "options": [
+        "Aumenta la frecuencia de reloj del procesador al reducir la longitud del camino de datos",
+        "Dobla el ancho de banda efectivo del bus del sistema, eliminando el cuello de botella",
+        "Reduce el consumo de energía al compartir la lógica de control entre los dos buses"
+      ],
+      "correct": 1,
+      "hint": "Al tener dos buses independientes, ¿cuánto aumenta el ancho de banda total?",
+      "explanation": "Con dos buses de datos y dos buses de direcciones independientes (instrucciones y datos), la arquitectura Harvard puede realizar accesos concurrentes a ambas memorias, doblando efectivamente el ancho de banda disponible para la CPU y eliminando el cuello de botella de Von Neumann."
+    },
+    {
+      "q": "¿Cuál era la forma de programación anterior al modelo de Von Neumann?",
+      "options": [
+        "Lenguaje ensamblador almacenado en tarjetas perforadas",
+        "Reconfiguración física de cables e interruptores de la máquina (programación por hardware)",
+        "Introducción de instrucciones en código máquina a través de una consola de operador"
+      ],
+      "correct": 1,
+      "hint": "Para cambiar de programa había que cambiar el hardware físicamente.",
+      "explanation": "Antes de Von Neumann, las máquinas eran de propósito único. Cambiar de programa requería que los operadores reconfiguraran físicamente los cables e interruptores del computador, un proceso laborioso que podía llevar horas o días."
+    },
+    {
+      "q": "¿Qué hace que los primeros computadores fuesen máquinas de 'propósito único'?",
+      "options": [
+        "Solo podían ejecutar un tipo de instrucción aritmética",
+        "Cada cambio de tarea requería reconfiguración física del hardware",
+        "Su memoria era demasiado pequeña para almacenar más de un programa"
+      ],
+      "correct": 1,
+      "hint": "El programa estaba 'grabado' en el hardware, no en una memoria.",
+      "explanation": "Los computadores anteriores a Von Neumann tenían el programa codificado directamente en su estructura de cables e interruptores. Para ejecutar una tarea diferente, era necesario reconfigurar físicamente el hardware, haciendo que cada máquina solo pudiera realizar una tarea específica."
+    },
+    {
+      "q": "Si un bus de datos tiene 64 líneas, ¿cuántos bits transfiere en un solo ciclo de bus?",
+      "options": [
+        "32 bits",
+        "64 bits",
+        "128 bits"
+      ],
+      "correct": 1,
+      "hint": "El número de líneas del bus de datos iguala el número de bits transferidos por ciclo.",
+      "explanation": "Un bus de datos de 64 líneas (bits) transfiere 64 bits (8 bytes) en cada ciclo de bus. Esta es la longitud de palabra nativa de los procesadores de 64 bits modernos, como los Intel Core i7/i9 o AMD Ryzen."
+    },
+    {
+      "q": "¿Cuál es el espacio de direccionamiento de un procesador con 24 líneas de dirección?",
+      "options": [
+        "16 MB",
+        "32 MB",
+        "64 MB"
+      ],
+      "correct": 0,
+      "hint": "2^24 bytes = 2^4 × 2^20 bytes = 16 MB.",
+      "explanation": "Con 24 líneas de dirección: 2^24 = 16.777.216 posiciones. Si cada posición almacena 1 byte, el espacio de direccionamiento es 16.777.216 bytes = 16 MB. (2^24 = 2^4 × 2^20 = 16 × 1 MB = 16 MB)."
+    },
+    {
+      "q": "En el contexto del modelo Von Neumann, ¿qué es un 'subsistema de Entrada/Salida'?",
+      "options": [
+        "La interfaz entre la CPU y los registros internos del procesador",
+        "La interfaz para comunicar el computador con periféricos externos como teclados, monitores y discos",
+        "El controlador de acceso directo a memoria (DMA) que gestiona transferencias sin intervención de la CPU"
+      ],
+      "correct": 1,
+      "hint": "Los 'periféricos' son los dispositivos externos del computador.",
+      "explanation": "El Subsistema de Entrada/Salida (E/S) es el tercer bloque funcional del modelo Von Neumann. Proporciona la interfaz necesaria para que el computador se comunique con el mundo exterior a través de periféricos: teclados, ratones, monitores, discos, impresoras, etc."
+    },
+    {
+      "q": "¿Por qué John von Neumann es considerado el padre de la arquitectura de computadores modernos?",
+      "options": [
+        "Porque inventó el transistor que permite fabricar circuitos integrados miniaturizados",
+        "Porque introdujo el concepto de programa almacenado, unificando datos e instrucciones en memoria",
+        "Porque diseñó el primer lenguaje de programación de alto nivel (FORTRAN)"
+      ],
+      "correct": 1,
+      "hint": "Su contribución clave fue la idea del 'Programa Almacenado'.",
+      "explanation": "Von Neumann introdujo el paradigma del Programa Almacenado, donde las instrucciones se codifican numéricamente y residen en la misma memoria que los datos. Esta idea unificadora permitió crear computadores de propósito general y es la base de todos los procesadores modernos."
+    },
+    {
+      "q": "¿Cuál es la relación entre el número de líneas del bus de direcciones (N) y el espacio máximo de direccionamiento?",
+      "options": [
+        "El espacio de direccionamiento es N × 1024 posiciones",
+        "El espacio de direccionamiento es 2^N posiciones",
+        "El espacio de direccionamiento es N^2 posiciones"
+      ],
+      "correct": 1,
+      "hint": "Cada línea puede tomar 2 valores (0 o 1), generando 2^N combinaciones.",
+      "explanation": "Con N líneas de dirección, cada línea puede estar en estado bajo (0) o alto (1). El número total de combinaciones únicas es 2 × 2 × ... × 2 (N veces) = 2^N. Por tanto, el espacio de direccionamiento máximo es 2^N posiciones."
+    },
+    {
+      "q": "En la terminología del modelo Von Neumann, ¿a qué se denomina 'longitud de palabra del computador'?",
+      "options": [
+        "Al número de bits del bus de direcciones",
+        "Al número de bits del bus de datos",
+        "Al número de bits del bus de control"
+      ],
+      "correct": 1,
+      "hint": "La 'palabra' es la unidad básica de datos que el procesador maneja nativamente.",
+      "explanation": "La longitud de palabra nativa del procesador está definida por el ancho del Bus de Datos. Si el bus de datos tiene 32 líneas, la palabra del computador es de 32 bits; si tiene 64, la palabra es de 64 bits."
+    },
+    {
+      "q": "¿Qué tipo de acceso tiene la Memoria Principal del modelo Von Neumann?",
+      "options": [
+        "Acceso secuencial: las posiciones deben leerse en orden",
+        "Acceso aleatorio: cualquier celda es accesible directamente mediante su dirección",
+        "Acceso LIFO: solo se puede acceder a la última posición escrita"
+      ],
+      "correct": 1,
+      "hint": "Por eso se llama RAM: Random Access Memory.",
+      "explanation": "La Memoria Principal es RAM (Random Access Memory): cualquier celda puede ser accedida directamente y en tiempo constante simplemente colocando su dirección en el Bus de Direcciones. No es necesario acceder secuencialmente a las posiciones anteriores."
+    },
+    {
+      "q": "¿Qué ocurre con el Bus de Datos cuando la CPU ejecuta una operación de escritura en memoria?",
+      "options": [
+        "El dato fluye desde la memoria hacia la CPU",
+        "El dato fluye desde la CPU hacia la memoria",
+        "El bus de datos permanece inactivo y solo actúa el bus de control"
+      ],
+      "correct": 1,
+      "hint": "En una escritura (store), la CPU ES el origen del dato.",
+      "explanation": "Durante una operación de escritura (store), la CPU coloca el dato en el Bus de Datos y la dirección de destino en el Bus de Direcciones. La señal de escritura en el Bus de Control indica a la memoria que debe almacenar el dato en la posición señalada. El flujo del Bus de Datos es CPU → Memoria."
+    },
+    {
+      "q": "¿Qué tipo de memoria utiliza la Caché L1 en los procesadores modernos?",
+      "options": [
+        "DRAM (Dynamic RAM) de alta densidad y bajo coste",
+        "SRAM (Static RAM) de alta velocidad y mayor coste por bit",
+        "Flash NAND de alta persistencia y escritura no volátil"
+      ],
+      "correct": 1,
+      "hint": "La caché necesita ser extremadamente rápida; la SRAM no requiere refresco.",
+      "explanation": "Las memorias caché (L1, L2, L3) utilizan SRAM (Static RAM), que es más rápida que la DRAM porque no necesita refresco periódico. Sin embargo, la SRAM ocupa más área de silicio por bit que la DRAM, por lo que es más cara y las cachés tienen capacidades mucho menores que la RAM principal."
+    },
+    {
+      "q": "¿Cuántos GB puede direccionar un procesador con bus de direcciones de 36 líneas?",
+      "options": [
+        "32 GB",
+        "64 GB",
+        "128 GB"
+      ],
+      "correct": 1,
+      "hint": "2^36 bytes = 2^6 × 2^30 bytes = 64 GB.",
+      "explanation": "Con 36 líneas: 2^36 bytes = 2^6 × 2^30 bytes = 64 × 1 GB = 64 GB. Los procesadores Intel con extensión PAE (Physical Address Extension) usaban exactamente 36 bits de dirección física para superar la barrera de los 4 GB de RAM."
+    },
+    {
+      "q": "¿Cuál es la función de la línea R/W del Bus de Control?",
+      "options": [
+        "Indica si la operación en curso es de lectura o de escritura en memoria",
+        "Controla la velocidad de refresco de la memoria dinámica DRAM",
+        "Selecciona entre el bus de datos y el bus de direcciones activo"
+      ],
+      "correct": 0,
+      "hint": "R/W = Read/Write (Lectura/Escritura).",
+      "explanation": "La línea R/W (Read/Write) del Bus de Control indica a la memoria el tipo de operación: cuando está en nivel alto (1), la CPU desea leer (load); cuando está en nivel bajo (0), la CPU desea escribir (store). La memoria responde colocando el dato en el bus (lectura) o almacenando el dato recibido (escritura)."
+    },
+    {
+      "q": "¿En qué nivel de la jerarquía de memoria se encuentran las cachés L1I y L1D?",
+      "options": [
+        "Son el nivel más lento, situado entre la RAM y el disco",
+        "Son el nivel más rápido, situado entre los registros y la caché L2",
+        "Son equivalentes en velocidad a la RAM principal"
+      ],
+      "correct": 1,
+      "hint": "L1 = Level 1 = primer nivel = más cercano al núcleo = más rápido (excepto los registros).",
+      "explanation": "En la jerarquía de memoria, la caché L1 (tanto L1I como L1D) es el nivel más rápido después de los registros del procesador. Se sitúa entre los registros y la caché L2, con latencias de 1-4 ciclos frente a los cientos de ciclos de la RAM principal."
+    },
+    {
+      "q": "¿Qué significa que la Memoria Principal en Von Neumann es 'linealmente direccionable'?",
+      "options": [
+        "Que las direcciones deben accederse en orden ascendente estricto",
+        "Que cada posición tiene una dirección numérica única y contigua en un espacio uniforme",
+        "Que la memoria está organizada en matrices bidimensionales de filas y columnas"
+      ],
+      "correct": 1,
+      "hint": "Cada byte tiene una etiqueta numérica única del 0 al N-1.",
+      "explanation": "El espacio de memoria en Von Neumann está organizado como un vector lineal: cada celda tiene una dirección numérica única que va desde 0 hasta 2^N - 1, donde N es el número de líneas de dirección. Este espacio uniforme simplifica la lógica del procesador para calcular y acceder a direcciones."
+    },
+    {
+      "q": "¿Cuál fue la principal consecuencia práctica del concepto de Programa Almacenado?",
+      "options": [
+        "Los computadores pasaron de ser máquinas de propósito único a máquinas de propósito general",
+        "Los computadores pudieron ejecutar programas más rápido al almacenarlos en ROM",
+        "Los computadores eliminaron la necesidad de memoria auxiliar (disco duro)"
+      ],
+      "correct": 0,
+      "hint": "¿Qué limitación de las máquinas anteriores elimina el Programa Almacenado?",
+      "explanation": "Al almacenar el programa en memoria como datos numéricos, basta con cargar un programa diferente en memoria para ejecutar una tarea completamente distinta, sin modificar el hardware. Esto convirtió los computadores en máquinas de propósito general capaces de ejecutar cualquier programa."
+    },
+    {
+      "q": "¿Cuál de los siguientes ejemplos de procesadores usa el diseño híbrido Harvard/Von Neumann descrito en el tema?",
+      "options": [
+        "Intel 8086 (1978) con bus de datos de 16 bits",
+        "Intel Core, AMD Ryzen y Apple M1",
+        "ENIAC (1945) con programación por tarjetas perforadas"
+      ],
+      "correct": 1,
+      "hint": "El tema menciona explícitamente estos procesadores como ejemplos modernos.",
+      "explanation": "El tema cita explícitamente a Intel Core, AMD Ryzen y Apple M1 como ejemplos de procesadores que usan el diseño híbrido: arquitectura Harvard internamente (cachés L1I y L1D separadas) y Von Neumann externamente (RAM principal unificada)."
+    },
+    {
+      "q": "¿Por qué la RAM principal mantiene la arquitectura Von Neumann unificada en los computadores modernos a pesar de sus limitaciones?",
+      "options": [
+        "Porque la tecnología DRAM no permite separar físicamente datos e instrucciones",
+        "Por simplicidad física de cableado: reduce el número de pistas y controladores necesarios",
+        "Porque los sistemas operativos modernos no soportan mapas de memoria separados"
+      ],
+      "correct": 1,
+      "hint": "El coste de duplicar el bus externo es prohibitivo a nivel de placa base.",
+      "explanation": "Mantener la arquitectura Von Neumann unificada en la RAM principal simplifica enormemente el diseño de la placa base: un solo banco de memoria, un solo conjunto de ranuras DIMM, un solo controlador de memoria. Duplicar todos estos elementos para separar datos e instrucciones sería extremadamente caro en el subsistema de memoria externa."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "El modelo de Von Neumann divide el computador en ____ subsistemas principales.",
+      "options": [
+        "dos",
+        "tres",
+        "cuatro"
+      ],
+      "correct": 1,
+      "hint": "Son CPU, Memoria Principal y E/S.",
+      "explanation": "La arquitectura de Von Neumann define exactamente tres subsistemas principales: la CPU, la Memoria Principal y el Subsistema de Entrada/Salida, interconectados por los buses del sistema."
+    },
+    {
+      "q": "El Bus de Direcciones en la arquitectura Von Neumann es ____.",
+      "options": [
+        "bidireccional",
+        "unidireccional",
+        "multiplexado"
+      ],
+      "correct": 1,
+      "hint": "Solo la CPU coloca direcciones; la memoria solo responde.",
+      "explanation": "El Bus de Direcciones es unidireccional: únicamente la CPU escribe direcciones en él. La memoria y los periféricos solo reciben y decodifican las direcciones para responder a las operaciones de lectura o escritura."
+    },
+    {
+      "q": "Con un bus de direcciones de 16 bits, el espacio máximo de direccionamiento es ____ posiciones.",
+      "options": [
+        "32.768",
+        "65.536",
+        "131.072"
+      ],
+      "correct": 1,
+      "hint": "2^16 = ?",
+      "explanation": "2^16 = 65.536 posiciones únicas de memoria. Si el bus de datos es de 8 bits (1 byte por posición), la capacidad total es 65.536 bytes = 64 KB."
+    },
+    {
+      "q": "El ancho del Bus de ____ define la longitud de palabra nativa del procesador.",
+      "options": [
+        "Direcciones",
+        "Datos",
+        "Control"
+      ],
+      "correct": 1,
+      "hint": "La palabra de datos define cuántos bits puede manejar el procesador en un ciclo.",
+      "explanation": "La longitud de palabra nativa es igual al número de líneas del Bus de Datos. Un bus de datos de 32 bits → procesador de 32 bits; bus de datos de 64 bits → procesador de 64 bits."
+    },
+    {
+      "q": "La Arquitectura ____ utiliza dos memorias físicas separadas para datos e instrucciones.",
+      "options": [
+        "Von Neumann",
+        "Harvard",
+        "RISC"
+      ],
+      "correct": 1,
+      "hint": "Lleva el nombre de la universidad estadounidense.",
+      "explanation": "La Arquitectura Harvard, diseñada originalmente en la Universidad de Harvard, separa físicamente la Memoria de Instrucciones de la Memoria de Datos, utilizando buses independientes para cada una."
+    },
+    {
+      "q": "El cuello de botella de Von Neumann se produce porque datos e instrucciones comparten el mismo ____.",
+      "options": [
+        "núcleo del procesador",
+        "bus físico",
+        "banco de registros"
+      ],
+      "correct": 1,
+      "hint": "El recurso compartido y limitante es el medio de comunicación entre CPU y memoria.",
+      "explanation": "El cuello de botella de Von Neumann surge porque la CPU no puede acceder simultáneamente a instrucciones y datos, ya que ambos comparten el mismo bus físico de datos y direcciones que conecta la CPU con la memoria principal."
+    },
+    {
+      "q": "La solución al cuello de botella de Von Neumann en el interior del chip del procesador es utilizar ____ de Nivel 1 separadas.",
+      "options": [
+        "memorias RAM dinámicas",
+        "cachés L1I y L1D",
+        "bancos de registros ampliados"
+      ],
+      "correct": 1,
+      "hint": "I = Instrucciones, D = Datos; ambas son caché de primer nivel.",
+      "explanation": "Los procesadores modernos integran dentro del núcleo dos cachés L1 físicamente separadas: L1I (para instrucciones) y L1D (para datos), siguiendo el principio Harvard y permitiendo accesos concurrentes."
+    },
+    {
+      "q": "Un procesador de 32 bits tiene un bus de direcciones de 32 líneas. Puede direccionar un máximo de ____ de memoria.",
+      "options": [
+        "2 GB",
+        "4 GB",
+        "8 GB"
+      ],
+      "correct": 1,
+      "hint": "2^32 bytes = 2^2 × 2^30 bytes = 4 × 1 GB.",
+      "explanation": "Con 32 líneas de dirección: 2^32 = 4.294.967.296 posiciones. Si cada posición es de 1 byte, el espacio de direccionamiento máximo es 4 GB = 4 × 2^30 bytes."
+    },
+    {
+      "q": "La Unidad de ____ interpreta y secuencia las instrucciones del programa almacenado.",
+      "options": [
+        "Datos",
+        "Control",
+        "Aritmética"
+      ],
+      "correct": 1,
+      "hint": "Controla el flujo de ejecución del programa.",
+      "explanation": "La Unidad de Control (UC) es la parte de la CPU que decodifica el código de operación de cada instrucción y genera las señales de control que coordinan la ALU, los registros y los accesos a memoria."
+    },
+    {
+      "q": "El Bus de ____ transporta señales de temporización, sincronización e interrupciones.",
+      "options": [
+        "Datos",
+        "Direcciones",
+        "Control"
+      ],
+      "correct": 2,
+      "hint": "Este bus 'gobierna' las operaciones de los demás buses.",
+      "explanation": "El Bus de Control es el encargado de transportar señales de temporización (reloj), señales de sincronización entre subsistemas (READY, WAIT), señales de interrupción de periféricos y la señal de lectura/escritura (R/W)."
+    },
+    {
+      "q": "La ____ realiza los cálculos lógicos y aritméticos dentro de la CPU.",
+      "options": [
+        "UC (Unidad de Control)",
+        "ALU (Unidad Aritmético-Lógica)",
+        "MMU (Unidad de Gestión de Memoria)"
+      ],
+      "correct": 1,
+      "hint": "Su nombre describe exactamente su función: ALU = Arithmetic Logic Unit.",
+      "explanation": "La ALU (Arithmetic Logic Unit / Unidad Aritmético-Lógica) es el componente de la CPU especializado en ejecutar operaciones aritméticas (suma, resta, multiplicación, división) y operaciones lógicas (AND, OR, NOT, XOR, comparaciones)."
+    },
+    {
+      "q": "Con un bus de datos de 8 líneas y un bus de direcciones de 16 líneas, la capacidad total de memoria es ____.",
+      "options": [
+        "32 KB",
+        "64 KB",
+        "128 KB"
+      ],
+      "correct": 1,
+      "hint": "Posiciones = 2^16 = 65536; bytes por posición = 8/8 = 1.",
+      "explanation": "2^16 = 65.536 posiciones. Bus de datos de 8 bits → 1 byte por posición. Capacidad = 65.536 × 1 = 65.536 bytes = 64 KB."
+    },
+    {
+      "q": "En el modelo Von Neumann, la Memoria Principal almacena de forma ____ los datos y las instrucciones.",
+      "options": [
+        "separada en zonas diferenciadas",
+        "indistinta en el mismo array de celdas",
+        "cifrada con claves de seguridad distintas"
+      ],
+      "correct": 1,
+      "hint": "No hay zonas diferenciadas; todo ocupa el mismo espacio lineal.",
+      "explanation": "En Von Neumann, datos e instrucciones conviven de forma indistinta en el mismo espacio lineal de memoria. La CPU los diferencia por su posición relativa y el contexto de ejecución (si está en fase Fetch, lo tratará como instrucción; en Execute, como dato)."
+    },
+    {
+      "q": "Los procesadores modernos como el Intel Core usan una arquitectura ____ externamente (RAM) y ____ internamente (caché L1).",
+      "options": [
+        "Harvard externamente y Von Neumann internamente",
+        "Von Neumann externamente y Harvard internamente",
+        "RISC externamente y CISC internamente"
+      ],
+      "correct": 1,
+      "hint": "El exterior es simple (Von Neumann); el interior es rápido (Harvard).",
+      "explanation": "Los procesadores modernos emplean un diseño híbrido: Von Neumann unificado hacia la RAM externa (por simplicidad) y Harvard con cachés L1I y L1D separadas hacia el interior del núcleo (por rendimiento)."
+    },
+    {
+      "q": "El Bus de Datos es ____, lo que permite transferir datos tanto de CPU a memoria como de memoria a CPU.",
+      "options": [
+        "unidireccional",
+        "bidireccional",
+        "multiplexado en tiempo"
+      ],
+      "correct": 1,
+      "hint": "Funciona en ambos sentidos según la operación de lectura o escritura.",
+      "explanation": "El Bus de Datos es bidireccional: en operaciones de lectura (Fetch/Load), los datos fluyen de Memoria → CPU; en operaciones de escritura (Store), fluyen de CPU → Memoria. La línea R/W del Bus de Control indica la dirección activa."
+    },
+    {
+      "q": "Un microcontrolador con bus de direcciones de ____ líneas puede direccionar exactamente 1 MB de memoria.",
+      "options": [
+        "16 líneas",
+        "20 líneas",
+        "24 líneas"
+      ],
+      "correct": 1,
+      "hint": "1 MB = 2^20 bytes → se necesitan 20 bits de dirección.",
+      "explanation": "1 MB = 1.048.576 bytes = 2^20 bytes. Para generar 2^20 direcciones únicas se necesitan exactamente 20 líneas de bus de direcciones. El famoso Intel 8086 usaba precisamente 20 líneas para acceder a 1 MB de memoria."
+    },
+    {
+      "q": "El banco de registros de la CPU contiene celdas de memoria ____ situadas directamente dentro del chip.",
+      "options": [
+        "de gran capacidad pero lenta",
+        "ultrarrápidas para operandos inmediatos",
+        "no volátiles que retienen datos sin alimentación"
+      ],
+      "correct": 1,
+      "hint": "Son la memoria más rápida del sistema, pero tienen muy poca capacidad.",
+      "explanation": "Los registros del banco de registros son celdas de memoria SRAM implementadas directamente en el silicio del procesador, a máxima velocidad (0-1 ciclos de latencia). Su pequeña capacidad (docenas de registros de 32 o 64 bits) se compensa con su velocidad extrema."
+    },
+    {
+      "q": "La arquitectura Harvard duplica el número de ____ necesarios en comparación con Von Neumann.",
+      "options": [
+        "núcleos de procesamiento",
+        "buses y pines de la CPU",
+        "bits por instrucción del conjunto de instrucciones"
+      ],
+      "correct": 1,
+      "hint": "Al tener dos memorias separadas, necesita dos conjuntos de buses.",
+      "explanation": "Harvard requiere dos buses de datos (uno para instrucciones, otro para datos) y dos buses de direcciones, lo que duplica el número de pines de la CPU y las pistas de cobre en la placa base, incrementando el coste y la complejidad de fabricación."
+    },
+    {
+      "q": "La capacidad de direccionamiento de un bus de 32 líneas es de ____ posiciones.",
+      "options": [
+        "2.147.483.648",
+        "4.294.967.296",
+        "8.589.934.592"
+      ],
+      "correct": 1,
+      "hint": "2^32 = ?",
+      "explanation": "2^32 = 4.294.967.296 posiciones únicas de memoria, equivalente a 4 GB si cada posición almacena 1 byte. Esta es la limitación clásica de los procesadores de 32 bits."
+    },
+    {
+      "q": "En el modelo Von Neumann, el Subsistema de E/S proporciona la interfaz con los ____ externos.",
+      "options": [
+        "registros internos del procesador",
+        "periféricos externos (teclados, monitores, discos)",
+        "módulos de caché de nivel 2 y 3"
+      ],
+      "correct": 1,
+      "hint": "E/S = Entrada/Salida = comunicación con el exterior del computador.",
+      "explanation": "El Subsistema de Entrada/Salida gestiona la comunicación del computador con todos los periféricos externos: dispositivos de entrada (teclado, ratón, micrófono), dispositivos de salida (monitor, impresora) y dispositivos de almacenamiento (discos, USB)."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el Bus de Datos es correcta?",
+      "options": [
+        "Es unidireccional y solo la CPU puede escribir en él",
+        "Su ancho en bits define la longitud de palabra nativa del procesador",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Recuerda qué parámetro del bus de datos determina el tamaño de la palabra del procesador.",
+      "explanation": "El ancho del Bus de Datos en bits define directamente la longitud de palabra nativa del procesador. Además, el bus de datos es bidireccional (no unidireccional), por lo que la afirmación correcta es la segunda opción."
+    },
+    {
+      "q": "¿Cuál de los siguientes es un beneficio de la Arquitectura Harvard?",
+      "options": [
+        "Menor coste de fabricación que Von Neumann",
+        "Permite accesos concurrentes a instrucciones y datos, eliminando el cuello de botella",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Los dos buses independientes permiten acceso paralelo.",
+      "explanation": "Harvard permite que la CPU acceda simultáneamente a la memoria de instrucciones (Fetch) y a la memoria de datos (Execute), doblando el ancho de banda efectivo y eliminando el cuello de botella de Von Neumann. Sin embargo, su coste es mayor, no menor."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el Bus de Direcciones es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "Es unidireccional: solo la CPU escribe en él",
+        "Su ancho en bits determina el espacio máximo de direccionamiento"
+      ],
+      "correct": 0,
+      "hint": "Evalúa cada afirmación sobre el Bus de Direcciones individualmente.",
+      "explanation": "Ambas afirmaciones son correctas: el Bus de Direcciones es unidireccional (solo la CPU coloca direcciones) Y su ancho determina el espacio de direccionamiento (2^N posiciones con N líneas). Por tanto, la opción correcta es 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes características corresponde a la Arquitectura Von Neumann?",
+      "options": [
+        "Todas las anteriores",
+        "Datos e instrucciones comparten el mismo bus físico",
+        "Datos e instrucciones residen en la misma memoria principal"
+      ],
+      "correct": 0,
+      "hint": "La esencia de Von Neumann es la unificación de datos e instrucciones.",
+      "explanation": "Ambas características son propias de Von Neumann: los datos y las instrucciones comparten el mismo bus físico (causando el cuello de botella) Y residen en la misma memoria principal (principio del Programa Almacenado). Ambas son correctas → 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes procesadores es citado en el tema como ejemplo de diseño híbrido Harvard/Von Neumann?",
+      "options": [
+        "Todas las anteriores",
+        "Intel Core",
+        "AMD Ryzen"
+      ],
+      "correct": 0,
+      "hint": "El tema menciona varios ejemplos de procesadores modernos.",
+      "explanation": "El tema cita explícitamente a Intel Core, AMD Ryzen Y Apple M1 como ejemplos de procesadores con diseño híbrido. Tanto Intel Core como AMD Ryzen son correctos individualmente, por lo que 'Todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes señales viaja por el Bus de Control?",
+      "options": [
+        "Todas las anteriores",
+        "Señal de Lectura/Escritura (R/W)",
+        "Señales de interrupción de periféricos"
+      ],
+      "correct": 0,
+      "hint": "El Bus de Control transporta múltiples tipos de señales de gobierno.",
+      "explanation": "El Bus de Control transporta múltiples tipos de señales: R/W, interrupciones, señales de reloj, señales de sincronización (READY, WAIT), etc. Tanto la señal R/W como las interrupciones son correctas, por lo que la opción correcta es 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes elementos forma parte de la CPU en el modelo Von Neumann?",
+      "options": [
+        "Todas las anteriores",
+        "Unidad de Control (UC)",
+        "Banco de Registros"
+      ],
+      "correct": 0,
+      "hint": "La CPU está compuesta por varios elementos internos.",
+      "explanation": "La CPU del modelo Von Neumann incluye la Unidad de Control (UC), la ALU y el Banco de Registros. Tanto la UC como el Banco de Registros son componentes de la CPU, por tanto 'Todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la Memoria Principal en Von Neumann es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "Es un array de celdas linealmente direccionables",
+        "Almacena indistintamente datos e instrucciones"
+      ],
+      "correct": 0,
+      "hint": "Ambas describen características fundamentales de la memoria en Von Neumann.",
+      "explanation": "La Memoria Principal en Von Neumann es un array de celdas linealmente direccionables (acceso aleatorio uniforme) Y almacena indistintamente datos e instrucciones (programa almacenado). Ambas son correctas → 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Puede la CPU escribir en el Bus de Datos durante una operación de lectura de memoria?",
+      "options": [
+        "Sí, simultáneamente en ambos sentidos",
+        "No, durante una lectura el Bus de Datos fluye de Memoria hacia CPU",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "En una lectura, ¿quién es el origen y quién es el destino del dato?",
+      "explanation": "Durante una operación de lectura (Load/Fetch), la memoria es el origen y la CPU el destino. El Bus de Datos fluye de Memoria → CPU. La CPU no escribe en el bus durante una lectura; simplemente lo recibe."
+    },
+    {
+      "q": "¿Tienen la Caché L1I y la Caché L1D el mismo ancho de banda disponible para la CPU en los procesadores modernos?",
+      "options": [
+        "No, L1D siempre tiene mayor ancho de banda",
+        "Sí, ambas ofrecen sus propios buses independientes de forma concurrente",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Al ser físicamente separadas, cada caché tiene su propio bus dedicado.",
+      "explanation": "Al seguir el principio Harvard, L1I y L1D tienen buses independientes hacia la CPU. Esto permite que ambas operen concurrentemente y cada una ofrezca su propio ancho de banda completo simultáneamente, doblando el ancho de banda efectivo total."
+    },
+    {
+      "q": "¿Es correcto afirmar que el cuello de botella de Von Neumann afecta solo a los datos y no a las instrucciones?",
+      "options": [
+        "Sí, solo los accesos a datos son los que causan el problema",
+        "No, afecta tanto a la lectura de instrucciones (Fetch) como al acceso a datos (Execute)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "El bus compartido afecta a TODOS los accesos a memoria.",
+      "explanation": "El cuello de botella afecta a AMBOS tipos de acceso a memoria. Precisamente el problema es que tanto la fase Fetch (leer instrucción) como la fase Execute que necesita acceder a datos comparten el mismo bus, no pudiendo ocurrir simultáneamente."
+    },
+    {
+      "q": "¿Puede un bus de datos de 8 bits transferir 2 bytes en un solo ciclo de bus?",
+      "options": [
+        "Sí, utilizando técnicas de compresión de datos",
+        "No, un bus de 8 bits solo transfiere 1 byte (8 bits) por ciclo",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "El ancho del bus define el máximo de bits transferidos POR CICLO.",
+      "explanation": "Un bus de datos de 8 líneas (bits) puede transportar como máximo 8 bits = 1 byte por ciclo de bus. Para transferir 2 bytes serían necesarios 2 ciclos de bus consecutivos. No existe compresión en el bus físico."
+    },
+    {
+      "q": "¿Es la Arquitectura Harvard más simple de implementar físicamente que la Von Neumann?",
+      "options": [
+        "Sí, porque tiene menos componentes de memoria",
+        "No, porque requiere duplicar buses, pines y controladores de memoria",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Más memorias y más buses = mayor complejidad física.",
+      "explanation": "Harvard es físicamente MÁS compleja que Von Neumann porque requiere duplicar la infraestructura: dos memorias separadas, dos buses de datos, dos buses de direcciones, más pines en la CPU y más controladores de memoria, todo lo cual incrementa el área del chip y el coste de fabricación."
+    },
+    {
+      "q": "¿Puede la CPU en un sistema Von Neumann puro ejecutar el ciclo Fetch y el ciclo Execute simultáneamente cuando Execute requiere acceso a memoria?",
+      "options": [
+        "Sí, utilizando diferentes rangos de direcciones",
+        "No, el bus compartido impide el acceso concurrente a memoria",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "El bus es el recurso compartido que serializa los accesos.",
+      "explanation": "En Von Neumann puro, Fetch y Execute (cuando requiere acceso a memoria) no pueden ocurrir simultáneamente porque ambos usan el mismo bus de datos y de direcciones. El bus puede solo servir una operación a la vez, serializando los accesos y creando el cuello de botella."
+    },
+    {
+      "q": "¿Tiene el Bus de Direcciones algún papel durante la fase Fetch del ciclo de instrucción?",
+      "options": [
+        "No, el Bus de Direcciones solo actúa durante la fase Execute",
+        "Sí, la CPU coloca en él la dirección de la instrucción a leer (valor del PC)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Para leer una instrucción de memoria, la CPU necesita indicar su dirección.",
+      "explanation": "Durante la fase Fetch, la CPU coloca en el Bus de Direcciones el contenido del Program Counter (PC), que indica la dirección de memoria donde reside la próxima instrucción. Sin esta operación, la memoria no sabe qué instrucción leer."
+    },
+    {
+      "q": "¿Existe alguna diferencia física entre las celdas de memoria que almacenan datos y las que almacenan instrucciones en la arquitectura Von Neumann?",
+      "options": [
+        "Sí, las celdas de instrucciones son de solo lectura (ROM)",
+        "No, todas las celdas son idénticas; la distinción la hace la CPU según el contexto",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Von Neumann es una memoria homogénea: todas las celdas son iguales.",
+      "explanation": "En Von Neumann, todas las celdas de memoria son físicamente idénticas. No existe ninguna distinción hardware entre celdas de instrucciones y celdas de datos. La CPU determina si el contenido de una celda es una instrucción o un dato según el contexto de ejecución (si está en la fase Fetch, lo interpreta como instrucción)."
+    },
+    {
+      "q": "¿Es posible que la dirección colocada en el Bus de Direcciones sea mayor que el espacio de direccionamiento del procesador?",
+      "options": [
+        "Sí, la memoria gestiona automáticamente el desbordamiento",
+        "No, el Bus de Direcciones tiene exactamente N líneas que limitan el máximo a 2^N - 1",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "El hardware del bus limita físicamente el rango de direcciones.",
+      "explanation": "Con N líneas de dirección, el valor máximo representable es 2^N - 1 (todos los bits en 1). Es físicamente imposible colocar una dirección mayor en el bus, ya que no existen más líneas para representarla. Por eso se dice que el espacio de direccionamiento máximo es 2^N posiciones (de 0 a 2^N - 1)."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una función de la Unidad de Control?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Decodificar el código de operación de las instrucciones",
+        "Ejecutar operaciones aritméticas sobre los operandos"
+      ],
+      "correct": 2,
+      "hint": "La UC controla; la ALU calcula.",
+      "explanation": "Ejecutar operaciones aritméticas NO es función de la Unidad de Control, sino de la ALU. La UC decodifica instrucciones y genera señales de control, pero no realiza cálculos. La opción incorrecta es la tercera."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un bus del sistema en el modelo Von Neumann?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Bus de Instrucciones",
+        "Bus de Periféricos"
+      ],
+      "correct": 0,
+      "hint": "Los tres buses del sistema Von Neumann son Datos, Direcciones y Control.",
+      "explanation": "Los tres buses del modelo Von Neumann son: Bus de Datos, Bus de Direcciones y Bus de Control. Ni el 'Bus de Instrucciones' ni el 'Bus de Periféricos' existen como buses independientes en el modelo Von Neumann puro. Ambas opciones son incorrectas → 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un componente de la CPU en el modelo Von Neumann?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Controlador de Memoria Caché L2",
+        "Módulo DIMM de RAM principal"
+      ],
+      "correct": 0,
+      "hint": "La CPU en el modelo básico Von Neumann contiene UC, ALU y Registros.",
+      "explanation": "Ni el controlador de caché L2 ni los módulos DIMM son parte de la CPU en el modelo básico Von Neumann. El controlador de caché es una extensión moderna no contemplada en el modelo original, y los módulos DIMM son la Memoria Principal externa. Ambas opciones son incorrectas → 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Bus de Direcciones y Espacio de Memoria (Caso Base: 16 líneas)",
+      "context": "Un microcontrolador educativo dispone de un bus de direcciones de 16 líneas y un bus de datos de 8 líneas. Se analizan sus capacidades de direccionamiento y memoria.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcula el número total de posiciones de memoria únicamente direccionables (combinaciones de dirección únicas). Expresa el resultado en valor entero.",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = 2^{16} = 65536 \\text{ posiciones}$$"
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Dado que el bus de datos tiene 8 líneas (1 byte por posición), calcula la capacidad total de memoria en bytes.",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$C = N_{pos} \\times \\frac{8 \\text{ bits}}{8 \\text{ bits/byte}} = 65536 \\times 1 = 65536 \\text{ bytes}$$"
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Convierte la capacidad total calculada en la parte b) a Kilobytes (KB), sabiendo que 1 KB = 1024 bytes.",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$C_{KB} = \\frac{65536 \\text{ bytes}}{1024 \\text{ bytes/KB}} = 64 \\text{ KB}$$"
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si el bus de datos fuera de 16 líneas (2 bytes por posición) manteniendo el mismo bus de direcciones de 16 líneas, ¿cuál sería la capacidad total de memoria en KB?",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "$$C = 65536 \\text{ pos} \\times 2 \\text{ bytes/pos} = 131072 \\text{ bytes} = \\frac{131072}{1024} = 128 \\text{ KB}$$"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Bus de Direcciones y Espacio de Memoria (32 líneas)",
+      "context": "Un procesador de propósito general tiene un bus de direcciones de 32 líneas y un bus de datos de 32 líneas. Se analizan sus capacidades.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcula el número total de posiciones de memoria direccionables con 32 líneas de dirección. Expresa en notación científica a 2 decimales (en este problema, como entero exacto).",
+          "correctValue": 4294967296,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = 2^{32} = 4.294.967.296 \\text{ posiciones}$$"
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Con bus de datos de 32 bits (4 bytes por posición), calcula la capacidad total de memoria en bytes.",
+          "correctValue": 17179869184,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{32} \\times 4 \\text{ bytes} = 2^{32} \\times 2^2 = 2^{34} = 17.179.869.184 \\text{ bytes}$$"
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Convierte la capacidad calculada en la parte b) a Gigabytes (GB), sabiendo que 1 GB = 2^30 bytes.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$C_{GB} = \\frac{2^{34}}{2^{30}} = 2^4 = 16 \\text{ GB}$$"
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Si en cambio el bus de datos fuera de 8 bits (1 byte por posición) manteniendo el bus de direcciones de 32 líneas, ¿cuántos GB podría direccionar?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{32} \\times 1 \\text{ byte} = 2^{32} \\text{ bytes} = \\frac{2^{32}}{2^{30}} = 2^2 = 4 \\text{ GB}$$"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cálculo de Líneas de Bus de Direcciones Necesarias",
+      "context": "Un sistema empotrado requiere acceder a exactamente 512 KB de memoria RAM. Se desea determinar el bus de direcciones mínimo necesario.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Convierte 512 KB a bytes. (1 KB = 1024 bytes)",
+          "correctValue": 524288,
+          "tolerance": 0,
+          "explanation": "$$512 \\text{ KB} = 512 \\times 1024 = 524.288 \\text{ bytes}$$"
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Si el bus de datos es de 8 bits (1 byte por posición), el número de posiciones de memoria necesarias es igual al número de bytes. ¿Cuántas posiciones se necesitan?",
+          "correctValue": 524288,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = \\frac{524288 \\text{ bytes}}{1 \\text{ byte/pos}} = 524288 \\text{ posiciones}$$"
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcula el número mínimo de líneas de bus de direcciones necesarias para direccionar 524.288 posiciones (N tal que 2^N >= 524.288). Expresa el valor de N.",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "$$2^N \\geq 524288 \\Rightarrow 2^{19} = 524288 \\Rightarrow N = 19 \\text{ líneas}$$"
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Con un bus de 19 líneas, ¿cuántas posiciones de memoria en exceso (no utilizadas) dispondrá el sistema respecto a las 524.288 requeridas?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$2^{19} = 524288 \\text{ posiciones} - 524288 \\text{ requeridas} = 0 \\text{ posiciones en exceso}$$"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Ancho de Banda del Bus de Datos",
+      "context": "Un bus de datos de 64 bits opera a una frecuencia de reloj de 100 MHz (100.000.000 ciclos por segundo) con una transferencia por ciclo.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula cuántos bits transfiere el bus por ciclo de reloj.",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits/ciclo} = \\text{Ancho del bus} = 64 \\text{ bits}$$"
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcula el ancho de banda del bus en bits por segundo (bps). Frecuencia = 100 MHz = 10^8 Hz.",
+          "correctValue": 6400000000,
+          "tolerance": 0,
+          "explanation": "$$BW = 64 \\text{ bits/ciclo} \\times 10^8 \\text{ ciclos/s} = 6.4 \\times 10^9 \\text{ bps} = 6.400.000.000 \\text{ bps}$$"
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Convierte el ancho de banda a bytes por segundo (Bps). (1 byte = 8 bits)",
+          "correctValue": 800000000,
+          "tolerance": 0,
+          "explanation": "$$BW_{Bps} = \\frac{6.4 \\times 10^9 \\text{ bps}}{8 \\text{ bits/byte}} = 8 \\times 10^8 \\text{ Bps} = 800.000.000 \\text{ Bps}$$"
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Si un sistema Harvard tiene DOS buses independientes de las mismas características, calcula el ancho de banda TOTAL combinado en bytes por segundo.",
+          "correctValue": 1600000000,
+          "tolerance": 0,
+          "explanation": "$$BW_{Harvard} = 2 \\times 800.000.000 = 1.600.000.000 \\text{ Bps}$$"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Capacidad de Direccionamiento con Bus de Direcciones de 24 Líneas",
+      "context": "Un procesador embebido tiene 24 líneas de bus de direcciones y un bus de datos de 16 bits.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula el número total de posiciones de memoria direccionables.",
+          "correctValue": 16777216,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = 2^{24} = 16.777.216 \\text{ posiciones}$$"
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Con bus de datos de 16 bits (2 bytes por posición), calcula la capacidad total en bytes.",
+          "correctValue": 33554432,
+          "tolerance": 0,
+          "explanation": "$$C = 16.777.216 \\times 2 = 33.554.432 \\text{ bytes}$$"
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Convierte la capacidad total a Megabytes (MB). (1 MB = 2^20 bytes = 1.048.576 bytes)",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$C_{MB} = \\frac{33.554.432}{1.048.576} = \\frac{2^{25}}{2^{20}} = 2^5 = 32 \\text{ MB}$$"
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si se añade una línea más al bus de direcciones (ahora 25 líneas), manteniendo el bus de datos de 16 bits, ¿cuál es la nueva capacidad en MB?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{25} \\times 2 \\text{ bytes} = 2^{26} \\text{ bytes} = \\frac{2^{26}}{2^{20}} = 2^6 = 64 \\text{ MB}$$"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Comparación Von Neumann vs Harvard: Tiempo de Ciclo",
+      "context": "En un sistema Von Neumann, un ciclo Fetch tarda 10 ns y un ciclo Execute con acceso a memoria tarda 10 ns adicionales. En Harvard, ambos pueden ocurrir simultáneamente.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "En el sistema Von Neumann, ¿cuántos nanosegundos tarda un ciclo completo (Fetch + Execute con acceso a memoria) en modo secuencial?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$T_{VN} = T_{Fetch} + T_{Execute} = 10 \\text{ ns} + 10 \\text{ ns} = 20 \\text{ ns}$$"
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "En el sistema Harvard, con acceso concurrente, ¿cuántos nanosegundos tarda el ciclo completo (tomando el máximo de los dos tiempos paralelos)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$T_{H} = \\max(T_{Fetch}, T_{Execute}) = \\max(10, 10) = 10 \\text{ ns}$$"
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula la frecuencia máxima de instrucciones por segundo del sistema Von Neumann (instrucciones/segundo = 1 / tiempo en segundos).",
+          "correctValue": 50000000,
+          "tolerance": 1000000,
+          "explanation": "$$f_{VN} = \\frac{1}{20 \\times 10^{-9} \\text{ s}} = \\frac{10^9}{20} = 5 \\times 10^7 = 50.000.000 \\text{ inst/s}$$"
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcula la frecuencia máxima de instrucciones por segundo del sistema Harvard y expresa cuántas veces más rápido es que Von Neumann.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$f_{H} = \\frac{1}{10 \\times 10^{-9}} = 10^8 \\text{ inst/s}; \\quad \\text{Factor} = \\frac{f_H}{f_{VN}} = \\frac{10^8}{5 \\times 10^7} = 2$$"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Espacio de Direccionamiento con Bus de 20 Líneas (Intel 8086)",
+      "context": "El microprocesador Intel 8086 tiene un bus de direcciones de 20 líneas y un bus de datos de 16 bits, lo que limitaba su capacidad de memoria.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcula el número de posiciones de memoria físicas direccionables por el Intel 8086 (2^20).",
+          "correctValue": 1048576,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = 2^{20} = 1.048.576 \\text{ posiciones}$$"
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Aunque el bus de datos es de 16 bits, el 8086 accede a memoria con granularidad de 1 byte (8 bits) por posición. Calcula la capacidad total en bytes.",
+          "correctValue": 1048576,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{20} \\times 1 \\text{ byte/pos} = 1.048.576 \\text{ bytes}$$"
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Convierte la capacidad total a Megabytes (1 MB = 1.048.576 bytes).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$C_{MB} = \\frac{1.048.576 \\text{ bytes}}{1.048.576 \\text{ bytes/MB}} = 1 \\text{ MB}$$"
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si el 8086 hubiera tenido 24 líneas de dirección (en lugar de 20) manteniendo la misma granularidad de 1 byte/posición, ¿cuántos MB de RAM podría haber direccionado?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{24} \\text{ bytes} = \\frac{2^{24}}{2^{20}} \\text{ MB} = 2^4 = 16 \\text{ MB}$$"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Cálculo de Posiciones de Memoria con Bus de Datos de 32 bits",
+      "context": "Un sistema con bus de datos de 32 bits organiza la memoria con 4 bytes por posición (word-addressable). El bus de direcciones tiene 28 líneas.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula el número total de posiciones de memoria word-addressable (2^28).",
+          "correctValue": 268435456,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = 2^{28} = 268.435.456 \\text{ posiciones de 32 bits}$$"
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Con 4 bytes por posición (bus de datos de 32 bits), calcula la capacidad total en bytes.",
+          "correctValue": 1073741824,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{28} \\times 4 = 2^{28} \\times 2^2 = 2^{30} = 1.073.741.824 \\text{ bytes}$$"
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Convierte la capacidad total a GB (1 GB = 2^30 bytes).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$C_{GB} = \\frac{2^{30}}{2^{30}} = 1 \\text{ GB}$$"
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Si añadimos 2 líneas más al bus de direcciones (total 30 líneas), manteniendo 4 bytes por posición, ¿cuántos GB puede direccionar ahora?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{30} \\times 4 = 2^{32} \\text{ bytes} = \\frac{2^{32}}{2^{30}} = 2^2 = 4 \\text{ GB}$$"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Ancho de Banda del Bus con Bus de 32 bits a 66 MHz",
+      "context": "Un bus PCI clásico tiene un bus de datos de 32 bits y opera a 33 MHz con una transferencia por ciclo.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula los bytes transferidos por ciclo de bus.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes/ciclo} = \\frac{32 \\text{ bits}}{8 \\text{ bits/byte}} = 4 \\text{ bytes/ciclo}$$"
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula el ancho de banda del bus PCI en Megabytes por segundo (MB/s). (33 MHz = 33 × 10^6 ciclos/s; 1 MB = 10^6 bytes en esta aproximación decimal)",
+          "correctValue": 132,
+          "tolerance": 1,
+          "explanation": "$$BW = 4 \\text{ bytes/ciclo} \\times 33 \\times 10^6 \\text{ ciclos/s} = 132 \\times 10^6 \\text{ bytes/s} \\approx 132 \\text{ MB/s}$$"
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "El bus PCI-X duplica la frecuencia a 66 MHz manteniendo el ancho de datos de 32 bits. Calcula el nuevo ancho de banda en MB/s.",
+          "correctValue": 264,
+          "tolerance": 2,
+          "explanation": "$$BW_{PCI-X} = 4 \\text{ bytes} \\times 66 \\times 10^6 = 264 \\times 10^6 \\text{ bytes/s} \\approx 264 \\text{ MB/s}$$"
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "PCI-X 2.0 duplica además el ancho de datos a 64 bits a 66 MHz. Calcula el ancho de banda resultante en MB/s.",
+          "correctValue": 528,
+          "tolerance": 2,
+          "explanation": "$$BW = \\frac{64 \\text{ bits}}{8} \\times 66 \\times 10^6 = 8 \\times 66 \\times 10^6 = 528 \\times 10^6 \\approx 528 \\text{ MB/s}$$"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Determinación de Líneas de Bus para una Memoria de 4 GB",
+      "context": "Se quiere diseñar un sistema con exactamente 4 GB de memoria RAM byte-addressable (1 byte por posición).",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Convierte 4 GB a bytes. (1 GB = 2^30 bytes)",
+          "correctValue": 4294967296,
+          "tolerance": 0,
+          "explanation": "$$4 \\text{ GB} = 4 \\times 2^{30} = 2^2 \\times 2^{30} = 2^{32} = 4.294.967.296 \\text{ bytes}$$"
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Con 1 byte por posición, ¿cuántas posiciones de memoria se necesitan?",
+          "correctValue": 4294967296,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = \\frac{4.294.967.296 \\text{ bytes}}{1 \\text{ byte/pos}} = 4.294.967.296 \\text{ posiciones}$$"
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula el número exacto de líneas de bus de direcciones necesarias (N tal que 2^N = número de posiciones).",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$2^N = 4.294.967.296 = 2^{32} \\Rightarrow N = 32 \\text{ líneas}$$"
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Si se quiere ampliar a 16 GB manteniendo byte-addressable, ¿cuántas líneas de bus de direcciones son necesarias?",
+          "correctValue": 34,
+          "tolerance": 0,
+          "explanation": "$$16 \\text{ GB} = 2^4 \\times 2^{30} = 2^{34} \\text{ bytes} \\Rightarrow N = 34 \\text{ líneas}$$"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Tamaño de Segmentos de Memoria: Sistema con Mapa de Memoria Particionado",
+      "context": "Un sistema Von Neumann con bus de direcciones de 16 bits divide su mapa de memoria en 4 particiones iguales: SO, ROM, RAM y E/S mapeada.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcula el espacio total de memoria del sistema en bytes (bus de 16 bits, 1 byte/posición).",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$C_{total} = 2^{16} = 65536 \\text{ bytes}$$"
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Divide el espacio total en 4 particiones iguales. ¿Cuántos bytes tiene cada partición?",
+          "correctValue": 16384,
+          "tolerance": 0,
+          "explanation": "$$C_{particion} = \\frac{65536}{4} = 16384 \\text{ bytes}$$"
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Convierte el tamaño de cada partición a KB. (1 KB = 1024 bytes)",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$C_{KB} = \\frac{16384}{1024} = 16 \\text{ KB}$$"
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "La dirección de inicio de la tercera partición (RAM) es igual a 2 × tamaño de partición. Calcula esa dirección de inicio en decimal.",
+          "correctValue": 32768,
+          "tolerance": 0,
+          "explanation": "$$D_{RAM} = 2 \\times 16384 = 32768 \\text{ (dirección 0x8000 en hexadecimal)}$$"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Tiempo de Acceso a Memoria y Ciclos de Bus",
+      "context": "Una CPU opera a 200 MHz (T_ciclo = 5 ns). La memoria RAM tiene un tiempo de acceso de 50 ns. Se calcula el número de ciclos de espera (wait states).",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcula el período de un ciclo de reloj de la CPU en nanosegundos. (f = 200 MHz = 200 × 10^6 Hz)",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = \\frac{1}{f} = \\frac{1}{200 \\times 10^6} = 5 \\times 10^{-9} \\text{ s} = 5 \\text{ ns}$$"
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcula el número de ciclos de CPU necesarios para completar un acceso a memoria de 50 ns. (Divide tiempo de acceso entre período de ciclo y redondea hacia arriba)",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$N_{ciclos} = \\left\\lceil \\frac{50 \\text{ ns}}{5 \\text{ ns}} \\right\\rceil = \\lceil 10 \\rceil = 10 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Si la CPU necesita 1 ciclo base para el ciclo de bus, calcula los ciclos de espera (wait states) adicionales necesarios.",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "$$W_{estados} = N_{ciclos} - 1 = 10 - 1 = 9 \\text{ wait states}$$"
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Si se instala una caché con tiempo de acceso de 5 ns (igual al período de ciclo), ¿cuántos ciclos de espera necesitaría la caché?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$N_{ciclos,cache} = \\left\\lceil \\frac{5 \\text{ ns}}{5 \\text{ ns}} \\right\\rceil = 1 \\text{ ciclo} \\Rightarrow W_{cache} = 1 - 1 = 0 \\text{ wait states}$$"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Cálculo de Dirección Final de Bloque de Memoria",
+      "context": "Un bloque de memoria RAM comienza en la dirección hexadecimal 0x2000 y tiene un tamaño de 8 KB en un sistema con bus de 16 bits y 1 byte/posición.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Convierte la dirección de inicio 0x2000 a decimal.",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$$0x2000 = 2 \\times 16^3 + 0 \\times 16^2 + 0 \\times 16 + 0 = 8192_{10}$$"
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Convierte el tamaño del bloque de 8 KB a bytes. (1 KB = 1024 bytes)",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$$8 \\text{ KB} = 8 \\times 1024 = 8192 \\text{ bytes}$$"
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcula la dirección decimal de la última posición del bloque (dirección final = dirección inicio + tamaño - 1).",
+          "correctValue": 16383,
+          "tolerance": 0,
+          "explanation": "$$D_{final} = 8192 + 8192 - 1 = 16383_{10}$$"
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcula la dirección decimal de inicio del siguiente bloque contiguo en memoria (dirección final + 1).",
+          "correctValue": 16384,
+          "tolerance": 0,
+          "explanation": "$$D_{sig} = 16383 + 1 = 16384_{10} = 0x4000_{16}$$"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Número de Líneas para Memorias de Distintas Capacidades",
+      "context": "Se analiza cuántas líneas de bus de direcciones necesitan diferentes tamaños de memoria (byte-addressable, 1 byte/posición).",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuántas líneas de bus de direcciones necesita una memoria de 256 bytes? (2^N = 256)",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$2^N = 256 = 2^8 \\Rightarrow N = 8 \\text{ líneas}$$"
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "¿Cuántas líneas necesita una memoria de 256 KB? (256 KB = 2^18 bytes)",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "$$256 \\text{ KB} = 256 \\times 1024 = 262144 = 2^{18} \\text{ bytes} \\Rightarrow N = 18 \\text{ líneas}$$"
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuántas líneas necesita una memoria de 256 MB? (256 MB = 2^28 bytes)",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "$$256 \\text{ MB} = 256 \\times 2^{20} = 2^8 \\times 2^{20} = 2^{28} \\text{ bytes} \\Rightarrow N = 28 \\text{ líneas}$$"
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "¿Cuántas líneas necesita una memoria de 256 GB? (256 GB = 2^38 bytes)",
+          "correctValue": 38,
+          "tolerance": 0,
+          "explanation": "$$256 \\text{ GB} = 256 \\times 2^{30} = 2^8 \\times 2^{30} = 2^{38} \\text{ bytes} \\Rightarrow N = 38 \\text{ líneas}$$"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Memoria Mapeada en E/S: Rango de Direcciones",
+      "context": "En un sistema con bus de direcciones de 16 bits, los últimos 4 KB del espacio de memoria se reservan para dispositivos de E/S mapeados en memoria (Memory-Mapped I/O).",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcula el espacio total del sistema en bytes.",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$C_{total} = 2^{16} = 65536 \\text{ bytes}$$"
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Convierte 4 KB a bytes para determinar el tamaño del área de E/S.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "$$4 \\text{ KB} = 4 \\times 1024 = 4096 \\text{ bytes}$$"
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcula la dirección de inicio del área de E/S mapeada (dirección inicio = espacio total - tamaño área E/S).",
+          "correctValue": 61440,
+          "tolerance": 0,
+          "explanation": "$$D_{inicio,ES} = 65536 - 4096 = 61440_{10} = 0xF000_{16}$$"
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcula el espacio disponible para RAM y ROM tras reservar los 4 KB de E/S mapeada (en KB).",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "$$C_{RAM+ROM} = 65536 - 4096 = 61440 \\text{ bytes} = \\frac{61440}{1024} = 60 \\text{ KB}$$"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Cálculo de Posiciones por Chip de Memoria",
+      "context": "Se deben conectar chips de memoria RAM de 64K × 1 bit para construir una memoria de 64 KB con palabras de 8 bits.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Cada chip tiene 64K posiciones de 1 bit. ¿Cuántos bits almacena un solo chip de 64K × 1 bit?",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits por chip} = 64K \\times 1 = 65536 \\text{ bits}$$"
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Para obtener palabras de 8 bits (1 byte), ¿cuántos chips de 64K × 1 bit deben conectarse en paralelo (en anchura)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$N_{chips} = \\frac{8 \\text{ bits/palabra}}{1 \\text{ bit/chip}} = 8 \\text{ chips en paralelo}$$"
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Con 8 chips en paralelo, ¿cuántos bytes de memoria RAM se obtienen en total?",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$C = 64K \\text{ posiciones} \\times 8 \\text{ bits} / 8 \\text{ bits/byte} = 64K \\text{ bytes} = 65536 \\text{ bytes}$$"
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si se quiere obtener 128 KB usando los mismos chips de 64K × 1 bit con palabras de 8 bits, ¿cuántos chips se necesitan en total?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$\\text{128 KB requiere 2 bancos} \\times 8 \\text{ chips/banco} = 16 \\text{ chips en total}$$"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Latencia y Tiempo de Transferencia de Bloques de Datos",
+      "context": "Un bus de 32 bits opera a 50 MHz. Se quiere transferir un bloque de 1 MB de datos desde memoria hacia la CPU.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcula el número de bytes transferidos por ciclo de bus (bus de datos de 32 bits).",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes/ciclo} = \\frac{32 \\text{ bits}}{8 \\text{ bits/byte}} = 4 \\text{ bytes/ciclo}$$"
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcula el número de ciclos de bus necesarios para transferir 1 MB = 1.048.576 bytes.",
+          "correctValue": 262144,
+          "tolerance": 0,
+          "explanation": "$$N_{ciclos} = \\frac{1.048.576 \\text{ bytes}}{4 \\text{ bytes/ciclo}} = 262.144 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcula el período de un ciclo de bus a 50 MHz en nanosegundos.",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = \\frac{1}{50 \\times 10^6} = 20 \\times 10^{-9} \\text{ s} = 20 \\text{ ns}$$"
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcula el tiempo total de transferencia del bloque de 1 MB en milisegundos (ms). (Tiempo = N_ciclos × T_ciclo)",
+          "correctValue": 5.24288,
+          "tolerance": 0.01,
+          "explanation": "$$T_{total} = 262144 \\times 20 \\text{ ns} = 5.242.880 \\text{ ns} = 5,24288 \\text{ ms}$$"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Espacio de Direccionamiento con PAE (Physical Address Extension)",
+      "context": "Intel introdujo PAE para ampliar el bus de direcciones de 32 bits a 36 bits, permitiendo superar el límite de 4 GB en procesadores de 32 bits.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula el espacio de direccionamiento con bus de 32 líneas en GB.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$C_{32} = 2^{32} \\text{ bytes} = \\frac{2^{32}}{2^{30}} = 2^2 = 4 \\text{ GB}$$"
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcula el espacio de direccionamiento con bus de 36 líneas (PAE) en GB.",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$C_{36} = 2^{36} \\text{ bytes} = \\frac{2^{36}}{2^{30}} = 2^6 = 64 \\text{ GB}$$"
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcula cuántas veces más grande es el espacio de direccionamiento de 36 bits respecto al de 32 bits.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$\\text{Factor} = \\frac{2^{36}}{2^{32}} = 2^4 = 16 \\text{ veces}$$"
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Los procesadores de 64 bits modernos usan 48 bits de dirección en la práctica. Calcula ese espacio en TB (1 TB = 2^40 bytes).",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$C_{48} = 2^{48} \\text{ bytes} = \\frac{2^{48}}{2^{40}} = 2^8 = 256 \\text{ TB}$$"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Eficiencia de Transferencia con Wait States",
+      "context": "Una CPU a 400 MHz accede a una memoria con tiempo de acceso de 20 ns. Cada acceso consta de 1 ciclo de dirección + N ciclos de datos (incluyendo wait states).",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula el período del ciclo de la CPU en nanosegundos.",
+          "correctValue": 2.5,
+          "tolerance": 0.01,
+          "explanation": "$$T_{ciclo} = \\frac{1}{400 \\times 10^6} = 2.5 \\times 10^{-9} \\text{ s} = 2.5 \\text{ ns}$$"
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcula el número de ciclos de CPU necesarios para el tiempo de acceso de 20 ns (redondea hacia arriba).",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$N_{ciclos} = \\left\\lceil \\frac{20 \\text{ ns}}{2.5 \\text{ ns}} \\right\\rceil = \\lceil 8 \\rceil = 8 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Si el ciclo de bus base (sin wait states) dura 1 ciclo de dirección + 1 ciclo de datos = 2 ciclos, calcula los wait states adicionales necesarios.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$W = N_{ciclos} - 2 = 8 - 2 = 6 \\text{ wait states}$$"
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula la eficiencia del bus (porcentaje de ciclos útiles = ciclos base / ciclos totales × 100).",
+          "correctValue": 25,
+          "tolerance": 1,
+          "explanation": "$$\\eta = \\frac{2 \\text{ ciclos útiles}}{8 \\text{ ciclos totales}} \\times 100 = 25\\%$$"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Cálculo del Número de Módulos DIMM Necesarios",
+      "context": "Un sistema necesita 1 GB de RAM. Se dispone de módulos DIMM de 256 MB. Cada módulo tiene un bus de datos propio de 64 bits.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Convierte 1 GB a Megabytes. (1 GB = 1024 MB)",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "$$1 \\text{ GB} = 1024 \\text{ MB}$$"
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcula el número de módulos DIMM de 256 MB necesarios para alcanzar 1 GB.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$N_{DIMMs} = \\frac{1024 \\text{ MB}}{256 \\text{ MB/DIMM}} = 4 \\text{ módulos}$$"
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Si cada módulo DIMM tiene bus de datos de 64 bits y opera a 100 MHz, calcula el ancho de banda de un solo módulo en MB/s. (1 MB = 10^6 bytes en esta aproximación)",
+          "correctValue": 800,
+          "tolerance": 5,
+          "explanation": "$$BW = \\frac{64 \\text{ bits}}{8} \\times 100 \\times 10^6 = 8 \\times 10^8 \\text{ Bps} = 800 \\text{ MB/s}$$"
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Si los 4 módulos DIMM operan en un canal de memoria único (el controlador los accede secuencialmente, no en paralelo), ¿cuál es el ancho de banda total del sistema de memoria en MB/s?",
+          "correctValue": 800,
+          "tolerance": 5,
+          "explanation": "$$BW_{total} = BW_{canal} = 800 \\text{ MB/s (canal único, acceso secuencial entre módulos)}$$"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Conversión entre Unidades de Memoria",
+      "context": "Se realizan conversiones entre las diferentes unidades de medida de capacidad de memoria para consolidar el dominio del sistema binario.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Convierte 2 MB a bytes. (1 MB = 2^20 bytes)",
+          "correctValue": 2097152,
+          "tolerance": 0,
+          "explanation": "$$2 \\text{ MB} = 2 \\times 2^{20} = 2^{21} = 2.097.152 \\text{ bytes}$$"
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Convierte 2.097.152 bytes a KB. (1 KB = 1024 bytes)",
+          "correctValue": 2048,
+          "tolerance": 0,
+          "explanation": "$$2.097.152 \\text{ bytes} \\div 1024 = 2048 \\text{ KB}$$"
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Convierte 2048 KB a MB.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$2048 \\text{ KB} \\div 1024 = 2 \\text{ MB}$$"
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "¿Cuántas líneas de bus de direcciones necesita una memoria de 2 MB byte-addressable? (2^N = 2^21)",
+          "correctValue": 21,
+          "tolerance": 0,
+          "explanation": "$$2 \\text{ MB} = 2^{21} \\text{ bytes} \\Rightarrow N = 21 \\text{ líneas de dirección}$$"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Ratio de Compresión Fetch/Execute en Von Neumann",
+      "context": "En un benchmark típico, el 40% de las instrucciones de un programa acceden a datos en memoria durante la fase Execute. Se analiza el impacto del cuello de botella.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "De 1000 instrucciones, ¿cuántas requieren acceso a memoria en la fase Execute?",
+          "correctValue": 400,
+          "tolerance": 0,
+          "explanation": "$$N_{accesos\\_datos} = 1000 \\times 0.40 = 400 \\text{ instrucciones con acceso a memoria}$$"
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "En Von Neumann, cada instrucción genera al menos 1 acceso a memoria (Fetch). Las 400 instrucciones con acceso a datos generan 1 acceso adicional. Calcula el número total de accesos a memoria del bus.",
+          "correctValue": 1400,
+          "tolerance": 0,
+          "explanation": "$$N_{total} = 1000 \\text{ (Fetch)} + 400 \\text{ (datos)} = 1400 \\text{ accesos totales al bus}$$"
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "En Harvard, los 1000 Fetch van por el bus de instrucciones y los 400 accesos a datos por el bus de datos, en paralelo donde sea posible. El número de ciclos de bus dominantes es el máximo de las 1000 instrucciones fetch. ¿Cuántos ciclos de bus se ahorran respecto a Von Neumann con 1400 ciclos?",
+          "correctValue": 400,
+          "tolerance": 0,
+          "explanation": "$$\\Delta_{ciclos} = 1400 - 1000 = 400 \\text{ ciclos de bus ahorrados}$$"
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula el porcentaje de mejora de ciclos de bus de Harvard respecto a Von Neumann: (ciclos ahorrados / ciclos Von Neumann) × 100.",
+          "correctValue": 28.57,
+          "tolerance": 0.5,
+          "explanation": "$$\\text{Mejora} = \\frac{400}{1400} \\times 100 = 28.57\\%$$"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Capacidad de ROM en Microcontroladores",
+      "context": "Un microcontrolador PIC tiene un bus de programa de 13 bits de anchura de palabra de instrucción de 14 bits, con 8K posiciones de programa.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "El bus de programa tiene 13 líneas de dirección. Calcula el número de posiciones de programa direccionables.",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$$N_{pos} = 2^{13} = 8192 \\text{ posiciones de instrucción}$$"
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Cada posición almacena una instrucción de 14 bits. Calcula el total de bits de la memoria de programa.",
+          "correctValue": 114688,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total bits} = 8192 \\times 14 = 114.688 \\text{ bits}$$"
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Convierte los 114.688 bits a bytes (1 byte = 8 bits).",
+          "correctValue": 14336,
+          "tolerance": 0,
+          "explanation": "$$C = \\frac{114688 \\text{ bits}}{8 \\text{ bits/byte}} = 14336 \\text{ bytes}$$"
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Convierte los 14.336 bytes a KB (1 KB = 1024 bytes).",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "$$C_{KB} = \\frac{14336}{1024} = 14 \\text{ KB}$$"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Diseño de Bus en Sistema Empotrado de 8 bits",
+      "context": "Un microcontrolador de 8 bits usa bus de datos de 8 bits y bus de direcciones de 16 bits. Se diseña el mapa de memoria con ROM y RAM.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcula el espacio de direccionamiento total del sistema en bytes.",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$C_{total} = 2^{16} \\times 1 \\text{ byte/pos} = 65536 \\text{ bytes}$$"
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Se asignan los primeros 32 KB a ROM y los 32 KB restantes a RAM. Calcula la dirección inicial de la RAM en decimal.",
+          "correctValue": 32768,
+          "tolerance": 0,
+          "explanation": "$$D_{RAM\\_inicio} = 32 \\text{ KB} = 32 \\times 1024 = 32768_{10}$$"
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcula la dirección final de la RAM (última posición válida) en decimal.",
+          "correctValue": 65535,
+          "tolerance": 0,
+          "explanation": "$$D_{RAM\\_fin} = 32768 + 32768 - 1 = 65535_{10} = 0xFFFF_{16}$$"
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Si se decide reservar los últimos 2 KB de la RAM para vectores de interrupción, ¿cuántos bytes de RAM libre quedan para el usuario?",
+          "correctValue": 30720,
+          "tolerance": 0,
+          "explanation": "$$C_{libre} = 32 \\text{ KB} - 2 \\text{ KB} = 30 \\text{ KB} = 30 \\times 1024 = 30720 \\text{ bytes}$$"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Ancho de Banda de Caché L1 vs RAM",
+      "context": "Una caché L1 de 32 KB opera a 3 GHz con latencia de 1 ciclo. La RAM opera a 100 MHz con latencia de 100 ns. Bus de datos de 64 bits en ambos casos.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula el ancho de banda de la caché L1 en GB/s. (BW = bytes/ciclo × frecuencia; 1 ciclo a 3 GHz = 1/3 ns)",
+          "correctValue": 24,
+          "tolerance": 0.5,
+          "explanation": "$$BW_{L1} = 8 \\text{ bytes/ciclo} \\times 3 \\times 10^9 \\text{ ciclos/s} = 24 \\times 10^9 \\text{ B/s} = 24 \\text{ GB/s}$$"
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Calcula el ancho de banda de la RAM en GB/s. (BW = bytes/ciclo × frecuencia = 8 × 100×10^6)",
+          "correctValue": 0.8,
+          "tolerance": 0.01,
+          "explanation": "$$BW_{RAM} = 8 \\text{ bytes/ciclo} \\times 100 \\times 10^6 = 8 \\times 10^8 \\text{ B/s} = 0.8 \\text{ GB/s}$$"
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcula cuántas veces más rápida es la caché L1 que la RAM en términos de ancho de banda.",
+          "correctValue": 30,
+          "tolerance": 1,
+          "explanation": "$$\\text{Factor} = \\frac{BW_{L1}}{BW_{RAM}} = \\frac{24 \\text{ GB/s}}{0.8 \\text{ GB/s}} = 30 \\text{ veces}$$"
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Si la tasa de aciertos de caché (hit rate) es del 95%, calcula el ancho de banda efectivo medio en GB/s. (BW_efectivo = hit_rate × BW_L1 + (1-hit_rate) × BW_RAM)",
+          "correctValue": 22.84,
+          "tolerance": 0.1,
+          "explanation": "$$BW_{ef} = 0.95 \\times 24 + 0.05 \\times 0.8 = 22.8 + 0.04 = 22.84 \\text{ GB/s}$$"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Direccionamiento Máximo de Procesadores Históricos",
+      "context": "Se comparan los límites de memoria de procesadores emblemáticos de Intel.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "El Intel 8086 (1978) tiene bus de direcciones de 20 líneas. Calcula su espacio de direccionamiento en KB.",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{20} \\text{ bytes} = \\frac{2^{20}}{2^{10}} \\text{ KB} = 2^{10} = 1024 \\text{ KB} = 1 \\text{ MB}$$"
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "El Intel 80286 (1982) tiene bus de direcciones de 24 líneas. Calcula su espacio de direccionamiento en MB.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{24} \\text{ bytes} = \\frac{2^{24}}{2^{20}} \\text{ MB} = 2^4 = 16 \\text{ MB}$$"
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "El Intel 80386 (1985) tiene bus de direcciones de 32 líneas. Calcula su espacio de direccionamiento en GB.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{32} \\text{ bytes} = \\frac{2^{32}}{2^{30}} \\text{ GB} = 2^2 = 4 \\text{ GB}$$"
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcula el factor de incremento del espacio de direccionamiento entre el 8086 (20 líneas) y el 80386 (32 líneas). (Factor = 2^(32-20))",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "$$\\text{Factor} = \\frac{2^{32}}{2^{20}} = 2^{12} = 4096 \\text{ veces mayor}$$"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Tamaño de la Caché L1 y Número de Bloques",
+      "context": "Una caché L1D tiene capacidad de 32 KB, líneas de caché de 64 bytes y es de mapeo directo (1 vía).",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Convierte la capacidad de la caché de 32 KB a bytes.",
+          "correctValue": 32768,
+          "tolerance": 0,
+          "explanation": "$$32 \\text{ KB} = 32 \\times 1024 = 32768 \\text{ bytes}$$"
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula el número de líneas (bloques) de caché. (Número de líneas = capacidad / tamaño de línea)",
+          "correctValue": 512,
+          "tolerance": 0,
+          "explanation": "$$N_{lineas} = \\frac{32768 \\text{ bytes}}{64 \\text{ bytes/línea}} = 512 \\text{ líneas}$$"
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Para indexar las 512 líneas se necesitan N bits de índice tal que 2^N = 512. Calcula N.",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "$$2^N = 512 = 2^9 \\Rightarrow N = 9 \\text{ bits de índice}$$"
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Dentro de una línea de 64 bytes se necesitan M bits para el desplazamiento (offset). Calcula M tal que 2^M = 64.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$2^M = 64 = 2^6 \\Rightarrow M = 6 \\text{ bits de offset}$$"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Cálculo de Throughput del Bus en Operaciones de DMA",
+      "context": "Un controlador DMA transfiere bloques de 4 KB desde disco a RAM usando el bus de datos de 32 bits a 50 MHz. Cada ciclo de bus transfiere 4 bytes.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Convierte el bloque de 4 KB a bytes.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "$$4 \\text{ KB} = 4 \\times 1024 = 4096 \\text{ bytes}$$"
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcula el número de ciclos de bus DMA necesarios para transferir el bloque de 4096 bytes (4 bytes por ciclo).",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "$$N_{ciclos} = \\frac{4096 \\text{ bytes}}{4 \\text{ bytes/ciclo}} = 1024 \\text{ ciclos de bus}$$"
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcula el período de un ciclo de bus a 50 MHz en microsegundos.",
+          "correctValue": 0.02,
+          "tolerance": 0.001,
+          "explanation": "$$T = \\frac{1}{50 \\times 10^6} = 2 \\times 10^{-8} \\text{ s} = 0.02 \\text{ \\mu s}$$"
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcula el tiempo total de transferencia DMA del bloque de 4 KB en microsegundos.",
+          "correctValue": 20.48,
+          "tolerance": 0.1,
+          "explanation": "$$T_{total} = 1024 \\text{ ciclos} \\times 0.02 \\text{ \\mu s/ciclo} = 20.48 \\text{ \\mu s}$$"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Análisis de Mapa de Memoria: Rangos y Solapamiento",
+      "context": "Un sistema con bus de 16 bits tiene: ROM en [0x0000 - 0x1FFF], RAM en [0x2000 - 0xDFFF] y E/S en [0xE000 - 0xFFFF].",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula el tamaño de la región ROM en bytes. (Tamaño = Dirección final - Dirección inicio + 1; 0x1FFF = 8191, 0x0000 = 0)",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$$C_{ROM} = 0x1FFF - 0x0000 + 1 = 8191 + 1 = 8192 \\text{ bytes} = 8 \\text{ KB}$$"
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Calcula el tamaño de la región RAM en bytes. (0xDFFF = 57343, 0x2000 = 8192)",
+          "correctValue": 49152,
+          "tolerance": 0,
+          "explanation": "$$C_{RAM} = 0xDFFF - 0x2000 + 1 = 57343 - 8192 + 1 = 49152 \\text{ bytes} = 48 \\text{ KB}$$"
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcula el tamaño de la región de E/S en bytes. (0xFFFF = 65535, 0xE000 = 57344)",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$$C_{ES} = 0xFFFF - 0xE000 + 1 = 65535 - 57344 + 1 = 8192 \\text{ bytes} = 8 \\text{ KB}$$"
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Verifica que la suma de las tres regiones cubre el total del espacio de 64 KB: ¿cuántos bytes suman las tres regiones?",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$C_{total} = 8192 + 49152 + 8192 = 65536 \\text{ bytes} = 64 \\text{ KB} \\checkmark$$"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Diseño Completo: Bus de Sistema para Procesador de 64 bits",
+      "context": "Se diseña el sistema de bus para un procesador de 64 bits con 48 líneas de dirección física, bus de datos de 64 bits a 200 MHz y caché L1 de 64 KB.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcula el espacio de direccionamiento físico total en TB con 48 líneas. (1 TB = 2^40 bytes)",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$C = 2^{48} \\text{ bytes} = \\frac{2^{48}}{2^{40}} = 2^8 = 256 \\text{ TB}$$"
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula el ancho de banda del bus de datos de 64 bits a 200 MHz en GB/s.",
+          "correctValue": 1.6,
+          "tolerance": 0.05,
+          "explanation": "$$BW = 8 \\text{ bytes/ciclo} \\times 200 \\times 10^6 = 1.6 \\times 10^9 \\text{ B/s} = 1.6 \\text{ GB/s}$$"
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "La caché L1 tiene 64 KB con líneas de 64 bytes. Calcula el número de líneas de caché totales.",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "$$N_{lineas} = \\frac{64 \\text{ KB}}{64 \\text{ bytes}} = \\frac{65536}{64} = 1024 \\text{ líneas}$$"
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si la caché L1 es 4-vía asociativa, ¿cuántos conjuntos (sets) tiene la caché? (Conjuntos = líneas totales / número de vías)",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$N_{sets} = \\frac{1024 \\text{ líneas}}{4 \\text{ vías}} = 256 \\text{ conjuntos}$$"
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Espacio de Direccionamiento Máximo",
+      "tex": "$$C_{max} = 2^{N_{addr}} \\text{ posiciones}$$"
+    },
+    {
+      "name": "Capacidad Total de Memoria",
+      "tex": "$$C_{total} = 2^{N_{addr}} \\times \\frac{N_{data}}{8} \\text{ bytes}$$"
+    },
+    {
+      "name": "Ancho de Banda del Bus",
+      "tex": "$$BW = \\frac{N_{data}}{8} \\times f_{bus} \\text{ [bytes/s]}$$"
+    },
+    {
+      "name": "Período del Ciclo de Reloj",
+      "tex": "$$T_{ciclo} = \\frac{1}{f_{clk}} \\text{ [s]}$$"
+    },
+    {
+      "name": "Número de Wait States",
+      "tex": "$$W_{states} = \\left\\lceil \\frac{t_{access}}{T_{ciclo}} \\right\\rceil - 1$$"
+    },
+    {
+      "name": "Número de Líneas de Bus Necesarias",
+      "tex": "$$N_{addr} = \\lceil \\log_2(C_{bytes}) \\rceil$$"
+    },
+    {
+      "name": "Conversión KB a Bytes",
+      "tex": "$$C_{bytes} = C_{KB} \\times 2^{10} = C_{KB} \\times 1024$$"
+    },
+    {
+      "name": "Conversión GB a Bytes",
+      "tex": "$$C_{bytes} = C_{GB} \\times 2^{30} = C_{GB} \\times 1.073.741.824$$"
+    },
+    {
+      "name": "Tiempo de Transferencia de Bloque",
+      "tex": "$$T_{transfer} = \\frac{C_{bloque}}{BW_{bus}} = N_{ciclos} \\times T_{ciclo}$$"
+    },
+    {
+      "name": "Número de Ciclos para Transferir un Bloque",
+      "tex": "$$N_{ciclos} = \\left\\lceil \\frac{C_{bloque} \\text{ [bytes]}}{N_{data}/8 \\text{ [bytes/ciclo]}} \\right\\rceil$$"
+    },
+    {
+      "name": "Ancho de Banda Efectivo con Jerarquía de Memoria",
+      "tex": "$$BW_{ef} = h \\times BW_{cache} + (1-h) \\times BW_{RAM}$$"
+    },
+    {
+      "name": "Factor de Incremento de Espacio por Líneas Adicionales",
+      "tex": "$$\\text{Factor} = 2^{\\Delta N_{addr}} = 2^{N_{nuevo} - N_{anterior}}$$"
+    }
+  ]
+}

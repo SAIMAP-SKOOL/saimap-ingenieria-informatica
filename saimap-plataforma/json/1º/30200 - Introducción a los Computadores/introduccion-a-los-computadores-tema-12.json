@@ -1,0 +1,1808 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el registro que se incrementa automáticamente durante la fase Fetch del ciclo de instrucción?",
+      "options": ["El Registro de Instrucción (IR)", "El Contador de Programa (PC)", "El Registro de Dirección de Memoria (MAR)"],
+      "correct": 1,
+      "hint": "Piensa en qué registro apunta a la siguiente instrucción.",
+      "explanation": "El PC (Program Counter) se incrementa en 4 (para instrucciones de 32 bits) durante la fase Fetch, concretamente en el ciclo T2, de forma simultánea a la lectura de la memoria."
+    },
+    {
+      "q": "¿Qué fase del ciclo de instrucción se encarga de identificar el OPCode contenido en el Registro de Instrucción (IR)?",
+      "options": ["Fetch (Búsqueda)", "Decode (Decodificación)", "Execute (Ejecución)"],
+      "correct": 1,
+      "hint": "El OPCode debe ser analizado antes de poder ejecutar cualquier operación.",
+      "explanation": "La fase Decode es responsabilidad de la Unidad de Control, que analiza el campo OPCode del IR para determinar la operación a realizar y los modos de direccionamiento de los operandos."
+    },
+    {
+      "q": "¿Cuántos ciclos de reloj requiere la fase Fetch universal de instrucciones según el modelo RTL estándar descrito en el tema?",
+      "options": ["2 ciclos (T1 y T2)", "3 ciclos (T1, T2 y T3)", "4 ciclos (T1, T2, T3 y T4)"],
+      "correct": 1,
+      "hint": "Cuenta las microoperaciones: MAR←PC, MDR←M[MAR], IR←MDR.",
+      "explanation": "La fase Fetch requiere exactamente 3 ciclos: T1 (MAR←PC), T2 (MDR←M[MAR] y PC←PC+4) y T3 (IR←MDR), siendo universal para todas las instrucciones."
+    },
+    {
+      "q": "En la microoperación T2 del ciclo Fetch, ¿qué dos operaciones se realizan simultáneamente?",
+      "options": ["MAR←PC y IR←MDR", "MDR←M[MAR] y PC←PC+4", "IR←MDR y MAR←Dirección"],
+      "correct": 1,
+      "hint": "La simultaneidad en T2 permite ganar tiempo de reloj.",
+      "explanation": "En T2 se realiza simultáneamente la lectura de memoria (MDR←M[MAR]) y el incremento del PC (PC←PC+4). Esto es posible porque ambas operaciones usan recursos hardware independientes."
+    },
+    {
+      "q": "¿Qué registro actúa como interfaz entre la CPU y el bus de direcciones durante el ciclo de instrucción?",
+      "options": ["MDR (Memory Data Register)", "IR (Instruction Register)", "MAR (Memory Address Register)"],
+      "correct": 2,
+      "hint": "Su nombre contiene la palabra 'Address' (dirección).",
+      "explanation": "El MAR (Memory Address Register) es el registro conectado físicamente al bus de direcciones. Toda dirección de memoria, ya sea de instrucción o de dato, debe pasar obligatoriamente por el MAR antes de acceder a la RAM."
+    },
+    {
+      "q": "En el flujo RTL de la instrucción ADD R1, R2, R3, ¿qué ocurre en el ciclo T4?",
+      "options": ["R1 recibe el resultado de la ALU", "Los operandos R2 y R3 se envían a las entradas de la ALU", "MAR recibe la dirección de R1"],
+      "correct": 1,
+      "hint": "Antes de ejecutar la ALU, es necesario alimentarla con datos.",
+      "explanation": "En T4 se cargan las entradas de la ALU: Entrada_A_ALU←R2 y Entrada_B_ALU←R3. La ALU no puede operar hasta que sus entradas estén estabilizadas con los valores correctos."
+    },
+    {
+      "q": "¿Cuántos ciclos de reloj adicionales (post-Fetch) requiere la instrucción ADD R1, R2, R3 según el modelo RTL del tema?",
+      "options": ["1 ciclo adicional (T4)", "2 ciclos adicionales (T4 y T5)", "3 ciclos adicionales (T4, T5 y T6)"],
+      "correct": 1,
+      "hint": "La suma es una operación interna pura que no accede a memoria.",
+      "explanation": "ADD necesita T4 (cargar operandos en la ALU) y T5 (R1←Salida_ALU). Al ser una operación puramente interna a la CPU, no requiere accesos adicionales a memoria, por lo que sólo necesita 2 ciclos post-Fetch."
+    },
+    {
+      "q": "¿Cuántos ciclos de reloj adicionales (post-Fetch) requiere la instrucción LW R1, [1000]?",
+      "options": ["2 ciclos (T4 y T5)", "3 ciclos (T4, T5 y T6)", "4 ciclos (T4, T5, T6 y T7)"],
+      "correct": 1,
+      "hint": "Se necesita enviar la dirección, leer la memoria y escribir en registro.",
+      "explanation": "LW requiere T4 (MAR←Dirección(1000)), T5 (MDR←M[MAR]) y T6 (R1←MDR). El acceso a memoria para leer el dato es lo que agrega el ciclo extra respecto a instrucciones puramente aritméticas."
+    },
+    {
+      "q": "En la instrucción SW R1, [2000] (Store Word), ¿qué microoperación se realiza en el ciclo T6?",
+      "options": ["MDR←R1", "MAR←Dirección(2000)", "M[MAR]←MDR"],
+      "correct": 2,
+      "hint": "El ciclo final de un Store escribe el dato en la RAM.",
+      "explanation": "En T6 se realiza M[MAR]←MDR: la Unidad de Control activa la señal Write en el bus de control, haciendo que la RAM captura el dato presente en el bus de datos (procedente del MDR) y lo almacena en la celda apuntada por MAR."
+    },
+    {
+      "q": "¿Qué componente físico del procesador determina la frecuencia máxima de reloj según el concepto de Camino Crítico?",
+      "options": ["El registro con mayor capacidad de almacenamiento", "La ruta de compuertas con mayor retardo de propagación", "El bus de datos con mayor ancho de banda"],
+      "correct": 1,
+      "hint": "El camino más lento limita la velocidad del conjunto.",
+      "explanation": "El Camino Crítico (Critical Path) es la ruta de compuertas lógicas que tarda más en propagar sus señales. La frecuencia máxima de reloj es f_max = 1/Retardo_crítico, ya que el ciclo debe ser al menos tan largo como el retardo del componente más lento."
+    },
+    {
+      "q": "Si el retardo del acceso a memoria es 0.4 ns, ¿cuál es la frecuencia máxima teórica del procesador?",
+      "options": ["2.0 GHz", "2.5 GHz", "4.0 GHz"],
+      "correct": 1,
+      "hint": "Aplica f_max = 1 / retardo_crítico.",
+      "explanation": "f_max = 1 / (0.4 × 10⁻⁹ s) = 2.5 × 10⁹ Hz = 2.5 GHz. El acceso a memoria, siendo el componente más lento, define el camino crítico y limita la velocidad máxima del procesador."
+    },
+    {
+      "q": "¿Qué ocurre físicamente si un procesador opera a una frecuencia superior al límite impuesto por el camino crítico (overclocking extremo)?",
+      "options": ["El procesador genera más calor pero funciona correctamente", "Las señales no se estabilizan antes del siguiente flanco de reloj, corrompiendo datos", "El procesador reduce automáticamente su frecuencia para protegerse"],
+      "correct": 1,
+      "hint": "Las señales necesitan tiempo para propagarse y estabilizarse.",
+      "explanation": "Si el período de reloj es inferior al retardo del camino crítico, las señales eléctricas no tienen tiempo suficiente para propagarse y estabilizarse en los biestables/registros antes del siguiente flanco activo. El resultado es la captura de valores incorrectos (metaestabilidad) y corrupción de datos."
+    },
+    {
+      "q": "En el modelo RTL, ¿qué operación representa la notación M[MAR]?",
+      "options": ["Escritura del valor MAR en memoria", "Lectura del contenido de la celda de memoria cuya dirección está en MAR", "Copia del registro MAR al MDR"],
+      "correct": 1,
+      "hint": "La notación M[...] indica acceso a una posición de memoria.",
+      "explanation": "M[MAR] denota una operación de lectura de la memoria física: se accede a la posición cuya dirección está almacenada en el registro MAR y se obtiene su contenido. Es la notación estándar del Lenguaje de Transferencia entre Registros (RTL)."
+    },
+    {
+      "q": "¿Cuál de las siguientes fases del ciclo de instrucción es idéntica (universal) para todas las instrucciones de un procesador?",
+      "options": ["Execute (Ejecución)", "Fetch (Búsqueda)", "Write-Back (Escritura)"],
+      "correct": 1,
+      "hint": "Esta fase es el punto de partida común de cualquier instrucción.",
+      "explanation": "La fase Fetch es universal: independientemente del tipo de instrucción (aritmética, carga, salto), el procesador siempre debe leer la instrucción desde la dirección apuntada por PC y cargarla en IR. Las fases posteriores varían según el tipo de instrucción."
+    },
+    {
+      "q": "¿Cuál es el propósito del registro MDR (Memory Data Register) en el ciclo de instrucción?",
+      "options": ["Almacenar la dirección de la siguiente instrucción", "Actuar como búfer entre la CPU y el bus de datos de memoria", "Contener el código de operación de la instrucción actual"],
+      "correct": 1,
+      "hint": "Su nombre contiene 'Data' (datos), no 'Address' (dirección).",
+      "explanation": "El MDR actúa como registro búfer bidireccional entre la CPU y el bus de datos. En lecturas, recibe el dato leído de memoria antes de que pase a un registro interno. En escrituras, contiene el dato a escribir en memoria. Desacopla los tiempos de la CPU y la RAM."
+    },
+    {
+      "q": "En la fase Decode del ciclo de instrucción, ¿qué parte del binario almacenado en IR analiza principalmente la Unidad de Control?",
+      "options": ["Los bits de paridad del IR", "El campo OPCode (código de operación) en los bits superiores del IR", "El campo de datos inmediatos del IR"],
+      "correct": 1,
+      "hint": "El OPCode identifica unívocamente el tipo de operación.",
+      "explanation": "La Unidad de Control analiza el campo OPCode ubicado en los bits de mayor peso del IR. Mediante un decodificador binario conectado a esos bits, determina qué tipo de instrucción debe ejecutarse y genera la secuencia de señales de control correspondiente."
+    },
+    {
+      "q": "Para una CPU con instrucciones de 16 bits (2 bytes), ¿cómo se modifica la microoperación T2 del ciclo Fetch respecto a la versión estándar de 32 bits?",
+      "options": ["T2: MDR←M[MAR], PC←PC+2", "T2: MDR←M[MAR], PC←PC+4", "T2: MDR←M[MAR], PC←PC+8"],
+      "correct": 0,
+      "hint": "El PC se incrementa según el tamaño en bytes de la instrucción.",
+      "explanation": "Si las instrucciones ocupan 2 bytes (16 bits), el PC debe incrementarse en 2 para apuntar a la siguiente instrucción: T2: MDR←M[MAR], PC←PC+2. Con instrucciones de 4 bytes se incrementa en 4, y con 8 bytes en 8."
+    },
+    {
+      "q": "¿En qué fase del ciclo de instrucción se calcula la dirección efectiva del operando cuando este reside en memoria?",
+      "options": ["Fetch", "Fetch de Operandos (Fetch Operands)", "Write-Back"],
+      "correct": 1,
+      "hint": "Esta fase es intermedia entre Decode y Execute.",
+      "explanation": "La fase 'Fetch de Operandos' (a veces llamada 'Memory Access' en arquitecturas pipeline) calcula las direcciones efectivas de los datos que residen en memoria y los trae al interior de la CPU antes de la ejecución. En RTL se modela con MAR←Dirección_efectiva y MDR←M[MAR]."
+    },
+    {
+      "q": "¿Cuál es la secuencia correcta de las 5 fases del ciclo de instrucción?",
+      "options": ["Decode → Fetch → Execute → Memory → Write-Back", "Fetch → Decode → Fetch Operands → Execute → Write-Back", "Fetch → Execute → Decode → Write-Back → Memory"],
+      "correct": 1,
+      "hint": "Primero se lee la instrucción, luego se entiende y finalmente se actúa.",
+      "explanation": "La secuencia correcta es: (1) Fetch: leer instrucción de memoria; (2) Decode: identificar OPCode; (3) Fetch Operands: leer datos de memoria si es necesario; (4) Execute: operar en la ALU; (5) Write-Back: guardar resultado. Este orden es lógicamente necesario."
+    },
+    {
+      "q": "En la instrucción de salto incondicional JUMP 0x1500, ¿qué registro modifica la microoperación de ejecución?",
+      "options": ["IR (Instruction Register)", "MAR (Memory Address Register)", "PC (Program Counter)"],
+      "correct": 2,
+      "hint": "Un salto cambia el flujo de ejecución modificando el puntero a instrucciones.",
+      "explanation": "En JUMP 0x1500, la microoperación de ejecución es PC←0x1500. Al modificar el PC directamente con la dirección destino, el siguiente ciclo Fetch leerá la instrucción de 0x1500, cambiando el flujo de ejecución del programa."
+    },
+    {
+      "q": "¿Qué significa que el Lenguaje RTL (Register Transfer Language) sea un 'formalismo matemático'?",
+      "options": ["Que sólo puede usarse para describir operaciones matemáticas de la ALU", "Que proporciona una notación precisa y no ambigua para describir el flujo de datos entre registros ciclo a ciclo", "Que debe implementarse mediante ecuaciones diferenciales"],
+      "correct": 1,
+      "hint": "RTL es una notación formal, no un tipo de operación.",
+      "explanation": "RTL es un formalismo matemático porque proporciona una notación precisa, no ambigua y reproducible para describir qué datos se transfieren entre qué registros en cada ciclo de reloj. Permite modelar y verificar el comportamiento del hardware sin ambigüedades lingüísticas."
+    },
+    {
+      "q": "En la fase Write-Back de la instrucción ADD R1, R2, R3, ¿dónde se escribe el resultado?",
+      "options": ["En la memoria RAM en la dirección contenida en MAR", "En el banco de registros interno de la CPU (registro R1)", "En el Registro de Instrucción (IR)"],
+      "correct": 1,
+      "hint": "ADD es una operación registro-registro, el resultado va a un registro.",
+      "explanation": "El Write-Back de ADD escribe el resultado de la ALU en el registro destino R1 del banco de registros interno de la CPU. La microoperación es R1←Salida_ALU. No hay acceso a memoria externa porque la instrucción es registro-registro."
+    },
+    {
+      "q": "¿Cuál de los siguientes componentes tiene el mayor retardo de propagación en un procesador típico según el ejemplo del tema?",
+      "options": ["Banco de registros (0.1 ns)", "ALU (0.25 ns)", "Acceso a memoria (0.4 ns)"],
+      "correct": 2,
+      "hint": "La memoria DRAM externa es más lenta que los circuitos internos de la CPU.",
+      "explanation": "Según el ejercicio resuelto, el acceso a memoria tiene 0.4 ns de retardo, frente a 0.25 ns de la ALU y 0.1 ns del banco de registros. La memoria externa (DRAM) es el cuello de botella clásico porque sus tiempos de acceso son mayores que los de los circuitos internos del chip."
+    },
+    {
+      "q": "¿Qué instrucción tiene mayor número total de ciclos de reloj (incluyendo Fetch) según el modelo RTL del tema?",
+      "options": ["ADD R1, R2, R3 (aritmética registro-registro)", "LW R1, [1000] (carga desde memoria)", "Ambas requieren el mismo número de ciclos"],
+      "correct": 1,
+      "hint": "La instrucción que accede a memoria externa requiere más ciclos.",
+      "explanation": "LW R1, [1000] requiere 6 ciclos totales (3 de Fetch + 3 de ejecución: T4, T5, T6), mientras que ADD R1, R2, R3 requiere 5 ciclos totales (3 de Fetch + 2: T4, T5). El acceso adicional a memoria en LW añade un ciclo extra."
+    },
+    {
+      "q": "¿Cuál es la notación RTL correcta para la microoperación T1 del ciclo Fetch?",
+      "options": ["IR←PC", "MAR←PC", "MDR←M[PC]"],
+      "correct": 1,
+      "hint": "En T1 se prepara la dirección para el acceso a memoria.",
+      "explanation": "T1: MAR←PC. El primer paso del Fetch consiste en copiar el valor actual del PC al MAR, poniendo así la dirección de la instrucción en el bus de direcciones para que la memoria pueda ser accedida en el siguiente ciclo."
+    },
+    {
+      "q": "En la instrucción SW R1, [2000], ¿qué microoperación RTL se realiza en T5?",
+      "options": ["MAR←Dirección(2000)", "MDR←R1", "M[MAR]←MDR"],
+      "correct": 1,
+      "hint": "En T5 se prepara el dato para ser escrito en memoria.",
+      "explanation": "En T5: MDR←R1. El contenido del registro R1 se copia al MDR para que esté disponible en el bus de datos en el siguiente ciclo, cuando la señal Write activará el guardado en la RAM."
+    },
+    {
+      "q": "¿Qué es el 'camino crítico' (critical path) de un procesador?",
+      "options": ["La instrucción que más tiempo tarda en ejecutarse en un programa", "La ruta física de compuertas lógicas que tiene el mayor retardo de propagación de señales", "El bus de datos más ancho del sistema"],
+      "correct": 1,
+      "hint": "Es un concepto de diseño hardware, no de software.",
+      "explanation": "El camino crítico es la ruta de compuertas lógicas más lenta del circuito. Determina el período mínimo del reloj (y por tanto la frecuencia máxima) porque el sistema debe esperar a que hasta el camino más lento haya propagado correctamente sus señales antes del siguiente flanco de reloj."
+    },
+    {
+      "q": "¿Cuál de los siguientes registros NO se modifica durante la fase Fetch de instrucciones?",
+      "options": ["PC (Program Counter)", "MDR (Memory Data Register)", "R1 del banco de registros de usuario"],
+      "correct": 2,
+      "hint": "Durante el Fetch solo se involucran registros de control internos de la CPU.",
+      "explanation": "Los registros del banco de usuario (R1, R2, etc.) no se modifican durante el Fetch. Este fase solo modifica MAR (en T1), MDR y PC (en T2) e IR (en T3). Los registros de usuario solo se alteran en fases posteriores como Execute y Write-Back."
+    },
+    {
+      "q": "Según el ciclo RTL, ¿en qué ciclo temporal (T) se carga la instrucción en el Registro de Instrucción (IR)?",
+      "options": ["T1", "T2", "T3"],
+      "correct": 2,
+      "hint": "IR recibe el valor procedente del MDR.",
+      "explanation": "En T3: IR←MDR. Después de que en T1 se envía la dirección al MAR y en T2 se lee el dato de memoria al MDR, en T3 el contenido del MDR (la instrucción leída) se transfiere al IR para su posterior decodificación."
+    },
+    {
+      "q": "¿Por qué se dice que la fase Fetch es común a todas las instrucciones de máquina?",
+      "options": ["Porque todas las instrucciones realizan las mismas operaciones aritmético-lógicas", "Porque toda instrucción debe ser leída de la memoria antes de poder procesarse, independientemente de su tipo", "Porque todas las instrucciones tienen el mismo número total de ciclos de reloj"],
+      "correct": 1,
+      "hint": "Las instrucciones residen en memoria y deben ser leídas primero.",
+      "explanation": "Toda instrucción, sea aritmética, de control o de acceso a memoria, debe ser primero recuperada (fetched) de la memoria RAM donde está almacenada como código binario. Sin este paso previo, la CPU no conoce qué operación debe realizar. Por ello Fetch es universal e invariante."
+    },
+    {
+      "q": "En el ciclo Fetch, ¿qué registro recibe el valor leído de la memoria y lo almacena temporalmente antes de pasarlo al IR?",
+      "options": ["MAR", "PC", "MDR"],
+      "correct": 2,
+      "hint": "Este registro actúa como búfer de datos de memoria.",
+      "explanation": "El MDR (Memory Data Register) recibe en T2 el dato leído de la dirección apuntada por MAR (MDR←M[MAR]). Actúa como etapa intermedia que desacopla el tiempo de acceso a la RAM externa del tiempo de carga del IR, que ocurre en T3 (IR←MDR)."
+    },
+    {
+      "q": "¿Qué campo del IR es analizado por la Unidad de Control mediante un decodificador binario durante la fase Decode?",
+      "options": ["Los bits de datos inmediatos de los operandos", "Los bits de mayor peso correspondientes al OPCode", "Los bits de paridad de corrección de errores"],
+      "correct": 1,
+      "hint": "El decodificador debe reconocer el tipo de instrucción.",
+      "explanation": "La Unidad de Control utiliza un decodificador binario conectado a los bits superiores (mayor peso) del IR donde se encuentra el OPCode. Según la combinación binaria del OPCode, el decodificador activa diferentes líneas de control que dirigen la ejecución de las microoperaciones correspondientes."
+    },
+    {
+      "q": "¿Qué tipo de instrucción NO requiere una fase de 'Fetch de Operandos' desde memoria externa?",
+      "options": ["LW R1, [1000] (Load Word)", "SW R1, [2000] (Store Word)", "ADD R1, R2, R3 (suma registro-registro)"],
+      "correct": 2,
+      "hint": "Si los operandos ya están en registros internos, no hace falta leer de memoria.",
+      "explanation": "ADD R1, R2, R3 opera directamente sobre registros internos de la CPU (R2 y R3). No necesita acceder a memoria RAM para obtener sus operandos, por lo que no tiene fase de Fetch de Operandos. Esto la hace más rápida que LW o SW, que sí acceden a memoria."
+    },
+    {
+      "q": "¿Cuál de los siguientes cambios permitiría aumentar la frecuencia máxima de reloj de un procesador?",
+      "options": ["Aumentar el ancho del bus de datos", "Reducir el retardo de propagación del camino crítico mediante memorias caché más rápidas", "Aumentar la capacidad de los registros de propósito general"],
+      "correct": 1,
+      "hint": "f_max = 1/retardo_crítico; para aumentar f hay que reducir el retardo.",
+      "explanation": "Como f_max = 1/retardo_crítico, reducir el retardo del camino crítico aumenta directamente la frecuencia máxima. Introducir memorias caché SRAM más rápidas (por ejemplo, caché L1 dentro del chip) reduce el retardo de acceso a memoria, que es el componente más lento y define el camino crítico."
+    },
+    {
+      "q": "En el contexto del ciclo de instrucción, ¿qué representa la notación 'T1', 'T2', 'T3' en RTL?",
+      "options": ["Transistores numerados en el circuito", "Estados de tiempo (ciclos de reloj secuenciales)", "Tipos de transferencia de datos"],
+      "correct": 1,
+      "hint": "T viene de 'Time state' (estado temporal).",
+      "explanation": "T1, T2, T3 son estados de tiempo que representan ciclos de reloj secuenciales. En cada estado Ti se realiza exactamente una microoperación (o un conjunto de microoperaciones simultáneas en el mismo ciclo). Esta notación permite describir el comportamiento temporal del hardware ciclo a ciclo."
+    },
+    {
+      "q": "¿Cuál es la función principal del banco de registros (register file) en el ciclo de instrucción?",
+      "options": ["Almacenar la instrucción codificada en binario", "Proporcionar almacenamiento temporal de alta velocidad para operandos y resultados dentro de la CPU", "Gestionar el acceso al bus de datos externo"],
+      "correct": 1,
+      "hint": "Es la memoria interna más rápida y cercana a la ALU.",
+      "explanation": "El banco de registros es una pequeña memoria de acceso aleatorio ultrarrápida (construida con flip-flops) dentro del chip de la CPU que almacena los operandos de instrucciones en curso y los resultados intermedios. Su baja latencia (0.1 ns típicamente) lo hace mucho más rápido que la memoria RAM externa."
+    },
+    {
+      "q": "¿Cuál de estas afirmaciones sobre el MDR es correcta?",
+      "options": ["El MDR solo puede recibir datos de la CPU para escribir en memoria", "El MDR es bidireccional: recibe datos de memoria (en lecturas) y envía datos a memoria (en escrituras)", "El MDR almacena permanentemente la última instrucción ejecutada"],
+      "correct": 1,
+      "hint": "El MDR está en el camino de datos entre CPU y RAM en ambas direcciones.",
+      "explanation": "El MDR es bidireccional: en operaciones de lectura (como LW) recibe el dato procedente de la RAM; en operaciones de escritura (como SW) contiene el dato que la CPU quiere escribir en memoria. Actúa como registro de interfaz entre el bus de datos y los registros internos de la CPU."
+    },
+    {
+      "q": "Después de una fase Fetch exitosa, ¿cuál es el estado del PC respecto a la instrucción que acaba de ser leída?",
+      "options": ["El PC apunta a la misma instrucción que acaba de leer", "El PC ha avanzado y ya apunta a la siguiente instrucción", "El PC ha sido puesto a cero para reiniciar el ciclo"],
+      "correct": 1,
+      "hint": "El PC se incrementa en T2, antes de que termine el Fetch.",
+      "explanation": "En T2 del Fetch se realiza PC←PC+4 simultáneamente con MDR←M[MAR]. Esto significa que al finalizar el Fetch (T3), el PC ya apunta a la siguiente instrucción en memoria, lista para el próximo ciclo de búsqueda. Este comportamiento es esencial para la ejecución secuencial del programa."
+    },
+    {
+      "q": "¿Cuál es el efecto de una instrucción JUMP sobre el PC en comparación con el incremento normal del Fetch?",
+      "options": ["JUMP también incrementa el PC en 4, pero lo hace dos veces", "JUMP sobrescribe el valor del PC con la dirección destino del salto", "JUMP no modifica el PC, sino que modifica el IR"],
+      "correct": 1,
+      "hint": "Un salto cambia el flujo secuencial redirigiendo el PC.",
+      "explanation": "Una instrucción JUMP (salto incondicional) reemplaza el valor del PC con la dirección destino especificada en la instrucción (PC←dirección_destino). Esto provoca que el siguiente Fetch se realice desde esa nueva dirección, rompiendo la secuencialidad normal del programa."
+    },
+    {
+      "q": "¿Qué señal activa la Unidad de Control en el bus de control durante la microoperación M[MAR]←MDR de la instrucción SW?",
+      "options": ["Señal de lectura (Read)", "Señal de escritura (Write)", "Señal de interrupción (Interrupt)"],
+      "correct": 1,
+      "hint": "SW es una operación de escritura en memoria.",
+      "explanation": "Durante M[MAR]←MDR la Unidad de Control activa la señal Write en el bus de control. Esta señal indica a la memoria RAM que debe capturar el dato presente en el bus de datos (que proviene del MDR) y almacenarlo en la celda cuya dirección está en el bus de direcciones (procedente del MAR)."
+    },
+    {
+      "q": "En el contexto del ciclo de instrucción, ¿cómo afecta la introducción de caché L1 al camino crítico?",
+      "options": ["No afecta al camino crítico porque la caché no forma parte del procesador", "Reduce el retardo de acceso a memoria, reduciendo el camino crítico y permitiendo mayor frecuencia de reloj", "Aumenta el camino crítico porque añade más lógica de hardware"],
+      "correct": 1,
+      "hint": "La caché es mucho más rápida que la DRAM externa.",
+      "explanation": "La caché L1 (típicamente SRAM integrada en el chip) tiene retardos de acceso mucho menores que la DRAM externa (décimas de nanosegundo frente a varias decenas). Al reducir el retardo del camino crítico de acceso a memoria, se puede aumentar la frecuencia máxima del reloj del procesador."
+    },
+    {
+      "q": "¿Cuál es la relación matemática entre la frecuencia máxima de reloj y el retardo del camino crítico?",
+      "options": ["f_max = Retardo_crítico × 2", "f_max = 1 / Retardo_crítico", "f_max = Retardo_crítico / número_de_etapas"],
+      "correct": 1,
+      "hint": "Frecuencia y período (retardo) son recíprocos.",
+      "explanation": "La frecuencia máxima es el inverso del período mínimo del reloj, que debe ser al menos igual al retardo del camino crítico: f_max = 1/Retardo_crítico. Si el retardo crítico es 0.4 ns, entonces f_max = 1/(0.4×10⁻⁹) = 2.5 GHz."
+    },
+    {
+      "q": "¿Cuántos ciclos de reloj totales (Fetch + ejecución) requiere completamente la instrucción LW R1, [1000] según el modelo RTL del tema?",
+      "options": ["4 ciclos totales", "5 ciclos totales", "6 ciclos totales"],
+      "correct": 2,
+      "hint": "Cuenta: T1, T2, T3 (Fetch) + T4, T5, T6 (ejecución LW).",
+      "explanation": "LW R1, [1000] requiere: T1 (MAR←PC), T2 (MDR←M[MAR], PC←PC+4), T3 (IR←MDR), T4 (MAR←Dirección(1000)), T5 (MDR←M[MAR]), T6 (R1←MDR). Total: 6 ciclos de reloj. La instrucción ADD requeriría solo 5 ciclos (T1 a T5)."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "La fase ____ del ciclo de instrucción lee la instrucción de la memoria y la almacena en el IR.",
+      "options": ["Fetch", "Execute", "Write-Back"],
+      "correct": 0,
+      "hint": "Esta fase es universal para todas las instrucciones.",
+      "explanation": "La fase Fetch (Búsqueda) es la que lee la instrucción apuntada por el PC desde la memoria RAM y la carga en el Registro de Instrucción (IR). Se realiza en 3 ciclos: T1, T2 y T3."
+    },
+    {
+      "q": "En RTL, la microoperación T1 del Fetch se escribe como ____.",
+      "options": ["MAR←PC", "IR←MDR", "PC←PC+4"],
+      "correct": 0,
+      "hint": "T1 prepara la dirección de memoria para el acceso.",
+      "explanation": "T1: MAR←PC. El primer ciclo del Fetch transfiere el valor del Program Counter al Memory Address Register, colocando la dirección de la instrucción en el bus de direcciones."
+    },
+    {
+      "q": "El Camino Crítico (Critical Path) de un procesador determina su frecuencia ____ de reloj.",
+      "options": ["máxima", "mínima", "promedio"],
+      "correct": 0,
+      "hint": "El componente más lento impone un límite superior a la velocidad.",
+      "explanation": "El camino crítico determina la frecuencia máxima: f_max = 1/Retardo_crítico. No se puede operar más rápido que el camino más lento sin comprometer la correcta propagación de señales."
+    },
+    {
+      "q": "La instrucción ADD R1, R2, R3 requiere ____ ciclos de reloj adicionales tras el Fetch.",
+      "options": ["2", "3", "4"],
+      "correct": 0,
+      "hint": "T4 carga operandos en ALU y T5 escribe el resultado.",
+      "explanation": "ADD requiere 2 ciclos post-Fetch: T4 (Entrada_A_ALU←R2, Entrada_B_ALU←R3) y T5 (R1←Salida_ALU). Al ser operación puramente interna, no hay acceso a memoria RAM."
+    },
+    {
+      "q": "En la instrucción SW R1, [2000], la microoperación T5 en RTL es ____.",
+      "options": ["MDR←R1", "M[MAR]←MDR", "MAR←Dirección(2000)"],
+      "correct": 0,
+      "hint": "En T5 se prepara el dato para ser escrito en la memoria.",
+      "explanation": "T5: MDR←R1. El contenido del registro R1 se copia al MDR para que esté disponible en el bus de datos cuando en T6 se active la señal Write de escritura en memoria."
+    },
+    {
+      "q": "El registro ____ actúa como interfaz entre la CPU y el bus de direcciones de memoria.",
+      "options": ["MAR (Memory Address Register)", "MDR (Memory Data Register)", "IR (Instruction Register)"],
+      "correct": 0,
+      "hint": "Su nombre incluye la palabra 'Address'.",
+      "explanation": "El MAR (Memory Address Register) está físicamente conectado al bus de direcciones. Toda dirección de memoria debe pasar por él antes de acceder a la RAM, tanto en lecturas como en escrituras."
+    },
+    {
+      "q": "Si el retardo del camino crítico es de 0.5 ns, la frecuencia máxima del procesador es ____ GHz.",
+      "options": ["2.0", "2.5", "4.0"],
+      "correct": 0,
+      "hint": "Aplica f = 1/T, con T = 0.5 ns = 0.5×10⁻⁹ s.",
+      "explanation": "f_max = 1/(0.5×10⁻⁹) = 2.0×10⁹ Hz = 2.0 GHz. La frecuencia máxima es el recíproco del período mínimo, que está fijado por el retardo del camino crítico."
+    },
+    {
+      "q": "La fase ____ es idéntica (universal) para todas las instrucciones de máquina.",
+      "options": ["Fetch", "Execute", "Write-Back"],
+      "correct": 0,
+      "hint": "Toda instrucción necesita ser leída antes de ser procesada.",
+      "explanation": "La fase Fetch es universal porque toda instrucción, independientemente de su tipo, debe ser leída de memoria y cargada en el IR. Las fases posteriores varían según el OPCode."
+    },
+    {
+      "q": "El registro ____ contiene el código binario de la instrucción que está siendo procesada por la Unidad de Control.",
+      "options": ["IR (Instruction Register)", "PC (Program Counter)", "MAR (Memory Address Register)"],
+      "correct": 0,
+      "hint": "Su nombre incluye 'Instruction'.",
+      "explanation": "El IR (Instruction Register) almacena la instrucción actualmente en proceso. La Unidad de Control analiza su contenido en la fase Decode para identificar el OPCode y generar las señales de control apropiadas."
+    },
+    {
+      "q": "En el ciclo Fetch, las microoperaciones T1, T2 y T3 corresponden a ____.",
+      "options": ["MAR←PC, MDR←M[MAR] y PC←PC+4 simultáneamente, IR←MDR", "MAR←MDR, PC←IR, IR←PC", "IR←PC, MAR←MDR, PC←IR"],
+      "correct": 0,
+      "hint": "El orden es: dirección → lectura → carga en IR.",
+      "explanation": "T1: MAR←PC (preparar dirección); T2: MDR←M[MAR] y PC←PC+4 simultáneamente (leer instrucción e incrementar PC); T3: IR←MDR (cargar instrucción en registro de decodificación)."
+    },
+    {
+      "q": "La instrucción LW R1, [1000] requiere un total de ____ ciclos de reloj (incluyendo Fetch).",
+      "options": ["6", "5", "4"],
+      "correct": 0,
+      "hint": "3 ciclos de Fetch + 3 ciclos de ejecución específica de LW.",
+      "explanation": "LW requiere 6 ciclos: T1, T2, T3 (Fetch) + T4 (MAR←Dirección(1000)), T5 (MDR←M[MAR]), T6 (R1←MDR). El acceso a memoria para leer el dato añade 3 ciclos post-Fetch."
+    },
+    {
+      "q": "La señal activada en el bus de control durante la microoperación M[MAR]←MDR es la señal de ____.",
+      "options": ["escritura (Write)", "lectura (Read)", "interrupción (Interrupt)"],
+      "correct": 0,
+      "hint": "M[MAR]←MDR indica que se está escribiendo en memoria.",
+      "explanation": "La señal Write indica a la RAM que debe capturar el dato del bus de datos (procedente del MDR) y almacenarlo en la celda cuya dirección está en el bus de direcciones (procedente del MAR)."
+    },
+    {
+      "q": "El componente más lento en el ejemplo del tema, que define el camino crítico, es el ____.",
+      "options": ["acceso a memoria (0.4 ns)", "cálculo en ALU (0.25 ns)", "acceso al banco de registros (0.1 ns)"],
+      "correct": 0,
+      "hint": "El retardo mayor es el que limita la frecuencia.",
+      "explanation": "El acceso a memoria con 0.4 ns es el componente más lento en el ejemplo del tema. Como el camino crítico es la ruta más lenta, define la frecuencia máxima: f_max = 1/0.4ns = 2.5 GHz."
+    },
+    {
+      "q": "En la fase Fetch, el PC se incrementa en ____ para instrucciones de 32 bits.",
+      "options": ["4", "2", "8"],
+      "correct": 0,
+      "hint": "32 bits = 4 bytes, y el PC avanza byte a byte en la mayoría de arquitecturas.",
+      "explanation": "Para instrucciones de 32 bits (4 bytes), el PC se incrementa en 4 unidades (bytes) durante T2: PC←PC+4. Esto asegura que el siguiente Fetch lea la instrucción inmediatamente posterior en memoria."
+    },
+    {
+      "q": "El MDR (Memory Data Register) es ____ porque puede recibir datos de la CPU para escritura o enviar datos al CPU tras lectura.",
+      "options": ["bidireccional", "unidireccional", "un registro de solo lectura"],
+      "correct": 0,
+      "hint": "Funciona en ambos sentidos según la operación.",
+      "explanation": "El MDR es bidireccional: en lecturas (LW) recibe datos de la RAM para pasarlos a registros internos; en escrituras (SW) contiene datos de la CPU que serán enviados a la RAM. Esta bidireccionalidad es esencial para su función de interfaz."
+    },
+    {
+      "q": "Para una CPU con instrucciones de 2 bytes (16 bits), el incremento del PC en T2 sería PC←PC+____.",
+      "options": ["2", "4", "1"],
+      "correct": 0,
+      "hint": "El incremento del PC es igual al tamaño en bytes de la instrucción.",
+      "explanation": "Con instrucciones de 16 bits = 2 bytes, el PC debe incrementarse en 2: PC←PC+2. Esto permite apuntar a la siguiente instrucción de 16 bits en la memoria linealmente organizada por bytes."
+    },
+    {
+      "q": "En la instrucción JUMP 0x1500, la microoperación de ejecución es ____.",
+      "options": ["PC←0x1500", "MAR←0x1500", "IR←0x1500"],
+      "correct": 0,
+      "hint": "JUMP modifica directamente el puntero de programa.",
+      "explanation": "JUMP 0x1500 realiza PC←0x1500. Al sobrescribir el PC con la dirección destino, el siguiente ciclo Fetch leerá desde 0x1500, implementando así el cambio de flujo de ejecución del programa."
+    },
+    {
+      "q": "La frecuencia de reloj de un procesador puede aumentarse reduciendo el ____ del camino crítico.",
+      "options": ["retardo de propagación", "número de registros", "tamaño del bus de datos"],
+      "correct": 0,
+      "hint": "f_max = 1/retardo; reducir el retardo aumenta f.",
+      "explanation": "Como f_max = 1/Retardo_crítico, cualquier reducción en el retardo del camino crítico (mediante mejoras tecnológicas, caché, pipelines, etc.) permite incrementar la frecuencia máxima de operación del procesador."
+    },
+    {
+      "q": "El RTL (Register Transfer Language) describe el flujo de datos entre ____ en cada ciclo de reloj.",
+      "options": ["registros de la CPU", "procesos del sistema operativo", "transistores del circuito"],
+      "correct": 0,
+      "hint": "RTL modela transferencias entre elementos de almacenamiento interno.",
+      "explanation": "RTL (Lenguaje de Transferencia entre Registros) describe matemáticamente qué datos se mueven entre qué registros de la CPU en cada ciclo de reloj. Permite modelar con precisión el comportamiento temporal del hardware a nivel micro-arquitectónico."
+    },
+    {
+      "q": "En el ciclo de instrucción, la fase ____ genera las señales de control que dirigen toda la ejecución posterior.",
+      "options": ["Decode", "Fetch", "Write-Back"],
+      "correct": 0,
+      "hint": "Para saber qué hacer, primero hay que entender la instrucción.",
+      "explanation": "La fase Decode (Decodificación) analiza el OPCode del IR y genera las señales de control que la Unidad de Control enviará a la ALU, al banco de registros y al bus durante las fases posteriores. Sin Decode, el hardware no sabría qué operación ejecutar."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el ciclo Fetch es correcta?",
+      "options": ["T1: MAR←PC transfiere la dirección al bus de direcciones", "El Fetch requiere sólo 2 ciclos de reloj", "En T3 se incrementa el PC"],
+      "correct": 0,
+      "hint": "T1 es el primer paso del Fetch y prepara la dirección.",
+      "explanation": "T1: MAR←PC es correcta: transfiere la dirección actual del PC al MAR, que está conectado al bus de direcciones, iniciando el ciclo de acceso a memoria para leer la instrucción. El Fetch requiere 3 ciclos (no 2), y el PC se incrementa en T2 (no T3)."
+    },
+    {
+      "q": "Para una instrucción ADD R1, R2, R3, ¿cuál de las siguientes opciones describe correctamente todas las microoperaciones post-Fetch?",
+      "options": ["T4: Entrada_A←R2, Entrada_B←R3; T5: R1←Salida_ALU", "T4: MAR←R2; T5: MDR←M[MAR]; T6: R1←MDR", "Todas las anteriores"],
+      "correct": 0,
+      "hint": "ADD es registro-registro, no accede a memoria.",
+      "explanation": "Para ADD R1, R2, R3 solo hay 2 microoperaciones post-Fetch: T4 carga los operandos en la ALU (Entrada_A←R2, Entrada_B←R3) y T5 escribe el resultado (R1←Salida_ALU). No hay acceso a memoria. La opción B describe LW, no ADD."
+    },
+    {
+      "q": "Respecto al retardo del camino crítico, ¿cuál de las siguientes afirmaciones es correcta?",
+      "options": ["El banco de registros con 0.1 ns de retardo define el camino crítico en el ejemplo", "El acceso a memoria con 0.4 ns define el camino crítico en el ejemplo", "Todas las anteriores"],
+      "correct": 1,
+      "hint": "El camino crítico es el más lento, no el más rápido.",
+      "explanation": "En el ejemplo del tema, el acceso a memoria tiene el mayor retardo (0.4 ns), frente a la ALU (0.25 ns) y el banco de registros (0.1 ns). Por tanto es el acceso a memoria el que define el camino crítico y limita la frecuencia máxima a 2.5 GHz."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son características del MDR (Memory Data Register)?",
+      "options": ["Todas las anteriores", "Es bidireccional y actúa como búfer entre CPU y RAM", "Solo puede escribir datos, nunca leer"],
+      "correct": 1,
+      "hint": "El MDR gestiona el flujo de datos en ambas direcciones.",
+      "explanation": "El MDR es bidireccional: en lecturas (LW) recibe datos de RAM; en escrituras (SW) envía datos a RAM. Actúa como búfer desacoplando los tiempos del procesador y la memoria. La opción C es incorrecta porque el MDR también lee de memoria."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones son correctas sobre la fase Fetch?",
+      "options": ["Todas las anteriores", "En T2 se realizan simultáneamente MDR←M[MAR] y PC←PC+4", "En T1 se carga la instrucción en el IR"],
+      "correct": 1,
+      "hint": "La simultaneidad en T2 es un detalle crítico del Fetch.",
+      "explanation": "En T2 se realizan simultáneamente MDR←M[MAR] (lectura de instrucción) y PC←PC+4 (incremento del PC), aprovechando que son operaciones independientes en hardware paralelo. La afirmación C es falsa: en T1 se transfiere PC a MAR, no se carga el IR."
+    },
+    {
+      "q": "¿Cuál de las siguientes instrucciones requiere el mayor número de ciclos de reloj totales?",
+      "options": ["LW R1, [1000] con 6 ciclos totales", "ADD R1, R2, R3 con 5 ciclos totales", "Todas las anteriores requieren el mismo número"],
+      "correct": 0,
+      "hint": "LW accede a memoria para el dato, añadiendo ciclos extra.",
+      "explanation": "LW R1, [1000] requiere 6 ciclos (3 Fetch + 3 ejecución), mientras ADD R1, R2, R3 requiere 5 ciclos (3 Fetch + 2 ejecución). El acceso adicional a memoria de LW (MAR←Dir, MDR←M[MAR], R1←MDR) añade un ciclo extra respecto a ADD."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre el ciclo RTL son correctas?",
+      "options": ["Todas las anteriores", "T3 transfiere la instrucción del MDR al IR", "T3 incrementa el PC en 4"],
+      "correct": 1,
+      "hint": "T3 es la última microoperación del Fetch.",
+      "explanation": "T3: IR←MDR es la microoperación correcta de T3: transfiere la instrucción del MDR al IR. La afirmación C es incorrecta (el PC se incrementa en T2, no T3). La opción A ('Todas las anteriores') también incluiría C, que es falsa, así que no puede ser correcta."
+    },
+    {
+      "q": "¿Cuál de los siguientes componentes NO se modifica en T1 del ciclo Fetch?",
+      "options": ["MDR", "MAR", "Ninguna de las anteriores"],
+      "correct": 0,
+      "hint": "En T1 solo se transfiere PC a MAR.",
+      "explanation": "En T1: MAR←PC solo se modifica el MAR. El MDR no es alterado en T1 (se modifica en T2). La opción B es incorrecta porque el MAR sí se modifica. La opción C ('Ninguna de las anteriores') implicaría que ambos se modifican, lo que es falso."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre las instrucciones SW (Store Word) es correcta?",
+      "options": ["Ninguna de las anteriores", "SW no requiere el ciclo Fetch porque no lee de memoria", "SW escribe el PC en memoria"],
+      "correct": 0,
+      "hint": "SW sí realiza el Fetch universal y escribe datos de un registro en RAM.",
+      "explanation": "Las opciones B y C son incorrectas. SW sí realiza el ciclo Fetch (es universal) y escribe el contenido de un registro (R1) en una posición de memoria, no el PC. La respuesta correcta es A: 'Ninguna de las anteriores', porque las afirmaciones B y C son ambas falsas."
+    },
+    {
+      "q": "Si aumentamos la frecuencia de reloj por encima de f_max, ¿qué ocurre?",
+      "options": ["Ninguna de las anteriores", "El procesador ralentiza automáticamente para protegerse", "El procesador no sufre ningún efecto negativo"],
+      "correct": 0,
+      "hint": "Superar f_max tiene consecuencias físicas graves para la correcta operación.",
+      "explanation": "Ninguna de las opciones B o C es correcta. Superar f_max provoca que las señales no se estabilicen a tiempo, causando captura de valores incorrectos en los registros (metaestabilidad) y corrupción de datos. Los procesadores modernos pueden tener protección térmica, pero no protección lógica contra overclocking extremo."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el IR (Instruction Register) es incorrecta?",
+      "options": ["Ninguna de las anteriores", "El IR almacena la instrucción siendo ejecutada actualmente", "El IR se carga durante la fase Fetch en T3"],
+      "correct": 0,
+      "hint": "Evalúa si las afirmaciones B y C son correctas o incorrectas.",
+      "explanation": "Ambas afirmaciones B y C son correctas: el IR sí almacena la instrucción en curso y sí se carga en T3 del Fetch (IR←MDR). Dado que ambas son correctas, la respuesta es A: 'Ninguna de las anteriores' (no hay ninguna afirmación incorrecta entre B y C)."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el PC (Program Counter) es incorrecta?",
+      "options": ["Ninguna de las anteriores", "El PC apunta a la instrucción que se está ejecutando actualmente", "El PC se incrementa durante el ciclo Fetch"],
+      "correct": 1,
+      "hint": "Tras el Fetch, el PC ya apunta a la instrucción SIGUIENTE.",
+      "explanation": "La afirmación B es incorrecta: tras T2 del Fetch, el PC ya apunta a la SIGUIENTE instrucción, no a la actual. La instrucción actual está en el IR. La afirmación C es correcta (el PC se incrementa en T2). Por tanto hay una afirmación incorrecta, y la respuesta no es A."
+    },
+    {
+      "q": "¿Cuál de las siguientes describe correctamente la relación entre el camino crítico y el diseño de procesadores?",
+      "options": ["Ninguna de las anteriores", "El camino crítico no afecta a la frecuencia máxima de reloj", "El camino crítico es siempre el camino más corto del circuito"],
+      "correct": 0,
+      "hint": "El camino crítico es fundamental en el diseño de CPUs.",
+      "explanation": "Las opciones B y C son ambas incorrectas: el camino crítico sí determina la frecuencia máxima (f_max = 1/retardo_crítico) y es el camino MÁS LARGO (mayor retardo), no el más corto. Por tanto la respuesta es A: 'Ninguna de las anteriores' entre las afirmaciones presentadas."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la instrucción LW R1, [1000] es incorrecta?",
+      "options": ["Ninguna de las anteriores", "LW requiere exactamente 5 ciclos de reloj totales", "LW escribe el resultado en un registro de la CPU"],
+      "correct": 1,
+      "hint": "Cuenta los ciclos de LW: Fetch (3) + ejecución (3) = ?",
+      "explanation": "La afirmación B es incorrecta: LW requiere 6 ciclos totales (T1 a T6), no 5. La afirmación C es correcta: LW sí escribe el dato leído de memoria en R1 del banco de registros (T6: R1←MDR). Dado que B es incorrecta, la respuesta no es A."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una ventaja de realizar PC←PC+4 simultáneamente con MDR←M[MAR] en T2?",
+      "options": ["Ninguna de las anteriores", "Permite que el Fetch dure sólo 1 ciclo", "Ahorra un ciclo de reloj al paralelizar dos operaciones independientes"],
+      "correct": 2,
+      "hint": "La simultaneidad en T2 aprovecha el paralelismo hardware.",
+      "explanation": "La opción C es correcta: al realizar ambas operaciones simultáneamente en T2 (usando recursos hardware independientes: el bus de memoria para MDR←M[MAR] y el incrementador del PC para PC←PC+4), se ahorra un ciclo de reloj respecto a hacerlas secuencialmente. El Fetch sigue durando 3 ciclos, no 1 (B es incorrecto)."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el ciclo de instrucción es incorrecta?",
+      "options": ["Ninguna de las anteriores", "La fase Execute siempre accede a memoria RAM", "La fase Decode identifica el OPCode de la instrucción"],
+      "correct": 1,
+      "hint": "Las instrucciones registro-registro no acceden a memoria en Execute.",
+      "explanation": "La afirmación B es incorrecta: la fase Execute NO siempre accede a memoria. Las instrucciones registro-registro como ADD operan puramente en registros internos y no acceden a RAM durante Execute. La afirmación C es correcta: Decode sí identifica el OPCode."
+    },
+    {
+      "q": "¿Cuál de las siguientes mejoras hardware NO reduciría el retardo del camino crítico?",
+      "options": ["Ninguna de las anteriores", "Añadir más registros de propósito general sin cambiar la tecnología de fabricación", "Implementar caché L1 de alta velocidad integrada en el chip"],
+      "correct": 1,
+      "hint": "Más registros no aceleran el hardware existente.",
+      "explanation": "Añadir más registros de propósito general (B) no reduce el retardo del camino crítico porque no cambia la velocidad de los componentes existentes (ALU, memoria, etc.). La caché L1 integrada (C) sí reduce el retardo al reemplazar accesos lentos a DRAM por accesos rápidos a SRAM interna."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el RTL es correcta?",
+      "options": ["Ninguna de las anteriores", "RTL sólo puede describir la fase Fetch, no las demás", "RTL es exclusivo para procesadores RISC"],
+      "correct": 0,
+      "hint": "RTL es un formalismo general para describir hardware.",
+      "explanation": "Las opciones B y C son ambas incorrectas: RTL puede describir TODAS las fases del ciclo de instrucción (no solo Fetch) y es un formalismo general aplicable a cualquier arquitectura (RISC, CISC, etc.). Por tanto la respuesta correcta es A: 'Ninguna de las anteriores' es incorrecta entre las opciones B y C."
+    },
+    {
+      "q": "¿Cuál es la secuencia correcta de fases del ciclo de instrucción para una instrucción de carga (LW)?",
+      "options": ["Fetch → Decode → Fetch Operands → Execute → Write-Back", "Execute → Fetch → Decode → Write-Back", "Todas las anteriores son válidas"],
+      "correct": 0,
+      "hint": "Las fases deben seguir un orden lógico estricto.",
+      "explanation": "La secuencia correcta para LW es: Fetch (leer instrucción), Decode (identificar LW), Fetch Operands (leer dato de memoria), Execute (en LW el 'execute' es mínimo), Write-Back (R1←MDR). La opción B es incorrecta porque Execute no puede ser antes de Fetch."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre el MAR son correctas?",
+      "options": ["Todas las anteriores", "El MAR recibe la dirección del PC en T1 del Fetch", "El MAR recibe la dirección del dato en instrucciones de acceso a memoria"],
+      "correct": 0,
+      "hint": "El MAR se usa tanto para instrucciones como para datos.",
+      "explanation": "Ambas afirmaciones B y C son correctas: en T1 del Fetch el MAR recibe la dirección de la instrucción desde el PC (MAR←PC), y en instrucciones de acceso a memoria (LW, SW) el MAR también recibe la dirección del dato (T4: MAR←Dirección). Por tanto 'Todas las anteriores' (A) es correcta."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son fases del ciclo de instrucción descritas en el tema?",
+      "options": ["Todas las anteriores", "Fetch y Decode", "Execute y Write-Back"],
+      "correct": 0,
+      "hint": "El ciclo tiene 5 fases en total.",
+      "explanation": "El ciclo de instrucción incluye las 5 fases: Fetch, Decode, Fetch Operands, Execute y Write-Back. Tanto B (Fetch y Decode) como C (Execute y Write-Back) son subconjuntos correctos pero incompletos. La respuesta más completa es A: 'Todas las anteriores' (que incluye implícitamente todas las fases)."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Ciclo Fetch en RTL: CPU de 1 GHz",
+      "context": "Un procesador opera a 1 GHz (período de reloj T = 1 ns). El ciclo Fetch requiere 3 ciclos de reloj (T1, T2, T3). Se pide analizar los tiempos del ciclo Fetch.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj a 1 GHz?",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "$$T = \\frac{1}{f} = \\frac{1}{1 \\times 10^9} = 1 \\text{ ns}$$"
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos dura la fase Fetch completa (3 ciclos)?",
+          "correctValue": 3.0,
+          "tolerance": 0.05,
+          "explanation": "$$t_{Fetch} = 3 \\times T = 3 \\times 1 \\text{ ns} = 3 \\text{ ns}$$"
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Si la instrucción ADD requiere 2 ciclos adicionales post-Fetch, ¿cuántos nanosegundos dura ADD completa?",
+          "correctValue": 5.0,
+          "tolerance": 0.05,
+          "explanation": "$$t_{ADD} = (3 + 2) \\times T = 5 \\times 1 \\text{ ns} = 5 \\text{ ns}$$"
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si la instrucción LW requiere 3 ciclos adicionales post-Fetch, ¿cuántos nanosegundos dura LW completa?",
+          "correctValue": 6.0,
+          "tolerance": 0.05,
+          "explanation": "$$t_{LW} = (3 + 3) \\times T = 6 \\times 1 \\text{ ns} = 6 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Camino Crítico y Frecuencia Máxima",
+      "context": "Un procesador tiene los siguientes retardos de propagación: acceso a memoria = 0.4 ns, ALU = 0.25 ns, banco de registros = 0.1 ns.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuál es el retardo del camino crítico (en ns)?",
+          "correctValue": 0.4,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Retardo crítico} = \\max(0.4, 0.25, 0.1) = 0.4 \\text{ ns}$$"
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia máxima de reloj en GHz?",
+          "correctValue": 2.5,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{0.4 \\times 10^{-9}} = 2.5 \\times 10^9 \\text{ Hz} = 2.5 \\text{ GHz}$$"
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Si mejoramos la memoria para reducir su retardo a 0.25 ns, ¿cuál sería la nueva frecuencia máxima en GHz?",
+          "correctValue": 4.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{0.25 \\times 10^{-9}} = 4.0 \\times 10^9 \\text{ Hz} = 4.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Con la mejora de la memoria (retardo 0.25 ns), ¿cuántos nanosegundos dura ahora un ciclo Fetch completo (3 ciclos)?",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "$$t_{Fetch} = 3 \\times T_{\\text{nuevo}} = 3 \\times 0.25 \\text{ ns} = 0.75 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Secuencia de Instrucciones: Ciclos Totales",
+      "context": "Un programa contiene la siguiente secuencia: 4 instrucciones ADD (5 ciclos c/u) y 3 instrucciones LW (6 ciclos c/u). El procesador opera a 2 GHz.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj totales consumen las 4 instrucciones ADD?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{ADD} = 4 \\times 5 = 20 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos de reloj totales consumen las 3 instrucciones LW?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{LW} = 3 \\times 6 = 18 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos de reloj totales requiere toda la secuencia?",
+          "correctValue": 38,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 20 + 18 = 38 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos dura la ejecución total de la secuencia a 2 GHz (T = 0.5 ns)?",
+          "correctValue": 19.0,
+          "tolerance": 0.1,
+          "explanation": "$$t_{total} = 38 \\times 0.5 \\text{ ns} = 19.0 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "CPI Promedio de un Programa Mixto",
+      "context": "Un programa ejecuta 100 instrucciones: 60 ADD (5 ciclos c/u) y 40 LW (6 ciclos c/u).",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos consumen las 60 instrucciones ADD?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{ADD} = 60 \\times 5 = 300 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos consumen las 40 instrucciones LW?",
+          "correctValue": 240,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{LW} = 40 \\times 6 = 240 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos totales requiere el programa?",
+          "correctValue": 540,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 300 + 240 = 540 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "¿Cuál es el CPI (Cycles Per Instruction) promedio del programa?",
+          "correctValue": 5.4,
+          "tolerance": 0.05,
+          "explanation": "$$CPI = \\frac{\\text{Ciclos}_{total}}{N_{instrucciones}} = \\frac{540}{100} = 5.4$$"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Tiempo de Ejecución con Camino Crítico Variable",
+      "context": "Un procesador tiene un camino crítico inicial de 0.5 ns. Se desea ejecutar un programa de 200 instrucciones ADD (5 ciclos c/u).",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuál es la frecuencia máxima de reloj inicial en GHz?",
+          "correctValue": 2.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{0.5 \\times 10^{-9}} = 2.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos totales requieren las 200 instrucciones ADD?",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 200 \\times 5 = 1000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "¿Cuántos microsegundos (µs) tarda la ejecución del programa a 2 GHz?",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "$$t = \\frac{1000}{2 \\times 10^9} = 500 \\times 10^{-9} \\text{ s} = 0.5 \\text{ µs}$$"
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si mejoramos el camino crítico a 0.25 ns (4 GHz), ¿cuántos nanosegundos dura ahora la misma ejecución?",
+          "correctValue": 250.0,
+          "tolerance": 1.0,
+          "explanation": "$$t = \\frac{1000}{4 \\times 10^9} = 250 \\times 10^{-9} \\text{ s} = 250 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Instrucción SW: Ciclos y Tiempo",
+      "context": "La instrucción SW R1, [2000] requiere 3 ciclos post-Fetch (T4, T5, T6). El procesador opera a 500 MHz.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuál es el período de reloj en nanosegundos a 500 MHz?",
+          "correctValue": 2.0,
+          "tolerance": 0.05,
+          "explanation": "$$T = \\frac{1}{500 \\times 10^6} = 2 \\times 10^{-9} \\text{ s} = 2 \\text{ ns}$$"
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos de reloj totales requiere SW R1, [2000]?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{SW} = 3 \\text{ (Fetch)} + 3 \\text{ (ejecución)} = 6 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos dura la instrucción SW completa a 500 MHz?",
+          "correctValue": 12.0,
+          "tolerance": 0.1,
+          "explanation": "$$t_{SW} = 6 \\times 2 \\text{ ns} = 12 \\text{ ns}$$"
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Si ejecutamos 50 instrucciones SW, ¿cuántos microsegundos (µs) dura la secuencia?",
+          "correctValue": 0.6,
+          "tolerance": 0.01,
+          "explanation": "$$t_{total} = 50 \\times 12 \\text{ ns} = 600 \\text{ ns} = 0.6 \\text{ µs}$$"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Mejora de Frecuencia y Aceleración (Speedup)",
+      "context": "Un procesador antiguo opera a 1 GHz. Uno nuevo opera a 4 GHz. Ambos ejecutan el mismo programa de 500 ciclos de reloj (en el procesador antiguo).",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos tarda el procesador antiguo (1 GHz) en ejecutar 500 ciclos?",
+          "correctValue": 500.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{\\text{antiguo}} = \\frac{500}{1 \\times 10^9} = 500 \\text{ ns}$$"
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos tarda el procesador nuevo (4 GHz) en ejecutar los mismos 500 ciclos?",
+          "correctValue": 125.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{\\text{nuevo}} = \\frac{500}{4 \\times 10^9} = 125 \\text{ ns}$$"
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "¿Cuál es el Speedup (aceleración) del procesador nuevo respecto al antiguo?",
+          "correctValue": 4.0,
+          "tolerance": 0.05,
+          "explanation": "$$\\text{Speedup} = \\frac{t_{\\text{antiguo}}}{t_{\\text{nuevo}}} = \\frac{500}{125} = 4.0$$"
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si el procesador nuevo también ejecuta 500 instrucciones en esos 500 ciclos, ¿cuál es su CPI?",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "$$CPI = \\frac{500 \\text{ ciclos}}{500 \\text{ instrucciones}} = 1.0$$"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Ciclos por Instrucción en Programa con 3 Tipos",
+      "context": "Un programa ejecuta: 50 instrucciones ADD (5 ciclos c/u), 30 instrucciones LW (6 ciclos c/u) y 20 instrucciones SW (6 ciclos c/u). Frecuencia = 1 GHz.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales consumen las instrucciones ADD?",
+          "correctValue": 250,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{ADD} = 50 \\times 5 = 250 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos totales consumen las instrucciones LW y SW juntas?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{LW+SW} = 30 \\times 6 + 20 \\times 6 = 180 + 120 = 300 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "¿Cuál es el CPI promedio del programa completo (100 instrucciones)?",
+          "correctValue": 5.5,
+          "tolerance": 0.05,
+          "explanation": "$$CPI = \\frac{250 + 300}{100} = \\frac{550}{100} = 5.5$$"
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos dura la ejecución total del programa a 1 GHz (T = 1 ns)?",
+          "correctValue": 550.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{total} = 550 \\text{ ciclos} \\times 1 \\text{ ns/ciclo} = 550 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Retardo del Camino Crítico: Diseño Multinivel",
+      "context": "Un nuevo diseño de procesador tiene los siguientes retardos: lógica combinacional ALU = 0.3 ns, acceso a caché L1 = 0.2 ns, banco de registros = 0.15 ns.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "¿Cuál es el retardo del camino crítico en nanosegundos?",
+          "correctValue": 0.3,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Retardo crítico} = \\max(0.3, 0.2, 0.15) = 0.3 \\text{ ns}$$"
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia máxima de reloj en GHz?",
+          "correctValue": 3.333,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{0.3 \\times 10^{-9}} \\approx 3.33 \\text{ GHz}$$"
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Si optimizamos la ALU a 0.2 ns, ¿cuál es la nueva frecuencia máxima en GHz?",
+          "correctValue": 5.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{\\max(0.2, 0.2, 0.15) \\times 10^{-9}} = \\frac{1}{0.2 \\times 10^{-9}} = 5.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Con la optimización de la ALU (f = 5 GHz), ¿cuántos nanosegundos dura un ciclo Fetch completo (3 ciclos)?",
+          "correctValue": 0.6,
+          "tolerance": 0.01,
+          "explanation": "$$t_{Fetch} = 3 \\times T = 3 \\times 0.2 \\text{ ns} = 0.6 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Número de Microoperaciones RTL y Ciclos de Reloj",
+      "context": "Un procesador ejecuta las instrucciones descritas en el tema. Se quiere calcular el número total de microoperaciones RTL para una secuencia de instrucciones.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuántas microoperaciones RTL tiene la fase Fetch (T1, T2, T3)? Nota: T2 cuenta 2 microoperaciones simultáneas.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{T1: 1, T2: 2 (MDR←M[MAR] y PC←PC+4), T3: 1} \\Rightarrow 4 \\text{ microoperaciones}$$"
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "¿Cuántas microoperaciones RTL tiene la instrucción ADD R1, R2, R3 completa (incluyendo Fetch)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Fetch: 4, T4: 2 (Ent\\_A←R2, Ent\\_B←R3), T5: 1 (R1←Salida\\_ALU)} \\Rightarrow 4+2+1 = 7$$\\n$$\\text{Nota: Fetch tiene 4, ADD post-Fetch: T4 (2 ops), T5 (1 op) = 3 ops} \\Rightarrow \\text{Total} = 4 + 3 = 7$$"
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "¿Cuántas microoperaciones RTL post-Fetch tiene LW R1, [1000] (T4, T5, T6)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$\\text{T4: MAR←Dir(1000) (1 op), T5: MDR←M[MAR] (1 op), T6: R1←MDR (1 op)} \\Rightarrow 3 \\text{ microoperaciones}$$"
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "¿Cuántas microoperaciones RTL post-Fetch tiene SW R1, [2000] (T4, T5, T6)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$\\text{T4: MAR←Dir(2000), T5: MDR←R1, T6: M[MAR]←MDR} \\Rightarrow 3 \\text{ microoperaciones}$$"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Programa con Instrucciones de Salto y Carga",
+      "context": "Un programa ejecuta 80 instrucciones LW (6 ciclos c/u) y 20 instrucciones JUMP (5 ciclos c/u). El procesador opera a 2.5 GHz.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales consumen las 80 instrucciones LW?",
+          "correctValue": 480,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{LW} = 80 \\times 6 = 480 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos totales consumen las 20 instrucciones JUMP (con 3 post-Fetch)?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{JUMP} = 20 \\times 5 = 100 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "¿Cuál es el CPI promedio del programa (100 instrucciones)?",
+          "correctValue": 5.8,
+          "tolerance": 0.05,
+          "explanation": "$$CPI = \\frac{480 + 100}{100} = \\frac{580}{100} = 5.8$$"
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos dura la ejecución total a 2.5 GHz (T = 0.4 ns)?",
+          "correctValue": 232.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{total} = 580 \\text{ ciclos} \\times 0.4 \\text{ ns} = 232 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Tiempo de Ejecución: Efecto de la Frecuencia de Reloj",
+      "context": "Un procesador A opera a 1 GHz y tiene CPI = 5.5. Un procesador B opera a 2 GHz y tiene CPI = 6. Ambos ejecutan 100 instrucciones.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales requiere el Procesador A para 100 instrucciones (CPI=5.5)?",
+          "correctValue": 550,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_A = 100 \\times 5.5 = 550 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos tarda el Procesador A (1 GHz) en ejecutar las 100 instrucciones?",
+          "correctValue": 550.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_A = \\frac{550}{1 \\times 10^9} = 550 \\text{ ns}$$"
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos tarda el Procesador B (2 GHz, CPI=6) en ejecutar 100 instrucciones?",
+          "correctValue": 300.0,
+          "tolerance": 1.0,
+          "explanation": "$$\\text{Ciclos}_B = 100 \\times 6 = 600, \\quad t_B = \\frac{600}{2 \\times 10^9} = 300 \\text{ ns}$$"
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "¿Cuántas veces es más rápido el Procesador B respecto al Procesador A?",
+          "correctValue": 1.833,
+          "tolerance": 0.05,
+          "explanation": "$$\\text{Speedup} = \\frac{t_A}{t_B} = \\frac{550}{300} \\approx 1.833$$"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Análisis RTL de la Instrucción LW: Verificación de Valores",
+      "context": "La RAM simulada tiene: dirección 0x1000 → instrucción 'LW R1, [0x2000]', dirección 0x2000 → valor 99. PC inicial = 0x1000.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Tras T1 del Fetch, ¿cuál es el valor hexadecimal de MAR? (Responde en decimal: 0x1000 = 4096)",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "$$T_1: MAR \\leftarrow PC = 0x1000 = 4096_{10}$$"
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Tras T2 del Fetch, ¿cuál es el valor decimal del PC?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "$$T_2: PC \\leftarrow PC + 4 = 0x1000 + 4 = 0x1004 = 4100_{10}$$"
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Tras T5 de la ejecución LW, ¿cuál es el valor del MDR?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "$$T_5: MDR \\leftarrow M[MAR] = M[0x2000] = 99$$"
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Tras T6, ¿cuál es el valor del registro R1?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "$$T_6: R1 \\leftarrow MDR = 99$$"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Impacto del Fetch en el Tiempo Total de Ejecución",
+      "context": "Un programa ejecuta 200 instrucciones. El ciclo Fetch dura 3 ciclos. Las instrucciones post-Fetch duran en promedio 2.5 ciclos. Frecuencia = 1 GHz.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj son debidos a Fetch para las 200 instrucciones?",
+          "correctValue": 600,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{Fetch} = 200 \\times 3 = 600 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos de reloj son debidos a las fases post-Fetch para las 200 instrucciones?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{\\text{post-Fetch}} = 200 \\times 2.5 = 500 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos de reloj totales requiere el programa?",
+          "correctValue": 1100,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 600 + 500 = 1100 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "¿Qué porcentaje del tiempo total corresponde al ciclo Fetch? (Con 1 decimal)",
+          "correctValue": 54.5,
+          "tolerance": 0.5,
+          "explanation": "$$\\%Fetch = \\frac{600}{1100} \\times 100 \\approx 54.5\\%$$"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Cálculo de Frecuencia desde Período Conocido",
+      "context": "Un procesador tiene los siguientes períodos de reloj en distintas configuraciones: configuración A: T = 0.5 ns; configuración B: T = 0.25 ns; configuración C: T = 0.2 ns.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuál es la frecuencia de la configuración A en GHz?",
+          "correctValue": 2.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_A = \\frac{1}{0.5 \\times 10^{-9}} = 2.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia de la configuración B en GHz?",
+          "correctValue": 4.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_B = \\frac{1}{0.25 \\times 10^{-9}} = 4.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "¿Cuál es la frecuencia de la configuración C en GHz?",
+          "correctValue": 5.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_C = \\frac{1}{0.2 \\times 10^{-9}} = 5.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "¿Cuántas veces es más rápida la configuración C respecto a la A?",
+          "correctValue": 2.5,
+          "tolerance": 0.05,
+          "explanation": "$$\\text{Speedup}_{C/A} = \\frac{f_C}{f_A} = \\frac{5.0}{2.0} = 2.5$$"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "CPI y Tiempo de Ejecución con Diferentes Tipos de Instrucciones",
+      "context": "Un benchmark ejecuta: 40% instrucciones ADD (5 ciclos), 40% instrucciones LW (6 ciclos), 20% instrucciones SW (6 ciclos). Total: 1000 instrucciones. Frecuencia = 3 GHz.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuál es el CPI ponderado del benchmark?",
+          "correctValue": 5.6,
+          "tolerance": 0.05,
+          "explanation": "$$CPI = 0.4 \\times 5 + 0.4 \\times 6 + 0.2 \\times 6 = 2.0 + 2.4 + 1.2 = 5.6$$"
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos totales requiere el benchmark (1000 instrucciones, CPI=5.6)?",
+          "correctValue": 5600,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 1000 \\times 5.6 = 5600 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos dura el benchmark a 3 GHz (T ≈ 0.333 ns)?",
+          "correctValue": 1866.7,
+          "tolerance": 5.0,
+          "explanation": "$$t = \\frac{5600}{3 \\times 10^9} \\approx 1866.7 \\text{ ns}$$"
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si reducimos el CPI de ADD a 4 ciclos manteniendo el resto igual, ¿cuál es el nuevo CPI ponderado?",
+          "correctValue": 5.2,
+          "tolerance": 0.05,
+          "explanation": "$$CPI_{\\text{nuevo}} = 0.4 \\times 4 + 0.4 \\times 6 + 0.2 \\times 6 = 1.6 + 2.4 + 1.2 = 5.2$$"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Latencia Total en Cadena de Instrucciones Dependientes",
+      "context": "Se ejecutan en secuencia sin solapamiento: LW R1,[100] (6 ciclos), ADD R1,R1,R2 (5 ciclos), SW R1,[200] (6 ciclos). Frecuencia = 2 GHz.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales requiere la secuencia de 3 instrucciones?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 6 + 5 + 6 = 17 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos dura la secuencia a 2 GHz (T = 0.5 ns)?",
+          "correctValue": 8.5,
+          "tolerance": 0.1,
+          "explanation": "$$t = 17 \\times 0.5 \\text{ ns} = 8.5 \\text{ ns}$$"
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "¿Cuál es el CPI promedio de las 3 instrucciones?",
+          "correctValue": 5.667,
+          "tolerance": 0.05,
+          "explanation": "$$CPI = \\frac{17}{3} \\approx 5.667$$"
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si la frecuencia aumenta a 4 GHz, ¿cuántos nanosegundos dura la misma secuencia de 17 ciclos?",
+          "correctValue": 4.25,
+          "tolerance": 0.05,
+          "explanation": "$$t = 17 \\times \\frac{1}{4 \\times 10^9} = 17 \\times 0.25 \\text{ ns} = 4.25 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Ciclos del Fetch con Diferente Tamaño de Instrucción",
+      "context": "Procesador A: instrucciones de 32 bits (PC+=4). Procesador B: instrucciones de 16 bits (PC+=2). Ambos a 2 GHz. Se ejecutan 100 instrucciones. El Fetch dura 3 ciclos en ambos.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos Fetch totales realizan los 100 instrucciones en el Procesador A?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{Fetch,A} = 100 \\times 3 = 300 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "¿Cuánto incrementa el PC por instrucción en el Procesador A (en bytes)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\Delta PC_A = 4 \\text{ bytes (instrucciones de 32 bits = 4 bytes)}$$"
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuánto incrementa el PC por instrucción en el Procesador B (en bytes)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$\\Delta PC_B = 2 \\text{ bytes (instrucciones de 16 bits = 2 bytes)}$$"
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si el programa del Procesador B ocupa 100 instrucciones de 16 bits en memoria, ¿cuántos bytes ocupa en memoria?",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "$$\\text{Tamaño} = 100 \\times 2 \\text{ bytes} = 200 \\text{ bytes}$$"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Frecuencia Actual vs. Frecuencia Máxima por Camino Crítico",
+      "context": "Un procesador opera actualmente a 2 GHz. Su camino crítico real es de 0.35 ns (acceso a memoria: 0.35 ns, ALU: 0.2 ns, registros: 0.1 ns).",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuál es la frecuencia máxima teórica permitida por el camino crítico en GHz?",
+          "correctValue": 2.857,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{0.35 \\times 10^{-9}} \\approx 2.857 \\text{ GHz}$$"
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos de margen de seguridad tiene el período actual respecto al camino crítico? (T_actual - T_crítico)",
+          "correctValue": 0.15,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Margen} = T_{\\text{actual}} - T_{\\text{crítico}} = 0.5 \\text{ ns} - 0.35 \\text{ ns} = 0.15 \\text{ ns}$$"
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Si el procesador se overclocka a 3 GHz (T = 0.333 ns), ¿cuántos nanosegundos faltarán para estabilizar la señal del camino crítico?",
+          "correctValue": 0.017,
+          "tolerance": 0.005,
+          "explanation": "$$\\text{Déficit} = T_{\\text{crítico}} - T_{\\text{overclock}} = 0.35 - 0.333 \\approx 0.017 \\text{ ns}$$"
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "¿Cuántos ciclos de Fetch (a 2 GHz) caben en 1 microsegundo (µs)?",
+          "correctValue": 666,
+          "tolerance": 5,
+          "explanation": "$$N_{Fetch} = \\frac{1 \\times 10^{-6} \\text{ s}}{3 \\times 0.5 \\times 10^{-9} \\text{ s}} = \\frac{10^{-6}}{1.5 \\times 10^{-9}} \\approx 666 \\text{ ciclos Fetch}$$"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Instrucciones por Segundo (IPS) y MIPS",
+      "context": "Un procesador opera a 2 GHz con CPI = 5 para todas las instrucciones.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuántas instrucciones por segundo puede ejecutar el procesador?",
+          "correctValue": 400000000,
+          "tolerance": 1000000,
+          "explanation": "$$IPS = \\frac{f}{CPI} = \\frac{2 \\times 10^9}{5} = 4 \\times 10^8 \\text{ instrucciones/s}$$"
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "¿Cuántas MIPS (millones de instrucciones por segundo) puede ejecutar?",
+          "correctValue": 400.0,
+          "tolerance": 1.0,
+          "explanation": "$$MIPS = \\frac{f}{CPI \\times 10^6} = \\frac{2 \\times 10^9}{5 \\times 10^6} = 400 \\text{ MIPS}$$"
+        },
+        {
+          "id": "p20c",
+          "label": "b)",
+          "question": "Si reducimos el CPI a 4, ¿cuántas MIPS puede ejecutar ahora?",
+          "correctValue": 500.0,
+          "tolerance": 1.0,
+          "explanation": "$$MIPS = \\frac{2 \\times 10^9}{4 \\times 10^6} = 500 \\text{ MIPS}$$"
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos tarda en ejecutar 1000 instrucciones con CPI = 4 a 2 GHz?",
+          "correctValue": 2000.0,
+          "tolerance": 10.0,
+          "explanation": "$$t = \\frac{1000 \\times 4}{2 \\times 10^9} = \\frac{4000}{2 \\times 10^9} = 2000 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Ciclos del PC para una Secuencia de Instrucciones de 32 bits",
+      "context": "Un procesador con instrucciones de 32 bits comienza con PC = 0x1000 (4096 en decimal). Se ejecutan 5 instrucciones secuenciales (sin saltos).",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del PC (en decimal) tras ejecutar la primera instrucción (después de T2 del primer Fetch)?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "$$PC = 0x1000 + 4 = 4096 + 4 = 4100$$"
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del PC (en decimal) tras ejecutar la segunda instrucción?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "$$PC = 4100 + 4 = 4104$$"
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del PC (en decimal) tras ejecutar la quinta instrucción?",
+          "correctValue": 4116,
+          "tolerance": 0,
+          "explanation": "$$PC = 4096 + 5 \\times 4 = 4096 + 20 = 4116$$"
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Si la tercera instrucción es JUMP 0x2000 (PC←0x2000 = 8192), ¿cuál es el PC tras el JUMP?",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$$\\text{JUMP: } PC \\leftarrow 0x2000 = 8192_{10}$$"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Tiempo de Ejecución Total de un Programa Real",
+      "context": "Un programa con 10000 instrucciones se ejecuta en un procesador a 1 GHz. El CPI medio observado es de 5.4.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj totales requiere el programa?",
+          "correctValue": 54000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 10000 \\times 5.4 = 54000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "¿Cuántos microsegundos (µs) tarda la ejecución a 1 GHz?",
+          "correctValue": 54.0,
+          "tolerance": 0.1,
+          "explanation": "$$t = \\frac{54000}{1 \\times 10^9} = 54 \\times 10^{-6} \\text{ s} = 54 \\text{ µs}$$"
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Si migramos a un procesador de 2 GHz con el mismo CPI, ¿cuántos µs tarda ahora?",
+          "correctValue": 27.0,
+          "tolerance": 0.1,
+          "explanation": "$$t = \\frac{54000}{2 \\times 10^9} = 27 \\times 10^{-6} \\text{ s} = 27 \\text{ µs}$$"
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "¿Cuántas MIPS ejecuta el procesador de 2 GHz con CPI = 5.4?",
+          "correctValue": 370.37,
+          "tolerance": 1.0,
+          "explanation": "$$MIPS = \\frac{f}{CPI \\times 10^6} = \\frac{2 \\times 10^9}{5.4 \\times 10^6} \\approx 370.37 \\text{ MIPS}$$"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Comparación de Arquitecturas por Ciclos por Instrucción",
+      "context": "Arquitectura RISC: todas las instrucciones en 5 ciclos (Fetch 3 + ejecución 2). Arquitectura CISC: instrucciones LW en 8 ciclos, ADD en 6 ciclos. Ambas a 2 GHz. Programa: 100 instrucciones (50 ADD, 50 LW).",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales requiere el programa en RISC?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{RISC} = 100 \\times 5 = 500 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos totales requiere el programa en CISC?",
+          "correctValue": 700,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{CISC} = 50 \\times 6 + 50 \\times 8 = 300 + 400 = 700 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos tarda RISC (500 ciclos a 2 GHz, T = 0.5 ns)?",
+          "correctValue": 250.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{RISC} = 500 \\times 0.5 \\text{ ns} = 250 \\text{ ns}$$"
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos tarda CISC (700 ciclos a 2 GHz, T = 0.5 ns)?",
+          "correctValue": 350.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{CISC} = 700 \\times 0.5 \\text{ ns} = 350 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Microbenchmark: Fetch Dominante",
+      "context": "Un microprocesador ejecuta instrucciones NOP (sin operación: solo Fetch, sin fases post-Fetch). Cada NOP dura solo 3 ciclos. Frecuencia = 3 GHz.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj a 3 GHz?",
+          "correctValue": 0.333,
+          "tolerance": 0.005,
+          "explanation": "$$T = \\frac{1}{3 \\times 10^9} \\approx 0.333 \\text{ ns}$$"
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos dura una instrucción NOP a 3 GHz?",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "$$t_{NOP} = 3 \\times T = 3 \\times 0.333 \\text{ ns} \\approx 1.0 \\text{ ns}$$"
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "¿Cuántas instrucciones NOP por microsegundo puede ejecutar el procesador?",
+          "correctValue": 1000,
+          "tolerance": 5,
+          "explanation": "$$N_{NOP/\\mu s} = \\frac{10^{-6} \\text{ s}}{1 \\times 10^{-9} \\text{ s/NOP}} = 1000 \\text{ NOP/µs}$$"
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "¿Cuántos MIPS equivalentes representa ejecutar 1000 NOP por microsegundo?",
+          "correctValue": 1000.0,
+          "tolerance": 1.0,
+          "explanation": "$$MIPS = \\frac{1000 \\text{ NOP/µs}}{1} = 1000 \\text{ MIPS} \\quad (1 \\text{ NOP} = 1 \\text{ instrucción})$$"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Análisis del Incremento del PC en Secuencias con Saltos",
+      "context": "PC inicial = 0x2000 (8192 decimal). Instrucciones de 4 bytes. Secuencia: instrucción 1 (ADD), instrucción 2 (JUMP 0x3000), instrucción 3 (LW, en 0x3000).",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuánto vale el PC tras el Fetch de la instrucción 1 (en decimal)?",
+          "correctValue": 8196,
+          "tolerance": 0,
+          "explanation": "$$PC = 0x2000 + 4 = 8192 + 4 = 8196$$"
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "¿Cuánto vale el PC tras el Fetch de la instrucción 2 JUMP (antes de su ejecución, en decimal)?",
+          "correctValue": 8200,
+          "tolerance": 0,
+          "explanation": "$$PC = 8196 + 4 = 8200 \\quad \\text{(incrementado en Fetch de instrucción 2)}$$"
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "¿Cuánto vale el PC tras la EJECUCIÓN de JUMP 0x3000 (en decimal)?",
+          "correctValue": 12288,
+          "tolerance": 0,
+          "explanation": "$$PC \\leftarrow 0x3000 = 12288_{10} \\quad \\text{(el JUMP sobrescribe el PC)}$$"
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "¿Cuántos bytes se han 'saltado' entre el PC post-Fetch2 (8200) y el destino del salto (12288)?",
+          "correctValue": 4088,
+          "tolerance": 0,
+          "explanation": "$$\\Delta = 12288 - 8200 = 4088 \\text{ bytes}$$"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Tiempo de Ciclo y Número de Instrucciones Ejecutables",
+      "context": "Un procesador a 4 GHz puede ejecutar instrucciones con CPI = 5. Se dispone de un tiempo de ejecución de 1 µs.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj caben en 1 µs a 4 GHz?",
+          "correctValue": 4000,
+          "tolerance": 0,
+          "explanation": "$$N_{ciclos} = f \\times t = 4 \\times 10^9 \\times 10^{-6} = 4000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "¿Cuántas instrucciones (CPI = 5) pueden ejecutarse en esos 4000 ciclos?",
+          "correctValue": 800,
+          "tolerance": 0,
+          "explanation": "$$N_{inst} = \\frac{4000}{5} = 800 \\text{ instrucciones}$$"
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Si el CPI aumenta a 6, ¿cuántas instrucciones caben en los mismos 4000 ciclos?",
+          "correctValue": 666,
+          "tolerance": 1,
+          "explanation": "$$N_{inst} = \\left\\lfloor \\frac{4000}{6} \\right\\rfloor = 666 \\text{ instrucciones}$$"
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos tarda en ejecutarse 1 instrucción con CPI = 5 a 4 GHz?",
+          "correctValue": 1.25,
+          "tolerance": 0.01,
+          "explanation": "$$t_{inst} = \\frac{CPI}{f} = \\frac{5}{4 \\times 10^9} = 1.25 \\times 10^{-9} \\text{ s} = 1.25 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Impacto de la Caché en el Camino Crítico",
+      "context": "Sin caché: acceso a RAM = 10 ns, ALU = 0.3 ns. Con caché L1: acceso a L1 = 0.5 ns, ALU = 0.3 ns. En ambos casos el banco de registros tiene 0.1 ns.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "¿Cuál es la frecuencia máxima sin caché (camino crítico = acceso RAM) en MHz?",
+          "correctValue": 100.0,
+          "tolerance": 1.0,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{10 \\times 10^{-9}} = 10^8 \\text{ Hz} = 100 \\text{ MHz}$$"
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia máxima con caché L1 (camino crítico = acceso L1) en GHz?",
+          "correctValue": 2.0,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{máx}} = \\frac{1}{0.5 \\times 10^{-9}} = 2.0 \\times 10^9 \\text{ Hz} = 2.0 \\text{ GHz}$$"
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "¿Cuántas veces aumenta la frecuencia máxima al introducir caché L1?",
+          "correctValue": 20.0,
+          "tolerance": 0.1,
+          "explanation": "$$\\text{Speedup} = \\frac{f_{\\text{con caché}}}{f_{\\text{sin caché}}} = \\frac{2.0 \\text{ GHz}}{100 \\text{ MHz}} = \\frac{2000}{100} = 20$$"
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Con caché L1 a 2 GHz, ¿cuántos nanosegundos dura un Fetch completo (3 ciclos)?",
+          "correctValue": 1.5,
+          "tolerance": 0.05,
+          "explanation": "$$t_{Fetch} = 3 \\times 0.5 \\text{ ns} = 1.5 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Análisis de Programas con Instrucciones de Diferente CPI",
+      "context": "Programa A: 1000 instrucciones todas con CPI = 5. Programa B: 500 instrucciones con CPI = 8. Ambos corren en el mismo procesador a 1 GHz.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales requiere el Programa A?",
+          "correctValue": 5000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_A = 1000 \\times 5 = 5000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos totales requiere el Programa B?",
+          "correctValue": 4000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_B = 500 \\times 8 = 4000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos tarda más el Programa A respecto al Programa B a 1 GHz?",
+          "correctValue": 1000.0,
+          "tolerance": 1.0,
+          "explanation": "$$\\Delta t = (5000 - 4000) \\times 1 \\text{ ns} = 1000 \\text{ ns}$$"
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Si el Programa B reduce su CPI a 5 (mediante optimización), ¿cuántos nanosegundos dura ahora?",
+          "correctValue": 2500.0,
+          "tolerance": 1.0,
+          "explanation": "$$t_{B_{\\text{opt}}} = 500 \\times 5 \\times 1 \\text{ ns} = 2500 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Cálculo del Número de Ciclos Fetch Totales en un Sistema",
+      "context": "Un sistema ejecuta continuamente instrucciones durante 1 segundo. El procesador opera a 3 GHz. El CPI medio es 6.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj ocurren en 1 segundo a 3 GHz?",
+          "correctValue": 3000000000,
+          "tolerance": 1000000,
+          "explanation": "$$N_{ciclos} = 3 \\times 10^9 \\text{ ciclos/s} \\times 1 \\text{ s} = 3 \\times 10^9 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "¿Cuántas instrucciones completas se ejecutan en 1 segundo (con CPI = 6)?",
+          "correctValue": 500000000,
+          "tolerance": 1000000,
+          "explanation": "$$N_{inst} = \\frac{3 \\times 10^9}{6} = 5 \\times 10^8 \\text{ instrucciones}$$"
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos Fetch (3 ciclos por instrucción) ocurren en total durante 1 segundo?",
+          "correctValue": 1500000000,
+          "tolerance": 1000000,
+          "explanation": "$$N_{Fetch} = 5 \\times 10^8 \\times 3 = 1.5 \\times 10^9 \\text{ ciclos Fetch}$$"
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "¿Qué porcentaje del tiempo total de reloj se dedica a ciclos Fetch?",
+          "correctValue": 50.0,
+          "tolerance": 0.5,
+          "explanation": "$$\\%Fetch = \\frac{1.5 \\times 10^9}{3 \\times 10^9} \\times 100 = 50\\%$$"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Diseño: Elección de Frecuencia para Presupuesto de Tiempo",
+      "context": "Se requiere ejecutar un programa de 500 instrucciones (CPI = 5.5) en un tiempo máximo de 1.5 µs. Se debe determinar la frecuencia mínima necesaria.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos totales requiere el programa (500 instrucciones, CPI = 5.5)?",
+          "correctValue": 2750,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 500 \\times 5.5 = 2750 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "¿Cuál es la frecuencia mínima (en GHz) para ejecutar 2750 ciclos en 1.5 µs?",
+          "correctValue": 1.833,
+          "tolerance": 0.05,
+          "explanation": "$$f_{\\text{mín}} = \\frac{N_{ciclos}}{t_{\\text{máx}}} = \\frac{2750}{1.5 \\times 10^{-6}} \\approx 1.833 \\times 10^9 \\text{ Hz} \\approx 1.833 \\text{ GHz}$$"
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuál es el período de reloj máximo permitido (en nanosegundos) correspondiente a esa frecuencia?",
+          "correctValue": 0.545,
+          "tolerance": 0.01,
+          "explanation": "$$T_{\\text{máx}} = \\frac{1}{f_{\\text{mín}}} = \\frac{1.5 \\times 10^{-6}}{2750} \\approx 0.545 \\text{ ns}$$"
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si el retardo del camino crítico es 0.5 ns, ¿es suficiente para cumplir el presupuesto de tiempo? Responde 1 (sí) o 0 (no).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$T_{\\text{crítico}} = 0.5 \\text{ ns} < T_{\\text{máx}} = 0.545 \\text{ ns} \\Rightarrow \\text{Sí es suficiente (valor: 1)}$$"
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Frecuencia máxima de reloj (Camino Crítico)",
+      "tex": "$$f_{\\text{máx}} = \\frac{1}{\\text{Retardo}_{\\text{crítico}}}$$"
+    },
+    {
+      "name": "Período de reloj",
+      "tex": "$$T = \\frac{1}{f}$$"
+    },
+    {
+      "name": "Tiempo total de ejecución",
+      "tex": "$$t_{\\text{total}} = N_{\\text{instrucciones}} \\times CPI \\times T = \\frac{N_{\\text{instrucciones}} \\times CPI}{f}$$"
+    },
+    {
+      "name": "CPI promedio (Cycles Per Instruction)",
+      "tex": "$$CPI = \\frac{\\text{Ciclos}_{\\text{total}}}{N_{\\text{instrucciones}}} = \\sum_{i} \\left( f_i \\times CPI_i \\right)$$"
+    },
+    {
+      "name": "MIPS (Millones de instrucciones por segundo)",
+      "tex": "$$MIPS = \\frac{f}{CPI \\times 10^6}$$"
+    },
+    {
+      "name": "Speedup (Aceleración)",
+      "tex": "$$\\text{Speedup} = \\frac{t_{\\text{antiguo}}}{t_{\\text{nuevo}}} = \\frac{f_{\\text{nuevo}}}{f_{\\text{antiguo}}} \\times \\frac{CPI_{\\text{antiguo}}}{CPI_{\\text{nuevo}}}$$"
+    },
+    {
+      "name": "Ciclo Fetch en RTL (microoperaciones)",
+      "tex": "$$T_1: MAR \\leftarrow PC \\quad T_2: MDR \\leftarrow M[MAR],\\; PC \\leftarrow PC+4 \\quad T_3: IR \\leftarrow MDR$$"
+    },
+    {
+      "name": "Incremento del PC por tamaño de instrucción",
+      "tex": "$$\\Delta PC = \\frac{\\text{Tamaño instrucción (bits)}}{8} \\text{ bytes}$$"
+    },
+    {
+      "name": "Ciclos totales del Fetch",
+      "tex": "$$\\text{Ciclos}_{Fetch\\,total} = N_{\\text{instrucciones}} \\times 3$$"
+    },
+    {
+      "name": "Instrucciones ejecutables en un tiempo dado",
+      "tex": "$$N_{\\text{inst}} = \\left\\lfloor \\frac{f \\times t}{CPI} \\right\\rfloor$$"
+    }
+  ]
+}

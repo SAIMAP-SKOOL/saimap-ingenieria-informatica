@@ -1,0 +1,2152 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué es el lenguaje ensamblador?",
+      "options": [
+        "Una representación de bajo nivel donde cada instrucción se corresponde directamente con una instrucción de código máquina",
+        "Un lenguaje de alto nivel que el compilador traduce directamente a código ejecutable",
+        "Un lenguaje interpretado que no requiere traducción previa a binario"
+      ],
+      "correct": 0,
+      "hint": "Piensa en la relación 1:1 entre instrucciones ensamblador y código máquina.",
+      "explanation": "El lenguaje ensamblador tiene una correspondencia uno a uno (mapeo directo) con las instrucciones binarias ejecutables por la CPU. Cada nemotécnico corresponde exactamente a una instrucción de máquina."
+    },
+    {
+      "q": "¿Cuál de los siguientes campos de una instrucción de máquina indica a la Unidad de Control qué operación debe realizarse?",
+      "options": [
+        "Campo Rs (Source Register)",
+        "OPCode (Código de Operación)",
+        "Campo Rd (Destination Register)"
+      ],
+      "correct": 1,
+      "hint": "Es el campo que 'codifica' la operación a ejecutar.",
+      "explanation": "El OPCode (Código de Operación) son los bits que indican a la Unidad de Control la operación a realizar (suma, carga, salto, etc.). Los campos Rs, Rt, Rd identifican los registros operandos."
+    },
+    {
+      "q": "En una instrucción de máquina típica de estilo RISC, ¿qué identifica el campo Rd?",
+      "options": [
+        "Un registro fuente que proporciona un operando",
+        "La dirección de memoria del dato principal",
+        "El registro destino donde se almacena el resultado de la operación"
+      ],
+      "correct": 2,
+      "hint": "Rd significa 'Destination'.",
+      "explanation": "Rd (Destination Register) es el campo que identifica el registro del procesador donde se almacenará el resultado de la operación. Rs y Rt son los registros fuente (Source y Target)."
+    },
+    {
+      "q": "¿Cuántos bits ocupa el campo OPCode en la instrucción de máquina descrita en el Tema 13?",
+      "options": [
+        "5 bits",
+        "6 bits",
+        "11 bits"
+      ],
+      "correct": 1,
+      "hint": "Repasa el formato de instrucción de la sección 1.",
+      "explanation": "Según el formato de instrucción del Tema 13, el OPCode ocupa los primeros 6 bits de la palabra de instrucción. Los campos Rs, Rt y Rd ocupan 5 bits cada uno, y el desplazamiento/inmediato ocupa 11 bits."
+    },
+    {
+      "q": "¿Cuántos bits ocupa cada uno de los campos de registro (Rs, Rt, Rd) en el formato de instrucción descrito?",
+      "options": [
+        "6 bits cada uno",
+        "5 bits cada uno",
+        "8 bits cada uno"
+      ],
+      "correct": 1,
+      "hint": "Con N bits se pueden direccionar 2^N registros distintos.",
+      "explanation": "Cada campo de registro (Rs, Rt, Rd) ocupa 5 bits. Con 5 bits se pueden referenciar hasta 2^5 = 32 registros distintos, lo cual es estándar en arquitecturas MIPS/RISC-V."
+    },
+    {
+      "q": "¿En qué modo de direccionamiento el dato operando está incluido directamente dentro de la propia instrucción?",
+      "options": [
+        "Direccionamiento Directo a Registro",
+        "Direccionamiento Inmediato",
+        "Direccionamiento Indirecto a Registro"
+      ],
+      "correct": 1,
+      "hint": "El dato no está en un registro ni en memoria, sino 'inmediatamente' disponible en la instrucción.",
+      "explanation": "En el Direccionamiento Inmediato, el propio dato (constante) está codificado dentro de la instrucción. Es el modo más rápido porque no requiere accesos adicionales a registros o memoria. Ejemplo: ADD R1, R2, #5."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja del Direccionamiento Inmediato frente a otros modos?",
+      "options": [
+        "Permite acceder a posiciones de memoria arbitrarias en cualquier segmento",
+        "Es extremadamente rápido al no requerir accesos adicionales a registros o memoria",
+        "Permite operar con datos de tamaño ilimitado directamente en la instrucción"
+      ],
+      "correct": 1,
+      "hint": "La velocidad se debe a la ausencia de accesos adicionales.",
+      "explanation": "El Direccionamiento Inmediato es extremadamente rápido porque el dato está incluido en la propia instrucción. No hay que buscar el valor en ningún registro ni en memoria RAM, lo que elimina ciclos de acceso adicionales."
+    },
+    {
+      "q": "La instrucción `ADD R1, R2, R3` utiliza el modo de direccionamiento:",
+      "options": [
+        "Inmediato para todos sus operandos",
+        "Directo a Registro para los operandos R2 y R3",
+        "Indirecto a Registro (Indexado)"
+      ],
+      "correct": 1,
+      "hint": "Los datos residen en registros del procesador, no en memoria ni codificados en la instrucción.",
+      "explanation": "ADD R1, R2, R3 emplea Direccionamiento Directo a Registro: los operandos fuente (R2 y R3) residen en registros del procesador. El destino R1 también es un registro. No hay acceso a memoria ni valores inmediatos."
+    },
+    {
+      "q": "¿Qué modo de direccionamiento utiliza la instrucción `LD R1, [0x2000]`?",
+      "options": [
+        "Direccionamiento Inmediato",
+        "Direccionamiento Directo (o Absoluto)",
+        "Direccionamiento Indirecto a Registro"
+      ],
+      "correct": 1,
+      "hint": "La instrucción contiene la dirección exacta de memoria del dato.",
+      "explanation": "LD R1, [0x2000] usa Direccionamiento Directo (o Absoluto): la instrucción contiene la dirección exacta de memoria RAM (0x2000) donde está el dato. No se realiza cálculo de dirección; se accede directamente a esa celda de memoria."
+    },
+    {
+      "q": "En la instrucción `LW R1, 4(R2)`, ¿cómo se calcula la dirección efectiva del dato en memoria?",
+      "options": [
+        "La dirección efectiva es simplemente el valor del registro R2",
+        "La dirección efectiva es R2 + 4, sumando el desplazamiento al registro base",
+        "La dirección efectiva es 4, ignorando el contenido de R2"
+      ],
+      "correct": 1,
+      "hint": "El número antes del paréntesis es el desplazamiento (offset).",
+      "explanation": "En el Direccionamiento Indirecto a Registro (Indexado), la dirección efectiva se calcula sumando el desplazamiento constante (4) al contenido del registro base (R2). Dirección efectiva = R2 + 4. Este modo es fundamental para acceder a arrays y estructuras."
+    },
+    {
+      "q": "¿Cuál de los siguientes modos de direccionamiento es el más adecuado para recorrer elementos de un array (vector) en memoria?",
+      "options": [
+        "Direccionamiento Inmediato",
+        "Direccionamiento Directo (Absoluto)",
+        "Direccionamiento Indirecto a Registro (Indexado)"
+      ],
+      "correct": 2,
+      "hint": "Necesitas cambiar dinámicamente la dirección de acceso sumando un desplazamiento a un registro.",
+      "explanation": "El Direccionamiento Indirecto a Registro (Indexado) es ideal para arrays porque permite calcular la dirección de cada elemento sumando un desplazamiento constante a un registro base, que actúa como puntero al inicio del array. Modificando el registro base o el desplazamiento se puede recorrer el array."
+    },
+    {
+      "q": "¿Qué hace la instrucción `LW` (Load Word) en arquitectura MIPS?",
+      "options": [
+        "Lee un valor de un registro y lo escribe en memoria",
+        "Lee (carga) un valor desde una posición de memoria a un registro del procesador",
+        "Realiza una suma lógica (OR) entre dos registros"
+      ],
+      "correct": 1,
+      "hint": "LW = Load Word: la dirección va de memoria a registro.",
+      "explanation": "LW (Load Word) carga (lee) una palabra de datos desde una posición de memoria RAM y la almacena en un registro del procesador. La operación inversa es SW (Store Word), que escribe de registro a memoria."
+    },
+    {
+      "q": "¿Qué hace la instrucción `SW` (Store Word) en arquitectura MIPS?",
+      "options": [
+        "Lee un valor de memoria y lo carga en un registro",
+        "Realiza una resta entre dos registros y almacena el resultado",
+        "Escribe (almacena) el contenido de un registro en una posición de memoria RAM"
+      ],
+      "correct": 2,
+      "hint": "SW = Store Word: la dirección va de registro a memoria.",
+      "explanation": "SW (Store Word) almacena (escribe) el contenido de un registro del procesador en una posición de memoria RAM. Es la operación inversa de LW (Load Word)."
+    },
+    {
+      "q": "¿Qué condición comprueba la instrucción `BEQ R1, R2, Etiqueta`?",
+      "options": [
+        "Salta a Etiqueta si R1 es mayor que R2",
+        "Salta a Etiqueta si R1 es igual a R2",
+        "Salta a Etiqueta si R1 es diferente de R2"
+      ],
+      "correct": 1,
+      "hint": "BEQ = Branch if Equal.",
+      "explanation": "BEQ (Branch if Equal) es un salto condicional que salta a la Etiqueta especificada únicamente si el contenido del registro R1 es igual al contenido del registro R2. Si no son iguales, continúa con la instrucción siguiente."
+    },
+    {
+      "q": "¿Qué condición comprueba la instrucción `BNE R1, R2, Etiqueta`?",
+      "options": [
+        "Salta a Etiqueta si R1 es igual a R2",
+        "Salta a Etiqueta si R1 es diferente de R2 (no igual)",
+        "Salta a Etiqueta si R1 es menor que R2"
+      ],
+      "correct": 1,
+      "hint": "BNE = Branch if Not Equal.",
+      "explanation": "BNE (Branch if Not Equal) salta a la Etiqueta si el contenido de R1 NO es igual al contenido de R2. Es el complementario de BEQ y se usa frecuentemente para implementar estructuras if-else en ensamblador."
+    },
+    {
+      "q": "¿Cuál es la diferencia fundamental entre una instrucción de bifurcación (BEQ, BNE) y una instrucción de salto incondicional (J)?",
+      "options": [
+        "Las bifurcaciones solo operan con registros, los saltos solo con inmediatos",
+        "Las bifurcaciones comprueban una condición antes de saltar; los saltos incondicionales saltan siempre",
+        "Los saltos incondicionales solo pueden saltar hacia adelante en el código"
+      ],
+      "correct": 1,
+      "hint": "La palabra 'condicional' es la clave.",
+      "explanation": "Las instrucciones de bifurcación (BEQ, BNE, BLE) son saltos condicionales: solo modifican el PC (Program Counter) si se cumple cierta condición. La instrucción J (Jump) es un salto incondicional: siempre transfiere el control a la dirección especificada, sin comprobar ninguna condición."
+    },
+    {
+      "q": "¿Qué hace la instrucción `J Etiqueta` en MIPS?",
+      "options": [
+        "Salta a Etiqueta solo si el registro $zero es cero",
+        "Transfiere el control a Etiqueta incondicionalmente, sin comprobar ninguna condición",
+        "Compara dos registros y salta si el resultado es positivo"
+      ],
+      "correct": 1,
+      "hint": "J = Jump: siempre salta.",
+      "explanation": "J (Jump) es un salto incondicional: transfiere el control de ejecución a la dirección de la Etiqueta siempre, sin evaluar ninguna condición. Se usa para salir de bloques if-else (evitar ejecutar el else tras el if) y para regresar al inicio de bucles."
+    },
+    {
+      "q": "¿Cuál es el rol del Compilador en la cadena de traducción de software?",
+      "options": [
+        "Traduce código ensamblador a código objeto binario (.o)",
+        "Une varios archivos objeto y resuelve referencias externas a librerías",
+        "Traduce el código de alto nivel (ej. C++) a código en lenguaje ensamblador"
+      ],
+      "correct": 2,
+      "hint": "Es el primer paso de la cadena: C++ → Ensamblador.",
+      "explanation": "El Compilador traduce el código fuente de alto nivel (ej. C++) a un archivo de texto en lenguaje ensamblador específico de la arquitectura destino (ej. x86, ARM, MIPS). El ensamblador y el enlazador realizan las etapas posteriores."
+    },
+    {
+      "q": "¿Cuál es la función del Ensamblador (Assembler) en la cadena de traducción?",
+      "options": [
+        "Traduce el código de alto nivel a lenguaje ensamblador",
+        "Traduce los nemotécnicos de ensamblador a código binario de máquina, generando un archivo objeto (.o)",
+        "Une los archivos objeto para generar el ejecutable final"
+      ],
+      "correct": 1,
+      "hint": "Genera el archivo .o o .obj.",
+      "explanation": "El Ensamblador (Assembler) traduce los nemotécnicos del lenguaje ensamblador a código binario ejecutable por el procesador, produciendo un archivo objeto (.o en Linux, .obj en Windows). Este archivo objeto aún no es ejecutable directamente; necesita ser enlazado."
+    },
+    {
+      "q": "¿Qué tarea realiza el Enlazador (Linker)?",
+      "options": [
+        "Traduce código C++ a ensamblador optimizado",
+        "Convierte instrucciones ensamblador en bytes de código máquina",
+        "Junta varios archivos objeto y resuelve las llamadas a funciones externas de librerías, generando el ejecutable final"
+      ],
+      "correct": 2,
+      "hint": "Genera el .exe final a partir de uno o más archivos .o.",
+      "explanation": "El Enlazador (Linker) combina múltiples archivos objeto (.o) y resuelve todas las referencias a funciones y símbolos externos (librerías del sistema), produciendo el archivo ejecutable final (.exe en Windows, ELF en Linux)."
+    },
+    {
+      "q": "¿Cuál es el orden correcto de la cadena de traducción de software?",
+      "options": [
+        "Código Fuente → Enlazador → Ensamblador → Compilador → Ejecutable",
+        "Código Fuente → Compilador → Ensamblador → Enlazador → Ejecutable",
+        "Código Fuente → Ensamblador → Compilador → Enlazador → Ejecutable"
+      ],
+      "correct": 1,
+      "hint": "Compilador primero, Enlazador último.",
+      "explanation": "La cadena de traducción correcta es: Código Fuente (C++) → Compilador → Código Ensamblador → Ensamblador → Código Objeto (.o) → Enlazador → Ejecutable (.exe). Cada herramienta produce la entrada para la siguiente."
+    },
+    {
+      "q": "En el programa MIPS de suma de los primeros 10 enteros, ¿qué registro se usa como contador del bucle (i)?",
+      "options": [
+        "$t1",
+        "$t2",
+        "$t0"
+      ],
+      "correct": 2,
+      "hint": "El contador empieza en 1 y se incrementa con addi.",
+      "explanation": "En el programa de ejemplo, $t0 es el contador del bucle (i), inicializado con li $t0, 1. $t1 es el acumulador de la suma y $t2 almacena el límite (10)."
+    },
+    {
+      "q": "La instrucción `addi $t0, $t0, 1` en MIPS corresponde a qué modo de direccionamiento para el operando constante '1'?",
+      "options": [
+        "Direccionamiento Directo a Registro",
+        "Direccionamiento Indirecto",
+        "Direccionamiento Inmediato"
+      ],
+      "correct": 2,
+      "hint": "La constante 1 está codificada directamente en la instrucción.",
+      "explanation": "La 'i' de 'addi' significa 'immediate' (inmediato). El operando constante '1' está codificado directamente en la instrucción, por lo que corresponde al Direccionamiento Inmediato. Los operandos de registro ($t0) usan Direccionamiento Directo a Registro."
+    },
+    {
+      "q": "En la traducción del if-else a MIPS, ¿por qué se usa `bne` en lugar de `beq` para implementar `if (a == b)`?",
+      "options": [
+        "Porque BNE es más eficiente que BEQ en procesadores MIPS",
+        "Porque se salta a la rama else cuando la condición del if NO se cumple (a ≠ b), lo que invierte la lógica",
+        "Porque BEQ solo funciona con la instrucción syscall en MIPS"
+      ],
+      "correct": 1,
+      "hint": "En ensamblador se implementa la condición contraria para saltar al else.",
+      "explanation": "En ensamblador se implementa la lógica inversa: si a == b (condición del if), queremos ejecutar la rama if. Por tanto, si a ≠ b (condición NOT del if), saltamos al else. BNE salta cuando NO son iguales, enviando la ejecución directamente al bloque else, lo cual es la implementación correcta."
+    },
+    {
+      "q": "¿Cuántos bits ocupa el campo de Desplazamiento/Inmediato en el formato de instrucción del Tema 13?",
+      "options": [
+        "5 bits",
+        "6 bits",
+        "11 bits"
+      ],
+      "correct": 2,
+      "hint": "Es el campo más ancho de la instrucción, utilizado para constantes y desplazamientos.",
+      "explanation": "El campo de Desplazamiento/Inmediato ocupa 11 bits (6+5+5+5+11 = 32 bits totales). Esto permite representar constantes en el rango -1024 a 1023 (en complemento a 2) o desplazamientos de dirección."
+    },
+    {
+      "q": "¿Cuál es el tamaño total de la instrucción de máquina descrita en el Tema 13?",
+      "options": [
+        "16 bits",
+        "32 bits",
+        "64 bits"
+      ],
+      "correct": 1,
+      "hint": "Suma los bits de todos los campos: 6+5+5+5+11.",
+      "explanation": "El tamaño total es 6 (OPCode) + 5 (Rs) + 5 (Rt) + 5 (Rd) + 11 (Desplazamiento/Inmediato) = 32 bits. Las arquitecturas MIPS y RISC-V de 32 bits utilizan instrucciones de longitud fija de 32 bits."
+    },
+    {
+      "q": "¿Qué característica define a las arquitecturas RISC frente a las CISC?",
+      "options": [
+        "Las RISC tienen instrucciones de longitud variable y muy numerosas",
+        "Las RISC utilizan un conjunto reducido de instrucciones simples, generalmente de longitud fija",
+        "Las RISC permiten realizar operaciones complejas directamente sobre memoria sin pasar por registros"
+      ],
+      "correct": 1,
+      "hint": "RISC = Reduced Instruction Set Computer.",
+      "explanation": "RISC (Reduced Instruction Set Computer) se caracteriza por un conjunto reducido de instrucciones simples, de longitud fija y que se ejecutan generalmente en un solo ciclo de reloj. Las arquitecturas MIPS y RISC-V son ejemplos de RISC. Las CISC (como x86) tienen instrucciones más complejas y de longitud variable."
+    },
+    {
+      "q": "En lenguaje ensamblador MIPS, ¿qué significa el prefijo '#' en una línea de código?",
+      "options": [
+        "Indica el inicio de una directiva del ensamblador",
+        "Indica el inicio de un comentario; el ensamblador ignora el resto de la línea",
+        "Indica un operando inmediato (constante numérica)"
+      ],
+      "correct": 1,
+      "hint": "Similar al '//' en C++ o al '#' en Python.",
+      "explanation": "En MIPS ensamblador, el carácter '#' marca el inicio de un comentario. Todo el texto desde '#' hasta el final de la línea es ignorado por el ensamblador y sirve únicamente para documentar el código."
+    },
+    {
+      "q": "La directiva `.text` en un programa MIPS ensamblador indica:",
+      "options": [
+        "Que la sección siguiente contiene datos estáticos del programa",
+        "Que la sección siguiente contiene el código ejecutable (instrucciones) del programa",
+        "Que el programa no tiene sección de datos globales"
+      ],
+      "correct": 1,
+      "hint": "El código reside en el segmento de texto.",
+      "explanation": "La directiva .text indica al ensamblador que las líneas siguientes pertenecen al segmento de código (texto) del programa, donde se almacenan las instrucciones ejecutables. La directiva .data indicaría el segmento de datos estáticos."
+    },
+    {
+      "q": "La directiva `.globl main` en un programa MIPS ensamblador sirve para:",
+      "options": [
+        "Declarar la variable global 'main' de tipo entero",
+        "Indicar que la etiqueta 'main' es visible externamente (punto de entrada global del programa)",
+        "Reservar espacio en memoria para la función principal"
+      ],
+      "correct": 1,
+      "hint": "El enlazador necesita saber dónde comienza el programa.",
+      "explanation": ".globl main declara la etiqueta 'main' como símbolo global visible por el enlazador (Linker). Esto indica que 'main' es el punto de entrada del programa, permitiendo al sistema operativo encontrar dónde comenzar la ejecución."
+    },
+    {
+      "q": "¿Qué instrucción MIPS se usa para terminar la ejecución de un programa de forma estándar?",
+      "options": [
+        "J $zero",
+        "li $v0, 10 seguida de syscall",
+        "BEQ $zero, $zero, fin"
+      ],
+      "correct": 1,
+      "hint": "Requiere cargar el código de llamada al sistema en $v0.",
+      "explanation": "Para terminar la ejecución en MIPS simulado, se carga el código 10 en el registro $v0 (li $v0, 10) y se ejecuta la instrucción syscall. El código 10 en $v0 le indica al sistema operativo que el programa ha terminado y debe liberarse."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre las instrucciones `ADD` y `ADDI` en MIPS?",
+      "options": [
+        "ADD suma registros con un carry, ADDI suma sin carry",
+        "ADD suma dos registros; ADDI (Add Immediate) suma un registro con una constante (inmediato)",
+        "ADD solo funciona con números positivos; ADDI funciona con cualquier entero"
+      ],
+      "correct": 1,
+      "hint": "La 'I' en ADDI significa 'Immediate'.",
+      "explanation": "ADD suma el contenido de dos registros: ADD Rd, Rs, Rt → Rd = Rs + Rt. ADDI (Add Immediate) suma el contenido de un registro con una constante inmediata: ADDI Rd, Rs, #n → Rd = Rs + n. La constante está codificada en la instrucción."
+    },
+    {
+      "q": "¿Cómo se implementa una resta en MIPS cuando el minuendo es un inmediato, como `c = b - 2`?",
+      "options": [
+        "Usando la instrucción SUBI Rd, Rs, #2",
+        "Usando ADDI con un valor inmediato negativo: ADDI Rd, Rs, #-2",
+        "No es posible restar un inmediato; hay que cargarlo en un registro primero"
+      ],
+      "correct": 1,
+      "hint": "Restar 2 es lo mismo que sumar -2.",
+      "explanation": "MIPS no tiene instrucción SUBI (Subtract Immediate) en su conjunto básico. La resta de una constante se realiza con ADDI usando un inmediato negativo: addi $t2, $t1, -2 equivale a $t2 = $t1 + (-2) = $t1 - 2."
+    },
+    {
+      "q": "¿Qué hace la instrucción `li $t0, 1` en MIPS?",
+      "options": [
+        "Carga el valor del registro 1 en $t0",
+        "Carga el valor inmediato (constante) 1 en el registro $t0",
+        "Lee una palabra de la dirección de memoria 1 y la almacena en $t0"
+      ],
+      "correct": 1,
+      "hint": "li = Load Immediate.",
+      "explanation": "li (Load Immediate) es un pseudo-instrucción de MIPS que carga una constante inmediata en un registro. li $t0, 1 coloca el valor 1 en el registro $t0. Es equivalente a addi $t0, $zero, 1 en MIPS real."
+    },
+    {
+      "q": "¿Qué es una etiqueta (label) en lenguaje ensamblador?",
+      "options": [
+        "Un comentario que documenta el propósito de una instrucción",
+        "Un símbolo que representa la dirección de memoria de una instrucción o dato, usado como destino de saltos",
+        "Una directiva que reserva espacio en el segmento de datos"
+      ],
+      "correct": 1,
+      "hint": "Las instrucciones BEQ, BNE y J saltan a etiquetas.",
+      "explanation": "Una etiqueta en ensamblador es un identificador simbólico que representa la dirección de memoria de la instrucción o dato que le sigue. Las instrucciones de salto (BEQ, BNE, J) usan etiquetas como destino, permitiendo escribir código sin conocer las direcciones exactas de memoria."
+    },
+    {
+      "q": "En el contexto del Tema 13, ¿qué instrucción MIPS implementa un 'Branch if Less or Equal'?",
+      "options": [
+        "BEQ",
+        "BNE",
+        "BLE"
+      ],
+      "correct": 2,
+      "hint": "BLE = Branch if Less or Equal.",
+      "explanation": "BLE (Branch if Less or Equal) salta a la etiqueta especificada si el primer registro es menor o igual que el segundo. En el programa de suma de los primeros 10 enteros, se usa `ble $t0, $t2, bucle` para seguir iterando mientras i <= 10."
+    },
+    {
+      "q": "¿Cuál es el rol del campo Rs (Source) en una instrucción de máquina?",
+      "options": [
+        "Identifica el registro destino donde se guarda el resultado",
+        "Identifica un registro fuente que provee uno de los operandos de la instrucción",
+        "Contiene la dirección de la siguiente instrucción a ejecutar"
+      ],
+      "correct": 1,
+      "hint": "Rs = Source Register (registro fuente).",
+      "explanation": "Rs (Source Register) es uno de los campos operando de la instrucción. Identifica un registro del procesador que proporciona uno de los valores fuente sobre los que opera la instrucción. En una suma ADD R1, R2, R3, tanto R2 como R3 son registros fuente."
+    },
+    {
+      "q": "¿Cuál de los siguientes describe correctamente el modo de direccionamiento de la instrucción `LW R1, 8(R3)`?",
+      "options": [
+        "Inmediato: el dato es el valor 8",
+        "Directo a Registro: el dato está en R3",
+        "Indirecto a Registro (Indexado): la dirección efectiva es R3 + 8"
+      ],
+      "correct": 2,
+      "hint": "La dirección se calcula combinando un registro y un desplazamiento.",
+      "explanation": "LW R1, 8(R3) usa Direccionamiento Indirecto a Registro (Indexado): la dirección efectiva del dato en memoria es el contenido de R3 más el desplazamiento 8 (Dirección = R3 + 8). El dato leído se carga en R1."
+    },
+    {
+      "q": "¿Por qué el lenguaje ensamblador permite 'entender cómo se manipulan físicamente los registros'?",
+      "options": [
+        "Porque cada instrucción ensamblador opera directamente sobre la ALU sin pasar por registros",
+        "Porque tiene mapeo uno a uno con las instrucciones de máquina, que especifican explícitamente los registros involucrados",
+        "Porque el ensamblador abstrae completamente el hardware, igual que los lenguajes de alto nivel"
+      ],
+      "correct": 1,
+      "hint": "La transparencia del hardware es la característica definitoria del ensamblador.",
+      "explanation": "Dado que el lenguaje ensamblador tiene correspondencia directa (uno a uno) con las instrucciones de máquina, cada instrucción especifica explícitamente los registros y modos de acceso a memoria involucrados. Esto hace transparente el funcionamiento del hardware, a diferencia de los lenguajes de alto nivel que lo abstraen."
+    },
+    {
+      "q": "¿Qué tipo de archivo genera el Ensamblador como salida?",
+      "options": [
+        "Un archivo fuente en lenguaje C (.c)",
+        "Un archivo ejecutable directo (.exe) listo para usar",
+        "Un archivo objeto (.o o .obj) con código máquina pero aún no enlazado"
+      ],
+      "correct": 2,
+      "hint": "El archivo objeto necesita el Enlazador para convertirse en ejecutable.",
+      "explanation": "El Ensamblador genera un archivo objeto (.o en Linux/macOS, .obj en Windows) que contiene el código máquina binario correspondiente a las instrucciones ensamblador, pero con referencias a símbolos externos sin resolver. El Enlazador es quien combina estos archivos objeto en el ejecutable final."
+    },
+    {
+      "q": "La instrucción `ADD R1, R2, #5` mezcla dos modos de direccionamiento. ¿Cuáles son?",
+      "options": [
+        "Directo a Registro (para R2) e Indirecto a Registro (para #5)",
+        "Directo a Registro (para R1 y R2) e Inmediato (para #5)",
+        "Inmediato (para R2) y Directo Absoluto (para #5)"
+      ],
+      "correct": 1,
+      "hint": "R1 y R2 son registros; #5 es una constante en la instrucción.",
+      "explanation": "ADD R1, R2, #5 usa Direccionamiento Directo a Registro para los operandos de registro (R1 como destino, R2 como fuente) y Direccionamiento Inmediato para la constante #5, que está codificada dentro de la instrucción."
+    },
+    {
+      "q": "¿Qué sucede si en un programa MIPS el bloque 'if' no termina con un salto incondicional `j fin_condicional`?",
+      "options": [
+        "El programa termina automáticamente al finalizar el bloque if",
+        "El procesador ejecutará también las instrucciones del bloque 'else' después del bloque 'if', produciendo un error de lógica",
+        "El ensamblador detectará el error y lanzará una excepción de compilación"
+      ],
+      "correct": 1,
+      "hint": "El procesador ejecuta instrucciones secuencialmente si no hay un salto.",
+      "explanation": "Sin el salto incondicional `j fin_condicional` al final del bloque if, el procesador continuaría ejecutando secuencialmente las instrucciones del bloque else tras completar el if. Esto produciría un error lógico: en el caso en que a==b se ejecutarían AMBOS bloques (if y else) en lugar de solo el if."
+    },
+    {
+      "q": "¿Qué instrucción MIPS realizaría la operación lógica AND entre dos registros?",
+      "options": [
+        "ADD R1, R2, R3",
+        "AND R1, R2, R3",
+        "OR R1, R2, R3"
+      ],
+      "correct": 1,
+      "hint": "AND es una instrucción lógica bit a bit.",
+      "explanation": "AND R1, R2, R3 realiza la operación AND lógico bit a bit entre los contenidos de R2 y R3, almacenando el resultado en R1. Es una instrucción aritmético-lógica del repertorio básico MIPS junto con OR, ADD y SUB."
+    },
+    {
+      "q": "¿Cuál es la función de la instrucción `syscall` en MIPS?",
+      "options": [
+        "Reserva espacio en el stack para variables locales",
+        "Invoca una llamada al sistema operativo, usando el código cargado en $v0 para determinar el servicio solicitado",
+        "Sincroniza el pipeline del procesador después de una instrucción de carga"
+      ],
+      "correct": 1,
+      "hint": "El registro $v0 contiene el código del servicio del SO.",
+      "explanation": "La instrucción syscall transfiere el control al sistema operativo para solicitar un servicio. El tipo de servicio está codificado en el registro $v0. Por ejemplo, $v0=10 termina el programa, $v0=1 imprime un entero, etc. Es el mecanismo de interfaz entre el programa y el SO."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En una instrucción de máquina RISC, el campo ____ indica la operación a realizar.",
+      "options": [
+        "OPCode",
+        "Rd",
+        "Desplazamiento"
+      ],
+      "correct": 0,
+      "hint": "Son los primeros bits de la instrucción.",
+      "explanation": "El OPCode (Código de Operación) es el campo que codifica la operación que debe ejecutar la CPU. La Unidad de Control decodifica este campo para determinar qué circuitos activar."
+    },
+    {
+      "q": "El modo de direccionamiento ____ calcula la dirección efectiva sumando una constante al contenido de un registro base.",
+      "options": [
+        "Indirecto a Registro (Indexado)",
+        "Inmediato",
+        "Directo Absoluto"
+      ],
+      "correct": 0,
+      "hint": "Se usa para acceder a elementos de arrays.",
+      "explanation": "En el Direccionamiento Indirecto a Registro (Indexado), la dirección efectiva = Registro_Base + Desplazamiento. El desplazamiento es una constante en la instrucción."
+    },
+    {
+      "q": "La instrucción `LW R1, 4(R2)` usa el modo de direccionamiento ____.",
+      "options": [
+        "Indirecto a Registro (Indexado)",
+        "Directo a Registro",
+        "Inmediato"
+      ],
+      "correct": 0,
+      "hint": "La dirección es R2 + 4.",
+      "explanation": "LW R1, 4(R2) usa Direccionamiento Indirecto a Registro: dirección efectiva = R2 + 4. El valor en esa dirección se carga en R1."
+    },
+    {
+      "q": "El programa en MIPS que suma los primeros 10 enteros almacena el acumulador de la suma en el registro ____.",
+      "options": [
+        "$t1",
+        "$t0",
+        "$t2"
+      ],
+      "correct": 0,
+      "hint": "Se inicializa con li $t1, 0.",
+      "explanation": "$t1 es el acumulador de la suma (sum), inicializado a 0. $t0 es el contador i y $t2 almacena el límite 10."
+    },
+    {
+      "q": "La etapa del compilador produce como salida un archivo en lenguaje ____, que es la entrada del ensamblador.",
+      "options": [
+        "Ensamblador",
+        "Objeto (.o)",
+        "Ejecutable (.exe)"
+      ],
+      "correct": 0,
+      "hint": "Es un archivo de texto legible con nemotécnicos.",
+      "explanation": "El compilador traduce el código fuente de alto nivel a un archivo de texto en lenguaje ensamblador. Este archivo es luego procesado por el Ensamblador para generar el código objeto binario."
+    },
+    {
+      "q": "El ____ es la herramienta que une los archivos objeto y resuelve las referencias a librerías externas.",
+      "options": [
+        "Enlazador (Linker)",
+        "Compilador",
+        "Ensamblador (Assembler)"
+      ],
+      "correct": 0,
+      "hint": "Genera el ejecutable final (.exe).",
+      "explanation": "El Enlazador (Linker) combina múltiples archivos objeto y resuelve todas las referencias a símbolos externos (librerías), produciendo el ejecutable final."
+    },
+    {
+      "q": "La instrucción BEQ salta a la etiqueta si los dos registros comparados son ____.",
+      "options": [
+        "Iguales",
+        "Diferentes",
+        "El primero mayor que el segundo"
+      ],
+      "correct": 0,
+      "hint": "BEQ = Branch if Equal.",
+      "explanation": "BEQ (Branch if Equal) realiza el salto únicamente cuando los dos registros son iguales. Si son distintos, continúa secuencialmente."
+    },
+    {
+      "q": "En MIPS, la instrucción `addi $t0, $t0, 1` usa el modo de direccionamiento ____ para el operando constante 1.",
+      "options": [
+        "Inmediato",
+        "Directo a Registro",
+        "Indirecto a Registro"
+      ],
+      "correct": 0,
+      "hint": "La 'i' en 'addi' significa 'immediate'.",
+      "explanation": "La constante 1 está codificada directamente en la instrucción, lo que constituye el Direccionamiento Inmediato. El registro $t0 usa Direccionamiento Directo a Registro."
+    },
+    {
+      "q": "La directiva ____ en MIPS indica el inicio del segmento de código ejecutable.",
+      "options": [
+        ".text",
+        ".data",
+        ".globl"
+      ],
+      "correct": 0,
+      "hint": "El código reside en el segmento de 'texto'.",
+      "explanation": ".text es la directiva que indica al ensamblador que las instrucciones siguientes pertenecen al segmento de código del programa."
+    },
+    {
+      "q": "Para terminar un programa MIPS, se carga el valor ____ en $v0 antes de ejecutar syscall.",
+      "options": [
+        "10",
+        "0",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "El código 10 significa 'exit' en el simulador MIPS.",
+      "explanation": "La convención del simulador MIPS (SPIM/MARS) es que el código de servicio 10 en $v0 antes de syscall indica al SO que termine el programa."
+    },
+    {
+      "q": "¿Cuántos bits ocupa el campo de desplazamiento/inmediato en el formato de instrucción de 32 bits descrito en el Tema 13?",
+      "options": [
+        "11 bits",
+        "5 bits",
+        "6 bits"
+      ],
+      "correct": 0,
+      "hint": "32 - 6 - 5 - 5 - 5 = ?",
+      "explanation": "El campo de desplazamiento/inmediato ocupa 11 bits (32 - 6 - 5 - 5 - 5 = 11). Es el campo más ancho, permitiendo codificar constantes y desplazamientos de cierto rango."
+    },
+    {
+      "q": "La instrucción `LD R1, [0x2000]` usa el modo de direccionamiento ____.",
+      "options": [
+        "Directo (o Absoluto)",
+        "Indirecto a Registro",
+        "Inmediato"
+      ],
+      "correct": 0,
+      "hint": "La instrucción contiene la dirección exacta de memoria.",
+      "explanation": "Direccionamiento Directo o Absoluto: la instrucción contiene literalmente la dirección de memoria (0x2000) donde está el dato."
+    },
+    {
+      "q": "La instrucción ____ en MIPS escribe el contenido de un registro en una posición de memoria.",
+      "options": [
+        "SW (Store Word)",
+        "LW (Load Word)",
+        "ADD"
+      ],
+      "correct": 0,
+      "hint": "SW = Store Word: de registro a memoria.",
+      "explanation": "SW (Store Word) copia el valor de un registro hacia una posición de memoria. LW hace lo contrario (memoria → registro)."
+    },
+    {
+      "q": "Los registros ____ y ____ en el formato de instrucción son los registros fuente de los operandos.",
+      "options": [
+        "Rs y Rt",
+        "Rd y Rs",
+        "OPCode y Rd"
+      ],
+      "correct": 0,
+      "hint": "Rs = Source, Rt = Target (ambos fuente).",
+      "explanation": "Rs (Source) y Rt (Target) son los dos campos de registro fuente en una instrucción típica de tres operandos. Rd es el registro destino."
+    },
+    {
+      "q": "La pseudo-instrucción `li $t0, 5` es equivalente a ____.",
+      "options": [
+        "addi $t0, $zero, 5",
+        "lw $t0, 5($zero)",
+        "add $t0, $zero, $zero"
+      ],
+      "correct": 0,
+      "hint": "Suma 5 al registro $zero (que siempre es 0).",
+      "explanation": "li es una pseudo-instrucción; el ensamblador la traduce a addi $t0, $zero, 5, que suma el inmediato 5 al registro $zero (que siempre contiene 0), cargando así 5 en $t0."
+    },
+    {
+      "q": "La instrucción `j fin_condicional` en la traducción del if-else en MIPS es de tipo ____.",
+      "options": [
+        "Salto Incondicional",
+        "Bifurcación Condicional",
+        "Llamada a subrutina"
+      ],
+      "correct": 0,
+      "hint": "J = Jump: siempre salta, sin comprobar condiciones.",
+      "explanation": "J (Jump) es un salto incondicional: transfiere el control a la etiqueta siempre, sin evaluar ninguna condición. Se usa para saltar por encima del bloque else tras ejecutar el bloque if."
+    },
+    {
+      "q": "La dirección efectiva en la instrucción `LW R1, 12(R5)` es ____.",
+      "options": [
+        "R5 + 12",
+        "R1 + 12",
+        "12"
+      ],
+      "correct": 0,
+      "hint": "El registro base es R5 y el desplazamiento es 12.",
+      "explanation": "Dirección efectiva = contenido_de_R5 + 12. El valor en esa dirección de memoria se cargará en R1."
+    },
+    {
+      "q": "En MIPS, la instrucción `bne $t0, $t1, rama_else` salta a rama_else si $t0 ____ $t1.",
+      "options": [
+        "es diferente de (≠)",
+        "es igual a (=)",
+        "es menor que (<)"
+      ],
+      "correct": 0,
+      "hint": "BNE = Branch if Not Equal.",
+      "explanation": "BNE salta cuando los dos registros NO son iguales ($t0 ≠ $t1). Si son iguales, no salta y continúa secuencialmente."
+    },
+    {
+      "q": "El ensamblador genera un archivo ____ que el enlazador usa para producir el ejecutable.",
+      "options": [
+        "Objeto (.o / .obj)",
+        "Fuente (.asm)",
+        "Ejecutable (.exe)"
+      ],
+      "correct": 0,
+      "hint": "Extensión .o en Linux, .obj en Windows.",
+      "explanation": "El Ensamblador produce archivos objeto (.o o .obj) que contienen código máquina con referencias sin resolver. El Enlazador los une para formar el ejecutable final."
+    },
+    {
+      "q": "La directiva `.globl main` marca la etiqueta 'main' como ____ para que el enlazador pueda encontrar el punto de entrada.",
+      "options": [
+        "Símbolo global (visible externamente)",
+        "Variable local",
+        "Sección de datos"
+      ],
+      "correct": 0,
+      "hint": ".globl = global symbol declaration.",
+      "explanation": ".globl declara un símbolo como global, haciéndolo visible para el enlazador. Esto es necesario para que el sistema operativo sepa dónde iniciar la ejecución del programa."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el Direccionamiento Inmediato es correcta?",
+      "options": [
+        "El dato operando está codificado directamente en la instrucción",
+        "El dato operando está en un registro del procesador",
+        "El dato operando se obtiene de una dirección de memoria"
+      ],
+      "correct": 0,
+      "hint": "Es el modo más rápido por esta razón.",
+      "explanation": "En el Direccionamiento Inmediato, el valor del dato está incluido literalmente en la instrucción. No requiere acceso adicional a registros ni a memoria, siendo el modo más rápido."
+    },
+    {
+      "q": "¿Cuál de las siguientes descripciones corresponde al Enlazador (Linker)?",
+      "options": [
+        "Todas las anteriores",
+        "Une archivos objeto en un único programa",
+        "Resuelve referencias a funciones de librerías externas"
+      ],
+      "correct": 0,
+      "hint": "El Linker hace ambas cosas al mismo tiempo.",
+      "explanation": "El Enlazador realiza ambas funciones: une múltiples archivos objeto en un único ejecutable Y resuelve las referencias a símbolos externos (librerías). Por tanto, 'Todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son modos de direccionamiento válidos descritos en el Tema 13?",
+      "options": [
+        "Todas las anteriores",
+        "Inmediato y Directo a Registro",
+        "Directo Absoluto e Indirecto a Registro"
+      ],
+      "correct": 0,
+      "hint": "El tema describe exactamente 4 modos.",
+      "explanation": "El Tema 13 describe cuatro modos: Inmediato, Directo a Registro, Directo Absoluto e Indirecto a Registro (Indexado). Todos ellos son válidos, por lo que 'Todas las anteriores' es correcta."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son instrucciones de carga/almacenamiento en MIPS?",
+      "options": [
+        "Todas las anteriores",
+        "LW (Load Word)",
+        "SW (Store Word)"
+      ],
+      "correct": 0,
+      "hint": "El Tema 13 menciona LW y SW como instrucciones de carga/almacenamiento.",
+      "explanation": "Tanto LW (Load Word, de memoria a registro) como SW (Store Word, de registro a memoria) son instrucciones de carga y almacenamiento en MIPS. 'Todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son instrucciones aritmético-lógicas mencionadas en el Tema 13?",
+      "options": [
+        "Todas las anteriores",
+        "ADD y SUB",
+        "AND y OR"
+      ],
+      "correct": 0,
+      "hint": "ADD, SUB, AND y OR forman el repertorio básico.",
+      "explanation": "El repertorio básico descrito en el Tema 13 incluye ADD (suma), SUB (resta), AND y OR como instrucciones aritmético-lógicas. Todas ellas son correctas."
+    },
+    {
+      "q": "¿Cuáles de los siguientes forman parte de la cadena de traducción de software?",
+      "options": [
+        "Todas las anteriores",
+        "El Compilador",
+        "El Ensamblador y el Enlazador"
+      ],
+      "correct": 0,
+      "hint": "La cadena tiene tres etapas principales.",
+      "explanation": "La cadena de traducción incluye el Compilador (código fuente → ensamblador), el Ensamblador (ensamblador → objeto), y el Enlazador (objetos → ejecutable). Las tres herramientas son parte de la cadena."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre BEQ y BNE son correctas?",
+      "options": [
+        "Todas las anteriores",
+        "Son instrucciones de salto condicional",
+        "Modifican el PC solo si se cumple la condición"
+      ],
+      "correct": 0,
+      "hint": "Ambas son bifurcaciones condicionales.",
+      "explanation": "BEQ y BNE son instrucciones de salto condicional (bifurcación) que modifican el Program Counter (PC) únicamente si la condición evaluada es verdadera. Ambas afirmaciones son correctas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes propiedades caracterizan al lenguaje ensamblador?",
+      "options": [
+        "Todas las anteriores",
+        "Tiene correspondencia uno a uno con el código máquina",
+        "Permite manipular directamente los registros del procesador"
+      ],
+      "correct": 0,
+      "hint": "Ambas son características fundamentales del ensamblador.",
+      "explanation": "El lenguaje ensamblador tiene mapeo 1:1 con el código máquina Y permite manipular directamente los registros del procesador. Ambas son características fundamentales y correctas."
+    },
+    {
+      "q": "¿Qué valor contiene el registro $zero en MIPS?",
+      "options": [
+        "Ninguna de las anteriores",
+        "El valor del Program Counter actual",
+        "El resultado de la última operación aritmética"
+      ],
+      "correct": 0,
+      "hint": "$zero siempre contiene cero por definición de la arquitectura.",
+      "explanation": "El registro $zero en MIPS siempre contiene el valor 0 y no puede ser modificado. Ninguna de las opciones incorrectas es correcta: no contiene el PC ni el resultado de la última operación."
+    },
+    {
+      "q": "¿Qué genera el compilador de C++ como salida?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Un archivo ejecutable listo para correr (.exe)",
+        "Un archivo de código objeto binario (.o)"
+      ],
+      "correct": 0,
+      "hint": "El compilador produce texto legible, no binario.",
+      "explanation": "El compilador genera un archivo de texto en lenguaje ensamblador, no un ejecutable ni un archivo objeto. Ninguna de las dos opciones incorrectas describe la salida del compilador."
+    },
+    {
+      "q": "¿Cuál de las siguientes instrucciones realiza una operación de salto INCONDICIONAL en MIPS?",
+      "options": [
+        "Ninguna de las anteriores",
+        "BEQ $t0, $t1, etiqueta",
+        "BNE $t0, $t1, etiqueta"
+      ],
+      "correct": 0,
+      "hint": "BEQ y BNE son condicionales. La instrucción J es incondicional pero no aparece como opción.",
+      "explanation": "Ni BEQ ni BNE son saltos incondicionales: ambos evalúan una condición antes de saltar. La instrucción incondicional es J (Jump), que no aparece como opción. Por tanto, 'Ninguna de las anteriores' es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el Direccionamiento Directo Absoluto es INCORRECTA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "La instrucción contiene la dirección exacta de memoria del dato",
+        "Se usa en instrucciones como LD R1, [0x2000]"
+      ],
+      "correct": 0,
+      "hint": "Ambas afirmaciones sobre el Direccionamiento Directo son correctas.",
+      "explanation": "Ambas afirmaciones son CORRECTAS sobre el Direccionamiento Directo: sí contiene la dirección exacta de memoria, y sí se usa en instrucciones como LD R1, [0x2000]. Por tanto, ninguna es incorrecta; la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una función del Ensamblador (Assembler)?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Traducir nemotécnicos a código binario de máquina",
+        "Generar el archivo objeto (.o)"
+      ],
+      "correct": 0,
+      "hint": "Ambas opciones SÍ son funciones del Ensamblador.",
+      "explanation": "Tanto 'Traducir nemotécnicos a código binario' como 'Generar el archivo objeto (.o)' son funciones correctas del Ensamblador. Por tanto, ninguna de las opciones describe algo que NO hace el ensamblador."
+    },
+    {
+      "q": "¿Cuál de las siguientes instrucciones NO pertenece al conjunto de bifurcaciones condicionales en MIPS?",
+      "options": [
+        "Ninguna de las anteriores",
+        "BEQ",
+        "BNE"
+      ],
+      "correct": 0,
+      "hint": "BEQ y BNE SÍ son bifurcaciones condicionales.",
+      "explanation": "BEQ y BNE SÍ son bifurcaciones condicionales en MIPS. No hay una opción que sea 'no condicional' entre BEQ y BNE, por lo que la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuántos registros fuente puede tener como máximo una instrucción aritmética de tres operandos en estilo RISC?",
+      "options": [
+        "2 registros fuente",
+        "3 registros fuente",
+        "1 registro fuente"
+      ],
+      "correct": 0,
+      "hint": "En ADD Rd, Rs, Rt → ¿cuántos son fuente?",
+      "explanation": "En una instrucción de tres operandos como ADD Rd, Rs, Rt, hay 2 registros fuente (Rs y Rt) y 1 registro destino (Rd). El formato tiene Rs y Rt como fuentes."
+    },
+    {
+      "q": "La instrucción `ADD R1, R2, #5` en el contexto del Tema 13: el símbolo '#' indica que 5 es ____.",
+      "options": [
+        "Un valor inmediato (constante codificada en la instrucción)",
+        "La dirección de memoria número 5",
+        "El identificador del registro número 5"
+      ],
+      "correct": 0,
+      "hint": "El prefijo '#' antes de un número indica operando inmediato.",
+      "explanation": "En la notación ensamblador del Tema 13, '#5' denota un operando inmediato: una constante cuyo valor (5) está codificado directamente en la instrucción, no en un registro ni en memoria."
+    },
+    {
+      "q": "El campo OPCode de 6 bits permite codificar un máximo de ____ operaciones diferentes.",
+      "options": [
+        "64",
+        "32",
+        "128"
+      ],
+      "correct": 0,
+      "hint": "2^6 = ?",
+      "explanation": "Con 6 bits de OPCode, se pueden codificar 2^6 = 64 operaciones distintas. Con 5 bits serían 32 y con 7 bits serían 128."
+    },
+    {
+      "q": "¿Qué instrucción MIPS se usa para realizar la operación `sum = sum + i` en el bucle de suma de los primeros 10 enteros?",
+      "options": [
+        "add $t1, $t1, $t0",
+        "addi $t1, $t1, 1",
+        "lw $t1, 0($t0)"
+      ],
+      "correct": 0,
+      "hint": "sum está en $t1 e i en $t0.",
+      "explanation": "La instrucción `add $t1, $t1, $t0` suma el contenido de $t1 (sum) y $t0 (i), almacenando el resultado de nuevo en $t1 (sum). Esto implementa sum = sum + i."
+    },
+    {
+      "q": "En el programa MIPS de suma de los primeros 10 enteros, el registro $t2 almacena ____.",
+      "options": [
+        "El límite del bucle (valor 10)",
+        "El contador del bucle (valor i)",
+        "El acumulador de la suma"
+      ],
+      "correct": 0,
+      "hint": "Se inicializa con li $t2, 10.",
+      "explanation": "$t2 almacena el límite del bucle (10), inicializado con `li $t2, 10`. Se compara con $t0 (el contador i) en la instrucción BLE para decidir si continuar el bucle."
+    },
+    {
+      "q": "La instrucción `ble $t0, $t2, bucle` en el programa de suma de los primeros 10 enteros: ¿a qué equivale en términos de condición?",
+      "options": [
+        "Si $t0 <= $t2 (si i <= 10), volver al inicio del bucle",
+        "Si $t0 >= $t2 (si i >= 10), volver al inicio del bucle",
+        "Si $t0 == $t2 (si i == 10), volver al inicio del bucle"
+      ],
+      "correct": 0,
+      "hint": "BLE = Branch if Less or Equal.",
+      "explanation": "BLE salta si el primer operando es menor o igual al segundo. `ble $t0, $t2, bucle` salta a 'bucle' si $t0 (i) <= $t2 (10), es decir, mientras i no supere 10 se continúa iterando."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Secuencia de operaciones ADD/ADDI sobre registros",
+      "context": "Dado un procesador MIPS con registros inicializados a: R1=0, R2=10, R3=5. Se ejecuta la siguiente secuencia de instrucciones:\n1. ADD R1, R2, R3\n2. ADDI R1, R1, 7\n3. ADD R2, R1, R3\n4. ADDI R3, R2, -3",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de R1 después de ejecutar la instrucción 1 (ADD R1, R2, R3)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "$$R1 = R2 + R3 = 10 + 5 = 15$$"
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R1 después de ejecutar la instrucción 2 (ADDI R1, R1, 7)?",
+          "correctValue": 22,
+          "tolerance": 0,
+          "explanation": "$$R1 = R1_{prev} + 7 = 15 + 7 = 22$$"
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de R2 después de ejecutar la instrucción 3 (ADD R2, R1, R3)?",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "$$R2 = R1 + R3 = 22 + 5 = 27$$"
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "¿Cuál es el valor de R3 después de ejecutar la instrucción 4 (ADDI R3, R2, -3)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "$$R3 = R2 + (-3) = 27 - 3 = 24$$"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Cálculo de Direcciones Efectivas en Modo Indexado",
+      "context": "Un procesador tiene los siguientes valores en sus registros: R1=100, R2=200, R3=50, R4=300. Se quieren calcular las direcciones efectivas de acceso a memoria.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección efectiva de la instrucción LW R0, 8(R1)?",
+          "correctValue": 108,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 8 = 100 + 8 = 108$$"
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección efectiva de la instrucción LW R0, 16(R2)?",
+          "correctValue": 216,
+          "tolerance": 0,
+          "explanation": "$$EA = R2 + 16 = 200 + 16 = 216$$"
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección efectiva de la instrucción SW R0, -10(R4)?",
+          "correctValue": 290,
+          "tolerance": 0,
+          "explanation": "$$EA = R4 + (-10) = 300 - 10 = 290$$"
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Si se ejecuta ADD R1, R1, R3, ¿cuál sería la nueva dirección efectiva de LW R0, 8(R1) usando el R1 actualizado?",
+          "correctValue": 158,
+          "tolerance": 0,
+          "explanation": "$$R1_{nuevo} = R1 + R3 = 100 + 50 = 150 \\Rightarrow EA = 150 + 8 = 158$$"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Simulación de Bucle MIPS: Suma de los primeros N enteros",
+      "context": "Se simula el bucle MIPS para calcular la suma de los primeros N enteros. Inicialmente: $t0 (contador i) = 1, $t1 (suma) = 0, $t2 (límite) = 5. El bucle ejecuta: add $t1, $t1, $t0 y luego addi $t0, $t0, 1 hasta que i > 5.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de $t1 (suma) después de la primera iteración del bucle (i=1)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$suma = 0 + 1 = 1. \\quad \\text{Se suma } i=1 \\text{ al acumulador inicial } 0.$$"
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de $t1 (suma) después de la tercera iteración (i=3)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$suma = 1 + 2 + 3 = 6. \\quad \\text{Tras las iteraciones con } i=1,2,3.$$"
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final de $t1 (suma) al terminar el bucle (suma de 1 a 5)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "$$\\sum_{i=1}^{5} i = 1+2+3+4+5 = 15$$"
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "¿Cuántas iteraciones ejecuta el bucle en total (cuántas veces se ejecuta la instrucción add)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$\\text{El bucle itera para } i = 1, 2, 3, 4, 5. \\text{ Total: 5 iteraciones.}$$"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Stack Pointer: Operaciones PUSH y POP",
+      "context": "Un procesador tiene el Stack Pointer (SP) inicializado en 1000. La pila crece hacia abajo (cada PUSH decrementa SP en 4 bytes, cada POP incrementa SP en 4 bytes). Se ejecuta la secuencia: PUSH R1, PUSH R2, PUSH R3.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del SP después de ejecutar PUSH R1?",
+          "correctValue": 996,
+          "tolerance": 0,
+          "explanation": "$$SP = SP - 4 = 1000 - 4 = 996. \\quad \\text{El valor de R1 se almacena en la dirección 996.}$$"
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del SP después de ejecutar PUSH R2?",
+          "correctValue": 992,
+          "tolerance": 0,
+          "explanation": "$$SP = SP - 4 = 996 - 4 = 992. \\quad \\text{El valor de R2 se almacena en la dirección 992.}$$"
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del SP después de ejecutar PUSH R3?",
+          "correctValue": 988,
+          "tolerance": 0,
+          "explanation": "$$SP = SP - 4 = 992 - 4 = 988. \\quad \\text{El valor de R3 se almacena en la dirección 988.}$$"
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Si a continuación se ejecutan dos POP seguidos, ¿cuál es el valor final del SP?",
+          "correctValue": 996,
+          "tolerance": 0,
+          "explanation": "$$SP = 988 + 4 = 992 \\text{ (primer POP)}, \\quad SP = 992 + 4 = 996 \\text{ (segundo POP)}.$$"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Acceso a Array con Direccionamiento Indexado",
+      "context": "Un array de enteros (4 bytes cada uno) comienza en la dirección de memoria 2000. El registro R5 contiene la dirección base del array (R5=2000). Se quieren acceder a los elementos array[0], array[1], array[2], array[3].",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de memoria de array[0] (primer elemento)?",
+          "correctValue": 2000,
+          "tolerance": 0,
+          "explanation": "$$EA_{array[0]} = R5 + 0 \\times 4 = 2000 + 0 = 2000$$"
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección de memoria de array[1] (segundo elemento)?",
+          "correctValue": 2004,
+          "tolerance": 0,
+          "explanation": "$$EA_{array[1]} = R5 + 1 \\times 4 = 2000 + 4 = 2004$$"
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección de memoria de array[3] (cuarto elemento)?",
+          "correctValue": 2012,
+          "tolerance": 0,
+          "explanation": "$$EA_{array[3]} = R5 + 3 \\times 4 = 2000 + 12 = 2012$$"
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si se ejecuta ADDI R5, R5, 8, ¿cuál es la nueva dirección de array[0] usando LW R1, 0(R5)?",
+          "correctValue": 2008,
+          "tolerance": 0,
+          "explanation": "$$R5_{nuevo} = 2000 + 8 = 2008. \\quad EA = R5_{nuevo} + 0 = 2008.$$"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Decodificación del campo OPCode",
+      "context": "Una instrucción de máquina de 32 bits tiene el siguiente formato: [OPCode:6][Rs:5][Rt:5][Rd:5][Desp:11]. Se tiene la instrucción binaria: 000010 00001 00010 00011 00000000101",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal del campo OPCode (000010)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$000010_2 = 0 \\times 2^5 + 0 \\times 2^4 + 0 \\times 2^3 + 0 \\times 2^2 + 1 \\times 2^1 + 0 \\times 2^0 = 2$$"
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal del campo Rs (00001)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$00001_2 = 0+0+0+0+1 = 1. \\quad \\text{Rs identifica el registro } R1.$$"
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "¿Cuál es el valor decimal del campo Rd (00011)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$00011_2 = 0 \\times 2^4 + 0 \\times 2^3 + 0 \\times 2^2 + 1 \\times 2^1 + 1 \\times 2^0 = 2 + 1 = 3. \\quad \\text{Rd es } R3.$$"
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del campo Desplazamiento (00000000101)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$00000000101_2 = 1 \\times 2^2 + 0 \\times 2^1 + 1 \\times 2^0 = 4 + 0 + 1 = 5$$"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Implementación de if-else: Trazado de valores de registros",
+      "context": "Se implementa `if (a == b) { c = a + 5; } else { c = b - 2; }` en MIPS. Inicialmente: $t0 (a) = 7, $t1 (b) = 7, $t2 (c) = 0. Se ejecuta la secuencia de instrucciones de la solución del Ejercicio 1.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Se cumple la condición a == b? Responde 1 si es verdadero, 0 si es falso.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$a = 7, \\quad b = 7. \\quad a == b \\Rightarrow \\text{Verdadero} = 1.$$"
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "¿La instrucción `bne $t0, $t1, rama_else` realiza el salto? Responde 1 si salta, 0 si no salta.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$\\text{BNE salta si } \\$t0 \\neq \\$t1. \\quad 7 = 7 \\Rightarrow \\text{NO son distintos} \\Rightarrow \\text{NO salta} = 0.$$"
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de $t2 (c) después de ejecutar la rama if (`addi $t2, $t0, 5`)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$c = a + 5 = \\$t0 + 5 = 7 + 5 = 12$$"
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si en cambio $t0=3 y $t1=7 (a≠b), ¿cuál sería el valor de $t2 tras ejecutar la rama else (`addi $t2, $t1, -2`)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$c = b - 2 = \\$t1 - 2 = 7 - 2 = 5$$"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Capacidades del OPCode: Número máximo de operaciones",
+      "context": "Se diseña un procesador con instrucciones de ancho fijo. Los campos son: [OPCode:N][Rs:5][Rt:5][Rd:5][Desp:(32-N-15)]. Se estudia cómo varía el número de operaciones posibles con el tamaño del OPCode.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuántas operaciones distintas puede codificar un OPCode de 4 bits?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$2^4 = 16 \\text{ operaciones posibles con 4 bits de OPCode.}$$"
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "¿Cuántas operaciones distintas puede codificar un OPCode de 6 bits (el del Tema 13)?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$2^6 = 64 \\text{ operaciones posibles con 6 bits de OPCode.}$$"
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "¿Cuántos bits de desplazamiento quedan disponibles si el OPCode es de 6 bits en una instrucción de 32 bits con Rs(5), Rt(5), Rd(5)?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$$32 - 6 - 5 - 5 - 5 = 11 \\text{ bits para el campo de desplazamiento/inmediato.}$$"
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Con 11 bits de desplazamiento en complemento a 2, ¿cuántos valores distintos de desplazamiento se pueden representar?",
+          "correctValue": 2048,
+          "tolerance": 0,
+          "explanation": "$$2^{11} = 2048 \\text{ valores distintos (desde } -1024 \\text{ hasta } +1023\\text{).}$$"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Suma acumulativa con bucle: Seguimiento de registros iteración por iteración",
+      "context": "Bucle MIPS con $t0 (i) = 1, $t1 (suma) = 0, $t2 (límite) = 4. Cada iteración: suma = suma + i, luego i = i + 1. El bucle termina cuando i > 4.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "¿Cuál es la suma acumulada $t1 después de la iteración 2 (i=2)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$\\text{Iter 1: suma}=0+1=1. \\quad \\text{Iter 2: suma}=1+2=3.$$"
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "¿Cuál es la suma acumulada $t1 después de la iteración 3 (i=3)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Iter 3: suma}=3+3=6.$$"
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "¿Cuál es la suma acumulada final $t1 al terminar el bucle (suma de 1 a 4)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$\\sum_{i=1}^{4} i = 1+2+3+4 = 10$$"
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del contador $t0 (i) justo cuando el bucle termina (el valor que hace que BLE falle)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$\\text{Tras la última iteración (i=4), se ejecuta addi: } i = 4+1 = 5. \\quad \\text{BLE evalúa } 5 \\leq 4 \\Rightarrow \\text{falso, bucle termina.}$$"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Secuencia SUB/ADDI sobre registros",
+      "context": "Registros iniciales: R1=50, R2=20, R3=8. Se ejecuta la siguiente secuencia:\n1. SUB R4, R1, R2\n2. ADDI R4, R4, -5\n3. ADD R5, R4, R3\n4. SUB R1, R5, R4",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de R4 después de la instrucción 1 (SUB R4, R1, R2)?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "$$R4 = R1 - R2 = 50 - 20 = 30$$"
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R4 después de la instrucción 2 (ADDI R4, R4, -5)?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "$$R4 = 30 + (-5) = 25$$"
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de R5 después de la instrucción 3 (ADD R5, R4, R3)?",
+          "correctValue": 33,
+          "tolerance": 0,
+          "explanation": "$$R5 = R4 + R3 = 25 + 8 = 33$$"
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "¿Cuál es el valor de R1 después de la instrucción 4 (SUB R1, R5, R4)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$R1 = R5 - R4 = 33 - 25 = 8$$"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Operación aritmética compleja: c = (a + b) - (d + 8)",
+      "context": "Se implementa en MIPS la operación: c = (a + b) - (d + 8). Valores: a ($t0) = 15, b ($t1) = 9, d ($t3) = 4. Se necesitan registros temporales: $t4 para (a+b) y $t5 para (d+8). Finalmente $t2 almacena c.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de $t4 tras ejecutar `add $t4, $t0, $t1` (a + b)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "$$\\$t4 = a + b = 15 + 9 = 24$$"
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de $t5 tras ejecutar `addi $t5, $t3, 8` (d + 8)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$\\$t5 = d + 8 = 4 + 8 = 12$$"
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de $t2 (c) tras ejecutar `sub $t2, $t4, $t5` ((a+b) - (d+8))?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$c = (a+b) - (d+8) = 24 - 12 = 12$$"
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si a continuación se ejecuta `addi $t2, $t2, 3`, ¿cuál es el valor final de $t2?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "$$\\$t2_{final} = 12 + 3 = 15$$"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Recorrido de array con registro base actualizado",
+      "context": "Un array entero de 4 bytes/elemento empieza en la dirección 500. R6=500 (dirección base). Se recorre el array actualizando R6 en cada paso con ADDI R6, R6, 4.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de acceso de `LW R1, 0(R6)` en la primera pasada (R6=500)?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "$$EA = R6 + 0 = 500 + 0 = 500$$"
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Tras `ADDI R6, R6, 4`, ¿cuál es el valor de R6?",
+          "correctValue": 504,
+          "tolerance": 0,
+          "explanation": "$$R6 = 500 + 4 = 504$$"
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Tras una segunda `ADDI R6, R6, 4`, ¿cuál es la dirección de acceso de `LW R1, 0(R6)`?",
+          "correctValue": 508,
+          "tolerance": 0,
+          "explanation": "$$R6 = 504 + 4 = 508. \\quad EA = 508 + 0 = 508.$$"
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Después de 5 actualizaciones de R6 (5 veces ADDI R6, R6, 4 desde R6=500), ¿cuál es el valor de R6?",
+          "correctValue": 520,
+          "tolerance": 0,
+          "explanation": "$$R6 = 500 + 5 \\times 4 = 500 + 20 = 520$$"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Profundidad de la pila: PUSH/POP mixtos",
+      "context": "SP inicial = 2000. La pila crece hacia abajo (PUSH decrementa SP 4, POP incrementa SP 4). Secuencia: PUSH R1, PUSH R2, POP R3, PUSH R4, PUSH R5, POP R6.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuál es el SP tras PUSH R1, PUSH R2?",
+          "correctValue": 1992,
+          "tolerance": 0,
+          "explanation": "$$SP = 2000 - 4 - 4 = 1992. \\quad \\text{Dos PUSH decrementan 8 en total.}$$"
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "¿Cuál es el SP tras el POP R3 que sigue?",
+          "correctValue": 1996,
+          "tolerance": 0,
+          "explanation": "$$SP = 1992 + 4 = 1996. \\quad \\text{POP incrementa SP en 4.}$$"
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "¿Cuál es el SP tras PUSH R4, PUSH R5?",
+          "correctValue": 1988,
+          "tolerance": 0,
+          "explanation": "$$SP = 1996 - 4 - 4 = 1988. \\quad \\text{Dos PUSH adicionales.}$$"
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "¿Cuál es el SP final tras el último POP R6?",
+          "correctValue": 1992,
+          "tolerance": 0,
+          "explanation": "$$SP = 1988 + 4 = 1992. \\quad \\text{El último POP restaura SP en 4.}$$"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Traducción de operación C a MIPS: seguimiento de registros",
+      "context": "Se traduce `resultado = (x * 1) + (y - 3)` en MIPS simplificado (sin multiplicación, se usa un 'MULT' ficticio). Valores: x ($t0)=6, y ($t1)=10. Pasos: R_temp1 = x, R_temp2 = y - 3, resultado = R_temp1 + R_temp2.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de $t2 (R_temp1 = x) tras `add $t2, $t0, $zero` (copia de x)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\$t2 = x + 0 = 6 + 0 = 6. \\quad \\text{Copia el valor de x en } \\$t2.$$"
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de $t3 (R_temp2 = y - 3) tras `addi $t3, $t1, -3`?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$$\\$t3 = y - 3 = 10 - 3 = 7$$"
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de $t4 (resultado) tras `add $t4, $t2, $t3`?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "$$resultado = R_{temp1} + R_{temp2} = 6 + 7 = 13$$"
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Si luego se ejecuta `addi $t4, $t4, -1`, ¿cuál es el valor final de $t4?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$\\$t4 = 13 + (-1) = 12$$"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Número de registros direccionables con N bits",
+      "context": "Se analiza cuántos registros puede identificar cada campo de registro en función del número de bits disponibles. En el formato del Tema 13, cada campo de registro tiene 5 bits.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuántos registros distintos puede identificar un campo de 3 bits?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$2^3 = 8 \\text{ registros distintos con 3 bits.}$$"
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "¿Cuántos registros distintos puede identificar un campo de 5 bits (el del Tema 13)?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$2^5 = 32 \\text{ registros distintos con 5 bits. MIPS tiene exactamente 32 registros de propósito general.}$$"
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Si se aumenta el campo de registro a 6 bits, ¿cuántos registros podrían identificarse?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$2^6 = 64 \\text{ registros identificables con 6 bits.}$$"
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Si una instrucción de 32 bits usa OPCode de 6 bits y tiene 3 campos de registro de 6 bits cada uno, ¿cuántos bits quedan para el desplazamiento?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$32 - 6 - 6 - 6 - 6 = 8 \\text{ bits restantes para desplazamiento.}$$"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Operaciones AND/OR lógicas bit a bit",
+      "context": "Se tienen dos registros de 8 bits (para simplificar): R1 = 0b11001010 = 202 (decimal), R2 = 0b10110011 = 179 (decimal). Se ejecutan operaciones lógicas.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuál es el resultado de AND R3, R1, R2 en decimal? (R1=202, R2=179)",
+          "correctValue": 130,
+          "tolerance": 0,
+          "explanation": "$$11001010 \\text{ AND } 10110011 = 10000010_2 = 128 + 2 = 130$$"
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "¿Cuál es el resultado de OR R4, R1, R2 en decimal? (R1=202, R2=179)",
+          "correctValue": 251,
+          "tolerance": 0,
+          "explanation": "$$11001010 \\text{ OR } 10110011 = 11111011_2 = 128+64+32+16+8+2+1 = 251$$"
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Si R3 = AND(R1, R2) = 130 y R4 = OR(R1, R2) = 251, ¿cuál es ADD R5, R3, R4?",
+          "correctValue": 381,
+          "tolerance": 0,
+          "explanation": "$$R5 = R3 + R4 = 130 + 251 = 381$$"
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "¿Cuál es el resultado de SUB R6, R4, R3 (OR - AND)?",
+          "correctValue": 121,
+          "tolerance": 0,
+          "explanation": "$$R6 = R4 - R3 = 251 - 130 = 121$$"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Secuencia de carga y almacenamiento (LW/SW)",
+      "context": "La memoria RAM tiene los siguientes valores: Dirección 100: valor 42, Dirección 104: valor 17, Dirección 108: valor 5. Registros iniciales: R1=100, R2=0, R3=0.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de R2 tras `LW R2, 0(R1)`?",
+          "correctValue": 42,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 0 = 100. \\quad \\text{Se carga el valor en la dirección 100, que es 42.} \\quad R2 = 42.$$"
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R3 tras `LW R3, 4(R1)`?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 4 = 104. \\quad \\text{Se carga el valor en la dirección 104, que es 17.} \\quad R3 = 17.$$"
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Tras `ADD R2, R2, R3`, ¿cuál es el valor de R2?",
+          "correctValue": 59,
+          "tolerance": 0,
+          "explanation": "$$R2 = 42 + 17 = 59$$"
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si se ejecuta `SW R2, 8(R1)`, ¿qué valor queda almacenado en la dirección de memoria 108?",
+          "correctValue": 59,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 8 = 108. \\quad \\text{SW almacena el contenido de R2 (=59) en la dirección 108.}$$"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Rango de desplazamiento representable con N bits en complemento a 2",
+      "context": "Un campo de desplazamiento de N bits en complemento a 2 puede representar valores desde -2^(N-1) hasta 2^(N-1)-1. Se analiza para distintos tamaños de campo.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuál es el valor mínimo representable (más negativo) con un campo de desplazamiento de 11 bits en complemento a 2?",
+          "correctValue": -1024,
+          "tolerance": 0,
+          "explanation": "$$\\text{Valor mínimo} = -2^{11-1} = -2^{10} = -1024$$"
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "¿Cuál es el valor máximo representable con un campo de desplazamiento de 11 bits en complemento a 2?",
+          "correctValue": 1023,
+          "tolerance": 0,
+          "explanation": "$$\\text{Valor máximo} = 2^{10} - 1 = 1024 - 1 = 1023$$"
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuántos valores distintos en total puede representar un campo de 11 bits?",
+          "correctValue": 2048,
+          "tolerance": 0,
+          "explanation": "$$2^{11} = 2048 \\text{ valores distintos (de } -1024 \\text{ a } +1023\\text{).}$$"
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si el desplazamiento del Tema 13 tiene 11 bits y el registro base R1=3000, ¿cuál es la dirección efectiva máxima alcanzable con `LW R2, max_offset(R1)`?",
+          "correctValue": 4023,
+          "tolerance": 0,
+          "explanation": "$$EA_{max} = R1 + 1023 = 3000 + 1023 = 4023$$"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Bucle de resta en 5 en 5 hasta cero o negativo",
+      "context": "Se implementa un bucle que resta de 5 en 5 a un valor inicial. Registro $t0 = 25 (valor inicial). El bucle ejecuta `addi $t0, $t0, -5` mientras $t0 > 0.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de $t0 después de la primera iteración?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$\\$t0 = 25 - 5 = 20$$"
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de $t0 después de la tercera iteración?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$\\$t0 = 25 - 3 \\times 5 = 25 - 15 = 10$$"
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "¿Cuántas iteraciones ejecuta el bucle en total antes de que $t0 sea <= 0?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$25 / 5 = 5 \\text{ iteraciones. Tras 5 restas de 5, } \\$t0 = 0 \\leq 0 \\Rightarrow \\text{termina.}$$"
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "¿Cuál es el valor final de $t0 cuando el bucle termina?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$\\$t0 = 25 - 5 \\times 5 = 25 - 25 = 0. \\quad 0 \\leq 0 \\Rightarrow \\text{condición de parada alcanzada.}$$"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Cadena de traducción: Tamaño de campos en una instrucción RISC",
+      "context": "Se diseña una arquitectura RISC con instrucciones de 32 bits y un banco de 64 registros. El OPCode usa 7 bits. Se tiene una instrucción de tipo R (tres registros) y una instrucción de tipo I (dos registros + inmediato).",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuántos bits necesita cada campo de registro para identificar 64 registros?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$2^6 = 64. \\quad \\text{Se necesitan 6 bits para identificar 64 registros distintos.}$$"
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "En una instrucción tipo R (OPCode:7 + Rs:6 + Rt:6 + Rd:6), ¿cuántos bits quedan para el campo de función/desplazamiento?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$$32 - 7 - 6 - 6 - 6 = 7 \\text{ bits para función/desplazamiento.}$$"
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "En una instrucción tipo I (OPCode:7 + Rs:6 + Rd:6 + Inmediato), ¿cuántos bits tiene el campo inmediato?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "$$32 - 7 - 6 - 6 = 13 \\text{ bits para el inmediato.}$$"
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Con 13 bits de inmediato en complemento a 2, ¿cuál es el valor positivo máximo representable?",
+          "correctValue": 4095,
+          "tolerance": 0,
+          "explanation": "$$\\text{Máximo con 13 bits (complemento a 2)} = 2^{12} - 1 = 4096 - 1 = 4095$$"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Direccionamiento múltiple: cálculo de direcciones para estructuras",
+      "context": "Una estructura (struct) en C tiene tres campos enteros: x a offset 0, y a offset 4, z a offset 8. El registro R7 apunta al inicio de la estructura (R7=3000).",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de acceso a struct.x con `LW R1, 0(R7)`?",
+          "correctValue": 3000,
+          "tolerance": 0,
+          "explanation": "$$EA = R7 + 0 = 3000 + 0 = 3000$$"
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección de acceso a struct.y con `LW R2, 4(R7)`?",
+          "correctValue": 3004,
+          "tolerance": 0,
+          "explanation": "$$EA = R7 + 4 = 3000 + 4 = 3004$$"
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección de acceso a struct.z con `LW R3, 8(R7)`?",
+          "correctValue": 3008,
+          "tolerance": 0,
+          "explanation": "$$EA = R7 + 8 = 3000 + 8 = 3008$$"
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Si R1=10, R2=20, R3=30 (valores de x, y, z), y se ejecuta `ADD R4, R1, R2` seguido de `ADD R4, R4, R3`, ¿cuál es el valor de R4?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "$$R4 = (R1 + R2) + R3 = (10 + 20) + 30 = 30 + 30 = 60$$"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Operaciones de pila para llamadas a subrutinas",
+      "context": "Al llamar a una subrutina, se salvan los registros en la pila. SP inicial = 5000. La pila crece hacia abajo (PUSH = SP-4, POP = SP+4). Secuencia: PUSH R1, PUSH R2, PUSH R3 (guardar), [ejecutar subrutina], POP R3, POP R2, POP R1 (restaurar).",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del SP tras hacer PUSH de los 3 registros (R1, R2, R3)?",
+          "correctValue": 4988,
+          "tolerance": 0,
+          "explanation": "$$SP = 5000 - 3 \\times 4 = 5000 - 12 = 4988$$"
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "¿En qué dirección de memoria se almacenó el valor de R1 (el primero en entrar a la pila)?",
+          "correctValue": 4996,
+          "tolerance": 0,
+          "explanation": "$$SP_{antes\\_R1} = 5000 - 4 = 4996. \\quad \\text{R1 se almacena en la dirección 4996.}$$"
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "¿En qué dirección de memoria se almacenó el valor de R3 (el último en entrar)?",
+          "correctValue": 4988,
+          "tolerance": 0,
+          "explanation": "$$SP_{antes\\_R3} = 4992 - 4 = 4988. \\quad \\text{R3 se almacena en la dirección 4988.}$$"
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Tras restaurar los 3 registros (POP R3, POP R2, POP R1), ¿cuál es el valor final del SP?",
+          "correctValue": 5000,
+          "tolerance": 0,
+          "explanation": "$$SP = 4988 + 3 \\times 4 = 4988 + 12 = 5000. \\quad \\text{La pila queda en su estado original.}$$"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Análisis de saltos condicionales: conteo de iteraciones de un bucle",
+      "context": "Se simula la ejecución de un bucle con BLE. Registros: $t0 (contador) = 1, $t2 (límite) = 10. Cada iteración: $t0 se incrementa en 1. La instrucción BLE salta si $t0 <= $t2.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuántas veces se ejecuta el cuerpo del bucle antes de que BLE deje de saltar?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$\\text{El bucle se ejecuta para } \\$t0 = 1, 2, ..., 10. \\quad \\text{Total: 10 iteraciones.}$$"
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del contador $t0 cuando BLE deja de saltar (condición falsa)?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$$\\text{Tras la décima iteración, addi incrementa } \\$t0 \\text{ a } 11. \\quad 11 > 10 \\Rightarrow \\text{BLE falla.}$$"
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Si el límite $t2 fuera 20 en lugar de 10, ¿cuántas iteraciones ejecutaría el bucle?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$\\text{El bucle iteraría para } i = 1, 2, ..., 20. \\quad \\text{Total: 20 iteraciones.}$$"
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si $t0 empieza en 3 y el límite $t2 = 10, ¿cuántas iteraciones ejecuta el bucle?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{El bucle itera para } i = 3, 4, 5, 6, 7, 8, 9, 10. \\quad \\text{Total: } 10 - 3 + 1 = 8 \\text{ iteraciones.}$$"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Conversión entre instrucción ensamblador y campos de instrucción de máquina",
+      "context": "Una instrucción `ADD R3, R1, R2` se codifica en el formato [OPCode:6][Rs:5][Rt:5][Rd:5][Desp:11]. Supón: OPCode_ADD=0, R1=1, R2=2, R3=3. Los campos Desp=0 para instrucciones tipo R.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuántos bits en total ocupa la instrucción codificada?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$6 + 5 + 5 + 5 + 11 = 32 \\text{ bits totales.}$$"
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "¿Cuál es el número decimal representado por el campo Rd=R3 (en binario 00011)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$00011_2 = 2 + 1 = 3. \\quad \\text{El campo Rd identifica el registro 3.}$$"
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "¿Cuántos bits ocupa el campo OPCode más los tres campos de registro (Rs, Rt, Rd)?",
+          "correctValue": 21,
+          "tolerance": 0,
+          "explanation": "$$6 + 5 + 5 + 5 = 21 \\text{ bits para OPCode + Rs + Rt + Rd.}$$"
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Si una instrucción de tipo I elimina el campo Rd y lo sustituye por un campo inmediato, ¿cuántos bits tendría ese campo inmediato?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$32 - 6 - 5 - 5 = 16 \\text{ bits para el inmediato en formato tipo I sin campo Rd.}$$"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Suma de serie aritmética: verificación matemática de un bucle",
+      "context": "La fórmula de Gauss para la suma de los N primeros enteros positivos es S = N*(N+1)/2. Se verifica el resultado del programa MIPS para varios valores de N.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuál es el valor esperado de la suma de los primeros 10 enteros (N=10) según la fórmula de Gauss?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "$$S = \\frac{N(N+1)}{2} = \\frac{10 \\times 11}{2} = \\frac{110}{2} = 55$$"
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "¿Cuál es el valor esperado de la suma de los primeros 5 enteros (N=5)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "$$S = \\frac{5 \\times 6}{2} = \\frac{30}{2} = 15$$"
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "¿Cuál es el valor esperado de la suma de los primeros 20 enteros (N=20)?",
+          "correctValue": 210,
+          "tolerance": 0,
+          "explanation": "$$S = \\frac{20 \\times 21}{2} = \\frac{420}{2} = 210$$"
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Si el registro acumulador ($t1) del programa MIPS de 10 enteros contiene 55 al final, y se ejecuta `addi $t1, $t1, 10`, ¿cuál es el valor final de $t1?",
+          "correctValue": 65,
+          "tolerance": 0,
+          "explanation": "$$\\$t1 = 55 + 10 = 65$$"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Gestión del Stack en subrrutinas: múltiples llamadas anidadas",
+      "context": "SP inicial = 8000. Se llama a una subrutina A que guarda 2 registros (PUSH x2). Luego llama a la subrutina B que guarda 3 registros (PUSH x3). B termina y restaura sus registros (POP x3). A restaura los suyos (POP x2).",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuál es el SP tras los 2 PUSH de la subrutina A?",
+          "correctValue": 7992,
+          "tolerance": 0,
+          "explanation": "$$SP = 8000 - 2 \\times 4 = 8000 - 8 = 7992$$"
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "¿Cuál es el SP tras los 3 PUSH de la subrutina B?",
+          "correctValue": 7980,
+          "tolerance": 0,
+          "explanation": "$$SP = 7992 - 3 \\times 4 = 7992 - 12 = 7980$$"
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "¿Cuál es el SP tras los 3 POP de la subrutina B (restauración)?",
+          "correctValue": 7992,
+          "tolerance": 0,
+          "explanation": "$$SP = 7980 + 3 \\times 4 = 7980 + 12 = 7992$$"
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "¿Cuál es el SP final tras los 2 POP de la subrutina A (restauración)?",
+          "correctValue": 8000,
+          "tolerance": 0,
+          "explanation": "$$SP = 7992 + 2 \\times 4 = 7992 + 8 = 8000. \\quad \\text{Vuelta al estado inicial.}$$"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Instrucciones de comparación y saltos: traza del PC",
+      "context": "Las instrucciones están en memoria a partir de la dirección 100, cada instrucción ocupa 4 bytes. El programa es: 100: BEQ R1, R2, etiqueta_200; 104: ADD R3, R1, R2; 108: J etiqueta_116; 112: SUB R3, R1, R2; 116: ADDI R3, R3, 1. La etiqueta_200 = dirección 200 (instrucción ADD). Valores: R1=5, R2=5.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "¿La instrucción BEQ R1, R2, etiqueta_200 realiza el salto? Responde 1 si salta, 0 si no.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$R1 = R2 = 5. \\quad \\text{BEQ salta si iguales} \\Rightarrow \\text{SÍ salta} = 1.$$"
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Si en cambio R1=3 y R2=7 (distintos), ¿la instrucción BEQ realiza el salto? Responde 1 si salta, 0 si no.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$R1 = 3 \\neq R2 = 7. \\quad \\text{BEQ NO salta si son distintos} = 0.$$"
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Con R1=3 y R2=7 (no saltan en BEQ), ¿cuál es el valor de R3 tras ejecutar `ADD R3, R1, R2` (instrucción en 104)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$R3 = R1 + R2 = 3 + 7 = 10$$"
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Tras el J etiqueta_116 (salta a 116), se ejecuta `ADDI R3, R3, 1`. ¿Cuál es el valor final de R3?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$$R3 = 10 + 1 = 11$$"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Capacidad de representación del campo inmediato",
+      "context": "En la instrucción `ADDI Rd, Rs, #inmediato`, el campo inmediato tiene 11 bits (complemento a 2). Se analizan distintos valores inmediatos.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Si R1=100 y se ejecuta `ADDI R2, R1, #50`, ¿cuál es el valor de R2?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "$$R2 = R1 + 50 = 100 + 50 = 150$$"
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Si R1=100 y se ejecuta `ADDI R2, R1, #-30`, ¿cuál es el valor de R2?",
+          "correctValue": 70,
+          "tolerance": 0,
+          "explanation": "$$R2 = R1 + (-30) = 100 - 30 = 70$$"
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Si R1=0 y se ejecuta `ADDI R2, R1, #1023` (máximo positivo con 11 bits), ¿cuál es el valor de R2?",
+          "correctValue": 1023,
+          "tolerance": 0,
+          "explanation": "$$R2 = 0 + 1023 = 1023. \\quad 1023 = 2^{10} - 1 \\text{ es el máximo positivo con 11 bits Ca2.}$$"
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Si R2=1023 y se ejecuta `ADDI R3, R2, #1`, ¿cuál sería el resultado (desbordamiento en 11 bits Ca2)?",
+          "correctValue": -1024,
+          "tolerance": 0,
+          "explanation": "$$1023 + 1 = 1024. \\text{ En 11 bits Ca2, } 1024 \\text{ desborda al mínimo negativo} = -1024 = -2^{10}.$$"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Ejecución de programa completo: suma de array",
+      "context": "Un array de 4 elementos está en memoria: M[100]=3, M[104]=7, M[108]=2, M[112]=8. R1=100 (base). El programa carga cada elemento y los suma en R5. R5 inicial = 0.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de R5 tras cargar y sumar M[100] (LW R2, 0(R1); ADD R5, R5, R2)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$R2 = M[100] = 3. \\quad R5 = 0 + 3 = 3.$$"
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R5 tras cargar y sumar también M[104]?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$R2 = M[104] = 7. \\quad R5 = 3 + 7 = 10.$$"
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de R5 tras cargar y sumar también M[108]?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$$R2 = M[108] = 2. \\quad R5 = 10 + 2 = 12.$$"
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "¿Cuál es el valor final de R5 tras sumar todos los elementos del array (incluido M[112]=8)?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$R2 = M[112] = 8. \\quad R5 = 12 + 8 = 20. \\quad \\text{Suma total del array: } 3+7+2+8=20.$$"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Análisis combinado: cadena de instrucciones ADD/LW/SW",
+      "context": "Estado inicial: R1=1000 (dirección base), R2=0, R3=0, R4=5. Memoria: M[1000]=10, M[1004]=20. Secuencia:\n1. LW R2, 0(R1)\n2. LW R3, 4(R1)\n3. ADD R4, R2, R3\n4. SW R4, 8(R1)",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de R2 tras la instrucción 1 (LW R2, 0(R1))?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 0 = 1000. \\quad R2 = M[1000] = 10.$$"
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R3 tras la instrucción 2 (LW R3, 4(R1))?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 4 = 1004. \\quad R3 = M[1004] = 20.$$"
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de R4 tras la instrucción 3 (ADD R4, R2, R3)?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "$$R4 = R2 + R3 = 10 + 20 = 30$$"
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "¿Qué valor queda almacenado en la dirección M[1008] tras la instrucción 4 (SW R4, 8(R1))?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "$$EA = R1 + 8 = 1008. \\quad M[1008] = R4 = 30.$$"
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Dirección Efectiva en Modo Indexado",
+      "tex": "$$EA = R_{base} + desplazamiento$$"
+    },
+    {
+      "name": "Número de Operaciones Codificables con N bits de OPCode",
+      "tex": "$$N_{operaciones} = 2^{N_{opcode}}$$"
+    },
+    {
+      "name": "Número de Registros Identificables con N bits",
+      "tex": "$$N_{registros} = 2^{N_{bits\\_campo\\_registro}}$$"
+    },
+    {
+      "name": "Tamaño Total de Instrucción (formato RISC típico)",
+      "tex": "$$W_{instruccion} = N_{opcode} + N_{Rs} + N_{Rt} + N_{Rd} + N_{desp}$$"
+    },
+    {
+      "name": "Rango del Campo Inmediato en Complemento a 2",
+      "tex": "$$-2^{N-1} \\leq inmediato \\leq 2^{N-1} - 1$$"
+    },
+    {
+      "name": "Suma de los N primeros enteros positivos (Fórmula de Gauss)",
+      "tex": "$$S = \\sum_{i=1}^{N} i = \\frac{N(N+1)}{2}$$"
+    },
+    {
+      "name": "Dirección del Elemento i-ésimo de un Array (base + índice * tamaño_elemento)",
+      "tex": "$$EA_{array[i]} = R_{base} + i \\times \\text{sizeof}(elemento)$$"
+    },
+    {
+      "name": "Operación PUSH sobre la pila (pila creciendo hacia abajo)",
+      "tex": "$$SP \\leftarrow SP - 4; \\quad M[SP] \\leftarrow R$$"
+    },
+    {
+      "name": "Operación POP de la pila (pila creciendo hacia abajo)",
+      "tex": "$$R \\leftarrow M[SP]; \\quad SP \\leftarrow SP + 4$$"
+    },
+    {
+      "name": "Instrucción ADD (formato tipo R)",
+      "tex": "$$Rd = Rs + Rt$$"
+    },
+    {
+      "name": "Instrucción ADDI (formato tipo I con inmediato)",
+      "tex": "$$Rd = Rs + \\text{inmediato}$$"
+    },
+    {
+      "name": "Número total de valores representables con N bits de campo inmediato",
+      "tex": "$$N_{valores} = 2^{N}$$"
+    }
+  ]
+}

@@ -1,0 +1,2130 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la función principal del Contador de Programa (PC)?",
+      "options": [
+        "Almacenar la dirección de la siguiente instrucción a ejecutar",
+        "Retener el código binario de la instrucción actual",
+        "Hacer de buffer entre la CPU y el bus de datos"
+      ],
+      "correct": 0,
+      "hint": "El PC apunta siempre hacia adelante.",
+      "explanation": "El PC (Program Counter) contiene en todo momento la dirección de memoria de la SIGUIENTE instrucción que debe ser leída. Se incrementa automáticamente tras cada ciclo de búsqueda (fetch)."
+    },
+    {
+      "q": "¿Qué registro de la CPU retiene el código binario de la instrucción que se está ejecutando actualmente?",
+      "options": [
+        "MAR (Memory Address Register)",
+        "IR (Instruction Register)",
+        "MDR (Memory Data Register)"
+      ],
+      "correct": 1,
+      "hint": "Su nombre en inglés contiene la palabra 'Instruction'.",
+      "explanation": "El IR (Instruction Register) almacena la instrucción que fue leída de memoria y que la Unidad de Control está decodificando y ejecutando en el ciclo actual."
+    },
+    {
+      "q": "¿A cuál bus externo está físicamente conectado el MAR (Memory Address Register)?",
+      "options": [
+        "Bus de datos",
+        "Bus de control",
+        "Bus de direcciones"
+      ],
+      "correct": 2,
+      "hint": "El MAR almacena la dirección de la celda de memoria.",
+      "explanation": "El MAR está conectado físicamente al bus de direcciones del sistema. Su contenido se coloca en dicho bus para indicar a la memoria principal a qué posición se desea acceder."
+    },
+    {
+      "q": "¿Cuál es la característica principal del MDR (Memory Data Register)?",
+      "options": [
+        "Es un registro unidireccional que solo recibe datos desde memoria",
+        "Es un buffer bidireccional que retiene datos leídos o datos a escribir en memoria",
+        "Almacena la dirección fuente de la instrucción en ejecución"
+      ],
+      "correct": 1,
+      "hint": "El MDR interviene tanto en lecturas como en escrituras de memoria.",
+      "explanation": "El MDR actúa como buffer bidireccional: en una operación de lectura retiene el dato recibido del bus de datos, y en una escritura retiene el dato que la CPU quiere enviar hacia la memoria."
+    },
+    {
+      "q": "¿En qué tipo de arquitectura es típica la Unidad de Control Cableada?",
+      "options": [
+        "CISC (Complex Instruction Set Computer)",
+        "RISC (Reduced Instruction Set Computer)",
+        "VLIW (Very Long Instruction Word)"
+      ],
+      "correct": 1,
+      "hint": "Las arquitecturas con repertorio de instrucciones reducido priorizan la velocidad.",
+      "explanation": "La UC cableada es típica en arquitecturas RISC (ARM, MIPS) porque su repertorio reducido y regular de instrucciones permite implementar la lógica de control con compuertas combinacionales optimizadas, consiguiendo máxima velocidad."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de la Unidad de Control Microprogramada respecto a la cableada?",
+      "options": [
+        "Mayor velocidad de ejecución de instrucciones",
+        "Menor número de transistores necesarios",
+        "Mayor flexibilidad para modificar o ampliar el repertorio de instrucciones"
+      ],
+      "correct": 2,
+      "hint": "Microprogramar significa guardar las señales de control en una ROM interna.",
+      "explanation": "La UC microprogramada almacena las señales de control en una ROM interna como microprogramas. Esto permite actualizar el repertorio (ISA) reescribiendo esa ROM (firmware), sin necesidad de rediseñar el chip de silicio."
+    },
+    {
+      "q": "¿Cuál es la principal desventaja de la Unidad de Control Cableada?",
+      "options": [
+        "Es más lenta que la microprogramada",
+        "Es extremadamente rígida; añadir instrucciones requiere rediseñar el circuito integrado",
+        "Requiere más memoria ROM interna para funcionar"
+      ],
+      "correct": 1,
+      "hint": "La rigidez es el precio a pagar por la velocidad.",
+      "explanation": "La UC cableada implementa la lógica de control en hardware fijo. Cualquier cambio en el repertorio de instrucciones implica un nuevo diseño físico del circuito integrado, lo que la hace completamente inflexible."
+    },
+    {
+      "q": "En la fase de Fetch, ¿cuál es el primer paso que realiza la CPU?",
+      "options": [
+        "IR ← MDR",
+        "MDR ← Bus de datos",
+        "MAR ← PC"
+      ],
+      "correct": 2,
+      "hint": "Primero hay que indicarle a la memoria qué dirección se quiere leer.",
+      "explanation": "El primer paso del ciclo Fetch es copiar el contenido del PC al MAR (MAR ← PC). Así la dirección de la instrucción aparece en el bus de direcciones y la memoria sabe a qué posición debe acceder."
+    },
+    {
+      "q": "¿Qué componente de la CPU ejecuta las operaciones aritméticas y lógicas sobre los operandos?",
+      "options": [
+        "Registro de Flags",
+        "ALU (Arithmetic Logic Unit)",
+        "Unidad de Control"
+      ],
+      "correct": 1,
+      "hint": "Su nombre en español es 'Unidad Aritmético-Lógica'.",
+      "explanation": "La ALU (Arithmetic Logic Unit) es el circuito combinacional encargado de ejecutar todas las operaciones aritméticas (suma, resta...) y lógicas (AND, OR, NOT...) sobre los operandos que le suministra el banco de registros."
+    },
+    {
+      "q": "¿Qué almacena el Registro de Flags tras cada operación de la ALU?",
+      "options": [
+        "La dirección de retorno de la subrutina actual",
+        "Las señales de estado Z, S, V y C producidas por la operación",
+        "El número de ciclos de reloj consumidos por la instrucción"
+      ],
+      "correct": 1,
+      "hint": "Los flags informan sobre el resultado: zero, sign, overflow, carry.",
+      "explanation": "El Registro de Flags captura automáticamente los bits de estado generados por la ALU: Z (Zero), S (Sign), V (oVerflow) y C (Carry). Estos flags son consultados por instrucciones de salto condicional."
+    },
+    {
+      "q": "¿Cómo se denomina la técnica mediante la cual una CPU procesa varias instrucciones simultáneamente en diferentes etapas de ejecución?",
+      "options": [
+        "Superescalaridad exclusiva",
+        "Segmentación del Cauce (Pipelining)",
+        "Microprogramación dinámica"
+      ],
+      "correct": 1,
+      "hint": "Se compara con una cadena de montaje industrial.",
+      "explanation": "La Segmentación (Pipelining) divide la ejecución de instrucciones en etapas independientes (Fetch, Decode, Execute, Memory, Write-back). Mientras una instrucción avanza por las etapas, las siguientes instrucciones se van introduciendo en etapas previas, similar a una cadena de montaje."
+    },
+    {
+      "q": "¿Para qué sirven los Registros de Segmentación (Pipeline Registers) en una CPU segmentada?",
+      "options": [
+        "Para almacenar el programa en ejecución en lugar de la RAM",
+        "Para retener de forma síncrona el estado parcial de cada instrucción entre etapas del cauce",
+        "Para reemplazar al banco de registros de propósito general"
+      ],
+      "correct": 1,
+      "hint": "Cada etapa del pipeline necesita que la información no se pierda al pasar a la siguiente.",
+      "explanation": "Los Registros de Segmentación actúan como separadores entre etapas del pipeline. En cada flanco de reloj capturan el resultado parcial de la etapa anterior y lo presentan a la siguiente etapa, evitando interferencias entre instrucciones simultáneas."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe correctamente la diferencia entre la Ruta de Datos (Datapath) y la Unidad de Control (UC)?",
+      "options": [
+        "El Datapath genera las señales de control; la UC ejecuta las operaciones sobre datos",
+        "El Datapath realiza transferencias y operaciones sobre operandos; la UC secuencia y activa esas operaciones",
+        "El Datapath almacena únicamente el IR y el PC; la UC gestiona el banco de registros"
+      ],
+      "correct": 1,
+      "hint": "Una actúa como 'cuerpo' y la otra como 'cerebro director'.",
+      "explanation": "La Ruta de Datos (Datapath) es el hardware que almacena y procesa los datos (ALU, banco de registros, MAR, MDR, etc.). La Unidad de Control es el director que genera las señales lógicas que deciden qué operaciones realiza el Datapath y en qué orden."
+    },
+    {
+      "q": "¿Qué tipo de registros del banco de registros son accesibles directamente por el programador?",
+      "options": [
+        "El MAR y el MDR",
+        "El IR y el PC",
+        "Los registros de propósito general como $s0, $t0 en MIPS"
+      ],
+      "correct": 2,
+      "hint": "El programador los nombra explícitamente en las instrucciones ensamblador.",
+      "explanation": "Los registros del banco de registros (GPRs - General Purpose Registers), como $s0, $t0, $a0 en MIPS, son visibles y direccionables por el programador. Por contraste, los registros de control (PC, IR, MAR, MDR) son internos e invisibles al nivel de programación."
+    },
+    {
+      "q": "¿Por qué la Unidad de Control Microprogramada es típica en arquitecturas CISC?",
+      "options": [
+        "Porque las instrucciones CISC son pocas y muy simples de codificar en hardware",
+        "Porque las complejas instrucciones CISC se descomponen en microinstrucciones almacenadas en la ROM interna",
+        "Porque CISC requiere que la UC trabaje con señales analógicas"
+      ],
+      "correct": 1,
+      "hint": "CISC significa 'instrucciones complejas': cada una puede hacer mucho trabajo.",
+      "explanation": "Las arquitecturas CISC (como x86) tienen instrucciones complejas que pueden requerir muchos pasos internos. La UC microprogramada es ideal porque traduce cada instrucción de máquina en una secuencia de microinstrucciones leídas de la ROM de control, sin necesidad de cablear lógica compleja."
+    },
+    {
+      "q": "Tras la fase de Fetch, ¿cuánto se incrementa típicamente el PC en una arquitectura con instrucciones de 32 bits (4 bytes)?",
+      "options": [
+        "1",
+        "2",
+        "4"
+      ],
+      "correct": 2,
+      "hint": "El PC apunta a bytes; 32 bits son cuántos bytes.",
+      "explanation": "En una arquitectura con instrucciones de 32 bits, cada instrucción ocupa 4 bytes en memoria. El PC se incrementa en 4 (PC ← PC + 4) para apuntar a la siguiente instrucción en la memoria direccionada por bytes."
+    },
+    {
+      "q": "¿Cuál es el orden correcto de operaciones durante el ciclo Fetch de una instrucción?",
+      "options": [
+        "IR ← MDR → MAR ← PC → MDR ← Bus → PC ← PC+n",
+        "MAR ← PC → Lectura memoria → MDR ← Bus de datos → IR ← MDR → PC ← PC+n",
+        "PC ← PC+n → MAR ← PC → MDR ← Bus de datos → IR ← MDR"
+      ],
+      "correct": 1,
+      "hint": "Primero se fija la dirección, luego se lee, y finalmente se actualiza el PC.",
+      "explanation": "El ciclo Fetch sigue: (1) MAR ← PC para presentar la dirección en el bus. (2) La memoria lee y pone el dato en el bus de datos. (3) MDR ← Bus de datos captura la instrucción. (4) IR ← MDR pasa la instrucción al registro de instrucción. (5) PC ← PC+n actualiza el puntero."
+    },
+    {
+      "q": "¿Qué distingue a la Unidad de Control Cableada en términos de velocidad?",
+      "options": [
+        "Es más lenta porque usa flip-flops adicionales para cada instrucción",
+        "Es extremadamente rápida porque usa circuitos combinacionales con mínimo retardo de conmutación",
+        "Tiene la misma velocidad que la microprogramada pero menor área de silicio"
+      ],
+      "correct": 1,
+      "hint": "Los circuitos combinacionales no requieren accesos a memoria adicionales.",
+      "explanation": "La UC cableada utiliza únicamente puertas lógicas (AND, OR, NOT) y decodificadores implementados directamente en silicio. Al no necesitar consultar ninguna ROM interna, el retardo de señal es mínimo y la frecuencia de reloj puede ser muy elevada."
+    },
+    {
+      "q": "¿Cuál es la función del bus interno de la CPU?",
+      "options": [
+        "Conectar la CPU con los dispositivos de entrada/salida externos",
+        "Interconectar los componentes internos de la CPU (ALU, banco de registros, registros de control)",
+        "Transportar instrucciones directamente desde el disco duro al IR"
+      ],
+      "correct": 1,
+      "hint": "Es un bus que existe dentro del chip, no fuera.",
+      "explanation": "El bus interno de la CPU (o bus de datos interno) interconecta los componentes que forman la Ruta de Datos: la ALU, el banco de registros y los registros de interfaz (MAR, MDR). No debe confundirse con los buses externos del sistema."
+    },
+    {
+      "q": "¿Cuáles de los siguientes registros son invisibles para el programador de alto nivel?",
+      "options": [
+        "Registros de propósito general (GPRs)",
+        "MAR, MDR, IR y PC",
+        "Únicamente el registro de flags"
+      ],
+      "correct": 1,
+      "hint": "Son registros de control que el ensamblador no menciona directamente.",
+      "explanation": "El PC, IR, MAR y MDR son registros de control internos de la CPU. No aparecen como operandos en las instrucciones ensamblador; su manipulación es realizada automáticamente por la Unidad de Control durante los ciclos de fetch y ejecución."
+    },
+    {
+      "q": "¿Qué componente de la CPU es el encargado de interpretar el campo de código de operación (opcode) de la instrucción en el IR?",
+      "options": [
+        "El banco de registros",
+        "La ALU",
+        "La Unidad de Control"
+      ],
+      "correct": 2,
+      "hint": "Quien interpreta activa las señales de control correspondientes.",
+      "explanation": "La Unidad de Control lee el opcode del IR, lo decodifica y genera el conjunto apropiado de señales de control que dirigen al Datapath para ejecutar la operación indicada (transferencia, operación ALU, acceso a memoria, etc.)."
+    },
+    {
+      "q": "En una CPU con un pipeline de 5 etapas (IF, ID, EX, MEM, WB), ¿cuántas instrucciones diferentes pueden estar siendo procesadas simultáneamente en estado estacionario?",
+      "options": [
+        "1",
+        "3",
+        "5"
+      ],
+      "correct": 2,
+      "hint": "Cada etapa alberga una instrucción diferente a la vez.",
+      "explanation": "En un pipeline de 5 etapas en estado estacionario, cada etapa puede albergar exactamente una instrucción distinta de forma simultánea. Por lo tanto, pueden coexistir hasta 5 instrucciones diferentes avanzando por el cauce a la vez."
+    },
+    {
+      "q": "¿Por qué es necesario el MDR como registro intermedio entre la CPU y la memoria principal?",
+      "options": [
+        "Porque la memoria principal es más rápida que la CPU y necesita un buffer de ralentización",
+        "Porque actúa como buffer que desacopla el bus de datos externo del funcionamiento interno de la CPU",
+        "Porque almacena el opcode antes de enviarlo al IR"
+      ],
+      "correct": 1,
+      "hint": "Los buses externos son lentos en comparación con los registros internos.",
+      "explanation": "El MDR actúa como buffer de interfaz: desacopla temporalmente el bus de datos externo (más lento) de los registros internos de la CPU. Permite que la CPU continúe su funcionamiento interno mientras espera que la memoria complete la transferencia."
+    },
+    {
+      "q": "¿Qué sucede con el PC inmediatamente después de que su contenido se copia al MAR en el ciclo Fetch?",
+      "options": [
+        "El PC se pone a cero hasta el siguiente ciclo de ejecución",
+        "El PC se carga con la dirección de destino de un salto",
+        "El PC se incrementa para apuntar ya a la siguiente instrucción"
+      ],
+      "correct": 2,
+      "hint": "El PC debe apuntar a la siguiente dirección lo antes posible.",
+      "explanation": "Tras copiar su valor al MAR, el PC se incrementa (PC ← PC + longitud_instrucción) para quedar apuntando ya a la siguiente instrucción. Así, si ocurre una interrupción durante la ejecución, el PC ya tiene la dirección de retorno correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una señal de estado (flag) producida por la ALU?",
+      "options": [
+        "Z (Zero flag)",
+        "IR (Instruction Register flag)",
+        "C (Carry flag)"
+      ],
+      "correct": 1,
+      "hint": "IR es un registro, no un flag de estado.",
+      "explanation": "Las señales de estado típicas de la ALU son Z (Zero), S (Sign), V (oVerflow) y C (Carry). El IR (Instruction Register) es un registro de control de la CPU, no un flag de resultado de la ALU."
+    },
+    {
+      "q": "¿Cómo se llama la memoria interna que usa la Unidad de Control Microprogramada para almacenar las microinstrucciones?",
+      "options": [
+        "RAM dinámica de control",
+        "ROM de control (memoria de microprograma)",
+        "Caché de nivel 1 (L1)"
+      ],
+      "correct": 1,
+      "hint": "Es una memoria de solo lectura interna al chip de la UC.",
+      "explanation": "La UC Microprogramada utiliza una ROM de control interna (también llamada memoria de microprograma) donde están codificadas las microinstrucciones que implementan cada instrucción de máquina del repertorio."
+    },
+    {
+      "q": "¿Qué es una microinstrucción en el contexto de la Unidad de Control Microprogramada?",
+      "options": [
+        "Una instrucción del lenguaje C que activa directamente la ALU",
+        "Un patrón de bits que codifica qué señales de control deben activarse en un ciclo de reloj concreto",
+        "Una instrucción RISC equivalente a una instrucción CISC compleja"
+      ],
+      "correct": 1,
+      "hint": "Cada microinstrucción activa un subconjunto de señales en el datapath.",
+      "explanation": "Una microinstrucción es una palabra binaria almacenada en la ROM de control donde cada bit (o campo de bits) corresponde a una señal de control del Datapath. La secuencia de microinstrucciones que implementa una instrucción de máquina se denomina microprograma."
+    },
+    {
+      "q": "¿Cuál es la relación entre el ancho del bus de datos y el ancho del MDR?",
+      "options": [
+        "El MDR siempre es el doble de ancho que el bus de datos",
+        "El MDR tiene el mismo ancho que el bus de datos para poder capturar la transferencia completa",
+        "El MDR siempre tiene 8 bits independientemente del bus de datos"
+      ],
+      "correct": 1,
+      "hint": "El MDR está conectado directamente al bus de datos.",
+      "explanation": "El MDR debe tener exactamente el mismo ancho que el bus de datos del sistema, ya que está físicamente conectado a él. Si el bus tiene 32 bits, el MDR debe ser un registro de 32 bits para capturar o enviar la transferencia completa."
+    },
+    {
+      "q": "¿Cuál es la relación entre el ancho del MAR y el tamaño del espacio de direcciones de memoria?",
+      "options": [
+        "El MAR no está relacionado con el espacio de direcciones",
+        "El ancho del MAR en bits (n) determina que se pueden direccionar hasta 2^n posiciones de memoria",
+        "El MAR siempre tiene 16 bits, independientemente del tamaño de memoria"
+      ],
+      "correct": 1,
+      "hint": "Con n bits se representan 2^n combinaciones distintas.",
+      "explanation": "El MAR almacena las direcciones de memoria y está conectado al bus de direcciones. Si el MAR tiene n bits de ancho, puede representar 2^n direcciones distintas, lo que determina el tamaño máximo del espacio de memoria direccionable."
+    },
+    {
+      "q": "¿En qué etapa del pipeline de 5 etapas se produce la operación en la ALU?",
+      "options": [
+        "IF (Instruction Fetch)",
+        "ID (Instruction Decode)",
+        "EX (Execute)"
+      ],
+      "correct": 2,
+      "hint": "La etapa de ejecución es donde se realizan los cálculos.",
+      "explanation": "En el pipeline clásico de 5 etapas, la operación aritmética o lógica se realiza en la etapa EX (Execute). En IF se busca la instrucción, en ID se decodifica y se leen registros, en EX opera la ALU, en MEM se accede a memoria y en WB se escriben los resultados."
+    },
+    {
+      "q": "¿Qué ventaja aporta el pipeline a la productividad (throughput) de la CPU?",
+      "options": [
+        "Reduce el tiempo de ejecución de una instrucción individual",
+        "Aumenta el número de instrucciones completadas por unidad de tiempo al procesar varias instrucciones simultáneamente",
+        "Elimina completamente los accesos a memoria principal"
+      ],
+      "correct": 1,
+      "hint": "El pipeline no hace cada instrucción más rápida, pero sí mejora la tasa global.",
+      "explanation": "El pipeline no reduce la latencia de una instrucción individual (que sigue requiriendo las mismas etapas). Sin embargo, al solapar la ejecución de múltiples instrucciones, incrementa el throughput: idealmente se completa una instrucción por ciclo de reloj en estado estacionario."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre el bus interno de la CPU y el bus externo del sistema?",
+      "options": [
+        "El bus interno conecta la CPU con la RAM; el externo conecta la RAM con el disco duro",
+        "El bus interno interconecta componentes dentro de la CPU; el externo conecta la CPU con la memoria principal y los periféricos",
+        "Ambos son idénticos; simplemente tienen nombres distintos según el fabricante"
+      ],
+      "correct": 1,
+      "hint": "Uno es intra-chip, el otro es inter-chip.",
+      "explanation": "El bus interno de la CPU es una estructura de interconexión dentro del propio chip que une la ALU, el banco de registros y los registros de interfaz. El bus externo del sistema (o bus del sistema) comunica la CPU con componentes externos: memoria principal, memoria caché externa e interfaces de E/S."
+    },
+    {
+      "q": "¿Qué ocurre si el resultado de una operación ALU es cero en el Registro de Flags?",
+      "options": [
+        "Se activa el flag C (Carry)",
+        "Se activa el flag Z (Zero)",
+        "Se activa el flag V (oVerflow)"
+      ],
+      "correct": 1,
+      "hint": "Zero → Z.",
+      "explanation": "Cuando el resultado de una operación en la ALU es exactamente cero, se pone a 1 el bit Z (Zero Flag) del Registro de Flags. Las instrucciones de salto condicional como BEQ (Branch if Equal) comprueban precisamente este flag."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un componente típico de la Ruta de Datos (Datapath)?",
+      "options": [
+        "ALU",
+        "Banco de Registros (Register File)",
+        "Decodificador de opcode de la Unidad de Control"
+      ],
+      "correct": 2,
+      "hint": "El decodificador de opcode pertenece al cerebro director.",
+      "explanation": "El Datapath contiene los elementos que procesan datos: la ALU, el banco de registros, el registro de flags, el MAR, el MDR y los buses internos. El decodificador de opcode forma parte de la Unidad de Control, no del Datapath."
+    },
+    {
+      "q": "¿Cuántas salidas de resultado principal genera la ALU para cada operación?",
+      "options": [
+        "Dos: un resultado principal y un conjunto de flags de estado",
+        "Solo una: el resultado numérico",
+        "Tres: resultado, dirección de salto y código de excepción"
+      ],
+      "correct": 0,
+      "hint": "La ALU siempre informa del resultado y del estado de ese resultado.",
+      "explanation": "La ALU produce dos tipos de salida: (1) el resultado numérico de la operación y (2) los bits de estado (flags: Z, S, V, C) que informan sobre características del resultado. Ambas salidas se almacenan en registros distintos del Datapath."
+    },
+    {
+      "q": "¿Por qué los registros del banco de registros tienen alta velocidad de acceso?",
+      "options": [
+        "Porque están implementados con celdas DRAM de alta densidad",
+        "Porque están implementados con flip-flops de alta velocidad integrados directamente en el chip de la CPU",
+        "Porque están ubicados en la misma placa que la memoria RAM"
+      ],
+      "correct": 1,
+      "hint": "Los registros están en el mismo silicio que la CPU.",
+      "explanation": "Los registros del banco de registros se fabrican con circuitos de biestable (flip-flop) de alta velocidad integrados directamente en el chip de la CPU. Al estar dentro del mismo chip, el tiempo de acceso es de orden de subnanosegundos, mucho más rápido que la RAM principal."
+    },
+    {
+      "q": "¿Qué se entiende por 'riesgos de datos' (Data Hazards) en un pipeline?",
+      "options": [
+        "Situaciones donde una instrucción necesita un dato que aún no ha sido producido por una instrucción anterior en el pipeline",
+        "Errores de paridad en la transmisión de datos por el bus externo",
+        "Fallos físicos en los registros del banco de registros debidos al calor"
+      ],
+      "correct": 0,
+      "hint": "Un riesgo ocurre cuando hay dependencia entre instrucciones solapadas.",
+      "explanation": "Un riesgo de datos (Data Hazard) ocurre cuando una instrucción que avanza por el pipeline necesita el resultado de una instrucción anterior que todavía no ha completado su etapa de escritura (WB). Puede resolverse con forwarding (cortocircuito) o con ciclos de espera (stalls)."
+    },
+    {
+      "q": "¿Qué se entiende por 'riesgos de control' (Control Hazards) en un pipeline?",
+      "options": [
+        "Problemas causados por instrucciones que modifican el flujo de ejecución (saltos), requiriendo vaciar etapas del pipeline incorrectamente cargadas",
+        "Errores en la decodificación del opcode por la Unidad de Control",
+        "Fallos en la sincronización del reloj entre la UC y el Datapath"
+      ],
+      "correct": 0,
+      "hint": "Los saltos cambian el orden esperado de instrucciones.",
+      "explanation": "Los riesgos de control surgen con instrucciones de salto o llamada a subrutina. Cuando el pipeline ha pre-cargado instrucciones que no deben ejecutarse (porque el salto cambia el flujo), hay que descartar esas instrucciones (flush), lo que produce ciclos de penalización."
+    },
+    {
+      "q": "¿Qué arquitectura es x86 (Intel/AMD), en cuanto al tipo de Unidad de Control que utiliza internamente?",
+      "options": [
+        "RISC puro con UC cableada",
+        "CISC con UC microprogramada (o híbrida)",
+        "VLIW con UC distribuida"
+      ],
+      "correct": 1,
+      "hint": "x86 tiene instrucciones de longitud variable y gran complejidad.",
+      "explanation": "x86 es una arquitectura CISC. Históricamente usaba UC microprogramada para manejar su complejo y variado repertorio de instrucciones. Los procesadores modernos x86 usan un enfoque híbrido: traducen internamente instrucciones CISC a microoperaciones RISC-like que luego ejecutan con lógica cableada."
+    },
+    {
+      "q": "¿Cuál de los siguientes elementos del pipeline se encarga de separar la etapa de búsqueda (IF) de la etapa de decodificación (ID)?",
+      "options": [
+        "El MAR",
+        "El registro de segmentación IF/ID",
+        "El MDR"
+      ],
+      "correct": 1,
+      "hint": "Entre cada par de etapas adyacentes del pipeline existe un registro de separación.",
+      "explanation": "El registro de segmentación IF/ID (también llamado pipeline register o latch) almacena síncronamente la instrucción y el PC incrementado al final de la etapa IF, para que la etapa ID los reciba de forma estable en el siguiente ciclo de reloj."
+    },
+    {
+      "q": "¿Cuál es la diferencia fundamental entre el PC y el MAR durante el ciclo Fetch?",
+      "options": [
+        "El PC y el MAR siempre contienen valores diferentes y sin relación",
+        "El PC mantiene la dirección de la siguiente instrucción permanentemente; el MAR la recibe puntualmente del PC para presentarla en el bus de direcciones",
+        "El MAR es el contador que se incrementa; el PC almacena la instrucción decodificada"
+      ],
+      "correct": 1,
+      "hint": "El MAR es un intermediario; el PC es el puntero persistente.",
+      "explanation": "El PC mantiene de forma continua la dirección de la próxima instrucción y es incrementado por la CPU. El MAR es un registro de interfaz: en el ciclo Fetch recibe una copia del PC para presentar esa dirección en el bus de direcciones externo y así solicitar la instrucción a la memoria."
+    },
+    {
+      "q": "En el modelo de bus único interno de la CPU, ¿cómo se transfieren datos entre registros sin que colisionen en el bus?",
+      "options": [
+        "Se transfieren todos simultáneamente usando multiplexores de alta anchura",
+        "La Unidad de Control activa las señales de habilitación (enable) de cada registro en ciclos de reloj distintos, permitiendo solo una transferencia a la vez",
+        "Cada par de registros tiene su propia línea dedicada independiente"
+      ],
+      "correct": 1,
+      "hint": "Un bus compartido solo puede ser usado por un emisor a la vez.",
+      "explanation": "En una arquitectura de bus interno único, la Unidad de Control secuencia las transferencias activando las señales de escritura y lectura de los registros en ciclos de reloj distintos. Así, en un ciclo determinado solo un registro pone su contenido en el bus y solo otro lo lee, evitando colisiones."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "El registro ____ almacena la dirección de la siguiente instrucción a ejecutar.",
+      "options": [
+        "PC (Program Counter)",
+        "IR (Instruction Register)",
+        "MDR (Memory Data Register)"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el registro que 'cuenta' las instrucciones del programa.",
+      "explanation": "El PC (Program Counter) es el registro que almacena en todo momento la dirección de la próxima instrucción. Se incrementa automáticamente en cada ciclo de fetch."
+    },
+    {
+      "q": "El registro ____ retiene el código binario de la instrucción en curso.",
+      "options": [
+        "IR (Instruction Register)",
+        "MAR (Memory Address Register)",
+        "PC (Program Counter)"
+      ],
+      "correct": 0,
+      "hint": "Su nombre incluye 'Instruction'.",
+      "explanation": "El IR (Instruction Register) captura la instrucción traída de memoria (desde el MDR) y la mantiene disponible para que la Unidad de Control la decodifique y ejecute."
+    },
+    {
+      "q": "El ____ está físicamente conectado al bus de direcciones del sistema.",
+      "options": [
+        "MAR (Memory Address Register)",
+        "MDR (Memory Data Register)",
+        "IR (Instruction Register)"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el registro que almacena la dirección de acceso a memoria.",
+      "explanation": "El MAR (Memory Address Register) está conectado físicamente al bus de direcciones. Su contenido se coloca en dicho bus para indicar a la memoria principal a qué posición se desea acceder."
+    },
+    {
+      "q": "El ____ actúa como buffer bidireccional entre la CPU y el bus de datos.",
+      "options": [
+        "MDR (Memory Data Register)",
+        "MAR (Memory Address Register)",
+        "Registro de Flags"
+      ],
+      "correct": 0,
+      "hint": "Este registro maneja los datos que entran y salen de la CPU.",
+      "explanation": "El MDR (Memory Data Register) está conectado al bus de datos y actúa de buffer en ambas direcciones: retiene el dato leído de memoria o el dato que la CPU quiere escribir en ella."
+    },
+    {
+      "q": "La Unidad de Control ____ utiliza circuitos combinacionales puros para generar las señales de control.",
+      "options": [
+        "Cableada",
+        "Microprogramada",
+        "Segmentada"
+      ],
+      "correct": 0,
+      "hint": "El nombre sugiere que la lógica está 'cableada' directamente en el silicio.",
+      "explanation": "La UC Cableada implementa la lógica de control mediante puertas lógicas y decodificadores hardcoded en el chip. Es muy rápida pero inflexible."
+    },
+    {
+      "q": "La técnica de ____ divide la ejecución de instrucciones en etapas independientes, similar a una cadena de montaje.",
+      "options": [
+        "Segmentación (Pipelining)",
+        "Microprogramación dinámica",
+        "Especulación de salto"
+      ],
+      "correct": 0,
+      "hint": "Piensa en una línea de producción industrial.",
+      "explanation": "La Segmentación o Pipelining divide la CPU en etapas (IF, ID, EX, MEM, WB) donde distintas instrucciones se procesan simultáneamente en etapas distintas, aumentando el throughput."
+    },
+    {
+      "q": "Los registros internos ____ son invisibles para el programador de alto nivel.",
+      "options": [
+        "PC, IR, MAR y MDR",
+        "R0, R1, R2 del banco de registros",
+        "Solo el registro de flags"
+      ],
+      "correct": 0,
+      "hint": "Son registros de control, no de propósito general.",
+      "explanation": "El PC, IR, MAR y MDR son registros de control interno que la CPU gestiona automáticamente. No son accesibles directamente mediante instrucciones de ensamblador estándar."
+    },
+    {
+      "q": "La ALU genera como salida tanto el resultado de la operación como el conjunto de ____ de estado.",
+      "options": [
+        "Flags (Z, S, V, C)",
+        "Microinstrucciones",
+        "Direcciones de memoria"
+      ],
+      "correct": 0,
+      "hint": "Estos indicadores informan de características del resultado: cero, signo, desbordamiento, acarreo.",
+      "explanation": "Además del resultado numérico, la ALU actualiza los bits de estado (flags): Z (Zero), S (Sign), V (oVerflow) y C (Carry), almacenados en el Registro de Flags."
+    },
+    {
+      "q": "En un pipeline de 5 etapas, los ____ intermedios retienen el estado parcial de cada instrucción entre etapas.",
+      "options": [
+        "Registros de segmentación (pipeline registers)",
+        "Bloques de memoria caché L1",
+        "Registros MAR y MDR"
+      ],
+      "correct": 0,
+      "hint": "Separan físicamente las etapas del cauce.",
+      "explanation": "Los registros de segmentación (IF/ID, ID/EX, EX/MEM, MEM/WB) capturan el estado al final de cada etapa y lo presentan a la siguiente en el flanco del reloj, evitando interferencias entre instrucciones solapadas."
+    },
+    {
+      "q": "La UC Microprogramada almacena las señales de control como microprogramas en una memoria ____ interna.",
+      "options": [
+        "ROM de control",
+        "RAM dinámica de alta velocidad",
+        "Caché de instrucciones L1"
+      ],
+      "correct": 0,
+      "hint": "Es una memoria de solo lectura dentro del chip de la UC.",
+      "explanation": "La ROM de control (memoria de microprograma) almacena las microinstrucciones que implementan cada instrucción de máquina. Se lee secuencialmente durante la ejecución de cada instrucción."
+    },
+    {
+      "q": "¿Cuál es el primer paso del ciclo de búsqueda (Fetch) de una instrucción?",
+      "options": [
+        "MAR ← PC",
+        "IR ← MDR",
+        "MDR ← Bus de datos"
+      ],
+      "correct": 0,
+      "hint": "Hay que comunicar la dirección de la instrucción a la memoria antes de leerla.",
+      "explanation": "El primer paso es transferir el contenido del PC al MAR (MAR ← PC), de modo que la dirección de la instrucción quede disponible en el bus de direcciones para que la memoria la localice."
+    },
+    {
+      "q": "¿Cuántas posiciones de memoria puede direccionar un MAR de 16 bits?",
+      "options": [
+        "65 536 (2^16)",
+        "32 768 (2^15)",
+        "131 072 (2^17)"
+      ],
+      "correct": 0,
+      "hint": "Con n bits se representan 2^n combinaciones.",
+      "explanation": "Un MAR de 16 bits puede representar 2^16 = 65 536 direcciones distintas, por lo que el espacio de memoria direccionable es de 64 KiB (asumiendo palabras de 1 byte)."
+    },
+    {
+      "q": "Si el bus de datos tiene 32 bits, ¿cuántos bits debe tener el MDR?",
+      "options": [
+        "32 bits",
+        "16 bits",
+        "64 bits"
+      ],
+      "correct": 0,
+      "hint": "El MDR está conectado directamente al bus de datos.",
+      "explanation": "El MDR debe tener el mismo ancho que el bus de datos al que está conectado físicamente. Con un bus de 32 bits, el MDR debe ser de 32 bits para capturar o enviar transferencias completas."
+    },
+    {
+      "q": "¿Cuántos bits de ancho mínimo debe tener el campo de operación (opcode) de una instrucción para codificar 8 operaciones distintas?",
+      "options": [
+        "3 bits",
+        "4 bits",
+        "8 bits"
+      ],
+      "correct": 0,
+      "hint": "Con n bits se codifican 2^n operaciones; 2^3 = 8.",
+      "explanation": "Para codificar exactamente 8 operaciones distintas se necesitan log2(8) = 3 bits. Con 3 bits se pueden representar 2^3 = 8 combinaciones diferentes."
+    },
+    {
+      "q": "Si una CPU tiene 32 registros de propósito general, ¿cuántos bits se necesitan para el campo de especificación de registro en la instrucción?",
+      "options": [
+        "5 bits",
+        "4 bits",
+        "6 bits"
+      ],
+      "correct": 0,
+      "hint": "32 = 2^5.",
+      "explanation": "Para direccionar 32 registros distintos se necesitan log2(32) = 5 bits. Con 5 bits se representan los valores del 0 al 31, que identifican unívocamente cada registro."
+    },
+    {
+      "q": "¿Cuántos ciclos de reloj ocupa idealmente completar una instrucción en un pipeline de 5 etapas en estado estacionario?",
+      "options": [
+        "1 ciclo por instrucción (CPI = 1)",
+        "5 ciclos por instrucción (CPI = 5)",
+        "3 ciclos por instrucción (CPI = 3)"
+      ],
+      "correct": 0,
+      "hint": "El pipeline hace que se complete una instrucción por ciclo cuando está lleno.",
+      "explanation": "En estado estacionario (pipeline lleno sin hazards), el throughput ideal es de CPI = 1: se completa una instrucción por cada ciclo de reloj, aunque cada instrucción individual tarde 5 ciclos en completarse."
+    },
+    {
+      "q": "Un procesador ejecuta un programa con 1000 instrucciones. Si el CPI promedio es 2 y el reloj es de 500 MHz, ¿cuántos microsegundos tarda?",
+      "options": [
+        "4 μs",
+        "2 μs",
+        "8 μs"
+      ],
+      "correct": 0,
+      "hint": "Tiempo = (Instrucciones × CPI) / Frecuencia.",
+      "explanation": "Tiempo = (1000 instrucciones × 2 ciclos/instrucción) / (500×10^6 ciclos/s) = 2000 / 500000000 s = 4×10^-6 s = 4 μs."
+    },
+    {
+      "q": "Si el MAR es de 20 bits, ¿cuántos MiB de memoria puede direccionar (asumiendo 1 byte por dirección)?",
+      "options": [
+        "1 MiB",
+        "2 MiB",
+        "512 KiB"
+      ],
+      "correct": 0,
+      "hint": "2^20 bytes = 1 MiB.",
+      "explanation": "Con un MAR de 20 bits se direccionan 2^20 = 1 048 576 posiciones de 1 byte cada una, es decir, exactamente 1 MiB."
+    },
+    {
+      "q": "¿Cuántas instrucciones distintas puede codificar un campo opcode de 4 bits?",
+      "options": [
+        "16 instrucciones",
+        "8 instrucciones",
+        "32 instrucciones"
+      ],
+      "correct": 0,
+      "hint": "2^4 = 16.",
+      "explanation": "Un campo opcode de 4 bits permite 2^4 = 16 combinaciones diferentes, por lo que la ISA puede tener hasta 16 instrucciones distintas con ese tamaño de opcode."
+    },
+    {
+      "q": "Si una instrucción de 16 bits usa 4 bits de opcode y 2 campos de registro de 3 bits cada uno, ¿cuántos bits quedan para el campo inmediato?",
+      "options": [
+        "6 bits",
+        "8 bits",
+        "4 bits"
+      ],
+      "correct": 0,
+      "hint": "16 - 4 - 3 - 3 = ?",
+      "explanation": "Bits disponibles = 16 - 4 (opcode) - 3 (reg1) - 3 (reg2) = 6 bits para el campo inmediato."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la Unidad de Control es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "La UC cableada usa compuertas lógicas y es muy rápida",
+        "La UC microprogramada usa una ROM interna y es muy flexible"
+      ],
+      "correct": 0,
+      "hint": "Ambas afirmaciones individuales son correctas.",
+      "explanation": "Tanto la opción B (UC cableada: compuertas, rápida) como la opción C (UC microprogramada: ROM, flexible) son afirmaciones correctas sobre la Unidad de Control. Por lo tanto, 'Todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre los registros de interfaz de memoria es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "El MAR está conectado al bus de direcciones",
+        "El MDR está conectado al bus de datos"
+      ],
+      "correct": 0,
+      "hint": "Ambas afirmaciones individuales son correctas.",
+      "explanation": "Efectivamente, el MAR se conecta al bus de direcciones y el MDR al bus de datos. Ambas afirmaciones son correctas simultáneamente, por lo que 'Todas las anteriores' es la respuesta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el ciclo Fetch es verdadera?",
+      "options": [
+        "Todas las anteriores",
+        "El contenido del PC se copia al MAR al inicio del fetch",
+        "El PC se incrementa durante o después del fetch"
+      ],
+      "correct": 0,
+      "hint": "Ambas afirmaciones individuales son corrrectas.",
+      "explanation": "Durante el ciclo Fetch, efectivamente el PC se copia al MAR (para acceder a memoria) y el PC se incrementa. Las dos afirmaciones son correctas a la vez, por lo que la respuesta es 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una ventaja del pipeline?",
+      "options": [
+        "Todas las anteriores",
+        "Aumenta el throughput de instrucciones",
+        "Permite que múltiples instrucciones se procesen simultáneamente en etapas distintas"
+      ],
+      "correct": 0,
+      "hint": "El pipeline mejora la eficiencia de la CPU.",
+      "explanation": "Tanto el aumento de throughput como el procesamiento simultáneo de instrucciones en distintas etapas son ventajas reales del pipeline. Ambas afirmaciones son correctas, por lo que 'Todas las anteriores' es la respuesta."
+    },
+    {
+      "q": "¿Cuál de las siguientes características corresponde a la Unidad de Control Cableada?",
+      "options": [
+        "Todas las anteriores",
+        "Implementada con circuitos combinacionales",
+        "Típica en arquitecturas RISC"
+      ],
+      "correct": 0,
+      "hint": "Todas las propiedades listadas son de la UC Cableada.",
+      "explanation": "La UC Cableada se implementa con circuitos combinacionales y es típica en RISC. Ambas afirmaciones son correctas, de modo que 'Todas las anteriores' es la opción válida."
+    },
+    {
+      "q": "¿Cuál de los siguientes componentes forma parte del Datapath de la CPU?",
+      "options": [
+        "Todas las anteriores",
+        "La ALU",
+        "El banco de registros de propósito general"
+      ],
+      "correct": 0,
+      "hint": "El Datapath agrupa los elementos que procesan datos.",
+      "explanation": "Tanto la ALU como el banco de registros son componentes del Datapath. Ambas afirmaciones son correctas, así que 'Todas las anteriores' es la respuesta correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el Registro de Flags es verdadera?",
+      "options": [
+        "Todas las anteriores",
+        "Almacena el flag Z cuando el resultado de la ALU es cero",
+        "Sus bits son consultados por instrucciones de salto condicional"
+      ],
+      "correct": 0,
+      "hint": "Ambas funciones del registro de flags son correctas.",
+      "explanation": "El Registro de Flags efectivamente activa Z cuando el resultado es cero, y sus bits son consultados por instrucciones condicionales (BEQ, BNE, etc.). Ambas afirmaciones son correctas, resultando en 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la Unidad de Control Microprogramada es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "Puede actualizarse reescribiendo la ROM de control",
+        "Es típica en arquitecturas CISC como x86"
+      ],
+      "correct": 0,
+      "hint": "Ambas descripciones de la UC microprogramada son correctas.",
+      "explanation": "La UC microprogramada puede modificarse actualizando la ROM de control (firmware) y es típica en CISC (x86). Ambas afirmaciones son correctas simultáneamente, resultando en 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre los registros de segmentación del pipeline es correcta?",
+      "options": [
+        "Todas las anteriores",
+        "Separan físicamente las etapas del cauce",
+        "Se actualizan en cada flanco de reloj"
+      ],
+      "correct": 0,
+      "hint": "Las dos propiedades listadas corresponden a los registros de segmentación.",
+      "explanation": "Los registros de segmentación separan las etapas del pipeline y se actualizan síncronamente en cada flanco de reloj para pasar el estado parcial de instrucción a la siguiente etapa. Ambas afirmaciones son correctas, por tanto 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un registro de control interno de la CPU?",
+      "options": [
+        "Ninguna de las anteriores",
+        "PC",
+        "IR"
+      ],
+      "correct": 0,
+      "hint": "Tanto PC como IR SÍ son registros de control interno.",
+      "explanation": "El PC y el IR sí son registros de control internos de la CPU. Como ninguna de las opciones B y C es incorrecta (ambas sí son registros de control), la respuesta es 'Ninguna de las anteriores' — no existe un ejemplo de 'no registro de control' en las opciones dadas."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la UC Cableada es INCORRECTA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Es más lenta que la microprogramada",
+        "Requiere accesos a una ROM interna"
+      ],
+      "correct": 0,
+      "hint": "En realidad la UC cableada es la MÁS rápida y NO usa ROM.",
+      "explanation": "Ambas afirmaciones (B y C) son falsas: la UC cableada es MÁS rápida que la microprogramada y NO requiere ROM interna. Como ambas son incorrectas, ninguna de ellas es la correcta, lo que hace que 'Ninguna de las anteriores' sea la respuesta."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una desventaja de la UC Microprogramada?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Es inflexible ante cambios en la ISA",
+        "Tiene mayor velocidad que la cableada"
+      ],
+      "correct": 0,
+      "hint": "La UC microprogramada SÍ es flexible y NO es más veloz.",
+      "explanation": "La opción B es falsa (la microprogramada ES flexible) y la opción C es falsa (es más LENTA, no más rápida). Como ninguna de las opciones describe correctamente una desventaja real, 'Ninguna de las anteriores' es la respuesta."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el PC es FALSA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "El PC se incrementa tras cada ciclo de fetch",
+        "El PC contiene la dirección de la siguiente instrucción"
+      ],
+      "correct": 0,
+      "hint": "Las afirmaciones B y C son ambas VERDADERAS sobre el PC.",
+      "explanation": "Tanto la afirmación B (el PC se incrementa tras el fetch) como la C (contiene la dirección de la siguiente instrucción) son verdaderas. No hay ninguna afirmación falsa sobre el PC en las opciones, por lo tanto la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una desventaja del pipeline?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Aumenta el número de instrucciones por segundo",
+        "Reduce la frecuencia de reloj del procesador"
+      ],
+      "correct": 0,
+      "hint": "El pipeline aumenta el throughput y no reduce la frecuencia de reloj.",
+      "explanation": "La opción B (aumentar IPS) es una VENTAJA, no desventaja. La opción C (reducir frecuencia) es falsa: el pipeline no reduce sino que permite mantener o incrementar la frecuencia. Ninguna de las opciones describe correctamente una desventaja, por tanto la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes elementos NO forma parte del Datapath?",
+      "options": [
+        "Ninguna de las anteriores",
+        "ALU",
+        "Banco de registros"
+      ],
+      "correct": 0,
+      "hint": "La ALU y el banco de registros SÍ forman parte del Datapath.",
+      "explanation": "Tanto la ALU como el banco de registros son componentes integrantes del Datapath. Como ninguno de los elementos listados queda fuera del Datapath, la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes flags de la ALU NO existe en una CPU típica?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Z (Zero)",
+        "C (Carry)"
+      ],
+      "correct": 0,
+      "hint": "Z y C son flags reales de la ALU.",
+      "explanation": "Tanto Z (Zero) como C (Carry) son flags estándar producidos por la ALU en CPUs reales. No hay ningún flag inventado entre las opciones, por lo que la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de las siguientes NO es una etapa típica del pipeline de 5 etapas?",
+      "options": [
+        "Ninguna de las anteriores",
+        "IF (Instruction Fetch)",
+        "EX (Execute)"
+      ],
+      "correct": 0,
+      "hint": "IF y EX sí son etapas reales del pipeline de 5 etapas.",
+      "explanation": "IF (Instruction Fetch) y EX (Execute) son etapas reales del pipeline clásico de 5 etapas (IF, ID, EX, MEM, WB). No hay ninguna etapa inventada en las opciones, por lo tanto la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un registro visible al programador?",
+      "options": [
+        "Ninguna de las anteriores",
+        "MAR",
+        "IR"
+      ],
+      "correct": 0,
+      "hint": "MAR e IR son invisibles al programador, por lo que ambas opciones B y C son correctas como registros invisibles.",
+      "explanation": "Tanto el MAR como el IR son registros internos de control, invisibles al programador. Pero como la pregunta pregunta cuál NO es visible y ambas opciones son correctas, no existe una única respuesta incorrecta, y por tanto 'Ninguna de las anteriores' no aplica aquí — la respuesta correcta es efectivamente 0, ya que ambas son 'no visibles'. (Nota: La pregunta evalúa si el estudiante reconoce que ambas son invisibles.)"
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre el IR es INCORRECTA?",
+      "options": [
+        "Ninguna de las anteriores",
+        "El IR retiene la instrucción durante su decodificación",
+        "El IR recibe su contenido desde el MDR"
+      ],
+      "correct": 0,
+      "hint": "Ambas afirmaciones sobre el IR son verdaderas.",
+      "explanation": "La afirmación B (IR retiene la instrucción durante decodificación) y la C (IR recibe su contenido del MDR mediante la transferencia IR ← MDR) son ambas verdaderas. No hay ninguna afirmación incorrecta, por lo tanto la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál de los siguientes NO es un componente de la Ruta de Datos (Datapath)?",
+      "options": [
+        "Ninguna de las anteriores",
+        "Registro de Flags",
+        "MDR"
+      ],
+      "correct": 0,
+      "hint": "Tanto el Registro de Flags como el MDR forman parte del Datapath.",
+      "explanation": "El Registro de Flags y el MDR son ambos componentes del Datapath de la CPU. Como ninguno de los elementos listados queda fuera del Datapath, la respuesta correcta es 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Espacio de Direccionamiento del MAR",
+      "context": "Una CPU tiene un MAR de 16 bits. La memoria se organiza con celdas de 1 byte cada una.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuántas posiciones de memoria distintas puede direccionar el MAR? (Expresar en número de celdas)",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$N = 2^{16} = 65\\,536 \\text{ celdas}$$"
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "¿Cuántos KiB (kibibytes) equivalen esas posiciones? (1 KiB = 1024 bytes)",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$64\\,\\text{KiB} = \\frac{65\\,536}{1024} = 64 \\text{ KiB}$$"
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Si se amplía el MAR a 24 bits, ¿cuántos MiB puede ahora direccionar? (1 MiB = 1 048 576 bytes)",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$N_{24} = 2^{24} = 16\\,777\\,216 \\text{ bytes} = \\frac{16\\,777\\,216}{1\\,048\\,576} = 16 \\text{ MiB}$$"
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "¿Cuántos bits adicionales necesita el MAR de 24 bits respecto al de 16 bits para representar el espacio 256 veces mayor?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\Delta \\text{bits} = 24 - 16 = 8 \\text{ bits adicionales}$$. Cada bit extra dobla el espacio: $$2^8 = 256$$ veces mayor."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Ancho del MDR y Bus de Datos",
+      "context": "Un sistema tiene un bus de datos de 32 bits. El MDR tiene el mismo ancho que el bus de datos.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuántos bytes transfiere el bus de datos en una única operación de lectura/escritura?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes} = \\frac{32 \\text{ bits}}{8 \\text{ bits/byte}} = 4 \\text{ bytes}$$"
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Si se amplía el bus a 64 bits, ¿cuántos bytes transfiere ahora en una única operación?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes} = \\frac{64 \\text{ bits}}{8 \\text{ bits/byte}} = 8 \\text{ bytes}$$"
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "¿Cuántos accesos a memoria de 32 bits se necesitan para transferir un bloque de 128 bytes completo?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$$\\text{Accesos} = \\frac{128 \\text{ bytes}}{4 \\text{ bytes/acceso}} = 32 \\text{ accesos}$$"
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Con el bus de 64 bits, ¿cuántos accesos se necesitan para transferir el mismo bloque de 128 bytes?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$\\text{Accesos} = \\frac{128 \\text{ bytes}}{8 \\text{ bytes/acceso}} = 16 \\text{ accesos}$$"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Codificación del Campo Opcode",
+      "context": "Una ISA debe codificar diferentes números de instrucciones usando un campo opcode de tamaño mínimo.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuántos bits mínimos necesita el opcode para codificar 4 instrucciones distintas?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$n = \\lceil \\log_2(4) \\rceil = \\lceil 2 \\rceil = 2 \\text{ bits}$$"
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "¿Cuántos bits mínimos necesita el opcode para codificar 16 instrucciones distintas?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$n = \\lceil \\log_2(16) \\rceil = \\lceil 4 \\rceil = 4 \\text{ bits}$$"
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "¿Cuántos bits mínimos necesita el opcode para codificar 64 instrucciones distintas?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$n = \\lceil \\log_2(64) \\rceil = \\lceil 6 \\rceil = 6 \\text{ bits}$$"
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Si el opcode tiene 6 bits, ¿cuántas instrucciones distintas como máximo puede codificar (incluyendo combinaciones no usadas)?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$\\text{Instrucciones máx.} = 2^6 = 64$$"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Campo de Especificación de Registro",
+      "context": "Una CPU tiene un banco de registros con un número determinado de registros de propósito general.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuántos bits necesita el campo de registro para identificar uno de los 8 registros disponibles?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$n = \\log_2(8) = 3 \\text{ bits}$$"
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "¿Cuántos bits necesita el campo de registro para identificar uno de los 32 registros (como en MIPS)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$n = \\log_2(32) = 5 \\text{ bits}$$"
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Una instrucción tipo R de MIPS de 32 bits tiene: 6 bits de opcode, 5 bits de rs, 5 bits de rt, 5 bits de rd, 5 bits de shamt, y 6 bits de funct. ¿Cuántos bits ocupan en total solo los tres campos de registro (rs, rt, rd)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits registros} = 5 + 5 + 5 = 15 \\text{ bits}$$"
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "En esa instrucción R de MIPS, ¿cuántos bits quedan para los campos que NO son registros (opcode + shamt + funct)?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits no-registro} = 32 - 15 = 17 \\text{ bits} = 6 + 5 + 6$$"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Cálculo de CPI y Tiempo de Ejecución",
+      "context": "Un programa tiene 10 000 instrucciones. La CPU opera a 1 GHz (10^9 ciclos/segundo). El CPI promedio es 2.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj totales requiere la ejecución del programa?",
+          "correctValue": 20000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos} = N_{inst} \\times \\text{CPI} = 10\\,000 \\times 2 = 20\\,000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "¿Cuántos microsegundos (μs) tarda la ejecución del programa a 1 GHz?",
+          "correctValue": 20,
+          "tolerance": 0.001,
+          "explanation": "$$T = \\frac{\\text{Ciclos}}{f} = \\frac{20\\,000}{10^9} = 20 \\times 10^{-6} \\text{ s} = 20 \\text{ μs}$$"
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Si se optimiza el CPI a 1.5, ¿cuántos ciclos totales se necesitan ahora?",
+          "correctValue": 15000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{opt} = 10\\,000 \\times 1.5 = 15\\,000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Con el CPI optimizado a 1.5 y la frecuencia de 1 GHz, ¿cuántos microsegundos tarda ahora la ejecución?",
+          "correctValue": 15,
+          "tolerance": 0.001,
+          "explanation": "$$T_{opt} = \\frac{15\\,000}{10^9} = 15 \\times 10^{-6} \\text{ s} = 15 \\text{ μs}$$"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Formato de Instrucción de 16 bits",
+      "context": "Una CPU sencilla usa instrucciones de 16 bits con el siguiente formato: [opcode: 4 bits | Rs: 3 bits | Rt: 3 bits | Inmediato: ? bits].",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Cuántos bits ocupa el campo Inmediato en esta instrucción de 16 bits?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$\\text{Inmediato} = 16 - 4 - 3 - 3 = 6 \\text{ bits}$$"
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "¿Cuántas instrucciones distintas puede codificar el campo opcode de 4 bits?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$2^4 = 16 \\text{ instrucciones}$$"
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "¿Cuántos registros distintos puede referenciar un campo de registro de 3 bits?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$2^3 = 8 \\text{ registros}$$"
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "¿Cuál es el rango de valores sin signo que puede representar el campo Inmediato de 6 bits? Expresar como el valor máximo posible.",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "$$\\text{Máx sin signo} = 2^6 - 1 = 63$$"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Pipeline: Throughput y Latencia",
+      "context": "Una CPU sin pipeline tarda 10 ns en completar cada instrucción (5 etapas de 2 ns cada una). Con pipeline de 5 etapas, el ciclo de reloj es de 2 ns.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Cuánto tiempo (en ns) tarda en completarse la primera instrucción en la CPU con pipeline de 5 etapas?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$T_{latencia} = 5 \\text{ etapas} \\times 2 \\text{ ns/etapa} = 10 \\text{ ns}$$. La latencia de una instrucción individual no cambia con el pipeline."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "En estado estacionario (pipeline lleno), ¿cuántas instrucciones se completan por nanosegundo?",
+          "correctValue": 0.5,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Throughput} = \\frac{1}{\\text{ciclo}} = \\frac{1}{2 \\text{ ns}} = 0.5 \\text{ instrucciones/ns}$$"
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Sin pipeline (ejecución secuencial), ¿cuántas instrucciones se completan por nanosegundo?",
+          "correctValue": 0.1,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Throughput}_{\\text{sin pipeline}} = \\frac{1}{10 \\text{ ns}} = 0.1 \\text{ instrucciones/ns}$$"
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "¿Cuántas veces mejora el throughput el pipeline respecto a la ejecución secuencial? (factor de mejora)",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$\\text{Mejora} = \\frac{0.5}{0.1} = 5 \\text{ veces}$$. El pipeline ideal de N etapas mejora el throughput en factor N."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Incremento del PC en Distintas Arquitecturas",
+      "context": "Tres arquitecturas distintas usan instrucciones de 8, 16 y 32 bits respectivamente. La memoria se direcciona por bytes.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuánto se incrementa el PC en la arquitectura de instrucciones de 8 bits (1 byte)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$\\Delta PC = \\frac{8 \\text{ bits}}{8 \\text{ bits/byte}} = 1 \\text{ byte}$$"
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "¿Cuánto se incrementa el PC en la arquitectura de instrucciones de 16 bits?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$\\Delta PC = \\frac{16 \\text{ bits}}{8 \\text{ bits/byte}} = 2 \\text{ bytes}$$"
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "¿Cuánto se incrementa el PC en la arquitectura de instrucciones de 32 bits (como MIPS)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\Delta PC = \\frac{32 \\text{ bits}}{8 \\text{ bits/byte}} = 4 \\text{ bytes}$$"
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "En la arquitectura de 32 bits, si el PC vale inicialmente 0x1000, ¿cuál es el valor del PC (en decimal) tras ejecutar 4 instrucciones?",
+          "correctValue": 4112,
+          "tolerance": 0,
+          "explanation": "$$PC_{final} = 0x1000 + 4 \\times 4 = 4096 + 16 = 4112 \\text{ (decimal)}$$"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Banco de Registros: Tamaño y Bits de Selección",
+      "context": "Un banco de registros de propósito general contiene N registros, cada uno de 32 bits de ancho.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Si el banco tiene 16 registros de 32 bits, ¿cuántos bits totales de almacenamiento contiene el banco?",
+          "correctValue": 512,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits totales} = 16 \\times 32 = 512 \\text{ bits}$$"
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "¿Cuántos bits se necesitan para el campo de selección de registro en una instrucción que deba referenciar cualquiera de los 16 registros?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$n = \\log_2(16) = 4 \\text{ bits de selección}$$"
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Si se amplía el banco a 64 registros de 32 bits, ¿cuántos bits totales de almacenamiento tendrá?",
+          "correctValue": 2048,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits totales} = 64 \\times 32 = 2048 \\text{ bits}$$"
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "¿Cuántos bits se necesitan para el campo de selección de registro en una instrucción que deba referenciar cualquiera de los 64 registros?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$n = \\log_2(64) = 6 \\text{ bits de selección}$$"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Ciclos del Fetch: Número de Ciclos de Reloj",
+      "context": "Una CPU con UC cableada completa el ciclo Fetch en 3 ciclos de reloj a 500 MHz. La UC microprogramada requiere 5 ciclos de reloj a 400 MHz por el acceso a la ROM interna.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj en la CPU con UC cableada (500 MHz)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = \\frac{1}{500 \\times 10^6} = 2 \\times 10^{-9} \\text{ s} = 2 \\text{ ns}$$"
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos dura el ciclo Fetch completo en la CPU con UC cableada (3 ciclos × 2 ns/ciclo)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$T_{fetch, cableada} = 3 \\times 2 \\text{ ns} = 6 \\text{ ns}$$"
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj en la CPU con UC microprogramada (400 MHz)?",
+          "correctValue": 2.5,
+          "tolerance": 0.001,
+          "explanation": "$$T_{ciclo} = \\frac{1}{400 \\times 10^6} = 2.5 \\times 10^{-9} \\text{ s} = 2.5 \\text{ ns}$$"
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos dura el ciclo Fetch completo en la CPU con UC microprogramada (5 ciclos × 2.5 ns/ciclo)?",
+          "correctValue": 12.5,
+          "tolerance": 0.01,
+          "explanation": "$$T_{fetch, microprog} = 5 \\times 2.5 \\text{ ns} = 12.5 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Capacidad de la ROM de Microprograma",
+      "context": "Una UC microprogramada tiene 32 instrucciones de máquina distintas. Cada instrucción se implementa con un microprograma de exactamente 8 microinstrucciones. Cada microinstrucción ocupa 24 bits.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuántas microinstrucciones hay en total en la ROM de control?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total microinstr.} = 32 \\text{ instrucciones} \\times 8 \\text{ microinstr./instrucción} = 256$$"
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "¿Cuántos bits ocupa en total la ROM de control?",
+          "correctValue": 6144,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits ROM} = 256 \\times 24 = 6144 \\text{ bits}$$"
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "¿Cuántos bytes ocupa la ROM de control?",
+          "correctValue": 768,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes} = \\frac{6144}{8} = 768 \\text{ bytes}$$"
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si se añaden 8 nuevas instrucciones al repertorio (con el mismo tamaño de microprograma), ¿cuántos bytes adicionales necesitará la ROM?",
+          "correctValue": 192,
+          "tolerance": 0,
+          "explanation": "$$\\Delta\\text{Bytes} = 8 \\text{ nuevas instrucciones} \\times 8 \\text{ microinstr.} \\times \\frac{24 \\text{ bits}}{8 \\text{ bits/byte}} = 8 \\times 8 \\times 3 = 192 \\text{ bytes}$$"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Mejora de Rendimiento con Pipeline",
+      "context": "Un procesador sin pipeline ejecuta un programa de 100 instrucciones en 500 ns. Con pipeline ideal de 5 etapas (mismo período de reloj), se espera una mejora teórica máxima.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos tarda en promedio cada instrucción sin pipeline?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$T_{inst} = \\frac{500 \\text{ ns}}{100 \\text{ instrucciones}} = 5 \\text{ ns/instrucción}$$"
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos dura cada etapa del pipeline (período de reloj) si hay 5 etapas iguales de 5 ns totales?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$T_{etapa} = \\frac{5 \\text{ ns}}{5 \\text{ etapas}} = 1 \\text{ ns/etapa}$$"
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Con pipeline ideal, ¿cuántos nanosegundos tarda en completar las 100 instrucciones? (latencia primera instrucción + (N-1) ciclos adicionales = 5 + 99 = 104 ciclos de 1 ns)",
+          "correctValue": 104,
+          "tolerance": 0,
+          "explanation": "$$T_{pipeline} = (5 + 99) \\times 1 \\text{ ns} = 104 \\text{ ns}$$. La primera instrucción tarda 5 ciclos y las 99 restantes 1 ciclo cada una."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "¿Cuál es el factor de aceleración (speedup) real del pipeline respecto a la ejecución sin pipeline para este programa de 100 instrucciones?",
+          "correctValue": 4.81,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Speedup} = \\frac{500 \\text{ ns}}{104 \\text{ ns}} \\approx 4.81$$"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Transferencias en el Ciclo Fetch: Número de Ciclos",
+      "context": "Una CPU sencilla tiene un bus interno de datos único. Cada transferencia entre registros (MAR←PC, MDR←Bus, IR←MDR, PC←PC+4) ocupa 1 ciclo de reloj cada una.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuántas transferencias de registro a registro ocurren dentro de la CPU durante el ciclo Fetch completo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Hay 3 transferencias internas: MAR←PC, IR←MDR, y PC←PC+4. La lectura de memoria (MDR←Bus) involucra el bus externo, no una transferencia registro a registro pura."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Contando también la lectura de memoria (MDR←Bus de datos = 1 ciclo externo), ¿cuántos ciclos de reloj totales ocupa el ciclo Fetch?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos Fetch} = 1 (MAR \\leftarrow PC) + 1 (\\text{Lectura memoria, MDR} \\leftarrow \\text{Bus}) + 1 (IR \\leftarrow MDR) + 1 (PC \\leftarrow PC+4) = 4 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Si la CPU opera a 200 MHz, ¿cuántos nanosegundos dura un ciclo de reloj?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = \\frac{1}{200 \\times 10^6} = 5 \\text{ ns}$$"
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos dura el ciclo Fetch completo (4 ciclos) a 200 MHz?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$$T_{fetch} = 4 \\times 5 \\text{ ns} = 20 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Flags de la ALU y Condiciones de Salto",
+      "context": "La ALU opera con registros de 8 bits sin signo. Se realizan dos operaciones: A = 200 + 100 y B = 50 - 50.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Cuál es el resultado de la operación A = 200 + 100 en 8 bits (módulo 256)?",
+          "correctValue": 44,
+          "tolerance": 0,
+          "explanation": "$$200 + 100 = 300. \\ 300 \\mod 256 = 44$$. El resultado se trunca a 8 bits."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "¿Vale 1 el flag de Carry (C) tras la operación A = 200 + 100 en 8 bits sin signo? (1 = sí, 0 = no)",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$300 > 255$$, por lo que hay desbordamiento sin signo (acarreo): el flag C = 1."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuál es el resultado de la operación B = 50 - 50?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$$50 - 50 = 0$$"
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "¿Vale 1 el flag Z (Zero) tras la operación B = 50 - 50? (1 = sí, 0 = no)",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El resultado es cero, por tanto el flag Z se activa: Z = 1."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Registro de Instrucción y Campos de Decodificación",
+      "context": "Una instrucción de 16 bits está almacenada en el IR con el valor binario: 1010 0011 1010 0001. El formato es [opcode: 4 bits | Rs: 4 bits | Rt: 4 bits | Rb: 4 bits].",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal del campo opcode (bits 15 a 12: 1010)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$1010_2 = 1 \\times 2^3 + 0 \\times 2^2 + 1 \\times 2^1 + 0 \\times 2^0 = 8 + 2 = 10_{10}$$"
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal del campo Rs (bits 11 a 8: 0011)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$0011_2 = 0 + 0 + 2 + 1 = 3_{10}$$"
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "¿Cuál es el valor decimal del campo Rt (bits 7 a 4: 1010)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$1010_2 = 8 + 0 + 2 + 0 = 10_{10}$$"
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del campo Rb (bits 3 a 0: 0001)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$0001_2 = 0 + 0 + 0 + 1 = 1_{10}$$"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Cálculo del CPI con Mezcla de Instrucciones",
+      "context": "Un programa tiene 3 tipos de instrucciones: 50% de tipo A (CPI=1), 30% de tipo B (CPI=3), y 20% de tipo C (CPI=5). El programa tiene 10 000 instrucciones totales.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuántas instrucciones de tipo A hay en el programa?",
+          "correctValue": 5000,
+          "tolerance": 0,
+          "explanation": "$$N_A = 10\\,000 \\times 0.5 = 5\\,000$$"
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "¿Cuántos ciclos consumen las instrucciones de tipo B en total?",
+          "correctValue": 9000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_B = 10\\,000 \\times 0.30 \\times 3 = 3\\,000 \\times 3 = 9\\,000$$"
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos totales consume el programa completo?",
+          "correctValue": 24000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_{total} = 5000 \\times 1 + 3000 \\times 3 + 2000 \\times 5 = 5000 + 9000 + 10000 = 24\\,000$$"
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "¿Cuál es el CPI promedio del programa completo?",
+          "correctValue": 2.4,
+          "tolerance": 0.01,
+          "explanation": "$$\\overline{\\text{CPI}} = \\frac{\\text{Ciclos}_{total}}{N_{inst}} = \\frac{24\\,000}{10\\,000} = 2.4$$"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Número de Etapas del Pipeline y Penalización por Hazard",
+      "context": "Un pipeline de 5 etapas opera a 1 GHz (período = 1 ns). Un riesgo de control (control hazard) en una instrucción de salto provoca una penalización de 3 ciclos de burbuja (stall).",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos dura cada ciclo de reloj?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = \\frac{1}{1 \\times 10^9} = 1 \\text{ ns}$$"
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos de penalización añade un salto con 3 ciclos de burbuja?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$T_{penalty} = 3 \\text{ ciclos} \\times 1 \\text{ ns/ciclo} = 3 \\text{ ns}$$"
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Si el 20% de las 1000 instrucciones del programa son saltos con dicha penalización, ¿cuántos ciclos extra totales genera esta penalización?",
+          "correctValue": 600,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos extra} = 1000 \\times 0.20 \\times 3 = 200 \\times 3 = 600 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Contando los 1000 ciclos base (CPI=1 sin hazards) más los 600 ciclos extra, ¿cuántos nanosegundos dura el programa en total?",
+          "correctValue": 1600,
+          "tolerance": 0,
+          "explanation": "$$T_{total} = (1000 + 600) \\text{ ciclos} \\times 1 \\text{ ns/ciclo} = 1600 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Capacidad del Banco de Registros en Bytes",
+      "context": "Una CPU RISC tiene 32 registros de propósito general, cada uno de 64 bits de ancho.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuántos bits de almacenamiento total tiene el banco de registros?",
+          "correctValue": 2048,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bits} = 32 \\times 64 = 2048 \\text{ bits}$$"
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "¿Cuántos bytes ocupa el banco de registros?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes} = \\frac{2048}{8} = 256 \\text{ bytes}$$"
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuántos bits necesita el campo de selección de registro para uno de los 32 registros?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$n = \\log_2(32) = 5 \\text{ bits}$$"
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si una instrucción de tipo R de 32 bits usa 3 campos de 5 bits para especificar registros (RS, RT, RD), ¿qué porcentaje del espacio total de la instrucción (32 bits) ocupan los campos de registro?",
+          "correctValue": 46.875,
+          "tolerance": 0.01,
+          "explanation": "$$\\%_{registros} = \\frac{3 \\times 5}{32} \\times 100 = \\frac{15}{32} \\times 100 = 46.875\\%$$"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Tiempo de Ejecución con Diferente Frecuencia de Reloj",
+      "context": "Dos CPUs ejecutan el mismo programa de 5000 instrucciones. CPU-A: CPI=1, f=2 GHz. CPU-B: CPI=4, f=4 GHz.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj necesita CPU-A para ejecutar el programa?",
+          "correctValue": 5000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_A = 5000 \\times 1 = 5000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos tarda CPU-A en ejecutar el programa?",
+          "correctValue": 2.5,
+          "tolerance": 0.001,
+          "explanation": "$$T_A = \\frac{5000}{2 \\times 10^9} = 2.5 \\times 10^{-6} \\text{ s} = 2500 \\text{ ns} = 2.5 \\text{ μs}$$. (En μs: 2.5 μs)"
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos de reloj necesita CPU-B para ejecutar el programa?",
+          "correctValue": 20000,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos}_B = 5000 \\times 4 = 20\\,000 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos tarda CPU-B? ¿Cuántas veces es más lenta que CPU-A? (expresar la razón T_B / T_A)",
+          "correctValue": 2,
+          "tolerance": 0.001,
+          "explanation": "$$T_B = \\frac{20\\,000}{4 \\times 10^9} = 5 \\text{ μs}. \\quad \\text{Razón} = \\frac{T_B}{T_A} = \\frac{5}{2.5} = 2 \\text{ (CPU-B es 2 veces más lenta)}$$"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Instrucción de Salto e Inmediato con Signo",
+      "context": "Una instrucción de salto condicional de 16 bits tiene el formato [opcode: 4 bits | condición: 2 bits | offset inmediato: 10 bits en complemento a 2]. El PC actual es 100 (decimal).",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuál es el rango de valores con signo representables en 10 bits en complemento a dos? (expresar el valor mínimo)",
+          "correctValue": -512,
+          "tolerance": 0,
+          "explanation": "$$\\text{Mín CA2 (10 bits)} = -2^{10-1} = -2^9 = -512$$"
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "¿Cuál es el valor máximo representable con signo en 10 bits en complemento a dos?",
+          "correctValue": 511,
+          "tolerance": 0,
+          "explanation": "$$\\text{Máx CA2 (10 bits)} = 2^9 - 1 = 512 - 1 = 511$$"
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Si el offset del salto es +25 y el PC ya fue incrementado a 102 (tras el fetch), ¿cuál es la dirección de destino del salto?",
+          "correctValue": 127,
+          "tolerance": 0,
+          "explanation": "$$\\text{Destino} = PC_{incr} + \\text{offset} = 102 + 25 = 127$$"
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Si el offset del salto es -10, ¿cuál es la dirección de destino del salto con PC incrementado = 102?",
+          "correctValue": 92,
+          "tolerance": 0,
+          "explanation": "$$\\text{Destino} = 102 + (-10) = 92$$"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Ancho del IR y Tamaño de la Instrucción",
+      "context": "Una CPU tiene un IR de 32 bits. Cada instrucción ocupa exactamente 32 bits. El programa almacenado en memoria empieza en la dirección 0x2000.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "¿Cuántos bytes ocupa cada instrucción en memoria?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$\\text{Bytes} = \\frac{32 \\text{ bits}}{8 \\text{ bits/byte}} = 4 \\text{ bytes}$$"
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección de la 5ª instrucción del programa (comenzando desde 0x2000)?",
+          "correctValue": 8208,
+          "tolerance": 0,
+          "explanation": "$$\\text{Dirección} = 0x2000 + (5-1) \\times 4 = 8192 + 16 = 8208$$. (0x2000 = 8192 decimal)"
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "¿Cuántas instrucciones pueden almacenarse en una memoria de 1 KiB (1024 bytes) reservada para el programa?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$N = \\frac{1024 \\text{ bytes}}{4 \\text{ bytes/instrucción}} = 256 \\text{ instrucciones}$$"
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Si el programa tiene 256 instrucciones a partir de la dirección 0x2000, ¿cuál es la dirección (decimal) de la última instrucción?",
+          "correctValue": 9204,
+          "tolerance": 0,
+          "explanation": "$$\\text{Dirección última} = 0x2000 + (256-1) \\times 4 = 8192 + 1020 = 9212$$. Nota: corrección → 8192 + 255×4 = 8192 + 1020 = 9212."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Cálculo del Número de Microinstrucciones por Instrucción",
+      "context": "Una UC microprogramada ejecuta una instrucción de LOAD que accede a memoria. El ciclo de la instrucción se descompone en: 3 microinstrucciones de Fetch + 2 de Decode + 4 de Execute + 3 de Memory + 1 de WriteBack.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿Cuántas microinstrucciones en total ejecuta la instrucción LOAD?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "$$\\text{Total} = 3 + 2 + 4 + 3 + 1 = 13 \\text{ microinstrucciones}$$"
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Si cada microinstrucción dura 1 ciclo de reloj a 500 MHz, ¿cuántos nanosegundos dura la instrucción LOAD completa?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = 2 \\text{ ns}. \\quad T_{LOAD} = 13 \\times 2 = 26 \\text{ ns}$$"
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Una instrucción ADD más simple usa: 3 Fetch + 2 Decode + 2 Execute + 0 Memory + 1 WriteBack = ¿cuántas microinstrucciones?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$3 + 2 + 2 + 0 + 1 = 8 \\text{ microinstrucciones}$$"
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "¿Cuántos ciclos de reloj más tarda la instrucción LOAD que la instrucción ADD?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$$\\Delta \\text{ciclos} = 13 - 8 = 5 \\text{ ciclos}$$"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Bus Interno Único: Número de Ciclos por Operación",
+      "context": "Una CPU con bus interno único necesita un ciclo de reloj por cada transferencia entre registros. Para calcular R3 = R1 + R2, debe: (1) copiar R1 al registro temporal A de la ALU, (2) copiar R2 al registro temporal B de la ALU, (3) activar la ALU (suma), (4) copiar el resultado al R3.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj necesita la operación R3 = R1 + R2 en este modelo?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Son 4 ciclos: ciclo 1 (A←R1), ciclo 2 (B←R2), ciclo 3 (ALU activa), ciclo 4 (R3←resultado ALU)."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "A 100 MHz, ¿cuántos nanosegundos dura un ciclo de reloj?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$T_{ciclo} = \\frac{1}{100 \\times 10^6} = 10 \\text{ ns}$$"
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos tarda la operación R3 = R1 + R2 completa a 100 MHz?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "$$T_{op} = 4 \\times 10 \\text{ ns} = 40 \\text{ ns}$$"
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si se realizan 1000 de estas operaciones en secuencia, ¿cuántos microsegundos tardan en total?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "$$T_{total} = 1000 \\times 40 \\text{ ns} = 40\\,000 \\text{ ns} = 40 \\text{ μs}$$"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Instrucción Tipo I (Inmediato) en MIPS de 32 bits",
+      "context": "El formato tipo I de MIPS: [opcode: 6 bits | rs: 5 bits | rt: 5 bits | inmediato: 16 bits].",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuántos bits ocupan en total los campos opcode + rs + rt?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$6 + 5 + 5 = 16 \\text{ bits}$$"
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "¿Cuántos bits quedan para el campo inmediato en la instrucción de 32 bits?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$$32 - 16 = 16 \\text{ bits para el campo inmediato}$$"
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "¿Cuál es el rango de valores inmediatos con signo (complemento a 2) representables en 16 bits? (expresar valor mínimo)",
+          "correctValue": -32768,
+          "tolerance": 0,
+          "explanation": "$$\\text{Mín} = -2^{15} = -32768$$"
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "¿Cuál es el valor máximo con signo representable en el campo inmediato de 16 bits?",
+          "correctValue": 32767,
+          "tolerance": 0,
+          "explanation": "$$\\text{Máx} = 2^{15} - 1 = 32767$$"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Frecuencia de Reloj y Período",
+      "context": "Cuatro CPUs operan a distintas frecuencias de reloj: 100 MHz, 500 MHz, 1 GHz y 3 GHz.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj a 100 MHz?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$$T = \\frac{1}{100 \\times 10^6} = 10 \\text{ ns}$$"
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj a 500 MHz?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$T = \\frac{1}{500 \\times 10^6} = 2 \\text{ ns}$$"
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "¿Cuántos nanosegundos dura un ciclo de reloj a 1 GHz?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$$T = \\frac{1}{1 \\times 10^9} = 1 \\text{ ns}$$"
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "¿Cuántos nanosegundos (redondeado a 2 decimales) dura un ciclo de reloj a 3 GHz?",
+          "correctValue": 0.33,
+          "tolerance": 0.01,
+          "explanation": "$$T = \\frac{1}{3 \\times 10^9} \\approx 0.333 \\text{ ns} \\approx 0.33 \\text{ ns}$$"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Número de Instrucciones por Segundo (MIPS rate)",
+      "context": "Una CPU opera a 2 GHz con un CPI promedio de 2. Se calcula la tasa de instrucciones por segundo en millones (MIPS).",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj hay por segundo a 2 GHz? (en miles de millones)",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$f = 2 \\text{ GHz} = 2 \\times 10^9 \\text{ ciclos/s}$$"
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "¿Cuántas instrucciones por segundo ejecuta la CPU con CPI=2 y f=2 GHz? (en millones de instrucciones, MIPS)",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "$$\\text{IPS} = \\frac{f}{\\text{CPI}} = \\frac{2 \\times 10^9}{2} = 10^9 \\text{ instrucciones/s} = 1000 \\text{ MIPS}$$"
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Si se mejora el diseño de la CPU reduciendo el CPI a 1, ¿cuántos MIPS se obtienen ahora a la misma frecuencia?",
+          "correctValue": 2000,
+          "tolerance": 0,
+          "explanation": "$$\\text{IPS}_{opt} = \\frac{2 \\times 10^9}{1} = 2 \\times 10^9 = 2000 \\text{ MIPS}$$"
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "¿Por qué factor se mejoró la tasa de instrucciones al pasar de CPI=2 a CPI=1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$\\text{Factor mejora} = \\frac{2000 \\text{ MIPS}}{1000 \\text{ MIPS}} = 2$$"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Instrucción tipo J (salto) en MIPS de 32 bits",
+      "context": "El formato tipo J de MIPS: [opcode: 6 bits | dirección objetivo: 26 bits]. Las instrucciones están alineadas a 4 bytes.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "¿Cuántos bits ocupa el campo de dirección objetivo en una instrucción tipo J de MIPS?",
+          "correctValue": 26,
+          "tolerance": 0,
+          "explanation": "$$32 - 6 = 26 \\text{ bits para la dirección objetivo}$$"
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Dado que las instrucciones están alineadas a 4 bytes, los 2 bits menos significativos siempre son 00. ¿Cuántos bits efectivos de dirección representa el campo de 26 bits? (26 + 2 bits implícitos)",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "El campo de 26 bits codifica palabras (no bytes), y al desplazar 2 bits a la izquierda se obtienen 28 bits efectivos de dirección: $$26 + 2 = 28 \\text{ bits}$$"
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "¿Cuántas posiciones (palabras de 4 bytes) distintas puede alcanzar el salto J con 26 bits de campo?",
+          "correctValue": 67108864,
+          "tolerance": 0,
+          "explanation": "$$2^{26} = 67\\,108\\,864 \\text{ palabras distintas}$$"
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "¿Cuántos MiB de espacio de memoria puede alcanzar el salto tipo J (2^28 bytes)?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$$2^{28} \\text{ bytes} = \\frac{2^{28}}{2^{20}} = 2^8 = 256 \\text{ MiB}$$"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Profundidad del Pipeline y Llenado del Cauce",
+      "context": "Un pipeline de N etapas. Se analiza cuántos ciclos se necesitan para completar un conjunto de instrucciones.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Un pipeline de 4 etapas. ¿Cuántos ciclos de reloj se necesitan para que la PRIMERA instrucción salga completada (latencia de la primera instrucción)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La primera instrucción debe recorrer las 4 etapas una por una: $$\\text{Latencia}_1 = 4 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Con el pipeline de 4 etapas lleno (en estado estacionario), ¿cuántos ciclos adicionales se necesitan para completar 96 instrucciones más (tras la primera)?",
+          "correctValue": 96,
+          "tolerance": 0,
+          "explanation": "En estado estacionario, una instrucción se completa por ciclo: $$96 \\text{ instrucciones} \\times 1 \\text{ ciclo/instrucción} = 96 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "¿Cuántos ciclos totales se necesitan para completar las 97 instrucciones (1 inicial + 96 en estado estacionario)?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos totales} = 4 \\text{ (llenado)} + 96 \\text{ (estado estacionario)} = 100 \\text{ ciclos}$$"
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Sin pipeline (ejecución secuencial con 4 ciclos por instrucción), ¿cuántos ciclos se necesitarían para las mismas 97 instrucciones?",
+          "correctValue": 388,
+          "tolerance": 0,
+          "explanation": "$$\\text{Ciclos sin pipeline} = 97 \\times 4 = 388 \\text{ ciclos}$$"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Uso del PC como Dirección Base en Instrucciones de Salto",
+      "context": "Una CPU con instrucciones de 4 bytes. PC = 0x0100 (256 en decimal). Se ejecuta una instrucción de salto relativo al PC con offset = +20 (en bytes), y el PC ya fue incrementado en 4 (fetch completado).",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuánto vale el PC tras el incremento del fetch (PC_inc)?",
+          "correctValue": 260,
+          "tolerance": 0,
+          "explanation": "$$PC_{inc} = 256 + 4 = 260$$"
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección de destino del salto con offset = +20 a partir del PC_inc?",
+          "correctValue": 280,
+          "tolerance": 0,
+          "explanation": "$$\\text{Destino} = 260 + 20 = 280$$"
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Si el offset fuese -8, ¿cuál sería la dirección de destino?",
+          "correctValue": 252,
+          "tolerance": 0,
+          "explanation": "$$\\text{Destino} = 260 + (-8) = 252$$"
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "¿Cuántas instrucciones hacia atrás apunta el salto con offset = -8 (asumiendo instrucciones de 4 bytes)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$\\frac{|{-8}|}{4} = 2 \\text{ instrucciones hacia atrás}$$"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Impacto del Ancho de la ALU en el Rango de Operandos",
+      "context": "Una ALU opera con registros de N bits en complemento a dos. Se analizan tres configuraciones: 8, 16 y 32 bits.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "¿Cuál es el valor máximo positivo representable en complemento a dos con 8 bits?",
+          "correctValue": 127,
+          "tolerance": 0,
+          "explanation": "$$\\text{Máx}_{8} = 2^{8-1} - 1 = 2^7 - 1 = 127$$"
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "¿Cuál es el valor máximo positivo representable en complemento a dos con 16 bits?",
+          "correctValue": 32767,
+          "tolerance": 0,
+          "explanation": "$$\\text{Máx}_{16} = 2^{15} - 1 = 32767$$"
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuál es el valor mínimo negativo representable en complemento a dos con 32 bits?",
+          "correctValue": -2147483648,
+          "tolerance": 0,
+          "explanation": "$$\\text{Mín}_{32} = -2^{31} = -2\\,147\\,483\\,648$$"
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "¿Cuántas veces más grande es el rango de valores positivos de una ALU de 32 bits respecto a una de 16 bits? (factor = 2^(32-1) / 2^(16-1))",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$$\\text{Factor} = \\frac{2^{31} - 1}{2^{15} - 1} \\approx \\frac{2^{31}}{2^{15}} = 2^{16} = 65536$$"
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Número de posiciones de memoria direccionables por el MAR",
+      "tex": "$$N_{mem} = 2^{n_{MAR}}$$"
+    },
+    {
+      "name": "Bits mínimos para codificar N instrucciones (opcode)",
+      "tex": "$$n_{opcode} = \\lceil \\log_2(N_{inst}) \\rceil$$"
+    },
+    {
+      "name": "Tiempo de ejecución de un programa",
+      "tex": "$$T_{exec} = \\frac{N_{instrucciones} \\times \\overline{\\text{CPI}}}{f_{reloj}}$$"
+    },
+    {
+      "name": "CPI promedio ponderado con mezcla de instrucciones",
+      "tex": "$$\\overline{\\text{CPI}} = \\sum_{i} f_i \\times \\text{CPI}_i$$"
+    },
+    {
+      "name": "Throughput ideal del pipeline (instrucciones por segundo)",
+      "tex": "$$\\text{Throughput}_{pipeline} = \\frac{1}{T_{ciclo}} = f_{reloj}$$"
+    },
+    {
+      "name": "Speedup del pipeline de N etapas (ideal)",
+      "tex": "$$\\text{Speedup}_{ideal} = N_{etapas}$$"
+    },
+    {
+      "name": "Período de reloj",
+      "tex": "$$T_{ciclo} = \\frac{1}{f_{reloj}}$$"
+    },
+    {
+      "name": "Tasa de instrucciones por segundo (MIPS rate)",
+      "tex": "$$\\text{MIPS} = \\frac{f_{reloj}}{\\overline{\\text{CPI}} \\times 10^6}$$"
+    },
+    {
+      "name": "Ciclo Fetch: transferencia de PC a MAR",
+      "tex": "$$MAR \\leftarrow PC \\;\\Rightarrow\\; MDR \\leftarrow M[MAR] \\;\\Rightarrow\\; IR \\leftarrow MDR \\;\\Rightarrow\\; PC \\leftarrow PC + \\Delta$$"
+    },
+    {
+      "name": "Rango complemento a dos de N bits",
+      "tex": "$$[-2^{N-1},\\; 2^{N-1} - 1]$$"
+    },
+    {
+      "name": "Bits de selección de registro para un banco de R registros",
+      "tex": "$$n_{reg} = \\log_2(R)$$"
+    },
+    {
+      "name": "Ciclos totales para K instrucciones en pipeline de N etapas",
+      "tex": "$$\\text{Ciclos}_{total} = N + (K - 1)$$"
+    }
+  ]
+}

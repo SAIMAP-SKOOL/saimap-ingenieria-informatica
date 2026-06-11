@@ -1,0 +1,2100 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el comportamiento de un Latch SR construido con puertas NOR cuando ambas entradas se ponen a nivel alto (S=1, R=1)?",
+      "options": [
+        "Las salidas Q y \\bar{Q} se fuerzan ambas a nivel bajo (0), perdiendo su complementariedad.",
+        "La salida Q se pone a 1 y \\bar{Q} se pone a 0, manteniéndose estables.",
+        "El circuito entra en un bucle oscilatorio de alta frecuencia indefinido."
+      ],
+      "correct": 0,
+      "hint": "Considere la tabla de verdad de una puerta NOR: si cualquiera de sus entradas es 1, la salida es 0.",
+      "explanation": "En un Latch SR con puertas NOR, las entradas S y R van directamente a una de las entradas de cada puerta. Si S=1 y R=1, ambas puertas NOR tendrán al menos una entrada en 1, lo que fuerza a que las salidas de ambas (Q y \\bar{Q}) sean obligatoriamente 0. Esto rompe la condición teórica de que Q y \\bar{Q} sean complementarias."
+    },
+    {
+      "q": "En un Latch SR basado en puertas NAND, ¿cuál es el estado lógico de las entradas en reposo (cuando se quiere mantener la memoria sin alterar el estado)?",
+      "options": [
+        "S = 0, R = 0",
+        "S = 1, R = 1",
+        "S = 1, R = 0"
+      ],
+      "correct": 1,
+      "hint": "El Latch SR-NAND trabaja con entradas activas por nivel bajo.",
+      "explanation": "En las puertas NAND, un 0 en la entrada fuerza la salida a 1 (estado activo). Por lo tanto, para mantener el estado anterior sin cambios (memoria), ambas entradas deben permanecer inactivas en nivel alto, es decir, S = 1 y R = 1."
+    },
+    {
+      "q": "¿Qué ocurre si en un Latch SR basado en puertas NAND se aplican simultáneamente las entradas S = 0 y R = 0?",
+      "options": [
+        "Se produce el estado prohibido, donde ambas salidas Q y \\bar{Q} se fuerzan a nivel alto (1).",
+        "La salida Q pasa a 0 y \\bar{Q} pasa a 1 de forma asíncrona.",
+        "El circuito entra en un estado de memoria reteniendo el valor anterior."
+      ],
+      "correct": 0,
+      "hint": "Recuerde que una puerta NAND produce un 1 en su salida si alguna de sus entradas es 0.",
+      "explanation": "Al aplicar S=0 y R=0 en un Latch NAND, ambas puertas NAND tienen una entrada en 0, lo que fuerza a ambas salidas Q y \\bar{Q} a ponerse a 1. Este estado no es complementario y se considera prohibido, ya que si ambas entradas vuelven a 1 al mismo tiempo, el estado final será indeterminado debido a una condición de carrera."
+    },
+    {
+      "q": "¿Cuál es la principal diferencia funcional entre un Latch y un Flip-Flop (Biestable síncrono)?",
+      "options": [
+        "El Latch es sensible al nivel de la señal de habilitación, mientras que el Flip-Flop es sensible únicamente a los flancos de subida o bajada del reloj.",
+        "El Latch es un circuito síncrono que requiere reloj, mientras que el Flip-Flop es completamente asíncrono.",
+        "El Latch almacena información analógica mediante condensadores y el Flip-Flop almacena digitalmente con latches."
+      ],
+      "correct": 0,
+      "hint": "Piense en el método de disparo o muestreo de la entrada.",
+      "explanation": "Los Latches son elementos sensibles al nivel (transparentes mientras la señal de habilitación esté activa), mientras que los Flip-Flops son sensibles a los flancos (las transiciones de reloj de 0 a 1 o de 1 a 0), muestreando la entrada en un instante de tiempo infinitesimal."
+    },
+    {
+      "q": "¿Cómo se define formalmente el tiempo de establecimiento (setup time, $T_{setup}$) en un biestable?",
+      "options": [
+        "El intervalo de tiempo mínimo que la entrada de datos debe permanecer estable antes del flanco activo de la señal de reloj.",
+        "El tiempo que tarda la salida Q en cambiar de estado después de que se ha producido el flanco de reloj.",
+        "El tiempo mínimo que debe transcurrir entre dos flancos activos consecutivos del reloj."
+      ],
+      "correct": 0,
+      "hint": "Es el requisito de estabilidad previo al evento de reloj.",
+      "explanation": "El tiempo de establecimiento (setup time) es el tiempo mínimo requerido por el fabricante antes del flanco activo del reloj durante el cual la señal de entrada (datos) debe mantenerse en un nivel lógico estable para garantizar su correcta captura."
+    },
+    {
+      "q": "¿Cómo se define formalmente el tiempo de mantenimiento (hold time, $T_{hold}$) en un biestable?",
+      "options": [
+        "El intervalo de tiempo mínimo que la entrada de datos debe permanecer estable después del flanco activo de la señal de reloj.",
+        "El retardo interno del camino de realimentación del biestable.",
+        "El tiempo de persistencia de la salida tras desactivar la alimentación."
+      ],
+      "correct": 0,
+      "hint": "Es el requisito de estabilidad posterior al evento de reloj.",
+      "explanation": "El tiempo de mantenimiento (hold time) es el tiempo mínimo requerido después del flanco activo de reloj durante el cual la entrada de datos no debe cambiar, asegurando que la compuerta interna de realimentación se cierre por completo y retenga el valor capturado."
+    },
+    {
+      "q": "¿Qué sucede en un circuito digital si se viola la condición del tiempo de establecimiento (setup time) en un biestable?",
+      "options": [
+        "El biestable puede entrar en un estado metaestable, tardando un tiempo indeterminado en estabilizarse en un valor lógico de 0 o 1.",
+        "La salida Q oscilará permanentemente a la frecuencia de resonancia intrínseca de los transistores.",
+        "El biestable se destruye físicamente debido a un cortocircuito térmico provocado por la corriente de avalancha."
+      ],
+      "correct": 0,
+      "hint": "Considere la pérdida de definición de los niveles lógicos intermedios.",
+      "explanation": "Si los datos cambian demasiado cerca del flanco del reloj (violando el setup time), el circuito de realimentación interna no logra definir un 0 o un 1 de forma limpia, entrando en metaestabilidad: un estado de equilibrio inestable donde la salida permanece a medio camino entre los niveles lógicos durante un tiempo aleatorio."
+    },
+    {
+      "q": "¿Cuál es la ecuación característica del Flip-Flop D?",
+      "options": [
+        "Q_{n+1} = D",
+        "Q_{n+1} = D \\oplus Q_n",
+        "Q_{n+1} = D\\bar{Q}_n"
+      ],
+      "correct": 0,
+      "hint": "La salida del biestable D simplemente sigue al dato de entrada en el flanco activo.",
+      "explanation": "El Flip-Flop D (Data/Delay) almacena directamente el valor presente en la entrada D. Su ecuación característica establece que el estado siguiente Q_{n+1} es igual al valor de la entrada D en el instante del flanco de reloj."
+    },
+    {
+      "q": "¿Cuál es la ecuación característica del Flip-Flop JK?",
+      "options": [
+        "Q_{n+1} = J\\bar{Q}_n + \\bar{K}Q_n",
+        "Q_{n+1} = JQ_n + \\bar{K}\\bar{Q}_n",
+        "Q_{n+1} = \\bar{J}\\bar{Q}_n + KQ_n"
+      ],
+      "correct": 0,
+      "hint": "Recuerde el comportamiento para J=1, K=1 (conmutación) y J=0, K=0 (memoria).",
+      "explanation": "La ecuación característica del Flip-Flop JK es Q_{n+1} = J\\bar{Q}_n + \\bar{K}Q_n. Si J=0, K=0, entonces Q_{n+1}=Q_n (memoria). Si J=1, K=1, entonces Q_{n+1}=\\bar{Q}_n (conmutación). Si J=1, K=0, Q_{n+1}=1 (Set). Si J=0, K=1, Q_{n+1}=0 (Reset)."
+    },
+    {
+      "q": "¿Cuál es la ecuación característica del Flip-Flop T?",
+      "options": [
+        "Q_{n+1} = T \\oplus Q_n",
+        "Q_{n+1} = T \\cdot Q_n + \\bar{T} \\cdot \\bar{Q}_n",
+        "Q_{n+1} = T"
+      ],
+      "correct": 0,
+      "hint": "El biestable T cambia su estado (conmuta) si T=1, y mantiene su estado si T=0.",
+      "explanation": "El Flip-Flop T (Toggle) realiza una operación XOR (suma exclusiva) entre su entrada T y su estado actual Q_n. Su ecuación es Q_{n+1} = T \\oplus Q_n, lo que significa que si T=1, Q_{n+1} = \\bar{Q}_n; y si T=0, Q_{n+1} = Q_n."
+    },
+    {
+      "q": "¿Bajo qué condiciones un Flip-Flop JK se comporta exactamente como un Flip-Flop T (Toggle)?",
+      "options": [
+        "Conectando juntas las entradas J y K para formar una única entrada T.",
+        "Conectando J a la salida Q y K a la salida \\bar{Q}.",
+        "Manteniendo la señal de reloj siempre a nivel alto."
+      ],
+      "correct": 0,
+      "hint": "Si J y K tienen el mismo valor, ¿cómo conmuta el JK?",
+      "explanation": "Al unir J y K en un solo terminal T, si T=0 (J=K=0) el biestable está en modo memoria, y si T=1 (J=K=1) está en modo conmutación. Este es exactamente el comportamiento del Flip-Flop T."
+    },
+    {
+      "q": "¿Qué combinaciones de entradas en un Flip-Flop JK producen el mantenimiento del estado anterior ($Q_{n+1} = Q_n$)?",
+      "options": [
+        "J = 0, K = 0",
+        "J = 1, K = 1",
+        "J = 0, K = 1"
+      ],
+      "correct": 0,
+      "hint": "Considere la tabla de verdad y cómo anular la excitación de cambio.",
+      "explanation": "Cuando J = 0 y K = 0, se anulan los términos de conmutación y reset en la ecuación característica, lo que resulta en Q_{n+1} = 0 \\cdot \\bar{Q}_n + 1 \\cdot Q_n = Q_n. Esto corresponde al modo memoria."
+    },
+    {
+      "q": "¿Qué prioridad tienen las entradas asíncronas de Preset (PR) y Clear (CLR) en un biestable frente a las entradas síncronas y el reloj?",
+      "options": [
+        "Prioridad absoluta: fuerzan el estado de forma inmediata e independiente del reloj y de las entradas síncronas.",
+        "Baja prioridad: solo se evalúan si las entradas síncronas J y K están a 0 en el flanco de reloj.",
+        "Prioridad media: requieren un flanco de reloj para poder forzar la salida a 1 o 0."
+      ],
+      "correct": 0,
+      "hint": "Asíncrono significa sin sincronía con el reloj.",
+      "explanation": "Las entradas asíncronas de Preset y Clear están conectadas directamente a los lazos de realimentación de los latches internos del biestable. Por lo tanto, tienen prioridad absoluta y alteran la salida de forma inmediata al activarse, independientemente del reloj o de las entradas síncronas (D, JK, T)."
+    },
+    {
+      "q": "En un biestable síncrono con entradas de Preset (PR) y Clear (CLR) activas por nivel bajo (lógica negativa), ¿cuál es el comportamiento si $\\overline{PR} = 0$ y $\\overline{CLR} = 1$?",
+      "options": [
+        "La salida Q se establece inmediatamente a 1 (Set asíncrono) y \\bar{Q} a 0.",
+        "La salida Q se borra inmediatamente a 0 (Clear asíncrono) y \\bar{Q} a 1.",
+        "El biestable entra en modo síncrono normal esperando el flanco de reloj."
+      ],
+      "correct": 0,
+      "hint": "Observe cuál de las dos entradas asíncronas está activa (nivel bajo).",
+      "explanation": "Dado que las entradas son activas por nivel bajo, $\\overline{PR} = 0$ indica que la función Preset está activa. Esto fuerza de manera asíncrona e inmediata la salida Q a 1 y \\bar{Q} a 0, ignorando al reloj."
+    },
+    {
+      "q": "Si en un Latch SR con puertas NOR se produce una transición simultánea y brusca de $S=1, R=1$ a $S=0, R=0$, ¿por qué se produce una condición de carrera?",
+      "options": [
+        "Porque ambas salidas intentan pasar de 0 a 1 a la vez y la realimentación cruzada genera oscilaciones o indeterminación según la compuerta más rápida.",
+        "Porque la compuerta NOR se sobrecalienta al procesar transiciones de nivel negativo.",
+        "Porque se consume un exceso de corriente que apaga el reloj del sistema."
+      ],
+      "correct": 0,
+      "hint": "El estado anterior forzaba a Q=\\bar{Q}=0. Al liberar las entradas a 0, ambas compuertas ven 0 en sus entradas.",
+      "explanation": "Con S=1, R=1, ambas salidas eran 0. Al pasar a S=0, R=0, ambas compuertas NOR ven sus dos entradas a 0, por lo que ambas intentan poner sus salidas a 1. La primera que lo logre forzará la entrada de la otra a 1, poniendo su salida a 0. Esto crea una carrera dependiente de los retardos físicos de las puertas, llevando a un estado final indeterminado o a oscilaciones."
+    },
+    {
+      "q": "¿Cómo evita la estructura de biestable Maestro-Esclavo (Master-Slave) el fenómeno de transparencia no deseada de los latches?",
+      "options": [
+        "Utilizando dos latches en serie controlados por señales de reloj complementarias, de modo que uno esté cerrado cuando el otro esté abierto.",
+        "Aumentando el retardo del lazo combinacional para que coincida exactamente con el periodo del reloj.",
+        "Añadiendo una compuerta XOR a la salida de cada puerta lógica para estabilizar las señales."
+      ],
+      "correct": 0,
+      "hint": "Piense en cómo bloquear el paso directo de los datos desde la entrada a la salida.",
+      "explanation": "La estructura Maestro-Esclavo consta de dos latches en serie. El reloj del maestro es el opuesto del esclavo. Cuando el reloj está en un nivel, el maestro se abre y captura la entrada mientras el esclavo está cerrado (mantiene la salida anterior). Al cambiar de nivel el reloj, el maestro se cierra y el esclavo se abre, transfiriendo el dato capturado a la salida. Esto evita que el dato pase directamente de la entrada a la salida durante todo el nivel del reloj."
+    },
+    {
+      "q": "¿Qué representa el tiempo de propagación reloj-a-Q ($T_{pcq}$) de un biestable síncrono?",
+      "options": [
+        "El tiempo que tarda la salida Q en alcanzar su nivel lógico estable medido desde el flanco activo del reloj.",
+        "El tiempo máximo que puede tardar el reloj en subir desde el 10% hasta el 90% de su valor de tensión.",
+        "El retardo máximo tolerado por la lógica de excitación síncrona."
+      ],
+      "correct": 0,
+      "hint": "Es el tiempo de respuesta del elemento de memoria tras el disparo.",
+      "explanation": "El tiempo de propagación reloj-a-Q ($T_{pcq}$ o propagation delay) es la demora temporal física que transcurre desde el instante en que la señal de reloj cruza el umbral del flanco activo hasta que la salida Q cambia y se estabiliza en su nuevo valor binario."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe la diferencia fundamental en el almacenamiento de datos entre las memorias SRAM y DRAM?",
+      "options": [
+        "La SRAM utiliza celdas formadas por lazos de realimentación estables (latches), mientras que la DRAM almacena los bits como carga eléctrica en condensadores microscópicos.",
+        "La SRAM requiere refresco constante por software, mientras que la DRAM retiene el estado indefinidamente sin alimentación.",
+        "La SRAM utiliza un transistor por celda y la DRAM utiliza al menos seis transistores."
+      ],
+      "correct": 0,
+      "hint": "Considere la presencia de condensadores frente a latches.",
+      "explanation": "La SRAM (Static RAM) se basa en un diseño estático con 4-6 transistores configurados como latches realimentados, manteniendo el dato mientras reciba corriente. La DRAM (Dynamic RAM) almacena la información de forma dinámica como carga en un condensador de tamaño diminuto, requiriendo ciclos de refresco periódicos para evitar que la carga se fugue."
+    },
+    {
+      "q": "¿Por qué las memorias dinámicas DRAM requieren ciclos de refresco periódicos?",
+      "options": [
+        "Porque la carga almacenada en los condensadores de las celdas se disipa rápidamente debido a corrientes de fuga inevitables a través del transistor de acceso.",
+        "Para evitar que los transistores entren en un estado permanente de metaestabilidad térmica.",
+        "Para sincronizar la velocidad de la memoria con el reloj del bus PCIe del procesador."
+      ],
+      "correct": 0,
+      "hint": "El condensador no es un aislante perfecto.",
+      "explanation": "Los condensadores integrados en las celdas DRAM son extremadamente pequeños (del orden de femtofaradios) y pierden su carga eléctrica en cuestión de milisegundos debido a las corrientes de fuga inherentes al sustrato del transistor de acceso. Por tanto, es obligatorio leer y reescribir periódicamente cada fila (ciclo de refresco) para no perder los datos."
+    },
+    {
+      "q": "¿Qué ventajas de ingeniería presenta la memoria DRAM frente a la SRAM?",
+      "options": [
+        "Una densidad de integración mucho mayor y un coste por bit significativamente menor, al requerir solo un transistor y un condensador por celda.",
+        "Tiempos de acceso mucho menores (latencias inferiores al nanosegundo) y ausencia de circuitería de refresco.",
+        "Un consumo de energía estática nulo al carecer de corrientes de fuga de compuertas."
+      ],
+      "correct": 0,
+      "hint": "Piense en el espacio físico y el coste de fabricación por bit.",
+      "explanation": "La celda DRAM (1T-1C) ocupa un área física en silicio mucho menor que la celda SRAM (6T). Esto permite integrar miles de millones de celdas en un chip a un coste muy bajo, lo que la hace idónea para la memoria principal del computador, a pesar de requerir circuitería para ciclos de refresco."
+    },
+    {
+      "q": "¿Qué ventajas de ingeniería presenta la memoria SRAM frente a la DRAM?",
+      "options": [
+        "Es extremadamente rápida (latencias del orden de picosegundos), no requiere ciclos de refresco y su consumo dinámico es más sencillo.",
+        "Requiere menor número de transistores por bit, lo que reduce su disipación térmica total.",
+        "Es inmune a cualquier tipo de radiación electromagnética y no sufre fugas de corriente."
+      ],
+      "correct": 0,
+      "hint": "Considere la velocidad de acceso y la ausencia de refresco.",
+      "explanation": "Al almacenar el dato en latches activos de realimentación, la SRAM no requiere refresco y permite velocidades de lectura/escritura sumamente altas. Esto la hace perfecta para las memorias caché de los procesadores (L1, L2 y L3), donde la velocidad es crítica."
+    },
+    {
+      "q": "La tabla de excitación de un Flip-Flop define:",
+      "options": [
+        "Los valores que deben tomar las entradas de control para producir una transición de estado deseada desde $Q_n$ a $Q_{n+1}$.",
+        "Las salidas del biestable para cada una de las combinaciones posibles de las entradas de excitación.",
+        "El retardo máximo permitido en la línea combinacional del reloj."
+      ],
+      "correct": 0,
+      "hint": "Es la herramienta de diseño de circuitos secuenciales a partir de transiciones deseadas.",
+      "explanation": "A diferencia de la tabla de verdad (que da el estado siguiente a partir del estado actual y las entradas), la tabla de excitación indica qué valores deben aplicarse a las entradas de control (J, K, D, T) para lograr una transición específica de estado (por ejemplo, de 0 a 1 o de 1 a 0)."
+    },
+    {
+      "q": "Si conectamos un Flip-Flop D de modo que su entrada D reciba la salida invertida del propio biestable ($D = \\bar{Q}$), ¿cuál es su comportamiento en cada flanco activo del reloj?",
+      "options": [
+        "Conmuta su estado en cada ciclo de reloj, funcionando como un divisor de frecuencia de reloj entre 2.",
+        "Se bloquea indefinidamente en un estado lógico estable de 0.",
+        "Sufre una violación de hold en cada ciclo debido a la realimentación directa sin lógica."
+      ],
+      "correct": 0,
+      "hint": "Analice qué ocurre con Q_{n+1} si D es siempre el inverso del estado actual Q_n.",
+      "explanation": "Si $D = \\bar{Q}$, entonces en cada flanco activo del reloj la salida se actualiza a $Q_{n+1} = \\bar{Q}_n$. Esto significa que la salida conmuta de 0 a 1 y de 1 a 0 en cada ciclo, reduciendo a la mitad la frecuencia de la señal de salida respecto a la de reloj."
+    },
+    {
+      "q": "Para convertir un Flip-Flop JK en un Flip-Flop D, la señal de datos externa D se debe conectar a las entradas JK mediante:",
+      "options": [
+        "J = D y K = \\bar{D}",
+        "J = D y K = D",
+        "J = \\bar{D} y K = D"
+      ],
+      "correct": 0,
+      "hint": "El biestable D debe almacenar 1 cuando D=1 (Set) y 0 cuando D=0 (Reset).",
+      "explanation": "Para que el JK actúe como D, si D=1 queremos Set (J=1, K=0), y si D=0 queremos Reset (J=0, K=1). Esto se consigue directamente conectando J = D y K = \\bar{D} mediante un inversor."
+    },
+    {
+      "q": "Para convertir un Flip-Flop JK en un Flip-Flop T (Toggle), la señal externa T debe conectarse a las entradas JK de la siguiente manera:",
+      "options": [
+        "J = T y K = T",
+        "J = T y K = \\bar{T}",
+        "J = 1 y K = T"
+      ],
+      "correct": 0,
+      "hint": "Cuando T=1, el biestable debe conmutar (J=1, K=1); cuando T=0, debe mantener el estado (J=0, K=0).",
+      "explanation": "Si conectamos J = T y K = T, entonces cuando T = 0, J = K = 0 (modo memoria). Cuando T = 1, J = K = 1 (modo conmutación). Esto reproduce de forma exacta el comportamiento de un Flip-Flop T."
+    },
+    {
+      "q": "¿Qué representa el tiempo de contaminación reloj-a-Q ($T_{ccq}$) de un biestable?",
+      "options": [
+        "El tiempo mínimo que transcurre desde el flanco activo del reloj antes de que la salida Q comience a cambiar su estado lógico.",
+        "El retardo máximo introducido por el ruido electromagnético en la línea del reloj.",
+        "El tiempo que tarda el dato en 'contaminar' la memoria interna del latch maestro."
+      ],
+      "correct": 0,
+      "hint": "Es el retardo mínimo reloj-a-Q (el mejor caso de velocidad).",
+      "explanation": "El tiempo de contaminación reloj-a-Q ($T_{ccq}$ o contamination delay) es el retardo mínimo del biestable. Indica el instante más temprano después del flanco activo de reloj en el que la salida del flip-flop puede empezar a variar. Se usa principalmente en el análisis del tiempo de mantenimiento (hold time)."
+    },
+    {
+      "q": "¿Cuál es el valor lógico estable de las salidas $Q$ y $\\bar{Q}$ en un Latch SR con puertas NOR en el estado prohibido ($S=1, R=1$)?",
+      "options": [
+        "Q = 0, \\bar{Q} = 0",
+        "Q = 1, \\bar{Q} = 1",
+        "Q = 1, \\bar{Q} = 0"
+      ],
+      "correct": 0,
+      "hint": "Analice la salida de una puerta NOR si una de sus entradas es 1.",
+      "explanation": "En el Latch NOR, las entradas S y R van a las puertas que generan Q y \\bar{Q} respectivamente. Si S=1, la puerta NOR que produce Q tiene una entrada en 1, forzando Q=0. Si R=1, la puerta NOR que produce \\bar{Q} tiene una entrada en 1, forzando \\bar{Q}=0. Ambas salidas son 0."
+    },
+    {
+      "q": "¿Cuál es el valor lógico estable de las salidas $Q$ y $\\bar{Q}$ en un Latch SR con puertas NAND en el estado prohibido ($S=0, R=0$)?",
+      "options": [
+        "Q = 1, \\bar{Q} = 1",
+        "Q = 0, \\bar{Q} = 0",
+        "Q = 0, \\bar{Q} = 1"
+      ],
+      "correct": 0,
+      "hint": "Analice la salida de una puerta NAND si una de sus entradas es 0.",
+      "explanation": "En el Latch NAND, las entradas actúan por nivel bajo. Si S=0, la puerta NAND superior tiene una entrada en 0, forzando su salida Q a 1. Si R=0, la puerta NAND inferior tiene una entrada en 0, forzando su salida \\bar{Q} a 1. Ambas salidas se ponen a 1."
+    },
+    {
+      "q": "El término 'metaestabilidad' en circuitos de memoria describe:",
+      "options": [
+        "Un estado en el que la salida del biestable oscila o permanece en un nivel de tensión intermedio e indeterminado durante un tiempo indefinido.",
+        "Un fallo destructivo provocado por la inyección de cargas estáticas de alto voltaje.",
+        "El proceso de transición rápida del estado 0 al estado 1 sin retardos capacitivos."
+      ],
+      "correct": 0,
+      "hint": "Se trata de un estado de equilibrio inestable debido a la violación de tiempos.",
+      "explanation": "La metaestabilidad ocurre cuando el dato de entrada cambia dentro de la ventana crítica de setup/hold del biestable. El circuito secuencial no recibe suficiente energía para decantarse rápidamente por un 0 o un 1 lógico, quedando atrapado temporalmente en un nivel de voltaje intermedio o en un comportamiento oscilatorio."
+    },
+    {
+      "q": "¿Qué efecto perjudicial tiene el 'clock skew' (desviación del reloj) en el análisis de tiempos de un circuito secuencial síncrono?",
+      "options": [
+        "Puede alterar la ventana temporal efectiva de llegada del reloj entre biestables contiguos, provocando violaciones de setup o hold.",
+        "Disminuye de forma permanente el voltaje de umbral de conmutación de los transistores de las compuertas.",
+        "Aumenta la capacitancia parásita de la línea de datos impidiendo cambios rápidos de tensión."
+      ],
+      "correct": 0,
+      "hint": "El reloj no llega de forma simultánea a todos los biestables.",
+      "explanation": "El clock skew es la diferencia de tiempo en la llegada de la señal de reloj a distintos biestables del circuito. Si el reloj de destino llega más tarde que el del origen (skew positivo), puede aliviar el setup pero empeorar la condición de hold. Si llega antes (skew negativo), empeora la condición de setup."
+    },
+    {
+      "q": "En un Latch D (Latch transparente), ¿cuál es el comportamiento de la salida Q mientras la señal de habilitación (G o EN) permanece activa en nivel alto?",
+      "options": [
+        "La salida Q sigue fielmente y en tiempo real cualquier cambio en la entrada D (el latch es transparente).",
+        "La salida Q permanece congelada en el valor que tenía antes de que la señal G pasara a nivel alto.",
+        "La salida Q oscila continuamente para refrescar la carga interna del lazo de realimentación."
+      ],
+      "correct": 0,
+      "hint": "El latch es sensible al nivel lógico de habilitación.",
+      "explanation": "Mientras la entrada de habilitación G está en nivel alto, el lazo de realimentación del Latch D está abierto y el camino de datos es directo (transparente). Cualquier cambio en D se refleja casi de inmediato en Q (tras el retardo de propagación del latch)."
+    },
+    {
+      "q": "En un Latch D, ¿qué sucede en el instante en que la señal de habilitación G cambia de nivel alto (1) a nivel bajo (0)?",
+      "options": [
+        "El latch se cierra y la salida Q retiene de forma estable el último valor que tenía la entrada D antes de la transición.",
+        "La salida Q se borra automáticamente y pasa a 0 de forma inmediata.",
+        "El circuito entra en un bucle de refresco dinámico idéntico al de una celda DRAM."
+      ],
+      "correct": 0,
+      "hint": "El flanco de bajada de la habilitación bloquea el estado.",
+      "explanation": "Al pasar G de 1 a 0, el latch D se bloquea (se cierra el lazo de realimentación interna) e ignora cualquier cambio posterior en la entrada D, reteniendo el último estado presente en D en el instante exacto de la transición de G a 0."
+    },
+    {
+      "q": "Un Flip-Flop JK síncrono tiene las entradas estables J = 1 y K = 0. Si el estado inicial del biestable es Q = 0, ¿cuál será el estado tras el flanco activo de reloj?",
+      "options": [
+        "Q = 1",
+        "Q = 0",
+        "Q = 0.5 (metaestable)"
+      ],
+      "correct": 0,
+      "hint": "Esta combinación representa una operación de Set.",
+      "explanation": "La combinación J = 1 y K = 0 en un Flip-Flop JK actúa como un comando de Set (establecimiento). En el flanco activo del reloj, la salida Q se fuerza a 1 lógico, independientemente del estado previo en que se encontrara."
+    },
+    {
+      "q": "En la tabla de excitación de un Flip-Flop JK, para lograr una transición de estado de Q_n = 1 a Q_{n+1} = 0, ¿qué valores deben tomar las entradas J y K?",
+      "options": [
+        "J = X, K = 1 (donde X representa una indiferencia lógica: puede ser 0 o 1).",
+        "J = 0, K = 1",
+        "J = 1, K = 1"
+      ],
+      "correct": 0,
+      "hint": "Podemos hacer la transición mediante Reset (J=0, K=1) o mediante Conmutación (J=1, K=1).",
+      "explanation": "Para pasar de Q_n=1 a Q_{n+1}=0, podemos usar el comando de Reset (J=0, K=1) o el comando de conmutación (J=1, K=1). Por lo tanto, la entrada K debe ser obligatoriamente 1, mientras que la entrada J puede ser 0 o 1 (indiferente 'X')."
+    },
+    {
+      "q": "En la tabla de excitación de un Flip-Flop D, para realizar una transición de Q_n = 0 a Q_{n+1} = 1, ¿cuál debe ser el valor de la entrada D?",
+      "options": [
+        "D = 1",
+        "D = 0",
+        "D = X (indiferente)"
+      ],
+      "correct": 0,
+      "hint": "El biestable D siempre carga el valor presente en D en el flanco activo.",
+      "explanation": "Puesto que la ecuación del biestable D es Q_{n+1} = D, para conseguir que el estado siguiente sea 1, la entrada D debe estar obligatoriamente a 1 durante el flanco de reloj, independientemente de que el estado anterior fuera 0."
+    },
+    {
+      "q": "¿Cuál es la estructura interna mínima común para implementar una celda de memoria DRAM básica frente a una SRAM?",
+      "options": [
+        "DRAM requiere 1 transistor y 1 condensador por celda; SRAM requiere típicamente 6 transistores.",
+        "DRAM requiere 6 transistores por celda; SRAM requiere 1 transistor y 1 condensador.",
+        "DRAM requiere 4 condensadores realimentados; SRAM requiere 2 transistores y 2 diodos."
+      ],
+      "correct": 0,
+      "hint": "Compare el coste y la densidad de integración de ambas tecnologías.",
+      "explanation": "La celda DRAM básica (1T-1C) consta de un transistor de acceso y un condensador de almacenamiento de carga. La celda SRAM básica consta de dos inversores acoplados en cruz (4 transistores) y dos transistores de acceso a la línea de bits, sumando en total 6 transistores."
+    },
+    {
+      "q": "¿Qué función de diseño realiza un circuito 'sincronizador' en un sistema digital síncrono?",
+      "options": [
+        "Captura señales generadas en un dominio de reloj asíncrono y las alinea temporalmente con el reloj local para evitar la propagación de estados metaestables.",
+        "Aumenta la frecuencia de reloj interna del procesador multiplicándola por un factor entero mediante bucles de enganche de fase (PLL).",
+        "Reduce los ruidos de alta frecuencia y los picos de tensión de la fuente de alimentación."
+      ],
+      "correct": 0,
+      "hint": "Piense en el problema de recibir datos externos asíncronos.",
+      "explanation": "Cuando una señal externa o de otro dominio de reloj entra a un dominio de reloj síncrono, puede cambiar en cualquier momento, violando el setup/hold del biestable receptor. El sincronizador (típicamente dos flip-flops D en cascada) reduce la probabilidad de que la metaestabilidad se propague a la lógica interna del sistema."
+    },
+    {
+      "q": "En un biestable disparado por flanco activo de subida, ¿en qué momento se evalúan sus entradas de control para determinar el estado siguiente de la salida?",
+      "options": [
+        "Únicamente durante la transición de nivel bajo a nivel alto del reloj (flanco ascendente).",
+        "Durante todo el intervalo de tiempo en el que la señal de reloj se mantiene en nivel alto estable.",
+        "Durante todo el intervalo de tiempo en el que el reloj está en nivel bajo estable."
+      ],
+      "correct": 0,
+      "hint": "Sensibilidad al flanco significa sensibilidad al cambio de nivel rápido.",
+      "explanation": "Los flip-flops síncronos son sensibles únicamente al flanco (transición rápida). Si son de flanco de subida, la entrada se evalúa y la salida se actualiza únicamente durante la transición ascendente del reloj. Fuera de esa transición, el biestable ignora cualquier cambio en sus entradas."
+    },
+    {
+      "q": "¿Qué sucede en un Flip-Flop T si la entrada de control T se mantiene en nivel lógico 0 durante el flanco activo del reloj?",
+      "options": [
+        "El biestable conserva su estado actual de forma estable ($Q_{n+1} = Q_n$).",
+        "La salida Q cambia al estado complementario ($Q_{n+1} = \\bar{Q}_n$).",
+        "La salida se pone inmediatamente a 0 lógico por seguridad."
+      ],
+      "correct": 0,
+      "hint": "La entrada T es la señal de habilitación del cambio o conmutación.",
+      "explanation": "La ecuación característica es Q_{n+1} = T \\oplus Q_n. Si T = 0, entonces Q_{n+1} = 0 \\oplus Q_n = Q_n. El biestable funciona en modo memoria, sin alterar su salida en los flancos de reloj."
+    },
+    {
+      "q": "¿Cuál de los siguientes dispositivos de almacenamiento de 1 bit carece por completo de un 'estado prohibido' o indeterminado en sus entradas en flanco activo?",
+      "options": [
+        "El Flip-Flop JK síncrono",
+        "El Latch SR asíncrono con puertas NOR",
+        "El Latch SR asíncrono con puertas NAND"
+      ],
+      "correct": 0,
+      "hint": "Busque el elemento que resolvió la indeterminación de las entradas simultáneas.",
+      "explanation": "El Flip-Flop JK se diseñó para solucionar el estado prohibido del Latch SR. En el JK, la combinación de entradas J=1 y K=1 está perfectamente definida como el modo de conmutación (el estado siguiente es el opuesto del actual). Por tanto, no tiene combinaciones prohibidas de entradas de control."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si un flip-flop D tiene un $T_{pcq} = 75\\text{ ps}$, un $T_{setup} = 45\\text{ ps}$ y el circuito combinacional intermedio tiene un retardo máximo de propagación $T_{comb} = 180\\text{ ps}$, el periodo de reloj mínimo ($T_{clk}$) necesario para evitar violaciones del tiempo de establecimiento es de ____ ps.",
+      "options": [
+        "300",
+        "255",
+        "225"
+      ],
+      "correct": 0,
+      "hint": "Sume los retardos reloj-a-Q, de la lógica combinacional y el tiempo de establecimiento.",
+      "explanation": "La condición para evitar violaciones de setup es $T_{clk} \\ge T_{pcq} + T_{comb} + T_{setup}$. Sustituyendo los valores: $T_{clk} \\ge 75\\text{ ps} + 180\\text{ ps} + 45\\text{ ps} = 300\\text{ ps}$."
+    },
+    {
+      "q": "Para que un biestable D funcione como un biestable T utilizando una compuerta XOR externa, la entrada D debe conectarse a la salida del XOR alimentada con la entrada de control T y la señal de salida de realimentación ____.",
+      "options": [
+        "Q",
+        "\\bar{Q}",
+        "CLK"
+      ],
+      "correct": 0,
+      "hint": "El estado siguiente de un FF T es Q_{n+1} = T \\oplus Q_n.",
+      "explanation": "Queremos que $Q_{n+1} = T \\oplus Q_n$. Dado que en el flip-flop D la salida siguiente es $Q_{n+1} = D$, si hacemos $D = T \\oplus Q$, el comportamiento resultante será idéntico al de un flip-flop T."
+    },
+    {
+      "q": "Un flip-flop JK síncrono tiene su salida actual en $Q_n = 1$. Si deseamos que en el siguiente flanco activo del reloj la salida cambie a $Q_{n+1} = 0$, la entrada K debe ser obligatoriamente igual a ____ (mientras que la entrada J puede ser indiferente).",
+      "options": [
+        "1",
+        "0",
+        "Q"
+      ],
+      "correct": 0,
+      "hint": "Considere la tabla de excitación del biestable JK.",
+      "explanation": "Para la transición $1 \\to 0$, la tabla de excitación del flip-flop JK requiere que $J = X$ (indiferente) y $K = 1$. Por lo tanto, K debe valer obligatoriamente 1."
+    },
+    {
+      "q": "Si un contador asíncrono de 4 bits se implementa mediante la conexión en cascada de 4 flip-flops ripple-carry, donde cada uno tiene un retardo de propagación reloj-a-Q de $15\\text{ ns}$, el retardo de propagación total acumulado del contador es de ____ ns.",
+      "options": [
+        "60",
+        "15",
+        "30"
+      ],
+      "correct": 0,
+      "hint": "En un circuito asíncrono en cascada, los retardos de cada etapa se suman.",
+      "explanation": "Dado que el reloj de cada biestable posterior es generado por la salida del anterior, el retardo total para que el cambio se propague por las 4 etapas en el peor caso es la suma de los retardos individuales: $4 \\times 15\\text{ ns} = 60\\text{ ns}$."
+    },
+    {
+      "q": "En un circuito con $T_{ccq} = 25\\text{ ps}$ y $T_{hold} = 45\\text{ ps}$, el retardo mínimo del camino combinacional ($T_{comb\\_min}$) necesario para garantizar que no existan violaciones de hold (asumiendo clock skew cero) debe ser de al menos ____ ps.",
+      "options": [
+        "20",
+        "10",
+        "45"
+      ],
+      "correct": 0,
+      "hint": "Utilice la inecuación de hold: $T_{ccq} + T_{comb\\_min} \\ge T_{hold}$.",
+      "explanation": "Para garantizar la estabilidad del dato después del flanco activo se requiere que el retardo mínimo de datos supere el tiempo de hold: $T_{ccq} + T_{comb\\_min} \\ge T_{hold} \\implies 25\\text{ ps} + T_{comb\\_min} \\ge 45\\text{ ps} \\implies T_{comb\\_min} \\ge 20\\text{ ps}$."
+    },
+    {
+      "q": "Para que un flip-flop JK funcione de manera idéntica a un biestable D, se debe alimentar la entrada J con la señal de datos externa D, y la entrada K con la señal ____.",
+      "options": [
+        "\\bar{D}",
+        "D",
+        "CLK"
+      ],
+      "correct": 0,
+      "hint": "Recuerde las condiciones de Set (J=1, K=0) y Reset (J=0, K=1) en el JK.",
+      "explanation": "Si deseamos que la salida siga a D, cuando D=1 queremos J=1 y K=0. Cuando D=0 queremos J=0 y K=1. Esto se cumple conectando J=D y K=\\bar{D}."
+    },
+    {
+      "q": "Si un microprocesador funciona con una señal de reloj síncrona cuya frecuencia de reloj es de $2\\text{ GHz}$, el periodo de reloj correspondiente es de ____ ps.",
+      "options": [
+        "500",
+        "200",
+        "1000"
+      ],
+      "correct": 0,
+      "hint": "El periodo es la inversa de la frecuencia: T = 1 / f.",
+      "explanation": "$T_{clk} = 1 / (2 \\times 10^9\\text{ Hz}) = 0.5 \\times 10^{-9}\\text{ s} = 500\\text{ ps}$."
+    },
+    {
+      "q": "La ecuación característica del flip-flop T es $Q_{n+1} = T \\oplus Q_n$. Si mantenemos permanentemente la entrada de control en $T = 1$, la frecuencia de la señal de salida en Q será ____ de la frecuencia del reloj de entrada.",
+      "options": [
+        "la mitad",
+        "el doble",
+        "el triple"
+      ],
+      "correct": 0,
+      "hint": "El biestable cambia de estado en cada flanco de subida del reloj.",
+      "explanation": "Al conmutar la salida Q en cada flanco de subida, se requiere dos ciclos de reloj de entrada para completar un ciclo completo de salida (subida y bajada de Q). Por lo tanto, la frecuencia de Q es $f_{out} = f_{clk} / 2$."
+    },
+    {
+      "q": "Si una celda de memoria DRAM requiere refrescarse de forma periódica cada $64\\text{ ms}$, y el array de memoria tiene un total de 8192 filas que deben refrescarse secuencialmente, el controlador de memoria debe iniciar un ciclo de refresco de fila cada ____ \\mu s.",
+      "options": [
+        "7.81",
+        "15.62",
+        "3.91"
+      ],
+      "correct": 0,
+      "hint": "Divida el tiempo total de refresco entre el número de filas.",
+      "explanation": "Intervalo entre refrescos de fila = $64\\text{ ms} / 8192 = 64000\\mu\\text{ s} / 8192 \\approx 7.8125\\mu\\text{ s}$."
+    },
+    {
+      "q": "Un biestable JK síncrono tiene su salida inicial en $Q = 0$. Si se aplican permanentemente las entradas de control $J = 1$ y $K = 1$, tras cumplirse 3 flancos de subida del reloj, el estado de la salida Q será ____.",
+      "options": [
+        "1",
+        "0",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "Dado que J=K=1, la salida conmuta en cada flanco activo.",
+      "explanation": "Estado inicial: Q=0. Flanco 1: conmuta a Q=1. Flanco 2: conmuta a Q=0. Flanco 3: conmuta a Q=1. La salida final será 1."
+    },
+    {
+      "q": "Un Flip-Flop D disparado por flanco ascendente tiene un $T_{setup} = 2.0\\text{ ns}$ y un $T_{hold} = 1.0\\text{ ns}$. Si la entrada de datos D realiza un cambio estable de 0 a 1 exactamente $1.5\\text{ ns}$ antes del flanco de reloj de subida, se producirá ____.",
+      "options": [
+        "una violación del tiempo de establecimiento (setup)",
+        "una violación del tiempo de mantenimiento (hold)",
+        "una conmutación limpia y correcta a nivel alto"
+      ],
+      "correct": 0,
+      "hint": "Compare el instante de cambio con el tiempo de setup requerido.",
+      "explanation": "El dato debe estar estable al menos $2.0\\text{ ns}$ antes del flanco de reloj. Como cambia a las $1.5\\text{ ns}$ antes del flanco (dentro de la ventana prohibida), se incumple el tiempo de setup y puede ocurrir metaestabilidad."
+    },
+    {
+      "q": "La entrada asíncrona de borrado $\\overline{CLR}$ (Clear activa por nivel bajo) de un flip-flop se encuentra en nivel lógico 0. Si llega un flanco de reloj de subida con la entrada síncrona $D = 1$, el estado de la salida Q será inmediatamente ____.",
+      "options": [
+        "0",
+        "1",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "Las señales asíncronas tienen prioridad total sobre el reloj.",
+      "explanation": "Dado que $\\overline{CLR}$ está activa (en 0), la salida Q se fuerza a 0 de forma inmediata e independiente del reloj o de la entrada D. El flanco del reloj es ignorado."
+    },
+    {
+      "q": "Si un circuito divisor de frecuencia está formado por 3 etapas de Flip-Flops T conectados en cascada con sus entradas permanentemente en $T = 1$, la frecuencia de la señal de salida de la última etapa será igual a la frecuencia del reloj de entrada dividida entre ____.",
+      "options": [
+        "8",
+        "6",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "Cada etapa divide la frecuencia de su entrada entre 2.",
+      "explanation": "Cada etapa actúa como un divisor por 2. Para 3 etapas en cascada, la división total es de $2 \\times 2 \\times 2 = 2^3 = 8$."
+    },
+    {
+      "q": "En un biestable JK síncrono, si el estado actual es $Q_n = 0$ y deseamos pasar al estado siguiente $Q_{n+1} = 1$, los valores que deben aplicarse a las entradas de control J y K son J = 1 y K = ____.",
+      "options": [
+        "X (indiferente)",
+        "0",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "La transición se logra con J=1, K=0 (Set) o J=1, K=1 (Toggle). K no influye si J=1.",
+      "explanation": "Para la transición $0 \\to 1$ en un JK, necesitamos J=1 para forzar el cambio, pero K puede ser 0 o 1 (indiferente 'X')."
+    },
+    {
+      "q": "Un Latch SR asíncrono con puertas NOR tiene inicialmente $Q = 0$. Si se aplican de forma estable las entradas $S = 1$ y $R = 0$, la salida Q cambia a valer ____.",
+      "options": [
+        "1",
+        "0",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "En un Latch NOR, S=1 activa el Set.",
+      "explanation": "Al aplicar S=1 (Set) y R=0 en un Latch NOR, la salida Q cambia a nivel alto (1) y la salida complementaria \\bar{Q} pasa a 0."
+    },
+    {
+      "q": "Si en un biestable JK conectamos directamente entre sí las entradas $J$ y $K$ de manera que compartan la misma señal lógica, obtenemos un biestable funcional de tipo ____.",
+      "options": [
+        "T",
+        "D",
+        "SR"
+      ],
+      "correct": 0,
+      "hint": "Considere qué ocurre si ambas entradas son 0 o ambas son 1.",
+      "explanation": "Al cortocircuitar J y K, las únicas combinaciones posibles son J=K=0 (memoria) y J=K=1 (conmutación). Esto es exactamente el comportamiento de un Flip-Flop T (Toggle)."
+    },
+    {
+      "q": "Para un circuito secuencial donde el periodo de reloj es $T_{clk} = 400\\text{ ps}$, el retardo de propagación reloj-a-Q es $T_{pcq} = 80\\text{ ps}$ y el tiempo de establecimiento es $T_{setup} = 40\\text{ ps}$, el retardo de propagación máximo tolerado para la lógica combinacional intermedia ($T_{comb}$) es de ____ ps.",
+      "options": [
+        "280",
+        "320",
+        "360"
+      ],
+      "correct": 0,
+      "hint": "Despeje T_comb de la ecuación: T_clk >= T_pcq + T_comb + T_setup.",
+      "explanation": "$T_{comb} \\le T_{clk} - T_{pcq} - T_{setup} \\implies T_{comb} \\le 400\\text{ ps} - 80\\text{ ps} - 40\\text{ ps} = 280\\text{ ps}$."
+    },
+    {
+      "q": "Un Flip-Flop JK se encuentra inicialmente en el estado $Q = 1$. Si se aplican las entradas estables $J = 0$ y $K = 0$, tras ocurrir un flanco de subida de reloj la salida Q valdrá ____.",
+      "options": [
+        "1",
+        "0",
+        "indeterminada"
+      ],
+      "correct": 0,
+      "hint": "J=0 y K=0 representa el modo memoria en el FF JK.",
+      "explanation": "Dado que J=0 y K=0 corresponde a la operación de memoria, el estado del biestable permanece inalterado, manteniendo su salida Q en 1."
+    },
+    {
+      "q": "El tiempo de mantenimiento (hold time) de un biestable D es de $0.5\\text{ ns}$. Si la señal de datos cambia a un nuevo valor estable exactamente $0.8\\text{ ns}$ después del flanco activo del reloj, la consecuencia será ____.",
+      "options": [
+        "que no se viola el tiempo de hold y el dato se captura correctamente",
+        "que se viola el tiempo de hold y el biestable entra en metaestabilidad",
+        "que la salida conmuta al estado inverso"
+      ],
+      "correct": 0,
+      "hint": "Compare el instante de cambio del dato con el hold time requerido.",
+      "explanation": "El hold time exige que el dato permanezca estable al menos $0.5\\text{ ns}$ después del flanco. Dado que el dato cambia a las $0.8\\text{ ns}$ después del flanco, se cumple la restricción de estabilidad y no hay violación de hold."
+    },
+    {
+      "q": "En un biestable síncrono, la salida Q cambia de estado después de transcurrir un retardo físico $T_{pcq}$ que se mide a partir del ____.",
+      "options": [
+        "flanco activo de la señal de reloj",
+        "instante en que cambia la señal de entrada D",
+        "flanco de bajada de la señal asíncrona de habilitación"
+      ],
+      "correct": 0,
+      "hint": "El biestable síncrono responde únicamente al estímulo de sincronización.",
+      "explanation": "En los biestables síncronos (sensibles al flanco), los cambios en las entradas de datos no afectan a la salida de forma inmediata; es el flanco activo del reloj el que dispara la evaluación, y a partir de ese flanco se mide el retraso de propagación reloj-a-Q ($T_{pcq}$)."
+    },
+    {
+      "q": "¿Qué factores físicos de diseño pueden provocar una violación del tiempo de establecimiento (setup time) en un circuito integrado secuencial?",
+      "options": [
+        "Un incremento excesivo en la frecuencia de la señal de reloj del sistema.",
+        "Un aumento en los retardos de propagación debido al calentamiento de la lógica combinacional intermedia.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El setup time exige que el periodo de reloj sea mayor que la suma de los retardos del camino crítico.",
+      "explanation": "Tanto elevar la frecuencia de reloj (reducir $T_{clk}$) como aumentar el retraso combinacional ($T_{comb}$) reducen el margen de setup e incrementan el riesgo de violarlo. Por tanto, todas las opciones son correctas."
+    },
+    {
+      "q": "¿Qué técnicas o estrategias se pueden implementar para reducir la probabilidad de fallo debido a la metaestabilidad en sistemas digitales?",
+      "options": [
+        "Utilizar circuitos sincronizadores compuestos por dos o más biestables D conectados en cascada.",
+        "Aumentar el periodo de reloj para permitir un mayor tiempo de resolución de la señal metaestable antes de leerla.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Piense en métodos para dar más tiempo a la señal para decantarse.",
+      "explanation": "El uso de sincronizadores en cascada y la ampliación del tiempo disponible para que el biestable resuelva su estado lógico (mayor periodo de reloj) son las metodologías estándar en la industria para mitigar los fallos por metaestabilidad."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones son correctas en relación al estado prohibido ($S=1, R=1$) en un Latch SR basado en puertas NOR?",
+      "options": [
+        "Las salidas Q y \\bar{Q} se ponen simultáneamente a 0, perdiendo la relación de complementariedad lógica.",
+        "Si ambas entradas cambian a 0 al mismo tiempo, el circuito puede entrar en oscilación o en un estado final aleatorio.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Considere la pérdida de simetría y la posterior carrera de transiciones.",
+      "explanation": "Con S=1, R=1 ambas salidas son 0. Si S y R caen a 0 a la vez, se produce una condición de carrera inestable y una indeterminación del estado final. Por tanto, todas las afirmaciones son correctas."
+    },
+    {
+      "q": "En el diseño de un Flip-Flop D disparado por flanco de subida, ¿cuáles de los siguientes parámetros temporales determinan el correcto funcionamiento del dispositivo?",
+      "options": [
+        "El tiempo mínimo de estabilidad previo al reloj (setup time).",
+        "El tiempo mínimo de estabilidad posterior al reloj (hold time).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Ambos parámetros definen la ventana de estabilidad obligatoria alrededor del flanco de reloj.",
+      "explanation": "Tanto el setup time como el hold time son restricciones indispensables para evitar que el flip-flop entre en un estado indeterminado o metaestable."
+    },
+    {
+      "q": "¿Qué diferencias físicas y operacionales existen entre la memoria SRAM y la DRAM?",
+      "options": [
+        "La SRAM emplea latches estáticos y es más veloz, mientras que la DRAM usa condensadores y requiere ciclos de refresco periódicos.",
+        "La DRAM ofrece mayor densidad de almacenamiento y un coste de fabricación inferior al de la SRAM.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Recuerde las ventajas e inconvenientes de coste, velocidad y estructura de SRAM y DRAM.",
+      "explanation": "La SRAM destaca por su rapidez y estabilidad, pero es costosa y de baja densidad. La DRAM destaca por su alta densidad e integración económica, pero es más lenta y requiere refresco. Ambas descripciones son correctas."
+    },
+    {
+      "q": "¿Qué combinaciones de entradas síncronas en un Flip-Flop JK provocan un cambio de estado en la salida Q (ya sea una conmutación o la carga de un estado diferente al previo)?",
+      "options": [
+        "La combinación J = 1 y K = 1, que siempre invierte el estado actual.",
+        "La combinación J = 1 y K = 0 cuando el estado previo es Q = 0.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Cualquier acción que altere el valor de Q de 0 a 1 o de 1 a 0.",
+      "explanation": "La combinación J=K=1 provoca la inversión (conmutación) del estado. La combinación J=1, K=0 realiza un Set, forzando a Q a cambiar a 1 si antes era 0. Ambas opciones modifican el valor de la salida, por lo que la respuesta correcta es 'Todas las anteriores'."
+    },
+    {
+      "q": "¿Cuáles de las siguientes señales tienen la capacidad de forzar de manera inmediata el estado de un biestable, ignorando el estado del reloj del sistema?",
+      "options": [
+        "La señal de inicialización asíncrona Preset (PR).",
+        "La señal de inicialización asíncrona Clear (CLR).",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Identifique las entradas asíncronas de control en el biestable.",
+      "explanation": "Tanto Preset como Clear son entradas asíncronas diseñadas para imponer un estado inicial estable (1 o 0, respectivamente) de manera inmediata e independiente de la señal de reloj."
+    },
+    {
+      "q": "¿Qué efectos puede tener un clock skew positivo ($T_{skew} > 0$) en la temporización de un camino de datos crítico entre dos biestables contiguos?",
+      "options": [
+        "Incrementar el margen de setup disponible, permitiendo una lógica combinacional ligeramente más lenta.",
+        "Reducir el margen de hold, aumentando la probabilidad de violar esta restricción si la lógica combinacional es muy rápida.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El reloj del destino llega más tarde que el del origen. Piense en cómo afecta esto al setup y al hold.",
+      "explanation": "Un clock skew positivo proporciona más tiempo para que los datos lleguen al destino (ayuda al setup), pero permite que el flanco de reloj de destino ocurra más tarde, haciendo más probable que la transición del origen afecte la captura del destino (perjudica al hold). Ambas afirmaciones son correctas."
+    },
+    {
+      "q": "¿Qué funciones clave desempeña un biestable D dentro de la arquitectura de la CPU de un computador?",
+      "options": [
+        "Almacenamiento de bits de datos en los registros de propósito general y de control.",
+        "Separación de etapas en sistemas con segmentación (pipelines) para incrementar la frecuencia de reloj.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Considere los registros y la segmentación (pipelining).",
+      "explanation": "Los biestables D son los bloques básicos para construir registros y los registros de segmentación (pipeline registers) que dividen el procesador en etapas de ejecución paralela. Ambas son funciones esenciales."
+    },
+    {
+      "q": "¿Cuáles de las siguientes consecuencias se derivan de la reducción del voltaje de alimentación ($V_{DD}$) en un biestable integrado?",
+      "options": [
+        "Un aumento en el retardo de propagación de reloj-a-Q ($T_{pcq}$) debido al menor flujo de corriente de conmutación.",
+        "Un incremento en las restricciones de los tiempos de establecimiento ($T_{setup}$) y mantenimiento ($T_{hold}$) requeridos.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "A menor voltaje, los transistores conmutan más lentamente.",
+      "explanation": "Al reducir $V_{DD}$, la corriente suministrada disminuye, lo que ralentiza la carga y descarga de las capacitancias parásitas internas, aumentando todos los retardos y requisitos de estabilidad temporal. Por lo tanto, todas las opciones son correctas."
+    },
+    {
+      "q": "Si un biestable D posee unos parámetros de diseño $T_{setup} = 5\\text{ ns}$ y $T_{hold} = 2\\text{ ns}$, y la señal de datos realiza una transición en el intervalo de tiempo $[-3\\text{ ns}, +1\\text{ ns}]$ respecto al instante del flanco activo del reloj ($t = 0\\text{ ns}$), ¿cuál es el comportamiento esperado?",
+      "options": [
+        "Se produce una violación del tiempo de hold pero no del de setup, por lo que el dato se captura con retardo.",
+        "El dato se captura correctamente en el flanco ascendente sin posibilidad de metaestabilidad.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La ventana prohibida para cambios en el dato es [-5 ns, +2 ns].",
+      "explanation": "El cambio ocurre en $[-3\\text{ ns}, +1\\text{ ns}]$, lo cual viola simultáneamente tanto la restricción de setup (que exige estabilidad en $[-5, 0]$) como la de hold (que exige estabilidad en $[0, 2]$). Como ninguna de las dos primeras opciones describe este fallo conjunto de ambas restricciones, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Un Flip-Flop JK síncrono tiene conectadas sus entradas de excitación de la siguiente forma: $J = X \\cdot Y$ y $K = \\bar{X}$. ¿Cuál es la ecuación lógica simplificada del estado siguiente $Q_{n+1}$ del biestable?",
+      "options": [
+        "Q_{n+1} = X \\cdot Y + Q_n",
+        "Q_{n+1} = X \\cdot Y \\cdot \\bar{Q}_n + \\bar{X} Q_n",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Sustituya J y K en la ecuación general: Q_{n+1} = J\\bar{Q}_n + \\bar{K}Q_n.",
+      "explanation": "La ecuación es $Q_{n+1} = J\\bar{Q}_n + \\bar{K}Q_n$. Sustituyendo: $Q_{n+1} = (XY)\\bar{Q}_n + \\overline{(\\bar{X})}Q_n = XY\\bar{Q}_n + XQ_n$. Como esta expresión no se encuentra en las dos primeras opciones, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si un Flip-Flop JK tiene permanentemente $J = 0$ y $K = 1$, y su estado inicial es $Q = 0$, ¿cuál será el estado de la salida Q tras transcurrir 1000 ciclos completos de reloj?",
+      "options": [
+        "Q valdrá 1 de forma estable al haberse acumulado pulsos de reloj.",
+        "La salida oscilará continuamente entre 0 y 1 en cada ciclo de reloj.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "J=0, K=1 es la operación de Reset.",
+      "explanation": "La combinación J=0, K=1 fuerza un Reset, lo que pone a la salida Q en 0. Dado que el estado inicial ya es 0 y las entradas no cambian, el biestable permanece de forma estable en 0 durante todos los ciclos. Como el valor de salida estable es 0 y no coincide con las dos opciones iniciales, la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Un biestable T tiene su entrada en $T = 0$ y su estado inicial es $Q = 1$. Si se activa la señal asíncrona de borrado (Clear activa por nivel alto, CLR = 1), ¿qué valor tendrá la salida Q después de un flanco activo del reloj?",
+      "options": [
+        "Q = 1, ya que T=0 mantiene el estado inicial.",
+        "Q entrará en un estado indeterminado debido a la discrepancia entre CLR y T.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Considere la prioridad de la señal asíncrona de Clear.",
+      "explanation": "La entrada asíncrona de Clear activa por nivel alto (CLR = 1) tiene prioridad absoluta y fuerza inmediatamente la salida Q a 0. Esto se mantiene independientemente de que la señal de reloj actúe o de que T = 0. Como la salida resultante es 0 y no se recoge en las primeras opciones, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "En un circuito secuencial con un periodo de reloj de $10\\text{ ns}$, si el retardo de propagación reloj-a-Q es $T_{pcq} = 3\\text{ ns}$ y el tiempo de establecimiento es $T_{setup} = 2\\text{ ns}$, ¿cuál es el retardo combinacional máximo ($T_{comb}$) que se puede permitir en la lógica intermedia?",
+      "options": [
+        "8 ns",
+        "7 ns",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Use la condición de setup: T_comb <= T_clk - T_pcq - T_setup.",
+      "explanation": "El retardo máximo para la lógica combinacional es $T_{comb} \\le 10 - 3 - 2 = 5\\text{ ns}$. Dado que 5 ns no figura en las dos primeras opciones (que proponen 8 ns y 7 ns), la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Qué retardo de contaminación de la lógica combinacional mínima ($T_{comb\\_min}$) garantiza que no haya violaciones de hold en un circuito donde $T_{ccq} = 0.5\\text{ ns}$ y $T_{hold} = 1.2\\text{ ns}$?",
+      "options": [
+        "0.3 ns",
+        "0.5 ns",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La inecuación es: T_ccq + T_comb_min >= T_hold.",
+      "explanation": "Despejando: $T_{comb\\_min} \\ge T_{hold} - T_{ccq} = 1.2 - 0.5 = 0.7\\text{ ns}$. Puesto que 0.7 ns no se encuentra listado en las opciones 0 y 1, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "En un Latch SR con puertas NOR la salida estable es $Q = 1$. ¿Cuál es la única combinación de entradas estables que pudo generar este estado y que ahora lo mantiene de forma estable?",
+      "options": [
+        "S = 1 y R = 1",
+        "S = 0 y R = 1",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Para poner a 1 se requiere Set (S=1, R=0). Para mantenerlo, Memoria (S=0, R=0).",
+      "explanation": "Para poner la salida Q a 1 se debe aplicar S=1, R=0 (Set) y luego pasar a S=0, R=0 (Memoria) para retenerlo. La opción S=1, R=1 es el estado prohibido y S=0, R=1 es el Reset (Q=0). Por lo tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "Si en un biestable T la entrada se realimenta directamente con la propia salida Q del biestable ($T = Q_n$), ¿cuál es la ecuación característica resultante para el estado siguiente $Q_{n+1}$?",
+      "options": [
+        "Q_{n+1} = 1",
+        "Q_{n+1} = Q_n",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Sustituya T por Q_n en la ecuación characteristic del FF T: Q_{n+1} = T \\oplus Q_n.",
+      "explanation": "Sustituyendo $T = Q_n$: $Q_{n+1} = Q_n \\oplus Q_n = 0$ (ya que cualquier variable en XOR consigo misma da 0). Por lo tanto, el estado siguiente será permanentemente 0. Como 0 no figura en las opciones 0 y 1, elegimos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Un flip-flop JK tiene J=1 y K=1, y el estado actual es Q=1. ¿Cuál será la salida tras el flanco de reloj si la entrada asíncrona de Preset (activa por bajo) está a $\\overline{PR} = 0$?",
+      "options": [
+        "La salida Q será 0 debido a la conmutación de J y K.",
+        "Se produce una carrera de oscilación indefinida.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Las señales asíncronas anulan por completo las entradas síncronas.",
+      "explanation": "La entrada asíncrona de Preset activa por nivel bajo ($\\overline{PR} = 0$) fuerza la salida Q a 1 de forma asíncrona, anulando la acción síncrona de conmutación de J=K=1. Por lo tanto, la salida será Q = 1. Como Q=1 no está entre las primeras dos opciones, la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si un biestable D posee $T_{setup} = 2\\text{ ns}$ y $T_{hold} = 1\\text{ ns}$, y el reloj funciona a una frecuencia de $500\\text{ MHz}$ (periodo de reloj $2\\text{ ns}$), ¿cuál es el retardo de la lógica combinacional máximo ($T_{comb}$) que soporta el circuito?",
+      "options": [
+        "1.5 ns",
+        "0.5 ns",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Considere la ecuación de setup: T_pcq + T_comb + T_setup <= T_clk.",
+      "explanation": "Dado que $T_{clk} = 2\\text{ ns}$ y $T_{setup} = 2\\text{ ns}$, la ecuación exige $T_{pcq} + T_{comb} + 2 \\le 2 \\implies T_{pcq} + T_{comb} \\le 0$. Como $T_{pcq}$ es un retardo físico real (siempre mayor que 0) y $T_{comb} \\ge 0$, no es físicamente posible cumplir la ecuación para ningún valor de lógica combinacional (se requerirían retardos nulos o negativos). El circuito no funciona a esa velocidad. Ninguna de las opciones anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Análisis de Tiempos Críticos en un Flip-Flop D",
+      "context": "Un circuito secuencial consta de un flip-flop D con las siguientes especificaciones físicas: retardo de propagación $T_{pcq} = 65\\text{ ps}$, tiempo de establecimiento $T_{setup} = 45\\text{ ps}$, y tiempo de mantenimiento $T_{hold} = 30\\text{ ps}$. El bloque combinacional intermedio tiene un retardo de propagación máximo $T_{comb} = 140\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcula el periodo de reloj mínimo $T_{clk\\_min}$ en picosegundos (ps) necesario para evitar violaciones de setup.",
+          "correctValue": 250.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo mínimo de reloj se calcula sumando el retardo reloj-a-Q del flip-flop, el retardo de la lógica combinacional y el tiempo de establecimiento: $$T_{clk\\_min} = T_{pcq} + T_{comb} + T_{setup} = 65\\text{ ps} + 140\\text{ ps} + 45\\text{ ps} = 250\\text{ ps}$$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Utilizando el periodo de reloj mínimo calculado en a) (250 ps), determina la frecuencia máxima de funcionamiento del reloj en gigahercios (GHz).",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "La frecuencia es el inverso del periodo. Convertimos el periodo a segundos ($250 \\times 10^{-12}\\text{ s}$): $$f_{max} = \\frac{1}{T_{clk\\_min}} = \\frac{1}{250 \\times 10^{-12}\\text{ s}} = 4.0 \\times 10^9\\text{ Hz} = 4.0\\text{ GHz}$$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Si se introduce un clock skew (desviación de reloj) perjudicial de $T_{skew} = 30\\text{ ps}$ que reduce la ventana de setup, calcula el nuevo periodo de reloj mínimo en ps.",
+          "correctValue": 280.0,
+          "tolerance": 0.0,
+          "explanation": "La desviación de reloj perjudicial para setup obliga a aumentar el periodo mínimo en la cantidad del skew: $$T_{clk\\_new} = T_{pcq} + T_{comb} + T_{setup} + T_{skew} = 250\\text{ ps} + 30\\text{ ps} = 280\\text{ ps}$$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Calcula la nueva frecuencia máxima de funcionamiento en GHz con el periodo corregido de la parte c) (280 ps).",
+          "correctValue": 3.57,
+          "tolerance": 0.02,
+          "explanation": "Calculamos la frecuencia como la inversa del nuevo periodo: $$f_{new} = \\frac{1}{280 \\times 10^{-12}\\text{ s}} \\approx 3.5714 \\times 10^9\\text{ Hz} = 3.57\\text{ GHz}$$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Análisis de Margen de Hold (Hold Slack) con Skew",
+      "context": "Un circuito secuencial trabaja con biestables que presentan: $T_{pcq} = 65\\text{ ps}$, $T_{setup} = 45\\text{ ps}$, $T_{hold} = 30\\text{ ps}$, y un retardo de contaminación de reloj a Q de $T_{ccq} = 40\\text{ ps}$. El retardo de contaminación mínimo de la lógica combinacional es $T_{comb\\_min} = 20\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcula el retardo total del camino de datos mínimo ($T_{data\\_min}$) en ps desde el flanco de reloj hasta la entrada del biestable de destino.",
+          "correctValue": 60.0,
+          "tolerance": 0.0,
+          "explanation": "El camino de datos mínimo se calcula sumando el retardo de contaminación del flip-flop y el retardo combinacional mínimo: $$T_{data\\_min} = T_{ccq} + T_{comb\\_min} = 40\\text{ ps} + 20\\text{ ps} = 60\\text{ ps}$$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcula el margen de hold (hold slack) del circuito en ps asumiendo que el clock skew es exactamente cero.",
+          "correctValue": 30.0,
+          "tolerance": 0.0,
+          "explanation": "El hold slack con skew cero es la diferencia entre el tiempo mínimo del dato y el tiempo de hold requerido: $$Slack_{hold} = T_{data\\_min} - T_{hold} = 60\\text{ ps} - 30\\text{ ps} = 30\\text{ ps}$$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Si se introduce un clock skew de $T_{skew} = 45\\text{ ps}$ que perjudica la condición de hold, calcula el nuevo margen de hold en ps.",
+          "correctValue": -15.0,
+          "tolerance": 0.0,
+          "explanation": "Con la presencia de clock skew perjudicial para hold, la ecuación de margen es: $$Slack_{hold} = T_{data\\_min} - T_{hold} - T_{skew} = 60\\text{ ps} - 30\\text{ ps} - 45\\text{ ps} = -15\\text{ ps}$$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcula el retardo combinacional mínimo $T_{comb\\_min}$ en ps necesario para que el margen de hold sea exactamente igual a 0 ps con dicho skew de 45 ps.",
+          "correctValue": 35.0,
+          "tolerance": 0.0,
+          "explanation": "Para que $Slack_{hold} = 0$, requerimos $T_{ccq} + T_{comb\\_min} = T_{hold} + T_{skew} \\implies 40\\text{ ps} + T_{comb\\_min} = 30\\text{ ps} + 45\\text{ ps} \\implies T_{comb\\_min} = 35\\text{ ps}$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Retardo de Propagación en Contador Ripple de 4 bits",
+      "context": "Un contador binario asíncrono (ripple counter) de 4 bits está construido con 4 biestables T en cascada. Cada biestable tiene un retardo de propagación reloj-a-Q de $T_{pcq} = 12\\text{ ns}$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcula el retardo de propagación total en ns para que todo el contador se estabilice tras cambiar del estado 1111 al estado 0000.",
+          "correctValue": 48.0,
+          "tolerance": 0.0,
+          "explanation": "El paso de 1111 a 0000 requiere que la conmutación se propague secuencialmente a lo largo de las 4 etapas del contador: $$T_{delay} = 4 \\times T_{pcq} = 4 \\times 12\\text{ ns} = 48\\text{ ns}$$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Si el periodo de reloj de la señal de entrada es de $T_{clk} = 80\\text{ ns}$, calcula la frecuencia de esta señal en MHz.",
+          "correctValue": 12.5,
+          "tolerance": 0.0,
+          "explanation": "La frecuencia de entrada es: $$f_{in} = \\frac{1}{80 \\times 10^{-9}\\text{ s}} = 12.5 \\times 10^6\\text{ Hz} = 12.5\\text{ MHz}$$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Utilizando la frecuencia de entrada de la parte b) (12.5 MHz), calcula la frecuencia de salida del último biestable (el bit más significativo Q3) en MHz.",
+          "correctValue": 0.78125,
+          "tolerance": 0.001,
+          "explanation": "Un contador de 4 bits divide la frecuencia de reloj entre $2^4 = 16$: $$f_{out} = \\frac{f_{in}}{16} = \\frac{12.5\\text{ MHz}}{16} = 0.78125\\text{ MHz}$$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Si añadimos una compuerta combinacional AND para borrar asíncronamente el contador al llegar al estado 10 (código 1010), y esta puerta tiene un retardo de $8\\text{ ns}$, calcula el tiempo en ns transcurrido desde el flanco de reloj inicial hasta que el reset se hace efectivo (considere que el reset se activa tras el cambio del segundo biestable).",
+          "correctValue": 32.0,
+          "tolerance": 0.0,
+          "explanation": "El cambio al estado 10 requiere que el primer y el segundo biestable cambien de estado. El segundo biestable cambia tras $2 \\times T_{pcq} = 24\\text{ ns}$. A partir de ese cambio, la puerta AND tarda $8\\text{ ns}$ en propagar el Reset. Total = $24\\text{ ns} + 8\\text{ ns} = 32\\text{ ns}$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Análisis de Fugas y Retención de Carga en DRAM",
+      "context": "Una celda DRAM almacena información en un condensador de $C = 30\\text{ fF}$. La celda se carga a un voltaje inicial de $V = 1.2\\text{ V}$ para un '1'. Debido a imperfecciones, la corriente de fuga promedio es $I_{leak} = 15\\text{ fA}$.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula la carga eléctrica inicial $Q_{init}$ almacenada en la celda en femtoculombios (fC).",
+          "correctValue": 36.0,
+          "tolerance": 0.0,
+          "explanation": "La carga almacenada es: $$Q_{init} = C \\times V = 30\\text{ fF} \\times 1.2\\text{ V} = 36\\text{ fC}$$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Si el circuito de detección requiere que la tensión no baje de $0.8\\text{ V}$ para identificar correctamente el bit '1', calcula la pérdida máxima de carga permitida en fC.",
+          "correctValue": 12.0,
+          "tolerance": 0.0,
+          "explanation": "La caída máxima admisible de voltaje es $\\Delta V = 1.2\\text{ V} - 0.8\\text{ V} = 0.4\\text{ V}$. La pérdida de carga límite es: $$Q_{loss} = C \\times \\Delta V = 30\\text{ fF} \\times 0.4\\text{ V} = 12\\text{ fC}$$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "A partir del valor de $Q_{loss}$ de la parte b) (12 fC), calcula el tiempo máximo de retención de la información en segundos.",
+          "correctValue": 0.8,
+          "tolerance": 0.0,
+          "explanation": "El tiempo de retención límite se calcula dividiendo la carga de pérdida máxima por la corriente de fuga: $$t = \\frac{Q_{loss}}{I_{leak}} = \\frac{12\\text{ fC}}{15\\text{ fA}} = \\frac{12 \\times 10^{-15}\\text{ C}}{15 \\times 10^{-15}\\text{ A}} = 0.8\\text{ s}$$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Si aplicamos un margen de seguridad del 50% (es decir, refrescamos en la mitad del tiempo límite calculado en c), calcula la frecuencia de refresco necesaria en Hz.",
+          "correctValue": 2.5,
+          "tolerance": 0.0,
+          "explanation": "El intervalo de refresco será $0.8\\text{ s} / 2 = 0.4\\text{ s}$. La frecuencia de refresco es: $$f_{ref} = \\frac{1}{0.4\\text{ s}} = 2.5\\text{ Hz}$$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Evaluación del Tiempo Medio entre Fallos (MTBF) de un Sincronizador",
+      "context": "Un sincronizador de un solo biestable D recibe datos asíncronos con una frecuencia promedio $f_D = 10\\text{ MHz}$. El reloj local del sistema tiene una frecuencia $f_{CLK} = 100\\text{ MHz}$. Los parámetros físicos del biestable son: ventana crítica metaestable $T_0 = 10\\text{ ps}$ y constante de resolución $\\tau = 200\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula el número de eventos de metaestabilidad por segundo ($N_{meta}$) que ocurren en el primer biestable.",
+          "correctValue": 10000.0,
+          "tolerance": 0.0,
+          "explanation": "El número medio de eventos de metaestabilidad por segundo es: $$N_{meta} = f_D \\times f_{CLK} \\times T_0 = (10 \\times 10^6) \\times (100 \\times 10^6) \\times (10 \\times 10^{-12}) = 10000\\text{ eventos/s}$$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Si asignamos un tiempo de resolución disponible de $t_r = 1.6\\text{ ns}$ para que el estado se resuelva, calcula el factor de atenuación exponencial $e^{-t_r / \\tau}$.",
+          "correctValue": 0.00033546,
+          "tolerance": 1e-05,
+          "explanation": "Convertimos $t_r$ a ps ($1.6\\text{ ns} = 1600\\text{ ps}$). El factor exponencial es: $$e^{-t_r / \\tau} = e^{-1600 / 200} = e^{-8} \\approx 0.00033546$$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcula la tasa de fallos residuales por segundo ($F$) utilizando los valores anteriores.",
+          "correctValue": 3.3546,
+          "tolerance": 0.01,
+          "explanation": "La tasa de fallos es el número de eventos multiplicados por el factor de probabilidad de no resolución: $$F = N_{meta} \\times e^{-t_r / \\tau} = 10000 \\times 0.00033546 = 3.3546\\text{ fallos/s}$$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Determina el tiempo medio entre fallos (MTBF) del sincronizador en segundos.",
+          "correctValue": 0.298,
+          "tolerance": 0.01,
+          "explanation": "El MTBF es el inverso de la tasa de fallos: $$MTBF = \\frac{1}{F} = \\frac{1}{3.3546} \\approx 0.298\\text{ s}$$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Análisis de Tiempos en la Conversión de Flip-Flop D a T",
+      "context": "Se desea construir un biestable T utilizando un biestable D y una compuerta XOR de 2 entradas con un retardo de propagación $T_{xor} = 3\\text{ ns}$. El biestable D tiene $T_{pcq\\_D} = 6\\text{ ns}$ y $T_{setup\\_D} = 4\\text{ ns}$.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Si conectáramos la entrada T directamente a un JK sin compuertas intermedias ($J=K=T$), ¿cuál sería el retardo combinacional externo añadido en ns?",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Al conectar la señal directamente a las entradas J y K, el retardo combinacional de la red de excitación externa es cero."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Para el caso del biestable D, con la conexión $D = T \\oplus Q$ mediante la compuerta XOR, calcula el retardo combinacional del lazo de realimentación externa ($T_{comb}$) en ns.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "El retardo combinacional en el lazo es el retardo de la compuerta XOR: $T_{comb} = T_{xor} = 3\\text{ ns}$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula el periodo de reloj mínimo $T_{clk\\_min}$ en ns para garantizar el setup de este biestable D modificado a T.",
+          "correctValue": 13.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo de reloj mínimo es la suma del retardo reloj-a-Q del biestable D, el retardo de la compuerta XOR y el tiempo de establecimiento de D: $$T_{clk\\_min} = T_{pcq\\_D} + T_{xor} + T_{setup\\_D} = 6\\text{ ns} + 3\\text{ ns} + 4\\text{ ns} = 13\\text{ ns}$$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Determina la frecuencia de reloj máxima en MHz correspondiente al periodo mínimo calculado (13 ns).",
+          "correctValue": 76.92,
+          "tolerance": 0.1,
+          "explanation": "La frecuencia máxima de operación es: $$f_{max} = \\frac{1}{13 \\times 10^{-9}\\text{ s}} \\approx 76.923 \\times 10^6\\text{ Hz} = 76.92\\text{ MHz}$$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Impacto de la Carga (Fan-out) en el Retardo Reloj-a-Q",
+      "context": "Un biestable D tiene una salida Q conectada a $N$ biestables de destino. El retardo reloj-a-Q se degrada linealmente con el número de cargas conectadas según la ecuación: $T_{pcq} = 50 + 10 \\times N\\text{ ps}$. El tiempo de establecimiento es constante $T_{setup} = 40\\text{ ps}$ y no hay lógica combinacional de retardo ($T_{comb} = 0$).",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcula el retardo reloj-a-Q ($T_{pcq}$) del biestable en ps si el fan-out es de $N = 4$ cargas.",
+          "correctValue": 90.0,
+          "tolerance": 0.0,
+          "explanation": "Aplicamos la ecuación con $N=4$: $$T_{pcq} = 50 + 10 \\times 4 = 90\\text{ ps}$$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Con $N = 4$ y $T_{comb} = 0$, calcula el periodo de reloj mínimo $T_{clk\\_min}$ en ps.",
+          "correctValue": 130.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo de reloj mínimo es: $$T_{clk\\_min} = T_{pcq} + T_{setup} = 90\\text{ ps} + 40\\text{ ps} = 130\\text{ ps}$$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si el fan-out aumenta a $N = 12$ cargas, calcula el nuevo retardo reloj-a-Q ($T_{pcq}$) en ps.",
+          "correctValue": 170.0,
+          "tolerance": 0.0,
+          "explanation": "Aplicamos la ecuación con $N=12$: $$T_{pcq} = 50 + 10 \\times 12 = 170\\text{ ps}$$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si además de $N = 12$ cargas se inserta un bloque combinacional con $T_{comb} = 80\\text{ ps}$, calcula el nuevo periodo de reloj mínimo en ps.",
+          "correctValue": 290.0,
+          "tolerance": 0.0,
+          "explanation": "Calculamos sumando el nuevo $T_{pcq}$, el retardo combinacional y el setup: $$T_{clk\\_new} = T_{pcq\\_12} + T_{comb} + T_{setup} = 170\\text{ ps} + 80\\text{ ps} + 40\\text{ ps} = 290\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Duty Cycle de un Divisor de Frecuencia por 2",
+      "context": "Un flip-flop D disparado por flanco de subida se configura como divisor por 2 conectando $D = \\bar{Q}$. La señal de reloj de entrada tiene una frecuencia $f_{in} = 500\\text{ MHz}$ y un duty cycle (ciclo de trabajo) del 60% (alto durante 60% de su periodo).",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula el periodo de la señal de reloj de entrada ($T_{in}$) en ns.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo de entrada es: $$T_{in} = \\frac{1}{f_{in}} = \\frac{1}{500 \\times 10^6\\text{ Hz}} = 2.0 \\times 10^{-9}\\text{ s} = 2.0\\text{ ns}$$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Calcula la frecuencia en MHz de la señal obtenida en la salida Q del biestable.",
+          "correctValue": 250.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el biestable conmuta en cada flanco de subida del reloj de entrada, la frecuencia de la salida es la mitad de la frecuencia de entrada: $$f_{out} = \\frac{f_{in}}{2} = \\frac{500\\text{ MHz}}{2} = 250\\text{ MHz}$$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcula el periodo de la señal de salida ($T_{out}$) en ns.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo de salida es el doble del periodo de entrada: $$T_{out} = 2 \\times T_{in} = 2 \\times 2.0\\text{ ns} = 4.0\\text{ ns}$$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcula el ciclo de trabajo (duty cycle) de la señal de salida Q en porcentaje (%).",
+          "correctValue": 50.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el biestable conmuta una vez por ciclo de reloj de entrada (en cada flanco de subida), el estado alto de Q dura exactamente un periodo completo del reloj de entrada ($2.0\\text{ ns}$), y el estado bajo dura el siguiente periodo completo ($2.0\\text{ ns}$). Por tanto, el ciclo de trabajo es: $$Duty = \\frac{T_{in}}{T_{out}} \\times 100 = \\frac{2.0\\text{ ns}}{4.0\\text{ ns}} \\times 100 = 50.0\\%$$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Consumo Energético de un Bloque de Memoria SRAM",
+      "context": "Un bloque de memoria caché SRAM de $10^6$ celdas de almacenamiento tiene una tensión de alimentación $V_{DD} = 1.0\\text{ V}$. La corriente de fuga estática combinada de cada celda (6 transistores) es de $I_{static} = 20\\text{ pA}$ cuando no conmuta.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula la potencia estática consumida por una sola celda de memoria en picovatios (pW).",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "La potencia estática por celda es: $$P_{static\\_cell} = I_{static} \\times V_{DD} = 20\\text{ pA} \\times 1.0\\text{ V} = 20\\text{ pW}$$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula la potencia estática total de las $10^6$ celdas de la caché en microvatios ($\\mu$W).",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "Multiplicamos la potencia de una celda por el número total de celdas: $$P_{static\\_total} = 10^6 \\times 20\\text{ pW} = 20 \\times 10^{-6}\\text{ W} = 20\\mu\\text{W}$$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Si la memoria opera a $f = 2\\text{ GHz}$ y en cada ciclo cambian de estado un promedio del 5% de las celdas (factor de actividad $\\alpha = 0.05$), con una capacitancia efectiva por celda de $C_{eff} = 1.5\\text{ fF}$, calcula la potencia dinámica total en microvatios ($\\mu$W).",
+          "correctValue": 150.0,
+          "tolerance": 0.0,
+          "explanation": "La potencia dinámica total se calcula como: $$P_{dyn\\_total} = N_{celdas} \\times \\alpha \\times C_{eff} \\times V_{DD}^2 \\times f$$ $$P_{dyn\\_total} = 10^6 \\times 0.05 \\times (1.5 \\times 10^{-15}) \\times 1^2 \\times (2 \\times 10^9) = 150 \\times 10^{-6}\\text{ W} = 150\\mu\\text{W}$$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Calcula la potencia total (estática + dinámica) del bloque de memoria en microvatios ($\\mu$W).",
+          "correctValue": 170.0,
+          "tolerance": 0.0,
+          "explanation": "La potencia total es la suma de la potencia estática total y la dinámica total: $$P_{total} = P_{static\\_total} + P_{dyn\\_total} = 20\\mu\\text{W} + 150\\mu\\text{W} = 170\\mu\\text{W}$$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Cronograma y Retardos Lógicos de un Latch SR con Puertas NOR",
+      "context": "Un Latch SR asíncrono de puertas NOR tiene compuertas con un retardo de propagación individual de $T_{gate} = 120\\text{ ps}$. Inicialmente las entradas son $S=0, R=0$ y el estado estable es $Q=0, \\bar{Q}=1$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Si aplicamos S = 1 (R = 0), calcula el retardo en ps para que la salida directa Q empiece a cambiar de 0 a 1 (retardo a través de la primera compuerta).",
+          "correctValue": 120.0,
+          "tolerance": 0.0,
+          "explanation": "La entrada S=1 llega a la puerta NOR superior que genera Q. Al cambiar su entrada a 1, su salida Q pasa de 0 a 1 después de un retardo de compuerta: $$t_Q = T_{gate} = 120\\text{ ps}$$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcula el retardo adicional en ps para que la salida complementaria $\\bar{Q}$ cambie a 0 tras la actualización de Q.",
+          "correctValue": 120.0,
+          "tolerance": 0.0,
+          "explanation": "El cambio en Q de 0 a 1 se propaga hacia una de las entradas de la puerta NOR inferior (que genera $\\bar{Q}$). Dicha compuerta actualiza su salida $\\bar{Q}$ a 0 después de otro retardo de compuerta: $$t_{\\bar{Q}} = T_{gate} = 120\\text{ ps}$$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula el retardo total en ps desde el cambio de entrada hasta que ambas salidas se encuentran en sus estados lógicos finales complementarios estables.",
+          "correctValue": 240.0,
+          "tolerance": 0.0,
+          "explanation": "El tiempo total de estabilización es la suma de los retardos en cascada de ambas compuertas: $$T_{total} = t_Q + t_{\\bar{Q}} = 120\\text{ ps} + 120\\text{ ps} = 240\\text{ ps}$$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Si reemplazamos las compuertas por tecnología más avanzada de $T_{gate} = 80\\text{ ps}$, calcula el nuevo retardo total de estabilización del Latch en ps.",
+          "correctValue": 160.0,
+          "tolerance": 0.0,
+          "explanation": "El nuevo tiempo de estabilización es: $$T_{total\\_new} = 2 \\times T_{gate\\_new} = 2 \\times 80\\text{ ps} = 160\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Análisis de Tiempos de Setup de un Pipeline bajo Variaciones de Temperatura",
+      "context": "En un procesador segmentado, dos etapas están separadas por un registro. El biestable de salida tiene $T_{pcq} = 80\\text{ ps}$ y el de entrada tiene $T_{setup} = 50\\text{ ps}$. El retardo de la lógica combinacional varía con la temperatura según la ecuación: $T_{comb} = 150 + 0.5 \\times Temp\\text{ ps}$, donde $Temp$ es la temperatura del silicio en grados Celsius ($^\\circ$C).",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "A una temperatura normal de funcionamiento de $40^\\circ$C, calcula el retardo combinacional $T_{comb}$ en ps.",
+          "correctValue": 170.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituimos $Temp = 40$ en la fórmula: $$T_{comb\\_40} = 150 + 0.5 \\times 40 = 170\\text{ ps}$$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcula el periodo de reloj mínimo $T_{clk}$ en ps para garantizar que no haya violación de setup a esta temperatura ($40^\\circ$C).",
+          "correctValue": 300.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo de reloj mínimo es: $$T_{clk} = T_{pcq} + T_{comb\\_40} + T_{setup} = 80\\text{ ps} + 170\\text{ ps} + 50\\text{ ps} = 300\\text{ ps}$$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Si el chip se calienta hasta $100^\\circ$C bajo carga máxima de trabajo, calcula el nuevo retardo combinacional $T_{comb}$ en ps.",
+          "correctValue": 200.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituimos $Temp = 100$ en la ecuación: $$T_{comb\\_100} = 150 + 0.5 \\times 100 = 200\\text{ ps}$$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcula el nuevo periodo de reloj mínimo $T_{clk}$ en ps para evitar violaciones de setup a $100^\\circ$C.",
+          "correctValue": 330.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituimos el nuevo retardo en la suma: $$T_{clk\\_new} = T_{pcq} + T_{comb\\_100} + T_{setup} = 80\\text{ ps} + 200\\text{ ps} + 50\\text{ ps} = 330\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Escalado de Voltaje de Alimentación y Margen de Setup (Setup Slack)",
+      "context": "El voltaje de alimentación del núcleo de una CPU cambia dinámicamente. A un voltaje nominal de $1.2\\text{ V}$, se tienen los siguientes retardos: $T_{pcq} = 50\\text{ ps}$, $T_{setup} = 30\\text{ ps}$, y el retardo de la lógica combinacional es $T_{comb} = 120\\text{ ps}$. El periodo del reloj de diseño es de $250\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcula el margen de setup (setup slack) en ps cuando el voltaje es de $1.2\\text{ V}$.",
+          "correctValue": 50.0,
+          "tolerance": 0.0,
+          "explanation": "El setup slack es la diferencia entre el periodo de reloj de diseño y el retardo del camino crítico: $$Slack = T_{clk} - (T_{pcq} + T_{comb} + T_{setup}) = 250\\text{ ps} - (50\\text{ ps} + 120\\text{ ps} + 30\\text{ ps}) = 50\\text{ ps}$$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Si bajamos la alimentación a $1.0\\text{ V}$ para ahorrar energía y todos los retardos lógicos se incrementan en un 30%, calcula el nuevo retardo combinacional $T_{comb\\_1.0}$ en ps.",
+          "correctValue": 156.0,
+          "tolerance": 0.0,
+          "explanation": "Multiplicamos el retardo por el factor de incremento: $$T_{comb\\_1.0} = 120\\text{ ps} \\times 1.3 = 156\\text{ ps}$$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcula el valor sumado de los nuevos retardos de propagación y establecimiento del biestable ($T_{pcq\\_1.0} + T_{setup\\_1.0}$) en ps (ambos aumentados un 30%).",
+          "correctValue": 104.0,
+          "tolerance": 0.0,
+          "explanation": "Aplicamos el incremento del 30% a la suma de los parámetros del biestable: $$(T_{pcq} + T_{setup}) \\times 1.3 = (50\\text{ ps} + 30\\text{ ps}) \\times 1.3 = 80\\text{ ps} \\times 1.3 = 104\\text{ ps}$$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcula el nuevo margen de setup (setup slack) en ps a $1.0\\text{ V}$ si mantenemos el mismo periodo del reloj de $250\\text{ ps}$.",
+          "correctValue": -10.0,
+          "tolerance": 0.0,
+          "explanation": "El nuevo slack se calcula restando del periodo nominal los retardos incrementados: $$Slack = T_{clk} - (T_{pcq\\_1.0} + T_{comb\\_1.0} + T_{setup\\_1.0}) = 250\\text{ ps} - (104\\text{ ps} + 156\\text{ ps}) = -10\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Márgenes Temporales de Entrada Asíncrona (Recovery y Removal)",
+      "context": "Un biestable síncrono tiene restricciones de tiempo asociadas a sus entradas asíncronas de control: tiempo de recuperación $T_{rec} = 40\\text{ ps}$ y tiempo de eliminación $T_{rem} = 25\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Si la señal de reset asíncrono se desactiva exactamente $55\\text{ ps}$ antes del flanco de reloj de subida, calcula el margen de recuperación (recovery slack) en ps.",
+          "correctValue": 15.0,
+          "tolerance": 0.0,
+          "explanation": "El recovery slack es la diferencia entre el instante de desactivación y el tiempo de recuperación requerido: $$Slack_{rec} = T_{actual} - T_{rec} = 55\\text{ ps} - 40\\text{ ps} = 15\\text{ ps}$$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Si la señal de reset se desactiva a las $30\\text{ ps}$ antes del flanco de reloj, calcula el margen de recuperación en ps.",
+          "correctValue": -10.0,
+          "tolerance": 0.0,
+          "explanation": "El margen se vuelve negativo al desactivarse la señal muy tarde: $$Slack_{rec} = 30\\text{ ps} - 40\\text{ ps} = -10\\text{ ps}$$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Si la señal de reset asíncrono se desactiva $35\\text{ ps}$ después del flanco de reloj activo, calcula el margen de eliminación (removal slack) en ps.",
+          "correctValue": 10.0,
+          "tolerance": 0.0,
+          "explanation": "El removal slack es la diferencia entre el tiempo real de desactivación y el mínimo tiempo requerido de mantenimiento inactivo posterior al reloj: $$Slack_{rem} = T_{actual\\_despues} - T_{rem} = 35\\text{ ps} - 25\\text{ ps} = 10\\text{ ps}$$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Si la señal de reset se desactiva a las $15\\text{ ps}$ después del flanco del reloj, calcula el margen de eliminación en ps.",
+          "correctValue": -10.0,
+          "tolerance": 0.0,
+          "explanation": "El removal slack se calcula como: $$Slack_{rem} = 15\\text{ ps} - 25\\text{ ps} = -10\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Modelado de Constantes de Tiempo RC en Líneas de Reloj",
+      "context": "La red de distribución de reloj (clock tree) de un circuito integrado presenta una resistencia equivalente total $R = 50\\ \\Omega$ y una capacitancia parásita distribuida $C = 2\\text{ pF}$.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcula la constante de tiempo RC equivalente ($\\tau$) de la línea de distribución de reloj en picosegundos (ps).",
+          "correctValue": 100.0,
+          "tolerance": 0.0,
+          "explanation": "La constante de tiempo es el producto de la resistencia y la capacitancia: $$\\tau = R \\times C = 50\\ \\Omega \\times (2 \\times 10^{-12}\\text{ F}) = 100 \\times 10^{-12}\\text{ s} = 100\\text{ ps}$$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "El tiempo de subida de la señal ($10\\%$ a $90\\%$) se aproxima por $T_{rise} = 2.2 \\times \\tau$. Calcula $T_{rise}$ en ps.",
+          "correctValue": 220.0,
+          "tolerance": 0.0,
+          "explanation": "Multiplicamos la constante por el factor de aproximación: $$T_{rise} = 2.2 \\times 100\\text{ ps} = 220\\text{ ps}$$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Si el reloj del sistema funciona a una frecuencia de $1\\text{ GHz}$, determina qué porcentaje del periodo total de reloj representa el tiempo de subida calculado (220 ps).",
+          "correctValue": 22.0,
+          "tolerance": 0.0,
+          "explanation": "A $1\\text{ GHz}$ el periodo es $T_{clk} = 1\\text{ ns} = 1000\\text{ ps}$. El porcentaje es: $$Pct = \\frac{220\\text{ ps}}{1000\\text{ ps}} \\times 100 = 22.0\\%$$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Si subimos la frecuencia a $2.5\\text{ GHz}$, calcula el nuevo porcentaje del periodo que ocupa este tiempo de subida.",
+          "correctValue": 55.0,
+          "tolerance": 0.0,
+          "explanation": "A $2.5\\text{ GHz}$, el periodo de reloj es $T_{clk} = 400\\text{ ps}$. El porcentaje correspondiente es: $$Pct_{new} = \\frac{220\\text{ ps}}{400\\text{ ps}} \\times 100 = 55.0\\%$$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Efectos del Jitter Temporal en las Entradas de Datos",
+      "context": "El camino de datos tiene una incertidumbre de llegada (jitter) debido a ruidos de conmutación de $\\pm 20\\text{ ps}$. El biestable de destino tiene $T_{setup} = 40\\text{ ps}$ y $T_{hold} = 30\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Si la señal de datos cambia teóricamente $70\\text{ ps}$ antes del flanco activo del reloj, calcula el tiempo de llegada en el peor caso en ps considerando el jitter en contra.",
+          "correctValue": 50.0,
+          "tolerance": 0.0,
+          "explanation": "El peor caso para setup es que el dato cambie lo más tarde posible. El retraso por jitter resta $20\\text{ ps}$ al margen: $$t_{llegada\\_peor} = 70\\text{ ps} - 20\\text{ ps} = 50\\text{ ps}$$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Calcula el margen de setup (setup slack) en ps en este peor caso.",
+          "correctValue": 10.0,
+          "tolerance": 0.0,
+          "explanation": "El margen de setup con jitter es: $$Slack_{setup} = t_{llegada\\_peor} - T_{setup} = 50\\text{ ps} - 40\\text{ ps} = 10\\text{ ps}$$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Si la señal de datos se mantiene estable teóricamente hasta $45\\text{ ps}$ después del flanco activo, calcula el peor tiempo de mantenimiento en ps considerando el jitter en contra (el cambio ocurre antes).",
+          "correctValue": 25.0,
+          "tolerance": 0.0,
+          "explanation": "El peor caso para hold es que la señal cambie lo antes posible. Con un jitter de $20\\text{ ps}$, el dato podría variar a las: $$t_{cambio\\_peor} = 45\\text{ ps} - 20\\text{ ps} = 25\\text{ ps}$$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Calcula el margen de hold (hold slack) en ps en este peor caso.",
+          "correctValue": -5.0,
+          "tolerance": 0.0,
+          "explanation": "El margen de hold resultante es: $$Slack_{hold} = t_{cambio\\_peor} - T_{hold} = 25\\text{ ps} - 30\\text{ ps} = -5\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Secuencia de Estados Lógicos de un Flip-Flop JK",
+      "context": "Un flip-flop JK está conectado con las funciones de excitación: $J(t) = Q(t) \\oplus X(t)$ y $K(t) = \\overline{X(t)}$, donde $X(t)$ es la señal de datos de entrada. Inicialmente en $t=0$, el estado es $Q(0) = 0$.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Si la entrada en el ciclo inicial es $X(0) = 1$, calcula el valor lógico de la entrada J(0) en $t=0$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituimos $Q(0)=0$ y $X(0)=1$: $$J(0) = Q(0) \\oplus X(0) = 0 \\oplus 1 = 1$$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Para esa misma entrada $X(0) = 1$, calcula el valor lógico de la entrada K(0) en $t=0$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La entrada K es la inversa de X: $$K(0) = \\overline{X(0)} = \\bar{1} = 0$$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcula el valor del estado siguiente Q(1) tras cumplirse el primer flanco de reloj en $t=1$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Con $J(0)=1, K(0)=0$, el biestable ejecuta la instrucción de Set, por lo que: $$Q(1) = 1$$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si en el siguiente ciclo la entrada es $X(1) = 1$, calcula el valor de salida Q(2) tras el segundo flanco de reloj en $t=2$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Calculamos las excitaciones en $t=1$ sabiendo que $Q(1)=1$ y $X(1)=1$: $$J(1) = Q(1) \\oplus X(1) = 1 \\oplus 1 = 0$$ $$K(1) = \\overline{X(1)} = \\bar{1} = 0$$ Dado que J(1)=0 y K(1)=0, el biestable está en modo memoria: $$Q(2) = Q(1) = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Frecuencia de Funcionamiento de un Contador Síncrono de 3 bits",
+      "context": "Un contador síncrono de 3 bits utiliza tres flip-flops JK idénticos, con $T_{pcq} = 80\\text{ ps}$ y $T_{setup} = 40\\text{ ps}$. La lógica de control utiliza una compuerta AND de 2 entradas con un retardo de $T_{and} = 30\\text{ ps}$ para calcular la excitación del tercer bit.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Identifica el retardo de propagación máximo de la lógica combinacional ($T_{comb}$) en ps.",
+          "correctValue": 30.0,
+          "tolerance": 0.0,
+          "explanation": "El camino combinacional crítico en la excitación está formado únicamente por la compuerta AND, por lo que: $T_{comb} = T_{and} = 30\\text{ ps}$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcula el periodo de reloj mínimo $T_{clk}$ en ps para evitar fallos de setup en el contador.",
+          "correctValue": 150.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo de reloj mínimo es: $$T_{clk} = T_{pcq} + T_{comb} + T_{setup} = 80\\text{ ps} + 30\\text{ ps} + 40\\text{ ps} = 150\\text{ ps}$$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcula la frecuencia máxima de reloj en GHz asociada a este periodo mínimo (150 ps).",
+          "correctValue": 6.67,
+          "tolerance": 0.02,
+          "explanation": "La frecuencia es: $$f_{max} = \\frac{1}{150 \\times 10^{-12}\\text{ s}} \\approx 6.67 \\times 10^9\\text{ Hz} = 6.67\\text{ GHz}$$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si sustituimos la puerta AND por una más rápida con un retardo de $15\\text{ ps}$, calcula la nueva frecuencia máxima del contador en GHz.",
+          "correctValue": 7.41,
+          "tolerance": 0.02,
+          "explanation": "El nuevo periodo mínimo es: $$T_{clk\\_new} = 80\\text{ ps} + 15\\text{ ps} + 40\\text{ ps} = 135\\text{ ps}$$ La nueva frecuencia máxima es: $$f_{max\\_new} = \\frac{1}{135 \\times 10^{-12}\\text{ s}} \\approx 7.407 \\times 10^9\\text{ Hz} = 7.41\\text{ GHz}$$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Secuencia de Estados de un Latch SR basado en NAND",
+      "context": "Un Latch SR se construye con dos compuertas NAND, lo que significa que responde a entradas activas por nivel bajo: $\\overline{S}$ y $\\overline{R}$.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula el valor lógico de salida Q si aplicamos de forma estable las entradas $\\overline{S} = 0$ y $\\overline{R} = 1$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Como $\\overline{S} = 0$, la entrada de Set está activa (nivel bajo). Por lo tanto, la salida Q se fuerza a 1."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Si las entradas cambian a $\\overline{S} = 1$ y $\\overline{R} = 1$, calcula el valor de Q.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "La combinación $\\overline{S}=1, \\overline{R}=1$ corresponde al estado inactivo (modo memoria). La salida retiene el valor anterior: Q = 1."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Si las entradas cambian a $\\overline{S} = 1$ y $\\overline{R} = 0$, calcula el valor lógico de la salida Q.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La entrada $\\overline{R} = 0$ activa el Reset asíncrono, lo que fuerza la salida Q a 0."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si se aplican simultáneamente $\\overline{S} = 0$ y $\\overline{R} = 0$, calcula el valor de la salida Q.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "La combinación de ambas entradas a nivel bajo fuerza ambas salidas Q y $\\bar{Q}$ a 1. Así, Q toma el valor 1 (estado no complementario)."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Retardos Lógicos y Clock Skew por Buffer de Distribución",
+      "context": "La red de reloj introduce demoras debidas a la inserción de búferes. El buffer que alimenta al biestable origen introduce una demora $T_{buf\\_src} = 100\\text{ ps}$ y el del biestable destino introduce $T_{buf\\_dst} = 120\\text{ ps}$. Se conocen: $T_{pcq} = 70\\text{ ps}$, $T_{setup} = 40\\text{ ps}$ y $T_{comb} = 130\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula el clock skew (desviación de reloj) definido como $T_{skew} = T_{buf\\_dst} - T_{buf\\_src}$ en ps.",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "El clock skew es la diferencia de tiempo entre la llegada de los relojes: $$T_{skew} = 120\\text{ ps} - 100\\text{ ps} = 20\\text{ ps}$$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Dado que el skew es positivo ($T_{skew} > 0$), calcula el periodo de reloj mínimo $T_{clk\\_min}$ en ps necesario para setup.",
+          "correctValue": 220.0,
+          "tolerance": 0.0,
+          "explanation": "El clock skew positivo disminuye el periodo de reloj requerido: $$T_{clk\\_min} = T_{pcq} + T_{comb} + T_{setup} - T_{skew} = 70\\text{ ps} + 130\\text{ ps} + 40\\text{ ps} - 20\\text{ ps} = 220\\text{ ps}$$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Si el buffer de destino se degrada de manera que su retardo pasa a ser $T_{buf\\_dst} = 80\\text{ ps}$, calcula el nuevo skew en ps.",
+          "correctValue": -20.0,
+          "tolerance": 0.0,
+          "explanation": "Calculamos el skew con el nuevo retardo: $$T_{skew\\_new} = 80\\text{ ps} - 100\\text{ ps} = -20\\text{ ps}$$ (skew negativo)."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula el nuevo periodo de reloj mínimo $T_{clk\\_min}$ en ps considerando este skew de -20 ps.",
+          "correctValue": 260.0,
+          "tolerance": 0.0,
+          "explanation": "El skew negativo aumenta el periodo mínimo de reloj requerido: $$T_{clk\\_min\\_new} = T_{pcq} + T_{comb} + T_{setup} - T_{skew\\_new} = 70\\text{ ps} + 130\\text{ ps} + 40\\text{ ps} - (-20\\text{ ps}) = 260\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Verificación y Corrección de Fallos de Hold en Biestables en Cascada",
+      "context": "Dos biestables D se conectan directamente en serie (la salida Q1 va conectada a la entrada D2 sin lógica combinacional). Los parámetros físicos son: $T_{pcq1} = 60\\text{ ps}$, $T_{ccq1} = 40\\text{ ps}$, $T_{setup2} = 30\\text{ ps}$, y $T_{hold2} = 45\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcula el retardo mínimo del camino de datos ($T_{data\\_min}$) en ps entre ambos biestables (considere $T_{comb\\_min} = 0$).",
+          "correctValue": 40.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que no hay lógica combinacional intermedia, el retardo mínimo de datos es igual al retardo de contaminación reloj-a-Q del primer biestable: $$T_{data\\_min} = T_{ccq1} + 0 = 40\\text{ ps}$$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcula el margen de hold (hold slack) en ps para el biestable de destino.",
+          "correctValue": -5.0,
+          "tolerance": 0.0,
+          "explanation": "El margen de hold es: $$Slack_{hold} = T_{data\\_min} - T_{hold2} = 40\\text{ ps} - 45\\text{ ps} = -5\\text{ ps}$$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Indique si el circuito presenta una violación de hold (escriba 1.0 si existe violación, o 0.0 si no existe).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el margen de hold es negativo ($-5\\text{ ps}$), se produce una violación de hold y el biestable destino capturará datos incorrectos. Respondemos con 1.0."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Para solucionar la violación de hold, se añade un pequeño retardo en la línea de datos con $T_{comb\\_min} = 15\\text{ ps}$. Calcula el nuevo margen de hold en ps.",
+          "correctValue": 10.0,
+          "tolerance": 0.0,
+          "explanation": "El nuevo retardo de datos mínimo es: $$T_{data\\_min\\_new} = T_{ccq1} + T_{comb\\_min} = 40\\text{ ps} + 15\\text{ ps} = 55\\text{ ps}$$ El nuevo margen es: $$Slack_{hold} = 55\\text{ ps} - 45\\text{ ps} = 10\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Consumo de Potencia Dinámica de un Registro de 32 bits",
+      "context": "Un registro de 32 bits se construye con 32 flip-flops D síncronos. La capacitancia de entrada del pin de reloj de cada flip-flop es $C_{clk} = 8\\text{ fF}$. La frecuencia de reloj es $f = 1.6\\text{ GHz}$ y la tensión de alimentación es $V_{DD} = 1.1\\text{ V}$.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcula la capacitancia de reloj total de todo el registro en femtofaradios (fF).",
+          "correctValue": 256.0,
+          "tolerance": 0.0,
+          "explanation": "La capacitancia total de reloj es la suma de las capacitancias de los 32 biestables: $$C_{total\\_clk} = 32 \\times 8\\text{ fF} = 256\\text{ fF}$$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcula la potencia dinámica disipada únicamente por el reloj del registro en microvatios ($\\mu$W).",
+          "correctValue": 495.616,
+          "tolerance": 0.1,
+          "explanation": "Calculamos la potencia usando la fórmula $P = C \\times V_{DD}^2 \\times f$: $$P_{clk} = (256 \\times 10^{-15}\\text{ F}) \\times (1.1\\text{ V})^2 \\times (1.6 \\times 10^9\\text{ Hz}) = 4.95616 \\times 10^{-4}\\text{ W} = 495.616\\mu\\text{W}$$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Si el factor de actividad de los datos es $\\alpha = 0.25$ (el 25% de los bits cambia en promedio) y la capacitancia de carga en la salida de cada biestable es $C_{load} = 15\\text{ fF}$, calcula la capacitancia conmutada media por los datos en fF ($32 \\times \\alpha \\times C_{load}$).",
+          "correctValue": 120.0,
+          "tolerance": 0.0,
+          "explanation": "La capacitancia conmutada promedio de la línea de datos es: $$C_{data} = 32 \\times 0.25 \\times 15\\text{ fF} = 120\\text{ fF}$$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcula la potencia dinámica media total (reloj + datos) consumida por el registro en microvatios ($\\mu$W).",
+          "correctValue": 727.936,
+          "tolerance": 0.1,
+          "explanation": "Primero calculamos la potencia consumida por los datos: $$P_{data} = (120 \\times 10^{-15}\\text{ F}) \\times (1.1\\text{ V})^2 \\times (1.6 \\times 10^9\\text{ Hz}) = 2.3232 \\times 10^{-4}\\text{ W} = 232.32\\mu\\text{W}$$ Sumamos la potencia de reloj y la de datos: $$P_{total} = P_{clk} + P_{data} = 495.616\\mu\\text{W} + 232.32\\mu\\text{W} = 727.936\\mu\\text{W}$$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Tiempo de Retención y Frecuencia de Refresco de DRAM vs. Temperatura",
+      "context": "Una celda DRAM mantiene la información durante $64\\text{ ms}$ a una temperatura normal de $25^\\circ$C. Debido a que las fugas térmicas de corriente en los transistores crecen de forma exponencial, el tiempo de retención de la celda disminuye a la mitad por cada incremento de $10^\\circ$C en la temperatura del silicio.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Si la CPU opera a una temperatura elevada de $55^\\circ$C, calcula el nuevo tiempo de retención de la celda de memoria en ms.",
+          "correctValue": 8.0,
+          "tolerance": 0.0,
+          "explanation": "El incremento térmico es $55^\\circ\\text{C} - 25^\\circ\\text{C} = 30^\\circ\\text{C}$. Esto representa un total de $30/10 = 3$ mitades consecutivas: $$t_{ret} = \\frac{64\\text{ ms}}{2^3} = 8\\text{ ms}$$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Utilizando el tiempo de retención a $55^\\circ$C (8 ms), calcula la frecuencia de refresco mínima requerida en Hz.",
+          "correctValue": 125.0,
+          "tolerance": 0.0,
+          "explanation": "La frecuencia mínima de refresco es la inversa del tiempo de retención: $$f_{ref} = \\frac{1}{8 \\times 10^{-3}\\text{ s}} = 125\\text{ Hz}$$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Si la temperatura del chip aumenta hasta alcanzar $75^\\circ$C bajo carga máxima, calcula el nuevo tiempo de retención en ms.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "El incremento térmico es $75^\\circ\\text{C} - 25^\\circ\\text{C} = 50^\\circ\\text{C}$, es decir, $50/10 = 5$ reducciones consecutivas a la mitad: $$t_{ret} = \\frac{64\\text{ ms}}{2^5} = 2\\text{ ms}$$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula la nueva frecuencia de refresco mínima requerida en Hz para operar a $75^\\circ$C.",
+          "correctValue": 500.0,
+          "tolerance": 0.0,
+          "explanation": "La frecuencia de refresco es: $$f_{ref} = \\frac{1}{2 \\times 10^{-3}\\text{ s}} = 500\\text{ Hz}$$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Secuencia de Estados Lógicos de un Flip-Flop T",
+      "context": "Un biestable síncrono T tiene su entrada de excitación conectada a la función lógica: $T(t) = A(t) \\cdot \\overline{Q(t)}$, donde $A(t)$ representa la señal externa de datos. En el instante inicial $t=0$, la salida es $Q(0) = 0$.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Si en el ciclo inicial se aplica la entrada $A(0) = 1$, calcula el valor lógico de la entrada de control T(0) en $t=0$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituimos $A(0)=1$ y $Q(0)=0$: $$T(0) = A(0) \\cdot \\overline{Q(0)} = 1 \\cdot 1 = 1$$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Determina el valor lógico del estado siguiente Q(1) tras el primer flanco activo del reloj.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Como T(0)=1, la salida conmuta: $$Q(1) = \\overline{Q(0)} = 1$$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Si en el segundo ciclo se mantiene $A(1) = 1$, calcula el valor de la entrada T(1) en $t=1$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Sustituimos $A(1)=1$ y $Q(1)=1$: $$T(1) = A(1) \\cdot \\overline{Q(1)} = 1 \\cdot 0 = 0$$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Calcula el valor lógico de la salida Q(2) tras el segundo flanco activo del reloj.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que T(1)=0, el biestable opera en modo memoria, manteniendo su estado previo: $$Q(2) = Q(1) = 1$$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Diseño de Excitación de un Contador de 2 bits con Flip-Flops JK",
+      "context": "Se diseña un contador síncrono de 2 bits ($Q_1$ y $Q_0$) que sigue la secuencia cíclica: 00 -> 01 -> 10 -> 11 -> 00... utilizando dos flip-flops JK.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Para el bit menos significativo $Q_0$, que debe conmutar en cada ciclo de reloj, calcula el valor lógico permanente que deben tener sus entradas $J_0$ y $K_0$ ($J_0 = K_0$).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Para que un biestable JK conmute su salida en cada flanco activo del reloj, sus entradas de control J y K deben estar permanentemente a nivel alto (1): $$J_0 = K_0 = 1$$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Para el bit más significativo $Q_1$, calcula el valor lógico de la entrada $J_1$ requerido cuando el estado actual es $Q_1 Q_0 = 01$ para realizar la transición al estado siguiente $10$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El bit $Q_1$ realiza la transición $0 \\to 1$. La tabla de excitación del biestable JK para esta transición requiere $J_1 = 1$ (K puede ser indiferente)."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Para el mismo bit $Q_1$, calcula el valor de la entrada $K_1$ requerido cuando el estado actual es $11$ para pasar al estado siguiente $00$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El bit $Q_1$ realiza la transición $1 \\to 0$. La tabla de excitación del biestable JK para esta transición requiere $K_1 = 1$ (J puede ser indiferente)."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Al simplificar la lógica del contador, se obtiene que $J_1 = K_1 = Q_0$. Si el contador está en el estado inicial $Q_1 Q_0 = 00$, calcula el valor lógico de la entrada de excitación $J_1$.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluamos la entrada de excitación utilizando el estado actual: $$J_1 = Q_0 = 0$$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Modelado RC del Retardo de Conmutación en Latch SR",
+      "context": "En un Latch SR con compuertas NOR, cada compuerta lógica presenta una resistencia equivalente de salida $R_o = 1.2\\ \\text{k}\\Omega$ y una capacitancia de entrada parásita $C_i = 15\\text{ fF}$. El retardo de propagación intrínseco de cada puerta es $T_{int} = 30\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula la constante de tiempo RC equivalente ($\\tau$) de la interconexión entre compuertas en picosegundos (ps).",
+          "correctValue": 18.0,
+          "tolerance": 0.0,
+          "explanation": "La constante de tiempo es: $$\\tau = R_o \\times C_i = (1200\\ \\Omega) \\times (15 \\times 10^{-15}\\text{ F}) = 1.8 \\times 10^{-11}\\text{ s} = 18\\text{ ps}$$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "El retardo total de una compuerta NOR es $T_{prop} = T_{int} + 0.7 \\times \\tau$. Calcula $T_{prop}$ en ps.",
+          "correctValue": 42.6,
+          "tolerance": 0.01,
+          "explanation": "Calculamos aplicando la constante de tiempo obtenida: $$T_{prop} = 30\\text{ ps} + 0.7 \\times 18\\text{ ps} = 30 + 12.6 = 42.6\\text{ ps}$$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Puesto que el cambio en el Latch requiere propagarse secuencialmente por ambas compuertas, calcula el tiempo de resolución del Latch en ps ($2 \\times T_{prop}$).",
+          "correctValue": 85.2,
+          "tolerance": 0.01,
+          "explanation": "El tiempo total es: $$T_{res} = 2 \\times T_{prop} = 2 \\times 42.6\\text{ ps} = 85.2\\text{ ps}$$."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Si disminuimos el tamaño de los transistores y la resistencia de salida se duplica a $R_o = 2.4\\ \\text{k}\\Omega$, calcula el nuevo tiempo de resolución del Latch en ps.",
+          "correctValue": 110.4,
+          "tolerance": 0.01,
+          "explanation": "La nueva constante es $\\tau_{new} = 2400\\ \\Omega \\times 15\\text{ fF} = 36\\text{ ps}$. El nuevo retardo por compuerta es: $$T_{prop\\_new} = 30\\text{ ps} + 0.7 \\times 36\\text{ ps} = 55.2\\text{ ps}$$ El nuevo tiempo de resolución es: $$T_{res\\_new} = 2 \\times 55.2\\text{ ps} = 110.4\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Tiempos de Propagación de Biestable Maestro-Esclavo",
+      "context": "Un biestable D de estructura maestro-esclavo está formado por dos latches individuales en serie. Cada latch tiene un retardo de propagación de $T_{latch} = 45\\text{ ps}$ y un tiempo de establecimiento de $T_{su\\_latch} = 25\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcula el retardo en ps que le toma a un cambio en D propagarse a través de la etapa del latch maestro cuando la señal de reloj está a nivel bajo.",
+          "correctValue": 45.0,
+          "tolerance": 0.0,
+          "explanation": "Cuando el reloj está a nivel bajo, el latch maestro es transparente y el retraso es simplemente el retardo propio del latch: $T_{latch} = 45\\text{ ps}$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcula el retardo de propagación reloj-a-Q ($T_{pcq}$) total del biestable maestro-esclavo en ps en el flanco de subida del reloj.",
+          "correctValue": 45.0,
+          "tolerance": 0.0,
+          "explanation": "En el flanco de subida, el latch esclavo pasa a ser transparente. El retardo reloj-a-Q final está determinado por el retardo del latch esclavo: $T_{pcq} = T_{latch} = 45\\text{ ps}$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Determina el tiempo de establecimiento ($T_{setup}$) total del biestable en ps.",
+          "correctValue": 25.0,
+          "tolerance": 0.0,
+          "explanation": "El tiempo de establecimiento del biestable completo es igual al tiempo de establecimiento de su latch maestro: $T_{setup} = T_{su\\_latch} = 25\\text{ ps}$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Si añadimos una compuerta inversora en la línea de reloj interno del latch maestro que introduce un retraso de $T_{inv} = 15\\text{ ps}$, calcula el nuevo tiempo de establecimiento total en ps.",
+          "correctValue": 40.0,
+          "tolerance": 0.0,
+          "explanation": "La demora de 15 ps en el reloj interno del maestro retrasa su cierre, obligando a que los datos estén estables $15\\text{ ps}$ antes. El nuevo setup es: $$T_{setup\\_new} = T_{setup} + T_{inv} = 25\\text{ ps} + 15\\text{ ps} = 40\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Margen de Setup (Setup Slack) con Jitter de Reloj",
+      "context": "Un circuito funciona con una frecuencia nominal $f = 4\\text{ GHz}$. El jitter de fase del reloj provoca una desviación de periodo de hasta $T_{jitter} = 15\\text{ ps}$. Los parámetros del biestable son $T_{pcq} = 55\\text{ ps}$ y $T_{setup} = 35\\text{ ps}$. El retardo de la lógica combinacional es $T_{comb} = 120\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Calcula el periodo nominal de reloj $T_{clk}$ del sistema en ps.",
+          "correctValue": 250.0,
+          "tolerance": 0.0,
+          "explanation": "El periodo nominal es el inverso de la frecuencia: $$T_{clk} = \\frac{1}{4 \\times 10^9\\text{ Hz}} = 250\\text{ ps}$$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula el periodo de reloj efectivo mínimo ($T_{clk\\_eff}$) en ps considerando el peor caso de jitter.",
+          "correctValue": 235.0,
+          "tolerance": 0.0,
+          "explanation": "En el peor caso de fluctuación, el ciclo del reloj se acorta en la magnitud del jitter: $$T_{clk\\_eff} = T_{clk} - T_{jitter} = 250\\text{ ps} - 15\\text{ ps} = 235\\text{ ps}$$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcula el margen de setup (setup slack) en ps bajo el peor caso de jitter.",
+          "correctValue": 25.0,
+          "tolerance": 0.0,
+          "explanation": "El slack de setup se calcula usando el periodo efectivo: $$Slack = T_{clk\\_eff} - (T_{pcq} + T_{comb} + T_{setup}) = 235\\text{ ps} - (55\\text{ ps} + 120\\text{ ps} + 35\\text{ ps}) = 25\\text{ ps}$$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Si debido al calentamiento el retardo combinacional aumenta a $T_{comb\\_hot} = 150\\text{ ps}$, calcula el nuevo margen de setup en ps.",
+          "correctValue": -5.0,
+          "tolerance": 0.0,
+          "explanation": "Calculamos el slack con el nuevo retardo: $$Slack = 235\\text{ ps} - (55\\text{ ps} + 150\\text{ ps} + 35\\text{ ps}) = -5\\text{ ps}$$ (lo que indica una violación de setup)."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Capacitancia y Corriente Equivalente en Módulo DRAM de 1 GB",
+      "context": "Un chip DRAM tiene una capacidad de almacenamiento de 1 GB ($2^{30}\\text{ bytes}$). Cada bit utiliza una celda constituida por un condensador de almacenamiento de $C_{cell} = 25\\text{ fF}$. La tensión lógica del chip es $V = 1.1\\text{ V}$.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcula el número de bits totales de almacenamiento presentes en el chip.",
+          "correctValue": 8589934592.0,
+          "tolerance": 0.0,
+          "explanation": "Convertimos gigabytes a bits: $$1\\text{ GB} = 2^{30}\\text{ bytes} = 1073741824\\text{ bytes} \\times 8\\text{ bits/byte} = 8589934592\\text{ bits}$$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcula la capacitancia total equivalente sumada de todas las celdas del chip en microfaradios ($\\mu$F).",
+          "correctValue": 214.748,
+          "tolerance": 0.05,
+          "explanation": "Multiplicamos la capacitancia de una celda por el número total de bits: $$C_{total} = 8589934592 \\times 25 \\times 10^{-15}\\text{ F} = 2.147483648 \\times 10^{-4}\\text{ F} \\approx 214.748\\mu\\text{F}$$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Si todas las celdas de almacenamiento guardan un '1' lógico, calcula la energía total almacenada en el chip en microjulios ($\\mu$J) ($E = \\frac{1}{2} C_{total} V^2$).",
+          "correctValue": 129.92,
+          "tolerance": 0.1,
+          "explanation": "Calculamos la energía almacenada: $$E = \\frac{1}{2} C_{total} V^2 = 0.5 \\times (214.74836 \\times 10^{-6}\\text{ F}) \\times (1.1\\text{ V})^2 \\approx 129.9227\\mu\\text{J}$$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Si se realiza el refresco de todo el chip cada $64\\text{ ms}$, calcula la corriente promedio en miliamperios (mA) requerida únicamente para recargar los condensadores desde 0.",
+          "correctValue": 3.691,
+          "tolerance": 0.01,
+          "explanation": "La carga total es $Q_{total} = C_{total} \\times V = 214.74836\\mu\\text{F} \\times 1.1\\text{ V} = 2.36223 \\times 10^{-4}\\text{ C}$. La corriente promedio de refresco es: $$I_{avg} = \\frac{Q_{total}}{T_{ref}} = \\frac{2.36223 \\times 10^{-4}\\text{ C}}{0.064\\text{ s}} \\approx 0.003691\\text{ A} = 3.691\\text{ mA}$$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Análisis de Tiempos Críticos con Clock Skew Negativo",
+      "context": "Dos etapas síncronas están conectadas de forma secuencial. El reloj del biestable de destino llega adelantado respecto al de origen, lo que genera un clock skew negativo $T_{skew} = -25\\text{ ps}$. Parámetros: $T_{pcq} = 60\\text{ ps}$, $T_{ccq} = 40\\text{ ps}$, $T_{setup} = 35\\text{ ps}$, $T_{hold} = 30\\text{ ps}$.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula el margen de hold (hold slack) en ps si no hay lógica combinacional ($T_{comb\\_min} = 0$).",
+          "correctValue": 35.0,
+          "tolerance": 0.0,
+          "explanation": "Con clock skew negativo, la inecuación de hold se reescribe como: $$Slack_{hold} = T_{ccq} + T_{comb\\_min} - T_{hold} - T_{skew}$$ $$Slack_{hold} = 40\\text{ ps} + 0 - 30\\text{ ps} - (-25\\text{ ps}) = 35\\text{ ps}$$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Si el periodo nominal de reloj es $T_{clk} = 200\\text{ ps}$ y el retardo combinacional máximo es $T_{comb} = 100\\text{ ps}$, calcula el margen de setup (setup slack) en ps.",
+          "correctValue": -20.0,
+          "tolerance": 0.0,
+          "explanation": "El setup slack con skew negativo es: $$Slack_{setup} = T_{clk} + T_{skew} - (T_{pcq} + T_{comb} + T_{setup})$$ $$Slack_{setup} = 200\\text{ ps} + (-25\\text{ ps}) - (60\\text{ ps} + 100\\text{ ps} + 35\\text{ ps}) = 175 - 195 = -20\\text{ ps}$$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Indique si el circuito presenta una violación de setup (escriba 1.0 si existe, o 0.0 si no existe).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el setup slack es negativo ($-20\\text{ ps}$), se produce una violación de setup. Escribimos 1.0."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcula el periodo de reloj mínimo necesario ($T_{clk\\_min}$) en ps para solucionar esta violación manteniendo la lógica combinacional de 100 ps.",
+          "correctValue": 220.0,
+          "tolerance": 0.0,
+          "explanation": "Despejamos el periodo mínimo para $Slack_{setup} = 0$: $$T_{clk\\_min} = T_{pcq} + T_{comb} + T_{setup} - T_{skew} = 60\\text{ ps} + 100\\text{ ps} + 35\\text{ ps} - (-25\\text{ ps}) = 220\\text{ ps}$$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Evaluación Lógica de Transiciones de un Biestable D con Control Externo",
+      "context": "Un biestable D forma parte de una unidad de control. Su entrada se alimenta con la lógica $D = (A \\cdot Q) + (\\bar{A} \\cdot B)$, donde A y B son entradas de control y Q es el estado actual del biestable. El estado inicial en $t=0$ es $Q(0) = 0$.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Si se aplican las señales de control $A = 0$ y $B = 1$, calcula el valor lógico de la entrada D(0) en $t=0$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluamos la ecuación lógica con $Q(0)=0$, $A=0$, $B=1$: $$D(0) = (A \\cdot Q(0)) + (\\bar{A} \\cdot B) = (0 \\cdot 0) + (1 \\cdot 1) = 0 + 1 = 1$$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula el valor lógico del estado siguiente Q(1) tras el primer flanco de reloj en $t=1$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "En un biestable D, la salida Q se actualiza directamente con el valor de la entrada D en el flanco: $$Q(1) = D(0) = 1$$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Si con la salida actual en $Q(1) = 1$ las entradas de control pasan a ser $A = 1$ y $B = 0$, calcula el nuevo valor de la entrada D(1) en $t=1$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluamos la ecuación con los nuevos valores: $$D(1) = (A \\cdot Q(1)) + (\\bar{A} \\cdot B) = (1 \\cdot 1) + (0 \\cdot 0) = 1 + 0 = 1$$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcula el valor lógico de la salida Q(2) tras cumplirse el segundo flanco de reloj en $t=2$.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "La salida del biestable D se actualiza al valor de D(1): $$Q(2) = D(1) = 1$$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuación característica de Flip-Flop D",
+      "tex": "$$Q_{n+1} = D$$"
+    },
+    {
+      "name": "Ecuación característica de Flip-Flop JK",
+      "tex": "$$Q_{n+1} = J\\bar{Q}_n + \\bar{K}Q_n$$"
+    },
+    {
+      "name": "Ecuación característica de Flip-Flop T",
+      "tex": "$$Q_{n+1} = T \\oplus Q_n$$"
+    },
+    {
+      "name": "Ecuación característica de Latch SR con NOR",
+      "tex": "$$Q_{n+1} = S + \\bar{R}Q_n$$"
+    },
+    {
+      "name": "Restricción de tiempo de establecimiento (Setup Constraint)",
+      "tex": "$$T_{clk} \\ge T_{pcq} + T_{comb} + T_{setup}$$"
+    },
+    {
+      "name": "Restricción de Setup con Clock Skew",
+      "tex": "$$T_{clk} + T_{skew} \\ge T_{pcq} + T_{comb} + T_{setup}$$"
+    },
+    {
+      "name": "Restricción de tiempo de mantenimiento (Hold Constraint)",
+      "tex": "$$T_{ccq} + T_{comb\\_min} \\ge T_{hold}$$"
+    },
+    {
+      "name": "Restricción de Hold con Clock Skew",
+      "tex": "$$T_{ccq} + T_{comb\\_min} \\ge T_{hold} + T_{skew}$$"
+    },
+    {
+      "name": "Tiempo Medio entre Fallos por Metaestabilidad (MTBF)",
+      "tex": "$$MTBF = \\frac{e^{\\frac{t_r}{\\tau}}}{f_D \\cdot f_{CLK} \\cdot T_0}$$"
+    },
+    {
+      "name": "Potencia Dinámica del Árbol de Reloj",
+      "tex": "$$P_{dyn} = C_{total} \\cdot V_{DD}^2 \\cdot f$$"
+    }
+  ]
+}

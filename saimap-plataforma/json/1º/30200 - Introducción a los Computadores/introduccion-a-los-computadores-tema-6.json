@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuáles son las ecuaciones lógicas que definen las salidas de suma (S) y acarreo de salida (C) en un semisumador (Half-Adder) con entradas A y B?",
+      "options": [
+        "S = A \\oplus B, C = A \\cdot B",
+        "S = A \\odot B, C = A + B",
+        "S = A \\oplus B, C = \\overline{A \\cdot B}"
+      ],
+      "correct": 0,
+      "hint": "El semisumador suma dos bits sin considerar un acarreo de entrada, utilizando una XOR y una AND.",
+      "explanation": "La suma lógica de dos bits se modela con la puerta XOR (S = A \\oplus B) y el acarreo con la puerta AND (C = A \\cdot B)."
+    },
+    {
+      "q": "¿Por qué un semisumador no puede utilizarse para las etapas intermedias de un sumador paralelo de múltiples bits?",
+      "options": [
+        "Porque carece de una entrada para el acarreo proveniente de la etapa anterior (C_in).",
+        "Porque su retardo de propagación aumenta exponencialmente con el número de bits.",
+        "Porque no puede representar la suma de dos bits de igual valor."
+      ],
+      "correct": 0,
+      "hint": "Un sumador intermedio de una palabra binaria debe procesar A_i, B_i y el acarreo de la etapa i-1.",
+      "explanation": "El semisumador solo tiene dos entradas (A y B) y no permite procesar el acarreo de entrada (C_in) que se propaga desde las etapas menos significativas."
+    },
+    {
+      "q": "La ecuación lógica para la suma (S) de un sumador completo (Full-Adder) de 1 bit con entradas A, B y C_in es:",
+      "options": [
+        "S = A \\oplus B \\oplus C_{in}",
+        "S = A \\cdot B + (A \\oplus B) \\cdot C_{in}",
+        "S = A \\cdot B \\cdot C_{in} + \\overline{A \\oplus B}"
+      ],
+      "correct": 0,
+      "hint": "La suma lógica es impar cuando un número impar de sus entradas es igual a 1.",
+      "explanation": "La suma S es 1 si un número impar de las entradas (A, B, C_in) es 1, lo cual se representa algebraicamente como la función XOR de tres variables: A \\oplus B \\oplus C_{in}."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una expresión lógicamente equivalente para el acarreo de salida (C_out) de un sumador completo utilizando únicamente puertas AND y OR de dos entradas?",
+      "options": [
+        "C_{out} = A \\cdot B + B \\cdot C_{in} + A \\cdot C_{in}",
+        "C_{out} = (A + B) \\cdot (B + C_{in}) \\cdot (A + C_{in})",
+        "C_{out} = A \\cdot B \\cdot C_{in} + A + B"
+      ],
+      "correct": 0,
+      "hint": "Busque la forma disyuntiva del acarreo que considera las intersecciones de dos operandos cualesquiera.",
+      "explanation": "La ecuación C_{out} = A \\cdot B + B \\cdot C_{in} + A \\cdot C_{in} es equivalente a A \\cdot B + (A \\oplus B) \\cdot C_{in}. Representa que hay acarreo si al menos dos de las tres entradas son 1."
+    },
+    {
+      "q": "En un sumador por propagación de acarreo (Ripple Carry Adder - RCA) de N bits, ¿cuál es la causa principal del retardo de la ruta crítica?",
+      "options": [
+        "La necesidad de que el acarreo de cada etapa se propague de manera secuencial a la etapa siguiente.",
+        "El uso de multiplexores para seleccionar dinámicamente entre suma y resta en cada bit.",
+        "El tiempo requerido para decodificar el OPCode en la ruta de control de la ALU."
+      ],
+      "correct": 0,
+      "hint": "El acarreo final 'ondula' (ripples) a través de todas las etapas intermedias del sumador.",
+      "explanation": "En un RCA, cada etapa de sumador completo debe esperar a que el acarreo de la etapa anterior (C_in) esté estabilizado, creando un retardo lineal de O(N)."
+    },
+    {
+      "q": "En el contexto de los sumadores con anticipación de acarreo (Carry Lookahead Adder - CLA), ¿cómo se define y qué significa el término de propagación P_i?",
+      "options": [
+        "P_i = A_i \\oplus B_i; indica que un acarreo entrante C_i se propagará a C_{i+1} si exactamente uno de los operandos es 1.",
+        "P_i = A_i \\cdot B_i; indica que se propagará el acarreo de entrada solo si ambos operandos son 0.",
+        "P_i = A_i + B_i; representa la probabilidad de que la suma intermedia sea mayor que la unidad."
+      ],
+      "correct": 0,
+      "hint": "La propagación requiere que el acarreo de entrada pase directamente al de salida a través de la etapa.",
+      "explanation": "El propagador P_i = A_i \\oplus B_i (o P_i = A_i + B_i en algunas optimizaciones) indica que si llega un acarreo de entrada C_i, este pasará a la etapa siguiente porque la suma local es 1."
+    },
+    {
+      "q": "En un sumador Carry Lookahead (CLA), ¿cómo se define el término generador de acarreo G_i y qué comportamiento describe?",
+      "options": [
+        "G_i = A_i \\cdot B_i; indica que la etapa i genera un acarreo de salida de forma autónoma, independiente del acarreo de entrada.",
+        "G_i = A_i \\oplus B_i; describe la generación de acarreo cuando el acarreo de entrada es exactamente 1.",
+        "G_i = \\overline{A_i \\cdot B_i}; representa la condición en la que no se puede generar un acarreo de salida."
+      ],
+      "correct": 0,
+      "hint": "La generación de acarreo ocurre cuando el valor de los operandos en esa etapa obliga a producir un acarreo.",
+      "explanation": "El generador G_i = A_i \\cdot B_i es 1 cuando A_i y B_i son 1, forzando a que C_{i+1} sea 1 sin importar el valor del acarreo de entrada C_i."
+    },
+    {
+      "q": "¿Cuál es la ecuación lógica del acarreo C_1 que entra en la etapa 1 de un CLA en función de los términos de propagación, generación y el acarreo inicial C_0?",
+      "options": [
+        "C_1 = G_0 + P_0 \\cdot C_0",
+        "C_1 = G_0 \\cdot (P_0 + C_0)",
+        "C_1 = P_0 + G_0 \\cdot C_0"
+      ],
+      "correct": 0,
+      "hint": "El acarreo se genera en la etapa 0 o se propaga desde el acarreo inicial C_0.",
+      "explanation": "El acarreo C_1 se activa si la etapa anterior genera un acarreo (G_0) o si propaga (P_0) el acarreo inicial (C_0), dando: C_1 = G_0 + P_0 \\cdot C_0."
+    },
+    {
+      "q": "¿Cuál es la ecuación lógica del acarreo C_2 en un CLA en función del acarreo inicial C_0 y los términos P_i y G_i?",
+      "options": [
+        "C_2 = G_1 + P_1 \\cdot G_0 + P_1 \\cdot P_0 \\cdot C_0",
+        "C_2 = G_1 + G_0 \\cdot (P_1 + P_0 \\cdot C_0)",
+        "C_2 = P_1 + P_0 \\cdot G_1 + P_1 \\cdot P_0 \\cdot C_0"
+      ],
+      "correct": 0,
+      "hint": "Sustituya C_1 = G_0 + P_0 \\cdot C_0 en la expresión de C_2 = G_1 + P_1 \\cdot C_1.",
+      "explanation": "Sustituyendo C_1 en C_2 = G_1 + P_1 \\cdot C_1 se obtiene C_2 = G_1 + P_1 \\cdot (G_0 + P_0 \\cdot C_0) = G_1 + P_1 \\cdot G_0 + P_1 \\cdot P_0 \\cdot C_0."
+    },
+    {
+      "q": "¿Cuál es la ecuación lógica correcta para el acarreo C_3 en un sumador Carry Lookahead?",
+      "options": [
+        "C_3 = G_2 + P_2 \\cdot G_1 + P_2 \\cdot P_1 \\cdot G_0 + P_2 \\cdot P_1 \\cdot P_0 \\cdot C_0",
+        "C_3 = G_2 + P_2 \\cdot (G_1 + P_1 \\cdot (G_0 + P_0 \\cdot C_0))",
+        "C_3 = G_2 \\cdot P_2 + G_1 \\cdot P_1 + G_0 \\cdot P_0 + C_0"
+      ],
+      "correct": 0,
+      "hint": "Expanda la recursión sustituyendo C_2 en la fórmula general C_3 = G_2 + P_2 \\cdot C_2.",
+      "explanation": "Al expandir C_3 = G_2 + P_2 \\cdot C_2, obtenemos C_3 = G_2 + P_2 \\cdot (G_1 + P_1 \\cdot G_0 + P_1 \\cdot P_0 \\cdot C_0) = G_2 + P_2 \\cdot G_1 + P_2 \\cdot P_1 \\cdot G_0 + P_2 \\cdot P_1 \\cdot P_0 \\cdot C_0."
+    },
+    {
+      "q": "¿Qué desventaja de hardware presenta la anticipación de acarreo (CLA) en sumadores de un número muy grande de bits (por ejemplo, 32 o 64 bits)?",
+      "options": [
+        "El fan-in de las puertas lógicas crece excesivamente, lo que incrementa el área y degrada la velocidad eléctrica.",
+        "Requiere un número infinito de compuertas lógicas XNOR redundantes.",
+        "Obliga a que las operaciones de la ALU se realicen de forma puramente secuencial."
+      ],
+      "correct": 0,
+      "hint": "Las puertas AND/OR de las últimas etapas del CLA necesitarían un número elevado de entradas.",
+      "explanation": "A medida que aumenta el número de bits en un CLA, las ecuaciones de acarreo requieren compuertas con mayor número de entradas (fan-in), lo que resulta impracticable físicamente debido a los retardos eléctricos y el espacio."
+    },
+    {
+      "q": "Para realizar la resta A - B en complemento a 2 utilizando un circuito sumador paralelo, ¿qué modificaciones se aplican habitualmente al operando B y al acarreo inicial C_in?",
+      "options": [
+        "Se invierten todos los bits de B (complemento a 1) y se establece C_{in} = 1.",
+        "Se invierten todos los bits de B (complemento a 1) y se establece C_{in} = 0.",
+        "Se calcula el complemento a 2 de B de forma externa y se establece C_{in} = 0."
+      ],
+      "correct": 0,
+      "hint": "El complemento a 2 se define matemáticamente como el complemento a 1 sumándole 1.",
+      "explanation": "La resta A - B se implementa como A + \\bar{B} + 1. Físicamente, esto se logra invirtiendo los bits de B con puertas XOR/NOT y metiendo un 1 a través del acarreo inicial (C_{in} = 1)."
+    },
+    {
+      "q": "¿Bajo qué condiciones se produce un desbordamiento aritmético (Overflow) al sumar dos números en complemento a 2 de N bits?",
+      "options": [
+        "Cuando se suman dos números del mismo signo y el resultado tiene el signo opuesto.",
+        "Cuando la suma produce un acarreo de salida del MSB (C_out = 1).",
+        "Cuando el resultado de la operación aritmética es igual a cero."
+      ],
+      "correct": 0,
+      "hint": "Piense en la suma de dos números positivos que resulta en un número negativo, o viceversa.",
+      "explanation": "El desbordamiento en complemento a 2 ocurre cuando el resultado de sumar dos números con el mismo signo excede el rango almacenable, lo que altera el bit de signo dando un resultado de signo opuesto."
+    },
+    {
+      "q": "¿Cómo se calcula la señal del flag de Overflow (V) mediante puertas lógicas basándose en los acarreos del bit más significativo (MSB)?",
+      "options": [
+        "V = C_{in, MSB} \\oplus C_{out, MSB}",
+        "V = C_{in, MSB} \\cdot C_{out, MSB}",
+        "V = C_{in, MSB} + C_{out, MSB}"
+      ],
+      "correct": 0,
+      "hint": "El overflow ocurre si y solo si el acarreo que entra al MSB es diferente del acarreo que sale del MSB.",
+      "explanation": "El flag de overflow V se genera de forma muy sencilla en hardware mediante la operación XOR entre el acarreo de entrada al MSB (C_{in, MSB}) y el acarreo de salida del MSB (C_{out, MSB})."
+    },
+    {
+      "q": "¿Cuál es la diferencia conceptual entre el Carry Flag (C) y el Overflow Flag (V) en un procesador?",
+      "options": [
+        "C se utiliza para detectar el desbordamiento en operaciones sin signo, mientras que V se utiliza en operaciones con signo (complemento a 2).",
+        "C se activa solo en las operaciones de resta, mientras que V solo se activa en las sumas.",
+        "C indica que el resultado es exactamente cero, mientras que V indica que el signo del resultado es negativo."
+      ],
+      "correct": 0,
+      "hint": "Considere la interpretación de los números operados por la ALU como firmados o no firmados.",
+      "explanation": "El Carry (C) indica si la suma de números sin signo excede el rango máximo de representación, mientras que el Overflow (V) evalúa si la suma de números con signo (complemento a 2) ha desbordado su rango."
+    },
+    {
+      "q": "¿Cómo se determina el Sign Flag (N o S) a la salida de una ALU de N bits?",
+      "options": [
+        "Copia directamente el bit más significativo (MSB) del resultado de la operación.",
+        "Se obtiene realizando una XOR entre el Carry flag y el Overflow flag.",
+        "Es igual al complemento lógico del bit de menor peso (LSB) del resultado."
+      ],
+      "correct": 0,
+      "hint": "El bit de signo de un número en complemento a 2 reside siempre en su posición más significativa.",
+      "explanation": "El Sign Flag simplemente duplica el bit MSB del resultado (R_{N-1}). Si el MSB es 1, el número representado en complemento a 2 es negativo ($N=1$); si es 0, es positivo ($N=0$)."
+    },
+    {
+      "q": "¿Qué estructura de circuito lógico se utiliza para generar el Zero Flag (Z) a partir del resultado de N bits de la ALU?",
+      "options": [
+        "Una puerta NOR de N entradas cuyos operandos son cada uno de los bits de la salida de la ALU.",
+        "Una puerta AND de N entradas cuyos operandos son cada uno de los bits de la salida de la ALU.",
+        "Una puerta XOR de dos entradas conectada al MSB y al LSB de la salida."
+      ],
+      "correct": 0,
+      "hint": "El flag Z debe ser 1 si y solo si todos los bits del resultado son exactamente 0.",
+      "explanation": "Para que la salida de la puerta NOR sea 1, todas sus entradas deben ser 0. Por tanto, una NOR de N entradas aplicada al bus de datos de salida de la ALU implementa exactamente la detección de cero."
+    },
+    {
+      "q": "Si en una ALU realizamos la operación de resta A - B donde los operandos son idénticos (A = B), ¿qué banderas de estado se activarán necesariamente?",
+      "options": [
+        "El flag de cero (Z = 1) y el flag de acarreo (C = 1, al no haber préstamo).",
+        "El flag de signo (N = 1) y el flag de overflow (V = 1).",
+        "Solo el flag de overflow (V = 1)."
+      ],
+      "correct": 0,
+      "hint": "Al restar dos números iguales el resultado es 0. En la ALU, la resta se implementa sumando el complemento.",
+      "explanation": "La resta A - B es A + \\bar{B} + 1. Si A=B, la suma genera un resultado de todos ceros, por lo que Z=1. Además, se produce un acarreo de salida de la etapa MSB (C=1) que representa la ausencia de préstamo (no borrow)."
+    },
+    {
+      "q": "En el diseño de un sumador/restador paralelo combinado, ¿con qué propósito se conectan puertas XOR a la entrada del operando B?",
+      "options": [
+        "Para actuar como inversores controlados: dejan pasar B si la señal de control es 0 (suma) o invierten B si es 1 (resta).",
+        "Para calcular la operación lógica XOR de manera paralela antes de realizar la suma de los operandos.",
+        "Para agilizar el cálculo del acarreo intermedio mediante la anticipación de la función XOR."
+      ],
+      "correct": 0,
+      "hint": "Recuerde que B \\oplus 0 = B y B \\oplus 1 = \\bar{B}.",
+      "explanation": "La puerta XOR con una entrada conectada al operando B y la otra a una señal de control de resta (SUB) devuelve B cuando SUB=0 y \\bar{B} cuando SUB=1, permitiendo compartir el hardware del sumador."
+    },
+    {
+      "q": "¿Cuál es la diferencia fundamental en el comportamiento de una ALU al realizar un desplazamiento aritmético a la derecha (ASR) frente a un desplazamiento lógico a la derecha (LSR)?",
+      "options": [
+        "ASR replica el bit de signo (MSB) en los espacios vacíos del extremo izquierdo, mientras que LSR introduce ceros.",
+        "LSR preserva el bit de signo duplicándolo, mientras que ASR introduce unos en todos los bits vacíos.",
+        "ASR desplaza los bits hacia la izquierda y LSR los desplaza hacia la derecha."
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento aritmético debe preservar el signo del operando en complemento a 2.",
+      "explanation": "ASR (Arithmetic Shift Right) divide entre 2 manteniendo el signo, por lo que rellena los bits vacantes por la izquierda con el valor del bit MSB actual. LSR (Logical Shift Right) simplemente mete ceros."
+    },
+    {
+      "q": "¿Qué función cumple el multiplexor final de selección en la ruta de datos de una ALU elemental?",
+      "options": [
+        "Seleccionar la salida final de la ALU entre las salidas de los bloques aritméticos y lógicos según el OPCode.",
+        "Determinar de forma dinámica si los operandos de entrada deben ser tratados con o sin signo.",
+        "Alinear el acarreo de salida con el bit de signo para evitar desbordamientos no deseados."
+      ],
+      "correct": 0,
+      "hint": "La ALU ejecuta internamente múltiples operaciones en paralelo, pero solo una debe enviarse al exterior.",
+      "explanation": "Todos los bloques (suma, resta, AND, OR, etc.) calculan su resultado en paralelo. El multiplexor de salida utiliza el OPCode de control para enrutar el resultado correcto al bus de salida."
+    },
+    {
+      "q": "En un sumador Ripple Carry (RCA) de N bits, si el retardo de entrada a salida de acarreo por etapa es \\tau_c y el de entrada a suma es \\tau_s, la latencia crítica del circuito se expresa aproximadamente como:",
+      "options": [
+        "(N-1)\\tau_c + \\max(\\tau_c, \\tau_s)",
+        "N \\cdot (\\tau_c + \\tau_s)",
+        "(N-1)\\tau_s + \\tau_c"
+      ],
+      "correct": 0,
+      "hint": "El acarreo viaja a través de N-1 etapas antes de que la última etapa sume su resultado final.",
+      "explanation": "El camino crítico involucra la propagación del acarreo a través de N-1 etapas interconectadas ((N-1)\\tau_c), y en la última etapa se debe esperar a que se compute la suma final o el último acarreo."
+    },
+    {
+      "q": "Cuando una CPU ejecuta una instrucción de comparación como 'CMP A, B', ¿cómo actúa físicamente la ALU?",
+      "options": [
+        "Realiza internamente la resta A - B para actualizar el registro de FLAGS, pero no almacena el resultado numérico.",
+        "Efectúa una operación lógica XOR bit a bit y guarda el resultado en el operando de destino.",
+        "Genera una interrupción de desbordamiento si los dos operandos no son de idéntico valor."
+      ],
+      "correct": 0,
+      "hint": "La comparación sirve para evaluar relaciones de orden (<, >, ==) mediante la actualización de banderas sin destruir el destino.",
+      "explanation": "La instrucción CMP resta los operandos de forma convencional modificando las banderas de estado (Z, N, C, V), pero la unidad de control impide que el resultado de la resta se escriba en ningún registro del procesador."
+    },
+    {
+      "q": "¿Cómo detecta un circuito aritmético el desbordamiento (Overflow) al realizar la suma de dos números binarios sin signo?",
+      "options": [
+        "Evaluando si el acarreo de salida de la última etapa (MSB) es igual a 1 (C_out = 1).",
+        "Mediante la misma puerta XOR que evalúa el desbordamiento con signo (V).",
+        "Verificando si el resultado de la suma es un número entero par."
+      ],
+      "correct": 0,
+      "hint": "En la aritmética sin signo, cualquier valor que requiera un bit adicional para representarse causa overflow.",
+      "explanation": "Para números sin signo, el rango máximo con N bits es 2^N - 1. Si la suma requiere un bit adicional (representado por el acarreo de salida final C_out = 1), se ha producido un desbordamiento sin signo."
+    },
+    {
+      "q": "¿Bajo qué combinación de signos de los operandos A y B puede producirse overflow (V = 1) durante una resta signed A - B?",
+      "options": [
+        "Solo si A y B tienen signos opuestos (por ejemplo, A positivo y B negativo).",
+        "Solo si A y B tienen el mismo signo.",
+        "El desbordamiento en la resta puede producirse independientemente de los signos de A y B."
+      ],
+      "correct": 0,
+      "hint": "Restar un número negativo de uno positivo equivale a sumar dos números positivos.",
+      "explanation": "La resta A - B equivale a A + (-B). Si A es positivo y B es negativo, se suman dos números positivos, lo cual puede desbordar. Si tienen el mismo signo, es imposible que desborde porque equivale a restar magnitudes."
+    },
+    {
+      "q": "Para implementar saltos condicionales del tipo 'BGE' (Branch if Greater than or Equal, con signo) en lenguaje ensamblador, la CPU evalúa la condición de las banderas como:",
+      "options": [
+        "N \\oplus V = 0",
+        "Z + C = 1",
+        "N \\cdot Z = 0"
+      ],
+      "correct": 0,
+      "hint": "Para que A \\ge B con signo, o bien no hay overflow y el resultado es positivo (N=0, V=0) o bien hay overflow y el resultado es negativo (N=1, V=1).",
+      "explanation": "La condición para mayor o igual con signo es que el Sign flag y el Overflow flag tengan el mismo valor. Esto se expresa lógicamente como N \\oplus V = 0 (o N = V)."
+    },
+    {
+      "q": "¿Cuál es el número mínimo de puertas lógicas NAND de 2 entradas requerido para construir un semisumador (Half-Adder) completo?",
+      "options": [
+        "5 puertas NAND",
+        "4 puertas NAND",
+        "6 puertas NAND"
+      ],
+      "correct": 0,
+      "hint": "La función XOR clásica requiere 4 puertas NAND, y a partir de sus nodos intermedios se puede derivar la AND.",
+      "explanation": "Una XOR de 2 entradas se implementa con 4 puertas NAND. El nodo intermedio de esa estructura es exactamente \\overline{A \\cdot B}. Añadiendo una quinta puerta NAND como inversor a este nodo se obtiene la salida AND (C = A \\cdot B)."
+    },
+    {
+      "q": "¿Cuántos semisumadores (Half-Adders) y puertas OR de 2 entradas se requieren para construir un sumador completo (Full-Adder) de 1 bit?",
+      "options": [
+        "2 semisumadores y 1 puerta OR",
+        "2 semisumadores y 2 puertas OR",
+        "3 semisumadores y ninguna puerta OR"
+      ],
+      "correct": 0,
+      "hint": "Un sumador completo suma las dos primeras entradas y luego le añade el acarreo de entrada, combinando los acarreos intermedios.",
+      "explanation": "El primer semisumador calcula S1 = A \\oplus B y C1 = A \\cdot B. El segundo semisumador calcula S = S1 \\oplus C_{in} y C2 = S1 \\cdot C_{in}. Una puerta OR combina los acarreos intermedios C_{out} = C1 + C2."
+    },
+    {
+      "q": "¿Por qué las estructuras jerárquicas (por ejemplo, bloques de 4 bits en cascada) son preferibles en los sumadores CLA grandes en vez de una estructura plana?",
+      "options": [
+        "Para limitar el crecimiento del fan-in de las puertas lógicas, manteniendo el retardo eléctrico controlado.",
+        "Para simplificar la conexión física de las patillas del circuito integrado.",
+        "Porque las ecuaciones de acarreo superiores no admiten representación mediante suma de productos."
+      ],
+      "correct": 0,
+      "hint": "El fan-in excesivo en tecnologías CMOS degrada enormemente la velocidad y requiere transistores enormes.",
+      "explanation": "Un CLA plano de 32 bits requeriría puertas AND/OR con hasta 33 entradas, lo cual es inviable. Al usar bloques jerárquicos de 4 bits, el fan-in máximo se limita a 5, manteniendo alta la velocidad."
+    },
+    {
+      "q": "En el bloque lógico de una ALU, la unidad lógica pura suele tener menor retardo que la unidad aritmética porque:",
+      "options": [
+        "No existe propagación de señales de acarreo entre los bits adyacentes de la palabra.",
+        "Utiliza multiplexores de transmisión sin puertas lógicas activas.",
+        "Procesa exclusivamente representaciones de coma flotante de alta precisión."
+      ],
+      "correct": 0,
+      "hint": "Las operaciones lógicas AND, OR y XOR se realizan bit a bit de forma independiente.",
+      "explanation": "La ausencia de acarreos o dependencias espaciales entre los diferentes bits de la palabra permite que las operaciones lógicas se computen en paralelo inmediato en tiempo constante O(1)."
+    },
+    {
+      "q": "¿Qué ventaja tiene la utilización de sumadores basados en puertas de transmisión (Transmission Gates) en las celdas estándar de tecnologías CMOS?",
+      "options": [
+        "Reducen significativamente el número de transistores y disminuyen los retardos en los caminos de acarreo y suma.",
+        "Eliminan la necesidad de conectar el circuito a las líneas de alimentación eléctrica de la oblea.",
+        "Impiden por completo la disipación de potencia estática en la celda."
+      ],
+      "correct": 0,
+      "hint": "Las puertas de transmisión permiten implementar funciones como XOR y multiplexores con muy pocos transistores.",
+      "explanation": "El uso de puertas de transmisión permite realizar la función XOR con solo 4 transistores (en lugar de los 8 o 12 usuales en lógica estática), reduciendo la capacitancia y acelerando los caminos críticos de suma y acarreo."
+    },
+    {
+      "q": "Al efectuar la resta A - B en un procesador de 8 bits con signo, si A es un número positivo mayor que cero y B es igual a cero, ¿cuáles serán los flags de estado resultantes?",
+      "options": [
+        "C = 1, V = 0, Z = 0, N = 0",
+        "C = 0, V = 1, Z = 0, N = 0",
+        "C = 1, V = 0, Z = 1, N = 1"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que en binario la resta se calcula como A + \\bar{B} + 1. Pruebe con un ejemplo rápido.",
+      "explanation": "Como B=0, su complemento a 1 es 255. La suma de A + 255 + 1 = A + 256. Esto produce un acarreo final (C=1). No hay overflow porque restar 0 no desborda (V=0), el resultado es mayor que cero (Z=0) y positivo (N=0)."
+    },
+    {
+      "q": "En procesadores de arquitectura ARM, el flag Carry se utiliza como un 'Not-Borrow' (no préstamo) durante la resta. ¿Qué indica que C = 0 tras una resta?",
+      "options": [
+        "Que se ha requerido un préstamo (el minuendo es menor que el sustraendo en aritmética sin signo).",
+        "Que el resultado ha sido positivo y no ha habido ningún tipo de error.",
+        "Que la resta ha producido un desbordamiento en complemento a 2."
+      ],
+      "correct": 0,
+      "hint": "En ARM, el acarreo se activa (C=1) si no hay préstamo y se desactiva (C=0) si se necesita préstamo.",
+      "explanation": "Al implementar la resta como A + \\bar{B} + 1, si A < B (sin signo), la suma total no supera 2^N - 1, por lo que no hay acarreo de salida. Esto se interpreta como que hubo préstamo (Borrow), indicado por C=0."
+    },
+    {
+      "q": "¿Qué es la técnica de cadena de acarreo Manchester (Manchester Carry Chain) en el diseño de circuitos aritméticos?",
+      "options": [
+        "Una técnica a nivel de transistor que emplea transistores de paso y compuertas de transmisión para acelerar la propagación del acarreo.",
+        "Un algoritmo software de simulación lógica utilizado en síntesis de silicio de ALUs multinivel.",
+        "Un formato de instrucción del procesador para la ejecución acelerada de sumas vectoriales."
+      ],
+      "correct": 0,
+      "hint": "Busque la alternativa que mencione componentes físicos del silicio.",
+      "explanation": "La cadena Manchester utiliza transistores de paso para conmutar directamente el nodo de acarreo de salida a partir del de entrada mediante las señales de propagación y generación, reduciendo el retardo de compuerta activo."
+    },
+    {
+      "q": "¿Cuál es el principio operativo de un sumador por selección de acarreo (Carry Select Adder - CSLA)?",
+      "options": [
+        "Precalcula dos sumas para el bloque superior (una con C_in = 0 y otra con C_in = 1) y luego selecciona la correcta con un multiplexor.",
+        "Utiliza sensores de corriente analógicos para predecir si el acarreo se propagará a través del sustrato de silicio.",
+        "Omite el cálculo de los bits pares en el ciclo actual y los calcula durante el ciclo de reloj posterior."
+      ],
+      "correct": 0,
+      "hint": "El CSLA duplica los circuitos de suma en bloques para adelantarse a la llegada del acarreo real de etapas previas.",
+      "explanation": "El CSLA calcula en paralelo los resultados posibles para el bloque más significativo asumiendo C_in = 0 y C_in = 1. Cuando el bloque inferior genera el acarreo real, un multiplexor selecciona al instante la suma ya calculada."
+    },
+    {
+      "q": "¿Qué mecanismo utiliza el sumador por omisión de acarreo (Carry Skip Adder - CSA) para mejorar la velocidad?",
+      "options": [
+        "Si todas las etapas de un bloque tienen P_i = 1, el acarreo de entrada del bloque se enruta directamente al siguiente bloque saltándose las etapas intermedias.",
+        "Desactiva las líneas de alimentación de las compuertas que procesan entradas iguales a cero para evitar transiciones de estado.",
+        "Realiza sumas estimadas y realiza una corrección probabilística en el siguiente ciclo."
+      ],
+      "correct": 0,
+      "hint": "El acarreo 'se salta' un bloque entero cuando todos los propagadores individuales del bloque están activos.",
+      "explanation": "Si para un bloque de bits todos los P_i son 1, el acarreo entrante se propagará necesariamente hasta la salida del bloque. El CSA utiliza una puerta AND para detectar esto y enrutar el acarreo de entrada directamente a la salida del bloque."
+    },
+    {
+      "q": "¿Por qué es imprescindible realizar la extensión de signo en la ALU cuando se suman números de diferente ancho de bits (por ejemplo, sumar un entero de 8 bits a uno de 16 bits)?",
+      "options": [
+        "Para conservar el valor y signo numérico correcto en complemento a 2, replicando el MSB del menor en los bits adicionales del mayor.",
+        "Para limpiar los bits de mayor peso y evitar la entrada de datos basura en la unidad de control.",
+        "Para forzar un desbordamiento voluntario en el registro de flags de estado."
+      ],
+      "correct": 0,
+      "hint": "En complemento a 2, extender un número negativo con ceros cambia su valor numérico.",
+      "explanation": "Para operar magnitudes de diferente ancho de palabra, la representación en complemento a 2 exige que el bit de signo del operando más pequeño se replique en todas las posiciones superiores libres para no alterar su valor decimal."
+    },
+    {
+      "q": "¿Pueden ocurrir simultáneamente un desbordamiento sin signo (Carry = 1) y un desbordamiento con signo (Overflow = 1) en una operación de suma de la ALU?",
+      "options": [
+        "Sí, por ejemplo, si sumamos dos números negativos en complemento a 2 cuya suma supera los límites negativos representables.",
+        "No, las ecuaciones lógicas de ambos flags se excluyen mutuamente para cualquier combinación de entradas.",
+        "Sí, pero únicamente si el resultado de la operación matemática resultante es exactamente igual a cero."
+      ],
+      "correct": 0,
+      "hint": "Piense en la suma en complemento a 2 de dos números que también son interpretables como números sin signo grandes.",
+      "explanation": "Sí. En un sistema de 8 bits, sumar 130 + 130 = 260. Sin signo, excede 255 (C=1). Con signo, representa (-126) + (-126) = -252, que excede el límite inferior de -128 (V=1). Ambos flags se activan."
+    },
+    {
+      "q": "¿Cuáles son las ecuaciones que definen a un semirrestador (Half-Subtractor) para realizar A - B obteniendo la Diferencia (D) y el préstamo de salida (B_out)?",
+      "options": [
+        "D = A \\oplus B, B_{out} = \\bar{A} \\cdot B",
+        "D = A \\oplus B, B_{out} = A \\cdot \\bar{B}",
+        "D = \\overline{A \\oplus B}, B_{out} = \\bar{A} \\cdot B"
+      ],
+      "correct": 0,
+      "hint": "La diferencia matemática es la misma que la suma binaria, pero el préstamo solo se activa si A=0 y B=1.",
+      "explanation": "La diferencia se calcula mediante una puerta XOR (D = A \\oplus B), igual que en el sumador. El préstamo de salida se activa cuando se resta 1 a 0, lo que lógicamente se describe como B_{out} = \\bar{A} \\cdot B."
+    },
+    {
+      "q": "La ecuación lógica para el préstamo de salida (B_out) de una etapa de restador completo (Full-Subtractor) que realiza la resta A - B - B_in es:",
+      "options": [
+        "B_{out} = \\bar{A} \\cdot B + (\\overline{A \\oplus B}) \\cdot B_{in}",
+        "B_{out} = A \\cdot \\bar{B} + (A \\oplus B) \\cdot B_{in}",
+        "B_{out} = \\bar{A} \\cdot B + (A \\oplus B) \\cdot B_{in}"
+      ],
+      "correct": 0,
+      "hint": "El préstamo se genera de manera local o se propaga si el minuendo intermedio es cero.",
+      "explanation": "El préstamo B_{out} de un restador completo es 1 si se genera un préstamo local (\\bar{A} \\cdot B) o si hay préstamo de entrada B_in y la diferencia intermedia de la etapa es 0 (representado por \\overline{A \\oplus B})."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si sumamos los operandos de 4 bits sin signo A = 1001 y B = 1011, el resultado binario truncado es S = 0100 y el acarreo de salida final es C_out = ____.",
+      "options": [
+        "1",
+        "0",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Sume los valores decimales correspondientes a 1001 (9) y 1011 (11).",
+      "explanation": "9 + 11 = 20. En binario de 5 bits es 10100. El resultado de 4 bits es 0100 y el acarreo de salida (el 5º bit) es 1."
+    },
+    {
+      "q": "En una suma de 8 bits en complemento a 2, si sumamos A = 01111111 y B = 00000001, el resultado es 10000000 y el flag de desbordamiento V vale ____.",
+      "options": [
+        "1",
+        "0",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "Considere los valores decimales de los operandos (+127 y +1).",
+      "explanation": "Sumar +127 y +1 da +128. Este valor excede el límite máximo de representación con signo de 8 bits (+127), por lo que se genera desbordamiento y V = 1."
+    },
+    {
+      "q": "Si realizamos la resta A - B en un restador de 8 bits con operandos A = 00000000 y B = 00000000, el flag de cero Z resultante vale ____.",
+      "options": [
+        "1",
+        "0",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "Determine el resultado numérico y aplique la definición del flag de cero.",
+      "explanation": "0 - 0 = 0. Como el resultado final de la operación es exactamente cero, el flag de cero Z se activa poniéndose a 1."
+    },
+    {
+      "q": "Un Ripple Carry Adder de 16 bits tiene un retardo de acarreo por etapa de 2 ns y un retardo de suma de 3 ns. El retardo crítico de propagación del sumador completo es ____ ns.",
+      "options": [
+        "33",
+        "35",
+        "32"
+      ],
+      "correct": 0,
+      "hint": "Use la fórmula del retardo del RCA: (N-1) * t_carry + t_sum.",
+      "explanation": "El retardo crítico se calcula como (16 - 1) * 2 ns + 3 ns = 15 * 2 ns + 3 ns = 33 ns."
+    },
+    {
+      "q": "En un sumador Carry Lookahead de 4 bits con acarreo inicial C_0 = 0, la ecuación simplificada del acarreo C_1 es C_1 = ____.",
+      "options": [
+        "G_0",
+        "P_0",
+        "G_0 \\cdot P_0"
+      ],
+      "correct": 0,
+      "hint": "Sustituya C_0 = 0 en la fórmula C_1 = G_0 + P_0 * C_0.",
+      "explanation": "Dado C_1 = G_0 + P_0 \\cdot C_0, si C_0 = 0, el segundo término se anula, por lo que C_1 = G_0."
+    },
+    {
+      "q": "Si realizamos la operación lógica XOR de 4 bits entre A = 1010 y B = 1100 en la ALU, el resultado obtenido es S = ____.",
+      "options": [
+        "0110",
+        "1110",
+        "1000"
+      ],
+      "correct": 0,
+      "hint": "Aplique la XOR bit a bit: bits diferentes dan 1, bits iguales dan 0.",
+      "explanation": "XOR bit a bit: 1^1 = 0, 0^1 = 1, 1^0 = 1, 0^0 = 0. El resultado de 1010 XOR 1100 es 0110."
+    },
+    {
+      "q": "Al efectuar la resta A - B en complemento a 2 de 4 bits, con A = 0101 y B = 1011, la entrada B se invierte a complemento a 1 dando ____.",
+      "options": [
+        "0100",
+        "0101",
+        "1011"
+      ],
+      "correct": 0,
+      "hint": "El complemento a 1 consiste en cambiar los 0 por 1 y los 1 por 0.",
+      "explanation": "El complemento a 1 del operando B (1011) se obtiene invirtiendo cada uno de sus bits, lo que da como resultado 0100."
+    },
+    {
+      "q": "Al realizar la suma de 8 bits sin signo A = 11111111 y B = 00000001, el Carry flag C final toma el valor de ____.",
+      "options": [
+        "1",
+        "0",
+        "indefinido"
+      ],
+      "correct": 0,
+      "hint": "Determine si la suma de 255 + 1 genera un bit adicional fuera del ancho de 8 bits.",
+      "explanation": "255 + 1 = 256. En binario de 9 bits es 100000000. El acarreo de salida es el noveno bit, es decir, C = 1."
+    },
+    {
+      "q": "Si sumamos A = 10000000 (-128) y B = 11111111 (-1) en complemento a 2 de 8 bits, el resultado binario obtenido es 01111111 (+127) y el flag de overflow V toma el valor de ____.",
+      "options": [
+        "1",
+        "0",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "Considere si la suma de dos números negativos puede resultar matemáticamente en uno positivo.",
+      "explanation": "-128 + (-1) = -129. Este valor está fuera del rango representable de 8 bits con signo [-128, 127], por lo que se produce desbordamiento (V = 1)."
+    },
+    {
+      "q": "Una ALU realiza una resta A - B que produce el resultado R = 00000000. Por lo tanto, el flag Z es 1 y el Sign flag N vale ____.",
+      "options": [
+        "0",
+        "1",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "El Sign flag copia directamente el MSB del resultado.",
+      "explanation": "Como el resultado R es todo ceros, el bit más significativo (MSB) es 0, lo que significa que el flag de signo N toma el valor de 0."
+    },
+    {
+      "q": "Si en un sumador completo de 1 bit las tres entradas están activas A = 1, B = 1 y C_in = 1, el acarreo de salida C_out vale ____.",
+      "options": [
+        "1",
+        "0",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Utilice la ecuación lógica de C_out = A.B + (A^B).C_in.",
+      "explanation": "C_out = 1 \\cdot 1 + (1 \\oplus 1) \\cdot 1 = 1 + 0 \\cdot 1 = 1. La suma aritmética es 3, que se representa como Suma=1 y Acarreo=1."
+    },
+    {
+      "q": "En un sumador Carry Lookahead, si las entradas del bit 3 son A_3 = 1 y B_3 = 0, el valor del propagador de acarreo P_3 es ____.",
+      "options": [
+        "1",
+        "0",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "El propagador se define lógicamente como P_i = A_i ^ B_i.",
+      "explanation": "P_3 = A_3 \\oplus B_3 = 1 \\oplus 0 = 1. Esto significa que la etapa 3 propagará cualquier acarreo que reciba de la etapa 2."
+    },
+    {
+      "q": "En una operación lógica de desplazamiento a la izquierda (LSL) de 8 bits aplicada al operando A = 11001010, el bit que se almacena en el Carry flag C tras desplazar 1 posición es ____.",
+      "options": [
+        "1",
+        "0",
+        "indefinido"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento a la izquierda expulsa el bit más significativo (MSB) de la palabra.",
+      "explanation": "El MSB de A (11001010) es 1. Al desplazar hacia la izquierda, este bit sale de la palabra de 8 bits y se almacena en el Carry flag, de modo que C = 1."
+    },
+    {
+      "q": "En una ALU de 4 bits, si realizamos la operación lógica AND bit a bit entre A = 1011 y B = 0110, el resultado obtenido es ____.",
+      "options": [
+        "0010",
+        "1111",
+        "0110"
+      ],
+      "correct": 0,
+      "hint": "Realice la operación AND para cada par de bits homólogos.",
+      "explanation": "AND bit a bit: (1 y 0) = 0, (0 y 1) = 0, (1 y 1) = 1, (1 y 0) = 0. Así, 1011 AND 0110 = 0010."
+    },
+    {
+      "q": "Si en la suma de dos operandos de 4 bits en complemento a 2, el acarreo entrante al bit MSB es C_in_MSB = 0 y el acarreo saliente del MSB es C_out_MSB = 1, el flag de overflow V toma el valor de ____.",
+      "options": [
+        "1",
+        "0",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que el overflow V es la XOR de ambos acarreos del MSB.",
+      "explanation": "V = C_in_MSB \\oplus C_out_MSB = 0 \\oplus 1 = 1. Esto indica que se ha producido una anomalía aritmética en la representación signed."
+    },
+    {
+      "q": "Al sumar A = 11110000 y B = 00010000 en un sumador paralelo de 8 bits, el resultado binario obtenido es 00000000 y el acarreo de salida final C_out vale ____.",
+      "options": [
+        "1",
+        "0",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Sume en binario convencional y observe si se genera un noveno bit de acarreo.",
+      "explanation": "11110000 + 00010000 = 100000000. El resultado se trunca a 8 bits (00000000) y el noveno bit activa el acarreo final (C_out = 1)."
+    },
+    {
+      "q": "Si un bloque lógico de la ALU tiene un retardo para la operación AND de 5 ns y el multiplexor de selección añade 2 ns, el tiempo requerido para estabilizar la salida lógica es ____ ns.",
+      "options": [
+        "7",
+        "17",
+        "5"
+      ],
+      "correct": 0,
+      "hint": "Sume el retardo de la ruta de datos AND y el retardo del multiplexor.",
+      "explanation": "El camino crítico de la operación AND es la suma de los retardos individuales en cascada: 5 ns + 2 ns = 7 ns."
+    },
+    {
+      "q": "Si sumamos en complemento a 2 los operandos de 4 bits A = 1111 (-1 en decimal) y B = 0001 (+1 en decimal), el resultado es 0000 y el flag de overflow V toma el valor de ____.",
+      "options": [
+        "0",
+        "1",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "Compruebe si el resultado matemático de la suma cabe en el rango [-8, 7].",
+      "explanation": "-1 + 1 = 0. Dado que 0 está en el rango de 4 bits con signo, no hay desbordamiento y V = 0."
+    },
+    {
+      "q": "Si restamos en complemento a 2 los operandos de 4 bits A = 0100 (+4) y B = 1100 (-4), el resultado binario obtenido del sumador (A + \\bar{B} + 1) es ____.",
+      "options": [
+        "1000",
+        "0000",
+        "0100"
+      ],
+      "correct": 0,
+      "hint": "Calcule la resta sumando 4 con el complemento a 1 de -4 más 1.",
+      "explanation": "A = 0100, B = 1100. Complemento a 1 de B es 0011. Suma: 0100 + 0011 + 1 = 1000 (que en complemento a 2 representa -8, indicando un overflow puesto que 4 - (-4) = 8)."
+    },
+    {
+      "q": "En un restador de 8 bits, al realizar la operación A - B con A = 00000101 (5) y B = 00001000 (8), el resultado es negativo, por lo que el Sign flag N vale ____.",
+      "options": [
+        "1",
+        "0",
+        "indeterminado"
+      ],
+      "correct": 0,
+      "hint": "El resultado de la resta es -3. Evalúe cuál es su bit de mayor peso (MSB) en 8 bits.",
+      "explanation": "5 - 8 = -3. En binario de 8 bits en complemento a 2, -3 se representa como 11111101. Como el MSB es 1, el Sign flag N es igual a 1."
+    },
+    {
+      "q": "¿Cuál de las siguientes combinaciones de operandos de 4 bits y operaciones en complemento a 2 produce desbordamiento (V = 1)?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "La suma de A = 0100 (+4) y B = 0101 (+5).",
+        "La resta de A = 1000 (-8) y B = 0001 (+1)."
+      ],
+      "correct": 0,
+      "hint": "El rango representable con 4 bits es de -8 a 7. Calcule el valor matemático de cada opción.",
+      "explanation": "En A: 4 + 5 = 9 (fuera de rango, V=1). En B: -8 - 1 = -9 (fuera de rango, V=1). Por lo tanto, todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "¿En qué casos al sumar dos operandos de 8 bits A y B en complemento a 2 se garantiza que no ocurrirá overflow (V = 0)?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "Cuando A y B tienen signos opuestos (uno positivo y otro negativo).",
+        "Cuando uno de los operandos es exactamente igual a cero."
+      ],
+      "correct": 0,
+      "hint": "El overflow en la suma con signo solo puede producirse cuando se suman operandos del mismo signo.",
+      "explanation": "Si los signos son opuestos, la magnitud del resultado siempre es menor o igual que la del operando mayor, imposibilitando el overflow. Si uno es cero, el resultado es igual al otro operando. Todas son correctas."
+    },
+    {
+      "q": "¿Qué condiciones lógicas o matemáticas indican que la suma binaria sin signo de dos números de 8 bits ha producido desbordamiento (fuera de rango)?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "El acarreo de salida de la última etapa (MSB) es C_out = 1.",
+        "El valor real de la suma matemática decimal es estrictamente mayor que 255."
+      ],
+      "correct": 0,
+      "hint": "Para 8 bits sin signo, el rango permitido de representación es [0, 255].",
+      "explanation": "Un resultado mayor que 255 no cabe en 8 bits y produce que el acarreo final C_out sea 1. Por tanto, todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "En una ALU de 8 bits en complemento a 2, ¿cuál de las siguientes operaciones de resta A - B da como resultado un valor negativo (N = 1) sin producir overflow (V = 0)?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "A = 11111110 (-2) y B = 00000001 (+1).",
+        "A = 00000010 (+2) y B = 00000101 (+5)."
+      ],
+      "correct": 0,
+      "hint": "Verifique que el resultado numérico se encuentre dentro del rango representable de 8 bits [-128, 127].",
+      "explanation": "En A: -2 - 1 = -3 (en rango, N=1, V=0). En B: 2 - 5 = -3 (en rango, N=1, V=0). Ambas cumplen las condiciones. Todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "En una ALU de 4 bits, ¿cuál de las siguientes combinaciones de entradas para una operación lógica XOR bit a bit produce una salida S = 1111?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "A = 1010 y B = 0101.",
+        "A = 1100 y B = 0011."
+      ],
+      "correct": 0,
+      "hint": "Para obtener un 1 en la salida XOR, los bits de A y B en la misma posición deben ser complementarios.",
+      "explanation": "En todos los casos indicados, los bits de A y B en cada posición son opuestos (0 y 1 o 1 y 0), lo que resulta en un vector completo de unos (1111) tras la XOR."
+    },
+    {
+      "q": "En un sumador Carry Lookahead de 4 bits, ¿cuál de los siguientes pares de operandos activa la señal de propagación global del bloque (P = P_3 P_2 P_1 P_0 = 1)?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "A = 1010 y B = 0101.",
+        "A = 1111 y B = 0000."
+      ],
+      "correct": 0,
+      "hint": "La propagación del bloque requiere que P_i = A_i ^ B_i sea 1 para todas las etapas i = 0, 1, 2, 3.",
+      "explanation": "Tanto para (1010 y 0101) como para (1111 y 0000), cada par de bits A_i y B_i es diferente, por lo que P_i = 1 para todas las posiciones y P = 1. Todas son correctas."
+    },
+    {
+      "q": "Al operar con A = 00000000 y B = 00000000 en una ALU de 8 bits, ¿qué operaciones lógicas o aritméticas darán como resultado el flag Z = 1?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "La suma aritmética de A y B.",
+        "La operación lógica OR bit a bit entre A y B."
+      ],
+      "correct": 0,
+      "hint": "Cualquier operación que devuelva un patrón de 8 bits de ceros activará la bandera Z.",
+      "explanation": "La suma 0+0=0 y la operación 0 OR 0 = 0. En ambos casos el resultado de la ALU es cero, lo que activa Z=1. Todas son correctas."
+    },
+    {
+      "q": "En el análisis de retardos de una ALU, ¿cuál de los siguientes elementos contribuye de forma directa a la latencia de propagación de la ruta crítica?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "El retardo de la compuerta XOR inicial para formar las señales de propagación.",
+        "El retardo del multiplexor analógico o digital de la salida final."
+      ],
+      "correct": 0,
+      "hint": "Cualquier componente que deba ser atravesado por la señal más lenta afecta al retardo de la ruta crítica.",
+      "explanation": "El camino crítico va desde los cambios en las entradas de datos, pasa por las puertas de cálculo aritmético/lógico y finaliza al pasar el multiplexor de salida. Todos contribuyen."
+    },
+    {
+      "q": "Si representamos el número decimal -5 en complemento a 2 de 4 bits (1011) y lo sumamos consigo mismo (1011 + 1011), ¿cuáles de las siguientes afirmaciones son correctas?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "Se produce un acarreo de salida de la última etapa (C = 1).",
+        "Se activa la bandera de overflow (V = 1) puesto que la suma matemática es -10."
+      ],
+      "correct": 0,
+      "hint": "El resultado binario de la suma es 10110. El rango representable de 4 bits firmado es de -8 a 7.",
+      "explanation": "La suma binaria 1011 + 1011 = 10110 de 5 bits. El MSB de acarreo es 1 (C=1). Como el resultado decimal matemático es -10 y el rango es [-8, 7], ocurre overflow (V=1). Todas las afirmaciones son correctas."
+    },
+    {
+      "q": "Al sumar dos operandos representados en complemento a 2 de N bits, ¿qué condiciones de acarreos del MSB aseguran que no se producirá desbordamiento (V = 0)?",
+      "options": [
+        "Todas las opciones anteriores son correctas.",
+        "Que no entre acarreo al bit MSB y no salga acarreo del MSB (C_in_MSB = 0, C_out_MSB = 0).",
+        "Que entre acarreo al bit MSB y salga acarreo del MSB (C_in_MSB = 1, C_out_MSB = 1)."
+      ],
+      "correct": 0,
+      "hint": "El overflow se calcula como V = C_in_MSB ^ C_out_MSB.",
+      "explanation": "La XOR de dos valores iguales da 0. Por tanto, si ambos acarreos son 0 o ambos son 1, V = 0 y no hay overflow. Todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "Si sumamos A = 0100 (+4) y B = 0011 (+3) en un sumador de 4 bits en complemento a 2, el resultado S de la ALU y las banderas V y C son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "S = 0111, V = 1, C = 1",
+        "S = 1111, V = 0, C = 0"
+      ],
+      "correct": 0,
+      "hint": "Calcule la suma binaria y verifique las banderas. 4 + 3 = 7.",
+      "explanation": "La suma binaria es 0100 + 0011 = 0111 (+7). Al ser 7 representable en 4 bits signed, no hay overflow (V = 0). Tampoco hay acarreo final (C = 0). La respuesta correcta es S=0111, V=0, C=0. Ninguna opción propuesta es correcta."
+    },
+    {
+      "q": "Se realiza la suma de A = 1111 y B = 1111 en complemento a 2 de 4 bits. El resultado S de la ALU y el flag de overflow V son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "S = 1111, V = 1",
+        "S = 1110, V = 1"
+      ],
+      "correct": 0,
+      "hint": "Determine la suma en binario y convierta los operandos a decimal (-1 + -1).",
+      "explanation": "-1 + (-1) = -2. En binario de 4 bits es 1110. Como -2 está en el rango [-8, 7], no hay overflow (V = 0). El resultado correcto es S = 1110, V = 0. Ninguna de las opciones propuestas es correcta."
+    },
+    {
+      "q": "Si un Ripple Carry Adder de 8 bits tiene un retardo de propagación de acarreo por etapa de 2 ns y de suma de 3 ns, ¿cuál es el retardo crítico del sumador?",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "24 ns",
+        "16 ns"
+      ],
+      "correct": 0,
+      "hint": "Use la fórmula de retardo crítico del RCA para N = 8.",
+      "explanation": "El retardo crítico es (8 - 1) * 2 ns + 3 ns = 7 * 2 ns + 3 ns = 17 ns. Como ni 24 ns ni 16 ns son correctos, la respuesta correcta es Ninguna."
+    },
+    {
+      "q": "En una resta de 4 bits en complemento a 2, A - B, con A = 1000 (-8) y B = 1000 (-8), el resultado binario S del sumador y el Carry flag C son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "S = 0000, C = 0",
+        "S = 1000, C = 1"
+      ],
+      "correct": 0,
+      "hint": "Efectúe la operación como A + \\bar{B} + 1 en binario.",
+      "explanation": "1000 + 0111 + 1 = 10000. El resultado de 4 bits es S = 0000, y el Carry-out del sumador es C = 1 (que representa 'no borrow'). La opción correcta es S = 0000, C = 1, por tanto la respuesta es Ninguna."
+    },
+    {
+      "q": "En un sumador CLA de 4 bits con operandos A = 1100 y B = 1010, los términos generadores de acarreo de cada etapa G_3, G_2, G_1, G_0 son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "1, 1, 0, 0",
+        "0, 0, 1, 0"
+      ],
+      "correct": 0,
+      "hint": "Calcule G_i = A_i y B_i para cada etapa de bits.",
+      "explanation": "G_3 = 1&1 = 1; G_2 = 1&0 = 0; G_1 = 0&1 = 0; G_0 = 0&0 = 0. Los generadores son 1, 0, 0, 0. La opción correcta no figura entre las propuestas."
+    },
+    {
+      "q": "Si en una ALU realizamos la resta A - B con A = 0111 (+7) y B = 1000 (-8) en complemento a 2 de 4 bits, el resultado decimal interpretado a la salida y el flag de signo N son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "15 y N = 0",
+        "-15 y N = 1"
+      ],
+      "correct": 0,
+      "hint": "La resta matemática es 15, pero no se puede representar en 4 bits signed.",
+      "explanation": "7 - (-8) = 15. En binario de 4 bits, 0111 + 0111 + 1 = 1111, que en complemento a 2 representa -1. Por tanto, la salida de la ALU representa -1 y el flag N es 1. La respuesta correcta es -1 y N=1. Ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "Si restamos A = 10000000 (-128) y B = 00000001 (+1) en un restador de 8 bits en complemento a 2, el resultado binario S y el flag de overflow V son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "S = 01111111, V = 0",
+        "S = 10000001, V = 1"
+      ],
+      "correct": 0,
+      "hint": "Evalúe -128 - 1. ¿Está dentro del rango de 8 bits signed?",
+      "explanation": "-128 - 1 = -129. Produce overflow, V=1. El resultado binario es 10000000 + 11111110 + 1 = 101111111 -> 01111111 (+127). El resultado correcto es S = 01111111, V = 1. Ninguna de las opciones es correcta."
+    },
+    {
+      "q": "En una ALU de 8 bits, al realizar la operación lógica NOT bit a bit del operando A = 01010101, ¿cuál es la salida de datos y el valor del flag de cero Z?",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "10101010 y Z = 1",
+        "00000000 y Z = 1"
+      ],
+      "correct": 0,
+      "hint": "Invierta todos los bits de A y verifique si el patrón resultante es igual a cero.",
+      "explanation": "NOT 01010101 = 10101010. Como el resultado es diferente de cero, Z = 0. La opción correcta es 10101010 y Z = 0. Ninguna opción propuesta es correcta."
+    },
+    {
+      "q": "Si sumamos A = 11000000 y B = 11000000 en un sumador de 8 bits, el Carry flag C y el Overflow flag V resultantes son:",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "C = 1, V = 1",
+        "C = 0, V = 0"
+      ],
+      "correct": 0,
+      "hint": "Sume en binario y determine los flags. En decimal firmado, sumamos -64 + -64 = -128.",
+      "explanation": "La suma binaria es 11000000 + 11000000 = 110000000 (9 bits). Por tanto, C = 1. El resultado truncado es 10000000 (-128 en complemento a 2). Como -128 cabe en 8 bits signed, no hay overflow (V = 0). La respuesta correcta es C=1, V=0."
+    },
+    {
+      "q": "En un sumador CLA de 4 bits, si los operandos son A = 0101 y B = 1010, ¿cuáles son los términos propagadores de acarreo P_3, P_2, P_1, P_0 de cada etapa?",
+      "options": [
+        "Ninguna de las opciones anteriores es correcta.",
+        "0, 0, 0, 0",
+        "0, 1, 0, 1"
+      ],
+      "correct": 0,
+      "hint": "Calcule P_i = A_i ^ B_i para i = 3, 2, 1, 0.",
+      "explanation": "P_3 = 0^1 = 1; P_2 = 1^0 = 1; P_1 = 0^1 = 1; P_0 = 1^0 = 1. Los propagadores son 1, 1, 1, 1. Por tanto, ninguna de las opciones propuestas es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Suma de 4 bits sin signo",
+      "context": "Se realiza la suma aritmética de dos operandos sin signo de 4 bits: A = 9 (1001) y B = 11 (1011).",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcule el valor decimal de la suma matemática exacta de A y B.",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "La suma matemática es A + B = 9 + 11 = 20."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado por la salida de 4 bits de la ALU (suma truncada).",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "En binario de 4 bits, la suma se realiza como 1001 + 1011 = 10100. Al truncar a 4 bits obtenemos 0100, que corresponde a 4 en decimal (aritmética modular: 20 mod 16 = 4)."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Determine el valor del Carry flag (C) resultante de esta operación (0 o 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Como la suma matemática (20) excede el valor representable con 4 bits (15), se genera un acarreo de salida y el flag C se pone a 1."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Determine el valor del flag de cero (Z) resultante de esta operación (0 o 1).",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El resultado binario de la suma es 0100. Al no ser todos sus bits cero, el flag de cero Z se desactiva (Z = 0)."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Suma de 4 bits con signo",
+      "context": "Considere la suma en complemento a 2 de dos números de 4 bits: A = 0101 (+5) y B = 0110 (+6).",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcule el valor decimal de la suma matemática exacta de los operandos.",
+          "correctValue": 11.0,
+          "tolerance": 0.0,
+          "explanation": "La suma matemática es (+5) + (+6) = 11."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado por el resultado de 4 bits en complemento a 2.",
+          "correctValue": -5.0,
+          "tolerance": 0.0,
+          "explanation": "La suma binaria es 0101 + 0110 = 1011. En complemento a 2, el bit MSB de 1011 representa el signo negativo, por lo que equivale a -8 + 3 = -5."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Determine el valor del flag de overflow (V) (0 o 1) tras esta suma.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que sumamos dos números positivos (+5 y +6) y el resultado es negativo (-5), ha ocurrido un desbordamiento aritmético con signo, por lo que V = 1."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo (N) (0 o 1) del resultado obtenido.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El bit más significativo (MSB) del resultado binario 1011 es 1, por tanto el Sign flag N se activa (N = 1)."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Resta de 4 bits con signo",
+      "context": "Se realiza la resta A - B en complemento a 2 de 4 bits, donde A = 1000 (-8 en decimal) y B = 0001 (+1 en decimal).",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcule el valor decimal de la resta matemática exacta A - B.",
+          "correctValue": -9.0,
+          "tolerance": 0.0,
+          "explanation": "La resta matemática exacta es -8 - (+1) = -9."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Determine el resultado decimal representado en complemento a 2 con los 4 bits del sumador.",
+          "correctValue": 7.0,
+          "tolerance": 0.0,
+          "explanation": "La resta se efectúa como A + \\bar{B} + 1: 1000 + 1110 + 1 = 10111. Truncado a 4 bits es 0111, que equivale a 7 en decimal."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Determine el valor del flag de overflow (V) (0 o 1) resultante.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Restamos un positivo de un negativo y el resultado es positivo (7), lo que excede el límite de representación inferior (-8). Por lo tanto, hay overflow y V = 1."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo (N) (0 o 1) de la operación.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El MSB del resultado truncado (0111) es 0, lo que significa que el flag N es 0."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Resta de 8 bits sin signo",
+      "context": "Se realiza la resta de dos números de 8 bits sin signo A = 15 y B = 25.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcule el valor de la resta matemática exacta en decimal.",
+          "correctValue": -10.0,
+          "tolerance": 0.0,
+          "explanation": "La resta exacta es 15 - 25 = -10."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Determine el resultado decimal representado en la salida de 8 bits de la ALU.",
+          "correctValue": 246.0,
+          "tolerance": 0.0,
+          "explanation": "En aritmética modular de 8 bits, restar 10 equivale a 256 - 10 = 246 (binario 11110110)."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Determine el valor del Carry flag (C) (0 o 1), donde C=0 indica que hubo préstamo ('borrow').",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Como el minuendo (15) es menor que el sustraendo (25), la resta requiere préstamo de un bit superior no existente, lo que desactiva el Carry a 0 (C = 0)."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo (N) (0 o 1) del resultado obtenido.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El bit MSB del resultado 11110110 es 1, por lo que el flag N es 1."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Retardos en Sumador Ripple Carry (RCA)",
+      "context": "Un sumador RCA de 8 bits tiene las siguientes latencias en cada Full-Adder: de A, B a C_out = 1.5 ns; de C_in a C_out = 1.2 ns; y de C_in a S = 2.0 ns. Las entradas cambian en t = 0 y el acarreo inicial C_0 está disponible.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcule el retardo (en ns) en el que se estabiliza el acarreo de salida de la segunda etapa (C_2).",
+          "correctValue": 2.7,
+          "tolerance": 0.01,
+          "explanation": "El acarreo C_1 se genera a partir de A_0, B_0 en 1.5 ns. Luego, C_2 se estabiliza tras propagar C_1 a través del segundo sumador, sumando 1.2 ns más: 1.5 + 1.2 = 2.7 ns."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcule el retardo de propagación (en ns) del acarreo final de salida C_8 del sumador de 8 bits.",
+          "correctValue": 9.9,
+          "tolerance": 0.01,
+          "explanation": "El acarreo final C_8 tarda en calcularse: t_{C8} = t_{gen} + (N-1) * t_{prop} = 1.5 + (8-1) * 1.2 = 1.5 + 7 * 1.2 = 9.9 ns."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcule el retardo crítico (en ns) para obtener el bit de suma más lento (S_7) de la última etapa.",
+          "correctValue": 10.7,
+          "tolerance": 0.01,
+          "explanation": "El acarreo C_7 tarda en estabilizarse: 1.5 + 6 * 1.2 = 8.7 ns. Desde C_7, el tiempo para obtener el bit de suma S_7 es de 2.0 ns. Así, el retardo para S_7 es 8.7 + 2.0 = 10.7 ns. Al ser mayor que el retardo de C_8 (9.9 ns), define el retardo crítico de suma."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si el tiempo de establecimiento de los registros es 0.5 ns y el tiempo de reloj a Q es 0.8 ns, calcule el período mínimo de reloj (en ns) para el sistema.",
+          "correctValue": 12.0,
+          "tolerance": 0.01,
+          "explanation": "El período mínimo es la suma del tiempo de reloj a Q, el retardo crítico del circuito combinacional y el tiempo de establecimiento: T_{min} = 0.8 + 10.7 + 0.5 = 12.0 ns."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Cálculo de señales en CLA de 4 bits",
+      "context": "Considere un sumador Carry Lookahead (CLA) de 4 bits con operandos A = 13 (1101) y B = 10 (1010).",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Determine el número total de etapas que generan acarreo de forma local (G_i = 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "G_i = A_i \\cdot B_i. Operando bit a bit para A=1101 (bits 3 a 0) y B=1010: G_3=1, G_2=0, G_1=0, G_0=0. Por lo tanto, solo 1 etapa activa G_i (la etapa 3)."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Determine el número total de etapas que propagan acarreo de forma local (P_i = 1).",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "P_i = A_i \\oplus B_i. Para A=1101 y B=1010: P_3 = 0, P_2 = 1, P_1 = 1, P_0 = 1. Hay 3 etapas con propagador activo."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Si el acarreo de entrada C_0 es igual a 0, calcule el valor del acarreo intermedio C_1 (0 o 1).",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "C_1 = G_0 + P_0 \\cdot C_0 = 0 + 1 \\cdot 0 = 0."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule el valor del acarreo de salida final C_4 (0 o 1) utilizando la lógica del CLA.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "C_4 = G_3 + P_3 \\cdot C_3. Como G_3 = 1, independientemente de C_3 (que es 0 en este caso, pues C_3 = G_2 + P_2 \\cdot C_2 = 0), obtenemos C_4 = 1 + 0 \\cdot 0 = 1."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Latencia en ALU con retardo de selección",
+      "context": "Una ALU de 8 bits realiza AND (3 ns), XOR (4 ns), SUM (12 ns) y RESTA (14 ns). La salida del bloque correspondiente pasa por un multiplexor de selección con retardo de 2.5 ns (desde cualquier entrada a la salida).",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcule el tiempo mínimo de propagación (en ns) para realizar la operación lógicamente más rápida (AND), asumiendo que el OPCode y los datos están estables desde el inicio.",
+          "correctValue": 5.5,
+          "tolerance": 0.01,
+          "explanation": "El tiempo mínimo corresponde a la ruta de la operación AND: 3.0 ns (bloque AND) + 2.5 ns (multiplexor) = 5.5 ns."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcule el tiempo máximo de propagación (en ns) para completar la operación de resta.",
+          "correctValue": 16.5,
+          "tolerance": 0.01,
+          "explanation": "El tiempo máximo corresponde a la resta: 14.0 ns (bloque resta) + 2.5 ns (multiplexor) = 16.5 ns."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si el OPCode se estabiliza tarde, concretamente a los 15 ns, y los datos entran a los 0 ns, calcule el tiempo total (en ns) hasta que la salida del multiplexor de la resta es estable.",
+          "correctValue": 17.5,
+          "tolerance": 0.01,
+          "explanation": "El bloque de resta tiene listos los datos en la entrada del multiplexor en t = 14 ns. Sin embargo, el multiplexor no selecciona la salida correcta hasta que el OPCode se estabiliza en t = 15 ns. La salida se estabiliza a los 15 + 2.5 = 17.5 ns (ya que 15 + 2.5 > 14 + 2.5)."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "A partir del tiempo crítico de la parte c, calcule la frecuencia máxima de funcionamiento (en MHz) de la ALU.",
+          "correctValue": 57.14,
+          "tolerance": 0.1,
+          "explanation": "F_{max} = 1000 / T_{critico} = 1000 / 17.5 = 57.14 MHz."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Operación y banderas en suma de 8 bits con signo",
+      "context": "Se realiza la suma en complemento a 2 de dos números de 8 bits: A = 120 (01111000) y B = 15 (00001111).",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcule la suma matemática teórica en formato decimal.",
+          "correctValue": 135.0,
+          "tolerance": 0.0,
+          "explanation": "La suma matemática es 120 + 15 = 135."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado por el resultado de 8 bits en complemento a 2 a la salida de la ALU.",
+          "correctValue": -121.0,
+          "tolerance": 0.0,
+          "explanation": "Suma binaria: 01111000 + 00001111 = 10000111. Al interpretar este resultado en complemento a 2 de 8 bits (MSB es 1), representa: -128 + 7 = -121."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Determine el valor del flag de desbordamiento (V) (0 o 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que se sumaron dos enteros positivos (120 y 15) y se obtuvo un resultado binario negativo (-121) debido a que 135 excede el rango máximo (+127), el flag V es 1."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo (N) (0 o 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El MSB de 10000111 es 1, indicando resultado negativo, por lo que N = 1."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Banderas en resta de 8 bits con signo",
+      "context": "Se realiza la resta A - B en complemento a 2 de 8 bits, con A = -60 y B = 70.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcule la diferencia matemática exacta A - B en decimal.",
+          "correctValue": -130.0,
+          "tolerance": 0.0,
+          "explanation": "-60 - 70 = -130."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado por la salida de 8 bits de la ALU en complemento a 2.",
+          "correctValue": 126.0,
+          "tolerance": 0.0,
+          "explanation": "-60 se codifica como 11000100. 70 es 01000110. Su resta da 01111110. En complemento a 2 representa 126 en decimal (aritmética modular: -130 + 256 = 126)."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Determine el valor del flag de desbordamiento (V) (0 o 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Al restar un número positivo de uno negativo obtuvimos un resultado positivo (126), lo que indica desbordamiento del rango inferior (-128), luego V = 1."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo (N) (0 o 1).",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El resultado binario es 01111110, cuyo MSB es 0. Por lo tanto, el flag de signo N = 0."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Retardos en un sumador Carry Skip (CSA) de 16 bits",
+      "context": "Un sumador de 16 bits consta de 4 bloques de 4 bits con Carry Skip. El retardo de propagación del acarreo dentro de un bloque es de 1.8 ns (0.45 ns por bit). El retardo para obtener la suma S_i es 2.2 ns desde el acarreo de entrada de su etapa. El multiplexor de bypass de bloque añade 0.6 ns.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcule el tiempo (en ns) para que se genere el acarreo C_4 saliente del bloque 1 si se genera en el bit 0.",
+          "correctValue": 1.8,
+          "tolerance": 0.01,
+          "explanation": "La generación de acarreo en el bit 0 y su propagación hasta la salida del primer bloque de 4 bits toma el retardo total del bloque, que es 1.8 ns."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcule el tiempo (en ns) para que el acarreo C_{12} esté disponible tras hacer bypass por el bloque 2 y bloque 3 (sabiendo que C_4 se generó a los 1.8 ns).",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "C_{12} se calcula saltando el segundo y tercer bloque: t_{C12} = t_{C4} + 2 * t_{skip} = 1.8 + 2 * 0.6 = 3.0 ns."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcule el retardo (en ns) de la ruta crítica del acarreo final C_{16} asumiendo propagación a través de las etapas del último bloque.",
+          "correctValue": 4.8,
+          "tolerance": 0.01,
+          "explanation": "Desde C_{12} (3.0 ns), el acarreo final C_{16} requiere propagarse a través de las 4 etapas del bloque 4, sumando el retardo interno del bloque (1.8 ns): 3.0 + 1.8 = 4.8 ns."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Calcule el retardo de la ruta crítica para obtener el bit de suma más lento S_{15} (asumiendo que C_{12} llega a los 3.0 ns y la suma S_{15} depende de la propagación interna de C_{12} a C_{15} a 0.45 ns/etapa y el retardo de suma de 2.2 ns).",
+          "correctValue": 6.55,
+          "tolerance": 0.01,
+          "explanation": "El acarreo C_{12} entra en el bloque 4 en t = 3.0 ns y se propaga 3 etapas hasta C_{15}: 3.0 + 3 * 0.45 = 4.35 ns. A partir de ahí, la suma final requiere 2.2 ns: 4.35 + 2.2 = 6.55 ns."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Retardos en un sumador Carry Select (CSLA)",
+      "context": "Se analiza un CSLA de 8 bits dividido en dos bloques de 4 bits. El bloque inferior (0-3) es un RCA normal de 4 bits con retardo de acarreo C_4 de 4.8 ns. El bloque superior (4-7) tiene dos RCAs de 4 bits en paralelo (retardo de suma de 5.2 ns, retardo de acarreo de 4.8 ns) seleccionados por multiplexores con retardo de selección de 1.5 ns y retardo de datos de 0.8 ns.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcule el tiempo (en ns) para que se estabilice el acarreo de selección C_4 generado por el bloque inferior.",
+          "correctValue": 4.8,
+          "tolerance": 0.01,
+          "explanation": "El bloque inferior es un RCA estándar de 4 bits, por lo que el acarreo de salida C_4 se estabiliza a los 4.8 ns."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcule el tiempo (en ns) para que los bloques superiores tengan listos sus bits de suma internos antes de la selección.",
+          "correctValue": 5.2,
+          "tolerance": 0.01,
+          "explanation": "Los dos RCAs de 4 bits superiores inician su cálculo en t = 0 ns, por lo que tienen listas sus sumas internas a los 5.2 ns."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcule el retardo total de propagación (en ns) para obtener el bit de suma más lento del bloque superior S_7.",
+          "correctValue": 6.3,
+          "tolerance": 0.01,
+          "explanation": "El multiplexor recibe las sumas a los 5.2 ns y la señal de selección C_4 a los 4.8 ns. El retardo de estabilización de la salida es max(C_4_delay + t_{sel}, suma_delay + t_{data}) = max(4.8 + 1.5, 5.2 + 0.8) = max(6.3, 6.0) = 6.3 ns."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcule el retardo de la ruta crítica (en ns) del acarreo final C_8, considerando que el acarreo interno de los RCAs superiores se estabiliza en 4.8 ns.",
+          "correctValue": 6.3,
+          "tolerance": 0.01,
+          "explanation": "El multiplexor de acarreo final recibe el acarreo de selección C_4 a los 4.8 ns (t_{sel}=1.5 ns) y los acarreos candidatos a los 4.8 ns (t_{data}=0.8 ns). El tiempo es max(4.8 + 1.5, 4.8 + 0.8) = 6.3 ns."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Comparativa de prestaciones: RCA vs CLA de 12 bits",
+      "context": "Se compara un RCA de 12 bits (etapas con retardo de acarreo de 0.4 ns y suma de 0.6 ns) y un CLA de 12 bits (bloques de 4 bits, señales P_i y G_i en 0.2 ns, retardo de acarreo de bloque de 0.3 ns, y suma final en 0.5 ns).",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Calcule el retardo crítico (en ns) de la suma en el RCA de 12 bits.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "Retardo RCA = (12 - 1) * 0.4 + 0.6 = 4.4 + 0.6 = 5.0 ns."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcule el tiempo (en ns) necesario para que el primer bloque del CLA genere su acarreo de salida C_4.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "El primer bloque CLA calcula C_4 a partir del retraso de generación de P_i/G_i (0.2 ns) más la anticipación del bloque (0.3 ns): 0.2 + 0.3 = 0.5 ns."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Calcule el tiempo (en ns) para que se estabilice el acarreo final C_{12} en el CLA.",
+          "correctValue": 1.1,
+          "tolerance": 0.01,
+          "explanation": "C_4 se estabiliza a los 0.5 ns. Cada bloque siguiente añade 0.3 ns para propagar el acarreo: C_8 se estabiliza a los 0.5 + 0.3 = 0.8 ns; C_{12} se estabiliza a los 0.8 + 0.3 = 1.1 ns."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcule el retardo (en ns) de la suma más lenta del CLA (el bit S_{11}, sabiendo que depende del acarreo de entrada de su bloque C_8 con retardo de 0.8 ns).",
+          "correctValue": 1.6,
+          "tolerance": 0.01,
+          "explanation": "El acarreo C_8 está listo a los 0.8 ns. A partir de allí, la generación de la suma tarda 0.8 ns (ya que la señal requiere pasar por la suma final de 0.5 ns y se sumó el retardo base del bloque). Específicamente, S_{11} se calcula a partir de C_8 en 0.8 ns, resultando en 0.8 + 0.8 = 1.6 ns."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Cálculo de funciones lógicas combinadas",
+      "context": "Una ALU de 4 bits realiza la operación combinada Y = (A AND B) XOR C, con operandos A = 12 (1100), B = 10 (1010) y C = 15 (1111).",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcule el valor decimal del producto lógico AND bit a bit entre A y B.",
+          "correctValue": 8.0,
+          "tolerance": 0.0,
+          "explanation": "AND bit a bit: 1100 AND 1010 = 1000, que equivale a 8 en decimal."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcule el valor decimal del resultado final Y.",
+          "correctValue": 7.0,
+          "tolerance": 0.0,
+          "explanation": "Y = (1000) XOR 1111 = 0111, que equivale a 7 en decimal."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Determine el valor del flag de cero Z (0 o 1) del resultado.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El resultado final Y es 0111 (diferente de cero), por lo que Z = 0."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo N (0 o 1) del resultado en complemento a 2.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El MSB del resultado final (0111) es 0, indicando que N = 0."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Desplazamiento a la izquierda y desbordamiento",
+      "context": "Se analiza la operación de multiplicación por 2 de números enteros firmados de 8 bits implementada mediante desplazamiento lógico a la izquierda (LSL) de 1 bit en la ALU.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Si el operando inicial es A = 60, calcule el resultado decimal obtenido tras el desplazamiento.",
+          "correctValue": 120.0,
+          "tolerance": 0.0,
+          "explanation": "60 * 2 = 120. En binario de 8 bits, 60 es 00111100. Tras el desplazamiento LSL es 01111000 (120)."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Determine el flag de overflow V (0 o 1) para la entrada A = 60.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El valor 120 es representable en el rango signed de 8 bits [-128, 127], por lo que V = 0."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Si el operando inicial es A = 70, determine el resultado decimal representado en complemento a 2 tras el desplazamiento.",
+          "correctValue": -116.0,
+          "tolerance": 0.0,
+          "explanation": "70 es 01000110. Desplazado a la izquierda 1 bit da 10001100. Interpretado en complemento a 2 es: -128 + 12 = -116."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Determine el flag de overflow V (0 o 1) para la entrada A = 70.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El valor de la operación matemática es 140, el cual excede +127, alterando el bit de signo de positivo a negativo. Por tanto, V = 1."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Desplazamiento aritmético a la derecha",
+      "context": "Se analiza el comportamiento del desplazamiento aritmético a la derecha (ASR) de 1 bit para realizar la división entera entre 2 en un sistema firmado de 8 bits.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Si el operando es A = 11111110 (-2), calcule el valor decimal del resultado tras ASR.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "ASR sobre 11111110 introduce el bit MSB (1) a la izquierda, resultando en 11111111, que es -1 en decimal."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Si el operando es A = 11111101 (-3), calcule el valor decimal del resultado obtenido tras ASR.",
+          "correctValue": -2.0,
+          "tolerance": 0.0,
+          "explanation": "ASR sobre 11111101 da 11111110, que es -2 en decimal (división con redondeo hacia el infinito negativo: -3 // 2 = -2)."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Determine el valor del bit que se desplaza hacia afuera y se almacena en el Carry flag C para la entrada A = -3.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El bit de menor peso (LSB) del operando A (11111101) es 1. Al desplazar, este bit pasa al Carry flag."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Determine el flag de signo N (0 o 1) del resultado obtenido para A = -3.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El resultado binario de la operación ASR para A = -3 es 11111110 (negativo), por lo que N = 1."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Optimización de compuertas lógicas en la ALU",
+      "context": "Una ALU de 1 bit realiza AND, OR, XOR y SUMA. El sumador utiliza las señales intermedias S = (A ^ B) ^ C_in y C_out = A.B + (A ^ B).C_in. El circuito busca reutilizar puertas lógicas para ahorrar transistores.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Determine el número mínimo de puertas XOR adicionales que deben colocarse para obtener el resultado lógico de XOR (asumiendo que las señales del sumador ya están calculadas).",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "La señal intermedia (A \\oplus B) que se calcula dentro del sumador completo es idéntica a la operación XOR lógica de los operandos. Por tanto, se requiere 0 compuertas XOR adicionales."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Determine el número de puertas AND de 2 entradas del sumador que se pueden reutilizar directamente como salida de la operación AND lógica.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El término de generación G = A \\cdot B se calcula en el sumador mediante una puerta AND. Esta misma puerta se puede reutilizar para dar la salida de la función AND de la ALU."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Si una puerta XOR tiene un retardo de 2.0 ns y una puerta AND de 1.2 ns, calcule el retardo (en ns) para obtener el término intermedio (A XOR B) desde las entradas.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "El término intermedio A \\oplus B se genera directamente a través de una compuerta XOR, por lo que su retardo es de 2.0 ns."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Calcule el retardo (en ns) para obtener el bit de suma final S si el acarreo C_in se estabiliza en t = 3.0 ns y las entradas A y B cambian en t = 0 ns.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "La suma S es (A \\oplus B) \\oplus C_{in}. El nodo (A \\oplus B) se estabiliza en t = 2.0 ns. El acarreo C_{in} lo hace en t = 3.0 ns. La segunda XOR operará cuando ambos estén listos, es decir, en t = 3.0 ns. Sumando su propio retardo: 3.0 + 2.0 = 5.0 ns."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Detección de cero a la salida de la ALU",
+      "context": "Se analiza el bloque combinacional que genera la bandera de cero (Z) a partir del resultado de suma de 4 bits utilizando una compuerta NOR de 4 entradas con retardo de 1.5 ns.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Si la salida de la suma es S = 0100, calcule el valor lógico de la bandera Z.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Z es la NOR de todos los bits: NOR(0, 1, 0, 0) = 0."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Si la salida de la suma es S = 0000, calcule el valor lógico de la bandera Z.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "NOR(0, 0, 0, 0) = 1. La bandera se activa para indicar resultado nulo."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Si la suma se estabiliza a los 10.0 ns, calcule el tiempo (en ns) en el que la bandera Z es estable a la salida de la compuerta NOR.",
+          "correctValue": 11.5,
+          "tolerance": 0.01,
+          "explanation": "La bandera Z se estabiliza sumando el tiempo de entrada de los datos más el retardo de la compuerta NOR: 10.0 + 1.5 = 11.5 ns."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Si la NOR de 4 entradas se sustituye por un árbol jerárquico de compuertas OR y NOR de 2 entradas (retardo de 0.8 ns por puerta), calcule el retardo total (en ns) del árbol para obtener Z desde que el resultado está listo.",
+          "correctValue": 1.6,
+          "tolerance": 0.01,
+          "explanation": "El árbol jerárquico tiene 2 niveles: primer nivel con OR de 2 entradas (0.8 ns) y segundo nivel con NOR de 2 entradas (0.8 ns). El retardo total del árbol es 0.8 + 0.8 = 1.6 ns."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Retardos lógicos en el generador de acarreos del CLA",
+      "context": "En un CLA de 4 bits, las compuertas lógicas tienen retardos según su número de entradas: AND/OR de 2 entradas = 1.0 ns, AND/OR de 3 entradas = 1.2 ns, AND/OR de 4 entradas = 1.4 ns. Asuma que las señales P_i y G_i están listas en t = 0 ns junto con C_0.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcule el retardo (en ns) para obtener el acarreo C_1 = G_0 + P_0.C_0.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "C_1 requiere una AND de 2 entradas (1.0 ns) y una OR de 2 entradas (1.0 ns) en cascada. Retardo = 1.0 + 1.0 = 2.0 ns."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcule el retardo (en ns) para obtener C_2 = G_1 + P_1.G_0 + P_1.P_0.C_0.",
+          "correctValue": 2.4,
+          "tolerance": 0.01,
+          "explanation": "Los términos AND se calculan en paralelo, donde el más lento es el de 3 entradas P_1.P_0.C_0 (1.2 ns). Luego, la OR de 3 entradas añade 1.2 ns. Retardo = 1.2 + 1.2 = 2.4 ns."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcule el retardo (en ns) para obtener C_3, que requiere compuertas de hasta 4 entradas en su nivel crítico.",
+          "correctValue": 2.8,
+          "tolerance": 0.01,
+          "explanation": "El camino crítico involucra una puerta AND de 4 entradas (1.4 ns) y una puerta OR de 4 entradas (1.4 ns). Retardo = 1.4 + 1.4 = 2.8 ns."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si la implementación de C_4 añade 0.8 ns de retardo adicional a la estructura de C_3 debido a la cascada de compuertas, calcule el retardo total (en ns) de C_4.",
+          "correctValue": 3.6,
+          "tolerance": 0.01,
+          "explanation": "El retardo total de C_4 se obtiene sumando el retardo de la estructura de C_3 y el retardo de cascada: 2.8 ns + 0.8 ns = 3.6 ns."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Extensión de signo y suma de palabras de diferente ancho",
+      "context": "Se realiza la suma de un operando de 4 bits A = 1011 (en complemento a 2) y un operando de 8 bits B = 00000100 (en complemento a 2).",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Determine el valor decimal del operando A de 4 bits.",
+          "correctValue": -5.0,
+          "tolerance": 0.0,
+          "explanation": "1011 en complemento a 2 de 4 bits representa -8 + 3 = -5."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado por A tras extender el signo a 8 bits.",
+          "correctValue": -5.0,
+          "tolerance": 0.0,
+          "explanation": "La extensión de signo a 8 bits de 1011 da 11111011, lo que preserva el valor decimal original, que sigue siendo -5."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcule el valor decimal del resultado de la suma de A (extendido) y B.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "-5 + 4 = -1."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Represente el resultado anterior en binario de 8 bits en complemento a 2 y calcule su valor interpretado como número sin signo.",
+          "correctValue": 255.0,
+          "tolerance": 0.0,
+          "explanation": "-1 en complemento a 2 de 8 bits se escribe como 11111111. Si se interpreta como número sin signo, equivale a 2^8 - 1 = 255."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Aritmética de saturación en sumas con signo",
+      "context": "Una ALU de DSP implementa aritmética de saturación para 8 bits en complemento a 2. Si ocurre desbordamiento positivo, el resultado satura a +127; si ocurre desbordamiento negativo, satura a -128. Considere la suma A = 100 y B = 40.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcule el valor decimal de la suma matemática exacta de A y B.",
+          "correctValue": 140.0,
+          "tolerance": 0.0,
+          "explanation": "100 + 40 = 140."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Si la ALU realizara aritmética modular estándar sin saturación (con overflow), determine el valor decimal representado por la salida de 8 bits.",
+          "correctValue": -116.0,
+          "tolerance": 0.0,
+          "explanation": "El resultado binario de 140 es 10001100. En complemento a 2 de 8 bits representa -128 + 12 = -116 (o bien 140 - 256 = -116)."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcule el valor decimal real de la salida de la ALU considerando que tiene activada la saturación.",
+          "correctValue": 127.0,
+          "tolerance": 0.0,
+          "explanation": "Puesto que la suma matemática (140) excede el valor representable con signo máximo (+127), el hardware satura el resultado al valor límite superior, que es +127."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcule la diferencia absoluta en decimal entre el valor matemático exacto y la salida saturada.",
+          "correctValue": 13.0,
+          "tolerance": 0.0,
+          "explanation": "|140 - 127| = 13."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Aritmética de saturación en restas con signo",
+      "context": "Considere ahora una resta con saturación en complemento a 2 de 8 bits con los operandos A = -100 y B = 50.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcule la resta matemática exacta A - B en decimal.",
+          "correctValue": -150.0,
+          "tolerance": 0.0,
+          "explanation": "-100 - 50 = -150."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado si la ALU desbordase sin saturar (aritmética estándar de 8 bits).",
+          "correctValue": 106.0,
+          "tolerance": 0.0,
+          "explanation": "En aritmética modular de 8 bits, -150 equivale a -150 + 256 = 106."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcule el valor decimal obtenido con la saturación activada.",
+          "correctValue": -128.0,
+          "tolerance": 0.0,
+          "explanation": "La resta matemática (-150) es menor que el valor representable con signo mínimo (-128), por lo que el circuito satura la salida al límite inferior: -128."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcule la diferencia absoluta entre el valor desbordado estándar (parte b) y el valor saturado (parte c).",
+          "correctValue": 234.0,
+          "tolerance": 0.0,
+          "explanation": "|106 - (-128)| = |106 + 128| = 234."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Actualización de banderas tras una comparación",
+      "context": "Se ejecuta la instrucción 'CMP A, B' en un sistema de 8 bits con signo. Los operandos son A = 01100000 (+96) y B = 10100000 (-96).",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcule la resta matemática teórica A - B en decimal.",
+          "correctValue": 192.0,
+          "tolerance": 0.0,
+          "explanation": "96 - (-96) = 96 + 96 = 192."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Determine la salida binaria resultante interpretada como entero de 8 bits firmado en complemento a 2.",
+          "correctValue": -64.0,
+          "tolerance": 0.0,
+          "explanation": "192 en binario es 11000000. Interpretado como complemento a 2 de 8 bits, equivale a -128 + 64 = -64 (o bien 192 - 256 = -64)."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Determine el valor del flag de desbordamiento (V) (0 o 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Restamos un número negativo de uno positivo y obtuvimos un resultado negativo (-64). Como 192 excede 127, se activa V = 1."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Determine el valor del flag de signo (N) (0 o 1).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El MSB del resultado binario 11000000 es 1, por lo que el flag de signo N = 1."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Uso de operaciones lógicas y máscaras",
+      "context": "Se realiza la operación lógica Y = A AND B (AND bit a bit) en una ALU de 8 bits para aislar los 4 bits menos significativos (LSB) de A = 11011011 (219 en decimal).",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Determine el valor decimal que debe tener la máscara B para limpiar los 4 bits más significativos.",
+          "correctValue": 15.0,
+          "tolerance": 0.0,
+          "explanation": "La máscara requerida es 00001111 binario, lo que equivale a 15 en decimal."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcule el valor decimal del resultado final Y.",
+          "correctValue": 11.0,
+          "tolerance": 0.0,
+          "explanation": "Y = 11011011 AND 00001111 = 00001011, que equivale a 11 en decimal."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Determine el valor del Sign flag (N) (0 o 1) del resultado Y.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El MSB de 00001011 es 0, por lo que N = 0."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si ahora realizamos la operación OR bit a bit del resultado Y anterior con la máscara B (Y OR B), determine el valor decimal del resultado.",
+          "correctValue": 15.0,
+          "tolerance": 0.0,
+          "explanation": "Y OR B = 00001011 OR 00001111 = 00001111, lo que en decimal es 15."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Ajuste aritmético en sumas BCD",
+      "context": "En aritmética BCD, cuando la suma de dos dígitos supera 9 (1001), se debe sumar una constante de corrección (+6) para ajustar el resultado.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Sume los dígitos BCD A = 7 (0111) y B = 8 (1000) en binario convencional. Determine el valor decimal del resultado obtenido.",
+          "correctValue": 15.0,
+          "tolerance": 0.0,
+          "explanation": "La suma binaria directa es 0111 + 1000 = 1111, que es 15 en decimal."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Dado que 15 es mayor que 9, sume la corrección binaria de +6 (0110) al resultado anterior. Determine el valor decimal de esta suma corregida.",
+          "correctValue": 21.0,
+          "tolerance": 0.0,
+          "explanation": "1111 + 0110 = 10101 binario, que en decimal equivale a 21."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "El resultado binario de 8 bits corregido es 00010101. Determine el valor decimal que representa en formato BCD (separando nibbles de 4 bits).",
+          "correctValue": 15.0,
+          "tolerance": 0.0,
+          "explanation": "Separado en grupos de 4 bits: 0001 (1) y 0101 (5), lo que representa el valor 15 en BCD."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Calcule el factor de corrección en decimal que se debe sumar si el resultado de sumar dos dígitos BCD es menor o igual a 9.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Si la suma BCD de un dígito es menor o igual a 9 y no hay acarreo intermedio, no se requiere ningún ajuste, es decir, el factor de corrección es 0."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Cálculo e implementación del flag de paridad",
+      "context": "El flag de paridad P se pone a 1 si el número de bits a 1 en el resultado de 8 bits de la ALU es par. Considere el resultado Y = 10110011.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcule el número total de bits con valor lógico 1 en el operando Y.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "En Y = 10110011 hay exactamente cinco '1' (posiciones 7, 5, 4, 1, 0)."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Determine el valor lógico del flag de paridad P (0 o 1) para Y.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Como el número de '1' es 5 (impar), el flag de paridad es 0."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Si realizamos una XOR entre Y y 00000001 para obtener Y', calcule el valor lógico del flag de paridad P resultante.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Y' = 10110011 XOR 00000001 = 10110010. Este nuevo valor tiene cuatro '1', que es una cantidad par, por lo que P se pone a 1."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Determine el valor lógico del flag de paridad P si el resultado es exactamente cero (00000000).",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Cero tiene 0 bits a 1. El número cero es considerado un número par, por lo que el flag de paridad se activa (P = 1)."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Resta de 4 bits con entrada de préstamo",
+      "context": "Se calcula la resta A - B - Borrow_in en un circuito restador de 4 bits, con A = 10 (1010), B = 4 (0100) y Borrow_in = 1 (representando un préstamo de la etapa anterior).",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcule el valor decimal del resultado matemático exacto de la resta.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "Resta matemática: 10 - 4 - 1 = 5."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Determine la salida binaria de 4 bits del sumador interpretada en decimal.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "El resultado binario de 5 es 0101. Representa el valor 5 en decimal."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Determine el valor del Carry flag de salida C_out (0 o 1) si la operación se realiza internamente como A + \\bar{B} + \\overline{Borrow_in}.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "A = 1010, \\bar{B} = 1011, \\overline{Borrow_in} = 0. Suma: 1010 + 1011 + 0 = 10101 binario. El Carry de salida del sumador es el MSB sobrante, es decir, 1."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Determine el valor del flag de overflow V (0 o 1) de la operación.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "En complemento a 2 de 4 bits, A representa -6. Restar 4 y luego 1 da -11, lo que excede el límite de representación inferior (-8). Se produce overflow, por lo que V = 1."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Retardos en un sumador CLA de 32 bits jerárquico",
+      "context": "Un sumador CLA de 32 bits tiene dos niveles. Cada bloque CLA de 4 bits de primer nivel tarda 0.4 ns en generar P_block y G_block. El generador de acarreos del segundo nivel tarda 1.5 ns en generar todos los acarreos del bloque. El bloque de primer nivel tarda 1.2 ns en estabilizar sus acarreos internos a partir del acarreo de entrada, y la suma final tarda 1.0 ns.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Determine el tiempo (en ns) en el que las señales P_block y G_block de los bloques de primer nivel están estables (asumiendo que las entradas cambian en t = 0).",
+          "correctValue": 0.4,
+          "tolerance": 0.01,
+          "explanation": "Se indica que los bloques de primer nivel generan P_block y G_block en 0.4 ns."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcule el tiempo (en ns) en el que el generador del segundo nivel tiene listos todos los acarreos de entrada para los bloques de primer nivel.",
+          "correctValue": 1.9,
+          "tolerance": 0.01,
+          "explanation": "El generador de segundo nivel necesita que las señales P_block y G_block estén estables (0.4 ns) y añade su propio retardo de 1.5 ns: 0.4 + 1.5 = 1.9 ns."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcule el tiempo (en ns) necesario para que el bloque de primer nivel más lento estabilice sus acarreos internos tras recibir el acarreo del segundo nivel.",
+          "correctValue": 3.1,
+          "tolerance": 0.01,
+          "explanation": "Los acarreos del segundo nivel están listos a los 1.9 ns. El bloque de primer nivel tarda 1.2 ns en estabilizar sus acarreos internos a partir de ahí: 1.9 + 1.2 = 3.1 ns."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcule el retardo crítico total (en ns) del sumador de 32 bits para obtener todos los bits de suma.",
+          "correctValue": 4.1,
+          "tolerance": 0.01,
+          "explanation": "Los acarreos internos están listos en t = 3.1 ns. La suma final requiere 1.0 ns adicionales: 3.1 + 1.0 = 4.1 ns."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Tiempos de estabilización de las banderas de la ALU",
+      "context": "Se analiza el cálculo de banderas en una ALU de 16 bits. Los acarreos C_{15} y C_{16} se estabilizan en t = 12.0 ns y t = 12.4 ns respectivamente. El resultado de 16 bits es estable en t = 12.8 ns. La XOR de overflow tarda 0.8 ns, la generación de signo N tarda 0.2 ns, y la lógica NOR/AND del flag Z tarda 2.2 ns.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Si C_{16} = 1 y C_{15} = 0, calcule el valor lógico de la bandera de desbordamiento V.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "V = C_{16} \\oplus C_{15} = 1 \\oplus 0 = 1."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcule el tiempo (en ns) en el que se estabiliza la bandera V.",
+          "correctValue": 13.2,
+          "tolerance": 0.01,
+          "explanation": "V depende de C_{16} (12.4 ns) y C_{15} (12.0 ns). Se estabiliza tras pasar la XOR: max(12.4, 12.0) + 0.8 = 12.4 + 0.8 = 13.2 ns."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcule el tiempo (en ns) en el que se estabiliza la bandera de cero Z.",
+          "correctValue": 15.0,
+          "tolerance": 0.01,
+          "explanation": "Z depende de que el resultado de 16 bits esté estable (12.8 ns) más el retardo de la lógica de detección de cero (2.2 ns): 12.8 + 2.2 = 15.0 ns."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Determine el tiempo máximo de estabilización (en ns) de todas las banderas (V, Z, N y C) tras la operación.",
+          "correctValue": 15.0,
+          "tolerance": 0.01,
+          "explanation": "El tiempo de estabilización de cada bandera es: V en 13.2 ns; Z en 15.0 ns; N en 13.0 ns (12.8 + 0.2); y C en 12.6 ns (12.4 + 0.2). El retardo crítico total para las banderas está definido por Z en 15.0 ns."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Suma en el límite superior del rango con signo",
+      "context": "Se analiza la suma de 8 bits con signo: A = 127 (01111111), B = 127 (01111111) y C_in = 1.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcule el valor decimal de la suma matemática exacta de los tres términos.",
+          "correctValue": 255.0,
+          "tolerance": 0.0,
+          "explanation": "Suma matemática: 127 + 127 + 1 = 255."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Determine el valor decimal representado por el resultado de 8 bits en complemento a 2.",
+          "correctValue": -1.0,
+          "tolerance": 0.0,
+          "explanation": "La suma binaria es 11111111. En complemento a 2, este patrón de bits representa -1 en decimal."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Determine el valor lógico del flag de desbordamiento V.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Se sumaron dos números positivos (127 y 127) y se obtuvo un resultado binario negativo (-1). Por lo tanto, hay overflow y V = 1."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Determine el valor lógico del flag de acarreo de salida C.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Suma binaria: 01111111 + 01111111 + 1 = 11111111. No se produce acarreo saliente del bit MSB, por tanto C = 0."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Operación lógica XNOR en la ALU de 8 bits",
+      "context": "Se ejecuta la operación lógica Y = NOT(A XOR B) en una ALU de 8 bits con operandos A = 170 (10101010) y B = 85 (01010101).",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcule el valor decimal de la operación lógica XOR bit a bit entre A y B.",
+          "correctValue": 255.0,
+          "tolerance": 0.0,
+          "explanation": "10101010 XOR 01010101 = 11111111 binario, lo que en decimal es 255."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcule el valor decimal del resultado final Y.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "Y = NOT(11111111) = 00000000 binario, lo que en decimal es 0."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Determine el valor lógico del flag de cero Z.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Como el resultado final de la operación es 00000000, el flag de cero se activa: Z = 1."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Determine el valor lógico del flag de signo N.",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "El MSB del resultado Y es 0, por lo que el flag N es 0."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuaciones del Semisumador (Half-Adder)",
+      "tex": "$$S = A \\oplus B$$ \n $$C = A \\cdot B$$"
+    },
+    {
+      "name": "Ecuaciones del Sumador Completo (Full-Adder)",
+      "tex": "$$S = A \\oplus B \\oplus C_{in}$$ \n $$C_{out} = A \\cdot B + (A \\oplus B) \\cdot C_{in}$$"
+    },
+    {
+      "name": "Retardo Crítico en Sumador Ripple Carry (RCA)",
+      "tex": "$$t_{RCA} = (N-1) \\cdot t_{carry} + \\max(t_{carry}, t_{sum})$$"
+    },
+    {
+      "name": "Generación y Propagación de Acarreo (CLA)",
+      "tex": "$$G_i = A_i \\cdot B_i$$ \n $$P_i = A_i \\oplus B_i$$"
+    },
+    {
+      "name": "Ecuación General de Acarreo en CLA",
+      "tex": "$$C_{i+1} = G_i + P_i \\cdot C_i$$"
+    },
+    {
+      "name": "Flag de Desbordamiento con Signo (Overflow V)",
+      "tex": "$$V = C_{in, MSB} \\oplus C_{out, MSB}$$"
+    },
+    {
+      "name": "Ecuación Equivalente de Overflow (Suma con Signo)",
+      "tex": "$$V = A_{N-1} \\cdot B_{N-1} \\cdot \\bar{S}_{N-1} + \\bar{A}_{N-1} \\cdot \\bar{B}_{N-1} \\cdot S_{N-1}$$"
+    },
+    {
+      "name": "Ecuación de Diferencia y Préstamo (Half-Subtractor)",
+      "tex": "$$D = A \\oplus B$$ \n $$B_{out} = \\bar{A} \\cdot B$$"
+    },
+    {
+      "name": "Ecuaciones de Restador Completo (Full-Subtractor)",
+      "tex": "$$D = A \\oplus B \\oplus B_{in}$$ \n $$B_{out} = \\bar{A} \\cdot B + (\\overline{A \\oplus B}) \\cdot B_{in}$$"
+    }
+  ]
+}

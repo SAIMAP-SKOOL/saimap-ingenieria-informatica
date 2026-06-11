@@ -1,0 +1,2104 @@
+{
+  "FORMULAS": [
+    {
+      "name": "Representación general de un número en base $r$",
+      "tex": "$$N_r = \\sum_{i=-m}^{n-1} d_i \\cdot r^i = d_{n-1} r^{n-1} + \\dots + d_0 r^0 + d_{-1} r^{-1} + \\dots + d_{-m} r^{-m}$$"
+    },
+    {
+      "name": "Rango de los dígitos permitidos en base $r$",
+      "tex": "$$d_i \\in \\{0, 1, \\dots, r-1\\}$$"
+    },
+    {
+      "name": "Algoritmo de Horner (evaluación de la parte entera)",
+      "tex": "$$N_{entero} = ((\\dots(d_{n-1} \\cdot r + d_{n-2}) \\cdot r + \\dots ) \\cdot r + d_0$$"
+    },
+    {
+      "name": "Conversión de entero por divisiones sucesivas",
+      "tex": "$$d_i = q_i \\pmod r \\quad \\text{donde } q_i = \\lfloor q_{i-1} / r \\rfloor$$"
+    },
+    {
+      "name": "Representación de la parte fraccionaria",
+      "tex": "$$F_{fraccionaria} = \\sum_{j=1}^m d_{-j} \\cdot r^{-j}$$"
+    },
+    {
+      "name": "Conversión de parte fraccionaria por multiplicaciones sucesivas",
+      "tex": "$$d_{-j} = \\lfloor F_{j-1} \\cdot r \\rfloor \\quad \\text{con } F_j = F_{j-1} \\cdot r - d_{-j}$$"
+    },
+    {
+      "name": "Valor máximo representable con $n$ dígitos enteros",
+      "tex": "$$V_{max} = r^n - 1$$"
+    },
+    {
+      "name": "Valor mínimo positivo representable con $m$ dígitos fraccionarios",
+      "tex": "$$V_{min\\_positivo} = r^{-m}$$"
+    },
+    {
+      "name": "Relación de bases para conversión rápida por agrupación",
+      "tex": "$$\\log_{r_2}(r_1) = k \\quad \\text{donde } r_1 = r_2^k$$"
+    },
+    {
+      "name": "Límite superior del error por redondeo",
+      "tex": "$$E \\le \\frac{1}{2} r^{-m} \\quad \\text{(Error por redondeo)}$$"
+    },
+    {
+      "name": "Límite superior del error por truncamiento",
+      "tex": "$$E < r^{-m} \\quad \\text{(Error por truncamiento)}$$"
+    }
+  ],
+  "TEST_A": [
+    {
+      "options": [
+        "Cuando se prohíben secuencias infinitas de la forma $d_i = r - 1$ para todo $i$ menor que un cierto índice.",
+        "Siempre que la base $r$ sea un número primo y el número real $N$ sea un valor estrictamente irracional.",
+        "En ningún caso práctico; todos los números reales tienen representación única en cualquier base posicional."
+      ],
+      "explanation": "La doble representación de números reales (como $0.999\\dots = 1$) ocurre debido a la existencia de secuencias periódicas infinitas de la forma $(r-1)^{\\infty}$. Al prohibir estas secuencias en el extremo de la parte fraccionaria, se garantiza la unicidad matemática.",
+      "q": "¿Bajo qué condición matemática la representación de un número real $N$ en una base $r > 1$ es única y no posee doble representación?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Todos los factores primos del denominador $q$ dividen a la base $r$.",
+        "Todos los factores primos de la base $r$ dividen al denominador $q$.",
+        "El denominador $q$ es estrictamente menor que el valor de la base $r$ elegida."
+      ],
+      "explanation": "Para que una fracción termine en base $r$, debe ser expresable como $P/r^k$ para algún entero $k$. Esto requiere matemáticamente que todos los factores primos del denominador $q$ estén contenidos en la base $r$.",
+      "q": "Una fracción irreducible de la forma $p/q$ (con $p, q$ coprimos) tiene una representación fraccionaria finita (no periódica) en la base posicional $r$ si y solo si:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Porque el denominador de su fracción irreducible ($1/10$) contiene el factor primo 5, el cual no divide a la base 2.",
+        "Porque la base binaria es menor que la base decimal, lo que impide representar decimales simples de forma directa.",
+        "Debido a que la base binaria no es capaz de representar números impares en ninguna de sus posiciones fraccionarias."
+      ],
+      "explanation": "La fracción equivalente es $1/10$. El denominador contiene los factores primos 2 y 5. Como el factor 5 es coprimo con la base binaria 2, no se puede expresar como una suma finita de potencias negativas de 2, dando lugar a un período infinito.",
+      "q": "¿Por qué el número decimal $0.1_{10}$ tiene una representación binaria periódica infinita?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "La base neperiana $e \\approx 2.71828$.",
+        "La base binaria $2$ por tener menor costo de hardware.",
+        "La base decimal $10$ por ser la base estándar natural."
+      ],
+      "explanation": "Al minimizar la función de complejidad de hardware $f(r) = r \\frac{\\ln N}{\\ln r}$, la primera derivada se anula en $r = e$. Esto indica que la base ideal para optimizar el almacenamiento y el coste es el número neperiano.",
+      "q": "Si definimos la complejidad de representación como el producto de la base $r$ por la longitud de representación $L = \\log_r N$, ¿cuál es la base teórica óptima?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Permite representar números positivos y negativos de forma única sin necesidad de un bit de signo explícito.",
+        "Duplica exactamente el rango dinámico en comparación con el sistema ternario estándar.",
+        "Requiere obligatoriamente un dígito de acarreo adicional en cada operación de suma o multiplicación."
+      ],
+      "explanation": "Al incluir dígitos con signo negativo, tanto enteros positivos como negativos se pueden escribir de manera posicional directa. Por ejemplo, $-2_{10}$ es $-1 \\cdot 3^1 + 1 \\cdot 3^0$, representado simplemente como $-+$.",
+      "q": "En el sistema ternario balanceado, donde la base es $3$ y los dígitos permitidos son $\\{-1, 0, 1\\}$, ¿cuál es una de sus propiedades notables?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Cualquier número entero (positivo o negativo) puede representarse de forma única sin un signo explícito.",
+        "Es imposible representar números fraccionarios debido a la alternancia de signos de los pesos.",
+        "Solo se pueden representar números cuyo valor absoluto sea estrictamente menor que el valor de la base."
+      ],
+      "explanation": "En las bases negativas, los pesos alternan su signo en función de si la potencia es par o impar ($(-2)^0=1$, $(-2)^1=-2$, $(-2)^2=4$). Esto permite codificar todos los enteros, positivos y negativos, de manera única sin signo auxiliar.",
+      "q": "En un sistema de numeración con base negativa $-r$ (donde $r > 1$), como la base $-2$ (negabinaria), ¿cuál de las siguientes afirmaciones es correcta?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Porque el último resto obtenido corresponde al coeficiente de la mayor potencia de la base $r$ en el desarrollo polinómico.",
+        "Porque los primeros restos representan las potencias más altas de la base en el número final.",
+        "Es simplemente una convención de diseño de hardware y matemáticamente daría igual en qué sentido leerlos."
+      ],
+      "explanation": "La primera división por $r$ da un resto que representa $N \\pmod r$, es decir, el dígito de las unidades ($d_0$). Cada división subsiguiente extrae los coeficientes de las potencias superiores, por lo que el último resto es el dígito más significativo.",
+      "q": "¿Por qué en el algoritmo de conversión de decimal a base $r$ por divisiones sucesivas se deben leer los restos en orden inverso (de abajo a arriba)?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Que una de las bases sea una potencia entera exacta de la otra ($B = A^k$ o $A = B^k$).",
+        "Que las dos bases sean números enteros coprimos entre sí.",
+        "Que ambas bases compartan exactamente los mismos factores primos en su descomposición."
+      ],
+      "explanation": "Cuando $B = A^k$, cada dígito de la base $B$ se corresponde exactamente con un grupo de $k$ dígitos de la base $A$. Esto permite realizar la traducción por bloques directos sin pasar por operaciones aritméticas complejas.",
+      "q": "¿Cuál es el requisito matemático estricto que permite realizar conversiones rápidas por agrupación de dígitos entre dos bases $A$ y $B$?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$2^{-m}$",
+        "$2^{-m-1}$",
+        "$2^{-m} - 1$"
+      ],
+      "explanation": "El truncamiento descarta los bits a partir de la posición $m+1$. La suma máxima posible de los términos descartados es $\\sum_{i=m+1}^{\\infty} 2^{-i} = 2^{-m}$. Por lo tanto, el error absoluto siempre es estrictamente menor que $2^{-m}$.",
+      "q": "Al truncar un número fraccionario periódico en binario a $m$ bits después de la coma, el error absoluto máximo cometido es menor que:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "La unicidad de la representación de los números.",
+        "La existencia de la representación para los números enteros.",
+        "La linealidad en los algoritmos de suma y resta posicional."
+      ],
+      "explanation": "Al tener más dígitos que la base, existen diferentes combinaciones posicionales que suman el mismo valor numérico, destruyendo la propiedad de unicidad del sistema de numeración.",
+      "q": "Si en un sistema de numeración posicional de base $r$ permitiéramos un conjunto de dígitos con un tamaño mayor que $r$ (sistemas redundantes), ¿qué propiedad matemática se perdería?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$r^{-1}$",
+        "$r^0$",
+        "$r^{-2}$"
+      ],
+      "explanation": "El punto fraccionario separa las potencias no negativas de la base ($r^0, r^1, \\dots$) de las potencias negativas. El primer dígito a la derecha de la coma corresponde al peso $r^{-1}$.",
+      "q": "En el desarrollo polinómico de un número, el dígito situado inmediatamente a la derecha del punto o coma fraccionaria tiene asignado un peso de:",
+      "correct": 0,
+      "hint": "Analiza los factores primos del denominador y compáralos con los de la base."
+    },
+    {
+      "options": [
+        "$N = \\lceil \\log_2 M \\rceil$",
+        "$N = \\lfloor \\log_2 M \\rfloor$",
+        "$N = 2^M$"
+      ],
+      "explanation": "La función techo (\\lceil \\rceil) garantiza que obtengamos un número entero de bits capaz de proporcionar al menos $M$ estados. Si $M$ no es una potencia de 2, redondear hacia abajo dejaría algunos estados sin poder representarse.",
+      "q": "Para representar exactamente $M$ valores enteros distintos en un sistema binario sin signo, ¿cuál es el número mínimo de bits $N$ necesarios?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Exactamente un cuarto (1/4) de la longitud original, omitiendo acoplamientos necesarios.",
+        "Exactamente la mitad (1/2) de la longitud original.",
+        "Depende exclusivamente del valor numérico y de la cantidad de bits a cero."
+      ],
+      "explanation": "Como $16 = 2^4$, cada grupo de 4 bits en binario se mapea de forma directa a un solo dígito hexadecimal. Esto reduce la longitud de la cadena resultante a un cuarto de la original.",
+      "q": "Si convertimos un número de base 2 a base 16, la longitud de la cadena resultante en hexadecimal comparada con la binaria original será:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0 \\le d_i < r_i$",
+        "$0 \\le d_i < \\min(r_i)$",
+        "$0 \\le d_i \\le \\sum r_i$"
+      ],
+      "explanation": "En cualquier sistema posicional (homogéneo o no), el dígito en una posición determinada debe ser estrictamente menor que la base asignada a esa posición específica para evitar ambigüedades.",
+      "q": "En un sistema de numeración de base mixta o variable (no homogéneo), donde cada posición $i$ tiene una base local $r_i$, ¿qué restricción debe cumplir cada dígito $d_i$?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Mayor o igual que la base $r$.",
+        "Estrictamente mayor que la base $r$.",
+        "Un número impar múltiplo de $r$."
+      ],
+      "explanation": "El acarreo se genera cuando el valor acumulado en una columna iguala o supera la capacidad de representación de un único dígito posicional, que es la base $r$ (es decir, la suma acumulada $S \\ge r$).",
+      "q": "Al realizar la suma de dos números enteros en una base $r$, se produce un acarreo en una determinada columna si y solo si la suma de los dígitos de dicha columna más el acarreo de entrada es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Representa el límite exacto de la serie geométrica infinitamente decreciente.",
+        "Es una aproximación práctica del sistema decimal que carece de formalidad matemática.",
+        "Se debe a las limitaciones del redondeo de hardware al procesar números en coma flotante."
+      ],
+      "explanation": "La expresión $0.999\\dots$ es la serie infinita $\\sum_{n=1}^{\\infty} 9 \\cdot 10^{-n}$. El límite de esta serie es $\\frac{9/10}{1 - 1/10} = 1$. Matemáticamente representa exactamente el mismo número real.",
+      "q": "La igualdad matemática $0.999\\dots = 1$ en el sistema decimal es válida porque:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Se produce un desbordamiento (overflow) de rango.",
+        "Se produce un error de redondeo fraccionario.",
+        "Se genera una subestimación (underflow) del valor."
+      ],
+      "explanation": "El overflow ocurre cuando el resultado numérico excede la capacidad de representación física definida por el número preestablecido de dígitos posicionales en el hardware.",
+      "q": "Si un circuito sumador en hardware diseñado para representar $k$ bits enteros en base $r$ produce un resultado que requiere $k+1$ bits, ¿qué fenómeno ocurre?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Una representación periódica infinita.",
+        "Una representación finita con un único dígito octal.",
+        "Es imposible de representar al ser la base un número par."
+      ],
+      "explanation": "La fracción irreducible de $0.4$ es $2/5$. Dado que el factor primo 5 no divide a la base octal 8 ($2^3$), es imposible representarlo con un número finito de dígitos octales, resultando en un período infinito ($0.3146\\dots_8$).",
+      "q": "¿Qué tipo de representación se obtiene al convertir la fracción decimal exacta $0.4_{10}$ a base octal ($r=8$)?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "La suma de todos sus dígitos es divisible por $r-1$.",
+        "El último dígito del número es igual a $r-1$.",
+        "La suma alternada de sus dígitos es igual a cero."
+      ],
+      "explanation": "Esta es la generalización de la regla de divisibilidad por 9. Como la base $r \\equiv 1 \\pmod{r-1}$, cualquier potencia $r^k \\equiv 1 \\pmod{r-1}$. Por ende, el valor total del polinomio es congruente con la suma de sus dígitos en módulo $r-1$.",
+      "q": "En cualquier sistema de numeración posicional de base $r$, un número entero es divisible por $r-1$ si y solo si:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Porque el peso de las posiciones sería siempre $1^i = 1$, de forma que la posición no aporta un factor exponencial.",
+        "Porque no permite en absoluto representar el valor de cero.",
+        "Porque requeriría un conjunto infinito de símbolos para representar enteros grandes."
+      ],
+      "explanation": "En base 1, todas las posiciones tienen peso $1^k = 1$. Por lo tanto, el valor del número es simplemente la suma directa de sus dígitos, convirtiéndolo en un sistema aditivo (unario) y no posicional exponencial.",
+      "q": "¿Por qué la base $r=1$ (sistema unario) no se clasifica estrictamente como un sistema posicional convencional?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Desplazar la coma fraccionaria exactamente $k$ posiciones hacia la derecha.",
+        "Desplazar la coma fraccionaria exactamente $k$ posiciones hacia la izquierda.",
+        "Elevar al cuadrado el número de dígitos significativos enteros."
+      ],
+      "explanation": "Al multiplicar por la base elevada a $k$, los dígitos se desplazan hacia la izquierda en sus respectivos pesos de potencia. Esto se traduce visualmente en desplazar la coma fraccionaria $k$ posiciones hacia la derecha.",
+      "q": "Multiplicar un número expresado en base posicional $r$ por el valor $r^k$ (con $k$ entero positivo) equivale geométricamente a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "El dígito más significativo de la parte entera.",
+        "El dígito menos significativo de la parte entera.",
+        "El dígito periódico dominante de la fracción."
+      ],
+      "explanation": "El término 'dígito más significativo' (MSD) se reserva para aquel dígito que ocupa la posición posicional de mayor peso numérico no nulo en el número.",
+      "q": "En la cadena de caracteres que representa un número real, el primer dígito no nulo que aparece a la izquierda de la coma fraccionaria se define como:",
+      "correct": 0,
+      "hint": "Analiza los factores primos del denominador y compáralos con los de la base."
+    },
+    {
+      "options": [
+        "No está codificada en los dígitos ni en la base, requiriendo un factor multiplicativo externo $\\pm 1$.",
+        "Está implícitamente determinada por el valor del dígito $d_0$.",
+        "Depende de si la base del sistema de numeración es par o impar."
+      ],
+      "explanation": "El polinomio estándar posicional maneja dígitos no negativos $d_i \\in [0, r-1]$. El signo positivo o negativo es un elemento algebraico complementario que multiplica externamente a la representación.",
+      "q": "En la definición matemática formal del polinomio característico de un número en base $r$, la información de signo (positivo/negativo):",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Los números enteros pueden requerir representaciones con parte fraccionaria no nula en potencias negativas.",
+        "Los números enteros siempre se representarán únicamente con parte entera limpia.",
+        "Es físicamente imposible representar números enteros mayores que 2."
+      ],
+      "explanation": "En bases no enteras (racionales o irracionales), las potencias de la base no coinciden con los múltiplos enteros directos, de modo que representar ciertos enteros requiere usar potencias negativas para anular las fracciones resultantes.",
+      "q": "Si se emplea un sistema de numeración con una base racional no entera, por ejemplo $r = 3/2$, ¿cuál es el comportamiento al representar enteros?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Tiene múltiples representaciones válidas de igual longitud, como '10' y '02'.",
+        "No se puede representar ya que supera el límite del dígito binario convencional.",
+        "Tiene una única representación '10' dado que los ceros a la izquierda carecen de valor."
+      ],
+      "explanation": "Al permitir redundancia con el dígito '2', la cantidad decimal 2 puede expresarse como $1 \\cdot 2^1 + 0 \\cdot 2^0 = 2$ (representación '10') o como $2 \\cdot 2^0 = 2$ (representación '02' o '2'). Esto destruye la unicidad de representación.",
+      "q": "Si en base 2 se permiten los dígitos redundantes $\\{0, 1, 2\\}$, el valor decimal 2:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Sí, es teóricamente posible y cualquier número real tendría representación, aunque con pérdida de unicidad y aritmética compleja.",
+        "No, las bases de sistemas de numeración posicionales están estrictamente limitadas a números enteros positivos.",
+        "Sí, pero solo permitiría representar múltiplos enteros del número irracional $\\pi$."
+      ],
+      "explanation": "Las bases no enteras (irracionales) son posibles matemáticamente. Todos los números reales se pueden representar, aunque los algoritmos para realizar operaciones aritméticas tradicionales pierden sencillez y simplicidad.",
+      "q": "¿Es matemáticamente posible definir un sistema de numeración posicional cuya base sea un número irracional como $\\pi$?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "En base 6 y base 12.",
+        "En base 2 y base 8.",
+        "En base 10 y base 16."
+      ],
+      "explanation": "Para que $1/3$ tenga representación finita, el factor primo 3 (del denominador) debe dividir a la base. Tanto la base 6 ($2 \\cdot 3$) como la base 12 ($2^2 \\cdot 3$) contienen al factor 3.",
+      "q": "¿En cuáles de las siguientes bases la fracción decimal $1/3$ se puede representar de forma exacta con un número finito de dígitos?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Exactamente $r$ símbolos.",
+        "Exactamente $r+1$ símbolos (incluyendo la coma fraccionaria).",
+        "Un conjunto variable que depende de la precisión aritmética elegida."
+      ],
+      "explanation": "Un sistema de base $r$ utiliza un alfabeto de exactamente $r$ símbolos para representar sus valores posicionales ($0, 1, \\dots, r-1$). La coma y el signo son marcadores funcionales y no dígitos.",
+      "q": "En un sistema posicional homogéneo de base $r$, la cantidad exacta de símbolos de dígitos diferentes que se requieren es de:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$O(n^2)$ usando algoritmos tradicionales de división aritmética.",
+        "$O(n)$ independientemente del algoritmo de división empleado.",
+        "$O(2^n)$ debido al crecimiento binario del número de restos."
+      ],
+      "explanation": "En el algoritmo clásico, realizamos divisiones sucesivas. Cada división de un número de tamaño $O(n)$ por 2 toma $O(n)$ operaciones de hardware. Como se requieren $O(n)$ divisiones, el costo total es cuadrático $O(n^2)$.",
+      "q": "La conversión de un número entero con $n$ dígitos decimales a binario por divisiones sucesivas posee una complejidad computacional clásica de:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Siempre 1, sin importar el valor de la base $r$.",
+        "Igual a $r - 1$.",
+        "Igual a la base $r$ completa."
+      ],
+      "explanation": "La suma máxima de dos dígitos en base $r$ más un acarreo de entrada es $(r-1) + (r-1) + 1 = 2r - 1$. Dividiendo por la base $r$ para calcular el acarreo de salida, obtenemos un cociente de 1. Así, el acarreo de salida máximo es siempre 1.",
+      "q": "Al sumar dos números de $N$ dígitos en una base cualquiera $r$, el acarreo máximo absoluto que se puede propagar a la siguiente columna es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "16 caracteres.",
+        "8 caracteres.",
+        "32 caracteres."
+      ],
+      "explanation": "Como cada carácter hexadecimal equivale a 4 bits ($2^4 = 16$), representar 64 bits de forma exacta requiere de $64 / 4 = 16$ caracteres hexadecimales.",
+      "q": "Si el bus de direcciones de un procesador es de 64 bits, ¿cuántos caracteres hexadecimales se necesitan para mostrar una dirección completa?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "El dígito situado en la posición más a la derecha que tiene un valor distinto de cero.",
+        "El dígito que tiene el menor valor nominal absoluto (usualmente el cero).",
+        "El primer dígito que se encuentra a la derecha de la coma fraccionaria."
+      ],
+      "explanation": "El dígito menos significativo (LSD) es el elemento que aporta el menor peso de potencia no nulo al valor numérico total, ubicándose en el extremo derecho de la representación.",
+      "q": "En la parte fraccionaria de un número posicional, el término 'dígito menos significativo' (LSD) hace referencia a:",
+      "correct": 0,
+      "hint": "Analiza los factores primos del denominador y compáralos con los de la base."
+    },
+    {
+      "options": [
+        "La base $r$ y el denominador $q$ son números coprimos entre sí.",
+        "Todos los factores de la base $r$ están contenidos en el denominador $q$.",
+        "El denominador $q$ es un divisor exacto de la base $r$ utilizada."
+      ],
+      "explanation": "Si el denominador y la base son coprimos, no existirá una fase transitoria de división decimal. Toda la parte fraccionaria entrará en el período repetitivo de manera inmediata tras el punto decimal.",
+      "q": "Una fracción irreducible $p/q$ cuya representación en base $r$ es puramente periódica cumple matemáticamente que:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Desperdicia estados en su almacenamiento y hace que la lógica de circuitos de la ALU sea más compleja.",
+        "No permite representar números enteros mayores de 9999.",
+        "Es imposible convertirlo a hexadecimal sin traducirlo a decimal primero."
+      ],
+      "explanation": "Con 4 bits se pueden representar 16 estados, pero en BCD solo se usan 10. Esto genera un desperdicio del 37.5% de la capacidad del byte. Además, la suma requiere un circuito de ajuste para sumas mayores de 9.",
+      "q": "El código BCD (Binary Coded Decimal) codifica cada dígito decimal por separado usando 4 bits. ¿Qué inconveniente presenta frente al binario puro?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Sus bases son potencias exactas de 2, permitiendo agrupar bits sin hacer operaciones aritméticas complejas.",
+        "Los computadores procesan internamente en octal y hexadecimal, y reservan el binario para buses.",
+        "Los buses físicos de datos están limitados por hardware a anchos de banda múltiplos de 8 y 16 únicamente."
+      ],
+      "explanation": "Dado que $8=2^3$ y $16=2^4$, las conversiones se reducen a un agrupamiento directo de bits. No se requieren operaciones de división o multiplicación, facilitando la lectura compacta de la memoria por los programadores.",
+      "q": "En informática, se prefieren las bases octal y hexadecimal a la base decimal para representar bytes porque:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "El número entero 1.",
+        "El valor de la base menos uno ($r - 1$).",
+        "Un valor infinitesimalmente menor que 1 pero estrictamente diferente."
+      ],
+      "explanation": "La suma de la serie geométrica infinitamente decreciente $\\sum_{i=1}^{\\infty} (r-1) r^{-i}$ en cualquier base $r$ converge matemáticamente al valor de 1, de forma idéntica a cómo $0.999\\dots = 1$ en decimal.",
+      "q": "En cualquier base posicional $r$, un número periódico de la forma $0.(r-1)(r-1)(r-1)\\dots$ equivale exactamente a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "La suma se puede realizar en tiempo constante $O(1)$ libre de la propagación en cadena del acarreo.",
+        "Permite reducir a la mitad la cantidad de registros de hardware en la ALU.",
+        "Elimina la necesidad de calcular el bit de signo al operar con flotantes."
+      ],
+      "explanation": "Al permitir redundancia de dígitos, las sumas y restas pueden realizarse de forma paralela en las posiciones sin esperar que los acarreos se propaguen en cascada a lo largo del bus, permitiendo sumas en tiempo constante.",
+      "q": "En los sistemas de numeración redundante de dígitos firmados (como la representación de Avizienis), ¿qué ventaja se obtiene al sumar?",
+      "correct": 0,
+      "hint": "Analiza las propiedades teóricas fundamentales expuestas en el material de estudio."
+    },
+    {
+      "options": [
+        "Siempre infinita y no periódica en todas las bases enteras posibles.",
+        "Finita si elegimos una base $r$ que sea múltiplo del primer dígito significativo.",
+        "Periódica pura en bases que sean múltiplos del período correspondiente."
+      ],
+      "explanation": "Por definición, un irracional no se puede expresar como fracción de enteros. Si tuviera una representación finita o periódica en una base entera $r$, se podría reescribir como una fracción racional, lo cual es una contradicción matemática.",
+      "q": "En cualquier sistema posicional de base entera $r$, la representación de un número irracional como $\\pi$ o $\\sqrt{2}$ es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "No altera el valor matemático absoluto, representando sumas nulas de potencias negativas adicionales.",
+        "Multiplica el valor del número fraccionario por la base $r$ elevada al número de ceros.",
+        "Altera la periodicidad del número, transformando un período puro en uno mixto."
+      ],
+      "explanation": "Añadir ceros a la derecha de la parte fraccionaria equivale a añadir términos del tipo $0 \\cdot r^{-k}$, por lo que el valor numérico no varía en absoluto.",
+      "q": "Añadir ceros al final de la parte fraccionaria de un número expresado en base posicional $r$ (por ejemplo, pasar de $0.12_r$ a $0.1200_r$):",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "Los enteros positivos pueden representarse mediante sumas de potencias no enteras de $\\varphi$, y algunos pueden requerir infinitos dígitos.",
+        "Todos los enteros tienen una única representación finita con dígitos del conjunto $\\{0, 1\\}$.",
+        "Es matemáticamente imposible representar números enteros pares en esta base."
+      ],
+      "explanation": "En la base áurea, es posible representar cualquier entero. Si se normaliza para evitar unos consecutivos ('11' ya que $\\varphi^2 = \\varphi + 1$), la representación es única, pero el proceso de conversión de enteros no es directo e involucra potencias de exponente negativo.",
+      "q": "En un sistema de numeración con base áurea $\\varphi = \\frac{1+\\sqrt{5}}{2} \\approx 1.618$, ¿cuál es una característica de la representación de enteros?",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    }
+  ],
+  "TEST_B": [
+    {
+      "options": [
+        "$110101_2$",
+        "$110111_2$",
+        "$101101_2$"
+      ],
+      "explanation": "$53 = 32 + 16 + 4 + 1 = 2^5 + 2^4 + 2^2 + 2^0 = 110101_2$.",
+      "q": "El número decimal $53_{10}$ expresado en base binaria es igual a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$47.5_{10}$",
+        "$47.8_{10}$",
+        "$45.5_{10}$"
+      ],
+      "explanation": "$2F.8_{16} = 2 \\cdot 16^1 + 15 \\cdot 16^0 + 8 \\cdot 16^{-1} = 32 + 15 + 0.5 = 47.5_{10}$.",
+      "q": "El número hexadecimal $2F.8_{16}$ expresado en decimal es igual a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$133.5_8$",
+        "$133.101_8$",
+        "$267.5_8$"
+      ],
+      "explanation": "Agrupando de 3 en 3 bits: $\\underline{001}\\ \\underline{011}\\ \\underline{011} . \\underline{101}_2 = 133.5_8$.",
+      "q": "La representación en octal del número binario $1011011.101_2$ equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$10010.011_2$",
+        "$10010.110_2$",
+        "$10001.011_2$"
+      ],
+      "explanation": "$18 = 16+2 = 10010_2$. $0.375 = 0.25+0.125 = 2^{-2} + 2^{-3} = 0.011_2$. Unido da $10010.011_2$.",
+      "q": "El número decimal $18.375_{10}$ expresado en base binaria es igual a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$57.75_{10}$",
+        "$57.3_{10}$",
+        "$56.75_{10}$"
+      ],
+      "explanation": "$111001_2 = 32+16+8+1 = 57$. $.11_2 = 0.5 + 0.25 = 0.75$. Unido da $57.75_{10}$.",
+      "q": "El número binario $111001.11_2$ convertido a base decimal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$3C.4_{16}$",
+        "$3C.2_{16}$",
+        "$74.2_{16}$"
+      ],
+      "explanation": "Convertimos a binario: $74.2_8 = 111\\ 100 . 010_2$. Agrupando en 4 bits: $\\underline{0011}\\ \\underline{1100} . \\underline{0100}_2 = 3C.4_{16}$.",
+      "q": "El número octal $74.2_8$ expresado en base hexadecimal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.0001_2$",
+        "$0.001_2$",
+        "$0.01_2$"
+      ],
+      "explanation": "$0.0625 = 1/16 = 2^{-4} = 0.0001_2$.",
+      "q": "El número decimal $0.0625_{10}$ expresado en base binaria es igual a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$5114_8$",
+        "$2444_8$",
+        "$5130_8$"
+      ],
+      "explanation": "Convertimos a binario: $A4C_{16} = 1010\\ 0100\\ 1100_2$. Agrupando de 3 en 3 bits: $\\underline{101}\\ \\underline{001}\\ \\underline{001}\\ \\underline{100}_2 = 5114_8$.",
+      "q": "El número hexadecimal $A4C_{16}$ expresado en base octal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$175_8$",
+        "$155_8$",
+        "$205_8$"
+      ],
+      "explanation": "$125 / 8 = 15$ resto $5$. $15 / 8 = 1$ resto $7$. $1 / 8 = 0$ resto $1$. Leyendo en orden inverso es $175_8$.",
+      "q": "El número decimal $125_{10}$ convertido a base octal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.001100_2$",
+        "$0.001101_2$",
+        "$0.010011_2$"
+      ],
+      "explanation": "$0.2 \\cdot 2 = 0.4 \\to 0$; $0.4 \\cdot 2 = 0.8 \\to 0$; $0.8 \\cdot 2 = 1.6 \\to 1$; $1.2 \\to 1$; $0.4 \\to 0$; $0.8 \\to 0$. Obtenemos $0.001100_2$.",
+      "q": "La fracción decimal $0.2_{10}$ convertida a binario con 6 bits en su parte fraccionaria es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$128_{10}$",
+        "$64_{10}$",
+        "$256_{10}$"
+      ],
+      "explanation": "$10000000_2 = 2^7 = 128_{10}$.",
+      "q": "El número binario $10000000_2$ equivale en base decimal a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$01111110_2$",
+        "$01111101_2$",
+        "$11111110_2$"
+      ],
+      "explanation": "$7 \\to 0111_2$ y $E \\to 1110_2$, por lo que $7E_{16} = 01111110_2$.",
+      "q": "La conversión del número hexadecimal $7E_{16}$ a base binaria es igual a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$202_{10}$",
+        "$200_{10}$",
+        "$256_{10}$"
+      ],
+      "explanation": "$312_8 = 3 \\cdot 8^2 + 1 \\cdot 8^1 + 2 \\cdot 8^0 = 192 + 8 + 2 = 202_{10}$.",
+      "q": "El número octal $312_8$ expresado en decimal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.3125_{10}$",
+        "$0.25_{10}$",
+        "$0.375_{10}$"
+      ],
+      "explanation": "$0.0101_2 = 0 \\cdot 2^{-1} + 1 \\cdot 2^{-2} + 0 \\cdot 2^{-3} + 1 \\cdot 2^{-4} = 0.25 + 0.0625 = 0.3125_{10}$.",
+      "q": "El número binario fraccionario $0.0101_2$ en base decimal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$213_{10}$",
+        "$221_{10}$",
+        "$205_{10}$"
+      ],
+      "explanation": "$D5_{16} = 13 \\cdot 16^1 + 5 \\cdot 16^0 = 208 + 5 = 213_{10}$.",
+      "q": "El número hexadecimal $D5_{16}$ equivale en base decimal a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$24_{10}$",
+        "$22_{10}$",
+        "$26_{10}$"
+      ],
+      "explanation": "$1101_2 = 13_{10}$. $1011_2 = 11_{10}$. Sumando ambos obtenemos $13 + 11 = 24_{10}$.",
+      "q": "La suma de los números binarios $1101_2$ y $1011_2$ expresada en decimal es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$15.5_{10}$",
+        "$15.4_{10}$",
+        "$17.5_{10}$"
+      ],
+      "explanation": "$17.4_8 = 1 \\cdot 8^1 + 7 \\cdot 8^0 + 4 \\cdot 8^{-1} = 8 + 7 + 0.5 = 15.5_{10}$.",
+      "q": "El número octal $17.4_8$ expresado en decimal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$100_{16}$",
+        "$FF_{16}$",
+        "$200_{16}$"
+      ],
+      "explanation": "$256_{10} = 1 \\cdot 16^2 + 0 \\cdot 16^1 + 0 \\cdot 16^0 = 100_{16}$.",
+      "q": "Si convertimos el número decimal $256_{10}$ a base hexadecimal, el resultado es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$127_8$",
+        "$107_8$",
+        "$147_8$"
+      ],
+      "explanation": "$87 / 8 = 10$ resto $7$. $10 / 8 = 1$ resto $2$. $1 / 8 = 0$ resto $1$. Obtenemos $127_8$.",
+      "q": "El número decimal $87_{10}$ en base octal es:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$52.5_8$",
+        "$52.2_8$",
+        "$25.5_8$"
+      ],
+      "explanation": "Parte entera: $\\underline{101}\\ \\underline{010} \\to 52_8$. Parte fraccionaria: $.\\underline{101} \\to .5_8$. Total: $52.5_8$.",
+      "q": "El número binario $101010.101_2$ expresado en octal equivale a:",
+      "correct": 0,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$1010_2$",
+        "$12_8$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "$1010_2 = 8+2 = 10$. $12_8 = 1\\cdot 8 + 2 = 10$. Ambas son representaciones correctas.",
+      "q": "¿Cuál de las siguientes representaciones numéricas equivale al valor decimal 10?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$00001111_2$",
+        "$10101011_2$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "Cualquier número binario cuyo bit de menor peso sea 1 es impar. $00001111_2 = 15_{10}$ y $10101011_2 = 171_{10}$ terminan en 1.",
+      "q": "¿Cuál de los siguientes números binarios representa un valor decimal impar?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$FF_{16}$",
+        "$0FF_{16}$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "El valor $FF_{16} = 15 \\cdot 16 + 15 = 255_{10}$. Los ceros a la izquierda ($0FF_{16}$) no modifican el valor.",
+      "q": "¿Qué representaciones en base hexadecimal corresponden al número decimal 255?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.1_2$",
+        "$0.4_8$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "$0.1_2 = 2^{-1} = 0.5$. $0.4_8 = 4/8 = 0.5$. Ambas representan exactamente $0.5$.",
+      "q": "¿Cuál de las siguientes representaciones numéricas equivale a la fracción decimal $0.5_{10}$?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$1.01_2$",
+        "$1.2_8$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "$1.01_2 = 1 + 2^{-2} = 1.25$. $1.2_8 = 1 + 2/8 = 1.25$. Ambas son correctas.",
+      "q": "¿Qué expresiones posicionales representan exactamente el número decimal $1.25_{10}$?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$1100_2$",
+        "$101000_2$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "En binario, un entero es divisible por $4 = 2^2$ si y solo si sus dos últimos bits de la derecha son ceros. $1100_2 = 12$ y $101000_2 = 40$ cumplen esto.",
+      "q": "Al realizar conversiones, ¿cuál de los siguientes números binarios representa un múltiplo de 4 en decimal?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$35_8 = 011101_2$",
+        "$70_8 = 111000_2$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "$35_8 \\to 011_2$ (3) y $101_2$ (5) $\\implies 011101_2$. $70_8 \\to 111_2$ (7) y $000_2$ (0) $\\implies 111000_2$.",
+      "q": "¿Cuáles de las siguientes equivalencias de conversión entre bases son matemáticamente correctas?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$A.4_{16}$",
+        "$100.4_{16}$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "La parte fraccionaria es $.4_{16}$ en ambos casos, lo que equivale a $4 \\cdot 16^{-1} = 4/16 = 0.25_{10}$.",
+      "q": "¿Cuál de los siguientes números hexadecimales posee una parte fraccionaria que equivale a $0.25_{10}$?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.11_2$",
+        "$0.1100_2$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "$0.11_2 = 2^{-1} + 2^{-2} = 0.5 + 0.25 = 0.75$. Agregar ceros a la derecha de la parte fraccionaria no altera su valor.",
+      "q": "¿Qué números binarios fraccionarios equivalen a $0.75_{10}$ en base decimal?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$1000000_2$",
+        "$100_8$",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "explanation": "$1000000_2 = 2^6 = 64$. $100_8 = 8^2 = 64$. Ambas son representaciones correctas.",
+      "q": "¿Cuáles de las siguientes combinaciones representan correctamente el valor decimal $64_{10}$?",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$55_8$",
+        "$51_8$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$43 / 8 = 5$ con resto $3$. Por lo tanto, el resultado correcto es $53_8$.",
+      "q": "Si convertimos el número decimal $43_{10}$ a base octal, el resultado es:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$185.2_{10}$",
+        "$185.25_{10}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$B9.2_{16} = 11 \\cdot 16 + 9 + 2/16 = 176 + 9 + 0.125 = 185.125_{10}$.",
+      "q": "El número hexadecimal $B9.2_{16}$ expresado en base decimal equivale a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$37_{10}$",
+        "$41_{10}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$100111_2 = 32 + 4 + 2 + 1 = 39_{10}$.",
+      "q": "El número binario $100111_2$ equivale en base decimal a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.011_2$",
+        "$0.101_2$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$0.3125_{10} = 0.25 + 0.0625 = 2^{-2} + 2^{-4} = 0.0101_2$.",
+      "q": "La fracción decimal $0.3125_{10}$ expresada en base binaria es igual a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$58_{16}$",
+        "$56_{16}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$127_8 = 001\\ 010\\ 111_2 = 0101\\ 0111_2 = 57_{16}$.",
+      "q": "El número octal $127_8$ convertido a base hexadecimal equivale a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$1101000_2$",
+        "$1100010_2$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$100_{10} = 64 + 32 + 4 = 1100100_2$.",
+      "q": "El número decimal $100_{10}$ en base binaria equivale a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$52.12_8$",
+        "$52.3_8$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$2A.C_{16} = 0010\\ 1010 . 1100_2 = 000\\ 101\\ 010 . 110_2 = 52.6_8$.",
+      "q": "El número hexadecimal $2A.C_{16}$ expresado en base octal equivale a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$30_{10}$",
+        "$32_{10}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$11111_2 = 2^5 - 1 = 31_{10}$.",
+      "q": "Al convertir el número binario $11111_2$ a decimal se obtiene exactamente el valor:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$225_{10}$",
+        "$230_{10}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$345_8 = 3 \\cdot 8^2 + 4 \\cdot 8^1 + 5 \\cdot 8^0 = 192 + 32 + 5 = 229_{10}$.",
+      "q": "El número octal $345_8$ convertido a base decimal equivale a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    },
+    {
+      "options": [
+        "$0.A_{16}$",
+        "$0.C_{16}$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "explanation": "$0.6875 \\cdot 16 = 11.0$, por lo que equivale a $0.B_{16}$.",
+      "q": "El número decimal $0.6875_{10}$ expresado en base hexadecimal equivale a:",
+      "correct": 2,
+      "hint": "Considera la base posicional y las potencias correspondientes de la base para la conversión."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Conversión analítica de decimal a binario",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión analítica de decimal a binario.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Considere el número decimal $59.375_{10}$. ¿Cuál es el cociente de la primera división entera de 59 entre 2?",
+          "correctValue": 29,
+          "tolerance": 0,
+          "explanation": "Dividimos 59 entre 2 de forma entera: $\\lfloor 59 / 2 \\rfloor = 29$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Si continuamos con el proceso de divisiones sucesivas para la parte entera ($59_{10} = d_5 d_4 d_3 d_2 d_1 d_0$), sume los valores numéricos individuales de los dígitos binarios obtenidos (es decir, la cantidad de bits '1' en su parte entera).",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$59_{10} = 111011_2$. Contiene cinco bits '1': $1+1+1+0+1+1 = 5$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Para la parte fraccionaria $0.375_{10}$, multiplíquela por la base 2. Indique el valor numérico de la parte fraccionaria restante después de extraer el primer bit obtenido.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "$0.375 \\cdot 2 = 0.75$. La parte entera es 0 (primer bit). El residuo fraccionario es $0.75$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Sume el valor de la parte entera original en base 10 (59) con la suma de todos los bits fraccionarios que forman el número binario exacto ($d_{-1}$, $d_{-2}$, $d_{-3}$).",
+          "correctValue": 61,
+          "tolerance": 0,
+          "explanation": "$0.75 \\cdot 2 = 1.5 \\implies d_{-2}=1$ con residuo $0.5$. $0.5 \\cdot 2 = 1.0 \\implies d_{-3}=1$. Los bits fraccionarios son $0, 1, 1$. Su suma es $0+1+1=2$. Sumado a 59 da $61$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Conversión rápida entre bases binarias",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión rápida entre bases binarias.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Dado el número binario $1101011.0111_2$. Si convertimos la parte entera a octal agrupando bits, ¿cuál es el valor del dígito octal más significativo?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La parte entera se agrupa como $\\underline{001}\\ \\underline{101}\\ \\underline{011}_2$. El grupo más a la izquierda es $001_2 = 1_8$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Sume todos los dígitos de la representación octal completa de la parte entera del número anterior.",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El número entero en octal es $153_8$. La suma de sus dígitos es $1 + 5 + 3 = 9$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Convierta la parte fraccionaria $.0111_2$ a hexadecimal completando con ceros a la derecha si es necesario. ¿Qué valor decimal tiene este dígito hexadecimal?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$.0111_2$ ya tiene 4 bits, lo que equivale a $7_{16}$. En decimal es $7$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Sume la suma de los dígitos octales obtenida en b (9) y el valor decimal de la parte fraccionaria hexadecimal obtenida en c (7).",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La suma es $9 + 7 = 16$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Polinomio característico y operaciones",
+      "context": "Resuelve el siguiente problema práctico sobre Polinomio característico y operaciones.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Analice el número hexadecimal $A3.C_{16}$. ¿Cuál es el valor decimal del dígito en la posición de peso $16^1$?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El dígito en la posición de peso $16^1$ es $A$, que equivale a $10_{10}$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcule el valor decimal completo de la parte entera de dicho número ($A3_{16}$).",
+          "correctValue": 163,
+          "tolerance": 0,
+          "explanation": "$A3_{16} = 10 \\cdot 16^1 + 3 \\cdot 16^0 = 160 + 3 = 163_{10}$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcule el valor decimal de la parte fraccionaria ($.C_{16}$).",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "$.C_{16} = 12 \\cdot 16^{-1} = 12/16 = 0.75_{10}$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Multiplique el valor de la parte entera decimal obtenida en b (163) por el valor de la parte fraccionaria decimal obtenida en c (0.75).",
+          "correctValue": 122.25,
+          "tolerance": 0.01,
+          "explanation": "Realizamos la multiplicación: $163 \\cdot 0.75 = 122.25$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Aritmética básica en binario",
+      "context": "Resuelve el siguiente problema práctico sobre Aritmética básica en binario.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Considere los números binarios $A = 1011_2$ y $B = 110_2$. Convierta $A$ a decimal.",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$1011_2 = 8 + 2 + 1 = 11_{10}$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Sume $A$ y $B$ en binario para obtener $C$. ¿Cuál es el valor decimal de $C$?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "$B = 110_2 = 6_{10}$. La suma es $C = 11 + 6 = 17$ ($10001_2$)."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcule el producto $P = A \\cdot B$ en binario. ¿Cuál es el valor decimal de $P$?",
+          "correctValue": 66,
+          "tolerance": 0,
+          "explanation": "El producto es $P = 11 \\cdot 6 = 66_{10}$ ($1000010_2$)."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Reste el valor decimal de la suma $C$ (17) al valor decimal del producto $P$ (66).",
+          "correctValue": 49,
+          "tolerance": 0,
+          "explanation": "$P - C = 66 - 17 = 49$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Rangos de representación y resolución",
+      "context": "Resuelve el siguiente problema práctico sobre Rangos de representación y resolución.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Trabajamos en base 2 con un formato de 8 bits enteros sin signo. ¿Cuál es el mayor número entero que se puede representar?",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "El valor máximo con $n=8$ es $2^8 - 1 = 255$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Si añadimos 4 bits fraccionarios a este formato (teniendo un total de 12 bits), ¿cuál es la resolución mínima (el menor valor fraccionario no nulo representable)?",
+          "correctValue": 0.0625,
+          "tolerance": 0.001,
+          "explanation": "La resolución viene dada por el bit de menor peso: $2^{-4} = 1/16 = 0.0625$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Bajo este formato de 12 bits (8 enteros, 4 fraccionarios), calcule el valor máximo representable.",
+          "correctValue": 255.9375,
+          "tolerance": 0.001,
+          "explanation": "El valor máximo es $2^8 - 2^{-4} = 256 - 0.0625 = 255.9375$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Divida el valor máximo representable obtenido en c (255.9375) entre la resolución obtenida en b (0.0625).",
+          "correctValue": 4095,
+          "tolerance": 0,
+          "explanation": "$255.9375 / 0.0625 = 4095$ (que equivale a $2^{12} - 1$ combinaciones de datos representables sin contar el cero)."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Aproximación de fracción periódica binaria",
+      "context": "Resuelve el siguiente problema práctico sobre Aproximación de fracción periódica binaria.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Queremos representar $0.1_{10}$ en binario. Multiplique $0.1$ por la base 2. ¿Cuál es la parte entera de este primer paso?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$0.1 \\cdot 2 = 0.2 \\implies 0$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Determine cuántos bits en total forman el período periódico repetitivo de la fracción $0.1_{10}$ en binario.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El proceso repite la secuencia de restos periódicos $0011$ de longitud 4: $0.1 \\cdot 2 = 0.2 \\to 0$; $0.2 \\cdot 2 = 0.4 \\to 0$; $0.4 \\cdot 2 = 0.8 \\to 0$; $0.8 \\cdot 2 = 1.6 \\to 1$; $0.6 \\cdot 2 = 1.2 \\to 1$; y vuelve a $0.2$. Período = 4 bits."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Aproximamos la fracción con 6 bits tras la coma ($0.000110_2$). Calcule el valor decimal exacto de esta aproximación.",
+          "correctValue": 0.09375,
+          "tolerance": 0.001,
+          "explanation": "$0.000110_2 = 2^{-4} + 2^{-5} = 1/16 + 1/32 = 0.0625 + 0.03125 = 0.09375$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule el valor del error absoluto de aproximación cometido en c (valor real $0.1$ menos valor aproximado).",
+          "correctValue": 0.00625,
+          "tolerance": 0.0001,
+          "explanation": "$|0.1 - 0.09375| = 0.00625$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Conversión y operaciones en base variable 3",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión y operaciones en base variable 3.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Queremos convertir el número decimal $47_{10}$ a base 3. ¿Cuál es el resto de la primera división entera de 47 entre 3?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$47 = 15 \\cdot 3 + 2$. El primer resto es 2."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Complete la conversión de $47_{10}$ a base 3. Indique el valor de la suma de todos los dígitos de esta representación en base 3.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$47 / 3 = 15$ resto 2. $15 / 3 = 5$ resto 0. $5 / 3 = 1$ resto 2. $1 / 3 = 0$ resto 1. El número es $1202_3$. La suma es $1 + 2 + 0 + 2 = 5$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si desplazamos el número obtenido una posición a la izquierda en base 3 (añadiendo un cero a la derecha, es decir, $12020_3$), ¿cuál es su valor decimal?",
+          "correctValue": 141,
+          "tolerance": 0,
+          "explanation": "$12020_3 = 47 \\cdot 3^1 = 141_{10}$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Sume el valor decimal obtenido en c (141) con la suma de los dígitos en b (5).",
+          "correctValue": 146,
+          "tolerance": 0,
+          "explanation": "$141 + 5 = 146$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Operaciones en base octal",
+      "context": "Resuelve el siguiente problema práctico sobre Operaciones en base octal.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Considere los números en octal $X = 35_8$ e $Y = 24_8$. Convierta $X$ a decimal.",
+          "correctValue": 29,
+          "tolerance": 0,
+          "explanation": "$35_8 = 3 \\cdot 8 + 5 = 29_{10}$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Realice la suma de $X$ e $Y$ en octal y convierta el resultado final a base decimal.",
+          "correctValue": 49,
+          "tolerance": 0,
+          "explanation": "$Y = 24_8 = 20_{10}$. La suma en decimal es $29 + 20 = 49_{10}$ (en octal, $35_8 + 24_8 = 61_8$)."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Multiplique $X$ e $Y$ en octal. Convierta el producto resultante a base decimal.",
+          "correctValue": 580,
+          "tolerance": 0,
+          "explanation": "El producto es $29 \\cdot 20 = 580_{10}$."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Divida el producto obtenido en c (580) entre la suma obtenida en b (49), redondeando el resultado a dos cifras decimales.",
+          "correctValue": 11.84,
+          "tolerance": 0.01,
+          "explanation": "$580 / 49 \\approx 11.8367 \\to 11.84$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Aritmética hexadecimal y bits",
+      "context": "Resuelve el siguiente problema práctico sobre Aritmética hexadecimal y bits.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Dados los números hexadecimales $A = F2_{16}$ y $B = 3D_{16}$. Convierta $A$ a decimal.",
+          "correctValue": 242,
+          "tolerance": 0,
+          "explanation": "$A = F2_{16} = 15 \\cdot 16 + 2 = 242$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Sume $A$ y $B$ en hexadecimal y obtenga el equivalente decimal de dicha suma.",
+          "correctValue": 303,
+          "tolerance": 0,
+          "explanation": "$B = 3D_{16} = 3 \\cdot 16 + 13 = 61_{10}$. La suma es $242 + 61 = 303$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Convierta el resultado de la suma (303) a binario. ¿Cuántos bits '1' tiene su representación?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$303 = 256 + 32 + 8 + 4 + 2 + 1 = 100101111_2$, que tiene 7 bits '1'."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Multiplique el número de bits '1' obtenido en c (7) por el valor decimal del operando $B$ (61).",
+          "correctValue": 427,
+          "tolerance": 0,
+          "explanation": "$7 \\cdot 61 = 427$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Análisis de coma fija y desplazamientos",
+      "context": "Resuelve el siguiente problema práctico sobre Análisis de coma fija y desplazamientos.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Dado el número binario $101.011_2$, convierta su parte entera a decimal.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$101_2 = 5$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Convierta la parte fraccionaria $.011_2$ a decimal.",
+          "correctValue": 0.375,
+          "tolerance": 0.01,
+          "explanation": "$.011_2 = 0 \\cdot 0.5 + 1 \\cdot 0.25 + 1 \\cdot 0.125 = 0.375$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Si multiplicamos el número completo $101.011_2$ por $2^3$ desplazando la coma, ¿cuál es el nuevo valor decimal obtenido?",
+          "correctValue": 43,
+          "tolerance": 0,
+          "explanation": "Multiplicar por $2^3$ equivale a desplazar la coma 3 posiciones a la derecha: $101011_2 = 32 + 8 + 2 + 1 = 43$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Sume al resultado anterior (43) el cuadrado del valor de la parte entera de a (5).",
+          "correctValue": 68,
+          "tolerance": 0,
+          "explanation": "$43 + 5^2 = 43 + 25 = 68$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "De base 5 a binario",
+      "context": "Resuelve el siguiente problema práctico sobre De base 5 a binario.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Convierta el número $342_5$ a base 10.",
+          "correctValue": 97,
+          "tolerance": 0,
+          "explanation": "$342_5 = 3 \\cdot 25 + 4 \\cdot 5 + 2 = 75 + 20 + 2 = 97$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Convierta el resultado decimal (97) a base binaria. ¿Cuántos bits '0' tiene su representación significativamente activa?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$97 = 1100001_2$. Contiene exactamente 3 bits a cero."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Si dividimos el número decimal 97 entre 8, ¿cuál es el resto entero resultante?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$97 = 12 \\cdot 8 + 1$. El resto es 1."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Sume la base original del número (5) más el valor decimal obtenido en a (97) y el resto obtenido en c (1).",
+          "correctValue": 103,
+          "tolerance": 0,
+          "explanation": "$5 + 97 + 1 = 103$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Conversión fraccionaria de base 10 a base 16",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión fraccionaria de base 10 a base 16.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Convertimos el número $0.8125_{10}$ a base hexadecimal. Multiplique el número por 16. ¿Cuál es el resultado entero?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "$0.8125 \\cdot 16 = 13$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Indique el valor decimal que representa a la letra hexadecimal resultante de la parte a.",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "El valor 13 se representa por la letra D."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Convierta la misma fracción decimal a binario exacto. ¿Cuántos bits se requieren en total detrás del punto binario?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$0.8125 = 0.5 + 0.25 + 0.0625 = 2^{-1} + 2^{-2} + 2^{-4} = 0.1101_2$ (4 bits)."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Sume la cantidad de bits obtenidos en c (4) al valor de la parte a (13).",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "$13 + 4 = 17$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Acarreos y bits en sumas binarias",
+      "context": "Resuelve el siguiente problema práctico sobre Acarreos y bits en sumas binarias.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Considere la suma de los números binarios $11011_2$ y $10101_2$. Calcule el valor decimal del primer operando.",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "$11011_2 = 16 + 8 + 2 + 1 = 27$."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcule el valor decimal completo del resultado de la suma.",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "$10101_2 = 21$. La suma es $27 + 21 = 48$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Al realizar la suma bit a bit en binario, ¿cuántos acarreos con valor '1' se generan en total (incluyendo el acarreo final de salida)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$11011 + 10101 = 110000_2$. Se generan acarreos en las posiciones 1, 2, 3, 4 y 5. Total = 5."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Reste la cantidad de acarreos generada en c (5) al valor decimal de la suma en b (48).",
+          "correctValue": 43,
+          "tolerance": 0,
+          "explanation": "$48 - 5 = 43$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Capacidad y densidades en base octal",
+      "context": "Resuelve el siguiente problema práctico sobre Capacidad y densidades en base octal.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Considere el número entero octal $777_8$. ¿Cuál es su equivalente decimal?",
+          "correctValue": 511,
+          "tolerance": 0,
+          "explanation": "$777_8 = 7 \\cdot 64 + 7 \\cdot 8 + 7 = 511_{10}$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Determine el número mínimo de bits necesarios en binario puro para poder alojar este valor.",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "$511 = 2^9 - 1$, requiere exactamente 9 bits ($111111111_2$)."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Sume $1_{10}$ al número octal original. Exprese el nuevo valor en decimal.",
+          "correctValue": 512,
+          "tolerance": 0,
+          "explanation": "$511 + 1 = 512_{10}$ ($1000_8$)."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Divida el valor decimal obtenido en c (512) por la cantidad de bits de b (9), expresando con dos decimales.",
+          "correctValue": 56.89,
+          "tolerance": 0.01,
+          "explanation": "$512 / 9 \\approx 56.8889 \\to 56.89$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Conversión de binario fraccionario a octal y hexadecimal",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión de binario fraccionario a octal y hexadecimal.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Dado el número fraccionario $0.101011_2$, conviértalo a octal. Sume los dígitos de la parte fraccionaria obtenida.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$0.101\\ 011_2 = 0.53_8$. La suma de los dígitos es $5 + 3 = 8$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Convierta el mismo binario a hexadecimal. ¿Qué valor decimal tiene el segundo dígito hexadecimal fraccionario obtenido?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$0.1010\\ 1100_2 = 0.AC_{16}$. El segundo dígito es C, cuyo valor decimal es $12$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcule el valor decimal completo del número original $0.101011_2$.",
+          "correctValue": 0.671875,
+          "tolerance": 0.0001,
+          "explanation": "$2^{-1} + 2^{-3} + 2^{-5} + 2^{-6} = 0.5 + 0.125 + 0.03125 + 0.015625 = 0.671875$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Sume los resultados de a (8) y b (12) y multiplíquelos por el valor decimal en c (0.671875). Exprese el resultado con dos decimales.",
+          "correctValue": 13.44,
+          "tolerance": 0.01,
+          "explanation": "$(8 + 12) \\cdot 0.671875 = 20 \\cdot 0.671875 = 13.4375 \\to 13.44$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "De base 7 a base 9",
+      "context": "Resuelve el siguiente problema práctico sobre De base 7 a base 9.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Convierta el número posicional $156_7$ a base 10.",
+          "correctValue": 90,
+          "tolerance": 0,
+          "explanation": "$156_7 = 1 \\cdot 49 + 5 \\cdot 7 + 6 = 49 + 35 + 6 = 90$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Divida el resultado anterior entre la base 9. Indique el cociente entero resultante.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$90 / 9 = 10$ (resto 0)."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Termine la conversión a base 9. ¿Cuál es la suma de los dígitos en base 9 del número obtenido?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$90 / 9 = 10$ resto 0. $10 / 9 = 1$ resto 1. $1/9 = 0$ resto 1. El número es $110_9$. Suma = $1+1+0 = 2$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Multiplique la suma de dígitos obtenida en c (2) por el valor decimal inicial de a (90).",
+          "correctValue": 180,
+          "tolerance": 0,
+          "explanation": "$2 \\cdot 90 = 180$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Polinomio en base 5",
+      "context": "Resuelve el siguiente problema práctico sobre Polinomio en base 5.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Dado el número en base 5 $12.34_5$, convierta su parte entera a decimal.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$12_5 = 1 \\cdot 5 + 2 = 7$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Convierta su parte fraccionaria $.34_5$ a decimal.",
+          "correctValue": 0.76,
+          "tolerance": 0.01,
+          "explanation": "$.34_5 = 3/5 + 4/25 = 0.6 + 0.16 = 0.76$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Convierta el número completo a decimal.",
+          "correctValue": 7.76,
+          "tolerance": 0.01,
+          "explanation": "$7 + 0.76 = 7.76$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Multiplique el número decimal completo obtenido en c por 25 para obtener un valor entero.",
+          "correctValue": 194,
+          "tolerance": 0,
+          "explanation": "$7.76 \\cdot 25 = 194$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Resta binaria y pesos",
+      "context": "Resuelve el siguiente problema práctico sobre Resta binaria y pesos.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Considere la resta binaria $A - B$ con $A = 11001_2$ y $B = 1011_2$. Convierta $A$ a decimal.",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "$11001_2 = 16 + 8 + 1 = 25$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Convierta $B$ a decimal.",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$1011_2 = 8 + 2 + 1 = 11$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcule el valor decimal de la resta $D = A - B$.",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "$25 - 11 = 14$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si $D$ expresado en binario es $1110_2$, sume los pesos de potencia de sus bits activos (es decir, $2^i$ donde $d_i=1$).",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Los bits 1 están en las posiciones $2^3, 2^2, 2^1$. La suma es $8 + 4 + 2 = 14$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Representación periódica en base 3",
+      "context": "Resuelve el siguiente problema práctico sobre Representación periódica en base 3.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Dada la fracción irreducible $7/18_{10}$, calcule su valor decimal redondeando a cuatro cifras decimales.",
+          "correctValue": 0.3889,
+          "tolerance": 0.001,
+          "explanation": "$7/18 \\approx 0.38888... \\to 0.3889$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Multiplique $7/18$ por la base 3. ¿Cuál es el primer dígito entero que se obtiene?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$7/18 \\cdot 3 = 21/18 = 1$ con residuo $3/18 = 1/6$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Multiplique la fracción restante ($1/6$) por la base 3. Indique el segundo dígito entero obtenido.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$1/6 \\cdot 3 = 3/6 = 0$ con residuo $0.5$."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Si calculamos los 4 primeros dígitos fraccionarios en base 3, obtenemos $0.1011_3$. Calcule su valor decimal equivalente exacto redondeando a cuatro decimales.",
+          "correctValue": 0.3827,
+          "tolerance": 0.001,
+          "explanation": "$1/3 + 0/9 + 1/27 + 1/81 = 31/81 \\approx 0.3827$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Conversión de octal a hexadecimal",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión de octal a hexadecimal.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Dado el número octal $345.6_8$. Convierta la parte entera a binario y cuente los bits '1'.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$345_8 = 11100101_2$. Los bits a 1 son 5."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Agrupe los bits de la parte entera en grupos de 4. ¿Cuál es el valor decimal del dígito hexadecimal más significativo?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "$\\underline{1110}\\ \\underline{0101}_2 = E5_{16}$. El primer dígito es $E$, que en decimal es $14$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Convierta la parte fraccionaria $.6_8$ a hexadecimal. Indique el valor decimal del primer dígito hexadecimal fraccionario.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$.6_8 = .110_2$. Agrupando a 4 bits: $.1100_2 = C_{16} \\to 12_{10}$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Sume los valores decimales de todos los dígitos hexadecimales del número completo obtenidos (14, 5 y 12).",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "$14 + 5 + 12 = 31$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Capacidad informática y almacenamiento",
+      "context": "Resuelve el siguiente problema práctico sobre Capacidad informática y almacenamiento.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Un archivo binario ocupa 4 Bytes. ¿Cuántos bits contiene?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$4 \\text{ Bytes} \\cdot 8 \\text{ bits/Byte} = 32$ bits."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Si visualizamos este archivo en formato hexadecimal, ¿cuántos caracteres hexadecimales se necesitan?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$32 \\text{ bits} / 4 \\text{ bits/carácter} = 8$ caracteres."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Si el archivo contiene únicamente el entero decimal 257, ¿cuántos de estos 8 caracteres hexadecimales serán distintos de cero?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$257_{10} = 00000101_{16}$. Los dígitos no nulos son 2."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Multiplique el número de caracteres necesarios en b (8) por el número de caracteres no nulos de c (2).",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$8 \\cdot 2 = 16$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Operaciones en base 4",
+      "context": "Resuelve el siguiente problema práctico sobre Operaciones en base 4.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Considere los números en base 4 $23_4$ y $12_4$. Convierta $23_4$ a decimal.",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$23_4 = 2 \\cdot 4 + 3 = 11_{10}$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Convierta $12_4$ a decimal.",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$12_4 = 1 \\cdot 4 + 2 = 6_{10}$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Sume los dos números en base 4 y convierta la suma final a decimal.",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "$11 + 6 = 17_{10}$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Multiplique los dos números en decimal y sume el resultado de c (17).",
+          "correctValue": 83,
+          "tolerance": 0,
+          "explanation": "$11 \\cdot 6 + 17 = 66 + 17 = 83$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "De decimal a base 12",
+      "context": "Resuelve el siguiente problema práctico sobre De decimal a base 12.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Queremos representar $145_{10}$ en base 12. ¿Cuál es el resto de dividir 145 entre 12?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$145 = 12 \\cdot 12 + 1$. El primer resto es 1."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Complete la conversión a base 12. Sume los dígitos del número resultante.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$145_{10} = 101_{12}$. La suma es $1 + 0 + 1 = 2$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Multiplique el número decimal original por 12 y conviértalo a base 12. Indique la suma de sus dígitos en base 12.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$145 \\cdot 12 = 1740_{10} = 1010_{12}$. La suma es $1 + 0 + 1 + 0 = 2$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Sume el residuo de a (1), la suma de dígitos de b (2) y la suma de dígitos de c (2).",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$1 + 2 + 2 = 5$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Desarrollo decimal de octales fraccionarios",
+      "context": "Resuelve el siguiente problema práctico sobre Desarrollo decimal de octales fraccionarios.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Considere el número fraccionario en octal $0.24_8$. Convierta el primer dígito fraccionario ($2 \\cdot 8^{-1}$) a decimal.",
+          "correctValue": 0.25,
+          "tolerance": 0.01,
+          "explanation": "$2/8 = 0.25$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Convierta el segundo dígito fraccionario ($4 \\cdot 8^{-2}$) a decimal.",
+          "correctValue": 0.0625,
+          "tolerance": 0.001,
+          "explanation": "$4/64 = 0.0625$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcule el valor decimal completo del número.",
+          "correctValue": 0.3125,
+          "tolerance": 0.001,
+          "explanation": "$0.25 + 0.0625 = 0.3125$."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Convierta este número decimal a binario exacto. ¿Cuántos bits '1' tiene su parte fraccionaria?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$0.3125_{10} = 0.0101_2$. Contiene 2 bits '1'."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Acarreos en suma hexadecimal",
+      "context": "Resuelve el siguiente problema práctico sobre Acarreos en suma hexadecimal.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Considere la suma en hexadecimal $A8_{16} + 5B_{16}$. Convierta el primer sumando a decimal.",
+          "correctValue": 168,
+          "tolerance": 0,
+          "explanation": "$A8_{16} = 10 \\cdot 16 + 8 = 168_{10}$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Convierta el segundo sumando a decimal.",
+          "correctValue": 91,
+          "tolerance": 0,
+          "explanation": "$5B_{16} = 5 \\cdot 16 + 11 = 91_{10}$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Al sumar la columna de las unidades ($8_{16} + B_{16}$), ¿cuál es el valor del acarreo enviado a la siguiente columna?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$8 + 11 = 19_{10} = 13_{16}$. Escribimos 3 y acarreamos 1."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Calcule la suma completa expresada en decimal.",
+          "correctValue": 259,
+          "tolerance": 0,
+          "explanation": "$168 + 91 = 259_{10}$ (en hexadecimal es $103_{16}$)."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Conversión de 0.3 a binario",
+      "context": "Resuelve el siguiente problema práctico sobre Conversión de 0.3 a binario.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Convertimos la fracción $0.3_{10}$ a binario. Multiplique $0.3$ por la base 2. Indique la parte entera obtenida.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$0.3 \\cdot 2 = 0.6 \\implies 0$."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Multiplique la parte fraccionaria resultante ($0.6$) por 2. Indique la parte entera obtenida.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$0.6 \\cdot 2 = 1.2 \\implies 1$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Escriba los primeros 5 bits obtenidos ($0.01001_2$). Convierta esta aproximación a decimal.",
+          "correctValue": 0.28125,
+          "tolerance": 0.001,
+          "explanation": "$0.01001_2 = 2^{-2} + 2^{-5} = 0.25 + 0.03125 = 0.28125$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Calcule el error absoluto de esta aproximación (restar de $0.3$ y redondear a cinco cifras decimales).",
+          "correctValue": 0.01875,
+          "tolerance": 0.0001,
+          "explanation": "$|0.3 - 0.28125| = 0.01875$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Multiplicación y desplazamientos hexadecimales",
+      "context": "Resuelve el siguiente problema práctico sobre Multiplicación y desplazamientos hexadecimales.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Dado el número en base hexadecimal $3.A8_{16}$, conviértalo a base decimal.",
+          "correctValue": 3.65625,
+          "tolerance": 0.0001,
+          "explanation": "$3 + 10/16 + 8/256 = 3 + 0.625 + 0.03125 = 3.65625$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Si multiplicamos el número original por 16 (desplazando la coma fraccionaria), ¿cuál es el nuevo valor decimal obtenido?",
+          "correctValue": 58.5,
+          "tolerance": 0.01,
+          "explanation": "$3A.8_{16} = 3 \\cdot 16 + 10 + 0.5 = 58.5$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Reste el valor obtenido en a (3.65625) al de b (58.5).",
+          "correctValue": 54.84375,
+          "tolerance": 0.0001,
+          "explanation": "$58.5 - 3.65625 = 54.84375$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Multiplique el resultado de c (54.84375) por 256 para obtener un número entero.",
+          "correctValue": 14040,
+          "tolerance": 0,
+          "explanation": "$54.84375 \\cdot 256 = 14040$."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Dinámica de representación fraccionaria",
+      "context": "Resuelve el siguiente problema práctico sobre Dinámica de representación fraccionaria.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Suponga que tenemos un formato de 6 bits enteros y 2 bits fraccionarios. ¿Cuántas combinaciones únicas de bits existen?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "El número de bits es $6+2=8$. Hay $2^8 = 256$ combinaciones."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Indique cuál es la resolución mínima (el menor valor fraccionario no nulo representable).",
+          "correctValue": 0.25,
+          "tolerance": 0.01,
+          "explanation": "$2^{-2} = 0.25$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcule el valor decimal máximo que se puede representar.",
+          "correctValue": 63.75,
+          "tolerance": 0.01,
+          "explanation": "$2^6 - 2^{-2} = 64 - 0.25 = 63.75$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Sume el valor máximo de c (63.75) y la resolución mínima de b (0.25).",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$63.75 + 0.25 = 64$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "De base 6 a binario",
+      "context": "Resuelve el siguiente problema práctico sobre De base 6 a binario.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Dado el número en base 6 $45.3_6$, convierta su parte entera a decimal.",
+          "correctValue": 29,
+          "tolerance": 0,
+          "explanation": "$45_6 = 4 \\cdot 6 + 5 = 29_{10}$."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Convierta su parte fraccionaria $.3_6$ a decimal.",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "$.3_6 = 3/6 = 0.5$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Convierta el número decimal completo ($29.5_{10}$) a binario. ¿Cuántos bits '1' tiene la parte entera?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$29_{10} = 11101_2$, que tiene 4 bits '1'."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Sume el valor decimal completo (29.5) y el número de bits '1' de c (4).",
+          "correctValue": 33.5,
+          "tolerance": 0.01,
+          "explanation": "$29.5 + 4 = 33.5$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Suma en tres bases posicionales",
+      "context": "Resuelve el siguiente problema práctico sobre Suma en tres bases posicionales.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Convierta el número binario $X = 1010_2$ a decimal.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$1010_2 = 10_{10}$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Convierta el número octal $Y = 12_8$ a decimal.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$12_8 = 1 \\cdot 8 + 2 = 10_{10}$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Convierta el número hexadecimal $Z = A_{16}$ a decimal.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$A_{16} = 10_{10}$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Sume los tres valores decimales obtenidos ($X+Y+Z$) y eleve al cuadrado el resultado.",
+          "correctValue": 900,
+          "tolerance": 0,
+          "explanation": "$(10 + 10 + 10)^2 = 30^2 = 900$."
+        }
+      ]
+    }
+  ]
+}
