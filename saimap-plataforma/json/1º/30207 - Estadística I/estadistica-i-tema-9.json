@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "1. ¿Qué representa el nivel de confianza $1-\\alpha$ en la construcción de un intervalo de confianza?",
+      "options": [
+        "La probabilidad a priori de que el intervalo de extremos aleatorios contenga al parámetro poblacional real.",
+        "La probabilidad a posteriori de que el parámetro poblacional real varíe dentro del intervalo calculado.",
+        "La proporción de observaciones muestrales que caen dentro de la región de aceptación."
+      ],
+      "correct": 0,
+      "hint": "El nivel de confianza es una medida probabilística que se asocia al proceso de muestreo antes de observar los datos.",
+      "explanation": "Antes de extraer la muestra, la probabilidad de que el intervalo aleatorio atrape al parámetro fijo $\\theta$ es $1-\\alpha$. Una vez calculado con datos concretos, el intervalo ya no es aleatorio y no se habla de probabilidad, sino de confianza."
+    },
+    {
+      "q": "2. Si se calcula un intervalo de confianza para la media de una población normal con varianza conocida, ¿qué distribución teórica se utiliza para obtener los valores críticos?",
+      "options": [
+        "La distribución t de Student con $n-1$ grados de libertad.",
+        "La distribución normal estándar $Z \\sim N(0,1)$.",
+        "La distribución Chi-cuadrado con $n-1$ grados de libertad."
+      ],
+      "correct": 1,
+      "hint": "Cuando la varianza poblacional es conocida, no hay incertidumbre adicional en la dispersión, por lo que recurrimos al TCL o a la normalidad directa.",
+      "explanation": "Si la población es normal y la varianza $\\sigma^2$ es conocida, el estadístico pivotante $\\frac{\\bar{X}-\\mu}{\\sigma/\\sqrt{n}}$ sigue exactamente una distribución normal estándar $N(0,1)$."
+    },
+    {
+      "q": "3. Cuando la varianza poblacional $\\sigma^2$ es desconocida, ¿qué estimador se introduce para construir el intervalo de confianza de la media $\\mu$?",
+      "options": [
+        "La cuasidesviación típica muestral $S_{n-1}$ en conjunción con la distribución t de Student.",
+        "La desviación típica muestral $S_n$ en conjunción con la distribución normal estándar.",
+        "El error estándar de la proporción utilizando la aproximación normal."
+      ],
+      "correct": 0,
+      "hint": "Al estimar la varianza poblacional, añadimos una fuente extra de variabilidad muestral que requiere una distribución con colas más pesadas.",
+      "explanation": "Dado que $\\sigma$ es desconocida, se estima mediante la cuasidesviación típica $S_{n-1}$. El estadístico resultante sigue una distribución t de Student con $n-1$ grados de libertad."
+    },
+    {
+      "q": "4. ¿Qué ocurre con la amplitud de un intervalo de confianza para la media si se incrementa el tamaño de la muestra $n$ manteniendo constantes el nivel de confianza y la desviación estándar?",
+      "options": [
+        "La amplitud del intervalo aumenta porque hay más datos que considerar.",
+        "La amplitud del intervalo disminuye, lo que representa una mayor precisión de la estimación.",
+        "La amplitud del intervalo permanece constante, ya que solo depende de la confianza."
+      ],
+      "correct": 1,
+      "hint": "El error estándar de la media es $\\sigma/\\sqrt{n}$. Analiza cómo influye el denominador al crecer.",
+      "explanation": "Al aumentar $n$, el error estándar de la media $\\sigma/\\sqrt{n}$ se reduce, disminuyendo el margen de error y estrechando el intervalo (mayor precisión)."
+    },
+    {
+      "q": "5. ¿Cómo influye el nivel de confianza $1-\\alpha$ en la longitud de un intervalo de confianza?",
+      "options": [
+        "A mayor nivel de confianza, mayor es la longitud del intervalo (menor precisión).",
+        "A mayor nivel de confianza, menor es la longitud del intervalo (mayor precisión).",
+        "La longitud del intervalo es independiente del nivel de confianza."
+      ],
+      "correct": 0,
+      "hint": "Si queremos estar más seguros (mayor confianza) de atrapar el parámetro, ¿debemos proponer un rango más amplio o más estrecho?",
+      "explanation": "Para aumentar la certeza estadística ($1-\\alpha$), el valor crítico ($z_{\\alpha/2}$ o $t_{\\alpha/2}$) debe ser mayor, lo que incrementa el margen de error y amplía la longitud del intervalo."
+    },
+    {
+      "q": "6. ¿Por qué el intervalo de confianza para la varianza $\\sigma^2$ de una población normal no es simétrico respecto a la cuasivarianza muestral $s_{n-1}^2$?",
+      "options": [
+        "Porque se basa en la distribución Chi-cuadrado, que es asimétrica y solo toma valores no negativos.",
+        "Porque la cuasivarianza es un estimador sesgado y requiere corrección asimétrica.",
+        "Porque se realiza una transformación logarítmica para estabilizar la varianza."
+      ],
+      "correct": 0,
+      "hint": "La distribución que modela la variabilidad muestral es la Chi-cuadrado. Revisa su representación gráfica.",
+      "explanation": "La variable aleatoria $\\frac{(n-1)S_{n-1}^2}{\\sigma^2}$ sigue una distribución $\\chi^2_{n-1}$, que es asimétrica a la derecha. Sus cuantiles inferior y superior no equidistan de la media."
+    },
+    {
+      "q": "7. ¿Qué condiciones deben cumplirse para poder aplicar el intervalo de confianza de la proporción poblacional basado en la aproximación normal?",
+      "options": [
+        "Que la muestra sea pequeña ($n < 30$) para que la aproximación sea conservadora.",
+        "Que el tamaño muestral sea grande ($n \\ge 30$) y se cumpla que $n\\hat{p} \\ge 5$ y $n(1-\\hat{p}) \\ge 5$.",
+        "Que la proporción estimada $\\hat{p}$ sea exactamente igual a $0.5$."
+      ],
+      "correct": 1,
+      "hint": "La aproximación de una binomial a una normal requiere que el número de éxitos y fracasos esperados sea suficientemente grande.",
+      "explanation": "Bajo las condiciones de muestra grande ($n \\ge 30$, $n\\hat{p} \\ge 5$ y $n(1-\\hat{p}) \\ge 5$), el Teorema del Límite Central permite aproximar la distribución de la proporción muestral por una normal."
+    },
+    {
+      "q": "8. Si construimos un intervalo de confianza al 95% para la diferencia de medias de dos poblaciones independientes y el intervalo obtenido es $[-1.5, 3.2]$, ¿qué conclusión estadística se deriva?",
+      "options": [
+        "Existe una diferencia significativa entre las medias ya que el intervalo contiene valores positivos y negativos.",
+        "No hay evidencia estadística de diferencia significativa entre las medias de ambas poblaciones al nivel del 5%.",
+        "La media de la primera población es significativamente mayor que la de la segunda."
+      ],
+      "correct": 1,
+      "hint": "Si el intervalo contiene al cero, ¿es plausible que la diferencia $\\mu_1 - \\mu_2$ sea nula?",
+      "explanation": "Dado que el valor $0$ está contenido en el intervalo de confianza de la diferencia de medias $\\mu_1 - \\mu_2$, no podemos rechazar la hipótesis de que las medias sean iguales con un nivel de significación del 5%."
+    },
+    {
+      "q": "9. Al comparar las varianzas de dos poblaciones normales independientes, ¿en qué distribución se fundamenta el intervalo de confianza para el cociente $\\sigma_1^2 / \\sigma_2^2$?",
+      "options": [
+        "La distribución t de Student.",
+        "La distribución Chi-cuadrado.",
+        "La distribución F de Snedecor."
+      ],
+      "correct": 2,
+      "hint": "El cociente de dos variables Chi-cuadrado independientes divididas por sus respectivos grados de libertad define esta distribución.",
+      "explanation": "El cociente de varianzas muestrales escaladas se modela mediante la distribución F de Snedecor con $(n_1-1, n_2-1)$ grados de libertad."
+    },
+    {
+      "q": "10. ¿Qué se infiere si el intervalo de confianza para el cociente de varianzas $\\sigma_1^2 / \\sigma_2^2$ contiene al valor 1?",
+      "options": [
+        "Podemos asumir la hipótesis de igualdad de varianzas (homocedasticidad) al nivel de confianza establecido.",
+        "Las varianzas son significativamente diferentes.",
+        "La varianza de la primera población es necesariamente superior a la de la segunda."
+      ],
+      "correct": 0,
+      "hint": "Si el cociente puede ser 1, significa que las varianzas pueden ser iguales.",
+      "explanation": "Si el intervalo para $\\sigma_1^2 / \\sigma_2^2$ contiene al 1, es estadísticamente aceptable considerar que ambas varianzas poblacionales son iguales (homocedasticidad)."
+    },
+    {
+      "q": "11. En R, ¿cuál de las siguientes opciones permite obtener el cuantil de la t de Student para un intervalo al 95% de confianza (bilateral) con 10 grados de libertad?",
+      "options": [
+        "`qt(0.975, df = 10)`",
+        "`qt(0.95, df = 10)`",
+        "`pt(0.95, df = 10)`"
+      ],
+      "correct": 0,
+      "hint": "Para un intervalo bilateral al 95%, el área de exclusión en cada cola es del 2.5%, dejando un área acumulada del 97.5% a la izquierda.",
+      "explanation": "La función `qt` calcula los cuantiles de la t de Student. Al ser bilateral, buscamos el percentil $1 - \\alpha/2 = 1 - 0.05/2 = 0.975$."
+    },
+    {
+      "q": "12. ¿Cuál es la diferencia fundamental en la interpretación estadística de un intervalo de confianza respecto a la probabilidad?",
+      "options": [
+        "El intervalo es fijo y el parámetro varía probabilísticamente.",
+        "El parámetro es una constante fija pero desconocida; lo aleatorio son los extremos del intervalo antes de la extracción muestral.",
+        "No existe ninguna diferencia; son conceptos matemáticamente equivalentes."
+      ],
+      "correct": 1,
+      "hint": "Una vez calculados los extremos del intervalo con datos muestrales, estos se vuelven constantes fijas.",
+      "explanation": "El parámetro real $\\theta$ es constante. Antes del muestreo, la probabilidad de que el intervalo contenga a $\\theta$ es $1-\\alpha$. Tras calcularlo, el intervalo contiene o no contiene al parámetro (probabilidad 1 o 0); por ello hablamos de 'confianza'."
+    },
+    {
+      "q": "13. ¿Qué mide el error estándar de un estimador?",
+      "options": [
+        "La desviación típica de la distribución muestral de dicho estimador.",
+        "La desviación típica de la población de la cual se extrajo la muestra.",
+        "El error sistemático o sesgo introducido por el diseño del experimento."
+      ],
+      "correct": 0,
+      "hint": "Es una medida de la variabilidad que exhibiría el estimador si repitiéramos el muestreo muchas veces.",
+      "explanation": "El error estándar es la desviación típica de la distribución en el muestreo de un estadístico (por ejemplo, para la media es $\\sigma/\\sqrt{n}$)."
+    },
+    {
+      "q": "14. Al reducir a la mitad la desviación típica poblacional $\\sigma$ (manteniendo constante $n$ y la confianza), la amplitud del intervalo de confianza para la media:",
+      "options": [
+        "Se reduce a la mitad.",
+        "Permanece igual.",
+        "Se duplica."
+      ],
+      "correct": 0,
+      "hint": "Observa la relación lineal entre el error estándar y $\\sigma$ en la fórmula del intervalo.",
+      "explanation": "La amplitud del intervalo es $2 \\cdot z_{\\alpha/2} \\frac{\\sigma}{\\sqrt{n}}$. Si $\\sigma$ se divide por 2, la amplitud se reduce exactamente a la mitad."
+    },
+    {
+      "q": "15. Para estimar la media de una población no normal con tamaño de muestra pequeño ($n < 30$), ¿qué se requiere para que el intervalo basado en la t de Student sea válido?",
+      "options": [
+        "No se puede utilizar en ningún caso sin aproximación Bootstrap.",
+        "Exigir asunción de normalidad estricta para la población de origen o un tamaño muestral grande por el TLC.",
+        "La desviación típica de la población debe ser obligatoriamente menor que 1."
+      ],
+      "correct": 1,
+      "hint": "El estadístico t de Student requiere formalmente que las observaciones originales provengan de una población normal.",
+      "explanation": "La distribución t de Student se deriva bajo la hipótesis de que la muestra procede de una distribución normal. Si no es así y el tamaño muestral es pequeño, los resultados pierden validez."
+    },
+    {
+      "q": "16. En R, ¿qué función devuelve los extremos de un intervalo de confianza al 95% para una proporción?",
+      "options": [
+        "`prop.test(x, n, conf.level = 0.95)$conf.int`",
+        "`t.test(x, conf.level = 0.95)$conf.int`",
+        "`qnorm(0.95)`"
+      ],
+      "correct": 0,
+      "hint": "Buscamos la función dedicada a proporciones en R.",
+      "explanation": "La función `prop.test` calcula intervalos de confianza y contrastes para proporciones, y su componente `$conf.int` extrae el intervalo."
+    },
+    {
+      "q": "17. Para un nivel de significación $\\alpha = 0.10$, ¿cuál es el nivel de confianza asociado al intervalo?",
+      "options": [
+        "99%",
+        "95%",
+        "90%"
+      ],
+      "correct": 2,
+      "hint": "El nivel de confianza se define como $1 - \\alpha$.",
+      "explanation": "Nivel de confianza = $1 - \\alpha = 1 - 0.10 = 0.90$ o 90%."
+    },
+    {
+      "q": "18. Si se asciende normalidad en una población y disponemos de una muestra pareada (por ejemplo, antes y después de un tratamiento), el intervalo de confianza para comparar las medias se construye analizando:",
+      "options": [
+        "La diferencia de las medias muestrales usando la distribución F.",
+        "Las diferencias individuales de cada par de datos como si fuesen una única muestra.",
+        "Las varianzas muestrales de ambos grupos por separado."
+      ],
+      "correct": 1,
+      "hint": "En muestras pareadas, cada par está correlacionado, por lo que analizamos la variable diferencia $D = X - Y$.",
+      "explanation": "Para datos pareados, transformamos las dos muestras correlacionadas en una sola muestra de diferencias $D_i = X_i - Y_i$ y calculamos el intervalo para la media de diferencias $\\mu_D$."
+    },
+    {
+      "q": "19. ¿Cuál de las siguientes afirmaciones sobre la distribución t de Student es CORRECTA?",
+      "options": [
+        "Es asimétrica y solo toma valores positivos.",
+        "Es simétrica con respecto al cero y tiene colas más pesadas que la normal estándar, aproximándose a ella a medida que aumentan los grados de libertad.",
+        "Tiene la misma varianza que la distribución normal estándar para cualquier tamaño de muestra."
+      ],
+      "correct": 1,
+      "hint": "Representa la variabilidad extra de estimar $\\sigma$. A mayor información ($n \\to \\infty$), esta variabilidad extra desaparece.",
+      "explanation": "La t de Student es simétrica en torno a 0. Su varianza es $\\frac{df}{df-2} > 1$, mayor que la de la normal estándar, pero converge a $N(0,1)$ cuando los grados de libertad tienden a infinito."
+    },
+    {
+      "q": "20. Al estimar un intervalo de confianza para la varianza $\\sigma^2$, ¿cuál es el papel de los grados de libertad?",
+      "options": [
+        "Derecho al voto en las decisiones del muestreo.",
+        "Definen el parámetro de la distribución Chi-cuadrado, que es igual a $n-1$.",
+        "Establecen el factor de escala que multiplica a la normal estándar."
+      ],
+      "correct": 1,
+      "hint": "El parámetro clave de la distribución Chi-cuadrado depende directamente del tamaño muestral de la estimación.",
+      "explanation": "La distribución Chi-cuadrado empleada para modelar la variabilidad de la cuasivarianza muestral tiene como único parámetro sus grados de libertad, calculados como $n-1$."
+    },
+    {
+      "q": "21. Si una distribución es altamente asimétrica y el tamaño de la muestra es pequeño ($n = 10$), ¿cuál de las siguientes opciones es la más recomendable para la estimación de la media?",
+      "options": [
+        "Usar el intervalo basado en la t de Student directamente.",
+        "Usar métodos no paramétricos o técnicas de remuestreo (Bootstrap).",
+        "Utilizar el cuantil normal estándar sin corregir por grados de libertad."
+      ],
+      "correct": 1,
+      "hint": "La falta de normalidad y el tamaño pequeño invalidan las aproximaciones paramétricas tradicionales.",
+      "explanation": "Con muestras pequeñas y fuerte asimetría, la t de Student no es robusta. Métodos no paramétricos o el remuestreo (Bootstrap) proporcionan estimaciones más fiables."
+    },
+    {
+      "q": "22. En la fórmula del intervalo de confianza para la proporción, ¿por qué se utiliza la aproximación $\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$ para el error estándar?",
+      "options": [
+        "Porque la varianza teórica de una variable de Bernoulli es $p(1-p)$, y la aproximamos con el valor muestral.",
+        "Porque simplifica el cálculo matemático sin justificación probabilística.",
+        "Porque es la varianza exacta de una distribución t de Student."
+      ],
+      "correct": 0,
+      "hint": "El estimador de la proporción muestral se basa en ensayos independientes de tipo éxito/fracaso.",
+      "explanation": "Una proporción es la media de observaciones Bernoulli. La varianza de una Bernoulli es $p(1-p)$, que al desconocerse se estima mediante la proporción de la muestra $\\hat{p}(1-\\hat{p})$."
+    },
+    {
+      "q": "23. Al aumentar el tamaño muestral $n$ manteniendo constante el nivel de confianza, el valor crítico $t_{\\alpha/2, n-1}$ de la distribución t de Student:",
+      "options": [
+        "Aumenta de forma exponencial.",
+        "Disminuye, aproximándose al valor crítico correspondiente de la normal estándar $z_{\\alpha/2}$.",
+        "Permanece constante."
+      ],
+      "correct": 1,
+      "hint": "A medida que aumentan los grados de libertad, las colas de la t de Student se vuelven más ligeras.",
+      "explanation": "Al crecer $n$, disminuye la incertidumbre sobre la desviación típica poblacional. La distribución t de Student se aproxima a la normal estándar, estrechando el valor crítico teórico."
+    },
+    {
+      "q": "24. Si se duplica el margen de error permitido ($E$) en la estimación de la media, manteniendo constante la desviación típica y el nivel de confianza, el tamaño muestral necesario:",
+      "options": [
+        "Se reduce a la cuarta parte ($n/4$).",
+        "Se reduce a la mitad ($n/2$).",
+        "Se cuadruplica ($4n$)."
+      ],
+      "correct": 0,
+      "hint": "Observa el exponente cuadrático en la fórmula de tamaño muestral necesario.",
+      "explanation": "La fórmula para el tamaño muestral es $n = \\left(\\frac{z_{\\alpha/2}\\sigma}{E}\\right)^2$. Si sustituimos $E$ por $2E$, la expresión se divide por $2^2 = 4$."
+    },
+    {
+      "q": "25. ¿Qué significa que un estimador sea 'insesgado'?",
+      "options": [
+        "Que su valor calculado siempre coincide con el parámetro poblacional real.",
+        "Que la media de su distribución muestral es igual al parámetro poblacional real que se desea estimar.",
+        "Que tiene la menor varianza posible de entre todos los estimadores."
+      ],
+      "correct": 1,
+      "hint": "El sesgo mide la desviación entre el valor esperado del estimador y el valor verdadero.",
+      "explanation": "Un estimador $\\hat{\\theta}$ es insesgado si su esperanza matemática coincide con el parámetro poblacional real: $E(\\hat{\\theta}) = \\theta$."
+    },
+    {
+      "q": "26. ¿Cuál es el valor crítico $z_{\\alpha/2}$ de la distribución normal estándar para un intervalo de confianza al 95%?",
+      "options": [
+        "1.96",
+        "1.645",
+        "2.576"
+      ],
+      "correct": 0,
+      "hint": "Es el valor de la normal estándar que acumula a su derecha un área de 0.025.",
+      "explanation": "Para $1-\\alpha = 0.95$, $\\alpha/2 = 0.025$. El cuantil que deja 0.025 a su derecha (y 0.975 a su izquierda) es $1.96$."
+    },
+    {
+      "q": "27. Para obtener un intervalo de confianza para la media al 99% con varianza conocida, el valor crítico $z_{\\alpha/2}$ es aproximadamente:",
+      "options": [
+        "2.58",
+        "1.96",
+        "1.65"
+      ],
+      "correct": 0,
+      "hint": "El nivel de significación unilateral es $\\alpha/2 = 0.005$. Buscamos el percentil 99.5%.",
+      "explanation": "El valor de la normal estándar tal que $P(Z > z_{0.005}) = 0.005$ es aproximadamente $2.576$ (redondeado comúnmente a $2.58$)."
+    },
+    {
+      "q": "28. En la comparación de dos varianzas poblacionales, si el intervalo de confianza al 95% para $\\sigma_1^2 / \\sigma_2^2$ es $[0.15, 0.85]$, concluimos estadísticamente que:",
+      "options": [
+        "La varianza de la población 2 es significativamente mayor que la de la población 1.",
+        "No hay diferencias significativas en la dispersión de las dos poblaciones.",
+        "La varianza de la población 1 es mayor que la de la población 2."
+      ],
+      "correct": 0,
+      "hint": "Si todo el intervalo es menor que 1, ¿cuál de los dos términos del cociente es superior?",
+      "explanation": "Dado que todo el intervalo $[0.15, 0.85]$ es menor que 1, el cociente de varianzas es significativamente menor que la unidad, indicando que $\\sigma_2^2 > \\sigma_1^2$."
+    },
+    {
+      "q": "29. Al estimar la diferencia de medias $\\mu_1 - \\mu_2$ de dos poblaciones normales independientes con varianzas desconocidas pero que se asumen distintas, ¿cómo se calculan los grados de libertad aproximados?",
+      "options": [
+        "Mediante la fórmula de aproximación de Welch.",
+        "Sencillamente sumando los tamaños muestrales y restando dos: $n_1 + n_2 - 2$.",
+        "Multiplicando los tamaños muestrales: $n_1 \\times n_2$."
+      ],
+      "correct": 0,
+      "hint": "Cuando no se puede asumir igualdad de varianzas, los grados de libertad se corrigen a la baja mediante una aproximación matemática.",
+      "explanation": "En el caso de varianzas desiguales (problema de Behrens-Fisher), los grados de libertad de la distribución t se calculan mediante la aproximación de Satterthwaite o Welch."
+    },
+    {
+      "q": "30. La cuasadesviación típica muestral $S_{n-1}$ se diferencia de la desviación típica muestral $S_n$ en que:",
+      "options": [
+        "La cuasadesviación típica divide entre $n-1$ en lugar de $n$, corrigiendo la tendencia a subestimar la dispersión en muestras pequeñas.",
+        "La cuasadesviación típica siempre resulta en un valor menor.",
+        "La cuasadesviación típica se aplica únicamente a variables cualitativas."
+      ],
+      "correct": 0,
+      "hint": "Considere qué estimador es insesgado para la varianza de la población.",
+      "explanation": "La varianza muestral tiene un sesgo hacia la subestimación de la varianza poblacional. Dividir por $n-1$ (cuasivarianza) elimina este sesgo matemático."
+    },
+    {
+      "q": "31. ¿Qué es el margen de error ($E$) en un intervalo de confianza?",
+      "options": [
+        "La semi-amplitud del intervalo, es decir, el valor que se suma y se resta a la estimación puntual.",
+        "La desviación típica de la población multiplicada por el tamaño de la muestra.",
+        "El error sistemático debido a fallos de calibración de los instrumentos."
+      ],
+      "correct": 0,
+      "hint": "Es la distancia máxima esperada entre el estimador puntual y el parámetro con la confianza elegida.",
+      "explanation": "El margen de error es el producto del valor crítico por el error estándar, constituyendo la mitad de la longitud total de un intervalo simétrico."
+    },
+    {
+      "q": "32. Al planificar un experimento, si se desea reducir el margen de error a la tercera parte sin cambiar el nivel de confianza, el tamaño de la muestra debe ser:",
+      "options": [
+        "Multiplicado por 9.",
+        "Multiplicado por 3.",
+        "Reducido a la tercera parte."
+      ],
+      "correct": 0,
+      "hint": "La relación de proporcionalidad entre el error y la muestra es inversa y cuadrática.",
+      "explanation": "Dado que el error es inversamente proporcional a $\\sqrt{n}$, para dividir el error por 3 se debe multiplicar el tamaño muestral por $3^2 = 9$."
+    },
+    {
+      "q": "33. La precisión de un intervalo de confianza se define formalmente como:",
+      "options": [
+        "La inversa de la longitud del intervalo (a menor longitud, mayor precisión).",
+        "El nivel de confianza del intervalo expresado en porcentaje.",
+        "El valor absoluto de la estimación de la media."
+      ],
+      "correct": 0,
+      "hint": "Un intervalo muy ancho nos da poca información precisa sobre el parámetro.",
+      "explanation": "La precisión está inversamente relacionada con el tamaño del intervalo. Intervalos estrechos ofrecen una estimación más localizada del parámetro poblacional real."
+    },
+    {
+      "q": "34. Para un tamaño de muestra fijo, ¿qué efecto tiene reducir el nivel de significación $\\alpha$ de 0.05 a 0.01?",
+      "options": [
+        "El intervalo de confianza se vuelve más ancho.",
+        "El intervalo de confianza se vuelve más estrecho.",
+        "El intervalo de confianza permanece inalterado."
+      ],
+      "correct": 0,
+      "hint": "Al disminuir $\\alpha$, el nivel de confianza $1-\\alpha$ aumenta del 95% al 99%.",
+      "explanation": "Aumentar la confianza (disminuir $\\alpha$) requiere un valor crítico mayor ($z_{\\alpha/2}$ aumenta de 1.96 a 2.58), lo que incrementa la amplitud del intervalo."
+    },
+    {
+      "q": "35. ¿Cuál es el estadístico pivotante utilizado para construir el intervalo de confianza de la varianza $\\sigma^2$ de una población normal?",
+      "options": [
+        "$\\frac{(n-1)S_{n-1}^2}{\\sigma^2}$",
+        "$\\frac{\\bar{X}-\\mu}{S_{n-1}/\\sqrt{n}}$",
+        "$\\frac{\\hat{p}-p}{\\sqrt{p(1-p)/n}}$"
+      ],
+      "correct": 0,
+      "hint": "Es la expresión matemática que sigue una distribución Chi-cuadrado con $n-1$ grados de libertad.",
+      "explanation": "Bajo normalidad, la variable aleatoria $\\frac{(n-1)S_{n-1}^2}{\\sigma^2}$ sigue una distribución Chi-cuadrado con $n-1$ grados de libertad."
+    },
+    {
+      "q": "36. Si dos intervalos de confianza para la media al 95% y al 99% se calculan a partir de la misma muestra, ¿cuál de las siguientes opciones describe su relación?",
+      "options": [
+        "El intervalo al 95% está completamente contenido dentro del intervalo al 99%.",
+        "El intervalo al 99% está completamente contenido dentro del intervalo al 95%.",
+        "Los dos intervalos son idénticos en longitud pero centrados en puntos distintos."
+      ],
+      "correct": 0,
+      "hint": "Una confianza del 99% exige un rango mayor que una del 95% para la misma muestra.",
+      "explanation": "Como el valor crítico para el 99% es mayor que para el 95% ($2.58 > 1.96$), el intervalo al 99% es más amplio y contiene por completo al intervalo al 95%."
+    },
+    {
+      "q": "37. El cuantil Chi-cuadrado necesario para el límite inferior del intervalo de confianza para la varianza $\\sigma^2$ con nivel de significación $\\alpha$ es:",
+      "options": [
+        "$\\chi^2_{\\alpha/2, n-1}$, colocado en el denominador del límite inferior.",
+        "$\\chi^2_{\\alpha/2, n-1}$, colocado en el denominador del límite superior.",
+        "$\\chi^2_{1-\\alpha/2, n-1}$, colocado en el denominador del límite inferior."
+      ],
+      "correct": 1,
+      "hint": "Dado que el cuantil más grande da como resultado un cociente más pequeño, su posición se cruza.",
+      "explanation": "El límite inferior del intervalo es $\\frac{(n-1)s^2}{\\chi^2_{\\alpha/2, n-1}}$ y el límite superior es $\\frac{(n-1)s^2}{\\chi^2_{1-\\alpha/2, n-1}}$. El cuantil de cola superior (mayor valor) va en el denominador del límite inferior."
+    },
+    {
+      "q": "38. ¿Qué ocurre con la t de Student cuando los grados de libertad tienden a infinito?",
+      "options": [
+        "Tiende a la distribución normal estándar.",
+        "Se aproxima a una Chi-cuadrado.",
+        "Su varianza tiende a infinito."
+      ],
+      "correct": 0,
+      "hint": "A medida que los grados de libertad aumentan, la estimación de la desviación estándar es cada vez más precisa.",
+      "explanation": "Por propiedades asintóticas, la distribución t de Student con $k$ grados de libertad converge a una normal estándar $N(0,1)$ cuando $k \\to \\infty$."
+    },
+    {
+      "q": "39. En R, ¿cuál es el argumento para especificar la confianza en la función `t.test`?",
+      "options": [
+        "`conf.level`",
+        "`confidence`",
+        "`alpha`"
+      ],
+      "correct": 0,
+      "hint": "El valor por defecto es 0.95 en la mayoría de los paquetes estadísticos de R.",
+      "explanation": "El argumento se denomina `conf.level` y acepta un valor decimal entre 0 y 1 (por ejemplo, `conf.level = 0.95`)."
+    },
+    {
+      "q": "40. Para comparar la variabilidad de dos procesos productivos independientes bajo normalidad, construimos un intervalo de confianza para:",
+      "options": [
+        "El cociente de las desviaciones típicas o varianzas.",
+        "La diferencia de las desviaciones típicas.",
+        "La suma de las varianzas muestrales."
+      ],
+      "correct": 0,
+      "hint": "La comparación de dispersión se realiza a través de su razón, cuya distribución muestral es conocida.",
+      "explanation": "La comparación de la variabilidad poblacional de dos muestras normales independientes se hace calculando el intervalo de confianza del cociente de varianzas $\\sigma_1^2 / \\sigma_2^2$ basado en la F de Snedecor."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "1. Una muestra de tamaño $n = 16$ de una población normal con desviación típica $\\sigma = 4$ tiene una media muestral $\\bar{x} = 20$. El error estándar de la media es ____.",
+      "options": [
+        "1.0",
+        "2.0",
+        "0.5"
+      ],
+      "correct": 0,
+      "hint": "El error estándar de la media se calcula como $\\sigma/\\sqrt{n}$.",
+      "explanation": "Error estándar = $\\sigma/\\sqrt{n} = 4/\\sqrt{16} = 4/4 = 1.0$."
+    },
+    {
+      "q": "2. Para estimar la media con $\\sigma = 10$, nivel de confianza del 95% ($z_{0.025} = 1.96$) and un error admisible de 2 unidades, el tamaño muestral mínimo requerido es ____.",
+      "options": [
+        "97",
+        "96",
+        "100"
+      ],
+      "correct": 0,
+      "hint": "Usa la fórmula $n = (z_{\\alpha/2} \\cdot \\sigma / E)^2$ y redondea hacia arriba.",
+      "explanation": "$n = (1.96 \\cdot 10 / 2)^2 = (9.8)^2 = 96.04 \\implies$ redondeando al entero superior obtenemos 97."
+    },
+    {
+      "q": "3. En un intervalo de confianza al 95% para la media con varianza desconocida y $n = 10$, el cuantil de la t de Student a utilizar es ____.",
+      "options": [
+        "`qt(0.975, df = 9)`",
+        "`qt(0.95, df = 9)`",
+        "`qt(0.975, df = 10)`"
+      ],
+      "correct": 0,
+      "hint": "El nivel de confianza es bilateral (0.975 de área a la izquierda) y los grados de libertad son $n-1$.",
+      "explanation": "Para $n=10$, los grados de libertad son $n-1 = 9$. Al ser un intervalo bilateral al 95%, acumulamos $0.975$ a la izquierda, por lo que usamos `qt(0.975, df = 9)`."
+    },
+    {
+      "q": "4. Si un intervalo de confianza al 90% para la media de una normal es $[45.2, 54.8]$, el margen de error $E$ empleado en la estimación es ____.",
+      "options": [
+        "4.8",
+        "9.6",
+        "2.4"
+      ],
+      "correct": 0,
+      "hint": "El margen de error es la mitad de la longitud total del intervalo.",
+      "explanation": "Amplitud = $54.8 - 45.2 = 9.6$. Margen de error $E$ = Amplitud / 2 = 4.8."
+    },
+    {
+      "q": "5. De 100 usuarios encuestados, 30 afirmaron utilizar una aplicación móvil a diario. El error estándar estimado para la proporción de usuarios diarios es ____.",
+      "options": [
+        "0.0458",
+        "0.0021",
+        "0.2100"
+      ],
+      "correct": 0,
+      "hint": "El error estándar estimado es $\\sqrt{\\hat{p}(1-\\hat{p})/n}$.",
+      "explanation": "$\\hat{p} = 0.30$. Error estándar = $\\sqrt{0.3 \\cdot 0.7 / 100} = \\sqrt{0.0021} \\approx 0.0458$."
+    },
+    {
+      "q": "6. Si una muestra de tamaño $n=9$ da una cuasivarianza muestral $s_{n-1}^2 = 4.5$, el numerador $(n-1)s_{n-1}^2$ para el intervalo de la varianza es ____.",
+      "options": [
+        "36.0",
+        "40.5",
+        "31.5"
+      ],
+      "correct": 0,
+      "hint": "Multiplica los grados de libertad ($n-1$) por la cuasivarianza.",
+      "explanation": "Numerador = $(9-1) \\cdot 4.5 = 8 \\cdot 4.5 = 36.0$."
+    },
+    {
+      "q": "7. El cuantil normal estándar $z_{\\alpha/2}$ correspondiente a un nivel de confianza del 99% es aproximadamente ____.",
+      "options": [
+        "2.576",
+        "1.960",
+        "1.645"
+      ],
+      "correct": 0,
+      "hint": "Es el valor de la normal estándar que deja 0.005 de probabilidad en la cola superior.",
+      "explanation": "El cuantil para una confianza del 99% acumulada bilateralmente es $z_{0.005} \\approx 2.576$."
+    },
+    {
+      "q": "8. Con una muestra de tamaño $n = 25$ y $\\bar{x} = 150$, con una desviación típica poblacional conocida $\\sigma = 10$ y confianza del 95% ($z_{0.025}=1.96$), el intervalo de confianza es ____.",
+      "options": [
+        "[146.08, 153.92]",
+        "[148.04, 151.96]",
+        "[145.00, 155.00]"
+      ],
+      "correct": 0,
+      "hint": "Calcula el margen de error como $1.96 \\cdot 10 / \\sqrt{25}$.",
+      "explanation": "Margen de error $E = 1.96 \\cdot 10 / 5 = 1.96 \\cdot 2 = 3.92$. Intervalo = $[150-3.92, 150+3.92] = [146.08, 153.92]$."
+    },
+    {
+      "q": "9. Para comparar varianzas con $n_1 = 16$ y $n_2 = 21$ observaciones normales, los grados de libertad de la distribución F de Snedecor son ____.",
+      "options": [
+        "(15, 20)",
+        "(16, 21)",
+        "(14, 19)"
+      ],
+      "correct": 0,
+      "hint": "Los grados de libertad del numerador y del denominador son $n_1-1$ y $n_2-1$.",
+      "explanation": "$df_1 = 16 - 1 = 15$; $df_2 = 21 - 1 = 20$. Los grados de libertad son (15, 20)."
+    },
+    {
+      "q": "10. Si en un estudio de proporciones con $n=400$ y $\\hat{p}=0.10$ queremos calcular el límite superior al 95% de confianza ($z_{0.025}=1.96$), este valor es ____.",
+      "options": [
+        "0.1294",
+        "0.1147",
+        "0.1500"
+      ],
+      "correct": 0,
+      "hint": "Límite superior = $\\hat{p} + z_{0.025} \\cdot \\sqrt{\\hat{p}(1-\\hat{p})/n}$.",
+      "explanation": "Error estándar = $\\sqrt{0.1 \\cdot 0.9 / 400} = \\sqrt{0.000225} = 0.015$. Límite superior = $0.10 + 1.96 \\cdot 0.015 = 0.10 + 0.0294 = 0.1294$."
+    },
+    {
+      "q": "11. Si estimamos la media con una muestra de $n = 9$ observaciones, $\\bar{x} = 100$ y $s_{n-1} = 6$, y usamos $t_{0.025, 8} = 2.306$, el límite inferior del intervalo al 95% de confianza es ____.",
+      "options": [
+        "95.388",
+        "96.400",
+        "97.694"
+      ],
+      "correct": 0,
+      "hint": "Límite inferior = $\\bar{x} - t_{\\alpha/2, n-1} \\cdot \\frac{s_{n-1}}{\\sqrt{n}}$.",
+      "explanation": "Margen de error = $2.306 \\cdot 6 / \\sqrt{9} = 2.306 \\cdot 2 = 4.612$. Límite inferior = $100 - 4.612 = 95.388$."
+    },
+    {
+      "q": "12. La amplitud de un intervalo de confianza al 95% para la media con varianza conocida si el tamaño muestral se multiplica por 4 (manteniendo el resto constante) se multiplica por ____.",
+      "options": [
+        "0.5",
+        "2.0",
+        "0.25"
+      ],
+      "correct": 0,
+      "hint": "El tamaño de la muestra $n$ está en el denominador de la amplitud como $\\sqrt{n}$.",
+      "explanation": "Amplitud final / Amplitud inicial = $\\sqrt{n_{inicial}} / \\sqrt{4 n_{inicial}} = 1/\\sqrt{4} = 0.5$."
+    },
+    {
+      "q": "13. Para estimar la varianza poblacional de una normal con $n = 10$ observaciones y $s_{n-1}^2 = 2.5$, el valor del denominador para el límite inferior del intervalo al 95% (usando cuantil Chi-cuadrado superior $\\chi^2_{0.025, 9}$) es ____.",
+      "options": [
+        "19.023",
+        "16.919",
+        "2.700"
+      ],
+      "correct": 0,
+      "hint": "Se requiere el cuantil Chi-cuadrado con $n-1=9$ grados de libertad que acumula 0.975 a la izquierda.",
+      "explanation": "El cuantil superior $\\chi^2_{0.025, 9}$ es aproximadamente 19.023 (en R: `qchisq(0.975, 9)`)."
+    },
+    {
+      "q": "14. Al realizar un muestreo de tamaño $n = 100$ para una proporción, si observamos $\\hat{p} = 0.5$, el error estándar de la proporción es ____.",
+      "options": [
+        "0.05",
+        "0.25",
+        "0.0025"
+      ],
+      "correct": 0,
+      "hint": "Calcula $\\sqrt{0.5 \\cdot 0.5 / 100}$.",
+      "explanation": "Error estándar = $\\sqrt{0.25 / 100} = \\sqrt{0.0025} = 0.05$."
+    },
+    {
+      "q": "15. En un intervalo de confianza para el cociente de varianzas con $s_1^2 = 8$ y $s_2^2 = 2$, la estimación puntual del cociente es ____.",
+      "options": [
+        "4.0",
+        "2.0",
+        "0.25"
+      ],
+      "correct": 0,
+      "hint": "La estimación puntual del cociente $\\sigma_1^2 / \\sigma_2^2$ es simplemente la razón de sus cuasivarianzas muestrales.",
+      "explanation": "Estimación puntual = $s_1^2 / s_2^2 = 8 / 2 = 4.0$."
+    },
+    {
+      "q": "16. Para un intervalo de confianza al 95% de la diferencia de medias con varianzas conocidas y muestras grandes ($n_1=40, n_2=40$), el valor crítico de la normal estándar es ____.",
+      "options": [
+        "1.960",
+        "1.645",
+        "2.576"
+      ],
+      "correct": 0,
+      "hint": "Con muestras grandes y varianzas conocidas, la distribución de referencia es la normal estándar al 95% bilateral.",
+      "explanation": "El cuantil para un intervalo bilateral al 95% es $z_{0.025} = 1.96$."
+    },
+    {
+      "q": "17. Si en R llamamos a la función `qt(0.95, df = 15)`, estamos obteniendo el valor crítico de la t de Student para un intervalo unilateral con significación de ____.",
+      "options": [
+        "0.05",
+        "0.10",
+        "0.025"
+      ],
+      "correct": 0,
+      "hint": "El cuantil deja el 95% de área a su izquierda y 5% a su derecha.",
+      "explanation": "El área a la derecha es $1 - 0.95 = 0.05$, lo que equivale al nivel de significación unilateral $\\alpha = 0.05$."
+    },
+    {
+      "q": "18. Si un intervalo de confianza al 95% para la diferencia de medias de dos tratamientos independientes es $[-5.2, -1.8]$, la conclusión estadística es ____.",
+      "options": [
+        "Las medias son significativamente diferentes ya que el intervalo no incluye al 0.",
+        "No hay diferencia significativa entre las medias poblacionales.",
+        "La media de la primera población es significativamente mayor que la de la segunda."
+      ],
+      "correct": 0,
+      "hint": "Analiza si el intervalo contiene el valor de igualdad (0) y el signo de los extremos.",
+      "explanation": "Como el intervalo $[-5.2, -1.8]$ está completamente a la izquierda de 0, concluimos que hay diferencia significativa, siendo $\\mu_2 > \\mu_1$."
+    },
+    {
+      "q": "19. Al estimar la proporción de fallos de un sistema con una muestra de $n = 64$ y un nivel de confianza del 95% ($z_{0.025}=1.96$), si $\\hat{p} = 0.05$, el margen de error del intervalo es ____.",
+      "options": [
+        "0.0534",
+        "0.0272",
+        "0.0125"
+      ],
+      "correct": 0,
+      "hint": "Margen de error = $1.96 \\cdot \\sqrt{\\hat{p}(1-\\hat{p})/n}$.",
+      "explanation": "Error estándar = $\\sqrt{0.05 \\cdot 0.95 / 64} = \\sqrt{0.0475 / 64} \\approx 0.02724$. Margen de error = $1.96 \\cdot 0.02724 \\approx 0.0534$."
+    },
+    {
+      "q": "20. Al estimar la varianza poblacional de una muestra con $n=8$ observaciones, los grados de libertad de la distribución Chi-cuadrado asociada son ____.",
+      "options": [
+        "7",
+        "8",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Los grados de libertad de la Chi-cuadrado para estimar la varianza son $n-1$.",
+      "explanation": "Grados de libertad = $n-1 = 8-1 = 7$."
+    },
+    {
+      "q": "21. Para reducir la amplitud de un intervalo de confianza de la media muestral se puede:",
+      "options": [
+        "Aumentar el tamaño muestral $n$.",
+        "Disminuir el nivel de confianza $1-\\alpha$.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza cómo afectan la muestra (en el denominador) y la confianza (en el numerador) al error estándar y al valor crítico.",
+      "explanation": "Aumentar $n$ reduce el error estándar; disminuir la confianza reduce el valor crítico. Ambas acciones disminuyen la amplitud del intervalo."
+    },
+    {
+      "q": "22. En un intervalo de confianza para la media de una normal con varianza conocida, el error estándar disminuye si:",
+      "options": [
+        "Se reduce la desviación estándar de la población $\\sigma$.",
+        "Se incrementa el tamaño muestral $n$.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa los términos que componen la fórmula del error estándar: $\\sigma/\\sqrt{n}$.",
+      "explanation": "El error estándar es $\\sigma/\\sqrt{n}$. Disminuir $\\sigma$ en el numerador o aumentar $n$ en el denominador reduce su valor."
+    },
+    {
+      "q": "23. Al comparar dos medias poblacionales de muestras independientes con varianzas desconocidas pero iguales, los supuestos necesarios son:",
+      "options": [
+        "Muestras seleccionadas de forma aleatoria e independiente.",
+        "Normalidad de las poblaciones originales o muestras suficientemente grandes.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa los requisitos teóricos del modelo de contraste de diferencia de medias.",
+      "explanation": "Para aplicar la t de Student en este escenario se exige independencia, normalidad de las poblaciones (o TCL en muestras grandes) y homocedasticidad."
+    },
+    {
+      "q": "24. En R, la función `t.test()` permite calcular intervalos de confianza para:",
+      "options": [
+        "La media de una muestra única.",
+        "La diferencia de medias de dos muestras independientes o pareadas.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa el manual de R para la función `t.test` y sus argumentos.",
+      "explanation": "`t.test` es una función versátil que admite una sola muestra, dos muestras independientes (`paired = FALSE`) o dos muestras pareadas (`paired = TRUE`)."
+    },
+    {
+      "q": "25. La distribución Chi-cuadrado utilizada para la varianza tiene las siguientes propiedades:",
+      "options": [
+        "Está definida solo para valores mayores o iguales a cero.",
+        "Es asimétrica y depende de los grados de libertad ($n-1$).",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considera la forma gráfica y el dominio matemático de la distribución Chi-cuadrado.",
+      "explanation": "Al provenir de la suma de cuadrados de normales, es no negativa, tiene una forma asimétrica positiva y su forma depende de los grados de libertad."
+    },
+    {
+      "q": "26. Para una estimación de la proporción muestral, el uso del cuantil normal estándar se justifica si:",
+      "options": [
+        "El tamaño muestral $n$ es lo bastante grande.",
+        "El número de éxitos ($n\\hat{p}$) y fracasos ($n(1-\\hat{p})$) es superior o igual a 5.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son las condiciones de aproximación del Teorema del Límite Central para proporciones.",
+      "explanation": "Para aproximar una distribución binomial por una normal se requiere $n \\ge 30$, $n\\hat{p} \\ge 5$ y $n(1-\\hat{p}) \\ge 5$."
+    },
+    {
+      "q": "27. Un intervalo de confianza para la diferencia de medias $\\mu_1 - \\mu_2$ de $[2.5, 6.8]$ al 95% de confianza nos permite concluir:",
+      "options": [
+        "La diferencia de medias es significativamente distinta de cero al nivel del 5%.",
+        "La media de la población 1 es significativamente mayor que la de la población 2.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza los signos de los extremos y si el intervalo incluye al cero.",
+      "explanation": "El intervalo contiene solo valores positivos y no incluye al cero, lo que implica que la diferencia es significativa y $\\mu_1 > \\mu_2$."
+    },
+    {
+      "q": "28. Al diseñar un experimento estadístico para estimar un parámetro poblacional, la amplitud del intervalo propuesto dependerá de:",
+      "options": [
+        "La dispersión intrínseca de los datos (varianza).",
+        "El tamaño de la muestra y el nivel de confianza elegidos.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda la fórmula general del margen de error.",
+      "explanation": "La longitud de un intervalo depende del error estándar (determinado por la varianza y la muestra) y del valor crítico (determinado por la confianza)."
+    },
+    {
+      "q": "29. Al estimar un intervalo de confianza para el cociente de varianzas $\\sigma_1^2/\\sigma_2^2$ de dos poblaciones normales independientes, se cumple que:",
+      "options": [
+        "Se basa en el cociente de cuasivarianzas muestrales.",
+        "Los cuantiles teóricos proceden de la distribución F de Snedecor.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa los componentes de la fórmula de comparación de dispersiones.",
+      "explanation": "El intervalo se construye dividiendo el cociente de cuasivarianzas muestrales por los cuantiles de la F de Snedecor correspondientes."
+    },
+    {
+      "q": "30. ¿Cuál de las siguientes es una propiedad del nivel de significación $\\alpha$?",
+      "options": [
+        "Representa la probabilidad de cometer el error de no atrapar el parámetro real con el intervalo.",
+        "Habitualmente toma valores pequeños como 0.05, 0.01 o 0.10.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El nivel de significación $\\alpha$ es el complemento del nivel de confianza.",
+      "explanation": "El nivel de significación $\\alpha$ es el riesgo tolerable de error, es decir, la probabilidad de que el intervalo aleatorio no contenga al parámetro. Suele ser del 5%, 1% o 10%."
+    },
+    {
+      "q": "31. Si se obtiene un intervalo de confianza al 95% para la media de $[10, 15]$, ¿cuál es la probabilidad de que el parámetro poblacional real $\\mu$ se encuentre en este intervalo una vez calculado?",
+      "options": [
+        "Exactamente 0.95.",
+        "Exactamente 0.05.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Tras realizar los cálculos con la muestra, los extremos del intervalo dejan de ser variables aleatorias.",
+      "explanation": "Una vez calculado el intervalo $[10, 15]$, sus extremos son constantes. El parámetro real $\\mu$ (fijo) está o no está en el intervalo (probabilidad 1 o 0). La confianza del 95% describe el proceso a priori, no el intervalo observado."
+    },
+    {
+      "q": "32. Si reducimos el tamaño muestral a la cuarta parte ($n_{nuevo} = n/4$), manteniendo la confianza y desviación estándar iguales, la amplitud del intervalo de confianza para la media:",
+      "options": [
+        "Se reduce a la mitad.",
+        "Se reduce a la cuarta parte.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Analiza cómo se altera el término $1/\\sqrt{n}$ al cambiar $n$ por $n/4$.",
+      "explanation": "Al cambiar $n$ por $n/4$, el término $1/\\sqrt{n}$ pasa a ser $1/\\sqrt{n/4} = 2/\\sqrt{n}$. Por tanto, la amplitud del intervalo se duplica (ninguna de las opciones propuestas)."
+    },
+    {
+      "q": "33. Si deseamos reducir a la mitad el margen de error $E$ en la estimación de una proporción manteniendo la confianza constante, el tamaño muestral necesario debe ser:",
+      "options": [
+        "Duplicado.",
+        "Triplicado.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El margen de error es inversamente proporcional a la raíz cuadrada del tamaño de la muestra.",
+      "explanation": "Para reducir el error a la mitad ($E/2$), el tamaño de la muestra debe cuadruplicarse ($4n$) debido a la relación cuadrática. Ninguna opción es correcta."
+    },
+    {
+      "q": "34. Para una muestra de tamaño $n = 5$ de una población normal, construimos un intervalo de confianza para la varianza con un nivel de significación $\\alpha = 0.05$. El cuantil Chi-cuadrado del denominador para el límite superior es:",
+      "options": [
+        "$\\chi^2_{0.05, 5}$",
+        "$\\chi^2_{0.95, 4}$",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerda la notación para los límites del intervalo de confianza de la varianza.",
+      "explanation": "El denominador del límite superior es $\\chi^2_{1-\\alpha/2, n-1} = \\chi^2_{0.975, 4}$ en la notación habitual (o $\\chi^2_{0.025, 4}$ según tablas de cola derecha). Ninguna de las opciones mostradas coincide."
+    },
+    {
+      "q": "35. Si comparamos las varianzas de dos poblaciones normales y obtenemos un intervalo de confianza al 95% para $\\sigma_1^2/\\sigma_2^2$ de $[1.2, 3.5]$, podemos concluir que:",
+      "options": [
+        "Las varianzas poblacionales son significativamente iguales.",
+        "La varianza de la segunda población es significativamente mayor que la de la primera.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Observa si el valor 1 está dentro del intervalo y qué lado del intervalo es superior.",
+      "explanation": "Dado que el intervalo $[1.2, 3.5]$ es estrictamente superior a 1, concluimos que $\\sigma_1^2 > \\sigma_2^2$. Las opciones A y B indican lo contrario, por lo que la respuesta es C."
+    },
+    {
+      "q": "36. En R, la función que permite calcular el cuantil de la t de Student para un intervalo al 95% de confianza unilateral por la derecha con 10 grados de libertad es:",
+      "options": [
+        "`pt(0.975, df = 10)`",
+        "`dt(0.95, df = 10)`",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Para obtener cuantiles en R usamos la familia de funciones que empiezan con 'q'.",
+      "explanation": "El cuantil para un intervalo unilateral por la derecha al 95% de confianza se obtiene con `qt(0.95, df = 10)`. Ninguna de las opciones mostradas coincide."
+    },
+    {
+      "q": "37. Si el intervalo de confianza al 95% para la proporción es $[0.20, 0.40]$, la proporción muestral $\\hat{p}$ utilizada es:",
+      "options": [
+        "0.25",
+        "0.35",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La proporción muestral coincide exactamente con el centro del intervalo simétrico.",
+      "explanation": "El centro del intervalo es $(0.20 + 0.40) / 2 = 0.30$. Las opciones propuestas son 0.25 y 0.35, por tanto la opción correcta es la C."
+    },
+    {
+      "q": "38. Al estimar la diferencia de medias de dos poblaciones normales independientes con varianzas conocidas, la distribución muestral del estadístico pivotante es:",
+      "options": [
+        "La distribución t de Student con $n_1 + n_2 - 2$ grados de libertad.",
+        "La distribución F de Snedecor con $(n_1-1, n_2-1)$ grados de libertad.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Si las varianzas poblacionales son conocidas, ¿necesitamos estimar la desviación típica con la t de Student?",
+      "explanation": "Con varianzas poblacionales conocidas, el estadístico de diferencia de medias sigue exactamente una distribución normal estándar $Z \\sim N(0,1)$, por lo que la respuesta correcta es la C."
+    },
+    {
+      "q": "39. En una distribución normal con varianza poblacional $\\sigma^2 = 64$ y muestra de tamaño $n=16$, el error estándar de la media es:",
+      "options": [
+        "4.0",
+        "1.0",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El error estándar de la media es $\\sigma / \\sqrt{n}$.",
+      "explanation": "$\\sigma = \\sqrt{64} = 8$. Error estándar = $\\sigma/\\sqrt{n} = 8 / \\sqrt{16} = 8 / 4 = 2.0$. La respuesta correcta es la C, ya que las opciones son 4.0 y 1.0."
+    },
+    {
+      "q": "40. Si el nivel de confianza de un intervalo aumenta del 90% al 99%, manteniendo el tamaño muestral y la varianza iguales, la longitud del intervalo:",
+      "options": [
+        "Disminuye, aumentando la precisión.",
+        "Permanece constante.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Para estar más seguro de incluir el parámetro, ¿el rango debe ser mayor o menor?",
+      "explanation": "Al aumentar la confianza del 90% al 99%, el valor crítico aumenta (por ejemplo, de 1.645 a 2.576), lo que incrementa el margen de error y amplía la longitud del intervalo (disminuyendo la precisión). Por tanto, la opción correcta es la C."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Tiempos de ejecución de script de base de datos",
+      "context": "Se ejecuta un script de base de datos en 10 ocasiones independientes, registrándose los siguientes tiempos en segundos: $\\{4.2, 4.8, 3.9, 4.5, 4.1, 4.7, 4.3, 4.6, 4.0, 4.4\\}$. Se asume normalidad de los tiempos.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "Calcule la media muestral $\\bar{x}$ en segundos.",
+          "correctValue": 4.35,
+          "tolerance": 0.01,
+          "explanation": "$$\\bar{x} = \\frac{\\sum x_i}{10} = 4.35\\text{ s}$$"
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcule la cuasidesviación típica muestral $s_{n-1}$ en segundos.",
+          "correctValue": 0.3028,
+          "tolerance": 0.005,
+          "explanation": "$$s_{n-1} = \\sqrt{\\frac{1}{9} \\sum (x_i - \\bar{x})^2} \\approx 0.3028\\text{ s}$$"
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Encuentre el valor crítico de la t de Student $t_{0.025, 9}$ para un intervalo de confianza al 95% bilateral.",
+          "correctValue": 2.2622,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 9} = 2.2622$$"
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Calcule el límite superior del intervalo de confianza al 95% para la media poblacional $\\mu$ en segundos.",
+          "correctValue": 4.5666,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = \\bar{x} + t_{0.025, 9} \\frac{s_{n-1}}{\\sqrt{10}} = 4.35 + 2.2622 \\frac{0.3028}{\\sqrt{10}} \\approx 4.5666\\text{ s}$$"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Consumo de memoria de microservicio",
+      "context": "Se monitoriza el consumo de memoria RAM (en MB) de $n = 16$ instancias de un microservicio: $\\{120, 125, 118, 122, 130, 121, 124, 126, 123, 119, 128, 122, 125, 127, 120, 124\\}$. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcule la media muestral $\\bar{x}$ del consumo de memoria en MB.",
+          "correctValue": 123.375,
+          "tolerance": 0.01,
+          "explanation": "$$\\bar{x} = \\frac{\\sum x_i}{16} = 123.375\\text{ MB}$$"
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcule la cuasivarianza muestral $s_{n-1}^2$ en $\\text{MB}^2$.",
+          "correctValue": 11.5833,
+          "tolerance": 0.01,
+          "explanation": "$$s_{n-1}^2 = \\frac{1}{15} \\sum (x_i - \\bar{x})^2 \\approx 11.5833\\text{ MB}^2$$"
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "Encuentre el valor crítico de la t de Student $t_{0.05, 15}$ para un intervalo de confianza al 90% bilateral.",
+          "correctValue": 1.753,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.05, 15} = 1.7531$$"
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo de confianza al 90% para el consumo medio poblacional en MB.",
+          "correctValue": 121.8834,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\bar{x} - t_{0.05, 15} \\frac{s_{n-1}}{\\sqrt{16}} = 123.375 - 1.7531 \\frac{\\sqrt{11.5833}}{4} \\approx 121.8833\\text{ MB}$$"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Latencia de ping a centro de datos",
+      "context": "Una muestra aleatoria de $n = 25$ mediciones de latencia de red (ping en ms) tiene una media muestral $\\bar{x} = 45$ ms y una cuasidesviación típica $s_{n-1} = 5$ ms. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcule el error estándar de la media en milisegundos.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{s_{n-1}}{\\sqrt{n}} = \\frac{5}{\\sqrt{25}} = 1.0\\text{ ms}$$"
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Obtenga el cuantil de la t de Student $t_{0.005, 24}$ para un 99% de confianza bilateral.",
+          "correctValue": 2.7969,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.005, 24} = 2.7969$$"
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ en ms para la estimación de la media con un 99% de confianza.",
+          "correctValue": 2.7969,
+          "tolerance": 0.01,
+          "explanation": "$$E = t_{0.005, 24} \\frac{s_{n-1}}{\\sqrt{n}} = 2.7969 \\times 1.0 = 2.7969\\text{ ms}$$"
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Encuentre el límite superior del intervalo al 99% de confianza para la latencia media real en ms.",
+          "correctValue": 47.7969,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = 45.0 + 2.7969 = 47.7969\\text{ ms}$$"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Pérdida de paquetes en transmisión de red",
+      "context": "En una auditoría de rendimiento de red, se transmiten $n = 500$ paquetes independientes de prueba y se detecta que 25 de ellos se pierden.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcule la proporción muestral $\\hat{p}$ de paquetes perdidos.",
+          "correctValue": 0.05,
+          "tolerance": 0.001,
+          "explanation": "$$\\hat{p} = \\frac{25}{500} = 0.05$$"
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado de la proporción muestral.",
+          "correctValue": 0.0097,
+          "tolerance": 0.0005,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} = \\sqrt{\\frac{0.05 \\cdot 0.95}{500}} \\approx 0.009747$$"
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Encuentre el valor crítico de la normal estándar $z_{0.025}$ para un intervalo de confianza al 95%.",
+          "correctValue": 1.96,
+          "tolerance": 0.005,
+          "explanation": "$$z_{0.025} = 1.960$$"
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Calcule el límite superior del intervalo al 95% de confianza para la proporción poblacional de paquetes perdidos.",
+          "correctValue": 0.0691,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Superior} = \\hat{p} + z_{0.025} \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} = 0.05 + 1.960 \\cdot 0.009747 \\approx 0.0691$$"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Tiempos de compilación con varianza poblacional conocida",
+      "context": "Los tiempos de compilación de un proyecto grande se analizan en $n = 9$ ejecuciones de prueba, dando una media muestral $\\bar{x} = 15$ segundos. Se conoce que la desviación típica poblacional de los tiempos de compilación es $\\sigma = 3$ segundos. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcule el error estándar de la media poblacional en segundos.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{\\sigma}{\\sqrt{n}} = \\frac{3}{\\sqrt{9}} = 1.0\\text{ s}$$"
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Encuentre el valor crítico $z_{0.025}$ para una confianza del 95%.",
+          "correctValue": 1.96,
+          "tolerance": 0.005,
+          "explanation": "$$z_{0.025} = 1.960$$"
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ en segundos para una confianza del 95%.",
+          "correctValue": 1.96,
+          "tolerance": 0.01,
+          "explanation": "$$E = z_{0.025} \\frac{\\sigma}{\\sqrt{n}} = 1.960 \\times 1.0 = 1.96\\text{ s}$$"
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo de confianza al 95% para el tiempo medio de compilación.",
+          "correctValue": 13.04,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\bar{x} - E = 15 - 1.96 = 13.04\\text{ s}$$"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Variabilidad en el tiempo de respuesta de consultas",
+      "context": "Se mide la latencia de $n = 12$ consultas de base de datos independientes, obteniéndose una cuasivarianza muestral $s_{n-1}^2 = 0.09\\text{ s}^2$. Se asume normalidad de las latencias.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Calcule el numerador $(n-1)s_{n-1}^2$ para el intervalo de confianza de la varianza.",
+          "correctValue": 0.99,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Numerador} = (n-1)s_{n-1}^2 = 11 \\cdot 0.09 = 0.99\\text{ s}^2$$"
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Obtenga el cuantil de la distribución Chi-cuadrado inferior $\\chi^2_{0.975, 11}$ para una confianza del 95% bilateral (cola de la izquierda).",
+          "correctValue": 3.8157,
+          "tolerance": 0.01,
+          "explanation": "$$\\chi^2_{0.975, 11} = 3.8157$$"
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Obtenga el cuantil de la distribución Chi-cuadrado superior $\\chi^2_{0.025, 11}$ para una confianza del 95% bilateral (cola de la derecha).",
+          "correctValue": 21.92,
+          "tolerance": 0.01,
+          "explanation": "$$\\chi^2_{0.025, 11} = 21.9200$$"
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Calcule el límite superior del intervalo al 95% para la varianza de los tiempos $\\sigma^2$ en $\\text{s}^2$.",
+          "correctValue": 0.2595,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = \\frac{(n-1)s_{n-1}^2}{\\chi^2_{0.975, 11}} = \\frac{0.99}{3.8157} \\approx 0.2594\\text{ s}^2$$"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Comparación del tiempo de respuesta entre servidores (varianzas iguales)",
+      "context": "Se desea comparar el tiempo medio de respuesta de dos servidores. Se toman muestras independientes:\\nServidor A: $n_1 = 10$, $\\bar{x}_1 = 120$ ms, $s_1 = 12$ ms.\\nServidor B: $n_2 = 12$, $\\bar{x}_2 = 110$ ms, $s_2 = 10$ ms.\\nLas poblaciones son normales con varianzas iguales.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Calcule la cuasivarianza ponderada común $s_p^2$ en $\\text{ms}^2$.",
+          "correctValue": 119.8,
+          "tolerance": 0.01,
+          "explanation": "$$s_p^2 = \\frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1+n_2-2} = \\frac{9(144) + 11(100)}{20} = 119.8\\text{ ms}^2$$"
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado para la diferencia de medias.",
+          "correctValue": 4.6865,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = s_p \\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}} = \\sqrt{119.8 \\cdot \\left(\\frac{1}{10} + \\frac{1}{12}\\right)} \\approx 4.6865\\text{ ms}$$"
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Encuentre el valor crítico $t_{0.025, 20}$ de la t de Student para una confianza del 95%.",
+          "correctValue": 2.086,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 20} = 2.0860$$"
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 95% para la diferencia de medias $\\mu_1 - \\mu_2$ en ms.",
+          "correctValue": 19.7759,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = (\\bar{x}_1 - \\bar{x}_2) + t_{0.025, 20} \\cdot \\text{Error Estándar} = (120 - 110) + 2.0860 \\cdot 4.6865 \\approx 19.7760\\text{ ms}$$"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Estabilidad de procesamiento entre dos algoritmos",
+      "context": "Se comparan dos algoritmos de búsqueda midiendo la varianza de sus tiempos de ejecución. Las muestras independientes e independientes dan:\\nAlgoritmo 1: $n_1 = 16$, $s_1^2 = 25\\text{ ms}^2$.\\nAlgoritmo 2: $n_2 = 21$, $s_2^2 = 9\\text{ ms}^2$.\\nSe asume normalidad.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcule el cociente de cuasivarianzas muestrales $s_1^2 / s_2^2$.",
+          "correctValue": 2.7778,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Cociente} = \\frac{25}{9} \\approx 2.7778$$"
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Encuentre el cuantil superior de la F de Snedecor $F_{0.025, 15, 20}$ al 95% de confianza.",
+          "correctValue": 2.5731,
+          "tolerance": 0.01,
+          "explanation": "$$F_{0.025, 15, 20} = 2.5731$$"
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Encuentre el cuantil inferior de la F de Snedecor $F_{0.975, 15, 20}$ al 95% de confianza.",
+          "correctValue": 0.3846,
+          "tolerance": 0.01,
+          "explanation": "$$F_{0.975, 15, 20} = 0.3846$$"
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Determine el límite inferior del intervalo de confianza al 95% para el cociente de varianzas $\\sigma_1^2 / \\sigma_2^2$.",
+          "correctValue": 1.0795,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\frac{s_1^2 / s_2^2}{F_{0.025, 15, 20}} = \\frac{2.7778}{2.5731} \\approx 1.0795$$"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Planificación de tamaño muestral para estimar una proporción",
+      "context": "Se planea estimar la proporción de descargas con éxito de una aplicación. Un estudio piloto inicial sugiere que la tasa de éxito estimada es $p^* = 0.15$. Se desea estimar la tasa real con un error máximo de $0.03$ y una confianza del 95% bilateral.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcule la varianza estimada de la proporción $p^*(1-p^*)$.",
+          "correctValue": 0.1275,
+          "tolerance": 0.001,
+          "explanation": "$$p^*(1-p^*) = 0.15 \\cdot 0.85 = 0.1275$$"
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Obtenga el valor crítico de la normal estándar $z_{0.025}$ para un intervalo bilateral al 95%.",
+          "correctValue": 1.96,
+          "tolerance": 0.005,
+          "explanation": "$$z_{0.025} \\approx 1.960$$"
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcule el tamaño muestral mínimo teórico exacto (con decimales).",
+          "correctValue": 544.2045,
+          "tolerance": 0.1,
+          "explanation": "$$n = \\frac{z_{0.025}^2 \\cdot p^*(1-p^*)}{E^2} = \\frac{1.960^2 \\cdot 0.1275}{0.03^2} \\approx 544.22$$"
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Determine el tamaño muestral mínimo redondeado al entero superior para cumplir el requisito.",
+          "correctValue": 545.0,
+          "tolerance": 0.0,
+          "explanation": "$$n_{mín} = \\lceil 544.22 \\rceil = 545$$"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Optimización de carga de página (Muestras Pareadas)",
+      "context": "Se mide el tiempo de carga (en segundos) de 6 páginas antes de instalar un módulo de caché. Los tiempos son:\\nAntes: $\\{3.2, 3.5, 4.0, 3.8, 4.2, 3.6\\}$\\nDespués: $\\{2.1, 2.5, 3.0, 2.7, 3.1, 2.6\\}$. Las diferencias individuales (Antes - Después) se denotan por $D_i$.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcule la media muestral de las diferencias $\\bar{d}$ en segundos.",
+          "correctValue": 1.05,
+          "tolerance": 0.01,
+          "explanation": "$$\\bar{d} = \\frac{1.1 + 1.0 + 1.0 + 1.1 + 1.1 + 1.0}{6} = 1.05\\text{ s}$$"
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcule la cuasadesviación típica de las diferencias $s_d$ en segundos.",
+          "correctValue": 0.0548,
+          "tolerance": 0.005,
+          "explanation": "$$s_d = \\sqrt{\\frac{1}{5} \\sum (d_i - \\bar{d})^2} \\approx 0.05477\\text{ s}$$"
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Encuentre el valor crítico de la t de Student $t_{0.025, 5}$ al 95% de confianza.",
+          "correctValue": 2.5706,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 5} = 2.5706$$"
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Determine el límite inferior del intervalo de confianza al 95% para la mejora media poblacional $\\mu_D$ en segundos.",
+          "correctValue": 0.9925,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\bar{d} - t_{0.025, 5} \\frac{s_d}{\\sqrt{6}} = 1.05 - 2.5706 \\frac{0.05477}{\\sqrt{6}} \\approx 0.9925\\text{ s}$$"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Rendimiento de FPS de una GPU",
+      "context": "La velocidad de fotogramas de una GPU se evalúa en 15 ejecuciones de benchmarking independientes. Se obtiene una velocidad de fotogramas media $\\bar{x} = 85$ fps con una cuasadesviación típica de $s_{n-1} = 4$ fps. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Calcule el error estándar de la media en fotogramas por segundo (fps).",
+          "correctValue": 1.0328,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{s_{n-1}}{\\sqrt{n}} = \\frac{4}{\\sqrt{15}} \\approx 1.0328\\text{ fps}$$"
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Obtenga el cuantil t de Student $t_{0.025, 14}$ para una confianza del 95% bilateral.",
+          "correctValue": 2.1448,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 14} = 2.1448$$"
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ en fps del intervalo al 95% de confianza.",
+          "correctValue": 2.2151,
+          "tolerance": 0.01,
+          "explanation": "$$E = t_{0.025, 14} \\cdot \\text{Error Estándar} = 2.1448 \\cdot 1.0328 \\approx 2.2151\\text{ fps}$$"
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo al 95% de confianza para el rendimiento medio real en fps.",
+          "correctValue": 82.7849,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = 85.0 - 2.2151 = 82.7849\\text{ fps}$$"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Tasa de fallos en transacciones bancarias electrónicas",
+      "context": "En una muestra aleatoria de $n = 1000$ transacciones bancarias en línea procesadas por una pasarela de pago, se registraron exactamente 12 fallos del sistema.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Determine la proporción muestral $\\hat{p}$ de transacciones fallidas.",
+          "correctValue": 0.012,
+          "tolerance": 0.001,
+          "explanation": "$$\\hat{p} = \\frac{12}{1000} = 0.012$$"
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado de la proporción.",
+          "correctValue": 0.0034,
+          "tolerance": 0.0005,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} = \\sqrt{\\frac{0.012 \\cdot 0.988}{1000}} \\approx 0.003443$$"
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Obtenga el cuantil normal estándar $z_{0.005}$ para un intervalo al 99% de confianza.",
+          "correctValue": 2.5758,
+          "tolerance": 0.005,
+          "explanation": "$$z_{0.005} \\approx 2.5758$$"
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 99% para la tasa real de fallos de transacciones.",
+          "correctValue": 0.0209,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Superior} = \\hat{p} + z_{0.005} \\cdot \\text{Error Estándar} = 0.012 + 2.5758 \\cdot 0.003443 \\approx 0.0209$$"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Variabilidad del grosor de placas de silicio",
+      "context": "Se mide la variación de espesor en una muestra aleatoria de $n = 20$ obleas de silicio. Tras los análisis, se calcula una cuasivarianza de $s_{n-1}^2 = 0.0025\\text{ mm}^2$. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Determine los grados de libertad asociados al estimador de la dispersión.",
+          "correctValue": 19.0,
+          "tolerance": 0.0,
+          "explanation": "$$\\text{Grados de Libertad} = n - 1 = 19$$"
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcule el límite inferior del intervalo de confianza al 95% para la varianza $\\sigma^2$ en $\\text{mm}^2$ (use cuantil Chi-cuadrado $\\chi^2_{0.025, 19} = 32.8523$).",
+          "correctValue": 0.0014,
+          "tolerance": 0.0001,
+          "explanation": "$$\\text{Límite Inferior Varianza} = \\frac{(n-1)s^2}{\\chi^2_{0.025, 19}} = \\frac{19 \\cdot 0.0025}{32.8523} \\approx 0.001446\\text{ mm}^2$$"
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcule el límite superior del intervalo de confianza al 95% para la varianza $\\sigma^2$ en $\\text{mm}^2$ (use cuantil Chi-cuadrado $\\chi^2_{0.975, 19} = 8.9065$).",
+          "correctValue": 0.0053,
+          "tolerance": 0.0001,
+          "explanation": "$$\\text{Límite Superior Varianza} = \\frac{(n-1)s^2}{\\chi^2_{0.975, 19}} = \\frac{19 \\cdot 0.0025}{8.9065} \\approx 0.005333\\text{ mm}^2$$"
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 95% para la desviación típica poblacional $\\sigma$ en mm.",
+          "correctValue": 0.073,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Superior Desviación} = \\sqrt{\\text{Límite Superior Varianza}} = \\sqrt{0.005333} \\approx 0.0730\\text{ mm}$$"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Comparación de proporciones de clics (Pruebas A/B)",
+      "context": "Una startup evalúa el éxito de una llamada a la acción (CTA) en dos versiones de una landing page. Muestra:\\nLanding Page A (Tradicional): $n_1 = 800$ usuarios, $x_1 = 160$ clics.\\nLanding Page B (Optimizada): $n_2 = 1000$ usuarios, $x_2 = 250$ clics.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Determine la diferencia de proporciones muestrales de clics $\\hat{p}_B - \\hat{p}_A$.",
+          "correctValue": 0.05,
+          "tolerance": 0.001,
+          "explanation": "$$\\hat{p}_B - \\hat{p}_A = \\frac{250}{1000} - \\frac{160}{800} = 0.25 - 0.20 = 0.05$$"
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado para la diferencia de proporciones.",
+          "correctValue": 0.0197,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{\\hat{p}_A(1-\\hat{p}_A)}{n_1} + \\frac{\\hat{p}_B(1-\\hat{p}_B)}{n_2}} = \\sqrt{\\frac{0.2\\cdot 0.8}{800} + \\frac{0.25\\cdot 0.75}{1000}} \\approx 0.019685$$"
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ al 95% de confianza ($z_{0.025} = 1.960$).",
+          "correctValue": 0.0386,
+          "tolerance": 0.001,
+          "explanation": "$$E = 1.960 \\cdot 0.019685 \\approx 0.03858$$"
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo de confianza al 95% para la diferencia de proporciones de clics $p_B - p_A$.",
+          "correctValue": 0.0114,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Inferior} = 0.05 - 0.03858 \\approx 0.0114$$"
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Estimación del tamaño medio de paquetes de red",
+      "context": "Se monitoriza una conexión de red recopilando una muestra aleatoria de $n = 36$ paquetes. El tamaño medio de estos paquetes es $\\bar{x} = 512$ bytes con una cuasadesviación típica de $s_{n-1} = 60$ bytes. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcule el error estándar de la media en bytes.",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{s_{n-1}}{\\sqrt{n}} = \\frac{60}{\\sqrt{36}} = 10.0\\text{ bytes}$$"
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Determine el cuantil t de Student $t_{0.025, 35}$ para una confianza del 95%.",
+          "correctValue": 2.0301,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 35} = 2.0301$$"
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ en bytes para una confianza del 95%.",
+          "correctValue": 20.3011,
+          "tolerance": 0.01,
+          "explanation": "$$E = t_{0.025, 35} \\cdot \\text{Error Estándar} = 2.0301 \\cdot 10.0 = 20.3011\\text{ bytes}$$"
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 95% para la media de tamaño de paquetes.",
+          "correctValue": 532.3011,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = \\bar{x} + E = 512 + 20.3011 = 532.3011\\text{ bytes}$$"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Comparación de latencias de dos bases de datos (muestras grandes, varianzas conocidas)",
+      "context": "Se registran los tiempos de carga en segundos para dos gestores de bases de datos relacionales independientes:\\nBase de datos 1: $n_1 = 50$, $\\bar{x}_1 = 2.4$ s, desviación típica poblacional conocida $\\sigma_1 = 0.5$ s.\\nBase de datos 2: $n_2 = 60$, $\\bar{x}_2 = 2.8$ s, desviación típica poblacional conocida $\\sigma_2 = 0.6$ s.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcule la diferencia puntual de medias muestrales $\\bar{x}_2 - \\bar{x}_1$ en segundos.",
+          "correctValue": 0.4,
+          "tolerance": 0.01,
+          "explanation": "$$\\bar{x}_2 - \\bar{x}_1 = 2.8 - 2.4 = 0.4\\text{ s}$$"
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Calcule el error estándar exacto de la diferencia de medias.",
+          "correctValue": 0.1049,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{\\sigma_1^2}{n_1} + \\frac{\\sigma_2^2}{n_2}} = \\sqrt{\\frac{0.25}{50} + \\frac{0.36}{60}} = \\sqrt{0.005 + 0.006} \\approx 0.10488\\text{ s}$$"
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ al 95% de confianza ($z_{0.025}=1.960$).",
+          "correctValue": 0.2056,
+          "tolerance": 0.01,
+          "explanation": "$$E = 1.960 \\cdot 0.10488 \\approx 0.2056\\text{ s}$$"
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 95% para la diferencia de medias poblacionales $\\mu_2 - \\mu_1$ en segundos.",
+          "correctValue": 0.6056,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = 0.4 + 0.2056 = 0.6056\\text{ s}$$"
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Monitoreo de temperatura media de CPU",
+      "context": "Bajo una prueba de estrés del procesador, se mide la temperatura en $n = 15$ ocasiones independientes, dando una media muestral de $\\bar{x} = 72^\\circ\\text{C}$ y cuasidesviación típica $s_{n-1} = 3^\\circ\\text{C}$. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcule el error estándar de la media en grados centígrados.",
+          "correctValue": 0.7746,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{s_{n-1}}{\\sqrt{n}} = \\frac{3}{\\sqrt{15}} \\approx 0.7746^\\circ\\text{C}$$"
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Determine el valor crítico de la t de Student $t_{0.005, 14}$ para un intervalo al 99% de confianza.",
+          "correctValue": 2.9768,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.005, 14} = 2.9768$$"
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ al 99% de confianza.",
+          "correctValue": 2.3059,
+          "tolerance": 0.01,
+          "explanation": "$$E = t_{0.005, 14} \\cdot \\text{Error Estándar} = 2.9768 \\cdot 0.7746 \\approx 2.3058^\\circ\\text{C}$$"
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo al 99% de confianza para la temperatura media poblacional.",
+          "correctValue": 74.3059,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = 72.0 + 2.3058 = 74.3058^\\circ\\text{C}$$"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Tasa de éxito de peticiones HTTP en servidores web",
+      "context": "Un servidor Apache de producción recibe $n = 1200$ peticiones web, de las cuales 1140 devuelven un código de respuesta HTTP 200 (éxito).",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Determine la proporción muestral $\\hat{p}$ de éxitos.",
+          "correctValue": 0.95,
+          "tolerance": 0.001,
+          "explanation": "$$\\hat{p} = \\frac{1140}{1200} = 0.95$$"
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado para la estimación de la proporción.",
+          "correctValue": 0.0063,
+          "tolerance": 0.0005,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} = \\sqrt{\\frac{0.95 \\cdot 0.05}{1200}} \\approx 0.006292$$"
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ para un 95% de confianza ($z_{0.025} = 1.960$).",
+          "correctValue": 0.0123,
+          "tolerance": 0.001,
+          "explanation": "$$E = 1.960 \\cdot 0.006292 \\approx 0.01233$$"
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Determine el límite inferior del intervalo de confianza al 95% para la proporción poblacional de peticiones exitosas.",
+          "correctValue": 0.9377,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Inferior} = \\hat{p} - E = 0.95 - 0.01233 \\approx 0.9377$$"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Intervalo de la variabilidad de peticiones concurrentes",
+      "context": "Se monitorizan $n = 8$ servidores independientes del mismo tipo bajo carga máxima. Registran una cuasivarianza de peticiones concurrentes de $s_{n-1}^2 = 16$. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Determine el límite inferior del intervalo de confianza al 90% para la varianza $\\sigma^2$ (use cuantil Chi-cuadrado superior $\\chi^2_{0.05, 7} = 14.0671$).",
+          "correctValue": 7.9618,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior Varianza} = \\frac{7 \\cdot 16}{14.0671} \\approx 7.9619$$"
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Determine el límite superior del intervalo de confianza al 90% para la varianza $\\sigma^2$ (use cuantil Chi-cuadrado inferior $\\chi^2_{0.95, 7} = 2.1673$).",
+          "correctValue": 51.6772,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior Varianza} = \\frac{7 \\cdot 16}{2.1673} \\approx 51.6843$$"
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcule el límite inferior del intervalo al 90% para la desviación típica poblacional $\\sigma$.",
+          "correctValue": 2.8217,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior Desviación} = \\sqrt{7.9619} \\approx 2.8217$$"
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcule el límite superior del intervalo al 90% para la desviación típica poblacional $\\sigma$.",
+          "correctValue": 7.1887,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior Desviación} = \\sqrt{51.6843} \\approx 7.1892$$"
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Tiempo de respuesta de un servidor de correo (varianza poblacional conocida)",
+      "context": "Se mide la latencia de respuesta de un servidor de correo corporativo mediante una muestra de $n = 25$ peticiones. La media muestral obtenida es $\\bar{x} = 250$ ms. Historias de red confirman que la varianza de la población es $\\sigma^2 = 400\\text{ ms}^2$. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Determine la desviación estándar de la media (error estándar) en ms.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{\\sigma}{\\sqrt{n}} = \\frac{\\sqrt{400}}{\\sqrt{25}} = \\frac{20}{5} = 4.0\\text{ ms}$$"
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Obtenga el cuantil normal estándar $z_{0.005}$ al 99% de confianza.",
+          "correctValue": 2.5758,
+          "tolerance": 0.005,
+          "explanation": "$$z_{0.005} \\approx 2.5758$$"
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ en ms para la estimación de la media.",
+          "correctValue": 10.3033,
+          "tolerance": 0.01,
+          "explanation": "$$E = z_{0.005} \\cdot \\text{Error Estándar} = 2.5758 \\cdot 4 = 10.3033\\text{ ms}$$"
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo al 99% de confianza para el tiempo medio real de respuesta en ms.",
+          "correctValue": 239.6967,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\bar{x} - E = 250 - 10.3033 \\approx 239.6967\\text{ ms}$$"
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Comparación de tiempos de procesamiento de dos algoritmos de encriptación",
+      "context": "Se mide la latencia de cifrado (en ms) de dos algoritmos independientes bajo cargas idénticas:\\nAlgoritmo X: $n_1 = 12$, $\\bar{x}_1 = 4.2$ ms, $s_1 = 0.5$ ms.\\nAlgoritmo Y: $n_2 = 12$, $\\bar{x}_2 = 4.8$ ms, $s_2 = 0.6$ ms.\\nVarianzas poblacionales desconocidas pero asumidas iguales. Poblaciones normales.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Determine los grados de libertad globales para calcular el intervalo.",
+          "correctValue": 22.0,
+          "tolerance": 0.0,
+          "explanation": "$$\\text{d.f.} = n_1 + n_2 - 2 = 12 + 12 - 2 = 22$$"
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcule la cuasivarianza ponderada común $s_p^2$ en $\\text{ms}^2$.",
+          "correctValue": 0.305,
+          "tolerance": 0.001,
+          "explanation": "$$s_p^2 = \\frac{11(0.25) + 11(0.36)}{22} = 0.305\\text{ ms}^2$$"
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcule el error estándar estimado para la diferencia de medias.",
+          "correctValue": 0.2255,
+          "tolerance": 0.005,
+          "explanation": "$$\\text{Error Estándar} = s_p \\sqrt{\\frac{1}{n_1} + \\frac{1}{n_2}} = \\sqrt{0.305 \\cdot \\left(\\frac{1}{12} + \\frac{1}{12}\\right)} \\approx 0.22546\\text{ ms}$$"
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo al 95% para la diferencia de medias $\\mu_2 - \\mu_1$ en ms (use $t_{0.025, 22} = 2.0739$).",
+          "correctValue": 0.1324,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = (\\bar{x}_2 - \\bar{x}_1) - 2.0739 \\cdot \\text{Error Estándar} = (4.8 - 4.2) - 2.0739 \\cdot 0.22546 \\approx 0.1323\\text{ ms}$$"
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Comparación de variabilidad en dos buses de datos",
+      "context": "Se mide la variación en la velocidad de transmisión mediante dos tecnologías de almacenamiento independientes:\\nBus PCIe (M.2): $n_1 = 9$, $s_1^2 = 0.08\\text{ GB/s}^2$.\\nBus SATA: $n_2 = 11$, $s_2^2 = 0.02\\text{ GB/s}^2$.\\nSe asume normalidad de las velocidades.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Determine la estimación puntual del cociente de varianzas $s_1^2 / s_2^2$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "$$\\text{Cociente muestral} = \\frac{0.08}{0.02} = 4.0$$"
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Obtenga el cuantil superior de la F de Snedecor $F_{0.05, 8, 10}$ al 90% de confianza.",
+          "correctValue": 3.0717,
+          "tolerance": 0.01,
+          "explanation": "$$F_{0.05, 8, 10} = 3.0717$$"
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Obtenga el cuantil inferior de la F de Snedecor $F_{0.95, 8, 10}$ al 90% de confianza.",
+          "correctValue": 0.3072,
+          "tolerance": 0.01,
+          "explanation": "$$F_{0.95, 8, 10} = 0.3072$$"
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo al 90% de confianza para el cociente de varianzas poblacionales $\\sigma_1^2 / \\sigma_2^2$.",
+          "correctValue": 13.0208,
+          "tolerance": 0.05,
+          "explanation": "$$\\text{Límite Superior} = \\frac{s_1^2/s_2^2}{F_{0.95, 8, 10}} = \\frac{4.0}{0.3072} \\approx 13.0208$$"
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Tasa de rebote en un sitio de comercio electrónico",
+      "context": "Se monitorizan $n = 1500$ sesiones aleatorias de comercio electrónico durante un fin de semana y se registra que 300 sesiones se clasificaron como rebotes.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Determine la proporción muestral de rebotes $\\hat{p}$.",
+          "correctValue": 0.2,
+          "tolerance": 0.01,
+          "explanation": "$$\\hat{p} = \\frac{300}{1500} = 0.20$$"
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado para la proporción muestral.",
+          "correctValue": 0.0103,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} = \\sqrt{\\frac{0.20 \\cdot 0.80}{1500}} \\approx 0.010328$$"
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ con un nivel de confianza del 95% ($z_{0.025} = 1.960$).",
+          "correctValue": 0.0202,
+          "tolerance": 0.001,
+          "explanation": "$$E = 1.960 \\cdot 0.010328 \\approx 0.02024$$"
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo al 95% de confianza para la proporción real de rebotes en la web.",
+          "correctValue": 0.2202,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Superior} = 0.20 + 0.02024 \\approx 0.2202$$"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Latencia en colas de mensajes RabbitMQ",
+      "context": "Un sistema de procesamiento asíncrono registra la latencia de mensajes en cola. Muestra aleatoria de $n = 30$ mensajes: $\\bar{x} = 15$ ms y cuasidesviación típica $s_{n-1} = 2.5$ ms. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcule el error estándar de la media en milisegundos.",
+          "correctValue": 0.4564,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Error Estándar} = \\frac{s_{n-1}}{\\sqrt{n}} = \\frac{2.5}{\\sqrt{30}} \\approx 0.4564\\text{ ms}$$"
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Determine el valor crítico de la t de Student $t_{0.025, 29}$ para una confianza del 95%.",
+          "correctValue": 2.0452,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 29} = 2.0452$$"
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ al 95% de confianza en ms.",
+          "correctValue": 0.9335,
+          "tolerance": 0.01,
+          "explanation": "$$E = t_{0.025, 29} \\cdot \\text{Error Estándar} = 2.0452 \\cdot 0.4564 \\approx 0.9335\\text{ ms}$$"
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Determine el límite inferior del intervalo de confianza al 95% para la latencia media real en ms.",
+          "correctValue": 14.0665,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = 15 - 0.9335 = 14.0665\\text{ ms}$$"
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Planificación del tamaño muestral para estimar latencia de red",
+      "context": "Un administrador desea estimar el tiempo medio de tránsito de datos con un error de precisión máximo admisible de $E = 2$ ms y una confianza del 99% bilateral ($z_{0.005} = 2.57583$). Se asume una desviación típica poblacional histórica de $\\sigma = 10$ ms.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Establece el margen de error máximo tolerable ($E$) en ms.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "$$E = 2.0\\text{ ms}$$"
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Obtenga el cuantil normal estándar $z_{0.005}$ requerido para el 99% de confianza.",
+          "correctValue": 2.5758,
+          "tolerance": 0.005,
+          "explanation": "$$z_{0.005} \\approx 2.5758$$"
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcule el tamaño de la muestra mínimo teórico exacto (con decimales).",
+          "correctValue": 165.8725,
+          "tolerance": 0.1,
+          "explanation": "$$n = \\left(\\frac{z_{0.005} \\cdot \\sigma}{E}\\right)^2 = \\left(\\frac{2.57583 \\cdot 10}{2}\\right)^2 \\approx 165.87$$"
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Determine el tamaño muestral mínimo como número entero (redondeo hacia arriba).",
+          "correctValue": 166.0,
+          "tolerance": 0.0,
+          "explanation": "$$n = \\lceil 165.87 \\rceil = 166$$"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Uso medio de CPU por hilo de procesamiento",
+      "context": "Se monitoriza el porcentaje de uso de un hilo de la CPU en 10 mediciones independientes: $\\{45, 52, 48, 50, 47, 53, 49, 51, 46, 50\\}$. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcule la media muestral $\\bar{x}$ del porcentaje de uso de CPU.",
+          "correctValue": 49.1,
+          "tolerance": 0.01,
+          "explanation": "$$\\bar{x} = \\frac{\\sum x_i}{10} = 49.1\\%$$"
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcule la cuasidesviación típica muestral $s_{n-1}$ del uso de CPU.",
+          "correctValue": 2.6854,
+          "tolerance": 0.005,
+          "explanation": "$$s_{n-1} = \\sqrt{\\frac{1}{9} \\sum (x_i - \\bar{x})^2} \\approx 2.6854\\%$$"
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Determine el límite inferior del intervalo de confianza al 95% para el consumo medio poblacional (use $t_{0.025, 9} = 2.2622$).",
+          "correctValue": 47.179,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\bar{x} - t_{0.025, 9} \\frac{s_{n-1}}{\\sqrt{10}} = 49.1 - 2.2622 \\frac{2.6854}{\\sqrt{10}} \\approx 47.1792\\%$$"
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 95% para el consumo medio poblacional.",
+          "correctValue": 51.021,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = \\bar{x} + t_{0.025, 9} \\frac{s_{n-1}}{\\sqrt{10}} = 49.1 + 1.9208 \\approx 51.0208\\%$$"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Comparación de dispersiones entre bases de datos NoSQL",
+      "context": "Se mide la variabilidad del tiempo de ejecución en segundos para dos bases de datos NoSQL independientes:\\nCassandra: $n_1 = 16$, $s_1^2 = 0.04\\text{ s}^2$.\\nMongoDB: $n_2 = 16$, $s_2^2 = 0.01\\text{ s}^2$.\\nSe asume normalidad.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "Determine el cociente de las cuasivarianzas muestrales $s_1^2 / s_2^2$.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "$$\\text{Cociente} = \\frac{0.04}{0.01} = 4.0$$"
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Obtenga el cuantil superior de la F de Snedecor $F_{0.025, 15, 15}$ al 95% de confianza.",
+          "correctValue": 2.8621,
+          "tolerance": 0.01,
+          "explanation": "$$F_{0.025, 15, 15} = 2.8621$$"
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Obtenga el cuantil inferior de la F de Snedecor $F_{0.975, 15, 15}$ al 95% de confianza.",
+          "correctValue": 0.3494,
+          "tolerance": 0.01,
+          "explanation": "$$F_{0.975, 15, 15} \\approx 0.3494$$"
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Calcule el límite inferior del intervalo de confianza al 95% para el cociente de varianzas poblacionales $\\sigma_1^2 / \\sigma_2^2$.",
+          "correctValue": 1.3976,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\frac{s_1^2/s_2^2}{F_{0.025, 15, 15}} = \\frac{4.0}{2.8621} \\approx 1.3976$$"
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Diferencia de proporciones de registro entre campañas de marketing",
+      "context": "Se comparan dos campañas de registro:\\nCampaña A: $n_1 = 1000$ visitas, $x_1 = 150$ usuarios registrados (proporción $\\hat{p}_A = 0.15$).\\nCampaña B: $n_2 = 1200$ visitas, $x_2 = 216$ usuarios registrados.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcule la proporción muestral de registros de la Campaña B ($\\hat{p}_B$).",
+          "correctValue": 0.18,
+          "tolerance": 0.01,
+          "explanation": "$$\\hat{p}_B = \\frac{216}{1200} = 0.18$$"
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcule el error estándar estimado para la diferencia de proporciones muestrales.",
+          "correctValue": 0.0158,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Error Estándar} = \\sqrt{\\frac{0.15\\cdot 0.85}{1000} + \\frac{0.18\\cdot 0.82}{1200}} \\approx 0.015827$$"
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Calcule el margen de error $E$ con un nivel de confianza del 90% ($z_{0.05} = 1.6449$).",
+          "correctValue": 0.026,
+          "tolerance": 0.001,
+          "explanation": "$$E = 1.6449 \\cdot 0.015827 \\approx 0.02603$$"
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Determine el límite superior del intervalo de confianza al 90% para la diferencia de proporciones $p_B - p_A$.",
+          "correctValue": 0.056,
+          "tolerance": 0.001,
+          "explanation": "$$\\text{Límite Superior} = (\\hat{p}_B - \\hat{p}_A) + E = (0.18 - 0.15) + 0.02603 \\approx 0.0560$$"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Variabilidad del tamaño de archivos subidos a la nube",
+      "context": "Se mide el tamaño en megabytes (MB) de los archivos subidos en $n = 25$ transferencias. Se calcula una cuasadesviación típica muestral de $s_{n-1} = 1.2$ MB. Se asume normalidad.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcule la cuasivarianza muestral $s_{n-1}^2$ en $\\text{MB}^2$.",
+          "correctValue": 1.44,
+          "tolerance": 0.0,
+          "explanation": "$$s_{n-1}^2 = 1.2^2 = 1.44\\text{ MB}^2$$"
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Obtenga el cuantil Chi-cuadrado superior $\\chi^2_{0.025, 24}$ al 95% de confianza.",
+          "correctValue": 39.3641,
+          "tolerance": 0.01,
+          "explanation": "$$\\chi^2_{0.025, 24} = 39.3641$$"
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcule el límite inferior del intervalo de confianza al 95% para la varianza poblacional $\\sigma^2$ en $\\text{MB}^2$.",
+          "correctValue": 0.878,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Inferior} = \\frac{24 \\cdot 1.44}{39.3641} \\approx 0.8779\\text{ MB}^2$$"
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcule el límite superior del intervalo de confianza al 95% para la varianza poblacional $\\sigma^2$ en $\\text{MB}^2$ (use cuantil $\\chi^2_{0.975, 24} = 12.4012$).",
+          "correctValue": 2.7868,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = \\frac{24 \\cdot 1.44}{12.4012} \\approx 2.7869\\text{ MB}^2$$"
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Tiempos de respuesta de servidores réplica en paralelo (Muestras Pareadas)",
+      "context": "Se envían 8 consultas idénticas a dos servidores réplicas (Réplica A y Réplica B) bajo carga paralela. Los tiempos de respuesta en segundos son:\\nA: $\\{1.2, 1.5, 1.8, 1.4, 1.6, 1.7, 1.3, 1.5\\}$\\nB: $\\{1.1, 1.4, 1.6, 1.3, 1.5, 1.5, 1.2, 1.4\\}$. Se analiza la diferencia $D_i = A_i - B_i$.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcule la media muestral de las diferencias de tiempos $\\bar{d}$ en segundos.",
+          "correctValue": 0.125,
+          "tolerance": 0.005,
+          "explanation": "$$\\bar{d} = \\frac{0.1\\cdot 6 + 0.2\\cdot 2}{8} = \\frac{0.6+0.4}{8} = 0.125\\text{ s}$$"
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcule la cuasadesviación típica de las diferencias $s_d$ en segundos.",
+          "correctValue": 0.0463,
+          "tolerance": 0.005,
+          "explanation": "$$s_d = \\sqrt{\\frac{1}{7} \\sum (d_i - \\bar{d})^2} \\approx 0.046291\\text{ s}$$"
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Obtenga el cuantil t de Student $t_{0.025, 7}$ para el 95% de confianza.",
+          "correctValue": 2.3646,
+          "tolerance": 0.005,
+          "explanation": "$$t_{0.025, 7} = 2.3646$$"
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcule el límite superior del intervalo al 95% de confianza para la diferencia media de tiempos $\\mu_D$ en segundos.",
+          "correctValue": 0.1637,
+          "tolerance": 0.01,
+          "explanation": "$$\\text{Límite Superior} = \\bar{d} + t_{0.025, 7} \\frac{s_d}{\\sqrt{8}} = 0.125 + 2.3646 \\frac{0.046291}{\\sqrt{8}} \\approx 0.1637\\text{ s}$$"
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Nivel de confianza de un intervalo",
+      "tex": "$$P(L_1 \\le \\theta \\le L_2) = 1 - \\alpha$$"
+    },
+    {
+      "name": "Intervalo para la media (varianza conocida)",
+      "tex": "$$I.C._{1-\\alpha}(\\mu) = \\left[ \\bar{X} - z_{\\alpha/2} \\frac{\\sigma}{\\sqrt{n}}, \\, \\bar{X} + z_{\\alpha/2} \\frac{\\sigma}{\\sqrt{n}} \\right]$$"
+    },
+    {
+      "name": "Intervalo para la media (varianza desconocida)",
+      "tex": "$$I.C._{1-\\alpha}(\\mu) = \\left[ \\bar{X} - t_{\\alpha/2, n-1} \\frac{S_{n-1}}{\\sqrt{n}}, \\, \\bar{X} + t_{\\alpha/2, n-1} \\frac{S_{n-1}}{\\sqrt{n}} \\right]$$"
+    },
+    {
+      "name": "Intervalo para la varianza poblacional",
+      "tex": "$$I.C._{1-\\alpha}(\\sigma^2) = \\left[ \\frac{(n-1)S_{n-1}^2}{\\chi^2_{\\alpha/2, n-1}}, \\, \\frac{(n-1)S_{n-1}^2}{\\chi^2_{1-\\alpha/2, n-1}} \\right]$$"
+    },
+    {
+      "name": "Intervalo para la proporción (muestras grandes)",
+      "tex": "$$I.C._{1-\\alpha}(p) = \\left[ \\hat{p} - z_{\\alpha/2} \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}, \\, \\hat{p} + z_{\\alpha/2} \\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}} \\right]$$"
+    },
+    {
+      "name": "Margen de error para estimar la media (varianza conocida)",
+      "tex": "$$E = z_{\\alpha/2} \\frac{\\sigma}{\\sqrt{n}}$$"
+    },
+    {
+      "name": "Tamaño muestral mínimo para la media",
+      "tex": "$$n = \\left( \\frac{z_{\\alpha/2} \\cdot \\sigma}{E} \\right)^2$$"
+    },
+    {
+      "name": "Cuasivarianza muestral",
+      "tex": "$$S_{n-1}^2 = \\frac{1}{n-1} \\sum_{i=1}^n (X_i - \\bar{X})^2$$"
+    }
+  ]
+}

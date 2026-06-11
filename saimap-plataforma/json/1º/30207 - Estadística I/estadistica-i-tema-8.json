@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué representa la población en la inferencia estadística?",
+      "options": [
+        "El conjunto total de elementos bajo estudio cuya distribución depende de parámetros desconocidos.",
+        "El subconjunto de elementos seleccionados aleatoriamente para realizar mediciones.",
+        "Cualquier estadístico calculado a partir de una muestra aleatoria simple."
+      ],
+      "correct": 0,
+      "hint": "Recuerde la diferencia entre el todo (población) y la parte (muestra).",
+      "explanation": "La población es el conjunto completo de elementos sobre los que se desea obtener conclusiones, y su comportamiento se modela mediante distribuciones que contienen parámetros desconocidos $\\theta$."
+    },
+    {
+      "q": "¿Qué es una Muestra Aleatoria Simple (M.A.S.) de tamaño $n$?",
+      "options": [
+        "Un conjunto de $n$ variables aleatorias dependientes pero con idéntica distribución.",
+        "Un conjunto de $n$ variables aleatorias independientes e idénticamente distribuidas (i.i.d.).",
+        "Cualquier subconjunto de datos seleccionados a criterio del investigador."
+      ],
+      "correct": 1,
+      "hint": "Busque los dos pilares fundamentales: independencia y distribución idéntica.",
+      "explanation": "Una M.A.S. requiere que todas las variables de la muestra sean independientes entre sí y compartan exactamente la misma distribución de probabilidad (i.i.d.) que la población original."
+    },
+    {
+      "q": "Un estadístico es en sí mismo:",
+      "options": [
+        "Un parámetro poblacional de valor constante y conocido.",
+        "Una variable aleatoria con su propia distribución, llamada distribución muestral.",
+        "Un valor numérico fijo que nunca varía entre distintas muestras."
+      ],
+      "correct": 1,
+      "hint": "Piense en qué ocurre si tomamos diferentes muestras y calculamos el estadístico en cada una.",
+      "explanation": "Al ser una función exclusiva de las observaciones muestrales (que son variables aleatorias), cualquier estadístico es también una variable aleatoria y posee su propia distribución de probabilidad muestral."
+    },
+    {
+      "q": "La esperanza de la media muestral ($\\bar{X}$) es siempre:",
+      "options": [
+        "Igual a la media poblacional $\\mu$.",
+        "Igual a la varianza poblacional $\\sigma^2$.",
+        "Igual a $\\mu / n$."
+      ],
+      "correct": 0,
+      "hint": "Aplique la linealidad de la esperanza a la fórmula $\\bar{X} = \\frac{1}{n} \\sum X_i$.",
+      "explanation": "$E[\\bar{X}] = E[\\frac{1}{n} \\sum_{i=1}^n X_i] = \\frac{1}{n} \\sum_{i=1}^n E[X_i] = \\frac{1}{n} (n \\mu) = \\mu$. Por tanto, la media muestral es un estimador insesgado de la media poblacional."
+    },
+    {
+      "q": "¿Cuál es la varianza de la media muestral ($\\bar{X}$) obtenida de una M.A.S. de tamaño $n$?",
+      "options": [
+        "$\\sigma^2$",
+        "$\\sigma^2 / n$",
+        "$\\sigma^2 / \\sqrt{n}$"
+      ],
+      "correct": 1,
+      "hint": "Recuerde que al promediar datos independientes la variabilidad disminuye de forma proporcional al tamaño de la muestra.",
+      "explanation": "Dado que las variables son independientes, $Var(\\bar{X}) = Var(\\frac{1}{n} \\sum X_i) = \\frac{1}{n^2} \\sum Var(X_i) = \\frac{n\\sigma^2}{n^2} = \\frac{\\sigma^2}{n}$."
+    },
+    {
+      "q": "¿Por qué la varianza muestral $S^2$ (dividida por $n$) es un estimador sesgado de la varianza poblacional $\\sigma^2$?",
+      "options": [
+        "Porque su esperanza matemática es menor que $\\sigma^2$, concretamente $E[S^2] = \\frac{n-1}{n}\\sigma^2$.",
+        "Porque su esperanza matemática es mayor que $\\sigma^2$, concretamente $E[S^2] = \\frac{n+1}{n}\\sigma^2$.",
+        "Porque la varianza muestral no depende de los datos muestrales."
+      ],
+      "correct": 0,
+      "hint": "Al usar la media muestral en lugar de la media poblacional para calcular las desviaciones, se pierde un grado de libertad y se subestima la dispersión.",
+      "explanation": "La varianza muestral $S^2$ tiende a subestimar la varianza poblacional debido a que las desviaciones se miden respecto a la media muestral $\\bar{X}$ (que se adapta a la muestra) y no a la media real $\\mu$. Su esperanza es $E[S^2] = \\frac{n-1}{n}\\sigma^2$."
+    },
+    {
+      "q": "¿Qué expresión define a la cuasivarianza muestral ($S_{n-1}^2$ o varianza corregida)?",
+      "options": [
+        "$\\frac{1}{n} \\sum_{i=1}^n (X_i - \\bar{X})^2$",
+        "$\\frac{1}{n-1} \\sum_{i=1}^n (X_i - \\bar{X})^2$",
+        "$\\frac{1}{n-1} \\sum_{i=1}^n (X_i - \\mu)^2$"
+      ],
+      "correct": 1,
+      "hint": "Es la versión corregida que divide por $n-1$ para conseguir la propiedad de insesgadez.",
+      "explanation": "La cuasivarianza muestral se define dividiendo la suma de cuadrados de desviaciones entre $n-1$ en lugar de $n$. Esto elimina el sesgo al estimar la varianza poblacional $\\sigma^2$."
+    },
+    {
+      "q": "¿Qué se entiende por sesgo de un estimador $\\hat{\\theta}$?",
+      "options": [
+        "La diferencia entre la esperanza del estimador y el verdadero valor del parámetro: $E[\\hat{\\theta}] - \\theta$.",
+        "La diferencia entre la varianza del estimador y el parámetro real.",
+        "La variabilidad del estimador cuando el tamaño muestral tiende a infinito."
+      ],
+      "correct": 0,
+      "hint": "El sesgo mide cuánto se desvía en promedio el estimador respecto al valor real del parámetro.",
+      "explanation": "El sesgo es $E[\\hat{\\theta}] - \\theta$. Si es cero, el estimador es insesgado, lo que significa que en promedio acierta con el parámetro real."
+    },
+    {
+      "q": "Un estimador $\\hat{\\theta}$ es insesgado si y solo si:",
+      "options": [
+        "Su varianza es igual a cero para cualquier tamaño muestral.",
+        "Su esperanza matemática coincide con el verdadero valor del parámetro, $E[\\hat{\\theta}] = \\theta$.",
+        "Su valor es constante e independiente de la muestra aleatoria seleccionada."
+      ],
+      "correct": 1,
+      "hint": "Insesgado significa 'sin sesgo sistemático' en promedio.",
+      "explanation": "Un estimador se considera insesgado o centrado si su distribución muestral tiene como centro (esperanza matemática) el parámetro poblacional que se desea estimar, es decir, $E[\\hat{\\theta}] = \\theta$."
+    },
+    {
+      "q": "Si tenemos dos estimadores insesgados, $\\hat{\\theta}_1$ y $\\hat{\\theta}_2$, de un mismo parámetro $\\theta$, ¿cuál se considera más eficiente?",
+      "options": [
+        "Aquel que presenta una mayor varianza muestral.",
+        "Aquel que presenta una menor varianza muestral.",
+        "Ambos son igualmente eficientes porque son insesgados."
+      ],
+      "correct": 1,
+      "hint": "La eficiencia se relaciona con la precisión del estimador (menor variabilidad).",
+      "explanation": "Entre estimadores insesgados, el más eficiente es el que tiene menor varianza ($Var(\\hat{\\theta}_1) < Var(\\hat{\\theta}_2)$), lo que implica que sus estimaciones oscilan menos alrededor del valor real."
+    },
+    {
+      "q": "¿Qué significa que un estimador sea consistente?",
+      "options": [
+        "Que converge en probabilidad al verdadero valor del parámetro $\\theta$ a medida que el tamaño de la muestra tiende a infinito ($n \\to \\infty$).",
+        "Que su sesgo permanece constante y diferente de cero sin importar el tamaño de la muestra.",
+        "Que su varianza aumenta de manera proporcional al tamaño de la muestra."
+      ],
+      "correct": 0,
+      "hint": "La consistencia es una propiedad asintótica: más datos implican mayor certeza de estar en el valor correcto.",
+      "explanation": "Un estimador es consistente si al crecer indefinidamente el tamaño muestral ($n \\to \\infty$), el estimador converge en probabilidad al parámetro real $\\theta$. Es decir, la probabilidad de cometer un error mayor que cualquier $\\epsilon$ tiende a cero."
+    },
+    {
+      "q": "¿Cuál es la idea fundamental detrás del Método de Máxima Verosimilitud (MLE)?",
+      "options": [
+        "Encontrar el estimador que minimice la varianza muestral de forma absoluta.",
+        "Encontrar el valor del parámetro $\\theta$ que maximiza la probabilidad conjunta (o densidad) de haber observado la muestra concreta.",
+        "Calcular un estimador que siempre coincida con la cuasivarianza de los datos."
+      ],
+      "correct": 1,
+      "hint": "Se busca responder a la pregunta: ¿para qué valor del parámetro es más creíble haber obtenido los datos que realmente se observaron?",
+      "explanation": "El MLE selecciona como estimador el valor de $\\theta$ que maximiza la función de verosimilitud $L(\\theta)$, la cual representa la probabilidad o densidad conjunta de los datos observados bajo dicho parámetro."
+    },
+    {
+      "q": "Para una M.A.S. $x_1, x_2, \\dots, x_n$ de una variable con función de densidad $f(x; \\theta)$, la función de verosimilitud $L(\\theta)$ es:",
+      "options": [
+        "La suma de las funciones de densidad: $\\sum_{i=1}^n f(x_i; \\theta)$.",
+        "El producto de las funciones de densidad individuales: $\\prod_{i=1}^n f(x_i; \\theta)$.",
+        "El cociente entre la media muestral y la densidad poblacional."
+      ],
+      "correct": 1,
+      "hint": "Por la independencia de las observaciones en una M.A.S., la distribución conjunta es el producto de las distribuciones marginales.",
+      "explanation": "Dado que las variables $X_1, X_2, \\dots, X_n$ son independientes en una M.A.S., su función de probabilidad o densidad conjunta es el producto de las funciones individuales: $L(\\theta) = \\prod_{i=1}^n f(x_i; \\theta)$."
+    },
+    {
+      "q": "¿Por qué se utiliza habitualmente la función de log-verosimilitud ($\\ln L(\\theta)$) en lugar de la función de verosimilitud $L(\\theta)$ para obtener el MLE?",
+      "options": [
+        "Porque el logaritmo transforma el producto de densidades en una suma de logaritmos, facilitando el cálculo de derivadas.",
+        "Porque el logaritmo cambia la posición del máximo, permitiendo encontrar una solución diferente y más sencilla.",
+        "Porque la función de verosimilitud original siempre es negativa y el logaritmo la hace positiva."
+      ],
+      "correct": 0,
+      "hint": "Piense en las reglas de derivación de productos frente a las de sumas.",
+      "explanation": "Al ser el logaritmo neperiano una función estrictamente creciente, el máximo de $L(\\theta)$ coincide exactamente con el máximo de $\\ln L(\\theta)$. Trabajar con $\\ln L(\\theta) = \\sum \\ln f(x_i; \\theta)$ simplifica enormemente la derivación respecto a $\\theta$ al convertir productos en sumas."
+    },
+    {
+      "q": "¿Cuál es el estimador de máxima verosimilitud de la tasa $\\lambda$ en una distribución de Poisson?",
+      "options": [
+        "La cuasivarianza muestral $S_{n-1}^2$.",
+        "La media muestral $\\bar{X}$.",
+        "La recíproca de la media muestral, $1 / \\bar{X}$."
+      ],
+      "correct": 1,
+      "hint": "Se demostró analíticamente en el Ejercicio 1 del manual del Tema 8.",
+      "explanation": "Al derivar la log-verosimilitud de una distribución de Poisson e igualar a cero, se obtiene de forma analítica que $\\hat{\\lambda}_{\\text{MLE}} = \\bar{X}$ (la media muestral)."
+    },
+    {
+      "q": "¿Cuál es el estimador de máxima verosimilitud de la tasa $\\lambda$ en una distribución Exponencial?",
+      "options": [
+        "La media muestral $\\bar{X}$.",
+        "El inverso de la media muestral, $1 / \\bar{X}$.",
+        "La cuasidesviación típica."
+      ],
+      "correct": 1,
+      "hint": "Recuerde que en la exponencial, la media poblacional es $E[X] = 1/\\lambda$.",
+      "explanation": "La función de densidad de la exponencial es $f(x) = \\lambda e^{-\\lambda x}$. Maximizando su log-verosimilitud se obtiene $\\hat{\\lambda}_{\\text{MLE}} = 1 / \\bar{X}$, lo cual coincide con la relación teórica entre la media y la tasa."
+    },
+    {
+      "q": "Para una población Normal con media $\\mu$ y varianza $\\sigma^2$ desconocidas, el MLE del parámetro $\\mu$ es:",
+      "options": [
+        "La cuasivarianza muestral $S_{n-1}^2$.",
+        "La media muestral $\\bar{X}$.",
+        "La mediana de la muestra."
+      ],
+      "correct": 1,
+      "hint": "Es el estimador natural del centro de una población simétrica.",
+      "explanation": "El estimador de máxima verosimilitud de la media $\\mu$ en una distribución Normal coincide con la media muestral $\\bar{X}$."
+    },
+    {
+      "q": "Para una población Normal con varianza $\\sigma^2$ y media $\\mu$ desconocidas, el MLE de $\\sigma^2$ es:",
+      "options": [
+        "La varianza muestral $S^2$ (con divisor $n$).",
+        "La cuasivarianza muestral $S_{n-1}^2$ (con divisor $n-1$).",
+        "La desviación típica muestral $S$."
+      ],
+      "correct": 0,
+      "hint": "Aunque la cuasivarianza es insesgada, el MLE de la varianza normal resulta de la maximización directa y divide por $n$.",
+      "explanation": "El MLE de la varianza poblacional en una distribución Normal es la varianza muestral $S^2 = \\frac{1}{n} \\sum (X_i - \\bar{X})^2$. Este estimador es sesgado, demostrando que los estimadores MLE no siempre son insesgados."
+    },
+    {
+      "q": "¿Qué establece la propiedad de invariancia de los estimadores de máxima verosimilitud?",
+      "options": [
+        "Que si $\\hat{\\theta}$ es el MLE de $\\theta$, entonces para cualquier función uno a uno $g(\\theta)$, el MLE de $g(\\theta)$ es $g(\\hat{\\theta})$.",
+        "Que el estimador MLE no varía al cambiar el tamaño de la muestra.",
+        "Que la varianza del estimador no cambia al transformar la variable original."
+      ],
+      "correct": 0,
+      "hint": "Si conoce el MLE de un parámetro, puede obtener directamente el MLE de una función de ese parámetro.",
+      "explanation": "La propiedad de invariancia funcional del MLE afirma que si $\\hat{\\theta}$ maximiza la verosimilitud de $\\theta$, entonces la función $g(\\hat{\\theta})$ es el MLE del parámetro transformado $g(\\theta)$."
+    },
+    {
+      "q": "¿Cuáles son las propiedades asintóticas de los estimadores de máxima verosimilitud bajo condiciones de regularidad?",
+      "options": [
+        "Son exactamente sesgados y de varianza infinita para cualquier tamaño de muestra.",
+        "Son asintóticamente insesgados, asintóticamente normales y asintóticamente eficientes.",
+        "Son siempre inconsistentes y su distribución muestral no converge."
+      ],
+      "correct": 1,
+      "hint": "Estas propiedades describen el comportamiento excelente del MLE cuando el tamaño muestral tiende a infinito.",
+      "explanation": "Bajo condiciones generales de regularidad, los estimadores por MLE son consistentemente excelentes: cuando $n \\to \\infty$, su sesgo tiende a cero (insesgadez asintótica), su varianza alcanza la cota mínima de Cramér-Rao (eficiencia asintótica), y su distribución converge a una Normal."
+    },
+    {
+      "q": "El Error Cuadrático Medio (ECM) de un estimador $\\hat{\\theta}$ se define como:",
+      "options": [
+        "$ECM(\\hat{\\theta}) = Var(\\hat{\\theta}) - Sesgo(\\hat{\\theta})^2$",
+        "$ECM(\\hat{\\theta}) = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2$",
+        "$ECM(\\hat{\\theta}) = E[\\hat{\\theta}]^2 - Var(\\hat{\\theta})$"
+      ],
+      "correct": 1,
+      "hint": "El ECM mide tanto la dispersión del estimador (varianza) como su desviación sistemática (sesgo al cuadrado).",
+      "explanation": "El Error Cuadrático Medio se descompone en $ECM(\\hat{\\theta}) = E[(\\hat{\\theta} - \\theta)^2] = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2$. Si un estimador es insesgado, su ECM es simplemente su varianza."
+    },
+    {
+      "q": "Si el Error Cuadrático Medio (ECM) de un estimador tiende a cero cuando $n \\to \\infty$:",
+      "options": [
+        "El estimador es consistente.",
+        "El estimador es necesariamente sesgado para muestras infinitas.",
+        "El estimador es ineficiente."
+      ],
+      "correct": 0,
+      "hint": "Que el error cuadrático medio tienda a cero asegura que el estimador colapsa sobre el valor real del parámetro.",
+      "explanation": "Una condición suficiente para asegurar la consistencia de un estimador es que su ECM tienda a cero cuando el tamaño de la muestra tiende a infinito, lo que exige que tanto su varianza como su sesgo tiendan a cero."
+    },
+    {
+      "q": "¿Qué función de R calcula la media muestral de un vector numérico?",
+      "options": [
+        "`average()`",
+        "`mean()`",
+        "`meandist()`"
+      ],
+      "correct": 1,
+      "hint": "Es la función estándar de R básica para promedios aritméticos.",
+      "explanation": "La función `mean()` en R recibe un vector numérico y devuelve su media muestral."
+    },
+    {
+      "q": "En R, la función `var()` calcula:",
+      "options": [
+        "La varianza muestral dividida por $n$.",
+        "La cuasivarianza muestral (dividida por $n-1$).",
+        "La desviación típica corregida."
+      ],
+      "correct": 1,
+      "hint": "R implementa por defecto estimadores insesgados para la varianza.",
+      "explanation": "La función `var()` en R devuelve la cuasivarianza muestral, es decir, divide la suma de cuadrados de desviaciones entre $n-1$ para obtener un estimador insesgado de la varianza poblacional."
+    },
+    {
+      "q": "En R, la función `sd()` calcula:",
+      "options": [
+        "La desviación típica corregida (cuasidesviación típica), es decir, la raíz cuadrada de la cuasivarianza.",
+        "El error estándar de la media de forma directa.",
+        "La varianza muestral sesgada."
+      ],
+      "correct": 0,
+      "hint": "`sd` proviene de Standard Deviation y trabaja en consonancia con `var()`.",
+      "explanation": "La función `sd()` calcula la desviación típica muestral corregida (cuasidesviación típica). Es equivalente a realizar `sqrt(var(x))`."
+    },
+    {
+      "q": "¿Qué librería de R se utiliza comúnmente para ajustar distribuciones por Máxima Verosimilitud de forma numérica?",
+      "options": [
+        "`ggplot2`",
+        "`fitdistrplus`",
+        "`dplyr`"
+      ],
+      "correct": 1,
+      "hint": "Esta librería cuenta con la función `fitdist()`.",
+      "explanation": "La librería `fitdistrplus` es una de las más utilizadas en R para estimar parámetros de distribuciones poblacionales a partir de datos empíricos empleando métodos como el MLE."
+    },
+    {
+      "q": "La proporción muestral $\\hat{p} = \\frac{1}{n} \\sum X_i$ (donde $X_i \\in \\{0, 1\\}$) es un estimador:",
+      "options": [
+        "Insesgado de la proporción poblacional $p$.",
+        "Sesgado de la proporción poblacional $p$ con sesgo de $p/n$.",
+        "Consistente pero sesgado."
+      ],
+      "correct": 0,
+      "hint": "Calcule la esperanza de $\\hat{p}$ sabiendo que $E[X_i] = p$.",
+      "explanation": "$E[\\hat{p}] = E[\\frac{1}{n} \\sum X_i] = \\frac{1}{n} \\sum E[X_i] = \\frac{1}{n} (n p) = p$. Por lo tanto, es un estimador insesgado de $p$."
+    },
+    {
+      "q": "¿Cuál es la varianza de la proporción muestral $\\hat{p}$ de una M.A.S. de tamaño $n$?",
+      "options": [
+        "$p(1-p)$",
+        "$\\frac{p(1-p)}{n}$",
+        "$\\sqrt{\\frac{p(1-p)}{n}}$"
+      ],
+      "correct": 1,
+      "hint": "Las variables de Bernoulli $X_i$ tienen varianza $p(1-p)$. Aplique propiedades de la varianza.",
+      "explanation": "Como las $X_i$ son independientes y tienen distribución de Bernoulli de parámetro $p$ (varianza $p(1-p)$), se cumple que $Var(\\hat{p}) = Var(\\frac{1}{n} \\sum X_i) = \\frac{1}{n^2} \\sum Var(X_i) = \\frac{n p(1-p)}{n^2} = \\frac{p(1-p)}{n}$."
+    },
+    {
+      "q": "¿Qué es la distribución muestral de un estadístico?",
+      "options": [
+        "La distribución de probabilidad del estadístico generada al considerar todas las muestras posibles de tamaño $n$ de la población.",
+        "El histograma que representa los datos observados en una única muestra.",
+        "La densidad de la población de la cual se extrajo la muestra."
+      ],
+      "correct": 0,
+      "hint": "El estadístico cambia su valor de una muestra a otra, por lo que posee un comportamiento probabilístico.",
+      "explanation": "La distribución muestral es la distribución de probabilidad que tendría un estadístico si se extrajeran infinitas muestras independientes de tamaño $n$ de la población y se calculara el estadístico en cada una de ellas."
+    },
+    {
+      "q": "Un parámetro es un valor numérico que caracteriza a:",
+      "options": [
+        "La muestra extraída.",
+        "La población bajo estudio.",
+        "Cualquier estadístico consistente."
+      ],
+      "correct": 1,
+      "hint": "Los parámetros son fijos y corresponden a la población completa.",
+      "explanation": "Un parámetro es una constante numérica desconocida que describe una característica de la población (como la media $\\mu$ o la varianza $\\sigma^2$), a diferencia de los estadísticos que describen a la muestra y son aleatorios."
+    },
+    {
+      "q": "El muestreo aleatorio simple (M.A.S.) implica que las observaciones:",
+      "options": [
+        "Son dependientes entre sí pero se extraen de la misma población.",
+        "Son independientes e idénticamente distribuidas (i.i.d.).",
+        "Siguen una secuencia creciente de valores fijos."
+      ],
+      "correct": 1,
+      "hint": "i.i.d. es el acrónimo clave en M.A.S.",
+      "explanation": "Muestra Aleatoria Simple significa matemáticamente que las variables aleatorias $X_1, \\dots, X_n$ son independientes entre sí y cada una posee la misma distribución de probabilidad (idénticamente distribuidas)."
+    },
+    {
+      "q": "¿Qué ocurre con la desviación típica de la media muestral (error estándar) cuando el tamaño de la muestra quadruplica su valor ($4n$)?",
+      "options": [
+        "Se reduce a la mitad.",
+        "Se reduce a la cuarta parte.",
+        "Se duplica."
+      ],
+      "correct": 0,
+      "hint": "El error estándar es $\\sigma / \\sqrt{n}$. Calcule para $4n$.",
+      "explanation": "El error estándar de la media es $SD(\\bar{X}) = \\sigma / \\sqrt{n}$. Si el tamaño muestral pasa a ser $4n$, el nuevo error estándar es $\\sigma / \\sqrt{4n} = \\sigma / (2\\sqrt{n})$, lo que equivale a la mitad del original."
+    },
+    {
+      "q": "Si la cuasivarianza muestral es un estimador insesgado de la varianza poblacional, ¿cuál de las siguientes afirmaciones es correcta?",
+      "options": [
+        "La cuasidesviación típica muestral $S_{n-1}$ es un estimador insesgado de la desviación típica poblacional $\\sigma$.",
+        "La cuasidesviación típica muestral $S_{n-1}$ es, en general, un estimador sesgado de $\\sigma$ debido a la no linealidad de la raíz cuadrada.",
+        "La esperanza de la cuasidesviación típica es exactamente igual a la desviación típica poblacional."
+      ],
+      "correct": 1,
+      "hint": "La esperanza de una raíz cuadrada no es igual a la raíz cuadrada de la esperanza: $E[\\sqrt{Y}] \\neq \\sqrt{E[Y]}$ en general.",
+      "explanation": "Aunque $E[S_{n-1}^2] = \\sigma^2$, al tomar la raíz cuadrada (que es una función cóncava), por la desigualdad de Jensen se tiene que $E[S_{n-1}] < \\sigma$. Por tanto, la cuasidesviación típica es un estimador sesgado (subestima la desviación típica poblacional)."
+    },
+    {
+      "q": "La condición de segundo orden para garantizar que un valor crítico $\\hat{\\theta}$ es un máximo de la log-verosimilitud es:",
+      "options": [
+        "Que la segunda derivada respecto al parámetro sea estrictamente positiva: $\\frac{d^2}{d\\theta^2} \\ln L(\\theta) > 0$.",
+        "Que la segunda derivada respecto al parámetro sea estrictamente negativa: $\\frac{d^2}{d\\theta^2} \\ln L(\\theta) < 0$.",
+        "Que la segunda derivada sea igual a cero."
+      ],
+      "correct": 1,
+      "hint": "Piense en las condiciones de máximos y mínimos locales de cálculo matemático.",
+      "explanation": "Para confirmar que el punto crítico donde la primera derivada es cero corresponde a un máximo local de la función de log-verosimilitud, la segunda derivada de dicha función evaluada en el estimador debe ser negativa."
+    },
+    {
+      "q": "La cota inferior de Cramér-Rao proporciona:",
+      "options": [
+        "El valor mínimo que puede tomar el sesgo de cualquier estimador.",
+        "El límite inferior para la varianza de cualquier estimador insesgado de un parámetro.",
+        "El tamaño de muestra mínimo para asegurar consistencia."
+      ],
+      "correct": 1,
+      "hint": "Es un resultado fundamental sobre el límite de precisión de estimadores insesgados.",
+      "explanation": "La cota de Cramér-Rao establece teóricamente la varianza mínima que puede alcanzar un estimador insesgado. Si un estimador alcanza esta cota, es de mínima varianza y eficiente."
+    },
+    {
+      "q": "¿Qué relación existe entre estimador y estimación?",
+      "options": [
+        "Son sinónimos conceptuales sin ninguna diferencia práctica.",
+        "El estimador es una regla matemática (variable aleatoria) y la estimación es el valor numérico concreto obtenido para una muestra dada.",
+        "El estimador es un valor constante de la población y la estimación es una función aleatoria."
+      ],
+      "correct": 1,
+      "hint": "Uno es la función genérica y el otro es el resultado numérico con datos específicos.",
+      "explanation": "El estimador es la variable aleatoria (ej. $\\bar{X}$), definida por una fórmula matemática. La estimación es el valor numérico concreto (ej. $1.44$) obtenido al aplicar dicha fórmula a unos datos particulares."
+    },
+    {
+      "q": "¿Qué mide el sesgo de un estimador?",
+      "options": [
+        "La desviación sistemática esperada entre el estimador y el parámetro real.",
+        "La variabilidad aleatoria del estimador de muestra a muestra.",
+        "El error máximo que se puede cometer con una probabilidad dada."
+      ],
+      "correct": 0,
+      "hint": "El sesgo evalúa si el estimador tiende a sobreestimar o subestimar el parámetro de forma sistemática.",
+      "explanation": "El sesgo mide la desviación sistemática. Un sesgo de cero indica que no hay tendencia sistemática a sobreestimar o subestimar el parámetro."
+    },
+    {
+      "q": "Si aumentamos el tamaño de la muestra de forma indefinida, un estimador consistente se caracteriza por:",
+      "options": [
+        "Tener una varianza constante pero un sesgo que se reduce a cero.",
+        "Concentrar toda su distribución de probabilidad en torno al verdadero valor del parámetro poblacional.",
+        "Tener un error cuadrático medio que tiende a infinito."
+      ],
+      "correct": 1,
+      "hint": "Piense en la convergencia en probabilidad al parámetro real.",
+      "explanation": "La consistencia significa que a medida que $n \\to \\infty$, la distribución del estimador colapsa (se concentra) con probabilidad 1 sobre el parámetro poblacional real $\\theta$."
+    },
+    {
+      "q": "¿Cuál es la varianza muestral sesgada de una muestra donde todos los valores son idénticos?",
+      "options": [
+        "Cero.",
+        "Infinita.",
+        "No se puede calcular."
+      ],
+      "correct": 0,
+      "hint": "Si todos los valores son iguales, no existe dispersión respecto a la media.",
+      "explanation": "Si todas las observaciones son iguales, la media muestral coincide con dichos valores, por lo que todas las desviaciones $(x_i - \\bar{x})$ son cero, resultando en una varianza muestral de cero."
+    },
+    {
+      "q": "El estimador de máxima verosimilitud de la probabilidad de éxito $p$ en una distribución Binomial con $n$ ensayos conocidos y $Y$ éxitos observados es:",
+      "options": [
+        "$\\hat{p} = Y / n$",
+        "$\\hat{p} = (Y - 1) / (n - 1)$",
+        "$\\hat{p} = Y$ (número total de éxitos)"
+      ],
+      "correct": 0,
+      "hint": "Es la proporción muestral de éxitos en los ensayos realizados.",
+      "explanation": "El MLE para la probabilidad de éxito $p$ en la distribución Binomial es el cociente entre el número de éxitos observados $Y$ y el número de ensayos $n$, es decir, la proporción muestral de éxitos $\\hat{p} = Y/n$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si una muestra aleatoria de tamaño $n=10$ tiene una media muestral $\\bar{x} = 5.0$, la suma de todos los datos observados es ____.",
+      "options": [
+        "5.0",
+        "50.0",
+        "2.0"
+      ],
+      "correct": 1,
+      "hint": "Use la definición de media muestral: $\\bar{x} = \\frac{1}{n} \\sum x_i$.",
+      "explanation": "Dado que $\\bar{x} = \\sum x_i / n$, despejando la suma se obtiene $\\sum x_i = n \\bar{x} = 10 \\times 5.0 = 50.0$."
+    },
+    {
+      "q": "Dada una muestra de tamaño $n=5$ tal que la suma de cuadrados de las desviaciones es $\\sum_{i=1}^5 (x_i - \\bar{x})^2 = 20.0$, la cuasivarianza muestral $S_{n-1}^2$ es ____.",
+      "options": [
+        "4.0",
+        "5.0",
+        "20.0"
+      ],
+      "correct": 1,
+      "hint": "Recuerde dividir la suma de cuadrados entre $n-1$.",
+      "explanation": "$S_{n-1}^2 = \\frac{1}{n-1} \\sum (x_i - \\bar{x})^2 = \\frac{20.0}{5-1} = \\frac{20.0}{4} = 5.0$."
+    },
+    {
+      "q": "Si un estimador $\\hat{\\theta}$ tiene una esperanza matemática de $E[\\hat{\\theta}] = 12.0$ y el verdadero valor del parámetro es $\\theta = 15.0$, el sesgo del estimador es ____.",
+      "options": [
+        "-3.0",
+        "3.0",
+        "0.0"
+      ],
+      "correct": 0,
+      "hint": "El sesgo es $E[\\hat{\\theta}] - \\theta$.",
+      "explanation": "Sesgo $= E[\\hat{\\theta}] - \\theta = 12.0 - 15.0 = -3.0$."
+    },
+    {
+      "q": "Si observamos 4 éxitos en una muestra aleatoria de tamaño $n=20$ bajo un modelo de Bernoulli, la proporción muestral de éxitos $\\hat{p}$ es ____.",
+      "options": [
+        "0.20",
+        "4.0",
+        "0.25"
+      ],
+      "correct": 0,
+      "hint": "Divida el número de éxitos entre el tamaño de la muestra.",
+      "explanation": "La proporción muestral es $\\hat{p} = 4 / 20 = 0.20$."
+    },
+    {
+      "q": "Si la varianza poblacional de una característica es $\\sigma^2 = 100.0$ y se extrae una muestra aleatoria de tamaño $n=25$, la varianza de la media muestral $Var(\\bar{X})$ es ____.",
+      "options": [
+        "4.0",
+        "100.0",
+        "20.0"
+      ],
+      "correct": 0,
+      "hint": "La fórmula de la varianza de la media muestral es $Var(\\bar{X}) = \\sigma^2 / n$.",
+      "explanation": "$Var(\\bar{X}) = \\sigma^2 / n = 100.0 / 25 = 4.0$."
+    },
+    {
+      "q": "Si el estimador de máxima verosimilitud de la varianza poblacional de una normal es $S^2 = 9.0$ para un tamaño muestral $n=10$, la cuasivarianza muestral corregida es ____.",
+      "options": [
+        "10.0",
+        "9.0",
+        "8.1"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que $S_{n-1}^2 = \\frac{n}{n-1} S^2$.",
+      "explanation": "$S_{n-1}^2 = \\frac{10}{9} \\times 9.0 = 10.0$."
+    },
+    {
+      "q": "Si una muestra de tiempos de espera que sigue una distribución exponencial tiene una media muestral $\\bar{x} = 4.0$, el estimador de máxima verosimilitud (MLE) de su tasa $\\lambda$ es ____.",
+      "options": [
+        "4.0",
+        "0.25",
+        "2.0"
+      ],
+      "correct": 1,
+      "hint": "El estimador analítico por MLE para la tasa de una exponencial es $\\hat{\\lambda}_{\\text{MLE}} = 1 / \\bar{x}$.",
+      "explanation": "El MLE de la tasa es la recíproca de la media muestral: $\\hat{\\lambda} = 1 / \\bar{x} = 1 / 4.0 = 0.25$."
+    },
+    {
+      "q": "Si el Error Cuadrático Medio (ECM) de un estimador es 25.0 y su varianza es 16.0, el valor absoluto del sesgo de dicho estimador es ____.",
+      "options": [
+        "9.0",
+        "3.0",
+        "5.0"
+      ],
+      "correct": 1,
+      "hint": "Utilice la relación $ECM = Varianza + Sesgo^2$.",
+      "explanation": "$ECM = Var + Sesgo^2 \\implies 25.0 = 16.0 + Sesgo^2 \\implies Sesgo^2 = 9.0 \\implies |Sesgo| = \\sqrt{9.0} = 3.0$."
+    },
+    {
+      "q": "Para una muestra aleatoria de datos observados $\\{2, 4, 6, 8\\}$, la media muestral $\\bar{x}$ es ____.",
+      "options": [
+        "5.0",
+        "4.0",
+        "6.0"
+      ],
+      "correct": 0,
+      "hint": "Sume las observaciones y divida por el tamaño de la muestra ($n=4$).",
+      "explanation": "$\\bar{x} = (2 + 4 + 6 + 8) / 4 = 20 / 4 = 5.0$."
+    },
+    {
+      "q": "Para la muestra de observaciones $\\{3, 5, 7\\}$, la cuasivarianza muestral $S_{n-1}^2$ es ____.",
+      "options": [
+        "4.0",
+        "8.0",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "Calcule primero la media muestral, luego las desviaciones al cuadrado, sume y divida por $n-1 = 2$.",
+      "explanation": "La media es $\\bar{x} = (3+5+7)/3 = 5$. Las desviaciones al cuadrado son $(3-5)^2 = 4$, $(5-5)^2 = 0$, y $(7-5)^2 = 4$. Su suma es 8. Así, $S_{n-1}^2 = 8 / 2 = 4.0$."
+    },
+    {
+      "q": "Si la varianza poblacional es $\\sigma^2 = 64.0$ y deseamos que la desviación típica de la media muestral (error estándar de la media) sea de $2.0$, el tamaño muestral necesario es ____.",
+      "options": [
+        "16.0",
+        "32.0",
+        "8.0"
+      ],
+      "correct": 0,
+      "hint": "El error estándar es $\\sigma / \\sqrt{n}$. Resuelva la ecuación para $n$.",
+      "explanation": "$\\sigma / \\sqrt{n} = 2.0 \\implies \\sqrt{64} / \\sqrt{n} = 2.0 \\implies 8 / \\sqrt{n} = 2.0 \\implies \\sqrt{n} = 4.0 \\implies n = 16.0$."
+    },
+    {
+      "q": "Si para una muestra de tamaño $n=100$ la proporción muestral es $\\hat{p} = 0.2$, el error estándar estimado de la proporción, calculado como $\\sqrt{\\hat{p}(1-\\hat{p})/n}$, es ____.",
+      "options": [
+        "0.04",
+        "0.16",
+        "0.02"
+      ],
+      "correct": 0,
+      "hint": "Sustituya los valores en la raíz: $\\sqrt{0.2 \\times 0.8 / 100}$.",
+      "explanation": "$\\sqrt{0.2 \\times 0.8 / 100} = \\sqrt{0.16 / 100} = \\sqrt{0.0016} = 0.04$."
+    },
+    {
+      "q": "Si un estimador tiene un sesgo de $2.0$ y una varianza de $5.0$, su Error Cuadrático Medio (ECM) es ____.",
+      "options": [
+        "9.0",
+        "7.0",
+        "1.0"
+      ],
+      "correct": 0,
+      "hint": "Sume la varianza y el sesgo al cuadrado: $Var + Sesgo^2$.",
+      "explanation": "$ECM = Var + Sesgo^2 = 5.0 + 2.0^2 = 5.0 + 4.0 = 9.0$."
+    },
+    {
+      "q": "Si la suma de cuadrados de las desviaciones respecto a la media muestral es $\\sum (x_i - \\bar{x})^2 = 36.0$ y la cuasivarianza muestral es $4.0$, el tamaño de la muestra $n$ es ____.",
+      "options": [
+        "10.0",
+        "9.0",
+        "8.0"
+      ],
+      "correct": 0,
+      "hint": "Recuerde que $S_{n-1}^2 = \\sum (x_i - \\bar{x})^2 / (n-1)$. Despeje $n$.",
+      "explanation": "$4.0 = 36.0 / (n-1) \\implies n-1 = 9 \\implies n = 10.0$."
+    },
+    {
+      "q": "Dada una muestra de observaciones independientes $\\{1, 3, 0, 2, 4\\}$ que proceden de una Poisson, el estimador de máxima verosimilitud de la tasa $\\lambda$ es ____.",
+      "options": [
+        "2.0",
+        "10.0",
+        "2.5"
+      ],
+      "correct": 0,
+      "hint": "El MLE de la tasa de Poisson coincide con la media de las observaciones muestrales.",
+      "explanation": "El estimador MLE para $\\lambda$ es la media muestral: $\\bar{x} = (1 + 3 + 0 + 2 + 4) / 5 = 10 / 5 = 2.0$."
+    },
+    {
+      "q": "Si una submuestra de tamaño $n_1 = 50$ tiene media 10.0 y otra submuestra independiente de tamaño $n_2 = 50$ tiene media 12.0, la media muestral combinada de la muestra de tamaño 100 es ____.",
+      "options": [
+        "11.0",
+        "10.5",
+        "11.5"
+      ],
+      "correct": 0,
+      "hint": "Es la media ponderada de las dos submuestras.",
+      "explanation": "Media combinada $= \\frac{n_1 \\bar{x}_1 + n_2 \\bar{x}_2}{n_1 + n_2} = \\frac{50(10.0) + 50(12.0)}{100} = \\frac{500 + 600}{100} = 11.0$."
+    },
+    {
+      "q": "Para cualquier estimador insesgado de un parámetro $\\theta$, el Error Cuadrático Medio (ECM) es igual a ____.",
+      "options": [
+        "La varianza del estimador.",
+        "Cero.",
+        "El cuadrado del parámetro."
+      ],
+      "correct": 0,
+      "hint": "Si un estimador es insesgado, el término de sesgo en el ECM se hace cero.",
+      "explanation": "Dado que el estimador es insesgado, $Sesgo = 0$. Sustituyendo en la fórmula $ECM = Varianza + Sesgo^2$, se obtiene que $ECM = Varianza$."
+    },
+    {
+      "q": "Si una población tiene media $\\mu$ y varianza $\\sigma^2$, la esperanza matemática de la media muestral $\\bar{X}$ obtenida de una muestra de tamaño $n=15$ es ____.",
+      "options": [
+        "$\\mu$",
+        "$\\mu / 15$",
+        "$\\sigma^2$"
+      ],
+      "correct": 0,
+      "hint": "La media muestral es un estimador insesgado de la media poblacional, independientemente de $n$.",
+      "explanation": "Para cualquier tamaño de muestra $n$, la esperanza de la media muestral es igual al parámetro de media de la población de origen, es decir, $E[\\bar{X}] = \\mu$."
+    },
+    {
+      "q": "Si en R ejecutamos el comando `var(c(2, 4, 6))`, el resultado devuelto en consola es ____.",
+      "options": [
+        "4.0",
+        "2.67",
+        "16.0"
+      ],
+      "correct": 0,
+      "hint": "La función `var()` en R calcula la cuasivarianza muestral.",
+      "explanation": "El vector tiene media $\\bar{x} = 4$. Las desviaciones cuadráticas son $(2-4)^2 = 4$, $(4-4)^2 = 0$, $(6-4)^2 = 4$. Suma $= 8$. La cuasivarianza divide por $n-1 = 2$, dando $8/2 = 4.0$."
+    },
+    {
+      "q": "Si en R ejecutamos el comando `mean(c(1, 2, 3, 4, 5))`, el resultado obtenido es ____.",
+      "options": [
+        "3.0",
+        "15.0",
+        "2.5"
+      ],
+      "correct": 0,
+      "hint": "El comando calcula la media aritmética simple de los números del 1 al 5.",
+      "explanation": "La suma es 15 y el tamaño es 5, de manera que la media muestral es $15 / 5 = 3.0$."
+    },
+    {
+      "q": "Un estadístico calculado a partir de una muestra aleatoria se define por ser:",
+      "options": [
+        "Una función exclusiva de las observaciones muestrales.",
+        "Una variable aleatoria que posee su propia distribución muestral.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise la definición de estadístico en la sección 1 del manual.",
+      "explanation": "Un estadístico es una función de la muestra (opción A) y, por ende, es una variable aleatoria con distribución muestral (opción B). Por tanto, todas son correctas."
+    },
+    {
+      "q": "El método de estimación por Máxima Verosimilitud (MLE) se caracteriza por:",
+      "options": [
+        "Estar fundamentado en maximizar la función de verosimilitud o su logaritmo.",
+        "Proporcionar estimadores que gozan de la propiedad de invariancia funcional.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere los principios de cálculo del MLE y sus propiedades.",
+      "explanation": "El MLE maximiza $L(\\theta)$ o $\\ln L(\\theta)$ (opción A) y cumple con la propiedad de invariancia funcional (opción B). Todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "La cuasivarianza muestral corregida, $S_{n-1}^2$, cumple que:",
+      "options": [
+        "Es un estimador insesgado de la varianza de la población.",
+        "Es un estadístico que se calcula dividiendo la suma de cuadrados de desviaciones entre $n-1$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde las propiedades y la formulación de la cuasivarianza.",
+      "explanation": "Es insesgado ($E[S_{n-1}^2] = \\sigma^2$) y se calcula dividiendo entre $n-1$. Por tanto, ambas afirmaciones son correctas."
+    },
+    {
+      "q": "Al incrementar el tamaño muestral $n$ para estimar la media poblacional:",
+      "options": [
+        "La varianza de la media muestral $\\sigma^2/n$ disminuye.",
+        "La precisión de la estimación (medida por el error estándar) aumenta.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Pensemos qué ocurre con la división por un $n$ cada vez mayor.",
+      "explanation": "Aumentar $n$ hace que la varianza disminuya (opción A) y que la precisión aumente debido a un menor error estándar (opción B). Todas son correctas."
+    },
+    {
+      "q": "Para la función de log-verosimilitud $\\ln L(\\theta)$, es cierto que:",
+      "options": [
+        "Se obtiene aplicando el logaritmo neperiano a la función de verosimilitud conjunta.",
+        "Facilita la obtención de las derivadas al convertir los productos en sumas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise las ventajas matemáticas del uso de logaritmos en el MLE.",
+      "explanation": "La log-verosimilitud es $\\ln L(\\theta)$ y simplifica notablemente el cálculo al transformar productos en sumas para derivar cómodamente."
+    },
+    {
+      "q": "Para que un estimador $\\hat{\\theta}$ sea considerado consistente para un parámetro $\\theta$:",
+      "options": [
+        "Basta con que su Error Cuadrático Medio tienda a cero cuando $n \\to \\infty$.",
+        "El estimador debe aproximarse en probabilidad al parámetro real a medida que crece la muestra.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Consistencia implica convergencia al valor verdadero mediante muestras grandes.",
+      "explanation": "La consistencia se define formalmente como la convergencia en probabilidad al parámetro (opción B), y tener un ECM que tiende a cero es una condición suficiente para ello (opción A). Ambas son correctas."
+    },
+    {
+      "q": "El sesgo de un estimador puntual de un parámetro:",
+      "options": [
+        "Mide la desviación sistemática promedio respecto al valor poblacional.",
+        "Es igual a cero si y solo si la esperanza del estimador es igual al parámetro.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Reflexione sobre la definición y la interpretación de un sesgo nulo.",
+      "explanation": "El sesgo mide la desviación sistemática (opción A) y es nulo bajo insesgadez (opción B). Todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "La media muestral $\\bar{X}$ calculada en una muestra aleatoria simple:",
+      "options": [
+        "Es un estimador insesgado de la media poblacional $\\mu$.",
+        "Tiene una varianza de $\\sigma^2/n$ si la población tiene varianza $\\sigma^2$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere la esperanza y la varianza de la media muestral.",
+      "explanation": "La media muestral es insesgada y su varianza es $\\sigma^2/n$, de modo que todas las afirmaciones son verdaderas."
+    },
+    {
+      "q": "El muestreo aleatorio simple (M.A.S.) asegura por definición que:",
+      "options": [
+        "Cada variable de la muestra es independiente de las demás.",
+        "Cada variable de la muestra tiene la misma distribución de probabilidad que la población.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "M.A.S. equivale a variables aleatorias i.i.d.",
+      "explanation": "Las observaciones son independientes (opción A) e idénticamente distribuidas a la población (opción B). Todas son correctas."
+    },
+    {
+      "q": "Las funciones básicas en R que permiten estimar estadísticos descriptivos elementales son:",
+      "options": [
+        "`mean()` para la media muestral.",
+        "`var()` para la cuasivarianza muestral.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Identifique las funciones estándar de resumen vistas en la sección R.",
+      "explanation": "Tanto `mean()` para promedios como `var()` para cuasivarianzas son funciones nativas de R para análisis muestral."
+    },
+    {
+      "q": "Si un estimador $\\hat{\\theta}$ posee un sesgo estrictamente igual a +5.0 para cualquier muestra:",
+      "options": [
+        "Es un estimador insesgado de $\\theta$.",
+        "Su esperanza matemática es menor que el valor real del parámetro.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Si el sesgo es +5.0, significa que $E[\\hat{\\theta}] - \\theta = 5.0$.",
+      "explanation": "Si el sesgo es +5.0, el estimador es sesgado (luego la opción A es falsa) y su esperanza es $E[\\hat{\\theta}] = \\theta + 5.0$, que es mayor (no menor) que el parámetro real (luego la opción B es falsa). La opción correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "El estimador de máxima verosimilitud de la varianza de una normal, $S^2 = \\frac{1}{n} \\sum (X_i - \\bar{X})^2$:",
+      "options": [
+        "Es un estimador insesgado de la varianza poblacional.",
+        "Tiene un sesgo positivo igual a $\\sigma^2/n$.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde la esperanza de $S^2$ y cómo se calcula su sesgo.",
+      "explanation": "Su esperanza es $E[S^2] = \\frac{n-1}{n}\\sigma^2$. Su sesgo es $E[S^2] - \\sigma^2 = -\\frac{\\sigma^2}{n}$ (sesgo negativo, subestima). Por lo tanto, no es insesgado (A falsa) y su sesgo es negativo (B falsa). La respuesta es Ninguna."
+    },
+    {
+      "q": "Si comparamos dos estimadores insesgados con varianzas de 4.0 y 9.0 respectivamente, el estimador más eficiente es:",
+      "options": [
+        "Aquel que tiene una varianza de 9.0.",
+        "Aquel cuya esperanza matemática sea menor.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Mayor eficiencia en estimadores insesgados equivale a menor varianza.",
+      "explanation": "El más eficiente es el que tiene menor varianza, es decir, el de varianza 4.0. Las opciones A y B son incorrectas."
+    },
+    {
+      "q": "La función de verosimilitud $L(\\theta)$ para una M.A.S. de observaciones independientes es siempre:",
+      "options": [
+        "La suma de las funciones de densidad individuales de cada observación.",
+        "Una función que depende únicamente del tamaño muestral y nunca de los datos observados.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La función de verosimilitud conjunta se define por el producto de densidades debido a la independencia.",
+      "explanation": "La función de verosimilitud $L(\\theta)$ es el producto de densidades y depende fuertemente de los valores observados en la muestra. Por tanto, A y B son falsas."
+    },
+    {
+      "q": "Si para una muestra de tamaño $n=5$ la varianza muestral sesgada $S^2$ es igual a cero, esto garantiza que:",
+      "options": [
+        "La media muestral $\\bar{x}$ debe ser necesariamente igual a cero.",
+        "La varianza de la población de la cual proviene la muestra es exactamente cero.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Que la varianza muestral sea cero solo significa que no hay variabilidad entre los datos de esa muestra concreta.",
+      "explanation": "Una varianza muestral de cero indica únicamente que todas las observaciones de la muestra son idénticas entre sí, pero no obliga a que sean cero (A es falsa) ni garantiza que la población tenga varianza cero (B es falsa)."
+    },
+    {
+      "q": "El Error Cuadrático Medio (ECM) de un estimador puntual es:",
+      "options": [
+        "La raíz cuadrada de la suma del sesgo y la varianza muestral.",
+        "El producto de la varianza por el sesgo elevado al cuadrado.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La definición matemática del ECM es $Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2$.",
+      "explanation": "Dado que el ECM es la suma de la varianza y el sesgo al cuadrado ($Var + Sesgo^2$), ninguna de las fórmulas descritas en A o B es correcta."
+    },
+    {
+      "q": "El estimador de máxima verosimilitud para la media $\\mu$ de una población Normal con varianza conocida $\\sigma^2$ es:",
+      "options": [
+        "La cuasivarianza de los datos muestrales.",
+        "El estimador sesgado de la varianza muestral corregida.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Piense en cuál es el estimador por MLE de la media de una normal.",
+      "explanation": "El MLE de la media de una Normal es la media muestral $\\bar{X}$, la cual no se menciona en las opciones A o B. Por tanto, la respuesta correcta es Ninguna."
+    },
+    {
+      "q": "Si ejecutamos el comando `sd(c(1, 2, 3))` en R, el resultado devuelto es:",
+      "options": [
+        "1.5",
+        "0.5",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "`sd()` calcula la raíz de la cuasivarianza.",
+      "explanation": "Para la muestra $\\{1, 2, 3\\}$, la media es 2. La suma de cuadrados de desviaciones es $(1-2)^2 + (2-2)^2 + (3-2)^2 = 2$. La cuasivarianza es $2 / 2 = 1$. Su raíz cuadrada es $\\sqrt{1} = 1.0$. Ninguna opción coincide con 1.0."
+    },
+    {
+      "q": "Un parámetro poblacional $\\theta$ se caracteriza por ser:",
+      "options": [
+        "Una variable aleatoria cuyo valor cambia en cada muestra extraída.",
+        "Un estimador insesgado de la media muestral.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Recuerde que el parámetro poblacional es un valor fijo y generalmente desconocido.",
+      "explanation": "Un parámetro poblacional es un valor numérico fijo (no aleatorio, por lo que A es falsa) y es el objeto a estimar (no un estimador de la muestra, por lo que B es falsa). La opción correcta es Ninguna."
+    },
+    {
+      "q": "La cota inferior de Cramér-Rao para estimadores insesgados se aplica únicamente a:",
+      "options": [
+        "Estimadores con sesgo creciente cuya varianza tiende a infinito.",
+        "Muestras de tamaño pequeño, concretamente cuando $n$ es menor o igual a 5.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La cota de Cramér-Rao es una propiedad matemática general aplicable bajo condiciones de regularidad.",
+      "explanation": "La cota de Cramér-Rao establece la varianza mínima para estimadores insesgados bajo condiciones de regularidad y es independiente de si $n \\le 5$ o del sesgo creciente. Ninguna de las opciones anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_1",
+      "title": "Estimación Muestral Normal - Serie A",
+      "context": "Se ha tomado una muestra aleatoria simple de observaciones independientes de una variable aleatoria normal con parámetros desconocidos. A partir de ella, se desea obtener los estadísticos descriptivos básicos y el error estándar asociado a la media muestral.",
+      "parts": [
+        {
+          "id": "norm_1_a",
+          "label": "a",
+          "question": "Calcule el valor de la media muestral $\\bar{x}$ para la muestra de observaciones: [1.5, 2.3, 0.8, 1.9, 2.5].",
+          "correctValue": 1.8,
+          "tolerance": 0.01,
+          "explanation": "La media muestral se calcula como $\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i$. En este caso: $\\bar{x} = \\frac{9.0}{5} = 1.8$."
+        },
+        {
+          "id": "norm_1_b",
+          "label": "b",
+          "question": "Usando la media muestral obtenida en la parte (a), calcule la suma de cuadrados de las desviaciones respecto a dicha media: $\\sum (x_i - \\bar{x})^2$.",
+          "correctValue": 1.84,
+          "tolerance": 0.01,
+          "explanation": "La suma de cuadrados de las desviaciones respecto a la media es $\\sum_{i=1}^n (x_i - \\bar{x})^2$. Restando 1.8 a cada dato, elevando al cuadrado y sumando, obtenemos 1.84."
+        },
+        {
+          "id": "norm_1_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), determine el estimador insesgado de la varianza poblacional (cuasivarianza muestral $S_{n-1}^2$).",
+          "correctValue": 0.46,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado de la varianza poblacional es la cuasivarianza, calculada como $S_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1}$. Dividiendo el resultado de la parte (b) entre 4, se obtiene $S_{n-1}^2 = 0.46$."
+        },
+        {
+          "id": "norm_1_d",
+          "label": "d",
+          "question": "Usando la cuasivarianza calculada en la parte (c), calcule el error estándar estimado de la media muestral, definido por $SE = \\sqrt{S_{n-1}^2 / n}$.",
+          "correctValue": 0.3033,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado de la media es $SE = \\sqrt{\\frac{S_{n-1}^2}{n}}$. Utilizando la cuasivarianza de la parte (c), calculamos $SE = \\sqrt{\\frac{0.46}{5}} = 0.3033$."
+        }
+      ]
+    },
+    {
+      "id": "lab_2",
+      "title": "Estimación Muestral Normal - Serie B",
+      "context": "Se ha tomado una muestra aleatoria simple de observaciones independientes de una variable aleatoria normal con parámetros desconocidos. A partir de ella, se desea obtener los estadísticos descriptivos básicos y el error estándar asociado a la media muestral.",
+      "parts": [
+        {
+          "id": "norm_2_a",
+          "label": "a",
+          "question": "Calcule el valor de la media muestral $\\bar{x}$ para la muestra de observaciones: [10.0, 12.0, 9.0, 11.0, 8.0].",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral se calcula como $\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i$. En este caso: $\\bar{x} = \\frac{50.0}{5} = 10.0$."
+        },
+        {
+          "id": "norm_2_b",
+          "label": "b",
+          "question": "Usando la media muestral obtenida en la parte (a), calcule la suma de cuadrados de las desviaciones respecto a dicha media: $\\sum (x_i - \\bar{x})^2$.",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de cuadrados de las desviaciones respecto a la media es $\\sum_{i=1}^n (x_i - \\bar{x})^2$. Restando 10.0 a cada dato, elevando al cuadrado y sumando, obtenemos 10.0."
+        },
+        {
+          "id": "norm_2_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), determine el estimador insesgado de la varianza poblacional (cuasivarianza muestral $S_{n-1}^2$).",
+          "correctValue": 2.5,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado de la varianza poblacional es la cuasivarianza, calculada como $S_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1}$. Dividiendo el resultado de la parte (b) entre 4, se obtiene $S_{n-1}^2 = 2.5$."
+        },
+        {
+          "id": "norm_2_d",
+          "label": "d",
+          "question": "Usando la cuasivarianza calculada en la parte (c), calcule el error estándar estimado de la media muestral, definido por $SE = \\sqrt{S_{n-1}^2 / n}$.",
+          "correctValue": 0.7071,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado de la media es $SE = \\sqrt{\\frac{S_{n-1}^2}{n}}$. Utilizando la cuasivarianza de la parte (c), calculamos $SE = \\sqrt{\\frac{2.5}{5}} = 0.7071$."
+        }
+      ]
+    },
+    {
+      "id": "lab_3",
+      "title": "Estimación Muestral Normal - Serie C",
+      "context": "Se ha tomado una muestra aleatoria simple de observaciones independientes de una variable aleatoria normal con parámetros desconocidos. A partir de ella, se desea obtener los estadísticos descriptivos básicos y el error estándar asociado a la media muestral.",
+      "parts": [
+        {
+          "id": "norm_3_a",
+          "label": "a",
+          "question": "Calcule el valor de la media muestral $\\bar{x}$ para la muestra de observaciones: [4.2, 5.8, 4.7, 5.3].",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral se calcula como $\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i$. En este caso: $\\bar{x} = \\frac{20.0}{4} = 5.0$."
+        },
+        {
+          "id": "norm_3_b",
+          "label": "b",
+          "question": "Usando la media muestral obtenida en la parte (a), calcule la suma de cuadrados de las desviaciones respecto a dicha media: $\\sum (x_i - \\bar{x})^2$.",
+          "correctValue": 1.46,
+          "tolerance": 0.01,
+          "explanation": "La suma de cuadrados de las desviaciones respecto a la media es $\\sum_{i=1}^n (x_i - \\bar{x})^2$. Restando 5.0 a cada dato, elevando al cuadrado y sumando, obtenemos 1.46."
+        },
+        {
+          "id": "norm_3_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), determine el estimador insesgado de la varianza poblacional (cuasivarianza muestral $S_{n-1}^2$).",
+          "correctValue": 0.4867,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado de la varianza poblacional es la cuasivarianza, calculada como $S_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1}$. Dividiendo el resultado de la parte (b) entre 3, se obtiene $S_{n-1}^2 = 0.4867$."
+        },
+        {
+          "id": "norm_3_d",
+          "label": "d",
+          "question": "Usando la cuasivarianza calculada en la parte (c), calcule el error estándar estimado de la media muestral, definido por $SE = \\sqrt{S_{n-1}^2 / n}$.",
+          "correctValue": 0.3488,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado de la media es $SE = \\sqrt{\\frac{S_{n-1}^2}{n}}$. Utilizando la cuasivarianza de la parte (c), calculamos $SE = \\sqrt{\\frac{0.4867}{4}} = 0.3488$."
+        }
+      ]
+    },
+    {
+      "id": "lab_4",
+      "title": "Estimación Muestral Normal - Serie D",
+      "context": "Se ha tomado una muestra aleatoria simple de observaciones independientes de una variable aleatoria normal con parámetros desconocidos. A partir de ella, se desea obtener los estadísticos descriptivos básicos y el error estándar asociado a la media muestral.",
+      "parts": [
+        {
+          "id": "norm_4_a",
+          "label": "a",
+          "question": "Calcule el valor de la media muestral $\\bar{x}$ para la muestra de observaciones: [102.0, 98.0, 105.0, 95.0].",
+          "correctValue": 100.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral se calcula como $\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i$. En este caso: $\\bar{x} = \\frac{400.0}{4} = 100.0$."
+        },
+        {
+          "id": "norm_4_b",
+          "label": "b",
+          "question": "Usando la media muestral obtenida en la parte (a), calcule la suma de cuadrados de las desviaciones respecto a dicha media: $\\sum (x_i - \\bar{x})^2$.",
+          "correctValue": 58.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de cuadrados de las desviaciones respecto a la media es $\\sum_{i=1}^n (x_i - \\bar{x})^2$. Restando 100.0 a cada dato, elevando al cuadrado y sumando, obtenemos 58.0."
+        },
+        {
+          "id": "norm_4_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), determine el estimador insesgado de la varianza poblacional (cuasivarianza muestral $S_{n-1}^2$).",
+          "correctValue": 19.3333,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado de la varianza poblacional es la cuasivarianza, calculada como $S_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1}$. Dividiendo el resultado de la parte (b) entre 3, se obtiene $S_{n-1}^2 = 19.3333$."
+        },
+        {
+          "id": "norm_4_d",
+          "label": "d",
+          "question": "Usando la cuasivarianza calculada en la parte (c), calcule el error estándar estimado de la media muestral, definido por $SE = \\sqrt{S_{n-1}^2 / n}$.",
+          "correctValue": 2.1985,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado de la media es $SE = \\sqrt{\\frac{S_{n-1}^2}{n}}$. Utilizando la cuasivarianza de la parte (c), calculamos $SE = \\sqrt{\\frac{19.3333}{4}} = 2.1985$."
+        }
+      ]
+    },
+    {
+      "id": "lab_5",
+      "title": "Estimación Muestral Normal - Serie E",
+      "context": "Se ha tomado una muestra aleatoria simple de observaciones independientes de una variable aleatoria normal con parámetros desconocidos. A partir de ella, se desea obtener los estadísticos descriptivos básicos y el error estándar asociado a la media muestral.",
+      "parts": [
+        {
+          "id": "norm_5_a",
+          "label": "a",
+          "question": "Calcule el valor de la media muestral $\\bar{x}$ para la muestra de observaciones: [5.0, 7.0, 6.0, 8.0, 9.0].",
+          "correctValue": 7.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral se calcula como $\\bar{x} = \\frac{1}{n} \\sum_{i=1}^n x_i$. En este caso: $\\bar{x} = \\frac{35.0}{5} = 7.0$."
+        },
+        {
+          "id": "norm_5_b",
+          "label": "b",
+          "question": "Usando la media muestral obtenida en la parte (a), calcule la suma de cuadrados de las desviaciones respecto a dicha media: $\\sum (x_i - \\bar{x})^2$.",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de cuadrados de las desviaciones respecto a la media es $\\sum_{i=1}^n (x_i - \\bar{x})^2$. Restando 7.0 a cada dato, elevando al cuadrado y sumando, obtenemos 10.0."
+        },
+        {
+          "id": "norm_5_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), determine el estimador insesgado de la varianza poblacional (cuasivarianza muestral $S_{n-1}^2$).",
+          "correctValue": 2.5,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado de la varianza poblacional es la cuasivarianza, calculada como $S_{n-1}^2 = \\frac{\\sum (x_i - \\bar{x})^2}{n-1}$. Dividiendo el resultado de la parte (b) entre 4, se obtiene $S_{n-1}^2 = 2.5$."
+        },
+        {
+          "id": "norm_5_d",
+          "label": "d",
+          "question": "Usando la cuasivarianza calculada en la parte (c), calcule el error estándar estimado de la media muestral, definido por $SE = \\sqrt{S_{n-1}^2 / n}$.",
+          "correctValue": 0.7071,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado de la media es $SE = \\sqrt{\\frac{S_{n-1}^2}{n}}$. Utilizando la cuasivarianza de la parte (c), calculamos $SE = \\sqrt{\\frac{2.5}{5}} = 0.7071$."
+        }
+      ]
+    },
+    {
+      "id": "lab_6",
+      "title": "Estimación Máxima Verosimilitud Exponencial - Serie A",
+      "context": "Se asume que los tiempos observados en segundos siguen una distribución exponencial con tasa de fallo $\\lambda$ desconocida. Se dispone de una muestra pequeña para realizar la estimación analítica de máxima verosimilitud.",
+      "parts": [
+        {
+          "id": "exp_1_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los tiempos de la muestra: [2.0, 3.0, 5.0].",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de las observaciones es $\\sum_{i=1}^n x_i = 10.0$."
+        },
+        {
+          "id": "exp_1_b",
+          "label": "b",
+          "question": "A partir de la suma de la parte (a), calcule la media muestral $\\bar{x}$ de esta muestra.",
+          "correctValue": 3.3333,
+          "tolerance": 0.01,
+          "explanation": "La media muestral es $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{10.0}{3} = 3.3333$."
+        },
+        {
+          "id": "exp_1_c",
+          "label": "c",
+          "question": "Utilizando la media muestral de la parte (b), calcule el estimador de máxima verosimilitud de la tasa $\\lambda$ de la distribución exponencial ($\\hat{\\lambda}_{MLE} = 1 / \\bar{x}$).",
+          "correctValue": 0.3,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución exponencial, el MLE de la tasa es la inversa de la media muestral: $\\hat{\\lambda} = 1 / \\bar{x} = 1 / 3.3333 = 0.3$."
+        },
+        {
+          "id": "exp_1_d",
+          "label": "d",
+          "question": "Haciendo uso del valor de $\\hat{\\lambda}_{MLE}$ estimado en la parte (c), calcule la probabilidad estimada de que una observación sea mayor que 4.0 segundos, dada por $P(X > 4.0) = e^{-\\hat{\\lambda} \\cdot 4.0}$.",
+          "correctValue": 0.3012,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de supervivencia para una exponencial es $P(X > t) = e^{-\\lambda t}$. Sustituyendo $\\hat{\\lambda} = 0.3$ y $t = 4.0$, obtenemos $P(X > 4.0) = e^{-0.3 \\times 4.0} = 0.3012$."
+        }
+      ]
+    },
+    {
+      "id": "lab_7",
+      "title": "Estimación Máxima Verosimilitud Exponencial - Serie B",
+      "context": "Se asume que los tiempos observados en segundos siguen una distribución exponencial con tasa de fallo $\\lambda$ desconocida. Se dispone de una muestra pequeña para realizar la estimación analítica de máxima verosimilitud.",
+      "parts": [
+        {
+          "id": "exp_2_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los tiempos de la muestra: [0.5, 1.5, 2.5, 3.5].",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de las observaciones es $\\sum_{i=1}^n x_i = 8.0$."
+        },
+        {
+          "id": "exp_2_b",
+          "label": "b",
+          "question": "A partir de la suma de la parte (a), calcule la media muestral $\\bar{x}$ de esta muestra.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral es $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{8.0}{4} = 2.0$."
+        },
+        {
+          "id": "exp_2_c",
+          "label": "c",
+          "question": "Utilizando la media muestral de la parte (b), calcule el estimador de máxima verosimilitud de la tasa $\\lambda$ de la distribución exponencial ($\\hat{\\lambda}_{MLE} = 1 / \\bar{x}$).",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución exponencial, el MLE de la tasa es la inversa de la media muestral: $\\hat{\\lambda} = 1 / \\bar{x} = 1 / 2.0 = 0.5$."
+        },
+        {
+          "id": "exp_2_d",
+          "label": "d",
+          "question": "Haciendo uso del valor de $\\hat{\\lambda}_{MLE}$ estimado en la parte (c), calcule la probabilidad estimada de que una observación sea mayor que 3.0 segundos, dada por $P(X > 3.0) = e^{-\\hat{\\lambda} \\cdot 3.0}$.",
+          "correctValue": 0.2231,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de supervivencia para una exponencial es $P(X > t) = e^{-\\lambda t}$. Sustituyendo $\\hat{\\lambda} = 0.5$ y $t = 3.0$, obtenemos $P(X > 3.0) = e^{-0.5 \\times 3.0} = 0.2231$."
+        }
+      ]
+    },
+    {
+      "id": "lab_8",
+      "title": "Estimación Máxima Verosimilitud Exponencial - Serie C",
+      "context": "Se asume que los tiempos observados en segundos siguen una distribución exponencial con tasa de fallo $\\lambda$ desconocida. Se dispone de una muestra pequeña para realizar la estimación analítica de máxima verosimilitud.",
+      "parts": [
+        {
+          "id": "exp_3_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los tiempos de la muestra: [1.2, 0.8, 1.5, 2.5].",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de las observaciones es $\\sum_{i=1}^n x_i = 6.0$."
+        },
+        {
+          "id": "exp_3_b",
+          "label": "b",
+          "question": "A partir de la suma de la parte (a), calcule la media muestral $\\bar{x}$ de esta muestra.",
+          "correctValue": 1.5,
+          "tolerance": 0.01,
+          "explanation": "La media muestral es $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{6.0}{4} = 1.5$."
+        },
+        {
+          "id": "exp_3_c",
+          "label": "c",
+          "question": "Utilizando la media muestral de la parte (b), calcule el estimador de máxima verosimilitud de la tasa $\\lambda$ de la distribución exponencial ($\\hat{\\lambda}_{MLE} = 1 / \\bar{x}$).",
+          "correctValue": 0.6667,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución exponencial, el MLE de la tasa es la inversa de la media muestral: $\\hat{\\lambda} = 1 / \\bar{x} = 1 / 1.5 = 0.6667$."
+        },
+        {
+          "id": "exp_3_d",
+          "label": "d",
+          "question": "Haciendo uso del valor de $\\hat{\\lambda}_{MLE}$ estimado en la parte (c), calcule la probabilidad estimada de que una observación sea mayor que 2.0 segundos, dada por $P(X > 2.0) = e^{-\\hat{\\lambda} \\cdot 2.0}$.",
+          "correctValue": 0.2636,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de supervivencia para una exponencial es $P(X > t) = e^{-\\lambda t}$. Sustituyendo $\\hat{\\lambda} = 0.6667$ y $t = 2.0$, obtenemos $P(X > 2.0) = e^{-0.6667 \\times 2.0} = 0.2636$."
+        }
+      ]
+    },
+    {
+      "id": "lab_9",
+      "title": "Estimación Máxima Verosimilitud Exponencial - Serie D",
+      "context": "Se asume que los tiempos observados en segundos siguen una distribución exponencial con tasa de fallo $\\lambda$ desconocida. Se dispone de una muestra pequeña para realizar la estimación analítica de máxima verosimilitud.",
+      "parts": [
+        {
+          "id": "exp_4_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los tiempos de la muestra: [4.0, 6.0, 8.0, 10.0, 12.0].",
+          "correctValue": 40.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de las observaciones es $\\sum_{i=1}^n x_i = 40.0$."
+        },
+        {
+          "id": "exp_4_b",
+          "label": "b",
+          "question": "A partir de la suma de la parte (a), calcule la media muestral $\\bar{x}$ de esta muestra.",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral es $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{40.0}{5} = 8.0$."
+        },
+        {
+          "id": "exp_4_c",
+          "label": "c",
+          "question": "Utilizando la media muestral de la parte (b), calcule el estimador de máxima verosimilitud de la tasa $\\lambda$ de la distribución exponencial ($\\hat{\\lambda}_{MLE} = 1 / \\bar{x}$).",
+          "correctValue": 0.125,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución exponencial, el MLE de la tasa es la inversa de la media muestral: $\\hat{\\lambda} = 1 / \\bar{x} = 1 / 8.0 = 0.125$."
+        },
+        {
+          "id": "exp_4_d",
+          "label": "d",
+          "question": "Haciendo uso del valor de $\\hat{\\lambda}_{MLE}$ estimado en la parte (c), calcule la probabilidad estimada de que una observación sea mayor que 5.0 segundos, dada por $P(X > 5.0) = e^{-\\hat{\\lambda} \\cdot 5.0}$.",
+          "correctValue": 0.5353,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de supervivencia para una exponencial es $P(X > t) = e^{-\\lambda t}$. Sustituyendo $\\hat{\\lambda} = 0.125$ y $t = 5.0$, obtenemos $P(X > 5.0) = e^{-0.125 \\times 5.0} = 0.5353$."
+        }
+      ]
+    },
+    {
+      "id": "lab_10",
+      "title": "Estimación Máxima Verosimilitud Exponencial - Serie E",
+      "context": "Se asume que los tiempos observados en segundos siguen una distribución exponencial con tasa de fallo $\\lambda$ desconocida. Se dispone de una muestra pequeña para realizar la estimación analítica de máxima verosimilitud.",
+      "parts": [
+        {
+          "id": "exp_5_a",
+          "label": "a",
+          "question": "Calcule la suma de todos los tiempos de la muestra: [1.0, 2.0, 1.0, 4.0].",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "La suma de las observaciones es $\\sum_{i=1}^n x_i = 8.0$."
+        },
+        {
+          "id": "exp_5_b",
+          "label": "b",
+          "question": "A partir de la suma de la parte (a), calcule la media muestral $\\bar{x}$ de esta muestra.",
+          "correctValue": 2.0,
+          "tolerance": 0.01,
+          "explanation": "La media muestral es $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{8.0}{4} = 2.0$."
+        },
+        {
+          "id": "exp_5_c",
+          "label": "c",
+          "question": "Utilizando la media muestral de la parte (b), calcule el estimador de máxima verosimilitud de la tasa $\\lambda$ de la distribución exponencial ($\\hat{\\lambda}_{MLE} = 1 / \\bar{x}$).",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución exponencial, el MLE de la tasa es la inversa de la media muestral: $\\hat{\\lambda} = 1 / \\bar{x} = 1 / 2.0 = 0.5$."
+        },
+        {
+          "id": "exp_5_d",
+          "label": "d",
+          "question": "Haciendo uso del valor de $\\hat{\\lambda}_{MLE}$ estimado en la parte (c), calcule la probabilidad estimada de que una observación sea mayor que 1.0 segundos, dada por $P(X > 1.0) = e^{-\\hat{\\lambda} \\cdot 1.0}$.",
+          "correctValue": 0.6065,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de supervivencia para una exponencial es $P(X > t) = e^{-\\lambda t}$. Sustituyendo $\\hat{\\lambda} = 0.5$ y $t = 1.0$, obtenemos $P(X > 1.0) = e^{-0.5 \\times 1.0} = 0.6065$."
+        }
+      ]
+    },
+    {
+      "id": "lab_11",
+      "title": "Inferencia de Poisson por MLE - Serie A",
+      "context": "Se estudia una variable aleatoria discreta que cuenta el número de eventos por unidad de tiempo, y que sigue una distribución de Poisson con tasa $\\lambda$. Se ha obtenido una muestra de observaciones independientes para analizarla.",
+      "parts": [
+        {
+          "id": "poi_1_a",
+          "label": "a",
+          "question": "Calcule la suma total de las observaciones de la muestra: [2, 4, 1, 3, 5].",
+          "correctValue": 15,
+          "tolerance": 0.01,
+          "explanation": "La suma total es $\\sum_{i=1}^n x_i = 15$."
+        },
+        {
+          "id": "poi_1_b",
+          "label": "b",
+          "question": "Utilizando la suma de la parte (a), determine el estimador de máxima verosimilitud para el parámetro $\\lambda$ ($\\hat{\\lambda}_{MLE}$), que coincide con la media muestral.",
+          "correctValue": 3.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador MLE de $\\lambda$ para una distribución de Poisson es la media muestral $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{15}{5} = 3.0$."
+        },
+        {
+          "id": "poi_1_c",
+          "label": "c",
+          "question": "A partir de $\\hat{\\lambda}_{MLE}$ de la parte (b), estime la varianza muestral de este estimador, sabiendo que para una Poisson $Var(\\hat{\\lambda}) = \\lambda / n$, por lo que se estima con $\\hat{\\lambda}_{MLE} / n$.",
+          "correctValue": 0.6,
+          "tolerance": 0.01,
+          "explanation": "La varianza del estimador de la media en una Poisson es $Var(\\hat{\\lambda}) = \\frac{\\lambda}{n}$. Su estimación puntual es $\\frac{\\hat{\\lambda}}{n} = \\frac{3.0}{5} = 0.6$."
+        },
+        {
+          "id": "poi_1_d",
+          "label": "d",
+          "question": "Haciendo uso del parámetro estimado $\\hat{\\lambda}_{MLE}$ de la parte (b), calcule la probabilidad estimada de observar exactamente 0 eventos en un nuevo intervalo, dada por $P(X = 0) = e^{-\\hat{\\lambda}}$.",
+          "correctValue": 0.0498,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de observar cero eventos en una distribución de Poisson es $P(X=0) = \\frac{e^{-\\lambda} \\lambda^0}{0!} = e^{-\\lambda}$. Sustituyendo por $\\hat{\\lambda} = 3.0$, obtenemos $e^{-3.0} = 0.0498$."
+        }
+      ]
+    },
+    {
+      "id": "lab_12",
+      "title": "Inferencia de Poisson por MLE - Serie B",
+      "context": "Se estudia una variable aleatoria discreta que cuenta el número de eventos por unidad de tiempo, y que sigue una distribución de Poisson con tasa $\\lambda$. Se ha obtenido una muestra de observaciones independientes para analizarla.",
+      "parts": [
+        {
+          "id": "poi_2_a",
+          "label": "a",
+          "question": "Calcule la suma total de las observaciones de la muestra: [0, 1, 2, 1, 0, 2].",
+          "correctValue": 6,
+          "tolerance": 0.01,
+          "explanation": "La suma total es $\\sum_{i=1}^n x_i = 6$."
+        },
+        {
+          "id": "poi_2_b",
+          "label": "b",
+          "question": "Utilizando la suma de la parte (a), determine el estimador de máxima verosimilitud para el parámetro $\\lambda$ ($\\hat{\\lambda}_{MLE}$), que coincide con la media muestral.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador MLE de $\\lambda$ para una distribución de Poisson es la media muestral $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{6}{6} = 1.0$."
+        },
+        {
+          "id": "poi_2_c",
+          "label": "c",
+          "question": "A partir de $\\hat{\\lambda}_{MLE}$ de la parte (b), estime la varianza muestral de este estimador, sabiendo que para una Poisson $Var(\\hat{\\lambda}) = \\lambda / n$, por lo que se estima con $\\hat{\\lambda}_{MLE} / n$.",
+          "correctValue": 0.1667,
+          "tolerance": 0.01,
+          "explanation": "La varianza del estimador de la media en una Poisson es $Var(\\hat{\\lambda}) = \\frac{\\lambda}{n}$. Su estimación puntual es $\\frac{\\hat{\\lambda}}{n} = \\frac{1.0}{6} = 0.1667$."
+        },
+        {
+          "id": "poi_2_d",
+          "label": "d",
+          "question": "Haciendo uso del parámetro estimado $\\hat{\\lambda}_{MLE}$ de la parte (b), calcule la probabilidad estimada de observar exactamente 0 eventos en un nuevo intervalo, dada por $P(X = 0) = e^{-\\hat{\\lambda}}$.",
+          "correctValue": 0.3679,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de observar cero eventos en una distribución de Poisson es $P(X=0) = \\frac{e^{-\\lambda} \\lambda^0}{0!} = e^{-\\lambda}$. Sustituyendo por $\\hat{\\lambda} = 1.0$, obtenemos $e^{-1.0} = 0.3679$."
+        }
+      ]
+    },
+    {
+      "id": "lab_13",
+      "title": "Inferencia de Poisson por MLE - Serie C",
+      "context": "Se estudia una variable aleatoria discreta que cuenta el número de eventos por unidad de tiempo, y que sigue una distribución de Poisson con tasa $\\lambda$. Se ha obtenido una muestra de observaciones independientes para analizarla.",
+      "parts": [
+        {
+          "id": "poi_3_a",
+          "label": "a",
+          "question": "Calcule la suma total de las observaciones de la muestra: [3, 5, 4, 4].",
+          "correctValue": 16,
+          "tolerance": 0.01,
+          "explanation": "La suma total es $\\sum_{i=1}^n x_i = 16$."
+        },
+        {
+          "id": "poi_3_b",
+          "label": "b",
+          "question": "Utilizando la suma de la parte (a), determine el estimador de máxima verosimilitud para el parámetro $\\lambda$ ($\\hat{\\lambda}_{MLE}$), que coincide con la media muestral.",
+          "correctValue": 4.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador MLE de $\\lambda$ para una distribución de Poisson es la media muestral $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{16}{4} = 4.0$."
+        },
+        {
+          "id": "poi_3_c",
+          "label": "c",
+          "question": "A partir de $\\hat{\\lambda}_{MLE}$ de la parte (b), estime la varianza muestral de este estimador, sabiendo que para una Poisson $Var(\\hat{\\lambda}) = \\lambda / n$, por lo que se estima con $\\hat{\\lambda}_{MLE} / n$.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "La varianza del estimador de la media en una Poisson es $Var(\\hat{\\lambda}) = \\frac{\\lambda}{n}$. Su estimación puntual es $\\frac{\\hat{\\lambda}}{n} = \\frac{4.0}{4} = 1.0$."
+        },
+        {
+          "id": "poi_3_d",
+          "label": "d",
+          "question": "Haciendo uso del parámetro estimado $\\hat{\\lambda}_{MLE}$ de la parte (b), calcule la probabilidad estimada de observar exactamente 0 eventos en un nuevo intervalo, dada por $P(X = 0) = e^{-\\hat{\\lambda}}$.",
+          "correctValue": 0.0183,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de observar cero eventos en una distribución de Poisson es $P(X=0) = \\frac{e^{-\\lambda} \\lambda^0}{0!} = e^{-\\lambda}$. Sustituyendo por $\\hat{\\lambda} = 4.0$, obtenemos $e^{-4.0} = 0.0183$."
+        }
+      ]
+    },
+    {
+      "id": "lab_14",
+      "title": "Inferencia de Poisson por MLE - Serie D",
+      "context": "Se estudia una variable aleatoria discreta que cuenta el número de eventos por unidad de tiempo, y que sigue una distribución de Poisson con tasa $\\lambda$. Se ha obtenido una muestra de observaciones independientes para analizarla.",
+      "parts": [
+        {
+          "id": "poi_4_a",
+          "label": "a",
+          "question": "Calcule la suma total de las observaciones de la muestra: [1, 2, 0, 1, 1].",
+          "correctValue": 5,
+          "tolerance": 0.01,
+          "explanation": "La suma total es $\\sum_{i=1}^n x_i = 5$."
+        },
+        {
+          "id": "poi_4_b",
+          "label": "b",
+          "question": "Utilizando la suma de la parte (a), determine el estimador de máxima verosimilitud para el parámetro $\\lambda$ ($\\hat{\\lambda}_{MLE}$), que coincide con la media muestral.",
+          "correctValue": 1.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador MLE de $\\lambda$ para una distribución de Poisson es la media muestral $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{5}{5} = 1.0$."
+        },
+        {
+          "id": "poi_4_c",
+          "label": "c",
+          "question": "A partir de $\\hat{\\lambda}_{MLE}$ de la parte (b), estime la varianza muestral de este estimador, sabiendo que para una Poisson $Var(\\hat{\\lambda}) = \\lambda / n$, por lo que se estima con $\\hat{\\lambda}_{MLE} / n$.",
+          "correctValue": 0.2,
+          "tolerance": 0.01,
+          "explanation": "La varianza del estimador de la media en una Poisson es $Var(\\hat{\\lambda}) = \\frac{\\lambda}{n}$. Su estimación puntual es $\\frac{\\hat{\\lambda}}{n} = \\frac{1.0}{5} = 0.2$."
+        },
+        {
+          "id": "poi_4_d",
+          "label": "d",
+          "question": "Haciendo uso del parámetro estimado $\\hat{\\lambda}_{MLE}$ de la parte (b), calcule la probabilidad estimada de observar exactamente 0 eventos en un nuevo intervalo, dada por $P(X = 0) = e^{-\\hat{\\lambda}}$.",
+          "correctValue": 0.3679,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de observar cero eventos en una distribución de Poisson es $P(X=0) = \\frac{e^{-\\lambda} \\lambda^0}{0!} = e^{-\\lambda}$. Sustituyendo por $\\hat{\\lambda} = 1.0$, obtenemos $e^{-1.0} = 0.3679$."
+        }
+      ]
+    },
+    {
+      "id": "lab_15",
+      "title": "Inferencia de Poisson por MLE - Serie E",
+      "context": "Se estudia una variable aleatoria discreta que cuenta el número de eventos por unidad de tiempo, y que sigue una distribución de Poisson con tasa $\\lambda$. Se ha obtenido una muestra de observaciones independientes para analizarla.",
+      "parts": [
+        {
+          "id": "poi_5_a",
+          "label": "a",
+          "question": "Calcule la suma total de las observaciones de la muestra: [5, 7, 6, 8, 4].",
+          "correctValue": 30,
+          "tolerance": 0.01,
+          "explanation": "La suma total es $\\sum_{i=1}^n x_i = 30$."
+        },
+        {
+          "id": "poi_5_b",
+          "label": "b",
+          "question": "Utilizando la suma de la parte (a), determine el estimador de máxima verosimilitud para el parámetro $\\lambda$ ($\\hat{\\lambda}_{MLE}$), que coincide con la media muestral.",
+          "correctValue": 6.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador MLE de $\\lambda$ para una distribución de Poisson es la media muestral $\\bar{x} = \\frac{\\sum x_i}{n} = \\frac{30}{5} = 6.0$."
+        },
+        {
+          "id": "poi_5_c",
+          "label": "c",
+          "question": "A partir de $\\hat{\\lambda}_{MLE}$ de la parte (b), estime la varianza muestral de este estimador, sabiendo que para una Poisson $Var(\\hat{\\lambda}) = \\lambda / n$, por lo que se estima con $\\hat{\\lambda}_{MLE} / n$.",
+          "correctValue": 1.2,
+          "tolerance": 0.01,
+          "explanation": "La varianza del estimador de la media en una Poisson es $Var(\\hat{\\lambda}) = \\frac{\\lambda}{n}$. Su estimación puntual es $\\frac{\\hat{\\lambda}}{n} = \\frac{6.0}{5} = 1.2$."
+        },
+        {
+          "id": "poi_5_d",
+          "label": "d",
+          "question": "Haciendo uso del parámetro estimado $\\hat{\\lambda}_{MLE}$ de la parte (b), calcule la probabilidad estimada de observar exactamente 0 eventos en un nuevo intervalo, dada por $P(X = 0) = e^{-\\hat{\\lambda}}$.",
+          "correctValue": 0.0025,
+          "tolerance": 0.01,
+          "explanation": "La probabilidad de observar cero eventos en una distribución de Poisson es $P(X=0) = \\frac{e^{-\\lambda} \\lambda^0}{0!} = e^{-\\lambda}$. Sustituyendo por $\\hat{\\lambda} = 6.0$, obtenemos $e^{-6.0} = 0.0025$."
+        }
+      ]
+    },
+    {
+      "id": "lab_16",
+      "title": "Estimación de la Proporción Muestral - Serie A",
+      "context": "Se realiza un muestreo dicotómico (éxito/fracaso) para analizar la tasa de aceptación de un servicio informático. Se desea estimar de manera puntual la proporción y calcular la incertidumbre asociada.",
+      "parts": [
+        {
+          "id": "prop_1_a",
+          "label": "a",
+          "question": "Calcule la proporción muestral de éxitos $\\hat{p} = k / n$ a partir de una muestra de tamaño $n=50$ con $k=15$ éxitos.",
+          "correctValue": 0.3,
+          "tolerance": 0.01,
+          "explanation": "La proporción muestral se calcula directamente dividiendo los éxitos observados por el total de ensayos: $\\hat{p} = 15 / 50 = 0.3$."
+        },
+        {
+          "id": "prop_1_b",
+          "label": "b",
+          "question": "Utilizando la proporción de la parte (a), calcule la varianza estimada de este estimador, dada por $\\widehat{Var}(\\hat{p}) = \\frac{\\hat{p}(1-\\hat{p})}{n}$.",
+          "correctValue": 0.0042,
+          "tolerance": 0.0001,
+          "explanation": "La varianza de la proporción muestral es $Var(\\hat{p}) = \\frac{p(1-p)}{n}$. Estimándola con la proporción de la muestra: $\\widehat{Var}(\\hat{p}) = \\frac{0.3 \\times (1 - 0.3)}{50} = 0.0042$."
+        },
+        {
+          "id": "prop_1_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), calcule el error estándar estimado de la proporción muestral, $\\widehat{SE}(\\hat{p}) = \\sqrt{\\widehat{Var}(\\hat{p})}$.",
+          "correctValue": 0.0648,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado es la raíz cuadrada de la varianza estimada calculada en la parte (b): $SE = \\sqrt{0.0042} = 0.0648$."
+        },
+        {
+          "id": "prop_1_d",
+          "label": "d",
+          "question": "Usando la proporción muestral estimada en la parte (a), calcule el número esperado de éxitos en una nueva población independiente de tamaño $N=200$ (calculado como $N \\cdot \\hat{p}$).",
+          "correctValue": 60.0,
+          "tolerance": 0.01,
+          "explanation": "El valor esperado de éxitos en una nueva muestra de tamaño $N$ bajo la proporción estimada es $E[Y] = N \\hat{p} = 200 \\times 0.3 = 60.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_17",
+      "title": "Estimación de la Proporción Muestral - Serie B",
+      "context": "Se realiza un muestreo dicotómico (éxito/fracaso) para analizar la tasa de aceptación de un servicio informático. Se desea estimar de manera puntual la proporción y calcular la incertidumbre asociada.",
+      "parts": [
+        {
+          "id": "prop_2_a",
+          "label": "a",
+          "question": "Calcule la proporción muestral de éxitos $\\hat{p} = k / n$ a partir de una muestra de tamaño $n=100$ con $k=40$ éxitos.",
+          "correctValue": 0.4,
+          "tolerance": 0.01,
+          "explanation": "La proporción muestral se calcula directamente dividiendo los éxitos observados por el total de ensayos: $\\hat{p} = 40 / 100 = 0.4$."
+        },
+        {
+          "id": "prop_2_b",
+          "label": "b",
+          "question": "Utilizando la proporción de la parte (a), calcule la varianza estimada de este estimador, dada por $\\widehat{Var}(\\hat{p}) = \\frac{\\hat{p}(1-\\hat{p})}{n}$.",
+          "correctValue": 0.0024,
+          "tolerance": 0.0001,
+          "explanation": "La varianza de la proporción muestral es $Var(\\hat{p}) = \\frac{p(1-p)}{n}$. Estimándola con la proporción de la muestra: $\\widehat{Var}(\\hat{p}) = \\frac{0.4 \\times (1 - 0.4)}{100} = 0.0024$."
+        },
+        {
+          "id": "prop_2_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), calcule el error estándar estimado de la proporción muestral, $\\widehat{SE}(\\hat{p}) = \\sqrt{\\widehat{Var}(\\hat{p})}$.",
+          "correctValue": 0.049,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado es la raíz cuadrada de la varianza estimada calculada en la parte (b): $SE = \\sqrt{0.0024} = 0.049$."
+        },
+        {
+          "id": "prop_2_d",
+          "label": "d",
+          "question": "Usando la proporción muestral estimada en la parte (a), calcule el número esperado de éxitos en una nueva población independiente de tamaño $N=500$ (calculado como $N \\cdot \\hat{p}$).",
+          "correctValue": 200.0,
+          "tolerance": 0.01,
+          "explanation": "El valor esperado de éxitos en una nueva muestra de tamaño $N$ bajo la proporción estimada es $E[Y] = N \\hat{p} = 500 \\times 0.4 = 200.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_18",
+      "title": "Estimación de la Proporción Muestral - Serie C",
+      "context": "Se realiza un muestreo dicotómico (éxito/fracaso) para analizar la tasa de aceptación de un servicio informático. Se desea estimar de manera puntual la proporción y calcular la incertidumbre asociada.",
+      "parts": [
+        {
+          "id": "prop_3_a",
+          "label": "a",
+          "question": "Calcule la proporción muestral de éxitos $\\hat{p} = k / n$ a partir de una muestra de tamaño $n=80$ con $k=20$ éxitos.",
+          "correctValue": 0.25,
+          "tolerance": 0.01,
+          "explanation": "La proporción muestral se calcula directamente dividiendo los éxitos observados por el total de ensayos: $\\hat{p} = 20 / 80 = 0.25$."
+        },
+        {
+          "id": "prop_3_b",
+          "label": "b",
+          "question": "Utilizando la proporción de la parte (a), calcule la varianza estimada de este estimador, dada por $\\widehat{Var}(\\hat{p}) = \\frac{\\hat{p}(1-\\hat{p})}{n}$.",
+          "correctValue": 0.002344,
+          "tolerance": 0.0001,
+          "explanation": "La varianza de la proporción muestral es $Var(\\hat{p}) = \\frac{p(1-p)}{n}$. Estimándola con la proporción de la muestra: $\\widehat{Var}(\\hat{p}) = \\frac{0.25 \\times (1 - 0.25)}{80} = 0.002344$."
+        },
+        {
+          "id": "prop_3_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), calcule el error estándar estimado de la proporción muestral, $\\widehat{SE}(\\hat{p}) = \\sqrt{\\widehat{Var}(\\hat{p})}$.",
+          "correctValue": 0.0484,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado es la raíz cuadrada de la varianza estimada calculada en la parte (b): $SE = \\sqrt{0.002344} = 0.0484$."
+        },
+        {
+          "id": "prop_3_d",
+          "label": "d",
+          "question": "Usando la proporción muestral estimada en la parte (a), calcule el número esperado de éxitos en una nueva población independiente de tamaño $N=400$ (calculado como $N \\cdot \\hat{p}$).",
+          "correctValue": 100.0,
+          "tolerance": 0.01,
+          "explanation": "El valor esperado de éxitos en una nueva muestra de tamaño $N$ bajo la proporción estimada es $E[Y] = N \\hat{p} = 400 \\times 0.25 = 100.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_19",
+      "title": "Estimación de la Proporción Muestral - Serie D",
+      "context": "Se realiza un muestreo dicotómico (éxito/fracaso) para analizar la tasa de aceptación de un servicio informático. Se desea estimar de manera puntual la proporción y calcular la incertidumbre asociada.",
+      "parts": [
+        {
+          "id": "prop_4_a",
+          "label": "a",
+          "question": "Calcule la proporción muestral de éxitos $\\hat{p} = k / n$ a partir de una muestra de tamaño $n=120$ con $k=90$ éxitos.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "La proporción muestral se calcula directamente dividiendo los éxitos observados por el total de ensayos: $\\hat{p} = 90 / 120 = 0.75$."
+        },
+        {
+          "id": "prop_4_b",
+          "label": "b",
+          "question": "Utilizando la proporción de la parte (a), calcule la varianza estimada de este estimador, dada por $\\widehat{Var}(\\hat{p}) = \\frac{\\hat{p}(1-\\hat{p})}{n}$.",
+          "correctValue": 0.001563,
+          "tolerance": 0.0001,
+          "explanation": "La varianza de la proporción muestral es $Var(\\hat{p}) = \\frac{p(1-p)}{n}$. Estimándola con la proporción de la muestra: $\\widehat{Var}(\\hat{p}) = \\frac{0.75 \\times (1 - 0.75)}{120} = 0.001563$."
+        },
+        {
+          "id": "prop_4_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), calcule el error estándar estimado de la proporción muestral, $\\widehat{SE}(\\hat{p}) = \\sqrt{\\widehat{Var}(\\hat{p})}$.",
+          "correctValue": 0.0395,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado es la raíz cuadrada de la varianza estimada calculada en la parte (b): $SE = \\sqrt{0.001563} = 0.0395$."
+        },
+        {
+          "id": "prop_4_d",
+          "label": "d",
+          "question": "Usando la proporción muestral estimada en la parte (a), calcule el número esperado de éxitos en una nueva población independiente de tamaño $N=800$ (calculado como $N \\cdot \\hat{p}$).",
+          "correctValue": 600.0,
+          "tolerance": 0.01,
+          "explanation": "El valor esperado de éxitos en una nueva muestra de tamaño $N$ bajo la proporción estimada es $E[Y] = N \\hat{p} = 800 \\times 0.75 = 600.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_20",
+      "title": "Estimación de la Proporción Muestral - Serie E",
+      "context": "Se realiza un muestreo dicotómico (éxito/fracaso) para analizar la tasa de aceptación de un servicio informático. Se desea estimar de manera puntual la proporción y calcular la incertidumbre asociada.",
+      "parts": [
+        {
+          "id": "prop_5_a",
+          "label": "a",
+          "question": "Calcule la proporción muestral de éxitos $\\hat{p} = k / n$ a partir de una muestra de tamaño $n=200$ con $k=150$ éxitos.",
+          "correctValue": 0.75,
+          "tolerance": 0.01,
+          "explanation": "La proporción muestral se calcula directamente dividiendo los éxitos observados por el total de ensayos: $\\hat{p} = 150 / 200 = 0.75$."
+        },
+        {
+          "id": "prop_5_b",
+          "label": "b",
+          "question": "Utilizando la proporción de la parte (a), calcule la varianza estimada de este estimador, dada por $\\widehat{Var}(\\hat{p}) = \\frac{\\hat{p}(1-\\hat{p})}{n}$.",
+          "correctValue": 0.000937,
+          "tolerance": 0.0001,
+          "explanation": "La varianza de la proporción muestral es $Var(\\hat{p}) = \\frac{p(1-p)}{n}$. Estimándola con la proporción de la muestra: $\\widehat{Var}(\\hat{p}) = \\frac{0.75 \\times (1 - 0.75)}{200} = 0.000937$."
+        },
+        {
+          "id": "prop_5_c",
+          "label": "c",
+          "question": "A partir del valor obtenido en la parte (b), calcule el error estándar estimado de la proporción muestral, $\\widehat{SE}(\\hat{p}) = \\sqrt{\\widehat{Var}(\\hat{p})}$.",
+          "correctValue": 0.0306,
+          "tolerance": 0.01,
+          "explanation": "El error estándar estimado es la raíz cuadrada de la varianza estimada calculada en la parte (b): $SE = \\sqrt{0.000937} = 0.0306$."
+        },
+        {
+          "id": "prop_5_d",
+          "label": "d",
+          "question": "Usando la proporción muestral estimada en la parte (a), calcule el número esperado de éxitos en una nueva población independiente de tamaño $N=1000$ (calculado como $N \\cdot \\hat{p}$).",
+          "correctValue": 750.0,
+          "tolerance": 0.01,
+          "explanation": "El valor esperado de éxitos en una nueva muestra de tamaño $N$ bajo la proporción estimada es $E[Y] = N \\hat{p} = 1000 \\times 0.75 = 750.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_21",
+      "title": "Análisis de Sesgo y ECM - Caso A",
+      "context": "Se evalúan las propiedades teóricas de un estimador puntual diseñado para un parámetro poblacional $\\theta$. Analizamos el impacto de corregir el sesgo multiplicando por una constante adecuada.",
+      "parts": [
+        {
+          "id": "bias_1_a",
+          "label": "a",
+          "question": "Sabiendo que el parámetro real es $\\theta = 10.0$ y que la esperanza de nuestro estimador es $E[\\hat{\\theta}] = 8.5$, calcule el sesgo de $\\hat{\\theta}$.",
+          "correctValue": -1.5,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $Sesgo(\\hat{\\theta}) = E[\\hat{\\theta}] - \\theta = 8.5 - 10.0 = -1.5$."
+        },
+        {
+          "id": "bias_1_b",
+          "label": "b",
+          "question": "A partir del sesgo obtenido en la parte (a) y sabiendo que la varianza del estimador es $Var(\\hat{\\theta}) = 1.8$, calcule el Error Cuadrático Medio ($ECM$) de $\\hat{\\theta}$.",
+          "correctValue": 4.05,
+          "tolerance": 0.01,
+          "explanation": "El Error Cuadrático Medio es la suma de la varianza y el sesgo al cuadrado: $ECM = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2 = 1.8 + (-1.5)^2 = 4.05$."
+        },
+        {
+          "id": "bias_1_c",
+          "label": "c",
+          "question": "Si asumimos que $E[\\hat{\\theta}] = a \\cdot \\theta$, determine el factor de escala $c = 1/a$ por el cual debemos multiplicar $\\hat{\\theta}$ para corregir el estimador y hacerlo insesgado.",
+          "correctValue": 1.1765,
+          "tolerance": 0.01,
+          "explanation": "Como $E[\\hat{\\theta}] = 8.5$ y $\\theta = 10.0$, la constante es $a = 8.5 / 10.0 = 0.85$. Para construir un estimador insesgado corregido $\\hat{\\theta}_{cor} = c \\hat{\\theta}$, se requiere que $E[c \\hat{\\theta}] = \\theta \\implies c \\cdot a \\theta = \\theta \\implies c = 1/a = 1.1765$."
+        },
+        {
+          "id": "bias_1_d",
+          "label": "d",
+          "question": "Usando el factor de escala $c$ de la parte (c), calcule la varianza del estimador corregido, que se define como $Var(c \\cdot \\hat{\\theta}) = c^2 \\cdot Var(\\hat{\\theta})$.",
+          "correctValue": 2.4913,
+          "tolerance": 0.01,
+          "explanation": "La varianza de una constante por una variable es la constante al cuadrado por la varianza de la variable: $Var(\\hat{\\theta}_{cor}) = c^2 Var(\\hat{\\theta}) = (1.1765)^2 \\times 1.8 = 2.4913$."
+        }
+      ]
+    },
+    {
+      "id": "lab_22",
+      "title": "Análisis de Sesgo y ECM - Caso B",
+      "context": "Se evalúan las propiedades teóricas de un estimador puntual diseñado para un parámetro poblacional $\\theta$. Analizamos el impacto de corregir el sesgo multiplicando por una constante adecuada.",
+      "parts": [
+        {
+          "id": "bias_2_a",
+          "label": "a",
+          "question": "Sabiendo que el parámetro real es $\\theta = 5.0$ y que la esperanza de nuestro estimador es $E[\\hat{\\theta}] = 4.0$, calcule el sesgo de $\\hat{\\theta}$.",
+          "correctValue": -1.0,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $Sesgo(\\hat{\\theta}) = E[\\hat{\\theta}] - \\theta = 4.0 - 5.0 = -1.0$."
+        },
+        {
+          "id": "bias_2_b",
+          "label": "b",
+          "question": "A partir del sesgo obtenido en la parte (a) y sabiendo que la varianza del estimador es $Var(\\hat{\\theta}) = 0.5$, calcule el Error Cuadrático Medio ($ECM$) de $\\hat{\\theta}$.",
+          "correctValue": 1.5,
+          "tolerance": 0.01,
+          "explanation": "El Error Cuadrático Medio es la suma de la varianza y el sesgo al cuadrado: $ECM = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2 = 0.5 + (-1.0)^2 = 1.5$."
+        },
+        {
+          "id": "bias_2_c",
+          "label": "c",
+          "question": "Si asumimos que $E[\\hat{\\theta}] = a \\cdot \\theta$, determine el factor de escala $c = 1/a$ por el cual debemos multiplicar $\\hat{\\theta}$ para corregir el estimador y hacerlo insesgado.",
+          "correctValue": 1.25,
+          "tolerance": 0.01,
+          "explanation": "Como $E[\\hat{\\theta}] = 4.0$ y $\\theta = 5.0$, la constante es $a = 4.0 / 5.0 = 0.8$. Para construir un estimador insesgado corregido $\\hat{\\theta}_{cor} = c \\hat{\\theta}$, se requiere que $E[c \\hat{\\theta}] = \\theta \\implies c \\cdot a \\theta = \\theta \\implies c = 1/a = 1.25$."
+        },
+        {
+          "id": "bias_2_d",
+          "label": "d",
+          "question": "Usando el factor de escala $c$ de la parte (c), calcule la varianza del estimador corregido, que se define como $Var(c \\cdot \\hat{\\theta}) = c^2 \\cdot Var(\\hat{\\theta})$.",
+          "correctValue": 0.7812,
+          "tolerance": 0.01,
+          "explanation": "La varianza de una constante por una variable es la constante al cuadrado por la varianza de la variable: $Var(\\hat{\\theta}_{cor}) = c^2 Var(\\hat{\\theta}) = (1.25)^2 \\times 0.5 = 0.7812$."
+        }
+      ]
+    },
+    {
+      "id": "lab_23",
+      "title": "Análisis de Sesgo y ECM - Caso C",
+      "context": "Se evalúan las propiedades teóricas de un estimador puntual diseñado para un parámetro poblacional $\\theta$. Analizamos el impacto de corregir el sesgo multiplicando por una constante adecuada.",
+      "parts": [
+        {
+          "id": "bias_3_a",
+          "label": "a",
+          "question": "Sabiendo que el parámetro real es $\\theta = 20.0$ y que la esperanza de nuestro estimador es $E[\\hat{\\theta}] = 18.0$, calcule el sesgo de $\\hat{\\theta}$.",
+          "correctValue": -2.0,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $Sesgo(\\hat{\\theta}) = E[\\hat{\\theta}] - \\theta = 18.0 - 20.0 = -2.0$."
+        },
+        {
+          "id": "bias_3_b",
+          "label": "b",
+          "question": "A partir del sesgo obtenido en la parte (a) y sabiendo que la varianza del estimador es $Var(\\hat{\\theta}) = 4.0$, calcule el Error Cuadrático Medio ($ECM$) de $\\hat{\\theta}$.",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "El Error Cuadrático Medio es la suma de la varianza y el sesgo al cuadrado: $ECM = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2 = 4.0 + (-2.0)^2 = 8.0$."
+        },
+        {
+          "id": "bias_3_c",
+          "label": "c",
+          "question": "Si asumimos que $E[\\hat{\\theta}] = a \\cdot \\theta$, determine el factor de escala $c = 1/a$ por el cual debemos multiplicar $\\hat{\\theta}$ para corregir el estimador y hacerlo insesgado.",
+          "correctValue": 1.1111,
+          "tolerance": 0.01,
+          "explanation": "Como $E[\\hat{\\theta}] = 18.0$ y $\\theta = 20.0$, la constante es $a = 18.0 / 20.0 = 0.9$. Para construir un estimador insesgado corregido $\\hat{\\theta}_{cor} = c \\hat{\\theta}$, se requiere que $E[c \\hat{\\theta}] = \\theta \\implies c \\cdot a \\theta = \\theta \\implies c = 1/a = 1.1111$."
+        },
+        {
+          "id": "bias_3_d",
+          "label": "d",
+          "question": "Usando el factor de escala $c$ de la parte (c), calcule la varianza del estimador corregido, que se define como $Var(c \\cdot \\hat{\\theta}) = c^2 \\cdot Var(\\hat{\\theta})$.",
+          "correctValue": 4.9383,
+          "tolerance": 0.01,
+          "explanation": "La varianza de una constante por una variable es la constante al cuadrado por la varianza de la variable: $Var(\\hat{\\theta}_{cor}) = c^2 Var(\\hat{\\theta}) = (1.1111)^2 \\times 4.0 = 4.9383$."
+        }
+      ]
+    },
+    {
+      "id": "lab_24",
+      "title": "Análisis de Sesgo y ECM - Caso D",
+      "context": "Se evalúan las propiedades teóricas de un estimador puntual diseñado para un parámetro poblacional $\\theta$. Analizamos el impacto de corregir el sesgo multiplicando por una constante adecuada.",
+      "parts": [
+        {
+          "id": "bias_4_a",
+          "label": "a",
+          "question": "Sabiendo que el parámetro real es $\\theta = 100.0$ y que la esperanza de nuestro estimador es $E[\\hat{\\theta}] = 95.0$, calcule el sesgo de $\\hat{\\theta}$.",
+          "correctValue": -5.0,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $Sesgo(\\hat{\\theta}) = E[\\hat{\\theta}] - \\theta = 95.0 - 100.0 = -5.0$."
+        },
+        {
+          "id": "bias_4_b",
+          "label": "b",
+          "question": "A partir del sesgo obtenido en la parte (a) y sabiendo que la varianza del estimador es $Var(\\hat{\\theta}) = 15.0$, calcule el Error Cuadrático Medio ($ECM$) de $\\hat{\\theta}$.",
+          "correctValue": 40.0,
+          "tolerance": 0.01,
+          "explanation": "El Error Cuadrático Medio es la suma de la varianza y el sesgo al cuadrado: $ECM = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2 = 15.0 + (-5.0)^2 = 40.0$."
+        },
+        {
+          "id": "bias_4_c",
+          "label": "c",
+          "question": "Si asumimos que $E[\\hat{\\theta}] = a \\cdot \\theta$, determine el factor de escala $c = 1/a$ por el cual debemos multiplicar $\\hat{\\theta}$ para corregir el estimador y hacerlo insesgado.",
+          "correctValue": 1.0526,
+          "tolerance": 0.01,
+          "explanation": "Como $E[\\hat{\\theta}] = 95.0$ y $\\theta = 100.0$, la constante es $a = 95.0 / 100.0 = 0.95$. Para construir un estimador insesgado corregido $\\hat{\\theta}_{cor} = c \\hat{\\theta}$, se requiere que $E[c \\hat{\\theta}] = \\theta \\implies c \\cdot a \\theta = \\theta \\implies c = 1/a = 1.0526$."
+        },
+        {
+          "id": "bias_4_d",
+          "label": "d",
+          "question": "Usando el factor de escala $c$ de la parte (c), calcule la varianza del estimador corregido, que se define como $Var(c \\cdot \\hat{\\theta}) = c^2 \\cdot Var(\\hat{\\theta})$.",
+          "correctValue": 16.6205,
+          "tolerance": 0.01,
+          "explanation": "La varianza de una constante por una variable es la constante al cuadrado por la varianza de la variable: $Var(\\hat{\\theta}_{cor}) = c^2 Var(\\hat{\\theta}) = (1.0526)^2 \\times 15.0 = 16.6205$."
+        }
+      ]
+    },
+    {
+      "id": "lab_25",
+      "title": "Análisis de Sesgo y ECM - Caso E",
+      "context": "Se evalúan las propiedades teóricas de un estimador puntual diseñado para un parámetro poblacional $\\theta$. Analizamos el impacto de corregir el sesgo multiplicando por una constante adecuada.",
+      "parts": [
+        {
+          "id": "bias_5_a",
+          "label": "a",
+          "question": "Sabiendo que el parámetro real es $\\theta = 2.0$ y que la esperanza de nuestro estimador es $E[\\hat{\\theta}] = 1.6$, calcule el sesgo de $\\hat{\\theta}$.",
+          "correctValue": -0.4,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $Sesgo(\\hat{\\theta}) = E[\\hat{\\theta}] - \\theta = 1.6 - 2.0 = -0.4$."
+        },
+        {
+          "id": "bias_5_b",
+          "label": "b",
+          "question": "A partir del sesgo obtenido en la parte (a) y sabiendo que la varianza del estimador es $Var(\\hat{\\theta}) = 0.12$, calcule el Error Cuadrático Medio ($ECM$) de $\\hat{\\theta}$.",
+          "correctValue": 0.28,
+          "tolerance": 0.01,
+          "explanation": "El Error Cuadrático Medio es la suma de la varianza y el sesgo al cuadrado: $ECM = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2 = 0.12 + (-0.4)^2 = 0.28$."
+        },
+        {
+          "id": "bias_5_c",
+          "label": "c",
+          "question": "Si asumimos que $E[\\hat{\\theta}] = a \\cdot \\theta$, determine el factor de escala $c = 1/a$ por el cual debemos multiplicar $\\hat{\\theta}$ para corregir el estimador y hacerlo insesgado.",
+          "correctValue": 1.25,
+          "tolerance": 0.01,
+          "explanation": "Como $E[\\hat{\\theta}] = 1.6$ y $\\theta = 2.0$, la constante es $a = 1.6 / 2.0 = 0.8$. Para construir un estimador insesgado corregido $\\hat{\\theta}_{cor} = c \\hat{\\theta}$, se requiere que $E[c \\hat{\\theta}] = \\theta \\implies c \\cdot a \\theta = \\theta \\implies c = 1/a = 1.25$."
+        },
+        {
+          "id": "bias_5_d",
+          "label": "d",
+          "question": "Usando el factor de escala $c$ de la parte (c), calcule la varianza del estimador corregido, que se define como $Var(c \\cdot \\hat{\\theta}) = c^2 \\cdot Var(\\hat{\\theta})$.",
+          "correctValue": 0.1875,
+          "tolerance": 0.01,
+          "explanation": "La varianza de una constante por una variable es la constante al cuadrado por la varianza de la variable: $Var(\\hat{\\theta}_{cor}) = c^2 Var(\\hat{\\theta}) = (1.25)^2 \\times 0.12 = 0.1875$."
+        }
+      ]
+    },
+    {
+      "id": "lab_26",
+      "title": "MLE en Distribución Uniforme - Caso A",
+      "context": "Se analiza una variable continua que sigue una distribución Uniforme en el intervalo $(0, \\theta)$. Se utiliza el máximo muestral como estimador de máxima verosimilitud de $\\theta$, y se aplica una corrección analítica para lograr la insesgadez.",
+      "parts": [
+        {
+          "id": "uni_1_a",
+          "label": "a",
+          "question": "Dada una muestra de una Uniforme$(0, \\theta)$ cuyo valor máximo observado es $M=8.0$, determine la estimación de máxima verosimilitud de $\\theta$, sabiendo que $\\hat{\\theta}_{MLE} = \\max(X)$.",
+          "correctValue": 8.0,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución Uniforme$(0, \\theta)$, la verosimilitud exige que todos los datos sean menores o iguales a $\\theta$. Por tanto, el menor valor posible para $\\theta$ que hace factibles los datos observados es el máximo muestral: $\\hat{\\theta}_{MLE} = M = 8.0$."
+        },
+        {
+          "id": "uni_1_b",
+          "label": "b",
+          "question": "Sabiendo que teóricamente el valor esperado del máximo de una muestra Uniforme es $E[\\max(X)] = \\frac{n}{n+1}\\theta$, calcule el sesgo teórico del estimador $\\hat{\\theta}_{MLE}$ si el parámetro real es $\\theta = 10.0$ y el tamaño de muestra es $n=4$.",
+          "correctValue": -2.0,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $E[\\hat{\\theta}] - \\theta = \\frac{n}{n+1}\\theta - \\theta = -\\frac{\\theta}{n+1}$. Sustituyendo $\\theta = 10.0$ y $n = 4$, obtenemos $-10.0 / (4+1) = -2.0$."
+        },
+        {
+          "id": "uni_1_c",
+          "label": "c",
+          "question": "A partir de la esperanza $E[\\hat{\\theta}_{MLE}] = \\frac{n}{n+1}\\theta$, determine el factor de corrección $c = (n+1)/n$ necesario para construir un estimador insesgado de la forma $\\hat{\\theta}_{cor} = c \\cdot \\hat{\\theta}_{MLE}$.",
+          "correctValue": 1.25,
+          "tolerance": 0.01,
+          "explanation": "Para que sea insesgado: $E[c \\max(X)] = \\theta \\implies c \\frac{n}{n+1}\\theta = \\theta \\implies c = \\frac{n+1}{n} = 1.25$."
+        },
+        {
+          "id": "uni_1_d",
+          "label": "d",
+          "question": "Multiplique la estimación original de la parte (a) por el factor de corrección de la parte (c) para obtener el valor del estimador insesgado corregido.",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado corregido es $\\hat{\\theta}_{cor} = c \\cdot M = 1.25 \\times 8.0 = 10.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_27",
+      "title": "MLE en Distribución Uniforme - Caso B",
+      "context": "Se analiza una variable continua que sigue una distribución Uniforme en el intervalo $(0, \\theta)$. Se utiliza el máximo muestral como estimador de máxima verosimilitud de $\\theta$, y se aplica una corrección analítica para lograr la insesgadez.",
+      "parts": [
+        {
+          "id": "uni_2_a",
+          "label": "a",
+          "question": "Dada una muestra de una Uniforme$(0, \\theta)$ cuyo valor máximo observado es $M=9.0$, determine la estimación de máxima verosimilitud de $\\theta$, sabiendo que $\\hat{\\theta}_{MLE} = \\max(X)$.",
+          "correctValue": 9.0,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución Uniforme$(0, \\theta)$, la verosimilitud exige que todos los datos sean menores o iguales a $\\theta$. Por tanto, el menor valor posible para $\\theta$ que hace factibles los datos observados es el máximo muestral: $\\hat{\\theta}_{MLE} = M = 9.0$."
+        },
+        {
+          "id": "uni_2_b",
+          "label": "b",
+          "question": "Sabiendo que teóricamente el valor esperado del máximo de una muestra Uniforme es $E[\\max(X)] = \\frac{n}{n+1}\\theta$, calcule el sesgo teórico del estimador $\\hat{\\theta}_{MLE}$ si el parámetro real es $\\theta = 12.0$ y el tamaño de muestra es $n=9$.",
+          "correctValue": -1.2,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $E[\\hat{\\theta}] - \\theta = \\frac{n}{n+1}\\theta - \\theta = -\\frac{\\theta}{n+1}$. Sustituyendo $\\theta = 12.0$ y $n = 9$, obtenemos $-12.0 / (9+1) = -1.2$."
+        },
+        {
+          "id": "uni_2_c",
+          "label": "c",
+          "question": "A partir de la esperanza $E[\\hat{\\theta}_{MLE}] = \\frac{n}{n+1}\\theta$, determine el factor de corrección $c = (n+1)/n$ necesario para construir un estimador insesgado de la forma $\\hat{\\theta}_{cor} = c \\cdot \\hat{\\theta}_{MLE}$.",
+          "correctValue": 1.1111,
+          "tolerance": 0.01,
+          "explanation": "Para que sea insesgado: $E[c \\max(X)] = \\theta \\implies c \\frac{n}{n+1}\\theta = \\theta \\implies c = \\frac{n+1}{n} = 1.1111$."
+        },
+        {
+          "id": "uni_2_d",
+          "label": "d",
+          "question": "Multiplique la estimación original de la parte (a) por el factor de corrección de la parte (c) para obtener el valor del estimador insesgado corregido.",
+          "correctValue": 10.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado corregido es $\\hat{\\theta}_{cor} = c \\cdot M = 1.1111 \\times 9.0 = 10.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_28",
+      "title": "MLE en Distribución Uniforme - Caso C",
+      "context": "Se analiza una variable continua que sigue una distribución Uniforme en el intervalo $(0, \\theta)$. Se utiliza el máximo muestral como estimador de máxima verosimilitud de $\\theta$, y se aplica una corrección analítica para lograr la insesgadez.",
+      "parts": [
+        {
+          "id": "uni_3_a",
+          "label": "a",
+          "question": "Dada una muestra de una Uniforme$(0, \\theta)$ cuyo valor máximo observado es $M=14.0$, determine la estimación de máxima verosimilitud de $\\theta$, sabiendo que $\\hat{\\theta}_{MLE} = \\max(X)$.",
+          "correctValue": 14.0,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución Uniforme$(0, \\theta)$, la verosimilitud exige que todos los datos sean menores o iguales a $\\theta$. Por tanto, el menor valor posible para $\\theta$ que hace factibles los datos observados es el máximo muestral: $\\hat{\\theta}_{MLE} = M = 14.0$."
+        },
+        {
+          "id": "uni_3_b",
+          "label": "b",
+          "question": "Sabiendo que teóricamente el valor esperado del máximo de una muestra Uniforme es $E[\\max(X)] = \\frac{n}{n+1}\\theta$, calcule el sesgo teórico del estimador $\\hat{\\theta}_{MLE}$ si el parámetro real es $\\theta = 16.0$ y el tamaño de muestra es $n=7$.",
+          "correctValue": -2.0,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $E[\\hat{\\theta}] - \\theta = \\frac{n}{n+1}\\theta - \\theta = -\\frac{\\theta}{n+1}$. Sustituyendo $\\theta = 16.0$ y $n = 7$, obtenemos $-16.0 / (7+1) = -2.0$."
+        },
+        {
+          "id": "uni_3_c",
+          "label": "c",
+          "question": "A partir de la esperanza $E[\\hat{\\theta}_{MLE}] = \\frac{n}{n+1}\\theta$, determine el factor de corrección $c = (n+1)/n$ necesario para construir un estimador insesgado de la forma $\\hat{\\theta}_{cor} = c \\cdot \\hat{\\theta}_{MLE}$.",
+          "correctValue": 1.1429,
+          "tolerance": 0.01,
+          "explanation": "Para que sea insesgado: $E[c \\max(X)] = \\theta \\implies c \\frac{n}{n+1}\\theta = \\theta \\implies c = \\frac{n+1}{n} = 1.1429$."
+        },
+        {
+          "id": "uni_3_d",
+          "label": "d",
+          "question": "Multiplique la estimación original de la parte (a) por el factor de corrección de la parte (c) para obtener el valor del estimador insesgado corregido.",
+          "correctValue": 16.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado corregido es $\\hat{\\theta}_{cor} = c \\cdot M = 1.1429 \\times 14.0 = 16.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_29",
+      "title": "MLE en Distribución Uniforme - Caso D",
+      "context": "Se analiza una variable continua que sigue una distribución Uniforme en el intervalo $(0, \\theta)$. Se utiliza el máximo muestral como estimador de máxima verosimilitud de $\\theta$, y se aplica una corrección analítica para lograr la insesgadez.",
+      "parts": [
+        {
+          "id": "uni_4_a",
+          "label": "a",
+          "question": "Dada una muestra de una Uniforme$(0, \\theta)$ cuyo valor máximo observado es $M=19.0$, determine la estimación de máxima verosimilitud de $\\theta$, sabiendo que $\\hat{\\theta}_{MLE} = \\max(X)$.",
+          "correctValue": 19.0,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución Uniforme$(0, \\theta)$, la verosimilitud exige que todos los datos sean menores o iguales a $\\theta$. Por tanto, el menor valor posible para $\\theta$ que hace factibles los datos observados es el máximo muestral: $\\hat{\\theta}_{MLE} = M = 19.0$."
+        },
+        {
+          "id": "uni_4_b",
+          "label": "b",
+          "question": "Sabiendo que teóricamente el valor esperado del máximo de una muestra Uniforme es $E[\\max(X)] = \\frac{n}{n+1}\\theta$, calcule el sesgo teórico del estimador $\\hat{\\theta}_{MLE}$ si el parámetro real es $\\theta = 20.0$ y el tamaño de muestra es $n=19$.",
+          "correctValue": -1.0,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $E[\\hat{\\theta}] - \\theta = \\frac{n}{n+1}\\theta - \\theta = -\\frac{\\theta}{n+1}$. Sustituyendo $\\theta = 20.0$ y $n = 19$, obtenemos $-20.0 / (19+1) = -1.0$."
+        },
+        {
+          "id": "uni_4_c",
+          "label": "c",
+          "question": "A partir de la esperanza $E[\\hat{\\theta}_{MLE}] = \\frac{n}{n+1}\\theta$, determine el factor de corrección $c = (n+1)/n$ necesario para construir un estimador insesgado de la forma $\\hat{\\theta}_{cor} = c \\cdot \\hat{\\theta}_{MLE}$.",
+          "correctValue": 1.0526,
+          "tolerance": 0.01,
+          "explanation": "Para que sea insesgado: $E[c \\max(X)] = \\theta \\implies c \\frac{n}{n+1}\\theta = \\theta \\implies c = \\frac{n+1}{n} = 1.0526$."
+        },
+        {
+          "id": "uni_4_d",
+          "label": "d",
+          "question": "Multiplique la estimación original de la parte (a) por el factor de corrección de la parte (c) para obtener el valor del estimador insesgado corregido.",
+          "correctValue": 20.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado corregido es $\\hat{\\theta}_{cor} = c \\cdot M = 1.0526 \\times 19.0 = 20.0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_30",
+      "title": "MLE en Distribución Uniforme - Caso E",
+      "context": "Se analiza una variable continua que sigue una distribución Uniforme en el intervalo $(0, \\theta)$. Se utiliza el máximo muestral como estimador de máxima verosimilitud de $\\theta$, y se aplica una corrección analítica para lograr la insesgadez.",
+      "parts": [
+        {
+          "id": "uni_5_a",
+          "label": "a",
+          "question": "Dada una muestra de una Uniforme$(0, \\theta)$ cuyo valor máximo observado es $M=4.5$, determine la estimación de máxima verosimilitud de $\\theta$, sabiendo que $\\hat{\\theta}_{MLE} = \\max(X)$.",
+          "correctValue": 4.5,
+          "tolerance": 0.01,
+          "explanation": "Para una distribución Uniforme$(0, \\theta)$, la verosimilitud exige que todos los datos sean menores o iguales a $\\theta$. Por tanto, el menor valor posible para $\\theta$ que hace factibles los datos observados es el máximo muestral: $\\hat{\\theta}_{MLE} = M = 4.5$."
+        },
+        {
+          "id": "uni_5_b",
+          "label": "b",
+          "question": "Sabiendo que teóricamente el valor esperado del máximo de una muestra Uniforme es $E[\\max(X)] = \\frac{n}{n+1}\\theta$, calcule el sesgo teórico del estimador $\\hat{\\theta}_{MLE}$ si el parámetro real es $\\theta = 5.0$ y el tamaño de muestra es $n=9$.",
+          "correctValue": -0.5,
+          "tolerance": 0.01,
+          "explanation": "El sesgo se calcula como $E[\\hat{\\theta}] - \\theta = \\frac{n}{n+1}\\theta - \\theta = -\\frac{\\theta}{n+1}$. Sustituyendo $\\theta = 5.0$ y $n = 9$, obtenemos $-5.0 / (9+1) = -0.5$."
+        },
+        {
+          "id": "uni_5_c",
+          "label": "c",
+          "question": "A partir de la esperanza $E[\\hat{\\theta}_{MLE}] = \\frac{n}{n+1}\\theta$, determine el factor de corrección $c = (n+1)/n$ necesario para construir un estimador insesgado de la forma $\\hat{\\theta}_{cor} = c \\cdot \\hat{\\theta}_{MLE}$.",
+          "correctValue": 1.1111,
+          "tolerance": 0.01,
+          "explanation": "Para que sea insesgado: $E[c \\max(X)] = \\theta \\implies c \\frac{n}{n+1}\\theta = \\theta \\implies c = \\frac{n+1}{n} = 1.1111$."
+        },
+        {
+          "id": "uni_5_d",
+          "label": "d",
+          "question": "Multiplique la estimación original de la parte (a) por el factor de corrección de la parte (c) para obtener el valor del estimador insesgado corregido.",
+          "correctValue": 5.0,
+          "tolerance": 0.01,
+          "explanation": "El estimador insesgado corregido es $\\hat{\\theta}_{cor} = c \\cdot M = 1.1111 \\times 4.5 = 5.0$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Media Muestral",
+      "tex": "$$\\bar{X} = \\frac{1}{n} \\sum_{i=1}^n X_i$$"
+    },
+    {
+      "name": "Varianza Muestral (Sesgada)",
+      "tex": "$$S^2 = \\frac{1}{n} \\sum_{i=1}^n (X_i - \\bar{X})^2$$"
+    },
+    {
+      "name": "Cuasivarianza Muestral (Insesgada)",
+      "tex": "$$S_{n-1}^2 = \\frac{1}{n-1} \\sum_{i=1}^n (X_i - \\bar{X})^2$$"
+    },
+    {
+      "name": "Proporción Muestral",
+      "tex": "$$\\hat{p} = \\frac{1}{n} \\sum_{i=1}^n X_i \\quad (X_i \\in \\{0, 1\\})$$"
+    },
+    {
+      "name": "Sesgo de un Estimador",
+      "tex": "$$\\text{Sesgo}(\\hat{\\theta}) = E[\\hat{\\theta}] - \\theta$$"
+    },
+    {
+      "name": "Varianza de la Media Muestral",
+      "tex": "$$Var(\\bar{X}) = \\frac{\\sigma^2}{n}$$"
+    },
+    {
+      "name": "Error Cuadrático Medio (ECM)",
+      "tex": "$$ECM(\\hat{\\theta}) = Var(\\hat{\\theta}) + [Sesgo(\\hat{\\theta})]^2$$"
+    },
+    {
+      "name": "Función de Verosimilitud (m.a.s.)",
+      "tex": "$$L(\\theta) = \\prod_{i=1}^n f(x_i; \\theta)$$"
+    }
+  ]
+}

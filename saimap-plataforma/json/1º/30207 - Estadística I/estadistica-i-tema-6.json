@@ -1,0 +1,2104 @@
+{
+  "TEST_A": [
+    {
+      "q": "1. ¿Qué describe una variable aleatoria que sigue una distribución Binomial $X \\sim B(n, p)$?",
+      "options": [
+        "El número de éxitos en $n$ ensayos independientes de Bernoulli con probabilidad constante de éxito $p$",
+        "El número de ensayos necesarios hasta obtener el primer éxito",
+        "El número de eventos que ocurren en un intervalo continuo de tiempo"
+      ],
+      "correct": 0,
+      "hint": "Piensa en ensayos independientes con solo dos resultados posibles.",
+      "explanation": "La distribución Binomial modela el número de éxitos al realizar $n$ pruebas independientes de Bernoulli, donde la probabilidad de éxito en cada una de ellas es constante e igual a $p$."
+    },
+    {
+      "q": "2. Para que una variable siga una distribución Binomial, los ensayos de Bernoulli deben ser:",
+      "options": [
+        "Dependientes entre sí y con probabilidad variable",
+        "Independientes entre sí y con probabilidad de éxito constante $p$",
+        "Continuos y con tasa de ocurrencia constante"
+      ],
+      "correct": 1,
+      "hint": "La independencia y la constancia de la probabilidad son supuestos clave.",
+      "explanation": "Los ensayos de Bernoulli que componen un proceso binomial deben ser independientes e idénticamente distribuidos, lo que significa que el resultado de uno no afecta a los demás y la probabilidad de éxito $p$ se mantiene constante."
+    },
+    {
+      "q": "3. ¿Cuál es la expresión de la esperanza matemática de una variable Binomial $X \\sim B(n, p)$?",
+      "options": [
+        "$E[X] = p$",
+        "$E[X] = n \\cdot p \\cdot (1-p)$",
+        "$E[X] = n \\cdot p$"
+      ],
+      "correct": 2,
+      "hint": "La esperanza de un único ensayo de Bernoulli es $p$. Para $n$ ensayos, se multiplica por $n$.",
+      "explanation": "Por la linealidad de la esperanza, el valor esperado de la suma de $n$ variables de Bernoulli independientes con parámetro $p$ es $E[X] = n \\cdot p$."
+    },
+    {
+      "q": "4. ¿Cuál es la expresión de la varianza de una variable Binomial $X \\sim B(n, p)$?",
+      "options": [
+        "$Var(X) = n \\cdot p \\cdot (1-p)$",
+        "$Var(X) = n \\cdot p$",
+        "$Var(X) = p \\cdot (1-p)$"
+      ],
+      "correct": 0,
+      "hint": "La varianza de un solo ensayo de Bernoulli es $p(1-p)$.",
+      "explanation": "Dado que los ensayos son independientes, la varianza de la suma es la suma de las varianzas de cada ensayo de Bernoulli, lo que resulta en $Var(X) = n \\cdot p \\cdot (1-p)$."
+    },
+    {
+      "q": "5. En R, ¿qué función se utiliza para obtener la probabilidad puntual exacta $P(X = x)$ en una distribución Binomial?",
+      "options": [
+        "`pbinom`",
+        "`dbinom`",
+        "`qbinom`"
+      ],
+      "correct": 1,
+      "hint": "El prefijo `d` en R indica la función de densidad o de probabilidad puntual.",
+      "explanation": "La función `dbinom(x, size, prob)` calcula la probabilidad exacta de obtener $x$ éxitos en una distribución Binomial con parámetros $n = \\text{size}$ y $p = \\text{prob}$."
+    },
+    {
+      "q": "6. En R, la expresión `pbinom(q, size, prob)` calcula:",
+      "options": [
+        "La probabilidad acumulada $P(X \\le q)$",
+        "La probabilidad exacta $P(X = q)$",
+        "El cuantil asociado a la probabilidad $q$"
+      ],
+      "correct": 0,
+      "hint": "El prefijo `p` en R indica la función de distribución acumulada.",
+      "explanation": "La función `pbinom(q, size, prob)` proporciona la probabilidad acumulada por debajo de $q$, es decir, $P(X \\le q)$."
+    },
+    {
+      "q": "7. ¿Cómo se calcula en R la probabilidad de obtener más de 4 éxitos en un modelo Binomial con 10 ensayos?",
+      "options": [
+        "`pbinom(4, 10, p)`",
+        "`1 - pbinom(4, 10, p)`",
+        "`dbinom(4, 10, p)`"
+      ],
+      "correct": 1,
+      "hint": "Recuerda que el suceso complementario a $X > 4$ es $X \\le 4$.",
+      "explanation": "La probabilidad de que una variable discreta sea mayor que 4 es $P(X > 4) = 1 - P(X \\le 4)$. En R, esto se traduce en `1 - pbinom(4, size, prob)` o mediante el argumento `lower.tail = FALSE` de `pbinom`."
+    },
+    {
+      "q": "8. ¿Qué función de R se utiliza para generar valores pseudoaleatorios de una distribución Binomial?",
+      "options": [
+        "`rbinom`",
+        "`randbinom`",
+        "`pbinom`"
+      ],
+      "correct": 0,
+      "hint": "El prefijo `r` proviene de 'random'.",
+      "explanation": "La función `rbinom(n, size, prob)` genera $n$ realizaciones aleatorias e independientes de una variable aleatoria Binomial."
+    },
+    {
+      "q": "9. La distribución de Poisson $X \\sim P(\\lambda)$ es adecuada para modelar:",
+      "options": [
+        "El número de ensayos hasta obtener un éxito",
+        "El número de eventos independientes que ocurren a una tasa constante en un intervalo continuo de tiempo o espacio",
+        "La duración temporal de un componente físico"
+      ],
+      "correct": 1,
+      "hint": "Piensa en el conteo de sucesos raros o peticiones que llegan en el tiempo.",
+      "explanation": "La distribución de Poisson describe procesos de llegada de eventos independientes a una tasa constante $\\lambda$ por unidad de tiempo o espacio (por ejemplo, número de llamadas a un centro de atención o número de erratas por página)."
+    },
+    {
+      "q": "10. En una distribución de Poisson $X \\sim P(\\lambda)$, ¿cuál es la relación entre su esperanza y su varianza?",
+      "options": [
+        "La varianza es el cuadrado de la esperanza",
+        "La esperanza y la varianza son iguales a $\\lambda$",
+        "La varianza es el doble de la esperanza"
+      ],
+      "correct": 1,
+      "hint": "Es una de las propiedades más singulares y reconocibles del modelo de Poisson.",
+      "explanation": "Para una variable $X \\sim P(\\lambda)$, se cumple que tanto la esperanza matemática como la varianza tienen el mismo valor numérico, el cual coincide con el parámetro de tasa $\\lambda$ ($E[X] = Var(X) = \\lambda$)."
+    },
+    {
+      "q": "11. La función de probabilidad de una variable de Poisson $X \\sim P(\\lambda)$ viene dada por:",
+      "options": [
+        "$P(X = k) = \\frac{e^{-\\lambda} \\lambda^k}{k!}$",
+        "$P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$",
+        "$P(X = k) = \\lambda e^{-\\lambda k}$"
+      ],
+      "correct": 0,
+      "hint": "La función involucra la constante exponencial $e$ y el factorial del número de eventos $k!$.",
+      "explanation": "La probabilidad de observar exactamente $k$ eventos en una distribución de Poisson de parámetro $\\lambda$ es $P(X = k) = \\frac{e^{-\\lambda} \\lambda^k}{k!}$ para $k \\in \\{0, 1, 2, \\dots\\}$."
+    },
+    {
+      "q": "12. En R, la función `dpois(k, lambda)` calcula:",
+      "options": [
+        "La probabilidad acumulada $P(X \\le k)$",
+        "La probabilidad puntual $P(X = k)$",
+        "El cuantil asociado a la tasa $\\lambda$"
+      ],
+      "correct": 1,
+      "hint": "El prefijo `d` corresponde a la densidad/probabilidad puntual.",
+      "explanation": "`dpois(k, lambda)` devuelve el valor de la función de masa de probabilidad en el punto $k$, es decir, $P(X = k)$."
+    },
+    {
+      "q": "13. Si queremos modelar el número de ensayos independientes de Bernoulli hasta conseguir el primer éxito, la distribución adecuada es la:",
+      "options": [
+        "Distribución Binomial",
+        "Distribución Geométrica",
+        "Distribución de Poisson"
+      ],
+      "correct": 1,
+      "hint": "Se busca la cantidad de repeticiones antes de lograr el primer acierto.",
+      "explanation": "La distribución Geométrica modela el número de ensayos de Bernoulli independientes con probabilidad constante de éxito $p$ necesarios para obtener el primer éxito."
+    },
+    {
+      "q": "14. Para una distribución Geométrica $X \\sim G(p)$ definida sobre el soporte de ensayos $k \\in \\{1, 2, 3, \\dots\\}$, ¿cuál es su esperanza?",
+      "options": [
+        "$E[X] = \\frac{1}{p}$",
+        "$E[X] = \\frac{1-p}{p}$",
+        "$E[X] = p$"
+      ],
+      "correct": 0,
+      "hint": "Es el inverso de la probabilidad de éxito.",
+      "explanation": "Si $X$ representa el número de ensayos necesarios hasta el primer éxito, el valor esperado es $E[X] = 1/p$."
+    },
+    {
+      "q": "15. ¿Cuál es la varianza de una distribución Geométrica $X \\sim G(p)$ con soporte $k \\in \\{1, 2, \\dots\\}$?",
+      "options": [
+        "$Var(X) = \\frac{1}{p^2}$",
+        "$Var(X) = \\frac{1-p}{p^2}$",
+        "$Var(X) = \\frac{1-p}{p}$"
+      ],
+      "correct": 1,
+      "hint": "La varianza tiene el término $1-p$ (probabilidad de fracaso) en el numerador.",
+      "explanation": "La varianza para una variable aleatoria geométrica que mide el número de ensayos es $Var(X) = \\frac{1-p}{p^2}$."
+    },
+    {
+      "q": "16. En R, la distribución geométrica (`dgeom`) cuenta:",
+      "options": [
+        "El número total de ensayos hasta el primer éxito",
+        "El número de fracasos acumulados antes de obtener el primer éxito",
+        "El número de éxitos conseguidos en $n$ intentos"
+      ],
+      "correct": 1,
+      "hint": "Presta atención a cómo define R esta distribución para empezar desde cero.",
+      "explanation": "En R, la distribución geométrica se define sobre el soporte $\\{0, 1, 2, \\dots\\}$, lo que representa el número de fracasos ocurridos antes del primer éxito."
+    },
+    {
+      "q": "17. Si definimos la Geométrica en R y queremos la probabilidad de que el primer éxito ocurra en el 4º ensayo, ¿qué valor de `x` pasamos a `dgeom(x, prob)`?",
+      "options": [
+        "`x = 4`",
+        "`x = 3`",
+        "`x = 5`"
+      ],
+      "correct": 1,
+      "hint": "Cuenta el número de fracasos anteriores al primer éxito.",
+      "explanation": "Si el éxito ocurre en el cuarto ensayo, significa que los tres primeros ensayos fueron fracasos. Dado que la distribución geométrica en R modela el número de fracasos, el argumento debe ser `x = 3`."
+    },
+    {
+      "q": "18. ¿Qué caracteriza a una distribución continua Uniforme $X \\sim U(a, b)$?",
+      "options": [
+        "Presenta una densidad de probabilidad constante en el intervalo $[a, b]$",
+        "Tiene una tasa de fallos exponencialmente decreciente",
+        "La probabilidad acumulada es una constante plana"
+      ],
+      "correct": 0,
+      "hint": "Todos los intervalos de la misma longitud dentro del soporte tienen igual probabilidad.",
+      "explanation": "La distribución uniforme continua asigna la misma probabilidad a intervalos de igual longitud dentro de su soporte $[a, b]$, lo que se traduce en una función de densidad constante y plana $f(x) = 1/(b-a)$."
+    },
+    {
+      "q": "19. ¿Cuál es la esperanza de una distribución Uniforme $X \\sim U(a, b)$?",
+      "options": [
+        "$E[X] = \\frac{a+b}{2}$",
+        "$E[X] = \\frac{b-a}{2}$",
+        "$E[X] = \\frac{a+b}{12}$"
+      ],
+      "correct": 0,
+      "hint": "Es el punto medio del intervalo del soporte.",
+      "explanation": "La esperanza de una distribución uniforme continua es simplemente el punto central del intervalo sobre el que está definida, es decir, el promedio aritmético de sus límites: $E[X] = (a+b)/2$."
+    },
+    {
+      "q": "20. ¿Cuál es la varianza de una distribución Uniforme $X \\sim U(a, b)$?",
+      "options": [
+        "$Var(X) = \\frac{(b-a)^2}{12}$",
+        "$Var(X) = \\frac{(b-a)^2}{2}$",
+        "$Var(X) = \\frac{a^2 + b^2}{12}$"
+      ],
+      "correct": 0,
+      "hint": "Involucra el denominador 12 y la longitud del intervalo elevada al cuadrado.",
+      "explanation": "La varianza de una variable Uniforme en el intervalo $[a, b]$ se deriva analíticamente mediante la integral de los momentos cuadráticos, obteniendo $Var(X) = \\frac{(b-a)^2}{12}$."
+    },
+    {
+      "q": "21. La función de densidad de la distribución Uniforme continua $X \\sim U(a, b)$ dentro de su soporte es:",
+      "options": [
+        "$f(x) = \\frac{1}{b-a}$",
+        "$f(x) = \\frac{1}{a+b}$",
+        "$f(x) = \\lambda e^{-\\lambda x}$"
+      ],
+      "correct": 0,
+      "hint": "Es el recíproco de la longitud total del intervalo.",
+      "explanation": "Para que la integral de la densidad sobre el intervalo $[a, b]$ sea igual a 1, la altura de la función de densidad debe ser constante e igual a $1/(b-a)$."
+    },
+    {
+      "q": "22. ¿Qué mide la distribución Exponencial $X \\sim Exp(\\lambda)$?",
+      "options": [
+        "El número de fallos en un intervalo de tiempo",
+        "El tiempo que transcurre entre dos eventos sucesivos de un proceso de Poisson con tasa $\\lambda$",
+        "El número de intentos independientes hasta conseguir el primer éxito"
+      ],
+      "correct": 1,
+      "hint": "Representa el tiempo de espera entre eventos de Poisson.",
+      "explanation": "La distribución Exponencial es la versión continua del tiempo de espera entre eventos que ocurren de acuerdo a un proceso de Poisson a una tasa media constante $\\lambda$."
+    },
+    {
+      "q": "23. La función de densidad de una variable Exponencial con parámetro de tasa $\\lambda > 0$ (para $x \\ge 0$) es:",
+      "options": [
+        "$f(x) = \\lambda e^{-\\lambda x}$",
+        "$f(x) = e^{-\\lambda x}$",
+        "$f(x) = 1 - e^{-\\lambda x}$"
+      ],
+      "correct": 0,
+      "hint": "Disminuye de forma exponencial decreciente a partir de $\\lambda$.",
+      "explanation": "La función de densidad de la distribución exponencial es $f(x) = \\lambda e^{-\\lambda x}$ para todo $x \\ge 0$, y 0 en cualquier otro caso."
+    },
+    {
+      "q": "24. ¿Cuál es la función de distribución acumulada $F(x) = P(X \\le x)$ para una distribución Exponencial (con $x \\ge 0$)?",
+      "options": [
+        "$F(x) = 1 - e^{-\\lambda x}$",
+        "$F(x) = e^{-\\lambda x}$",
+        "$F(x) = \\lambda e^{-\\lambda x}$"
+      ],
+      "correct": 0,
+      "hint": "Representa la integral de la función de densidad de 0 a $x$.",
+      "explanation": "Al integrar la función de densidad $\\lambda e^{-\\lambda t}$ de 0 a $x$ se obtiene la función de distribución acumulada: $F(x) = 1 - e^{-\\lambda x}$."
+    },
+    {
+      "q": "25. ¿Cuál es la esperanza matemática de una variable Exponencial $X \\sim Exp(\\lambda)$?",
+      "options": [
+        "$E[X] = \\lambda$",
+        "$E[X] = \\frac{1}{\\lambda}$",
+        "$E[X] = \\frac{1}{\\lambda^2}$"
+      ],
+      "correct": 1,
+      "hint": "Es el recíproco del parámetro de tasa.",
+      "explanation": "El tiempo medio esperado entre eventos es el inverso de la tasa media de llegadas. Así, $E[X] = 1/\\lambda$."
+    },
+    {
+      "q": "26. ¿Cuál es la varianza de una variable Exponencial $X \\sim Exp(\\lambda)$?",
+      "options": [
+        "$Var(X) = \\frac{1}{\\lambda^2}$",
+        "$Var(X) = \\frac{1}{\\lambda}$",
+        "$Var(X) = \\lambda^2$"
+      ],
+      "correct": 0,
+      "hint": "Es el cuadrado del valor esperado.",
+      "explanation": "Para la distribución exponencial, la desviación típica es igual a la esperanza ($1/\\lambda$). Por lo tanto, la varianza es el cuadrado de la esperanza, es decir, $Var(X) = 1/\\lambda^2$."
+    },
+    {
+      "q": "27. ¿Qué establece la propiedad de falta de memoria (memoryless property) de la distribución Exponencial?",
+      "options": [
+        "Que la probabilidad de que ocurra el evento en el futuro es independiente de cuánto tiempo haya transcurrido ya",
+        "Que la probabilidad de fallo aumenta a medida que el componente envejece",
+        "Que la tasa media de eventos fluctúa de forma aleatoria con el tiempo"
+      ],
+      "correct": 0,
+      "hint": "El componente 'no envejece'.",
+      "explanation": "La propiedad establece que $P(X > s + t \\mid X > s) = P(X > t)$. Esto significa que si un componente electrónico ha funcionado durante $s$ horas, la probabilidad de que funcione otras $t$ horas más es la misma que la probabilidad de que dure $t$ horas desde el principio."
+    },
+    {
+      "q": "28. ¿Cuáles son las únicas distribuciones de probabilidad (continua y discreta respectivamente) que poseen la propiedad de falta de memoria?",
+      "options": [
+        "Exponencial y Binomial",
+        "Exponencial y Geométrica",
+        "Uniforme y Poisson"
+      ],
+      "correct": 1,
+      "hint": "Son los modelos que representan tiempos de espera continuos y discretos.",
+      "explanation": "Las únicas distribuciones que carecen de memoria son la exponencial (en el caso continuo) y la geométrica (en el caso discreto)."
+    },
+    {
+      "q": "29. En R, para calcular la probabilidad de que una variable exponencial supere un valor $x$, se puede usar:",
+      "options": [
+        "`pexp(x, rate, lower.tail = FALSE)`",
+        "`dexp(x, rate)`",
+        "`qexp(x, rate)`"
+      ],
+      "correct": 0,
+      "hint": "Se busca calcular $P(X > x)$, es decir, la cola superior.",
+      "explanation": "La opción `lower.tail = FALSE` de la función `pexp` instruye a R para que calcule la integral de la cola derecha de la densidad, que equivale a $P(X > x)$."
+    },
+    {
+      "q": "30. ¿Cuál es el parámetro que requiere la función `pexp` de R para definir la tasa de la distribución exponencial?",
+      "options": [
+        "`lambda`",
+        "`rate`",
+        "`mean`"
+      ],
+      "correct": 1,
+      "hint": "El término en inglés significa tasa o ritmo de ocurrencia.",
+      "explanation": "En R, el parámetro de la distribución exponencial se denomina `rate`, y corresponde a la tasa $\\lambda$ del proceso continuo."
+    },
+    {
+      "q": "31. Si un proceso de Poisson tiene una tasa media de 2 eventos por minuto, el tiempo de espera entre eventos sigue una distribución exponencial con tasa $\\lambda$ igual a:",
+      "options": [
+        "0.5",
+        "2",
+        "4"
+      ],
+      "correct": 1,
+      "hint": "La tasa de la distribución exponencial asociada es la misma del proceso de Poisson.",
+      "explanation": "El parámetro de tasa $\\lambda$ de la distribución exponencial que modela los tiempos de espera es exactamente igual a la tasa del proceso de Poisson de origen, es decir, $\\lambda = 2$."
+    },
+    {
+      "q": "32. En un proceso de Poisson con tasa de ocurrencia $\\lambda$, el número de eventos en un intervalo de longitud $T$ sigue una distribución de Poisson con parámetro:",
+      "options": [
+        "$\\lambda$",
+        "$\\lambda \\cdot T$",
+        "$\\frac{\\lambda}{T}$"
+      ],
+      "correct": 2,
+      "hint": "La tasa se escala proporcionalmente con el tamaño del intervalo.",
+      "explanation": "La tasa media es $\\lambda$ por unidad. Para un intervalo de tamaño $T$, la tasa media esperada de eventos es el producto $\\lambda \\cdot T$."
+    },
+    {
+      "q": "33. Si la probabilidad de éxito de un ensayo de Bernoulli es $p = 1$, la varianza de la distribución Binomial asociada es:",
+      "options": [
+        "1",
+        "0",
+        "$n$"
+      ],
+      "correct": 1,
+      "hint": "Sustituye $p=1$ en la fórmula de la varianza.",
+      "explanation": "La varianza es $Var(X) = n \\cdot p \\cdot (1-p)$. Si $p = 1$, entonces $1-p = 0$, por lo que la varianza es igual a 0. Esto tiene sentido ya que el resultado es determinista (siempre se obtienen $n$ éxitos)."
+    },
+    {
+      "q": "34. La distribución de Poisson se puede utilizar como una aproximación de la distribución Binomial cuando:",
+      "options": [
+        "$n$ es grande y $p$ es muy pequeño, con $\\lambda = n \\cdot p$ constante",
+        "$n$ es pequeño y $p$ es grande",
+        "$n$ tiende a infinito y $p$ tiende a 1"
+      ],
+      "correct": 0,
+      "hint": "Se conoce también como la ley de los sucesos raros.",
+      "explanation": "Cuando el número de ensayos $n$ es elevado (por ejemplo, $n \\ge 30$) y la probabilidad de éxito $p$ es muy pequeña (por ejemplo, $p \\le 0.05$), la binomial $B(n, p)$ se aproxima por una Poisson con parámetro $\\lambda = n \\cdot p$."
+    },
+    {
+      "q": "35. Si la variable aleatoria $X$ es uniforme en el intervalo $[a, b]$, la altura de su función de densidad es:",
+      "options": [
+        "Constantemente $\\frac{1}{b-a}$",
+        "Cero en todos los puntos",
+        "Lineal de pendiente $\\frac{1}{b-a}$"
+      ],
+      "correct": 0,
+      "hint": "La densidad de la uniforme es constante en todo el soporte.",
+      "explanation": "Dado que la integral de la densidad sobre el intervalo $[a, b]$ debe dar 1, la función de densidad debe ser constante e igual a $\\frac{1}{b-a}$."
+    },
+    {
+      "q": "36. ¿Qué representa la función `qnorm` o en general `q[dist]` en R?",
+      "options": [
+        "La función de cuantiles, que es la inversa de la función de distribución acumulada",
+        "La función de densidad puntual",
+        "Un generador de números aleatorios"
+      ],
+      "correct": 0,
+      "hint": "El prefijo `q` proviene de 'quantile'.",
+      "explanation": "Las funciones con prefijo `q` calculan el valor de la variable para el cual se acumula una determinada probabilidad a la izquierda (inversa de la función de distribución)."
+    },
+    {
+      "q": "37. En el caso de una variable geométrica $X$ que cuenta el número de fracasos antes del primer éxito (definición en R), su esperanza matemática es:",
+      "options": [
+        "$\\frac{1}{p}$",
+        "$\\frac{1-p}{p}$",
+        "$\\frac{1}{p^2}$"
+      ],
+      "correct": 1,
+      "hint": "Es menor en una unidad que el modelo que cuenta los ensayos totales.",
+      "explanation": "Si definimos $Y$ como el número de ensayos totales hasta el primer éxito ($E[Y] = 1/p$), el número de fracasos previos es $X = Y - 1$. Por linealidad de la esperanza: $E[X] = E[Y] - 1 = 1/p - 1 = (1-p)/p$."
+    },
+    {
+      "q": "38. Si el tiempo de vida de un componente se modela con una distribución exponencial, la probabilidad de que falle exactamente en el instante de tiempo $t=5$ es:",
+      "options": [
+        "0",
+        "$e^{-5\\lambda}$",
+        "$\\lambda e^{-5\\lambda}$"
+      ],
+      "correct": 0,
+      "hint": "Para variables aleatorias continuas, la probabilidad en un punto aislado es nula.",
+      "explanation": "La probabilidad de que una variable aleatoria continua tome un valor exacto específico es siempre 0, ya que su probabilidad se define mediante áreas bajo la curva de densidad."
+    },
+    {
+      "q": "39. Si $X \\sim P(\\lambda)$, la probabilidad del suceso complementario a que ocurran cero eventos se calcula como:",
+      "options": [
+        "$1 - e^{-\\lambda}$",
+        "$e^{-\\lambda}$",
+        "$\\lambda e^{-\\lambda}$"
+      ],
+      "correct": 0,
+      "hint": "Calcula primero la probabilidad de que no ocurra ningún evento ($X=0$).",
+      "explanation": "El suceso complementario a 'cero eventos' es 'al menos un evento' ($X \\ge 1$). Como $P(X=0) = e^{-\\lambda}$, entonces $P(X \\ge 1) = 1 - P(X=0) = 1 - e^{-\\lambda}$."
+    },
+    {
+      "q": "40. La mediana de una variable aleatoria continua es el valor $M$ tal que:",
+      "options": [
+        "$P(X \\le M) = 0.5$",
+        "$P(X = M) = 0.5$",
+        "$E[X] = M$"
+      ],
+      "correct": 0,
+      "hint": "La mediana divide el área total bajo la función de densidad en dos partes iguales.",
+      "explanation": "La mediana $M$ se define formalmente como el valor de la variable que acumula una probabilidad de exactamente el 50%, es decir, $P(X \\le M) = 0.5$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "1. Si $X \\sim B(10, 0.3)$, la esperanza de $X$ es ____ y su varianza es 2.1.",
+      "options": [
+        "3.0",
+        "4.0",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $E[X] = n \\cdot p$.",
+      "explanation": "Para $n = 10$ y $p = 0.3$, $E[X] = 10 \\cdot 0.3 = 3.0$."
+    },
+    {
+      "q": "2. Si $X \\sim P(4)$, la probabilidad de que $X = 0$ es aproximadamente ____.",
+      "options": [
+        "0.0183",
+        "0.0543",
+        "0.1353"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula de probabilidad puntual de Poisson para $k = 0$, que se simplifica a $e^{-\\lambda}$.",
+      "explanation": "$P(X = 0) = e^{-4} \\approx 0.0183156$."
+    },
+    {
+      "q": "3. Si una variable $X \\sim G(0.25)$ modela el número de ensayos hasta el primer éxito, su valor esperado es ____.",
+      "options": [
+        "4.0",
+        "2.0",
+        "3.0"
+      ],
+      "correct": 0,
+      "hint": "Aplica $E[X] = 1/p$.",
+      "explanation": "$E[X] = 1 / 0.25 = 4.0$."
+    },
+    {
+      "q": "4. Para una variable Uniforme continua $X \\sim U(2, 8)$, la varianza es de ____.",
+      "options": [
+        "3.0",
+        "4.0",
+        "5.0"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $Var(X) = (b-a)^2 / 12$.",
+      "explanation": "Con $a = 2$ y $b = 8$, $Var(X) = (8 - 2)^2 / 12 = 36 / 12 = 3.0$."
+    },
+    {
+      "q": "5. Si $X \\sim Exp(0.5)$, la probabilidad de que $X \\le 2$ es aproximadamente ____.",
+      "options": [
+        "0.6321",
+        "0.3679",
+        "0.5000"
+      ],
+      "correct": 0,
+      "hint": "Usa la función de distribución acumulada $F(x) = 1 - e^{-\\lambda x}$.",
+      "explanation": "$F(2) = 1 - e^{-0.5 \\cdot 2} = 1 - e^{-1} \\approx 0.63212$."
+    },
+    {
+      "q": "6. La varianza de una variable aleatoria $X \\sim B(20, 0.1)$ es ____.",
+      "options": [
+        "1.8",
+        "2.0",
+        "1.6"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $Var(X) = n \\cdot p \\cdot (1-p)$.",
+      "explanation": "$Var(X) = 20 \\cdot 0.1 \\cdot 0.9 = 1.8$."
+    },
+    {
+      "q": "7. Para una variable de Poisson $X \\sim P(9)$, la desviación típica es igual a ____.",
+      "options": [
+        "3.0",
+        "9.0",
+        "4.5"
+      ],
+      "correct": 0,
+      "hint": "Recuerda que la varianza es $\\lambda$, y la desviación típica es su raíz cuadrada.",
+      "explanation": "La varianza es $\\lambda = 9$, por lo que la desviación típica es $\\sigma = \\sqrt{9} = 3.0$."
+    },
+    {
+      "q": "8. Si $X \\sim G(0.1)$, el número de fracasos esperados antes del primer éxito (según el modelo usado en R) es ____.",
+      "options": [
+        "9.0",
+        "10.0",
+        "1.0"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $E[X_{R}] = (1-p)/p$.",
+      "explanation": "$E[X_R] = (1 - 0.1) / 0.1 = 0.9 / 0.1 = 9.0$."
+    },
+    {
+      "q": "9. Una variable uniforme continua $X \\sim U(0, 10)$ tiene un valor de esperanza igual a ____.",
+      "options": [
+        "5.0",
+        "4.0",
+        "6.0"
+      ],
+      "correct": 0,
+      "hint": "Calcula el punto medio del intervalo $[0, 10]$.",
+      "explanation": "$E[X] = (0 + 10) / 2 = 5.0$."
+    },
+    {
+      "q": "10. Para una variable $X \\sim Exp(2)$, su esperanza $E[X]$ es igual a ____.",
+      "options": [
+        "0.5",
+        "2.0",
+        "1.0"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $E[X] = 1/\\lambda$.",
+      "explanation": "$E[X] = 1 / 2 = 0.5$."
+    },
+    {
+      "q": "11. Si $X \\sim B(5, 0.5)$, la probabilidad de que $X = 5$ (es decir, todos éxitos) es de ____.",
+      "options": [
+        "0.03125",
+        "0.0625",
+        "0.15625"
+      ],
+      "correct": 0,
+      "hint": "Es $p^n$, puesto que los sucesos son independientes.",
+      "explanation": "$P(X = 5) = 0.5^5 = 0.03125$."
+    },
+    {
+      "q": "12. Si el número medio de errores de red por hora es $\\lambda = 2$, la probabilidad de no registrar fallos en una hora es ____.",
+      "options": [
+        "0.1353",
+        "0.2707",
+        "0.0500"
+      ],
+      "correct": 0,
+      "hint": "Usa el modelo de Poisson con $k=0$.",
+      "explanation": "$P(X=0) = e^{-2} \\approx 0.1353$."
+    },
+    {
+      "q": "13. Si una variable $X \\sim G(0.5)$ modela el número de intentos, la probabilidad de que el primer éxito ocurra en el segundo intento es ____.",
+      "options": [
+        "0.25",
+        "0.50",
+        "0.125"
+      ],
+      "correct": 0,
+      "hint": "Significa que primero hay un fracaso y luego un éxito.",
+      "explanation": "$P(X = 2) = (1-0.5) \\cdot 0.5 = 0.25$."
+    },
+    {
+      "q": "14. Para una variable uniforme continua $X \\sim U(-5, 5)$, la probabilidad acumulada $P(X < 0)$ es igual a ____.",
+      "options": [
+        "0.5",
+        "0.25",
+        "0.75"
+      ],
+      "correct": 0,
+      "hint": "El intervalo $[-5, 0]$ cubre exactamente la mitad del soporte total de longitud 10.",
+      "explanation": "$P(X < 0) = (0 - (-5)) / (5 - (-5)) = 5 / 10 = 0.5$."
+    },
+    {
+      "q": "15. Si el tiempo de vida de un componente es $X \\sim Exp(0.1)$ años, la probabilidad de que dure más de 10 años es ____.",
+      "options": [
+        "0.3679",
+        "0.6321",
+        "0.1000"
+      ],
+      "correct": 0,
+      "hint": "Usa la probabilidad de la cola derecha $P(X > x) = e^{-\\lambda x}$.",
+      "explanation": "$P(X > 10) = e^{-0.1 \\cdot 10} = e^{-1} \\approx 0.3679$."
+    },
+    {
+      "q": "16. En R, la llamada `dbinom(0, size = 4, prob = 0.5)` da como resultado ____.",
+      "options": [
+        "0.0625",
+        "0.2500",
+        "0.1250"
+      ],
+      "correct": 0,
+      "hint": "Es la probabilidad de obtener 0 éxitos en 4 lanzamientos de una moneda equilibrada.",
+      "explanation": "`dbinom(0, 4, 0.5)` calcula $0.5^4 = 0.0625$."
+    },
+    {
+      "q": "17. Si $X \\sim P(1)$, la varianza de $X$ es ____.",
+      "options": [
+        "1.0",
+        "0.0",
+        "2.0"
+      ],
+      "correct": 0,
+      "hint": "La varianza de una Poisson es igual a su parámetro de tasa.",
+      "explanation": "Para $X \\sim P(1)$, $Var(X) = \\lambda = 1.0$."
+    },
+    {
+      "q": "18. Para una variable uniforme $X \\sim U(0, 6)$, el valor de la función de densidad en el punto $x = 3$ es ____.",
+      "options": [
+        "1/6",
+        "1/2",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "La función de densidad de la uniforme es constante e igual a $1/(b-a)$ dentro de su soporte.",
+      "explanation": "$f(3) = 1 / (6 - 0) = 1/6$."
+    },
+    {
+      "q": "19. Si $X \\sim Exp(4)$, su varianza es ____.",
+      "options": [
+        "0.0625",
+        "0.2500",
+        "0.5000"
+      ],
+      "correct": 0,
+      "hint": "La varianza de la exponencial es $1/\\lambda^2$.",
+      "explanation": "$Var(X) = 1 / 4^2 = 1 / 16 = 0.0625$."
+    },
+    {
+      "q": "20. Si $X \\sim B(100, 0.02)$, la esperanza de $X$ es ____.",
+      "options": [
+        "2.0",
+        "20.0",
+        "0.2"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula $E[X] = n \\cdot p$.",
+      "explanation": "$E[X] = 100 \\cdot 0.02 = 2.0$."
+    },
+    {
+      "q": "21. Para modelar de forma adecuada una distribución Binomial, ¿qué condiciones deben cumplirse?",
+      "options": [
+        "Independencia entre los ensayos de Bernoulli",
+        "Probabilidad de éxito constante en cada ensayo",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Revisa los supuestos fundamentales del modelo Binomial.",
+      "explanation": "Para aplicar la distribución Binomial, cada ensayo debe tener solo dos posibles resultados, la probabilidad de éxito debe mantenerse constante ($p$) y los resultados de los ensayos deben ser independientes."
+    },
+    {
+      "q": "22. En una distribución de Poisson de parámetro $\\lambda$:",
+      "options": [
+        "La media y la varianza son idénticas e iguales a $\\lambda$",
+        "El soporte de la variable es el conjunto de enteros no negativos $\\{0, 1, 2, \\dots\\}$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Evalúa los momentos y el rango de valores que puede tomar una variable de Poisson.",
+      "explanation": "Ambas afirmaciones son propiedades básicas de la distribución de Poisson: su soporte son los enteros no negativos y su media y varianza valen $\\lambda$."
+    },
+    {
+      "q": "23. La distribución geométrica se caracteriza por:",
+      "options": [
+        "Modelar el número de fracasos antes de obtener el primer éxito (según R)",
+        "Tener la propiedad de falta de memoria en el ámbito discreto",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Considera la propiedad de no envejecimiento y la definición usada por el software.",
+      "explanation": "La geométrica modela el número de fracasos anteriores al primer éxito en R, y es la única distribución discreta que presenta falta de memoria."
+    },
+    {
+      "q": "24. En el lenguaje R, la distribución exponencial puede analizarse mediante:",
+      "options": [
+        "`dexp` para la función de densidad de probabilidad",
+        "`pexp` para la función de distribución acumulada",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Revisa la nomenclatura de prefijos de distribuciones en R.",
+      "explanation": "R proporciona `dexp` (densidad) y `pexp` (distribución acumulada) para trabajar con el modelo exponencial."
+    },
+    {
+      "q": "25. Si $X \\sim U(a, b)$, ¿cuáles de las siguientes afirmaciones son correctas?",
+      "options": [
+        "La función de densidad es constante en el intervalo $[a, b]$",
+        "La media es el punto medio del intervalo, $(a+b)/2$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Considera las propiedades geométricas de la densidad y la esperanza de la uniforme.",
+      "explanation": "La densidad es constante e igual a $1/(b-a)$ y su esperanza es el valor central del intervalo de soporte."
+    },
+    {
+      "q": "26. La propiedad de falta de memoria se cumple para:",
+      "options": [
+        "La distribución exponencial (en variables continuas)",
+        "La distribución geométrica (en variables discretas)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La falta de memoria describe variables cuyo comportamiento futuro no depende del tiempo ya transcurrido.",
+      "explanation": "Los dos únicos modelos con falta de memoria son la distribución exponencial (continua) y la distribución geométrica (discreta)."
+    },
+    {
+      "q": "27. Al realizar $n$ lanzamientos independientes de una moneda con probabilidad de cara $p$:",
+      "options": [
+        "El número de caras sigue una distribución Binomial $B(n, p)$",
+        "La varianza de caras obtenidas es máxima cuando $p = 0.5$",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La varianza de una binomial es $n \\cdot p \\cdot (1-p)$. ¿Cuándo alcanza su máximo esta función cuadrática?",
+      "explanation": "El número de caras es una binomial $B(n, p)$. Su varianza es $Var(X) = n p (1-p)$, que es una parábola invertida con su máximo en $p = 0.5$."
+    },
+    {
+      "q": "28. El parámetro de tasa $\\lambda$ en una distribución exponencial representa:",
+      "options": [
+        "El número medio de eventos por unidad de tiempo del proceso de Poisson asociado",
+        "El inverso de la esperanza matemática de la variable",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La tasa es la inversa del tiempo medio de espera.",
+      "explanation": "En una distribución exponencial, $E[X] = 1/\\lambda \\implies \\lambda = 1/E[X]$. Además, es el parámetro de tasa media del proceso de Poisson subyacente."
+    },
+    {
+      "q": "29. En R, para generar simulaciones aleatorias de variables estudiadas en el Tema 6 podemos usar:",
+      "options": [
+        "`runif` para la distribución uniforme",
+        "`rexp` para la distribución exponencial",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Identifica las funciones que empiezan por `r` para distribuciones continuas.",
+      "explanation": "Las funciones `runif` y `rexp` generan valores pseudoaleatorios para la distribución uniforme y exponencial, respectivamente."
+    },
+    {
+      "q": "30. Una distribución de Poisson es adecuada para modelar:",
+      "options": [
+        "El número de peticiones recibidas por un servidor web en 10 minutos",
+        "El número de erratas detectadas en una página de un libro",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Evalúa si las variables propuestas representan conteos en un soporte continuo (tiempo o espacio).",
+      "explanation": "Tanto las peticiones de red por intervalo temporal como las erratas por unidad de área son ejemplos clásicos de aplicación del modelo de Poisson."
+    },
+    {
+      "q": "31. Si $X \\sim B(10, 0.4)$, la probabilidad exacta de obtener 11 éxitos es:",
+      "options": [
+        "0.4000",
+        "0.0001",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El soporte de la variable es el número de éxitos posibles.",
+      "explanation": "El soporte de una binomial con 10 ensayos es $\\{0, 1, \\dots, 10\\}$. La probabilidad de obtener 11 éxitos es estrictamente 0, lo cual no está recogido en las dos primeras opciones."
+    },
+    {
+      "q": "32. Si $X \\sim P(5)$, ¿cuál es el valor de su desviación típica?",
+      "options": [
+        "5.0000",
+        "2.5000",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La desviación estándar es la raíz cuadrada del parámetro $\\lambda$.",
+      "explanation": "La varianza es $\\lambda = 5$. La desviación típica es $\\sigma = \\sqrt{5} \\approx 2.2361$, que no coincide con 5.0 ni con 2.5."
+    },
+    {
+      "q": "33. Para una variable geométrica $X \\sim G(p)$ que mide el número de ensayos hasta el primer éxito, si la probabilidad de éxito es $p=0.0$, su esperanza es:",
+      "options": [
+        "0.0",
+        "1.0",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Si la probabilidad de éxito es cero, el éxito nunca ocurrirá.",
+      "explanation": "Para $p=0$, la esperanza $E[X] = 1/p$ no está definida (tiende a infinito), por lo que elegimos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "34. Si $X \\sim U(0, 10)$, la probabilidad de que $X$ tome exactamente el valor 5.000 es:",
+      "options": [
+        "0.1000",
+        "0.5000",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Considera la naturaleza continua de la distribución uniforme.",
+      "explanation": "Para cualquier variable aleatoria continua, la probabilidad de que tome un valor puntual es exactamente 0. Por tanto, no es 0.1 ni 0.5."
+    },
+    {
+      "q": "35. Si $X \\sim Exp(2)$, su mediana es:",
+      "options": [
+        "0.5000",
+        "2.0000",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Resuelve la ecuación de la distribución acumulada para $F(M) = 0.5$.",
+      "explanation": "$1 - e^{-2 M} = 0.5 \\implies e^{-2 M} = 0.5 \\implies M = \\ln(2)/2 \\approx 0.3466$. Al no coincidir con 0.5 ni con 2.0, se escoge 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "36. En R, la función que calcula el cuantil 0.95 de una Binomial $B(20, 0.3)$ es:",
+      "options": [
+        "`pbinom(0.95, 20, 0.3)`",
+        "`dbinom(0.95, 20, 0.3)`",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Los cuantiles se obtienen con la función inversa de la acumulada.",
+      "explanation": "La función para calcular cuantiles en R es `qbinom`. Por lo tanto, la llamada correcta es `qbinom(0.95, 20, 0.3)`. Las opciones propuestas son incorrectas."
+    },
+    {
+      "q": "37. Si $X \\sim B(12, 0.25)$, ¿cuál es su varianza?",
+      "options": [
+        "3.0000",
+        "4.0000",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Calcula la varianza usando la fórmula $n \\cdot p \\cdot (1-p)$.",
+      "explanation": "$Var(X) = 12 \\cdot 0.25 \\cdot 0.75 = 2.25$. Dado que no es 3.0 ni 4.0, la opción correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "38. Para una variable $X \\sim Exp(\\lambda)$, la probabilidad de que $X$ sea estrictamente menor que su esperanza $1/\\lambda$ es:",
+      "options": [
+        "0.5000",
+        "0.3679",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Sustituye $x = 1/\\lambda$ en la función de distribución acumulada.",
+      "explanation": "$P(X < 1/\\lambda) = F(1/\\lambda) = 1 - e^{-\\lambda (1/\\lambda)} = 1 - e^{-1} \\approx 0.6321$. Ninguna de las opciones anteriores muestra este valor."
+    },
+    {
+      "q": "39. Si $X \\sim U(-2, 2)$, su varianza es:",
+      "options": [
+        "1.3333",
+        "5.3333",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 0,
+      "hint": "Aplica la fórmula de la varianza Uniforme $(b-a)^2 / 12$.",
+      "explanation": "$Var(X) = (2 - (-2))^2 / 12 = 16 / 12 = 4/3 \\approx 1.3333$. La primera opción es correcta, por lo que la opción 'Ninguna de las anteriores' es incorrecta."
+    },
+    {
+      "q": "40. Si $X \\sim P(\\lambda)$, la probabilidad $P(X \\ge 1)$ es igual a:",
+      "options": [
+        "$1 - e^{\\lambda}$",
+        "$\\lambda e^{-\\lambda}$",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Calcula la probabilidad complementaria a $X = 0$.",
+      "explanation": "$P(X \\ge 1) = 1 - P(X = 0) = 1 - e^{-\\lambda}$. Las opciones A y B plantean fórmulas incorrectas."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_01",
+      "title": "Control de calidad de microchips",
+      "context": "Un fabricante de microchips produce lotes donde el 2% de los microchips son defectuosos de forma independiente.",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "En un lote de 50 microchips, calcula el número esperado de defectuosos.",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "El número esperado de microchips defectuosos es $E[X] = n \\cdot p = 50 \\cdot 0.02 = 1.0$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de encontrar exactamente el número esperado de defectuosos en el lote (es decir, $P(X = 1)$).",
+          "correctValue": 0.3716,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 1) = \\binom{50}{1} 0.02^1 0.98^{49} = 50 \\cdot 0.02 \\cdot 0.3716 = 0.3716$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de encontrar al menos un microchip defectuoso en el lote ($P(X \\ge 1)$).",
+          "correctValue": 0.6358,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 1) = 1 - P(X = 0) = 1 - 0.98^{50} \\approx 1 - 0.3642 = 0.6358$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si seleccionamos sucesivamente lotes de 50, calcula el número esperado de lotes que debemos revisar hasta encontrar el primero que tiene al menos un defectuoso (incluyendo este último).",
+          "correctValue": 1.5727,
+          "tolerance": 0.005,
+          "explanation": "Dado que la probabilidad de éxito (lote con al menos un defectuoso) es $p_l = 0.6358$, el número esperado de intentos para el primer éxito sigue una distribución geométrica con media $E[Y] = 1/p_l = 1/0.6358 \\approx 1.5728$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_02",
+      "title": "Consultas al servidor web",
+      "context": "Un servidor de base de datos recibe un promedio de 3 peticiones por minuto de forma independiente y a tasa constante.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "Calcula la probabilidad de que no se reciban peticiones en un minuto determinado ($P(X = 0)$).",
+          "correctValue": 0.0498,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 0) = \\frac{e^{-3} 3^0}{0!} = e^{-3} \\approx 0.0498$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que haya al menos una petición en un minuto.",
+          "correctValue": 0.9502,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 1) = 1 - P(X = 0) = 1 - e^{-3} \\approx 0.9502$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "En un intervalo de 5 minutos, ¿cuál es el número esperado de peticiones?",
+          "correctValue": 15.0,
+          "tolerance": 0.0,
+          "explanation": "La tasa media es proporcional al tiempo: $\\lambda_{5} = 3 \\cdot 5 = 15.0$ peticiones."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de recibir exactamente 15 peticiones en esos 5 minutos.",
+          "correctValue": 0.1024,
+          "tolerance": 0.001,
+          "explanation": "$P(Y = 15) = \\frac{e^{-15} 15^{15}}{15!} \\approx 0.1024$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_03",
+      "title": "Transmisión de paquetes TCP",
+      "context": "Un protocolo de red retransmite un paquete de forma independiente. La probabilidad de transmisión exitosa en cada intento es $p = 0.4$.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "Calcula el número esperado de intentos requeridos para lograr la primera transmisión exitosa.",
+          "correctValue": 2.5,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = 1/p = 1/0.4 = 2.5$ intentos."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de lograr la transmisión exitosa exactamente en el segundo intento ($P(X = 2)$).",
+          "correctValue": 0.24,
+          "tolerance": 0.0,
+          "explanation": "$P(X = 2) = (1-0.4) \\cdot 0.4 = 0.6 \\cdot 0.4 = 0.24$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que se requieran más de 3 intentos ($P(X > 3)$).",
+          "correctValue": 0.216,
+          "tolerance": 0.0,
+          "explanation": "$P(X > 3) = (1-0.4)^3 = 0.6^3 = 0.216$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Si se transmiten 10 paquetes independientes, calcula el número esperado de paquetes que requerirán más de 3 intentos.",
+          "correctValue": 2.16,
+          "tolerance": 0.01,
+          "explanation": "El número de paquetes sigue una distribución Binomial $B(10, p_{c})$ con $p_c = 0.216$. El valor esperado es $E[Z] = 10 \\cdot 0.216 = 2.16$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_04",
+      "title": "Tiempo de ejecución de un proceso",
+      "context": "El tiempo de ejecución (en segundos) de un script de base de datos se distribuye de forma uniforme entre 10 y 30 segundos.",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "Calcula el valor esperado del tiempo de ejecución.",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = \\frac{a+b}{2} = \\frac{10+30}{2} = 20.0$ segundos."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "Calcula la varianza del tiempo de ejecución.",
+          "correctValue": 33.3333,
+          "tolerance": 0.01,
+          "explanation": "$Var(X) = \\frac{(b-a)^2}{12} = \\frac{(30-10)^2}{12} = \\frac{400}{12} \\approx 33.3333\\text{ s}^2$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que el script tarde más de 25 segundos en ejecutarse.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "$P(X > 25) = \\frac{30 - 25}{30 - 10} = \\frac{5}{20} = 0.25$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "Si ejecutamos el script 4 veces de forma independiente, ¿cuál es la probabilidad de que tarde más de 25 segundos exactamente en 2 de las 4 ejecuciones?",
+          "correctValue": 0.2109,
+          "tolerance": 0.001,
+          "explanation": "$P(Z = 2) = \\binom{4}{2} (0.25)^2 (0.75)^2 = 6 \\cdot 0.0625 \\cdot 0.5625 = 0.2109$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_05",
+      "title": "Tiempo entre fallos en disco duro",
+      "context": "El tiempo de funcionamiento (en años) de un tipo de disco duro antes de fallar sigue una distribución exponencial con tasa $\\lambda = 0.2$ fallos/año.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "Calcula el valor esperado del tiempo de vida del disco duro en años.",
+          "correctValue": 5.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = 1/\\lambda = 1/0.2 = 5.0$ años."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que un disco duro falle antes de los 3 años ($P(X < 3)$).",
+          "correctValue": 0.4512,
+          "tolerance": 0.001,
+          "explanation": "$P(X < 3) = 1 - e^{-0.2 \\cdot 3} = 1 - e^{-0.6} \\approx 0.4512$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "Si un disco duro ya ha funcionado sin fallar durante 2 años, calcula la probabilidad de que dure al menos 3 años más.",
+          "correctValue": 0.5488,
+          "tolerance": 0.001,
+          "explanation": "Por la falta de memoria de la distribución exponencial, la probabilidad condicionada es idéntica a la probabilidad no condicionada de durar más de 3 años: $P(X > 5 \\mid X > 2) = P(X > 3) = e^{-0.2 \\cdot 3} = e^{-0.6} \\approx 0.5488$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "Si instalamos un servidor con 3 discos duros idénticos e independientes, calcula la probabilidad de que los 3 duren al menos 3 años más.",
+          "correctValue": 0.1653,
+          "tolerance": 0.002,
+          "explanation": "$P(\\text{todos}) = (P(X > 3))^3 = (e^{-0.6})^3 = e^{-1.8} \\approx 0.1653$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_06",
+      "title": "Envíos de correos basura",
+      "context": "Un filtro de spam recibe una media de 0.8 correos basura por hora de forma independiente.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "Calcula la tasa media de spam recibida en un periodo de 8 horas.",
+          "correctValue": 6.4,
+          "tolerance": 0.0,
+          "explanation": "La tasa media es $\\lambda_{8} = 0.8 \\cdot 8 = 6.4$ correos basura."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de recibir exactamente 5 correos basura en una jornada laboral de 8 horas.",
+          "correctValue": 0.1487,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 5) = \\frac{e^{-6.4} 6.4^5}{5!} \\approx 0.1490$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de recibir al menos un correo basura en una hora determinada ($P(Y \\ge 1)$).",
+          "correctValue": 0.5507,
+          "tolerance": 0.001,
+          "explanation": "$P(Y \\ge 1) = 1 - P(Y = 0) = 1 - e^{-0.8} \\approx 0.5507$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Si vigilamos el buzón durante 3 horas independientes, calcula la probabilidad de recibir al menos un correo basura en exactamente 2 de esas 3 horas.",
+          "correctValue": 0.4088,
+          "tolerance": 0.002,
+          "explanation": "Sigue una binomial $B(3, 0.5507)$. La probabilidad de obtener exactamente 2 es $\\binom{3}{2} (0.5507)^2 (1 - 0.5507) \\approx 0.4088$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_07",
+      "title": "Sensores IoT defectuosos",
+      "context": "En un envío de sensores de temperatura IoT, se sabe que el 5% son defectuosos de forma independiente.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "Si seleccionamos una muestra aleatoria de 15 sensores, calcula la probabilidad de tener exactamente 0 defectuosos.",
+          "correctValue": 0.4633,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 0) = 0.95^{15} \\approx 0.4633$."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de tener al menos 2 defectuosos en la muestra de 15 ($P(X \\ge 2)$).",
+          "correctValue": 0.171,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 2) = 1 - P(X = 0) - P(X = 1) = 1 - 0.95^{15} - 15 \\cdot 0.05 \\cdot 0.95^{14} \\approx 1 - 0.4633 - 0.3658 = 0.1709$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Calcula la varianza del número de sensores defectuosos en la muestra de 15.",
+          "correctValue": 0.7125,
+          "tolerance": 0.001,
+          "explanation": "$Var(X) = n \\cdot p \\cdot (1-p) = 15 \\cdot 0.05 \\cdot 0.95 = 0.7125$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Si se revisan sensores uno a uno, calcula el número esperado de sensores que deben revisarse hasta encontrar el primer defectuoso.",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "El tiempo de espera hasta el primer éxito sigue una distribución geométrica con esperanza $E[Y] = 1/p = 1/0.05 = 20.0$ sensores."
+        }
+      ]
+    },
+    {
+      "id": "LAB_08",
+      "title": "Tiempo de espera del autobús urbano",
+      "context": "El tiempo de espera (en minutos) para el autobús en una parada sigue una distribución uniforme entre 0 y 12 minutos.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "Calcula la probabilidad de tener que esperar más de 9 minutos.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "$P(X > 9) = \\frac{12 - 9}{12} = 0.25$."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "Sabiendo que el autobús no pasará en los próximos 3 minutos, calcula la probabilidad de esperar en total más de 9 minutos ($P(X > 9 \\mid X > 3)$).",
+          "correctValue": 0.3333,
+          "tolerance": 0.001,
+          "explanation": "$P(X > 9 \\mid X > 3) = \\frac{P(X > 9)}{P(X > 3)} = \\frac{3/12}{9/12} = \\frac{3}{9} \\approx 0.3333$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "Calcula el tiempo medio de espera en minutos.",
+          "correctValue": 6.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = \\frac{0+12}{2} = 6.0$ minutos."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "Calcula la desviación típica de este tiempo de espera en minutos.",
+          "correctValue": 3.4641,
+          "tolerance": 0.001,
+          "explanation": "La varianza es $(12-0)^2 / 12 = 12$. La desviación típica es $\\sigma = \\sqrt{12} \\approx 3.4641$ minutos."
+        }
+      ]
+    },
+    {
+      "id": "LAB_09",
+      "title": "Fallos en líneas de código",
+      "context": "Un programador comete de media 0.5 errores de sintaxis por cada 100 líneas de código escritas.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "Calcula la tasa esperada de errores de sintaxis en un módulo de 800 líneas de código.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "La tasa esperada en 800 líneas es $\\lambda_{800} = 0.5 \\cdot (800 / 100) = 4.0$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que el módulo de 800 líneas no contenga ningún error de sintaxis ($P(X = 0)$).",
+          "correctValue": 0.0183,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 0) = e^{-4} \\approx 0.0183$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de encontrar más de 2 errores de sintaxis en dicho módulo ($P(X > 2)$).",
+          "correctValue": 0.7619,
+          "tolerance": 0.002,
+          "explanation": "$P(X > 2) = 1 - P(X \\le 2) = 1 - [P(0) + P(1) + P(2)] = 1 - e^{-4}(1 + 4 + \\frac{16}{2}) = 1 - 13 e^{-4} \\approx 1 - 0.2381 = 0.7619$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Si se escriben 5 módulos independientes de 800 líneas cada uno, calcula el número esperado de módulos que tendrán más de 2 errores.",
+          "correctValue": 3.8095,
+          "tolerance": 0.01,
+          "explanation": "Sigue una binomial $B(5, p_c)$ donde $p_c \\approx 0.7619$. El número esperado de módulos es $E[Z] = 5 \\cdot 0.7619 \\approx 3.8095$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_10",
+      "title": "Conexión WiFi",
+      "context": "La probabilidad de establecer conexión WiFi con éxito en un intento en un sótano es $p = 0.15$. Los intentos son independientes.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "Calcula la probabilidad de conectar en el primer intento.",
+          "correctValue": 0.15,
+          "tolerance": 0.0,
+          "explanation": "$P(X = 1) = 0.15$."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que se necesiten exactamente 4 intentos para conectar.",
+          "correctValue": 0.0921,
+          "tolerance": 0.001,
+          "explanation": "Significa que se producen 3 fracasos y un éxito: $P(X = 4) = 0.85^3 \\cdot 0.15 \\approx 0.0921$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de necesitar al menos 3 intentos para lograr la conexión ($P(X \\ge 3)$).",
+          "correctValue": 0.7225,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 3)$ equivale a fallar los dos primeros intentos: $P(\\text{fallo en 1 y 2}) = 0.85^2 = 0.7225$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "Calcula el número de intentos esperado hasta lograr la conexión.",
+          "correctValue": 6.6667,
+          "tolerance": 0.01,
+          "explanation": "El valor esperado en la distribución geométrica (de soporte enteros positivos) es $E[X] = 1/p = 1/0.15 \\approx 6.6667$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_11",
+      "title": "Duración de llamadas en call center",
+      "context": "La duración (en minutos) de las llamadas atendidas por un agente de soporte sigue una distribución exponencial con una media de 4 minutos.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "Determina el parámetro de tasa $\\lambda$ (en llamadas por minuto).",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "El parámetro $\\lambda$ es el recíproco de la esperanza: $\\lambda = 1/E[X] = 1/4 = 0.25$."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que una llamada dure menos de 2 minutos ($P(X < 2)$).",
+          "correctValue": 0.3935,
+          "tolerance": 0.001,
+          "explanation": "$P(X < 2) = 1 - e^{-0.25 \\cdot 2} = 1 - e^{-0.5} \\approx 0.3935$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que una llamada dure entre 3 y 6 minutos ($P(3 \\le X \\le 6)$).",
+          "correctValue": 0.2492,
+          "tolerance": 0.001,
+          "explanation": "$P(3 \\le X \\le 6) = F(6) - F(3) = (1 - e^{-1.5}) - (1 - e^{-0.75}) = e^{-0.75} - e^{-1.5} \\approx 0.4724 - 0.2231 = 0.2493$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si una llamada ya dura 5 minutos, calcula la probabilidad de que termine en los próximos 2 minutos ($P(X \\le 7 \\mid X > 5)$).",
+          "correctValue": 0.3935,
+          "tolerance": 0.001,
+          "explanation": "Por la falta de memoria, $P(X \\le 7 \\mid X > 5) = P(X \\le 2) \\approx 0.3935$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_12",
+      "title": "Errores en transacciones bancarias",
+      "context": "Una pasarela de pago experimenta un error de transacción con probabilidad $p = 0.001$. Se procesa un lote de 2000 transacciones.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "Para el lote de 2000 transacciones, calcula el número medio de errores esperados.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "El número medio esperado es $\\lambda = n \\cdot p = 2000 \\cdot 0.001 = 2.0$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "Calcula la desviación típica del número de errores en ese lote.",
+          "correctValue": 1.4135,
+          "tolerance": 0.001,
+          "explanation": "La varianza binomial es $n p (1-p) = 2000 \\cdot 0.001 \\cdot 0.999 = 1.998$. La desviación estándar es $\\sigma = \\sqrt{1.998} \\approx 1.4135$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "Usando la distribución binomial exacta, calcula la probabilidad de tener exactamente 2 errores en el lote.",
+          "correctValue": 0.2708,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 2) = \\binom{2000}{2} (0.001)^2 (0.999)^{1998} \\approx 0.2708$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Calcula la probabilidad aproximada de tener exactamente 2 errores utilizando la distribución de Poisson con $\\lambda = 2.0$.",
+          "correctValue": 0.2707,
+          "tolerance": 0.001,
+          "explanation": "$P(Y = 2) = \\frac{e^{-2} 2^2}{2!} = 2 e^{-2} \\approx 0.2707$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_13",
+      "title": "Clientes en caja de supermercado",
+      "context": "A una caja rápida de supermercado llegan clientes siguiendo un proceso de Poisson a una tasa media de 12 clientes por hora.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "Calcula la tasa de llegadas de clientes por minuto.",
+          "correctValue": 0.2,
+          "tolerance": 0.0,
+          "explanation": "La tasa por minuto es $\\lambda_{min} = 12 / 60 = 0.2$ clientes."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que no llegue ningún cliente en un intervalo de 5 minutos.",
+          "correctValue": 0.3679,
+          "tolerance": 0.001,
+          "explanation": "Para $t = 5$, la tasa es $\\lambda_5 = 0.2 \\cdot 5 = 1.0$. La probabilidad es $P(X=0) = e^{-1} \\approx 0.3679$."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que llegue exactamente 1 cliente en ese intervalo de 5 minutos.",
+          "correctValue": 0.3679,
+          "tolerance": 0.001,
+          "explanation": "$P(X=1) = e^{-1} 1^1 / 1! = e^{-1} \\approx 0.3679$."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de que lleguen al menos 2 clientes en 5 minutos.",
+          "correctValue": 0.2642,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 2) = 1 - P(X=0) - P(X=1) = 1 - 2 e^{-1} \\approx 0.2642$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_14",
+      "title": "Lectura de sensor de nivel",
+      "context": "Un sensor de nivel de agua lee valores distribuidos uniformemente entre 1.5 y 4.5 metros.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "Calcula el valor esperado de la lectura del sensor en metros.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = \\frac{1.5 + 4.5}{2} = 3.0$ metros."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Calcula la varianza del nivel de agua leído.",
+          "correctValue": 0.75,
+          "tolerance": 0.0,
+          "explanation": "$Var(X) = \\frac{(4.5 - 1.5)^2}{12} = \\frac{9}{12} = 0.75$."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que el sensor mida un nivel superior a 4.0 metros.",
+          "correctValue": 0.1667,
+          "tolerance": 0.001,
+          "explanation": "$P(X > 4) = \\frac{4.5 - 4}{4.5 - 1.5} = \\frac{0.5}{3.0} \\approx 0.1667$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "Si realizamos 8 mediciones independientes, calcula la probabilidad de que como máximo 1 de ellas supere los 4.0 metros.",
+          "correctValue": 0.6047,
+          "tolerance": 0.002,
+          "explanation": "El número de mediciones que superan los 4 metros sigue una Binomial $B(8, 0.1667)$. La probabilidad de que sea $\\le 1$ es $P(0) + P(1) = \\binom{8}{0} 0.8333^8 + \\binom{8}{1} 0.1667 \\cdot 0.8333^7 \\approx 0.2326 + 0.3721 = 0.6047$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_15",
+      "title": "Impresora 3D en laboratorio",
+      "context": "El tiempo de impresión (en horas) de una pieza en una impresora 3D sigue una distribución exponencial con media de 8 horas.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "Calcula el parámetro de tasa $\\lambda$ por hora de este proceso de impresión.",
+          "correctValue": 0.125,
+          "tolerance": 0.0,
+          "explanation": "La tasa es el recíproco de la media: $\\lambda = 1/8 = 0.125$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que una impresión finalice antes de 4 horas ($P(X < 4)$).",
+          "correctValue": 0.3935,
+          "tolerance": 0.001,
+          "explanation": "$P(X < 4) = 1 - e^{-0.125 \\cdot 4} = 1 - e^{-0.5} \\approx 0.3935$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que una impresión dure más de 12 horas ($P(X > 12)$).",
+          "correctValue": 0.2231,
+          "tolerance": 0.001,
+          "explanation": "$P(X > 12) = e^{-0.125 \\cdot 12} = e^{-1.5} \\approx 0.2231$."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "Si la impresora ha estado funcionando durante 6 horas, calcula la probabilidad de que la impresión requiera al menos 12 horas adicionales ($P(X > 18 \\mid X > 6)$).",
+          "correctValue": 0.2231,
+          "tolerance": 0.001,
+          "explanation": "Debido a la propiedad de falta de memoria de la distribución exponencial, esta probabilidad es idéntica a la probabilidad no condicionada de que dure más de 12 horas: $P(X > 18 \\mid X > 6) = P(X > 12) \\approx 0.2231$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_16",
+      "title": "Control de calidad de bombillas",
+      "context": "La probabilidad de que una bombilla LED salga defectuosa es $p = 0.03$. Se empaquetan en cajas de 100 unidades de forma independiente.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "Calcula el número medio de bombillas defectuosas por caja.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = n \\cdot p = 100 \\cdot 0.03 = 3.0$."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "Calcula la desviación típica del número de defectuosas.",
+          "correctValue": 1.7059,
+          "tolerance": 0.001,
+          "explanation": "$Var(X) = n p (1-p) = 100 \\cdot 0.03 \\cdot 0.97 = 2.91$. La desviación típica es $\\sigma = \\sqrt{2.91} \\approx 1.7059$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de encontrar exactamente 3 bombillas defectuosas en una caja.",
+          "correctValue": 0.2275,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 3) = \\binom{100}{3} (0.03)^3 (0.97)^{97} \\approx 0.2244$."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "Si una caja se rechaza si contiene más de 5 bombillas defectuosas, calcula la probabilidad de aceptar la caja ($P(X \\le 5)$).",
+          "correctValue": 0.9192,
+          "tolerance": 0.002,
+          "explanation": "$P(X \\le 5) = \\sum_{k=0}^5 \\binom{100}{k} 0.03^k 0.97^{100-k} \\approx 0.9188$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_17",
+      "title": "Fallos de disco en RAID",
+      "context": "Un sistema RAID consta de 6 discos. La probabilidad de fallo de cualquier disco individual durante el primer año es $p = 0.1$, de forma independiente.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "Calcula el número medio de discos que fallan el primer año.",
+          "correctValue": 0.6,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = n \\cdot p = 6 \\cdot 0.1 = 0.6$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que no falle ningún disco en el primer año.",
+          "correctValue": 0.5314,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 0) = 0.9^6 \\approx 0.5314$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "El sistema RAID sigue operativo si fallan como máximo 2 discos. Calcula la probabilidad de que siga operativo ($P(X \\le 2)$).",
+          "correctValue": 0.9842,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\le 2) = P(0) + P(1) + P(2) = 0.9^6 + 6 \\cdot 0.1 \\cdot 0.9^5 + 15 \\cdot 0.01 \\cdot 0.9^4 \\approx 0.5314 + 0.3543 + 0.0984 = 0.9842$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de que fallen exactamente 3 discos ($P(X = 3)$).",
+          "correctValue": 0.0146,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 3) = \\binom{6}{3} (0.1)^3 (0.9)^3 = 20 \\cdot 0.001 \\cdot 0.729 = 0.0146$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_18",
+      "title": "Mensajes de error en log",
+      "context": "Un script de mantenimiento registra errores en un archivo log a una tasa media de 1.5 errores por día.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "Calcula la tasa esperada de errores en una semana completa (7 días).",
+          "correctValue": 10.5,
+          "tolerance": 0.0,
+          "explanation": "La tasa es proporcional al tiempo: $\\lambda_{7} = 1.5 \\cdot 7 = 10.5$ errores."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que no se registren errores en un día determinado ($P(X = 0)$).",
+          "correctValue": 0.2231,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 0) = e^{-1.5} \\approx 0.2231$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de recibir exactamente 2 errores en un día.",
+          "correctValue": 0.251,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 2) = \\frac{e^{-1.5} 1.5^2}{2!} = 1.125 e^{-1.5} \\approx 0.2510$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si consideramos 5 días independientes, ¿cuál es la probabilidad de que en al menos 1 de ellos no se registre ningún error?",
+          "correctValue": 0.717,
+          "tolerance": 0.002,
+          "explanation": "El número de días sin errores sigue una Binomial $B(5, p_b)$ con $p_b = 0.2231$. La probabilidad de tener $\\ge 1$ es $1 - (1 - p_b)^5 = 1 - 0.7769^5 \\approx 1 - 0.2831 = 0.7169$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_19",
+      "title": "Juego de dados",
+      "context": "Un jugador gana un juego si saca un 6 al lanzar un dado equilibrado de 6 caras de forma independiente.",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "Calcula la probabilidad de ganar en el primer lanzamiento.",
+          "correctValue": 0.1667,
+          "tolerance": 0.001,
+          "explanation": "La probabilidad es simplemente $p = 1/6 \\approx 0.1667$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de requerir exactamente 4 lanzamientos para ganar ($P(X = 4)$).",
+          "correctValue": 0.0965,
+          "tolerance": 0.001,
+          "explanation": "Consiste en fallar los primeros 3 lanzamientos y acertar en el 4º: $P(X=4) = (5/6)^3 \\cdot (1/6) \\approx 0.0965$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Calcula el número esperado de lanzamientos para ganar.",
+          "correctValue": 6.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = 1/p = 1/(1/6) = 6.0$ lanzamientos."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de requerir más de 6 lanzamientos para ganar.",
+          "correctValue": 0.3349,
+          "tolerance": 0.001,
+          "explanation": "Es equivalente a fallar los 6 primeros lanzamientos: $P(X > 6) = (5/6)^6 \\approx 0.3349$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_20",
+      "title": "Autobús al campus",
+      "context": "Un estudiante llega a la parada de autobús. Sabe que el autobús pasa de forma uniforme entre las 8:00 y las 8:20 (0 a 20 minutos de espera).",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "Calcula la probabilidad de esperar menos de 5 minutos.",
+          "correctValue": 0.25,
+          "tolerance": 0.0,
+          "explanation": "$P(X < 5) = \\frac{5 - 0}{20} = 0.25$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de esperar entre 5 y 15 minutos.",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "$P(5 \\le X \\le 15) = \\frac{15 - 5}{20} = 0.5$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "Sabiendo que ya ha esperado 6 minutos, calcula la probabilidad de esperar en total más de 12 minutos ($P(X > 12 \\mid X > 6)$).",
+          "correctValue": 0.5714,
+          "tolerance": 0.001,
+          "explanation": "$P(X > 12 \\mid X > 6) = \\frac{P(X > 12)}{P(X > 6)} = \\frac{8/20}{14/20} = \\frac{8}{14} \\approx 0.5714$."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Calcula la varianza del tiempo de espera.",
+          "correctValue": 33.3333,
+          "tolerance": 0.01,
+          "explanation": "$Var(X) = \\frac{(20-0)^2}{12} = \\frac{400}{12} \\approx 33.3333$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_21",
+      "title": "Tiempo de descarga de imágenes",
+      "context": "El tiempo (en segundos) para descargar una imagen médica sigue una distribución exponencial con tasa $\\lambda = 0.4$ descargas/segundo.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "Calcula la esperanza del tiempo de descarga.",
+          "correctValue": 2.5,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = 1/\\lambda = 1/0.4 = 2.5$ segundos."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de descargar una imagen en menos de 2 segundos.",
+          "correctValue": 0.5507,
+          "tolerance": 0.001,
+          "explanation": "$P(X < 2) = 1 - e^{-0.4 \\cdot 2} = 1 - e^{-0.8} \\approx 0.5507$."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "Calcula el tiempo de descarga $T$ en segundos tal que la probabilidad de tardar más de $T$ sea exactamente 0.10.",
+          "correctValue": 5.7565,
+          "tolerance": 0.01,
+          "explanation": "$P(X > T) = e^{-0.4 T} = 0.10 \\implies T = -\\frac{\\ln(0.10)}{0.4} \\approx 5.7565$ segundos."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Si descargamos 6 imágenes independientes, calcula la probabilidad de que al menos una tarde más de $T$ segundos (con probabilidad individual de 0.10).",
+          "correctValue": 0.4686,
+          "tolerance": 0.001,
+          "explanation": "$P(Z \\ge 1) = 1 - (1-0.10)^6 = 1 - 0.9^6 \\approx 0.4686$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_22",
+      "title": "Envíos fallidos de newsletter",
+      "context": "Un servicio de marketing tiene una probabilidad de rebote de correo de $p = 0.08$. Se envía una campaña a 50 destinatarios independientes.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "Calcula el número esperado de rebotes.",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = n \\cdot p = 50 \\cdot 0.08 = 4.0$ correos rebotados."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "Calcula la varianza del número de rebotes.",
+          "correctValue": 3.68,
+          "tolerance": 0.0,
+          "explanation": "$Var(X) = n p (1-p) = 50 \\cdot 0.08 \\cdot 0.92 = 3.68$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que no rebote ningún correo.",
+          "correctValue": 0.0155,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 0) = 0.92^{50} \\approx 0.0155$."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de que reboten exactamente 4 correos.",
+          "correctValue": 0.2037,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 4) = \\binom{50}{4} (0.08)^4 (0.92)^{46} \\approx 0.2014$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_23",
+      "title": "Clientes que compran",
+      "context": "En una tienda física, la probabilidad de que un cliente que entra realice una compra es $p = 0.22$. Los clientes actúan independientemente.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "Calcula el número esperado de clientes que deben entrar hasta que uno realice una compra.",
+          "correctValue": 4.5455,
+          "tolerance": 0.01,
+          "explanation": "$E[X] = 1/p = 1/0.22 \\approx 4.5455$ clientes."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que la primera compra se realice por el tercer cliente que entra.",
+          "correctValue": 0.1338,
+          "tolerance": 0.001,
+          "explanation": "$P(X=3) = 0.78^2 \\cdot 0.22 \\approx 0.1338$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que al menos 5 clientes tengan que entrar para ver la primera compra ($P(X \\ge 5)$).",
+          "correctValue": 0.3702,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 5)$ es equivalente a que los primeros 4 clientes no realicen compras: $P(X \\ge 5) = 0.78^4 \\approx 0.3701$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si entran 30 clientes independientes, calcula la probabilidad de que exactamente 6 de ellos realicen una compra.",
+          "correctValue": 0.1732,
+          "tolerance": 0.001,
+          "explanation": "$P(Y = 6) = \\binom{30}{6} (0.22)^6 (0.78)^{24} \\approx 0.1687$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_24",
+      "title": "Llegada de llamadas a soporte",
+      "context": "El centro de soporte de una aplicación de entrega recibe de media 2.4 llamadas por hora de forma independiente.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "Calcula el número esperado de llamadas en una jornada de 8 horas.",
+          "correctValue": 19.2,
+          "tolerance": 0.0,
+          "explanation": "El valor esperado en 8 horas es $\\lambda_{8} = 2.4 \\cdot 8 = 19.2$ llamadas."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de recibir exactamente 2 llamadas en una hora determinada.",
+          "correctValue": 0.2613,
+          "tolerance": 0.001,
+          "explanation": "$P(Y = 2) = \\frac{e^{-2.4} 2.4^2}{2!} = 2.88 e^{-2.4} \\approx 0.2613$."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Calcula la varianza del número de llamadas recibidas en una jornada de 8 horas.",
+          "correctValue": 19.2,
+          "tolerance": 0.0,
+          "explanation": "En la distribución de Poisson, la varianza es igual al parámetro de tasa, por lo que para 8 horas es 19.2."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de que no se reciba ninguna llamada en un periodo de 2 horas.",
+          "correctValue": 0.0082,
+          "tolerance": 0.001,
+          "explanation": "Para 2 horas, la tasa es $\\lambda_2 = 4.8$. $P(Z = 0) = e^{-4.8} \\approx 0.0082$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_25",
+      "title": "Tiempo de parada de máquina",
+      "context": "El tiempo de parada (en horas) de una máquina para su mantenimiento preventivo se distribuye uniformemente entre 1.0 y 5.0 horas.",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "Calcula la probabilidad de que el mantenimiento dure menos de 3.5 horas.",
+          "correctValue": 0.625,
+          "tolerance": 0.0,
+          "explanation": "$P(X < 3.5) = \\frac{3.5 - 1.0}{5.0 - 1.0} = \\frac{2.5}{4.0} = 0.625$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "Sabiendo que ya ha durado más de 2.5 horas, calcula la probabilidad de que dure más de 4.0 horas ($P(X > 4.0 \\mid X > 2.5)$).",
+          "correctValue": 0.4,
+          "tolerance": 0.0,
+          "explanation": "$P(X > 4.0 \\mid X > 2.5) = \\frac{P(X > 4.0)}{P(X > 2.5)} = \\frac{1.0/4.0}{2.5/4.0} = \\frac{1.0}{2.5} = 0.4$."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "Calcula el valor esperado de la duración del mantenimiento en horas.",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = \\frac{1.0 + 5.0}{2} = 3.0$ horas."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Si el coste del mantenimiento es de 150€ por hora, calcula el coste esperado del mantenimiento.",
+          "correctValue": 450.0,
+          "tolerance": 0.0,
+          "explanation": "$E[\\text{Coste}] = 150 \\cdot E[X] = 150 \\cdot 3.0 = 450.0$€."
+        }
+      ]
+    },
+    {
+      "id": "LAB_26",
+      "title": "Tiempo entre llegadas de clientes",
+      "context": "Los clientes entran a una sucursal bancaria siguiendo un proceso de Poisson con una tasa de 6 clientes por hora.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "Calcula el tiempo medio (en minutos) entre la llegada de dos clientes consecutivos.",
+          "correctValue": 10.0,
+          "tolerance": 0.0,
+          "explanation": "La tasa es de 6 clientes por hora (1 cliente cada 10 minutos). Por tanto, la media es $E[T] = 10.0$ minutos."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de que pasen más de 15 minutos entre dos llegadas consecutivas.",
+          "correctValue": 0.2231,
+          "tolerance": 0.001,
+          "explanation": "La tasa en minutos es $\\lambda_m = 0.1$. $P(T > 15) = e^{-0.1 \\cdot 15} = e^{-1.5} \\approx 0.2231$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de que pasen menos de 5 minutos entre dos llegadas.",
+          "correctValue": 0.3935,
+          "tolerance": 0.001,
+          "explanation": "$P(T < 5) = 1 - e^{-0.1 \\cdot 5} = 1 - e^{-0.5} \\approx 0.3935$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "Si ya han pasado 10 minutos sin llegadas, calcula la probabilidad de que pasen al menos 15 minutos más.",
+          "correctValue": 0.2231,
+          "tolerance": 0.001,
+          "explanation": "Por falta de memoria: $P(T > 25 \\mid T > 10) = P(T > 15) = e^{-1.5} \\approx 0.2231$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_27",
+      "title": "Transacciones fraudulentas",
+      "context": "En una pasarela de pago virtual, el 0.5% de las transacciones son fraudulentas de forma independiente.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "En una muestra aleatoria de 400 transacciones, calcula el número medio de transacciones fraudulentas.",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = n \\cdot p = 400 \\cdot 0.005 = 2.0$."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de tener exactamente 1 transacción fraudulenta en la muestra ($P(X = 1)$).",
+          "correctValue": 0.2707,
+          "tolerance": 0.001,
+          "explanation": "$P(X = 1) = \\binom{400}{1} 0.005^1 0.995^{399} \\approx 0.2707$."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de tener al menos una transacción fraudulenta ($P(X \\ge 1)$).",
+          "correctValue": 0.8653,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\ge 1) = 1 - P(X = 0) = 1 - 0.995^{400} \\approx 0.8660$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "Si cada transacción fraudulenta genera una pérdida fija de 80€, calcula la varianza de la pérdida total en dicha muestra.",
+          "correctValue": 12736.0,
+          "tolerance": 1.0,
+          "explanation": "La pérdida total es $Y = 80 X$. Su varianza es $Var(Y) = 80^2 \\cdot Var(X) = 6400 \\cdot (400 \\cdot 0.005 \\cdot 0.995) = 6400 \\cdot 1.99 = 12736.0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_28",
+      "title": "Errores de impresión en imprenta",
+      "context": "Una máquina de imprenta produce de media 0.2 errores por página de forma independiente.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "Calcula la tasa media de errores en un libro de 300 páginas.",
+          "correctValue": 60.0,
+          "tolerance": 0.0,
+          "explanation": "La tasa media es $\\lambda_{300} = 0.2 \\cdot 300 = 60.0$ errores."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "Calcula la varianza del número de errores en las 300 páginas.",
+          "correctValue": 60.0,
+          "tolerance": 0.0,
+          "explanation": "En una distribución de Poisson, la varianza es igual a la media: $Var(X) = \\lambda = 60.0$."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Para un capítulo de 10 páginas, calcula la probabilidad de que no haya ningún error.",
+          "correctValue": 0.1353,
+          "tolerance": 0.001,
+          "explanation": "Para 10 páginas, la tasa es $\\lambda_{10} = 2.0$. La probabilidad es $P(Y = 0) = e^{-2} \\approx 0.1353$."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de tener al menos 2 errores en dicho capítulo de 10 páginas.",
+          "correctValue": 0.594,
+          "tolerance": 0.001,
+          "explanation": "$P(Y \\ge 2) = 1 - P(Y = 0) - P(Y = 1) = 1 - e^{-2} - 2 e^{-2} = 1 - 3 e^{-2} \\approx 0.5940$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_29",
+      "title": "Test psicotécnico",
+      "context": "Un candidato realiza tests psicotécnicos sucesivos e independientes hasta que supera uno. La probabilidad de superar cualquier test es $p = 0.35$.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "Calcula el número esperado de tests que debe realizar el candidato.",
+          "correctValue": 2.8571,
+          "tolerance": 0.01,
+          "explanation": "$E[X] = 1/p = 1/0.35 \\approx 2.8571$ tests."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "Calcula la probabilidad de superar el test en el primer intento.",
+          "correctValue": 0.35,
+          "tolerance": 0.0,
+          "explanation": "$P(X = 1) = 0.35$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "Calcula la probabilidad de superar el test en el tercer intento.",
+          "correctValue": 0.1479,
+          "tolerance": 0.001,
+          "explanation": "Significa fallar los dos primeros e ingresar en el tercero: $P(X=3) = 0.65^2 \\cdot 0.35 \\approx 0.1479$."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de que el candidato tenga que realizar como máximo 4 intentos ($P(X \\le 4)$).",
+          "correctValue": 0.8215,
+          "tolerance": 0.001,
+          "explanation": "$P(X \\le 4) = 1 - P(X > 4) = 1 - 0.65^4 \\approx 1 - 0.1785 = 0.8215$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_30",
+      "title": "Calentamiento de CPU",
+      "context": "El aumento de temperatura (en grados Celsius) de una CPU bajo carga de trabajo pesada se distribuye uniformemente entre 15 y 45 grados.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "Calcula el rango o longitud de variación del intervalo de temperatura.",
+          "correctValue": 30.0,
+          "tolerance": 0.0,
+          "explanation": "La longitud del intervalo de la distribución es $b - a = 45 - 15 = 30.0$ grados."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "Calcula el valor esperado del incremento de temperatura.",
+          "correctValue": 30.0,
+          "tolerance": 0.0,
+          "explanation": "$E[X] = \\frac{a+b}{2} = \\frac{15 + 45}{2} = 30.0$ grados."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "Calcula la desviación típica de este incremento de temperatura.",
+          "correctValue": 8.6603,
+          "tolerance": 0.01,
+          "explanation": "La varianza es $(b-a)^2 / 12 = 30^2 / 12 = 900 / 12 = 75$. La desviación típica es $\\sigma = \\sqrt{75} \\approx 8.6603$ grados."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Calcula la probabilidad de que el incremento de temperatura sea estrictamente superior a 35 grados.",
+          "correctValue": 0.3333,
+          "tolerance": 0.001,
+          "explanation": "$P(X > 35) = \\frac{45 - 35}{45 - 15} = \\frac{10}{30} \\approx 0.3333$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Función de Probabilidad de la Binomial",
+      "tex": "$$P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}$$"
+    },
+    {
+      "name": "Esperanza de la Binomial",
+      "tex": "$$E[X] = n \\cdot p$$"
+    },
+    {
+      "name": "Varianza de la Binomial",
+      "tex": "$$Var(X) = n \\cdot p \\cdot (1-p)$$"
+    },
+    {
+      "name": "Función de Probabilidad de Poisson",
+      "tex": "$$P(X = k) = \\frac{e^{-\\lambda} \\lambda^k}{k!}$$"
+    },
+    {
+      "name": "Función de Probabilidad de la Geométrica",
+      "tex": "$$P(X = k) = (1-p)^{k-1} p$$"
+    },
+    {
+      "name": "Esperanza de la Geométrica",
+      "tex": "$$E[X] = \\frac{1}{p}$$"
+    },
+    {
+      "name": "Función de Densidad de la Uniforme",
+      "tex": "$$f(x) = \\frac{1}{b-a} \\quad \\text{para } a \\le x \\le b$$"
+    },
+    {
+      "name": "Varianza de la Uniforme",
+      "tex": "$$Var(X) = \\frac{(b-a)^2}{12}$$"
+    },
+    {
+      "name": "Función de Densidad de la Exponencial",
+      "tex": "$$f(x) = \\lambda e^{-\\lambda x} \\quad \\text{para } x \\ge 0$$"
+    },
+    {
+      "name": "Función de Distribución de la Exponencial",
+      "tex": "$$F(x) = 1 - e^{-\\lambda x} \\quad \\text{para } x \\ge 0$$"
+    },
+    {
+      "name": "Propiedad de Falta de Memoria",
+      "tex": "$$P(X > s + t \\mid X > s) = P(X > t)$$"
+    }
+  ]
+}
