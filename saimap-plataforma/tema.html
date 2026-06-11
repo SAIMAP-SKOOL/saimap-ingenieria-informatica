@@ -785,7 +785,26 @@
         document.getElementById('view-error').classList.remove('hidden');
         document.getElementById('error-message').textContent = 'Faltan parámetros en la URL (?asignatura=...&tema=...).';
     } else {
-        init();
+        const REQUIRE_AUTH = true; // Activar protección de Skool
+        window.isGuest = false;
+
+        if (REQUIRE_AUTH) {
+            const userEmail = localStorage.getItem('saimap_user_email');
+            if (!userEmail) {
+                const cleanTemaKey = String(TEMA_KEY).replace(/-/g, '.');
+                const isTheme1 = /^1(\.|$)/.test(cleanTemaKey);
+                if (isTheme1) {
+                    window.isGuest = true;
+                    init();
+                } else {
+                    window.location.href = "index.html?lock=true&redirect=" + encodeURIComponent(window.location.href);
+                }
+            } else {
+                init();
+            }
+        } else {
+            init();
+        }
     }
 
     function init() {
