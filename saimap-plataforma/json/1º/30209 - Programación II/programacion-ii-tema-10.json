@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué principio matemático se corresponde directamente con la estructura de un algoritmo recursivo?",
+      "options": [
+        "El principio de inducción matemática.",
+        "El teorema fundamental del álgebra.",
+        "El principio de exclusión mutua."
+      ],
+      "correct": 0,
+      "hint": "Mapea el caso base y el paso inductivo con la llamada recursiva.",
+      "explanation": "La estructura de un algoritmo recursivo consta de un caso base (caso de parada) y un caso inductivo (llamada recursiva), lo cual se corresponde directamente con el principio de inducción matemática."
+    },
+    {
+      "q": "¿Cuáles son los dos pasos fundamentales del Principio de Inducción Matemática?",
+      "options": [
+        "Caso Base y Paso Inductivo (Hipótesis + Tesis).",
+        "Análisis Asintótico y Paso de Parada.",
+        "Precondición y Postcondición del bucle."
+      ],
+      "correct": 0,
+      "hint": "El primero verifica el valor inicial y el segundo propaga la propiedad.",
+      "explanation": "Para demostrar una propiedad $P(n)$ por inducción, se debe probar el Caso Base $P(n_0)$ y el Paso Inductivo (que asume la Hipótesis de Inducción $P(k)$ para demostrar la Tesis $P(k+1)$)."
+    },
+    {
+      "q": "¿Qué se asume como verdadero en la Hipótesis de Inducción (H.I.) en una demostración por inducción débil?",
+      "options": [
+        "Que la propiedad es verdadera para el elemento actual $n$.",
+        "Que la propiedad es verdadera para el elemento inmediatamente anterior $n-1$ (o valores menores).",
+        "Que la propiedad es falsa para todo $k < n$."
+      ],
+      "correct": 1,
+      "hint": "Es la suposición que nos permite dar el paso inductivo.",
+      "explanation": "En la inducción débil, la Hipótesis de Inducción asume que la propiedad $P(n-1)$ es verdadera para poder demostrar $P(n)$ (la Tesis)."
+    },
+    {
+      "q": "En el contexto de la demostración de corrección de una función recursiva, ¿qué es la Tesis Inductiva?",
+      "options": [
+        "Demostrar que la función es correcta para el caso base $P(0)$.",
+        "Demostrar que la función devuelve el resultado correcto para el caso general $n$, asumiendo la hipótesis de inducción.",
+        "La definición matemática del predicado de corrección."
+      ],
+      "correct": 1,
+      "hint": "Es el objetivo a demostrar en el paso inductivo.",
+      "explanation": "La Tesis Inductiva consiste en demostrar que la propiedad $P(n)$ es verdadera para el elemento actual basándose en que es cierta para el caso o casos anteriores."
+    },
+    {
+      "q": "¿Cuál es el propósito de definir un Predicado de Corrección $P(n)$ en una función recursiva?",
+      "options": [
+        "Expresar formalmente qué significa que la función termine y devuelva el resultado esperado para una entrada $n$.",
+        "Acelerar el tiempo de ejecución de las llamadas recursivas en la JVM.",
+        "Evitar que ocurra un error de tipo StackOverflowError."
+      ],
+      "correct": 0,
+      "hint": "Es la propiedad matemática que queremos demostrar.",
+      "explanation": "El predicado de corrección $P(n)$ formaliza el comportamiento esperado del método, estableciendo que para una entrada $n$, el algoritmo termina y produce el resultado correcto."
+    },
+    {
+      "q": "¿Qué parte de una función recursiva en Java se analiza durante la verificación del Caso Base de inducción?",
+      "options": [
+        "La rama o bloque de código que se ejecuta cuando se cumple la condición de parada (sin llamadas recursivas).",
+        "La llamada al constructor de la clase.",
+        "El bucle interno que optimiza las llamadas recursivas."
+      ],
+      "correct": 0,
+      "hint": "Es el fragmento de código que devuelve un valor directo sin llamarse a sí mismo.",
+      "explanation": "El caso base de la inducción se corresponde con el caso de parada del algoritmo, es decir, la rama que retorna un valor directamente sin realizar más llamadas recursivas."
+    },
+    {
+      "q": "Al demostrar la corrección de un algoritmo recursivo, ¿con qué se justifica la sustitución de la llamada recursiva por su valor teórico?",
+      "options": [
+        "Con la postcondición global del programa.",
+        "Con la Hipótesis de Inducción (H.I.).",
+        "Con el análisis de complejidad asintótica."
+      ],
+      "correct": 1,
+      "hint": "Asumimos que el método ya funciona correctamente para entradas menores.",
+      "explanation": "La Hipótesis de Inducción nos permite asumir que la llamada recursiva para un tamaño menor (por ejemplo, $n-1$) funciona correctamente y devuelve el valor matemático esperado, permitiendo su sustitución algebraica."
+    },
+    {
+      "q": "¿Qué diferencia principal hay entre inducción matemática débil e inducción fuerte al demostrar recursión?",
+      "options": [
+        "La inducción fuerte asume la veracidad de la propiedad para todos los valores menores que $n$, mientras que la débil solo para el inmediatamente anterior $n-1$.",
+        "La inducción débil es más correcta y rigurosa que la inducción fuerte.",
+        "La inducción fuerte no requiere verificar el caso base."
+      ],
+      "correct": 0,
+      "hint": "Una requiere suponer la propiedad para un rango completo de valores menores.",
+      "explanation": "La inducción fuerte (o completa) asume que $P(k)$ es verdadero para todo $k < n$, lo cual es necesario en funciones recursivas con múltiples llamadas como Fibonacci."
+    },
+    {
+      "q": "¿Por qué es imprescindible verificar el caso base en una demostración por inducción?",
+      "options": [
+        "Porque sin él, el paso inductivo podría demostrar una propiedad sobre un conjunto vacío, haciendo la demostración inválida.",
+        "Porque el caso base determina la complejidad temporal del algoritmo en notación Big-O.",
+        "Porque define el tipo de retorno de la función recursiva en Java."
+      ],
+      "correct": 0,
+      "hint": "La inducción necesita un punto de partida real sobre el que sostenerse.",
+      "explanation": "Si no se verifica el caso base, se podría demostrar una propiedad falsa (por ejemplo, que todos los números son iguales a su sucesor). El caso base es el cimiento de la inducción."
+    },
+    {
+      "q": "¿Qué representa un error de tipo 'StackOverflowError' en relación con la demostración de corrección?",
+      "options": [
+        "Un error de sintaxis en el código Java.",
+        "Un fallo de terminación, lo que implica que el algoritmo no es totalmente correcto para esa entrada.",
+        "Una falta de memoria física en el disco duro del sistema."
+      ],
+      "correct": 1,
+      "hint": "Ocurre cuando la pila de llamadas del hilo de ejecución supera su límite.",
+      "explanation": "Para que un algoritmo sea totalmente correcto, debe terminar. Un StackOverflowError representa una recursión infinita o demasiado profunda que impide la terminación del programa."
+    },
+    {
+      "q": "¿Qué es la corrección parcial de un algoritmo recursivo?",
+      "options": [
+        "Que el algoritmo devuelve el resultado correcto en caso de terminar.",
+        "Que el algoritmo funciona únicamente para la mitad de los datos de entrada.",
+        "Que la demostración de inducción solo se ha realizado para el caso base."
+      ],
+      "correct": 0,
+      "hint": "No asume que el programa finalice con éxito en todos los casos.",
+      "explanation": "La corrección parcial garantiza que, *si* el algoritmo termina, entonces el resultado devuelto es el correcto. No garantiza por sí misma la terminación."
+    },
+    {
+      "q": "¿Qué es la corrección total de un algoritmo recursivo?",
+      "options": [
+        "Corrección parcial más la garantía de terminación para todas las entradas válidas.",
+        "Demostrar que el algoritmo funciona en cualquier lenguaje de programación.",
+        "Un algoritmo que no contiene variables primitivas en el Stack."
+      ],
+      "correct": 0,
+      "hint": "Incluye la demostración de que el algoritmo no entra en bucle infinito.",
+      "explanation": "La corrección total requiere demostrar dos cosas: primero, que el algoritmo siempre termina (terminación) y, segundo, que si termina, el resultado es correcto (corrección parcial)."
+    },
+    {
+      "q": "¿Cómo se demuestra formalmente la terminación de una función recursiva?",
+      "options": [
+        "Definiendo una función variante (o de decremento) que toma valores de un conjunto bien ordenado y decrece estrictamente en cada llamada.",
+        "Ejecutando el programa 1000 veces con entradas aleatorias.",
+        "Comprobando que el tipo de retorno no sea void."
+      ],
+      "correct": 0,
+      "hint": "Se busca una métrica que decrezca hacia una cota inferior.",
+      "explanation": "Se utiliza una función variante $t(\\text{parámetros}) \\to \\mathbb{N}$ que decrece estrictamente en cada paso recursivo y está acotada inferiormente por el caso base, asegurando que se alcanzará la parada."
+    },
+    {
+      "q": "¿Qué propiedad debe cumplir una función variante $t(n)$ para garantizar la terminación?",
+      "options": [
+        "Debe ser monótona no decreciente.",
+        "Debe decrecer estrictamente en cada llamada recursiva y estar acotada inferiormente.",
+        "Debe ser siempre igual a cero."
+      ],
+      "correct": 1,
+      "hint": "Disminución continua hacia un límite inferior.",
+      "explanation": "La función variante debe mapear el estado a un conjunto bien ordenado (como los enteros no negativos) de modo que decrezca en cada llamada recursiva. Al no poder decrecer infinitamente, garantiza que se llega al caso base."
+    },
+    {
+      "q": "Si una función recursiva divide el tamaño de su entrada a la mitad en cada llamada (ej. $n / 2$), ¿cuál sería una función variante adecuada?",
+      "options": [
+        "$$t(n) = n$$",
+        "$$t(n) = n^2$$",
+        "$$t(n) = \\text{parámetro actual } a$$"
+      ],
+      "correct": 0,
+      "hint": "La función variante mide el tamaño del problema que disminuye.",
+      "explanation": "La función variante $t(n) = n$ (para $n \\ge 1$) decrece estrictamente, ya que $n / 2 < n$ para todo $n \\ge 1$, y está acotada inferiormente por el caso base (ej. $n \\le 1$)."
+    },
+    {
+      "q": "¿Qué tipo de inducción es la más adecuada para demostrar la corrección de un algoritmo sobre un árbol binario?",
+      "options": [
+        "Inducción matemática débil clásica sobre el valor de los nodos.",
+        "Inducción estructural sobre la altura o el número de nodos del árbol.",
+        "Inducción lineal sobre el recorrido inorden."
+      ],
+      "correct": 1,
+      "hint": "Se basa en la definición recursiva de la propia estructura de datos.",
+      "explanation": "La inducción estructural es una extensión de la inducción matemática que permite demostrar propiedades sobre estructuras definidas recursivamente, como árboles o listas."
+    },
+    {
+      "q": "En la inducción estructural sobre un árbol binario, ¿cuál suele ser el caso base?",
+      "options": [
+        "El árbol vacío (referencia `null`).",
+        "Un nodo con dos hijos.",
+        "La raíz del árbol."
+      ],
+      "correct": 0,
+      "hint": "Es la estructura de menor tamaño posible que define la parada de la recursión.",
+      "explanation": "El caso base suele ser el árbol vacío (representado por `null`), para el cual el predicado se verifica directamente (por ejemplo, que su altura es 0 o que no contiene elementos)."
+    },
+    {
+      "q": "En la inducción estructural sobre un árbol binario, ¿qué asume la Hipótesis de Inducción (H.I.)?",
+      "options": [
+        "Que la función es correcta para el árbol completo.",
+        "Que la función es correcta para los subárboles izquierdo y derecho del nodo actual.",
+        "Que la función es correcta para un nodo hoja únicamente."
+      ],
+      "correct": 1,
+      "hint": "Asume corrección en los componentes inmediatos de la estructura.",
+      "explanation": "La hipótesis asume que el predicado de corrección se cumple para los subárboles hijos (izquierdo y derecho) del nodo actual, para luego demostrar que también se cumple para el árbol enraizado en dicho nodo."
+    },
+    {
+      "q": "¿Qué es la recursión mutua?",
+      "options": [
+        "Un método que se llama a sí mismo dentro de un bucle for.",
+        "Dos o más métodos que se llaman entre sí de forma cíclica.",
+        "Una llamada recursiva que se ejecuta en dos hilos diferentes simultáneamente."
+      ],
+      "correct": 1,
+      "hint": "A llama a B, y B llama a A.",
+      "explanation": "La recursión mutua o cruzada ocurre cuando un método $A$ realiza una llamada a un método $B$, y este a su vez realiza una llamada a $A$ (directa o indirectamente)."
+    },
+    {
+      "q": "¿Cómo se demuestra la corrección de funciones mutuamente recursivas?",
+      "options": [
+        "Mediante inducción simultánea de múltiples predicados de corrección vinculados.",
+        "Demostrando una función por separado ignorando la otra.",
+        "No es posible demostrar formalmente la recursión mutua."
+      ],
+      "correct": 0,
+      "hint": "Se definen predicados para cada función y se demuestran a la vez.",
+      "explanation": "Se definen predicados de corrección $P(n)$ y $Q(n)$ para cada una de las funciones y se realiza una demostración inductiva conjunta donde la hipótesis de uno ayuda a probar la tesis del otro."
+    },
+    {
+      "q": "¿Qué papel juegan las precondiciones en una demostración de corrección recursiva?",
+      "options": [
+        "Definen el dominio o rango de valores de entrada para los cuales el algoritmo está obligado a cumplir su postcondición.",
+        "Indican a la JVM la cantidad de memoria que debe reservar en el Stack.",
+        "Son sentencias try-catch que capturan excepciones de ejecución."
+      ],
+      "correct": 0,
+      "hint": "Son las asunciones iniciales de los datos de entrada.",
+      "explanation": "Las precondiciones limitan los valores válidos de entrada (ej. $n \\ge 0$). La demostración de inducción se realiza bajo la suposición de que estas precondiciones se cumplen para los parámetros de entrada."
+    },
+    {
+      "q": "¿Qué ocurre si una llamada interna en un algoritmo recursivo viola la precondición del propio método?",
+      "options": [
+        "La demostración de corrección falla porque no se puede aplicar la hipótesis de inducción.",
+        "El compilador de Java generará automáticamente un error de compilación.",
+        "La recursión se transformará automáticamente en un bucle iterativo."
+      ],
+      "correct": 0,
+      "hint": "No podemos asumir que la llamada recursiva funciona si sus argumentos no cumplen lo requerido.",
+      "explanation": "Para poder aplicar la hipótesis de inducción en la llamada recursiva, los argumentos de dicha llamada deben cumplir con la precondición del método. Si no lo hacen, la demostración de la tesis no es válida."
+    },
+    {
+      "q": "En la demostración de corrección de la función `potencia(a, n) = a^n`, ¿cuál es la precondición sobre $n$?",
+      "options": [
+        "$$n \\ge 0$$",
+        "$$n < 0$$",
+        "$$n \\text{ debe ser un número primo}$$"
+      ],
+      "correct": 0,
+      "hint": "El exponente en esta versión recursiva simple debe ser no negativo.",
+      "explanation": "La precondición típica para la función potencia recursiva simple es $n \\ge 0$, ya que de ser negativo, $n-1$ se alejaría del caso base ($n=0$) produciendo recursión infinita."
+    },
+    {
+      "q": "Si un método recursivo disminuye el parámetro $n$ en cada paso en 2 unidades (ej. `f(n-2)`), y el caso base es `n == 0`, ¿qué ocurre si se llama con un número impar?",
+      "options": [
+        "El método entrará en recursión infinita porque nunca cumplirá `n == 0` (se salta el caso base).",
+        "El compilador detecta el valor impar y lanza una excepción.",
+        "La máquina virtual de Java redondea automáticamente el valor al número par más cercano."
+      ],
+      "correct": 0,
+      "hint": "Paso de impar a impar restando de dos en dos.",
+      "explanation": "Si restamos de dos en dos partiendo de un impar (ej. 3, 1, -1, -3...), nunca alcanzaremos el caso base `n == 0`. Esto viola la terminación y demuestra la importancia de la precondición (ej. $n$ par y no negativo)."
+    },
+    {
+      "q": "¿Por qué probar un algoritmo recursivo para un millón de casos de prueba no equivale a una demostración formal?",
+      "options": [
+        "Porque las pruebas empíricas solo muestran la ausencia de fallos para esos casos concretos, pero la inducción demuestra matemáticamente la corrección para infinitos casos.",
+        "Porque la JVM altera el resultado de las variables después de un millón de ejecuciones.",
+        "Porque las pruebas unitarias en Java no son válidas para métodos estáticos."
+      ],
+      "correct": 0,
+      "hint": "La inducción es una demostración universal.",
+      "explanation": "Las pruebas demuestran que el código funciona para los casos probados, pero no descartan fallos en otros. La inducción matemática proporciona una certeza absoluta para todo el dominio definido."
+    },
+    {
+      "q": "En la demostración de la suma de los primeros $n$ enteros con `sumaN(n)`, al sustituir la llamada recursiva `sumaN(n-1)` por la hipótesis de inducción, obtenemos la expresión:",
+      "options": [
+        "$$n + \\frac{(n-1)n}{2}$$",
+        "$$n + \\frac{n(n+1)}{2}$$",
+        "$$\\frac{n(n+1)}{2} + (n-1)$$"
+      ],
+      "correct": 0,
+      "hint": "El código ejecuta `n + sumaN(n - 1)`. Aplica la fórmula sustituyendo `n` por `n-1`.",
+      "explanation": "Por H.I., `sumaN(n - 1)` devuelve $\\frac{(n-1)((n-1)+1)}{2} = \\frac{(n-1)n}{2}$. Como el código ejecuta `n + sumaN(n - 1)`, la expresión es $n + \\frac{(n-1)n}{2}$."
+    },
+    {
+      "q": "Para demostrar la corrección de un algoritmo que recorre una lista enlazada, ¿sobre qué variable se suele aplicar la inducción?",
+      "options": [
+        "Sobre la longitud (número de nodos) de la lista.",
+        "Sobre la dirección de memoria de los nodos en el Heap.",
+        "Sobre el valor entero almacenado en el primer nodo."
+      ],
+      "correct": 0,
+      "hint": "Es la magnitud que decrece en cada paso recursivo.",
+      "explanation": "Se aplica inducción sobre el número de nodos de la lista (longitud $N$). El caso base es $N = 0$ (lista vacía) y el paso inductivo asume la corrección para listas de tamaño $N-1$ (la cola de la lista)."
+    },
+    {
+      "q": "¿Qué representa la inducción estructural?",
+      "options": [
+        "Un tipo de inducción basada en la estructura recursiva de los tipos de datos en lugar de los números enteros.",
+        "Una técnica para optimizar la estructura de clases en la JVM.",
+        "Un método de depuración para identificar fugas de memoria."
+      ],
+      "correct": 0,
+      "hint": "Se usa directamente en objetos compuestos recursivamente.",
+      "explanation": "La inducción estructural demuestra propiedades sobre conjuntos definidos inductivamente, como listas, árboles o expresiones lógicas, basándose en la forma en que se construyen sus elementos."
+    },
+    {
+      "q": "Si una función recursiva `factorial(n)` realiza la llamada `n * factorial(n - 1)`, ¿cuál es su relación de recurrencia en tiempo de ejecución?",
+      "options": [
+        "$$T(n) = T(n - 1) + \\mathcal{O}(1)$$",
+        "$$T(n) = 2T(n / 2) + \\mathcal{O}(1)$$",
+        "$$T(n) = T(n - 1) + \\mathcal{O}(n)$$"
+      ],
+      "correct": 0,
+      "hint": "Hace una llamada reduciendo el problema en 1, con un coste constante en la multiplicación.",
+      "explanation": "El tiempo para resolver un problema de tamaño $n$ es el tiempo de resolver un problema de tamaño $n-1$ más una cantidad constante de operaciones (multiplicación y comparación), es decir, $T(n) = T(n - 1) + \\mathcal{O}(1)$."
+    },
+    {
+      "q": "¿Qué ocurre si una función recursiva carece de una cota inferior bien definida en su función variante?",
+      "options": [
+        "El algoritmo no tiene garantizada la terminación.",
+        "El compilador forzará un retorno de tipo null.",
+        "La complejidad asintótica se reduce a constante."
+      ],
+      "correct": 0,
+      "hint": "Los valores podrían decrecer indefinidamente sin detenerse.",
+      "explanation": "Si no hay una cota inferior bien definida, los valores de la función variante podrían decrecer infinitamente sin alcanzar nunca el caso base, provocando que la recursión no termine."
+    },
+    {
+      "q": "¿Cuál es la relación de recurrencia típica para el algoritmo de ordenación Merge Sort?",
+      "options": [
+        "$$T(n) = 2T(n / 2) + \\mathcal{O}(n)$$",
+        "$$T(n) = T(n - 1) + \\mathcal{O}(n)$$",
+        "$$T(n) = T(n / 2) + \\mathcal{O}(1)$$"
+      ],
+      "correct": 0,
+      "hint": "Divide el problema en dos subproblemas de tamaño mitad y luego junta los resultados.",
+      "explanation": "Merge Sort divide el array de tamaño $n$ en dos mitades de tamaño $n/2$ (de ahí el $2T(n/2)$) y realiza una mezcla lineal de coste $\\mathcal{O}(n)$."
+    },
+    {
+      "q": "Al definir el predicado de corrección para un algoritmo de búsqueda en un array, ¿qué debe asegurar el predicado en caso de que el elemento no exista?",
+      "options": [
+        "Que la función retorne un indicador especial (ej: -1) tras terminar.",
+        "Que la función lance una excepción de tipo de datos.",
+        "Que la función no termine nunca para indicar la ausencia del elemento."
+      ],
+      "correct": 0,
+      "hint": "La terminación y retorno de fallo es parte del comportamiento correcto.",
+      "explanation": "El predicado de corrección debe contemplar todos los casos válidos de la precondición. Si el elemento buscado no está, la función debe terminar y devolver el valor establecido (como -1)."
+    },
+    {
+      "q": "En el paso inductivo de la suma de los primeros $n$ enteros, ¿qué identidad algebraica se utiliza para simplificar $\\frac{n^2 + n}{2}$?",
+      "options": [
+        "$$\\frac{n^2 + n}{2} = \\frac{n(n+1)}{2}$$",
+        "$$\\frac{n^2 + n}{2} = n^2 + n$$",
+        "$$\\frac{n^2 + n}{2} = \\frac{(n-1)n}{2}$$"
+      ],
+      "correct": 0,
+      "hint": "Se factoriza el numerador extrayendo factor común.",
+      "explanation": "Extrayendo el factor común $n$ en el numerador de $n^2 + n$, obtenemos de forma inmediata $n(n+1)$, con lo que queda demostrado el paso inductivo."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones es correcta sobre la complejidad de espacio de una función recursiva en Java?",
+      "options": [
+        "Requiere memoria adicional en el Stack proporcional a la profundidad máxima de llamadas recursivas debido a los marcos de activación.",
+        "No requiere memoria adicional porque los objetos se almacenan en el Heap.",
+        "Su complejidad de espacio es siempre $\\mathcal{O}(1)$."
+      ],
+      "correct": 0,
+      "hint": "Cada llamada activa guarda variables y dirección de retorno en el stack.",
+      "explanation": "Cada llamada recursiva añade un marco de activación al Stack. Por tanto, la complejidad de espacio en el Stack es proporcional a la profundidad máxima del árbol de recursión."
+    },
+    {
+      "q": "Si un algoritmo recursivo cumple con su predicado de corrección para toda entrada que satisfaga la precondición, se dice que es:",
+      "options": [
+        "Correcto respecto a su especificación.",
+        "Lógicamente redundante.",
+        "Un algoritmo ineficiente."
+      ],
+      "correct": 0,
+      "hint": "Cumplir la especificación (pre/post) define la corrección.",
+      "explanation": "La corrección de un algoritmo siempre se mide respecto a una especificación dada (precondiciones y postcondiciones). Si la cumple, es correcto respecto a ella."
+    },
+    {
+      "q": "¿Qué papel juega el 'principio del buen orden' en la demostración de terminación de algoritmos recursivos?",
+      "options": [
+        "Garantiza que cualquier conjunto no vacío de enteros no negativos contiene un elemento mínimo, impidiendo un decrecimiento infinito.",
+        "Ordena las variables locales en orden alfabético para mejorar el rendimiento.",
+        "Permite ordenar los elementos del Heap al liberar memoria."
+      ],
+      "correct": 0,
+      "hint": "Cualquier secuencia estrictamente decreciente en N debe ser finita.",
+      "explanation": "Como los enteros no negativos están bien ordenados, una función variante que devuelve enteros no negativos y decrece estrictamente no puede decrecer indefinidamente; debe alcanzar un mínimo (el caso base)."
+    },
+    {
+      "q": "Al verificar el caso base para la función potencia recursiva `potencia(a, 0)`, ¿por qué el resultado es correcto?",
+      "options": [
+        "Porque el código devuelve 1.0, y por definición matemática $a^0 = 1.0$ (con $a \\neq 0$).",
+        "Porque el método devuelve null.",
+        "Porque la JVM eleva automáticamente el número a su base."
+      ],
+      "correct": 0,
+      "hint": "Se compara el valor devuelto con la definición matemática.",
+      "explanation": "Para $n=0$, la condición se cumple y se retorna `1.0`. Dado que $a^0 = 1.0$, el caso base de la inducción queda verificado."
+    },
+    {
+      "q": "Si un programador olvida actualizar el parámetro de llamada en la llamada recursiva (ej. ejecuta `f(n)` en lugar de `f(n-1)`), ¿cuál de los siguientes pasos fallará en la demostración?",
+      "options": [
+        "La demostración de la terminación (no existe función variante decreciente).",
+        "La definición del tipo de retorno en el compilador.",
+        "La verificación del caso base."
+      ],
+      "correct": 0,
+      "hint": "El problema no reduce su tamaño, manteniendo la función variante constante.",
+      "explanation": "Al no reducir el parámetro, la función variante no decrece estrictamente ($t(n) = t(n)$). Por lo tanto, no se puede demostrar la terminación y el programa entrará en recursión infinita."
+    },
+    {
+      "q": "¿Qué relación existe entre la inducción matemática y los bucles iterativos en Java?",
+      "options": [
+        "La inducción matemática se utiliza para demostrar la corrección de bucles mediante el concepto de invariante de bucle.",
+        "Los bucles iterativos no se pueden analizar matemáticamente.",
+        "Ninguna, la inducción solo sirve para recursión."
+      ],
+      "correct": 0,
+      "hint": "Los invariantes de bucle se basan en un razonamiento de tipo inductivo.",
+      "explanation": "La corrección de bucles iterativos se demuestra mediante invariantes de bucle. La prueba de que el invariante se mantiene en cada iteración es análoga al paso inductivo."
+    },
+    {
+      "q": "En una demostración por inducción estructural en una lista enlazada, la hipótesis de inducción asume que la propiedad se cumple para:",
+      "options": [
+        "La cola de la lista (`head.next`).",
+        "La lista vacía únicamente.",
+        "El primer elemento de la lista."
+      ],
+      "correct": 0,
+      "hint": "Es la subestructura inmediata de menor tamaño de la lista.",
+      "explanation": "En una lista enlazada, la subestructura inmediata de menor tamaño es la cola de la lista (`head.next`). La H.I. asume la corrección para esta sublista para probarla para la lista completa."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Dada la función para calcular el factorial, complete el espacio en blanco:\n```java\npublic static int fact(int n) {\n    if (n == 0) return 1;\n    return n * ____;\n}\n```",
+      "options": [
+        "fact(n)",
+        "fact(n - 1)",
+        "fact(n + 1)"
+      ],
+      "correct": 1,
+      "hint": "Debemos llamar al método con un problema de tamaño reducido en 1.",
+      "explanation": "Para calcular $n!$, multiplicamos $n$ por el factorial de $n-1$, lo cual se expresa recursivamente como `fact(n - 1)`."
+    },
+    {
+      "q": "Dada la función recursiva para calcular la suma de los números del 1 al $n$, complete el código:\n```java\npublic static int sumaN(int n) {\n    if (n == 1) return 1;\n    return n + ____;\n}\n```",
+      "options": [
+        "sumaN(n - 1)",
+        "sumaN(n)",
+        "sumaN(n + 1)"
+      ],
+      "correct": 0,
+      "hint": "Para obtener la suma hasta n, sumamos n a la suma acumulada de los primeros n-1 enteros.",
+      "explanation": "La llamada recursiva correcta es `sumaN(n - 1)` para resolver el subproblema anterior."
+    },
+    {
+      "q": "Para el predicado de corrección $P(n): \\text{potencia}(a, n) = ____$, que demuestra la función de potencia, ¿cuál es el resultado esperado?",
+      "options": [
+        "a^n",
+        "a * n",
+        "a + n"
+      ],
+      "correct": 0,
+      "hint": "Representa el valor matemático de la potencia entera de a elevado a n.",
+      "explanation": "El predicado de corrección de la función potencia debe certificar que el valor devuelto es exactamente $a^n$."
+    },
+    {
+      "q": "En el caso base de una búsqueda binaria recursiva, complete la condición de parada:\n```java\nif (____) return -1; // Elemento no encontrado\n```",
+      "options": [
+        "low > high",
+        "low == high",
+        "low < high"
+      ],
+      "correct": 0,
+      "hint": "Ocurre cuando el rango de búsqueda se vuelve vacío.",
+      "explanation": "Cuando el índice inferior `low` es estrictamente mayor que el superior `high`, el subsegmento de búsqueda no contiene elementos y la recursión se detiene devolviendo -1."
+    },
+    {
+      "q": "Para la implementación de la función potencia rápida con exponente par, complete la línea:\n```java\nint half = powerFast(a, n / 2);\nreturn ____;\n```",
+      "options": [
+        "half * half",
+        "a * half",
+        "half * half * a"
+      ],
+      "correct": 0,
+      "hint": "Aprovechamos que a^n = (a^(n/2))^2 para exponentes pares.",
+      "explanation": "Dado que $n$ es par, $a^n = a^{n/2} \\cdot a^{n/2}$. Por tanto, habiendo calculado `half`, el retorno es `half * half`."
+    },
+    {
+      "q": "Complete la condición de parada para verificar recursivamente si un array está ordenado:\n```java\npublic static boolean estaOrdenado(int[] arr, int index) {\n    if (index >= ____) return true;\n    if (arr[index] > arr[index + 1]) return false;\n    return estaOrdenado(arr, index + 1);\n}\n```",
+      "options": [
+        "arr.length - 1",
+        "arr.length",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Debemos parar antes de evaluar una posición fuera de límites en arr[index + 1].",
+      "explanation": "La última comparación válida se hace entre `arr[arr.length - 2]` y `arr[arr.length - 1]`. Por tanto, paramos cuando `index >= arr.length - 1`."
+    },
+    {
+      "q": "Complete el cálculo del máximo común divisor en el algoritmo de Euclides recursivo:\n```java\npublic static int gcd(int a, int b) {\n    if (b == 0) return a;\n    return gcd(b, ____);\n}\n```",
+      "options": [
+        "a % b",
+        "a / b",
+        "a - b"
+      ],
+      "correct": 0,
+      "hint": "El siguiente paso calcula el MCD usando el resto de la división.",
+      "explanation": "El algoritmo de Euclides establece que $\\text{mcd}(a, b) = \\text{mcd}(b, a \\pmod b)$, por lo que pasamos `a % b` como segundo parámetro."
+    },
+    {
+      "q": "Complete el método recursivo para invertir un array en el rango $[i, j]$:\n```java\npublic static void reverse(int[] arr, int i, int j) {\n    if (i >= j) return;\n    swap(arr, i, j);\n    reverse(arr, ____, j - 1);\n}\n```",
+      "options": [
+        "i + 1",
+        "i",
+        "i - 1"
+      ],
+      "correct": 0,
+      "hint": "Debemos estrechar el rango avanzando el índice de la izquierda.",
+      "explanation": "El índice izquierdo `i` debe incrementarse a `i + 1` en la llamada recursiva para aproximarse a `j`."
+    },
+    {
+      "q": "Complete el conteo de nodos de un árbol binario:\n```java\npublic static int countNodes(Node root) {\n    if (root == null) return 0;\n    return 1 + countNodes(____) + countNodes(root.right);\n}\n```",
+      "options": [
+        "root.left",
+        "root",
+        "root.right"
+      ],
+      "correct": 0,
+      "hint": "Debemos sumar el nodo actual más el conteo del subárbol izquierdo y el derecho.",
+      "explanation": "El número de nodos se calcula sumando 1 (raíz) más el conteo de nodos del hijo izquierdo (`root.left`) y el derecho."
+    },
+    {
+      "q": "Complete la llamada de la función variante de decremento $t(n) = ____$ para comprobar la terminación de `factorial(n)`:",
+      "options": [
+        "n",
+        "n^2",
+        "2 * n"
+      ],
+      "correct": 0,
+      "hint": "Mide el número de llamadas restantes directas para llegar al caso base 0.",
+      "explanation": "Para `factorial(n)`, la función variante más simple y directa es $t(n) = n$, la cual decrece estrictamente en 1 por cada llamada y está acotada inferiormente por 0."
+    },
+    {
+      "q": "Complete la precondición para garantizar la terminación del factorial recursivo:\n```java\n// Precondición: n >= ____\npublic static int factorial(int n) { ... }\n```",
+      "options": [
+        "0",
+        "1",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "Si pasamos un entero negativo, el programa entrará en recursión infinita.",
+      "explanation": "La precondición matemática para el factorial es que $n$ sea un entero no negativo ($n \\ge 0$). Si $n < 0$, restar 1 nunca alcanzará el caso base `n == 0`."
+    },
+    {
+      "q": "Complete el caso base para la inducción estructural sobre una lista enlazada simple:\n```java\nif (head == ____) return 0; // Lista vacía\n```",
+      "options": [
+        "null",
+        "new ListNode()",
+        "head.next"
+      ],
+      "correct": 0,
+      "hint": "Una lista vacía se representa por la ausencia de referencia.",
+      "explanation": "En Java, una lista vacía se denota típicamente con una referencia a `null`. Este es el caso base para contar la longitud o sumar valores."
+    },
+    {
+      "q": "Complete el cálculo del paso recursivo de Fibonacci:\n```java\npublic static int fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + ____;\n}\n```",
+      "options": [
+        "fib(n - 2)",
+        "fib(n - 1)",
+        "fib(n)"
+      ],
+      "correct": 0,
+      "hint": "El enésimo número de Fibonacci es la suma de los dos términos anteriores.",
+      "explanation": "La definición recursiva de Fibonacci requiere calcular la suma de `fib(n-1)` y `fib(n-2)`."
+    },
+    {
+      "q": "En el análisis asintótico de Merge Sort, complete su relación de recurrencia:\n```java\nT(n) = 2T(____) + O(n)\n```",
+      "options": [
+        "n/2",
+        "n-1",
+        "n-2"
+      ],
+      "correct": 0,
+      "hint": "Merge Sort divide el problema original en dos subproblemas de tamaño exactamente mitad.",
+      "explanation": "El coste temporal se calcula como dos veces el tiempo necesario para ordenar la mitad del array, es decir, $2T(n/2)$, más el coste de mezclar las partes $\\mathcal{O}(n)$."
+    },
+    {
+      "q": "Complete el caso base para la suma recursiva de los elementos de un array:\n```java\npublic static int sumaArray(int[] arr, int index) {\n    if (index == ____) return 0;\n    return arr[index] + sumaArray(arr, index + 1);\n}\n```",
+      "options": [
+        "arr.length",
+        "arr.length - 1",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Ocurre cuando el índice supera los límites del array (rango vacío).",
+      "explanation": "Cuando `index == arr.length`, ya no quedan elementos por procesar en el array, por lo que devolvemos 0 en el caso base."
+    },
+    {
+      "q": "Para demostrar $P(n): \\text{sumaN}(n) = \\frac{n(n+1)}{2}$, en la hipótesis de inducción asumimos que:\n```java\nsumaN(n - 1) = ____\n```",
+      "options": [
+        "((n-1)*n) / 2",
+        "(n*(n+1)) / 2",
+        "((n-1)*(n-2)) / 2"
+      ],
+      "correct": 0,
+      "hint": "Sustituye 'n' por 'n-1' en el predicado P(n).",
+      "explanation": "Sustituyendo $n$ por $n-1$ en el predicado teórico $\\frac{n(n+1)}{2}$, obtenemos $\\frac{(n-1)((n-1)+1)}{2} = \\frac{(n-1)n}{2}$."
+    },
+    {
+      "q": "Para que una función variante $t(n)$ demuestre la terminación de una recursión, debe estar acotada inferiormente por un valor constante ____.",
+      "options": [
+        "K",
+        "n",
+        "infinito"
+      ],
+      "correct": 0,
+      "hint": "Es el límite mínimo a partir del cual ya no es posible seguir decreciendo.",
+      "explanation": "La función variante debe estar acotada inferiormente por un valor constante $K$ (generalmente 0) que coincide con el caso base, forzando la terminación del algoritmo."
+    },
+    {
+      "q": "Complete el conteo recursivo de apariciones del carácter 'c' en una cadena de texto:\n```java\npublic static int countChar(String s, char c) {\n    if (s.isEmpty()) return 0;\n    int count = (s.charAt(0) == c) ? 1 : 0;\n    return count + countChar(____, c);\n}\n```",
+      "options": [
+        "s.substring(1)",
+        "s",
+        "s.substring(0, s.length() - 1)"
+      ],
+      "correct": 0,
+      "hint": "Debemos realizar la llamada recursiva enviando la cadena sin el primer carácter.",
+      "explanation": "`s.substring(1)` devuelve una nueva cadena recortando el primer elemento, lo cual reduce el tamaño del problema en 1."
+    },
+    {
+      "q": "Complete la llamada recursiva para el cálculo del producto por sumas de enteros positivos:\n```java\npublic static int producto(int a, int b) {\n    if (b == 0) return 0;\n    return a + producto(a, ____);\n}\n```",
+      "options": [
+        "b - 1",
+        "b",
+        "b + 1"
+      ],
+      "correct": 0,
+      "hint": "Debemos disminuir el número de sumas pendientes (b) en 1 en cada iteración recursiva.",
+      "explanation": "Sumar `a` un total de `b` veces es igual a sumar `a` más el producto de `a` por `b - 1`."
+    },
+    {
+      "q": "Complete el cálculo recursivo de la longitud de una lista enlazada:\n```java\npublic static int size(ListNode node) {\n    if (node == null) return 0;\n    return 1 + size(____);\n}\n```",
+      "options": [
+        "node.next",
+        "node",
+        "node.prev"
+      ],
+      "correct": 0,
+      "hint": "Pasamos el siguiente nodo de la lista para reducir el tamaño restante.",
+      "explanation": "La longitud de una lista que empieza en `node` es 1 más la longitud de la lista que empieza en `node.next`."
+    },
+    {
+      "q": "¿Qué requisitos lógicos son indispensables para poder demostrar formalmente que una función recursiva es correcta?",
+      "options": [
+        "Demostrar que el algoritmo termina en un número finito de pasos para cualquier entrada que cumpla la precondición.",
+        "Demostrar que el valor devuelto cumple con la especificación (postcondición) tanto en el caso base como en el paso inductivo.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Implica probar tanto la terminación del bucle recursivo como la corrección del resultado.",
+      "explanation": "La demostración de corrección total de un algoritmo recursivo requiere probar dos cosas: terminación y corrección parcial (todas las anteriores)."
+    },
+    {
+      "q": "Al definir una función variante (o función de decremento) $t(n)$ para probar la terminación de una función recursiva en Java, ¿cuáles de los siguientes requisitos se deben cumplir?",
+      "options": [
+        "Su rango debe ser un conjunto bien ordenado (normalmente los enteros no negativos).",
+        "Su valor debe decrecer estrictamente en cada llamada recursiva.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Debe disminuir y no poder descender indefinidamente sin topar con la cota.",
+      "explanation": "Para garantizar la terminación, la función variante debe decrecer estrictamente y pertenecer a un conjunto bien ordenado con un elemento mínimo, impidiendo cadenas infinitas de decremento."
+    },
+    {
+      "q": "¿Qué elementos estructurales esenciales debe contener un método recursivo correcto en Java para evitar una ejecución infinita?",
+      "options": [
+        "Al menos un caso base (rama sin llamada recursiva) que retorne un resultado directo.",
+        "Una llamada recursiva que modifique los parámetros acercándose estrictamente al caso base.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Requiere una cota y un avance constante hacia dicha cota.",
+      "explanation": "La combinación de un caso base (para parar) y un paso recursivo que reduzca el problema (para avanzar) es obligatoria en cualquier algoritmo recursivo correcto."
+    },
+    {
+      "q": "Durante la fase de verificación del Caso Base en la demostración de corrección de una función recursiva:",
+      "options": [
+        "Se analiza el valor devuelto cuando no se realizan más llamadas recursivas.",
+        "Se comprueba que el valor de retorno en el código coincide con el resultado matemático esperado.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Consiste en comprobar el comportamiento para el caso mínimo sin aplicar recursión.",
+      "explanation": "Verificar el caso base implica evaluar el código en su parada y verificar que coincide con la especificación matemática teórica."
+    },
+    {
+      "q": "¿En cuáles de las siguientes estructuras de datos recursivas es recomendable utilizar la inducción estructural para demostrar algoritmos?",
+      "options": [
+        "Listas enlazadas simples definidas como un nodo y una referencia al siguiente nodo.",
+        "Árboles binarios definidos como una raíz con dos referencias a subárboles hijo.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La inducción estructural se aplica a cualquier tipo de dato compuesto recursivamente.",
+      "explanation": "Tanto las listas enlazadas como los árboles son tipos de datos definidos inductivamente, por lo que la inducción estructural es la herramienta idónea."
+    },
+    {
+      "q": "¿Qué fallos en el código de un método recursivo invalidan su demostración de terminación?",
+      "options": [
+        "Omitir el caso base en el flujo de ejecución.",
+        "Realizar una llamada recursiva donde el parámetro de tamaño no disminuye respecto al original.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier falta de reducción o falta de parada provoca recursión infinita.",
+      "explanation": "Sin caso base o sin decrecimiento del tamaño del problema, el algoritmo no alcanzará el final, impidiendo demostrar su terminación."
+    },
+    {
+      "q": "¿Qué supuestos asumimos en la Hipótesis de Inducción (H.I.) en el paso inductivo al demostrar la corrección de un algoritmo?",
+      "options": [
+        "Que el algoritmo termina y da el resultado correcto para entradas estrictamente menores.",
+        "Que la función es correcta para el subproblema planteado en la llamada interna.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es la asunción necesaria para sustituir algebraicamente la llamada recursiva.",
+      "explanation": "Asumimos que el método es correcto para tamaños menores, lo que permite sustituir el resultado de la llamada recursiva por el valor teórico correcto."
+    },
+    {
+      "q": "En el análisis de corrección de algoritmos numéricos recursivos, ¿cuál de las siguientes propiedades matemáticas se suele utilizar como postcondición teórica para validar sumatorios o potencias?",
+      "options": [
+        "La fórmula de la suma de los primeros enteros $\\frac{n(n+1)}{2}$.",
+        "La propiedad de exponentes $a^n = a \\cdot a^{n-1}$.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son identidades que facilitan la demostración por inducción en el paso inductivo.",
+      "explanation": "Ambas fórmulas matemáticas representan postcondiciones típicas de algoritmos clásicos y se emplean para verificar la igualdad algebraica en las demostraciones."
+    },
+    {
+      "q": "Al verificar un algoritmo recursivo de búsqueda sobre un árbol binario:",
+      "options": [
+        "El caso base de árbol vacío (`null`) debe retornar un indicador de elemento ausente (ej. `false`).",
+        "La hipótesis de inducción asume que la búsqueda funciona correctamente en el subárbol izquierdo y derecho.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cubre tanto el caso de parada nula como el paso recursivo en los hijos.",
+      "explanation": "Ambas afirmaciones reflejan los componentes reales del análisis formal de la búsqueda en árboles por inducción estructural."
+    },
+    {
+      "q": "¿Cuál es la utilidad práctica de demostrar la corrección formal de un algoritmo recursivo?",
+      "options": [
+        "Asegurar que el algoritmo es correcto para cualquier entrada válida, sin importar su tamaño.",
+        "Identificar de manera precisa las precondiciones necesarias que debe cumplir el usuario al llamar a la función.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Previene errores lógicos extremos y establece los límites de uso seguros del método.",
+      "explanation": "La demostración formal proporciona robustez matemática y define explícitamente qué datos de entrada tolera el algoritmo para funcionar adecuadamente."
+    },
+    {
+      "q": "Si demostramos que una función recursiva cumple con su caso base $P(0)$, pero no logramos demostrar el paso inductivo $P(n-1) \\implies P(n)$:",
+      "options": [
+        "Queda demostrada la corrección total para cualquier valor $n \\ge 0$.",
+        "El algoritmo se optimiza automáticamente en memoria en tiempo de ejecución.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La inducción requiere obligatoriamente que se cumplan ambos pasos para ser válida.",
+      "explanation": "Si falla el paso inductivo, no podemos asegurar que la propiedad se cumpla para $n \\ge 1$. Por tanto, ninguna de las dos opciones anteriores es correcta."
+    },
+    {
+      "q": "¿Qué excepción lanza la JVM si un método recursivo carece por completo de un caso base?",
+      "options": [
+        "NullPointerException",
+        "ArithmeticException",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se agota la memoria del stack reservada para los marcos de llamada.",
+      "explanation": "Carecer de caso base causa una recursión infinita que consume la pila de llamadas, lanzando un `java.lang.StackOverflowError`, que no figura en las opciones."
+    },
+    {
+      "q": "Si un algoritmo recursivo se convierte a un formato iterativo mediante bucles, ¿cómo cambia su prueba de corrección matemática?",
+      "options": [
+        "La prueba por inducción deja de ser necesaria y se sustituye por pruebas de caja negra.",
+        "Se debe cambiar el caso base al tamaño máximo permitido por el sistema físico.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La demostración de corrección de un bucle iterativo usa invariantes de bucle, que siguen un razonamiento inductivo similar.",
+      "explanation": "Los algoritmos iterativos se demuestran con invariantes de bucle. Las opciones anteriores no describen de forma correcta este cambio lógico."
+    },
+    {
+      "q": "En una lista enlazada simple, si demostramos la corrección de un método mediante inducción sobre su tamaño, ¿qué representa el paso inductivo?",
+      "options": [
+        "Probar que si el código funciona para una lista vacía, funciona para una lista de tamaño 1.",
+        "Probar que si funciona para una lista de tamaño $n$, funciona para una lista de tamaño $n-1$.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Consiste en asumir que funciona para el subproblema (tamaño n-1) y demostrarlo para el tamaño actual n.",
+      "explanation": "El paso inductivo asume que la función es correcta para la cola (tamaño $n-1$, H.I.) y demuestra que es correcta para la lista completa (tamaño $n$, Tesis). Ninguna de las opciones anteriores describe esto."
+    },
+    {
+      "q": "Si una función recursiva es de cola (tail-recursive), ¿cuál de los siguientes enunciados es verdadero sobre su demostración de corrección?",
+      "options": [
+        "No se puede utilizar la inducción matemática porque los marcos de llamada se sobrescriben en el Stack.",
+        "No necesita caso base ya que no hay valores de retorno intermedios que calcular.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La optimización física del Stack no altera la corrección lógica y matemática del algoritmo.",
+      "explanation": "La recursión de cola se demuestra con inducción de forma idéntica, y requiere caso base obligatoriamente. Por tanto, las afirmaciones dadas son falsas."
+    },
+    {
+      "q": "Si la función variante $t(n)$ de una función recursiva aumenta estrictamente en cada llamada recursiva (ej. de $n$ a $n+1$):",
+      "options": [
+        "El algoritmo alcanzará el caso base de forma más veloz.",
+        "El Garbage Collector liberará inmediatamente las variables del Stack.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Indica un alejamiento continuo del caso base, conduciendo habitualmente a recursión infinita.",
+      "explanation": "Un incremento en la función variante implica que el algoritmo se aleja del caso base, por lo que la recursión no terminará y producirá un desbordamiento del stack."
+    },
+    {
+      "q": "En Java, si un método recursivo devuelve `void`, ¿cómo afecta esto a su demostración de corrección?",
+      "options": [
+        "Impide el uso de inducción matemática ya que no devuelve ningún valor numérico.",
+        "El caso base de la inducción debe evaluar siempre a `null` de forma obligatoria.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los métodos void modifican variables de estado o estructuras; su corrección se basa en el estado resultante.",
+      "explanation": "Para métodos `void` se demuestra la corrección comparando el estado final de los datos (postcondición) con el esperado, usando inducción sobre el estado. Ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "Si la relación de recurrencia en tiempo de un algoritmo recursivo es $T(n) = T(n-1) + \\mathcal{O}(1)$, ¿cuál es su complejidad asintótica?",
+      "options": [
+        "$$\\mathcal{O}(\\log n)$$",
+        "$$\\mathcal{O}(n \\log n)$$",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La recurrencia representa un coste lineal de n pasos con coste constante por paso.",
+      "explanation": "La solución a la recurrencia $T(n) = T(n-1) + \\mathcal{O}(1)$ es $T(n) \\in \\mathcal{O}(n)$. Al no estar la opción lineal entre las alternativas, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "En el caso base de la demostración formal de recorrido en preorden de un árbol binario vacío:",
+      "options": [
+        "Se debe realizar una visita al nodo raíz para validar la corrección.",
+        "Se debe lanzar una excepción para evitar que el puntero nulo se propague.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El recorrido de un árbol vacío simplemente no hace nada y termina de inmediato.",
+      "explanation": "En el caso base de árbol vacío (`null`), el recorrido preorden termina inmediatamente sin realizar ninguna acción, lo que es correcto ya que no hay elementos que listar."
+    },
+    {
+      "q": "En la demostración por inducción del cálculo recursivo de la suma de los elementos de un array en el rango $[i, n-1]$, el caso base se verifica para:",
+      "options": [
+        "i = 0",
+        "i = n - 1",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se verifica típicamente cuando el rango de elementos a sumar está vacío.",
+      "explanation": "El caso base correcto es cuando el rango está vacío ($i \\ge n$), lo que devuelve un valor de suma igual a 0. Las opciones propuestas no indican esto."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_101",
+      "title": "Factorial Recursivo y su Pila de Llamadas",
+      "context": "Dado el siguiente método recursivo en Java para calcular el factorial:\n```java\npublic static int fact(int n) {\n    if (n <= 1) return 1;\n    return n * fact(n - 1);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor entero devuelto al ejecutar la llamada `fact(4)`?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El valor se calcula recursivamente como $4 \\cdot 3 \\cdot 2 \\cdot 1 = 24$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas en total (excluyendo la llamada inicial) se realizan al evaluar `fact(4)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las llamadas adicionales son para $n=3$, $n=2$ y $n=1$. En total se realizan exactamente $3$ llamadas recursivas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de la pila (número máximo de marcos de activación activos de `fact`, incluyendo la llamada inicial) durante la evaluación de `fact(4)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La profundidad máxima se alcanza en el caso base con las llamadas activas `fact(4)`, `fact(3)`, `fact(2)` y `fact(1)` acumuladas en el Stack. Eso supone $4$ marcos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor entero devuelto al ejecutar la llamada `fact(1)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para $n \\le 1$ la condición de parada se cumple inmediatamente, retornando el valor $1$ sin llamadas adicionales."
+        }
+      ]
+    },
+    {
+      "id": "LAB_102",
+      "title": "Potencia Entera Recursiva Simple",
+      "context": "Considere la función recursiva para calcular la potencia $a^n$ (con $n \\ge 0$):\n```java\npublic static int power(int a, int n) {\n    if (n == 0) return 1;\n    return a * power(a, n - 1);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto al ejecutar la llamada `power(3, 4)`?",
+          "correctValue": 81,
+          "tolerance": 0,
+          "explanation": "El resultado de $3^4$ es $3 \\cdot 3 \\cdot 3 \\cdot 3 = 81$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas operaciones de multiplicación en total realiza la llamada `power(2, 5)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Cada llamada no base realiza una multiplicación. Para $n=5$, hay $5$ llamadas recursivas y por tanto se realizan $5$ multiplicaciones."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se evalúa o ejecuta el caso base en la llamada `power(5, 3)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El caso base ($n=0$) se evalúa exactamente $1$ vez al final de la cadena de llamadas recursivas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Si definimos la función variante de decremento como $t(n) = n$, ¿cuál es su valor entero tras realizarse la primera llamada recursiva si inicialmente $n=6$?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La llamada inicial es con $n=6$. La primera llamada recursiva recibe $n-1$, es decir, $5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_103",
+      "title": "Suma de los Primeros N Enteros",
+      "context": "Dado el siguiente método recursivo para obtener la suma $\\sum_{i=1}^n i$:\n```java\npublic static int sumN(int n) {\n    if (n <= 0) return 0;\n    return n + sumN(n - 1);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `sumN(10)`?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "La suma de los primeros 10 enteros es $\\frac{10 \\cdot 11}{2} = 55$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "Si demostramos por inducción la fórmula matemática $P(n) = \\frac{n(n+1)}{2}$, ¿cuál es el valor numérico del término $P(5)$?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Sustituyendo $n=5$ en la fórmula: $\\frac{5 \\cdot 6}{2} = 15$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas en total (incluyendo la inicial) se ejecutan para evaluar `sumN(3)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Las llamadas son para $n=3$, $n=2$, $n=1$ y el caso base $n=0$. Esto da un total de $4$ llamadas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Qué valor entero devuelve el método si se realiza la llamada `sumN(-5)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que $-5 \\le 0$, el método entra de inmediato al caso base y devuelve $0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_104",
+      "title": "Fibonacci de Doble Recursión",
+      "context": "Considere la clásica función recursiva para calcular términos de Fibonacci:\n```java\npublic static int fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `fib(5)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Los términos de Fibonacci son $F_0=0, F_1=1, F_2=1, F_3=2, F_4=3, F_5=5$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para evaluar `fib(4)`?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El número de llamadas responde a la relación $C(n) = 1 + C(n-1) + C(n-2)$, con $C(0)=C(1)=1$. Así, $C(2)=3$, $C(3)=5$, $C(4)=1 + 5 + 3 = 9$ llamadas en total."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el número máximo de marcos de activación activos en el Stack simultáneamente (incluyendo la llamada inicial) al evaluar `fib(4)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La profundidad máxima de llamadas en el stack corresponde al camino más largo: `fib(4)` $\\to$ `fib(3)` $\\to$ `fib(2)` $\\to$ `fib(1)`. Esto acumula $4$ marcos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se llega al caso base con retorno de 1 (es decir, llamadas que devuelven `fib(1)`) al evaluar `fib(4)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El valor de `fib(4)` se compone de la suma de términos base. $F_4 = 3$, lo que indica que se reduce a la suma de $3$ llamadas a `fib(1)` y $2$ llamadas a `fib(0)`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_105",
+      "title": "Conteo Recursivo de Dígitos",
+      "context": "Dado el siguiente método que cuenta los dígitos de un entero positivo:\n```java\npublic static int countDigits(int n) {\n    if (n < 10) return 1;\n    return 1 + countDigits(n / 10);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor entero devuelto al evaluar `countDigits(98765)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El número $98765$ tiene $5$ dígitos, por lo que la función devuelve $5$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas (excluyendo la inicial) se efectúan al evaluar `countDigits(1234)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las llamadas recursivas adicionales se realizan para $123$, $12$ y $1$. Eso da exactamente $3$ llamadas adicionales."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del parámetro `n` en la tercera llamada (siendo la primera la inicial con valor $4321$) al evaluar `countDigits(4321)`?",
+          "correctValue": 43,
+          "tolerance": 0,
+          "explanation": "1ª llamada: $4321$. 2ª llamada: $432$. 3ª llamada: $43$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto si pasamos la entrada `0`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como $0 < 10$, se activa de inmediato el caso base y retorna $1$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_106",
+      "title": "Suma de los Dígitos de un Número",
+      "context": "Considere la función recursiva que calcula la suma de los dígitos de un número no negativo:\n```java\npublic static int sumDigits(int n) {\n    if (n == 0) return 0;\n    return (n % 10) + sumDigits(n / 10);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `sumDigits(987)`?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "La suma es $9 + 8 + 7 = 24$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para `sumDigits(1005)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Las llamadas se ejecutan en secuencia para los argumentos: $1005$, $100$, $10$, $1$ y $0$. Esto suma $5$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el número de marcos en el stack durante la ejecución del caso base para `sumDigits(7)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se llama a `sumDigits(7)` y luego a `sumDigits(0)`. En el caso base, ambos marcos están activos, haciendo un total de $2$ marcos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por `sumDigits(0)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La condición `n == 0` se cumple inmediatamente y retorna $0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_107",
+      "title": "Inversión de Elementos de Array",
+      "context": "Dado el método recursivo para invertir un array en un rango definido:\n```java\npublic static void reverse(int[] arr, int i, int j) {\n    if (i >= j) return;\n    int temp = arr[i];\n    arr[i] = arr[j];\n    arr[j] = temp;\n    reverse(arr, i + 1, j - 1);\n}\n```\nConsideremos el array inicial `int[] arr = {1, 2, 3, 4, 5, 6};` y la llamada `reverse(arr, 0, 5);`.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de `arr[0]` tras la ejecución completa del método?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El primer y último elemento se intercambian, con lo que `arr[0]` toma el valor original de `arr[5]`, que es $6$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas operaciones de intercambio (`swap`) de elementos se llevan a cabo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se intercambian las posiciones $(0,5)$, $(1,4)$ y $(2,3)$. Las llamadas recursivas posteriores no cumplen la condición $i < j$, por lo que hay $3$ intercambios."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas recursivas en total (excluyendo la inicial) se ejecutan?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las llamadas adicionales son `reverse(arr, 1, 4)`, `reverse(arr, 2, 3)` y la llamada de parada `reverse(arr, 3, 2)`. Esto suma $3$ llamadas recursivas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor de la diferencia `j - i` en la última llamada recursiva (caso base)?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "En el caso base se invoca a `reverse(arr, 3, 2)`. La diferencia es $j - i = 2 - 3 = -1$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_108",
+      "title": "Búsqueda Binaria Recursiva",
+      "context": "Dado el siguiente código de búsqueda binaria:\n```java\npublic static int binarySearch(int[] arr, int low, int high, int key) {\n    if (low > high) return -1;\n    int mid = low + (high - low) / 2;\n    if (arr[mid] == key) return mid;\n    if (arr[mid] > key) return binarySearch(arr, low, mid - 1, key);\n    return binarySearch(arr, mid + 1, high, key);\n}\n```\nConsideremos el array ordenado `int[] arr = {2, 4, 6, 8, 10, 12, 14, 16};` y la llamada inicial `binarySearch(arr, 0, 7, 5);`.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada inicial?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Dado que el valor 5 no se encuentra en el array, la búsqueda finaliza retornando $-1$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para esta búsqueda?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "1ª: (0,7) mid=3, arr[3]=8 > 5. 2ª: (0,2) mid=1, arr[1]=4 < 5. 3ª: (2,2) mid=2, arr[2]=6 > 5. 4ª: (2,1) low > high (parada). Total $4$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del índice medio `mid` calculado en la segunda llamada (la primera llamada recursiva)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la segunda llamada, $low=0, high=2$. El punto medio es $0 + (2-0)/2 = 1$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor de la diferencia `high - low` en la última llamada recursiva que alcanza el caso base?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "En la última llamada (de parada), $low=2$ y $high=1$. La diferencia $high - low = 1 - 2 = -1$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_109",
+      "title": "Máximo Común Divisor (Euclides)",
+      "context": "Dado el algoritmo recursivo de Euclides para calcular el MCD:\n```java\npublic static int gcd(int a, int b) {\n    if (b == 0) return a;\n    return gcd(b, a % b);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `gcd(48, 18)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Los pasos son: $\\text{gcd}(48,18) \\to \\text{gcd}(18,12) \\to \\text{gcd}(12,6) \\to \\text{gcd}(6,0) \\to 6$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas (excluyendo la inicial) se realizan al evaluar `gcd(48, 18)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las llamadas adicionales son para pares $(18,12)$, $(12,6)$ y $(6,0)$. Son exactamente $3$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el MCD resultante devuelto al evaluar `gcd(13, 8)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Dado que 13 y 8 son primos entre sí, su máximo común divisor es $1$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para resolver `gcd(13, 8)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Llamadas: $(13,8) \\to (8,5) \\to (5,3) \\to (3,2) \\to (2,1) \\to (1,0)$. Son un total de $6$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_110",
+      "title": "Función de Ackermann",
+      "context": "Dada la definición recursiva de la función de Ackermann:\n```java\npublic static int ack(int m, int n) {\n    if (m == 0) return n + 1;\n    if (m > 0 && n == 0) return ack(m - 1, 1);\n    return ack(m - 1, ack(m, n - 1));\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `ack(1, 2)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Calculando: $\\text{ack}(1,2) = \\text{ack}(0,\\text{ack}(1,1)) = \\text{ack}(0,3) = 4$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor devuelto por `ack(2, 1)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Calculando: $\\text{ack}(2,1) = \\text{ack}(1,\\text{ack}(2,0)) = \\text{ack}(1,3) = 5$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto por la llamada directa `ack(0, 5)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Para $m=0$, la función devuelve inmediatamente $n+1$, lo que da $5+1=6$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack para evaluar `ack(1, 1)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La cadena de ejecución más profunda es: `ack(1,1)` $\\to$ `ack(1,0)` $\\to$ `ack(0,1)`. Esto genera un máximo de $3$ marcos en la pila."
+        }
+      ]
+    },
+    {
+      "id": "LAB_111",
+      "title": "Secuencia de Collatz",
+      "context": "Dado el siguiente método recursivo que calcula el número de pasos de Collatz hasta llegar a 1:\n```java\npublic static int collatz(int n) {\n    if (n == 1) return 0;\n    if (n % 2 == 0) return 1 + collatz(n / 2);\n    return 1 + collatz(3 * n + 1);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `collatz(6)`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Secuencia: $6 \\to 3 \\to 10 \\to 5 \\to 16 \\to 8 \\to 4 \\to 2 \\to 1$. Son exactamente $8$ pasos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para evaluar `collatz(6)`?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Se ejecutan las llamadas para $6, 3, 10, 5, 16, 8, 4, 2, 1$. Esto suma $9$ llamadas en total."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto al evaluar `collatz(8)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Secuencia: $8 \\to 4 \\to 2 \\to 1$, que requiere $3$ pasos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por la llamada al caso base `collatz(1)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La primera condición se cumple retornando $0$ pasos."
+        }
+      ]
+    },
+    {
+      "id": "LAB_112",
+      "title": "Búsqueda Lineal Recursiva",
+      "context": "Dado el método recursivo de búsqueda lineal sobre un array:\n```java\npublic static int linearSearch(int[] arr, int index, int key) {\n    if (index >= arr.length) return -1;\n    if (arr[index] == key) return index;\n    return linearSearch(arr, index + 1, key);\n}\n```\nConsideremos el array `int[] arr = {10, 20, 30, 40, 50};`.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto al llamar a `linearSearch(arr, 0, 35)`?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "El valor 35 no existe en el array, por lo que retorna $-1$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan al ejecutar `linearSearch(arr, 0, 35)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Llamadas para índices: $0$, $1$, $2$, $3$, $4$ y la llamada de fuera de rango $5$ (caso base). Son $6$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto al llamar a `linearSearch(arr, 0, 30)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El elemento 30 se encuentra en el índice $2$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas en total se realizan al ejecutar `linearSearch(arr, 0, 30)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Llamadas para los índices $0$, $1$ y $2$ (donde encuentra el elemento). En total $3$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_113",
+      "title": "Búsqueda de Máximo Recursivo",
+      "context": "Dado el siguiente método para encontrar el mayor elemento en un array:\n```java\npublic static int findMax(int[] arr, int n) {\n    if (n == 1) return arr[0];\n    return Math.max(arr[n - 1], findMax(arr, n - 1));\n}\n```\nConsideremos el array `int[] arr = {3, 8, 2, 7, 5};`.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `findMax(arr, 5)`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El máximo valor de los elementos del array es $8$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para `findMax(arr, 5)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se ejecuta una llamada para cada tamaño desde $n=5$ hasta $n=1$. En total $5$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack para `findMax(arr, 3)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al evaluar para $n=3$, se acumulan los marcos de $n=3$, $n=2$ y $n=1$. La profundidad máxima es $3$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Si el array fuera `{-5, -2, -10}` y llamamos a `findMax` con $n=3$, ¿qué valor devuelve?",
+          "correctValue": -2,
+          "tolerance": 0,
+          "explanation": "El mayor elemento entre $-5$, $-2$ y $-10$ es $-2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_114",
+      "title": "Conteo de Ocurrencias en Array",
+      "context": "Dado el método para contar las ocurrencias de un número en un array:\n```java\npublic static int countOccur(int[] arr, int index, int x) {\n    if (index >= arr.length) return 0;\n    int count = (arr[index] == x) ? 1 : 0;\n    return count + countOccur(arr, index + 1, x);\n}\n```\nConsideremos el array `int[] arr = {1, 2, 3, 2, 1, 2};`.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada `countOccur(arr, 0, 2)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El número 2 aparece en las posiciones $1$, $3$ y $5$. Retorna $3$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas totales (excluyendo la inicial) se efectúan al evaluar `countOccur(arr, 0, 2)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La llamada inicial es con $index=0$. Se realizan llamadas recursivas para $index=1, 2, 3, 4, 5$ y $6$ (caso base). Son $6$ llamadas recursivas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto por la llamada `countOccur(arr, 3, 1)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el rango desde el índice 3 hasta el final (`{2, 1, 2}`), el número 1 aparece exactamente $1$ vez."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por la llamada `countOccur(arr, 0, 9)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El elemento 9 no existe en el array, por lo que el conteo final es $0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_115",
+      "title": "Altura de un Árbol Binario",
+      "context": "Dado el método recursivo para obtener la altura de un árbol binario:\n```java\nclass Node {\n    Node left, right;\n}\npublic static int height(Node root) {\n    if (root == null) return 0;\n    return 1 + Math.max(height(root.left), height(root.right));\n}\n```\nSupongamos un árbol con raíz A, hijo izquierdo B, e hijo derecho C. B tiene un hijo izquierdo D. C no tiene hijos.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `height(root)` para este árbol?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El camino más largo es A $\\to$ B $\\to$ D, que contiene $3$ nodos, por lo que la altura es $3$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas veces se ejecuta la llamada a `height` recibiendo un argumento `null`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Los punteros nulos son: hijo izquierdo de D, hijo derecho de D, hijo derecho de B, hijo izquierdo de C, hijo derecho de C. Total: $5$ llamadas nulas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas en total (incluyendo nulas e inicial) se realizan al evaluar `height(root)`?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Se llama una vez por cada uno de los $4$ nodos y $5$ veces por los punteros nulos. Total: $9$ llamadas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Si el árbol estuviera completamente vacío (`root == null`), ¿cuál es la altura devuelta?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Se cumple la condición de parada `root == null` devolviendo $0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_116",
+      "title": "Conteo de Nodos en Árbol Binario",
+      "context": "Dado el método recursivo para contar los nodos de un árbol binario:\n```java\npublic static int countNodes(Node root) {\n    if (root == null) return 0;\n    return 1 + countNodes(root.left) + countNodes(root.right);\n}\n```\nSuponga un árbol con raíz A. A tiene hijo izquierdo B y este hijo izquierdo C. A tiene hijo derecho D y este hijo derecho E.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el número total de nodos devuelto por `countNodes(root)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El árbol consta de los nodos A, B, C, D, E. Total: $5$ nodos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (incluyendo nulos e inicial) se procesan durante la ejecución?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Hay $5$ nodos reales y $6$ referencias nulas (2 en C, 1 en B, 2 en E, 1 en D). Total: $5 + 6 = 11$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto si evaluamos únicamente `countNodes(root.left)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El subárbol izquierdo de la raíz consta únicamente de los nodos B y C, por lo que devuelve $2$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por la llamada con argumento nulo `countNodes(null)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Retorna $0$ de forma inmediata en el caso base."
+        }
+      ]
+    },
+    {
+      "id": "LAB_117",
+      "title": "Conteo de Hojas en Árbol Binario",
+      "context": "Dado el siguiente código recursivo para contar las hojas (nodos sin hijos) de un árbol binario:\n```java\npublic static int countLeaves(Node root) {\n    if (root == null) return 0;\n    if (root.left == null && root.right == null) return 1;\n    return countLeaves(root.left) + countLeaves(root.right);\n}\n```\nConsidere el árbol: raíz A con hijo izquierdo B, B con hijo izquierdo C e hijo derecho D. A tiene un hijo derecho E.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `countLeaves(root)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las hojas del árbol son C, D y E. El resultado es $3$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se ejecutan al evaluar este árbol?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se realiza una llamada por cada nodo real (A, B, C, D, E). Ninguna llamada recibe null debido a la guarda del código. Total: $5$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas en total se realizan si el árbol consta de una única raíz sin hijos?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se realiza la llamada inicial y se detiene en la segunda condición retornando $1$ de inmediato. Total: $1$ llamada."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Si el árbol es nulo (`root == null`), ¿qué valor devuelve?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El caso base de árbol nulo retorna de inmediato el valor $0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_118",
+      "title": "Suma de Elementos en Árbol Binario",
+      "context": "Dado el siguiente método recursivo para sumar los valores enteros de los nodos:\n```java\nclass IntNode {\n    int val;\n    IntNode left, right;\n    IntNode(int v) { val = v; }\n}\npublic static int sumTree(IntNode root) {\n    if (root == null) return 0;\n    return root.val + sumTree(root.left) + sumTree(root.right);\n}\n```\nSupongamos: raíz A ($val=5$) con hijo izquierdo B ($val=3$) e hijo derecho C ($val=8$). B tiene hijo derecho D ($val=2$).",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor entero devuelto por `sumTree(root)`?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "La suma total es $5 + 3 + 8 + 2 = 18$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas a `sumTree` reciben un valor nulo (`null`)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Las referencias nulas son: izquierdo de B, izquierdo de D, derecho de D, izquierdo de C, derecho de C. En total $5$ nulos."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto por `sumTree(root.right)`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Dado que el nodo C no tiene hijos, devuelve su propio valor $8$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas (marcos en el Stack) al evaluar `sumTree(root)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El camino más largo es A $\\to$ B $\\to$ D $\\to$ null. Esto requiere $4$ marcos simultáneos en el Stack."
+        }
+      ]
+    },
+    {
+      "id": "LAB_119",
+      "title": "Verificar Potencia de 2 Recursivo",
+      "context": "Dado el método recursivo para validar si un entero positivo es potencia de 2:\n```java\npublic static boolean isPowerOfTwo(int n) {\n    if (n <= 0) return false;\n    if (n == 1) return true;\n    if (n % 2 != 0) return false;\n    return isPowerOfTwo(n / 2);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Qué valor entero (1 para true, 0 para false) devuelve `isPowerOfTwo(16)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como 16 es una potencia de 2 ($2^4$), el resultado es true ($1$)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para evaluar `isPowerOfTwo(16)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Llamadas consecutivas para $n = 16, 8, 4, 2, 1$. Se realizan exactamente $5$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Qué valor entero (1 para true, 0 para false) devuelve `isPowerOfTwo(18)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "18 no es potencia de 2, por lo que devuelve false ($0$)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan para evaluar `isPowerOfTwo(18)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Llamadas para $n=18$ y luego para $n=9$. En esta segunda llamada, $9 \\pmod 2 \\neq 0$, por lo que termina. Total: $2$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_120",
+      "title": "Multiplicación por Sumas Sucesivas",
+      "context": "Dado el método que multiplica dos números enteros no negativos mediante sumas recursivas:\n```java\npublic static int multiply(int a, int b) {\n    if (b == 0) return 0;\n    return a + multiply(a, b - 1);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada `multiply(6, 4)`?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El producto de $6 \\cdot 4$ se calcula sumando $6$ cuatro veces, dando $24$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas (excluyendo la llamada inicial) se realizan al evaluar `multiply(6, 4)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Las llamadas recursivas adicionales son para $b=3, 2, 1$ y $0$. En total $4$ llamadas recursivas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "En la demostración de la inducción sobre $b$, ¿cuál es el valor del caso base para $P(0)$?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El caso base con $b=0$ devuelve el neutro de la suma, que es $0$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan al evaluar `multiply(5, 1)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se realiza la llamada inicial con $b=1$, y la llamada recursiva con $b=0$ (parada). En total $2$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_121",
+      "title": "División por Restas Sucesivas",
+      "context": "Dado el método que divide dos enteros positivos usando restas recursivas:\n```java\npublic static int divide(int a, int b) {\n    if (a < b) return 0;\n    return 1 + divide(a - b, b);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada `divide(14, 3)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El cociente entero de $14 / 3$ es $4$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas (excluyendo la inicial) se efectúan al evaluar `divide(14, 3)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Llamadas recursivas para $a=11$, $a=8$, $a=5$ y el caso base $a=2$. Esto supone $4$ llamadas recursivas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del parámetro `a` en la última llamada recursiva (caso base) para `divide(14, 3)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La última llamada recursiva recibe $a = 5 - 3 = 2$, lo cual satisface la condición $a < b$ (ya que $2 < 3$) y finaliza."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por `divide(5, 8)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como $5 < 8$, el método devuelve $0$ de manera inmediata."
+        }
+      ]
+    },
+    {
+      "id": "LAB_122",
+      "title": "Factorial con Recursión de Cola",
+      "context": "Considere la función recursiva de cola para calcular el factorial con acumulador:\n```java\npublic static int factTail(int n, int acc) {\n    if (n <= 1) return acc;\n    return factTail(n - 1, n * acc);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada inicial `factTail(4, 1)`?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El factorial de 4 es $24$. El acumulador propaga el resultado parcial."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del parámetro `acc` en la llamada que alcanza el caso base ($n=1$) al evaluar `factTail(4, 1)`?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Llamadas: $(4,1) \\to (3,4) \\to (2,12) \\to (1,24)$. Al alcanzar $n=1$, el acumulador vale $24$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas recursivas totales (excluyendo la inicial) se realizan para `factTail(4, 1)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las llamadas recursivas son para $n=3$, $n=2$ y $n=1$. En total se realizan $3$ llamadas recursivas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack (incluyendo la inicial) en Java estándar (que no optimiza recursión de cola)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Sin optimización de cola, se acumulan $4$ marcos en la pila de ejecución: $(4,1)$, $(3,4)$, $(2,12)$ y $(1,24)$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_123",
+      "title": "Llamadas y Divisiones en Merge Sort",
+      "context": "Supongamos la estructura de división recursiva en el algoritmo Merge Sort:\n```java\npublic static void mergeSort(int[] arr, int low, int high) {\n    if (low >= high) return;\n    int mid = low + (high - low) / 2;\n    mergeSort(arr, low, mid);\n    mergeSort(arr, mid + 1, high);\n    merge(arr, low, mid, high);\n}\n```\nSe ejecuta `mergeSort(arr, 0, 7)` sobre un array de 8 elementos.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántas llamadas a `mergeSort` en total (incluyendo la inicial y los casos base) se ejecutan?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El árbol de llamadas tiene 1 raíz, 2 hijos en nivel 1, 4 en nivel 2, y 8 hojas (casos base) en nivel 3. El total es $1+2+4+8 = 15$ llamadas."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas veces en total se ejecuta el método de mezcla `merge`?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Se ejecuta una vez por cada división que tenga más de un elemento. Corresponde a los nodos internos del árbol de recursión: $1+2+4 = 7$ mezclas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de llamadas en la pila (incluyendo la inicial) alcanzada?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El camino máximo tiene longitud 4 (por ejemplo, llamadas para rangos $[0..7] \\to [0..3] \\to [0..1] \\to [0..0]$). Esto genera $4$ marcos activos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas de las llamadas totales corresponden a casos base (donde `low >= high`)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Las hojas del árbol corresponden a subarrays unitarios. Para un array de tamaño 8, hay $8$ casos base."
+        }
+      ]
+    },
+    {
+      "id": "LAB_124",
+      "title": "Quick Sort con Partición Equitativa",
+      "context": "Considere la función recursiva de Quick Sort:\n```java\npublic static void quickSort(int[] arr, int low, int high) {\n    if (low >= high) return;\n    int p = partition(arr, low, high);\n    quickSort(arr, low, p - 1);\n    quickSort(arr, p + 1, high);\n}\n```\nSuponga un array de 5 elementos tal que el pivote siempre se ubica exactamente en la mitad de cada rango (es decir, para rango $[0, 4]$, `partition` retorna $p=2$; para $[0, 1]$, retorna $p=0$; para $[3, 4]$, retorna $p=3$).",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántas llamadas a `quickSort` en total (inicial + recursivas + casos base) se realizan?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Árbol de llamadas: $[0..4]$ (1), llama a $[0..1]$ y $[3..4]$ (2). A su vez, $[0..1]$ llama a $[0..-1]$ y $[1..1]$ (casos base), y $[3..4]$ llama a $[3..2]$ y $[4..4]$ (casos base). Total: $1 + 2 + 4 = 7$ llamadas."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas veces en total se ejecuta el método `partition`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se ejecuta en las llamadas no base: para rango $[0..4]$, $[0..1]$ y $[3..4]$. Esto suma $3$ ejecuciones."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack (incluyendo la inicial)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El camino de llamadas más largo tiene longitud 3 (por ejemplo, $[0..4] \\to [0..1] \\to [0..-1]$). Esto da un pico de $3$ marcos en el Stack."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas corresponden a casos de parada (`low >= high`)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Las hojas del árbol son los casos base: $[0..-1]$, $[1..1]$, $[3..2]$ y $[4..4]$. Hay $4$ casos de parada."
+        }
+      ]
+    },
+    {
+      "id": "LAB_125",
+      "title": "Longitud de una Lista Enlazada Recursiva",
+      "context": "Dada la clase de nodo de lista simple y el método recursivo de cálculo de longitud:\n```java\nclass ListNode {\n    int val;\n    ListNode next;\n    ListNode(int v, ListNode n) { val = v; next = n; }\n}\npublic static int length(ListNode head) {\n    if (head == null) return 0;\n    return 1 + length(head.next);\n}\n```\nInstanciamos la lista: `ListNode list = new ListNode(10, new ListNode(20, new ListNode(30, null)));`.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `length(list)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La lista consta de 3 nodos, por lo que la longitud devuelta es $3$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan al evaluar `length`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se llama para los nodos 1, 2, 3 y para el nodo nulo del final. Total: $4$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "En la hipótesis de inducción estructural de $P(L)$, para una lista de tamaño 3, ¿cuál es el tamaño asumido para la cola `head.next`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La cola de la lista contiene 2 elementos, por lo que la H.I. asume que `length(head.next)` devuelve exactamente $2$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el nivel de profundidad de llamada en el stack para la llamada con argumento `null` (siendo la inicial de profundidad 1)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La secuencia es: 1ª (nodo 1), 2ª (nodo 2), 3ª (nodo 3), 4ª (null). La profundidad es $4$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_126",
+      "title": "Torres de Hanói",
+      "context": "Dado el método recursivo que calcula el número mínimo de movimientos para resolver el puzzle de las Torres de Hanói con $n$ discos:\n```java\npublic static int hanoi(int n) {\n    if (n == 1) return 1;\n    return 2 * hanoi(n - 1) + 1;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada `hanoi(4)`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El resultado es $2^4 - 1 = 15$ movimientos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se ejecutan para resolver `hanoi(4)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El algoritmo realiza una sola llamada recursiva en cada paso. Para $n=4, 3, 2, 1$. Hay $4$ llamadas en total."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto al ejecutar la llamada `hanoi(6)`?",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "El resultado responde a la fórmula $2^6 - 1 = 63$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Si demostramos por inducción que $P(n) = 2^n - 1$, ¿cuál es el valor de la tesis para $n=3$?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Sustituyendo $n=3$, la tesis afirma que el resultado debe ser $2^3 - 1 = 7$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_127",
+      "title": "Conversión a Binario y Conteo de bits 1",
+      "context": "Dado el método recursivo que calcula el número de dígitos 1 en la representación binaria de un entero no negativo:\n```java\npublic static int countOnes(int n) {\n    if (n == 0) return 0;\n    return (n % 2) + countOnes(n / 2);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada `countOnes(13)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El número 13 en binario es $1101_2$, que contiene $3$ dígitos 1."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se ejecutan para evaluar `countOnes(13)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Secuencia de argumentos: $13, 6, 3, 1, 0$. Esto genera $5$ llamadas en total."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack para evaluar `countOnes(8)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Secuencia de llamadas: $8 \\to 4 \\to 2 \\to 1 \\to 0$. Esto acumula un total de $5$ marcos de activación."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por la llamada al caso base `countOnes(0)`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Para $n=0$ la función retorna $0$ de forma inmediata."
+        }
+      ]
+    },
+    {
+      "id": "LAB_128",
+      "title": "Generación de Permutaciones",
+      "context": "Dado el siguiente código recursivo para contar los pasos de la generación de permutaciones:\n```java\npublic static int permCount;\npublic static void permute(String str, int l, int r) {\n    permCount++;\n    if (l == r) return;\n    for (int i = l; i <= r; i++) {\n        permute(str, l + 1, r);\n    }\n}\n```\nSuponga que `permCount` inicializa en 0.",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `permCount` tras llamar a `permute(\"abc\", 0, 2)`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El número de llamadas responde a $C(k) = 1 + k \\cdot C(k-1)$ con $C(1)=1$. Para $k=3$ (rango 0 a 2), tenemos $C(2) = 1 + 2(1) = 3$ y $C(3) = 1 + 3(3) = 10$ llamadas."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas de las 10 totales corresponden al caso base (`l == r`)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Las llamadas base son aquellas con longitud del rango igual a 1. Cada una de las 3 llamadas de longitud 2 genera 2 llamadas de longitud 1. Total: $3 \\cdot 2 = 6$ llamadas base."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor de `permCount` si se ejecuta el método para una cadena de tamaño 2, como `permute(\"ab\", 0, 1)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para $k=2$, el número de llamadas es $1 + 2 \\cdot C(1) = 3$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack para `permute(\"abc\", 0, 2)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La profundidad corresponde al tamaño del rango, que pasa de $3$ a $2$ y finalmente a $1$ en el caso base. Son $3$ niveles."
+        }
+      ]
+    },
+    {
+      "id": "LAB_129",
+      "title": "Números de Catalán Recursivos",
+      "context": "Dado el método recursivo para obtener los números de Catalán:\n```java\npublic static int catalan(int n) {\n    if (n <= 1) return 1;\n    int res = 0;\n    for (int i = 0; i < n; i++) {\n        res += catalan(i) * catalan(n - 1 - i);\n    }\n    return res;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto al evaluar `catalan(3)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Valores: $C_0=1, C_1=1, C_2=2$. Para $n=3$, $C_3 = C_0 C_2 + C_1 C_1 + C_2 C_0 = 2 + 1 + 2 = 5$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor devuelto al evaluar `catalan(4)`?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Calculando: $C_4 = C_0 C_3 + C_1 C_2 + C_2 C_1 + C_3 C_0 = 5 + 2 + 2 + 5 = 14$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces en total se evalúa directamente el caso base (`n <= 1`) al calcular `catalan(2)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`catalan(2)` divide en $C_0 \\cdot C_1 + C_1 \\cdot C_0$, lo que genera 4 llamadas de tamaño $\\le 1$ ($C_0, C_1, C_1, C_0$). Todas ellas van al caso base."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el stack (incluyendo la inicial) para `catalan(3)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La pila alcanza su máximo en la secuencia `catalan(3)` $\\to$ `catalan(2)` $\\to$ `catalan(1)` o `catalan(0)`. Esto acumula $4$ marcos."
+        }
+      ]
+    },
+    {
+      "id": "LAB_130",
+      "title": "Caminos en una Cuadrícula (Grid)",
+      "context": "Dado el método que calcula los caminos posibles en una rejilla bidimensional:\n```java\npublic static int countPaths(int m, int n) {\n    if (m == 1 || n == 1) return 1;\n    return countPaths(m - 1, n) + countPaths(m, n - 1);\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto al evaluar `countPaths(3, 3)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El número de caminos en una cuadrícula $3 \\times 3$ es $\\binom{2+2}{2} = 6$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas en total (inicial + recursivas) se realizan al evaluar `countPaths(3, 3)`?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Se efectúan 11 llamadas en el árbol de recursión: 5 llamadas no base y 6 llamadas base. Total: $11$ llamadas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas de las 11 llamadas de la evaluación de `countPaths(3, 3)` corresponden a casos base?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Las hojas del árbol son los casos base donde $m=1$ o $n=1$. En total hay $6$ hojas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto al evaluar `countPaths(4, 2)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El resultado es $\\binom{3+1}{1} = 4$ caminos."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Principio de Inducción Matemática (Paso Inductivo)",
+      "tex": "$$P(k) \\implies P(k+1) \\quad \\forall k \\ge n_0$$"
+    },
+    {
+      "name": "Fórmula del Sumatorio de los Primeros n Enteros",
+      "tex": "$$\\sum_{i=1}^n i = \\frac{n(n+1)}{2}$$"
+    },
+    {
+      "name": "Relación de Recurrencia para Potencia Simple",
+      "tex": "$$T(n) = T(n-1) + \\mathcal{O}(1)$$"
+    },
+    {
+      "name": "Complejidad Temporal Asintótica de Torres de Hanói",
+      "tex": "$$\\mathcal{O}(2^n)$$"
+    },
+    {
+      "name": "Relación de Recurrencia de Torres de Hanói",
+      "tex": "$$H(n) = 2H(n-1) + 1$$"
+    },
+    {
+      "name": "Complejidad Temporal de la Búsqueda Binaria",
+      "tex": "$$\\mathcal{O}(\\log n)$$"
+    },
+    {
+      "name": "Definición Formal de la Relación de Recurrencia de Fibonacci",
+      "tex": "$$T(n) = T(n-1) + T(n-2) + \\mathcal{O}(1)$$"
+    },
+    {
+      "name": "Definición Matemática de Función Variante para Terminación",
+      "tex": "$$t: S \\to \\mathbb{N} \\quad \\text{t.q.} \\quad t(s_{i+1}) < t(s_i)$$"
+    },
+    {
+      "name": "Suma de una Serie Geométrica Finita",
+      "tex": "$$\\sum_{i=0}^{n-1} a \\cdot r^i = a \\frac{1-r^n}{1-r}$$"
+    }
+  ]
+}

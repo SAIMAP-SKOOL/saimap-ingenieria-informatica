@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué modificador de acceso permite a una subclase en otro paquete acceder a un miembro de la superclase?",
+      "options": [
+        "private",
+        "protected",
+        "default (package-private)"
+      ],
+      "correct": 1,
+      "hint": "Proporciona un nivel intermedio entre la restricción total y la visibilidad universal.",
+      "explanation": "El modificador `protected` hace que un miembro sea accesible para la propia clase, las del mismo paquete y todas las subclases, incluso si están en paquetes distintos."
+    },
+    {
+      "q": "¿Cómo se especifica la relación de herencia en Java entre dos clases?",
+      "options": [
+        "Con la palabra clave implements",
+        "Con la palabra clave extends",
+        "Con la palabra clave inherits"
+      ],
+      "correct": 1,
+      "hint": "Significa que una clase expande la funcionalidad de otra.",
+      "explanation": "En Java, se emplea la palabra clave `extends` para indicar que una subclase hereda de una superclase."
+    },
+    {
+      "q": "¿Cuál es la clase raíz de la que heredan todas las clases en Java de forma implícita?",
+      "options": [
+        "java.lang.Class",
+        "java.lang.Object",
+        "java.lang.System"
+      ],
+      "correct": 1,
+      "hint": "Es la raíz de toda la jerarquía de objetos en la JVM.",
+      "explanation": "Si no se define explícitamente una superclase con `extends`, Java hace que la clase extienda automáticamente de `java.lang.Object`."
+    },
+    {
+      "q": "¿Es posible la herencia múltiple de clases en Java?",
+      "options": [
+        "Sí, usando comas después de la cláusula extends",
+        "No, Java solo admite herencia simple de clases",
+        "Sí, siempre que las superclases no tengan constructores parametrizados"
+      ],
+      "correct": 1,
+      "hint": "Java evita los problemas del 'diamante' restringiendo la herencia de clases a un solo progenitor.",
+      "explanation": "Java no permite la herencia múltiple de clases. Una subclase solo puede extender a una única superclase directa."
+    },
+    {
+      "q": "¿Se heredan los constructores de una clase en sus subclases?",
+      "options": [
+        "No, cada subclase debe definir o heredar la llamada implícita a sus constructores",
+        "Sí, se heredan automáticamente todos los constructores públicos y protegidos",
+        "Sí, pero solo si no tienen parámetros definidos"
+      ],
+      "correct": 0,
+      "hint": "Los constructores inicializan el estado propio de cada clase y no forman parte de los miembros heredados.",
+      "explanation": "Los constructores no se heredan en Java. Las subclases deben definir sus propios constructores, llamando al del padre mediante `super()` si es necesario."
+    },
+    {
+      "q": "¿Qué ocurre si no se llama explícitamente a super() en la primera línea de un constructor de una subclase?",
+      "options": [
+        "El compilador inserta automáticamente la llamada al constructor sin parámetros del padre super()",
+        "Se produce un error de compilación inmediato en todos los casos",
+        "El programa compila pero lanzará un NullPointerException en ejecución al usar atributos del padre"
+      ],
+      "correct": 0,
+      "hint": "El compilador asiste en la inicialización encadenada de la jerarquía.",
+      "explanation": "Si no se especifica `super(...)` ni `this(...)` en la primera línea del constructor, el compilador inserta de forma automática e invisible la llamada al constructor sin parámetros `super()`."
+    },
+    {
+      "q": "¿En qué línea de un constructor de una subclase debe colocarse la llamada a super(...)?",
+      "options": [
+        "En la última línea del constructor",
+        "En la primera línea del constructor",
+        "En cualquier parte, el compilador lo reordena automáticamente"
+      ],
+      "correct": 1,
+      "hint": "La construcción del padre debe completarse antes de inicializar los campos específicos del hijo.",
+      "explanation": "Cualquier llamada a `super(...)` debe ser estrictamente la primera sentencia ejecutable del constructor de la subclase."
+    },
+    {
+      "q": "¿Qué sucede si una superclase no tiene constructor sin parámetros y la subclase no llama explícitamente a super(...) con argumentos?",
+      "options": [
+        "El compilador genera un error indicando que no puede resolver la llamada implícita a super()",
+        "Java inicializa todos los campos de la superclase en sus valores por defecto",
+        "El constructor de la subclase compila pero provoca un fallo de ejecución en la JVM"
+      ],
+      "correct": 0,
+      "hint": "El compilador busca un constructor sin argumentos en el padre que no existe.",
+      "explanation": "Al no haber un constructor sin parámetros en la superclase, la llamada implícita `super()` que intenta insertar el compilador falla, provocando un error de compilación."
+    },
+    {
+      "q": "¿Cómo se puede invocar la versión de un método que existe en la superclase y que ha sido sobreescrito en la subclase?",
+      "options": [
+        "Usando parent.metodo()",
+        "Usando super.metodo()",
+        "Usando this.metodo()"
+      ],
+      "correct": 1,
+      "hint": "Se requiere una palabra clave de referencia directa a la superclase.",
+      "explanation": "La palabra clave `super` hace referencia al ámbito de la superclase inmediata, permitiendo llamar a sus métodos con `super.metodo()`."
+    },
+    {
+      "q": "¿Cuál es el orden de ejecución de los constructores al instanciar una subclase?",
+      "options": [
+        "Primero el de la subclase y luego el de la superclase",
+        "Desde la raíz de la jerarquía (Object, superclases) descendiendo hasta el de la subclase",
+        "Se ejecutan en paralelo en hilos independientes gestionados por la JVM"
+      ],
+      "correct": 1,
+      "hint": "Se debe asegurar que el objeto base esté construido antes de que se añadan los detalles del objeto derivado.",
+      "explanation": "La JVM ejecuta los constructores en cadena de arriba hacia abajo: primero `Object`, luego las superclases intermedias y finalmente la subclase instanciada."
+    },
+    {
+      "q": "¿Qué es la sobreescritura de métodos (method overriding)?",
+      "options": [
+        "Definir en una subclase un método con la misma firma (nombre, retorno y parámetros) que en la superclase",
+        "Definir múltiples métodos con el mismo nombre pero distintos parámetros en la misma clase",
+        "Declarar un método estático dentro de una interfaz que no tiene cuerpo"
+      ],
+      "correct": 0,
+      "hint": "Permite redefinir un comportamiento heredado manteniendo el contrato original del método.",
+      "explanation": "La sobreescritura ocurre cuando una subclase proporciona una implementación específica de un método ya definido por su superclase, usando exactamente la misma firma."
+    },
+    {
+      "q": "¿Cuál es la principal utilidad de la anotación @Override?",
+      "options": [
+        "Indicar al compilador que verifique la concordancia de firmas, evitando errores tipográficos",
+        "Cambiar la visibilidad del método para que sea accesible públicamente",
+        "Evitar que el recolector de basura elimine el método de la memoria de clases"
+      ],
+      "correct": 0,
+      "hint": "No cambia el flujo del programa, pero actúa como un mecanismo de seguridad en compilación.",
+      "explanation": "La anotación `@Override` asegura que el programador realmente está sobreescribiendo un método de la superclase, emitiendo un error si no se encuentra coincidencia en la firma."
+    },
+    {
+      "q": "¿Cuál es la diferencia básica entre sobreescritura (overriding) y sobrecarga (overloading)?",
+      "options": [
+        "La sobrecarga requiere relaciones de herencia; la sobreescritura se da en clases aisladas",
+        "La sobreescritura requiere la misma firma en clases de una jerarquía; la sobrecarga usa misma clase y firmas distintas",
+        "No existe diferencia alguna, son simplemente términos sinónimos en Java"
+      ],
+      "correct": 1,
+      "hint": "Uno redefine un método heredado y el otro crea variantes del mismo método en la misma clase.",
+      "explanation": "La sobreescritura mantiene firma y retorno en subclases; la sobrecarga varía los parámetros dentro de la misma clase."
+    },
+    {
+      "q": "¿Dónde se asigna la memoria para un objeto completo instanciado de una subclase?",
+      "options": [
+        "En el Heap, reservando un único bloque que alberga los atributos del padre y del hijo",
+        "En el Stack frame de ejecución correspondiente al constructor",
+        "En el área estática de métodos y constantes de la JVM"
+      ],
+      "correct": 0,
+      "hint": "Todos los objetos normales de Java se instancian en la memoria dinámica global.",
+      "explanation": "Cualquier objeto instanciado mediante `new` reside en el Heap, ocupando un único espacio que engloba todas sus variables, heredadas y propias."
+    },
+    {
+      "q": "¿Qué tipo de relación semántica representa el mecanismo de herencia?",
+      "options": [
+        "Una relación de tipo 'tiene-un' (has-a) o composición",
+        "Una relación jerárquica de tipo 'es-un' (is-a)",
+        "Una relación puramente asociativa o de uso temporal (uses-a)"
+      ],
+      "correct": 1,
+      "hint": "Define la pertenencia de una entidad a una categoría más general.",
+      "explanation": "La herencia modela la relación 'es-un' (por ejemplo, un `Profesor` es un `Empleado`), mientras que la composición representa 'tiene-un'."
+    },
+    {
+      "q": "¿Qué sucede con los atributos privados de una superclase al instanciar una subclase?",
+      "options": [
+        "Se reservan en el Heap del objeto, pero la subclase no puede acceder a ellos directamente",
+        "No se reservan en el Heap, por lo que no consumen memoria",
+        "Se convierten automáticamente en atributos protegidos de la subclase"
+      ],
+      "correct": 0,
+      "hint": "La encapsulación se mantiene estricta, pero el objeto sigue necesitando el estado del padre.",
+      "explanation": "El estado privado del padre forma parte de la instancia en el Heap, pero debido al encapsulamiento, la subclase solo puede interactuar con él mediante métodos de acceso públicos o protegidos."
+    },
+    {
+      "q": "¿A qué elementos da acceso el nivel de visibilidad protected?",
+      "options": [
+        "Únicamente a las subclases ubicadas en el mismo paquete",
+        "A la propia clase, clases del mismo paquete y subclases de otros paquetes",
+        "A cualquier clase externa, comportándose igual que el modificador public"
+      ],
+      "correct": 1,
+      "hint": "Permite extender la visibilidad a las subclases fuera del paquete del padre.",
+      "explanation": "Los miembros `protected` son visibles dentro de su paquete y para cualquier subclase, sin importar el paquete en el que se encuentre esta última."
+    },
+    {
+      "q": "¿Cuál es la recomendación general de encapsulamiento para atributos que necesitan usar las subclases?",
+      "options": [
+        "Hacerlos directamente protegidos (protected) para que la subclase los modifique libremente",
+        "Mantenerlos como privados (private) y exponer getters/setters protegidos o públicos",
+        "Hacerlos públicos para eliminar la sobrecarga de llamadas a métodos"
+      ],
+      "correct": 1,
+      "hint": "Busca siempre mantener el encapsulamiento lo más fuerte posible para evitar acoplamientos innecesarios.",
+      "explanation": "La buena práctica dicta mantener los atributos privados expuestos mediante getters/setters con la visibilidad mínima requerida (por ejemplo, `protected`), previniendo modificaciones inconsistentes."
+    },
+    {
+      "q": "¿Qué método de la clase java.lang.Object se sobreescribe frecuentemente para proporcionar una salida de texto legible de una instancia?",
+      "options": [
+        "equals()",
+        "hashCode()",
+        "toString()"
+      ],
+      "correct": 2,
+      "hint": "Retorna una cadena que representa al objeto.",
+      "explanation": "El método `toString()` devuelve una representación textual del objeto. Por defecto en `Object` devuelve el nombre de la clase y el hash, por lo que suele sobreescribirse."
+    },
+    {
+      "q": "¿Qué es el ligamiento dinámico (dynamic binding) en Java?",
+      "options": [
+        "La resolución en tiempo de ejecución del método a ejecutar en función del tipo dinámico (real) del objeto",
+        "La asignación en tiempo de compilación de las referencias de memoria estática",
+        "El proceso de enlazado de librerías externas .jar antes de cargar la clase"
+      ],
+      "correct": 0,
+      "hint": "Hace posible el polimorfismo resolviendo las llamadas según el objeto real en el Heap.",
+      "explanation": "El ligamiento dinámico permite que las llamadas a métodos sobreescritos se resuelvan en tiempo de ejecución de acuerdo con la clase concreta del objeto real, no el tipo de la variable de referencia."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de la operación get(index) en un ArrayList de tamaño N?",
+      "options": [
+        "O(N)",
+        "O(1)",
+        "O(log N)"
+      ],
+      "correct": 1,
+      "hint": "Los elementos se guardan contiguos en memoria, posibilitando acceso directo.",
+      "explanation": "El acceso por índice en `ArrayList` se calcula mediante aritmética de direcciones directas, lo cual toma tiempo constante $O(1)$."
+    },
+    {
+      "q": "¿Cuál es la complejidad de buscar un elemento en una LinkedList no ordenada en el peor caso?",
+      "options": [
+        "O(1)",
+        "O(N)",
+        "O(N log N)"
+      ],
+      "correct": 1,
+      "hint": "Es necesario recorrer los nodos secuencialmente a través de los enlaces.",
+      "explanation": "En el peor de los casos, el elemento buscado está al final o no existe en la `LinkedList`, requiriendo recorrer los $N$ nodos secuencialmente, lo que es $O(N)$."
+    },
+    {
+      "q": "¿Qué estructura de datos representa fielmente el principio LIFO (Last In First Out)?",
+      "options": [
+        "Cola (Queue)",
+        "Pila (Stack)",
+        "Lista (List)"
+      ],
+      "correct": 1,
+      "hint": "El último elemento en entrar es el primero en ser extraído.",
+      "explanation": "La Pila (Stack) restringe el acceso de forma que solo se inserta y extrae por el extremo superior (LIFO)."
+    },
+    {
+      "q": "¿Qué estructura de datos representa fielmente el principio FIFO (First In First Out)?",
+      "options": [
+        "Pila (Stack)",
+        "Cola (Queue)",
+        "Árbol Binario de Búsqueda"
+      ],
+      "correct": 1,
+      "hint": "El primer elemento en entrar es el primero en salir, como en una fila de espera.",
+      "explanation": "La Cola (Queue) implementa la lógica FIFO: las inserciones se realizan por el final y las extracciones por el principio."
+    },
+    {
+      "q": "En el análisis asintótico de algoritmos, ¿qué define la notación de cota superior Big-O?",
+      "options": [
+        "El límite superior del crecimiento del tiempo de ejecución para entradas grandes",
+        "El tiempo mínimo en milisegundos que tarda en ejecutarse un algoritmo",
+        "La cantidad exacta de memoria Stack consumida en el peor escenario"
+      ],
+      "correct": 0,
+      "hint": "Se enfoca en la tasa de crecimiento asintótico a medida que N tiende a infinito.",
+      "explanation": "La notación $\\mathcal{O}(g(n))$ establece un límite superior para la tasa de crecimiento de una función a partir de un valor de entrada umbral."
+    },
+    {
+      "q": "¿Qué categoría de excepción en Java no está sujeta a la comprobación obligatoria del compilador?",
+      "options": [
+        "Checked Exceptions",
+        "Unchecked Exceptions (derivadas de RuntimeException)",
+        "Todas las subclases de Exception exceptuando RuntimeException"
+      ],
+      "correct": 1,
+      "hint": "Suelen representar errores lógicos del programador de los que no es fácil recuperarse.",
+      "explanation": "Las excepciones que heredan de `RuntimeException` (o `Error`) son consideradas `Unchecked` y no requieren declaraciones obligatorias `throws` o bloques `try-catch`."
+    },
+    {
+      "q": "¿En qué consiste el borrado de tipos (type erasure) de los genéricos de Java?",
+      "options": [
+        "El compilador elimina la información de tipos genéricos al generar el bytecode para asegurar compatibilidad",
+        "Es la liberación de memoria de los tipos parametrizados por parte del Garbage Collector",
+        "La prohibición de utilizar tipos primitivos en colecciones genéricas"
+      ],
+      "correct": 0,
+      "hint": "Ocurre durante la compilación para mantener compatibilidad con versiones antiguas de la JVM.",
+      "explanation": "Para compatibilidad hacia atrás, el compilador traduce los parámetros genéricos a sus cotas (como `Object`) en el bytecode, aplicando castings automáticos."
+    },
+    {
+      "q": "¿Qué se entiende por la corrección total (total correctness) de un algoritmo?",
+      "options": [
+        "Que responde correctamente a todos los casos válidos de entrada",
+        "Que responde correctamente (corrección parcial) y además garantiza finalizar en un tiempo finito",
+        "Que el código compila perfectamente sin warnings ni errores de tipos"
+      ],
+      "correct": 1,
+      "hint": "No basta con que la respuesta sea buena, el bucle o recursión debe terminar.",
+      "explanation": "La corrección total requiere que el algoritmo cumpla la corrección parcial (respuesta correcta ante precondición) y la propiedad de terminación (convergencia)."
+    },
+    {
+      "q": "¿Qué elemento es indispensable en una función recursiva para evitar el desbordamiento de la pila de llamadas?",
+      "options": [
+        "Un caso base que no realice más llamadas recursivas",
+        "El uso de la palabra clave static",
+        "Declarar todas las variables locales como final"
+      ],
+      "correct": 0,
+      "hint": "Permite romper el ciclo infinito de llamadas hacia sí misma.",
+      "explanation": "El caso base detiene la recursión y permite que la pila de llamadas (Call Stack) comience a desapilarse."
+    },
+    {
+      "q": "En el diseño de contratos para funciones, ¿cuál es el significado de una precondición?",
+      "options": [
+        "Una condición obligatoria que el invocador debe cumplir antes de llamar al método",
+        "El tipo de dato que el método garantiza que devolverá tras finalizar",
+        "El conjunto de excepciones que la firma del método puede lanzar"
+      ],
+      "correct": 0,
+      "hint": "Es la responsabilidad del cliente o llamador del método.",
+      "explanation": "Las precondiciones son requisitos que deben ser verdaderos en el momento de la invocación para asegurar el comportamiento correcto del método."
+    },
+    {
+      "q": "¿Cuál de las siguientes funciones de complejidad asintótica presenta el menor crecimiento temporal?",
+      "options": [
+        "O(N)",
+        "O(log N)",
+        "O(N log N)"
+      ],
+      "correct": 1,
+      "hint": "Crece de forma sublineal amortiguando drásticamente el coste para valores grandes de N.",
+      "explanation": "La complejidad logarítmica $\\mathcal{O}(\\log N)$ crece mucho más lentamente que la lineal $\\mathcal{O}(N)$ y la cuasi-lineal $\\mathcal{O}(N \\log N)$."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de insertar un nodo al principio de una LinkedList si ya tenemos la referencia al nodo cabeza?",
+      "options": [
+        "O(1)",
+        "O(N)",
+        "O(N^2)"
+      ],
+      "correct": 0,
+      "hint": "No se requiere buscar ni recorrer ningún nodo de la lista.",
+      "explanation": "La inserción al inicio requiere reajustar un par de referencias constantes en memoria, lo que tarda tiempo constante $O(1)$."
+    },
+    {
+      "q": "¿Cuál es el propósito del Stack de ejecución (Call Stack) en la máquina virtual de Java?",
+      "options": [
+        "Almacenar instancias de objetos dinámicos creados con new",
+        "Llevar el registro de los marcos (frames) de los métodos activos, parámetros y variables locales",
+        "Mantener las clases cargadas por el ClassLoader en formato binario"
+      ],
+      "correct": 1,
+      "hint": "Es la memoria asociada al flujo secuencial del hilo de ejecución actual.",
+      "explanation": "Cada llamada a un método crea un nuevo marco (frame) en el Stack para guardar variables locales y control de retorno, liberándose al terminar."
+    },
+    {
+      "q": "¿Qué determina que un objeto en el Heap sea elegible por el recolector de basura (Garbage Collector)?",
+      "options": [
+        "Que no exista ninguna referencia activa que apunte a él desde el Stack o variables estáticas",
+        "Que haya transcurrido más de un minuto desde su última llamada",
+        "Que todos los métodos de su clase sean abstractos o vacíos"
+      ],
+      "correct": 0,
+      "hint": "Se basa en la inalcanzabilidad desde los nodos raíz (GC Roots).",
+      "explanation": "Un objeto cuya cadena de referencias está rota y ya no puede ser alcanzado por ningún hilo activo se vuelve elegible para su eliminación."
+    },
+    {
+      "q": "¿Qué sucede si intentamos instanciar una clase declarada como abstracta directamente usando new?",
+      "options": [
+        "El compilador genera un error de compilación",
+        "La JVM lanza una InstantationException en tiempo de ejecución",
+        "Se crea un objeto con todos sus campos inicializados en null"
+      ],
+      "correct": 0,
+      "hint": "Las clases abstractas están incompletas conceptualmente.",
+      "explanation": "Las clases abstractas no son instanciables por definición y el compilador prohíbe el uso de `new` directamente sobre ellas."
+    },
+    {
+      "q": "Con una variable de tipo estático de la superclase y dinámico de la subclase, ¿qué miembros son directamente accesibles sin castings?",
+      "options": [
+        "Todos los miembros definidos en la subclase",
+        "Solo los miembros declarados en la superclase (tipo estático)",
+        "Ninguno, es obligatorio realizar un casting explícito previo"
+      ],
+      "correct": 1,
+      "hint": "El compilador valida el acceso basándose en el tipo formal declarado para la variable.",
+      "explanation": "El tipo estático (el de la declaración de la variable) determina qué métodos y atributos conoce el compilador para esa referencia."
+    },
+    {
+      "q": "¿Qué propiedad define a un invariante de bucle en pruebas de corrección?",
+      "options": [
+        "Una afirmación lógica que es verdadera antes y después de cada iteración del bucle",
+        "Una variable local cuyo valor permanece inmutable en el programa",
+        "La condición que obliga a que el bucle realice un número par de iteraciones"
+      ],
+      "correct": 0,
+      "hint": "Ayuda a razonar inductivamente sobre la exactitud de los bucles.",
+      "explanation": "El invariante debe cumplirse al inicio del bucle, conservarse en cada paso y ser verdadero tras la terminación para demostrar la corrección."
+    },
+    {
+      "q": "¿Cuál de las siguientes relaciones de recurrencia representa el coste de la búsqueda binaria?",
+      "options": [
+        "T(N) = 2T(N/2) + O(1)",
+        "T(N) = T(N/2) + O(1)",
+        "T(N) = T(N-1) + O(N)"
+      ],
+      "correct": 1,
+      "hint": "Divide el problema a la mitad y realiza una comparación de coste constante.",
+      "explanation": "La búsqueda binaria reduce el espacio de búsqueda a la mitad ($T(N/2)$) con una comparación de coste constante ($O(1)$) en cada paso."
+    },
+    {
+      "q": "¿Qué excepción lanza la JVM si se intenta acceder a un índice inválido en una colección indexada como ArrayList?",
+      "options": [
+        "NullPointerException",
+        "IndexOutOfBoundsException",
+        "IllegalArgumentException"
+      ],
+      "correct": 1,
+      "hint": "Indica que el índice solicitado está fuera del rango válido de la lista.",
+      "explanation": "El ArrayList valida los índices de consulta y lanza `IndexOutOfBoundsException` si el índice es menor que cero o mayor/igual al tamaño."
+    },
+    {
+      "q": "Si una clase A implementa una interfaz I, ¿cuál es la relación de tipos que se establece para una instancia de A?",
+      "options": [
+        "La instancia de A es también de tipo I",
+        "La instancia de A es la superclase de I",
+        "La interfaz I hereda la implementación concreta de A"
+      ],
+      "correct": 0,
+      "hint": "La interfaz actúa como un tipo superclase para las clases que la adoptan.",
+      "explanation": "La implementación de una interfaz establece una relación jerárquica, permitiendo usar polimorfismo donde la referencia sea de tipo `I`."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Considera el fragmento:\n```java\npublic class Base {\n  public Base(String s) {}\n}\npublic class Derived extends Base {\n  public Derived() {\n    ____(\"test\");\n  }\n}\n```\n¿Qué palabra clave debe insertarse en el espacio en blanco?",
+      "options": [
+        "super",
+        "this",
+        "parent"
+      ],
+      "correct": 0,
+      "hint": "Se usa para delegar en el constructor de la superclase.",
+      "explanation": "En Java, para invocar al constructor de la superclase se debe emplear la palabra clave `super` como la primera sentencia del constructor."
+    },
+    {
+      "q": "Dado el siguiente código:\n```java\nclass A {\n  protected int val;\n}\nclass B extends A {\n  void update() {\n    ____.val = 10;\n  }\n}\n```\n¿Qué palabra clave o referencia se puede usar en el blanco para referirse al campo heredado `val`?",
+      "options": [
+        "super",
+        "this",
+        "Ambas opciones son válidas y correctas"
+      ],
+      "correct": 2,
+      "hint": "Debido a la herencia, el campo forma parte del objeto de clase B.",
+      "explanation": "El campo protegido `val` es heredado por `B`, por lo que se puede acceder mediante `this.val` o a través del contexto del padre `super.val`."
+    },
+    {
+      "q": "Dado el código:\n```java\nPersona p = new Estudiante();\nEstudiante e = (____) p;\n```\n¿Qué tipo de casting debe colocarse en el espacio en blanco para compilar sin errores?",
+      "options": [
+        "Estudiante",
+        "Persona",
+        "Object"
+      ],
+      "correct": 0,
+      "hint": "Consiste en un downcast al tipo de la variable destino.",
+      "explanation": "Para asignar una referencia de superclase a una subclase se requiere un casting explícito al tipo de la subclase destino: `(Estudiante)`."
+    },
+    {
+      "q": "Completa el espacio en blanco para establecer la herencia de clases en Java:\n```java\npublic class Circulo ____ Figura {}\n```",
+      "options": [
+        "implements",
+        "extends",
+        "inherits"
+      ],
+      "correct": 1,
+      "hint": "Es la palabra reservada para herencia simple.",
+      "explanation": "La palabra clave `extends` es la que define la relación de herencia entre una subclase y su superclase."
+    },
+    {
+      "q": "Completa la anotación en el siguiente fragmento para asegurar la sobreescritura de un método:\n```java\n@____\npublic String toString() {\n  return \"Objeto\";\n}\n```",
+      "options": [
+        "Override",
+        "Deprecated",
+        "SuppressWarnings"
+      ],
+      "correct": 0,
+      "hint": "Indica que redefine un método de la clase base.",
+      "explanation": "La anotación `@Override` indica que el método está redefiniendo una firma existente en la superclase (en este caso, de `Object`)."
+    },
+    {
+      "q": "Considera el siguiente código:\n```java\npublic interface Dibujable {\n  void dibujar();\n}\npublic class Circulo ____ Dibujable {\n  public void dibujar() {}\n}\n```\n¿Qué palabra clave falta en el espacio en blanco?",
+      "options": [
+        "extends",
+        "implements",
+        "instanceof"
+      ],
+      "correct": 1,
+      "hint": "Se usa para implementar contratos definidos en interfaces.",
+      "explanation": "Las clases implementan interfaces utilizando la palabra clave `implements`."
+    },
+    {
+      "q": "En el siguiente fragmento:\n```java\nint[] arr = {10, 20, 30};\nint len = arr.____;\n```\n¿Qué propiedad de los arrays nativos debe ir en el espacio en blanco?",
+      "options": [
+        "length",
+        "length()",
+        "size()"
+      ],
+      "correct": 0,
+      "hint": "Es un atributo público implícito del objeto array, no un método.",
+      "explanation": "En Java, los arrays nativos exponen la longitud mediante la propiedad pública de lectura `.length`."
+    },
+    {
+      "q": "En el siguiente fragmento de inicialización de colecciones:\n```java\nList<Integer> list = new ____<>();\n```\n¿Qué implementación estándar basada en arrays dinámicos completa el espacio en blanco?",
+      "options": [
+        "LinkedList",
+        "ArrayList",
+        "Vector"
+      ],
+      "correct": 1,
+      "hint": "Ofrece acceso en O(1) a los elementos por índice.",
+      "explanation": "La clase `ArrayList` implementa `List` utilizando un array redimensionable internamente."
+    },
+    {
+      "q": "Completa el fragmento para controlar una excepción aritmética:\n```java\ntry {\n  int res = 100 / 0;\n} ____ (ArithmeticException e) {\n  System.out.println(\"División por cero\");\n}\n```",
+      "options": [
+        "catch",
+        "except",
+        "throws"
+      ],
+      "correct": 0,
+      "hint": "Bloque encargado de capturar y tratar el error de ejecución.",
+      "explanation": "La palabra clave `catch` define la captura del objeto de excepción lanzado en el bloque `try`."
+    },
+    {
+      "q": "En el fragmento:\n```java\npublic class Constantes {\n  public ____ final double PI = 3.14159;\n}\n```\n¿Qué modificador permite que la constante sea global a la clase sin requerir instancias?",
+      "options": [
+        "static",
+        "volatile",
+        "transient"
+      ],
+      "correct": 0,
+      "hint": "Hace que el miembro pertenezca a la definición de la clase.",
+      "explanation": "La palabra clave `static` indica que la constante es única y compartida por todas las instancias de la clase."
+    },
+    {
+      "q": "Completa el fragmento para que un objeto deje de tener referencias activas:\n```java\nEmpleado emp = new Empleado(\"Pedro\", 1000);\nemp = ____;\n```",
+      "options": [
+        "null",
+        "void",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Es la referencia nula en Java.",
+      "explanation": "Asignar `null` desconecta la referencia del objeto en el Heap, haciéndolo elegible para el Garbage Collector."
+    },
+    {
+      "q": "Completa el código para invocar al constructor del padre pasando dos argumentos:\n```java\npublic Profesor(String n, double s) {\n  ____(n, s);\n}\n```",
+      "options": [
+        "super",
+        "this",
+        "base"
+      ],
+      "correct": 0,
+      "hint": "Delega la inicialización al constructor parametrizado del padre.",
+      "explanation": "La llamada `super(n, s)` invoca al constructor de la superclase que acepta dichos parámetros."
+    },
+    {
+      "q": "Completa la firma de la función genérica:\n```java\npublic <T> ____ devolverElemento(T param) {\n  return param;\n}\n```\n¿Qué tipo de retorno debe especificarse para mantener la genericidad?",
+      "options": [
+        "T",
+        "Object",
+        "void"
+      ],
+      "correct": 0,
+      "hint": "Debe coincidir con la letra del parámetro de tipo declarado.",
+      "explanation": "El tipo de retorno de la función es `T`, permitiendo tipado seguro de retorno basado en el parámetro."
+    },
+    {
+      "q": "En el fragmento:\n```java\nfor (int i = 0; i < N; ____) {\n  // cuerpo del bucle\n}\n```\n¿Qué incremento se emplea típicamente para avanzar secuencialmente de uno en uno?",
+      "options": [
+        "i++",
+        "i = i + 2",
+        "i--"
+      ],
+      "correct": 0,
+      "hint": "Incremento unitario post-fijo.",
+      "explanation": "`i++` incrementa la variable `i` en 1 en cada iteración del bucle."
+    },
+    {
+      "q": "Completa para comparar el contenido textual de dos cadenas de caracteres de forma segura:\n```java\nif (cadena1.____(cadena2)) {}\n```",
+      "options": [
+        "equals",
+        "==",
+        "compareTo"
+      ],
+      "correct": 0,
+      "hint": "Método de comparación de valores de objetos.",
+      "explanation": "El método `equals(Object)` evalúa la igualdad del contenido de los Strings, no de sus referencias."
+    },
+    {
+      "q": "Completa el fragmento para lanzar de forma intencionada una excepción de argumento inválido:\n```java\nif (horas < 0) ____ new IllegalArgumentException();\n```",
+      "options": [
+        "throw",
+        "throws",
+        "raise"
+      ],
+      "correct": 0,
+      "hint": "Instrucción de lanzamiento de excepciones.",
+      "explanation": "La palabra clave `throw` (en singular) se usa para lanzar una instancia de una excepción."
+    },
+    {
+      "q": "Dado el fragmento de declaración:\n```java\npublic static void main(String[] ____) {}\n```\n¿Qué nombre recibe tradicionalmente el array de argumentos de entrada?",
+      "options": [
+        "args",
+        "params",
+        "strings"
+      ],
+      "correct": 0,
+      "hint": "Abreviatura en inglés de arguments.",
+      "explanation": "Por convención, el array de Strings en la firma del método `main` se llama `args`."
+    },
+    {
+      "q": "En el fragmento de código de la subclase:\n```java\ndouble total = super.____() + horas * 20;\n```\n¿Qué método sobreescrito de la clase base Empleado calcula el sueldo base?",
+      "options": [
+        "calcularSueldo",
+        "getSueldoBase",
+        "sueldoBase"
+      ],
+      "correct": 0,
+      "hint": "El método que devuelve el cálculo del sueldo base.",
+      "explanation": "El método `calcularSueldo()` se invoca con `super.calcularSueldo()` para reutilizar el cálculo base."
+    },
+    {
+      "q": "En el fragmento de búsqueda en lista enlazada:\n```java\nNode aux = head;\nwhile (aux.____ != null) {\n  aux = aux.next;\n}\n```\n¿Cuál es la propiedad del nodo que enlaza con el siguiente?",
+      "options": [
+        "next",
+        "val",
+        "prev"
+      ],
+      "correct": 0,
+      "hint": "Referencia al nodo sucesor.",
+      "explanation": "El bucle avanza mientras `aux.next` no sea nulo, localizando el último nodo de la lista."
+    },
+    {
+      "q": "En el fragmento:\n```java\nint base = 10;\nint area = base * ____ / 2;\n// Queremos calcular el área de un triángulo de altura h\n```",
+      "options": [
+        "h",
+        "base",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Es la variable de altura.",
+      "explanation": "La fórmula del área del triángulo es base por altura entre dos: `base * h / 2`."
+    },
+    {
+      "q": "Dada la jerarquía donde `Profesor` hereda de `Empleado`. ¿Cuál de los siguientes métodos está presente en la clase `Profesor`?",
+      "options": [
+        "calcularSueldo()",
+        "getNombre()",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Considera los métodos propios y los heredados de forma pública.",
+      "explanation": "`Profesor` tiene acceso a `getNombre()` por herencia y a su propia redefinición de `calcularSueldo()`."
+    },
+    {
+      "q": "¿Qué elementos se ubican en la memoria Heap al instanciarse una clase derivada?",
+      "options": [
+        "Las variables de la superclase",
+        "Las variables específicas de la subclase",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "El objeto se guarda completo en una única zona física de memoria del montón.",
+      "explanation": "Un objeto de subclase incluye la totalidad de su estado heredado y propio dentro del Heap."
+    },
+    {
+      "q": "Al diseñar una jerarquía de clases, ¿qué modificadores de acceso permiten que un método sea heredado y visible por clases del mismo paquete?",
+      "options": [
+        "public",
+        "protected",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Cualquier modificador excepto private permite el acceso a nivel de paquete.",
+      "explanation": "Los modificadores `public`, `protected` y por defecto (`package-private`) permiten el acceso dentro de un mismo paquete."
+    },
+    {
+      "q": "¿Qué acciones se pueden realizar utilizando la palabra clave `super`?",
+      "options": [
+        "Invocar un constructor específico de la superclase",
+        "Acceder a la implementación original de un método de la superclase",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Se asocia a los constructores y a los métodos tapados por la sobreescritura.",
+      "explanation": "La palabra clave `super` resuelve los accesos del hijo hacia constructores y métodos de la superclase inmediata."
+    },
+    {
+      "q": "¿Cuáles de las siguientes opciones representan clases de las que es posible heredar?",
+      "options": [
+        "java.lang.Object",
+        "Cualquier clase definida por el usuario que no posea la palabra clave final",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Las clases marcadas como final son las únicas que impiden la herencia.",
+      "explanation": "Cualquier clase normal no declarada como `final` es extensible en Java, empezando por `Object`."
+    },
+    {
+      "q": "Para un objeto de tipo `Profesor` asignado a una variable de referencia `Empleado`, ¿cuál de las siguientes operaciones es válida sin castings?",
+      "options": [
+        "Invocar el método getNombre()",
+        "Invocar el método calcularSueldo()",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Los métodos deben existir en el tipo estático (la clase Empleado).",
+      "explanation": "Dado que ambos métodos están declarados en `Empleado`, se pueden llamar directamente de forma polimórfica."
+    },
+    {
+      "q": "Si declaramos una variable `x` dentro del constructor de una subclase, ¿qué propiedades posee?",
+      "options": [
+        "Es una variable local al constructor",
+        "Se almacena temporalmente en el Stack de llamadas",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Las variables locales a un constructor se comportan igual que las de cualquier método.",
+      "explanation": "Toda variable declarada dentro del cuerpo de un constructor es local, se almacena en su frame del Stack y se destruye al salir."
+    },
+    {
+      "q": "¿Qué condiciones causarán un error de compilación al estructurar la herencia?",
+      "options": [
+        "Que la superclase carezca de constructor por defecto y no se use super(...) con argumentos",
+        "Intentar extender de múltiples clases simultáneamente con extends A, B",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "La herencia en Java tiene restricciones de multiplicidad e inicialización de constructores.",
+      "explanation": "Java prohíbe la herencia múltiple de clases y exige que el constructor del padre pueda inicializarse sin ambigüedad."
+    },
+    {
+      "q": "¿Qué ventajas aporta el uso explícito de la anotación `@Override`?",
+      "options": [
+        "Validación en compilación de que la firma coincide con la superclase",
+        "Mejora de la documentación y lectura del diseño jerárquico",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Ayuda al compilador a validar la firma del método y a otros desarrolladores a entender el código.",
+      "explanation": "La anotación previene errores tipográficos y documenta que se está redefiniendo comportamiento."
+    },
+    {
+      "q": "En una estructura de tipo Pila (Stack) dinámica, ¿cuáles de las siguientes operaciones provocan un cambio en su tamaño?",
+      "options": [
+        "La operación push()",
+        "La operación pop()",
+        "Todas las anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Operaciones que introducen o eliminan nodos de la pila.",
+      "explanation": "`push()` inserta un elemento aumentando el tamaño en 1; `pop()` extrae un elemento reduciendo el tamaño en 1."
+    },
+    {
+      "q": "¿Qué palabra clave se usa para indicar herencia múltiple de clases en Java?",
+      "options": [
+        "extends double",
+        "implements multiple",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Java no admite herencia múltiple de clases bajo ningún concepto.",
+      "explanation": "Java no soporta herencia múltiple de clases, por lo que no existe ninguna palabra clave o cláusula para este fin."
+    },
+    {
+      "q": "¿Qué modificador de acceso permite a los atributos de una clase ser editados directamente desde clases de cualquier paquete?",
+      "options": [
+        "protected",
+        "private",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Para acceso universal de escritura se requiere el nivel de mayor apertura.",
+      "explanation": "El acceso libre desde cualquier paquete requiere el modificador `public`. Ni `protected` ni `private` proveen esta visibilidad."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal en el peor caso para insertar un elemento en una Pila implementada con LinkedList?",
+      "options": [
+        "O(N)",
+        "O(log N)",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "La inserción en una pila ocurre en tiempo constante.",
+      "explanation": "La inserción en una pila (push) se hace siempre al principio de la estructura, lo que es constante $\\mathcal{O}(1)$."
+    },
+    {
+      "q": "Dado `int x = 10;`, ¿qué valor tendrá `x` después de evaluar la asignación `x = x++ + ++x;`?",
+      "options": [
+        "20",
+        "21",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "El primer operando usa post-incremento (valor 10) y el segundo pre-incremento (valor 12).",
+      "explanation": "La expresión se evalúa como `10 + 12`, dando como resultado `22`, por lo que ninguna de las opciones propuestas (20 o 21) es la correcta."
+    },
+    {
+      "q": "¿Qué método estándar de la clase `Object` devuelve el tamaño físico del objeto en memoria en bytes?",
+      "options": [
+        "sizeof()",
+        "length()",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "La JVM gestiona la memoria de manera interna y no expone tamaño en bytes directamente.",
+      "explanation": "No existe un método estándar en la clase `Object` que devuelva el tamaño en bytes del objeto."
+    },
+    {
+      "q": "Si una clase `Sub` extiende a `Base`, ¿cómo puede `Sub` leer directamente un atributo privado de `Base`?",
+      "options": [
+        "Usando la referencia super.atributo",
+        "Usando la anotación @Override en el constructor",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Los miembros privados son inaccesibles fuera de su propia clase.",
+      "explanation": "Los miembros privados de una superclase no pueden leerse directamente en la subclase; deben usarse métodos de acceso expuestos."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal en promedio del algoritmo de ordenación QuickSort?",
+      "options": [
+        "O(N^2)",
+        "O(N)",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Se trata de un crecimiento superlineal.",
+      "explanation": "La complejidad promedio de QuickSort es $\\mathcal{O}(N \\log N)$, lo cual no se encuentra listado en las opciones."
+    },
+    {
+      "q": "Para sobrecargar un método que no tiene argumentos en la misma clase, ¿cuál de las siguientes firmas es válida?",
+      "options": [
+        "Un método con el mismo nombre y mismos parámetros que retorne int",
+        "Un método con el mismo nombre y tipo de retorno void",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "La sobrecarga requiere modificar obligatoriamente la lista de parámetros.",
+      "explanation": "Para sobrecargar se debe cambiar la lista de parámetros (en cantidad o tipos). Cambiar el tipo de retorno no basta y da error de compilación."
+    },
+    {
+      "q": "En la relación de recurrencia $T(N) = 2T(N/2) + N$, ¿cuál es la complejidad según el Teorema Maestro?",
+      "options": [
+        "O(N^2)",
+        "O(log N)",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Corresponde al coste del algoritmo de ordenación por mezcla (Merge Sort).",
+      "explanation": "El coste asintótico es $\\mathcal{O}(N \\log N)$, por lo que la opción correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Al declarar un array de enteros primitivos `int[] a = new int[5]`, ¿con qué valor por defecto se inicializan sus elementos?",
+      "options": [
+        "null",
+        "-1",
+        "Ninguna de las anteriores es correcta"
+      ],
+      "correct": 2,
+      "hint": "Es el valor cero para el tipo primitivo int.",
+      "explanation": "Los elementos del array se inicializan automáticamente a `0`. Dado que `null` o `-1` no son correctos, la respuesta es Ninguna de las anteriores."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_1",
+      "title": "Cálculo de Sueldos con Herencia",
+      "context": "Se definen las clases Empleado y Profesor (subclase) descritas en el manual.\n```java\nEmpleado emp1 = new Empleado(\"Ana\", 1000.0);\nProfesor prof1 = new Profesor(\"Luis\", 1200.0, 5);\nProfesor prof2 = new Profesor(\"Maria\", 1500.0, 10);\n```\nNota: `PRECIO_HORA = 20.0`.",
+      "parts": [
+        {
+          "id": "LAB_1_A",
+          "label": "a",
+          "question": "¿Cuál es el resultado de invocar `emp1.calcularSueldo()`?",
+          "correctValue": 1000.0,
+          "tolerance": 0.0,
+          "explanation": "Para `emp1` de tipo `Empleado`, el método `calcularSueldo()` devuelve directamente el sueldo base: $1000.0$."
+        },
+        {
+          "id": "LAB_1_B",
+          "label": "b",
+          "question": "¿Cuál es el resultado de invocar `prof1.calcularSueldo()`?",
+          "correctValue": 1300.0,
+          "tolerance": 0.0,
+          "explanation": "Para `prof1` de tipo `Profesor`, el sueldo es el sueldo base ($1200.0$) más las horas extras ($5 \\times 20.0 = 100.0$), lo que da un total de $1300.0$."
+        },
+        {
+          "id": "LAB_1_C",
+          "label": "c",
+          "question": "¿Cuál es el resultado de invocar `prof2.calcularSueldo()`?",
+          "correctValue": 1700.0,
+          "tolerance": 0.0,
+          "explanation": "Para `prof2` de tipo `Profesor`, el sueldo es $1500.0 + 10 \\times 20.0 = 1700.0$."
+        },
+        {
+          "id": "LAB_1_D",
+          "label": "d",
+          "question": "¿Cuántas instancias de la clase `Empleado` (incluyendo subclases) se crean en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se crean 3 objetos en total: 1 `Empleado` (`emp1`) y 2 `Profesor` (`prof1`, `prof2`), que al heredar de `Empleado` también son instancias del tipo base."
+        }
+      ]
+    },
+    {
+      "id": "LAB_2",
+      "title": "Orden de Construcción y Contadores Estáticos",
+      "context": "Dadas las clases:\n```java\nclass A {\n  static int c = 0;\n  A() { c += 1; }\n}\nclass B extends A {\n  B() { c += 10; }\n}\nclass C extends B {\n  C() { c += 100; }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_2_A",
+          "label": "a",
+          "question": "Si ejecutamos `A.c = 0; A obj = new A();`, ¿cuál es el valor final de `A.c`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al instanciar `A`, solo se ejecuta el constructor de `A`, incrementando `c` en $1$."
+        },
+        {
+          "id": "LAB_2_B",
+          "label": "b",
+          "question": "Si ejecutamos `A.c = 0; B obj = new B();`, ¿cuál es el valor final de `A.c`?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Al instanciar `B`, se llama implícitamente al constructor del padre `A` (c += 1) y luego al de `B` (c += 10), resultando en $11$."
+        },
+        {
+          "id": "LAB_2_C",
+          "label": "c",
+          "question": "Si ejecutamos `A.c = 0; C obj = new C();`, ¿cuál es el valor final de `A.c`?",
+          "correctValue": 111,
+          "tolerance": 0,
+          "explanation": "La instanciación de `C` ejecuta en cadena los constructores de `A` (c += 1), luego `B` (c += 10) y por último `C` (c += 100). La suma total es $111$."
+        },
+        {
+          "id": "LAB_2_D",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecuta el constructor de la clase `A` al crear un objeto de clase `C`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "A pesar de la jerarquía de herencia, el constructor de cada clase en la cadena jerárquica se ejecuta exactamente una vez durante la creación del objeto."
+        }
+      ]
+    },
+    {
+      "id": "LAB_3",
+      "title": "Recolección de Basura e Hilos de Referencias",
+      "context": "Considera el siguiente código:\n```java\nclass Node {\n  Node next;\n  Node(Node n) { this.next = n; }\n}\n// Bloque ejecutable:\nNode n1 = new Node(null);\nNode n2 = new Node(n1);\nNode n3 = new Node(n2);\nNode n4 = n3;\n```",
+      "parts": [
+        {
+          "id": "LAB_3_A",
+          "label": "a",
+          "question": "¿Cuántos objetos de tipo `Node` se instancian en la memoria Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se producen 3 llamadas a `new Node(...)`, por lo que se reservan 3 objetos en el Heap."
+        },
+        {
+          "id": "LAB_3_B",
+          "label": "b",
+          "question": "¿Cuántas referencias activas totales apuntan a objetos Node (variables locales + campos next)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Las referencias activas son las variables `n1`, `n2`, `n3`, `n4`, más los campos `next` dentro de `n2` y `n3`. Total = $6$."
+        },
+        {
+          "id": "LAB_3_C",
+          "label": "c",
+          "question": "Si se ejecuta `n3 = null; n4 = null;`, ¿cuántos objetos pasan a ser elegibles para el Garbage Collector (asumiendo n1 y n2 siguen activos)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo el objeto originalmente referenciado por `n3` queda inalcanzable. Los otros dos siguen referenciados por `n2` y `n1`."
+        },
+        {
+          "id": "LAB_3_D",
+          "label": "d",
+          "question": "¿Cuál es la longitud (número de nodos) de la lista enlazada partiendo de `n4` antes de reasignar variables?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La cadena contiene `n3` (o `n4`), enlazado con `n2`, enlazado con `n1`, dando una longitud de $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_4",
+      "title": "Complejidad Temporal de Bucles Anidados",
+      "context": "Considera el siguiente bucle:\n```java\nint count = 0;\nfor (int i = 0; i < N; i++) {\n  for (int j = i; j < N; j++) {\n    count++;\n  }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_4_A",
+          "label": "a",
+          "question": "Si $N = 10$, ¿cuál es el valor final de `count`?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "El bucle ejecuta $\\sum_{i=1}^{10} i = \\frac{10 \\times 11}{2} = 55$ iteraciones."
+        },
+        {
+          "id": "LAB_4_B",
+          "label": "b",
+          "question": "Si $N = 20$, ¿cuál es el valor final de `count`?",
+          "correctValue": 210,
+          "tolerance": 0,
+          "explanation": "Para $N = 20$, las iteraciones son $\\frac{20 \\times 21}{2} = 210$."
+        },
+        {
+          "id": "LAB_4_C",
+          "label": "c",
+          "question": "¿Cuál es el coeficiente de la potencia $N^2$ en la expresión analítica del número de iteraciones?",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "La fórmula analítica es $\\frac{N(N+1)}{2} = 0.5N^2 + 0.5N$. El coeficiente de $N^2$ es $0.5$."
+        },
+        {
+          "id": "LAB_4_D",
+          "label": "d",
+          "question": "¿Cuál es el coeficiente de la potencia $N$ en dicha expresión?",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "El término lineal es $0.5N$, por lo que su coeficiente también es $0.5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_5",
+      "title": "Ecuaciones de Recurrencia Dividiendo para Vencer",
+      "context": "Sea la relación de recurrencia:\n$$T(N) = 2T(N/2) + N$$\npara $N$ potencia de $2$, con $T(1) = 0$.",
+      "parts": [
+        {
+          "id": "LAB_5_A",
+          "label": "a",
+          "question": "¿Cuál es el valor de $T(2)$?",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "$T(2) = 2T(1) + 2 = 2(0) + 2 = 2$."
+        },
+        {
+          "id": "LAB_5_B",
+          "label": "b",
+          "question": "¿Cuál es el valor de $T(4)$?",
+          "correctValue": 8.0,
+          "tolerance": 0.0,
+          "explanation": "$T(4) = 2T(2) + 4 = 2(2) + 4 = 8$."
+        },
+        {
+          "id": "LAB_5_C",
+          "label": "c",
+          "question": "¿Cuál es el valor de $T(8)$?",
+          "correctValue": 24.0,
+          "tolerance": 0.0,
+          "explanation": "$T(8) = 2T(4) + 8 = 2(8) + 8 = 24$."
+        },
+        {
+          "id": "LAB_5_D",
+          "label": "d",
+          "question": "¿Cuál es el valor de $T(1024)$?",
+          "correctValue": 10240.0,
+          "tolerance": 0.0,
+          "explanation": "La solución general es $T(N) = N \\log_2 N$. Para $N=1024$, tenemos $1024 \\times 10 = 10240$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_6",
+      "title": "Sobreescritura y Referencia Super",
+      "context": "Considera las siguientes clases:\n```java\nclass Parent {\n  int getValue() { return 10; }\n}\nclass Child extends Parent {\n  int getValue() { return super.getValue() + 5; }\n}\nclass GrandChild extends Child {\n  int getValue() { return super.getValue() * 2; }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_6_A",
+          "label": "a",
+          "question": "¿Qué valor entero devuelve `new Parent().getValue()`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Retorna directamente la constante $10$ definida en la clase base."
+        },
+        {
+          "id": "LAB_6_B",
+          "label": "b",
+          "question": "¿Qué valor entero devuelve `new Child().getValue()`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Llama al getValue de Parent ($10$) y le suma $5$, devolviendo $15$."
+        },
+        {
+          "id": "LAB_6_C",
+          "label": "c",
+          "question": "¿Qué valor entero devuelve `new GrandChild().getValue()`?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Llama al getValue de Child ($15$) y lo multiplica por $2$, devolviendo $30$."
+        },
+        {
+          "id": "LAB_6_D",
+          "label": "d",
+          "question": "¿Cuántas clases componen la cadena de herencia de `GrandChild` en Java (incluyendo la implícita Object)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La cadena jerárquica es: `GrandChild` $\\rightarrow$ `Child` $\\rightarrow$ `Parent` $\\rightarrow$ `Object`. Total = $4$ clases."
+        }
+      ]
+    },
+    {
+      "id": "LAB_7",
+      "title": "Polimorfismo con Arrays",
+      "context": "Usando las clases definidas en el problema 6, se ejecuta:\n```java\nParent[] arr = new Parent[4];\narr[0] = new Parent();\narr[1] = new Child();\narr[2] = new GrandChild();\narr[3] = new Child();\nint sum = 0;\nfor (Parent p : arr) {\n  sum += p.getValue();\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_7_A",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `sum`?",
+          "correctValue": 70,
+          "tolerance": 0,
+          "explanation": "La suma se calcula con ligamiento dinámico: $10 (Parent) + 15 (Child) + 30 (GrandChild) + 15 (Child) = 70$."
+        },
+        {
+          "id": "LAB_7_B",
+          "label": "b",
+          "question": "¿Cuántos objetos en total se instancian en la memoria Heap (incluyendo el array)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se crea 1 objeto array de tamaño 4 y 4 objetos individuales. Total = $5$."
+        },
+        {
+          "id": "LAB_7_C",
+          "label": "c",
+          "question": "Si hacemos `arr[2] = null;`, ¿cuántos objetos GrandChild quedan activos (con referencias directas o indirectas) en el Heap?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al asignar `null` en la posición del array que contenía la única referencia al objeto `GrandChild`, este se queda sin referencias activas (0)."
+        },
+        {
+          "id": "LAB_7_D",
+          "label": "d",
+          "question": "¿Cuántos elementos de `arr` son instancias de `Child` o de alguna de sus subclases antes de poner null?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los índices 1, 2 y 3 contienen `Child` o `GrandChild` (que es-un `Child`). Total = $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_8",
+      "title": "Operaciones con TAD Pila",
+      "context": "Dada la siguiente secuencia de operaciones sobre una pila de enteros inicialmente vacía:\n```java\nStack<Integer> s = new Stack<>();\ns.push(5);\ns.push(10);\nint a = s.pop();\ns.push(15);\ns.push(20);\nint b = s.pop();\nint c = s.peek();\n```",
+      "parts": [
+        {
+          "id": "LAB_8_A",
+          "label": "a",
+          "question": "¿Cuál es el valor de la variable `a`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "`pop()` extrae el elemento superior, que en ese momento era $10$."
+        },
+        {
+          "id": "LAB_8_B",
+          "label": "b",
+          "question": "¿Cuál es el valor de la variable `b`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El elemento superior era $20$ tras insertar $15$ y $20$."
+        },
+        {
+          "id": "LAB_8_C",
+          "label": "c",
+          "question": "¿Cuál es el valor de la variable `c`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "`peek()` consulta el valor del elemento superior sin extraerlo, que es $15$."
+        },
+        {
+          "id": "LAB_8_D",
+          "label": "d",
+          "question": "¿Cuál es el número total de elementos que quedan en la pila al finalizar la secuencia?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Quedan en la pila los elementos $[5, 15]$. Su tamaño es $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_9",
+      "title": "Operaciones con TAD Cola",
+      "context": "Dada la siguiente secuencia de operaciones sobre una cola de enteros inicialmente vacía:\n```java\nQueue<Integer> q = new LinkedList<>();\nq.add(5);\nq.add(10);\nint a = q.poll();\nq.add(15);\nq.add(20);\nint b = q.poll();\nint c = q.peek();\n```",
+      "parts": [
+        {
+          "id": "LAB_9_A",
+          "label": "a",
+          "question": "¿Cuál es el valor de la variable `a`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "`poll()` extrae el primer elemento de la cola (FIFO), que es $5$."
+        },
+        {
+          "id": "LAB_9_B",
+          "label": "b",
+          "question": "¿Cuál es el valor de la variable `b`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El siguiente en la cola tras extraer el 5 era $10$."
+        },
+        {
+          "id": "LAB_9_C",
+          "label": "c",
+          "question": "¿Cuál es el valor obtenido por la consulta `c`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "`peek()` consulta el primero en cola sin extraerlo, que es $15$."
+        },
+        {
+          "id": "LAB_9_D",
+          "label": "d",
+          "question": "¿Cuál es el número de elementos que permanecen en la cola?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Permanecen en la cola los elementos $[15, 20]$. Tamaño = $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_10",
+      "title": "Bucle con Suma e Invariante",
+      "context": "Dado el bucle para calcular la suma de los primeros $N$ enteros:\n```java\nint s = 0;\nint i = 1;\nwhile (i <= N) {\n  s += i;\n  i++;\n}\n```\nSuponemos que $N = 5$.",
+      "parts": [
+        {
+          "id": "LAB_10_A",
+          "label": "a",
+          "question": "¿Cuántas iteraciones del bucle se ejecutan?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle se ejecuta para $i = 1, 2, 3, 4, 5$. Son $5$ iteraciones en total."
+        },
+        {
+          "id": "LAB_10_B",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable `s`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La suma acumulada es $1 + 2 + 3 + 4 + 5 = 15$."
+        },
+        {
+          "id": "LAB_10_C",
+          "label": "c",
+          "question": "¿Cuál es el valor de la variable de control `i` cuando el bucle finaliza?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El bucle termina cuando $i \\le 5$ es falso. Esto ocurre cuando $i$ alcanza el valor $6$."
+        },
+        {
+          "id": "LAB_10_D",
+          "label": "d",
+          "question": "Usando el invariante de bucle $s = \\sum_{j=1}^{i-1} j$, ¿cuál es el valor de `s` justo antes de comenzar la iteración donde $i = 4$?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Para $i=4$, la suma acumulada de los anteriores es $1 + 2 + 3 = 6$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_11",
+      "title": "Comparaciones en Búsqueda Binaria",
+      "context": "Dado el array ordenado: `int[] A = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20};` y el algoritmo de búsqueda binaria clásico con divisiones enteras `mid = (low + high) / 2`.",
+      "parts": [
+        {
+          "id": "LAB_11_A",
+          "label": "a",
+          "question": "¿Cuántas comparaciones exactas (de igualdad con `A[mid]`) realiza si buscamos el valor 14?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Iteraciones: 1) low=0, high=9, mid=4 (A[4]=10 < 14). 2) low=5, high=9, mid=7 (A[7]=16 > 14). 3) low=5, high=6, mid=5 (A[5]=12 < 14). 4) low=6, high=6, mid=6 (A[6]=14 == 14). Total = $4$ comparaciones."
+        },
+        {
+          "id": "LAB_11_B",
+          "label": "b",
+          "question": "¿Cuántas comparaciones de igualdad realiza si buscamos el valor 10?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la primera iteración, `mid = 4` y `A[4] = 10`, coincidiendo inmediatamente. Total = $1$."
+        },
+        {
+          "id": "LAB_11_C",
+          "label": "c",
+          "question": "¿Cuántas comparaciones realiza si buscamos el valor 5 (que no está en el array)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "1) mid=4 (10 > 5), high=3. 2) mid=1 (4 < 5), low=2. 3) mid=2 (6 > 5), high=1. Termina. Total = $3$ comparaciones."
+        },
+        {
+          "id": "LAB_11_D",
+          "label": "d",
+          "question": "¿Cuántas comparaciones realiza si buscamos el valor 2?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "1) mid=4 (10 > 2), high=3. 2) mid=1 (4 > 2), high=0. 3) mid=0 (2 == 2), coincide. Total = $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_12",
+      "title": "Evaluación de Funciones de Complejidad",
+      "context": "Sea una función de complejidad temporal exacta dada por:\n$$f(n) = 3n^3 + 5n^2 + 100$$",
+      "parts": [
+        {
+          "id": "LAB_12_A",
+          "label": "a",
+          "question": "¿Cuál es el grado de la potencia dominante de $f(n)$ que determina su cota O?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El término dominante es $3n^3$, por tanto la cota asintótica es $\\mathcal{O}(n^3)$, de grado $3$."
+        },
+        {
+          "id": "LAB_12_B",
+          "label": "b",
+          "question": "¿Cuál es el valor del límite de $\\frac{f(n)}{n^3}$ cuando $n$ tiende a infinito?",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "El límite de $\\frac{3n^3 + 5n^2 + 100}{n^3}$ cuando $n \\rightarrow \\infty$ es el coeficiente del término principal: $3.0$."
+        },
+        {
+          "id": "LAB_12_C",
+          "label": "c",
+          "question": "Si duplicamos el tamaño de entrada para valores muy grandes de $n$, ¿por qué factor se multiplica aproximadamente el tiempo de ejecución?",
+          "correctValue": 8.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el comportamiento asintótico es cúbico, al duplicar $n$ se multiplica el coste por $2^3 = 8.0$."
+        },
+        {
+          "id": "LAB_12_D",
+          "label": "d",
+          "question": "¿Cuál es el valor exacto de la función para $n = 10$?",
+          "correctValue": 3600.0,
+          "tolerance": 0.0,
+          "explanation": "$f(10) = 3(1000) + 5(100) + 100 = 3000 + 500 + 100 = 3600.0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_13",
+      "title": "Bucles Triples Anidados",
+      "context": "Considera el siguiente algoritmo:\n```java\nint count = 0;\nfor (int i = 0; i < N; i++) {\n  for (int j = 0; j < i; j++) {\n    for (int k = 0; k < M; k++) {\n      count++;\n    }\n  }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_13_A",
+          "label": "a",
+          "question": "Si $N = 5$ y $M = 4$, ¿cuántas veces se incrementa `count`?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "Las iteraciones del bucle interno suman $\\sum_{i=0}^{4} i \\times M = (0 + 1 + 2 + 3 + 4) \\times 4 = 10 \\times 4 = 40$."
+        },
+        {
+          "id": "LAB_13_B",
+          "label": "b",
+          "question": "Si $N = 10$ y $M = 2$, ¿cuántas veces se incrementa `count`?",
+          "correctValue": 90,
+          "tolerance": 0,
+          "explanation": "Suma total: $\\frac{9 \\times 10}{2} \\times 2 = 90$."
+        },
+        {
+          "id": "LAB_13_C",
+          "label": "c",
+          "question": "Si asumimos $N = M$, ¿cuál es el exponente dominante de la variable $N$ en el cálculo de la complejidad asintótica?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El número de ejecuciones es $M \\times \\frac{N(N-1)}{2} = \\mathcal{O}(M N^2)$. Si $N=M$, es $\\mathcal{O}(N^3)$, exponente $3$."
+        },
+        {
+          "id": "LAB_13_D",
+          "label": "d",
+          "question": "¿Cuál es el coeficiente del término principal $N^2 M$ en la expresión del número total de incrementos?",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "La expresión exacta es $\\frac{N(N-1)M}{2} = 0.5 N^2 M - 0.5 N M$. El coeficiente de $N^2 M$ es $0.5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_14",
+      "title": "Llamadas en Recursión de Fibonacci",
+      "context": "Se analiza el número de llamadas que realiza la implementación ingenua de Fibonacci:\n```java\nint calls = 0;\nint fib(int n) {\n  calls++;\n  if (n <= 1) return n;\n  return fib(n - 1) + fib(n - 2);\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_14_A",
+          "label": "a",
+          "question": "¿Cuál es el valor final del contador `calls` al invocar `fib(1)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ejecuta una única llamada que entra en el caso base directo."
+        },
+        {
+          "id": "LAB_14_B",
+          "label": "b",
+          "question": "¿Cuál es el valor final de `calls` al invocar `fib(3)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Llamadas: fib(3) $\\rightarrow$ [fib(2) y fib(1)]. fib(2) $\\rightarrow$ [fib(1) y fib(0)]. Total = $1 + 3 + 1 = 5$ llamadas."
+        },
+        {
+          "id": "LAB_14_C",
+          "label": "c",
+          "question": "¿Cuál es el valor final de `calls` al invocar `fib(4)`?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Llamadas: fib(4) $\\rightarrow$ [fib(3) (5 llamadas) y fib(2) (3 llamadas)] + 1 (raíz) = $9$ llamadas."
+        },
+        {
+          "id": "LAB_14_D",
+          "label": "d",
+          "question": "¿Cuál es el valor final de `calls` al invocar `fib(5)`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Llamadas: fib(5) $\\rightarrow$ [fib(4) (9 llamadas) y fib(3) (5 llamadas)] + 1 (raíz) = $15$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_15",
+      "title": "Redimensionamiento de un ArrayList",
+      "context": "Un ArrayList comienza vacío con una capacidad interna de 4 posiciones. Cada vez que se llena por completo y se realiza una nueva inserción, se duplica su capacidad. Suponemos que insertar un elemento cuesta O(1) excepto cuando se redimensiona, en cuyo caso copiar un elemento al nuevo array tiene coste 1.",
+      "parts": [
+        {
+          "id": "LAB_15_A",
+          "label": "a",
+          "question": "¿Cuál es la capacidad del array tras insertar 4 elementos?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La capacidad inicial de 4 basta para los primeros 4 elementos sin redimensionar."
+        },
+        {
+          "id": "LAB_15_B",
+          "label": "b",
+          "question": "¿Cuál es la capacidad del array tras insertar 5 elementos?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Al insertar el quinto elemento se desborda la capacidad de 4, duplicándose a 8."
+        },
+        {
+          "id": "LAB_15_C",
+          "label": "c",
+          "question": "¿Cuál es la capacidad del array tras insertar 9 elementos?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Con 9 elementos se supera la capacidad anterior de 8, duplicándose de nuevo a 16."
+        },
+        {
+          "id": "LAB_15_D",
+          "label": "d",
+          "question": "¿Cuántas copias individuales de elementos se han realizado en total por efecto de las redistribuciones de memoria al insertar 9 elementos?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Copias: 4 al pasar de 4 a 8, y 8 al pasar de 8 a 16. Total = $4 + 8 = 12$ copias de elementos."
+        }
+      ]
+    },
+    {
+      "id": "LAB_16",
+      "title": "Manipulación de Índices en una Lista",
+      "context": "Partimos de una lista de enteros en la secuencia: `[10, 20, 30, 40, 50]`.",
+      "parts": [
+        {
+          "id": "LAB_16_A",
+          "label": "a",
+          "question": "¿Cuál es el índice (0-indexado) del elemento 30 originalmente?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los elementos son: 0:10, 1:20, 2:30. Índice = $2$."
+        },
+        {
+          "id": "LAB_16_B",
+          "label": "b",
+          "question": "Si añadimos el número 25 en el índice 2, ¿cuál pasa a ser el índice del elemento 30?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Insertar desplaza a la derecha a partir del índice especificado: [10, 20, 25, 30, 40, 50]. El 30 ahora está en el índice $3$."
+        },
+        {
+          "id": "LAB_16_C",
+          "label": "c",
+          "question": "Si seguidamente eliminamos el elemento en el índice 0, ¿qué valor se encuentra ahora en el índice 1?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "Al eliminar el de índice 0 (10), la lista pasa a ser: [20, 25, 30, 40, 50]. En el índice 1 se encuentra el número $25$."
+        },
+        {
+          "id": "LAB_16_D",
+          "label": "d",
+          "question": "¿Cuál es el tamaño total de la lista al finalizar estas tres operaciones?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Tamaño inicial $5$. Se insertó uno ($6$) y se borró uno ($5$). Tamaño final = $5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_17",
+      "title": "Elegibilidad para el Recolector de Basura",
+      "context": "Analiza el siguiente fragmento de código:\n```java\nclass Ref {\n  Ref next;\n  Ref(int id) {}\n}\nRef r1 = new Ref(1);\nRef r2 = new Ref(2);\nRef r3 = new Ref(3);\nr1.next = r2;\nr2.next = r3;\nr3.next = r1;\nr2 = null;\nr3 = null;\n```",
+      "parts": [
+        {
+          "id": "LAB_17_A",
+          "label": "a",
+          "question": "¿Cuántas instancias de la clase `Ref` se han reservado en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Hay 3 llamadas a `new Ref(...)`, por lo que se crearon 3 objetos."
+        },
+        {
+          "id": "LAB_17_B",
+          "label": "b",
+          "question": "¿Cuántos caminos directos desde variables locales en la pila apuntan a objetos Ref tras poner r2 y r3 en null?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo queda activa la variable local `r1` apuntando al objeto 1."
+        },
+        {
+          "id": "LAB_17_C",
+          "label": "c",
+          "question": "Si a continuación ejecutamos `r1 = null;`, ¿cuántos objetos pasan a ser elegibles para el Garbage Collector?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al anular `r1`, se pierde la última referencia externa. Los 3 objetos formaban una estructura circular inalcanzable, por lo que los 3 son candidatos a GC."
+        },
+        {
+          "id": "LAB_17_D",
+          "label": "d",
+          "question": "Si en vez de hacer `r1 = null` hiciéramos `r1.next = null;` (manteniendo r2=null, r3=null, y r1 apuntando a objeto 1), ¿cuántos objetos quedan inalcanzables?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al romper el enlace `r1.next`, el objeto 2 y el objeto 3 dejan de ser alcanzables a través del objeto 1. Solo objeto 1 sigue referenciado por `r1`. Quedan inalcanzables 2 objetos."
+        }
+      ]
+    },
+    {
+      "id": "LAB_18",
+      "title": "Recurrencia de Búsqueda Binaria",
+      "context": "Considera la relación de recurrencia:\n$$T(N) = T(N/2) + 1$$\ncon $T(1) = 1$ para $N$ potencia de $2$.",
+      "parts": [
+        {
+          "id": "LAB_18_A",
+          "label": "a",
+          "question": "¿Cuál es el valor resultante para $T(2)$?",
+          "correctValue": 2.0,
+          "tolerance": 0.0,
+          "explanation": "$T(2) = T(1) + 1 = 1 + 1 = 2$."
+        },
+        {
+          "id": "LAB_18_B",
+          "label": "b",
+          "question": "¿Cuál es el valor resultante para $T(4)$?",
+          "correctValue": 3.0,
+          "tolerance": 0.0,
+          "explanation": "$T(4) = T(2) + 1 = 2 + 1 = 3$."
+        },
+        {
+          "id": "LAB_18_C",
+          "label": "c",
+          "question": "¿Cuál es el valor resultante para $T(8)$?",
+          "correctValue": 4.0,
+          "tolerance": 0.0,
+          "explanation": "$T(8) = T(4) + 1 = 3 + 1 = 4$."
+        },
+        {
+          "id": "LAB_18_D",
+          "label": "d",
+          "question": "¿Cuál es el valor de $T(1024)$?",
+          "correctValue": 11.0,
+          "tolerance": 0.0,
+          "explanation": "La solución analítica es $T(N) = \\log_2 N + 1$. Para $N=1024$, tenemos $10 + 1 = 11.0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_19",
+      "title": "Número de Comparaciones en Bubble Sort",
+      "context": "El número de comparaciones de clave en el algoritmo Bubble Sort para ordenar $N$ elementos en el peor caso es:\n$$C(N) = \\frac{N(N-1)}{2}$$",
+      "parts": [
+        {
+          "id": "LAB_19_A",
+          "label": "a",
+          "question": "¿Cuántas comparaciones se realizan si $N = 100$?",
+          "correctValue": 4950.0,
+          "tolerance": 0.0,
+          "explanation": "$C(100) = \\frac{100 \\times 99}{2} = 4950$."
+        },
+        {
+          "id": "LAB_19_B",
+          "label": "b",
+          "question": "¿Cuántas comparaciones se realizan si $N = 10$?",
+          "correctValue": 45.0,
+          "tolerance": 0.0,
+          "explanation": "$C(10) = \\frac{10 \\times 9}{2} = 45$."
+        },
+        {
+          "id": "LAB_19_C",
+          "label": "c",
+          "question": "¿Cuál es el coeficiente numérico de la potencia $N^2$ en la fórmula de comparaciones?",
+          "correctValue": 0.5,
+          "tolerance": 0.0,
+          "explanation": "Desarrollando: $\\frac{N^2 - N}{2} = 0.5N^2 - 0.5N$. El coeficiente es $0.5$."
+        },
+        {
+          "id": "LAB_19_D",
+          "label": "d",
+          "question": "¿Cuál es el coeficiente numérico del término lineal $N$ en dicha fórmula?",
+          "correctValue": -0.5,
+          "tolerance": 0.0,
+          "explanation": "El coeficiente lineal es $-0.5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_20",
+      "title": "Cálculo de Tamaños de Atributos con Herencia",
+      "context": "Asumiendo que un entero primitivo (`int`) ocupa 4 bytes y un real de doble precisión (`double`) ocupa 8 bytes.\nLa clase `Base` contiene 2 variables de tipo `int` y 1 variable de tipo `double`.\nLa clase `Derived` extiende a `Base` y añade 2 variables de tipo `double` y 1 variable de tipo `int`.",
+      "parts": [
+        {
+          "id": "LAB_20_A",
+          "label": "a",
+          "question": "¿Cuántos bytes ocupan únicamente los atributos heredados de `Base`?",
+          "correctValue": 16.0,
+          "tolerance": 0.0,
+          "explanation": "$2 \\times 4\\text{ bytes (int)} + 1 \\times 8\\text{ bytes (double)} = 8 + 8 = 16\\text{ bytes}$."
+        },
+        {
+          "id": "LAB_20_B",
+          "label": "b",
+          "question": "¿Cuántos bytes ocupan los atributos introducidos de manera exclusiva en `Derived`?",
+          "correctValue": 20.0,
+          "tolerance": 0.0,
+          "explanation": "$2 \\times 8\\text{ bytes (double)} + 1 \\times 4\\text{ bytes (int)} = 16 + 4 = 20\\text{ bytes}$."
+        },
+        {
+          "id": "LAB_20_C",
+          "label": "c",
+          "question": "¿Cuál es la suma de bytes de todos los atributos de un objeto instanciado de la clase `Derived`?",
+          "correctValue": 36.0,
+          "tolerance": 0.0,
+          "explanation": "Ocupa la suma de los campos de base e hijo: $16 + 20 = 36\\text{ bytes}$."
+        },
+        {
+          "id": "LAB_20_D",
+          "label": "d",
+          "question": "¿Cuál es el número total de atributos primitivos que contiene la instancia de `Derived`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$3$ en la clase base más $3$ en la clase derivada. Total = $6$ atributos primitivos."
+        }
+      ]
+    },
+    {
+      "id": "LAB_21",
+      "title": "Estrategia de Capacidad en Pilas",
+      "context": "Una pila dinámica utiliza un array con una capacidad inicial de 2. Cuando está lleno, se duplica. Cuando el número de elementos se sitúa estrictamente por debajo de 1/4 de su capacidad, se reduce a la mitad (con una capacidad mínima de 2).",
+      "parts": [
+        {
+          "id": "LAB_21_A",
+          "label": "a",
+          "question": "¿Cuál es la capacidad del array tras realizar 5 operaciones push consecutivas?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "1:cap=2, 2:cap=2. 3:cap=4, 4:cap=4. 5:cap=8 (al llenarse con 4)."
+        },
+        {
+          "id": "LAB_21_B",
+          "label": "b",
+          "question": "A continuación, realizamos 3 operaciones pop consecutivas (quedan 2 elementos). ¿Cuál es la capacidad?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Elementos = 2. Capacidad = 8. La proporción es $2/8 = 0.25$, la cual no es estrictamente menor que $1/4$ ($0.25$). Se mantiene en $8$."
+        },
+        {
+          "id": "LAB_21_C",
+          "label": "c",
+          "question": "Realizamos otra operación pop (quedan 1 elemento). ¿Cuál es la capacidad resultante?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Elementos = 1. Capacidad = 8. Proporción = $1/8 = 0.125 < 0.25$. Se reduce a la mitad: $4$."
+        },
+        {
+          "id": "LAB_21_D",
+          "label": "d",
+          "question": "Realizamos otra operación pop (quedan 0 elementos). ¿Cuál es la capacidad?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Elementos = 0. Capacidad = 4. Proporción = $0/4 = 0.0 < 0.25$. Se reduce a la mitad: $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_22",
+      "title": "Inserción en Lista Enlazada Simple",
+      "context": "Considera una lista simplemente enlazada vacía con un puntero `head`. Realizamos inserciones al inicio:\n1) Insertar 10\n2) Insertar 20\n3) Insertar 30",
+      "parts": [
+        {
+          "id": "LAB_22_A",
+          "label": "a",
+          "question": "¿Qué valor almacena el nodo apuntado por `head.next`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La lista queda estructurada como: `head` $\\rightarrow$ [30] $\\rightarrow$ [20] $\\rightarrow$ [10]. `head.next` apunta a la celda con valor $20$."
+        },
+        {
+          "id": "LAB_22_B",
+          "label": "b",
+          "question": "¿Qué valor almacena el nodo apuntado por `head.next.next`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "`head.next.next` apunta a la celda con valor $10$."
+        },
+        {
+          "id": "LAB_22_C",
+          "label": "c",
+          "question": "¿Cuál es el número de elementos en la lista?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se han insertado 3 valores al inicio, por lo que el tamaño es $3$."
+        },
+        {
+          "id": "LAB_22_D",
+          "label": "d",
+          "question": "Si eliminamos el nodo situado a continuación de `head`, ¿cuál es el nuevo tamaño de la lista?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Eliminar el nodo tras `head` quita el elemento 20. La lista queda: [30] $\\rightarrow$ [10], tamaño = $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_23",
+      "title": "Resolución Estática vs Dinámica en Polimorfismo",
+      "context": "Considera el siguiente código:\n```java\nclass X {\n  int val = 1;\n  int get() { return val; }\n}\nclass Y extends X {\n  int val = 2;\n  int get() { return val; }\n}\n// Bloque de código:\nX obj1 = new X();\nX obj2 = new Y();\nY obj3 = new Y();\n```",
+      "parts": [
+        {
+          "id": "LAB_23_A",
+          "label": "a",
+          "question": "¿Qué valor entero devuelve la invocación `obj1.get()`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Instancia `X`, se ejecuta el método de la clase `X` que retorna $1$."
+        },
+        {
+          "id": "LAB_23_B",
+          "label": "b",
+          "question": "¿Qué valor entero devuelve la invocación `obj2.get()`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Debido al ligamiento dinámico, se ejecuta el método de la clase real instanciada (`Y`), devolviendo $2$."
+        },
+        {
+          "id": "LAB_23_C",
+          "label": "c",
+          "question": "¿Qué valor tiene el atributo consultado mediante `obj2.val`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Los atributos se resuelven de manera estática basándose en el tipo de la variable de referencia. Al ser `obj2` de tipo `X`, devuelve el atributo de la superclase ($1$)."
+        },
+        {
+          "id": "LAB_23_D",
+          "label": "d",
+          "question": "¿Qué valor tiene el atributo consultado mediante `obj3.val`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El tipo estático de `obj3` es `Y`, por lo que se accede directamente al campo de `Y` que vale $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_24",
+      "title": "Bucle con Saltos en Arrays",
+      "context": "Considera el siguiente código:\n```java\nint[] arr = {1, 2, 3, 4, 5, 6, 7, 8};\nint sum = 0;\nfor (int i = 1; i < arr.length - 1; i += 2) {\n  sum += arr[i];\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_24_A",
+          "label": "a",
+          "question": "¿Cuántas veces se ejecuta el cuerpo del bucle?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El rango del índice es desde $1$ hasta menos de $7$ (arr.length - 1 = 7). Los valores de `i` son $1$, $3$ y $5$. Se ejecuta $3$ veces."
+        },
+        {
+          "id": "LAB_24_B",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable `sum`?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Suma: arr[1] + arr[3] + arr[5] = 2 + 4 + 6 = $12$."
+        },
+        {
+          "id": "LAB_24_C",
+          "label": "c",
+          "question": "¿Cuál es el valor de la variable `i` tras la terminación del bucle?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Tras la iteración con `i = 5`, se suma 2 y pasa a valer `7`, incumpliendo la condición `i < 7`."
+        },
+        {
+          "id": "LAB_24_D",
+          "label": "d",
+          "question": "Si la condición del bucle se cambia a `i <= arr.length - 1`, ¿cuál sería el valor final de `sum`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se añadiría el elemento `i = 7` (arr[7] = 8) al cálculo anterior: $12 + 8 = 20$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_25",
+      "title": "Aritmética de Cola Circular",
+      "context": "Una cola circular se implementa en un array de tamaño 8. Las posiciones se gestionan con los índices `front`, `rear` y `size`. Inicialmente: `front=0, rear=0, size=0`.\n1) Se encolan 5 elementos\n2) Se desencolan 2 elementos\n3) Se encolan 4 elementos",
+      "parts": [
+        {
+          "id": "LAB_25_A",
+          "label": "a",
+          "question": "¿Cuál es el valor final del índice `front`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Cada desencolado avanza `front` en una posición: $(0 + 2) \\pmod 8 = 2$."
+        },
+        {
+          "id": "LAB_25_B",
+          "label": "b",
+          "question": "¿Cuál es el valor final del índice `rear`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "`rear` marca el siguiente slot vacío de inserción. Tras encolar 5 ($rear=5$), y luego 4 más: $(5 + 4) \\pmod 8 = 1$."
+        },
+        {
+          "id": "LAB_25_C",
+          "label": "c",
+          "question": "¿Cuál es la cantidad de elementos presentes en la cola al final?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El tamaño neto es: $0 + 5 - 2 + 4 = 7$ elementos."
+        },
+        {
+          "id": "LAB_25_D",
+          "label": "d",
+          "question": "¿Cuántas posiciones libres quedan en la estructura sin provocar desbordamiento?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La capacidad máxima del array es $8$, por lo que con un tamaño de $7$ queda $8 - 7 = 1$ espacio libre."
+        }
+      ]
+    },
+    {
+      "id": "LAB_26",
+      "title": "Cálculo de Costes en Mezcla (Merge Sort)",
+      "context": "Considera la relación de recurrencia exacta:\n$$T(N) = 2T(N/2) + N$$\ncon un coste inicial para $N=2$ de $T(2) = 2$.",
+      "parts": [
+        {
+          "id": "LAB_26_A",
+          "label": "a",
+          "question": "¿Cuál es el coste calculado para $T(4)$?",
+          "correctValue": 8.0,
+          "tolerance": 0.0,
+          "explanation": "$T(4) = 2T(2) + 4 = 2(2) + 4 = 8$."
+        },
+        {
+          "id": "LAB_26_B",
+          "label": "b",
+          "question": "¿Cuál es el coste calculado para $T(16)$?",
+          "correctValue": 64.0,
+          "tolerance": 0.0,
+          "explanation": "Evaluando: $T(8) = 2(8) + 8 = 24$. $T(16) = 2(24) + 16 = 64$."
+        },
+        {
+          "id": "LAB_26_C",
+          "label": "c",
+          "question": "¿Cuál es el coste calculado para $T(64)$?",
+          "correctValue": 384.0,
+          "tolerance": 0.0,
+          "explanation": "$T(32) = 2(64) + 32 = 160$. $T(64) = 2(160) + 64 = 384$."
+        },
+        {
+          "id": "LAB_26_D",
+          "label": "d",
+          "question": "Si $N = 1024$ ($2^{10}$), ¿cuál es el coste exacto $T(1024)$?",
+          "correctValue": 10240.0,
+          "tolerance": 0.0,
+          "explanation": "La fórmula cerrada es $T(2^k) = k \\times 2^k$. Para $k = 10$, es $10 \\times 1024 = 10240$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_27",
+      "title": "Flujo de Control en Excepciones",
+      "context": "Considera el siguiente bloque de código:\n```java\nint val = 0;\ntry {\n  val += 1;\n  if (val > 0) throw new Exception();\n  val += 2;\n} catch (Exception e) {\n  val += 10;\n} finally {\n  val += 100;\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_27_A",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `val`?",
+          "correctValue": 111,
+          "tolerance": 0,
+          "explanation": "Comienza en 0. Incrementa a 1. Se lanza la excepción. Se captura sumando 10 (val=11). Se ejecuta el bloque finally sumando 100. Total = $111$."
+        },
+        {
+          "id": "LAB_27_B",
+          "label": "b",
+          "question": "Si no se lanzara la excepción, ¿qué valor final tendría la variable `val`?",
+          "correctValue": 103,
+          "tolerance": 0,
+          "explanation": "Sin excepción: val=1, luego suma 2 (val=3). Se ejecuta finally sumando 100. Total = $103$."
+        },
+        {
+          "id": "LAB_27_C",
+          "label": "c",
+          "question": "¿Cuántos bloques `catch` se ejecutan al producirse la excepción?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ejecuta exactamente el bloque `catch` coincidente con el tipo de excepción lanzado."
+        },
+        {
+          "id": "LAB_27_D",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecuta el bloque `finally` en la llamada con excepción?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bloque `finally` se ejecuta siempre una única vez al terminar el try-catch, independientemente de si se lanza excepción o no."
+        }
+      ]
+    },
+    {
+      "id": "LAB_28",
+      "title": "Resolución de Métodos Sobrecargados",
+      "context": "Considera la siguiente definición de métodos sobrecargados:\n```java\nclass Calculator {\n  int add(int a, int b) { return a + b; }\n  double add(double a, double b) { return a + b + 1.0; }\n  int add(int a, int b, int c) { return a + b + c + 2; }\n}\nCalculator calc = new Calculator();\n```",
+      "parts": [
+        {
+          "id": "LAB_28_A",
+          "label": "a",
+          "question": "¿Qué valor devuelve la llamada `calc.add(2, 3)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Invoca el método con firma `add(int, int)` que realiza la suma exacta: $2+3=5$."
+        },
+        {
+          "id": "LAB_28_B",
+          "label": "b",
+          "question": "¿Qué valor devuelve la llamada `calc.add(2.0, 3.0)`?",
+          "correctValue": 6.0,
+          "tolerance": 0.0,
+          "explanation": "Invoca `add(double, double)` que suma los operandos más una unidad: $2.0 + 3.0 + 1.0 = 6.0$."
+        },
+        {
+          "id": "LAB_28_C",
+          "label": "c",
+          "question": "¿Qué valor devuelve la llamada `calc.add(1, 2, 3)`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Invoca `add(int, int, int)` que retorna la suma total más dos unidades: $1+2+3+2=8$."
+        },
+        {
+          "id": "LAB_28_D",
+          "label": "d",
+          "question": "¿Qué valor devuelve `calc.add(2, 3.0)`?",
+          "correctValue": 6.0,
+          "tolerance": 0.0,
+          "explanation": "Debido a la promoción automática de tipos, el parámetro `int` 2 se convierte en `double`, ejecutando la versión `add(double, double)` que da $2.0 + 3.0 + 1.0 = 6.0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_29",
+      "title": "Coste en Multiplicación de Matrices",
+      "context": "Se multiplica dos matrices de dimensiones $N \\times N$ usando el algoritmo clásico iterativo.",
+      "parts": [
+        {
+          "id": "LAB_29_A",
+          "label": "a",
+          "question": "¿Cuántos bucles anidados interactúan en el núcleo de este algoritmo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El algoritmo convencional consta de un bucle para filas, otro para columnas y un tercero para el producto escalar. Total = $3$."
+        },
+        {
+          "id": "LAB_29_B",
+          "label": "b",
+          "question": "Si $N = 10$, ¿cuál es el número total de multiplicaciones de números reales realizadas?",
+          "correctValue": 1000.0,
+          "tolerance": 0.0,
+          "explanation": "Cada casilla del resultado requiere $N$ multiplicaciones. Al ser $N^2$ casillas, el total es $N^3 = 10^3 = 1000$."
+        },
+        {
+          "id": "LAB_29_C",
+          "label": "c",
+          "question": "Si $N = 10$, ¿cuál es el número total de sumas de números reales realizadas?",
+          "correctValue": 900.0,
+          "tolerance": 0.0,
+          "explanation": "Cada casilla necesita $N-1$ sumas. Para $N^2$ casillas: $N^2(N-1) = 100 \\times 9 = 900$ sumas."
+        },
+        {
+          "id": "LAB_29_D",
+          "label": "d",
+          "question": "Si duplicamos el tamaño de la matriz ($2N$), ¿por qué factor se multiplica la cantidad de multiplicaciones escalares?",
+          "correctValue": 8.0,
+          "tolerance": 0.0,
+          "explanation": "Dado que el algoritmo tiene complejidad cúbica $\\mathcal{O}(N^3)$, multiplicar $N$ por 2 causa un incremento de $2^3 = 8$ veces en las operaciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_30",
+      "title": "Compatibilidad de Tipos Genéricos con Comodines",
+      "context": "Dada la jerarquía `GrandChild` extends `Child` extends `Parent`. Disponemos de variables de tipo lista:\n`List<? extends Parent> list;` y listas parametrizadas:\n`List<Parent> parents;` , `List<Child> children;` , `List<GrandChild> grandchildren;`.",
+      "parts": [
+        {
+          "id": "LAB_30_A",
+          "label": "a",
+          "question": "¿Es válida la asignación `list = parents`? (Indicar 1.0 para Sí, 0.0 para No)",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "`? extends Parent` acepta listas de cualquier tipo derivado o igual a `Parent`, por tanto `List<Parent>` es asignable ($1.0$)."
+        },
+        {
+          "id": "LAB_30_B",
+          "label": "b",
+          "question": "¿Es válida la asignación `list = children`? (Indicar 1.0 para Sí, 0.0 para No)",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "Como `Child` es una subclase de `Parent`, es perfectamente compatible ($1.0$)."
+        },
+        {
+          "id": "LAB_30_C",
+          "label": "c",
+          "question": "¿Es válida la asignación `list = grandchildren`? (Indicar 1.0 para Sí, 0.0 para No)",
+          "correctValue": 1.0,
+          "tolerance": 0.0,
+          "explanation": "`GrandChild` hereda de `Parent` a través de `Child`, por lo que es compatible ($1.0$)."
+        },
+        {
+          "id": "LAB_30_D",
+          "label": "d",
+          "question": "Si declaramos `List<? super Child> listSuper;`, ¿es admisible la asignación `listSuper = grandchildren`? (Indicar 1.0 para Sí, 0.0 para No)",
+          "correctValue": 0.0,
+          "tolerance": 0.0,
+          "explanation": "`? super Child` indica que el tipo genérico debe ser de un ancestro (padre) de `Child`, no una subclase. `GrandChild` es descendiente, luego no es compatible ($0.0$)."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Definición Formal de Cota Superior Asintótica (Big-O)",
+      "tex": "$f(n) = \\mathcal{O}(g(n)) \\iff \\exists c > 0, n_0 > 0 \\text{ t.q. } 0 \\le f(n) \\le c \\cdot g(n) \\ \\forall n \\ge n_0$"
+    },
+    {
+      "name": "Teorema Maestro para Ecuaciones de Recurrencia",
+      "tex": "$T(n) = a T(n/b) + f(n)$"
+    },
+    {
+      "name": "Suma de los Primeros N Enteros Consecutivos",
+      "tex": "$\\sum_{i=1}^n i = \\frac{n(n+1)}{2}$"
+    },
+    {
+      "name": "Coste Asintótico de la Búsqueda Binaria",
+      "tex": "$T(n) = T(n/2) + \\mathcal{O}(1) \\implies T(n) = \\mathcal{O}(\\log n)$"
+    },
+    {
+      "name": "Relación de Recurrencia para los Números de Fibonacci",
+      "tex": "$F(n) = F(n-1) + F(n-2) \\ \\forall n \\ge 2$"
+    },
+    {
+      "name": "Suma de una Serie Geométrica de Razón r",
+      "tex": "$\\sum_{i=0}^k r^i = \\frac{r^{k+1}-1}{r-1}$"
+    },
+    {
+      "name": "Coste Asintótico del Algoritmo de Ordenación por Mezcla (Merge Sort)",
+      "tex": "$T(n) = 2T(n/2) + \\mathcal{O}(n) \\implies T(n) = \\mathcal{O}(n \\log n)$"
+    },
+    {
+      "name": "Fórmula de Cambio de Base Logarítmica",
+      "tex": "$\\log_a(b) = \\frac{\\log_c(b)}{\\log_c(a)}$"
+    }
+  ]
+}

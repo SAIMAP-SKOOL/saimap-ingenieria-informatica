@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el propósito fundamental de la genericidad introducida en Java 5?",
+      "options": [
+        "Asegurar la comprobación de tipos en tiempo de compilación y evitar casts explícitos.",
+        "Permitir la creación de nuevos tipos primitivos de datos dinámicamente en tiempo de ejecución.",
+        "Optimizar el espacio ocupado en el Stack por las variables locales de tipo objeto."
+      ],
+      "correct": 0,
+      "hint": "Permite verificar los tipos en la fase de compilación.",
+      "explanation": "La genericidad permite parametrizar clases, interfaces y métodos con tipos, garantizando el control de tipos en tiempo de compilación (type-safety) y eliminando la necesidad de castings manuales."
+    },
+    {
+      "q": "¿Cómo se define una clase genérica en Java?",
+      "options": [
+        "Especificando uno o más parámetros de tipo entre caracteres <> después del nombre de la clase.",
+        "Mediante la palabra reservada generic antes de la definición de la clase.",
+        "Heredando obligatoriamente de la clase GenericObject."
+      ],
+      "correct": 0,
+      "hint": "Se usa una notación con corchetes angulares.",
+      "explanation": "Una clase genérica se declara especificando sus parámetros de tipo entre menor y mayor que (<T>) inmediatamente después del nombre de la clase."
+    },
+    {
+      "q": "¿Qué convención de nombrado se utiliza por defecto en Java para representar el parámetro de tipo genérico de un elemento en una colección?",
+      "options": [
+        "La letra 'E' en mayúscula.",
+        "La palabra reservada 'Element' en minúsculas.",
+        "La letra 'T' acompañada del índice del tipo, como T1."
+      ],
+      "correct": 0,
+      "hint": "Proviene de la palabra Element.",
+      "explanation": "Por convención, en Java se utiliza la letra 'E' para representar un elemento (Element) de una colección, mientras que 'T' se usa para tipos generales."
+    },
+    {
+      "q": "En el contexto de la genericidad de Java, ¿qué es un tipo crudo (raw type)?",
+      "options": [
+        "El uso de un tipo genérico sin especificar ningún argumento de tipo, como utilizar simplemente List en lugar de List<String>.",
+        "Un tipo genérico que solo admite tipos de datos primitivos en sus colecciones.",
+        "La definición de un tipo genérico que se ha compilado sin optimizaciones del compilador."
+      ],
+      "correct": 0,
+      "hint": "Uso retrospectivo sin parámetros de tipo.",
+      "explanation": "Un raw type es el nombre de una clase o interfaz genérica utilizada sin ningún argumento de tipo (ej. ArrayList en lugar de ArrayList<T>), lo cual existe para mantener compatibilidad hacia atrás."
+    },
+    {
+      "q": "¿Dónde se declara el parámetro de tipo genérico en la cabecera de un método genérico?",
+      "options": [
+        "Antes del tipo de retorno del método.",
+        "Después de los parámetros formales del método.",
+        "Dentro de los argumentos del método utilizando la palabra clave generic."
+      ],
+      "correct": 0,
+      "hint": "Debe preceder al tipo que devuelve el método.",
+      "explanation": "En un método genérico, el parámetro de tipo genérico se declara antes del tipo de retorno del método, por ejemplo: public static <E> void swap(E[] a, int i, int j)."
+    },
+    {
+      "q": "¿Qué es el proceso de Borrado de Tipos (Type Erasure) en Java?",
+      "options": [
+        "La eliminación de la información de tipos genéricos durante la compilación para mantener compatibilidad hacia atrás en ejecución.",
+        "Un proceso automático en ejecución que destruye las variables genéricas no utilizadas del Heap.",
+        "El borrado físico del código fuente de los genéricos para optimizar la compilación."
+      ],
+      "correct": 0,
+      "hint": "Ocurre en la compilación y borra metadatos de genéricos.",
+      "explanation": "La JVM no da soporte nativo a genéricos. El compilador de Java realiza el Borrado de Tipos eliminando la información del tipo genérico en el bytecode para poder ejecutarlo en máquinas virtuales antiguas."
+    },
+    {
+      "q": "¿Por qué tipo se sustituye el parámetro genérico T en el bytecode compilado si se declara como class Caja<T> sin cotas?",
+      "options": [
+        "Por la clase Object.",
+        "Por un tipo primitivo void.",
+        "Se mantiene como tipo genérico T en el bytecode ejecutable."
+      ],
+      "correct": 0,
+      "hint": "Es la raíz de la jerarquía de clases.",
+      "explanation": "Si un tipo genérico no tiene cotas especificadas, el compilador lo sustituye por Object durante el proceso de borrado de tipos."
+    },
+    {
+      "q": "Si declaramos una clase genérica como class AlmacenNum<T extends Number>, ¿por qué tipo se reemplaza T en el bytecode final?",
+      "options": [
+        "Por Number.",
+        "Por Object.",
+        "Por Double."
+      ],
+      "correct": 0,
+      "hint": "Se reemplaza por su cota superior.",
+      "explanation": "Durante el borrado de tipos, si el parámetro genérico tiene una cota superior, se sustituye por el tipo que define dicha cota, en este caso Number."
+    },
+    {
+      "q": "Debido al borrado de tipos, ¿cuál de las siguientes acciones es ilegal en Java dentro de una clase genérica con parámetro T?",
+      "options": [
+        "Crear una nueva instancia mediante new T().",
+        "Declarar una variable local de tipo T.",
+        "Retornar un valor de tipo T en un método."
+      ],
+      "correct": 0,
+      "hint": "No se puede instanciar algo de lo que no se conoce el tipo concreto.",
+      "explanation": "Dado que el tipo real se borra en compilación, no se puede hacer 'new T()' en ejecución porque la JVM no sabe qué constructor llamar."
+    },
+    {
+      "q": "¿Por qué no es posible compilar la declaración de un array genérico del tipo T[] array = new T[10];?",
+      "options": [
+        "Porque en Java los arrays necesitan conocer su tipo exacto en tiempo de ejecución, lo cual impide el borrado de tipos.",
+        "Porque el tamaño de los arrays genéricos en el Stack debe ser estático e inmutable.",
+        "Porque las clases genéricas no pueden contener estructuras basadas en arrays."
+      ],
+      "correct": 0,
+      "hint": "Los arrays son reificados en ejecución.",
+      "explanation": "Los arrays en Java comprueban la seguridad de tipos en tiempo de ejecución (reificación). Al borrarse los genéricos, la JVM no sabría de qué tipo exacto crear el array."
+    },
+    {
+      "q": "¿Qué es un comodín acotado superiormente (Upper Bound) en Java y cómo se declara?",
+      "options": [
+        "Se declara como ? extends T y limita los argumentos válidos a la clase T o a sus subclases.",
+        "Se declara como ? super T y limita los argumentos válidos a la clase T o a sus superclases.",
+        "Se declara como T extends ? y permite cualquier tipo que no sea una interfaz."
+      ],
+      "correct": 0,
+      "hint": "Relación hacia abajo en la jerarquía.",
+      "explanation": "Un comodín acotado superiormente se expresa como '? extends T' y restringe el tipo genérico a ser la clase T o cualquier tipo derivado de esta."
+    },
+    {
+      "q": "¿Qué indica la regla mnemotécnica PECS (Producer Extends, Consumer Super) sobre el uso de comodines?",
+      "options": [
+        "Que si una estructura produce datos (lectura) se usa extends, y si consume datos (escritura) se usa super.",
+        "Que las interfaces genéricas deben extender de clases y consumir superclases.",
+        "Que las colecciones de lectura deben declararse con super y las de escritura con extends."
+      ],
+      "correct": 0,
+      "hint": "P de Producer, C de Consumer.",
+      "explanation": "La regla PECS establece que si la estructura produce datos (es leída), se debe usar '? extends T'. Si consume datos (es escrita/modificada), se usa '? super T'."
+    },
+    {
+      "q": "Si tenemos una colección declarada como List<? extends Number> lista, ¿cuál es su comportamiento respecto a inserciones y extracciones?",
+      "options": [
+        "Es una lista principalmente productora (de la cual se lee con seguridad de tipo Number), y no permite insertar elementos excepto null.",
+        "Es una lista consumidora donde podemos insertar con seguridad cualquier número decimal o entero.",
+        "Permite tanto insertar como leer elementos de tipo Number sin ninguna restricción."
+      ],
+      "correct": 0,
+      "hint": "Al ser extends, solo asegura el tipo en lecturas.",
+      "explanation": "Con '? extends Number', la JVM sabe que cualquier elemento recuperado es un Number. Pero no permite insertar nada (salvo null) porque el tipo exacto almacenado en la lista real podría ser Integer, Double, etc."
+    },
+    {
+      "q": "Si declaramos una lista como List<? super Integer> lista, ¿qué operaciones son seguras?",
+      "options": [
+        "Es una lista consumidora que permite insertar elementos de tipo Integer de forma segura, y la lectura devuelve objetos de tipo Object.",
+        "Permite leer elementos garantizando que son de tipo Integer sin necesidad de casting.",
+        "Permite insertar cualquier tipo de número real o double ya que superclase incluye a todo."
+      ],
+      "correct": 0,
+      "hint": "Al ser super, admite inserciones de esa clase o derivados.",
+      "explanation": "Con '? super Integer', se garantiza que es seguro insertar un Integer (o subclases). La lectura solo garantiza devolver la clase base universal Object, ya que la lista podría ser de Number o de Object."
+    },
+    {
+      "q": "¿Por qué un método estático de una clase genérica Contenedor<T> no puede hacer uso directo del parámetro de tipo T de la clase?",
+      "options": [
+        "Parámetros estáticos pertenecen a la clase cargada y se procesan sin que exista una instancia que defina el tipo concreto de T.",
+        "Porque la palabra reservada static obliga a borrar todos los genéricos de la clase antes de compilar.",
+        "Porque los métodos estáticos se ejecutan en el Stack y los genéricos solo se manejan en el Heap."
+      ],
+      "correct": 0,
+      "hint": "La inicialización de estáticos es a nivel de clase.",
+      "explanation": "Los elementos estáticos existen a nivel de clase, por lo que no pueden referenciar a un parámetro genérico T que es específico de cada instancia de objeto creada."
+    },
+    {
+      "q": "En la Máquina Virtual de Java (JVM), ¿cuál es la función del Class Loader?",
+      "options": [
+        "Cargar de forma dinámica las clases compiladas (.class) en la memoria en tiempo de ejecución.",
+        "Compilar el código fuente Java (.java) en bytecode interpretable por el procesador.",
+        "Traducir las instrucciones binarias a código de máquina específico del microprocesador."
+      ],
+      "correct": 0,
+      "hint": "Se encarga de leer los archivos binarios compilados.",
+      "explanation": "El Class Loader de la JVM es el encargado de buscar, cargar, verificar y enlazar los archivos binarios compilados de las clases (.class) en el Heap de memoria."
+    },
+    {
+      "q": "¿Qué componente de la JVM realiza la traducción en tiempo de ejecución del bytecode a código máquina nativo para optimizar el rendimiento?",
+      "options": [
+        "El compilador Just-In-Time (JIT).",
+        "El Recolector de Basura (Garbage Collector).",
+        "El verificador de bytecode (Bytecode Verifier)."
+      ],
+      "correct": 0,
+      "hint": "Traduce dinámicamente las partes calientes del código.",
+      "explanation": "El compilador JIT (Just-In-Time) compila fragmentos de bytecode frecuentes a código máquina nativo en tiempo de ejecución para mejorar notablemente la velocidad."
+    },
+    {
+      "q": "En el modelo de memoria de Java, ¿qué información se almacena principalmente en la memoria Stack?",
+      "options": [
+        "Las variables locales, los parámetros de métodos y los marcos de llamada de los hilos de ejecución.",
+        "Los objetos creados dinámicamente y todas las instancias de clases genéricas.",
+        "Las definiciones de clases, metadatos y constantes cargadas por la JVM."
+      ],
+      "correct": 0,
+      "hint": "Almacén rápido y de ámbito temporal de métodos.",
+      "explanation": "El Stack almacena variables locales primitivas y referencias a objetos, además de controlar el flujo de llamadas a través de marcos (frames) de hilos."
+    },
+    {
+      "q": "¿Dónde se almacenan las instancias de objetos y los arrays creados con el operador new en Java?",
+      "options": [
+        "En el Heap.",
+        "En el Stack.",
+        "En el registro de programa de la CPU."
+      ],
+      "correct": 0,
+      "hint": "Memoria compartida para datos dinámicos.",
+      "explanation": "Todas las instancias de objetos y de arrays dinámicos en Java se alojan siempre en la memoria de montón (Heap)."
+    },
+    {
+      "q": "¿Cuándo es elegible un objeto en el Heap para ser recolectado por el Garbage Collector en Java?",
+      "options": [
+        "Cuando deja de ser alcanzable a través de cualquier referencia activa en el programa.",
+        "Inmediatamente cuando el hilo que lo creó finaliza su ejecución.",
+        "Cuando el objeto es de tipo genérico y se realiza el borrado de tipos."
+      ],
+      "correct": 0,
+      "hint": "No hay caminos activos hacia él desde el conjunto de raíces.",
+      "explanation": "Un objeto se convierte en basura y es elegible para el Garbage Collector cuando no existe ningún enlace o camino de referencias activo desde las raíces (Stack, variables estáticas) que permita alcanzarlo."
+    },
+    {
+      "q": "¿Cómo afecta el borrado de tipos genéricos al funcionamiento del Garbage Collector?",
+      "options": [
+        "No le afecta en absoluto, ya que el Garbage Collector gestiona las instancias de objetos en el Heap de forma idéntica, independientemente de los genéricos.",
+        "Obliga al Garbage Collector a ejecutarse con más frecuencia para limpiar los castings implícitos.",
+        "Impide que el Garbage Collector pueda liberar la memoria de objetos parametrizados."
+      ],
+      "correct": 0,
+      "hint": "El borrado de tipos solo actúa a nivel de compilación.",
+      "explanation": "La genericidad es una característica para la comprobación en compilación. La JVM y su recolector de basura manejan las instancias de la misma forma que cualquier objeto ordinario en ejecución."
+    },
+    {
+      "q": "¿Qué principio de la programación orientada a objetos se encarga de ocultar los detalles internos de implementación de una clase y proteger su estado?",
+      "options": [
+        "El encapsulamiento.",
+        "El polimorfismo.",
+        "La herencia."
+      ],
+      "correct": 0,
+      "hint": "Se relaciona con ocultar datos y modificadores de acceso.",
+      "explanation": "El encapsulamiento oculta la representación interna y restringe el acceso directo al estado interno del objeto, exponiendo solo interfaces públicas controladas."
+    },
+    {
+      "q": "¿Cuál es el efecto del modificador de acceso protected en un atributo de una clase?",
+      "options": [
+        "Permite el acceso directo al atributo desde la misma clase, subclases y clases del mismo paquete.",
+        "Limita el acceso únicamente a los métodos definidos dentro de la propia clase.",
+        "Permite que cualquier clase en cualquier paquete del programa acceda libremente al atributo."
+      ],
+      "correct": 0,
+      "hint": "Herencia y paquete común.",
+      "explanation": "El modificador protected otorga acceso a los miembros dentro del mismo paquete y a todas las subclases que hereden de la clase que lo declara."
+    },
+    {
+      "q": "En Java, ¿cuál es la diferencia principal entre extender una clase abstracta e implementar una interfaz?",
+      "options": [
+        "Una clase solo puede extender una clase abstracta (herencia simple), pero puede implementar múltiples interfaces.",
+        "Las interfaces permiten almacenar el estado dinámico de los objetos mediante variables de instancia.",
+        "Las clases abstractas solo pueden contener métodos estáticos."
+      ],
+      "correct": 0,
+      "hint": "Limitación del modelo de herencia en Java.",
+      "explanation": "Java admite herencia múltiple de tipos a través de interfaces, pero herencia simple para la reutilización de código mediante clases (abstractas o no)."
+    },
+    {
+      "q": "¿Qué palabra clave se utiliza para invocar el constructor de la clase base desde una subclase en Java?",
+      "options": [
+        "super",
+        "this",
+        "parent"
+      ],
+      "correct": 0,
+      "hint": "Hace referencia a la superclase.",
+      "explanation": "La palabra clave 'super' se utiliza para referenciar métodos y el constructor de la clase base inmediata de una subclase."
+    },
+    {
+      "q": "¿Qué es el polimorfismo en programación orientada a objetos?",
+      "options": [
+        "La capacidad de que una misma referencia invoque comportamientos distintos según el tipo real del objeto apuntado en ejecución.",
+        "La propiedad de definir múltiples variables con el mismo nombre y tipo en el mismo bloque.",
+        "La característica que permite a un objeto cambiar su clase en tiempo de ejecución."
+      ],
+      "correct": 0,
+      "hint": "Una misma llamada se comporta diferente según la instancia.",
+      "explanation": "El polimorfismo permite que una referencia de tipo padre invoque métodos sobreescritos y ejecute el código de la clase hija a la que realmente apunta."
+    },
+    {
+      "q": "¿Qué mecanismo utiliza Java para decidir en tiempo de ejecución qué implementación de un método invocar cuando existe herencia?",
+      "options": [
+        "Enlace dinámico (dynamic binding).",
+        "Enlace estático en compilación.",
+        "Borrado de tipos."
+      ],
+      "correct": 0,
+      "hint": "Resolución tardía del método.",
+      "explanation": "El enlace dinámico resuelve en tiempo de ejecución qué implementación del método ejecutar, basándose en la clase concreta de la instancia del objeto, no en el tipo de la variable."
+    },
+    {
+      "q": "¿Qué caracteriza a una excepción checked (verificada) en Java?",
+      "options": [
+        "Debe ser capturada con un bloque try-catch o declarada en la firma del método con throws en tiempo de compilación.",
+        "Hereda directamente de la clase RuntimeException.",
+        "Se produce únicamente por errores graves de la máquina virtual (como OutOfMemoryError)."
+      ],
+      "correct": 0,
+      "hint": "El compilador obliga a gestionarla.",
+      "explanation": "Las excepciones checked (que heredan de Exception pero no de RuntimeException) son obligadas a gestionarse mediante captura o delegación bajo pena de error de compilación."
+    },
+    {
+      "q": "Si un método lanza una excepción de tipo unchecked (no verificada) y nadie la captura en la pila de llamadas, ¿qué sucede con la ejecución?",
+      "options": [
+        "El hilo actual termina de forma abrupta propagando el error hasta abortar el programa.",
+        "La JVM la captura automáticamente y continúa la ejecución en la siguiente línea del método.",
+        "Se ejecuta el Garbage Collector para reintentar la operación."
+      ],
+      "correct": 0,
+      "hint": "Propagación automática sin control.",
+      "explanation": "Las excepciones unchecked provocan que, si no se capturan, la pila de llamadas del hilo de ejecución se vacíe hasta que este finalice de forma abrupta imprimiendo la traza del error."
+    },
+    {
+      "q": "En el Diseño por Contrato, ¿who es el responsable de cumplir la precondición de un método?",
+      "options": [
+        "El cliente (llamador del método).",
+        "El proveedor (implementador del método).",
+        "El compilador en tiempo de compilación."
+      ],
+      "correct": 0,
+      "hint": "Quien invoca es el que debe asegurarse de cumplir las reglas iniciales.",
+      "explanation": "En DbC, el cliente tiene la responsabilidad de garantizar que las precondiciones sean verdaderas antes de invocar al método, liberando al proveedor de comprobarlas defensivamente."
+    },
+    {
+      "q": "¿Qué es el Invariante de Representación de una clase?",
+      "options": [
+        "Una condición que debe cumplirse para el estado de cualquier objeto válido de la clase en todo momento de reposo.",
+        "Un método especial que se ejecuta justo antes de invocar al constructor.",
+        "Un valor numérico que identifica unívocamente la versión compilada de una clase."
+      ],
+      "correct": 0,
+      "hint": "Condición sobre el estado interno que siempre es cierta.",
+      "explanation": "El Invariante de Representación es un predicado que define la consistencia de los atributos internos de una clase y que debe ser verdadero para cualquier instancia válida en estado estable."
+    },
+    {
+      "q": "En la verificación de la corrección de bucles, ¿qué propiedad debe cumplir un invariante de bucle?",
+      "options": [
+        "Debe ser verdadero antes del bucle, en cada iteración del bucle, y al finalizar el bucle.",
+        "Debe cambiar su valor en cada iteración para garantizar que el bucle avance hacia el final.",
+        "Debe ser un valor numérico entero que represente el índice actual."
+      ],
+      "correct": 0,
+      "hint": "Es una propiedad invariable en todas las etapas del bucle.",
+      "explanation": "Para demostrar la corrección de un bucle, el invariante de bucle es una aserción que debe mantenerse verdadera antes de iniciar, antes y después de cada paso, y al salir del mismo."
+    },
+    {
+      "q": "¿Qué es la función variante en la demostración de la corrección de un bucle?",
+      "options": [
+        "Una expresión entera acotada inferiormente que disminuye estrictamente en cada iteración para demostrar la terminación del bucle.",
+        "Una variable booleana que cambia a falsa cuando ocurre una excepción en el bucle.",
+        "Una ecuación que define el tiempo de ejecución asintótico en el peor caso."
+      ],
+      "correct": 0,
+      "hint": "Demuestra la finalización finita del bucle.",
+      "explanation": "La función variante es una métrica entera que disminuye con cada iteración y está acotada inferiormente (generalmente por 0), demostrando formalmente que el bucle finalizará."
+    },
+    {
+      "q": "¿Qué condición es indispensable para que una función recursiva termine su ejecución correctamente y no provoque un desbordamiento de pila?",
+      "options": [
+        "Tener al menos un caso base que detenga la recursividad sin realizar nuevas llamadas recursivas.",
+        "Hacer uso del borrado de tipos genéricos para limpiar los marcos de llamada.",
+        "Estar declarada con la palabra reservada static."
+      ],
+      "correct": 0,
+      "hint": "Detiene las llamadas consecutivas.",
+      "explanation": "Un caso base o condición de parada detiene la recursión retornando un valor constante, impidiendo que la pila Stack continúe creciendo indefinidamente."
+    },
+    {
+      "q": "En una llamada recursiva, ¿dónde almacena la JVM la información de la llamada actual antes de pasar a la siguiente?",
+      "options": [
+        "En un nuevo marco de activación en la pila Stack de llamadas.",
+        "En la raíz del montón Heap.",
+        "En la zona de constantes globales."
+      ],
+      "correct": 0,
+      "hint": "Es un marco en la zona LIFO de memoria.",
+      "explanation": "Cada llamada recursiva genera un marco de activación (activation record) en el Stack, el cual se almacena con sus variables locales hasta que retorne."
+    },
+    {
+      "q": "Si un algoritmo tiene un tiempo de ejecución que se duplica cada vez que se incrementa el tamaño de la entrada en una unidad, ¿cuál es su complejidad asintótica?",
+      "options": [
+        "Exponencial: \\mathcal{O}(2^n)",
+        "Cuadrática: \\mathcal{O}(n^2)",
+        "Logarítmica: \\mathcal{O}(\\log n)"
+      ],
+      "correct": 0,
+      "hint": "Crecimiento geométrico de base 2.",
+      "explanation": "Un crecimiento proporcional a 2^n corresponde a una complejidad de tipo exponencial, que es altamente ineficiente para valores grandes de n."
+    },
+    {
+      "q": "Según las reglas de la notación Big-O, ¿cuál es el orden de complejidad simplificado del término 3n^2 + 100n \\log n + 15?",
+      "options": [
+        "\\mathcal{O}(n^2)",
+        "\\mathcal{O}(n \\log n)",
+        "\\mathcal{O}(n^3)"
+      ],
+      "correct": 0,
+      "hint": "Se descartan términos dominados y coeficientes constantes.",
+      "explanation": "En la notación asintótica asumiendo n tendiendo a infinito, n^2 domina a n log(n) y a la constante 15. Los coeficientes constantes se ignoran, quedando O(n^2)."
+    },
+    {
+      "q": "¿Qué herramienta matemática se utiliza para modelar el comportamiento temporal de un algoritmo recursivo que se divide en subproblemas?",
+      "options": [
+        "Una relación de recurrencia.",
+        "Una función variante booleana.",
+        "Un invariante de representación."
+      ],
+      "correct": 0,
+      "hint": "Expresa el tiempo del problema en términos de subproblemas.",
+      "explanation": "Las relaciones de recurrencia definen el coste temporal de resolver un problema de tamaño n relacionándolo con subproblemas más pequeños (ej. T(n) = 2T(n/2) + O(n))."
+    },
+    {
+      "q": "Según el Teorema Maestro, ¿cuál es la complejidad de la recurrencia T(n) = 2T(n/2) + \\mathcal{O}(n)?",
+      "options": [
+        "\\mathcal{O}(n \\log n)",
+        "\\mathcal{O}(n^2)",
+        "\\mathcal{O}(n)"
+      ],
+      "correct": 0,
+      "hint": "Caso de división balanceada (p. ej. MergeSort).",
+      "explanation": "Bajo el Teorema Maestro, con a=2, b=2, d=1 (ya que f(n) = O(n^1)). Dado que log_b(a) = log_2(2) = 1 == d, la complejidad es O(n^d * log n) = O(n log n)."
+    },
+    {
+      "q": "¿Cuál es la principal diferencia entre las estructuras de datos abstractas Pila (Stack) y Cola (Queue)?",
+      "options": [
+        "La Pila es LIFO (Last-In, First-Out) y la Cola es FIFO (First-In, First-Out).",
+        "La Pila se almacena en el Heap y la Cola se almacena en el Stack de memoria.",
+        "La Pila admite elementos duplicados y la Cola no los permite."
+      ],
+      "correct": 0,
+      "hint": "Orden de inserción y de extracción.",
+      "explanation": "Una Pila procesa los elementos en orden inverso al de llegada (LIFO), mientras que una Cola los procesa en el mismo orden de inserción (FIFO)."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Complete el código: Para declarar una clase genérica con un parámetro de tipo T se escribe `public class Contenedor<____> { ... }`.",
+      "options": [
+        "T",
+        "?",
+        "Object"
+      ],
+      "correct": 0,
+      "hint": "Sintaxis para el parámetro de tipo genérico.",
+      "explanation": "El parámetro genérico se coloca entre caracteres menor y mayor que (<T>)."
+    },
+    {
+      "q": "Complete el código: En la regla PECS, si queremos que un método reciba una lista de la que solo va a leer elementos numéricos, declaramos el parámetro como `List<? ____ Number> lista`.",
+      "options": [
+        "extends",
+        "super",
+        "implements"
+      ],
+      "correct": 0,
+      "hint": "PECS = Producer Extends.",
+      "explanation": "Si actúa como productor (lectura), se utiliza la cota superior declarada con 'extends'."
+    },
+    {
+      "q": "Complete el código: Para un método que va a escribir elementos de tipo Integer en una lista, declaramos el parámetro como `List<? ____ Integer> lista`.",
+      "options": [
+        "super",
+        "extends",
+        "implements"
+      ],
+      "correct": 0,
+      "hint": "PECS = Consumer Super.",
+      "explanation": "Si actúa como consumidor (escritura/inserción), se utiliza la cota inferior declarada con 'super'."
+    },
+    {
+      "q": "Complete el código: Dado el borrado de tipos en Java, la expresión `T elemento = new ____();` dentro de una clase genérica con parámetro T provoca un error de compilación.",
+      "options": [
+        "T",
+        "Object",
+        "ArrayList<T>"
+      ],
+      "correct": 0,
+      "hint": "No se pueden instanciar parámetros de tipo genérico directamente.",
+      "explanation": "El borrado de tipos remueve la información de T en compilación; escribir 'new T()' dará error porque no se sabe qué objeto instanciar en ejecución."
+    },
+    {
+      "q": "Complete el código: Si queremos declarar un método genérico independiente en una clase no genérica, colocamos la declaración genérica antes del tipo de retorno, por ejemplo: `public static <____> void mostrar(E elemento)`.",
+      "options": [
+        "E",
+        "?",
+        "void"
+      ],
+      "correct": 0,
+      "hint": "Debe definir el mismo identificador que el tipo del argumento.",
+      "explanation": "El parámetro formal <E> se introduce antes del tipo de retorno del método para habilitar la genericidad a nivel de método."
+    },
+    {
+      "q": "Complete el código: No es posible crear un array genérico de forma directa, por lo que escribir `T[] array = new ____[10];` dará error de compilación.",
+      "options": [
+        "T",
+        "Object",
+        "ArrayList"
+      ],
+      "correct": 0,
+      "hint": "No se pueden crear instancias de arrays genéricos directamente.",
+      "explanation": "La creación directa de un array de tipo genérico (new T[10]) está prohibida debido al borrado de tipos."
+    },
+    {
+      "q": "Complete el código: En tiempo de ejecución, debido al borrado de tipos, la consulta `if (objeto instanceof Caja<____>)` generará un error de compilación en Java.",
+      "options": [
+        "String",
+        "?",
+        "Object"
+      ],
+      "correct": 0,
+      "hint": "No se pueden hacer comprobaciones de tipo genérico específico en ejecución.",
+      "explanation": "No es posible verificar la parametrización específica (como Caja<String>) en tiempo de ejecución con instanceof debido al borrado de tipos."
+    },
+    {
+      "q": "Complete el código: Para comprobar mediante instanceof la clase genérica Caja de forma válida en ejecución, se puede utilizar el comodín indefinido de la forma `if (objeto instanceof Caja<____>)`.",
+      "options": [
+        "?",
+        "String",
+        "Object"
+      ],
+      "correct": 0,
+      "hint": "El comodín que denota tipo desconocido.",
+      "explanation": "Caja<?> comprueba si el objeto es una instancia de Caja de cualquier tipo, lo cual es legal porque el comodín no requiere saber el tipo real."
+    },
+    {
+      "q": "Complete el código: Si declaramos `class Almacen<T extends Number>`, el borrado de tipos sustituirá T por ____ en el bytecode.",
+      "options": [
+        "Number",
+        "Object",
+        "Integer"
+      ],
+      "correct": 0,
+      "hint": "Cota superior elegida.",
+      "explanation": "El borrado de tipos sustituye los parámetros por su cota superior, en este caso Number."
+    },
+    {
+      "q": "Complete el código: Si deseamos instanciar una lista genérica usando el operador diamante en Java 7, escribimos `List<String> list = new ArrayList____();`.",
+      "options": [
+        "<>",
+        "<String>",
+        "[]"
+      ],
+      "correct": 0,
+      "hint": "Operador abreviado sin duplicar tipos.",
+      "explanation": "El operador diamante <> infiere el tipo a partir de la declaración de la izquierda, evitando escribir new ArrayList<String>()."
+    },
+    {
+      "q": "Complete el código: Si deseamos que un tipo genérico T implemente múltiples interfaces, usamos la sintaxis `<T extends Interfaz1 & ____>`.",
+      "options": [
+        "Interfaz2",
+        "implements Interfaz2",
+        "super Interfaz2"
+      ],
+      "correct": 0,
+      "hint": "Separador de límites múltiples en genéricos.",
+      "explanation": "Se usa el operador ampersand (&) para añadir cotas múltiples de interfaces en genéricos: T extends Interfaz1 & Interfaz2."
+    },
+    {
+      "q": "Complete el código: Para poder comparar dos objetos genéricos T usando el método compareTo en un método, debemos asegurar que la clase genérica esté declarada como `class Comparador<T extends ____<T>>`.",
+      "options": [
+        "Comparable",
+        "Comparator",
+        "Cloneable"
+      ],
+      "correct": 0,
+      "hint": "Interfaz nativa que define compareTo.",
+      "explanation": "La interfaz Comparable<T> obliga a implementar compareTo(T o), haciendo seguro su uso."
+    },
+    {
+      "q": "Complete el código: Si intentamos instanciar una clase genérica con un tipo primitivo escribiendo `Caja<____> c = new Caja<>();` obtendremos un error de compilación.",
+      "options": [
+        "double",
+        "Double",
+        "String"
+      ],
+      "correct": 0,
+      "hint": "Tipo numérico de minúsculas.",
+      "explanation": "Los genéricos solo admiten tipos de referencia. Escribir Caja<double> dará error; debe ser Caja<Double>."
+    },
+    {
+      "q": "Complete el código: Para almacenar de forma segura un número entero en un almacén genérico `AlmacenLimitado<T extends Number>` el cliente debe pasar un objeto de tipo ____ para evitar que falle el tipo crudo o se rechace en compilación.",
+      "options": [
+        "Integer",
+        "int",
+        "String"
+      ],
+      "correct": 0,
+      "hint": "La clase envolvente de los enteros.",
+      "explanation": "Para la genericidad y su borrado a nivel de Number, se usa la clase Integer que hereda de Number."
+    },
+    {
+      "q": "Complete el código: En una clase `Caja<T>`, un miembro estático no puede acceder a T. Por tanto, declarar `private static ____ dato;` producirá un error de compilación.",
+      "options": [
+        "T",
+        "Object",
+        "String"
+      ],
+      "correct": 0,
+      "hint": "El parámetro genérico de la clase.",
+      "explanation": "Los miembros estáticos son comunes a toda la clase y no tienen acceso al tipo genérico T de las instancias individuales."
+    },
+    {
+      "q": "Complete el código: Al compilar una clase genérica sin cotas, el compilador traduce todas las variables de tipo T a variables de tipo ____.",
+      "options": [
+        "Object",
+        "T",
+        "generic"
+      ],
+      "correct": 0,
+      "hint": "El ancestro común de todas las clases.",
+      "explanation": "Al no especificar cota superior, se asume por defecto la cota Object durante el borrado de tipos."
+    },
+    {
+      "q": "Complete el código: Para pasar como argumento un objeto `Caja<Integer>` a un método que espera una caja de cualquier tipo numérico, la cabecera del método debe ser `void procesar(Caja<? ____ Number> c)`.",
+      "options": [
+        "extends",
+        "super",
+        "implements"
+      ],
+      "correct": 0,
+      "hint": "Cota superior para tipos numéricos.",
+      "explanation": "Se usa ? extends Number para admitir Caja con cualquier subclase de Number, como Integer."
+    },
+    {
+      "q": "Complete el código: En Java, las colecciones genéricas garantizan la seguridad de tipos en tiempo de compilación, pero en tiempo de ejecución no hay diferencia de tipos por el borrado. Esto significa que `new ArrayList<String>().getClass() == new ArrayList<Integer>().getClass()` evalúa a ____.",
+      "options": [
+        "true",
+        "false",
+        "un error de compilación"
+      ],
+      "correct": 0,
+      "hint": "Ambos objetos comparten la misma clase base en ejecución.",
+      "explanation": "Ambas instancias tienen como clase representativa a java.util.ArrayList en tiempo de ejecución, por lo que su getClass() es idéntico y devuelve true."
+    },
+    {
+      "q": "Complete el código: Para una clase genérica `Par<K, V>`, la inicialización correcta de una instancia con tipos String e Integer es `Par<String, Integer> p = new Par____(\"Clave\", 100);`.",
+      "options": [
+        "<>",
+        "<String>",
+        "[]"
+      ],
+      "correct": 0,
+      "hint": "Se indica con el operador diamante vacío.",
+      "explanation": "Se utiliza el operador diamante <> para inferir automáticamente los tipos genéricos al instanciar."
+    },
+    {
+      "q": "Complete el código: Al recuperar un elemento de una lista genérica `List<String>`, el bytecode generado por el compilador contiene una instrucción de casting explícita a ____ insertada automáticamente.",
+      "options": [
+        "String",
+        "Object",
+        "CharSequence"
+      ],
+      "correct": 0,
+      "hint": "El tipo con el que se parametrizó la lista.",
+      "explanation": "Debido a que el método get() de la lista retorna Object tras el borrado, el compilador inserta el casting (String) automáticamente."
+    },
+    {
+      "q": "¿Cuál de las siguientes restricciones se aplica a los tipos genéricos en Java debido al borrado de tipos?",
+      "options": [
+        "No se pueden crear instancias de parámetros de tipo con new T().",
+        "No se pueden crear arrays de tipos genéricos.",
+        "Todas las anteriores son restricciones correctas derivadas del borrado de tipos."
+      ],
+      "correct": 2,
+      "hint": "Recuerda las restricciones críticas de la genericidad.",
+      "explanation": "Tanto instanciar directamente new T() como crear arrays genéricos new T[10] e incluso usar instanceof con genéricos son ilegales debido al borrado de tipos."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son declaraciones de comodín válidas en Java?",
+      "options": [
+        "Comodín acotado superiormente (? extends T).",
+        "Comodín acotado inferiormente (? super T).",
+        "Todas las anteriores son declaraciones de comodín válidas en Java."
+      ],
+      "correct": 2,
+      "hint": "Están acotadas hacia arriba y hacia abajo en la jerarquía.",
+      "explanation": "Las sintaxis de comodín soportadas incluyen la cota superior (? extends T), la cota inferior (? super T) y el comodín indefinido (?)"
+    },
+    {
+      "q": "Si definimos un método genérico con la firma `public static <T> void copiar(List<? super T> dest, List<? extends T> src)`, ¿cuál de las siguientes opciones describe correctamente su comportamiento?",
+      "options": [
+        "El origen actúa como productor y el destino actúa como consumidor de datos.",
+        "Permite transferir elementos de la lista origen a la lista destino con total seguridad de tipos.",
+        "Todas las anteriores son afirmaciones correctas sobre el método de copia."
+      ],
+      "correct": 2,
+      "hint": "Aplica la regla PECS.",
+      "explanation": "De acuerdo con PECS, el origen usa 'extends' (productor) y el destino usa 'super' (consumidor), lo que permite escribir elementos de origen en el destino de manera segura."
+    },
+    {
+      "q": "¿Qué problemas resolvieron los genéricos tras su introducción en Java 5?",
+      "options": [
+        "Evitar la necesidad de castings manuales al recuperar elementos de una colección.",
+        "Detectar errores de tipo incompatibles en tiempo de compilación.",
+        "Todas las anteriores son respuestas correctas."
+      ],
+      "correct": 2,
+      "hint": "Mejoras de seguridad y usabilidad del lenguaje.",
+      "explanation": "Los genéricos aumentaron la legibilidad al eliminar los castings repetitivos y proporcionaron robustez al detectar incompatibilidades antes de ejecutar el programa."
+    },
+    {
+      "q": "Al compilar código Java que contiene clases genéricas, ¿qué operaciones efectúa el borrado de tipos?",
+      "options": [
+        "Reemplaza los parámetros de tipo por sus cotas superiores o por Object si no están acotados.",
+        "Inserta instrucciones de conversión explícita (castings) en el código cliente donde sea necesario.",
+        "Todas las anteriores son operaciones efectuadas por el borrado de tipos."
+      ],
+      "correct": 2,
+      "hint": "Modificaciones realizadas en el bytecode.",
+      "explanation": "El compilador sustituye el parámetro T por su cota, e inserta castings explícitos correspondientes en el código cliente de forma transparente."
+    },
+    {
+      "q": "¿Cuáles de las siguientes cabeceras de clases genéricas son completamente válidas en Java?",
+      "options": [
+        "public class Contenedor<T>",
+        "public class Par<K, V>",
+        "Todas las anteriores son cabeceras de clases genéricas válidas."
+      ],
+      "correct": 2,
+      "hint": "Se pueden declarar uno o más parámetros de tipo.",
+      "explanation": "Es posible parametrizar clases con uno (T) o múltiples parámetros (K, V) separados por comas."
+    },
+    {
+      "q": "¿Qué sucederá si intentamos compilar el siguiente método dentro de una clase genérica `Contenedor<T>`? `public void inicializar() { T valor = new T(); }`",
+      "options": [
+        "Compilará sin problemas porque T es un tipo válido.",
+        "Dará un error en tiempo de ejecución al inicializarse la clase.",
+        "Todas las anteriores son incorrectas, dará un error de compilación directo."
+      ],
+      "correct": 2,
+      "hint": "El compilador no puede verificar new T() porque T se borra.",
+      "explanation": "El compilador prohíbe explícitamente instanciar un tipo genérico mediante new T(), resultando en un error de compilación."
+    },
+    {
+      "q": "¿Cuáles de las siguientes inicializaciones de colecciones genéricas provocarán un error de compilación?",
+      "options": [
+        "List<int> lista = new ArrayList<>();",
+        "ArrayList<Number> lista = new ArrayList<Integer>();",
+        "Todas las anteriores provocarán un error de compilación."
+      ],
+      "correct": 2,
+      "hint": "Los primitivos no se permiten y la covarianza no es directa.",
+      "explanation": "No se pueden usar tipos primitivos como genéricos (List<int> es inválido) y las colecciones parametrizadas son invariantes por defecto, impidiendo asignar ArrayList<Integer> a ArrayList<Number>."
+    },
+    {
+      "q": "¿Qué operaciones de inserción son válidas en una lista declarada como `List<? extends Number> lista`?",
+      "options": [
+        "lista.add(10);",
+        "lista.add(4.5);",
+        "Todas las anteriores son incorrectas, no se puede insertar nada excepto null."
+      ],
+      "correct": 2,
+      "hint": "El tipo real de la lista podría ser cualquier subclase específica.",
+      "explanation": "Al usar ? extends Number, el compilador bloquea la inserción de cualquier objeto (salvo null) porque desconoce si la lista subyacente es de tipo Double, Integer, etc."
+    },
+    {
+      "q": "Si declaramos `class AlmacenLimitado<T extends Number>`, ¿cuáles de los siguientes tipos son argumentos válidos para instanciar la clase?",
+      "options": [
+        "Integer",
+        "Double",
+        "Todas las opciones anteriores son correctas ya que heredan de Number."
+      ],
+      "correct": 2,
+      "hint": "Herederos de la clase base Number.",
+      "explanation": "Tanto Integer como Double heredan directamente de Number, cumpliendo con la cota superior del almacén."
+    },
+    {
+      "q": "Si intentamos compilar `List<Number> lista = new ArrayList<Integer>();`, ¿qué sucede?",
+      "options": [
+        "Compila correctamente porque Integer hereda de Number.",
+        "Compila pero genera un warning de tipo crudo (raw type warning).",
+        "Ninguna de las anteriores es correcta, produce un error de compilación."
+      ],
+      "correct": 2,
+      "hint": "Invarianza de genéricos en Java.",
+      "explanation": "En Java, los tipos genéricos son invariantes: List<Number> no es compatible con ArrayList<Integer> a pesar de que Integer extienda de Number."
+    },
+    {
+      "q": "¿Qué tipo de datos primitivo se puede pasar directamente como parámetro de tipo en `Caja<T>`?",
+      "options": [
+        "int",
+        "double",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Solo se aceptan clases (tipos de referencia).",
+      "explanation": "Los genéricos solo pueden parametrizarse con tipos de referencia. Los primitivos como int, double, etc., deben usar sus correspondientes clases envolventes."
+    },
+    {
+      "q": "¿Cuál es el operador de tiempo de ejecución en Java que permite saber si una lista es de tipo `List<String>` y no `List<Integer>`?",
+      "options": [
+        "El operador instanceof.",
+        "El método getClass() del objeto.",
+        "Ninguna de las anteriores, no es posible distinguirlos en ejecución debido al borrado de tipos."
+      ],
+      "correct": 2,
+      "hint": "Se elimina la información de tipos parametrizados.",
+      "explanation": "En tiempo de ejecución la JVM solo conoce que el objeto es de la clase ArrayList; la parametrización se borra, haciendo imposible distinguirlos."
+    },
+    {
+      "q": "¿Qué sentencia se puede usar dentro de una clase genérica para instanciar un array genérico de tamaño 10 como `T[] array = new T[10];`?",
+      "options": [
+        "Realizar un casting directo desde un array de Object: (T[]) new Object[10].",
+        "Utilizar reflexión mediante Array.newInstance en compilación.",
+        "Ninguna de las anteriores, la línea da un error de compilación directo."
+      ],
+      "correct": 2,
+      "hint": "Es un error del compilador por la reificación.",
+      "explanation": "La instanciación 'new T[10]' causa un error de compilación directo que no se puede evitar en esa misma línea."
+    },
+    {
+      "q": "Dada la clase `Caja<T>`, ¿cómo se puede declarar un método estático que use el parámetro de tipo de instancia T sin volver a declarar un parámetro genérico en el método?",
+      "options": [
+        "Declarando el atributo como private static T.",
+        "Usando la palabra clave static antes de T en el tipo de retorno.",
+        "Ninguna de las anteriores, un método estático no tiene acceso a los parámetros genéricos de instancia de la clase."
+      ],
+      "correct": 2,
+      "hint": "La clase se carga a nivel estático sin parámetros de instancia.",
+      "explanation": "Los métodos estáticos no tienen acceso a variables de instancia ni al tipo parametrizado T de la clase instanciada; deben definir su propio parámetro genérico."
+    },
+    {
+      "q": "¿Qué método de la colección `List<? super Integer> lista` nos permite recuperar de forma segura un elemento y guardarlo en una variable de tipo `Integer` sin realizar un casting explícito?",
+      "options": [
+        "El método lista.get(0).",
+        "El método lista.getFirstElement().",
+        "Ninguna de las anteriores, el método get() devuelve Object en este caso."
+      ],
+      "correct": 2,
+      "hint": "El compilador solo sabe que es un ancestro de Integer.",
+      "explanation": "Con '? super Integer', el compilador solo garantiza que lo que retorna es un Object, requiriendo un casting manual a Integer."
+    },
+    {
+      "q": "¿Cuál es la cota inferior por defecto de un comodín indefinido `?` si no se especifica ninguna cota?",
+      "options": [
+        "La clase Object.",
+        "La interfaz Comparable.",
+        "Ninguna de las anteriores es correcta, los comodines no tienen cota inferior por defecto."
+      ],
+      "correct": 2,
+      "hint": "Los comodines solo admiten cotas superiores de forma implícita.",
+      "explanation": "El comodín indefinido ? equivale a ? extends Object. No existe una cota inferior por defecto."
+    },
+    {
+      "q": "¿Qué palabra clave se utiliza en Java para acotar inferiormente un comodín genérico (Lower Bound)?",
+      "options": [
+        "extends",
+        "implements",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Relación hacia arriba de jerarquía.",
+      "explanation": "Para cotas inferiores se utiliza la palabra clave 'super'. La opción correcta es 'super', por tanto ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "¿Qué casting explícito es necesario escribir en el código fuente para compilar la línea `String s = lista.get(0);` si `lista` es de tipo `List<String>`?",
+      "options": [
+        "Un casting explícito manual como (String).",
+        "Un casting dinámico como String.class.cast().",
+        "Ninguna de las anteriores es correcta, el compilador inserta el casting automáticamente en el bytecode."
+      ],
+      "correct": 2,
+      "hint": "El compilador facilita el type-safety al programador.",
+      "explanation": "El desarrollador no necesita escribir ningún casting en el código fuente; el compilador de Java lo genera automáticamente en el archivo compilado."
+    },
+    {
+      "q": "Si intentamos sobrecargar dos métodos en la misma clase con firmas `void imprimir(List<String> l)` y `void imprimir(List<Integer> l)`, ¿qué ocurre?",
+      "options": [
+        "Se sobrecargan de forma normal y la JVM ejecuta el correspondiente.",
+        "Compila pero genera un warning de tipo crudo.",
+        "Ninguna de las anteriores, da un error de compilación por tener la misma firma tras el borrado."
+      ],
+      "correct": 2,
+      "hint": "Ambas listas se convierten a java.util.List en el bytecode.",
+      "explanation": "Debido al borrado de tipos, ambas declaraciones se reducen a imprimir(List l) en el bytecode, lo que genera una colisión de firmas e impide la compilación."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Caja Genérica de Enteros",
+      "context": "Un desarrollador utiliza una clase genérica `Caja<T>` para almacenar valores enteros. Se ejecutan las siguientes instrucciones:\n```java\nCaja<Integer> c1 = new Caja<>();\nc1.guardar(25);\nCaja<Integer> c2 = new Caja<>();\nc2.guardar(4);\nint x = c1.obtener() * c2.obtener();\n```",
+      "parts": [
+        {
+          "id": "LAB_1_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `x`?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$x = c1.obtener() \\times c2.obtener() = 25 \\times 4 = 100$."
+        },
+        {
+          "id": "LAB_1_b",
+          "label": "b",
+          "question": "¿Cuántas referencias al Heap se crean en total mediante el operador `new` en este fragmento?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se crean exactamente $2$ instancias de `Caja` mediante el constructor `new Caja<>()`."
+        },
+        {
+          "id": "LAB_1_c",
+          "label": "c",
+          "question": "¿Cuántos castings explícitos a `Integer` introduce el compilador en el bytecode al leer con `obtener()`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Cada llamada a `obtener()` sobre una referencia parametrizada requiere un cast a `Integer` en el bytecode, totalizando $2$ castings."
+        },
+        {
+          "id": "LAB_1_d",
+          "label": "d",
+          "question": "Si a continuación asignamos `c1.guardar(null)`, ¿cuál es el número de elementos no nulos guardados en la caja `c1`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El contenido pasa a ser `null`, por lo que contiene $0$ elementos no nulos."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Almacén Numérico Acotado",
+      "context": "Se declara la clase genérica `AlmacenLimitado<T extends Number>` que mantiene una lista de elementos numéricos. Se ejecuta el siguiente código:\n```java\nAlmacenLimitado<Integer> almacen = new AlmacenLimitado<>();\nalmacen.agregar(8);\nalmacen.agregar(12);\nalmacen.agregar(30);\ndouble suma = almacen.sumarTodos();\n```",
+      "parts": [
+        {
+          "id": "LAB_2_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de la variable `suma`?",
+          "correctValue": 50.0,
+          "tolerance": 0,
+          "explanation": "La suma total es $8 + 12 + 30 = 50.0$."
+        },
+        {
+          "id": "LAB_2_b",
+          "label": "b",
+          "question": "¿Cuántas iteraciones realiza el bucle de suma en `sumarTodos()`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Como hay 3 elementos en el almacén, el bucle itera exactamente $3$ veces."
+        },
+        {
+          "id": "LAB_2_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas implícitas al método `doubleValue()` se efectúan durante la suma?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para cada elemento se invoca `doubleValue()`, realizando $3$ llamadas en total."
+        },
+        {
+          "id": "LAB_2_d",
+          "label": "d",
+          "question": "¿Cuál es el valor resultante si dividimos `suma` por la cantidad de elementos en el almacén?",
+          "correctValue": 16.666666666666668,
+          "tolerance": 0.0001,
+          "explanation": "El promedio es $50.0 / 3 \\approx 16.6667$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Intercambio Genérico de Arrays",
+      "context": "Se implementa un método genérico para intercambiar elementos de un array:\n```java\npublic static <E> void intercambiar(E[] array, int i, int j) {\n    E temp = array[i];\n    array[i] = array[j];\n    array[j] = temp;\n}\n```\nSe declara un array `Integer[] arr = {10, 20, 30, 40, 50};` y se invoca `intercambiar(arr, 1, 3);`.",
+      "parts": [
+        {
+          "id": "LAB_3_a",
+          "label": "a",
+          "question": "¿Qué valor entero queda en la posición `arr[1]` tras la ejecución?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El elemento en el índice 1 (20) se intercambia con el del índice 3 (40), por lo que `arr[1]` pasa a valer $40$."
+        },
+        {
+          "id": "LAB_3_b",
+          "label": "b",
+          "question": "¿Qué valor entero queda en la posición `arr[3]`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El elemento en el índice 3 pasa a valer $20$."
+        },
+        {
+          "id": "LAB_3_c",
+          "label": "c",
+          "question": "¿Cuántas asignaciones de variables de tipo genérico `E` se realizan dentro del cuerpo del método `intercambiar`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Hay 3 asignaciones: `temp = array[i]`, `array[i] = array[j]` y `array[j] = temp`."
+        },
+        {
+          "id": "LAB_3_d",
+          "label": "d",
+          "question": "¿Cuál es la suma de los valores de los elementos en los índices modificados (1 y 3) tras la llamada?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "La suma es $40 + 20 = 60$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Comodines e Inserciones PECS",
+      "context": "Analizamos las restricciones de compilación de comodines usando el siguiente código:\n```java\nList<Double> debs = new ArrayList<>();\ndebs.add(2.5);\ndebs.add(7.5);\nList<? extends Number> listaP = debs;\n```",
+      "parts": [
+        {
+          "id": "LAB_4_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño (size) de la lista referenciada por `listaP`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "`listaP` referencia a `debs`, por lo que su tamaño es $2$."
+        },
+        {
+          "id": "LAB_4_b",
+          "label": "b",
+          "question": "¿Cuántos elementos de tipo Double podemos agregar a `listaP` en el código cliente sin que dé error de compilación?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Las listas con cota superior `? extends T` son inmutables para inserciones (salvo null). Se pueden agregar $0$ elementos."
+        },
+        {
+          "id": "LAB_4_c",
+          "label": "c",
+          "question": "¿Cuál es la suma de todos los elementos numéricos que podemos leer desde `listaP`?",
+          "correctValue": 10.0,
+          "tolerance": 0,
+          "explanation": "La suma es $2.5 + 7.5 = 10.0$."
+        },
+        {
+          "id": "LAB_4_d",
+          "label": "d",
+          "question": "¿Cuántos errores de compilación generaría la línea `listaP.add(3.14);`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Provoca exactamente $1$ error de compilación."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Consumo de Datos en Colecciones Genéricas",
+      "context": "Evaluamos el uso de una lista consumidora aplicando PECS:\n```java\nList<Number> numList = new ArrayList<>();\nList<? super Integer> listaC = numList;\nlistaC.add(100);\nlistaC.add(200);\n```",
+      "parts": [
+        {
+          "id": "LAB_5_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño actual de la lista `numList`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se han agregado dos elementos, por lo que el tamaño es $2$."
+        },
+        {
+          "id": "LAB_5_b",
+          "label": "b",
+          "question": "¿Cuántos errores de compilación produciría añadir un tipo Double en `listaC` mediante `listaC.add(1.5);`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "`listaC` está parametrizada con `? super Integer`, por lo que solo acepta `Integer` o derivados directos. Intentar agregar un Double produce exactamente $1$ error de compilación."
+        },
+        {
+          "id": "LAB_5_c",
+          "label": "c",
+          "question": "Si recuperamos el primer elemento de `listaC` como `Object`, ¿cuál es su valor entero?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El primer elemento añadido es $100$."
+        },
+        {
+          "id": "LAB_5_d",
+          "label": "d",
+          "question": "Si añadimos a continuación `listaC.add(300);`, ¿cuál será el tamaño final de `numList`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El tamaño aumenta a $3$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Pila Genérica en Memoria",
+      "context": "Implementamos una estructura de Pila genérica `Pila<T>` utilizando un array interno de `Object`. Se realiza la siguiente secuencia:\n```java\nPila<Integer> p = new Pila<>(10);\np.push(10);\np.push(20);\np.push(30);\np.pop();\np.push(40);\n```",
+      "parts": [
+        {
+          "id": "LAB_6_a",
+          "label": "a",
+          "question": "¿Cuál es la cantidad de elementos en la pila al finalizar las operaciones?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se añaden 3 elementos (tamaño 3), se quita 1 (tamaño 2), y se añade 1 (tamaño 3). Quedan $3$ elementos."
+        },
+        {
+          "id": "LAB_6_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del elemento que se encuentra en la cima de la pila?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El último elemento insertado es $40$."
+        },
+        {
+          "id": "LAB_6_c",
+          "label": "c",
+          "question": "¿Cuántas posiciones vacías quedan disponibles en el array interno de la pila (capacidad 10)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Capacidad $10 - 3$ ocupados = $7$ vacíos."
+        },
+        {
+          "id": "LAB_6_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas en total a `pop()` se necesitarían a partir de este punto para vaciar la pila por completo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Como quedan 3 elementos, se requieren exactamente $3$ extracciones."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Cola Genérica Circular",
+      "context": "Se simula una Cola circular `Cola<String>` de capacidad 4. Se ejecutan consecutivamente:\n```java\nCola<String> q = new Cola<>(4);\nq.enqueue(\"A\");\nq.enqueue(\"B\");\nq.dequeue();\nq.enqueue(\"C\");\nq.enqueue(\"D\");\n```",
+      "parts": [
+        {
+          "id": "LAB_7_a",
+          "label": "a",
+          "question": "¿Cuál es el número de elementos que hay actualmente en la cola?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Operaciones: +1, +1, -1, +1, +1 = $3$ elementos en total."
+        },
+        {
+          "id": "LAB_7_b",
+          "label": "b",
+          "question": "Si el índice de inicio del array circular es 0, ¿cuál es el índice que ocupa el primer elemento activo (frente de la cola) tras el dequeue?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El elemento \"A\" en el índice 0 se eliminó, por lo que el frente de la cola es el índice $1$ (\"B\")."
+        },
+        {
+          "id": "LAB_7_c",
+          "label": "c",
+          "question": "¿Cuántos espacios libres quedan en la cola?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La capacidad es 4 y hay 3 elementos activos, por lo que queda exactamente $1$ espacio libre."
+        },
+        {
+          "id": "LAB_7_d",
+          "label": "d",
+          "question": "¿Cuántos elementos en total han sido insertados de forma exitosa mediante `enqueue`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se realizaron $4$ llamadas exitosas a `enqueue` (\"A\", \"B\", \"C\", \"D\")."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Par Genérico y Conteo",
+      "context": "Se crea un array de objetos del tipo `Par<String, Integer>` para almacenar un inventario simple de productos:\n```java\nPar<String, Integer>[] inv = new Par[4];\ninv[0] = new Par<>(\"Manzanas\", 15);\ninv[1] = new Par<>(\"Naranjas\", 8);\ninv[2] = new Par<>(\"Platanos\", 22);\ninv[3] = new Par<>(\"Uvas\", 5);\n```",
+      "parts": [
+        {
+          "id": "LAB_8_a",
+          "label": "a",
+          "question": "¿Cuál es la suma total de las cantidades almacenadas en el inventario?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "Suma = $15 + 8 + 22 + 5 = 50$."
+        },
+        {
+          "id": "LAB_8_b",
+          "label": "b",
+          "question": "¿Cuántos productos tienen una cantidad superior o igual a 10?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Manzanas (15) y Plátanos (22) cumplen, totalizando $2$ productos."
+        },
+        {
+          "id": "LAB_8_c",
+          "label": "c",
+          "question": "¿Cuál es la longitud del array `inv`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El array se instanció con un tamaño de $4$."
+        },
+        {
+          "id": "LAB_8_d",
+          "label": "d",
+          "question": "¿Cuántos productos tienen un nombre con más de 7 caracteres?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "\"Manzanas\" (8) y \"Naranjas\" (8) cumplen la condición, dando $2$ productos."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Fusión de Listas Genéricas Ordenadas",
+      "context": "Un método genérico combina dos listas ordenadas en una nueva lista fusionada y ordenada:\n```java\nList<Integer> l1 = List.of(3, 8, 15);\nList<Integer> l2 = List.of(1, 5, 10, 20);\nList<Integer> fusion = Mezclador.mezclar(l1, l2);\n```",
+      "parts": [
+        {
+          "id": "LAB_9_a",
+          "label": "a",
+          "question": "¿Cuál es el número de elementos en la lista `fusion`?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "$3 + 4 = 7$ elementos."
+        },
+        {
+          "id": "LAB_9_b",
+          "label": "b",
+          "question": "¿Cuál es el valor entero que ocupa el índice 3 en la lista `fusion`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La lista ordenada combinada es `[1, 3, 5, 8, 10, 15, 20]`. En el índice 3 (cuarto elemento) está el $8$."
+        },
+        {
+          "id": "LAB_9_c",
+          "label": "c",
+          "question": "¿Cuál es la suma de todos los elementos de la lista fusionada?",
+          "correctValue": 62,
+          "tolerance": 0,
+          "explanation": "Suma = $1+3+5+8+10+15+20 = 62$."
+        },
+        {
+          "id": "LAB_9_d",
+          "label": "d",
+          "question": "¿Cuántos elementos de la lista `fusion` son divisibles por 5?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los elementos son 5, 10 y 20, dando un total de $3$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Cámara y Anidamiento de Genéricos",
+      "context": "Evaluamos el anidamiento de clases genéricas con el siguiente fragmento:\n```java\nCaja<Caja<Integer>> cajaMadre = new Caja<>();\nCaja<Integer> cajaHija = new Caja<>();\ncajaHija.guardar(500);\ncajaMadre.guardar(cajaHija);\nint valor = cajaMadre.obtener().obtener();\n```",
+      "parts": [
+        {
+          "id": "LAB_10_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de la variable `valor` al finalizar?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "Se recupera la caja interna y luego su contenido, que es $500$."
+        },
+        {
+          "id": "LAB_10_b",
+          "label": "b",
+          "question": "¿Cuántas instancias de la clase `Caja` se reservaron en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se instanciaron exactamente $2$ cajas: `cajaMadre` y `cajaHija`."
+        },
+        {
+          "id": "LAB_10_c",
+          "label": "c",
+          "question": "¿Cuál es el nivel máximo de anidamiento de los tipos genéricos definidos en `cajaMadre`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El tipo es `Caja<Caja<Integer>>`, que presenta un anidamiento de nivel $2$."
+        },
+        {
+          "id": "LAB_10_d",
+          "label": "d",
+          "question": "Si ejecutamos `cajaHija.guardar(100);`, ¿cuál es el nuevo valor recuperado por `cajaMadre.obtener().obtener()`?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El valor almacenado cambia de 500 a $100$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Borrado de Tipos y Métodos Puente (Bridge Methods)",
+      "context": "Consideremos la jerarquía de herencia genérica en compilación:\n```java\nclass Nodo<T> {\n    T dato;\n    public void setDato(T d) { this.dato = d; }\n}\nclass NodoEntero extends Nodo<Integer> {\n    public void setDato(Integer d) { super.setDato(d); }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_11_a",
+          "label": "a",
+          "question": "¿Cuántos métodos con la firma `setDato` compilará la clase `NodoEntero` en el bytecode (incluyendo el bridge method generado por el compilador)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El compilador genera un método bridge `setDato(Object)` además del método `setDato(Integer)` para respetar la firma de la clase base borrada, totalizando $2$ métodos."
+        },
+        {
+          "id": "LAB_11_b",
+          "label": "b",
+          "question": "¿Cuántos parámetros de tipo genéricos explícitos quedan en el bytecode de `NodoEntero` tras la compilación?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Tras el borrado de tipos, los genéricos se resuelven y eliminan en la compilación, por lo que quedan $0$ parámetros genéricos."
+        },
+        {
+          "id": "LAB_11_c",
+          "label": "c",
+          "question": "¿Cuántos métodos llamados `setDato` existen en la clase padre `Nodo` en el bytecode?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo existe `setDato(Object d)` en `Nodo`, es decir, $1$ método."
+        },
+        {
+          "id": "LAB_11_d",
+          "label": "d",
+          "question": "¿Cuál es el número de interfaces que implementa la clase `NodoEntero`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No se declara ninguna interfaz implementada en la jerarquía, dando $0$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Frecuencia de Elementos Genéricos",
+      "context": "Un algoritmo cuenta las ocurrencias de un elemento genérico en una lista:\n```java\nList<String> list = List.of(\"X\", \"Y\", \"X\", \"Z\", \"X\", \"Y\", \"W\");\nint countX = Frecuencia.contar(list, \"X\");\nint countY = Frecuencia.contar(list, \"Y\");\n```",
+      "parts": [
+        {
+          "id": "LAB_12_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de la variable `countX`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La letra \"X\" aparece exactamente $3$ veces en la lista."
+        },
+        {
+          "id": "LAB_12_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de la variable `countY`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La letra \"Y\" aparece exactamente $2$ veces en la lista."
+        },
+        {
+          "id": "LAB_12_c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones mediante `equals` se ejecutan en total si el método recorre la lista completa una vez para cada llamada a `contar`?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Cada llamada recorre la lista de tamaño 7, realizando 7 comparaciones. Dos llamadas totalizan $14$ comparaciones."
+        },
+        {
+          "id": "LAB_12_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño total de la lista analizada?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La lista original tiene exactamente $7$ elementos."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Buscador Genérico",
+      "context": "Se analiza la búsqueda lineal en arrays genéricos:\n```java\nString[] palabras = {\"Java\", \"C++\", \"Python\", \"Go\", \"Rust\"};\nint posGo = Buscador.buscar(palabras, \"Go\");\nint posRuby = Buscador.buscar(palabras, \"Ruby\");\n```",
+      "parts": [
+        {
+          "id": "LAB_13_a",
+          "label": "a",
+          "question": "¿Qué índice de retorno almacena la variable `posGo`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "\"Go\" se ubica en el índice $3$ (cuarta posición)."
+        },
+        {
+          "id": "LAB_13_b",
+          "label": "b",
+          "question": "¿Qué índice almacena la variable `posRuby` si el elemento no se encuentra?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Por convención, un elemento ausente retorna un índice centinela de $-1$."
+        },
+        {
+          "id": "LAB_13_c",
+          "label": "c",
+          "question": "¿Cuántas comprobaciones con `equals` se efectúan en la búsqueda de \"Ruby\"?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al no encontrarse, el buscador recorre todo el array realizando exactamente $5$ comparaciones."
+        },
+        {
+          "id": "LAB_13_d",
+          "label": "d",
+          "question": "¿Cuántas comprobaciones con `equals` se efectúan para encontrar \"Python\"?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "\"Python\" está en la tercera posición (índice 2), por lo que toma $3$ comparaciones."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Lista Genérica Filtrada",
+      "context": "Se define un método de filtrado que recibe una lista y un predicado:\n```java\nList<Integer> num = List.of(2, 5, 8, 11, 14, 17, 20);\nList<Integer> pares = Filtrador.filtrar(num, x -> x % 2 == 0);\n```",
+      "parts": [
+        {
+          "id": "LAB_14_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño de la lista `pares`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los números pares son 2, 8, 14 y 20, por lo que el tamaño es $4$."
+        },
+        {
+          "id": "LAB_14_b",
+          "label": "b",
+          "question": "¿Cuál es la suma de los elementos almacenados en `pares`?",
+          "correctValue": 44,
+          "tolerance": 0,
+          "explanation": "Suma = $2 + 8 + 14 + 20 = 44$."
+        },
+        {
+          "id": "LAB_14_c",
+          "label": "c",
+          "question": "¿Cuántas evaluaciones del predicado se realizan al procesar la lista?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El predicado se evalúa para cada uno de los 7 elementos de la lista, totalizando $7$ evaluaciones."
+        },
+        {
+          "id": "LAB_14_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del primer elemento en la lista `pares`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El primer número par es $2$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Cálculo de Cotas Numéricas",
+      "context": "Se analiza la clase `Calculadora<T extends Number>` que tiene el método `sumar(T a, T b)`. Se ejecuta el siguiente código:\n```java\nCalculadora<Double> calc = new Calculadora<>();\ndouble res = calc.sumar(4.5, 5.5);\n```",
+      "parts": [
+        {
+          "id": "LAB_15_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de la variable `res`?",
+          "correctValue": 10.0,
+          "tolerance": 0,
+          "explanation": "$res = 4.5 + 5.5 = 10.0$."
+        },
+        {
+          "id": "LAB_15_b",
+          "label": "b",
+          "question": "¿Cuántas variables del tipo parametrizado `T` son sustituidas por `Number` en la firma de la clase en el bytecode?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El parámetro genérico `T` a nivel de clase se traduce en su cota `Number`, lo que cuenta como $1$ parámetro de tipo borrado."
+        },
+        {
+          "id": "LAB_15_c",
+          "label": "c",
+          "question": "Si el cliente instancia `Calculadora<Integer>`, ¿cuántas clases físicas `.class` independientes se generan al compilar?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se compila un único archivo `Calculadora.class` debido al borrado de tipos genéricos en compilación. La respuesta es $1$."
+        },
+        {
+          "id": "LAB_15_d",
+          "label": "d",
+          "question": "¿Cuántos castings a `Double` realiza el compilador en el código cliente cuando invocamos a `sumar(4.5, 5.5)` si el método retorna `double`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El método `sumar` en el bytecode retorna un primitivo `double` tras procesar los `Number`, por lo que el cliente recibe directamente un double sin necesidad de un casting de objeto a Double. La respuesta es $0$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Complejidad del Árbol Binario de Búsqueda Binaria Recursiva",
+      "context": "Analizamos las llamadas recursivas de una búsqueda binaria recursiva en una lista ordenada de tamaño 1024.",
+      "parts": [
+        {
+          "id": "LAB_16_a",
+          "label": "a",
+          "question": "¿Cuál es la profundidad máxima de llamadas recursivas en el peor caso?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "La profundidad máxima es $\\log_2(1024) = 10$."
+        },
+        {
+          "id": "LAB_16_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones de elementos se realizan en el mejor de los casos (encontrar a la primera)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Si el elemento está en el medio exacto, solo se realiza $1$ comparación."
+        },
+        {
+          "id": "LAB_16_c",
+          "label": "c",
+          "question": "¿Cuántas llamadas recursivas totales se ejecutan si el elemento no se encuentra en el array?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Se ejecutan exactamente $10$ llamadas antes de retornar que no se ha encontrado."
+        },
+        {
+          "id": "LAB_16_d",
+          "label": "d",
+          "question": "Si duplicamos el tamaño a 2048, ¿en cuánto aumenta la profundidad máxima del árbol recursivo?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Duplicar la entrada incrementa la profundidad en $\\log_2(2) = 1$ llamada."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Covarianza y Excepciones de Arrays",
+      "context": "Evaluamos el comportamiento de arrays covariance en ejecución:\n```java\nObject[] arr = new Integer[5];\narr[0] = 10;\narr[1] = 20;\n```",
+      "parts": [
+        {
+          "id": "LAB_17_a",
+          "label": "a",
+          "question": "¿Cuántos enteros se han almacenado con éxito en el array?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se insertaron 10 y 20 correctamente en los índices 0 y 1, sumando $2$ elementos."
+        },
+        {
+          "id": "LAB_17_b",
+          "label": "b",
+          "question": "Si intentamos ejecutar la línea `arr[2] = \"Hola\";`, ¿en qué índice se produce el fallo en ejecución?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El fallo ocurre al intentar escribir en el índice $2$."
+        },
+        {
+          "id": "LAB_17_c",
+          "label": "c",
+          "question": "¿Cuántos errores de compilación generará esa misma línea?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ninguno, ya que sintácticamente un Object[] puede contener un String, pero en ejecución lanza un ArrayStoreException. Por tanto, se generan $0$ errores de compilación."
+        },
+        {
+          "id": "LAB_17_d",
+          "label": "d",
+          "question": "¿Cuál es la capacidad física asignada al array en el Heap?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El tamaño físico inicializado es de $5$ celdas de memoria."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Buffer Circular Genérico",
+      "context": "Un buffer circular genérico tiene una capacidad máxima de 5 elementos. Se escribe secuencialmente:\n```java\nBufferCircular<Character> buf = new BufferCircular<>(5);\nbuf.write('A'); buf.write('B'); buf.write('C');\nbuf.read();\nbuf.write('D'); buf.write('E'); buf.write('F');\n```\nAsuma que si el buffer se llena, la escritura de 'F' se bloquea o descarta sin alterar el estado.",
+      "parts": [
+        {
+          "id": "LAB_18_a",
+          "label": "a",
+          "question": "¿Cuántos elementos activos quedan guardados en el buffer final?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Secuencia: +3 (ABC), -1 (BC), +3 (BCDEF, pero F se descarta por estar lleno). Quedan 4 elementos activos: B, C, D, E."
+        },
+        {
+          "id": "LAB_18_b",
+          "label": "b",
+          "question": "¿Cuántos elementos en total fueron descartados por estar lleno?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo el carácter 'F' se descarta, dando $1$ elemento."
+        },
+        {
+          "id": "LAB_18_c",
+          "label": "c",
+          "question": "¿Cuántas lecturas (`read`) exitosas se completaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se invocó `read` una vez, completando $1$ lectura."
+        },
+        {
+          "id": "LAB_18_d",
+          "label": "d",
+          "question": "¿Cuál es la capacidad total configurada del buffer?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El buffer se creó con capacidad de $5$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Lista Doblemente Enlazada Genérica",
+      "context": "Se simulan operaciones de inserción en una lista doblemente enlazada genérica:\n```java\nListaDoble<Integer> l = new ListaDoble<>();\nl.insertarAlInicio(15);\nl.insertarAlFinal(25);\nl.insertarAlInicio(5);\n```",
+      "parts": [
+        {
+          "id": "LAB_19_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del elemento al principio de la lista?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El último insertado al inicio es $5$."
+        },
+        {
+          "id": "LAB_19_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del elemento al final de la lista?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "El elemento insertado al final es $25$."
+        },
+        {
+          "id": "LAB_19_c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño total de la lista final?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se han insertado 3 elementos en total, por lo que el tamaño es $3$."
+        },
+        {
+          "id": "LAB_19_d",
+          "label": "d",
+          "question": "¿Cuántas asignaciones de punteros (next o prev) se realizan en total para estas tres inserciones ordenadas?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Primera inserción (vacía): 2 punteros (cabeza=cola). Segunda: 3 punteros (cola.next, nodo.prev, cola). Tercera: 3 punteros (nodo.next, cabeza.prev, cabeza). Total = 8 asignaciones."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Simulación de Diccionario Genérico",
+      "context": "Se analiza un diccionario simulado que almacena pares clave-valor:\n```java\nDiccionario<String, Integer> dic = new Diccionario<>();\ndic.put(\"A\", 10);\ndic.put(\"B\", 20);\ndic.put(\"A\", 30);\n```",
+      "parts": [
+        {
+          "id": "LAB_20_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño del diccionario (claves únicas) al final?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Las claves únicas son \"A\" y \"B\", por lo que el tamaño es $2$."
+        },
+        {
+          "id": "LAB_20_b",
+          "label": "b",
+          "question": "¿Cuál es el valor asociado a la clave \"A\" tras la última actualización?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "El valor se actualiza y pasa de 10 a $30$."
+        },
+        {
+          "id": "LAB_20_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ha sobrescrito un valor de clave existente?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se sobrescribió para la clave \"A\" una vez, resultando en $1$ modificación."
+        },
+        {
+          "id": "LAB_20_d",
+          "label": "d",
+          "question": "¿Cuál es la suma de los valores de todas las claves activas en el diccionario?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "Suma = 30 (\"A\") + 20 (\"B\") = $50$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Redimensión de ArrayList Genérico",
+      "context": "Un `ArrayList<Integer>` tiene una capacidad inicial de 10. Agregamos 11 elementos secuencialmente, forzando la redimensión de capacidad por un factor multiplicador de 1.5 en Java.",
+      "parts": [
+        {
+          "id": "LAB_21_a",
+          "label": "a",
+          "question": "¿Cuál es el número de elementos agregados que dispara la redimensión?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "El undécimo elemento sobrepasa la capacidad 10 y dispara la redimensión, dando $11$."
+        },
+        {
+          "id": "LAB_21_b",
+          "label": "b",
+          "question": "¿Cuál es la nueva capacidad interna del ArrayList tras la redimensión (10 * 1.5)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La nueva capacidad es $10 \\times 1.5 = 15$."
+        },
+        {
+          "id": "LAB_21_c",
+          "label": "c",
+          "question": "¿Cuántas copias de referencias se realizan en memoria para trasladar los elementos viejos al nuevo array?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Se copian los $10$ elementos ya existentes en el ArrayList."
+        },
+        {
+          "id": "LAB_21_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño actual (size) de la lista tras la inserción?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "El tamaño es exactamente $11$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Conjunto Genérico e Intersección",
+      "context": "Se consideran dos conjuntos representados por listas genéricas con valores únicos:\n`S1 = {1, 2, 3, 4}` y `S2 = {3, 4, 5, 6, 7}`.",
+      "parts": [
+        {
+          "id": "LAB_22_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño del conjunto intersección `S1 ∩ S2`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los elementos comunes son {3, 4}, sumando un tamaño de $2$."
+        },
+        {
+          "id": "LAB_22_b",
+          "label": "b",
+          "question": "¿Cuál es el tamaño del conjunto unión `S1 ∪ S2`?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La unión contiene {1, 2, 3, 4, 5, 6, 7}, con tamaño $7$."
+        },
+        {
+          "id": "LAB_22_c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño del conjunto diferencia `S2 - S1`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los elementos en S2 pero no en S1 son {5, 6, 7}, totalizando $3$."
+        },
+        {
+          "id": "LAB_22_d",
+          "label": "d",
+          "question": "¿Cuántas comparaciones se realizan si buscamos cada elemento de S1 en S2 secuencialmente en el peor de los casos para calcular la intersección?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Cada elemento de S1 (4) se compara con los de S2 (5), totalizando $4 \\times 5 = 20$ comparaciones."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Ordenación por Burbuja en Listas Genéricas",
+      "context": "Aplicamos el algoritmo de ordenación burbuja sobre un array genérico de tamaño 6.",
+      "parts": [
+        {
+          "id": "LAB_23_a",
+          "label": "a",
+          "question": "¿Cuál es el número máximo de comparaciones de elementos en el peor caso?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Comparaciones en el peor caso = $\\frac{6 \\times (6-1)}{2} = 15$."
+        },
+        {
+          "id": "LAB_23_b",
+          "label": "b",
+          "question": "¿Cuál es el número de intercambios de elementos si el array original ya está ordenado?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Si está ordenado, se requieren $0$ intercambios."
+        },
+        {
+          "id": "LAB_23_c",
+          "label": "c",
+          "question": "¿Cuál es el número máximo de pasadas completas por el bucle externo?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle externo ejecuta $N-1 = 5$ pasadas."
+        },
+        {
+          "id": "LAB_23_d",
+          "label": "d",
+          "question": "¿Cuál es la complejidad temporal asintótica del peor caso si la representamos como un exponente de N (exponente de N en O(N^p))?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La complejidad es $O(N^2)$, por lo que el exponente es $2$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Reflexión y Violación de Genéricos",
+      "context": "Se elude el chequeo de tipos del compilador usando reflexión:\n```java\nList<Integer> list = new ArrayList<>();\nlist.add(10);\nlist.getClass().getMethod(\"add\", Object.class).invoke(list, \"Infiltrado\");\n```",
+      "parts": [
+        {
+          "id": "LAB_24_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño final de la lista tras la llamada por reflexión?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se han añadido dos elementos, por lo que el tamaño es $2$."
+        },
+        {
+          "id": "LAB_24_b",
+          "label": "b",
+          "question": "¿Cuántas instancias de tipo String contiene la lista en ejecución?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Contiene un String (\"Infiltrado\"), sumando $1$ elemento de tipo String."
+        },
+        {
+          "id": "LAB_24_c",
+          "label": "c",
+          "question": "Si recorremos la lista mediante `for(Integer x : list)`, ¿en qué iteración (1-based) se lanzará una excepción `ClassCastException`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La primera iteración lee 10 (Integer). La segunda lee \"Infiltrado\" (String) y lanza ClassCastException al intentar convertirlo en Integer, por lo que ocurre en la iteración $2$."
+        },
+        {
+          "id": "LAB_24_d",
+          "label": "d",
+          "question": "¿Cuántos errores de compilación genera esta violación de tipos si se ejecuta en tiempo de ejecución?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ninguno, ya que la reflexión burla el chequeo estático, dando $0$ errores de compilación."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Complejidad en Matrices Cuadradas Genéricas",
+      "context": "Se procesa una matriz cuadrada de doubles parametrizada de tamaño 4x4 mediante algoritmos iterativos estándar.",
+      "parts": [
+        {
+          "id": "LAB_25_a",
+          "label": "a",
+          "question": "¿Cuántos elementos en total almacena la matriz de 4x4?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Número de elementos = $4 \\times 4 = 16$."
+        },
+        {
+          "id": "LAB_25_b",
+          "label": "b",
+          "question": "¿Cuál es la longitud de la diagonal principal?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La diagonal principal de una matriz cuadrada de lado 4 contiene $4$ elementos."
+        },
+        {
+          "id": "LAB_25_c",
+          "label": "c",
+          "question": "¿Cuántas multiplicaciones se realizan al multiplicar dos matrices cuadradas de este tamaño?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "Multiplicaciones = $N^3 = 4^3 = 64$."
+        },
+        {
+          "id": "LAB_25_d",
+          "label": "d",
+          "question": "¿Cuántas sumas se realizan en total para computar el producto de ambas matrices?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "Para cada celda de la matriz resultante se realizan $N-1$ sumas. En total, $N^2 \\times (N-1) = 16 \\times 3 = 48$ sumas."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Árbol de Llamadas de Fibonacci Recursivo",
+      "context": "Evaluamos el coste computacional del cálculo recursivo clásico de Fibonacci para `F(5)`.",
+      "parts": [
+        {
+          "id": "LAB_26_a",
+          "label": "a",
+          "question": "¿Cuál es el número total de llamadas recursivas realizadas (incluyendo la llamada raíz)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El árbol de llamadas para N=5 realiza exactamente $15$ invocaciones."
+        },
+        {
+          "id": "LAB_26_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del resultado final de `F(5)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$F(5) = 5$ (sucesión: 0, 1, 1, 2, 3, 5)."
+        },
+        {
+          "id": "LAB_26_c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de llamadas en el Stack para esta recursión?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La profundidad de pila máxima es $N - 1 = 4$ para N=5 (llamando a F(5)->F(4)->F(3)->F(2)->F(1))."
+        },
+        {
+          "id": "LAB_26_d",
+          "label": "d",
+          "question": "¿Cuántas veces se evalúa el caso base `F(1)` en el árbol de llamadas?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La evaluación del caso base `F(1)` ocurre exactamente $5$ veces en el árbol."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Cotas de Tipo Múltiples",
+      "context": "Se analiza una clase genérica con cotas múltiples:\n```java\nclass Registro<T extends Number & Comparable<T>> {\n    private T valor;\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_27_a",
+          "label": "a",
+          "question": "¿Cuántas cotas superiores tiene especificadas el parámetro genérico `T`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Tiene 2 cotas superiores: `Number` y `Comparable`."
+        },
+        {
+          "id": "LAB_27_b",
+          "label": "b",
+          "question": "¿A qué clase se convierte `T` en el bytecode tras el borrado de tipos?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se convierte a su primera cota superior en el bytecode, que es `Number` (representando $1$ clase)."
+        },
+        {
+          "id": "LAB_27_c",
+          "label": "c",
+          "question": "¿Cuántos errores de compilación genera instanciar `Registro<Double> reg = new Registro<>();`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Double es subclase de Number e implementa Comparable, por lo que genera $0$ errores de compilación."
+        },
+        {
+          "id": "LAB_27_d",
+          "label": "d",
+          "question": "¿Cuántos errores de compilación genera `Registro<String> reg;`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "String implementa Comparable pero NO extiende de Number, dando $1$ error de compilación."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Instanciación de Clases Genéricas",
+      "context": "Evaluamos la validez de varias sentencias de inicialización genérica:\n```java\nList<Number> list1 = new ArrayList<Integer>(); // S1\nList<? extends Number> list2 = new ArrayList<Integer>(); // S2\nList<Object> list3 = new ArrayList<String>(); // S3\nList<? super Integer> list4 = new ArrayList<Number>(); // S4\n```",
+      "parts": [
+        {
+          "id": "LAB_28_a",
+          "label": "a",
+          "question": "¿Cuántas de las anteriores sentencias (S1, S2, S3, S4) provocarán un error de compilación?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "S1 (invariante) y S3 (invariante) fallan en compilación. S2 (extends) y S4 (super) compilan bien. Por tanto, fallan exactamente $2$ sentencias."
+        },
+        {
+          "id": "LAB_28_b",
+          "label": "b",
+          "question": "¿Es válida la sentencia S2 (0 para Falso, 1 para Verdadero)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, es completamente válida ($1$) porque Double/Integer heredan de Number."
+        },
+        {
+          "id": "LAB_28_c",
+          "label": "c",
+          "question": "¿Es válida la sentencia S4 (0 para Falso, 1 para Verdadero)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, es válida ($1$) porque Number es superclase de Integer."
+        },
+        {
+          "id": "LAB_28_d",
+          "label": "d",
+          "question": "¿Cuántos raw types (tipos crudos) se utilizan en las cuatro sentencias?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En todas se especifican parámetros de tipo, por lo que se usan $0$ raw types."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Bucle con Invariante Numérico",
+      "context": "Se analiza un bucle iterativo que suma elementos en un array de enteros de tamaño 5:\n```java\nint suma = 0;\nfor (int i = 0; i < 5; i++) {\n    suma += arr[i];\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_29_a",
+          "label": "a",
+          "question": "¿Cuántas veces se ejecuta la comprobación de condición del bucle `i < 5`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La comprobación ocurre para i=0,1,2,3,4 (verdadero) e i=5 (falso), totalizando $6$ veces."
+        },
+        {
+          "id": "LAB_29_b",
+          "label": "b",
+          "question": "¿Cuántas actualizaciones de la variable `suma` ocurren en total?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La variable se actualiza en cada paso del bucle, es decir, $5$ veces."
+        },
+        {
+          "id": "LAB_29_c",
+          "label": "c",
+          "question": "¿Cuál es la constante límite de la función variante booleana para terminar el bucle (i < L)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza en el límite $5$."
+        },
+        {
+          "id": "LAB_29_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del incremento de la variable de control `i` en cada paso?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La variable de control se incrementa en $1$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Bridge Methods e Interfaces Genéricas",
+      "context": "Consideremos una interfaz genérica `Comparable<T>` con el método `int compareTo(T o)`. Una clase `Cliente` implementa `Comparable<Cliente>` de la siguiente forma:\n```java\nclass Cliente implements Comparable<Cliente> {\n    public int compareTo(Cliente c) { return 0; }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_30_a",
+          "label": "a",
+          "question": "¿Cuántos métodos llamados `compareTo` se generarán en la clase `Cliente` compilada?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se genera `compareTo(Cliente)` y el bridge `compareTo(Object)` en el bytecode, totalizando $2$ métodos."
+        },
+        {
+          "id": "LAB_30_b",
+          "label": "b",
+          "question": "¿Cuántos de estos métodos son generados de forma sintética (puente) por el compilador?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El compilador genera automáticamente exactly $1$ bridge method."
+        },
+        {
+          "id": "LAB_30_c",
+          "label": "c",
+          "question": "¿Cuál es el número de parámetros genéricos que quedan a nivel de interfaz tras compilar?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Por el borrado de tipos, la interfaz compilada no conserva parámetros genéricos, dejando $0$."
+        },
+        {
+          "id": "LAB_30_d",
+          "label": "d",
+          "question": "¿Cuántos archivos `.class` se compilan en disco para esta estructura?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se compila `Cliente.class` y `Comparable.class` si es una interfaz local, es decir, $2$ archivos."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Comodín Acotado Superiormente (PECS Producer)",
+      "tex": "$$\\text{List<? extends T>} \\implies \\text{Lectura segura como tipo } T$$"
+    },
+    {
+      "name": "Comodín Acotado Inferiormente (PECS Consumer)",
+      "tex": "$$\\text{List<? super T>} \\implies \\text{Escritura segura de tipo } T$$"
+    },
+    {
+      "name": "Borrado de Tipos Genéricos sin Cotas",
+      "tex": "$$\\text{Erasure}(T) = \\text{Object}$$"
+    },
+    {
+      "name": "Borrado de Tipos Genéricos con Cota Superior",
+      "tex": "$$\\text{Erasure}(T \\text{ extends } C) = C$$"
+    },
+    {
+      "name": "Firma de Método Genérico Estático",
+      "tex": "$$\\langle E \\rangle \\text{ Retorno} \\text{ nombreMetodo}(E \\text{ param})$$"
+    },
+    {
+      "name": "Regla de Invarianza Genérica",
+      "tex": "$$A \\le B \\not\\implies \\text{Coleccion}<A> \\le \\text{Coleccion}<B>$$"
+    },
+    {
+      "name": "Complejidad Temporal del Compilador (Borrado de Tipos)",
+      "tex": "$$T(N) = \\mathcal{O}(N)$$"
+    },
+    {
+      "name": "Definición del Comodín Indefinido",
+      "tex": "$$\\text{Coleccion<?>} \\equiv \\text{Coleccion<? extends Object>}$$"
+    }
+  ]
+}

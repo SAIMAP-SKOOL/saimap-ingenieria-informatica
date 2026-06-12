@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cómo se define el coste temporal de un algoritmo recursivo?",
+      "options": [
+        "Mediante una ecuación de recurrencia.",
+        "Mediante una suma directa de bucles iterativos.",
+        "Utilizando únicamente el Teorema de Chebyshev."
+      ],
+      "correct": 0,
+      "hint": "El coste de un paso depende del coste de los pasos anteriores de forma recursiva.",
+      "explanation": "La complejidad temporal de una función recursiva se define mediante una ecuación de recurrencia, la cual expresa el coste total $T(N)$ en términos de sí misma aplicada a subproblemas de menor tamaño (por ejemplo, $T(N/2)$ o $T(N-1)$), además del trabajo adicional no recursivo."
+    },
+    {
+      "q": "En el análisis de algoritmos recursivos, ¿qué representa el 'caso inductivo' de una relación de recurrencia?",
+      "options": [
+        "El coste de la llamada con la entrada más pequeña posible, que suele ser constante.",
+        "El coste del código no recursivo sumado al coste de las llamadas recursivas sobre subproblemas más pequeños.",
+        "El límite asintótico superior calculado únicamente por el Teorema Máster."
+      ],
+      "correct": 1,
+      "hint": "Representa el comportamiento general del algoritmo para valores de entrada mayores que el caso base.",
+      "explanation": "El caso inductivo describe el coste de procesar una entrada de tamaño $N > 1$. Incluye el coste del código no recursivo necesario para dividir la entrada o combinar los resultados ($f(N)$) más la suma de los costes de resolver las llamadas recursivas sobre subproblemas."
+    },
+    {
+      "q": "En el contexto de la máquina virtual de Java (JVM), ¿dónde se almacenan los marcos de pila (stack frames) de las llamadas recursivas activas?",
+      "options": [
+        "En la memoria Heap (montículo).",
+        "En la memoria Stack (pila).",
+        "En la sección de Metaspace."
+      ],
+      "correct": 1,
+      "hint": "Se trata de la estructura destinada al control del flujo de llamadas y variables locales del hilo actual.",
+      "explanation": "Cada vez que se invoca un método en Java, la JVM crea un marco de pila (stack frame) en la memoria Stack asociada al hilo actual. Este marco contiene los parámetros del método, las variables locales y la dirección de retorno."
+    },
+    {
+      "q": "¿Qué excepción o error se lanza en Java si el número de llamadas recursivas excede la capacidad de la memoria de la pila?",
+      "options": [
+        "java.lang.StackOverflowError",
+        "java.lang.OutOfMemoryError",
+        "java.io.IOException"
+      ],
+      "correct": 0,
+      "hint": "Ocurre cuando la pila de llamadas se 'desborda' por llamadas recursivas ilimitadas.",
+      "explanation": "Cuando la pila de llamadas (call stack) se llena por completo debido a una recursión muy profunda o infinita, la JVM lanza un `java.lang.StackOverflowError`, que es un error en tiempo de ejecución de tipo virtual machine error."
+    },
+    {
+      "q": "Si un método recursivo no contiene un caso base o este nunca se alcanza, ¿cuál será el comportamiento en tiempo de ejecución en Java?",
+      "options": [
+        "El compilador generará un error de compilación estático.",
+        "El programa continuará ejecutándose indefinidamente en segundo plano sin consumir memoria extra.",
+        "Se producirá una excepción StackOverflowError en tiempo de ejecución debido al consumo ilimitado de la pila."
+      ],
+      "correct": 2,
+      "hint": "La falta de parada causa llamadas recursivas infinitas.",
+      "explanation": "Si no hay un caso base que detenga la recursión, las llamadas continuarán acumulando marcos en la pila hasta que esta se agote, resultando invariablemente en un error `StackOverflowError`."
+    },
+    {
+      "q": "¿Cuál es la ecuación de recurrencia estándar que modela el coste del peor caso del algoritmo de búsqueda binaria?",
+      "options": [
+        "T(N) = T(N/2) + c",
+        "T(N) = 2T(N/2) + c",
+        "T(N) = T(N-1) + c"
+      ],
+      "correct": 0,
+      "hint": "En cada paso dividimos el espacio a la mitad y realizamos una única llamada recursiva y trabajo constante.",
+      "explanation": "La búsqueda binaria divide el espacio de búsqueda por la mitad ($N/2$), realiza una comparación de coste constante ($c$) y hace una única llamada recursiva sobre la mitad correspondiente. Por lo tanto, la ecuación es $T(N) = T(N/2) + c$."
+    },
+    {
+      "q": "¿Cuál es la ecuación de recurrencia estándar que modela el coste del algoritmo de ordenación MergeSort (Ordenación por Mezcla)?",
+      "options": [
+        "T(N) = 2T(N/2) + c * N",
+        "T(N) = 2T(N/2) + c",
+        "T(N) = T(N-1) + c * N"
+      ],
+      "correct": 0,
+      "hint": "Divide el array en dos mitades, realiza dos llamadas recursivas y combina los resultados de forma lineal.",
+      "explanation": "MergeSort divide el array en dos partes, realiza dos llamadas recursivas sobre mitades de tamaño ($2T(N/2)$) y realiza un proceso de fusión o combinación de coste lineal ($c \\cdot N$). Así, $T(N) = 2T(N/2) + \\Theta(N)$."
+    },
+    {
+      "q": "En la ecuación general del Teorema Máster, T(N) = a * T(N/b) + Theta(N^k), ¿qué representa el parámetro 'a'?",
+      "options": [
+        "El factor de reducción del tamaño de entrada.",
+        "El coste no recursivo de dividir y combinar.",
+        "El número de subproblemas independientes en los que se divide el problema original."
+      ],
+      "correct": 2,
+      "hint": "Representa el número de llamadas recursivas simultáneas que se realizan en un nivel.",
+      "explanation": "En el Teorema Máster, 'a' indica la cantidad de llamadas recursivas que el algoritmo realiza en cada paso inductivo, es decir, el número de subproblemas que se generan."
+    },
+    {
+      "q": "En la ecuación general del Teorema Máster, T(N) = a * T(N/b) + Theta(N^k), ¿qué representa el parámetro 'b'?",
+      "options": [
+        "El factor por el cual se divide el tamaño del problema en cada nivel de recursión.",
+        "El exponente que define el coste de combinación.",
+        "El número total de llamadas recursivas en el caso base."
+      ],
+      "correct": 0,
+      "hint": "Indica cómo disminuye el tamaño de la entrada en cada subproblema.",
+      "explanation": "El parámetro 'b' (donde $b > 1$) indica el factor de división del tamaño del problema. Cada subproblema recursivo se ejecuta sobre una entrada de tamaño $N/b$."
+    },
+    {
+      "q": "En el Teorema Máster, ¿qué caso se aplica y cuál es el coste asintótico si el número de subproblemas 'a' es estrictamente mayor que b^k?",
+      "options": [
+        "Aplica el Caso 3, y la complejidad temporal asintótica es Theta(N^k).",
+        "Aplica el Caso 1, y la complejidad temporal asintótica es Theta(N^(log_b a)).",
+        "Aplica el Caso 2, y la complejidad temporal asintótica es Theta(N^k * log N)."
+      ],
+      "correct": 1,
+      "hint": "En este escenario, el trabajo acumulado en las llamadas recursivas (las hojas) domina sobre el coste de combinación.",
+      "explanation": "Cuando $a > b^k$, el coste de las llamadas recursivas secundarias domina el coste global del algoritmo. Se trata del Caso 1 del Teorema Máster, cuya complejidad resultante es $\\Theta(N^{\\log_b a})$."
+    },
+    {
+      "q": "En el Teorema Máster, ¿cuál es el orden de complejidad resultante si el coste de las llamadas recursivas y de combinación está balanceado, es decir, a = b^k?",
+      "options": [
+        "Theta(N^k * log N)",
+        "Theta(N^(log_b a))",
+        "Theta(N^k)"
+      ],
+      "correct": 0,
+      "hint": "Es el caso correspondiente a algoritmos como MergeSort, donde el trabajo es uniforme en los niveles del árbol.",
+      "explanation": "Cuando $a = b^k$, el coste de las llamadas recursivas y el coste de división y combinación están en equilibrio. Esto corresponde al Caso 2 del Teorema Máster, y el coste total es $\\Theta(N^k \\log N)$."
+    },
+    {
+      "q": "En el Teorema Máster, ¿cuál es el orden de complejidad resultante si el coste de combinación domina, es decir, a < b^k?",
+      "options": [
+        "Theta(N^k * log N)",
+        "Theta(N^(log_b a))",
+        "Theta(N^k)"
+      ],
+      "correct": 2,
+      "hint": "El trabajo en la raíz del árbol de recursión domina sobre el trabajo acumulado de las llamadas.",
+      "explanation": "Cuando $a < b^k$, el coste principal del algoritmo reside en la división y combinación del problema original (el término no recursivo). Esto corresponde al Caso 3, y la complejidad es $\\Theta(N^k)$."
+    },
+    {
+      "q": "Si un algoritmo recursivo divide un problema de tamaño N en 4 subproblemas de tamaño N/2 y realiza un trabajo de combinación lineal Theta(N), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N log N)",
+        "Theta(N^2)",
+        "Theta(N^3)"
+      ],
+      "correct": 1,
+      "hint": "Aplica el Teorema Máster con a=4, b=2, k=1.",
+      "explanation": "Aplicando el Teorema Máster: $a=4$, $b=2$, $k=1$. Comparamos $a$ con $b^k$: $4 > 2^1 = 2$. Al ser $a > b^k$, aplica el Caso 1, por lo que la complejidad es $\\Theta(N^{\\log_2 4}) = \\Theta(N^2)$."
+    },
+    {
+      "q": "Si un algoritmo recursivo divide un problema de tamaño N en 2 subproblemas de tamaño N/2 y realiza un trabajo de combinación constante Theta(1), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N)",
+        "Theta(N log N)",
+        "Theta(log N)"
+      ],
+      "correct": 0,
+      "hint": "Aplica el Teorema Máster con a=2, b=2, k=0.",
+      "explanation": "Tenemos $a=2$, $b=2$, $k=0$ (pues $\\Theta(1) = \\Theta(N^0)$). Comparamos $a$ con $b^k$: $2 > 2^0 = 1$. Aplica el Caso 1, de modo que la complejidad es $\\Theta(N^{\\log_2 2}) = \\Theta(N^1) = \\Theta(N)$."
+    },
+    {
+      "q": "¿Qué método de resolución de recurrencias consiste en sustituir sucesivamente la definición recursiva de una función en su propia definición hasta detectar un patrón matemático?",
+      "options": [
+        "El Teorema Máster.",
+        "El método de expansión (o sustitución).",
+        "La inducción estructural."
+      ],
+      "correct": 1,
+      "hint": "Se expande la recurrencia paso a paso introduciendo la función repetidamente.",
+      "explanation": "El método de expansión (o sustitución) consiste en sustituir sucesivamente el término recursivo $T(N-1)$ o $T(N/2)$ utilizando la propia ecuación general, expresando el coste en función de un paso arbitrario $k$ hasta llegar al caso base."
+    },
+    {
+      "q": "Para una función recursiva con la ecuación T(N) = T(N-1) + c y T(0) = d (donde c y d son constantes), ¿qué complejidad asintótica se obtiene al resolverla?",
+      "options": [
+        "Complejidad lineal, Theta(N).",
+        "Complejidad logarítmica, Theta(log N).",
+        "Complejidad cuadrática, Theta(N^2)."
+      ],
+      "correct": 0,
+      "hint": "Se realiza una cantidad constante de trabajo en cada llamada, reduciendo el problema en 1 unidad.",
+      "explanation": "Al expandir $T(N) = T(N-1) + c$, tras $k$ pasos obtenemos $T(N) = T(N-k) + k \\cdot c$. Si $N-k=0 \\implies k=N$, sustituyendo queda $T(N) = T(0) + N \\cdot c = d + c \\cdot N$, lo cual pertenece a $\\Theta(N)$."
+    },
+    {
+      "q": "Para una función recursiva con la ecuación T(N) = T(N-1) + N y T(1) = 1, ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N)",
+        "Theta(N^2)",
+        "Theta(N log N)"
+      ],
+      "correct": 1,
+      "hint": "La suma resultante es de tipo aritmética: 1 + 2 + ... + N.",
+      "explanation": "Al expandir la relación obtenemos la suma de los primeros $N$ números naturales: $T(N) = T(1) + \\sum_{i=2}^{N} i = \\frac{N(N+1)}{2}$. El término dominante en este polinomio es cuadrático, por lo que la complejidad es $\\Theta(N^2)$."
+    },
+    {
+      "q": "¿Qué mide principalmente la complejidad espacial en un algoritmo recursivo?",
+      "options": [
+        "La memoria Heap máxima que ocupan los arrays declarados en el programa principal.",
+        "La memoria máxima en la pila de llamadas (call stack) en el punto de máxima profundidad de la recursión.",
+        "La suma de toda la memoria ocupada por las variables estáticas de la clase."
+      ],
+      "correct": 1,
+      "hint": "Se asocia a la cantidad máxima de marcos de pila almacenados de manera simultánea.",
+      "explanation": "La complejidad espacial en algoritmos recursivos está directamente determinada por el número máximo de llamadas activas concurrentemente en la pila (la profundidad máxima de recursión), ya que cada llamada requiere su propio marco de pila."
+    },
+    {
+      "q": "En Java, ¿qué ocurre con el marco de pila (stack frame) de una llamada recursiva cuando esta alcanza su retorno?",
+      "options": [
+        "Se desapila inmediatamente, liberando el espacio que ocupaba en la memoria Stack.",
+        "Permanece en la pila de llamadas hasta que el Garbage Collector ejecuta un ciclo de recolección.",
+        "Se copia a la memoria Heap de forma indefinida para optimizar futuras llamadas."
+      ],
+      "correct": 0,
+      "hint": "La pila funciona con un principio LIFO (Last In, First Out).",
+      "explanation": "Cuando una llamada recursiva finaliza su ejecución y devuelve su valor de retorno, su marco de pila se desapila y se elimina de forma inmediata y automática de la memoria Stack del hilo, sin intervención del Garbage Collector."
+    },
+    {
+      "q": "Si representamos la ejecución de MergeSort como un árbol de recursión, ¿cuál es el coste total por nivel y el coste global final del algoritmo?",
+      "options": [
+        "El coste por nivel disminuye a la mitad y el coste global es lineal.",
+        "El coste por nivel es constante e igual a Theta(N), y el coste global es Theta(N log N).",
+        "El coste por nivel aumenta el doble y el coste global es cuadrático."
+      ],
+      "correct": 1,
+      "hint": "MergeSort tiene log_2 N niveles, y cada nivel procesa la suma de todas las partes en coste lineal.",
+      "explanation": "En el árbol de recursión de MergeSort, cada nivel $j$ realiza un trabajo total de $2^j \\cdot \\Theta(N / 2^j) = \\Theta(N)$. Dado que la altura del árbol es $\\log_2 N$, el coste total sumado sobre todos los niveles es $\\Theta(N \\log N)$."
+    },
+    {
+      "q": "¿Cuál es la altura o profundidad máxima (número de niveles de llamadas) de un árbol de recursión de un algoritmo que divide la entrada a la mitad en cada paso?",
+      "options": [
+        "N",
+        "log_2 N",
+        "N^2"
+      ],
+      "correct": 1,
+      "hint": "Es el número de veces que se puede dividir N entre 2 hasta llegar a 1.",
+      "explanation": "Si un problema de tamaño $N$ se divide repetidamente entre 2, la profundidad máxima del árbol de recursión es $\\log_2 N$, que es el número de pasos necesarios para llegar al tamaño mínimo 1."
+    },
+    {
+      "q": "El algoritmo recursivo directo para calcular los números de Fibonacci de forma ingenua (sin memoización) se modela mediante la recurrencia T(N) = T(N-1) + T(N-2) + c. ¿Cuál es su complejidad asintótica?",
+      "options": [
+        "Theta(N^2)",
+        "Theta(2^N)",
+        "Theta(N log N)"
+      ],
+      "correct": 1,
+      "hint": "El árbol de recursión realiza múltiples llamadas duplicadas e ineficientes.",
+      "explanation": "El algoritmo ingenuo genera un árbol binario casi completo de llamadas, duplicando una inmensa cantidad de cálculos. Su complejidad temporal asintótica es exponencial, del orden $\\Theta(\\phi^N)$ o aproximada de forma superior por $\\Theta(2^N)$."
+    },
+    {
+      "q": "Para probar la corrección de un algoritmo recursivo utilizando inducción matemática, ¿cuál es el objetivo del paso inductivo?",
+      "options": [
+        "Demostrar que el algoritmo termina en un número finito de pasos.",
+        "Demostrar que si el algoritmo funciona correctamente para llamadas recursivas de tamaño menor o igual que k, también funciona correctamente para el tamaño k+1.",
+        "Demostrar que el caso base devuelve un valor nulo."
+      ],
+      "correct": 1,
+      "hint": "Consiste en verificar la propagación de la corrección desde tamaños menores hacia tamaños mayores.",
+      "explanation": "El paso inductivo en la prueba de corrección de algoritmos recursivos consiste en asumir la hipótesis inductiva (que las llamadas recursivas sobre subproblemas de menor tamaño devuelven el resultado correcto) y probar a partir de ella que el cálculo sobre el problema completo de tamaño superior también es correcto."
+    },
+    {
+      "q": "¿Qué limitación fundamental tiene el Teorema Máster para resolver relaciones de recurrencia?",
+      "options": [
+        "Solo puede aplicarse si las llamadas recursivas reducen el problema dividiendo su tamaño de forma fraccional (N/b), y no mediante restas constantes (N-1).",
+        "Solo se puede aplicar si la complejidad del algoritmo es estrictamente exponencial.",
+        "No se puede utilizar en la JVM porque la memoria no es compartida."
+      ],
+      "correct": 0,
+      "hint": "El Teorema Máster requiere una forma general de la ecuación basada en la división del tamaño del problema.",
+      "explanation": "El Teorema Máster está diseñado específicamente para relaciones de recurrencia surgidas del paradigma Divide y Vencerás, con la forma $T(N) = a T(N/b) + f(N)$. No es directamente aplicable a recurrencias lineales decrecientes como $T(N) = T(N-1) + T(N-2)$."
+    },
+    {
+      "q": "Si un algoritmo recursivo hace 3 llamadas sobre problemas de tamaño N/3 y realiza un trabajo de combinación lineal Theta(N), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N log N)",
+        "Theta(N^2)",
+        "Theta(N)"
+      ],
+      "correct": 0,
+      "hint": "Aplica el Teorema Máster con a=3, b=3, k=1.",
+      "explanation": "Aplicando el Teorema Máster: $a=3$, $b=3$, $k=1$. Como $a = b^k$ ($3 = 3^1 = 3$), estamos ante el Caso 2. La complejidad temporal asintótica resultante es $\\Theta(N^k \\log N) = \\Theta(N \\log N)$."
+    },
+    {
+      "q": "En Java, ¿con qué opción o parámetro de la línea de comandos podemos modificar el tamaño de la memoria pila (Stack) del hilo al ejecutar la JVM?",
+      "options": [
+        "Con el parámetro -Xmx.",
+        "Con el parámetro -Xss.",
+        "Mediante la variable de entorno JAVA_HEAP_SIZE."
+      ],
+      "correct": 1,
+      "hint": "El nombre del parámetro hace referencia al 'Thread Stack Size'.",
+      "explanation": "El parámetro `-Xss` (Thread Stack Size) de la JVM se utiliza para definir la cantidad de memoria asignada a la pila de cada hilo (por ejemplo, `-Xss1m` para 1 Megabyte). Aumentarlo ayuda a prevenir StackOverflowError en recursiones profundas."
+    },
+    {
+      "q": "¿Qué estructura de datos abstracta gestiona internamente la CPU/JVM para realizar el seguimiento del flujo de métodos y sus puntos de retorno?",
+      "options": [
+        "Una Pila (Stack).",
+        "Una Cola (Queue).",
+        "Una Lista enlazada."
+      ],
+      "correct": 0,
+      "hint": "El último método en ser llamado es el primero en finalizar.",
+      "explanation": "La JVM utiliza la pila del sistema (Call Stack). Su naturaleza LIFO (Last In, First Out) es perfecta para apilar un marco cada vez que se llama a un método, y desapilarlo inmediatamente cuando este retorna su valor."
+    },
+    {
+      "q": "Si la relación de recurrencia de un algoritmo es T(N) = 9T(N/3) + Theta(N^2), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N^2 log N)",
+        "Theta(N^2)",
+        "Theta(N^3)"
+      ],
+      "correct": 0,
+      "hint": "Aplica el Teorema Máster con a=9, b=3, k=2.",
+      "explanation": "Identificando parámetros: $a=9$, $b=3$, $k=2$. Comparamos $a$ con $b^k$: $9 = 3^2 = 9$. Al cumplirse que $a = b^k$, se aplica el Caso 2 del Teorema Máster, dando una complejidad de $\\Theta(N^2 \\log N)$."
+    },
+    {
+      "q": "Si la relación de recurrencia de un algoritmo es T(N) = 2T(N/4) + Theta(N^0.5), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N^0.5)",
+        "Theta(N^0.5 log N)",
+        "Theta(N)"
+      ],
+      "correct": 1,
+      "hint": "Aplica el Teorema Máster con a=2, b=4, k=0.5.",
+      "explanation": "Identificando parámetros: $a=2$, $b=4$, $k=0.5$. Comparamos $a$ con $b^k$: $2 = 4^{0.5} = 2$. Al cumplirse que $a = b^k$, se aplica el Caso 2 del Teorema Máster, resultando en $\\Theta(N^{0.5} \\log N)$."
+    },
+    {
+      "q": "Si la relación de recurrencia de un algoritmo es T(N) = 8T(N/4) + Theta(N), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N^1.5)",
+        "Theta(N log N)",
+        "Theta(N^2)"
+      ],
+      "correct": 0,
+      "hint": "Aplica el Teorema Máster con a=8, b=4, k=1.",
+      "explanation": "Identificando parámetros: $a=8$, $b=4$, $k=1$. Comparamos $a$ con $b^k$: $8 > 4^1 = 4$. Al cumplirse que $a > b^k$, se aplica el Caso 1 del Teorema Máster: $\\Theta(N^{\\log_b a}) = \\Theta(N^{\\log_4 8}) = \\Theta(N^{1.5})$."
+    },
+    {
+      "q": "¿Cuál es la definición formal de una ecuación de recurrencia lineal homogénea de orden k con coeficientes constantes?",
+      "options": [
+        "Una ecuación donde el término f(N) de combinación es constante.",
+        "Una ecuación donde cada término es una combinación lineal de los k términos precedentes de la secuencia sin términos independientes añadidos.",
+        "Una ecuación recursiva que no tiene caso base y se evalúa para valores infinitesimales."
+      ],
+      "correct": 1,
+      "hint": "Homogénea implica que el término independiente es igual a cero.",
+      "explanation": "Una relación de recurrencia lineal homogénea tiene la forma $T(N) = c_1 T(N-1) + c_2 T(N-2) + \\dots + c_k T(N-k)$, donde los coeficientes $c_i$ son constantes y no hay ningún término independiente o función añadida de $N$ (homogeneidad)."
+    },
+    {
+      "q": "Si un método recursivo es invocado de forma asíncrona dentro de la JVM mediante un nuevo hilo de ejecución, ¿cómo se gestiona el espacio de pila?",
+      "options": [
+        "Cada hilo recibe su propia pila independiente asignada por la JVM, evitando conflictos con otros hilos.",
+        "Todos los hilos comparten la misma pila del hilo principal, lo que incrementa el riesgo de desbordamiento.",
+        "Los hilos no consumen memoria Stack en Java; en su lugar, utilizan memoria volátil temporal en el disco."
+      ],
+      "correct": 0,
+      "hint": "Cada hilo tiene su propio registro PC y pila de ejecución privada.",
+      "explanation": "En Java, cada hilo de ejecución posee su propia área de pila (Stack) privada creada al arrancar el hilo. La recursión en un hilo secundario no consume espacio en la pila del hilo principal ni de otros hilos."
+    },
+    {
+      "q": "Si un algoritmo de tipo 'Divide y Vencerás' divide un problema en 2 subproblemas de tamaño N/2 y realiza un trabajo de combinación cuadrático Theta(N^2), ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N^2 log N)",
+        "Theta(N^2)",
+        "Theta(N^3)"
+      ],
+      "correct": 1,
+      "hint": "Aplica el Teorema Máster con a=2, b=2, k=2.",
+      "explanation": "Identificando parámetros: $a=2$, $b=2$, $k=2$. Comparamos $a$ con $b^k$: $2 < 2^2 = 4$. Al cumplirse que $a < b^k$, estamos en el Caso 3 del Teorema Máster (el coste de combinación domina), de modo que la complejidad es $\\Theta(N^k) = \\Theta(N^2)$."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal asintótica de resolver el juego de las Torres de Hanói para N discos de forma recursiva?",
+      "options": [
+        "Theta(N^2)",
+        "Theta(2^N)",
+        "Theta(N!)"
+      ],
+      "correct": 1,
+      "hint": "Cada movimiento requiere mover un subproblema de N-1 discos dos veces más un movimiento básico.",
+      "explanation": "El número de movimientos para ordenar $N$ discos se modela con la recurrencia $H(N) = 2H(N-1) + 1$, cuya resolución por expansión da como resultado exacto $2^N - 1$. Por lo tanto, la complejidad asintótica es $\\Theta(2^N)$."
+    },
+    {
+      "q": "Si un algoritmo recursivo posee una ecuación de recurrencia de coste modelada por T(N) = 2T(N-1) + c, ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(2^N)",
+        "Theta(N^2)",
+        "Theta(N log N)"
+      ],
+      "correct": 0,
+      "hint": "Cada paso de tamaño N genera dos llamadas completas de tamaño N-1.",
+      "explanation": "Al expandir $T(N) = 2T(N-1) + c$, se forma una serie geométrica de base 2: $T(N) = 2^k T(N-k) + c \\sum_{i=0}^{k-1} 2^i$. Al alcanzar el caso base $N-k=0 \\implies k=N$, queda $2^N T(0) + c(2^N - 1)$, lo cual es de orden exponencial $\\Theta(2^N)$."
+    },
+    {
+      "q": "En la resolución por sustitución (o expansión) de la recurrencia T(N) = T(N-2) + c con T(0) = d, ¿cuál es el coste en un paso arbitrario k?",
+      "options": [
+        "T(N) = T(N-2k) + k * c",
+        "T(N) = T(N-k) + k * c",
+        "T(N) = T(N-2k) + 2k * c"
+      ],
+      "correct": 0,
+      "hint": "Cada paso decrementa el argumento en 2 y suma una constante c.",
+      "explanation": "En cada expansión sustituimos $T(N-2i) = T(N-2i-2) + c$. Para el paso $k$, habremos restado $2$ un total de $k$ veces (es decir, $N-2k$) y sumado la constante $c$ un total de $k$ veces ($k \\cdot c$). La expresión es $T(N) = T(N-2k) + k \\cdot c$."
+    },
+    {
+      "q": "¿Cómo influye el tamaño y número de variables locales declaradas dentro de un método recursivo en el espacio ocupado por la pila?",
+      "options": [
+        "No influye en absoluto, ya que los marcos de pila de la JVM son fijos.",
+        "Influye directamente, pues cada variable local aumenta el tamaño requerido para el marco de pila individual.",
+        "Solo influye si las variables locales se declaran como finales (final) o de tipo estático."
+      ],
+      "correct": 1,
+      "hint": "El marco de pila almacena todas las variables locales asociadas a la ejecución de una llamada.",
+      "explanation": "El tamaño de un marco de pila individual en la JVM está determinado estáticamente en tiempo de compilación por las variables locales y tipos de datos del método. Cuantas más variables locales y de mayor tamaño tenga el método, más rápido se llenará la pila física por llamada recursiva."
+    },
+    {
+      "q": "En Java, ¿la llamada a métodos recursivos estáticos (static) consume menos espacio en la pila que la llamada a métodos no estáticos (de instancia)?",
+      "options": [
+        "No, no hay diferencia sustancial en el consumo del Stack, ya que la pila almacena la información necesaria para gestionar el contexto de ejecución del método en ambos casos.",
+        "Sí, los métodos recursivos no estáticos consumen el doble porque almacenan sus instancias dinámicas enteras en el Stack.",
+        "Sí, porque la JVM optimiza automáticamente todos los métodos estáticos para que no utilicen marcos de pila."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el paso de variables y parámetros de ejecución.",
+      "explanation": "Aunque los métodos de instancia reciben una referencia implícita adicional en su pila (la referencia `this`), esto solo equivale a un puntero en memoria. Fuera de eso, el consumo de la pila para almacenar variables y controlar retornos es idéntico entre métodos estáticos e instanciados."
+    },
+    {
+      "q": "Si aplicamos el Teorema Máster a la relación de recurrencia T(N) = 3T(N/2) + Theta(N^2), ¿cuál es el coste asintótico resultante?",
+      "options": [
+        "Theta(N^2)",
+        "Theta(N^(log_2 3))",
+        "Theta(N^2 log N)"
+      ],
+      "correct": 0,
+      "hint": "Compara a=3 con b^k = 2^2 = 4.",
+      "explanation": "Tenemos $a=3$, $b=2$, $k=2$. Comparamos $a$ con $b^k$: $3 < 2^2 = 4$. Al cumplirse que $a < b^k$, se aplica el Caso 3 del Teorema Máster, resultando en una complejidad asintótica determinada por el coste de combinación: $\\Theta(N^k) = \\Theta(N^2)$."
+    },
+    {
+      "q": "Si modelamos la complejidad de un algoritmo recursivo que recorre una lista enlazada sumando recursivamente sus elementos: T(N) = T(N-1) + c, ¿cuál es su coste temporal?",
+      "options": [
+        "Theta(N)",
+        "Theta(log N)",
+        "Theta(N log N)"
+      ],
+      "correct": 0,
+      "hint": "El problema se reduce de elemento en elemento de forma sucesiva realizando un coste constante.",
+      "explanation": "El algoritmo realiza $N$ llamadas sucesivas reduciendo la entrada en una unidad por paso y sumando un coste constante $c$ en cada llamada. Es una recurrencia lineal estándar que se resuelve como $T(N) = O(N)$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Considera el siguiente código Java para el cálculo recursivo del factorial:\n```java\nint fact(int n) {\n    if (n <= 1) return 1;\n    return n * ____;\n}\n```\n¿Qué debe ir en la línea en blanco para completar la recursión?",
+      "options": [
+        "fact(n - 1)",
+        "fact(n)",
+        "fact(n - 2)"
+      ],
+      "correct": 0,
+      "hint": "Para calcular el factorial de n, multiplicamos n por el factorial del número anterior.",
+      "explanation": "El factorial de un número se define recursivamente como $N \\times (N-1)!$. Por tanto, en Java la llamada correcta para resolver el subproblema de menor tamaño es `fact(n - 1)`."
+    },
+    {
+      "q": "Completa el código recursivo de la búsqueda binaria en Java:\n```java\nint busq(int[] a, int k, int izq, int der) {\n    if (izq > der) return -1;\n    int m = (izq + der) / 2;\n    if (a[m] == k) return m;\n    if (a[m] > k) return ____;\n    return busq(a, k, m + 1, der);\n}\n```",
+      "options": [
+        "busq(a, k, izq, m - 1)",
+        "busq(a, k, izq, m)",
+        "busq(a, k, m + 1, der)"
+      ],
+      "correct": 0,
+      "hint": "Si el elemento del medio es mayor que la clave buscada k, debemos buscar en la mitad izquierda del rango actual.",
+      "explanation": "Al ser el array ordenado y cumplirse que $a[m] > k$, la clave debe encontrarse en la mitad izquierda. El nuevo límite derecho del intervalo pasa a ser $m-1$. La llamada correcta es `busq(a, k, izq, m - 1)`."
+    },
+    {
+      "q": "Completa el caso base de la función recursiva de Fibonacci:\n```java\nint fib(int n) {\n    if (n <= 1) return ____;\n    return fib(n - 1) + fib(n - 2);\n}\n```",
+      "options": [
+        "n",
+        "1",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Para n=0 devuelve 0, y para n=1 devuelve 1.",
+      "explanation": "El caso base de Fibonacci para los términos 0 y 1 devuelve el propio valor del argumento $n$ (pues $fib(0)=0$ y $fib(1)=1$). Por ende, `return n;` completa correctamente la condición."
+    },
+    {
+      "q": "Completa el caso base del método recursivo que recorre e imprime un array:\n```java\nvoid printArray(int[] a, int index) {\n    if (index == ____) return;\n    System.out.println(a[index]);\n    printArray(a, index + 1);\n}\n```",
+      "options": [
+        "a.length",
+        "a.length - 1",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Debemos detener la ejecución cuando el índice alcanza una posición no válida después del último elemento.",
+      "explanation": "En Java, los índices de un array van de $0$ a $a.length-1$. El caso de parada debe activarse cuando `index` sea exactamente igual a `a.length` para evitar un error de desbordamiento."
+    },
+    {
+      "q": "Considera el coste de una búsqueda binaria modelado como $T(N) = T(____) + O(1)$. ¿Qué expresión completa el tamaño del subproblema recursivo?",
+      "options": [
+        "N / 2",
+        "N - 1",
+        "N / 3"
+      ],
+      "correct": 0,
+      "hint": "La búsqueda binaria reduce a la mitad el volumen de datos a procesar en cada llamada.",
+      "explanation": "La búsqueda binaria descarta la mitad de los elementos en cada comparación, reduciendo el problema a un subproblema de tamaño $N/2$, por lo que la ecuación correcta de recurrencia contiene $T(N/2)$."
+    },
+    {
+      "q": "Al resolver la relación $T(N) = T(N-1) + c$ por expansión, sustituimos sucesivamente:\n$T(N) = [T(N-2) + c] + c = T(N-2) + 2c$\n$T(N) = T(N-3) + ____$\n¿Qué término completa el tercer paso de expansión?",
+      "options": [
+        "3c",
+        "c",
+        "2c"
+      ],
+      "correct": 0,
+      "hint": "En cada paso sumamos una constante c adicional.",
+      "explanation": "Puesto que $T(N-2) = T(N-3) + c$, sustituyendo en la ecuación del paso 2 obtenemos $T(N) = [T(N-3) + c] + 2c = T(N-3) + 3c$."
+    },
+    {
+      "q": "Analiza el siguiente código Java:\n```java\nint misterio(int n) {\n    if (n <= 1) return 1;\n    return misterio(____) + 1;\n}\n```\nSi deseamos que este método tenga una complejidad temporal lineal O(n), ¿qué llamada recursiva debe realizarse?",
+      "options": [
+        "n - 1",
+        "n / 2",
+        "n - 2"
+      ],
+      "correct": 0,
+      "hint": "Para un coste lineal con trabajo constante por llamada, la recursión debe disminuir en 1 unidad en cada paso.",
+      "explanation": "Si disminuye en 1 unidad en cada paso (`n - 1`), se realizan exactamente $n$ llamadas recursivas, y como el trabajo por llamada es constante $O(1)$, la complejidad total es $O(n)$."
+    },
+    {
+      "q": "Dada la ecuación general $T(N) = a \\cdot T(N/b) + \\Theta(N^k)$, si tenemos la recurrencia $T(N) = 4T(N/2) + N^2$, identificamos los parámetros $a = 4$, $b = 2$, y $k = ____$.",
+      "options": [
+        "2",
+        "4",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "El trabajo de combinación es N^2, por lo que k es el exponente.",
+      "explanation": "El coste de combinación es de orden cuadrático $\\Theta(N^2)$, por lo que comparando con el término general $\\Theta(N^k)$, el valor del exponente $k$ es exactamente 2."
+    },
+    {
+      "q": "Completa la condición de equilibrio del Teorema Máster para obtener una complejidad de la forma $T(N) \\in \\Theta(N^k \\log N)$:\n$a \\quad ____ \\quad b^k$",
+      "options": [
+        "==",
+        ">",
+        "<"
+      ],
+      "correct": 0,
+      "hint": "El número de subproblemas es exactamente igual al factor de tamaño elevado a la potencia de combinación.",
+      "explanation": "El Caso 2 del Teorema Máster se da cuando el coste de división/combinación y las llamadas recursivas son equivalentes en peso, lo cual se cumple bajo la condición de igualdad $a == b^k$."
+    },
+    {
+      "q": "En el algoritmo de MergeSort, la combinación de dos subproblemas de tamaño N/2 para producir un array ordenado de tamaño N requiere una complejidad temporal de ____.",
+      "options": [
+        "O(N)",
+        "O(1)",
+        "O(N log N)"
+      ],
+      "correct": 0,
+      "hint": "El método de fusión recorre ambas mitades usando punteros en una sola pasada.",
+      "explanation": "La mezcla de dos listas ya ordenadas de tamaño combinado $N$ se realiza comparando secuencialmente los elementos de ambas partes de izquierda a derecha. Esto se completa en una única pasada de coste lineal $O(N)$."
+    },
+    {
+      "q": "Dada la función recursiva:\n```java\nint g(int n) {\n    if (n <= 0) return 0;\n    return g(n - 2) + ____;\n}\n```\nSi llamamos a `g(4)` y queremos que devuelva 2, ¿qué constante numérica debe ir en la línea en blanco?",
+      "options": [
+        "1",
+        "2",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Traza el flujo: g(4) = g(2) + x = (g(0) + x) + x = 2x. Despeja x.",
+      "explanation": "Dado que $g(0) = 0$, tenemos que $g(2) = g(0) + x = x$, y $g(4) = g(2) + x = 2x$. Si queremos que $g(4) = 2$, entonces $2x = 2 \\implies x = 1$."
+    },
+    {
+      "q": "Dada la ecuación de coste $T(N) = T(N-1) + T(____) + O(1)$, que define el cálculo redundante de Fibonacci, completa el término para la segunda llamada recursiva.",
+      "options": [
+        "n - 2",
+        "n - 1",
+        "n / 2"
+      ],
+      "correct": 0,
+      "hint": "Los dos sumandos anteriores en la serie de Fibonacci son n-1 y n-2.",
+      "explanation": "La serie de Fibonacci en su forma estándar recursiva se basa en la suma de los valores de los dos elementos previos inmediatos, por lo que la segunda llamada recursiva evalúa la expresión `n - 2`."
+    },
+    {
+      "q": "Para un árbol de recursión de un algoritmo con coste $T(N) = 2T(N/2) + N$, el trabajo en el nivel $j$ del árbol es de la forma $2^j \\cdot (N / ____)$",
+      "options": [
+        "2^j",
+        "j",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "En el nivel j hay 2^j nodos, cada uno con una entrada dividida j veces a la mitad.",
+      "explanation": "En el nivel $j$ (donde la raíz es el nivel 0), hay exactamente $2^j$ nodos de ejecución recursiva, y el tamaño de la entrada para cada uno de estos subproblemas se reduce a $N / 2^j$. Por tanto, el divisor en la fórmula es $2^j$."
+    },
+    {
+      "q": "Dada la recurrencia $T(N) = T(N-1) + 2^N$ con $T(0) = 1$. Su expansión en el paso $k$ es $T(N) = T(N-k) + \\sum_{i=0}^{k-1} ____$. Completa el sumatorio.",
+      "options": [
+        "2^{N-i}",
+        "2^i",
+        "2^{N-k}"
+      ],
+      "correct": 0,
+      "hint": "El trabajo en la primera llamada recursiva es 2^N, en la segunda es 2^(N-1), y así sucesivamente.",
+      "explanation": "Sustituyendo paso a paso obtenemos: $T(N) = T(N-1) + 2^N = T(N-2) + 2^{N-1} + 2^N$. En general, para el paso $k$, el término acumulado de potencias de 2 corresponde al sumatorio de $2^{N-i}$ para $i$ desde $0$ hasta $k-1$."
+    },
+    {
+      "q": "En el siguiente código recursivo mutuo para determinar si un número es par:\n```java\nboolean esPar(int n) {\n    if (n == 0) return true;\n    return ____;\n}\nboolean esImpar(int n) {\n    if (n == 0) return false;\n    return esPar(n - 1);\n}\n```\n¿Qué llamada recursiva completa correctamente la lógica de `esPar`?",
+      "options": [
+        "esImpar(n - 1)",
+        "esPar(n - 1)",
+        "esImpar(n)"
+      ],
+      "correct": 0,
+      "hint": "Un número n es par si su predecesor n-1 es impar.",
+      "explanation": "La lógica de recursión cruzada establece que un número $N$ es par si $N-1$ es impar, llamando así a `esImpar(n - 1)`. De forma análoga, $N$ es impar si $N-1$ es par."
+    },
+    {
+      "q": "Para la recurrencia $T(N) = 3T(N/2) + N$, al aplicar el Teorema Máster tenemos que $a = 3$, $b = 2$, $k = 1$. Dado que $3 > 2^1$, la complejidad temporal es $\\Theta(N^{____})$.",
+      "options": [
+        "\\log_2 3",
+        "2",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "El exponente asintótico en el caso de dominio recursivo es la base logarítmica de a en base b.",
+      "explanation": "Dado que $a > b^k$ ($3 > 2$), aplica el Caso 1 del Teorema Máster. Por tanto, el coste temporal asintótico viene dado por la potencia $\\Theta(N^{\\log_b a}) = \\Theta(N^{\\log_2 3})$."
+    },
+    {
+      "q": "Completa la línea para implementar la división entera por restas sucesivas de forma recursiva:\n```java\nint residuo(int a, int b) {\n    if (a < b) return a;\n    return residuo(____, b);\n}\n```",
+      "options": [
+        "a - b",
+        "a / b",
+        "a + b"
+      ],
+      "correct": 0,
+      "hint": "Restamos repetidamente el divisor b del dividendo a hasta obtener un residuo menor que b.",
+      "explanation": "La división entera mediante restas sucesivas se basa en restar el divisor $b$ del dividendo $a$ en cada iteración o llamada recursiva. La nueva llamada debe recibir `a - b` como primer parámetro."
+    },
+    {
+      "q": "Al resolver la recurrencia $T(N) = T(N/3) + c$ por expansión, el caso base se alcanza cuando $N/3^k = 1$, lo que implica que el número de niveles de recursión es $k = ____$.",
+      "options": [
+        "\\log_3 N",
+        "3^N",
+        "N/3"
+      ],
+      "correct": 0,
+      "hint": "Despeja k de la ecuación 3^k = N aplicando logaritmos.",
+      "explanation": "Si la entrada se divide por 3 en cada llamada, el tamaño después de $k$ llamadas es $N/3^k$. Para llegar al caso base de tamaño 1, igualamos $N/3^k = 1 \\implies N = 3^k \\implies k = \\log_3 N$."
+    },
+    {
+      "q": "En el análisis de coste, la ecuación de recurrencia para el algoritmo QuickSort en su peor caso (cuando el pivote es siempre el elemento mínimo o máximo del rango) es $T(N) = T(N-1) + \\Theta(____)$.",
+      "options": [
+        "N",
+        "1",
+        "N^2"
+      ],
+      "correct": 0,
+      "hint": "En cada paso recursivo se realiza la partición que compara todos los elementos restantes con el pivote de forma lineal.",
+      "explanation": "En el peor caso de QuickSort, un subproblema queda vacío (tamaño 0) y el otro contiene todos los elementos restantes menos el pivote (tamaño $N-1$). A esto se le suma el coste lineal $\\Theta(N)$ de realizar la partición de los elementos."
+    },
+    {
+      "q": "Completa el siguiente fragmento para implementar una suma recursiva de elementos en una lista enlazada simple:\n```java\nint sumaLista(Node nodo) {\n    if (nodo == null) return 0;\n    return nodo.val + sumaLista(____);\n}\n```",
+      "options": [
+        "nodo.next",
+        "nodo.prev",
+        "nodo"
+      ],
+      "correct": 0,
+      "hint": "Avanzamos al siguiente nodo de la lista simple en cada llamada recursiva.",
+      "explanation": "Para sumar recursivamente los elementos de una lista enlazada simple, sumamos el valor del nodo actual `nodo.val` a la suma del resto de la lista, la cual se inicia con el puntero al siguiente nodo `nodo.next`."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe de forma correcta una característica de la memoria Stack (pila) en la máquina virtual de Java?",
+      "options": [
+        "Almacena variables locales y parámetros del método actual.",
+        "Cada hilo posee su propia pila dedicada y aislada de los demás.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda las características de almacenamiento local y aislamiento por hilo.",
+      "explanation": "La memoria Stack almacena marcos de pila específicos para cada hilo de ejecución. Cada marco de pila contiene las variables locales y parámetros del método correspondiente. Por lo tanto, todas las opciones indicadas son verdaderas."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son métodos analíticos estándar utilizados para resolver ecuaciones de recurrencia de coste temporal?",
+      "options": [
+        "El método de sustitución o expansión paso a paso.",
+        "La aplicación directa del Teorema Máster para problemas Divide y Vencerás.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son las técnicas teóricas principales descritas en el manual de la asignatura.",
+      "explanation": "Tanto el método de expansión (sustituir consecutivamente hasta hallar el patrón de inducción) como el Teorema Máster (fórmula directa para problemas balanceados) son métodos matemáticos válidos para resolver recurrencias."
+    },
+    {
+      "q": "¿Qué elementos son necesarios para que una ecuación de recurrencia de coste temporal esté correctamente planteada y pueda resolverse?",
+      "options": [
+        "Una o más condiciones de parada que definan el coste del caso base.",
+        "Una expresión recursiva que determine el coste del caso inductivo.",
+        "Todas las opciones indicadas son necesarias."
+      ],
+      "correct": 2,
+      "hint": "Una ecuación recursiva necesita un punto de parada y una regla de avance.",
+      "explanation": "Para definir adecuadamente una recurrencia, es imprescindible contar con un caso base para entradas mínimas (que impida la recursión infinita) y una regla inductiva que describa cómo avanza y se divide el cálculo para entradas de tamaño $N$."
+    },
+    {
+      "q": "Al analizar la complejidad espacial de un método recursivo en Java, ¿cuál de los siguientes factores aumenta el consumo total de memoria en la pila?",
+      "options": [
+        "La cantidad y el tamaño de las variables locales declaradas dentro del método.",
+        "La profundidad máxima de llamadas recursivas activas en la pila al mismo tiempo.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El espacio depende tanto del tamaño de cada marco individual como de cuántos marcos se acumulan.",
+      "explanation": "El coste espacial en la pila depende linealmente de la profundidad de recursión (número de marcos activos) y del tamaño de cada marco individual (determinado por sus variables locales y parámetros)."
+    },
+    {
+      "q": "¿Qué ventajas presenta el método del Teorema Máster para calcular costes temporales de algoritmos?",
+      "options": [
+        "Permite obtener la cota asintótica de forma inmediata mediante comparación de constantes.",
+        "Evita el desarrollo manual de complejos sumatorios algebraicos.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El Teorema Máster simplifica el análisis al proporcionar una fórmula directa precalculada.",
+      "explanation": "El Teorema Máster proporciona un marco directo y rápido para deducir la complejidad temporal de algoritmos Divide y Vencerás simplemente comparando los valores de $a$ y $b^k$, ahorrando la expansión manual de la recurrencia."
+    },
+    {
+      "q": "¿Cuáles de las siguientes condiciones impedirían la aplicación directa del Teorema Máster para una recurrencia T(N) = a * T(N/b) + f(N)?",
+      "options": [
+        "Que el parámetro 'a' que define el número de llamadas recursivas sea estrictamente menor que 1.",
+        "Que el factor de división de tamaño 'b' sea menor o igual que 1.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa los requisitos matemáticos exigidos para los parámetros del teorema.",
+      "explanation": "El Teorema Máster exige por definición que $a \\ge 1$ (debe haber al menos una llamada recursiva) y $b > 1$ (el tamaño de la entrada debe reducirse estrictamente en cada nivel). Cualquier violación de esto impide aplicar el teorema."
+    },
+    {
+      "q": "Si declaramos una variable de referencia a un array u objeto dentro de una función recursiva en Java, ¿qué ocurre en memoria?",
+      "options": [
+        "La referencia (dirección de memoria) se almacena en el Stack del hilo de ejecución actual.",
+        "El objeto o array en sí se aloja dinámicamente en el montículo (Heap).",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Distingue entre la variable de referencia y el contenido del objeto en Java.",
+      "explanation": "En Java, todos los objetos (incluidos arrays) se crean dinámicamente en la memoria Heap. Sin embargo, las variables locales que apuntan a dichos objetos (referencias) residen dentro del marco de pila (Stack) del método recursivo activo."
+    },
+    {
+      "q": "Para prevenir un error de tipo StackOverflowError en Java al procesar grandes cantidades de datos, ¿qué soluciones se pueden plantear?",
+      "options": [
+        "Aumentar el tamaño máximo de la pila mediante la directiva -Xss en la JVM.",
+        "Convertir la función recursiva a un enfoque iterativo equivalente mediante bucles y pilas explícitas.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se puede atajar tanto mediante configuración del entorno como modificando el diseño del código.",
+      "explanation": "Se puede resolver a nivel del sistema incrementando el tamaño físico del stack con `-Xss`, o a nivel de código rediseñando el algoritmo para que sea iterativo (el cual almacena su estado en el Heap y no consume marcos de la pila de la JVM)."
+    },
+    {
+      "q": "En el árbol de recursión de un algoritmo Divide y Vencerás modelado por T(N) = 2T(N/2) + N, ¿cuál de las siguientes opciones es verdadera?",
+      "options": [
+        "El nivel raíz (nivel 0) tiene un único nodo con tamaño del problema N.",
+        "El nivel de profundidad máxima alcanzado es igual a log_2 N.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza paso a paso la estructura de división binaria y su profundidad.",
+      "explanation": "La ejecución comienza en el nodo raíz (un problema de tamaño N). Dado que el tamaño se reduce a la mitad por nivel de llamadas, el árbol se bifurca binariamente hasta alcanzar una profundidad de $\\log_2 N$. Todas las afirmaciones son correctas."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son ejemplos típicos de algoritmos recursivos clásicos que dividen y resuelven el problema en subproblemas de tamaño fraccional?",
+      "options": [
+        "La búsqueda binaria para encontrar elementos en arrays ordenados.",
+        "La ordenación por mezcla (MergeSort) de elementos de una lista.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos algoritmos reducen el espacio de entrada dividiéndolo a la mitad.",
+      "explanation": "Tanto la búsqueda binaria (hace 1 llamada sobre $N/2$) como MergeSort (hace 2 llamadas sobre $N/2$) son ejemplos insignes del paradigma Divide y Vencerás de coste fraccional."
+    },
+    {
+      "q": "Si un algoritmo recursivo posee una ecuación de recurrencia de coste temporal $T(N) = 2T(N/2) + N^2$, ¿cuál es su complejidad temporal según el Teorema Máster?",
+      "options": [
+        "Theta(N log N)",
+        "Theta(N)",
+        "Ninguna de las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster. Compara a=2 con b^k = 2^2 = 4.",
+      "explanation": "Tenemos $a=2$, $b=2$, $k=2$. Comparamos $a$ con $b^k$: $2 < 4$. Por tanto, se aplica el Caso 3 del Teorema Máster, dando una complejidad de $\\Theta(N^k) = \\Theta(N^2)$. Al no estar entre las opciones indicadas, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si la complejidad de un algoritmo recursivo está modelada por $T(N) = T(N-1) + \\Theta(1)$ con $T(0) = c$, ¿cuál es su clase de complejidad temporal asintótica?",
+      "options": [
+        "Theta(N^2)",
+        "Theta(log N)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Al expandir se acumula una suma constante N veces.",
+      "explanation": "La expansión de $T(N) = T(N-1) + c$ produce $T(N) = T(0) + N \\cdot c = c + c \\cdot N$, cuya complejidad temporal asintótica es lineal $\\Theta(N)$. Como no figura en la lista de opciones, se selecciona 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si la ecuación de coste de un método recursivo es $T(N) = 3T(N/3) + \\Theta(1)$ con $T(1)=c$, ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N log N)",
+        "Theta(log N)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster con a=3, b=3, k=0.",
+      "explanation": "Tenemos $a=3$, $b=3$, $k=0$ (pues $\\Theta(1) = \\Theta(N^0)$). Comparamos $a$ con $b^k$: $3 > 3^0 = 1$. Aplica el Caso 1 del Teorema Máster, de modo que la complejidad es $\\Theta(N^{\\log_3 3}) = \\Theta(N)$. Ninguna de las opciones mostradas coincide con $\\Theta(N)$."
+    },
+    {
+      "q": "En el análisis de coste, ¿qué complejidad asintótica posee un algoritmo recursivo modelado por $T(N) = 4T(N/2) + N^3$?",
+      "options": [
+        "Theta(N^2)",
+        "Theta(N^2 log N)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster con a=4, b=2, k=3.",
+      "explanation": "Tenemos $a=4$, $b=2$, $k=3$. Comparamos $a$ con $b^k$: $4 < 2^3 = 8$. Aplica el Caso 3 del Teorema Máster (combinación dominante), dando como resultado $\\Theta(N^k) = \\Theta(N^3)$. Al no estar listado, la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si la relación de recurrencia es $T(N) = 2T(N/4) + N$ con $T(1)=1$, ¿cuál de las siguientes opciones describe su complejidad temporal asintótica?",
+      "options": [
+        "Theta(N^2)",
+        "Theta(N log N)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster con a=2, b=4, k=1.",
+      "explanation": "Tenemos $a=2$, $b=4$, $k=1$. Comparamos $a$ con $b^k$: $2 < 4^1 = 4$. Aplica el Caso 3 del Teorema Máster, lo cual determina una complejidad de $\\Theta(N^k) = \\Theta(N^1) = \\Theta(N)$. Al no ser $\\Theta(N^2)$ ni $\\Theta(N \\log N)$, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Dada la recurrencia $T(N) = 8T(N/2) + N^2$, ¿cuál es el exponente de la complejidad asintótica $\\Theta(N^x)$ resultante de aplicar el Teorema Máster?",
+      "options": [
+        "El exponente es x = 2.",
+        "El exponente es x = 4.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster con a=8, b=2, k=2.",
+      "explanation": "Tenemos $a=8$, $b=2$, $k=2$. Comparamos $a$ con $b^k$: $8 > 2^2 = 4$. Aplica el Caso 1, por lo que la complejidad es $\\Theta(N^{\\log_2 8}) = \\Theta(N^3)$. El exponente $x$ es $3$, por lo que ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "Si un algoritmo recursivo divide su entrada en 9 subproblemas de tamaño N/3 y el coste de combinación es constante, ¿cuál es su complejidad temporal?",
+      "options": [
+        "Theta(N)",
+        "Theta(N log N)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster con a=9, b=3, k=0.",
+      "explanation": "Tenemos $a=9$, $b=3$, $k=0$ (pues $\\Theta(1) = \\Theta(N^0)$). Comparamos $a$ con $b^k$: $9 > 3^0 = 1$. Aplica el Caso 1 del Teorema Máster, resultando en una complejidad de $\\Theta(N^{\\log_3 9}) = \\Theta(N^2)$. Al no figurar $\\Theta(N^2)$ en las opciones, se marca 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "En la JVM, ¿cuál de los siguientes tipos de datos locales se almacena directamente en la memoria montón (Heap) en lugar de en la pila (Stack)?",
+      "options": [
+        "Las variables locales declaradas como de tipo primitivo int.",
+        "Las referencias locales que apuntan a objetos declarados.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Distingue entre variables locales, referencias y la instancia real en memoria.",
+      "explanation": "Tanto los tipos primitivos locales como las referencias locales (los punteros) se almacenan en el Stack dentro del marco de la llamada. Los objetos apuntados se almacenan en el Heap. Puesto que las opciones listan variables locales y referencias (y no el objeto en sí), la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Dada la relación de recurrencia de coste $T(N) = T(N-1) + 2$ con $T(0) = 5$, ¿cuál es el valor numérico exacto de $T(10)$?",
+      "options": [
+        "15",
+        "20",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Resuelve la recurrencia por expansión y evalúa para N=10.",
+      "explanation": "La expansión de la relación da la función lineal $T(N) = 5 + 2N$. Evaluando para $N=10$, obtenemos $T(10) = 5 + 2 \\times 10 = 25$. Como 25 no es 15 ni 20, la respuesta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si aplicamos el Teorema Máster a una función recursiva cuya relación de recurrencia es $T(N) = T(N/2) + N^2$, ¿cuál es su complejidad temporal asintótica?",
+      "options": [
+        "Theta(N)",
+        "Theta(N log N)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica el Teorema Máster con a=1, b=2, k=2.",
+      "explanation": "Tenemos $a=1$, $b=2$, $k=2$. Comparamos $a$ con $b^k$: $1 < 2^2 = 4$. Aplica el Caso 3 del Teorema Máster (combinación dominante), dando $\\Theta(N^k) = \\Theta(N^2)$. Al no estar $\\Theta(N^2)$ en las opciones, se selecciona 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_1",
+      "title": "Recursión de Factorial",
+      "context": "Sea el método recursivo en Java:\n```java\nint factorial(int n) {\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}\n```\nAnalizamos la ejecución de este método para la llamada `factorial(5)`.",
+      "parts": [
+        {
+          "id": "lab_1_a",
+          "label": "a",
+          "question": "¿Cuál es la profundidad máxima de llamadas en la pila (número total de marcos activos de `factorial`) alcanzada durante la ejecución?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La ejecución realiza llamadas sucesivas: `factorial(5)` $\\to$ `factorial(4)` $\\to$ `factorial(3)` $\\to$ `factorial(2)` $\\to$ `factorial(1)`. En este punto se alcanza el caso base, habiendo $5$ marcos de pila activos en la pila de llamadas."
+        },
+        {
+          "id": "lab_1_b",
+          "label": "b",
+          "question": "¿Cuántas multiplicaciones aritméticas en total se ejecutan en el método?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Las multiplicaciones se ejecutan en los casos inductivos para $N = 5, 4, 3, 2$. Para el caso base $N=1$, el método retorna inmediatamente sin multiplicar. Por lo tanto, se realizan exactamente $4$ multiplicaciones."
+        },
+        {
+          "id": "lab_1_c",
+          "label": "c",
+          "question": "¿Cuál es el valor entero que devuelve la llamada principal `factorial(5)`?",
+          "correctValue": 120,
+          "tolerance": 0,
+          "explanation": "El valor devuelto es el producto $5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$."
+        },
+        {
+          "id": "lab_1_d",
+          "label": "d",
+          "question": "Si cada marco de pila en la pila de llamadas consume 32 bytes de memoria, ¿cuántos bytes consume la pila de ejecución en su punto de máxima profundidad?",
+          "correctValue": 160,
+          "tolerance": 0,
+          "explanation": "A la máxima profundidad de recursión hay $5$ marcos activos simultáneamente. Por tanto, la memoria ocupada en bytes es $5 \\times 32 = 160$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "lab_2",
+      "title": "Llamadas redundantes en Fibonacci recursivo",
+      "context": "Dado el algoritmo ineficiente para calcular los números de Fibonacci en Java:\n```java\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n```\nEstudiamos el árbol de llamadas de la invocación `fib(4)`.",
+      "parts": [
+        {
+          "id": "lab_2_a",
+          "label": "a",
+          "question": "¿Cuántas veces en total se ejecuta el método `fib` (incluyendo la llamada inicial)?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El árbol de llamadas se expande como:\n- `fib(4)` (1)\n  - `fib(3)` (2)\n    - `fib(2)` (3)\n      - `fib(1)` (4)\n      - `fib(0)` (5)\n    - `fib(1)` (6)\n  - `fib(2)` (7)\n    - `fib(1)` (8)\n    - `fib(0)` (9)\nEn total se ejecutan $9$ llamadas."
+        },
+        {
+          "id": "lab_2_b",
+          "label": "b",
+          "question": "¿Cuántas veces se evalúa el caso base regresando directamente un valor menor o igual a 1?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Los casos base corresponden a las hojas del árbol de recursión. Se evalúan en las llamadas a `fib(1)` y `fib(0)`. Sumando en el árbol, hay exactamente $5$ llamadas que caen en el caso base ($3$ de `fib(1)` y $2$ de `fib(0)`)."
+        },
+        {
+          "id": "lab_2_c",
+          "label": "c",
+          "question": "¿Qué valor entero retorna la función principal `fib(4)`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los valores devueltos son: $fib(0)=0$, $fib(1)=1$, $fib(2)=1+0=1$, $fib(3)=1+1=2$ y $fib(4)=2+1=3$."
+        },
+        {
+          "id": "lab_2_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas en la pila alcanzada durante esta ejecución?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La profundidad máxima se alcanza en la rama más a la izquierda del árbol: `fib(4)` $\\to$ `fib(3)` $\\to$ `fib(2)` $\\to$ `fib(1)`. Esto representa un máximo de $4$ marcos apilados a la vez."
+        }
+      ]
+    },
+    {
+      "id": "lab_3",
+      "title": "Búsqueda Binaria Recursiva",
+      "context": "Búsqueda binaria aplicada sobre un array ordenado de 16 elementos (índices 0 a 15) buscando una clave que no existe, forzando la recursión hasta el final.",
+      "parts": [
+        {
+          "id": "lab_3_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del índice medio (mid) calculado en la primera llamada de la recursión?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La primera llamada abarca de `low = 0` a `high = 15`. El índice medio es $mid = \\lfloor(0 + 15)/2\\rfloor = 7$."
+        },
+        {
+          "id": "lab_3_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones con elementos del array se realizan en el peor caso antes de concluir que el elemento no existe?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "En el peor caso de tamaño 16, dividimos sucesivamente el intervalo: 16 elementos $\\to$ 8 $\\to$ 4 $\\to$ 2 $\\to$ 1 $\\to$ 0 (parada). Se compara un elemento en cada paso del intervalo no vacío, resultando en exactamente $5$ comparaciones."
+        },
+        {
+          "id": "lab_3_c",
+          "label": "c",
+          "question": "¿Qué valor numérico retorna la función si la búsqueda falla al no encontrar la clave?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "La especificación estándar del algoritmo define retornar $-1$ para indicar la ausencia del elemento buscado en el array."
+        },
+        {
+          "id": "lab_3_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del logaritmo en base 2 del tamaño de la entrada (N=16) que determina el límite asintótico superior?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El coste de la búsqueda binaria es de orden logarítmico. Dado que $N = 16$, $\\log_2 16 = 4$."
+        }
+      ]
+    },
+    {
+      "id": "lab_4",
+      "title": "Expansión lineal con incremento constante",
+      "context": "Sea la relación de recurrencia $T(N) = T(N-1) + 2$ para $N > 0$, con el caso base $T(0) = 1$.",
+      "parts": [
+        {
+          "id": "lab_4_a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico obtenido para T(1)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Aplicando la regla recursiva: $T(1) = T(0) + 2 = 1 + 2 = 3$."
+        },
+        {
+          "id": "lab_4_b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico obtenido para T(5)?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "La forma cerrada de la ecuación es $T(N) = T(0) + 2N = 1 + 2N$. Evaluando para $N=5$ nos da $1 + 2(5) = 11$."
+        },
+        {
+          "id": "lab_4_c",
+          "label": "c",
+          "question": "¿Cuál es el coeficiente del término lineal N en la fórmula del coste cerrado?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Puesto que se suman 2 unidades de coste en cada una de las N reducciones del tamaño del problema, el coeficiente es 2."
+        },
+        {
+          "id": "lab_4_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del término independiente (caso base) en la forma cerrada de la ecuación?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La constante independiente corresponde al coste del caso base, que es $T(0) = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_5",
+      "title": "Parámetros del Teorema Máster en MergeSort",
+      "context": "Analizamos la recurrencia del algoritmo MergeSort: $T(N) = 2T(N/2) + N$, con $T(1) = 0$.",
+      "parts": [
+        {
+          "id": "lab_5_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a' (número de subproblemas)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El algoritmo realiza 2 llamadas recursivas en el paso inductivo (sobre la mitad izquierda y derecha), por lo que $a=2$."
+        },
+        {
+          "id": "lab_5_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del parámetro 'b' (factor de división del tamaño)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El tamaño de cada subproblema se divide a la mitad en cada paso recursivo, por lo que $b=2$."
+        },
+        {
+          "id": "lab_5_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente k de la complejidad del trabajo de combinación Theta(N^k)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El trabajo de combinación es lineal, $\\Theta(N) = \\Theta(N^1)$, por lo que el exponente $k$ es igual a $1$."
+        },
+        {
+          "id": "lab_5_d",
+          "label": "d",
+          "question": "¿Cuál es la complejidad temporal asintótica del algoritmo expresada como exponente de N en Theta(N^x * log N)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como $a = b^k$ ($2 = 2^1$), aplica el Caso 2 del Teorema Máster. La complejidad es $\\Theta(N^1 \\log N)$, por lo que el exponente $x$ de $N$ es $1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_6",
+      "title": "Teorema Máster - Caso 1",
+      "context": "Sea un algoritmo con coste modelado por la ecuación de recurrencia $T(N) = 8T(N/2) + N$, con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_6_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a' de llamadas recursivas?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El algoritmo genera 8 subproblemas recursivos independientes, por lo tanto $a=8$."
+        },
+        {
+          "id": "lab_6_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del parámetro 'b' de reducción de la entrada?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Cada subproblema procesa una entrada de tamaño reducido a la mitad ($N/2$), por lo tanto $b=2$."
+        },
+        {
+          "id": "lab_6_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente del coste asintótico resultante de la forma Theta(N^x)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Comparamos $a$ con $b^k$: $a=8$ y $b^k=2^1=2$. Como $a > b^k$ ($8 > 2$), aplica el Caso 1 del Teorema Máster. La complejidad es $\\Theta(N^{\\log_b a}) = \\Theta(N^{\\log_2 8}) = \\Theta(N^3)$. El exponente $x$ es $3$."
+        },
+        {
+          "id": "lab_6_d",
+          "label": "d",
+          "question": "¿Cuál es el coste temporal numérico para una entrada de tamaño N = 2?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Evaluando en la ecuación: $T(2) = 8T(1) + 2$. Como el caso base es $T(1) = 1$, sustituyendo obtenemos $T(2) = 8(1) + 2 = 10$."
+        }
+      ]
+    },
+    {
+      "id": "lab_7",
+      "title": "Teorema Máster - Caso 3",
+      "context": "Considere la ecuación de recurrencia $T(N) = 2T(N/4) + N^2$, con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_7_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El coeficiente que multiplica a la llamada recursiva es $a=2$."
+        },
+        {
+          "id": "lab_7_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del parámetro 'b'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El divisor del tamaño de la entrada en el término recursivo es $b=4$."
+        },
+        {
+          "id": "lab_7_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente del término dominante en la complejidad temporal Theta(N^x)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Comparamos $a$ con $b^k$ ($a=2, b=4, k=2 \\implies b^k = 16$). Dado que $a < b^k$ ($2 < 16$), estamos ante el Caso 3 del Teorema Máster, donde domina el coste de combinación de la raíz: $\\Theta(N^k) = \\Theta(N^2)$. El exponente $x$ es $2$."
+        },
+        {
+          "id": "lab_7_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico resultante para una entrada N = 4?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "Evaluando: $T(4) = 2T(4/4) + 4^2 = 2T(1) + 16$. Dado que $T(1) = 1$, sustituyendo queda $2(1) + 16 = 18$."
+        }
+      ]
+    },
+    {
+      "id": "lab_8",
+      "title": "Propiedades de Árbol de Recursión",
+      "context": "Analizamos el árbol de recursión de la relación de recurrencia $T(N) = 3T(N/3) + N$ con $T(1)=1$.",
+      "parts": [
+        {
+          "id": "lab_8_a",
+          "label": "a",
+          "question": "¿Cuántos nodos de ejecución recursiva hay en el nivel 0 (raíz)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El nivel 0 representa la llamada inicial al algoritmo completo, la cual corresponde a un único nodo de ejecución."
+        },
+        {
+          "id": "lab_8_b",
+          "label": "b",
+          "question": "¿Cuántos nodos de ejecución hay en el nivel 2 del árbol de recursión?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Cada nodo se divide en 3 subproblemas. El número de nodos en el nivel $j$ es $3^j$. Para el nivel $2$, tenemos $3^2 = 9$ nodos."
+        },
+        {
+          "id": "lab_8_c",
+          "label": "c",
+          "question": "En el nivel 2, ¿cuál es el coeficiente multiplicador de N para representar el trabajo total del nivel (ej. x si el trabajo es x*N)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el nivel 2 hay 9 nodos de tamaño $N/9$. Dado que el trabajo individual de un nodo de tamaño $M$ es $M$, el trabajo conjunto en el nivel 2 es $9 \\times (N/9) = 1 \\cdot N$. El coeficiente es 1."
+        },
+        {
+          "id": "lab_8_d",
+          "label": "d",
+          "question": "¿Cuál es la altura o número de niveles del árbol de recursión si el tamaño de entrada es N = 27?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La altura viene dada por $\\log_3 N$. Para $N=27$, la altura es $\\log_3 27 = 3$ niveles de llamadas."
+        }
+      ]
+    },
+    {
+      "id": "lab_9",
+      "title": "Recursión Cruzada o Mutua",
+      "context": "Se implementa un algoritmo recursivo mutuo para comprobar la paridad de un entero positivo:\n```java\nboolean esPar(int n) {\n    if (n == 0) return true;\n    return esImpar(n - 1);\n}\nboolean esImpar(int n) {\n    if (n == 0) return false;\n    return esPar(n - 1);\n}\n```\nEstudiamos el flujo para la llamada inicial `esPar(6)`.",
+      "parts": [
+        {
+          "id": "lab_9_a",
+          "label": "a",
+          "question": "¿Cuántas llamadas a funciones en total se realizan hasta completar la ejecución (incluida la inicial)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Las llamadas ocurren secuencialmente de 1 en 1 disminuyendo el valor de $N$: `esPar(6)` $\\to$ `esImpar(5)` $\\to$ `esPar(4)` $\\to$ `esImpar(3)` $\\to$ `esPar(2)` $\\to$ `esImpar(1)` $\\to$ `esPar(0)` (parada en caso base). Totalizan $7$ llamadas."
+        },
+        {
+          "id": "lab_9_b",
+          "label": "b",
+          "question": "¿Cuántas veces en total se ejecuta concretamente el método `esImpar`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El método `esImpar` es ejecutado para los parámetros de entrada $5$, $3$ y $1$. En total se invoca $3$ veces."
+        },
+        {
+          "id": "lab_9_c",
+          "label": "c",
+          "question": "¿Qué valor entero representa el resultado booleano final retornado (mapear true=1 y false=0)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Puesto que 6 es un número par, la función `esPar(6)` devuelve `true`, que representamos con el valor numérico 1."
+        },
+        {
+          "id": "lab_9_d",
+          "label": "d",
+          "question": "¿Cuál es la cantidad máxima de marcos de pila apilados simultáneamente?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Dado que las llamadas son lineales y no retornan hasta alcanzar el caso base en $N=0$, el punto de máxima profundidad de la pila retiene todos los $7$ marcos de la secuencia."
+        }
+      ]
+    },
+    {
+      "id": "lab_10",
+      "title": "Torres de Hanói",
+      "context": "El número de movimientos mínimos requeridos para trasladar N discos de una varilla a otra en las Torres de Hanói sigue la relación de recurrencia: $H(N) = 2H(N-1) + 1$, con $H(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_10_a",
+          "label": "a",
+          "question": "¿Cuál es la cantidad de movimientos para N = 3 discos?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Calculamos paso a paso: $H(1)=1$, $H(2)=2(1)+1=3$, $H(3)=2(3)+1=7$."
+        },
+        {
+          "id": "lab_10_b",
+          "label": "b",
+          "question": "¿Cuál es la cantidad de movimientos para N = 5 discos?",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "Calculamos sucesivamente: $H(4)=2(7)+1=15$, $H(5)=2(15)+1=31$."
+        },
+        {
+          "id": "lab_10_c",
+          "label": "c",
+          "question": "¿Cuál es la base de la potencia exponencial en la complejidad O(c^N) de este algoritmo?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La forma cerrada del número de movimientos es $2^N - 1$. Por ende, la base de la complejidad exponencial es 2."
+        },
+        {
+          "id": "lab_10_d",
+          "label": "d",
+          "question": "¿Cuántos movimientos se requieren en total si jugamos con N = 6 discos?",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "Evaluando en la forma cerrada para $N=6$: $2^6 - 1 = 64 - 1 = 63$ movimientos."
+        }
+      ]
+    },
+    {
+      "id": "lab_11",
+      "title": "Recursión Lineal con Trabajo Cuadrático",
+      "context": "Sea una ecuación de recurrencia para un algoritmo ineficiente: $T(N) = T(N-1) + N^2$ con $T(0) = 0$.",
+      "parts": [
+        {
+          "id": "lab_11_a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico obtenido para T(1)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Aplicando la regla recursiva: $T(1) = T(0) + 1^2 = 0 + 1 = 1$."
+        },
+        {
+          "id": "lab_11_b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico obtenido para T(3)?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Calculando secuencialmente: $T(1)=1$, $T(2)=T(1)+2^2=1+4=5$, $T(3)=T(2)+3^2=5+9=14$."
+        },
+        {
+          "id": "lab_11_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente x de la complejidad asintótica dominante Theta(N^x) de esta relación?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La forma cerrada es la suma de los cuadrados de los primeros $N$ enteros, expresada como $\\frac{N(N+1)(2N+1)}{6}$. El término dominante en este polinomio es $\\frac{2N^3}{6} = \\frac{N^3}{3}$, lo que da complejidad $\\Theta(N^3)$, con exponente $3$."
+        },
+        {
+          "id": "lab_11_d",
+          "label": "d",
+          "question": "¿Cuál es el valor numérico de T(4)?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Sustituyendo en el paso anterior: $T(4) = T(3) + 4^2 = 14 + 16 = 30$."
+        }
+      ]
+    },
+    {
+      "id": "lab_12",
+      "title": "Búsqueda Ternaria",
+      "context": "Un algoritmo de búsqueda ternaria divide un array en 3 partes iguales, y tras realizar comparaciones constantes realiza a lo sumo una única llamada recursiva: $T(N) = T(N/3) + 1$, con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_12_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a' en la ecuación del Teorema Máster?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El algoritmo realiza como máximo una llamada recursiva sobre una de las tres partes, de modo que $a=1$."
+        },
+        {
+          "id": "lab_12_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de la base de reducción 'b' del tamaño de entrada?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El array se divide en tres intervalos iguales en cada iteración recursiva, por lo que $b=3$."
+        },
+        {
+          "id": "lab_12_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente k de la complejidad del trabajo no recursivo Theta(N^k)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El trabajo realizado en cada nivel es de coste constante, $\\Theta(1) = \\Theta(N^0)$, por lo que el exponente $k$ es igual a $0$."
+        },
+        {
+          "id": "lab_12_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico exacto de T(27)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Podemos calcular la forma cerrada como $T(N) = \\log_3 N + 1$. Para $N=27$: $T(27) = \\log_3(27) + 1 = 3 + 1 = 4$."
+        }
+      ]
+    },
+    {
+      "id": "lab_13",
+      "title": "Multiplicación de Karatsuba",
+      "context": "El algoritmo de multiplicación de Karatsuba para enteros de N dígitos reduce el problema de multiplicar dos números a tres multiplicaciones de números de tamaño mitad: $T(N) = 3T(N/2) + N$, con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_13_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a' en la recurrencia?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Karatsuba genera exactamente 3 llamadas recursivas con números de menor tamaño, por lo que $a=3$."
+        },
+        {
+          "id": "lab_13_b",
+          "label": "b",
+          "question": "¿Cuál es el parámetro de reducción de tamaño 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los enteros se dividen en partes que contienen aproximadamente la mitad de los dígitos originales, por lo que $b=2$."
+        },
+        {
+          "id": "lab_13_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del exponente x de la complejidad asintótica Theta(N^x) aproximado a 4 decimales?",
+          "correctValue": 1.585,
+          "tolerance": 0.001,
+          "explanation": "Aplicando el Caso 1 del Teorema Máster ($3 > 2^1$), la complejidad es $\\Theta(N^{\\log_2 3})$. Dado que $\\log_2 3 \\approx 1.58496$, redondeando a 3 decimales es $1.585$."
+        },
+        {
+          "id": "lab_13_d",
+          "label": "d",
+          "question": "¿Cuál es el coste temporal numérico para N = 4?",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "Calculando paso a paso: $T(1)=1$, $T(2)=3T(1)+2 = 3(1)+2 = 5$, $T(4)=3T(2)+4 = 3(5)+4 = 19$."
+        }
+      ]
+    },
+    {
+      "id": "lab_14",
+      "title": "Multiplicación de Matrices de Strassen",
+      "context": "El algoritmo de Strassen modela el coste de multiplicar dos matrices cuadradas de tamaño N x N mediante: $T(N) = 7T(N/2) + N^2$ con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_14_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a' (número de submatrices a multiplicar)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Strassen reduce las 8 multiplicaciones de submatrices estándar a solo 7 llamadas recursivas, por lo que $a=7$."
+        },
+        {
+          "id": "lab_14_b",
+          "label": "b",
+          "question": "¿Cuál es el divisor del tamaño de dimensión de matriz 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Cada submatriz dividida posee una dimensión que es exactamente la mitad de la original, por lo que $b=2$."
+        },
+        {
+          "id": "lab_14_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del exponente x de la complejidad asintótica Theta(N^x) aproximado a 4 decimales?",
+          "correctValue": 2.8074,
+          "tolerance": 0.0001,
+          "explanation": "Comparamos $a=7$ con $b^k=2^2=4$. Como $7 > 4$, aplica el Caso 1 del Teorema Máster. La complejidad es $\\Theta(N^{\\log_2 7}) \\approx \\Theta(N^{2.80735})$. Redondeando a 4 decimales da $2.8074$."
+        },
+        {
+          "id": "lab_14_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas recursivas de tamaño 1 se realizan en total si ejecutamos el algoritmo para matrices de N = 2?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Para $N=2$, se realiza una primera llamada que genera 7 subproblemas de tamaño $2/2 = 1$. Es decir, se realizan exactamente $7$ llamadas de tamaño básico."
+        }
+      ]
+    },
+    {
+      "id": "lab_15",
+      "title": "Ecuación recursiva lineal con paso variable",
+      "context": "Dada la ecuación de recurrencia $T(N) = T(N-2) + 1$, con los casos base $T(0) = 0$ y $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_15_a",
+          "label": "a",
+          "question": "¿Cuál es el coste numérico exacto para T(4)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Calculamos para valores pares: $T(2) = T(0) + 1 = 1$, $T(4) = T(2) + 1 = 2$."
+        },
+        {
+          "id": "lab_15_b",
+          "label": "b",
+          "question": "¿Cuál es el coste numérico exacto para T(5)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Calculamos para valores impares: $T(1) = 1$, $T(3) = T(1) + 1 = 2$, $T(5) = T(3) + 1 = 3$."
+        },
+        {
+          "id": "lab_15_c",
+          "label": "c",
+          "question": "¿Cuál es el coste numérico exacto para T(10)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para valores pares $N$, el coste es $N/2$. Por lo tanto, $T(10) = 10 / 2 = 5$."
+        },
+        {
+          "id": "lab_15_d",
+          "label": "d",
+          "question": "¿Cuál es la complejidad temporal expresada como exponente de N (ej. 1 para Theta(N))?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El coste se incrementa linealmente en función de $N$ (aproximadamente $N/2$). La complejidad es $\\Theta(N)$, cuyo exponente es $1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_16",
+      "title": "Capacidad y Desbordamiento del Stack de la JVM",
+      "context": "Suponga que un método recursivo consume exactamente 256 bytes por cada marco de pila creado. Configuramos la pila de ejecución de la JVM para que tenga un tamaño máximo de 1 Megabyte (1.048.576 bytes).",
+      "parts": [
+        {
+          "id": "lab_16_a",
+          "label": "a",
+          "question": "¿Cuántas llamadas recursivas máximo se pueden realizar antes de sufrir un StackOverflowError?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "El número máximo de marcos permitidos se calcula como la capacidad total dividida por el tamaño de un marco: $1048576 / 256 = 4096$ llamadas."
+        },
+        {
+          "id": "lab_16_b",
+          "label": "b",
+          "question": "Si reducimos el tamaño de variables locales para que cada marco ocupe 128 bytes, ¿cuál es el nuevo número máximo de llamadas soportadas?",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "Dividiendo el espacio total por el nuevo tamaño de marco: $1048576 / 128 = 8192$ llamadas."
+        },
+        {
+          "id": "lab_16_c",
+          "label": "c",
+          "question": "Si por el contrario aumentamos la complejidad del método requiriendo 512 bytes por marco, ¿cuál es el nuevo límite máximo de llamadas?",
+          "correctValue": 2048,
+          "tolerance": 0,
+          "explanation": "Dividiendo el espacio total por el nuevo tamaño de marco: $1048576 / 512 = 2048$ llamadas."
+        },
+        {
+          "id": "lab_16_d",
+          "label": "d",
+          "question": "Si mantenemos el marco en 256 bytes pero aumentamos la pila mediante JVM (-Xss) a 2 Megabytes (2.097.152 bytes), ¿cuál es la nueva capacidad máxima de llamadas?",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "Dividiendo el espacio duplicado por el coste unitario: $2097152 / 256 = 8192$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "lab_17",
+      "title": "Complejidad de la Ordenación por Selección Recursiva",
+      "context": "El algoritmo SelectionSort puede implementarse recursivamente reduciendo el tamaño del subarray a ordenar por medio de búsquedas del mínimo. La ecuación para sus comparaciones es $C(N) = C(N-1) + (N - 1)$, con $C(1) = 0$.",
+      "parts": [
+        {
+          "id": "lab_17_a",
+          "label": "a",
+          "question": "¿Cuántas comparaciones se realizan para ordenar un array de N = 4 elementos?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Evaluando recursivamente: $C(1)=0$, $C(2)=C(1)+1=1$, $C(3)=C(2)+2=3$, $C(4)=C(3)+3=6$."
+        },
+        {
+          "id": "lab_17_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones se ejecutan si el array tiene N = 10 elementos?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "La forma cerrada es la suma de los enteros de $1$ a $N-1$: $\\frac{N(N-1)}{2}$. Para $N=10$, tenemos $\\frac{10 \\times 9}{2} = 45$."
+        },
+        {
+          "id": "lab_17_c",
+          "label": "c",
+          "question": "¿Cuál es la complejidad temporal de las comparaciones expresada como el exponente x en Theta(N^x)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El coste de comparaciones es un polinomio cuadrático $\\frac{N^2 - N}{2}$. Su cota asintótica es $\\Theta(N^2)$, con exponente $2$."
+        },
+        {
+          "id": "lab_17_d",
+          "label": "d",
+          "question": "¿Cuántas comparaciones se realizan para un array de N = 5 elementos?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Aplicando la fórmula cerrada para $N=5$: $\\frac{5 \\times 4}{2} = 10$ comparaciones."
+        }
+      ]
+    },
+    {
+      "id": "lab_18",
+      "title": "Redundancia de Fibonacci en fib(5)",
+      "context": "Evaluamos en detalle la recursión del Fibonacci ingenuo $fib(n)$ para la llamada inicial `fib(5)`.",
+      "parts": [
+        {
+          "id": "lab_18_a",
+          "label": "a",
+          "question": "¿Cuántas veces se invoca el método `fib(2)` en total?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Desglosando el árbol:\n- `fib(5)` llama a `fib(4)` y `fib(3)`\n- `fib(4)` llama a `fib(3)` y `fib(2)` (1ª)\n- Cada una de las dos llamadas a `fib(3)` invoca a `fib(2)` y `fib(1)` (2ª y 3ª)\nTotal de llamadas a `fib(2)` = $3$."
+        },
+        {
+          "id": "lab_18_b",
+          "label": "b",
+          "question": "¿Cuántas veces se invoca el método `fib(1)` en total?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Cada `fib(3)` llama a `fib(1)` (2 veces en total). Cada `fib(2)` llama a `fib(1)` (3 veces en total). Por tanto, la suma es $2 + 3 = 5$ invocaciones a `fib(1)`."
+        },
+        {
+          "id": "lab_18_c",
+          "label": "c",
+          "question": "¿Cuántas veces se invoca el método `fib(0)` en total?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El caso base `fib(0)` es invocado únicamente por las llamadas a `fib(2)`. Dado que `fib(2)` se ejecuta 3 veces, `fib(0)` se llama exactamente $3$ veces."
+        },
+        {
+          "id": "lab_18_d",
+          "label": "d",
+          "question": "¿Cuál es el número total de llamadas (nodos en el árbol) para resolver `fib(5)`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La suma total de llamadas es: `fib(5)` [1] + `fib(4)` [1] + `fib(3)` [2] + `fib(2)` [3] + `fib(1)` [5] + `fib(0)` [3] = $15$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "lab_19",
+      "title": "Búsqueda en Árbol Binario de Búsqueda Balanceado",
+      "context": "La búsqueda de un elemento en un árbol binario de búsqueda perfectamente equilibrado se modela por la relación $T(N) = T(N/2) + 1$, con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_19_a",
+          "label": "a",
+          "question": "¿Cuál es el coste numérico de realizar la búsqueda en un árbol de N = 8 nodos?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Calculamos recursivamente: $T(1)=1$, $T(2)=T(1)+1=2$, $T(4)=3$, $T(8)=4$."
+        },
+        {
+          "id": "lab_19_b",
+          "label": "b",
+          "question": "¿Cuál es el coste numérico si el árbol contiene N = 64 nodos?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La fórmula de coste cerrado es $T(N) = \\log_2 N + 1$. Evaluando para $N=64$: $\\log_2 64 + 1 = 6 + 1 = 7$."
+        },
+        {
+          "id": "lab_19_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del parámetro 'a' de llamadas recursivas en esta relación?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En un árbol de búsqueda binaria balanceado, se decide ir a la rama izquierda o derecha, realizando únicamente 1 llamada recursiva, por lo que $a=1$."
+        },
+        {
+          "id": "lab_19_d",
+          "label": "d",
+          "question": "¿Cuál es el exponente x de N en la complejidad Theta(N^x * log N) obtenida?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Puesto que la complejidad es puramente logarítmica $\\Theta(\\log N) = \\Theta(N^0 \\log N)$, el exponente $x$ del factor $N$ es $0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_20",
+      "title": "Recurrencia Exponencial con Suma de Potencias",
+      "context": "Un algoritmo acumula coste exponencial mediante la ecuación: $T(N) = T(N-1) + 2^N$ con $T(0) = 1$.",
+      "parts": [
+        {
+          "id": "lab_20_a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico obtenido para T(1)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Aplicando la definición recursiva: $T(1) = T(0) + 2^1 = 1 + 2 = 3$."
+        },
+        {
+          "id": "lab_20_b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico obtenido para T(2)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Aplicando la regla recursiva: $T(2) = T(1) + 2^2 = 3 + 4 = 7$."
+        },
+        {
+          "id": "lab_20_c",
+          "label": "c",
+          "question": "¿Cuál es el valor numérico obtenido para T(3)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Aplicando de nuevo: $T(3) = T(2) + 2^3 = 7 + 8 = 15$."
+        },
+        {
+          "id": "lab_20_d",
+          "label": "d",
+          "question": "¿Cuál es el valor numérico de T(5)?",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "La forma cerrada es $T(N) = 2^{N+1} - 1$. Para $N=5$, obtenemos $2^6 - 1 = 64 - 1 = 63$."
+        }
+      ]
+    },
+    {
+      "id": "lab_21",
+      "title": "Bucle Lineal con División Binaria",
+      "context": "Se analiza un fragmento Java cuyo coste sigue la recurrencia $T(N) = 2T(N/2) + N$ con el caso base $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_21_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de subproblemas 'a'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El coeficiente del término recursivo indica que se realizan exactamente $a=2$ llamadas en cada paso inductivo."
+        },
+        {
+          "id": "lab_21_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de reducción de tamaño 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La entrada se divide exactamente entre 2 en cada llamada, por lo que $b=2$."
+        },
+        {
+          "id": "lab_21_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente k del coste no recursivo Theta(N^k)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El coste no recursivo de combinación es lineal $\\Theta(N) = \\Theta(N^1)$, de modo que el exponente $k=1$."
+        },
+        {
+          "id": "lab_21_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico exacto de T(4) para este algoritmo?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Calculamos recursivamente: $T(1) = 1$. $T(2) = 2T(1) + 2 = 2(1) + 2 = 4$. $T(4) = 2T(2) + 4 = 2(4) + 4 = 12$."
+        }
+      ]
+    },
+    {
+      "id": "lab_22",
+      "title": "Tres llamadas recursivas de tamaño tercio",
+      "context": "Sea la ecuación de recurrencia $T(N) = 3T(N/3) + 1$, con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_22_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro de llamadas 'a'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La función realiza exactamente $3$ llamadas recursivas sobre subproblemas, por lo que $a=3$."
+        },
+        {
+          "id": "lab_22_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de la división de tamaño 'b'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Cada subproblema es de tamaño exactamente un tercio del original ($N/3$), por lo que $b=3$."
+        },
+        {
+          "id": "lab_22_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente x de la complejidad asintótica de la forma Theta(N^x)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Comparamos $a$ con $b^k$: $a=3, b=3, k=0 \\implies b^k=1$. Como $a > b^k$ ($3 > 1$), aplica el Caso 1 del Teorema Máster. La complejidad es $\\Theta(N^{\\log_b a}) = \\Theta(N^{\\log_3 3}) = \\Theta(N^1) = \\Theta(N)$. El exponente $x$ es $1$."
+        },
+        {
+          "id": "lab_22_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico exacto para T(9)?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Calculamos paso a paso: $T(1)=1$. $T(3)=3T(1)+1 = 3(1)+1 = 4$. $T(9)=3T(3)+1 = 3(4)+1 = 13$."
+        }
+      ]
+    },
+    {
+      "id": "lab_23",
+      "title": "Expansión lineal con decremento mayor",
+      "context": "Analice la relación de recurrencia $T(N) = T(N-3) + 5$ con caso base $T(0) = 2$, considerando que N es un múltiplo de 3.",
+      "parts": [
+        {
+          "id": "lab_23_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de T(3)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Aplicando la regla recursiva: $T(3) = T(0) + 5 = 2 + 5 = 7$."
+        },
+        {
+          "id": "lab_23_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de T(6)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Aplicando la regla recursiva: $T(6) = T(3) + 5 = 7 + 5 = 12$."
+        },
+        {
+          "id": "lab_23_c",
+          "label": "c",
+          "question": "¿Cuál es el valor de T(15)?",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "La ecuación general por expansión es $T(N) = T(0) + 5 \\cdot (N/3) = 2 + \\frac{5N}{3}$. Para $N=15$: $2 + 5(5) = 27$."
+        },
+        {
+          "id": "lab_23_d",
+          "label": "d",
+          "question": "¿Cuál es la complejidad temporal expresada como exponente de N (ej. 1 para lineal)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El coste cerrado es lineal respecto a $N$, es decir, $\\Theta(N) = \\Theta(N^1)$, por lo que el exponente es $1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_24",
+      "title": "Teorema Máster - Exponente Fraccionario",
+      "context": "Analice la recurrencia $T(N) = 4T(N/3) + N$ con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_24_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El número de subproblemas es $a=4$."
+        },
+        {
+          "id": "lab_24_b",
+          "label": "b",
+          "question": "¿Cuál es el parámetro de división 'b'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La reducción del tamaño de entrada es entre $3$, por lo que $b=3$."
+        },
+        {
+          "id": "lab_24_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del exponente x en la complejidad Theta(N^x) redondeado a 4 decimales?",
+          "correctValue": 1.2619,
+          "tolerance": 0.0001,
+          "explanation": "Comparamos $a=4$ con $b^k=3^1=3$. Puesto que $a > b^k$, estamos en el Caso 1 del Teorema Máster. La complejidad es $\\Theta(N^{\\log_3 4})$. Calculando $\\log_3 4 = \\frac{\\ln 4}{\\ln 3} \\approx 1.261859$. Redondeado a 4 decimales da $1.2619$."
+        },
+        {
+          "id": "lab_24_d",
+          "label": "d",
+          "question": "¿Cuál es el valor numérico exacto de T(3)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Aplicando la regla recursiva: $T(3) = 4T(1) + 3 = 4(1) + 3 = 7$."
+        }
+      ]
+    },
+    {
+      "id": "lab_25",
+      "title": "Trabajo de Combinación con Logaritmo",
+      "context": "Sea la relación de recurrencia $T(N) = 2T(N/2) + N \\log_2 N$, con $T(1) = 0$.",
+      "parts": [
+        {
+          "id": "lab_25_a",
+          "label": "a",
+          "question": "¿Cuál es el coste numérico exacto de T(2)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Calculamos: $T(2) = 2T(1) + 2 \\log_2 2$. Como $T(1)=0$, queda $2(0) + 2(1) = 2$."
+        },
+        {
+          "id": "lab_25_b",
+          "label": "b",
+          "question": "¿Cuál es el coste numérico de T(4)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Calculamos: $T(4) = 2T(2) + 4 \\log_2 4 = 2(2) + 4(2) = 4 + 8 = 12$."
+        },
+        {
+          "id": "lab_25_c",
+          "label": "c",
+          "question": "¿Cuál es el coste numérico de T(8)?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "Calculamos: $T(8) = 2T(4) + 8 \\log_2 8 = 2(12) + 8(3) = 24 + 24 = 48$."
+        },
+        {
+          "id": "lab_25_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico de T(16)?",
+          "correctValue": 160,
+          "tolerance": 0,
+          "explanation": "Calculamos: $T(16) = 2T(8) + 16 \\log_2 16 = 2(48) + 16(4) = 96 + 64 = 160$."
+        }
+      ]
+    },
+    {
+      "id": "lab_26",
+      "title": "Teorema Máster - Dominio Recursivo Mayor",
+      "context": "Sea la recurrencia $T(N) = 16T(N/2) + N^3$ con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_26_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a'?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El número de subproblemas es $a=16$."
+        },
+        {
+          "id": "lab_26_b",
+          "label": "b",
+          "question": "¿Cuál es el divisor de entrada 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La entrada se reduce a la mitad por subproblema, por lo que $b=2$."
+        },
+        {
+          "id": "lab_26_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente de la complejidad asintótica de la forma Theta(N^x)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Comparamos $a=16$ con $b^k = 2^3 = 8$. Dado que $16 > 8$, aplica el Caso 1 del Teorema Máster. Complejidad: $\\Theta(N^{\\log_2 16}) = \\Theta(N^4)$, por lo que el exponente es $4$."
+        },
+        {
+          "id": "lab_26_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico para una entrada de tamaño N = 2?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Evaluando en la ecuación: $T(2) = 16T(1) + 2^3 = 16(1) + 8 = 24$."
+        }
+      ]
+    },
+    {
+      "id": "lab_27",
+      "title": "Ecuación de Recurrencia Lineal Homogénea",
+      "context": "Considere la relación homogénea de segundo orden: $a_n = 5a_{n-1} - 6a_{n-2}$, con las condiciones iniciales $a_0 = 1$ y $a_1 = 5$.",
+      "parts": [
+        {
+          "id": "lab_27_a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico de a_2?",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "Calculamos recursivamente: $a_2 = 5a_1 - 6a_0 = 5(5) - 6(1) = 25 - 6 = 19$."
+        },
+        {
+          "id": "lab_27_b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico de a_3?",
+          "correctValue": 65,
+          "tolerance": 0,
+          "explanation": "Calculamos: $a_3 = 5a_2 - 6a_1 = 5(19) - 6(5) = 95 - 30 = 65$."
+        },
+        {
+          "id": "lab_27_c",
+          "label": "c",
+          "question": "Si la solución general de la recurrencia es a_n = C_1 * 3^n + C_2 * 2^n, ¿cuál es el valor de la constante C_1?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Resolvemos con las condiciones iniciales:\n1) $C_1 + C_2 = 1 \\implies C_2 = 1 - C_1$\n2) $3C_1 + 2C_2 = 5 \\implies 3C_1 + 2(1 - C_1) = 5 \\implies C_1 + 2 = 5 \\implies C_1 = 3$."
+        },
+        {
+          "id": "lab_27_d",
+          "label": "d",
+          "question": "¿Cuál es el valor de la constante C_2 de la solución general?",
+          "correctValue": -2,
+          "tolerance": 0,
+          "explanation": "Sustituyendo $C_1 = 3$ en la primera ecuación: $C_2 = 1 - 3 = -2$."
+        }
+      ]
+    },
+    {
+      "id": "lab_28",
+      "title": "Suma recursiva de elementos de un array",
+      "context": "Se analiza un método recursivo para sumar los elementos de un array en Java:\n```java\nint sum(int[] arr, int n) {\n    if (n <= 0) return 0;\n    return arr[n - 1] + sum(arr, n - 1);\n}\n```\nConsideramos el array `arr = {1, 2, 3, 4, 5}` y la llamada `sum(arr, 5)`.",
+      "parts": [
+        {
+          "id": "lab_28_a",
+          "label": "a",
+          "question": "¿Qué valor entero retorna la llamada principal sum(arr, 5)?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La función suma consecutivamente todos los elementos: $1 + 2 + 3 + 4 + 5 = 15$."
+        },
+        {
+          "id": "lab_28_b",
+          "label": "b",
+          "question": "¿Cuántos marcos de pila en total se crean durante la ejecución (incluyendo la llamada inicial)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Las llamadas son `sum(5)`, `sum(4)`, `sum(3)`, `sum(2)`, `sum(1)`, y la parada en `sum(0)`. En total son $6$ llamadas y marcos de pila."
+        },
+        {
+          "id": "lab_28_c",
+          "label": "c",
+          "question": "¿Qué valor del array `arr[n-1]` se procesa en la tercera llamada (donde el argumento es n = 3)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "En la llamada con $n=3$, se accede al elemento `arr[3-1] = arr[2]`. Dado que el array es `{1, 2, 3, 4, 5}`, `arr[2]` vale $3$."
+        },
+        {
+          "id": "lab_28_d",
+          "label": "d",
+          "question": "¿Qué valor retorna concretamente la llamada sum(arr, 1)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La llamada `sum(arr, 1)` ejecuta `arr[0] + sum(arr, 0)`. Como `arr[0] = 1` y `sum(arr, 0) = 0`, retorna $1 + 0 = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_29",
+      "title": "Teorema Máster - Caso 2 de Equilibrio Cuadrático",
+      "context": "Analizamos la relación de recurrencia $T(N) = 4T(N/2) + N^2$ con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_29_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El coeficiente multiplicador es $a=4$."
+        },
+        {
+          "id": "lab_29_b",
+          "label": "b",
+          "question": "¿Cuál es el divisor de tamaño de entrada 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El divisor del término recursivo es $b=2$."
+        },
+        {
+          "id": "lab_29_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente de N en la complejidad final Theta(N^x * log N)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Comparamos $a=4$ con $b^k = 2^2 = 4$. Al cumplirse que $a = b^k$, aplica el Caso 2 del Teorema Máster. La complejidad es $\\Theta(N^2 \\log N)$, por lo que el exponente $x$ es $2$."
+        },
+        {
+          "id": "lab_29_d",
+          "label": "d",
+          "question": "¿Cuál es el coste numérico exacto de T(2)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Evaluando en la ecuación: $T(2) = 4T(1) + 2^2$. Puesto que $T(1)=1$, sustituyendo queda $4(1) + 4 = 8$."
+        }
+      ]
+    },
+    {
+      "id": "lab_30",
+      "title": "División por 3 con Combinación Lineal",
+      "context": "Sea la recurrencia $T(N) = 3T(N/3) + N$ con $T(1) = 1$.",
+      "parts": [
+        {
+          "id": "lab_30_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del parámetro 'a'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El número de subproblemas es $a=3$."
+        },
+        {
+          "id": "lab_30_b",
+          "label": "b",
+          "question": "¿Cuál es el divisor del tamaño 'b'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El factor de división es $b=3$."
+        },
+        {
+          "id": "lab_30_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente de N en la complejidad resultante Theta(N^x * log N)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Comparamos $a=3$ con $b^k = 3^1 = 3$. Al ser iguales ($a = b^k$), aplica el Caso 2 del Teorema Máster. La complejidad es $\\Theta(N^1 \\log N)$, de modo que el exponente $x$ es $1$."
+        },
+        {
+          "id": "lab_30_d",
+          "label": "d",
+          "question": "¿Cuál es el coste temporal numérico exacto para T(3)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Evaluando en la ecuación: $T(3) = 3T(1) + 3$. Dado que $T(1) = 1$, sustituyendo queda $3(1) + 3 = 6$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuación General para el Teorema Máster",
+      "tex": "$$T(N) = a T\\left(\\frac{N}{b}\\right) + \\Theta(N^k)$$"
+    },
+    {
+      "name": "Teorema Máster: Caso de Dominio Recursivo (Caso 1)",
+      "tex": "$$T(N) \\in \\Theta\\left(N^{\\log_b a}\\right) \\quad \\text{si } a > b^k$$"
+    },
+    {
+      "name": "Teorema Máster: Caso Equilibrado (Caso 2)",
+      "tex": "$$T(N) \\in \\Theta\\left(N^k \\log N\\right) \\quad \\text{si } a = b^k$$"
+    },
+    {
+      "name": "Teorema Máster: Caso de Dominio de Combinación (Caso 3)",
+      "tex": "$$T(N) \\in \\Theta\\left(N^k\\right) \\quad \\text{si } a < b^k$$"
+    },
+    {
+      "name": "Relación de Recurrencia para la Búsqueda Binaria",
+      "tex": "$$T(N) = T\\left(\\frac{N}{2}\\right) + \\Theta(1)$$"
+    },
+    {
+      "name": "Relación de Recurrencia para la Ordenación por Mezcla (MergeSort)",
+      "tex": "$$T(N) = 2T\\left(\\frac{N}{2}\\right) + \\Theta(N)$$"
+    },
+    {
+      "name": "Forma general de la expansión para decremento unitario con coste constante",
+      "tex": "$$T(N) = T(N-k) + k \\cdot c$$"
+    },
+    {
+      "name": "Ecuación de Recurrencia de las Torres de Hanói",
+      "tex": "$$H(N) = 2H(N-1) + 1$$"
+    },
+    {
+      "name": "Fórmula del coste cerrado para la suma recursiva cuadrática",
+      "tex": "$$T(N) = \\sum_{i=1}^{N} i^2 = \\frac{N(N+1)(2N+1)}{6} \\in \\Theta(N^3)$$"
+    }
+  ]
+}

@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el objetivo principal de la metodología de Diseño por Contrato (DbC)?",
+      "options": [
+        "Aumentar el rendimiento del compilador optimizando el uso de registros.",
+        "Establecer una relación formal de derechos y obligaciones mutuos entre el cliente y el proveedor de un método.",
+        "Evitar el uso de excepciones unchecked para no interrumpir el flujo del programa."
+      ],
+      "correct": 1,
+      "hint": "Bertrand Meyer diseñó DbC como un contrato legal entre dos partes.",
+      "explanation": "El Diseño por Contrato define formalmente los derechos y obligaciones mutuos. El cliente se compromete a cumplir las precondiciones y el proveedor garantiza las postcondiciones."
+    },
+    {
+      "q": "En el Diseño por Contrato, ¿cuál es la obligación principal del cliente?",
+      "options": [
+        "Garantizar que la precondición del método es verdadera antes de invocarlo.",
+        "Capturar todas las excepciones unchecked lanzadas por el proveedor.",
+        "Liberar la memoria del Heap asignada por el proveedor."
+      ],
+      "correct": 0,
+      "hint": "El cliente llama al método y debe cumplir lo que este requiere.",
+      "explanation": "La obligación del cliente es satisfacer la precondición. Si no la cumple, el proveedor no tiene obligación de comportarse correctamente."
+    },
+    {
+      "q": "Si la precondición de un método es falsa al ser invocado, ¿cuál es el derecho del proveedor?",
+      "options": [
+        "Debe capturar la excepción y reintentar con valores por defecto.",
+        "No está obligado a controlar qué sucede y puede asumir que la precondición es verdadera para su lógica.",
+        "Debe llamar obligatoriamente al recolector de basura."
+      ],
+      "correct": 1,
+      "hint": "El contrato exime al proveedor de responsabilidad si el cliente incumple.",
+      "explanation": "El proveedor tiene el derecho de asumir que la precondición se cumple. Si no es así, el contrato se rompe y el comportamiento del método queda indeterminado."
+    },
+    {
+      "q": "¿Qué representa la postcondición de un método en la filosofía del DbC?",
+      "options": [
+        "La garantía que el proveedor cumple al finalizar la ejecución, dado que el cliente satisfizo la precondición.",
+        "La condición que el cliente debe verificar inmediatamente después de que el Garbage Collector actúe.",
+        "Una expresión lógica que solo se cumple si ocurre una excepción checked."
+      ],
+      "correct": 0,
+      "hint": "Es la garantía que ofrece el proveedor al cliente que ha cumplido su parte.",
+      "explanation": "La postcondición es la obligación del proveedor y el derecho del cliente. Si el cliente cumplió la precondición, el resultado final del método satisfará la postcondición."
+    },
+    {
+      "q": "En la práctica de programación en Java, ¿cómo se suele gestionar la violación de una precondición?",
+      "options": [
+        "Retornando un valor nulo o un código de error como -1.",
+        "Lanzando inmediatamente una excepción unchecked, como IllegalArgumentException.",
+        "Ignorando el error y continuando la ejecución con programación defensiva."
+      ],
+      "correct": 1,
+      "hint": "Se busca abortar la ejecución ante un uso incorrecto por parte del cliente.",
+      "explanation": "En Java, si un cliente no cumple una precondición, la práctica recomendada es lanzar una excepción de tipo unchecked (por ejemplo, IllegalArgumentException o NullPointerException) para notificar el bug de forma temprana."
+    },
+    {
+      "q": "¿Qué es el Invariante de Representación (IR) de una clase?",
+      "options": [
+        "Un predicado booleano sobre los atributos internos del objeto que debe ser verdadero durante todo su ciclo de vida.",
+        "Un método público que clona los elementos del Stack al Heap de manera síncrona.",
+        "Una constante que define el tamaño máximo del array interno de la colección."
+      ],
+      "correct": 0,
+      "hint": "Es la condición de consistencia interna de un objeto.",
+      "explanation": "El Invariante de Representación (IR) define si el estado interno de un objeto es consistente y válido. Debe cumplirse en todo momento que el objeto esté en un estado estable."
+    },
+    {
+      "q": "¿Quién o qué debe establecer inicialmente el cumplimiento del Invariante de Representación (IR)?",
+      "options": [
+        "El recolector de basura durante la asignación de memoria.",
+        "Los constructores de la clase al crear e inicializar el objeto.",
+        "El compilador de Java en tiempo de compilación estática."
+      ],
+      "correct": 1,
+      "hint": "El IR debe nacer con el objeto.",
+      "explanation": "Es responsabilidad de los constructores establecer un estado inicial consistente que cumpla con el Invariante de Representación de la clase."
+    },
+    {
+      "q": "¿Cuál es la regla del Invariante de Representación (IR) respecto a los métodos públicos mutadores?",
+      "options": [
+        "No se puede violar bajo ninguna circunstancia, ni siquiera temporalmente a mitad del método.",
+        "Puede violarse temporalmente durante la ejecución del método, pero debe restablecerse antes de finalizar.",
+        "Solo se evalúa al invocar métodos constructores."
+      ],
+      "correct": 1,
+      "hint": "A mitad de la ejecución los valores pueden cambiar temporalmente.",
+      "explanation": "Un método público puede violar temporalmente el IR a mitad de su ejecución mientras realiza sus cálculos, pero antes de finalizar y devolver el control al cliente, el IR debe cumplirse obligatoriamente."
+    },
+    {
+      "q": "¿Qué es el método de validación interno checkRep()?",
+      "options": [
+        "Un método privado de validación asertiva que comprueba que el Invariante de Representación se mantiene.",
+        "Un método público de la interfaz que permite comparar dos instancias en el Heap.",
+        "Una directiva de la JVM que fuerza la ejecución del Garbage Collector."
+      ],
+      "correct": 0,
+      "hint": "Es un método que valida el estado interno y lanza excepciones si falla.",
+      "explanation": "checkRep() comprueba de forma asertiva que el IR es verdadero. Si no se cumple, lanza una excepción de tipo IllegalStateException para advertir de una violación del invariante."
+    },
+    {
+      "q": "¿En qué lugares de una clase debe invocarse típicamente el método checkRep()?",
+      "options": [
+        "Únicamente en los métodos estáticos y destructores de la clase.",
+        "Al final del constructor y al final de cualquier método público que modifique el estado del objeto.",
+        "En todos los getters y setters, antes de cualquier asignación."
+      ],
+      "correct": 1,
+      "hint": "Se llama siempre tras modificar el estado para garantizar que sigue siendo válido.",
+      "explanation": "checkRep() se invoca al final del constructor (cuando se crea el objeto) y al final de los métodos mutadores (públicos) para garantizar que ninguna operación del proveedor deje el objeto en un estado inconsistente."
+    },
+    {
+      "q": "Si definimos una clase Fraccion con numerador y denominador, ¿cuál de los siguientes invariantes es correcto?",
+      "options": [
+        "numerador != 0",
+        "denominador != 0",
+        "numerador >= denominador"
+      ],
+      "correct": 1,
+      "hint": "La división por cero no está definida matemáticamente.",
+      "explanation": "El denominador de una fracción nunca puede ser cero, por lo tanto, el Invariante de Representación mínimo de la clase Fraccion es 'denominador != 0'."
+    },
+    {
+      "q": "En una clase Fecha(dia, mes) sin años bisiestos, ¿cuál es el Invariante de Representación (IR)?",
+      "options": [
+        "1 <= mes <= 12 y 1 <= dia <= limiteDias(mes)",
+        "dia <= 31 y mes <= 12",
+        "dia != 0 y mes != 0"
+      ],
+      "correct": 0,
+      "hint": "El día máximo depende del mes en cuestión.",
+      "explanation": "El mes debe estar en el rango [1, 12] y el día debe ser mayor o igual a 1 y menor o igual al límite de días correspondiente a ese mes en particular."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre el uso de excepciones en programación defensiva y en el Diseño por Contrato?",
+      "options": [
+        "En la programación defensiva se asume que pueden llegar datos inválidos y se manejan; en DbC estricto el cliente es responsable y la violación del contrato es un bug de programación.",
+        "La programación defensiva no utiliza excepciones unchecked, mientras que el DbC sí.",
+        "El DbC solo maneja excepciones de tipo NullPointerException."
+      ],
+      "correct": 0,
+      "hint": "El DbC define responsabilidades claras para evitar que ocurran errores.",
+      "explanation": "La programación defensiva valida constantemente y maneja posibles entradas incorrectas en tiempo de ejecución. El DbC asume que violar el contrato es un bug del programador cliente que debe ser corregido en fase de desarrollo."
+    },
+    {
+      "q": "¿Qué tipo de excepción en Java representa una violación del Invariante de Representación y es lanzada por checkRep()?",
+      "options": [
+        "IllegalArgumentException",
+        "IllegalStateException",
+        "NullPointerException"
+      ],
+      "correct": 1,
+      "hint": "Se refiere al estado actual del objeto (State).",
+      "explanation": "Se utiliza IllegalStateException para indicar que el estado interno del objeto es inconsistente o inválido (violación del invariante), diferenciándolo de un parámetro de entrada incorrecto."
+    },
+    {
+      "q": "Si un método cliente invoca setDenominador(0) en un objeto Fraccion, ¿quién ha cometido el bug?",
+      "options": [
+        "El cliente, por violar la precondición del método que prohibía pasar 0.",
+        "El proveedor, por permitir que el método setDenominador sea público.",
+        "Ambos, porque la fracción debería soportar denominadores nulos."
+      ],
+      "correct": 0,
+      "hint": "El cliente tiene la obligación de cumplir la precondición.",
+      "explanation": "El cliente es el responsable de satisfacer la precondición del método. Intentar pasar un parámetro no válido es una violación de la precondición y constituye un bug en el cliente."
+    },
+    {
+      "q": "En el análisis de corrección de un bucle, ¿qué es la función cota o variante de bucle?",
+      "options": [
+        "Una expresión lógica que se mantiene verdadera en cada iteración.",
+        "Una función entera no negativa que decrece estrictamente en cada iteración, garantizando la terminación del bucle.",
+        "La cantidad de memoria Heap consumida por cada vuelta del bucle."
+      ],
+      "correct": 1,
+      "hint": "Sirve para demostrar que el bucle no será infinito.",
+      "explanation": "La función cota (o variante) es una métrica entera que mide la distancia restante hasta la terminación. Al ser no negativa y decrecer estrictamente, asegura que el bucle terminará en un número finito de pasos."
+    },
+    {
+      "q": "¿Qué significa la propiedad de preservación (o paso inductivo) en un Invariante de Bucle?",
+      "options": [
+        "Que el invariante es verdadero justo antes de entrar al bucle por primera vez.",
+        "Que si el invariante es verdadero al inicio de una iteración, se garantiza que seguirá siendo verdadero al final de esa iteración.",
+        "Que el invariante se guarda en la pila de llamadas de la JVM."
+      ],
+      "correct": 1,
+      "hint": "Es el paso que mantiene la validez del invariante a lo largo de las iteraciones.",
+      "explanation": "La preservación es el paso inductivo: si el invariante de bucle es verdadero al comienzo de una iteración y se ejecuta el cuerpo del bucle, el invariante vuelve a ser verdadero al final de la misma."
+    },
+    {
+      "q": "¿Qué se puede concluir si un bucle cumple con las propiedades de inicialización, preservación y terminación?",
+      "options": [
+        "Que el bucle es totalmente correcto y cumple con la postcondición al finalizar.",
+        "Que el bucle tiene una complejidad exacta de O(1).",
+        "Que la JVM asignará más memoria en el Heap."
+      ],
+      "correct": 0,
+      "hint": "Cumplir estas propiedades garantiza la corrección total del algoritmo.",
+      "explanation": "Si se demuestran la inicialización, preservación y terminación del bucle, queda demostrada la corrección total del bucle con respecto a su especificación."
+    },
+    {
+      "q": "¿Dónde se guardan los parámetros de entrada y variables locales de tipo primitivo de un método al ser invocado en Java?",
+      "options": [
+        "En el Heap.",
+        "En el Stack (Pila de llamadas de la ejecución del hilo).",
+        "En el Method Area."
+      ],
+      "correct": 1,
+      "hint": "Se gestionan de forma LIFO con las llamadas a métodos.",
+      "explanation": "Cada hilo de ejecución en Java tiene una pila (Stack) privada donde se guardan los marcos de llamada de los métodos activos, los cuales almacenan las variables locales y parámetros de tipo primitivo."
+    },
+    {
+      "q": "¿Qué tipo de datos se almacenan en el Heap (Montículo) de la JVM?",
+      "options": [
+        "Las referencias a las variables locales del Stack únicamente.",
+        "Todos los objetos y arrays creados de forma dinámica mediante 'new'.",
+        "Las variables locales primitivas de forma directa."
+      ],
+      "correct": 1,
+      "hint": "Es el área de memoria para la asignación dinámica de objetos.",
+      "explanation": "El Heap de Java almacena todas las instancias de clases (objetos) y arrays que se crean dinámicamente. El Stack solo guarda referencias que apuntan a esos objetos."
+    },
+    {
+      "q": "¿Qué determina el Garbage Collector para saber si un objeto en el Heap debe ser recolectado?",
+      "options": [
+        "Si el objeto no es alcanzable a través de ninguna cadena de referencias activas desde los hilos de ejecución.",
+        "Si el invariante de representación de la clase se ha violado en el objeto.",
+        "Si el tamaño del objeto supera el límite del Stack."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con la accesibilidad de las referencias.",
+      "explanation": "El recolector de basura rastrea los objetos alcanzables desde los puntos raíz (Stack, variables estáticas, etc.). Si un objeto es inalcanzable, se considera basura y se libera."
+    },
+    {
+      "q": "Si ejecutamos 'Fecha f1 = new Fecha(1,1); Fecha f2 = f1;', ¿qué se ha creado en el Heap y en el Stack?",
+      "options": [
+        "Dos objetos Fecha en el Heap y dos referencias en el Stack.",
+        "Un objeto Fecha en el Heap y dos referencias en el Stack apuntando a él (alias).",
+        "Dos objetos Fecha en el Heap y una única referencia en el Stack."
+      ],
+      "correct": 1,
+      "hint": "Solo se usa la palabra clave 'new' una vez.",
+      "explanation": "La palabra clave 'new' crea un único objeto en el Heap. Ambas variables f1 y f2 en el Stack almacenan la misma referencia física hacia ese único objeto."
+    },
+    {
+      "q": "¿Qué es la firma o signatura de un método en Java?",
+      "options": [
+        "El nombre del método y el número, tipo y orden de sus parámetros.",
+        "El tipo de retorno, el modificador de acceso y el nombre del método.",
+        "El Javadoc que describe la postcondición del método."
+      ],
+      "correct": 0,
+      "hint": "Es lo que identifica unívocamente a un método para la sobrecarga.",
+      "explanation": "La firma de un método en Java consta del nombre del método y la lista de tipos de sus parámetros. El tipo de retorno no forma parte de la firma."
+    },
+    {
+      "q": "¿Qué es el enlace dinámico (dynamic binding) en el contexto de la herencia y polimorfismo en Java?",
+      "options": [
+        "La capacidad de compilar clases en diferentes sistemas operativos.",
+        "El mecanismo por el cual la JVM decide en tiempo de ejecución qué método concreto ejecutar según la clase real del objeto.",
+        "El enlace físico que une las variables locales primitivas del Stack al Heap."
+      ],
+      "correct": 1,
+      "hint": "Depende del objeto real que está en el Heap y no de la declaración de la variable.",
+      "explanation": "El enlace dinámico permite que las llamadas a métodos sobreescritos se resuelvan en tiempo de ejecución basándose en el tipo real del objeto al que apunta la referencia, no en el tipo declarado de la variable."
+    },
+    {
+      "q": "¿Cuál es la característica principal de las excepciones de tipo Checked en Java?",
+      "options": [
+        "Heredan de RuntimeException y no requieren ser capturadas obligatoriamente.",
+        "Heredan de Exception (pero no de RuntimeException) y el compilador obliga a capturarlas o declararlas en la cláusula 'throws'.",
+        "Son detectadas por el Garbage Collector en lugar de la JVM."
+      ],
+      "correct": 1,
+      "hint": "El compilador las comprueba activamente (Checked).",
+      "explanation": "Las checked exceptions son comprobadas en tiempo de compilación. Si un método puede lanzarlas, debe manejarlas con try-catch o declararlas con throws, lo que obliga al cliente a gestionar el escenario."
+    },
+    {
+      "q": "¿Qué ventaja aporta el uso de tipos genéricos (Generics) en estructuras de datos como Pila<E>?",
+      "options": [
+        "Permite escribir una única implementación del TAD que funcione de forma segura con cualquier tipo de objeto, validando tipos en compilación.",
+        "Permite duplicar la capacidad del Stack en tiempo de ejecución de manera asíncrona.",
+        "Elimina la necesidad de utilizar constructores en las clases hijas."
+      ],
+      "correct": 0,
+      "hint": "Permite parametrizar las clases con tipos E.",
+      "explanation": "Los genéricos permiten la reutilización de código con seguridad de tipos en tiempo de compilación, eliminando la necesidad de castings manuales y detectando fallos de tipos antes de la ejecución."
+    },
+    {
+      "q": "Al definir la especificación de un TAD Cola (Queue) con comportamiento FIFO, ¿cuál de los siguientes describe el comportamiento correcto?",
+      "options": [
+        "El último elemento en entrar es el primero en salir.",
+        "El primer elemento en entrar es el primero en salir.",
+        "Los elementos se extraen de forma aleatoria según el recolector de basura."
+      ],
+      "correct": 1,
+      "hint": "First-In, First-Out.",
+      "explanation": "Una cola (Queue) sigue la política FIFO: el primer elemento en ser insertado (enqueue) es el primero en ser extraído (dequeue)."
+    },
+    {
+      "q": "¿Cuál es la precondición estándar para la operación pop() en una Pila (Stack)?",
+      "options": [
+        "La pila no debe estar vacía (size > 0).",
+        "La pila debe estar vacía.",
+        "La pila debe contener solo números positivos."
+      ],
+      "correct": 0,
+      "hint": "No podemos extraer elementos de un contenedor vacío.",
+      "explanation": "La operación pop() intenta extraer el elemento en la cima. Si la pila está vacía, la operación no puede realizarse, por lo que la precondición es que la pila contenga al menos un elemento."
+    },
+    {
+      "q": "Si un método tiene una complejidad temporal de O(N log N), ¿cómo se clasifica su comportamiento asintótico?",
+      "options": [
+        "Lineal.",
+        "Lineal-logarítmico (o casi lineal).",
+        "Cuadrático."
+      ],
+      "correct": 1,
+      "hint": "Es el producto de N por log(N).",
+      "explanation": "O(N log N) se denomina complejidad lineal-logarítmica o casi lineal. Es típica de algoritmos eficientes de ordenación como MergeSort y QuickSort (en el caso promedio)."
+    },
+    {
+      "q": "Según el Teorema Maestro, si la relación de recurrencia es T(n) = 2T(n/2) + O(n), ¿cuál es su complejidad asintótica?",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n^2)"
+      ],
+      "correct": 1,
+      "hint": "El trabajo en las divisiones coincide con el trabajo del nivel actual.",
+      "explanation": "En la recurrencia T(n) = 2T(n/2) + O(n), los parámetros son a=2, b=2, d=1. Como a = b^d (2 = 2^1), cae en el caso 2 del Teorema Maestro, dando como resultado O(n log n)."
+    },
+    {
+      "q": "¿Qué sucede en la JVM si un objeto no tiene ninguna referencia en el Stack pero sigue en el Heap?",
+      "options": [
+        "Se borra inmediatamente de forma síncrona.",
+        "Queda huérfano y es susceptible de ser liberado por el Garbage Collector en su próximo ciclo.",
+        "Se mueve automáticamente al Stack."
+      ],
+      "correct": 1,
+      "hint": "Ya no es accesible, por lo que es inútil.",
+      "explanation": "Si un objeto ya no tiene ninguna cadena de referencias que lo conecte con los elementos activos del Stack, se vuelve inalcanzable. El Garbage Collector lo detectará y liberará su espacio de memoria de forma asíncrona."
+    },
+    {
+      "q": "¿Qué representa la cota superior asintótica O(g(n))?",
+      "options": [
+        "Que a partir de cierto valor de entrada, el tiempo de ejecución no crecerá más rápido que una constante multiplicada por g(n).",
+        "El tiempo exacto en nanosegundos que tarda el microprocesador en ejecutar una iteración del bucle.",
+        "La cantidad de objetos que el Garbage Collector elimina en un segundo."
+      ],
+      "correct": 0,
+      "hint": "Es una cota superior.",
+      "explanation": "La notación Big-O define una cota superior asintótica para el crecimiento de una función, indicando que para valores grandes de entrada, el algoritmo no superará ese límite de complejidad."
+    },
+    {
+      "q": "¿Qué es la exposición de la representación (representation exposure)?",
+      "options": [
+        "Mostrar el código fuente de los métodos privados a los usuarios.",
+        "Permitir que un cliente modifique el estado de atributos mutables internos obteniendo referencias directas a ellos sin pasar por checkRep().",
+        "Exponer el valor del invariante en el Javadoc de forma pública."
+      ],
+      "correct": 1,
+      "hint": "Ocurre cuando devolvemos un objeto mutable directamente.",
+      "explanation": "La exposición de la representación ocurre cuando una clase permite el acceso externo directo a objetos mutables internos. Los clientes pueden alterar dicho estado saltándose el invariante de representación de la clase contenedora."
+    },
+    {
+      "q": "¿Cómo se puede prevenir la exposición de la representación al trabajar con atributos mutables (ej. List, Date)?",
+      "options": [
+        "Declarando los atributos como public y estáticos.",
+        "Realizando copias defensivas en el constructor y en los métodos getter.",
+        "Implementando el método de validación checkRep() como public."
+      ],
+      "correct": 1,
+      "hint": "Se deben duplicar los objetos mutables antes de entregarlos o guardarlos.",
+      "explanation": "Hacer copias defensivas consiste en duplicar el objeto mutable al recibirlo o al entregarlo. De esta manera, el cliente trabaja con una copia y no puede modificar los datos internos reales del objeto proveedor."
+    },
+    {
+      "q": "En el contexto de la corrección de bucles, ¿qué significa la propiedad de 'Inicialización'?",
+      "options": [
+        "Que el invariante de bucle es verdadero justo antes de comenzar la primera iteración.",
+        "Que el índice del bucle debe inicializarse siempre en 0.",
+        "Que el Garbage Collector inicializa todas las variables a null."
+      ],
+      "correct": 0,
+      "hint": "Es la base del razonamiento inductivo antes de entrar al bucle.",
+      "explanation": "La inicialización establece que el invariante del bucle debe cumplirse inmediatamente antes de entrar al bucle. Es el caso base de la inducción matemática."
+    },
+    {
+      "q": "Si un método getter de la clase Fecha retorna el valor del mes (int), ¿es necesario llamar a checkRep() al final?",
+      "options": [
+        "Sí, en todos los métodos de la clase sin excepción se debe llamar a checkRep().",
+        "No, porque es un método de solo lectura que no modifica el estado interno de la clase.",
+        "Sí, para asegurar que el valor devuelto no sea modificado por el recolector de basura."
+      ],
+      "correct": 1,
+      "hint": "Los getters no mutan el estado de los objetos primitivos.",
+      "explanation": "Como los tipos primitivos se copian por valor y el método no altera el estado del objeto Fecha, el invariante de representación no puede ser violado. Por lo tanto, no es necesario llamar a checkRep() al final."
+    },
+    {
+      "q": "¿Qué relación hay entre el Diseño por Contrato y la cohesión y acoplamiento?",
+      "options": [
+        "El DbC favorece una alta cohesión y bajo acoplamiento al fijar interfaces claras con pre y postcondiciones definidas.",
+        "El DbC aumenta el acoplamiento obligando a que las clases conozcan los métodos privados del cliente.",
+        "No existe ninguna relación directa entre el DbC y las propiedades de cohesión y acoplamiento."
+      ],
+      "correct": 0,
+      "hint": "Los contratos bien definidos hacen que los módulos sean independientes y claros.",
+      "explanation": "El DbC mejora la cohesión y reduce el acoplamiento porque cada módulo define explícitamente sus condiciones de uso y resultados esperados a través del contrato, permitiendo una integración limpia."
+    },
+    {
+      "q": "¿Qué sucede si una especificación formal es incompleta?",
+      "options": [
+        "No cubre todos los estados de entrada válidos o deja comportamientos sin especificar en ciertos casos.",
+        "Produce un error de compilación inmediato por sintaxis inválida.",
+        "El compilador asume por defecto que la precondición es siempre falsa."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con la cobertura de los casos de uso.",
+      "explanation": "Una especificación es incompleta si no cubre la totalidad del dominio de entrada o no determina con precisión los resultados esperados para cada escenario contemplado por la precondición."
+    },
+    {
+      "q": "En una Cola (Queue) limitada a capacidad N, ¿cuál es la precondición para realizar dequeue()?",
+      "options": [
+        "Que la cola no esté vacía (size > 0).",
+        "Que la cola esté completamente llena (size == N).",
+        "Que el elemento a extraer sea nulo."
+      ],
+      "correct": 0,
+      "hint": "No se puede sacar nada de una estructura sin elementos.",
+      "explanation": "La operación dequeue extrae un elemento del frente de la cola. Por lo tanto, su precondición lógica fundamental es que haya al menos un elemento disponible (cola no vacía)."
+    },
+    {
+      "q": "¿Qué establece el contrato de un método respecto a las excepciones unchecked?",
+      "options": [
+        "Se lanzan para señalar violaciones del contrato (bugs del programador) y no forman parte del comportamiento normal del sistema.",
+        "Deben ser capturadas obligatoriamente por el cliente en cada llamada usando bloques try-catch.",
+        "Están prohibidas en el Diseño por Contrato según Bertrand Meyer."
+      ],
+      "correct": 0,
+      "hint": "Las excepciones unchecked indican errores de programación en ejecución.",
+      "explanation": "Las excepciones unchecked (como IllegalArgumentException) se lanzan cuando se viola una regla del contrato. Indican un error de programación en lugar de un flujo de negocio normal."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Considere el constructor de la clase Fraccion:\n```java\npublic Fraccion(int num, int den) {\n    if (den == 0) {\n        throw new ____(\"Denominador no puede ser cero.\");\n    }\n    this.num = num; this.den = den;\n}\n```\n¿Qué tipo de excepción debe completarse en el espacio en blanco?",
+      "options": [
+        "IllegalStateException",
+        "IllegalArgumentException",
+        "NullPointerException"
+      ],
+      "correct": 1,
+      "hint": "Se trata de un argumento de entrada inválido.",
+      "explanation": "Dado que el denominador es un parámetro pasado al constructor, si es incorrecto se está violando una precondición, lo cual se representa típicamente con IllegalArgumentException."
+    },
+    {
+      "q": "Considere la validación del Invariante de Representación en la clase Fecha:\n```java\nprivate void checkRep() {\n    if (this.mes < 1 || this.mes > 12) {\n        throw new ____(\"Invariante roto: mes inválido\");\n    }\n}\n```\n¿Qué excepción de Java debe completar el espacio en blanco en checkRep()?",
+      "options": [
+        "IllegalArgumentException",
+        "IllegalStateException",
+        "ArithmeticException"
+      ],
+      "correct": 1,
+      "hint": "Representa una inconsistencia en el estado del objeto.",
+      "explanation": "checkRep() verifica el estado del objeto. Si falla, el objeto está en un estado inconsistente, por lo que se debe lanzar una excepción de tipo IllegalStateException."
+    },
+    {
+      "q": "Observe el método para avanzar el día en la clase Fecha:\n```java\npublic void avanzarDia() {\n    this.dia++;\n    if (this.dia > ____(this.mes)) {\n        this.dia = 1;\n        this.mes++;\n    }\n    checkRep();\n}\n```\nComplete el espacio en blanco con el nombre del método correcto.",
+      "options": [
+        "limiteDias",
+        "size",
+        "checkRep"
+      ],
+      "correct": 0,
+      "hint": "Debe obtener el número máximo de días para el mes actual.",
+      "explanation": "Para saber si el día supera el máximo del mes actual, se debe llamar al método auxiliar limiteDias(this.mes)."
+    },
+    {
+      "q": "Considere el método pop() de una Pila genérica:\n```java\npublic E pop() {\n    if (isEmpty()) {\n        throw new ____(\"Pila vacía\");\n    }\n    E item = elements[--size];\n    elements[size] = null;\n    return item;\n}\n```\n¿Qué excepción estándar de Java debe ir en el espacio en blanco?",
+      "options": [
+        "NullPointerException",
+        "NoSuchElementException",
+        "IllegalArgumentException"
+      ],
+      "correct": 1,
+      "hint": "Se intenta acceder a un elemento que no existe.",
+      "explanation": "En las colecciones de Java, cuando se intenta extraer un elemento de un contenedor vacío, la excepción estándar adecuada es NoSuchElementException."
+    },
+    {
+      "q": "Observe el siguiente bucle para sumar los elementos de un array:\n```java\nint s = 0;\nint i = 0;\nwhile (i < arr.length) {\n    // Invariante: s == suma(arr[0..i-1])\n    s += arr[i];\n    i = ____;\n}\n```\nComplete la instrucción que mantiene el progreso del bucle en el espacio en blanco.",
+      "options": [
+        "i",
+        "i + 1",
+        "i - 1"
+      ],
+      "correct": 1,
+      "hint": "Debemos avanzar el índice de uno en uno.",
+      "explanation": "Para avanzar en el array y mantener el progreso hacia el fin del bucle (terminación), el índice i debe incrementarse en 1 en cada iteración: i = i + 1 (o i++)."
+    },
+    {
+      "q": "Observe el siguiente constructor con validación en DbC:\n```java\npublic Fecha(int dia, int mes) {\n    if (mes < 1 || mes > 12) throw new IllegalArgumentException();\n    this.dia = dia;\n    this.mes = mes;\n    ____();\n}\n```\nComplete la llamada obligatoria para validar la consistencia del objeto tras su inicialización.",
+      "options": [
+        "checkRep",
+        "finalize",
+        "toString"
+      ],
+      "correct": 0,
+      "hint": "Es el método que valida el invariante del objeto.",
+      "explanation": "Al final del constructor se debe invocar a checkRep() para comprobar que el Invariante de Representación se satisface de forma efectiva tras crear el objeto."
+    },
+    {
+      "q": "Para probar la corrección de un algoritmo de búsqueda binaria:\n```java\n// Pre: el array arr está ____\npublic int binarySearch(int[] arr, int target) { ... }\n```\nComplete el espacio en blanco de la precondición para que el algoritmo sea correcto.",
+      "options": [
+        "desordenado",
+        "ordenado",
+        "vacío"
+      ],
+      "correct": 1,
+      "hint": "La búsqueda binaria requiere que los elementos tengan una relación de orden estricta en el array.",
+      "explanation": "La precondición fundamental para aplicar el algoritmo de búsqueda binaria es que el array de entrada esté ordenado (normalmente de forma ascendente)."
+    },
+    {
+      "q": "Considere la asignación de variables en Java:\n```java\nFecha f1 = new Fecha(10, 5);\nFecha f2 = f1;\nf2.setDia(15);\n// Post: f1.getDia() == ____\n```\nComplete el valor esperado de la fecha f1 tras la asignación.",
+      "options": [
+        "10",
+        "15",
+        "0"
+      ],
+      "correct": 1,
+      "hint": "Tanto f1 como f2 apuntan al mismo objeto en el Heap.",
+      "explanation": "f1 y f2 son referencias alias que apuntan al mismo objeto en el Heap. Modificar el objeto a través de f2 altera su estado, por lo que f1.getDia() devuelve 15."
+    },
+    {
+      "q": "Considere la postcondición de un método para obtener el último elemento de una lista:\n```java\npublic E obtenerUltimo() {\n    // Pre: size() > 0\n    return get(____);\n}\n```\nComplete la llamada para obtener el índice correcto en una lista basada en índices de 0 a size-1.",
+      "options": [
+        "size()",
+        "size() - 1",
+        "0"
+      ],
+      "correct": 1,
+      "hint": "En Java los índices empiezan en 0, por lo que el último elemento está en la posición anterior al tamaño total.",
+      "explanation": "El índice del último elemento es size() - 1. Pasar size() lanzaría una excepción de tipo IndexOutOfBoundsException."
+    },
+    {
+      "q": "Considere el código:\n```java\nint x = -5;\nif (x < 0) {\n    throw new ____(\"El valor no puede ser negativo\");\n}\n```\nComplete el espacio en blanco con la excepción de precondición idónea.",
+      "options": [
+        "IllegalArgumentException",
+        "IllegalStateException",
+        "NullPointerException"
+      ],
+      "correct": 0,
+      "hint": "Es un argumento inválido suministrado por el llamante.",
+      "explanation": "Dado que el valor del parámetro de entrada x es inválido (negativo), la excepción adecuada es IllegalArgumentException."
+    },
+    {
+      "q": "Observe el método avanzarDia() cuando llega al fin del año:\n```java\npublic void avanzarDia() {\n    this.dia++;\n    if (this.dia > limiteDias(this.mes)) {\n        this.dia = 1;\n        this.mes++;\n        if (this.mes > 12) {\n            this.mes = ____;\n        }\n    }\n    checkRep();\n}\n```\nComplete el valor que debe tomar el mes tras pasar el 31 de Diciembre.",
+      "options": [
+        "12",
+        "1",
+        "0"
+      ],
+      "correct": 1,
+      "hint": "El primer mes del nuevo año.",
+      "explanation": "Al avanzar de diciembre a enero, el mes debe reiniciarse en 1 (Enero)."
+    },
+    {
+      "q": "Observe la precondición de la función factorial recursiva:\n```java\nint factorial(int n) {\n    // Pre: n >= ____\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}\n```\nComplete el espacio en blanco para evitar una recursión infinita.",
+      "options": [
+        "1",
+        "0",
+        "-1"
+      ],
+      "correct": 1,
+      "hint": "El factorial está definido para números enteros no negativos.",
+      "explanation": "Para enteros, el factorial está definido para n >= 0. Si n fuera negativo, el algoritmo entraría en un bucle recursivo infinito y causaría StackOverflowError."
+    },
+    {
+      "q": "Observe las siguientes referencias en memoria de la JVM:\n```java\nFecha f1 = new Fecha(1, 1);\nFecha f2 = new Fecha(2, 2);\nFecha f3 = f1;\nf1 = ____;\n```\nComplete la instrucción que desvincula la referencia f1 permitiendo que el objeto al que apuntaba siga accesible únicamente a través de f3.",
+      "options": [
+        "null",
+        "new Fecha(1, 1)",
+        "f2"
+      ],
+      "correct": 0,
+      "hint": "Asignar la referencia de no-objeto.",
+      "explanation": "Al asignar f1 = null, la variable local f1 deja de apuntar al objeto, pero éste no es liberado porque f3 sigue manteniendo una referencia activa hacia él."
+    },
+    {
+      "q": "Considere la función cota en el siguiente bucle:\n```java\nint i = n;\nwhile (i > 0) {\n    // Variante de bucle: ____\n    i = i / 2;\n}\n```\nComplete el espacio en blanco con la variante o función cota del bucle.",
+      "options": [
+        "n",
+        "i",
+        "1"
+      ],
+      "correct": 1,
+      "hint": "Es la variable que disminuye hasta alcanzar el límite de terminación (0).",
+      "explanation": "La variable i actúa como la variante del bucle, puesto que decrece estrictamente en cada paso y está acotada inferiormente por 0, lo que garantiza la parada."
+    },
+    {
+      "q": "Complete la clase de complejidad temporal de peor caso para el siguiente fragmento:\n```java\nfor (int i = 0; i < n; i++) {\n    for (int j = 0; j < n; j++) {\n        sum += i * j;\n    }\n}\n// Complejidad: ____\n```",
+      "options": [
+        "O(n)",
+        "O(n^2)",
+        "O(log n)"
+      ],
+      "correct": 1,
+      "hint": "Dos bucles anidados que recorren de 0 a n.",
+      "explanation": "El bucle interno realiza n iteraciones y el externo n iteraciones. En total, la ejecución toma un tiempo proporcional a n * n, es decir, O(n^2)."
+    },
+    {
+      "q": "Considere el invariante de representación de una lista enlazada:\n```java\nprivate void checkRep() {\n    if (head == null && size != ____) {\n        throw new IllegalStateException(\"Lista vacía inconsistente\");\n    }\n}\n```\nComplete con el valor del tamaño que invalida la lista cuando head es null.",
+      "options": [
+        "1",
+        "0",
+        "-1"
+      ],
+      "correct": 1,
+      "hint": "Si no hay nodos, el tamaño del contador de elementos debe ser...",
+      "explanation": "Si 'head' es null, la lista está vacía y su tamaño 'size' debe ser obligatoriamente 0. Cualquier valor de size diferente de 0 viola el IR."
+    },
+    {
+      "q": "En el control de excepciones de Java:\n```java\ntry {\n    metodoQueLanzaCheckedException();\n} catch (____ e) {\n    System.out.println(\"Excepción capturada\");\n}\n```\nComplete la clase base de las excepciones checked en el espacio en blanco.",
+      "options": [
+        "Exception",
+        "RuntimeException",
+        "Error"
+      ],
+      "correct": 0,
+      "hint": "Es la clase madre de la cual heredan todas las excepciones comprobadas.",
+      "explanation": "La clase Exception es la base para las excepciones checked. RuntimeException hereda de Exception pero se usa exclusivamente para las de tipo unchecked."
+    },
+    {
+      "q": "Considere la declaración de la clase Fecha:\n```java\npublic class Fecha implements ____ {\n    // Permite comparar objetos Fecha\n    public int compareTo(Fecha otra) { ... }\n}\n```\nComplete con el nombre de la interfaz genérica estándar de Java en el espacio en blanco.",
+      "options": [
+        "Comparable<Fecha>",
+        "Comparator<Fecha>",
+        "Serializable"
+      ],
+      "correct": 0,
+      "hint": "Es la interfaz usada para definir el orden natural de los objetos.",
+      "explanation": "La interfaz Comparable<T> define el método compareTo(T o) que permite que los objetos de la clase se ordenen de manera natural."
+    },
+    {
+      "q": "En una estructura de datos basada en punteros, complete la inicialización:\n```java\nNode nuevo = ____ Node(valor);\nnuevo.next = head;\nhead = nuevo;\n```\n¿Qué operador de asignación de memoria dinámica falta?",
+      "options": [
+        "this",
+        "new",
+        "super"
+      ],
+      "correct": 1,
+      "hint": "Crea una nueva instancia de objeto en el Heap.",
+      "explanation": "El operador 'new' reserva memoria en el Heap de la JVM para una nueva instancia del tipo Node e invoca su constructor."
+    },
+    {
+      "q": "Considere la postcondición del método getMes():\n```java\npublic int getMes() {\n    // Post: devuelve el valor de la variable de instancia mes\n    return ____.mes;\n}\n```\nComplete la referencia implícita al propio objeto en el espacio en blanco.",
+      "options": [
+        "this",
+        "super",
+        "null"
+      ],
+      "correct": 0,
+      "hint": "Puntero interno de Java que apunta al objeto receptor de la llamada.",
+      "explanation": "La palabra clave 'this' hace referencia explícita al propio objeto en ejecución que invoca el método."
+    },
+    {
+      "q": "¿Cuáles son las ventajas asociadas al uso del Diseño por Contrato (DbC) en el desarrollo de software?",
+      "options": [
+        "Genera documentación precisa y ejecutable de los componentes.",
+        "Permite una detección más rápida y localizada de los bugs al fallar de forma asertiva.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Piense en la documentación y en el depurado de errores.",
+      "explanation": "El DbC actúa como documentación de las interfaces y hace que los bugs se manifiesten inmediatamente al fallar los contratos, facilitando la depuración."
+    },
+    {
+      "q": "En un árbol binario de búsqueda, ¿qué propiedades debe verificar el método checkRep() para garantizar que la estructura es correcta?",
+      "options": [
+        "Que no existan ciclos y la estructura sea un árbol estrictamente acíclico.",
+        "Que para cada nodo, los valores del subárbol izquierdo sean menores y del subárbol derecho sean mayores.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El invariante debe contemplar tanto la estructura física como el orden lógico del árbol.",
+      "explanation": "El Invariante de Representación de un BST requiere garantizar tanto las propiedades topológicas del árbol como la relación de orden en las claves de los nodos."
+    },
+    {
+      "q": "¿En qué circunstancias se permite violar temporalmente el Invariante de Representación (IR) de un objeto?",
+      "options": [
+        "En medio de la ejecución de un método público mutador mientras realiza sus cálculos internos.",
+        "Dentro de métodos privados de asistencia interna que no son expuestos directamente al cliente.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Solo importa el estado del objeto en momentos estables.",
+      "explanation": "El IR puede ser violado temporalmente durante los pasos de cálculo intermedio de los métodos (tanto públicos como privados) siempre que al retornar el control al cliente el objeto vuelva a un estado consistente."
+    },
+    {
+      "q": "¿Cuáles de las siguientes excepciones en Java son de tipo Unchecked (hijas de RuntimeException)?",
+      "options": [
+        "NullPointerException al intentar acceder a un miembro de una referencia nula.",
+        "IllegalArgumentException al proporcionar un parámetro incorrecto a un método.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Son errores comunes en tiempo de ejecución causados por bugs de programación.",
+      "explanation": "Ambas excepciones heredan de RuntimeException y representan violaciones de contrato o errores lógicos de programación que no se comprueban en compilación."
+    },
+    {
+      "q": "¿Qué información debe especificarse formalmente en el contrato de un método?",
+      "options": [
+        "La precondición o requisitos obligatorios que debe cumplir el cliente.",
+        "La postcondición o garantías que el proveedor asegura al finalizar el método.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El contrato involucra a ambas partes del servicio.",
+      "explanation": "El contrato completo consta tanto de la precondición (responsabilidad del cliente) como de la postcondición (responsabilidad del proveedor)."
+    },
+    {
+      "q": "¿Cuáles son obligaciones del cliente al invocar un método bajo un esquema de DbC?",
+      "options": [
+        "Asegurar que todas las precondiciones definidas son verdaderas.",
+        "No esperar que el método funcione si no ha cumplido con los parámetros de entrada requeridos.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El cliente debe ceñirse a las limitaciones y condiciones de llamada.",
+      "explanation": "La obligación del cliente es garantizar el cumplimiento del contrato antes de llamar al método; si viola las precondiciones, pierde los derechos de postcondición."
+    },
+    {
+      "q": "¿Qué motivos pueden provocar que la validación asertiva checkRep() falle lanzando una excepción?",
+      "options": [
+        "Un error interno en el código de un método público de la clase que modifica incorrectamente un atributo.",
+        "Exposición de la representación donde un cliente externo modificó un campo mutable sin pasar por los métodos públicos.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Cualquier alteración incorrecta del estado provoca un fallo del invariante.",
+      "explanation": "Un fallo del IR puede originarse tanto por un bug en el propio código mutador de la clase como por una modificación directa externa debido a la exposición de la representación."
+    },
+    {
+      "q": "¿Qué características definen al Garbage Collector de la Máquina Virtual de Java (JVM)?",
+      "options": [
+        "Se ejecuta de forma asíncrona en un hilo de fondo de la JVM.",
+        "Libera memoria dinámicamente en el Heap y no en el Stack.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La recolección es automática y se centra en los objetos no alcanzables en memoria dinámica.",
+      "explanation": "El Garbage Collector trabaja en segundo plano localizando y liberando memoria de objetos inalcanzables en el Heap, sin intervención directa del programador en el Stack."
+    },
+    {
+      "q": "En un TAD Cola (Queue) implementado como lista enlazada simple, ¿qué verifica checkRep()?",
+      "options": [
+        "Que size coincida con el número real de nodos que van desde head hasta tail.",
+        "Que el último nodo apunte a null (tail.next == null) si la cola no está vacía.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El invariante estructural debe validar todos los contadores y punteros finales.",
+      "explanation": "El IR debe comprobar la coherencia de todos los componentes: el contador de nodos, las referencias de cabecera y cola, y que el extremo de la lista finalice correctamente en null."
+    },
+    {
+      "q": "¿Qué métodos públicos de la clase Fecha deben invocar a checkRep() al finalizar para asegurar la consistencia?",
+      "options": [
+        "El constructor, para validar el estado de inicialización.",
+        "Los métodos mutadores como avanzarDia() o setMes().",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Cualquier método público que pueda crear o modificar el estado del objeto.",
+      "explanation": "Tanto la creación en el constructor como las modificaciones posteriores en los métodos públicos mutadores pueden dejar al objeto en un estado inválido; de ahí la necesidad de validarlos con checkRep()."
+    },
+    {
+      "q": "En el Diseño por Contrato, ¿cuál es la obligación del cliente con respecto a las postcondiciones?",
+      "options": [
+        "El cliente debe garantizar que la postcondición sea verdadera antes de invocar el método.",
+        "El cliente debe ejecutar un hilo de comprobación de postcondición asíncrono.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La postcondición es responsabilidad del proveedor, no del cliente.",
+      "explanation": "El cliente no tiene ninguna obligación de cumplir las postcondiciones, ese es el derecho del cliente y la obligación exclusiva del proveedor de software."
+    },
+    {
+      "q": "Si se viola una precondición en DbC estricto, ¿cuál es la obligación del proveedor según la teoría original de Meyer?",
+      "options": [
+        "Intentar corregir los parámetros y reintentar la operación con programación defensiva.",
+        "Lanzar una excepción de tipo checked para forzar la captura obligatoria.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "En DbC estricto, si el contrato se rompe, el proveedor no tiene ninguna obligación.",
+      "explanation": "Si el cliente incumple la precondición, el contrato queda invalidado. El proveedor no tiene obligación alguna sobre cómo comportarse (comportamiento indefinido), aunque en la práctica en Java se lancen excepciones unchecked."
+    },
+    {
+      "q": "¿Dónde se asigna el espacio de memoria para los atributos locales primitivos de un método en Java?",
+      "options": [
+        "En el Heap de memoria global compartida.",
+        "En el Method Area de clases compiladas.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se guardan en la pila asociada a la ejecución del hilo actual.",
+      "explanation": "Las variables locales primitivas se guardan en el Stack de ejecución del hilo y no en el Heap o en el Method Area."
+    },
+    {
+      "q": "¿Qué palabra clave de Java se utiliza para declarar que una clase no puede ser heredada por ninguna otra?",
+      "options": [
+        "static",
+        "transient",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es un modificador que hace que la clase sea inmutable en la jerarquía de herencia.",
+      "explanation": "Para evitar que una clase sea heredada o extendida, se utiliza la palabra clave 'final' en su declaración. Ninguna de las opciones anteriores contiene esta palabra clave."
+    },
+    {
+      "q": "¿Cuál es la complejidad de la operación pop() en una Pila LIFO implementada con lista enlazada simple sin puntero de cola?",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La cima de la pila se ubica al principio de la lista enlazada (head).",
+      "explanation": "Insertar y extraer de la cima de la pila en una lista enlazada se hace en la cabecera (head), lo cual toma tiempo constante, es decir, O(1). Ninguna de las opciones propuestas es O(1)."
+    },
+    {
+      "q": "En la demostración formal de la terminación de un bucle, ¿cuál de los siguientes elementos garantiza por sí mismo que el bucle no es infinito?",
+      "options": [
+        "El Invariante de Bucle.",
+        "La Postcondición del bucle.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es una función entera y no negativa que decrece estrictamente.",
+      "explanation": "La terminación del bucle se demuestra mediante la función variante o función cota, no por el invariante de bucle o la postcondición. Por tanto, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "En Java, ¿cuál es el valor por defecto asignado a una variable de referencia local si no es inicializada explícitamente en el código?",
+      "options": [
+        "null",
+        "Un puntero vacío en el Heap.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El compilador es muy estricto con las variables locales antes de su lectura.",
+      "explanation": "Las variables locales en Java no tienen un valor por defecto. El compilador lanzará un error si se intenta leer una variable local antes de haber sido inicializada explícitamente. Ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes clases de excepciones de Java es de tipo Checked (comprobada obligatoriamente por el compilador)?",
+      "options": [
+        "ArithmeticException al realizar una división por cero.",
+        "ClassCastException al hacer un casteo erróneo de clases.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Ambas son unchecked, ya que heredan directamente de RuntimeException.",
+      "explanation": "Tanto ArithmeticException como ClassCastException son excepciones unchecked (Runtime). Ninguna de las dos es checked."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal en el peor caso de la búsqueda de un elemento en un árbol binario de búsqueda (BST) de N nodos completamente desbalanceado?",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Si está desbalanceado, se asemeja a una lista enlazada.",
+      "explanation": "En el peor caso de un BST completamente desbalanceado (degenerado en lista), la búsqueda de un elemento requiere recorrer todos los nodos, lo que toma O(N) de tiempo. Ninguna de las opciones anteriores es O(N)."
+    },
+    {
+      "q": "Si un método público getter (como getDia()) solo lee el estado del objeto y devuelve un entero primitivo sin modificar nada, ¿cuál es su obligación en el DbC?",
+      "options": [
+        "Llamar a checkRep() al inicio para mutar el objeto.",
+        "Invocar obligatoriamente el recolector de basura antes del return.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El método solo lee y no modifica el estado del objeto.",
+      "explanation": "Al ser un método de solo lectura que devuelve un tipo primitivo por valor, no puede violar el invariante de representación, por lo que no tiene obligación de realizar validaciones extras o mutaciones. Ninguna de las anteriores."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_01",
+      "title": "Consistencia del Invariante en la Clase Fracción",
+      "context": "Consideremos una clase `Fraccion` con atributos `numerador` (int) y `denominador` (int). El Invariante de Representación (IR) exige que `denominador != 0`. El constructor reduce la fracción a sus términos mínimos dividiendo por el Máximo Común Divisor (MCD). Si creamos un objeto `Fraccion f = new Fraccion(12, 18);` y luego sumamos otra fracción de la siguiente manera `f.sumar(new Fraccion(1, 6));`.",
+      "parts": [
+        {
+          "id": "LAB_01_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del atributo `numerador` del objeto `f` inmediatamente después de ejecutar el constructor?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La fracción $12/18$ simplificada dividiendo por su MCD (6) da $2/3$, por lo que el numerador es $2$."
+        },
+        {
+          "id": "LAB_01_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del atributo `denominador` del objeto `f` inmediatamente después de ejecutar el constructor?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El denominador $18$ simplificado dividiendo por $6$ da $3$."
+        },
+        {
+          "id": "LAB_01_c",
+          "label": "c",
+          "question": "Después de realizar la suma `f.sumar(new Fraccion(1, 6))`, ¿cuál es el nuevo valor de `numerador` tras simplificar el resultado final?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La operación es $\\frac{2}{3} + \\frac{1}{6} = \\frac{4}{6} + \\frac{1}{6} = \\frac{5}{6}$. El numerador simplificado resultante es $5$."
+        },
+        {
+          "id": "LAB_01_d",
+          "label": "d",
+          "question": "Después de la suma, ¿cuál es el nuevo valor del atributo `denominador` tras simplificar el resultado?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El denominador resultante de $\\frac{5}{6}$ es $6$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_02",
+      "title": "Avance de Fecha en Año No Bisiesto",
+      "context": "Consideremos una instancia de la clase `Fecha` inicializada como `Fecha f = new Fecha(28, 2);` en un año común (febrero tiene 28 días). Aplicamos el método `avanzarDia()` de forma consecutiva.",
+      "parts": [
+        {
+          "id": "LAB_02_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del atributo `dia` después de llamar a `avanzarDia()` exactamente $1$ vez?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como febrero tiene 28 días, al avanzar 1 día desde el 28 de febrero, pasamos al 1 de marzo. El día es $1$."
+        },
+        {
+          "id": "LAB_02_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del atributo `mes` después de llamar a `avanzarDia()` exactamente $1$ vez?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al pasar del 28 de febrero al 1 de marzo, el mes avanza de 2 a $3$."
+        },
+        {
+          "id": "LAB_02_c",
+          "label": "c",
+          "question": "Si desde la posición inicial (28 de febrero) llamamos a `avanzarDia()` exactamente $31$ veces, ¿cuál será el valor del atributo `dia`?",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "Feb 28 + 1 día -> Mar 1. Nos quedan 30 avances. Mar 1 + 30 días -> Mar 31. El día es $31$."
+        },
+        {
+          "id": "LAB_02_d",
+          "label": "d",
+          "question": "Si desde la posición inicial (28 de febrero) llamamos a `avanzarDia()` exactamente $32$ veces, ¿cuál será el valor del atributo `mes`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Feb 28 + 1 día -> Mar 1. Mar 1 + 30 días -> Mar 31 (31 pasos). 1 paso más -> Abr 1 (32 pasos). El mes es $4$ (Abril)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_03",
+      "title": "Redimensionado de Array en Lista Dinámica",
+      "context": "Una clase `MiLista` implementa una lista sobre un array interno. Su capacidad inicial es de $4$ elementos. Si se llena y se añade un nuevo elemento, el array se duplica en capacidad y se copian los elementos actuales en el nuevo array.",
+      "parts": [
+        {
+          "id": "LAB_03_a",
+          "label": "a",
+          "question": "¿Cuál es la capacidad del array interno tras insertar $5$ elementos de forma consecutiva partiendo de la lista vacía?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Al insertar el 5º elemento, la capacidad original de 4 se ve superada, por lo que se duplica a $8$."
+        },
+        {
+          "id": "LAB_03_b",
+          "label": "b",
+          "question": "¿Cuántas copias individuales de elementos se realizan en total durante el redimensionado al pasar de $4$ a $8$ de capacidad?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para redimensionar la lista, se copian los 4 elementos ya existentes en el nuevo array de capacidad 8. El total de copias en ese paso es $4$."
+        },
+        {
+          "id": "LAB_03_c",
+          "label": "c",
+          "question": "¿Cuál es la capacidad del array interno tras insertar $9$ elementos de forma consecutiva?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La capacidad era 8. Al insertar el 9º elemento, se vuelve a superar el tamaño, duplicando de 8 a $16$."
+        },
+        {
+          "id": "LAB_03_d",
+          "label": "d",
+          "question": "¿Cuántas copias de elementos se habrán realizado en total en todo el proceso desde la inicialización vacía hasta insertar los $9$ elementos?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Primer redimensionado (de 4 a 8): 4 copias. Segundo redimensionado (de 8 a 16): 8 copias. Total = $4 + 8 = 12$ copias."
+        }
+      ]
+    },
+    {
+      "id": "LAB_04",
+      "title": "Análisis de Progreso e Iteraciones de Bucle",
+      "context": "Consideremos el siguiente bucle para procesar un rango de enteros:\n```java\nint i = 0;\nint n = 100;\nwhile (i < n) {\n    i = i + 2;\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_04_a",
+          "label": "a",
+          "question": "¿Cuántas iteraciones realiza este bucle en total?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "El índice avanza de 2 en 2 desde 0 hasta 100, haciendo $\\frac{100}{2} = 50$ iteraciones."
+        },
+        {
+          "id": "LAB_04_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable `i` tras la terminación del bucle?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El bucle se detiene cuando `i < n` deja de cumplirse. Como avanza de 2 en 2, `i` valdrá exactamente $100$ en la última comprobación y terminará."
+        },
+        {
+          "id": "LAB_04_c",
+          "label": "c",
+          "question": "Si modificamos la instrucción del cuerpo a `i = i + 3;`, ¿cuál es el valor final de la variable `i`?",
+          "correctValue": 102,
+          "tolerance": 0,
+          "explanation": "Las iteraciones de `i` serán 0, 3, 6, ..., 99 (33 iteraciones, sigue siendo menor que 100). En la iteración 34, `i` pasa a $102$, rompiendo la condición y saliendo del bucle."
+        },
+        {
+          "id": "LAB_04_d",
+          "label": "d",
+          "question": "¿Cuántas iteraciones realiza el bucle en esta segunda variante (avanzando de $3$ en $3$)?",
+          "correctValue": 34,
+          "tolerance": 0,
+          "explanation": "Las iteraciones son 34 en total (desde i=0 hasta i=99, más el último incremento a 102)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_05",
+      "title": "Recuento de Referencias y Objetos en Heap",
+      "context": "Analice la ejecución paso a paso del siguiente bloque de código en Java:\n```java\nFecha f1 = new Fecha(10, 5);\nFecha f2 = new Fecha(20, 6);\nFecha f3 = f1;\nf1 = null;\n```",
+      "parts": [
+        {
+          "id": "LAB_05_a",
+          "label": "a",
+          "question": "¿Cuántas referencias activas no nulas (variables en Stack) apuntan a objetos en el Heap al final de la ejecución?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Las referencias activas son `f2` (apunta a la segunda Fecha) y `f3` (apunta a la primera Fecha). `f1` es null. Por tanto, hay $2$ referencias."
+        },
+        {
+          "id": "LAB_05_b",
+          "label": "b",
+          "question": "¿Cuántos objetos de la clase `Fecha` residen físicamente en el Heap al final de la ejecución del fragmento?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se han invocado dos constructores `new Fecha`, por lo que se crearon $2$ objetos en el Heap y ninguno ha sido recolectado aún."
+        },
+        {
+          "id": "LAB_05_c",
+          "label": "c",
+          "question": "¿Cuántos objetos `Fecha` son elegibles para ser eliminados por el Garbage Collector en ese instante final?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ambos objetos siguen siendo accesibles: el primero mediante `f3` y el segundo mediante `f2`. Ninguno es elegible ($0$ objetos)."
+        },
+        {
+          "id": "LAB_05_d",
+          "label": "d",
+          "question": "Si añadimos la línea `f3 = null;` al final del código, ¿cuántos objetos `Fecha` pasarán a ser elegibles para la recolección?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al hacer `f3 = null`, el objeto `Fecha(10, 5)` queda huérfano de referencias en el Stack y es eligible para recolección ($1$ objeto)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_06",
+      "title": "Comparaciones en Búsqueda Binaria",
+      "context": "Tenemos el siguiente array ordenado de $15$ elementos: `[1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29]`. Los índices van del $0$ al $14$. Se aplica el algoritmo de búsqueda binaria tradicional que calcula el punto medio como `mid = low + (high - low)/2`.",
+      "parts": [
+        {
+          "id": "LAB_06_a",
+          "label": "a",
+          "question": "¿Cuál es el índice (0-based) del elemento central que se comprueba en la primera iteración (primera comparación)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El rango inicial es `low = 0` y `high = 14`. El elemento medio está en `mid = 0 + (14 - 0)/2 = 7`."
+        },
+        {
+          "id": "LAB_06_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones con elementos del array en total se requieren para encontrar el número $17$?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "1) mid = 7 (val=15 < 17, low=8); 2) mid=11 (val=23 > 17, high=10); 3) mid=9 (val=19 > 17, high=8); 4) mid=8 (val=17 == 17). Se realizan $4$ comparaciones."
+        },
+        {
+          "id": "LAB_06_c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones con elementos del array en total se realizan al buscar el número $30$ (no presente)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "1) mid=7 (val=15, low=8); 2) mid=11 (val=23, low=12); 3) mid=13 (val=27, low=14); 4) mid=14 (val=29, low=15). El rango es inválido (15 > 14). Total = $4$ comparaciones."
+        },
+        {
+          "id": "LAB_06_d",
+          "label": "d",
+          "question": "¿Cuántas comparaciones en total se requieren para localizar el número $1$ (índice 0)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "1) mid=7 (val=15, high=6); 2) mid=3 (val=7, high=2); 3) mid=1 (val=3, high=0); 4) mid=0 (val=1 == 1). Total = $4$ comparaciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_07",
+      "title": "Teorema Maestro en Algoritmos Divide y Vencerás",
+      "context": "Un algoritmo recursivo de división y conquista procesa un array reduciéndolo a la mitad y realizando un procesamiento lineal adicional. Su complejidad viene dada por la recurrencia: $$T(n) = 2T(n/2) + O(n)$$",
+      "parts": [
+        {
+          "id": "LAB_07_a",
+          "label": "a",
+          "question": "En la fórmula del Teorema Maestro $T(n) = aT(n/b) + f(n)$, ¿cuál es el valor del parámetro $a$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El parámetro $a$ representa la cantidad de subproblemas recursivos generados, que en este caso es $2$."
+        },
+        {
+          "id": "LAB_07_b",
+          "label": "b",
+          "question": "En la misma fórmula, ¿cuál es el valor de la base de división $b$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El parámetro $b$ representa el factor por el cual se divide el tamaño del problema, que es $2$."
+        },
+        {
+          "id": "LAB_07_c",
+          "label": "c",
+          "question": "Si el coste adicional es $f(n) = \\Theta(n^d)$, ¿cuál es el valor del exponente $d$?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El coste adicional es lineal, de la forma $O(n^1)$, por lo que $d = 1$."
+        },
+        {
+          "id": "LAB_07_d",
+          "label": "d",
+          "question": "Según la resolución del Teorema Maestro, ¿cuál es el exponente $p$ de la complejidad resultante expresada en la forma $\\Theta(n^p \\log n)$?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como $a = b^d \\implies 2 = 2^1$, estamos en el caso equilibrado del teorema, dando como resultado $\\Theta(n \\log n)$, donde el exponente de $n$ es $1$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_08",
+      "title": "Invariante en Lista Enlazada Simple",
+      "context": "Una clase `ListaEnlazada` mantiene un puntero al primer nodo `head` y un entero `size` que cuenta los nodos. El Invariante de Representación exige que `size` coincida exactamente con la cantidad de nodos recorribles desde `head` hasta llegar a null.",
+      "parts": [
+        {
+          "id": "LAB_08_a",
+          "label": "a",
+          "question": "Si la lista tiene `size = 3` y añadimos un elemento al principio (prepend), ¿cuál será el valor del atributo `size` para mantener el invariante?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se ha añadido un nuevo nodo, por lo que la cantidad de nodos recorribles se incrementa en uno, pasando a $4$."
+        },
+        {
+          "id": "LAB_08_b",
+          "label": "b",
+          "question": "¿Cuántos nodos es necesario recorrer (visitar) para insertar un elemento al inicio de la lista?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La inserción al inicio se realiza modificando las referencias `head` y el `next` del nuevo nodo directamente, sin necesidad de recorrer nodos ($0$ recorridos)."
+        },
+        {
+          "id": "LAB_08_c",
+          "label": "c",
+          "question": "Si la lista no posee puntero al último elemento (solo `head`), ¿cuántos nodos debemos recorrer en el peor caso para insertar un nuevo nodo al final de la lista si su tamaño es $4$?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Debemos recorrer los $4$ elementos existentes para llegar al nodo final (cuyo `next` es null) y cambiar su enlace."
+        },
+        {
+          "id": "LAB_08_d",
+          "label": "d",
+          "question": "¿Cuántas actualizaciones de referencias a punteros de nodos (enlaces `next` o variables de cabecera) se deben hacer para completar la inserción al final?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Únicamente se actualiza la referencia `next` del último nodo actual para que apunte al nuevo nodo ($1$ enlace modificado)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_09",
+      "title": "Simulación de Estructuras LIFO y FIFO",
+      "context": "Partimos de una pila $S$ y una cola $Q$, ambas inicialmente vacías. Ejecutamos la siguiente secuencia de operaciones:\nPara la Pila S: `push(10)`, `push(20)`, `pop()`, `push(30)`.\nPara la Cola Q: `enqueue(10)`, `enqueue(20)`, `dequeue()`, `enqueue(30)`.",
+      "parts": [
+        {
+          "id": "LAB_09_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del elemento situado en la cima de la Pila $S$ tras finalizar las operaciones?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Operaciones: push(10) [10], push(20) [10, 20], pop() elimina 20 [10], push(30) [10, 30]. El elemento en la cima es $30$."
+        },
+        {
+          "id": "LAB_09_b",
+          "label": "b",
+          "question": "¿Cuál es el tamaño (`size`) final de la Pila $S$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La pila contiene dos elementos: 10 y 30. El tamaño es $2$."
+        },
+        {
+          "id": "LAB_09_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del elemento situado en el frente de la Cola $Q$ tras finalizar las operaciones?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Operaciones: enqueue(10) [10], enqueue(20) [10, 20], dequeue() elimina el frente (10) [20], enqueue(30) [20, 30]. El frente es $20$."
+        },
+        {
+          "id": "LAB_09_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño (`size`) final de la Cola $Q$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La cola Q contiene los elementos 20 y 30. Su tamaño final es $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_10",
+      "title": "Profundidad de Llamadas de Fibonacci",
+      "context": "Consideremos la implementación recursiva ineficiente de Fibonacci:\n```java\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n-1) + fib(n-2);\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_10_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la invocación de `fib(5)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Sucesión: fib(0)=0, fib(1)=1, fib(2)=1, fib(3)=2, fib(4)=3, fib(5)=5. El valor es $5$."
+        },
+        {
+          "id": "LAB_10_b",
+          "label": "b",
+          "question": "¿Cuál es la profundidad máxima (número de marcos de pila concurrentes) al calcular `fib(5)`, contando el paso inicial `fib(5)` como profundidad $1$?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La llamada que va más profundo es `fib(5) -> fib(4) -> fib(3) -> fib(2) -> fib(1)`. En este punto hay exactamente $5$ métodos activos en el Stack de llamadas simultáneamente."
+        },
+        {
+          "id": "LAB_10_c",
+          "label": "c",
+          "question": "¿Cuál es el valor de retorno devuelto por la invocación de `fib(6)`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "fib(6) = fib(5) + fib(4) = 5 + 3 = $8$."
+        },
+        {
+          "id": "LAB_10_d",
+          "label": "d",
+          "question": "¿Cuál es la profundidad máxima de llamadas en la pila para la llamada inicial `fib(6)` (donde `fib(6)` es nivel 1)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El camino más profundo es `fib(6) -> fib(5) -> fib(4) -> fib(3) -> fib(2) -> fib(1)`, que acumula $6$ niveles de profundidad en el Stack."
+        }
+      ]
+    },
+    {
+      "id": "LAB_11",
+      "title": "Evaluación Numérica de Funciones de Complejidad",
+      "context": "Evaluamos tres funciones de complejidad para comparar su crecimiento: $f_1(n) = 100n^2$, $f_2(n) = 2^n$ y $f_3(n) = n \\log_2 n$.",
+      "parts": [
+        {
+          "id": "LAB_11_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de $f_1(10)$?",
+          "correctValue": 10000,
+          "tolerance": 0,
+          "explanation": "$f_1(10) = 100 \\times (10)^2 = 100 \\times 100 = 10000$."
+        },
+        {
+          "id": "LAB_11_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de $f_2(10)$?",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "$f_2(10) = 2^{10} = 1024$."
+        },
+        {
+          "id": "LAB_11_c",
+          "label": "c",
+          "question": "¿Cuál es el valor exacto de $f_3(16)$?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$f_3(16) = 16 \\times \\log_2(16) = 16 \\times 4 = 64$."
+        },
+        {
+          "id": "LAB_11_d",
+          "label": "d",
+          "question": "Para $n = 10$, ordene las funciones de menor a mayor valor indicando el identificador numérico de la menor de ellas (1 para $f_1$, 2 para $f_2$, 3 para $f_3$).",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$f_1(10)=10000$, $f_2(10)=1024$, $f_3(10) = 10 \\log_2(10) \\approx 10 \\times 3.32 = 33.2$. La menor es $f_3$, por lo que la respuesta es $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_12",
+      "title": "Control de Precondiciones en Modificadores de Fecha",
+      "context": "Consideremos una clase `Fecha` mutable con atributos `dia` (int) y `mes` (int). La fecha inicial es $15$ de Mayo (dia=15, mes=5). El método mutador valida precondiciones lanzando `IllegalArgumentException` si el rango es inválido.",
+      "parts": [
+        {
+          "id": "LAB_12_a",
+          "label": "a",
+          "question": "Si el cliente llama a `setMes(13)` y se lanza una excepción, ¿cuál es el valor del atributo `mes` tras la fallida llamada?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El valor del mes permanece inalterado porque la excepción se lanza antes de realizar la modificación. El valor sigue siendo $5$."
+        },
+        {
+          "id": "LAB_12_b",
+          "label": "b",
+          "question": "Si el cliente llama a `setMes(2)` de forma válida, ¿cuál es el valor del atributo `mes` en el objeto?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El mes es válido, por lo que el atributo se actualiza a $2$."
+        },
+        {
+          "id": "LAB_12_c",
+          "label": "c",
+          "question": "Si a continuación el cliente llama a `setDia(30)` (lo cual viola el invariante de que febrero tiene como máximo 28 días, lanzándose una excepción), ¿cuál es el valor del atributo `dia` tras el fallo?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Al lanzarse la excepción en la validación, el atributo `dia` no llega a modificarse, conservando su valor previo de $15$."
+        },
+        {
+          "id": "LAB_12_d",
+          "label": "d",
+          "question": "¿Cuántas excepciones en total se han lanzado en toda la secuencia de pruebas descrita?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se lanzó una excepción en `setMes(13)` y otra en `setDia(30)`. En total, $2$ excepciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_13",
+      "title": "Análisis de Complejidad Cuadrática con Teorema Maestro",
+      "context": "Un algoritmo divide recursivamente el problema en 4 subproblemas de tamaño mitad y realiza un procesado cuadrático del nivel actual: $$T(n) = 4T(n/2) + n^2$$",
+      "parts": [
+        {
+          "id": "LAB_13_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del coeficiente $a$ de la llamada recursiva?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El coeficiente multiplicador de las llamadas recursivas es $a = 4$."
+        },
+        {
+          "id": "LAB_13_b",
+          "label": "b",
+          "question": "¿Cuál es la base de división de tamaño $b$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El tamaño del problema se reduce a la mitad, por lo que $b = 2$."
+        },
+        {
+          "id": "LAB_13_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente $d$ del coste no recursivo $O(n^d)$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El coste es $n^2$, lo que significa un exponente $d = 2$."
+        },
+        {
+          "id": "LAB_13_d",
+          "label": "d",
+          "question": "Según el Teorema Maestro, ¿cuál es el exponente $p$ del término principal en la complejidad final expresada en la forma $O(n^p \\log n)$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Como $a = b^d \\implies 4 = 2^2$, estamos en el caso equilibrado. La complejidad es $O(n^2 \\log n)$, por lo que el exponente es $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_14",
+      "title": "Recuento de Iteraciones Anidadas",
+      "context": "Analice el siguiente código con dos bucles anidados:\n```java\nint i = 0;\nint count = 0;\nwhile (i < 10) {\n    for (int j = i; j < 10; j++) {\n        count++;\n    }\n    i++;\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_14_a",
+          "label": "a",
+          "question": "¿Cuántas veces se evalúa la condición del bucle `while` (incluida la evaluación final que resulta falsa)?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "El bucle se ejecuta para i=0..9 (10 veces) y se comprueba la condición una vez extra al final (i=10) para salir. En total, $11$ evaluaciones."
+        },
+        {
+          "id": "LAB_14_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final acumulado en la variable `count`?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "El bucle interno corre de j=i a 9. Número de iteraciones internas: 10 + 9 + 8 + ... + 1 = 55. El valor final es $55$."
+        },
+        {
+          "id": "LAB_14_c",
+          "label": "c",
+          "question": "¿Cuál es el valor final de la variable `i` tras salir del bucle?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando `i < 10` es falso. Al incrementarse al final, la variable `i` termina en $10$."
+        },
+        {
+          "id": "LAB_14_d",
+          "label": "d",
+          "question": "Si cambiamos la condición a `while (i <= 10)`, ¿cuál sería el valor final de la variable `i`?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "El bucle se repetiría hasta que `i <= 10` fuera falso, deteniéndose en $11$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_15",
+      "title": "Invariante de Signo en Fracciones",
+      "context": "Añadimos al invariante de la clase `Fraccion` la regla de que el signo siempre debe ir en el numerador (es decir, el denominador debe ser estrictamente positivo `denominador > 0`). El constructor ajusta los signos en consecuencia.",
+      "parts": [
+        {
+          "id": "LAB_15_a",
+          "label": "a",
+          "question": "Si ejecutamos `Fraccion f = new Fraccion(5, -10);` y se simplifica, ¿cuál es el valor del atributo `numerador`?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "El signo negativo del denominador pasa al numerador. La fracción $5/-10$ es $-5/10$, que simplificada es $-1/2$. Numerador = $-1$."
+        },
+        {
+          "id": "LAB_15_b",
+          "label": "b",
+          "question": "Para el objeto anterior `f`, ¿cuál es el valor del atributo `denominador`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El denominador simplificado es $2$ (positivo para cumplir con el invariante)."
+        },
+        {
+          "id": "LAB_15_c",
+          "label": "c",
+          "question": "Si creamos `Fraccion g = new Fraccion(-3, -9);`, ¿cuál será el valor del atributo `numerador` tras simplificar?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Menos entre menos es más ($-3/-9 = 3/9$). Simplificando por MCD (3) resulta $1/3$. Numerador = $1$."
+        },
+        {
+          "id": "LAB_15_d",
+          "label": "d",
+          "question": "Para el objeto anterior `g`, ¿cuál es el valor del atributo `denominador`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El denominador simplificado de $1/3$ es $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_16",
+      "title": "Capacidad y Copias de una Pila Dinámica",
+      "context": "Una clase `PilaDinamica` tiene capacidad inicial de $2$ elementos. Cuando está llena y se hace un `push`, duplica su capacidad. Si se hace un `pop`, los elementos no válidos de la pila se ponen a null en el array interno para evitar fugas de memoria.",
+      "parts": [
+        {
+          "id": "LAB_16_a",
+          "label": "a",
+          "question": "¿Cuál es la capacidad del array interno tras realizar exactamente $3$ operaciones `push` consecutivas sobre la pila vacía?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Inicial: 2. Con 3 elementos supera la capacidad de 2, por lo que se duplica a $4$."
+        },
+        {
+          "id": "LAB_16_b",
+          "label": "b",
+          "question": "¿Cuál es la capacidad tras realizar exactamente $5$ operaciones `push`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Supera la capacidad de 4 al insertar el 5º elemento, por lo que se duplica a $8$."
+        },
+        {
+          "id": "LAB_16_c",
+          "label": "c",
+          "question": "¿Cuántas copias individuales de elementos en total se han realizado en el Heap durante las expansiones para llegar a los $5$ elementos?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Primera expansión (de 2 a 4): 2 copias. Segunda expansión (de 4 a 8): 4 copias. Total = $2 + 4 = 6$ copias."
+        },
+        {
+          "id": "LAB_16_d",
+          "label": "d",
+          "question": "Si después de las $5$ inserciones realizamos exactamente $2$ operaciones `pop()`, ¿cuántos elementos activos (no nulos) quedan almacenados en la pila?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Teníamos 5 elementos activos. Dos operaciones `pop()` reducen la cantidad de elementos a $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_17",
+      "title": "Cálculo de Distancias Temporales",
+      "context": "Queremos implementar una función que devuelva la diferencia en días naturales entre dos fechas del mismo año (no bisiesto). Por ejemplo, los días transcurridos desde el 1 de Enero.",
+      "parts": [
+        {
+          "id": "LAB_17_a",
+          "label": "a",
+          "question": "¿Cuántos días transcurren de diferencia entre el $1$ de Enero (Fecha(1, 1)) y el $15$ de Enero (Fecha(15, 1))?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "$15 - 1 = 14$ días."
+        },
+        {
+          "id": "LAB_17_b",
+          "label": "b",
+          "question": "¿Cuántos días de diferencia hay entre el $31$ de Enero y el $1$ de Febrero?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Es el día siguiente directo, por lo que la diferencia es $1$ día."
+        },
+        {
+          "id": "LAB_17_c",
+          "label": "c",
+          "question": "¿Cuántos días de diferencia transcurren entre el $1$ de Enero y el $1$ de Marzo en un año común?",
+          "correctValue": 59,
+          "tolerance": 0,
+          "explanation": "Enero tiene 31 días y febrero 28. Días del 1 de enero al 1 de marzo = $31 \\text{ (Enero)} + 28 \\text{ (Febrero)} = 59$ días."
+        },
+        {
+          "id": "LAB_17_d",
+          "label": "d",
+          "question": "¿Cuántos días de diferencia hay entre el $1$ de Enero y el $31$ de Diciembre en un año común?",
+          "correctValue": 364,
+          "tolerance": 0,
+          "explanation": "Un año común tiene 365 días. La diferencia entre el primer y último día del año es $365 - 1 = 364$ días."
+        }
+      ]
+    },
+    {
+      "id": "LAB_18",
+      "title": "Propagación de Excepciones y Bloque Finally",
+      "context": "Consideremos el siguiente fragmento de código que gestiona excepciones:\n```java\nint foo(int x) {\n    try {\n        if (x < 0) throw new IllegalArgumentException();\n        if (x == 0) throw new ArithmeticException();\n        return x * 2;\n    } catch (IllegalArgumentException e) {\n        return 10;\n    } finally {\n        x = 100;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_18_a",
+          "label": "a",
+          "question": "¿Qué valor retorna la llamada a `foo(-5)`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Al ser x < 0, se lanza `IllegalArgumentException` que es capturada en el catch, retornando $10$. La asignación `x = 100` en finally ocurre pero no altera el retorno."
+        },
+        {
+          "id": "LAB_18_b",
+          "label": "b",
+          "question": "¿Qué valor retorna la llamada a `foo(3)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "No se lanzan excepciones, por lo que el try retorna `3 * 2 = 6`."
+        },
+        {
+          "id": "LAB_18_c",
+          "label": "c",
+          "question": "Si implementamos un método contenedor `int bar(int x)` que captura `ArithmeticException` retornando $99$ y llama a `foo(x)`, ¿cuál es el valor de retorno de `bar(0)`?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "`foo(0)` lanza `ArithmeticException` que no es capturada dentro de `foo`, propagándose hacia `bar` donde se captura y retorna $99$."
+        },
+        {
+          "id": "LAB_18_d",
+          "label": "d",
+          "question": "¿Cuál es el valor retornado por la llamada a `bar(-10)`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "`foo(-10)` captura internamente su `IllegalArgumentException` y retorna $10$, por lo que `bar` recibe ese retorno directamente sin disparar su propio catch. Retorna $10$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_19",
+      "title": "Fugas de Memoria en Pila Genérica",
+      "context": "Una Pila genérica usa `Object[] elements` y `int size`. Para evitar memory leaks en el Garbage Collector, el invariante exige que todas las posiciones desocupadas del array (desde `size` hasta el final) sean null.",
+      "parts": [
+        {
+          "id": "LAB_19_a",
+          "label": "a",
+          "question": "Si realizamos $3$ operaciones `push` consecutivas sobre la pila vacía (capacidad de 10) y luego $1$ operación `pop()`, ¿cuál es el índice del elemento que ha sido retornado por `pop()`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los elementos se insertan en los índices 0, 1, 2. El `pop()` extrae el elemento de la cima, que es el índice $2$."
+        },
+        {
+          "id": "LAB_19_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable `size`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El tamaño inicial era 0. Tras 3 push es 3. Tras 1 pop disminuye a $2$."
+        },
+        {
+          "id": "LAB_19_c",
+          "label": "c",
+          "question": "¿Cuántas posiciones de valor nulo (`null`) debe tener el array interno (de capacidad $10$) para cumplir con el invariante de representación?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Como la pila tiene 2 elementos válidos, las restantes $10 - 2 = 8$ posiciones del array deben ser obligatoriamente `null`."
+        },
+        {
+          "id": "LAB_19_d",
+          "label": "d",
+          "question": "Si el desarrollador olvida limpiar la posición y ejecuta `pop()` sin hacer `elements[size] = null`, ¿cuántas posiciones con valor `null` quedarían en el array?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "La posición del elemento eliminado seguiría conteniendo la referencia al objeto, por lo que solo quedarían las $7$ posiciones finales que ya eran nulas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_20",
+      "title": "Invariante de Matriz Rectangular",
+      "context": "Consideremos una clase `Matriz` con un array bidimensional `double[][] data`. El IR requiere que `data != null`, `data.length > 0`, y que para todo `i`, `data[i] != null` y su longitud sea idéntica a `data[0].length` (todas las filas del mismo tamaño). Inicializamos `double[][] data = new double[3][4];`.",
+      "parts": [
+        {
+          "id": "LAB_20_a",
+          "label": "a",
+          "question": "¿Cuál es el número de filas de esta matriz?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La dimensión de la primera coordenada `data.length` es $3$ (filas)."
+        },
+        {
+          "id": "LAB_20_b",
+          "label": "b",
+          "question": "¿Cuál es el número de columnas de esta matriz?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Cada fila tiene un tamaño `data[i].length` igual a $4$ (columnas)."
+        },
+        {
+          "id": "LAB_20_c",
+          "label": "c",
+          "question": "¿Cuál es la cantidad total de variables tipo double creadas en la matriz?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "La matriz contiene $3 \\times 4 = 12$ elementos de tipo double."
+        },
+        {
+          "id": "LAB_20_d",
+          "label": "d",
+          "question": "Si deseamos cambiar el contenido de la fila indexada como 1 por otra fila de forma consistente con el IR, ¿cuál debe ser la longitud mínima y máxima que debe poseer el nuevo array `double[]`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para no violar el IR rectangular, la nueva fila debe tener exactamente la misma longitud que la fila de referencia en la columna 0, es decir, $4$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_21",
+      "title": "Recursión en Máximo Común Divisor (Algoritmo de Euclides)",
+      "context": "Analizamos la ejecución del algoritmo de Euclides para encontrar el MCD:\n```java\nint mcd(int a, int b) {\n    if (b == 0) return a;\n    return mcd(b, a % b);\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_21_a",
+          "label": "a",
+          "question": "¿Cuál es el resultado numérico devuelto por la llamada `mcd(48, 18)`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$MCD(48, 18) = 6$."
+        },
+        {
+          "id": "LAB_21_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas en total (excluyendo la primera llamada de invocación externa `mcd(48, 18)`) se realizan?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Llamadas: 1) mcd(18, 12), 2) mcd(12, 6), 3) mcd(6, 0) que retorna 6. Total llamadas recursivas = $3$."
+        },
+        {
+          "id": "LAB_21_c",
+          "label": "c",
+          "question": "¿Cuál es el resultado de la llamada `mcd(101, 10)`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$101$ es primo, por lo que su MCD con $10$ es $1$."
+        },
+        {
+          "id": "LAB_21_d",
+          "label": "d",
+          "question": "¿Cuántas llamadas recursivas en total (excluyendo la primera) se realizan para `mcd(101, 10)`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Llamadas: 1) mcd(10, 1), 2) mcd(1, 0) que retorna 1. Total llamadas recursivas = $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_22",
+      "title": "Ecuación de Recurrencia Lineal Secuencial",
+      "context": "Un algoritmo iterativo realiza sumas sucesivas. Su ecuación de coste está descrita por $T(n) = T(n-1) + n$ con caso base $T(0) = 0$.",
+      "parts": [
+        {
+          "id": "LAB_22_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del coste para $T(4)$?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "$T(4) = 4 + 3 + 2 + 1 + 0 = 10$."
+        },
+        {
+          "id": "LAB_22_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del coste para $T(10)$?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "$T(10) = \\frac{10 \\times 11}{2} = 55$."
+        },
+        {
+          "id": "LAB_22_c",
+          "label": "c",
+          "question": "La solución analítica de la recurrencia es de la forma $T(n) = c_1 n^2 + c_2 n$. ¿Cuál es el valor del coeficiente $c_1$?",
+          "correctValue": 0.5,
+          "tolerance": 0,
+          "explanation": "$T(n) = \\frac{n(n+1)}{2} = 0.5n^2 + 0.5n$. Por tanto, $c_1 = 0.5$."
+        },
+        {
+          "id": "LAB_22_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del coeficiente $c_2$?",
+          "correctValue": 0.5,
+          "tolerance": 0,
+          "explanation": "Igual que el anterior, el coeficiente de la variable de primer grado es $c_2 = 0.5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_23",
+      "title": "Cola Implementada con Dos Pilas",
+      "context": "Implementamos una Cola usando dos Pilas internas: `inbox` y `outbox`. La operación `enqueue(x)` añade a `inbox`. La operación `dequeue()` extrae de `outbox`. Si `outbox` está vacía, se transfieren todos los elementos de `inbox` a `outbox` invirtiendo su orden.",
+      "parts": [
+        {
+          "id": "LAB_23_a",
+          "label": "a",
+          "question": "Si en la cola vacía hacemos `enqueue(1)`, `enqueue(2)` y `enqueue(3)`, ¿cuál es el tamaño (`size`) de la pila `inbox`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los 3 elementos se insertan en la pila `inbox`, por lo que su tamaño es $3$."
+        },
+        {
+          "id": "LAB_23_b",
+          "label": "b",
+          "question": "Bajo las mismas condiciones de inserción, ¿cuál es el tamaño de la pila `outbox` antes de realizar ningún `dequeue()`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ningún elemento ha sido transferido, por lo que `outbox` se mantiene en $0$."
+        },
+        {
+          "id": "LAB_23_c",
+          "label": "c",
+          "question": "Realizamos una única llamada a `dequeue()`. ¿Cuál es el tamaño de `inbox` inmediatamente después?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al estar `outbox` vacía, se desapilan los 3 elementos de `inbox` y se apilan en `outbox`. `inbox` se queda con tamaño $0$."
+        },
+        {
+          "id": "LAB_23_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño de `outbox` tras finalizar ese primer `dequeue()`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se transfirieron 3 elementos a `outbox` y luego se extrajo uno (el frente de la cola). Quedan $2$ elementos en `outbox`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_24",
+      "title": "Invariante de Alturas en Árbol Binario de Búsqueda",
+      "context": "Insertamos de forma consecutiva las claves $1$, $2$ y $3$ en un árbol binario de búsqueda sin balancear (orden de inserción directo). Definimos la altura de un subárbol vacío como 0 y la de un único nodo como 1.",
+      "parts": [
+        {
+          "id": "LAB_24_a",
+          "label": "a",
+          "question": "¿Cuál es la altura del nodo raíz en el árbol resultante?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El árbol degenera en una lista lineal hacia la derecha: 1 -> 2 -> 3. La altura de la raíz (camino más largo) es $3$."
+        },
+        {
+          "id": "LAB_24_b",
+          "label": "b",
+          "question": "¿Cuál es la altura del subárbol izquierdo del nodo raíz?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como no hay nodos a la izquierda del 1, la altura de ese subárbol es $0$."
+        },
+        {
+          "id": "LAB_24_c",
+          "label": "c",
+          "question": "¿Cuál es la altura del subárbol derecho del nodo raíz?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El subárbol derecho de 1 contiene los nodos 2 y 3. Su altura es $2$."
+        },
+        {
+          "id": "LAB_24_d",
+          "label": "d",
+          "question": "Si el árbol fuera balanceado (tipo AVL), ¿cuál sería la altura de la raíz para las mismas claves?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "En un árbol AVL balanceado, la raíz sería 2, con 1 a la izquierda y 3 a la derecha. La altura total sería $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_25",
+      "title": "Estadísticas de Comparaciones en Búsqueda Lineal",
+      "context": "Dado el siguiente array desordenado de $8$ elementos: `[12, 5, 8, 9, 3, 7, 2, 11]`. Se realiza un algoritmo de búsqueda lineal simple secuencial de izquierda a derecha.",
+      "parts": [
+        {
+          "id": "LAB_25_a",
+          "label": "a",
+          "question": "¿Cuántas comparaciones de elementos del array se realizan para encontrar el valor $9$?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se comparan: 12, 5, 8 y finalmente 9. Son $4$ comparaciones."
+        },
+        {
+          "id": "LAB_25_b",
+          "label": "b",
+          "question": "¿Cuántas comparaciones se realizan para encontrar el valor $11$?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El elemento 11 está en la última posición (índice 7), por lo que se comparan los $8$ elementos."
+        },
+        {
+          "id": "LAB_25_c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones se realizan al buscar un elemento inexistente como $20$?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Se debe recorrer el array entero de principio a fin para asegurar la ausencia del elemento. Total = $8$ comparaciones."
+        },
+        {
+          "id": "LAB_25_d",
+          "label": "d",
+          "question": "¿Cuál es el promedio (media) de comparaciones necesarias para realizar una búsqueda con éxito en este array (asumiendo igual probabilidad para buscar cualquiera de sus elementos)?",
+          "correctValue": 4.5,
+          "tolerance": 0,
+          "explanation": "El promedio es la suma del número de comparaciones de cada elemento dividido entre el total: $\\frac{1+2+3+4+5+6+7+8}{8} = \\frac{36}{8} = 4.5$ comparaciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_26",
+      "title": "Verificación del Factorial Iterativo",
+      "context": "Consideremos el código para calcular el factorial de $n=5$ de forma iterativa:\n```java\nint prod = 1;\nint i = 1;\nwhile (i <= n) {\n    prod = prod * i;\n    i++;\n}\n```",
+      "parts": [
+        {
+          "id": "LAB_26_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `prod`?",
+          "correctValue": 120,
+          "tolerance": 0,
+          "explanation": "$5! = 1 \\times 2 \\times 3 \\times 4 \\times 5 = 120$."
+        },
+        {
+          "id": "LAB_26_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de `i` inmediatamente después de salir del bucle?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando `i <= 5` deja de cumplirse. En la última iteración, `i` pasa de 5 a $6$, se comprueba la condición (6 <= 5 es falso) y se sale."
+        },
+        {
+          "id": "LAB_26_c",
+          "label": "c",
+          "question": "¿Cuántas veces en total se evalúa la condición de parada del bucle `i <= n`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Se evalúa 5 veces resultando verdadera (para i=1..5) y 1 vez resultando falsa (para i=6). En total, $6$ evaluaciones."
+        },
+        {
+          "id": "LAB_26_d",
+          "label": "d",
+          "question": "¿Cuál es el valor de la variable `prod` después de completar exactamente $3$ iteraciones del bucle?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Tras 3 iteraciones, prod contiene $1 \\times 2 \\times 3 = 6$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_27",
+      "title": "Búsqueda Binaria Fallida",
+      "context": "Se busca la clave $5$ en el siguiente array ordenado: `[2, 4, 6, 8, 10, 12, 14, 16]`. Los índices van de $0$ a $7$. El cálculo del punto medio es `mid = low + (high - low)/2`.",
+      "parts": [
+        {
+          "id": "LAB_27_a",
+          "label": "a",
+          "question": "¿Cuál es el primer índice `mid` que se comprueba en el array?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "`low = 0`, `high = 7`. `mid = 0 + (7 - 0)/2 = 3` (valor 8)."
+        },
+        {
+          "id": "LAB_27_b",
+          "label": "b",
+          "question": "¿Cuál es el segundo índice `mid` evaluado en el array tras saber que $5 < 8$?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ajusta `high = 2`. `low = 0`. El nuevo `mid = 0 + (2 - 0)/2 = 1` (valor 4)."
+        },
+        {
+          "id": "LAB_27_c",
+          "label": "c",
+          "question": "¿Cuál es el tercer índice `mid` evaluado tras saber que $5 > 4$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se ajusta `low = 2`. `high = 2`. El nuevo `mid = 2 + (2 - 2)/2 = 2` (valor 6)."
+        },
+        {
+          "id": "LAB_27_d",
+          "label": "d",
+          "question": "¿Cuántas comparaciones en total se ejecutan antes de determinar que el elemento $5$ no existe en el array?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se comprueban los índices 3, 1 y 2. Tras esto, `high = 1` y `low = 2` (rango cruzado e inválido). Total comparaciones = $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_28",
+      "title": "Invariante con Años Bisiestos",
+      "context": "Ampliamos la clase `Fecha` para dar soporte a años bisiestos. Un año es bisiesto si es divisible por 4 pero no por 100, excepto si es divisible por 400. Esto cambia la función `limiteDias(mes, anio)` para el mes de Febrero (mes 2).",
+      "parts": [
+        {
+          "id": "LAB_28_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por `limiteDias(2, 2024)`?",
+          "correctValue": 29,
+          "tolerance": 0,
+          "explanation": "El año $2024$ es divisible por 4 y no por 100, por lo que es bisiesto. Febrero tiene $29$ días."
+        },
+        {
+          "id": "LAB_28_b",
+          "label": "b",
+          "question": "¿Cuál es el valor devuelto por `limiteDias(2, 2100)`?",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "El año $2100$ es divisible por 100 pero no por 400, por lo que no es bisiesto. Febrero tiene $28$ días."
+        },
+        {
+          "id": "LAB_28_c",
+          "label": "c",
+          "question": "¿Cuál es el valor devuelto por `limiteDias(2, 2000)`?",
+          "correctValue": 29,
+          "tolerance": 0,
+          "explanation": "El año $2000$ es divisible por 400, por lo que es bisiesto. Febrero tiene $29$ días."
+        },
+        {
+          "id": "LAB_28_d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por `limiteDias(2, 1900)`?",
+          "correctValue": 28,
+          "tolerance": 0,
+          "explanation": "$1900$ no es divisible por 400, por lo que no es bisiesto. Febrero tiene $28$ días."
+        }
+      ]
+    },
+    {
+      "id": "LAB_29",
+      "title": "Cola en Buffer Circular",
+      "context": "Una Cola está implementada en un array circular de capacidad $5$. Usamos `head = 0`, `tail = 0` y `size = 0`. Las inserciones aumentan `tail` de forma circular (`tail = (tail+1)%cap`), y las extracciones avanzan `head` de forma circular.",
+      "parts": [
+        {
+          "id": "LAB_29_a",
+          "label": "a",
+          "question": "Si realizamos $3$ enqueues, $1$ dequeue y luego $3$ enqueues adicionales de forma consecutiva, ¿cuál es el valor del índice `head`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El `head` avanza únicamente al hacer dequeue. Se hace 1 dequeue, por lo que `head` pasa de 0 a $1$."
+        },
+        {
+          "id": "LAB_29_b",
+          "label": "b",
+          "question": "Bajo la secuencia descrita, ¿cuál es el valor del índice `tail`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Inserciones: 3 enqueues (tail=3). 1 dequeue (no afecta a tail). 3 enqueues más: tail pasa a 4, luego a 0, y luego a 1. El valor es $1$."
+        },
+        {
+          "id": "LAB_29_c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño actual (`size`) de la cola?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "$3 - 1 + 3 = 5$ elementos."
+        },
+        {
+          "id": "LAB_29_d",
+          "label": "d",
+          "question": "Si a continuación intentamos realizar otro `enqueue()` (que viola la precondición de que la cola no esté llena, lanzando una excepción sin alterar el estado), ¿cuál es el valor del atributo `size`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Dado que se lanza una excepción antes de realizar la inserción, el tamaño de la cola no varía y continúa en $5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_30",
+      "title": "Exponentes de Complejidad en Peor Caso",
+      "context": "Identificamos el exponente de complejidad asintótica de peor caso $p$ en la representación compacta $O(n^p)$ para diferentes estructuras de bucles.",
+      "parts": [
+        {
+          "id": "LAB_30_a",
+          "label": "a",
+          "question": "¿Cuál es el exponente $p$ de la complejidad para: `for (int i=0; i<n; i++) { for (int j=0; j<n; j+=2) { count++; } }`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El bucle interno corre $n/2$ veces y el externo $n$ veces. Coste = $O(n^2)$, por lo que $p=2$."
+        },
+        {
+          "id": "LAB_30_b",
+          "label": "b",
+          "question": "¿Cuál es el exponente $p$ de la complejidad para un bucle triple anidado iterativo estándar de tamaño $n$?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Un bucle triple anidado estándar realiza $n \\times n \\times n = n^3$ operaciones. El exponente es $3$."
+        },
+        {
+          "id": "LAB_30_c",
+          "label": "c",
+          "question": "¿Cuál es el exponente $p$ para: `for (int i=0; i<n; i++) { for (int j=0; j<i; j++) { count++; } }`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se realizan $\\frac{n(n-1)}{2} = 0.5n^2 - 0.5n$ iteraciones. La complejidad es de orden cuadrático $O(n^2)$, por lo que $p=2$."
+        },
+        {
+          "id": "LAB_30_d",
+          "label": "d",
+          "question": "¿Cuál es el exponente $p$ de la complejidad si recorremos un array bidimensional cuadrado de lado $n$ mediante un bucle simple de longitud $n^2$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Un bucle simple de $n^2$ pasos tiene complejidad $O(n^2)$, de modo que el exponente de la variable $n$ es $2$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Invariante de Representación de Fracción",
+      "tex": "$$\\text{denominador} \\neq 0$$"
+    },
+    {
+      "name": "Invariante de Representación de Fecha en Año Común",
+      "tex": "$$1 \\le mes \\le 12 \\quad \\land \\quad 1 \\le dia \\le limiteDias(mes)$$"
+    },
+    {
+      "name": "Ecuación de Recurrencia General (Teorema Maestro)",
+      "tex": "$$T(n) = aT(n/b) + f(n)$$"
+    },
+    {
+      "name": "Complejidad de la Búsqueda Binaria",
+      "tex": "$$\\mathcal{O}(\\log_2 n)$$"
+    },
+    {
+      "name": "Invariante del Bucle de Suma de Array",
+      "tex": "$$s = \\sum_{k=0}^{i-1} arr[k]$$"
+    },
+    {
+      "name": "Ecuación de Recurrencia del Factorial Recursivo",
+      "tex": "$$T(n) = T(n-1) + \\Theta(1)$$"
+    },
+    {
+      "name": "Variante de Bucle Decreciente",
+      "tex": "$$t(i) = n - i$$"
+    },
+    {
+      "name": "Relación de Recurrencia de Fibonacci",
+      "tex": "$$F(n) = F(n-1) + F(n-2)$$"
+    }
+  ]
+}

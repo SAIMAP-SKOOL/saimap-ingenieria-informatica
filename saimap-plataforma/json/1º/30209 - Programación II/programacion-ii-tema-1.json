@@ -1,0 +1,2100 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué diferencia principal existe en la gestión de memoria entre C y Java?",
+      "options": [
+        "En Java la memoria se gestiona de forma automática a través de la JVM, eliminando la necesidad de liberar memoria explícitamente.",
+        "Java permite aritmética de punteros pero la JVM la verifica antes de ejecutar.",
+        "C y Java gestionan la memoria de forma idéntica usando llamadas del sistema similares a malloc()."
+      ],
+      "correct": 0,
+      "hint": "Java tiene una máquina virtual y un hilo de ejecución en segundo plano para limpiar memoria.",
+      "explanation": "En Java, el programador no usa punteros explícitos ni libera memoria manualmente. La JVM gestiona la memoria de manera automática mediante el Garbage Collector."
+    },
+    {
+      "q": "¿Dónde se almacenan las variables locales de tipo primitivo (como `int` o `double`) en Java?",
+      "options": [
+        "En el Heap (Montículo)",
+        "En el Stack (Pila de llamadas)",
+        "En el área de constantes de la JVM"
+      ],
+      "correct": 1,
+      "hint": "Pertenecen al marco de activación del método.",
+      "explanation": "Las variables locales de tipos primitivos se almacenan en el Stack de llamadas, dentro del marco de activación del método en ejecución."
+    },
+    {
+      "q": "¿Qué se almacena en el Stack cuando declaramos una variable de tipo objeto, como `Persona p = new Persona(\"Ana\");`?",
+      "options": [
+        "El objeto completo `Persona` con todos sus atributos.",
+        "La referencia (dirección de memoria en el Heap) al objeto `Persona`.",
+        "El código ejecutable de la clase `Persona`."
+      ],
+      "correct": 1,
+      "hint": "La variable `p` no contiene al objeto directamente, sino que apunta a él.",
+      "explanation": "El Stack almacena la referencia (la dirección de memoria en el Heap) del objeto. El objeto físico reside en el Heap."
+    },
+    {
+      "q": "¿Cuál es el ciclo de vida de una variable local almacenada en el Stack?",
+      "options": [
+        "Permanecerá en memoria hasta que el Garbage Collector la recolecte.",
+        "Permanece viva mientras dure la ejecución de la JVM.",
+        "Su ciclo de vida está acotado al flujo de ejecución del método; se destruye al salir de su ámbito."
+      ],
+      "correct": 2,
+      "hint": "LIFO: Last-In, First-Out.",
+      "explanation": "Al finalizar el método, su marco de activación en el Stack se destruye y la memoria de las variables locales se libera instantáneamente."
+    },
+    {
+      "q": "¿Qué tipo de datos se almacenan siempre en el Heap?",
+      "options": [
+        "Los objetos creados con el operador `new`, incluyendo todos sus atributos y arrays.",
+        "Las variables primitivas locales de los métodos.",
+        "Las direcciones de retorno de los métodos."
+      ],
+      "correct": 0,
+      "hint": "Heap es global y dinámico.",
+      "explanation": "Todos los objetos y arrays se crean en el Heap, incluidos sus atributos, independientemente de si son primitivos o referencias."
+    },
+    {
+      "q": "¿Qué ocurre en memoria al ejecutar la asignación `Persona p2 = p1;` (donde `p1` es un objeto ya instanciado)?",
+      "options": [
+        "Se clona el objeto en el Heap, creando dos objetos idénticos.",
+        "Se copia la referencia en el Stack, haciendo que `p2` apunte al mismo objeto en el Heap que `p1`.",
+        "Se produce un error de compilación por duplicación de punteros."
+      ],
+      "correct": 1,
+      "hint": "Java no copia objetos por defecto en una asignación simple.",
+      "explanation": "La asignación copia la referencia (dirección de memoria) en el Stack. Ambos apuntan al mismo objeto en el Heap."
+    },
+    {
+      "q": "¿Qué sucede con la memoria en el Heap si un objeto ya no tiene ninguna referencia activa que apunte a él?",
+      "options": [
+        "Se destruye automáticamente de forma inmediata en la misma línea de código.",
+        "El objeto se vuelve inalcanzable y es candidato a ser eliminado por el Garbage Collector.",
+        "Permanece en el Heap para siempre, provocando un error en el programa."
+      ],
+      "correct": 1,
+      "hint": "El Garbage Collector limpia la memoria inalcanzable de forma asíncrona.",
+      "explanation": "Un objeto sin referencias se clasifica como 'inalcanzable' (huérfano) y el Garbage Collector lo eliminará para liberar su memoria."
+    },
+    {
+      "q": "¿Qué función tiene el Garbage Collector de la JVM?",
+      "options": [
+        "Optimizar la velocidad del procesador mediante hilos estáticos.",
+        "Identificar y destruir objetos inalcanzables en el Heap para liberar su espacio de memoria.",
+        "Organizar el Stack para evitar StackOverflowError."
+      ],
+      "correct": 1,
+      "hint": "Su nombre lo indica: recolectar basura.",
+      "explanation": "El Garbage Collector (GC) es un hilo de baja prioridad de la JVM que libera el espacio de memoria ocupado por objetos que ya no pueden ser alcanzados."
+    },
+    {
+      "q": "¿Se puede forzar la ejecución inmediata del Garbage Collector en Java?",
+      "options": [
+        "Sí, llamando al método `System.gc()` se garantiza la limpieza inmediata.",
+        "No, el método `System.gc()` es una sugerencia a la JVM que esta puede ignorar.",
+        "Sí, destruyendo el hilo de ejecución principal del programa."
+      ],
+      "correct": 1,
+      "hint": "El programador de Java no tiene control absoluto de cuándo se ejecuta el recolector de basura.",
+      "explanation": "El Garbage Collector es gestionado de manera autónoma por la JVM. `System.gc()` es una recomendación y no garantiza una recolección inmediata."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos acceder a un miembro de una referencia que tiene el valor `null`?",
+      "options": [
+        "Se lanza una excepción `NullPointerException` en tiempo de ejecución.",
+        "Se devuelve un valor por defecto (0 o vacío) y el programa continúa.",
+        "Se genera un error de compilación."
+      ],
+      "correct": 0,
+      "hint": "Es un error que ocurre en tiempo de ejecución debido a una referencia que no apunta a nada.",
+      "explanation": "Si una referencia apunta a `null` y se intenta desreferenciar (ej. `p.nombre`), la JVM lanza un `NullPointerException` en tiempo de ejecución."
+    },
+    {
+      "q": "¿Qué estructura física tiene el Stack de la JVM?",
+      "options": [
+        "Estructura LIFO (Last-In, First-Out).",
+        "Estructura FIFO (First-In, First-Out).",
+        "Estructura jerárquica en árbol."
+      ],
+      "correct": 0,
+      "hint": "Los marcos de activación se apilan y desapilan.",
+      "explanation": "El Stack de llamadas se gestiona de forma LIFO (último en entrar, primero en salir), lo cual encaja con el flujo de llamadas a funciones y retornos."
+    },
+    {
+      "q": "¿Qué sucede si una aplicación Java crea continuamente objetos y los mantiene referenciados en el Stack sin liberarlos?",
+      "options": [
+        "El Garbage Collector se ralentiza pero nunca se queda sin memoria.",
+        "Se puede producir un `OutOfMemoryError` en el Heap.",
+        "Se produce un `StackOverflowError` de forma inmediata."
+      ],
+      "correct": 1,
+      "hint": "La acumulación de objetos agota el Montículo.",
+      "explanation": "Si los objetos siguen referenciados, el Garbage Collector no puede liberarlos. Si el Heap se llena, se produce un error `java.lang.OutOfMemoryError: Java heap space`."
+    },
+    {
+      "q": "¿Qué almacena un array de tipo objeto en Java en sus posiciones de memoria?",
+      "options": [
+        "Los objetos en sí mismos, alineados secuencialmente en el Heap.",
+        "Referencias a los objetos que se encuentran en otras partes del Heap.",
+        "Direcciones a variables del Stack."
+      ],
+      "correct": 1,
+      "hint": "Los elementos de arrays de objetos son punteros seguros.",
+      "explanation": "Un array de objetos almacena referencias a los objetos correspondientes en el Heap, no los objetos en sí."
+    },
+    {
+      "q": "¿Cómo se representan los arrays en Java?",
+      "options": [
+        "Son tratados como objetos y siempre residen en el Heap.",
+        "Se almacenan en el Stack si son de tamaño fijo.",
+        "Son estructuras de memoria estáticas ajenas a la JVM."
+      ],
+      "correct": 0,
+      "hint": "Se instancian usando `new`.",
+      "explanation": "En Java, los arrays son objetos. Por lo tanto, se almacenan siempre en el Heap, independientemente de su tipo elemental."
+    },
+    {
+      "q": "¿Cuál del los siguientes errores de memoria está directamente relacionado con la pila (Stack)?",
+      "options": [
+        "OutOfMemoryError",
+        "StackOverflowError",
+        "NullPointerException"
+      ],
+      "correct": 1,
+      "hint": "Pila desbordada.",
+      "explanation": "Un exceso de llamadas a métodos (por ejemplo, recursividad infinita) consume todo el espacio del Stack de llamadas, provocando `StackOverflowError`."
+    },
+    {
+      "q": "¿Qué sucede al pasar un objeto como parámetro a un método en Java?",
+      "options": [
+        "Se pasa una copia completa del objeto (paso por valor del objeto).",
+        "Se pasa una copia del valor de la referencia (dirección de memoria), por lo que apunta al mismo objeto.",
+        "Se pasa la dirección del Stack del método llamador."
+      ],
+      "correct": 1,
+      "hint": "Java es estrictamente 'pass-by-value'.",
+      "explanation": "Java pasa parámetros por valor. Para los objetos, el valor copiado es la referencia (dirección de memoria). El método receptor opera sobre el mismo objeto."
+    },
+    {
+      "q": "¿Qué elemento no forma parte de un marco de activación (Stack Frame) en el Stack?",
+      "options": [
+        "Las variables locales primitivas del método.",
+        "La referencia al objeto `this` si es un método de instancia.",
+        "El espacio reservado para los objetos creados con el operador `new` dentro del método."
+      ],
+      "correct": 2,
+      "hint": "Los objetos siempre van a la memoria global dinámica.",
+      "explanation": "Los objetos creados con `new` se almacenan en el Heap, no en el Stack Frame. El Stack Frame contiene únicamente la referencia al objeto."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones es correcta sobre el tamaño del Stack en la JVM?",
+      "options": [
+        "Es de tamaño dinámico ilimitado durante toda la ejecución.",
+        "Se define al arrancar el hilo y suele ser fijo; si se supera, ocurre un error de desbordamiento.",
+        "Se ajusta automáticamente robando espacio del Heap."
+      ],
+      "correct": 1,
+      "hint": "El desbordamiento ocurre cuando este espacio limitado se agota.",
+      "explanation": "El tamaño del Stack suele ser fijo para cada hilo y mucho menor que el del Heap. Excederlo provoca un `StackOverflowError`."
+    },
+    {
+      "q": "Si tenemos `int[] v1 = {1, 2, 3};` y hacemos `int[] v2 = v1;` y luego `v2[0] = 99;`, ¿cuál es el valor de `v1[0]`?",
+      "options": [
+        "1",
+        "99",
+        "Se lanza una excepción."
+      ],
+      "correct": 1,
+      "hint": "Ambos arrays comparten la misma referencia en memoria.",
+      "explanation": "Como `v1` y `v2` apuntan al mismo array en el Heap, cualquier modificación mediante `v2` altera el array compartido y se refleja en `v1`."
+    },
+    {
+      "q": "¿Qué sucede cuando asignamos `null` a una referencia `p` que apuntaba a un objeto?",
+      "options": [
+        "El objeto es destruido inmediatamente en el Heap.",
+        "La referencia en el Stack se limpia (vale null) y el objeto en el Heap queda elegible para GC si no hay más referencias.",
+        "Se libera automáticamente la pila entera del método actual."
+      ],
+      "correct": 1,
+      "hint": "El objeto huérfano queda candidato para el GC.",
+      "explanation": "Asignar `null` elimina el enlace desde esa variable al objeto. Si no existen otras referencias, el objeto queda listo para ser recolectado."
+    },
+    {
+      "q": "¿Qué es el algoritmo 'Mark & Sweep' en el contexto de la JVM?",
+      "options": [
+        "Un algoritmo de búsqueda de elementos en arrays de objetos.",
+        "Un proceso del Garbage Collector que marca los objetos alcanzables y barre (libera) los no alcanzables.",
+        "Un método de ordenamiento de marcos de activación en el Stack."
+      ],
+      "correct": 1,
+      "hint": "Marcado y barrido.",
+      "explanation": "Es el algoritmo básico del Garbage Collector: se marcan los objetos accesibles desde las raíces y luego se liberan los no marcados."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre la aritmética de punteros en Java es verdadera?",
+      "options": [
+        "Java no permite aritmética de punteros para garantizar la seguridad del acceso a memoria.",
+        "Java permite aritmética de punteros dentro de bloques marcados con la palabra clave `unsafe`.",
+        "La aritmética de punteros solo está disponible para arrays de tipo primitivo."
+      ],
+      "correct": 0,
+      "hint": "Java busca la robustez eliminando punteros explícitos.",
+      "explanation": "Java elimina la aritmética de punteros por razones de seguridad y robustez, evitando accesos corruptos a memoria."
+    },
+    {
+      "q": "Si una clase `Vehiculo` tiene un atributo primitivo `int velocidad`, ¿dónde reside esta variable?",
+      "options": [
+        "En el Stack, por ser de tipo primitivo.",
+        "En el Heap, dentro del espacio asignado al objeto `Vehiculo` correspondiente.",
+        "En el área estática de la JVM."
+      ],
+      "correct": 1,
+      "hint": "Los atributos forman parte del objeto.",
+      "explanation": "Aunque `velocidad` sea de tipo primitivo, es un atributo de instancia de un objeto, por lo que se almacena en el Heap como parte del objeto."
+    },
+    {
+      "q": "¿Qué pasa con los objetos huérfanos que están en una estructura cíclica de referencias (ej. A apunta a B, B apunta a A) pero sin referencias desde el Stack?",
+      "options": [
+        "El Garbage Collector no puede recolectarlos porque se apuntan entre sí.",
+        "El Garbage Collector los recolecta porque son inalcanzables desde las raíces (GC Roots).",
+        "Se genera un fallo del sistema y el programa termina."
+      ],
+      "correct": 1,
+      "hint": "La alcanzabilidad se evalúa a partir de raíces externas (como el Stack).",
+      "explanation": "El GC de Java utiliza análisis de alcanzabilidad desde raíces (GC Roots). Si un ciclo de objetos no es alcanzable desde el Stack, es recolectado por completo."
+    },
+    {
+      "q": "¿Qué representa el área de memoria 'Metaspace' (o el antiguo 'PermGen') en la JVM?",
+      "options": [
+        "El área del Stack reservada para la recursión.",
+        "El espacio del Heap exclusivo para arrays de gran tamaño.",
+        "El área donde se cargan los metadatos de las clases, métodos y constantes del programa."
+      ],
+      "correct": 2,
+      "hint": "Metadatos de clases.",
+      "explanation": "Metaspace almacena los metadatos de las clases cargadas por la JVM, la definición de métodos, el pool de constantes y las variables estáticas."
+    },
+    {
+      "q": "Si una variable estática contiene una referencia a un objeto, ¿cuándo es elegible ese objeto para el Garbage Collector?",
+      "options": [
+        "Cuando termine el método que la inicializó.",
+        "Solo cuando la clase que contiene la variable estática sea descargada de la JVM, o si la referencia se cambia a null.",
+        "Nunca, las referencias estáticas impiden que se recolecte el objeto bajo cualquier circunstancia."
+      ],
+      "correct": 1,
+      "hint": "Las variables estáticas actúan como GC Roots.",
+      "explanation": "Las variables estáticas son raíces de recolección (GC Roots) y mantienen vivos a los objetos a los que apuntan hasta que se asigne null o se descargue la clase."
+    },
+    {
+      "q": "¿Qué diferencia a los tipos primitivos de las clases de envoltura (Wrapper classes como `Integer` o `Double`) en términos de memoria?",
+      "options": [
+        "Los primitivos residen en el Stack si son variables locales; las instancias de envoltura siempre residen en el Heap.",
+        "Las clases de envoltura se guardan en el Stack y los primitivos en el Heap.",
+        "No hay diferencia, ambos se comportan exactamente igual."
+      ],
+      "correct": 0,
+      "hint": "Las clases de envoltura son objetos.",
+      "explanation": "Los tipos primitivos locales se guardan en el Stack. Las envolturas son objetos ordinarios y por lo tanto sus instancias se crean en el Heap."
+    },
+    {
+      "q": "¿Qué sucede al intentar inicializar un array de tamaño negativo en Java (ej. `int[] v = new int[-5];`)?",
+      "options": [
+        "Se crea un array vacío con tamaño cero.",
+        "Se produce un error de compilación.",
+        "Se lanza una excepción `NegativeArraySizeException` en tiempo de ejecución."
+      ],
+      "correct": 2,
+      "hint": "Es verificado en tiempo de ejecución.",
+      "explanation": "Java permite la compilación pero lanza la excepción runtime `NegativeArraySizeException` si el tamaño evaluado es negativo."
+    },
+    {
+      "q": "¿Cómo afecta la recursividad a la pila de llamadas (Stack)?",
+      "options": [
+        "No le afecta, la recursividad utiliza el Heap.",
+        "Cada llamada recursiva añade un nuevo marco de activación en el tope del Stack, incrementando su tamaño temporalmente.",
+        "La recursividad optimiza el Stack reduciendo su espacio a la mitad."
+      ],
+      "correct": 1,
+      "hint": "LIFO acumula marcos.",
+      "explanation": "Cada llamada recursiva requiere guardar el estado de la llamada actual en un nuevo marco en el Stack. Si la recursión es muy profunda, puede causar un desbordamiento del Stack."
+    },
+    {
+      "q": "¿Qué ocurre con las variables locales del Stack si se lanza una excepción y no se captura en el método actual?",
+      "options": [
+        "Se mantienen congeladas en memoria para depuración.",
+        "El marco de activación se destruye de inmediato y el control de la pila se propaga hacia atrás, liberando la memoria local.",
+        "Se transfieren automáticamente al Heap."
+      ],
+      "correct": 1,
+      "hint": "La pila se desbobina.",
+      "explanation": "Cuando ocurre una excepción no capturada, la pila se desbobina ('stack unwinding'), lo que destruye secuencialmente los marcos de activación correspondientes y libera sus variables locales."
+    },
+    {
+      "q": "¿Dónde reside el código de los métodos de una clase en memoria?",
+      "options": [
+        "En el Stack de cada hilo.",
+        "En el Heap junto con las variables de instancia.",
+        "En el área de código/metadatos (Metaspace) de la JVM."
+      ],
+      "correct": 2,
+      "hint": "El código ejecutable es compartido por todas las instancias.",
+      "explanation": "Las instrucciones de los métodos se cargan una única vez en la zona de metadatos de clase (Metaspace) administrada por la JVM."
+    },
+    {
+      "q": "¿Cuál es el valor por defecto de una variable de referencia declarada como atributo de clase pero no inicializada?",
+      "options": [
+        "Un objeto vacío.",
+        "null",
+        "Un error de compilación."
+      ],
+      "correct": 1,
+      "hint": "Las variables de instancia de tipo objeto se inicializan a un valor especial.",
+      "explanation": "Por defecto, en Java todas las variables de instancia y de clase de tipo objeto se inicializan a `null` de forma automática."
+    },
+    {
+      "q": "Si declaramos una variable local de tipo objeto pero no la inicializamos ni le asignamos valor, ¿qué ocurre si intentamos usarla?",
+      "options": [
+        "Se produce un error de compilación por variable no inicializada.",
+        "Tiene el valor `null` por defecto y se puede usar libremente.",
+        "Lanza un `NullPointerException` en tiempo de ejecución de inmediato."
+      ],
+      "correct": 0,
+      "hint": "El compilador de Java es estricto con las variables locales.",
+      "explanation": "Las variables locales en Java no reciben un valor por defecto automáticamente. Intentar utilizarlas antes de inicializarlas produce un error de compilación."
+    },
+    {
+      "q": "¿Cuál es la función principal de la JVM en el ecosistema Java?",
+      "options": [
+        "Ejecutar directamente el código fuente .java sin compilar.",
+        "Compilar el código .java en bytecode .class.",
+        "Proporcionar un entorno de ejecución independiente de la plataforma para ejecutar el bytecode (.class)."
+      ],
+      "correct": 2,
+      "hint": "Write once, run anywhere.",
+      "explanation": "La JVM interpreta y compila al vuelo (JIT) el bytecode (.class) a instrucciones de máquina nativas de la plataforma donde se ejecuta."
+    },
+    {
+      "q": "¿Qué es el compilador Just-In-Time (JIT) de la JVM?",
+      "options": [
+        "Un compilador que traduce el código fuente directamente a HTML.",
+        "Un componente de la JVM que compila partes del bytecode a código máquina nativo en tiempo de ejecución para mejorar el rendimiento.",
+        "Un depurador de memoria del Stack."
+      ],
+      "correct": 1,
+      "hint": "Compila al vuelo en tiempo de ejecución.",
+      "explanation": "El compilador JIT (Just-In-Time) detecta las secciones de código que más se ejecutan ('hot spots') y las traduce a código máquina nativo para ejecutarlas a alta velocidad."
+    },
+    {
+      "q": "¿Qué es el espacio de direcciones virtuales de la JVM?",
+      "options": [
+        "La porción de memoria física asignada al sistema operativo.",
+        "La memoria lógica que la JVM solicita al sistema operativo y gestiona internamente dividida en Stack, Heap, etc.",
+        "Un disco duro virtual utilizado para paginación."
+      ],
+      "correct": 1,
+      "hint": "Es la memoria lógica gestionada por la JVM.",
+      "explanation": "Al iniciarse, la JVM reserva un bloque de memoria virtual del sistema operativo y lo gestiona internamente para sus necesidades de Stack, Heap y Metaspace."
+    },
+    {
+      "q": "Si un array se declara como `int[][] m = new int[2][3];`, ¿cuántos objetos se reservan en el Heap?",
+      "options": [
+        "1 objeto",
+        "3 objetos",
+        "6 objetos"
+      ],
+      "correct": 1,
+      "hint": "Un array bidimensional es un array de arrays.",
+      "explanation": "Se crea 1 array principal (fila de 2 referencias) y 2 arrays de enteros (cada uno de tamaño 3). En total son 3 objetos de tipo array en el Heap."
+    },
+    {
+      "q": "¿Qué sucede si excedemos la memoria máxima configurada para el Heap en la JVM?",
+      "options": [
+        "La JVM amplía automáticamente el tamaño físico e indefinidamente.",
+        "La JVM arroja un `java.lang.OutOfMemoryError: Java heap space` y la ejecución puede terminar.",
+        "El sistema operativo detiene la máquina entera."
+      ],
+      "correct": 1,
+      "hint": "Es un error de memoria irrecuperable.",
+      "explanation": "Si el Heap se llena y el GC no puede recuperar más espacio, la JVM arroja `OutOfMemoryError` y generalmente el programa finaliza por falta de recursos."
+    },
+    {
+      "q": "¿En qué se diferencia el ciclo de vida de un objeto en C (usando malloc) y en Java?",
+      "options": [
+        "En C hay que destruirlo explícitamente con `free()`; en Java, queda sin referencias y es recolectado automáticamente.",
+        "En Java hay que usar `free()` y en C se liberan automáticamente.",
+        "No hay diferencia, ambos usan recolectores de basura automáticos modernos."
+      ],
+      "correct": 0,
+      "hint": "Java tiene recolección automática, C es manual.",
+      "explanation": "C requiere control manual de la memoria mediante `malloc` y `free`. Java delega esa responsabilidad al Garbage Collector de la JVM."
+    },
+    {
+      "q": "¿Qué tipo de raíz de recolección (GC Root) no utiliza la JVM para el análisis de alcanzabilidad?",
+      "options": [
+        "Referencias locales en la pila de llamadas activa.",
+        "Referencias contenidas en atributos de objetos inalcanzables en el Heap.",
+        "Referencias estáticas de clases cargadas."
+      ],
+      "correct": 1,
+      "hint": "Si un objeto ya es inalcanzable, sus atributos no pueden salvar a otros de serlo.",
+      "explanation": "Las GC Roots deben ser externas al Heap dinámico inactivo. Las referencias locales del Stack y variables estáticas son raíces válidas, pero los atributos de objetos inalcanzables no lo son."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "¿Qué palabra clave completa la línea para instanciar un objeto?\n`Persona p = ____ Persona(\"Luis\");`",
+      "options": [
+        "new",
+        "create",
+        "alloc"
+      ],
+      "correct": 0,
+      "hint": "Constructor allocation.",
+      "explanation": "En Java, el operador `new` se utiliza para reservar memoria para un nuevo objeto en el Heap e invocar su constructor."
+    },
+    {
+      "q": "Completa el código para copiar la referencia de `v1` en `v2`:\n`int[] v1 = {1, 2};\nint[] v2 = ____;`",
+      "options": [
+        "v1",
+        "new int[2]",
+        "v1.clone()"
+      ],
+      "correct": 0,
+      "hint": "Copia simple de dirección de memoria.",
+      "explanation": "Asignar directamente `v1` copia el puntero o referencia a `v2` en el Stack."
+    },
+    {
+      "q": "Completa la línea para sugerir la ejecución del recolector de basura:\n`System.____();`",
+      "options": [
+        "gc",
+        "garbageCollector",
+        "runGC"
+      ],
+      "correct": 0,
+      "hint": "Abreviación común de Garbage Collector.",
+      "explanation": "El método estático `System.gc()` sugiere a la JVM que ejecute el Garbage Collector."
+    },
+    {
+      "q": "Dada la siguiente declaración de clase, completa para definir un constructor:\n`class Persona {\n  String nombre;\n  Persona(String n) { ____ = n; }\n}`",
+      "options": [
+        "this.nombre",
+        "nombre.this",
+        "super.nombre"
+      ],
+      "correct": 0,
+      "hint": "Referencia al objeto actual.",
+      "explanation": "`this.nombre` permite referenciar explícitamente el atributo de la instancia actual de la clase."
+    },
+    {
+      "q": "Completa el código para que el objeto apuntado por `p` sea candidato al recolector de basura:\n`Persona p = new Persona(\"Marta\");\n____;`",
+      "options": [
+        "p = null",
+        "p.free()",
+        "delete p"
+      ],
+      "correct": 0,
+      "hint": "Elimina la única referencia existente.",
+      "explanation": "Asignar `p = null` quita la única referencia existente al objeto en el Stack, haciéndolo inalcanzable."
+    },
+    {
+      "q": "Completa el código para evitar un NullPointerException al acceder a `p`:\n`Persona p = obtenerPersona();\nif (____) {\n  System.out.println(p.nombre);\n}`",
+      "options": [
+        "p != null",
+        "p == null",
+        "p.exists()"
+      ],
+      "correct": 0,
+      "hint": "Comprobación de referencia no nula.",
+      "explanation": "Verificar `p != null` garantiza que el puntero sea seguro antes de intentar acceder a cualquiera de sus atributos o métodos."
+    },
+    {
+      "q": "Completa para declarar un array bidimensional en Java:\n`int[][] matriz = ____ int[3][3];`",
+      "options": [
+        "new",
+        "create",
+        "alloc"
+      ],
+      "correct": 0,
+      "hint": "Es un objeto en el Heap.",
+      "explanation": "Los arrays multidimensionales también son objetos en el Heap y se instancian con `new`."
+    },
+    {
+      "q": "Completa para que el bucle imprima los elementos de un array `arr`:\n`for(int i = 0; i < arr.____; i++)`",
+      "options": [
+        "length",
+        "size",
+        "length()"
+      ],
+      "correct": 0,
+      "hint": "Atributo público de tamaño en arrays en Java.",
+      "explanation": "En Java, los arrays tienen un miembro de solo lectura llamado `length` que indica su número de elementos."
+    },
+    {
+      "q": "Completa el código para liberar explícitamente la referencia en el stack:\n`String s = \"Hola\";\n____;`",
+      "options": [
+        "s = null",
+        "s = \"\"",
+        "s.clear()"
+      ],
+      "correct": 0,
+      "hint": "Puntero nulo.",
+      "explanation": "Para limpiar una referencia del stack y liberar su objeto asociado para GC, se le asigna `null`."
+    },
+    {
+      "q": "Completa la condición para verificar si dos referencias `p1` y `p2` apuntan al mismo objeto en el heap:\n`if (____) { ... }`",
+      "options": [
+        "p1 == p2",
+        "p1.equals(p2)",
+        "p1 === p2"
+      ],
+      "correct": 0,
+      "hint": "Operador de igualdad de referencias.",
+      "explanation": "El operador `==` compara si las direcciones físicas almacenadas en las referencias del stack son iguales."
+    },
+    {
+      "q": "Completa para crear una instancia vacía de un array de enteros de tamaño 5:\n`int[] numeros = ____;`",
+      "options": [
+        "new int[5]",
+        "new int(5)",
+        "new Array(5)"
+      ],
+      "correct": 0,
+      "hint": "Sintaxis estándar de arrays con new.",
+      "explanation": "`new int[5]` reserva espacio en el Heap para un array de 5 enteros inicializados por defecto a 0."
+    },
+    {
+      "q": "Completa el tipo de retorno para un método que no devuelve nada:\n`public static ____ main(String[] args)`",
+      "options": [
+        "void",
+        "null",
+        "int"
+      ],
+      "correct": 0,
+      "hint": "Palabra clave de ausencia de retorno.",
+      "explanation": "`void` indica que el método realiza acciones pero no retorna ningún valor al llamador."
+    },
+    {
+      "q": "Completa el código para imprimir la dirección implícita o representación por defecto del objeto si no es null:\n`Persona p = new Persona(\"Ana\");\nSystem.out.println(____);`",
+      "options": [
+        "p",
+        "p.toString()",
+        "p.nombre"
+      ],
+      "correct": 0,
+      "hint": "La variable de referencia misma.",
+      "explanation": "Imprimir la referencia directamente llamará implícitamente al método `toString()` del objeto."
+    },
+    {
+      "q": "Completa para lanzar una excepción de puntero nulo manualmente:\n`throw new ____();`",
+      "options": [
+        "NullPointerException",
+        "IllegalArgumentException",
+        "RuntimeException"
+      ],
+      "correct": 0,
+      "hint": "Nombre exacto de la clase del error de referencia nula.",
+      "explanation": "Se lanza `NullPointerException` para indicar usos incorrectos de variables apuntando a null."
+    },
+    {
+      "q": "Completa para comparar el contenido de texto de dos cadenas `s1` y `s2` en Java:\n`boolean iguales = s1.____(s2);`",
+      "options": [
+        "equals",
+        "==",
+        "compareTo"
+      ],
+      "correct": 0,
+      "hint": "Método heredado de Object para igualdad de valor.",
+      "explanation": "El método `equals` compara los contenidos del String en lugar de las referencias."
+    },
+    {
+      "q": "Completa el tipo para guardar una referencia a un objeto de tipo `Persona`:\n`____ p = new Persona(\"Ana\");`",
+      "options": [
+        "Persona",
+        "Object",
+        "var"
+      ],
+      "correct": 0,
+      "hint": "Tipo exacto de la clase instanciada.",
+      "explanation": "Debemos declarar la variable con el tipo de la clase (`Persona`) o una superclase compatible."
+    },
+    {
+      "q": "Completa para hacer un casting de un tipo Object `obj` a tipo `Persona`:\n`Persona p = (____) obj;`",
+      "options": [
+        "Persona",
+        "persona",
+        "Persona.class"
+      ],
+      "correct": 0,
+      "hint": "Tipo de destino entre paréntesis.",
+      "explanation": "El casting explícito se realiza escribiendo el nombre de la clase destino entre paréntesis antes del objeto."
+    },
+    {
+      "q": "Completa para heredar de una clase base `Empleado`:\n`class Gerente ____ Empleado { }`",
+      "options": [
+        "extends",
+        "implements",
+        "inherits"
+      ],
+      "correct": 0,
+      "hint": "Palabra clave de herencia de clases.",
+      "explanation": "En Java, la herencia de clases se declara con `extends`."
+    },
+    {
+      "q": "Completa para llamar al constructor de la clase base:\n`public Gerente() { ____(); }`",
+      "options": [
+        "super",
+        "this",
+        "parent"
+      ],
+      "correct": 0,
+      "hint": "Palabra clave para la clase padre.",
+      "explanation": "`super()` invoca el constructor de la superclase (en este caso Empleado)."
+    },
+    {
+      "q": "Completa la asignación del elemento en la posición 0 del array `x`:\n`x[____] = 10;`",
+      "options": [
+        "0",
+        "1",
+        "first"
+      ],
+      "correct": 0,
+      "hint": "Primer índice de un array en Java.",
+      "explanation": "En Java los índices de arrays son 0-indexed, por lo que el primer elemento es `x[0]`."
+    },
+    {
+      "q": "¿Cuáles de los siguientes elementos se almacenan en el Heap de Java?",
+      "options": [
+        "Los objetos creados con 'new'",
+        "Los arrays de tipos primitivos u objetos",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Memory regions.",
+      "explanation": "Todos los objetos instanciados y arrays, independientemente de sus tipos contenidos, se guardan en el Heap."
+    },
+    {
+      "q": "¿Qué puede provocar que un objeto en el Heap sea recolectado por el Garbage Collector?",
+      "options": [
+        "Que su única referencia en el Stack se asigne a null",
+        "Que la variable del Stack que lo referencia salga de su ámbito de ejecución",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Uso de memoria y fin de ámbito.",
+      "explanation": "Ambas acciones destruyen la cadena de alcanzabilidad del objeto, haciéndolo elegible para GC."
+    },
+    {
+      "q": "¿Cuáles son ventajas de la gestión automática de memoria en la JVM comparado con C?",
+      "options": [
+        "Prevención de fugas de memoria por olvido de liberación",
+        "Eliminación de la aritmética de punteros insegura",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Seguridad y abstracción.",
+      "explanation": "Java proporciona seguridad y fiabilidad al automatizar la recolección y evitar operaciones de puntero crudo."
+    },
+    {
+      "q": "¿Qué tipo de variables se almacenan en el Stack de la JVM?",
+      "options": [
+        "Variables locales de tipo primitivo",
+        "Referencias a objetos del Heap",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Estructura LIFO del stack frame.",
+      "explanation": "Tanto variables locales primitivas como variables locales de referencia de objetos residen en el Stack."
+    },
+    {
+      "q": "¿Qué sucede cuando finaliza la ejecución de un método en Java?",
+      "options": [
+        "Se elimina su marco de activación en el Stack",
+        "Se liberan las variables locales primitivas del método",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Destrucción del stack frame.",
+      "explanation": "Al retornar un método, su marco completo en el Stack se libera, limpiando sus parámetros y variables locales."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son algoritmos o fases comunes del Garbage Collector?",
+      "options": [
+        "Fase de marcado (Mark)",
+        "Fase de barrido (Sweep)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Algoritmos clásicos del GC.",
+      "explanation": "El algoritmo estándar Mark & Sweep se compone exactamente de estas dos fases."
+    },
+    {
+      "q": "¿Qué puede causar una excepción o error relacionado con la memoria en Java?",
+      "options": [
+        "Exceso de recursión sin caso base (StackOverflowError)",
+        "Falta de espacio libre en el Heap (OutOfMemoryError)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Pila vs Montículo.",
+      "explanation": "Ambos son problemas reales de límites de memoria de la JVM (StackOverflowError en Stack y OutOfMemoryError en Heap)."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre las referencias en Java son correctas?",
+      "options": [
+        "No permiten aritmética de punteros",
+        "Se almacenan en el Stack si son variables locales",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Características de las referencias.",
+      "explanation": "Las referencias de Java son seguras, no permiten operaciones aritméticas directas y viven en el Stack como variables locales."
+    },
+    {
+      "q": "¿Qué se copia al realizar la asignación `p2 = p1` si ambas son referencias a objetos?",
+      "options": [
+        "La dirección de memoria almacenada en p1",
+        "El valor de la referencia",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Paso de puntero.",
+      "explanation": "Copiar una referencia copia exactamente su valor numérico que representa la dirección de memoria en el Heap."
+    },
+    {
+      "q": "¿Cuáles de las siguientes opciones representan raíces (GC Roots) válidas para buscar objetos alcanzables?",
+      "options": [
+        "Variables locales en la pila de llamadas (Stack)",
+        "Variables estáticas de las clases cargadas",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Puntos de partida del GC.",
+      "explanation": "El GC inicia el análisis de alcanzabilidad desde el Stack activo y las variables estáticas globales."
+    },
+    {
+      "q": "Si ejecutamos `Persona p1 = new Persona(\"Ana\"); Persona p2 = new Persona(\"Ana\");`, ¿cuál es el resultado de comparar `p1 == p2`?",
+      "options": [
+        "true",
+        "false",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 1,
+      "hint": "Comparación de direcciones de memoria físicas.",
+      "explanation": "Como se usó `new` dos veces, existen dos objetos diferentes en el Heap, por lo que sus referencias son distintas y `p1 == p2` evalúa a false."
+    },
+    {
+      "q": "En Java, ¿cómo puede un programador forzar de manera garantizada la recolección de basura inmediata de un objeto?",
+      "options": [
+        "Llamando a System.gc()",
+        "Usando el operador delete",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "No hay control directo de la recolección.",
+      "explanation": "No existe ningún mecanismo garantizado en Java para forzar la recolección de basura; la JVM la gestiona de forma autónoma."
+    },
+    {
+      "q": "¿Cuál es el operador o palabra clave que permite liberar memoria de un objeto en Java de la misma manera que 'free' en C?",
+      "options": [
+        "free",
+        "delete",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Gestión automática de memoria.",
+      "explanation": "En Java no existe un operador explícito de liberación de memoria como `free` o `delete`."
+    },
+    {
+      "q": "Si declaramos `int[] v = null;`, ¿en qué zona de memoria se encuentra el array?",
+      "options": [
+        "En el Heap",
+        "En el Stack",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El array no se ha creado.",
+      "explanation": "No se ha creado ningún array en memoria porque `v` es null. Solo existe la variable de referencia `v` en el Stack."
+    },
+    {
+      "q": "¿Cuál de las siguientes expresiones incrementa la dirección del puntero `p` para apuntar al siguiente elemento de un array en Java?",
+      "options": [
+        "p++",
+        "p = p + sizeof(p)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Java prohíbe estas operaciones de bajo nivel.",
+      "explanation": "Java no soporta aritmética de punteros, por lo que tales expresiones producen errores de compilación."
+    },
+    {
+      "q": "Si una clase declara una variable miembro como `int id;`, ¿dónde reside esta variable al instanciar el objeto?",
+      "options": [
+        "Siempre en el Stack",
+        "En una zona de memoria estática",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Atributos del objeto.",
+      "explanation": "Reside en el Heap, como parte del espacio de memoria dinámica reservado para el objeto instanciado."
+    },
+    {
+      "q": "Si llamamos a un método recursivo sin caso base, ¿qué tipo de excepción o error de Heap obtendremos?",
+      "options": [
+        "OutOfMemoryError",
+        "NullPointerException",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Pila de ejecución.",
+      "explanation": "Provocará un `StackOverflowError`, que ocurre en la pila (Stack) y no en el montículo (Heap)."
+    },
+    {
+      "q": "Si asignamos `Object obj = new Persona(\"Luis\");`, ¿cuál es el resultado en tiempo de compilación?",
+      "options": [
+        "Error de compilación porque los tipos son incompatibles",
+        "Se crea un objeto de tipo Object en el Heap",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Polimorfismo implícito.",
+      "explanation": "Compila perfectamente debido al polimorfismo, y se crea un objeto de tipo `Persona` en el Heap, no de tipo `Object`."
+    },
+    {
+      "q": "Al invocar `System.gc()`, ¿qué garantiza la JVM?",
+      "options": [
+        "Que se recolectarán todos los objetos huérfanos antes de la siguiente línea de código",
+        "Que se liberará al menos el 50% del Heap",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "No hay garantías en GC.",
+      "explanation": "La JVM no ofrece ninguna garantía de ejecución inmediata tras llamar a `System.gc()`."
+    },
+    {
+      "q": "Si un objeto `A` tiene una referencia al objeto `B`, y `B` tiene una referencia al objeto `A`, pero ninguno es accesible desde el Stack, ¿qué hace el Garbage Collector?",
+      "options": [
+        "No los recolecta porque hay referencias activas entre ellos (referencia circular)",
+        "Recolecta solo el objeto A",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Alcanzabilidad desde GC Roots.",
+      "explanation": "Recolectará ambos objetos, ya que ninguno de los dos es alcanzable desde las variables del Stack."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_001",
+      "title": "Asignación Básica de Referencias",
+      "context": "Dado el siguiente bloque de código:\n```java\nint[] a = {5, 10, 15};\nint[] b = a;\nb[1] = 20;\na[0] = 30;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la posición `a[1]` en el array?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La variable `b` copia la referencia de `a` en la pila (Stack). Ambas apuntan al mismo array en el montículo (Heap). Por tanto, modificar `b[1] = 20` cambia directamente el valor en el array compartido, haciendo que `a[1]` sea $20$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la posición `b[0]` en el array?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "De igual manera, como `a` y `b` comparten el mismo objeto array en el Heap, la modificación `a[0] = 30` altera el array común. El valor recuperado mediante `b[0]` es $30$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos de tipo array se han creado en el Heap?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Únicamente se ha instanciado un array en la línea `int[] a = {5, 10, 15};`. La línea `int[] b = a;` solo copia la referencia en el Stack, sin crear ningún objeto adicional."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas referencias activas a este array existen en la pila (Stack) al finalizar?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Existen $2$ referencias activas: la variable `a` y la variable `b`, ambas apuntando a la misma dirección de memoria."
+        }
+      ]
+    },
+    {
+      "id": "LAB_002",
+      "title": "Reasignación de Arrays y GC Candidates",
+      "context": "Dado el siguiente bloque de código:\n```java\nint[] v = {1, 2, 3};\nint[] w = {4, 5};\nv = w;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `v[0]`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Al realizar la asignación `v = w`, la referencia `v` pasa a apuntar al mismo array que `w`, el cual es `{4, 5}`. Así, `v[0]` devuelve su primer elemento, que es $4$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos arrays en el Heap quedan elegibles para el Garbage Collector al terminar?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El array inicial de tres elementos `{1, 2, 3}` pierde todas sus referencias puesto que `v` ahora apunta al otro array. Se convierte en $1$ candidato para el Garbage Collector."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas referencias activas al segundo array `{4, 5}` quedan en el Stack al finalizar?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Las dos variables locales `v` y `w` en el Stack contienen ahora la dirección del segundo array `{4, 5}` en el Heap. Son $2$ referencias."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la longitud del array apuntado por `v` al final?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El array apuntado por `v` es `{4, 5}`, cuya longitud o tamaño es exactamente $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_003",
+      "title": "Mutación de Objetos Persona",
+      "context": "Dada la definición de la clase `Persona` con un atributo entero `edad`:\n```java\nPersona p1 = new Persona(20);\nPersona p2 = new Persona(30);\nPersona p3 = p1;\np1 = p2;\np2 = p3;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `p1.edad`?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Tras reasignar `p1 = p2`, la referencia `p1` apunta al objeto creado originalmente como `p2` con edad $30$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de `p2.edad`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La variable `p2` recibe la referencia guardada en `p3`, que a su vez contenía la de `p1` inicial. Apunta al objeto con edad $20$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor final de `p3.edad`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "`p3` mantiene la referencia original del primer objeto creado con edad $20$, la cual no ha cambiado en este flujo."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Persona` en el Heap son elegibles para el Garbage Collector al finalizar?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ambos objetos en el Heap siguen teniendo al menos una referencia activa en el Stack (de hecho, el de edad $20$ tiene dos referencias y el de edad $30$ tiene una), por lo que $0$ objetos son candidatos al GC."
+        }
+      ]
+    },
+    {
+      "id": "LAB_004",
+      "title": "Array de Objetos en Heap",
+      "context": "Dado el siguiente bloque de código:\n```java\nclass Nodo { int valor; Nodo(int v) { valor = v; } }\nNodo[] arr = new Nodo[3];\narr[0] = new Nodo(10);\narr[1] = new Nodo(20);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántos objetos totales (incluyendo arrays y nodos) se han reservado en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se crea un objeto array de tamaño 3 (`new Nodo[3]`) y dos objetos de clase `Nodo`. En total, $1 + 2 = 3$ objetos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico correspondiente al elemento `arr[2]` (especifica 0 si es null, 1 si no es null)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al instanciarse un array de objetos, sus posiciones se inicializan por defecto a `null`. Dado que no se asignó nada a `arr[2]`, es `null` (representado por $0$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor numérico del atributo `valor` del objeto almacenado en `arr[1]`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "En `arr[1]` reside el objeto creado con `new Nodo(20)`. Su atributo `valor` es exactamente $20$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos elementos de tipo referencia dentro del objeto array tienen un valor null al terminar?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El array tiene 3 celdas. `arr[0]` y `arr[1]` están ocupadas por referencias a objetos Nodo, mientras que `arr[2]` permanece en `null`. Hay $1$ referencia null."
+        }
+      ]
+    },
+    {
+      "id": "LAB_005",
+      "title": "Paso de Referencias por Valor a Métodos",
+      "context": "Dada la siguiente definición de clase y método auxiliar:\n```java\nclass Auxiliar {\n    static void modificar(int[] x) {\n        x[0] = 99;\n        x = new int[]{5, 6};\n        x[0] = 100;\n    }\n}\n// main:\nint[] array = {1, 2, 3};\nAuxiliar.modificar(array);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `array[0]` en la función main?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "Al invocar el método, se copia la referencia del array. La asignación `x[0] = 99` modifica el array compartido, cambiando el primer elemento a $99$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos arrays en total se crean en el Heap durante la ejecución completa?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se crean $2$ arrays: el array original `{1, 2, 3}` en la función main y el array `{5, 6}` instanciado dentro del método `modificar`."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos arrays quedan listos para el Garbage Collector inmediatamente al retornar el método?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El array `{5, 6}` creado localmente en el método pierde su única referencia `x` cuando el método termina y su marco de pila se destruye. Es $1$ candidato para el GC."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál era el valor de la primera posición del array secundario `{5, 6}` justo antes de perderse?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Dentro del método se modificó `x[0] = 100` sobre el nuevo array `{5, 6}`. Por lo tanto, el valor era $100$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_006",
+      "title": "Instanciación explícita de Cadenas",
+      "context": "Dado el siguiente código en Java:\n```java\nString s1 = new String(\"hola\");\nString s2 = s1;\nString s3 = new String(\"hola\");\ns1 = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántos objetos String distintos se han instanciado explícitamente en el Heap mediante `new`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Cada expresión `new String(...)` crea un objeto único en el Heap. Se usó dos veces, por lo que hay $2$ objetos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas referencias activas a estos objetos creados quedan en el Stack al finalizar?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Quedan $2$ referencias activas: `s2` (que apunta al primer objeto) y `s3` (que apunta al segundo). `s1` vale null."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Son los objetos apuntados por `s2` y `s3` el mismo objeto en memoria (indica 1 para sí, 0 para no)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al ser creados con `new` independientes en el Heap, ocupan direcciones distintas. Por tanto, `s2 == s3` es falso ($0$)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos de estos objetos son candidatos para el Garbage Collector al final del fragmento?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ambos objetos siguen siendo alcanzables (uno por `s2` y otro por `s3`). Ninguno es candidato para el GC ($0$)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_007",
+      "title": "Matrices Irregulares (Jagged Arrays)",
+      "context": "Dado el siguiente bloque de inicialización de matrices:\n```java\nint[][] mat = new int[3][];\nmat[0] = new int[4];\nmat[1] = new int[2];\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántos objetos de tipo array se han creado en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se crea un array bidimensional inicial (`new int[3][]`) y dos sub-arrays de enteros. En total son $3$ objetos array."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas posiciones de datos primitivos enteros (`int`) se han asignado físicamente en el Heap?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El primer sub-array tiene 4 enteros y el segundo 2 enteros. En total son $4 + 2 = 6$ elementos enteros asignados en memoria."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor lógico correspondiente al elemento `mat[2]` (especifica 0 si es null, 1 si no es null)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La tercera fila `mat[2]` no se ha inicializado y mantiene su valor por defecto de referencia, el cual es `null` ($0$)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor inicial de `mat[0][0]` tras la reserva en el Heap?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Las celdas de arrays numéricos primitivos en Java se inicializan por defecto a $0$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_008",
+      "title": "Recursividad y Profundidad del Stack",
+      "context": "Dado el método recursivo de conteo simple:\n```java\nclass Rec {\n    static int contar(int n) {\n        if (n <= 1) return 1;\n        return 1 + contar(n - 1);\n    }\n}\n// Invocación inicial: Rec.contar(4);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es la cantidad máxima de marcos de activación activos de `contar` en el Stack simultáneamente?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La recursión genera llamadas anidadas para $n=4, 3, 2, 1$. Se apilan consecutivamente hasta $4$ marcos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Qué valor entero retorna la invocación `Rec.contar(4)`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La suma acumula $1 + 1 + 1 + 1$ (el caso base retorna 1), devolviendo un resultado de $4$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos se reservaron en el Heap durante esta llamada?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Este proceso recursivo solo manipula variables locales y llamadas en el Stack, por lo que se crean $0$ objetos en el Heap."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la suma acumulativa de todos los valores del argumento `n` recibidos por el método?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El método es invocado con $n=4$, $n=3$, $n=2$, y $n=1$. La suma es $4+3+2+1 = 10$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_009",
+      "title": "Elegibilidad de Objetos Anidados para GC",
+      "context": "Dado el siguiente bloque de código:\n```java\nclass A { B refB; }\nclass B { int val; }\nA objA = new A();\nobjA.refB = new B();\nobjA.refB.val = 50;\nobjA = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántos objetos se vuelven candidatos para el Garbage Collector al final de este bloque?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al hacer `objA = null`, el objeto `A` queda inalcanzable. Dado que la única referencia al objeto `B` estaba contenida en `A` (`refB`), `B` también se vuelve inalcanzable. Se liberarán $2$ objetos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas referencias activas a objetos de este código quedan en el Stack?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La única variable local en el Stack era `objA`, que fue reasignada a `null`. Por tanto, quedan $0$ referencias activas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos en total se crearon en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se crearon $2$ objetos usando `new`: uno de la clase `A` y otro de la clase `B`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál era el valor de la propiedad `val` del objeto B?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "El atributo `val` del objeto de tipo `B` se asignó a $50$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_010",
+      "title": "Mutación con múltiples referencias",
+      "context": "Dado el siguiente fragmento de código:\n```java\nclass Contador { int c = 0; }\nContador c1 = new Contador();\nContador c2 = c1;\nc1.c++;\nc2.c += 2;\nc1 = new Contador();\nc1.c = 10;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `c2.c`?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "`c1` y `c2` apuntaban al mismo objeto Contador. Su atributo `c` se incrementó en $1$ y luego en $2$, dando $3$. Después `c1` cambió su dirección, pero `c2` sigue apuntando al primer objeto, por lo que vale $3$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de `c1.c`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "`c1` se reasignó a una nueva instancia de `Contador` y se estableció su atributo `c` a $10$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas instancias de `Contador` se reservaron en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se invocó `new Contador()` dos veces en el código, de modo que se crearon $2$ instancias."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Contador` son candidatos para el Garbage Collector al final?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El primer objeto sigue apuntado por `c2` y el segundo por `c1`. Ambos son alcanzables, por lo que hay $0$ candidatos para el GC."
+        }
+      ]
+    },
+    {
+      "id": "LAB_011",
+      "title": "Intercambio de Referencias (Reference Swap)",
+      "context": "Dado el siguiente bloque de código:\n```java\nint[] x = {10, 20};\nint[] y = {30, 40};\nint[] z = x;\nx = y;\ny = z;\nz[0] = 5;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de `x[0]` al terminar?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "`x` se reasignó para apuntar al array de `y` original `{30, 40}`. No se alteró su primer elemento, por lo que vale $30$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de `y[0]` al terminar?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "`y` apunta a `z` (el array `x` original `{10, 20}`). Dado que modificamos `z[0] = 5`, el valor obtenido desde `y[0]` es $5$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor de `z[0]` al terminar?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El valor del primer elemento de `z` fue modificado explícitamente a $5$ en la línea final."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos arrays en el Heap quedan sin ninguna referencia activa?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Los dos arrays creados en el Heap tienen variables activas que apuntan a ellos: `x` apunta a uno, e `y` y `z` apuntan al otro. Ninguno queda sin referencias ($0$)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_012",
+      "title": "Ciclo de Referencias Cruzadas",
+      "context": "Dada la clase `Node` que contiene una referencia al siguiente nodo:\n```java\nclass Node { Node next; }\nNode n1 = new Node();\nNode n2 = new Node();\nn1.next = n2;\nn2.next = n1;\nn1 = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Es el objeto originalmente apuntado por `n1` alcanzable desde el Stack (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, aunque `n1` sea null, el objeto sigue siendo alcanzable a través de `n2.next` ($1$)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Es el objeto originalmente apuntado por `n2` alcanzable desde el Stack (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, el objeto está directamente referenciado por la variable local `n2` en el Stack ($1$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "Si ahora ejecutamos además `n2 = null;`, ¿cuántos objetos `Node` quedan huérfanos y listos para GC?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al limpiar `n2`, no queda ninguna variable en el Stack que pueda alcanzar el ciclo. Ambos objetos en el Heap quedan huérfanos, por lo que $2$ son candidatos al GC."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas variables de referencia no nulas a nodos quedan en el Stack tras ejecutar `n1 = null` y `n2 = null`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Tanto `n1` como `n2` han sido asignadas a `null`. Quedan $0$ referencias activas."
+        }
+      ]
+    },
+    {
+      "id": "LAB_013",
+      "title": "Parámetro Primitivo vs Referencia",
+      "context": "Dado el siguiente fragmento de código:\n```java\nclass Test {\n    static void process(int a, int[] b) {\n        a = 99;\n        b[0] = 99;\n    }\n}\n// main:\nint val = 10;\nint[] arr = {10};\nTest.process(val, arr);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `val` en el main?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Los tipos primitivos se pasan por copia de valor. El cambio de la variable `a` dentro de `process` no tiene efecto sobre `val`, que permanece en $10$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de `arr[0]` en el main?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "La referencia del array se pasa por valor, lo cual significa que apunta al mismo array en el Heap. La modificación de `b[0] = 99` altera directamente el elemento, haciendo que valga $99$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas variables locales de referencia de array se encuentran activas en el Stack mientras se ejecuta `process` (incluyendo main)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Están activas la referencia `arr` en el marco de activación de `main` y la referencia parametrizada `b` en el marco de `process`. Son $2$ referencias."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos arrays se han asignado en el Heap?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Únicamente se ha instanciado un array en la línea `int[] arr = {10};`, por lo que hay $1$ objeto en el Heap."
+        }
+      ]
+    },
+    {
+      "id": "LAB_014",
+      "title": "Dimensiones en Matriz Triangular",
+      "context": "Dado el código para inicializar un array de arrays en Java:\n```java\nint[][] matrix = new int[4][];\nfor (int i = 0; i < matrix.length; i++) {\n    matrix[i] = new int[i + 1];\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántos objetos de tipo array se han creado en total en el Heap?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se crea un array de referencias a arrays (`new int[4][]`) y luego cuatro sub-arrays en el bucle. Total: $1 + 4 = 5$ objetos array."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas variables de tipo primitivo `int` se han reservado en el Heap en total?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Las filas tienen tamaños de 1, 2, 3 y 4 elementos. La suma total es $1 + 2 + 3 + 4 = 10$ enteros."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos sub-arrays tienen exactamente un tamaño de 3 elementos?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Únicamente la fila correspondiente a `i=2` se crea con un tamaño de `i+1` = $3$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la longitud del último sub-array (`matrix[3]`)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para `i=3`, se realiza `new int[4]`, lo que define un array de longitud $4$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_015",
+      "title": "Matriz de Objetos y Modificación de Atributos",
+      "context": "Dada la definición de un array y la clase Item:\n```java\nclass Item { int price; Item(int p) { price = p; } }\nItem[] items = { new Item(10), new Item(20) };\nItem first = items[0];\nfirst.price = 15;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `items[0].price`?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La variable `first` apunta al primer elemento de `items` en el Heap. Modificar `first.price` altera el atributo del objeto en la primera posición, fijándolo en $15$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos objetos totales (incluyendo arrays) se han instanciado en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se instanciaron dos objetos de clase `Item` y un array de referencias. En total son $3$ objetos."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas referencias del Stack apuntan directamente a objetos `Item` (excluyendo las referencias dentro del array)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La única variable local en el Stack que apunta a un objeto `Item` es `first`. Las variables `items` apuntan al array. Hay $1$ referencia."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del atributo `price` del segundo elemento del array?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El segundo elemento `items[1]` no sufrió ninguna alteración; mantiene su precio inicial de $20$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_016",
+      "title": "Variables de bucle y operaciones del Stack",
+      "context": "Dado el siguiente bucle de cálculo numérico:\n```java\nint count = 0;\nfor (int i = 0; i < 3; i++) {\n    int temp = i * 2;\n    count += temp;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuántos marcos de activación se crearon en la pila (Stack) además del principal (main)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Las instrucciones dentro de bucles se ejecutan en el ámbito del marco de activación del método actual. No se añade ningún marco adicional ($0$)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable `count`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "En cada paso se suma `temp` ($0$, luego $2$, luego $4$). La suma acumulada es $0 + 2 + 4 = 6$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos bytes o bloques de memoria se asignaron en el Heap durante esta ejecución?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Todas las variables del bucle son primitivas de tipo `int` locales. Residen en el Stack, por lo que en el Heap se asignan $0$ bytes."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas iteraciones completas realiza el bucle?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El bucle se ejecuta para `i=0`, `i=1` e `i=2`. Realiza exactamente $3$ iteraciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_017",
+      "title": "Anidamiento de Referencias de Objetos (Box)",
+      "context": "Dada la clase `Box` que envuelve otra instancia:\n```java\nclass Box {\n    Box inner;\n    Box(Box b) { inner = b; }\n}\nBox b1 = new Box(null);\nBox b2 = new Box(b1);\nBox b3 = new Box(b2);\nb1 = null;\nb2 = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Es el primer objeto (`new Box(null)`) alcanzable desde el Stack (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, el objeto original está enlazado a través de `b3.inner.inner`, por lo que es alcanzable desde la variable activa `b3` ($1$)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos objetos Box son elegibles para el Garbage Collector en la última línea?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Toda la cadena sigue viva y conectada a la raíz `b3`. Ningún objeto Box es candidato al GC ($0$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "Si ahora asignamos `b3 = null;`, ¿cuántos objetos Box se vuelven candidatos para el Garbage Collector?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al romper la referencia `b3`, los tres objetos creados pierden toda conexión con las variables del Stack. Los $3$ objetos se vuelven huérfanos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Box` se crearon en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se instanciaron $3$ objetos mediante llamadas a `new Box(...)`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_018",
+      "title": "Intercambio de Variables de Array y Mutación",
+      "context": "Dado el siguiente código en Java:\n```java\nint[] p = {1, 2};\nint[] q = {3, 4};\nint[] temp = p;\np = q;\nq = temp;\np[0] = 7;\nq[1] = 8;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final del elemento `p[0]`?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Tras el intercambio de variables, `p` apunta al segundo array `{3, 4}`. La asignación `p[0] = 7` actualiza este array, resultando en $7$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final del elemento `q[0]`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "`q` ahora apunta al primer array `{1, 2}`. No se modificó la primera posición de este array, por lo que vale $1$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor final del elemento `q[1]`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El segundo elemento de `q` (primer array) fue modificado explícitamente a $8$ en la instrucción `q[1] = 8`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos arrays en total se encuentran almacenados en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Solo se crearon dos arrays mediante inicialización explícita, por lo que residen $2$ objetos array en el Heap."
+        }
+      ]
+    },
+    {
+      "id": "LAB_019",
+      "title": "Amigos Referenciados Circularmente",
+      "context": "Dada la definición de la clase `Member`:\n```java\nclass Member {\n    Member friend;\n    int id;\n    Member(int i) { id = i; }\n}\nMember m1 = new Member(1);\nMember m2 = new Member(2);\nm1.friend = m2;\nm2.friend = m1;\nm1 = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico del atributo `id` de `m2.friend`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "`m2.friend` apunta al primer objeto creado (con id 1). El valor de su `id` es $1$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos objetos `Member` en el Heap son candidatos para el Garbage Collector al finalizar?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ambos objetos se pueden alcanzar desde la variable del Stack `m2` (el primer objeto mediante `m2.friend`). Así, $0$ objetos son candidatos para el GC."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas referencias activas directas en el Stack apuntan a objetos `Member`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Únicamente la variable `m2` contiene una referencia a un objeto en el Heap; `m1` es null. Hay $1$ referencia."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor del atributo `id` del objeto apuntado directamente por `m2`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El objeto apuntado directamente por `m2` tiene un `id` igual a $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_020",
+      "title": "Valores por defecto en Array y Mutación",
+      "context": "Dado el siguiente fragmento de inicialización de arrays:\n```java\nint[] array = new int[5];\narray[2] = 10;\nint[] ref = array;\nref[3] = 20;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de `array[0]` (inicializado por defecto)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En Java, los arrays numéricos primitivos inicializan todas sus celdas automáticamente al valor por defecto, que es $0$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de `array[2]`?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El tercer elemento (`índice 2`) fue asignado explícitamente al valor $10$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor de `array[3]`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Como `ref` y `array` comparten el mismo array en el Heap, modificar `ref[3] = 20` se refleja en `array[3]`, que pasa a valer $20$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la longitud del array reservado en el Heap?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El array fue instanciado con tamaño 5, por lo que tiene $5$ elementos de longitud."
+        }
+      ]
+    },
+    {
+      "id": "LAB_021",
+      "title": "Variables Estáticas frente a Variables de Instancia",
+      "context": "Dada la clase `Data` con atributos estáticos e individuales:\n```java\nclass Data {\n    static int global = 10;\n    int local = 5;\n}\nData d1 = new Data();\nData d2 = new Data();\nd1.local = 8;\nd1.global = 12;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del atributo `local` del objeto d2?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El atributo `local` es de instancia. Modificar `d1.local` no altera a `d2.local`, que mantiene su valor original de $5$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del atributo `global` de la clase compartido por d2?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El atributo `global` es estático (shared). Modificarlo a través de `d1.global = 12` afecta a toda la clase, por lo que `d2.global` devuelve $12$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas instancias de la clase `Data` se han creado en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se instanciaron dos objetos utilizando `new Data()` en el fragmento. Por lo tanto, existen $2$ objetos."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor final del atributo `local` del objeto d1?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El atributo `local` de `d1` fue explícitamente modificado a $8$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_022",
+      "title": "Anulación de Referencia en Métodos",
+      "context": "Dada la definición de la clase `Persona` y un método que opera sobre ella:\n```java\nclass Utils {\n    static void reset(Persona p) {\n        p.edad = 0;\n        p = null;\n    }\n}\n// main:\nPersona pers = new Persona(25);\nUtils.reset(pers);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es la edad del objeto `pers` después de la llamada al método?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La referencia compartida dentro del método modificó el atributo a $0$. Dicha mutación persiste tras terminar la llamada."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Es null la variable `pers` del main al finalizar la llamada (indica 1 para sí, 0 para no)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No. El método asigna `null` a su copia local del parámetro `p` en el Stack, pero la variable `pers` del main permanece intacta ($0$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos quedan listos para GC después de la llamada a `reset`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El objeto sigue apuntado por `pers` en el Stack del main. No queda ningún candidato para el GC ($0$)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Persona` se crearon en el Heap?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se instanció un objeto en el main con `new Persona(25)`. El total es $1$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_023",
+      "title": "Reasignación de Referencia en Cadena",
+      "context": "Dada la clase `Wrapper` para almacenar nodos encadenados:\n```java\nclass Wrapper {\n    Wrapper next;\n    int val;\n    Wrapper(int v) { val = v; }\n}\nWrapper w1 = new Wrapper(10);\nw1.next = new Wrapper(20);\nw1.next.next = new Wrapper(30);\nWrapper temp = w1.next;\nw1.next = temp.next;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor `val` del objeto apuntado por `w1.next` al final?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "`w1.next` se asigna a `temp.next`. Dado que `temp` apunta al Wrapper de valor 20, su `next` era el Wrapper de valor 30. Por tanto, `w1.next` pasa a valer $30$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos objetos en el Heap quedan huérfanos de referencias tras la última línea?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El Wrapper con valor 20 ya no tiene ninguna referencia desde `w1` (que ahora salta al de valor 30) ni está enlazado por ningún otro objeto activo. Aunque `temp` apunta a él, wait... ¡La variable `temp` en el Stack sigue apuntando al Wrapper con valor 20! Por lo tanto, sigue vivo y no es elegible para el GC ($0$ objetos huérfanos). Espera, ¿es $0$ o $1$? Dado que `temp` es una variable en el Stack, el objeto sigue referenciado por `temp`, así que no queda elegible para GC. La respuesta es $0$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor `val` del objeto apuntado por la variable temporal `temp`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "`temp` mantiene su referencia al objeto con valor $20$, el cual no ha sido destruido ni modificado."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Wrapper` se crearon en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se crearon $3$ objetos con el constructor `new Wrapper(...)` en el Heap."
+        }
+      ]
+    },
+    {
+      "id": "LAB_024",
+      "title": "Múltiples Enlaces a la misma Instancia",
+      "context": "Dado el siguiente bloque de código:\n```java\nPersona ana = new Persona(18);\nPersona[] grupo = new Persona[3];\ngrupo[0] = ana;\ngrupo[1] = ana;\ngrupo[2] = new Persona(20);\nana.edad = 25;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es la edad del elemento del grupo `grupo[0]`?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "`grupo[0]` apunta a la misma instancia que `ana`. Al cambiar `ana.edad = 25`, su valor pasa a ser $25$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es la edad del elemento del grupo `grupo[1]`?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "`grupo[1]` también apunta al objeto de `ana`. Así, devuelve la edad actualizada, que es $25$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la edad del elemento del grupo `grupo[2]`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "`grupo[2]` contiene un objeto `Persona` independiente con edad $20$, el cual no se modificó."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Persona` (excluyendo el array en sí) residen en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se crearon exactamente $2$ objetos `Persona`: el apuntado por `ana` y el creado para `grupo[2]`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_025",
+      "title": "Profundidad Recursiva Máxima",
+      "context": "Dado el método recursivo de resta:\n```java\nclass StackTest {\n    static int run(int x) {\n        if (x == 0) return 0;\n        return run(x - 1) + 1;\n    }\n}\n// Llamada: StackTest.run(5);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el número máximo de marcos de la función `run` en el Stack de llamadas al mismo tiempo?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Se apilan marcos para `run(5)`, `run(4)`, `run(3)`, `run(2)`, `run(1)` y `run(0)` (el caso base). Esto da un total de $6$ marcos simultáneos."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Qué valor retorna la llamada `run(5)`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El resultado final acumula $1 + 1 + 1 + 1 + 1 + 0 = 5$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas reservas en el Heap se produjeron durante el cálculo?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Este programa opera puramente sobre variables del Stack de llamadas, produciendo $0$ reservas en el Heap."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos marcos de llamada a `run` son creados (y destruidos) en total durante toda la ejecución?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Se ejecutan y cierran secuencialmente las llamadas desde 5 hasta 0. En total son $6$ marcos creados."
+        }
+      ]
+    },
+    {
+      "id": "LAB_026",
+      "title": "Compartición de Filas en Matrices",
+      "context": "Dado el siguiente bloque de código en Java:\n```java\nint[][] grid = new int[2][2];\ngrid[0][0] = 1;\ngrid[0][1] = 2;\ngrid[1] = grid[0];\ngrid[1][1] = 5;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de `grid[0][1]`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al reasignar `grid[1] = grid[0]`, ambas filas apuntan al mismo array. Modificar `grid[1][1] = 5` cambia la posición compartida, de modo que `grid[0][1]` vale $5$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de `grid[0][0]`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El valor original asignado en `grid[0][0]` es $1$, el cual no fue sobreescrito."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos de tipo array se crearon inicialmente en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La declaración `new int[2][2]` crea el array principal (de 2 posiciones para referencias) y dos arrays de tamaño 2. Son $3$ arrays en total."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos arrays del Heap quedan huérfanos y listos para GC después de `grid[1] = grid[0]`?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El array correspondiente a la fila 1 original de `grid` pierde su única referencia al sobreescribirse. Queda $1$ candidato para el GC."
+        }
+      ]
+    },
+    {
+      "id": "LAB_027",
+      "title": "Llamadas Secuenciales de Métodos",
+      "context": "Dada la clase calculadora:\n```java\nclass Calc {\n    int val = 0;\n    void add(int x) { val += x; }\n    void mul(int y) { val *= y; }\n}\n// main:\nCalc c = new Calc();\nc.add(5);\nc.mul(3);\nc.add(2);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final del atributo `val`?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "El cálculo secuencial realiza $(0 + 5) \\times 3 + 2 = 17$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el número máximo de marcos del Stack de llamadas activos al mismo tiempo debido a estos métodos?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Las llamadas a `add` y `mul` se ejecutan y finalizan de manera secuencial, por lo que nunca hay más de $1$ marco activo simultáneamente (además del main)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos de la clase `Calc` se han reservado en el Heap?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ha instanciado un único objeto de tipo `Calc` usando `new Calc()`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas variables locales de referencia al objeto `c` hay en el Stack al finalizar?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solamente la variable local `c` en el Stack mantiene la referencia activa."
+        }
+      ]
+    },
+    {
+      "id": "LAB_028",
+      "title": "Intercambios de Valores en Array",
+      "context": "Dado el siguiente bloque de reordenación de elementos de un array:\n```java\nint[] nums = {10, 20, 30, 40};\nint temp = nums[1];\nnums[1] = nums[3];\nnums[3] = nums[2];\nnums[2] = temp;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de `nums[1]` al terminar?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "`nums[1]` recibe el valor de `nums[3]` ($40$)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor de `nums[2]` al terminar?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "`nums[2]` recibe el valor guardado en `temp` (que era `nums[1]` original = $20$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor de `nums[3]` al terminar?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "`nums[3]` recibe el valor de `nums[2]` original ($30$)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el valor de `nums[0]` al terminar?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "La posición `nums[0]` no sufrió ningún cambio, manteniendo su valor original de $10$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_029",
+      "title": "Ciclo Circular Inalcanzable",
+      "context": "Dada la clase de encadenamiento simple:\n```java\nclass Chain { Chain link; }\nChain c1 = new Chain();\nChain c2 = new Chain();\nChain c3 = new Chain();\nc1.link = c2;\nc2.link = c3;\nc3.link = c1;\nc1 = null;\nc2 = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Es el objeto originalmente apuntado por `c3` candidato al Garbage Collector (1 para sí, 0 para no)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No, el objeto sigue directamente referenciado por la variable `c3` del Stack, por lo que no es candidato al GC ($0$)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Es el objeto originalmente apuntado por `c1` candidato al Garbage Collector (1 para sí, 0 para no)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No, aunque `c1` se asignó a null, el objeto es alcanzable a través de `c3.link` (que es el objeto original c1). No es candidato al GC ($0$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "Si ahora asignamos además `c3 = null;`, ¿cuántos objetos `Chain` en total quedan listos para GC?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al poner `c3` en `null`, se rompe el último enlace desde el Stack. El ciclo circular de $3$ objetos se vuelve inalcanzable colectivamente."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos `Chain` se crearon en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se instanciaron $3$ objetos mediante llamadas a `new Chain()`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_030",
+      "title": "Referencias Compartidas de Cadena de Texto",
+      "context": "Dado el siguiente bloque de asignación de referencias:\n```java\nString[] arr = new String[4];\narr[0] = \"A\";\narr[1] = \"B\";\narr[2] = arr[0];\narr[0] = null;\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es la longitud del texto almacenado en `arr[2]` (especifica 0 si es null)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "`arr[2]` apunta al String \"A\", que tiene una longitud de $1$ caracter."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el estado de `arr[0]` (indica 0 si es null, 1 si no es null)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "`arr[0]` fue explícitamente reasignado a `null` ($0$)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas celdas del array `arr` apuntan activamente a la cadena de texto \"A\" al final?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Únicamente la celda `arr[2]` apunta al objeto \"A\" después de que `arr[0]` se pusiera a null. Hay $1$ celda activa."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la longitud total del array `arr`?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El array se instanció con un tamaño de $4$ elementos."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Complejidad de búsqueda binaria",
+      "tex": "$$\\mathcal{O}(\\log n)$$"
+    },
+    {
+      "name": "Teorema Maestro (Relación de recurrencia)",
+      "tex": "$$T(n) = aT(n/b) + f(n)$$"
+    },
+    {
+      "name": "Recurrencia de Fibonacci",
+      "tex": "$$F(n) = F(n-1) + F(n-2)$$"
+    },
+    {
+      "name": "Suma de los primeros n números enteros",
+      "tex": "$$\\sum_{i=1}^n i = \\frac{n(n+1)}{2}$$"
+    },
+    {
+      "name": "Suma de una serie geométrica",
+      "tex": "$$\\sum_{i=0}^{n-1} r^i = \\frac{1-r^n}{1-r}$$"
+    },
+    {
+      "name": "Definición formal de Big-O",
+      "tex": "$$f(n) \\le c \\cdot g(n) \\quad \\forall n \\ge n_0$$"
+    },
+    {
+      "name": "Aproximación de Stirling para factorial",
+      "tex": "$$\\ln(n!) \\approx n \\ln n - n$$"
+    },
+    {
+      "name": "Operaciones promedio en tabla Hash",
+      "tex": "$$\\mathcal{O}(1)$$"
+    },
+    {
+      "name": "Relación de recurrencia de Merge Sort",
+      "tex": "$$T(n) = 2T(n/2) + \\mathcal{O}(n)$$"
+    },
+    {
+      "name": "Relación de recurrencia en peor caso de Quick Sort",
+      "tex": "$$T(n) = T(n-1) + \\mathcal{O}(n)$$"
+    }
+  ]
+}

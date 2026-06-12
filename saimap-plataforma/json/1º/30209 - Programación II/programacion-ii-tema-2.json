@@ -1,0 +1,2092 @@
+{
+    "TEST_A": [
+        {
+            "q": "¿Qué es una clase en el contexto de la programación orientada a objetos en Java?",
+            "options": [
+                "Una plantilla o molde que define los atributos y métodos que tendrán los objetos de ese tipo.",
+                "Una instancia concreta de un objeto ubicada en el Heap de la memoria.",
+                "Un tipo primitivo de datos utilizado para optimizar el rendimiento del compilador."
+            ],
+            "correct": 0,
+            "hint": "Reside en la zona de metadatos (Method Area) y sirve de plano para instanciar objetos.",
+            "explanation": "La clase es el plano o plantilla conceptual, mientras que el objeto es la instancia física real creada a partir de ella."
+        },
+        {
+            "q": "¿En qué zona de memoria de la JVM se almacena la información de las clases cargadas, incluyendo sus métodos y constantes?",
+            "options": [
+                "En el Heap.",
+                "En el Method Area (zona de metadatos).",
+                "En la Pila (Stack)."
+            ],
+            "correct": 1,
+            "hint": "No es una zona dinámica para objetos individuales, sino para metadatos de tipos.",
+            "explanation": "La JVM carga las definiciones de clases, estructuras de datos de métodos y la tabla de constantes en el Method Area."
+        },
+        {
+            "q": "¿Qué zona de memoria de la JVM se utiliza para almacenar los objetos creados dinámicamente con la palabra clave 'new'?",
+            "options": [
+                "El Heap.",
+                "La Pila (Stack).",
+                "El Method Area."
+            ],
+            "correct": 0,
+            "hint": "Esta área es compartida por todos los hilos y es gestionada por el Garbage Collector.",
+            "explanation": "Todos los objetos y arrays dinámicos en Java se alojan en el Heap (montículo) de la JVM."
+        },
+        {
+            "q": "¿Qué se almacena en la Pila (Stack) de la JVM durante la ejecución de un programa?",
+            "options": [
+                "Las referencias de clase cargadas en tiempo de inicio.",
+                "Los marcos de llamadas a métodos, variables locales y parámetros de tipo primitivo o referencias a objetos.",
+                "Los objetos dinámicos de gran tamaño."
+            ],
+            "correct": 1,
+            "hint": "Cada hilo tiene su propia pila de llamadas y almacena datos de corta duración.",
+            "explanation": "El Stack almacena variables locales, parámetros y punteros de referencia a objetos del Heap en cada marco de activación de método."
+        },
+        {
+            "q": "¿Cuál es el ciclo de vida de una variable local declarada dentro de un método en Java?",
+            "options": [
+                "Permanente, hasta que el Garbage Collector libera el Heap.",
+                "Existe mientras el hilo esté en el método y se libera al salir de este al destruir su marco en el Stack.",
+                "Persiste durante toda la vida útil de la clase asociada."
+            ],
+            "correct": 1,
+            "hint": "Se asocia directamente con la activación y desactivación del método en el Stack.",
+            "explanation": "Las variables locales viven en los marcos de llamada del Stack; al retornar el método, el marco se destruye y la variable desaparece."
+        },
+        {
+            "q": "¿Cómo funciona el Garbage Collector (GC) de Java para identificar qué objetos liberar?",
+            "options": [
+                "Monitorea el uso de CPU de cada objeto en tiempo real.",
+                "Libera los objetos que ya no tienen referencias activas accesibles desde los hilos de ejecución principales (roots).",
+                "Destruye los objetos que llevan más de 5 minutos en el Heap de manera automática."
+            ],
+            "correct": 1,
+            "hint": "Utiliza algoritmos de rastreo de alcanzabilidad desde variables estáticas y locales activas.",
+            "explanation": "Un objeto es candidato a GC cuando no queda ninguna referencia activa hacia él desde las variables de la pila (roots) o campos estáticos."
+        },
+        {
+            "q": "¿Qué representa el modificador 'static' aplicado a un atributo de una clase?",
+            "options": [
+                "Que el atributo pertenece a la clase en sí, existiendo una única copia en memoria compartida por todas las instancias.",
+                "Que el atributo no puede cambiar de valor una vez inicializado.",
+                "Que solo puede accederse a él mediante herencia."
+            ],
+            "correct": 0,
+            "hint": "No depende de un objeto específico y se aloja fuera del Heap de instancias.",
+            "explanation": "Un atributo estático pertenece a la clase; todos los objetos de esa clase comparten la misma variable física en el Method Area."
+        },
+        {
+            "q": "¿Por qué un método estático no puede utilizar directamente la palabra clave 'this'?",
+            "options": [
+                "Porque 'this' hace referencia a la instancia actual del objeto, y los métodos estáticos no se ejecutan sobre una instancia específica.",
+                "Porque 'this' es una palabra reservada exclusiva para clases abstractas.",
+                "Porque la JVM prohíbe el uso de variables locales en métodos estáticos."
+            ],
+            "correct": 0,
+            "hint": "Los métodos estáticos pueden ejecutarse sin que se haya creado un solo objeto de esa clase.",
+            "explanation": "Al no requerir una instancia para invocarse, el contexto de un método estático carece de objeto actual y, por ende, de referencia 'this'."
+        },
+        {
+            "q": "¿Qué nivel de visibilidad ofrece el modificador de acceso 'private' en Java?",
+            "options": [
+                "Accesible desde cualquier clase dentro del mismo paquete.",
+                "Accesible únicamente desde dentro de la clase que lo declara.",
+                "Accesible desde la clase que lo declara y todas sus subclases."
+            ],
+            "correct": 1,
+            "hint": "Es el modificador más restrictivo, fundamental para aplicar ocultación de datos.",
+            "explanation": "Los miembros privados solo pueden ser leídos o modificados por el código que está dentro de la misma clase física."
+        },
+        {
+            "q": "¿Qué visibilidad tiene un miembro de una clase si no se especifica ningún modificador de acceso (visibilidad por defecto o package-private)?",
+            "options": [
+                "Es accesible desde cualquier clase en cualquier paquete.",
+                "Es accesible solo dentro de la misma clase.",
+                "Es accesible desde cualquier clase que pertenezca al mismo paquete."
+            ],
+            "correct": 2,
+            "hint": "También se conoce como visibilidad de paquete.",
+            "explanation": "Al omitir el modificador de acceso, Java aplica visibilidad a nivel de paquete, impidiendo el acceso desde fuera de este."
+        },
+        {
+            "q": "¿Qué nivel de acceso otorga el modificador 'protected' en Java?",
+            "options": [
+                "Accesible en la propia clase, en las clases de su mismo paquete y en subclases aunque estén en otros paquetes.",
+                "Accesible solo dentro de la propia clase y sus subclases en cualquier paquete, pero no en el mismo paquete.",
+                "Accesible públicamente para todos los hilos del sistema."
+            ],
+            "correct": 0,
+            "hint": "Es clave en el diseño de jerarquías de herencia sin exponer la API públicamente.",
+            "explanation": "El modificador protected abre el acceso a las clases del mismo paquete y a todas las subclases derivadas de la clase base."
+        },
+        {
+            "q": "¿Cuál es el propósito fundamental del principio de encapsulamiento?",
+            "options": [
+                "Permitir la ejecución concurrente de métodos estáticos sin bloqueos.",
+                "Ocultar los detalles de implementación interna y proteger la consistencia del estado del objeto validando accesos.",
+                "Hacer que el código ocupe menos espacio físico en el disco duro."
+            ],
+            "correct": 1,
+            "hint": "Se logra haciendo los atributos privados y controlando su lectura/escritura mediante getters/setters.",
+            "explanation": "El encapsulamiento protege el estado interno de los objetos de modificaciones indebidas y asegura que se cumplan las reglas de consistencia interna."
+        },
+        {
+            "q": "¿Por qué es una mala práctica dejar atributos de instancia con visibilidad 'public'?",
+            "options": [
+                "Porque impide que el recolector de basura elimine el objeto en el futuro.",
+                "Porque cualquier código externo podría modificar el valor a estados no válidos o inconsistentes con la lógica de negocio.",
+                "Porque las clases públicas no permiten herencia."
+            ],
+            "correct": 1,
+            "hint": "Si un atributo es público, cualquier clase externa puede cambiarlo sin control ni validación.",
+            "explanation": "Exponer atributos permite a terceros cambiar valores sin control. La validación en los métodos setter evita valores físicamente imposibles."
+        },
+        {
+            "q": "¿Cuál es la función principal de un constructor en Java?",
+            "options": [
+                "Reservar memoria para la clase en el Method Area.",
+                "Inicializar el estado inicial de un objeto al crearlo y reservar su espacio en el Heap.",
+                "Destruir referencias activas en el Stack."
+            ],
+            "correct": 1,
+            "hint": "Se invoca con la palabra clave 'new' y no tiene tipo de retorno.",
+            "explanation": "Los constructores inicializan los atributos del objeto recién creado para asegurar que empiece en un estado consistente."
+        },
+        {
+            "q": "¿Qué ocurre si no definimos explícitamente ningún constructor en una clase en Java?",
+            "options": [
+                "El compilador genera automáticamente un constructor por defecto sin parámetros y vacío.",
+                "Se produce un error de compilación indicando la falta de constructor.",
+                "El objeto se crea sin inicializar ningún atributo de instancia en memoria."
+            ],
+            "correct": 0,
+            "hint": "Es un constructor implícito y público.",
+            "explanation": "Si una clase no tiene constructores declarados, el compilador provee un constructor por defecto de tipo public y sin argumentos."
+        },
+        {
+            "q": "Si declaramos un constructor propio con parámetros en una clase, ¿qué sucede con el constructor por defecto sin parámetros?",
+            "options": [
+                "Se mantiene disponible de forma invisible para la JVM.",
+                "Se pierde automáticamente y ya no se puede usar a menos que lo definamos de forma explícita.",
+                "Lanza una excepción NullPointerException en tiempo de ejecución."
+            ],
+            "correct": 1,
+            "hint": "El compilador asume que quieres controlar la creación y ya no genera el de por defecto.",
+            "explanation": "Definir cualquier constructor propio elimina la creación automática del constructor por defecto."
+        },
+        {
+            "q": "¿Qué es la sobrecarga de constructores?",
+            "options": [
+                "La capacidad de definir múltiples constructores con el mismo nombre pero con firmas (parámetros) diferentes.",
+                "La herencia de constructores de una superclase a una subclase.",
+                "El exceso de constructores dentro de una clase que supera el límite de memoria del compilador."
+            ],
+            "correct": 0,
+            "hint": "Permite crear objetos de diferentes formas pasándole distintos tipos o cantidad de datos.",
+            "explanation": "La sobrecarga de constructores permite inicializar el objeto con diferentes conjuntos de datos iniciales ajustados a la necesidad."
+        },
+        {
+            "q": "¿Para qué sirve el uso de 'this(...)' dentro de un constructor?",
+            "options": [
+                "Para instanciar una clase interna estática.",
+                "Para invocar a otro constructor sobrecargado de la misma clase, evitando duplicar lógica de inicialización.",
+                "Para indicar a la JVM que debe limpiar el montón de memoria del hilo actual."
+            ],
+            "correct": 1,
+            "hint": "Es útil para delegar tareas de inicialización entre constructores.",
+            "explanation": "Permite que un constructor llame a otro constructor de la misma clase de manera estructurada."
+        },
+        {
+            "q": "¿Cuál es la regla de sintaxis obligatoria al utilizar 'this(...)' en un constructor?",
+            "options": [
+                "Debe ser la última instrucción ejecutada en el constructor.",
+                "Debe colocarse como la primera instrucción del constructor.",
+                "Solo puede llamarse dentro de bloques 'try-catch'."
+            ],
+            "correct": 1,
+            "hint": "La inicialización delegada debe ocurrir antes de cualquier otra lógica propia del constructor.",
+            "explanation": "Java exige que 'this(...)' o 'super(...)' sea la primerísima línea de código del constructor para evitar inicializaciones inconsistentes."
+        },
+        {
+            "q": "¿Qué diferencia fundamental hay entre los valores por defecto de atributos de clase y variables locales en métodos?",
+            "options": [
+                "Los atributos se inicializan a su valor por defecto (0, null, false); las variables locales no tienen valor por defecto y causan error de compilación si se usan sin inicializar.",
+                "Las variables locales se inicializan a null y los atributos causan error de compilación.",
+                "Ambos tipos se inicializan automáticamente a cero."
+            ],
+            "correct": 0,
+            "hint": "Las variables locales en la pila no reciben inicializaciones de cortesía de la JVM por razones de rendimiento.",
+            "explanation": "Los campos de objeto (Heap) siempre se inicializan con valores por defecto. En cambio, las variables locales (Stack) deben inicializarse explícitamente antes de su lectura."
+        },
+        {
+            "q": "¿Cómo se comporta la asignación de objetos (ej. 'Obj a = b;') en Java?",
+            "options": [
+                "Crea una copia completa de los atributos del objeto en el Heap.",
+                "Copia la referencia en memoria del objeto, de modo que ambas variables apuntan al mismo objeto en el Heap (alias).",
+                "Mueve el objeto en el Heap eliminando la variable original."
+            ],
+            "correct": 1,
+            "hint": "Se copian punteros, no estructuras de datos completas.",
+            "explanation": "En Java, las variables guardan referencias a los objetos. Al asignar una variable a otra, se copia la referencia (dirección), creando un alias."
+        },
+        {
+            "q": "¿Es posible declarar un constructor con tipo de retorno 'void'?",
+            "options": [
+                "Sí, y es la forma correcta de definir constructores sin parámetros.",
+                "No, un constructor no debe declarar ningún tipo de retorno. Si se pone 'void', el compilador lo tratará como un método normal y no como un constructor.",
+                "Sí, pero solo si es privado."
+            ],
+            "correct": 1,
+            "hint": "Un método que se llama igual que la clase y retorna void es simplemente un método común, no un constructor.",
+            "explanation": "Los constructores carecen de tipo de retorno. Si añades void, deja de ser constructor y se convierte en un método de instancia común."
+        },
+        {
+            "q": "¿Qué sucede en memoria si un objeto pierde todas sus referencias durante la ejecución?",
+            "options": [
+                "Se destruye inmediatamente liberando memoria al instante (tiempo real determinista).",
+                "Queda huérfano en el Heap y eventualmente será recolectado de forma asíncrona por el Garbage Collector.",
+                "Es trasladado automáticamente al Stack para acelerar su acceso."
+            ],
+            "correct": 1,
+            "hint": "Java no tiene destrucción determinista de objetos en memoria.",
+            "explanation": "La recolección es asíncrona; el objeto queda disponible para que el recolector de basura lo destruya cuando la JVM lo decida."
+        },
+        {
+            "q": "¿Qué causa un error de desbordamiento de pila ('StackOverflowError')?",
+            "options": [
+                "Crear demasiados objetos en el Heap de la aplicación.",
+                "Llamar de forma recursiva a métodos acumulando marcos de activación en el Stack sin alcanzar un caso base.",
+                "Cargar clases excesivamente grandes con muchos miembros estáticos."
+            ],
+            "correct": 1,
+            "hint": "El Stack tiene un tamaño limitado y almacena llamadas activas a funciones.",
+            "explanation": "Cada llamada a método consume un marco en el Stack. Si hay recursión infinita, se llena la pila y se produce el StackOverflowError."
+        },
+        {
+            "q": "¿Qué es una variable final ('final') a nivel de atributo de clase?",
+            "options": [
+                "Un atributo cuyo valor no puede ser modificado una vez asignado (constante).",
+                "Un método que no puede llamarse más de una vez por ejecución.",
+                "Un modificador que obliga a que el atributo sea público."
+            ],
+            "correct": 0,
+            "hint": "Debe asignarse al declararse o en los constructores.",
+            "explanation": "Los campos marcados como final actúan como constantes de instancia, impidiendo cambios de valor tras su inicialización inicial."
+        },
+        {
+            "q": "¿Cuándo se inicializan las variables de clase estáticas?",
+            "options": [
+                "Cada vez que se crea una instancia de la clase.",
+                "Una sola vez cuando la JVM carga la clase en memoria.",
+                "Al finalizar la ejecución del programa principal."
+            ],
+            "correct": 1,
+            "hint": "Ocurre antes de que los constructores de instancia se ejecuten por primera vez.",
+            "explanation": "La carga de miembros estáticos ocurre en el momento de carga de la clase por el ClassLoader, garantizando inicialización única."
+        },
+        {
+            "q": "¿Cuál es la función del operador de comparación '==' aplicado a dos variables de tipo de referencia a objetos?",
+            "options": [
+                "Comparar si los valores de todos los atributos de ambos objetos son idénticos.",
+                "Comparar si ambas variables apuntan a la misma dirección de memoria (mismo objeto en el Heap).",
+                "Verificar si pertenecen a la misma clase abstracta."
+            ],
+            "correct": 1,
+            "hint": "Compara identidades (referencias), no equivalencias lógicas de contenido.",
+            "explanation": "El operador == compara el valor almacenado en las variables. En objetos, este valor es la referencia en memoria (dirección Heap)."
+        },
+        {
+            "q": "¿Cómo se define un método de acceso getter de forma convencional?",
+            "options": [
+                "Debe tener visibilidad privada, retornar void y aceptar un parámetro.",
+                "Debe tener visibilidad pública, retornar el tipo del atributo y no recibir parámetros.",
+                "Debe ser estático y retornar un entero siempre."
+            ],
+            "correct": 1,
+            "hint": "Permite consultar el estado de un atributo privado de forma controlada.",
+            "explanation": "Un getter lee el estado; es public, retorna el valor del atributo y no altera el estado del objeto (sin parámetros)."
+        },
+        {
+            "q": "¿Cuál es la convención y buena práctica de un método mutador (setter)?",
+            "options": [
+                "Hacerlo público, con tipo de retorno void, y con un parámetro para recibir el nuevo valor, validando su consistencia.",
+                "Hacerlo privado y retornar un clon del objeto completo.",
+                "Hacerlo estático para evitar crear objetos en memoria."
+            ],
+            "correct": 0,
+            "hint": "Su función es alterar de forma segura el valor de un atributo privado.",
+            "explanation": "El setter permite validar la consistencia antes de la asignación del atributo y asegurar que el objeto no entre en estado inválido."
+        },
+        {
+            "q": "¿Qué significa que un objeto sea inmutable?",
+            "options": [
+                "Que no puede tener referencias en el Stack.",
+                "Que su estado interno (atributos) no puede ser modificado después de su creación.",
+                "Que no puede ser eliminado por el Garbage Collector."
+            ],
+            "correct": 1,
+            "hint": "La clase String de Java es un ejemplo clásico de esto.",
+            "explanation": "Un objeto inmutable se diseña sin setters y con atributos finales, garantizando que conserve su estado de creación permanentemente."
+        },
+        {
+            "q": "¿Qué palabra clave se utiliza para referirse al objeto del contexto de ejecución actual desde dentro de un método de instancia?",
+            "options": [
+                "this",
+                "super",
+                "self"
+            ],
+            "correct": 0,
+            "hint": "Es un puntero implícito a la propia instancia.",
+            "explanation": "El operador 'this' hace referencia al objeto llamador actual y permite acceder a sus miembros y resolver colisiones de nombres."
+        },
+        {
+            "q": "¿Se puede declarar una clase con constructores privados únicamente?",
+            "options": [
+                "No, causaría un error de compilación inmediato.",
+                "Sí, esto es común en clases de utilidad (con solo métodos estáticos) o para implementar el patrón Singleton.",
+                "Sí, pero solo si la clase es abstracta."
+            ],
+            "correct": 1,
+            "hint": "Evita que el código externo pueda instanciar la clase directamente usando 'new'.",
+            "explanation": "Los constructores privados impiden la instanciación externa directa, algo característico de clases de utilidades o del patrón Singleton."
+        },
+        {
+            "q": "¿Cuál es la consecuencia de no implementar validación en un método setter para campos críticos?",
+            "options": [
+                "Pérdida del principio de ocultación de datos, permitiendo estados inconsistentes e inválidos del objeto.",
+                "Error de sintaxis en tiempo de compilación.",
+                "Aumento drástico del consumo de memoria en la JVM."
+            ],
+            "correct": 0,
+            "hint": "Es equivalente a dejar el atributo público a efectos prácticos de consistencia.",
+            "explanation": "Un setter sin validación no protege la integridad física del objeto, rompiendo la garantía de estado invariante del encapsulamiento."
+        },
+        {
+            "q": "¿Qué ocurre si intentamos acceder a un atributo no estático desde un método estático de la misma clase sin referenciar un objeto específico?",
+            "options": [
+                "Funciona normalmente, ya que están dentro de la misma clase.",
+                "Produce un error de compilación indicando que no se puede referenciar un miembro de instancia desde un contexto estático.",
+                "Lanza una excepción NullPointerException al ejecutar la aplicación."
+            ],
+            "correct": 1,
+            "hint": "El método estático no tiene 'this' implícito para saber sobre qué objeto buscar el atributo.",
+            "explanation": "Los miembros estáticos existen de manera independiente a cualquier instancia, por lo que no pueden acceder directamente a datos individuales sin una instancia explícita."
+        },
+        {
+            "q": "¿Cómo se invoca correctamente un miembro estático de una clase desde el exterior?",
+            "options": [
+                "Instanciando la clase con 'new' y accediendo al miembro a través del objeto.",
+                "Utilizando directamente el nombre de la clase, seguido del punto y el nombre del miembro.",
+                "Llamando al método estático mediante la palabra clave 'super'."
+            ],
+            "correct": 1,
+            "hint": "No requiere un objeto específico en memoria Heap.",
+            "explanation": "La forma correcta y recomendada es 'Clase.miembro' para reflejar que el comportamiento/dato pertenece a la clase y no a un objeto."
+        },
+        {
+            "q": "¿Qué ocurre cuando se ejecuta la instrucción 'throw new IllegalArgumentException(...)';?",
+            "options": [
+                "Se cancela la compilación de la clase actual.",
+                "Se detiene el flujo de ejecución normal y se propaga una excepción para señalar un argumento no válido.",
+                "La JVM reinicia el Garbage Collector."
+            ],
+            "correct": 1,
+            "hint": "Es muy utilizado en métodos setters para el control de la consistencia física.",
+            "explanation": "Se interrumpe el programa lanzando una excepción de tiempo de ejecución para notificar una violación de los requerimientos de los parámetros."
+        },
+        {
+            "q": "¿Qué contiene la tabla de símbolos y metadatos del Method Area?",
+            "options": [
+                "Los valores de los registros internos del microprocesador.",
+                "Las estructuras de las clases, campos, firmas de métodos y código de bytecodes.",
+                "Las referencias dinámicas de hilos concurrentes del sistema."
+            ],
+            "correct": 1,
+            "hint": "Se nutre de los archivos compilados .class.",
+            "explanation": "La JVM carga los metadatos necesarios de los bytecodes de cada clase (estructura, código ejecutable de métodos) en esta área de memoria."
+        },
+        {
+            "q": "¿Qué es un 'alias' de objeto en Java?",
+            "options": [
+                "El nombre que se le asigna a una variable en el archivo de configuración XML.",
+                "Dos o más variables de referencia distintas en el Stack que apuntan exactamente al mismo objeto en el Heap.",
+                "Un mecanismo para renombrar clases en tiempo de ejecución."
+            ],
+            "correct": 1,
+            "hint": "Si se modifica el estado del objeto a través de un alias, el cambio es visible en la otra variable.",
+            "explanation": "El aliasing ocurre cuando varias referencias apuntan a la misma dirección del Heap; los cambios hechos a través de una se reflejan en todas."
+        },
+        {
+            "q": "¿Puede un constructor llamar a un método ordinario no estático de la misma clase?",
+            "options": [
+                "Sí, ya que en el momento de ejecutar el cuerpo del constructor, el objeto ya existe en memoria Heap.",
+                "No, la JVM prohíbe llamadas a métodos ordinarios antes del final del constructor.",
+                "Solo si el método ordinario es declarado como estático."
+            ],
+            "correct": 0,
+            "hint": "El objeto ya tiene asignada una dirección en Heap en la fase previa del constructor.",
+            "explanation": "El constructor se ejecuta sobre un objeto ya alojado en memoria, por lo que es posible llamar a sus métodos, aunque debe hacerse con precaución si estos se pueden sobrescribir."
+        },
+        {
+            "q": "¿Qué es la ocultación de información ('information hiding')?",
+            "options": [
+                "Cifrar el código fuente del programa para evitar plagios.",
+                "Ocultar los detalles de implementación de una clase y exponer solo una interfaz pública limpia y segura.",
+                "Guardar el código en bases de datos externas no accesibles."
+            ],
+            "correct": 1,
+            "hint": "Es el principio de diseño de software en el que se apoya el encapsulamiento.",
+            "explanation": "Ocultar la estructura interna de datos protege contra dependencias rígidas de código cliente con detalles de implementación propensos a cambiar."
+        }
+    ],
+    "TEST_B": [
+        {
+            "q": "Analice el siguiente código:\n```java\npublic class Sensor {\n    private double temp;\n    public Sensor() {\n        ____(25.0);\n    }\n    public Sensor(double temp) {\n        this.temp = temp;\n    }\n}\n```\n¿Qué palabra clave debe rellenar el espacio en blanco para delegar al segundo constructor?",
+            "options": [
+                "this",
+                "super",
+                "new"
+            ],
+            "correct": 0,
+            "hint": "Se utiliza para invocar constructores de la propia clase.",
+            "explanation": "La instrucción 'this(25.0);' llama al constructor con parámetro double de la misma clase y debe ser la primera sentencia."
+        },
+        {
+            "q": "Dado el siguiente fragmento de código:\n```java\npublic class Contador {\n    private ____ int total = 0;\n    public Contador() {\n        total++;\n    }\n}\n```\n¿Qué modificador debe colocarse en el espacio en blanco para que 'total' sea una variable única compartida por todas las instancias de la clase Contador?",
+            "options": [
+                "static",
+                "final",
+                "volatile"
+            ],
+            "correct": 0,
+            "hint": "Pertenece a la clase en lugar de a cada instancia del Heap.",
+            "explanation": "El modificador 'static' hace que la variable 'total' sea de clase y se comparta de forma única en el Method Area."
+        },
+        {
+            "q": "Considere la clase:\n```java\npublic class Calculo {\n    public static int multiplicar(int a, int b) {\n        return a * b;\n    }\n}\n```\nPara usar el método desde una clase externa sin instanciar un objeto de tipo Calculo, escribimos:\n```java\nint res = ____.multiplicar(10, 5);\n```\n¿Qué va en el espacio en blanco?",
+            "options": [
+                "Calculo",
+                "this",
+                "new Calculo()"
+            ],
+            "correct": 0,
+            "hint": "Los métodos estáticos se invocan directamente a través del nombre de su clase.",
+            "explanation": "El acceso correcto a un método de clase estático se realiza mediante el nombre de la clase: 'Calculo.multiplicar(10, 5)'."
+        },
+        {
+            "q": "Observe el siguiente fragmento:\n```java\npublic class Cuenta {\n    private String titular;\n    public ____ getTitular() {\n        return this.titular;\n    }\n}\n```\n¿Qué tipo de dato de retorno debe especificarse en el espacio en blanco?",
+            "options": [
+                "String",
+                "void",
+                "Cuenta"
+            ],
+            "correct": 0,
+            "hint": "Debe coincidir con el tipo del atributo 'titular' que está siendo retornado.",
+            "explanation": "El método 'getTitular()' retorna un String, por lo que su firma debe declarar 'String' como tipo de retorno."
+        },
+        {
+            "q": "Se desea validar que el saldo de una cuenta bancaria no sea negativo en el setter:\n```java\npublic void setSaldo(double saldo) {\n    if (saldo < 0) {\n        ____ new IllegalArgumentException(\"Saldo negativo no permitido\");\n    }\n    this.saldo = saldo;\n}\n```\n¿Qué palabra clave completa la instrucción para lanzar la excepción?",
+            "options": [
+                "throw",
+                "throws",
+                "throwable"
+            ],
+            "correct": 0,
+            "hint": "Es la acción activa de lanzar un objeto de excepción en Java.",
+            "explanation": "La palabra clave 'throw' se usa para lanzar explícitamente una instancia de una clase de excepción."
+        },
+        {
+            "q": "Complete la firma de la definición del constructor en la siguiente clase:\n```java\npublic class Motor {\n    private int potencia;\n    ____ Motor(int potencia) {\n        this.potencia = potencia;\n    }\n}\n```\n¿Qué modificador va en el espacio en blanco si queremos que el constructor sea de acceso público y no devuelva ningún tipo?",
+            "options": [
+                "public",
+                "public void",
+                "public static"
+            ],
+            "correct": 0,
+            "hint": "Los constructores no definen ningún valor de retorno, ni siquiera void.",
+            "explanation": "Un constructor de acceso público se declara con 'public Motor(...)', sin indicar retorno."
+        },
+        {
+            "q": "Observe el siguiente método:\n```java\npublic static void main(String[] args) {\n    int x;\n    ____.out.println(x); // Produce error de compilación\n}\n```\n¿Qué palabra completa la llamada de salida padrão y por qué ocurre el error de compilación en el espacio en blanco?",
+            "options": [
+                "System",
+                "system",
+                "out"
+            ],
+            "correct": 0,
+            "hint": "La clase estándar del sistema de Java empieza con mayúscula.",
+            "explanation": "Se escribe 'System.out.println'. Además, el error de compilación es porque la variable local 'x' de la pila no ha sido inicializada."
+        },
+        {
+            "q": "Analice el error en esta clase:\n```java\npublic class Impresora {\n    private int paginas = 100;\n    public static void limpiar() {\n        System.out.println(____.paginas); // Error de compilación\n    }\n}\n```\n¿Qué referencia implícita prohibida en el espacio en blanco intenta acceder al atributo de instancia?",
+            "options": [
+                "this",
+                "Impresora",
+                "super"
+            ],
+            "correct": 0,
+            "hint": "Se refiere al objeto actual, inaccesible en un contexto estático.",
+            "explanation": "El compilador detecta un error al usar 'this.paginas' (o simplemente 'paginas' de manera implícita como 'this.paginas') en un método estático."
+        },
+        {
+            "q": "Dadas las referencias en Java:\n```java\nSensor s1 = new Sensor(15.0);\nSensor s2 = s1;\nboolean iguales = (s1 ____ s2);\n```\n¿Qué operador debe colocarse en el espacio en blanco para verificar si 's1' y 's2' apuntan exactamente al mismo objeto en el Heap?",
+            "options": [
+                "==",
+                "equals",
+                "!="
+            ],
+            "correct": 0,
+            "hint": "Es un operador de comparación de referencias a nivel de variables primitivas/direcciones.",
+            "explanation": "El operador == compara las direcciones lógicas almacenadas en las referencias. Al ser s2 un alias de s1, da true."
+        },
+        {
+            "q": "Observe el siguiente diseño de paquete:\n```java\npackage negocio;\nclass Transaccion {\n    ____ double monto;\n}\n```\nSi queremos que el atributo 'monto' sea accesible desde cualquier otra clase dentro de su mismo paquete 'negocio', pero inaccesible fuera de él, el espacio en blanco debe ser:",
+            "options": [
+                "/* sin especificar modificador (por defecto) */",
+                "private",
+                "protected"
+            ],
+            "correct": 0,
+            "hint": "La ausencia de modificador activa la visibilidad a nivel de paquete.",
+            "explanation": "El nivel package-private se obtiene al no declarar ningún modificador de acceso."
+        },
+        {
+            "q": "En el mapa de memoria de la JVM, la información sobre las plantillas y métodos estáticos se almacena en el ____ Area.",
+            "options": [
+                "Method",
+                "Heap",
+                "Stack"
+            ],
+            "correct": 0,
+            "hint": "Es la zona destinada para metadatos de las clases.",
+            "explanation": "El Method Area contiene las definiciones estructurales de las clases y sus miembros estáticos."
+        },
+        {
+            "q": "En el siguiente código:\n```java\npublic class Estudiante {\n    private String nombre;\n    ____ Estudiante() {\n        this.nombre = \"Pendiente\";\n    }\n}\n```\nEl constructor por defecto público requiere colocar ____ antes del nombre de la clase para ser visible en todo el proyecto.",
+            "options": [
+                "public",
+                "void",
+                "class"
+            ],
+            "correct": 0,
+            "hint": "Es el modificador de visibilidad global.",
+            "explanation": "Para que el constructor sea instanciable desde cualquier paquete, debe declararse con el modificador de acceso 'public'."
+        },
+        {
+            "q": "Analice la clase:\n```java\nclass Cuenta {\n    private double saldo;\n    public void depositar(double cant) {\n        ____.saldo += cant;\n    }\n}\n```\n¿Qué palabra clave en el espacio en blanco hace referencia explícita al atributo de la instancia actual?",
+            "options": [
+                "this",
+                "Cuenta",
+                "super"
+            ],
+            "correct": 0,
+            "hint": "Representa una referencia al objeto actual en el que se ejecuta el método.",
+            "explanation": "Se utiliza 'this' para referenciar variables de instancia de manera explícita: 'this.saldo'."
+        },
+        {
+            "q": "Considere la secuencia de instrucciones:\n```java\nPersona p = new Persona();\np = ____;\n```\n¿Qué valor debe rellenar el espacio en blanco para que el objeto original creado pierda su única referencia y quede expuesto al Garbage Collector?",
+            "options": [
+                "null",
+                "new Persona()",
+                "this"
+            ],
+            "correct": 0,
+            "hint": "Representa la ausencia de valor o referencia en Java.",
+            "explanation": "Asignar 'null' a la variable de referencia rompe el enlace con el objeto en el Heap, dejándolo elegible para el recolector de basura."
+        },
+        {
+            "q": "Cuando ejecutamos 'new Persona()', el objeto se crea en el ____.",
+            "options": [
+                "Heap",
+                "Stack",
+                "Method Area"
+            ],
+            "correct": 0,
+            "hint": "Es el montículo de memoria compartida para almacenamiento dinámico de objetos.",
+            "explanation": "El operador 'new' siempre reserva espacio y aloja las variables de instancia de los objetos en el Heap."
+        },
+        {
+            "q": "El espacio temporal reservado para almacenar los parámetros y variables locales de un método en ejecución se encuentra en el ____ de la JVM.",
+            "options": [
+                "Stack",
+                "Heap",
+                "Method Area"
+            ],
+            "correct": 0,
+            "hint": "Es la pila de llamadas de hilos, organizada en marcos.",
+            "explanation": "Las variables locales y los marcos de ejecución residen temporalmente en el Stack."
+        },
+        {
+            "q": "Analice el siguiente diseño de clase:\n```java\npublic class Base {\n    ____ int codigo;\n}\n```\n¿Qué modificador completa el espacio en blanco para que 'codigo' sea accesible por clases derivadas en otros paquetes y por clases del mismo paquete?",
+            "options": [
+                "protected",
+                "private",
+                "public"
+            ],
+            "correct": 0,
+            "hint": "Nivel de acceso intermedio pensado especialmente para el diseño de herencia.",
+            "explanation": "El modificador 'protected' ofrece acceso a nivel de subclases y de paquete."
+        },
+        {
+            "q": "Si deseamos que un atributo constante de una clase no pueda cambiar de valor tras ser inicializado en el constructor, usamos:\n```java\nprivate ____ double CONSTANTE = 9.81;\n```\n¿Qué palabra completa el espacio en blanco?",
+            "options": [
+                "final",
+                "static",
+                "volatile"
+            ],
+            "correct": 0,
+            "hint": "Evita la reasignación de variables una vez establecido su valor.",
+            "explanation": "El modificador 'final' impide volver a asignar un valor a la variable."
+        },
+        {
+            "q": "Dadas las líneas:\n```java\nPersona p1 = new Persona(\"A\");\nPersona p2 = new Persona(\"A\");\nboolean res = (p1 ____ p2);\n```\n¿Qué operador debe rellenar el espacio en blanco para que 'res' resulte false debido a que las direcciones de memoria son diferentes?",
+            "options": [
+                "==",
+                "equals",
+                "!="
+            ],
+            "correct": 0,
+            "hint": "Compara direcciones físicas de objetos y no valores semánticos.",
+            "explanation": "El operador == compara referencias. Como p1 y p2 apuntan a dos objetos creados de forma independiente en el Heap, su comparación da false."
+        },
+        {
+            "q": "Dada la clase Persona encapsulada:\n```java\nPersona p = new Persona();\np.____(30);\n```\n¿Qué llamada de método mutador se utiliza habitualmente en el espacio en blanco para asignar la edad?",
+            "options": [
+                "setEdad",
+                "edad =",
+                "getEdad"
+            ],
+            "correct": 0,
+            "hint": "Sigue la convención del principio de encapsulación de Java Beans.",
+            "explanation": "Se accede mediante el método setter 'setEdad(30)' para cumplir con las reglas de encapsulamiento."
+        },
+        {
+            "q": "¿Cuáles de los siguientes elementos forman parte de la estructura definible de una clase en Java?",
+            "options": [
+                "Los atributos (estado) y métodos (comportamiento).",
+                "Los constructores de inicialización y bloques estáticos.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Considere todos los componentes vistos en el tema.",
+            "explanation": "Una clase agrupa atributos, métodos, constructores e inicializadores estáticos como sus miembros estructurales."
+        },
+        {
+            "q": "¿Qué modificadores de visibilidad impiden el acceso directo de clases externas ajenas a la herencia y al paquete original a un atributo de instancia?",
+            "options": [
+                "private",
+                "protected (cuando la clase externa no es una subclase)",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Ambos modificadores restringen el acceso a clases externas no autorizadas.",
+            "explanation": "Tanto private (solo en la clase) como protected (solo mismo paquete y subclases) bloquean el acceso a clases ordinarias externas."
+        },
+        {
+            "q": "¿Qué características definen a un miembro marcado como 'static' en Java?",
+            "options": [
+                "Es único y compartido por todas las instancias de la clase.",
+                "Se almacena en la zona del Method Area de la JVM.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Recuerde su mapa de memoria y la persistencia del miembro.",
+            "explanation": "Los miembros estáticos son únicos en memoria, compartidos por todas las referencias y alojados en el Method Area."
+        },
+        {
+            "q": "¿Qué criterios sigue la JVM para ejecutar el Garbage Collector de manera automática?",
+            "options": [
+                "Cuando la memoria Heap está próxima a agotarse.",
+                "De forma asíncrona mediante políticas internas de optimización.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El recolector es controlado por el entorno de ejecución según necesidad y disponibilidad.",
+            "explanation": "La JVM inicia la recolección cuando los recursos del Heap escasean o durante tiempos de inactividad programados."
+        },
+        {
+            "q": "¿Qué reglas se aplican a la delegación de constructores mediante 'this(...)'?",
+            "options": [
+                "Debe invocarse obligatoriamente en la primera línea de código del constructor.",
+                "Evita duplicar lógica llamando a otro constructor sobrecargado de la misma clase.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Son las condiciones fundamentales para el encadenamiento de constructores en la misma clase.",
+            "explanation": "La instrucción 'this(...)' debe ser la primera y su objetivo es reutilizar código de otros constructores de la clase."
+        },
+        {
+            "q": "¿Qué propiedades tiene el constructor por defecto generado automáticamente en Java?",
+            "options": [
+                "Tiene acceso público y no recibe ningún parámetro.",
+                "Se pierde por completo en cuanto el desarrollador implementa cualquier constructor propio.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El constructor por defecto es simple, de visibilidad pública y se sobrescribe al crear constructores propios.",
+            "explanation": "Cumple ambas afirmaciones: es público y sin parámetros, y se destruye si declaramos constructores a medida."
+        },
+        {
+            "q": "¿Qué efectos perjudiciales tiene no aplicar encapsulamiento (atributos públicos sin control)?",
+            "options": [
+                "Pérdida de la consistencia de los datos del objeto (estados inconsistentes).",
+                "Mayor acoplamiento entre clases, dificultando cambios internos de implementación en el futuro.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Piense en la integridad de los datos y el mantenimiento del software.",
+            "explanation": "El encapsulamiento evita que el código cliente dependa de variables internas y previene la alteración a valores erróneos."
+        },
+        {
+            "q": "¿Qué elementos se gestionan dentro de la Pila (Stack) de la JVM?",
+            "options": [
+                "Las referencias locales a objetos alojados en el Heap.",
+                "Las variables de tipo primitivo declaradas dentro de métodos locales.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El Stack guarda datos vinculados a la ejecución momentánea de métodos.",
+            "explanation": "Tanto las referencias como los tipos primitivos declarados en el cuerpo de un método se alojan en el Stack."
+        },
+        {
+            "q": "¿Cómo podemos asegurar el mantenimiento del invariante de clase en Java?",
+            "options": [
+                "Asegurando que todos los constructores validen los parámetros de entrada.",
+                "Haciendo todos los atributos de instancia 'private' y validando en sus respectivos setters.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El invariante debe cumplirse en la creación y mantenerse a lo largo del ciclo de vida del objeto.",
+            "explanation": "La consistencia se asegura al nacer (constructores) y al mutar (setters privados/encapsulados con validaciones)."
+        },
+        {
+            "q": "¿Cuáles de las siguientes situaciones producen un error de compilación inmediato en Java?",
+            "options": [
+                "Declarar un método estático que intenta llamar a 'this' de forma directa.",
+                "Definir un constructor indicando 'void' como tipo de retorno.",
+                "Todas las anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Ambos casos violan las reglas gramaticales y conceptuales del compilador de Java.",
+            "explanation": "Un método estático carece de 'this' y los constructores no admiten tipo de retorno; ambos fallos detienen la compilación."
+        },
+        {
+            "q": "¿Dónde se alojan físicamente los objetos instanciados en Java en tiempo de ejecución?",
+            "options": [
+                "En el registro interno del procesador principal.",
+                "En el Stack de llamadas del hilo de ejecución.",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Se almacenan de forma dinámica en un montón común para toda la aplicación.",
+            "explanation": "Los objetos se crean en el Heap (montículo), no en el Stack ni en los registros del procesador. La respuesta correcta no figura en las opciones."
+        },
+        {
+            "q": "¿Qué palabra clave de Java permite heredar de forma directa constructores de la clase padre en una clase hija que no tiene ninguno?",
+            "options": [
+                "this",
+                "static",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Los constructores no se heredan en Java.",
+            "explanation": "En Java los constructores no se heredan. La subclase debe definir sus propios constructores e invocar de manera explícita a super() si es necesario."
+        },
+        {
+            "q": "Si definimos una clase con atributos públicos, ¿cómo podemos evitar mediante modificadores que se guarden valores negativos en ellos sin modificar el acceso público?",
+            "options": [
+                "Marcando la variable como estática y final.",
+                "Usando la palabra clave 'transient'.",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "No hay forma de filtrar valores si la variable de instancia se mantiene pública.",
+            "explanation": "La única forma de garantizar validez en el estado es encapsulando con private y usando un setter validador. Manteniendo el atributo público es imposible evitarlo."
+        },
+        {
+            "q": "¿Qué método se encarga de liberar manualmente la memoria Heap de un objeto específico en Java?",
+            "options": [
+                "free()",
+                "delete",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "En Java no existe la gestión manual de liberación de objetos individuales.",
+            "explanation": "Java no tiene 'delete' ni 'free' para el Heap; la memoria es gestionada exclusivamente por el Garbage Collector de manera asíncrona."
+        },
+        {
+            "q": "¿Cuál es la sintaxis correcta para declarar un destructor de clase clásico en Java que se ejecute obligatoriamente al finalizar el ciclo de vida del objeto?",
+            "options": [
+                "public void finalize() throws Throwable",
+                "public void ~Clase()",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Java carece de un mecanismo determinista de destrucción de objetos de estilo C++.",
+            "explanation": "Java no soporta destructores. Aunque existía finalize(), está en desuso (deprecated) y no garantiza cuándo ni si llegará a ejecutarse."
+        },
+        {
+            "q": "¿Qué modificador de acceso permite la visibilidad de un miembro únicamente en las clases hijas de otro paquete, bloqueando las del mismo paquete?",
+            "options": [
+                "protected",
+                "private",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "No existe ningún modificador con ese comportamiento particular.",
+            "explanation": "El modificador protected permite visibilidad en subclases (incluso de otros paquetes) pero también da visibilidad obligatoria en el mismo paquete."
+        },
+        {
+            "q": "¿Cuál es el procedimiento correcto para sobrescribir un método de instancia que ha sido declarado como 'private' en la clase base?",
+            "options": [
+                "Usar la anotación @Override en el método heredado.",
+                "Declarar el método heredado como estático.",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Los miembros privados no se heredan ni son visibles en la descendencia.",
+            "explanation": "Un método private no se puede heredar ni sobrescribir; declararlo en la subclase creará un método nuevo, no una sobrescritura."
+        },
+        {
+            "q": "¿Cuál es el valor predeterminado que la JVM le asigna a una variable de referencia a objeto declarada localmente en un método si no se inicializa?",
+            "options": [
+                "null",
+                "Un objeto vacío de esa clase.",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Las variables locales en la pila no tienen asignación por defecto.",
+            "explanation": "Las variables locales no poseen valores por defecto; si intentas leer una variable local no inicializada se produce un error de compilación."
+        },
+        {
+            "q": "¿Qué combinación de palabras clave se utiliza en Java para declarar una variable global constante que no pueda instanciarse en el Stack?",
+            "options": [
+                "const double",
+                "readonly static double",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Las constantes de clase se declaran con una combinación diferente en Java.",
+            "explanation": "Se declaran como 'static final'. Las opciones 'const' o 'readonly static' no son válidas en Java."
+        },
+        {
+            "q": "¿Cómo podemos obligar al Garbage Collector a ejecutarse de forma inmediata en el instante actual de la llamada?",
+            "options": [
+                "Invocando System.gc()",
+                "Llamando a Runtime.getRuntime().gc()",
+                "Ninguna de las anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "No hay llamadas deterministas obligatorias para el recolector de basura.",
+            "explanation": "Tanto System.gc() como Runtime.gc() sugieren y solicitan a la JVM correr el recolector, pero no garantizan ni obligan su ejecución inmediata."
+        }
+    ],
+    "LABORATORIO": [
+        {
+            "id": "lab_01",
+            "title": "Delegación de Constructores y Contadores de Instancia",
+            "context": "Considere la siguiente definición de clase en Java:\n```java\npublic class Sensor {\n    public static int count = 0;\n    public double temp;\n    public Sensor() {\n        this(25.0);\n        count += 2;\n    }\n    public Sensor(double t) {\n        this.temp = t;\n        count++;\n    }\n}\n```\nSe ejecuta el siguiente fragmento de código:\n```java\nSensor s1 = new Sensor();\nSensor s2 = new Sensor(30.0);\n```",
+            "parts": [
+                {
+                    "id": "lab_01_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable estática 'Sensor.count'?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Para `s1` se ejecuta `Sensor()` que delega en `Sensor(25.0)` (`count` pasa a 1) y luego suma 2 (`count` pasa a 3). Para `s2` se ejecuta `Sensor(30.0)` incrementando en 1, totalizando $1 + 2 + 1 = 4$."
+                },
+                {
+                    "id": "lab_01_b",
+                    "label": "b",
+                    "question": "¿Cuál es la temperatura almacenada en el objeto 's1'?",
+                    "correctValue": 25.0,
+                    "tolerance": 0.01,
+                    "explanation": "`s1` se creó mediante el constructor sin parámetros, el cual delega con `this(25.0)`, asignando $25.0$ a `temp`."
+                },
+                {
+                    "id": "lab_01_c",
+                    "label": "c",
+                    "question": "¿Cuántas instancias físicas del objeto 'Sensor' se alojan en el Heap de la JVM al final del código?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Se ejecutan exactamente dos llamadas a constructores usando `new`, lo que aloja $2$ objetos independientes en el Heap."
+                },
+                {
+                    "id": "lab_01_d",
+                    "label": "d",
+                    "question": "¿Cuál es la temperatura almacenada en el objeto 's2'?",
+                    "correctValue": 30.0,
+                    "tolerance": 0.01,
+                    "explanation": "`s2` se crea llamando a `new Sensor(30.0)`, pasando directamente el valor $30.0$ a su atributo `temp`."
+                }
+            ]
+        },
+        {
+            "id": "lab_02",
+            "title": "Miembros Estáticos y Estado Compartido",
+            "context": "Analice el comportamiento de la siguiente clase:\n```java\npublic class Item {\n    public static int stock = 10;\n    public int id;\n    public Item(int id) {\n        this.id = id;\n        stock--;\n    }\n}\n```\nSe ejecuta el siguiente fragmento:\n```java\nItem a = new Item(1);\nItem b = new Item(2);\nItem c = new Item(3);\n```",
+            "parts": [
+                {
+                    "id": "lab_02_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable estática 'Item.stock'?",
+                    "correctValue": 7,
+                    "tolerance": 0,
+                    "explanation": "El stock inicial es 10. Se crean tres instancias de `Item`. Cada constructor disminuye el stock compartido en 1: $10 - 3 = 7$."
+                },
+                {
+                    "id": "lab_02_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor del atributo 'id' del objeto 'a'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El objeto `a` se inicializó con `new Item(1)`, por lo que su atributo de instancia `id` es $1$."
+                },
+                {
+                    "id": "lab_02_c",
+                    "label": "c",
+                    "question": "¿Cuál es la suma de los valores del atributo de instancia 'id' de todos los objetos instanciados?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "Los objetos `a`, `b`, y `c` tienen ids $1$, $2$, y $3$ respectivamente. La suma total es $1 + 2 + 3 = 6$."
+                },
+                {
+                    "id": "lab_02_d",
+                    "label": "d",
+                    "question": "¿Cuántas variables individuales llamadas 'id' se reservaron físicamente en total dentro del Heap?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Como `id` es un atributo de instancia, cada objeto del Heap posee su propia copia del mismo. Se crearon 3 objetos, luego hay $3$ variables `id` en el Heap."
+                }
+            ]
+        },
+        {
+            "id": "lab_03",
+            "title": "Recolección de Basura e Identificadores Huérfanos",
+            "context": "Analice el siguiente bloque de código en Java:\n```java\nPersona p1 = new Persona(\"A\");\nPersona p2 = new Persona(\"B\");\nPersona p3 = p1;\np1 = new Persona(\"C\");\np2 = null;\np3 = null;\n```",
+            "parts": [
+                {
+                    "id": "lab_03_a",
+                    "label": "a",
+                    "question": "¿Cuántas instancias de 'Persona' se crearon en total en el Heap durante la ejecución de este código?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Cada palabra clave `new` crea un objeto en Heap. Se invocó `new` 3 veces, por tanto se instanciaron $3$ objetos."
+                },
+                {
+                    "id": "lab_03_b",
+                    "label": "b",
+                    "question": "¿Cuántas referencias activas (punteros en la pila) apuntan al objeto inicialmente denominado 'A' al final del fragmento?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al principio `p1` y `p3` apuntan a 'A'. Después `p1` se reasigna a 'C' y `p3` se hace null. Por lo tanto, no quedan referencias apuntando a 'A', es decir, $0$."
+                },
+                {
+                    "id": "lab_03_c",
+                    "label": "c",
+                    "question": "¿Cuántos objetos creados en este código son candidatos elegibles para el Garbage Collector al finalizar la última línea?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Los objetos 'A' y 'B' se quedan sin referencias activas. 'C' sigue referenciado por `p1`. Así que hay $2$ objetos listos para recolectar."
+                },
+                {
+                    "id": "lab_03_d",
+                    "label": "d",
+                    "question": "¿Cuántas variables de tipo referencia a 'Persona' se definieron y mantuvieron activas en la pila (Stack)?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Se declararon exactamente tres variables de referencia en el ámbito local: `p1`, `p2` y `p3`. Luego son $3$ variables en la pila."
+                }
+            ]
+        },
+        {
+            "id": "lab_04",
+            "title": "Arrays de Objetos e Inicialización por Defecto",
+            "context": "Dado el siguiente código en Java:\n```java\npublic class Punto {\n    public int x, y;\n    public Punto(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n}\n// Bloque ejecutable:\nPunto[] puntos = new Punto[5];\npuntos[0] = new Punto(1, 2);\npuntos[2] = new Punto(3, 4);\n```",
+            "parts": [
+                {
+                    "id": "lab_04_a",
+                    "label": "a",
+                    "question": "¿Cuántas instancias de la clase 'Punto' se crearon físicamente en el Heap?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Crear el array `new Punto[5]` solo reserva espacio para 5 referencias, todas a null. Solo se crean objetos con `new Punto(...)` dos veces. Total = $2$."
+                },
+                {
+                    "id": "lab_04_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor almacenado en la celda 'puntos[1]'? (Si es nulo, representarlo como 0).",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al no inicializarse, las posiciones del array por defecto tienen el valor `null`. Se representa con un valor numérico de $0$."
+                },
+                {
+                    "id": "lab_04_c",
+                    "label": "c",
+                    "question": "¿Cuál es la suma del valor del atributo 'x' de todos los objetos 'Punto' asignados dentro del array?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Los puntos válidos en el array son `puntos[0]` ($x=1$) y `puntos[2]` ($x=3$). La suma de sus atributos $x$ es $1 + 3 = 4$."
+                },
+                {
+                    "id": "lab_04_d",
+                    "label": "d",
+                    "question": "¿Cuál es el tamaño total del array de referencias 'puntos' asignado en memoria?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El array se instanció con un tamaño de 5 mediante `new Punto[5]`, por lo que su capacidad es de $5$ elementos de referencia."
+                }
+            ]
+        },
+        {
+            "id": "lab_05",
+            "title": "Métodos Estáticos y Llamadas Concurrentes",
+            "context": "Analice la siguiente clase matemática:\n```java\npublic class Calculadora {\n    public static int operacion = 0;\n    public static int sumar(int a, int b) {\n        operacion++;\n        return a + b;\n    }\n    public static int restar(int a, int b) {\n        operacion += 2;\n        return a - b;\n    }\n}\n// Ejecución:\nint r1 = Calculadora.sumar(5, 5);\nint r2 = Calculadora.restar(10, 3);\nint r3 = Calculadora.sumar(r1, r2);\n```",
+            "parts": [
+                {
+                    "id": "lab_05_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable estática 'Calculadora.operacion'?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Se llama a `sumar` en r1 (+1), luego a `restar` en r2 (+2), y de nuevo a `sumar` en r3 (+1). Total = $1 + 2 + 1 = 4$."
+                },
+                {
+                    "id": "lab_05_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor resultante guardado en 'r1'?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "`r1` guarda el resultado de `sumar(5, 5)`, que es $10$."
+                },
+                {
+                    "id": "lab_05_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor resultante de la variable 'r2'?",
+                    "correctValue": 7,
+                    "tolerance": 0,
+                    "explanation": "`r2` guarda el resultado de `restar(10, 3)`, que es $7$."
+                },
+                {
+                    "id": "lab_05_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor final obtenido en la variable 'r3'?",
+                    "correctValue": 17,
+                    "tolerance": 0,
+                    "explanation": "`r3` es el resultado de `sumar(r1, r2) = sumar(10, 7) = 17$."
+                }
+            ]
+        },
+        {
+            "id": "lab_06",
+            "title": "Estructuras Enlazadas en Memoria",
+            "context": "Analice el direccionamiento en memoria de este nodo simple:\n```java\npublic class Nodo {\n    public int valor;\n    public Nodo sig;\n    public Nodo(int v) { this.valor = v; }\n}\n// Código:\nNodo n1 = new Nodo(10);\nNodo n2 = new Nodo(20);\nn1.sig = n2;\nn2.sig = new Nodo(30);\n```",
+            "parts": [
+                {
+                    "id": "lab_06_a",
+                    "label": "a",
+                    "question": "¿Cuál es el número total de nodos enlazados linealmente desde 'n1'?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El camino desde `n1` es `n1 -> n2 -> (nodo con valor 30) -> null`. Total de nodos = $3$."
+                },
+                {
+                    "id": "lab_06_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor numérico al final de la cadena de nodos ('n1.sig.sig.valor')?",
+                    "correctValue": 30,
+                    "tolerance": 0,
+                    "explanation": "`n1.sig` es `n2`, y `n2.sig` es el tercer nodo, cuyo valor de inicialización fue $30$."
+                },
+                {
+                    "id": "lab_06_c",
+                    "label": "c",
+                    "question": "¿Cuántos objetos de tipo 'Nodo' se han creado de forma dinámica en el Heap?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Se empleó la palabra clave `new` tres veces para crear Nodos. Total = $3$."
+                },
+                {
+                    "id": "lab_06_d",
+                    "label": "d",
+                    "question": "¿Cuántas variables de referencia a 'Nodo' se declararon en la pila (Stack)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Solo se declararon en la pila las variables `n1` y `n2`. La tercera referencia reside en el Heap dentro del campo `sig` de `n2`."
+                }
+            ]
+        },
+        {
+            "id": "lab_07",
+            "title": "Autoincremento y Conteo Estático de Usuarios",
+            "context": "Considere la clase Usuario:\n```java\npublic class Usuario {\n    private int id;\n    private static int totalUsuarios = 100;\n    public Usuario() {\n        this.id = ++totalUsuarios;\n    }\n}\n// Bloque de ejecución:\nUsuario u1 = new Usuario();\nUsuario u2 = new Usuario();\nUsuario u3 = new Usuario();\n```",
+            "parts": [
+                {
+                    "id": "lab_07_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable estática 'totalUsuarios'?",
+                    "correctValue": 103,
+                    "tolerance": 0,
+                    "explanation": "Empieza en 100 y aumenta en 1 con cada nueva instancia. Tras crear `u1`, `u2` y `u3`, `totalUsuarios` es $100 + 3 = 103$."
+                },
+                {
+                    "id": "lab_07_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor asignado al atributo 'id' de la primera instancia 'u1'?",
+                    "correctValue": 101,
+                    "tolerance": 0,
+                    "explanation": "Al crear `u1`, `++totalUsuarios` se evalúa primero incrementando a $101$, valor asignado al campo `id` de `u1`."
+                },
+                {
+                    "id": "lab_07_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor del atributo 'id' asignado al objeto 'u3'?",
+                    "correctValue": 103,
+                    "tolerance": 0,
+                    "explanation": "Tras instanciar `u1` ($id=101$) y `u2` ($id=102$), al crear `u3` el contador estático pasa a $103$, asignando ese ID."
+                },
+                {
+                    "id": "lab_07_d",
+                    "label": "d",
+                    "question": "¿Cuál es la diferencia aritmética entre el ID de 'u3' y el ID de 'u1'?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "ID de `u3` ($103$) menos ID de `u1` ($101$) da como resultado $103 - 101 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab_08",
+            "title": "Consistencia de Estado y Mutadores Validados",
+            "context": "Dada la clase para gestionar temperaturas:\n```java\npublic class Temperatura {\n    private double celsius;\n    public void setCelsius(double c) {\n        if (c >= -273.15) {\n            this.celsius = c;\n        } else {\n            this.celsius = -273.15;\n        }\n    }\n}\n// Bloque de ejecución:\nTemperatura t = new Temperatura();\nt.setCelsius(25.0);\nt.setCelsius(-300.0);\n```",
+            "parts": [
+                {
+                    "id": "lab_08_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor del atributo 'celsius' al final de la ejecución?",
+                    "correctValue": -273.15,
+                    "tolerance": 0.01,
+                    "explanation": "Al asignar $-300.0$, el setter valida si es menor a $-273.15$. Como lo es, fuerza el valor al cero absoluto: $-273.15$."
+                },
+                {
+                    "id": "lab_08_b",
+                    "label": "b",
+                    "question": "Si a continuación llamamos a 't.setCelsius(0.0)', ¿cuál será el valor del atributo 'celsius'?",
+                    "correctValue": 0.0,
+                    "tolerance": 0.01,
+                    "explanation": "Dado que $0.0 \\ge -273.15$, la asignación es directa y se guarda $0.0$ en la variable."
+                },
+                {
+                    "id": "lab_08_c",
+                    "label": "c",
+                    "question": "¿Cuántos atributos de instancia posee la clase 'Temperatura'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Solo tiene un atributo de instancia declarado: la variable primitiva `celsius`."
+                },
+                {
+                    "id": "lab_08_d",
+                    "label": "d",
+                    "question": "¿Cuántas evaluaciones lógicas (condición del if) se realizaron en total durante las llamadas descritas (las dos iniciales y la posterior)?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Cada llamada a `setCelsius` evalúa el condicional del if exactamente una vez. Habiendo tres llamadas, se ejecutan $3$ evaluaciones."
+                }
+            ]
+        },
+        {
+            "id": "lab_09",
+            "title": "Lógica Acumuladora y Bucles de Instancia",
+            "context": "Analice la ejecución del acumulador:\n```java\npublic class Acumulador {\n    private int valor = 0;\n    public void agregar(int n) {\n        for (int i = 1; i <= n; i++) {\n            if (i % 2 == 0) {\n                this.valor += i;\n            } \n        }\n    }\n}\n// Bloque de ejecución:\nAcumulador ac = new Acumulador();\nac.agregar(5);\nac.agregar(3);\n```",
+            "parts": [
+                {
+                    "id": "lab_09_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor del atributo 'valor' de 'ac' inmediatamente después de 'ac.agregar(5)'?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "El bucle va de 1 a 5. Los pares son 2 y 4. Se suman al acumulador: $2 + 4 = 6$."
+                },
+                {
+                    "id": "lab_09_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor final del atributo 'valor' tras todas las llamadas?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "La segunda llamada `agregar(3)` suma los pares entre 1 y 3, que es solo 2. Así, `valor` pasa de 6 a $6 + 2 = 8$."
+                },
+                {
+                    "id": "lab_09_c",
+                    "label": "c",
+                    "question": "¿Cuántas iteraciones del bucle for se realizaron en total en todo el proceso?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "La primera llamada ejecuta 5 iteraciones y la segunda ejecuta 3 iteraciones, acumulando $5 + 3 = 8$ iteraciones totales."
+                },
+                {
+                    "id": "lab_09_d",
+                    "label": "d",
+                    "question": "¿Cuántas veces se cumplió la condición del if (i % 2 == 0) en total?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "En la primera llamada se cumple para 2 y 4 (2 veces). En la segunda para 2 (1 vez). En total $2 + 1 = 3$ veces."
+                }
+            ]
+        },
+        {
+            "id": "lab_10",
+            "title": "Marcos de Activación y Recursión en la Pila",
+            "context": "Analice la profundidad de la pila de la JVM en esta ejecución:\n```java\npublic class ContadorLlamadas {\n    public int profundidad = 0;\n    public int ejecutar(int n) {\n        profundidad++;\n        if (n <= 1) return 1;\n        return n * ejecutar(n - 1);\n    }\n}\n// Código:\nContadorLlamadas c = new ContadorLlamadas();\nint res = c.ejecutar(4);\n```",
+            "parts": [
+                {
+                    "id": "lab_10_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor devuelto en la variable 'res'?",
+                    "correctValue": 24,
+                    "tolerance": 0,
+                    "explanation": "Es el cálculo factorial de 4. $4! = 4 \\\\times 3 \\\\times 2 \\\\times 1 = 24$."
+                },
+                {
+                    "id": "lab_10_b",
+                    "label": "b",
+                    "question": "¿Cuál es la profundidad máxima alcanzada por las llamadas en la pila (valor de 'c.profundidad')?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Se llama a `ejecutar(4)`, `ejecutar(3)`, `ejecutar(2)` y `ejecutar(1)`. Cada llamada incrementa en 1, totalizando $4$."
+                },
+                {
+                    "id": "lab_10_c",
+                    "label": "c",
+                    "question": "¿Cuántos parámetros primitivos se mantuvieron en el Stack simultáneamente en la llamada más profunda?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "En el punto más profundo de la recursión, hay 4 marcos activos en la pila, cada uno guardando una variable parámetro `n` ($n=4, 3, 2, 1$). Así hay $4$ variables."
+                },
+                {
+                    "id": "lab_10_d",
+                    "label": "d",
+                    "question": "Partiendo de profundidad = 0, ¿cuál sería el valor de 'c.profundidad' tras invocar 'c.ejecutar(1)'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Al ejecutarse con $1$, no entra en recursión; incrementa `profundidad` una única vez y retorna. El resultado es $1$."
+                }
+            ]
+        },
+        {
+            "id": "lab_11",
+            "title": "Encadenamiento de Constructores y Propiedades de Instancia",
+            "context": "Analice el encadenamiento de constructores:\n```java\npublic class Producto {\n    public double precio;\n    public int stock;\n    public Producto() {\n        this(10.0);\n    }\n    public Producto(double p) {\n        this(p, 5);\n    }\n    public Producto(double p, int s) {\n        this.precio = p;\n        this.stock = s;\n    }\n}\n// Bloque de código:\nProducto p1 = new Producto();\nProducto p2 = new Producto(20.0);\nProducto p3 = new Producto(15.0, 8);\n```",
+            "parts": [
+                {
+                    "id": "lab_11_a",
+                    "label": "a",
+                    "question": "¿Cuál es el precio asignado al objeto 'p1'?",
+                    "correctValue": 10.0,
+                    "tolerance": 0.01,
+                    "explanation": "`p1` se crea con `Producto()`, que delega en `Producto(10.0)`. Este a su vez delega en `Producto(10.0, 5)`. Por tanto, su precio es $10.0$."
+                },
+                {
+                    "id": "lab_11_b",
+                    "label": "b",
+                    "question": "¿Cuál es el stock inicial asignado al objeto 'p1'?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "A través de la delegación en cadena, el stock final asignado para `p1` es el valor por defecto provisto: $5$."
+                },
+                {
+                    "id": "lab_11_c",
+                    "label": "c",
+                    "question": "¿Cuál es el stock asignado a la segunda instancia 'p2'?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "`p2` llama a `Producto(20.0)`, que delega en `Producto(20.0, 5)`. Por lo tanto, el stock también vale $5$."
+                },
+                {
+                    "id": "lab_11_d",
+                    "label": "d",
+                    "question": "¿Cuál es la suma del stock de las tres instancias creadas (p1, p2, p3)?",
+                    "correctValue": 18,
+                    "tolerance": 0,
+                    "explanation": "El stock de `p1` es 5, el de `p2` es 5 y el de `p3` es 8. La suma total es $5 + 5 + 8 = 18$."
+                }
+            ]
+        },
+        {
+            "id": "lab_12",
+            "title": "Configuración Global Estática y Efecto Cascada",
+            "context": "Observe el uso de un parámetro estático de configuración:\n```java\npublic class Config {\n    public static double IVA = 0.21;\n    public double precioNeto;\n    public Config(double p) {\n        this.precioNeto = p;\n    }\n    public double getPrecioConIva() {\n        return precioNeto * (1 + IVA);\n    }\n}\n// Bloque de código:\nConfig c1 = new Config(100.0);\nConfig c2 = new Config(200.0);\nConfig.IVA = 0.10;\n```",
+            "parts": [
+                {
+                    "id": "lab_12_a",
+                    "label": "a",
+                    "question": "¿Cuál es el precio con IVA retornado por 'c1.getPrecioConIva()' tras modificar la tasa?",
+                    "correctValue": 110.0,
+                    "tolerance": 0.01,
+                    "explanation": "Al cambiar `Config.IVA = 0.10`, afecta a todas las instancias. `c1` tiene `precioNeto` de 100. $100 \\\\times (1 + 0.10) = 110.0$."
+                },
+                {
+                    "id": "lab_12_b",
+                    "label": "b",
+                    "question": "¿Cuál es el precio con IVA devuelto por el objeto 'c2'?",
+                    "correctValue": 220.0,
+                    "tolerance": 0.01,
+                    "explanation": "`c2` tiene un neto de 200. Con el nuevo IVA del 10%, el total con IVA es $200 \\\\times (1 + 0.10) = 220.0$."
+                },
+                {
+                    "id": "lab_12_c",
+                    "label": "c",
+                    "question": "¿Cuántas copias del atributo 'IVA' existen almacenadas en la memoria Heap?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La variable es estática (`static`), lo que significa que no se almacena en el Heap con los objetos de instancia, sino de forma única en el Method Area ($0$ en Heap)."
+                },
+                {
+                    "id": "lab_12_d",
+                    "label": "d",
+                    "question": "¿Cuántas copias físicas de la variable 'precioNeto' se encuentran en el Heap?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "`precioNeto` es miembro de instancia. Hay dos objetos en el Heap, por lo tanto existen $2$ copias en el Heap."
+                }
+            ]
+        },
+        {
+            "id": "lab_13",
+            "title": "Interacción de Parámetros de Objeto y Comparaciones",
+            "context": "Analice la interacción entre objetos en métodos estáticos:\n```java\npublic class Rectangulo {\n    public int ancho, alto;\n    public Rectangulo(int an, int al) {\n        this.ancho = an;\n        this.alto = al;\n    }\n    public int getArea() { return ancho * alto; }\n    public static int comparar(Rectangulo r1, Rectangulo r2) {\n        int a1 = r1.getArea();\n        int a2 = r2.getArea();\n        return Integer.compare(a1, a2);\n    }\n}\n// Bloque de código:\nRectangulo rA = new Rectangulo(4, 5);\nRectangulo rB = new Rectangulo(3, 7);\nint comp = Rectangulo.comparar(rA, rB);\n```",
+            "parts": [
+                {
+                    "id": "lab_13_a",
+                    "label": "a",
+                    "question": "¿Cuál es el área calculada para el rectángulo 'rA'?",
+                    "correctValue": 20,
+                    "tolerance": 0,
+                    "explanation": "El área de `rA` es $ancho \\\\times alto = 4 \\\\times 5 = 20$."
+                },
+                {
+                    "id": "lab_13_b",
+                    "label": "b",
+                    "question": "¿Cuál es el área resultante para el rectángulo 'rB'?",
+                    "correctValue": 21,
+                    "tolerance": 0,
+                    "explanation": "El área de `rB` es $ancho \\\\times alto = 3 \\\\times 7 = 21$."
+                },
+                {
+                    "id": "lab_13_c",
+                    "label": "c",
+                    "question": "¿Cuál es el resultado de la comparación devuelto en 'comp'?",
+                    "correctValue": -1,
+                    "tolerance": 0,
+                    "explanation": "`Integer.compare(20, 21)` devuelve un valor negativo ($-1$) porque el primer valor es menor que el segundo."
+                },
+                {
+                    "id": "lab_13_d",
+                    "label": "d",
+                    "question": "¿Cuántas referencias a objetos se pasan como parámetros al método 'comparar' al ejecutarse?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El método estático `comparar` recibe dos referencias de tipo `Rectangulo` (`rA` y `rB`), totalizando $2$ parámetros."
+                }
+            ]
+        },
+        {
+            "id": "lab_14",
+            "title": "Encapsulamiento Estricto y Atributos de Solo Lectura",
+            "context": "Dada la definición del sensor digital:\n```java\npublic class SensorDigital {\n    private final int id;\n    private int lectura;\n    private static int contador = 0;\n    public SensorDigital(int l) {\n        this.id = ++contador;\n        this.lectura = l;\n    }\n    public int getId() { return id; }\n    public int getLectura() { return lectura; }\n    public void setLectura(int l) { this.lectura = l; }\n}\n// Ejecución:\nSensorDigital s1 = new SensorDigital(100);\nSensorDigital s2 = new SensorDigital(200);\ns1.setLectura(150);\n```",
+            "parts": [
+                {
+                    "id": "lab_14_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor del atributo 'id' asignado al sensor 's1'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El sensor `s1` es el primero en crearse; `contador` aumenta a $1$, asignándose a su atributo `id` de solo lectura."
+                },
+                {
+                    "id": "lab_14_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor del atributo 'id' asignado al sensor 's2'?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Al crearse `s2`, el contador estático `contador` aumenta de 1 a $2$, asociando el ID correspondiente."
+                },
+                {
+                    "id": "lab_14_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor de la lectura de 's1' al finalizar todo el bloque?",
+                    "correctValue": 150,
+                    "tolerance": 0,
+                    "explanation": "La lectura inicial de `s1` es 100, pero luego se actualiza a $150$ mediante `s1.setLectura(150)`."
+                },
+                {
+                    "id": "lab_14_d",
+                    "label": "d",
+                    "question": "¿Cuántos campos o atributos de tipo int (primitivos) residen en total dentro de cada objeto en el Heap?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Cada instancia de `SensorDigital` aloja de manera individual los atributos `id` y `lectura` en el Heap, sumando $2$ variables por objeto."
+                }
+            ]
+        },
+        {
+            "id": "lab_15",
+            "title": "Rastreo de Referencias Cruzadas y Alias",
+            "context": "Observe el intercambio de referencias en el Stack:\n```java\nPersona pA = new Persona(\"Carlos\");\nPersona pB = new Persona(\"Beatriz\");\nPersona pC = pA;\npA = pB;\npB = pC;\n```",
+            "parts": [
+                {
+                    "id": "lab_15_a",
+                    "label": "a",
+                    "question": "¿A qué objeto apunta la variable 'pA' al final? (1 para 'Carlos', 2 para 'Beatriz').",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "`pA` toma la referencia de `pB`, la cual apuntaba originalmente a la instancia 'Beatriz', por tanto apunta a $2$."
+                },
+                {
+                    "id": "lab_15_b",
+                    "label": "b",
+                    "question": "¿A qué objeto apunta la referencia 'pB' al final? (1 para 'Carlos', 2 para 'Beatriz').",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "`pB` toma la referencia guardada en `pC`, la cual apuntaba al objeto original 'Carlos', por tanto apunta a $1$."
+                },
+                {
+                    "id": "lab_15_c",
+                    "label": "c",
+                    "question": "¿A qué objeto apunta la referencia 'pC' al final? (1 para 'Carlos', 2 para 'Beatriz').",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "`pC` no cambia su referencia después de asignársele `pA` inicial. Apunta permanentemente a 'Carlos' ($1$)."
+                },
+                {
+                    "id": "lab_15_d",
+                    "label": "d",
+                    "question": "¿Cuántos intercambios o asignaciones de referencias en la pila se ejecutan en este fragmento?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Se ejecutan las asignaciones `pC = pA`, `pA = pB` y `pB = pC`, haciendo un total de $3$ instrucciones de asignación."
+                }
+            ]
+        },
+        {
+            "id": "lab_16",
+            "title": "Paso de Parámetros por Valor en Referencias",
+            "context": "Analice el paso de parámetros en Java:\n```java\npublic class Modificador {\n    public static void duplicar(int x) { x = x * 2; }\n    public static void duplicarObjeto(Sensor s) { s.temp = s.temp * 2; }\n}\n// Ejecución:\nint valor = 50;\nSensor miSensor = new Sensor(30.0);\nModificador.duplicar(valor);\nModificador.duplicarObjeto(miSensor);\n```",
+            "parts": [
+                {
+                    "id": "lab_16_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable primitiva 'valor'?",
+                    "correctValue": 50,
+                    "tolerance": 0,
+                    "explanation": "Java pasa los tipos primitivos por valor. El método modifica una copia local del Stack; el original sigue valiendo $50$."
+                },
+                {
+                    "id": "lab_16_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor final del atributo 'temp' del objeto 'miSensor'?",
+                    "correctValue": 60.0,
+                    "tolerance": 0.01,
+                    "explanation": "La referencia se pasa por valor, por lo que `s` apunta al mismo objeto. Modificar `s.temp` cambia el objeto en el Heap: $30.0 \\\\times 2 = 60.0$."
+                },
+                {
+                    "id": "lab_16_c",
+                    "label": "c",
+                    "question": "¿Cuántas llamadas a métodos estáticos se realizan en total en el fragmento?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Se invocan `Modificador.duplicar` y `Modificador.duplicarObjeto`, lo que representa $2$ llamadas."
+                },
+                {
+                    "id": "lab_16_d",
+                    "label": "d",
+                    "question": "¿Cuántas variables tipo referencia apuntan al objeto sensor de forma concurrente en el Stack de llamadas mientras corre el método duplicarObjeto?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Están activas la variable `miSensor` del método llamador y el parámetro `s` del método ejecutado. Total = $2$."
+                }
+            ]
+        },
+        {
+            "id": "lab_17",
+            "title": "Recolección de Basura y Alcance de Cadenas",
+            "context": "Observe el ciclo de vida de los siguientes objetos String:\n```java\nString a = new String(\"Prueba A\");\nString b = new String(\"Prueba B\");\nString c = a;\na = null;\nc = new String(\"Prueba C\");\n```",
+            "parts": [
+                {
+                    "id": "lab_17_a",
+                    "label": "a",
+                    "question": "¿Cuántas referencias apuntaban al primer objeto ('Prueba A') tras la ejecución de la tercera línea?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tanto `a` como `c` (tras la asignación `c = a`) apuntan a la misma dirección Heap, sumando $2$ referencias activas."
+                },
+                {
+                    "id": "lab_17_b",
+                    "label": "b",
+                    "question": "¿Cuántas referencias válidas apuntan al objeto ('Prueba A') al finalizar todo el bloque?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "`a` se reasigna a null, y `c` se reasigna a 'Prueba C'. Por tanto, no quedan referencias que apunten a 'Prueba A', es decir, $0$."
+                },
+                {
+                    "id": "lab_17_c",
+                    "label": "c",
+                    "question": "¿Cuántos objetos creados en el Heap quedan desreferenciados y listos para el Garbage Collector al final?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Solo 'Prueba A' pierde todas sus referencias. 'Prueba B' sigue apuntado por `b` y 'Prueba C' por `c`. Queda $1$ objeto candidato."
+                },
+                {
+                    "id": "lab_17_d",
+                    "label": "d",
+                    "question": "¿Cuántas variables en la pila mantienen una referencia no nula a un objeto del Heap?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "La variable `a` es null. Solo `b` (apunta a 'Prueba B') y `c` (apunta a 'Prueba C') guardan referencias válidas. Total = $2$."
+                }
+            ]
+        },
+        {
+            "id": "lab_18",
+            "title": "Bloques Estáticos vs Bloques de Instancia",
+            "context": "Analice el orden de carga y ejecución de miembros de clase:\n```java\npublic class RegistroGlobal {\n    public static int cuenta = 10;\n    static {\n        cuenta += 50;\n    }\n    public RegistroGlobal() {\n        cuenta += 5;\n    }\n}\n// Ejecución:\nint inicial = RegistroGlobal.cuenta;\nRegistroGlobal r1 = new RegistroGlobal();\nRegistroGlobal r2 = new RegistroGlobal();\n```",
+            "parts": [
+                {
+                    "id": "lab_18_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor de la variable local 'inicial'?",
+                    "correctValue": 60,
+                    "tolerance": 0,
+                    "explanation": "Al acceder a `RegistroGlobal.cuenta` se carga la clase. El bloque estático se ejecuta sumando 50 al valor inicial: $10 + 50 = 60$."
+                },
+                {
+                    "id": "lab_18_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor de 'RegistroGlobal.cuenta' tras crear el primer objeto 'r1'?",
+                    "correctValue": 65,
+                    "tolerance": 0,
+                    "explanation": "El constructor de `r1` incrementa `cuenta` en 5, pasando de 60 a $65$."
+                },
+                {
+                    "id": "lab_18_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor final de la variable estática 'RegistroGlobal.cuenta' al final del código?",
+                    "correctValue": 70,
+                    "tolerance": 0,
+                    "explanation": "El constructor de `r2` vuelve a incrementar la variable compartida en 5, alcanzando un valor de $70$."
+                },
+                {
+                    "id": "lab_18_d",
+                    "label": "d",
+                    "question": "¿Cuántas veces se ejecuta el bloque de inicialización estático 'static { ... }' en este programa?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El cargador de clases (ClassLoader) de la JVM ejecuta los inicializadores estáticos una única vez por clase activa, es decir, $1$ vez."
+                }
+            ]
+        },
+        {
+            "id": "lab_19",
+            "title": "Solapamiento de Nombres (Shadowing) y Ámbito",
+            "context": "Observe el error común de sombreado de variables de instancia:\n```java\npublic class Coordenada {\n    public int x = 0;\n    public int y = 0;\n    public Coordenada(int x, int y) {\n        x = x;\n        this.y = y;\n    }\n}\n// Código:\nCoordenada coord = new Coordenada(10, 20);\n```",
+            "parts": [
+                {
+                    "id": "lab_19_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor del atributo de instancia 'x' en el objeto 'coord'?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La línea `x = x` asocia el parámetro consigo mismo (sombreado) en lugar del atributo de instancia. Queda con su valor por defecto: $0$."
+                },
+                {
+                    "id": "lab_19_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor del atributo de instancia 'y' en el objeto 'coord'?",
+                    "correctValue": 20,
+                    "tolerance": 0,
+                    "explanation": "El atributo `y` se asigna correctamente usando el operador `this.y = y`. Su valor resultante es $20$."
+                },
+                {
+                    "id": "lab_19_c",
+                    "label": "c",
+                    "question": "Si ejecutamos 'coord.x = 15' y luego creamos otra coordenada 'c2', ¿afecta al valor inicial de 'c2.x'? (0 para No, 1 para Sí).",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Dado que `x` es un atributo de instancia, modificar un objeto no tiene efecto sobre el valor inicial o estado de otros objetos. Por tanto, es $0$."
+                },
+                {
+                    "id": "lab_19_d",
+                    "label": "d",
+                    "question": "¿Cuántas declaraciones distintas de la variable 'x' existen en total (incluyendo parámetros e instancia) dentro de la estructura de la clase?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Se define una variable de instancia `public int x` y un parámetro formal `int x` en el constructor, sumando $2$ declaraciones."
+                }
+            ]
+        },
+        {
+            "id": "lab_20",
+            "title": "Validaciones de Saldo y Operaciones en Cuenta",
+            "context": "Dada la clase para gestionar transacciones bancarias:\n```java\npublic class Cuenta {\n    private double saldo;\n    public Cuenta(double saldoInicial) {\n        if (saldoInicial >= 0) {\n            this.saldo = saldoInicial;\n        } else {\n            this.saldo = 0;\n        }\n    }\n    public double retirar(double cant) {\n        if (cant > 0 && cant <= this.saldo) {\n            this.saldo -= cant;\n            return cant;\n        }\n        return 0;\n    }\n}\n// Ejecución:\nCuenta c = new Cuenta(-100.0);\nc.retirar(50.0);\nCuenta c2 = new Cuenta(150.0);\nc2.retirar(50.0);\n```",
+            "parts": [
+                {
+                    "id": "lab_20_a",
+                    "label": "a",
+                    "question": "¿Cuál es el saldo del objeto 'c' inmediatamente después de su construcción?",
+                    "correctValue": 0.0,
+                    "tolerance": 0.01,
+                    "explanation": "El constructor de `c` recibe $-100.0$, lo cual es negativo. El control del if fuerza el saldo a $0.0$."
+                },
+                {
+                    "id": "lab_20_b",
+                    "label": "b",
+                    "question": "¿Qué cantidad de dinero se retira efectivamente del objeto 'c' tras llamar a 'c.retirar(50.0)'?",
+                    "correctValue": 0.0,
+                    "tolerance": 0.01,
+                    "explanation": "Intentar retirar $50.0$ de un saldo de $0.0$ falla en la condición `cant <= saldo`. Devuelve $0.0$."
+                },
+                {
+                    "id": "lab_20_c",
+                    "label": "c",
+                    "question": "¿Cuál es el saldo final de la segunda cuenta 'c2'?",
+                    "correctValue": 100.0,
+                    "tolerance": 0.01,
+                    "explanation": "`c2` inicia con $150.0$. La operación de retiro descuenta $50.0$, dejando el saldo en $150 - 50 = 100.0$."
+                },
+                {
+                    "id": "lab_20_d",
+                    "label": "d",
+                    "question": "¿Qué cantidad de dinero se extrae en total de la segunda cuenta 'c2' en su llamada a retirar?",
+                    "correctValue": 50.0,
+                    "tolerance": 0.01,
+                    "explanation": "Como $50.0 \\\\le 150.0$, el retiro se aprueba y se devuelve la cantidad solicitada de $50.0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_21",
+            "title": "Recursos Compartidos y Estado de Impresora",
+            "context": "Analice el recurso estático en una oficina:\n```java\npublic class Impresora {\n    private static int totalHojas = 500;\n    private int hojasImpresas = 0;\n    public void imprimir(int pags) {\n        if (totalHojas >= pags) {\n            totalHojas -= pags;\n            this.hojasImpresas += pags;\n        }\n    }\n    public int getImpresas() { return hojasImpresas; }\n    public static int getDisponibles() { return totalHojas; }\n}\n// Ejecución:\nImpresora imp1 = new Impresora();\nImpresora imp2 = new Impresora();\nimp1.imprimir(100);\nimp2.imprimir(150);\nimp1.imprimir(300);\n```",
+            "parts": [
+                {
+                    "id": "lab_21_a",
+                    "label": "a",
+                    "question": "¿Cuántas páginas imprimió con éxito la impresora 'imp1' en su primera ejecución?",
+                    "correctValue": 100,
+                    "tolerance": 0,
+                    "explanation": "`imp1.imprimir(100)` reduce las hojas estáticas de 500 a 400 y almacena $100$ en `hojasImpresas` de `imp1`."
+                },
+                {
+                    "id": "lab_21_b",
+                    "label": "b",
+                    "question": "¿Cuántas hojas totales quedan de reserva compartida tras la impresión de 'imp2'?",
+                    "correctValue": 250,
+                    "tolerance": 0,
+                    "explanation": "Tras la acción de `imp1` quedan 400. `imp2` imprime 150, reduciendo el total compartido a $400 - 150 = 250$."
+                },
+                {
+                    "id": "lab_21_c",
+                    "label": "c",
+                    "question": "¿Cuántas páginas se imprimen en la segunda llamada de 'imp1' (solicita 300)?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Solicita 300, pero solo quedan 250 disponibles. La condición `totalHojas >= pags` es falsa, no imprime nada ($0$ páginas)."
+                },
+                {
+                    "id": "lab_21_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor final de páginas impresas por la impresora 'imp2'?",
+                    "correctValue": 150,
+                    "tolerance": 0,
+                    "explanation": "`imp2` ejecutó exitosamente su única orden de impresión, acumulando un total de $150$ páginas impresas."
+                }
+            ]
+        },
+        {
+            "id": "lab_22",
+            "title": "Manejo de Excepciones de Referencia y Nulos",
+            "context": "Observe el código que simula excepciones de nulos:\n```java\npublic class Almacen {\n    public String nombre;\n    public Almacen(String n) { this.nombre = n; }\n}\n// Código:\nAlmacen a1 = new Almacen(\"Almacen Central\");\nAlmacen a2 = null;\nAlmacen a3 = a1;\nint errorType = 0;\ntry {\n    String n = a2.nombre;\n} catch (NullPointerException e) {\n    errorType = 1;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab_22_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable de estado de error 'errorType'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Intentar acceder al atributo `nombre` sobre la referencia nula `a2` lanza un `NullPointerException`, lo que asigna $1$ a `errorType`."
+                },
+                {
+                    "id": "lab_22_b",
+                    "label": "b",
+                    "question": "¿Cuántos objetos de tipo 'Almacen' existen alojados en el Heap en total?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Solo se invoca `new Almacen(...)` una vez. Por tanto, solo hay $1$ objeto en memoria."
+                },
+                {
+                    "id": "lab_22_c",
+                    "label": "c",
+                    "question": "¿Cuántas variables de la pila apuntan de forma válida al objeto creado?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tanto `a1` como `a3` (debido a `a3 = a1`) contienen la dirección de memoria del mismo objeto, sumando $2$ referencias."
+                },
+                {
+                    "id": "lab_22_d",
+                    "label": "d",
+                    "question": "Si añadimos la línea 'a3 = null' al final, ¿cuántas referencias apuntarán al objeto Almacen?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Al desvincular `a3`, solo la variable inicial `a1` sigue conteniendo la dirección del objeto en Heap, quedando $1$ referencia activa."
+                }
+            ]
+        },
+        {
+            "id": "lab_23",
+            "title": "Efectos Colaterales de Incremento e Incremento Post/Pre",
+            "context": "Analice los operadores de incremento dentro de un objeto:\n```java\npublic class Contador {\n    public int valor;\n    public Contador(int v) { this.valor = v; }\n    public int increment() { return ++valor; }\n    public int decrement() { return valor--; }\n}\n// Ejecución:\nContador c = new Contador(10);\nint a = c.increment();\nint b = c.decrement();\n```",
+            "parts": [
+                {
+                    "id": "lab_23_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor devuelto en la variable 'a'?",
+                    "correctValue": 11,
+                    "tolerance": 0,
+                    "explanation": "`increment` usa preincremento (`++valor`). Incrementa `valor` a 11 y luego retorna el nuevo valor, es decir, $11$."
+                },
+                {
+                    "id": "lab_23_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor asignado a la variable 'b'?",
+                    "correctValue": 11,
+                    "tolerance": 0,
+                    "explanation": "`decrement` usa postdecremento (`valor--`). Retorna el valor actual (11) y luego decrementa el atributo de instancia a 10. Retorna $11$."
+                },
+                {
+                    "id": "lab_23_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor final del atributo 'c.valor'?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "Comenzó en 10, subió a 11 con `increment()`, y bajó a $10$ tras completarse el postdecremento en `decrement()`."
+                },
+                {
+                    "id": "lab_23_d",
+                    "label": "d",
+                    "question": "¿Cuántas veces en total cambió de valor la variable 'valor' del objeto instanciado?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Cambió una vez al incrementarse ($10 \\\\to 11$) y una segunda vez al decrementarse ($11 \\\\to 10$), totalizando $2$ modificaciones."
+                }
+            ]
+        },
+        {
+            "id": "lab_24",
+            "title": "Simulación de Operaciones de Matriz Bidimensional",
+            "context": "Analice los bucles anidados en una instancia de procesamiento:\n```java\npublic class MatrizSimulada {\n    public int tamaño;\n    public int celdasModificadas = 0;\n    public MatrizSimulada(int t) { this.tamaño = t; }\n    public void procesar() {\n        for (int i = 0; i < tamaño; i++) {\n            for (int j = 0; j < tamaño; j++) {\n                if (i == j) {\n                    celdasModificadas++;\n                }\n            }\n        }\n    }\n}\n// Código:\nMatrizSimulada m = new MatrizSimulada(4);\nm.procesar();\n```",
+            "parts": [
+                {
+                    "id": "lab_24_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable 'celdasModificadas'?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "La condición `i == j` se cumple solo para la diagonal principal. Al ser tamaño 4, se cumple para (0,0), (1,1), (2,2) y (3,3), sumando $4$."
+                },
+                {
+                    "id": "lab_24_b",
+                    "label": "b",
+                    "question": "¿Cuántas veces en total se ejecuta el cuerpo del bucle más interno?",
+                    "correctValue": 16,
+                    "tolerance": 0,
+                    "explanation": "Es un bucle anidado de $4 \\\\times 4$ ejecuciones. El bloque interno se evalúa exactamente $16$ veces."
+                },
+                {
+                    "id": "lab_24_c",
+                    "label": "c",
+                    "question": "¿Cuántas veces se evalúa como verdadera la condición del condicional 'if'?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Coincide con el número de elementos en la diagonal de la matriz, por tanto es $4$."
+                },
+                {
+                    "id": "lab_24_d",
+                    "label": "d",
+                    "question": "Si invocamos de nuevo el método 'm.procesar()', ¿cuál será el valor del atributo 'celdasModificadas'?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "Como no se resetea a cero, la segunda llamada vuelve a sumar 4 sobre el acumulador anterior: $4 + 4 = 8$."
+                }
+            ]
+        },
+        {
+            "id": "lab_25",
+            "title": "Límites de Velocidad e Integridad de Vehículos",
+            "context": "Observe la interacción entre límites estáticos y velocidades individuales:\n```java\npublic class Vehiculo {\n    public static int velocidadMaxima = 120;\n    public int velocidadActual;\n    public Vehiculo(int v) {\n        this.velocidadActual = v;\n    }\n    public void acelerar(int inc) {\n        velocidadActual += inc;\n        if (velocidadActual > velocidadMaxima) {\n            velocidadActual = velocidadMaxima;\n        }\n    }\n}\n// Ejecución:\nVehiculo v1 = new Vehiculo(80);\nVehiculo v2 = new Vehiculo(100);\nVehiculo.velocidadMaxima = 110;\nv1.acelerar(40);\nv2.acelerar(5);\n```",
+            "parts": [
+                {
+                    "id": "lab_25_a",
+                    "label": "a",
+                    "question": "¿Cuál es la velocidad final del primer vehículo 'v1'?",
+                    "correctValue": 110,
+                    "tolerance": 0,
+                    "explanation": "`v1` intenta acelerar a $80 + 40 = 120$. Sin embargo, la velocidad máxima se redujo a $110$. El condicional limita el valor final a $110$."
+                },
+                {
+                    "id": "lab_25_b",
+                    "label": "b",
+                    "question": "¿Cuál es la velocidad final del segundo vehículo 'v2'?",
+                    "correctValue": 105,
+                    "tolerance": 0,
+                    "explanation": "`v2` acelera de $100$ a $100 + 5 = 105$. Al no superar el límite de $110$, se mantiene en $105$."
+                },
+                {
+                    "id": "lab_25_c",
+                    "label": "c",
+                    "question": "¿Cuántas variables de tipo estático posee en total la clase 'Vehiculo'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La clase solo contiene un atributo estático (`static`): la variable `velocidadMaxima` ($1$)."
+                },
+                {
+                    "id": "lab_25_d",
+                    "label": "d",
+                    "question": "¿Cuántos atributos de instancia del tipo int se asignan físicamente en la memoria Heap para el conjunto de vehículos instanciados?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Cada uno de los dos objetos en Heap almacena su propio atributo de instancia `velocidadActual`. Hay $2$ variables en total."
+                }
+            ]
+        },
+        {
+            "id": "lab_26",
+            "title": "Parámetros de Referencia e Intercambio de Objetos",
+            "context": "Observe este intento de intercambio de objetos usando un método auxiliar:\n```java\npublic class Swap {\n    public static void swapRef(Persona x, Persona y) {\n        Persona temp = x;\n        x = y;\n        y = temp;\n    }\n}\n// Ejecución:\nPersona p1 = new Persona(\"Ana\");\nPersona p2 = new Persona(\"Luis\");\nSwap.swapRef(p1, p2);\n```",
+            "parts": [
+                {
+                    "id": "lab_26_a",
+                    "label": "a",
+                    "question": "¿A qué objeto apunta 'p1' tras ejecutarse swapRef? (1 para 'Ana', 2 para 'Luis').",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Como Java pasa las referencias por valor (copia de la dirección), el intercambio de referencias locales dentro del método no afecta a `p1` fuera de él. Sigue apuntando a 'Ana' ($1$)."
+                },
+                {
+                    "id": "lab_26_b",
+                    "label": "b",
+                    "question": "¿A qué objeto apunta la referencia 'p2' al finalizar el código? (1 para 'Ana', 2 para 'Luis').",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Por la misma regla de paso por valor, la referencia externa `p2` permanece inalterada y apunta a 'Luis' ($2$)."
+                },
+                {
+                    "id": "lab_26_c",
+                    "label": "c",
+                    "question": "¿Cuántas variables de tipo referencia locales (incluidos parámetros de entrada) se crean en la pila durante la invocación del método 'swapRef'?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Se crean tres variables en la pila local de `swapRef`: los dos parámetros formales `x` e `y`, y la variable temporal `temp`. Total = $3$."
+                },
+                {
+                    "id": "lab_26_d",
+                    "label": "d",
+                    "question": "¿Se cambia la dirección de memoria de los objetos en el Heap durante esta ejecución? (0 para No, 1 para Sí).",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Los objetos en el Heap no sufren ningún cambio de dirección ni de estado; solo se manipulan copias de punteros temporales. Luego la respuesta es $0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_27",
+            "title": "Evaluación Lógica Cruzada y Divisibilidad de Objetos",
+            "context": "Analice las llamadas repetitivas de verificación de estados de objetos:\n```java\npublic class Divisor {\n    private int base;\n    public Divisor(int b) { this.base = b; }\n    public boolean esDivisible(int num) {\n        return num % base == 0;\n    }\n}\n// Ejecución:\nDivisor d3 = new Divisor(3);\nDivisor d5 = new Divisor(5);\nint divisibles = 0;\nfor (int i = 1; i <= 15; i++) {\n    if (d3.esDivisible(i) && d5.esDivisible(i)) {\n        divisibles++;\n    }\n}\n```",
+            "parts": [
+                {
+                    "id": "lab_27_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final de la variable local 'divisibles'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El único número en el rango $[1, 15]$ divisible simultáneamente por 3 y 5 es 15. Por tanto, `divisibles` termina con valor $1$."
+                },
+                {
+                    "id": "lab_27_b",
+                    "label": "b",
+                    "question": "¿Cuántas veces en total se invoca el método 'esDivisible' a lo largo del bucle?",
+                    "correctValue": 20,
+                    "tolerance": 0,
+                    "explanation": "`d3.esDivisible(i)` se evalúa en cada iteración (15 veces). Debido al cortocircuito de `&&`, `d5.esDivisible(i)` solo se ejecuta cuando la primera es verdadera (para $3, 6, 9, 12, 15$, es decir, 5 veces). Total llamadas = $15 + 5 = 20$."
+                },
+                {
+                    "id": "lab_27_c",
+                    "label": "c",
+                    "question": "¿Cuál es la suma acumulada de todos los números del 1 al 15 que son divisibles entre d3?",
+                    "correctValue": 45,
+                    "tolerance": 0,
+                    "explanation": "Los múltiplos de 3 en ese rango son 3, 6, 9, 12 y 15. Su suma es $3 + 6 + 9 + 12 + 15 = 45$."
+                },
+                {
+                    "id": "lab_27_d",
+                    "label": "d",
+                    "question": "¿Cuántos atributos de instancia en total se almacenan en el montón (Heap) para el conjunto de divisores?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Hay dos objetos (`d3` y `d5`), cada uno con su atributo de instancia `base`. El total asignado es $2$."
+                }
+            ]
+        },
+        {
+            "id": "lab_28",
+            "title": "Cajas y Sobrecarga de Constructores",
+            "context": "Analice el volumen calculado mediante constructores sobrecargados:\n```java\npublic class Caja {\n    public int ancho, alto, prof;\n    public Caja() { this(1); }\n    public Caja(int l) { this(l, l, l); }\n    public Caja(int a, int h, int p) {\n        this.ancho = a;\n        this.alto = h;\n        this.prof = p;\n    }\n}\n// Bloque de código:\nCaja c1 = new Caja();\nCaja c2 = new Caja(5);\nCaja c3 = new Caja(2, 3, 4);\n```",
+            "parts": [
+                {
+                    "id": "lab_28_a",
+                    "label": "a",
+                    "question": "¿Cuál es el volumen (ancho * alto * prof) del objeto 'c1'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "`c1` delega en `Caja(1)` y luego en `Caja(1, 1, 1)`. Su volumen es $1 \\\\times 1 \\\\times 1 = 1$."
+                },
+                {
+                    "id": "lab_28_b",
+                    "label": "b",
+                    "question": "¿Cuál es el volumen resultante para la caja cúbica 'c2'?",
+                    "correctValue": 125,
+                    "tolerance": 0,
+                    "explanation": "`c2` se crea con `Caja(5)`, delegando en `Caja(5, 5, 5)`. Su volumen es $5 \\\\times 5 \\\\times 5 = 125$."
+                },
+                {
+                    "id": "lab_28_c",
+                    "label": "c",
+                    "question": "¿Cuál es el volumen resultante de la caja 'c3'?",
+                    "correctValue": 24,
+                    "tolerance": 0,
+                    "explanation": "`c3` se crea directamente especificando dimensiones $2, 3$ y $4$. Volumen = $2 \\\\times 3 \\\\times 4 = 24$."
+                },
+                {
+                    "id": "lab_28_d",
+                    "label": "d",
+                    "question": "¿Cuántas veces en total se ejecuta el cuerpo final del constructor principal (de tres parámetros)?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Cada una de las tres instanciaciones termina ejecutando el constructor principal de tres parámetros debido a la delegación. En total se invoca $3$ veces."
+                }
+            ]
+        },
+        {
+            "id": "lab_29",
+            "title": "Ocultación de Campos y Ámbitos de Variables",
+            "context": "Estudie el conflicto de nombres entre local e instancia:\n```java\npublic class ScopeTest {\n    public int x = 10;\n    public void cambiar() {\n        int x = 20;\n        this.x += x;\n    }\n}\n// Ejecución:\nScopeTest st = new ScopeTest();\nst.cambiar();\n```",
+            "parts": [
+                {
+                    "id": "lab_29_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final del atributo de instancia 'x' en 'st'?",
+                    "correctValue": 30,
+                    "tolerance": 0,
+                    "explanation": "El método `cambiar` tiene una variable local $x = 20$. Suma este valor a la variable de instancia `this.x` (10), resultando en $10 + 20 = 30$."
+                },
+                {
+                    "id": "lab_29_b",
+                    "label": "b",
+                    "question": "¿Cuál es la suma acumulada de la variable local 'x' y el atributo 'this.x' al término de la ejecución del método?",
+                    "correctValue": 50,
+                    "tolerance": 0,
+                    "explanation": "La variable local $x$ es $20$, y el atributo de instancia `this.x` queda en $30$. Su suma es $20 + 30 = 50$."
+                },
+                {
+                    "id": "lab_29_c",
+                    "label": "c",
+                    "question": "¿Cuántas variables individuales llamadas 'x' coexisten simultáneamente en la memoria durante la llamada a 'cambiar()'?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Coexiste la variable local `x` (en la pila) y el atributo `x` de la instancia (en el montón). Total = $2$."
+                },
+                {
+                    "id": "lab_29_d",
+                    "label": "d",
+                    "question": "Si creamos una nueva instancia 'st2' sin ejecutar 'cambiar()', ¿cuál es el valor de su atributo 'x'?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "El objeto inicia con el valor por defecto de inicialización declarado directamente en el campo: $10$."
+                }
+            ]
+        },
+        {
+            "id": "lab_30",
+            "title": "Referencias Circulares y Recolector de Basura",
+            "context": "Observe el direccionamiento de dos nodos con referencia doble:\n```java\npublic class Elemento {\n    public Elemento sig;\n    public Elemento ant;\n}\n// Bloque ejecutable:\nElemento e1 = new Elemento();\nElemento e2 = new Elemento();\ne1.sig = e2;\ne2.ant = e1;\ne1 = null;\ne2 = null;\n```",
+            "parts": [
+                {
+                    "id": "lab_30_a",
+                    "label": "a",
+                    "question": "¿Cuántas variables locales en el Stack apuntan a los objetos al finalizar la ejecución?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Ambas variables locales `e1` y `e2` se asignan a null al final. Por lo tanto, no queda ninguna referencia activa en el Stack ($0$)."
+                },
+                {
+                    "id": "lab_30_b",
+                    "label": "b",
+                    "question": "¿Cuántos de los objetos creados en el Heap quedan libres para el Garbage Collector al final de este bloque?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Aunque los objetos siguen enlazados entre sí, son inalcanzables desde cualquier variable de ejecución (GC roots). Ambos ($2$) son candidatos al GC."
+                },
+                {
+                    "id": "lab_30_c",
+                    "label": "c",
+                    "question": "¿Cuántas referencias del Heap siguen apuntando al primer objeto instanciado?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El segundo objeto en el Heap aún almacena la dirección del primer objeto en su atributo de instancia `ant`. Hay $1$ referencia."
+                },
+                {
+                    "id": "lab_30_d",
+                    "label": "d",
+                    "question": "¿Cuál es el número total de atributos de referencia no nulos que residen internamente en los objetos del Heap al final?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El campo `sig` del primer objeto apunta al segundo, y el campo `ant` del segundo apunta al primero. Ambos son no nulos, sumando $2$ referencias."
+                }
+            ]
+        }
+    ],
+    "FORMULAS": [
+        {
+            "name": "Ecuación de complejidad de la Búsqueda Binaria",
+            "tex": "$$ T(n) = T\\left(\\frac{n}{2}\\right) + \\mathcal{O}(1) $$"
+        },
+        {
+            "name": "Fórmula general del Teorema Maestro",
+            "tex": "$$ T(n) = aT\\left(\\frac{n}{b}\\right) + f(n) $$"
+        },
+        {
+            "name": "Recurrencia de ordenamiento rápido (Quicksort) en el peor caso",
+            "tex": "$$ T(n) = T(n-1) + \\mathcal{O}(n) $$"
+        },
+        {
+            "name": "Recurrencia de ordenamiento por mezcla (Mergesort)",
+            "tex": "$$ T(n) = 2T\\left(\\frac{n}{2}\\right) + \\mathcal{O}(n) $$"
+        },
+        {
+            "name": "Definición matemática formal de complejidad asintótica superior (Cota Big-O)",
+            "tex": "$$ f(n) \\le c \\cdot g(n) \\quad \\forall n \\ge n_0 $$"
+        },
+        {
+            "name": "Suma de los N primeros números naturales (Progresión Aritmética)",
+            "tex": "$$ \\sum_{i=1}^{n} i = \\frac{n(n+1)}{2} $$"
+        },
+        {
+            "name": "Suma de una serie geométrica infinita convergente",
+            "tex": "$$ \\sum_{i=0}^{\\infty} r^i = \\frac{1}{1-r} \\quad \\text{para } |r| < 1 $$"
+        },
+        {
+            "name": "Recurrencia lineal de los números de Fibonacci",
+            "tex": "$$ F(n) = F(n-1) + F(n-2) $$"
+        }
+    ]
+}

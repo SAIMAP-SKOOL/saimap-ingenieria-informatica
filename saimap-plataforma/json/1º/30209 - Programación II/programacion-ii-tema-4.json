@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué determina el tipo estático (o de declaración) de una variable de referencia en Java?",
+      "options": [
+        "Los métodos que está permitido invocar sobre esa variable en tiempo de compilación.",
+        "La implementación exacta del método que se ejecutará en tiempo de ejecución.",
+        "La dirección de memoria en el Stack donde se crea el objeto."
+      ],
+      "correct": 0,
+      "hint": "El tipo estático es el tipo con el que se declara la variable.",
+      "explanation": "El tipo estático es evaluado por el compilador para verificar si los métodos invocados están definidos en dicho tipo, restringiendo lo que se puede llamar en el código."
+    },
+    {
+      "q": "¿Qué determina el tipo dinámico (o de ejecución) de una variable de referencia en Java?",
+      "options": [
+        "Qué métodos están permitidos compilar sobre esa referencia.",
+        "El tipo real del objeto en el Heap y qué implementación de método se ejecutará en tiempo de ejecución.",
+        "El tamaño reservado en la pila de llamadas para las variables locales."
+      ],
+      "correct": 1,
+      "hint": "El tipo dinámico corresponde al objeto real creado con new.",
+      "explanation": "El tipo dinámico es el tipo del objeto real en el Heap. La JVM lo usa para la resolución de métodos sobreescritos mediante enlace dinámico."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos compilar la línea Persona p = new Estudiante(); si Estudiante extiende a Persona?",
+      "options": [
+        "Produce un error de compilación por incompatibilidad de tipos.",
+        "Compila correctamente debido al mecanismo de Upcasting automático.",
+        "Produce un error en tiempo de ejecución de tipo ClassCastException."
+      ],
+      "correct": 1,
+      "hint": "Un estudiante es una persona.",
+      "explanation": "El upcasting (conversión a superclase) es automático e implícito en Java, ya que se garantiza que un objeto de la subclase cumple con el contrato de la superclase."
+    },
+    {
+      "q": "Si la clase Persona tiene un método mostrar() y la subclase Estudiante lo sobreescribe, ¿qué versión se ejecuta al llamar a p.mostrar() sobre una referencia Persona p = new Estudiante();?",
+      "options": [
+        "La versión de Persona, porque el tipo estático es Persona.",
+        "La versión de Estudiante, porque el tipo dinámico es Estudiante y el enlace es dinámico.",
+        "Ninguna, ya que produce un error de compilación."
+      ],
+      "correct": 1,
+      "hint": "El enlace dinámico busca la versión del método correspondiente al tipo real del objeto.",
+      "explanation": "En Java, los métodos no estáticos se resuelven mediante enlace dinámico, seleccionando la implementación del tipo dinámico del objeto en tiempo de ejecución."
+    },
+    {
+      "q": "Si Estudiante tiene un método getMatricula() que no está en Persona, ¿qué ocurre al ejecutar p.getMatricula() sobre Persona p = new Estudiante();?",
+      "options": [
+        "Compila y ejecuta correctamente devolviendo la matrícula del estudiante.",
+        "Produce un error de compilación, porque el tipo estático Persona no contiene ese método.",
+        "Lanza una excepción de tipo NoSuchMethodError en tiempo de ejecución."
+      ],
+      "correct": 1,
+      "hint": "El compilador solo mira el tipo de declaración.",
+      "explanation": "El compilador verifica que el método invocado exista en el tipo estático (la clase de declaración). Si no está en Persona, el código no compila."
+    },
+    {
+      "q": "¿Cuál de los siguientes es un requisito para que ocurra enlace dinámico en Java?",
+      "options": [
+        "Que el método sea estático (static).",
+        "Que haya herencia y el método esté sobreescrito (@Override) en la subclase.",
+        "Que el método sea privado (private)."
+      ],
+      "correct": 1,
+      "hint": "La sobreescritura es fundamental para que existan diferentes implementaciones.",
+      "explanation": "El enlace dinámico requiere una jerarquía de clases donde una subclase sobreescriba un método de la superclase, permitiendo elegir la implementación en tiempo de ejecución."
+    },
+    {
+      "q": "¿Qué es el Downcasting y cómo se realiza en Java?",
+      "options": [
+        "Es la conversión automática de una subclase a una superclase.",
+        "Es la conversión explícita de una referencia de superclase a subclase mediante un operador de moldeado.",
+        "Es un mecanismo exclusivo del Garbage Collector para mover objetos en el Heap."
+      ],
+      "correct": 1,
+      "hint": "Implica ir hacia abajo en la jerarquía.",
+      "explanation": "El downcasting consiste en cambiar el tipo estático a una subclase y debe hacerse explícitamente: (Subclase) referencia."
+    },
+    {
+      "q": "¿Qué excepción se lanza si se realiza un downcasting inválido en tiempo de ejecución (por ejemplo, convertir una Persona que es un Profesor a Estudiante)?",
+      "options": [
+        "NullPointerException",
+        "ClassCastException",
+        "IllegalArgumentException"
+      ],
+      "correct": 1,
+      "hint": "Se relaciona con el casting de clases.",
+      "explanation": "Si el objeto dinámico no es del tipo al que se intenta realizar el moldeado (ni una de sus subclases), la JVM lanza ClassCastException."
+    },
+    {
+      "q": "¿Cuál es la función principal del operador instanceof en Java?",
+      "options": [
+        "Crear una nueva instancia de una clase de forma de reflexión.",
+        "Verificar en tiempo de ejecución si el tipo dinámico de un objeto es compatible con un tipo determinado.",
+        "Destruir una instancia para liberar memoria en el Heap."
+      ],
+      "correct": 1,
+      "hint": "Permite hacer downcasting seguro.",
+      "explanation": "instanceof comprueba si el tipo real del objeto (o supertipo) coincide con la clase especificada, evitando excepciones de casting."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones sobre las clases abstractas en Java es correcta?",
+      "options": [
+        "Se pueden instanciar directamente usando new.",
+        "No pueden contener atributos de instancia ni constructores.",
+        "Pueden contener tanto métodos abstractos (sin cuerpo) como métodos concretos implementados."
+      ],
+      "correct": 2,
+      "hint": "Representan conceptos incompletos pero con algún estado o comportamiento.",
+      "explanation": "Las clases abstractas no se pueden instanciar, pero pueden tener métodos con código y atributos de instancia, además de métodos abstractos."
+    },
+    {
+      "q": "Si una clase concreta herede de una clase abstracta, ¿qué obligación tiene?",
+      "options": [
+        "Sobreescribir todos los métodos (tanto abstractos como concretos).",
+        "Implementar obligatoriamente todos los métodos abstractos declarados en la clase abstracta.",
+        "Convertirse a su vez en una clase abstracta de manera automática."
+      ],
+      "correct": 1,
+      "hint": "Debe completar lo incompleto.",
+      "explanation": "Cualquier clase concreta (no abstracta) que extienda de una clase abstracta debe proporcionar la implementación para todos los métodos abstractos de su superclase."
+    },
+    {
+      "q": "¿Qué restricción principal se aplica a los atributos definidos en una interfaz en Java?",
+      "options": [
+        "Deben ser privados y modificables.",
+        "Son implícitamente constantes públicas, es decir, public static final.",
+        "Solo pueden declararse en interfaces con métodos default."
+      ],
+      "correct": 1,
+      "hint": "Las interfaces no tienen estado de instancia.",
+      "explanation": "Los atributos en interfaces son siempre constantes estáticas y públicas, no permiten variables de instancia."
+    },
+    {
+      "q": "¿Cuál de las siguientes características diferencia principalmente a una interfaz de una clase abstracta en Java?",
+      "options": [
+        "Una clase puede implementar múltiples interfaces, pero solo puede extender de una clase abstracta.",
+        "Las interfaces pueden instanciarse directamente y las clases abstractas no.",
+        "Las clases abstractas solo admiten herencia múltiple."
+      ],
+      "correct": 0,
+      "hint": "Java no admite herencia múltiple de clases, pero sí de interfaces.",
+      "explanation": "Java limita la herencia de clases a herencia simple, pero permite la herencia múltiple de interfaces mediante la palabra clave implements."
+    },
+    {
+      "q": "En Java 8 y versiones posteriores, ¿qué tipo de métodos con cuerpo se pueden definir en una interfaz?",
+      "options": [
+        "Métodos de instancia ordinarios sin ningún modificador especial.",
+        "Métodos con el modificador default y métodos estáticos (static).",
+        "Ninguno, las interfaces siguen sin poder albergar código en absoluto."
+      ],
+      "correct": 1,
+      "hint": "Permiten añadir comportamiento sin romper la compatibilidad.",
+      "explanation": "Los métodos default y static permiten proporcionar implementaciones base dentro de las interfaces en versiones de Java 8 en adelante."
+    },
+    {
+      "q": "¿Qué área de memoria de la JVM se encarga de almacenar los objetos creados dinámicamente con new?",
+      "options": [
+        "Stack (Pila de llamadas)",
+        "Heap (Montículo)",
+        "Metaspace (Área de métodos)"
+      ],
+      "correct": 1,
+      "hint": "La memoria dinámica donde se ubica el tipo dinámico.",
+      "explanation": "El Heap es el área de memoria global donde la JVM aloja todos los objetos y sus variables de instancia."
+    },
+    {
+      "q": "¿Qué se almacena en el Stack de la JVM durante la ejecución de un programa?",
+      "options": [
+        "Las variables locales, parámetros de métodos y referencias a objetos en el Heap.",
+        "El bytecode de las clases y los metadatos de carga.",
+        "El registro de las clases que implementan múltiples interfaces."
+      ],
+      "correct": 0,
+      "hint": "Memoria organizada en marcos de llamada (frames).",
+      "explanation": "Cada hilo tiene su propio Stack, donde se guardan marcos de llamada con variables locales, parámetros y referencias a los objetos del Heap."
+    },
+    {
+      "q": "¿Cuál es el propósito del Garbage Collector (GC) en Java?",
+      "options": [
+        "Liberar memoria del Stack cuando un método finaliza su ejecución.",
+        "Identificar y destruir objetos en el Heap que ya no son accesibles por ninguna referencia activa.",
+        "Prevenir errores de compilación por falta de memoria RAM."
+      ],
+      "correct": 1,
+      "hint": "Automatiza la gestión de memoria dinámica.",
+      "explanation": "El GC libera la memoria ocupada por objetos en el Heap que han quedado huérfanos de referencias, evitando fugas de memoria."
+    },
+    {
+      "q": "¿Cuándo se considera que un objeto es elegible para el Garbage Collector en Java?",
+      "options": [
+        "Inmediatamente después de que finaliza su constructor.",
+        "Cuando ya no existe ninguna referencia activa en el Stack o Heap que apunte a él.",
+        "Solo cuando el programador llama explícitamente a System.gc()."
+      ],
+      "correct": 1,
+      "hint": "Inaccesibilidad desde la raíz.",
+      "explanation": "Un objeto es candidato a la recolección cuando se vuelve inalcanzable desde las referencias 'raíz' del programa (variables activas en el Stack o campos estáticos)."
+    },
+    {
+      "q": "¿Qué define el principio de encapsulación en la Programación Orientada a Objetos?",
+      "options": [
+        "Ocultar los detalles internos de implementación de una clase y exponer una interfaz pública controlada.",
+        "Permitir que una clase herede comportamiento de múltiples superclases.",
+        "Forzar a que todos los métodos de una clase sean estáticos."
+      ],
+      "correct": 0,
+      "hint": "Uso de private y public.",
+      "explanation": "La encapsulación protege el estado de un objeto restringiendo el acceso directo a sus campos (con private) y permitiendo modificarlo solo mediante métodos (getters/setters)."
+    },
+    {
+      "q": "En la herencia de Java, ¿qué modificador de acceso permite que un miembro sea visible dentro del mismo paquete y por las subclases en otros paquetes?",
+      "options": [
+        "private",
+        "protected",
+        "public"
+      ],
+      "correct": 1,
+      "hint": "Es intermedio entre privado y público.",
+      "explanation": "El modificador protected otorga visibilidad a las subclases (incluso en paquetes diferentes) y a las clases del mismo paquete."
+    },
+    {
+      "q": "¿Qué es el Polimorfismo de Sobrecarga (Overloading)?",
+      "options": [
+        "Declarar múltiples métodos con el mismo nombre pero diferente firma (parámetros) en la misma clase.",
+        "Redefinir un método heredado con exactamente la misma firma en una subclase.",
+        "Implementar una interfaz en una clase abstracta sin definir sus métodos."
+      ],
+      "correct": 0,
+      "hint": "Se resuelve en tiempo de compilación.",
+      "explanation": "La sobrecarga permite definir métodos homónimos que difieren en tipo o cantidad de argumentos, decidiéndose en tiempo de compilación (enlace estático)."
+    },
+    {
+      "q": "¿Qué diferencia clave existe entre Sobrecarga (Overloading) y Sobreescritura (Overriding)?",
+      "options": [
+        "La sobrecarga se resuelve en tiempo de ejecución y la sobreescritura en tiempo de compilación.",
+        "La sobreescritura requiere la misma firma del método en una subclase, mientras que la sobrecarga requiere diferentes firmas.",
+        "Las interfaces solo permiten sobrecarga, pero no sobreescritura."
+      ],
+      "correct": 1,
+      "hint": "Recuerda que @Override mantiene la firma idéntica.",
+      "explanation": "La sobreescritura redefine un método de la superclase con idéntica firma en la subclase (enlace dinámico); la sobrecarga tiene distinta firma."
+    },
+    {
+      "q": "¿Qué representa una Excepción (Exception) en Java?",
+      "options": [
+        "Un error sintáctico detectado por el compilador.",
+        "Un evento inusual o de error que interrumpe el flujo normal de ejecución de un programa en tiempo de ejecución.",
+        "Una clase que solo puede instanciarse dentro de métodos abstractos."
+      ],
+      "correct": 1,
+      "hint": "Alteración del flujo que puede capturarse con try-catch.",
+      "explanation": "Las excepciones son objetos que representan condiciones anormales de ejecución que pueden gestionarse para evitar que el programa aborte de forma abrupta."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre Checked Exceptions y Unchecked Exceptions?",
+      "options": [
+        "Las Checked Exceptions heredan de RuntimeException y no es obligatorio capturarlas.",
+        "Las Checked Exceptions obligan al programador a gestionarlas (o declararlas con throws) en tiempo de compilación.",
+        "Las Unchecked Exceptions son detectadas exclusivamente por el Garbage Collector."
+      ],
+      "correct": 1,
+      "hint": "El compilador verifica las Checked.",
+      "explanation": "Las excepciones que no heredan de RuntimeException (Checked) son comprobadas por el compilador, requiriendo su captura (try-catch) o propagación (throws)."
+    },
+    {
+      "q": "¿Qué representan los Tipos Genéricos (Generics) en Java?",
+      "options": [
+        "Clases que pueden almacenar cualquier tipo de datos sin seguridad de tipos.",
+        "Parametrizar clases, interfaces y métodos con tipos de datos que se especifican al instanciarse, mejorando la seguridad en compilación.",
+        "Un tipo especial de herencia múltiple reservado para la interfaz Map."
+      ],
+      "correct": 1,
+      "hint": "Permiten evitar castings innecesarios al usar colecciones.",
+      "explanation": "Los genéricos permiten definir estructuras reutilizables parametrizadas por tipo, verificando la validez de los tipos de datos durante la compilación."
+    },
+    {
+      "q": "En el contexto de especificación y diseño de software, ¿qué es un contrato de un método?",
+      "options": [
+        "El acuerdo de licencia de usuario final que acompaña al programa.",
+        "La definición de precondiciones, postcondiciones e invariantes que rigen el comportamiento del método.",
+        "Un tipo de interfaz que define atributos privados para el Heap."
+      ],
+      "correct": 1,
+      "hint": "Lo que el método exige y lo que promete cumplir.",
+      "explanation": "Un contrato formaliza qué debe cumplirse antes de llamar al método (precondición) y qué garantiza el método al finalizar (postcondición)."
+    },
+    {
+      "q": "¿Qué es una precondición en el diseño por contrato?",
+      "options": [
+        "Una condición que el cliente del método debe garantizar que es verdadera antes de invocarlo.",
+        "El estado final de las variables tras completar la ejecución del método.",
+        "Una comprobación que realiza el recolector de basura antes de liberar memoria."
+      ],
+      "correct": 0,
+      "hint": "Requisito de entrada.",
+      "explanation": "La precondición especifica los requisitos que los parámetros y el estado deben cumplir antes de la ejecución; si se viola, el comportamiento del método es indeterminado."
+    },
+    {
+      "q": "¿Qué es una postcondición en el diseño por contrato?",
+      "options": [
+        "La verificación inicial que realiza el método sobre sus parámetros.",
+        "Una garantía que el método promete cumplir cuando finaliza su ejecución, asumiendo que se cumplían las precondiciones.",
+        "El tiempo de ejecución en notación Big-O del método."
+      ],
+      "correct": 1,
+      "hint": "Promesa de salida.",
+      "explanation": "La postcondición define el estado resultante y los valores devueltos por el método si sus precondiciones iniciales eran válidas."
+    },
+    {
+      "q": "¿Qué establece la propiedad de corrección (correctness) en un bucle o algoritmo iterativo?",
+      "options": [
+        "Que el bucle nunca se ejecute más de 100 veces en la JVM.",
+        "Que el bucle produzca el resultado esperado para cualquier entrada válida y que termine en un número finito de pasos.",
+        "Que el algoritmo esté implementado exclusivamente mediante interfaces."
+      ],
+      "correct": 1,
+      "hint": "Corrección parcial y terminación.",
+      "explanation": "La corrección de un algoritmo iterativo requiere demostrar que si termina es correcto (corrección parcial) y que siempre termina (terminación)."
+    },
+    {
+      "q": "¿Qué es un invariante de bucle?",
+      "options": [
+        "Una propiedad lógica que es verdadera antes, durante (al inicio de cada iteración) y después de la ejecución del bucle.",
+        "Una variable de control del bucle cuyo valor no cambia nunca en memoria.",
+        "La complejidad temporal asintótica del bucle expresada en notación Big-O."
+      ],
+      "correct": 0,
+      "hint": "Condición lógica constante en el proceso iterativo.",
+      "explanation": "El invariante ayuda a demostrar la corrección del bucle al mantener una propiedad lógica inalterada a través de las iteraciones."
+    },
+    {
+      "q": "Qué mide la complejidad temporal Big-O (por ejemplo, $$\\mathcal{O}(N)$$) de un algoritmo?",
+      "options": [
+        "El tiempo exacto en milisegundos que tarda el programa en ejecutarse.",
+        "El crecimiento asintótico del número de operaciones básicas del algoritmo en el peor de los casos según el tamaño de la entrada $N$.",
+        "La cantidad máxima de memoria Stack que consume el programa."
+      ],
+      "correct": 1,
+      "hint": "Comportamiento a gran escala.",
+      "explanation": "La notación O describe una cota superior del crecimiento del tiempo de ejecución en función del tamaño de entrada N, omitiendo constantes y términos menores."
+    },
+    {
+      "q": "Si un algoritmo duplica su tiempo de ejecución cada vez que la entrada $N$ aumenta en una unidad, ¿cuál es su complejidad asintótica?",
+      "options": [
+        "$$\\mathcal{O}(N)$$",
+        "$$\\mathcal{O}(N^2)$$",
+        "$$\\mathcal{O}(2^N)$$"
+      ],
+      "correct": 2,
+      "hint": "Crecimiento exponencial.",
+      "explanation": "Un incremento constante en la entrada que duplica el tiempo corresponde a un crecimiento exponencial, denotado por O(2^N)."
+    },
+    {
+      "q": "¿Qué representa una relación de recurrencia en el análisis de algoritmos?",
+      "options": [
+        "Un método recursivo que se llama a sí mismo en un bucle infinito sin condición de parada.",
+        "Una ecuación matemática que define el tiempo de ejecución de un algoritmo recursivo en términos de su ejecución sobre entradas más pequeñas.",
+        "El enlace dinámico aplicado a interfaces anidadas."
+      ],
+      "correct": 1,
+      "hint": "Usado frecuentemente en Divide y Vencerás.",
+      "explanation": "Las relaciones de recurrencia modelan el tiempo de los algoritmos recursivos, por ejemplo, T(N) = 2T(N/2) + O(N) para Merge Sort."
+    },
+    {
+      "q": "¿Qué es un Tipo Abstracto de Datos (TAD)?",
+      "options": [
+        "Una clase en Java que contiene únicamente métodos estáticos y atributos privados.",
+        "Un modelo matemático de un tipo de datos definido por su comportamiento (operaciones y propiedades lógicas) y no por su implementación en memoria.",
+        "Una interfaz que hereda directamente del Garbage Collector de la JVM."
+      ],
+      "correct": 1,
+      "hint": "Abstracción conceptual de datos.",
+      "explanation": "Un TAD define conceptualmente un conjunto de valores y operaciones válidas (como Pila, Cola o Lista) abstrayéndose del lenguaje y almacenamiento concretos."
+    },
+    {
+      "q": "¿Cuál es el comportamiento de acceso que define a una Pila (Stack) como Tipo Abstracto de Datos?",
+      "options": [
+        "FIFO (First-In, First-Out): el primer elemento en entrar es el primero en salir.",
+        "LIFO (Last-In, First-Out): el último elemento en entrar es el primero en salir.",
+        "Acceso aleatorio directo a cualquier elemento mediante su índice de memoria Heap."
+      ],
+      "correct": 1,
+      "hint": "Piensa en una pila de platos.",
+      "explanation": "En una pila, las inserciones (push) y extracciones (pop) se realizan por el mismo extremo (la cima), siguiendo la disciplina LIFO."
+    },
+    {
+      "q": "¿Cuál es el comportamiento de acceso que define a una Cola (Queue) como Tipo Abstracto de Datos?",
+      "options": [
+        "LIFO (Last-In, First-Out)",
+        "FIFO (First-In, First-Out)",
+        "Acceso prioritario basado exclusivamente en castings."
+      ],
+      "correct": 1,
+      "hint": "Como una fila de personas esperando su turno.",
+      "explanation": "En una cola, los elementos se insertan por el final y se extraen por el frente, garantizando el orden de llegada FIFO."
+    },
+    {
+      "q": "¿Qué diferencia principal existe entre una Lista (List) y un Conjunto (Set) como estructuras de datos?",
+      "options": [
+        "Las Listas permiten duplicados y mantienen un orden posicional, mientras que los Conjuntos no admiten elementos duplicados.",
+        "Las Listas son siempre de tipo estático y los Conjuntos de tipo dinámico.",
+        "Los Conjuntos son de tamaño fijo en memoria Heap y las Listas son dinámicas en Stack."
+      ],
+      "correct": 0,
+      "hint": "Duplicados y orden.",
+      "explanation": "Una Lista mantiene una secuencia ordenada indexada de elementos que pueden repetirse; un Set representa una colección matemática sin duplicados."
+    },
+    {
+      "q": "¿Qué se conoce como 'acoplamiento' en el diseño de software orientado a objetos?",
+      "options": [
+        "El número de subclases que extienden directamente de una interfaz.",
+        "El grado de dependencia interrelacionada que existe entre diferentes módulos o clases del sistema.",
+        "La velocidad de respuesta del Garbage Collector para compactar la memoria."
+      ],
+      "correct": 1,
+      "hint": "A menor dependencia, mayor flexibilidad.",
+      "explanation": "El acoplamiento mide la dependencia de una clase respecto a otras. Diseñar con interfaces y polimorfismo ayuda a conseguir un bajo acoplamiento."
+    },
+    {
+      "q": "Qué ventaja ofrece programar orientado a interfaces ('program to an interface, not an implementation')?",
+      "options": [
+        "Permite al compilador de Java optimizar el código eliminando el Heap.",
+        "Desacopla el código del cliente de las implementaciones concretas, facilitando la extensión del sistema sin modificar el código existente.",
+        "Elimina por completo la necesidad de gestionar excepciones en tiempo de ejecución."
+      ],
+      "correct": 1,
+      "hint": "Pensar en el ejemplo de los métodos de pago.",
+      "explanation": "Al referenciar variables por su tipo interfaz, el código cliente puede interactuar con cualquier implementación futura sin necesidad de ser reescrito."
+    },
+    {
+      "q": "¿Cuál es la regla principal para poder aplicar un Casting explícito entre dos interfaces en Java sin que el compilador proteste?",
+      "options": [
+        "Que ambas interfaces hereden de la misma clase abstracta.",
+        "El compilador de Java permite el casting entre interfaces diferentes en la compilación porque una clase concreta podría implementar ambas.",
+        "Que las interfaces tengan al menos un método default común en su definición."
+      ],
+      "correct": 1,
+      "hint": "Java comprueba la validez del casting de interfaces en ejecución.",
+      "explanation": "El compilador de Java no puede garantizar que un objeto no implemente ambas interfaces a la vez, por lo que permite el casting de interfaces en compilación, aplazando la validación del tipo dinámico a ejecución."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Dado el siguiente código:\n```java\ninterface Dibujable { void dibujar(); }\nclass Circulo implements Dibujable { public void dibujar() { System.out.print(\"O\"); } }\n// ...\nDibujable d = new Circulo();\nd.____();\n```\n¿Qué palabra completa la llamada al método para imprimir 'O'?",
+      "options": [
+        "dibujar",
+        "paint",
+        "run"
+      ],
+      "correct": 0,
+      "hint": "Es el nombre del método definido en el contrato de la interfaz.",
+      "explanation": "La interfaz Dibujable define un único método dibujar(). Circulo lo implementa, permitiendo su llamada polimórfica."
+    },
+    {
+      "q": "Completa el hueco para indicar la palabra clave que comprueba de manera segura si la variable 'ref' es de tipo dinámico compatible con la clase 'Estudiante':\n```java\nif (ref ____ Estudiante) {\n    Estudiante e = (Estudiante) ref;\n}\n```",
+      "options": [
+        "instanceof",
+        "implements",
+        "extends"
+      ],
+      "correct": 0,
+      "hint": "Operador de comprobación de tipo dinámico.",
+      "explanation": "instanceof es el operador que verifica en tiempo de ejecución si el tipo dinámico del objeto es compatible con la clase indicada."
+    },
+    {
+      "q": "Completa el hueco con la palabra clave correcta para declarar la interfaz:\n```java\npublic ____ MetodoPago {\n    void procesarPago(double importe);\n}\n```",
+      "options": [
+        "class",
+        "interface",
+        "abstract"
+      ],
+      "correct": 1,
+      "hint": "Es un contrato puro en Java.",
+      "explanation": "Para definir un tipo de dato que sea una interfaz se utiliza la palabra clave 'interface' en Java."
+    },
+    {
+      "q": "Dado el código:\n```java\npublic abstract class Figura {\n    public ____ void rotar();\n}\n```\n¿Qué palabra clave indica que rotar() no tiene cuerpo y debe ser implementado obligatoriamente por subclases concretas?",
+      "options": [
+        "abstract",
+        "virtual",
+        "interface"
+      ],
+      "correct": 0,
+      "hint": "Es la misma palabra clave con la que se declara la clase incompleta.",
+      "explanation": "Los métodos declarados sin cuerpo en una clase abstracta deben llevar obligatoriamente la palabra clave 'abstract'."
+    },
+    {
+      "q": "Completa la cabecera de clase para que 'Factura' implemente las interfaces 'Imprimible' y 'Almacenable':\n```java\npublic class Factura ____ Imprimible, Almacenable {\n    // ...\n}\n```",
+      "options": [
+        "extends",
+        "implements",
+        "requires"
+      ],
+      "correct": 1,
+      "hint": "Adopta contratos múltiples en una clase.",
+      "explanation": "La palabra clave 'implements' indica las interfaces cuyos métodos se compromete a implementar la clase concreta."
+    },
+    {
+      "q": "Considere el downcasting explícito. ¿Qué opción completa correctamente el fragmento de código?\n```java\nPersona p = new Estudiante();\nEstudiante e = ____ p;\n```",
+      "options": [
+        "(Estudiante)",
+        "[Estudiante]",
+        "<Estudiante>"
+      ],
+      "correct": 0,
+      "hint": "Se indica el tipo de destino entre paréntesis antes de la referencia.",
+      "explanation": "El casting descendente requiere un moldeado explícito utilizando la sintaxis de tipo entre paréntesis: (Clase) referencia."
+    },
+    {
+      "q": "Completa la declaración de la constante en la interfaz para que sea explícitamente correcta:\n```java\ninterface Constantes {\n    ____ double PI = 3.14159;\n}\n```",
+      "options": [
+        "public static final",
+        "private volatile",
+        "protected transient"
+      ],
+      "correct": 0,
+      "hint": "Los atributos de interfaces son constantes públicas globales por defecto.",
+      "explanation": "En las interfaces de Java, todos los campos definidos son implícitamente constantes públicas y de clase, equivalentes a 'public static final'."
+    },
+    {
+      "q": "Rellena el hueco para indicar qué método de una interfaz de Java 8+ contiene una implementación por defecto:\n```java\npublic interface Log {\n    ____ void logInfo(String msg) {\n        System.out.println(\"INFO: \" + msg);\n    }\n}\n```",
+      "options": [
+        "default",
+        "static",
+        "protected"
+      ],
+      "correct": 0,
+      "hint": "Habilita la escritura de un cuerpo de método no estático en una interfaz.",
+      "explanation": "El modificador default permite a las interfaces definir implementaciones de métodos de instancia para no romper la compatibilidad de clases hijas."
+    },
+    {
+      "q": "¿Qué palabra clave se usa en la firma del método para propagar una excepción IOException?\n```java\npublic void leerArchivo(String ruta) ____ IOException {\n    // ...\n}\n```",
+      "options": [
+        "throws",
+        "throw",
+        "catch"
+      ],
+      "correct": 0,
+      "hint": "Se sitúa después de los parámetros del método.",
+      "explanation": "La cláusula 'throws' declara en la firma del método que este puede propagar excepciones comprobadas hacia el invocador."
+    },
+    {
+      "q": "Si queremos declarar una clase genérica llamada 'Contenedor' con un parámetro de tipo, ¿cuál es la sintaxis correcta?\n```java\npublic class Contenedor____ {\n    private T contenido;\n}\n```",
+      "options": [
+        "<T>",
+        "[T]",
+        "(T)"
+      ],
+      "correct": 0,
+      "hint": "Corchetes angulares en Java.",
+      "explanation": "Los tipos genéricos se parametrizan situando los marcadores correspondientes entre corchetes angulares <T> tras el nombre de la clase."
+    },
+    {
+      "q": "Suponga el siguiente fragmento de código genérico:\n```java\nList<____> lista = new ArrayList<>();\nlista.add(10.5);\n```\n¿Qué tipo completa el hueco para almacenar de forma correcta y segura números reales?",
+      "options": [
+        "Double",
+        "double",
+        "Number"
+      ],
+      "correct": 0,
+      "hint": "Las colecciones genéricas solo admiten tipos de referencia (Clases envolventes).",
+      "explanation": "Los tipos primitivos como 'double' no son válidos como argumentos genéricos. Se debe utilizar su clase envolvente wrapper 'Double'."
+    },
+    {
+      "q": "Rellena el hueco en el caso base de esta función recursiva de factorial:\n```java\npublic int factorial(int n) {\n    if (n <= 1) return ____;\n    return n * factorial(n - 1);\n}\n```",
+      "options": [
+        "1",
+        "0",
+        "n"
+      ],
+      "correct": 0,
+      "hint": "El factorial de 1 o de 0 es 1.",
+      "explanation": "El caso base detiene la recursión retornando 1 cuando la entrada n es menor o igual que 1."
+    },
+    {
+      "q": "Analiza el siguiente fragmento de código:\n```java\nObject obj = \"Hola\";\nString str = (String) obj;\nSystem.out.print(str.____());\n```\n¿Qué llamada a método completa el hueco para imprimir la longitud de la cadena?",
+      "options": [
+        "length",
+        "size",
+        "count"
+      ],
+      "correct": 0,
+      "hint": "Método de la clase String de Java.",
+      "explanation": "El método length() en la clase String devuelve el número total de caracteres de la cadena representada."
+    },
+    {
+      "q": "Rellena el hueco para capturar una excepción de división entre cero:\n```java\ntry {\n    int res = 10 / 0;\n} ____ (ArithmeticException e) {\n    System.out.print(\"Error\");\n}\n```",
+      "options": [
+        "catch",
+        "except",
+        "rescue"
+      ],
+      "correct": 0,
+      "hint": "Bloque asociado al try.",
+      "explanation": "El bloque catch intercepta excepciones del tipo especificado que ocurran dentro del bloque try."
+    },
+    {
+      "q": "Rellena el hueco para eliminar la accesibilidad de una variable y hacer su objeto elegible por el Garbage Collector:\n```java\nPersona p = new Persona(\"Luis\");\np = ____;\n```",
+      "options": [
+        "null",
+        "void",
+        "empty"
+      ],
+      "correct": 0,
+      "hint": "Es la referencia vacía de Java.",
+      "explanation": "Asignar null a una referencia rompe la vinculación con el objeto en el Heap, dejándolo inaccesible y permitiendo que sea recolectado por el GC."
+    },
+    {
+      "q": "Para insertar un elemento al inicio de una lista enlazada simple de nodos:\n```java\npublic void insertarInicio(int dato) {\n    Nodo nuevo = new Nodo(dato);\n    nuevo.siguiente = ____;\n    cabecera = nuevo;\n}\n```",
+      "options": [
+        "cabecera",
+        "nuevo",
+        "null"
+      ],
+      "correct": 0,
+      "hint": "El nuevo nodo debe enlazar con el que antes era el primer elemento.",
+      "explanation": "Para mantener los elementos anteriores de la lista, el enlace siguiente de la nueva inserción debe apuntar al antiguo inicio, representado por cabecera."
+    },
+    {
+      "q": "En un TAD Pila (Stack) de nodos, la operación 'push' reubica la cima:\n```java\npublic void push(int x) {\n    Nodo nuevo = new Nodo(x);\n    nuevo.siguiente = ____;\n    cima = nuevo;\n}\n```",
+      "options": [
+        "cima",
+        "null",
+        "fondo"
+      ],
+      "correct": 0,
+      "hint": "El nuevo nodo pasa a ser el primero, apuntando a la anterior cima.",
+      "explanation": "En una estructura LIFO, el elemento insertado se vincula al nodo que ocupaba la cima y después se redefine la cima hacia el nuevo nodo."
+    },
+    {
+      "q": "Completa la inicialización utilizando LinkedList para una cola de tipo String:\n```java\nQueue<String> cola = new ____<>();\n```",
+      "options": [
+        "LinkedList",
+        "ArrayList",
+        "PriorityQueue"
+      ],
+      "correct": 0,
+      "hint": "Esta clase de la API de Java implementa directamente la interfaz Queue.",
+      "explanation": "LinkedList implementa los métodos de la interfaz Queue (como offer, poll, peek) y es idónea para comportamientos FIFO."
+    },
+    {
+      "q": "Completa la cabecera de la clase Empleado para que herede de la clase Persona:\n```java\npublic class Empleado ____ Persona {\n    // ...\n}\n```",
+      "options": [
+        "extends",
+        "implements",
+        "inherits"
+      ],
+      "correct": 0,
+      "hint": "Palabra clave para herencia simple en Java.",
+      "explanation": "La palabra clave 'extends' se emplea para heredar el comportamiento y atributos de una superclase en Java."
+    },
+    {
+      "q": "Rellena el hueco para llamar al constructor padre que recibe un parámetro:\n```java\npublic class Estudiante extends Persona {\n    public Estudiante(String nombre) {\n        ____(nombre);\n    }\n}\n```",
+      "options": [
+        "super",
+        "parent",
+        "this"
+      ],
+      "correct": 0,
+      "hint": "Debe ser la primera sentencia en el constructor del hijo.",
+      "explanation": "super(parámetros) invoca al constructor de la superclase y debe llamarse inmediatamente al inicio del constructor de la clase hija."
+    },
+    {
+      "q": "Dado el siguiente fragmento de código:\n```java\ninterface I { void m(); }\nclass A implements I { public void m() { System.out.print(\"A\"); } }\nclass B implements I { public void m() { System.out.print(\"B\"); } }\n```\n¿Cuáles de las siguientes líneas de código compilan e invocan correctamente el método 'm'?\n1) `I obj = new A(); obj.m();`\n2) `I obj = new B(); obj.m();`\n3) `A obj = (A) new A(); obj.m();`",
+      "options": [
+        "Solo las opciones 1 y 2 compilan.",
+        "Solo la opción 3 compila debido al casting.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Verifique las relaciones de tipo estático y dinámico y la validez del casting.",
+      "explanation": "Tanto A como B implementan la interfaz I. Las referencias de tipo interfaz pueden almacenar dichos objetos. Además, el casting explícito a A de un objeto A es válido en compilación y ejecución."
+    },
+    {
+      "q": "Suponga que ejecutamos el siguiente código de herencia:\n```java\nPersona p = new Estudiante();\n```\nSi 'Estudiante' extiende a 'Persona', ¿cuáles de las siguientes expresiones devuelven el valor lógico 'true'?\n1) `p instanceof Persona`\n2) `p instanceof Estudiante`\n3) `p instanceof Object`",
+      "options": [
+        "Solo las opciones 1 y 2.",
+        "Solo las opciones 1 y 3.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El operador instanceof comprueba compatibilidad a lo largo de toda la jerarquía de herencia del objeto real.",
+      "explanation": "El tipo dinámico del objeto es Estudiante. Estudiante es subclase de Persona y hereda de Object, por lo que las tres evaluaciones instanceof resultan verdaderas."
+    },
+    {
+      "q": "Analiza los siguientes intentos de instanciación o asignación en Java:\n```java\nabstract class Vehiculo { abstract void acelerar(); }\nclass Coche extends Vehiculo { void acelerar() {} }\n```\n¿Cuáles de estas líneas producen un error de compilación?\n1) `Vehiculo v = new Vehiculo();`\n2) `Coche c = new Vehiculo();`",
+      "options": [
+        "Únicamente la línea 1 produce error.",
+        "Únicamente la línea 2 produce error.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerde que no se pueden crear objetos de clases abstractas y que las asignaciones seguras van de subclase a superclase.",
+      "explanation": "Ambas líneas fallan al compilar. La línea 1 porque Vehiculo es una clase abstracta y no es instanciable. La línea 2 porque no se puede asignar una superclase a una referencia de subclase sin un downcasting explícito."
+    },
+    {
+      "q": "Considere la jerarquía de interfaces múltiples:\n```java\ninterface Volador { void volar(); }\ninterface Nadador { void nadar(); }\nclass Pato implements Volador, Nadador {\n    public void volar() {}\n    public void nadar() {}\n}\n```\n¿Cuáles de los siguientes fragmentos compilan correctamente?\n1) `Volador v = new Pato(); v.volar();`\n2) `Nadador n = new Pato(); n.nadar();`\n3) `Pato p = new Pato(); p.volar(); p.nadar();`",
+      "options": [
+        "Solo los fragmentos 1 y 3 compilan.",
+        "Solo los fragmentos 2 y 3 compilan.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La clase Pato implementa ambas interfaces, por lo que hereda ambos contratos de diseño.",
+      "explanation": "Pato implementa Volador y Nadador. Por tanto, objetos de tipo Pato pueden ser referenciados por variables de tipo Volador, Nadador o Pato y llamar a los métodos definidos en esos tipos."
+    },
+    {
+      "q": "Analice el siguiente bloque try-catch multinivel:\n```java\ntry {\n    String s = null;\n    s.length();\n} catch (NullPointerException e) {\n    System.out.print(\"NPE\");\n} catch (RuntimeException e) {\n    System.out.print(\"RE\");\n} catch (Exception e) {\n    System.out.print(\"E\");\n}\n```\n¿Qué afirmaciones son correctas sobre este código?\n1) Lanza y captura NullPointerException.\n2) Imprime 'NPE' en consola.\n3) Compila porque los catch están ordenados del más específico al más general.",
+      "options": [
+        "Solo las afirmaciones 1 y 2 son correctas.",
+        "Solo la afirmación 3 es correcta.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La excepción lanzada se gestiona en el primer bloque catch compatible compatible.",
+      "explanation": "Invocar length() sobre null genera NullPointerException. Este es capturado por el primer bloque catch. El orden de los catch (hijo a padre) es válido en Java y compila correctamente."
+    },
+    {
+      "q": "Dado el siguiente fragmento de código:\n```java\nNodo n1 = new Nodo(5);\nNodo n2 = new Nodo(10);\nn1.sig = n2;\nn2.sig = n1;\n```\nSi no existen más referencias que apunten a n1 y n2 en el Stack, y estas se ponen a null, ¿qué ocurre?\n1) Los dos objetos Nodo quedan referenciados cíclicamente en el Heap.\n2) Ninguno de los dos nodos es accesible a partir de las referencias raíz.\n3) El Garbage Collector detecta el ciclo aislado y libera ambos objetos.",
+      "options": [
+        "Solo las afirmaciones 1 y 2 son correctas.",
+        "Solo la afirmación 3 es correcta.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El Garbage Collector de Java no tiene problemas con las referencias circulares si están desconectadas del Stack.",
+      "explanation": "Al anular n1 y n2 en la pila, la estructura cíclica de dos nodos en el Heap queda incomunicada. El GC de Java determina la inaccesibilidad y libera ambos."
+    },
+    {
+      "q": "Considere la inicialización de la clase genérica Par:\n```java\nclass Par<K, V> { K c; V v; }\n// ...\nPar<String, Integer> p = new Par<>();\n```\n¿Cuáles de las siguientes afirmaciones son correctas?\n1) K y V representan parámetros de tipo formal.\n2) La instanciación aprovecha el operador diamante (<>).\n3) Se comprueba estáticamente que la clave sea String y el valor Integer.",
+      "options": [
+        "Solo las afirmaciones 1 y 3 son correctas.",
+        "Solo la afirmación 2 es correcta.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es la sintaxis de definición y uso de genéricos introducida en Java.",
+      "explanation": "El código define una clase con dos tipos genéricos y la instancia usando inferencia de tipos (diamante), lo que permite al compilador realizar comprobaciones de tipo estrictas."
+    },
+    {
+      "q": "Respecto a las diferencias entre interfaces y clases abstractas en Java, señale cuáles de las siguientes afirmaciones son verdaderas:\n1) Las interfaces no pueden declarar constructores, las clases abstractas sí.\n2) Las variables de una interfaz son implícitamente constantes (public static final).\n3) Una clase puede implementar múltiples interfaces, pero solo extender una clase abstracta.",
+      "options": [
+        "Solo las afirmaciones 1 y 3 son verdaderas.",
+        "Solo las afirmaciones 2 y 3 son verdaderas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise las restricciones de constructores, variables de instancia y herencia múltiple.",
+      "explanation": "Las tres sentencias describen correctamente diferencias normativas del lenguaje Java entre interfaces y clases abstractas."
+    },
+    {
+      "q": "Analiza el siguiente fragmento de código:\n```java\nclass A { void x() { System.out.print(\"A\"); } }\nclass B extends A { void x() { System.out.print(\"B\"); } }\nclass C extends B { void x() { System.out.print(\"C\"); } }\n// ...\nA obj = new C();\nobj.x();\n```\n¿Cuáles de los siguientes principios de la POO se demuestran en este ejemplo?\n1) Herencia de clases multinivel.\n2) Sobreescritura de métodos (Overriding).\n3) Polimorfismo de subtipos y Enlace Dinámico.",
+      "options": [
+        "Solo los principios 1 y 2.",
+        "Solo el principio 3.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "C hereda de B, que hereda de A, modificando el método x. Al final, se decide en tiempo de ejecución la versión de C.",
+      "explanation": "El código presenta herencia (A-B-C), sobreescritura del método x() en las subclases, y polimorfismo con enlace dinámico (la referencia A ejecuta la versión de C en ejecución)."
+    },
+    {
+      "q": "Considere la declaración de una variable de tipo de interfaz Colección:\n```java\nList<String> lista = new ArrayList<>();\n```\n¿Cuáles de las siguientes son ventajas de esta declaración en lugar de ArrayList<String> lista = new ArrayList<>()?\n1) Se reduce el acoplamiento del código con la implementación concreta ArrayList.\n2) Permite intercambiar ArrayList por LinkedList en el futuro sin modificar el código que use la variable.\n3) Limita los métodos utilizables a los definidos en el contrato de List.",
+      "options": [
+        "Solo la ventaja 1.",
+        "Solo las ventajas 1 y 2.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piense en el principio de 'programar para una interfaz, no para una implementación'.",
+      "explanation": "Declarar la variable utilizando el tipo interfaz List desacopla el código, restringe el uso a dicho contrato y posibilita sustituir la implementación con facilidad."
+    },
+    {
+      "q": "Considere el siguiente fragmento de jerarquía de clases e interfaces:\n```java\ninterface I { void a(); }\nabstract class C implements I {}\nclass D extends C {}\n```\n¿Qué error de compilación se produce en este código?",
+      "options": [
+        "Error en la interfaz I porque sus métodos no pueden ser abstractos por defecto.",
+        "Error en la clase abstracta C por no implementar el método a() de la interfaz I.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Las clases abstractas no necesitan implementar los métodos de sus interfaces, pero las clases hijas concretas sí.",
+      "explanation": "El error de compilación ocurre en la clase concreta D, ya que esta no implementa el método abstracto a() heredado de la interfaz I a través de C. Las opciones A y B señalan errores inexistentes."
+    },
+    {
+      "q": "Suponga que se ejecuta el siguiente código con métodos de clase (estáticos):\n```java\nclass Base { static void f() { System.out.print(\"Base\"); } }\nclass Derivada extends Base { static void f() { System.out.print(\"Derivada\"); } }\n// ...\nBase b = new Derivada();\nb.f();\n```\n¿Qué se imprime en la consola tras ejecutar b.f()?",
+      "options": [
+        "Imprime 'Derivada' por aplicación del enlace dinámico.",
+        "Lanza una excepción de tipo ClassCastException.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los métodos estáticos no participan en el enlace dinámico en Java; se resuelven en tiempo de compilación.",
+      "explanation": "Dado que f() es estático, se resuelve mediante enlace estático según el tipo de declaración (estático) de la variable b, que es Base. Imprime 'Base'. Por tanto, ninguna de las dos opciones propuestas es correcta."
+    },
+    {
+      "q": "Analiza el siguiente código con manejo de excepciones y arreglos:\n```java\ntry {\n    int[] arr = new int[5];\n    arr[10] = 3;\n} catch (NullPointerException e) {\n    System.out.print(\"Nulo\");\n} catch (ClassCastException e) {\n    System.out.print(\"Casting\");\n}\n```\n¿Cuál es la salida impresa al ejecutar este fragmento de código?",
+      "options": [
+        "Imprime la cadena 'Nulo' en la consola.",
+        "Imprime la cadena 'Casting' en la consola.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Un acceso fuera de rango en un arreglo lanza ArrayIndexOutOfBoundsException. Revise si es capturada.",
+      "explanation": "El acceso a arr[10] en un arreglo de tamaño 5 lanza ArrayIndexOutOfBoundsException. Los bloques catch solo capturan NullPointerException y ClassCastException. La excepción no se captura, el programa se interrumpe y no se imprime nada. Por tanto, ninguna opción es correcta."
+    },
+    {
+      "q": "Considere el siguiente fragmento sobre ocultación de campos de instancia:\n```java\nclass A { int x = 10; }\nclass B extends A { int x = 20; }\n// ...\nA obj = new B();\nSystem.out.print(obj.x);\n```\n¿Qué valor se imprime por pantalla?",
+      "options": [
+        "Imprime 20 porque los campos de instancia se enlazan dinámicamente según el objeto real.",
+        "Da un error de compilación porque no está permitido duplicar nombres de variables en subclases.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los atributos en Java se resuelven estáticamente de acuerdo al tipo estático de la referencia.",
+      "explanation": "En Java, los atributos no se sobreescriben, se ocultan. La resolución de obj.x se basa en el tipo estático de la referencia obj (clase A), imprimiendo 10. Las opciones propuestas afirman que imprime 20 o da error, por lo que la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Dado el siguiente fragmento que implementa dos interfaces con firmas coincidentes:\n```java\ninterface A { void x(); }\ninterface B { void x(); }\nclass C implements A, B {\n    public void x() { System.out.print(\"C\"); }\n}\n```\n¿Qué ocurre al compilar el código anterior?",
+      "options": [
+        "Falla la compilación en C por conflicto de ambigüedad del método x().",
+        "Requiere que C implemente dos versiones diferentes de x(), especificando el tipo de interfaz de retorno.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En Java, una única implementación satisface firmas equivalentes de múltiples interfaces.",
+      "explanation": "El código compila perfectamente y sin ambigüedades. El método 'public void x()' en C satisface simultáneamente los contratos de A y B. Ninguna de las opciones de error propuestas es correcta."
+    },
+    {
+      "q": "Considere la asignación genérica en Java:\n```java\nList<Object> lista = new ArrayList<String>();\n```\n¿Qué ocurre al intentar compilar esta línea de código?",
+      "options": [
+        "Compila perfectamente debido a que String es una subclase de Object.",
+        "Compila pero genera un warning de conversión insegura en tiempo de ejecución.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los tipos genéricos en Java son invariantes, no covariantes.",
+      "explanation": "Aunque String hereda de Object, List<String> no es subtipo de List<Object>. Esto produce un error de compilación inmediato de incompatibilidad de tipos. Ninguna de las afirmaciones de compilación exitosa es correcta."
+    },
+    {
+      "q": "Analiza la siguiente implementación de búsqueda binaria recursiva:\n```java\nint busquedaBinaria(int[] arr, int izq, int der, int clave) {\n    if (izq > der) return -1;\n    int medio = (izq + der) / 2;\n    if (arr[medio] == clave) return medio;\n    if (arr[medio] > clave) {\n        return busquedaBinaria(arr, izq, medio, clave);\n    } else {\n        return busquedaBinaria(arr, medio, der, clave);\n    }\n}\n```\n¿Qué ocurre al ejecutar este algoritmo si buscamos un elemento que no existe?",
+      "options": [
+        "Retorna correctamente -1 indicando que el elemento no se encuentra.",
+        "Produce un error de compilación por declaración de firma duplicada.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Revise los parámetros en las llamadas recursivas. ¿Se reduce el tamaño del intervalo de búsqueda?",
+      "explanation": "Al llamar recursivamente con 'medio' en vez de 'medio - 1' o 'medio + 1', el intervalo no disminuye de tamaño en ciertos casos (ej. izq = medio), cayendo en una recursión infinita y lanzando un StackOverflowError en lugar de retornar -1. Por tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "Considere una cola circular limitada de tamaño 8. Actualmente tiene los punteros 'frente = 3' y 'fin = 2', y se encuentra llena. Si desencolamos (dequeue) 2 elementos, ¿cuáles serán los nuevos valores de los punteros 'frente' y 'fin' utilizando la fórmula usual (frente + 1) % capacidad?",
+      "options": [
+        "frente = 1, fin = 2",
+        "frente = 3, fin = 4",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La extracción incrementa el puntero frente de forma modular. La inserción no se realiza, por lo que fin no cambia.",
+      "explanation": "Al desencolar el primer elemento, frente pasa a ser (3+1)%8 = 4. Al desencolar el segundo, frente pasa a ser (4+1)%8 = 5. El puntero fin sigue valiendo 2. La respuesta correcta debería ser frente = 5, fin = 2, por lo que seleccionamos 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Dada la implementación para eliminar el último nodo en una lista enlazada simple:\n```java\npublic void eliminarUltimo() {\n    if (cabecera == null || cabecera.siguiente == null) {\n        cabecera = null;\n    } else {\n        Nodo aux = cabecera;\n        while (aux.siguiente != null) {\n            aux = aux.siguiente;\n        }\n        aux = null;\n    }\n}\n```\n¿Qué efecto produce la ejecución de este método sobre una lista con 3 nodos?",
+      "options": [
+        "Elimina correctamente el último nodo modificando las referencias correspondientes.",
+        "Lanza una excepción de tipo NullPointerException en el bucle.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Verifique si cambiar la variable temporal local 'aux' a null tiene efecto sobre los enlaces internos de los nodos.",
+      "explanation": "El método encuentra el último nodo mediante el bucle while y luego asigna 'aux = null'. Esto solo modifica la variable local 'aux' y no altera el enlace 'siguiente' del penúltimo nodo, dejando la lista sin cambios. No elimina el nodo. Ninguna de las opciones propuestas es correcta."
+    },
+    {
+      "q": "Considere el siguiente algoritmo de ordenación por selección:\n```java\nvoid ordenar(int[] arr) {\n    for (int i = 0; i < arr.length; i++) {\n        for (int j = i + 1; j < arr.length; j++) {\n            if (arr[i] > arr[j]) {\n                int temp = arr[i];\n                arr[i] = arr[j];\n                arr[j] = temp;\n            } \n        }\n    }\n}\n```\n¿Cuál es la complejidad temporal asintótica de este algoritmo en el mejor de los casos (por ejemplo, si el arreglo ya está ordenado)?",
+      "options": [
+        "O(N) ya que no requiere realizar intercambios.",
+        "O(N log N) por ser el límite inferior óptimo.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El algoritmo de selección realiza el mismo número de comparaciones en sus bucles anidados sin importar el orden inicial.",
+      "explanation": "El número de iteraciones y comparaciones en los bucles es fijo e independiente del contenido del arreglo, dando siempre una complejidad de O(N^2). Las opciones propuestas indican O(N) u O(N log N), por lo que la correcta es 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Jerarquía de Vehículos e Interfaces de Autonomía",
+      "context": "Considere el siguiente diseño:\n```java\ninterface Autonomo { int calcularAutonomia(int litros, int consumoMedio); }\nclass Vehiculo { int ruedas; Vehiculo(int r) { this.ruedas = r; } }\nclass Coche extends Vehiculo implements Autonomo {\n    Coche() { super(4); }\n    public int calcularAutonomia(int litros, int consumoMedio) { return (litros * 100) / consumoMedio; }\n}\n```\nSe ejecuta el siguiente fragmento en la clase principal:\n```java\nVehiculo v1 = new Coche();\nCoche c1 = new Coche();\nint aut = c1.calcularAutonomia(50, 5);\n```",
+      "parts": [
+        {
+          "id": "lab-4-1-a",
+          "label": "a",
+          "question": "¿Cuántas ruedas tiene el objeto referenciado por v1?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El constructor de `Coche` invoca a `super(4)`, asignando al campo `ruedas` heredado de `Vehiculo` el valor 4."
+        },
+        {
+          "id": "lab-4-1-b",
+          "label": "b",
+          "question": "¿Cuál es el valor resultante de la autonomía calculada en la variable aut?",
+          "correctValue": 1000,
+          "tolerance": 0,
+          "explanation": "Se calcula mediante $$(50 \\\\times 100) / 5 = 1000$$."
+        },
+        {
+          "id": "lab-4-1-c",
+          "label": "c",
+          "question": "¿Cuántas referencias distintas en el Stack apuntan a objetos en el Heap creados en este código?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Las variables locales en la pila son `v1` y `c1`, cada una de las cuales almacena una referencia a un objeto diferente en el Heap."
+        },
+        {
+          "id": "lab-4-1-d",
+          "label": "d",
+          "question": "¿Cuál es el número total de clases e interfaces declaradas en la jerarquía del código (excluyendo Object)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se han declarado la interfaz `Autonomo`, la superclase `Vehiculo` y la subclase `Coche`. Total = 3."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Enlace Dinámico y Jerarquía de Clases",
+      "context": "Considere la siguiente jerarquía de métodos sobreescritos:\n```java\nclass A { int f(int x) { return x + 1; } }\nclass B extends A { int f(int x) { return x * 2; } }\nclass C extends B { int f(int x) { return x * 3; } }\n```\nSe ejecuta el siguiente código:\n```java\nA obj1 = new C();\nA obj2 = new B();\nint r1 = obj1.f(5);\nint r2 = obj2.f(5);\n```",
+      "parts": [
+        {
+          "id": "lab-4-2-a",
+          "label": "a",
+          "question": "¿Qué valor entero devuelve la llamada obj1.f(5) almacenada en r1?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Por enlace dinámico, al ser el tipo dinámico de `obj1` la clase `C`, se ejecuta `C.f(5) = 5 * 3 = 15`."
+        },
+        {
+          "id": "lab-4-2-b",
+          "label": "b",
+          "question": "¿Qué valor entero devuelve la llamada obj2.f(5) almacenada en r2?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El tipo dinámico de `obj2` es `B`, por lo que se ejecuta `B.f(5) = 5 * 2 = 10`."
+        },
+        {
+          "id": "lab-4-2-c",
+          "label": "c",
+          "question": "¿Cuántas llamadas a constructores (incluyendo las implícitas super() en la jerarquía, excluyendo Object) se ejecutan al crear los objetos obj1 y obj2?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para `new C()` se ejecutan constructores de C, B, A (3 llamadas). Para `new B()` se ejecutan de B, A (2 llamadas). Total = 5."
+        },
+        {
+          "id": "lab-4-2-d",
+          "label": "d",
+          "question": "Si sumamos r1 + r2, ¿cuál es el valor resultante?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "La suma simple es $$15 + 10 = 25$$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Conteo de Referencias en el Heap y Garbage Collection",
+      "context": "Dada la siguiente estructura de nodos enlazados:\n```java\nclass Nodo { int val; Nodo sig; Nodo(int v) { val = v; } }\n// ...\nNodo n1 = new Nodo(1);\nNodo n2 = new Nodo(2);\nNodo n3 = new Nodo(3);\nn1.sig = n2;\nn2.sig = n3;\nn3.sig = n1;\nn2 = null;\nn3 = null;\n```",
+      "parts": [
+        {
+          "id": "lab-4-3-a",
+          "label": "a",
+          "question": "¿Cuántas variables de referencia en el Stack siguen apuntando a objetos en el Heap al final del fragmento?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo la variable `n1` permanece activa en el Stack apuntando a un objeto. `n2` y `n3` son `null`."
+        },
+        {
+          "id": "lab-4-3-b",
+          "label": "b",
+          "question": "¿Cuántos objetos del tipo Nodo se crearon inicialmente en el Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se ejecutó `new Nodo(...)` tres veces, creando exactamente 3 objetos en el Heap."
+        },
+        {
+          "id": "lab-4-3-c",
+          "label": "c",
+          "question": "¿Cuántos objetos de tipo Nodo son accesibles en total desde la referencia n1 al final de la ejecución?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "A través de `n1`, que forma un ciclo circular (`n1 -> n2 -> n3 -> n1`), los 3 nodos siguen siendo accesibles."
+        },
+        {
+          "id": "lab-4-3-d",
+          "label": "d",
+          "question": "¿Cuántos objetos de tipo Nodo son elegibles para el Garbage Collector al final de este fragmento?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que todos los nodos son accesibles desde `n1` (referencia activa en la pila), ninguno es elegible para recolección. El resultado es 0."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Complejidad Temporal de un Bucle Anidado",
+      "context": "Analice el siguiente método iterativo:\n```java\nvoid procesar(int n) {\n    int cont = 0;\n    for (int i = 0; i < n; i++) {\n        for (int j = i; j < n; j++) {\n            cont++;\n        }\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-4-a",
+          "label": "a",
+          "question": "Para n = 10, ¿cuántas veces se ejecuta el incremento cont++?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "Se ejecuta $$\\sum_{i=0}^{9} (10 - i) = 10 + 9 + \\\\dots + 1 = \\\\frac{10 \\\\times 11}{2} = 55$$ veces."
+        },
+        {
+          "id": "lab-4-4-b",
+          "label": "b",
+          "question": "¿Cuál es el coeficiente del término cuadrático n^2 en la fórmula exacta del número de ejecuciones de cont++?",
+          "correctValue": 0.5,
+          "tolerance": 0.01,
+          "explanation": "La suma es $$\\frac{n(n+1)}{2} = 0.5n^2 + 0.5n$$, por lo que el coeficiente es 0.5."
+        },
+        {
+          "id": "lab-4-4-c",
+          "label": "c",
+          "question": "¿Cuál es la complejidad temporal asintótica del bucle expresada como el exponente de n en la notación O(n^k)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La complejidad temporal de dos bucles anidados con rangos dependientes lineales es cuadrática, es decir, $$\\mathcal{O}(n^2)$$, por lo que el exponente $$k = 2$$."
+        },
+        {
+          "id": "lab-4-4-d",
+          "label": "d",
+          "question": "Para n = 100, ¿cuántas veces se ejecutará el incremento cont++?",
+          "correctValue": 5050,
+          "tolerance": 0,
+          "explanation": "Aplicando la fórmula $$\\frac{100 \\\\times 101}{2} = 5050$$ veces."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Recurrencia y Complejidad Divide y Vencerás",
+      "context": "Un algoritmo divide la entrada de tamaño $N$ en 2 partes iguales, realizando una comparación de tiempo constante. La relación de recurrencia es $T(N) = T(N/2) + 1$, con caso base $T(1) = 1$ para $N$ potencia de 2.",
+      "parts": [
+        {
+          "id": "lab-4-5-a",
+          "label": "a",
+          "question": "¿Cuál es el valor de T(8)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$$T(8) = T(4) + 1 = T(2) + 2 = T(1) + 3 = 1 + 3 = 4$$."
+        },
+        {
+          "id": "lab-4-5-b",
+          "label": "b",
+          "question": "¿Cuál es el valor de T(32)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$$T(32) = \\\\log_2(32) + 1 = 5 + 1 = 6$$."
+        },
+        {
+          "id": "lab-4-5-c",
+          "label": "c",
+          "question": "¿Qué valor tiene el coeficiente multiplicativo a en la ecuación estándar de recurrencia T(N) = a T(N/b) + f(N) para este algoritmo?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la relación dada $$T(N) = 1 T(N/2) + 1$$, el coeficiente $$a = 1$$."
+        },
+        {
+          "id": "lab-4-5-d",
+          "label": "d",
+          "question": "¿Cuál es el valor de T(1024)?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "$$T(1024) = \\\\log_2(1024) + 1 = 10 + 1 = 11$$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Polimorfismo e Interfaces de Cálculo",
+      "context": "Considere la interfaz y clases de cálculo:\n```java\ninterface Calculador { double operar(double a, double b); }\nclass Suma implements Calculador { public double operar(double a, double b) { return a + b; } }\nclass Resta implements Calculador { public double operar(double a, double b) { return a - b; } }\nclass Multiplicacion implements Calculador { public double operar(double a, double b) { return a * b; } }\n```\nSe ejecuta el siguiente fragmento:\n```java\nCalculador[] ops = { new Suma(), new Resta(), new Multiplicacion() };\ndouble val = 10.0;\nfor (Calculador op : ops) {\n    val = op.operar(val, 2.0);\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-6-a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable val tras completarse el bucle?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Iteraciones: Suma: $$10.0 + 2.0 = 12.0$$. Resta: $$12.0 - 2.0 = 10.0$$. Multiplicación: $$10.0 \\\\times 2.0 = 20.0$$."
+        },
+        {
+          "id": "lab-4-6-b",
+          "label": "b",
+          "question": "¿Cuántas instancias de clases que implementan Calculador se han creado en memoria Heap?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se instanciaron tres objetos utilizando `new`: `Suma`, `Resta` y `Multiplicacion`."
+        },
+        {
+          "id": "lab-4-6-c",
+          "label": "c",
+          "question": "¿Cuántas llamadas polimórficas al método operar se producen en total en el bucle?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El bucle recorre un arreglo de longitud 3, invocando el método una vez por cada elemento."
+        },
+        {
+          "id": "lab-4-6-d",
+          "label": "d",
+          "question": "¿Cuál es la suma del número de parámetros definidos en los constructores explícitos declarados de Suma, Resta y Multiplicacion?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ninguna de estas clases declara constructores explícitos. Utilizan el constructor por defecto vacío (0 parámetros)."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Excepciones y Flujo de Control Numérico",
+      "context": "Dada la definición del siguiente método:\n```java\nint metodo(int x) {\n    try {\n        if (x < 0) throw new IllegalArgumentException();\n        if (x == 0) return 10;\n        return x * 2;\n    } catch (IllegalArgumentException e) {\n        return 5;\n    } finally {\n        return 100;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-7-a",
+          "label": "a",
+          "question": "¿Qué valor devuelve la llamada metodo(-5)?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El bloque `finally` se ejecuta siempre y sobreescribe cualquier sentencia `return` previa de los bloques `try` o `catch`."
+        },
+        {
+          "id": "lab-4-7-b",
+          "label": "b",
+          "question": "¿Qué valor devuelve la llamada metodo(0)?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Igual que en el caso anterior, el bloque `finally` retorna 100 ignorando el `return 10` del `try`."
+        },
+        {
+          "id": "lab-4-7-c",
+          "label": "c",
+          "question": "¿Qué valor devuelve la llamada metodo(5)?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "De la misma manera, el flujo pasa por el `finally` devolviendo 100."
+        },
+        {
+          "id": "lab-4-7-d",
+          "label": "d",
+          "question": "¿Cuál sería el valor devuelto por metodo(-5) si eliminamos por completo el bloque finally de la función?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Al lanzar `IllegalArgumentException`, se captura en el catch y este retorna 5 al no haber `finally`."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Recursividad y Profundidad de Llamada de Fibonacci",
+      "context": "Dada la implementación clásica recursiva de Fibonacci:\n```java\nint fib(int n) {\n    if (n <= 1) return n;\n    return fib(n - 1) + fib(n - 2);\n}\n```\nSe realiza la llamada inicial fib(4).",
+      "parts": [
+        {
+          "id": "lab-4-8-a",
+          "label": "a",
+          "question": "¿Cuál es el valor entero devuelto por fib(4)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$$fib(0)=0, fib(1)=1, fib(2)=1, fib(3)=2, fib(4)=3$$."
+        },
+        {
+          "id": "lab-4-8-b",
+          "label": "b",
+          "question": "¿Cuántas llamadas a la función fib se ejecutan en total para calcular fib(4) (incluyendo la inicial)?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El árbol de llamadas es: fib(4) -> [fib(3)->[fib(2)->[fib(1), fib(0)], fib(1)], fib(2)->[fib(1), fib(0)]]. En total hay 9 llamadas."
+        },
+        {
+          "id": "lab-4-8-c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de la pila de llamadas (call stack depth) alcanzada durante el cálculo, contando la llamada inicial como nivel 1?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El camino más profundo es `fib(4) -> fib(3) -> fib(2) -> fib(1)`, lo que equivale a 4 niveles activos simultáneamente."
+        },
+        {
+          "id": "lab-4-8-d",
+          "label": "d",
+          "question": "¿Cuántas llamadas del árbol recursivo corresponden a un caso base (n=0 o n=1)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Las llamadas hoja son `fib(1)` (3 veces) y `fib(0)` (2 veces). Total = 5."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Operaciones con una Pila (Stack) LIFO",
+      "context": "Se dispone de un TAD Pila vacío que almacena enteros. Se ejecutan secuencialmente las siguientes operaciones:\n`push(5)`, `push(8)`, `push(12)`, `pop()`, `push(3)`, `pop()`, `pop()`, `push(7)`.",
+      "parts": [
+        {
+          "id": "lab-4-9-a",
+          "label": "a",
+          "question": "¿Qué tamaño tiene la pila después de realizar todas las operaciones?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Traza: [5], [5,8], [5,8,12], pop->[5,8], [5,8,3], pop->[5,8], pop->[5], [5,7]. Quedan 2 elementos."
+        },
+        {
+          "id": "lab-4-9-b",
+          "label": "b",
+          "question": "¿Cuál es el valor situado en la cima de la pila tras finalizar la secuencia?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El último elemento insertado que no ha sido eliminado es 7, el cual se sitúa en la cima."
+        },
+        {
+          "id": "lab-4-9-c",
+          "label": "c",
+          "question": "¿Cuál es la suma de todos los elementos que permanecen en la pila?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Los elementos son 5 y 7. Su suma es $$5 + 7 = 12$$."
+        },
+        {
+          "id": "lab-4-9-d",
+          "label": "d",
+          "question": "¿Cuántas veces se ha ejecutado la operación pop() en total?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se han invocado explícitamente 3 operaciones `pop()`."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Operaciones con una Cola (Queue) FIFO",
+      "context": "Se dispone de un TAD Cola vacío de enteros. Se aplican secuencialmente las siguientes operaciones:\n`enqueue(10)`, `enqueue(20)`, `dequeue()`, `enqueue(30)`, `enqueue(40)`, `dequeue()`, `enqueue(50)`.",
+      "parts": [
+        {
+          "id": "lab-4-10-a",
+          "label": "a",
+          "question": "¿Qué tamaño tiene la cola tras finalizar todas las operaciones?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Traza: [10], [10,20], dequeue->[20], [20,30], [20,30,40], dequeue->[30,40], [30,40,50]. Quedan 3 elementos."
+        },
+        {
+          "id": "lab-4-10-b",
+          "label": "b",
+          "question": "¿Cuál es el elemento situado al frente de la cola al finalizar la secuencia?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "El elemento al frente es el más antiguo que queda en la cola, el cual es 30."
+        },
+        {
+          "id": "lab-4-10-c",
+          "label": "c",
+          "question": "¿Cuál es la suma de todos los elementos que permanecen en la cola?",
+          "correctValue": 120,
+          "tolerance": 0,
+          "explanation": "Los elementos en la cola son 30, 40 y 50. Suma = $$30 + 40 + 50 = 120$$."
+        },
+        {
+          "id": "lab-4-10-d",
+          "label": "d",
+          "question": "¿Cuál fue el valor de retorno de la primera llamada a la función dequeue()?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El primer elemento insertado era 10, por lo que la primera extracción devuelve 10."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Interfaces y Clases Genéricas de Contenedores",
+      "context": "Considere la siguiente estructura genérica:\n```java\ninterface Contenedor<T> { void guardar(T objeto); T obtener(); }\nclass Caja<T> implements Contenedor<T> {\n    private T item;\n    public void guardar(T objeto) { this.item = objeto; }\n    public T obtener() { return this.item; }\n}\n```\nSe ejecuta:\n```java\nCaja<Integer> c1 = new Caja<>();\nCaja<String> c2 = new Caja<>();\nc1.guardar(50);\nc2.guardar(\"Hola\");\nint n = c1.obtener() * 2;\n```",
+      "parts": [
+        {
+          "id": "lab-4-11-a",
+          "label": "a",
+          "question": "¿Cuál es el valor entero almacenado en la variable n?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Se multiplica el entero extraído por 2: $$50 \\\\times 2 = 100$$."
+        },
+        {
+          "id": "lab-4-11-b",
+          "label": "b",
+          "question": "¿Cuántas instancias de la clase Caja se crean en memoria Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se instancian dos objetos Caja mediante `new Caja<>()`."
+        },
+        {
+          "id": "lab-4-11-c",
+          "label": "c",
+          "question": "¿Cuál es la longitud del String almacenado en la caja c2?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El String es \"Hola\", que contiene 4 caracteres."
+        },
+        {
+          "id": "lab-4-11-d",
+          "label": "d",
+          "question": "Debido al borrado de tipos (Type Erasure), ¿cuántas clases físicas Caja existen en el bytecode en tiempo de ejecución?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El borrado de tipos elimina los parámetros genéricos del bytecode compilado, unificándolos bajo una sola definición de clase."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Complejidad de Búsqueda Binaria vs Lineal",
+      "context": "Considere un arreglo ordenado de $N$ elementos donde realizamos una búsqueda.",
+      "parts": [
+        {
+          "id": "lab-4-12-a",
+          "label": "a",
+          "question": "En el peor de los casos, ¿cuál es el número máximo de comparaciones requeridas por la búsqueda lineal para N = 100?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "La búsqueda lineal recorre todos los elementos del arreglo uno por uno, realizando $N$ comparaciones en el peor caso."
+        },
+        {
+          "id": "lab-4-12-b",
+          "label": "b",
+          "question": "En el peor de los casos, ¿cuál es el número máximo de comparaciones requeridas por la búsqueda binaria para N = 100?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El número de comparaciones en peor caso es $$\\lceil \\\\log_2(100) \\\\rceil = 7$$ comparaciones."
+        },
+        {
+          "id": "lab-4-12-c",
+          "label": "c",
+          "question": "Si N = 1024, ¿cuántas comparaciones como máximo requiere la búsqueda binaria en el peor caso?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Aplicando la fórmula del peor caso: $$\\lfloor \\\\log_2(1024) \\\\rfloor + 1 = 10 + 1 = 11$$ comparaciones."
+        },
+        {
+          "id": "lab-4-12-d",
+          "label": "d",
+          "question": "¿Cuál es la parte entera del factor de mejora (peor lineal / peor binario) para N = 1024?",
+          "correctValue": 93,
+          "tolerance": 0,
+          "explanation": "Se calcula como $$1024 / 11 \\\\approx 93.09$$, cuya parte entera es 93."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Herencia y Enlace Estático con Atributos de Instancia",
+      "context": "Dado el siguiente código en el que se redefine un atributo:\n```java\nclass A {\n    int valor = 5;\n    int getValor() { return valor; }\n}\nclass B extends A {\n    int valor = 10;\n    int getValor() { return valor; }\n}\n```\nSe ejecuta el siguiente fragmento:\n```java\nA obj = new B();\nint v1 = obj.valor;\nint v2 = obj.getValor();\n```",
+      "parts": [
+        {
+          "id": "lab-4-13-a",
+          "label": "a",
+          "question": "¿Qué valor numérico se almacena en la variable v1?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Los campos no se enlazan dinámicamente. Se resuelven de acuerdo al tipo estático de la referencia (A)."
+        },
+        {
+          "id": "lab-4-13-b",
+          "label": "b",
+          "question": "¿Qué valor numérico se almacena en la variable v2?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Los métodos se enlazan de forma dinámica. La JVM ejecuta `B.getValor()` por ser el tipo de ejecución de `obj` igual a B."
+        },
+        {
+          "id": "lab-4-13-c",
+          "label": "c",
+          "question": "Si realizamos un downcasting explícito: ((B) obj).valor, ¿qué valor se obtiene?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Al cambiar el tipo estático de la referencia a B, se accede directamente a la variable `valor` definida en B."
+        },
+        {
+          "id": "lab-4-13-d",
+          "label": "d",
+          "question": "¿Cuál es la suma resultante de v1 + v2?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Suma simple: $$5 + 10 = 15$$."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Relación de Recurrencia para Merge Sort",
+      "context": "La complejidad de tiempo del algoritmo Merge Sort viene dada por la recurrencia $T(N) = 2T(N/2) + N$ para $N > 1$, con $T(1) = 0$ (asumiendo $N$ potencia de 2).",
+      "parts": [
+        {
+          "id": "lab-4-14-a",
+          "label": "a",
+          "question": "¿Cuál es el valor de T(2)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$$T(2) = 2 T(1) + 2 = 2 \\\\times 0 + 2 = 2$$."
+        },
+        {
+          "id": "lab-4-14-b",
+          "label": "b",
+          "question": "¿Cuál es el valor de T(4)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$$T(4) = 2 T(2) + 4 = 2 \\\\times 2 + 4 = 8$$."
+        },
+        {
+          "id": "lab-4-14-c",
+          "label": "c",
+          "question": "¿Cuál es el valor de T(8)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "$$T(8) = 2 T(4) + 8 = 2 \\\\times 8 + 8 = 24$$."
+        },
+        {
+          "id": "lab-4-14-d",
+          "label": "d",
+          "question": "¿Cuál es el valor de T(16)?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "$$T(16) = 2 T(8) + 16 = 2 \\\\times 24 + 16 = 64$$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Operaciones sobre una Lista Enlazada Simple",
+      "context": "Considere las operaciones sobre una lista simplemente enlazada:\n```java\nclass Nodo { int dato; Nodo sig; Nodo(int d) { dato = d; } }\nclass Lista {\n    Nodo cab;\n    void agregar(int d) {\n        Nodo nuevo = new Nodo(d);\n        if (cab == null) cab = nuevo;\n        else {\n            Nodo aux = cab;\n            while (aux.sig != null) aux = aux.sig;\n            aux.sig = nuevo;\n        }\n    }\n}\n```\nSe ejecuta:\n```java\nLista l = new Lista();\nl.agregar(10);\nl.agregar(20);\nl.agregar(30);\n```",
+      "parts": [
+        {
+          "id": "lab-4-15-a",
+          "label": "a",
+          "question": "¿Cuántos nodos contiene la lista al final del código?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se han insertado exactamente 3 elementos, creando 3 instancias de Nodo."
+        },
+        {
+          "id": "lab-4-15-b",
+          "label": "b",
+          "question": "¿Cuál es el valor almacenado en el segundo nodo de la lista (cab.sig)?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Los elementos se insertan al final en orden, por lo que el segundo es 20."
+        },
+        {
+          "id": "lab-4-15-c",
+          "label": "c",
+          "question": "¿Cuántas comprobaciones exitosas de la condición (aux.sig != null) se realizan en el bucle en total?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "1ª inserción: 0. 2ª inserción: 1 comprobación. 3ª inserción: 2 comprobaciones. Total = 3."
+        },
+        {
+          "id": "lab-4-15-d",
+          "label": "d",
+          "question": "Si ejecutamos l.cab = l.cab.sig, ¿cuántos nodos siguen siendo accesibles en la lista?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se desplaza la cabecera al segundo elemento, quedando huérfano el primer nodo y restando 2 nodos accesibles."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Jerarquía de Figuras y Métodos Polimórficos",
+      "context": "Dado el siguiente código:\n```java\nabstract class Figura { abstract double getArea(); }\nclass Rectangulo extends Figura {\n    double b, h;\n    Rectangulo(double b, double h) { this.b = b; this.h = h; }\n    double getArea() { return b * h; }\n}\nclass Triangulo extends Figura {\n    double b, h;\n    Triangulo(double b, double h) { this.b = b; this.h = h; }\n    double getArea() { return (b * h) / 2; }\n}\n```\nSe ejecuta:\n```java\nFigura[] figs = { new Rectangulo(4, 5), new Triangulo(4, 5) };\ndouble areaTotal = 0;\nfor (Figura f : figs) {\n    areaTotal += f.getArea();\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-16-a",
+          "label": "a",
+          "question": "¿Cuál es el área calculada para el objeto Rectangulo?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se calcula como $$b \\\\times h = 4 \\\\times 5 = 20.0$$."
+        },
+        {
+          "id": "lab-4-16-b",
+          "label": "b",
+          "question": "¿Cuál es el área calculada para el objeto Triangulo?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Se calcula como $$(b \\\\times h) / 2 = (4 \\\\times 5) / 2 = 10.0$$."
+        },
+        {
+          "id": "lab-4-16-c",
+          "label": "c",
+          "question": "¿Cuál es el valor final acumulado en la variable areaTotal?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Es la suma de ambas áreas: $$20.0 + 10.0 = 30.0$$."
+        },
+        {
+          "id": "lab-4-16-d",
+          "label": "d",
+          "question": "¿Cuántas clases concretas (instanciables) se definen en este código?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Las clases concretas son `Rectangulo` y `Triangulo` (Figura es abstracta). Total = 2."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Búsqueda en Matriz Cuadrada Ordenada",
+      "context": "Analice el algoritmo de búsqueda sobre una matriz de tamaño $N \\\\times N$:\n```java\nboolean buscar(int[][] matriz, int n, int clave) {\n    int fila = 0;\n    int col = n - 1;\n    while (fila < n && col >= 0) {\n        if (matriz[fila][col] == clave) return true;\n        if (matriz[fila][col] > clave) col--;\n        else fila++;\n    }\n    return false;\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-17-a",
+          "label": "a",
+          "question": "Para una matriz de 10 x 10, ¿cuál es el número máximo de comparaciones con elementos de la matriz en el peor caso?",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "El peor camino del recorrido por la matriz tiene una longitud máxima de $$2n - 1$$ comparaciones. Para $$n=10$$ es 19."
+        },
+        {
+          "id": "lab-4-17-b",
+          "label": "b",
+          "question": "Si n = 100, ¿cuál es el número máximo de comparaciones con elementos en el peor caso?",
+          "correctValue": 199,
+          "tolerance": 0,
+          "explanation": "Para $$n=100$$, $$2 \\\\times 100 - 1 = 199$$."
+        },
+        {
+          "id": "lab-4-17-c",
+          "label": "c",
+          "question": "¿Cuál es el coeficiente c en la cota de peor caso de la forma c*N + k?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La cota es $$2N - 1$$, por lo que el coeficiente multiplicativo es 2."
+        },
+        {
+          "id": "lab-4-17-d",
+          "label": "d",
+          "question": "Si la clave buscada se encuentra en la posición [0][n-1], ¿cuántas comparaciones se realizan?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se verifica en la primera comparación y el método retorna inmediatamente true. Total = 1."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Recursión Mutua y Evaluación Numérica",
+      "context": "Considere las funciones recursivas mutuas:\n```java\nint par(int n) {\n    if (n == 0) return 1;\n    return impar(n - 1);\n}\nint impar(int n) {\n    if (n == 0) return 0;\n    return par(n - 1);\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-18-a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por la llamada par(4)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La función determina si un número es par de forma lógica (1 significa true, 0 false). 4 es par."
+        },
+        {
+          "id": "lab-4-18-b",
+          "label": "b",
+          "question": "¿Cuál es el valor devuelto por la llamada impar(5)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Determina si el número es impar. 5 es impar (devuelve 1)."
+        },
+        {
+          "id": "lab-4-18-c",
+          "label": "c",
+          "question": "¿Cuál es el número total de llamadas a funciones (par e impar, incluyendo la inicial) para resolver par(3)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Llamadas: par(3) -> impar(2) -> par(1) -> impar(0). Total = 4 llamadas."
+        },
+        {
+          "id": "lab-4-18-d",
+          "label": "d",
+          "question": "¿Cuál es el valor devuelto por la llamada impar(0)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Caso base directo de impar(0) retorna 0."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Casting e Identidad de Objetos en Interfaces",
+      "context": "Considere la siguiente estructura de interfaces:\n```java\ninterface I1 { int m1(); }\ninterface I2 { int m2(); }\nclass Base implements I1 { public int m1() { return 100; } }\nclass Derivada extends Base implements I2 { public int m2() { return 200; } }\n```\nSe ejecuta el código:\n```java\nBase obj = new Derivada();\nI1 i1 = (I1) obj;\nI2 i2 = (I2) obj;\n```",
+      "parts": [
+        {
+          "id": "lab-4-19-a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico obtenido de la llamada i1.m1()?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Derivada hereda `m1()` de Base, la cual devuelve 100."
+        },
+        {
+          "id": "lab-4-19-b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico obtenido de la llamada i2.m2()?",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "Se ejecuta `m2()` implementado en Derivada, que devuelve 200."
+        },
+        {
+          "id": "lab-4-19-c",
+          "label": "c",
+          "question": "Si ejecutamos el casting y llamada ((Base) i2).m1(), ¿qué valor se obtiene?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El casting devuelve la referencia como Base, llamando a `m1()` que retorna 100."
+        },
+        {
+          "id": "lab-4-19-d",
+          "label": "d",
+          "question": "¿Cuántos objetos se instanciaron en total en memoria Heap?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se realiza una sentencia `new`, por lo que se crea un único objeto en memoria."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Complejidad Espacial en Exponenciación Rápida",
+      "context": "Analice el algoritmo recursivo para calcular la potencia:\n```java\ndouble potencia(double x, int n) {\n    if (n == 0) return 1.0;\n    if (n % 2 == 0) {\n        double temp = potencia(x, n / 2);\n        return temp * temp;\n    } else {\n        return x * potencia(x, n - 1);\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "lab-4-20-a",
+          "label": "a",
+          "question": "¿Cuál es la profundidad de la pila de llamadas (call stack depth) para calcular potencia(2.0, 8), incluyendo la llamada inicial?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Llamadas: 8 -> 4 -> 2 -> 1 -> 0. Total = 5 llamadas concurrentes."
+        },
+        {
+          "id": "lab-4-20-b",
+          "label": "b",
+          "question": "¿Cuál es la profundidad de la pila de llamadas para potencia(2.0, 16), incluyendo la inicial?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Llamadas: 16 -> 8 -> 4 -> 2 -> 1 -> 0. Total = 6 llamadas concurrentes."
+        },
+        {
+          "id": "lab-4-20-c",
+          "label": "c",
+          "question": "¿Cuál es el peor caso de profundidad de la pila de llamadas en el rango de n <= 31?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Para n = 31: 31 -> 30 -> 15 -> 14 -> 7 -> 6 -> 3 -> 2 -> 1 -> 0. Total = 10 llamadas en la pila."
+        },
+        {
+          "id": "lab-4-20-d",
+          "label": "d",
+          "question": "¿Cuál es el resultado de la llamada potencia(2.0, 10)?",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "Calcula $$2^{10} = 1024.0$$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Invariante de Bucle y Sumas",
+      "context": "Analice el cálculo de suma en un arreglo:\n```java\nint sumar(int[] arr, int n) {\n    int suma = 0;\n    int i = 0;\n    while (i < n) {\n        suma += arr[i];\n        i++;\n    }\n    return suma;\n}\n```\nSe pasa el arreglo `arr = {10, 20, 30, 40, 50}` y `n = 5`.",
+      "parts": [
+        {
+          "id": "lab-4-21-a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable suma?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "Es la suma de todos los elementos: $$10 + 20 + 30 + 40 + 50 = 150$$."
+        },
+        {
+          "id": "lab-4-21-b",
+          "label": "b",
+          "question": "¿Cuál es el valor del invariante suma antes de comenzar la iteración en la que i = 2?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Antes de i = 2, se han sumado arr[0] y arr[1]: $$10 + 20 = 30$$."
+        },
+        {
+          "id": "lab-4-21-c",
+          "label": "c",
+          "question": "¿Cuál es el valor del invariante suma antes de comenzar la iteración en la que i = 4?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Antes de i = 4, se han sumado los primeros 4 elementos: $$10 + 20 + 30 + 40 = 100$$."
+        },
+        {
+          "id": "lab-4-21-d",
+          "label": "d",
+          "question": "¿Cuántas iteraciones completas del bucle se ejecutan?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle se ejecuta para i = 0, 1, 2, 3, 4. Total = 5 iteraciones."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Tracing del Algoritmo Bubble Sort",
+      "context": "Dado el algoritmo Bubble Sort:\n```java\nvoid bubbleSort(int[] arr) {\n    int n = arr.length;\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - i - 1; j++) {\n            if (arr[j] > arr[j + 1]) {\n                int temp = arr[j];\n                arr[j] = arr[j + 1];\n                arr[j + 1] = temp;\n            }\n        }\n    }\n}\n```\nSe ordena el arreglo `arr = {5, 1, 4, 2, 8}`.",
+      "parts": [
+        {
+          "id": "lab-4-22-a",
+          "label": "a",
+          "question": "¿Cuántas comparaciones (arr[j] > arr[j + 1]) se realizan en total?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Para un arreglo de tamaño 5: $$4 + 3 + 2 + 1 = 10$$ comparaciones."
+        },
+        {
+          "id": "lab-4-22-b",
+          "label": "b",
+          "question": "¿Cuántos intercambios de elementos (swaps) se producen durante la ejecución?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Iteraciones: i=0: (5,1)->swap, (5,4)->swap, (5,2)->swap. i=1: (4,2)->swap. Total = 4 intercambios."
+        },
+        {
+          "id": "lab-4-22-c",
+          "label": "c",
+          "question": "¿Cuál es el valor del elemento en el índice 2 tras la primera iteración completa del bucle externo (i = 0)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Tras i=0 el arreglo queda `{1, 4, 2, 5, 8}`. El índice 2 almacena el valor 2."
+        },
+        {
+          "id": "lab-4-22-d",
+          "label": "d",
+          "question": "¿Cuál es la suma de los valores en los índices 0 y 4 tras finalizar la ordenación?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El arreglo ordenado es `{1, 2, 4, 5, 8}`. Suma de arr[0] y arr[4] es $$1 + 8 = 9$$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Cola con Arreglo Circular modular",
+      "context": "Cola sobre arreglo circular de tamaño 5 (frente=0, fin=0, size=0 inicialmente).\nOperaciones: `enqueue(10)`, `enqueue(20)`, `enqueue(30)`, `dequeue()`, `enqueue(40)`, `dequeue()`, `enqueue(50)`.",
+      "parts": [
+        {
+          "id": "lab-4-23-a",
+          "label": "a",
+          "question": "¿Cuál es el valor del índice frente al finalizar el proceso?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Inicialmente frente=0. Se desencolan 2 elementos incrementándolo modularmente a 2."
+        },
+        {
+          "id": "lab-4-23-b",
+          "label": "b",
+          "question": "¿Cuál es el valor del índice fin al finalizar?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Se encolan 5 elementos en total. fin se incrementa: $$0 \\\\to 1 \\\\to 2 \\\\to 3 \\\\to 4 \\\\to 0$$."
+        },
+        {
+          "id": "lab-4-23-c",
+          "label": "c",
+          "question": "¿Cuántos elementos quedan almacenados en la cola?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "5 inserciones y 2 extracciones dejan exactamente 3 elementos."
+        },
+        {
+          "id": "lab-4-23-d",
+          "label": "d",
+          "question": "¿Cuál es la suma de los elementos que quedan en la cola?",
+          "correctValue": 120,
+          "tolerance": 0,
+          "explanation": "Quedan 30, 40 y 50. Suma = $$30 + 40 + 50 = 120$$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Operaciones de Pila Enlazada",
+      "context": "Pila con elementos iniciales `[cima -> 10 -> 20 -> 30]`. Se ejecuta: `pop()`, `push(40)`, `push(50)`, `pop()`.",
+      "parts": [
+        {
+          "id": "lab-4-24-a",
+          "label": "a",
+          "question": "¿Cuál es el elemento situado en la cima al final de las operaciones?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "Traza: [10,20,30] -> pop()->[20,30] -> push(40)->[40,20,30] -> push(50)->[50,40,20,30] -> pop()->[40,20,30]."
+        },
+        {
+          "id": "lab-4-24-b",
+          "label": "b",
+          "question": "¿Cuál es el elemento situado en el fondo de la pila?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "El nodo del fondo no se ha visto alterado y sigue siendo 30."
+        },
+        {
+          "id": "lab-4-24-c",
+          "label": "c",
+          "question": "¿Cuántos elementos tiene la pila al final de las operaciones?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La pila contiene [40, 20, 30], es decir, 3 elementos."
+        },
+        {
+          "id": "lab-4-24-d",
+          "label": "d",
+          "question": "¿Cuál es la suma de todos los elementos que hay en la pila?",
+          "correctValue": 90,
+          "tolerance": 0,
+          "explanation": "La suma es $$40 + 20 + 30 = 90$$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Recursividad y Suma de Dígitos",
+      "context": "Dado el algoritmo recursivo:\n```java\nint sumaDigitos(int n) {\n    if (n < 10) return n;\n    return (n % 10) + sumaDigitos(n / 10);\n}\n```\nSe ejecuta `sumaDigitos(12345)`.",
+      "parts": [
+        {
+          "id": "lab-4-25-a",
+          "label": "a",
+          "question": "¿Cuál es el resultado numérico devuelto por la llamada?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Suma de los dígitos: $$1 + 2 + 3 + 4 + 5 = 15$$."
+        },
+        {
+          "id": "lab-4-25-b",
+          "label": "b",
+          "question": "¿Cuántas llamadas a la función en total se realizan (incluida la inicial)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Llamadas: 12345 -> 1234 -> 123 -> 12 -> 1 (caso base). Total = 5."
+        },
+        {
+          "id": "lab-4-25-c",
+          "label": "c",
+          "question": "¿Cuál es la profundidad máxima de la pila de llamadas?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Hay 5 llamadas activas en el momento de alcanzar el caso base."
+        },
+        {
+          "id": "lab-4-25-d",
+          "label": "d",
+          "question": "Si la entrada fuera 987654321, ¿cuál sería el resultado numérico devuelto?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "Suma de dígitos de 1 a 9: $$\\sum_{i=1}^{9} i = \\\\frac{9 \\\\times 10}{2} = 45$$."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Sobrecarga, Sobreescritura y Casting",
+      "context": "Dado el código de sobrecarga y sobreescritura:\n```java\nclass A {\n    int calcular(int x) { return x + 1; }\n    int calcular(double x) { return (int)x + 2; }\n}\nclass B extends A {\n    int calcular(int x) { return x + 10; }\n}\n```\nSe ejecuta:\n```java\nA obj = new B();\nint r1 = obj.calcular(5);\nint r2 = obj.calcular(5.0);\n```",
+      "parts": [
+        {
+          "id": "lab-4-26-a",
+          "label": "a",
+          "question": "¿Qué valor entero devuelve la llamada obj.calcular(5) almacenada en r1?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Por enlace dinámico, se invoca `B.calcular(int)` que devuelve $$5 + 10 = 15$$."
+        },
+        {
+          "id": "lab-4-26-b",
+          "label": "b",
+          "question": "¿Qué valor entero devuelve la llamada obj.calcular(5.0) almacenada en r2?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Se ejecuta `A.calcular(double)` (no sobreescrito en B) que devuelve $$5 + 2 = 7$$."
+        },
+        {
+          "id": "lab-4-26-c",
+          "label": "c",
+          "question": "Si ejecutamos ((A) obj).calcular(5), ¿qué valor se obtiene?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El casting a la clase base A no altera el tipo dinámico del objeto real (B), ejecutándose `B.calcular(int)`."
+        },
+        {
+          "id": "lab-4-26-d",
+          "label": "d",
+          "question": "¿Cuál es la suma resultante de r1 + r2?",
+          "correctValue": 22,
+          "tolerance": 0,
+          "explanation": "Suma simple: $$15 + 7 = 22$$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Cola circular con operaciones modulares",
+      "context": "Cola en arreglo de tamaño 6 (capacidad = 6, frente = 0, fin = 0 inicialmente).\nOperaciones: encolar del 1 al 5, desencolar 3 elementos, encolar 6, 7 y 8.",
+      "parts": [
+        {
+          "id": "lab-4-27-a",
+          "label": "a",
+          "question": "¿Cuántos elementos quedan en la cola al finalizar el proceso?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Inserción de 5 -> size=5. Extracción de 3 -> size=2. Inserción de 3 -> size=5."
+        },
+        {
+          "id": "lab-4-27-b",
+          "label": "b",
+          "question": "¿Cuál es el valor del elemento situado en el frente de la cola al final?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se desencolan 1, 2 y 3. El siguiente elemento en la cola es 4."
+        },
+        {
+          "id": "lab-4-27-c",
+          "label": "c",
+          "question": "¿Cuál es el valor del índice fin del arreglo circular al final?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Secuencia de incrementos de fin: encolar 5 -> fin=5. encolar 3 más -> $$0 \\\\to 1 \\\\to 2$$."
+        },
+        {
+          "id": "lab-4-27-d",
+          "label": "d",
+          "question": "¿Cuál es el elemento situado al final (el último encolado) de la cola?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El último encolado fue el número 8."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Invariantes de Bucle en Búsqueda Lineal",
+      "context": "Dado el algoritmo de búsqueda lineal:\n```java\nint busqueda(int[] arr, int n, int clave) {\n    int i = 0;\n    while (i < n && arr[i] < clave) {\n        i++;\n    }\n    if (i < n && arr[i] == clave) return i;\n    return -1;\n}\n```\nSe pasa `arr = {10, 20, 30, 40, 50}` y `clave = 35`.",
+      "parts": [
+        {
+          "id": "lab-4-28-a",
+          "label": "a",
+          "question": "¿Qué valor de retorno devuelve la llamada a la función?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "35 no está en el arreglo, por lo que devuelve -1."
+        },
+        {
+          "id": "lab-4-28-b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable i al salir del bucle?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Sale cuando `arr[i] < clave` es falso. Para `i = 3`, `arr[3] = 40` (no es < 35)."
+        },
+        {
+          "id": "lab-4-28-c",
+          "label": "c",
+          "question": "¿Cuántas comparaciones de la condición (arr[i] < clave) se realizan en total?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se evalúa para i = 0 (10<35), i = 1 (20<35), i = 2 (30<35) e i = 3 (40<35). Total = 4."
+        },
+        {
+          "id": "lab-4-28-d",
+          "label": "d",
+          "question": "¿Cuál sería el valor final de i si clave = 60?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle recorre todo el arreglo finalizando cuando `i < n` es falso, es decir, cuando `i = 5`."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Métodos Estáticos vs Dinámicos (Ocultación)",
+      "context": "Dado el comportamiento estático y dinámico:\n```java\nclass Superior {\n    static int getNum() { return 1; }\n    int getId() { return 10; }\n}\nclass Inferior extends Superior {\n    static int getNum() { return 2; }\n    int getId() { return 20; }\n}\n```\nSe ejecuta el siguiente fragmento:\n```java\nSuperior ref = new Inferior();\nint v1 = ref.getNum();\nint v2 = ref.getId();\n```",
+      "parts": [
+        {
+          "id": "lab-4-29-a",
+          "label": "a",
+          "question": "¿Qué valor numérico se almacena en la variable v1?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Los métodos estáticos no tienen enlace dinámico. Se resuelven de acuerdo al tipo estático de la referencia (Superior)."
+        },
+        {
+          "id": "lab-4-29-b",
+          "label": "b",
+          "question": "¿Qué valor numérico se almacena en la variable v2?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Los métodos de instancia se enlazan dinámicamente, ejecutándose la versión de la subclase real (Inferior)."
+        },
+        {
+          "id": "lab-4-29-c",
+          "label": "c",
+          "question": "Si ejecutamos el casting explícito ((Inferior) ref).getNum(), ¿qué valor se obtiene?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al cambiar el tipo estático de la referencia a Inferior, se accede a su método estático homónimo."
+        },
+        {
+          "id": "lab-4-29-d",
+          "label": "d",
+          "question": "¿Cuál es el producto de v1 por v2?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Producto simple: $$1 \\\\times 20 = 20$$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Complejidad Espacial y Recursión en Lista",
+      "context": "Considere la suma recursiva de elementos de una lista simplemente enlazada:\n```java\nint sumarLista(Nodo nodo) {\n    if (nodo == null) return 0;\n    return nodo.dato + sumarLista(nodo.sig);\n}\n```\nSuponga que la lista tiene $N = 100$ nodos.",
+      "parts": [
+        {
+          "id": "lab-4-30-a",
+          "label": "a",
+          "question": "¿Cuál es el número de llamadas recursivas activas en la pila de ejecución cuando se llega a procesar el nodo 50, contando la llamada inicial como nivel 1?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "Cada nodo procesado añade una llamada a la pila, resultando en 50 llamadas activas al procesar el nodo 50."
+        },
+        {
+          "id": "lab-4-30-b",
+          "label": "b",
+          "question": "¿Cuál es la profundidad máxima de la pila de llamadas (call stack depth) alcanzada para procesar la lista completa, contando el caso base null?",
+          "correctValue": 101,
+          "tolerance": 0,
+          "explanation": "Se ejecutan 100 llamadas para los nodos más 1 llamada para el caso base, dando un total de 101."
+        },
+        {
+          "id": "lab-4-30-c",
+          "label": "c",
+          "question": "Si cambiamos la implementación a una versión iterativa con un bucle while, ¿cuál es la complejidad de espacio expresada como el exponente k de la notación O(N^k)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La versión iterativa usa espacio constante $$\\mathcal{O}(1) = \\\\mathcal{O}(N^0)$$, por lo que el exponente $$k = 0$$."
+        },
+        {
+          "id": "lab-4-30-d",
+          "label": "d",
+          "question": "Para una lista de 500 nodos, ¿cuántas llamadas a sumarLista se ejecutan en total (incluyendo el caso base)?",
+          "correctValue": 501,
+          "tolerance": 0,
+          "explanation": "Hay 500 llamadas correspondientes a los nodos y 1 para la referencia final null."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuación general de recurrencia para algoritmos Divide y Vencerás (Teorema Maestro)",
+      "tex": "$$T(N) = a T\\\\left(\\\\frac{N}{b}\\\\right) + \\\\mathcal{O}(N^d)$$"
+    },
+    {
+      "name": "Complejidad temporal asintótica óptima de la búsqueda binaria",
+      "tex": "$$\\\\mathcal{O}(\\\\log_2 N)$$"
+    },
+    {
+      "name": "Complejidad cuadrática en el peor caso de algoritmos de ordenación por comparación básicos",
+      "tex": "$$\\\\mathcal{O}(N^2)$$"
+    },
+    {
+      "name": "Complejidad asintótica exponencial del algoritmo recursivo simple de Fibonacci",
+      "tex": "$$\\\\mathcal{O}\\\\left(\\\\left(\\\\frac{1+\\\\sqrt{5}}{2}\\\\right)^N\\\\right)$$"
+    },
+    {
+      "name": "Suma aritmética usada en el análisis de bucles anidados lineales",
+      "tex": "$$\\\\sum_{i=1}^{N} i = \\\\frac{N(N+1)}{2}$$"
+    },
+    {
+      "name": "Cota inferior de peor caso para algoritmos de ordenación basados en comparación de elementos",
+      "tex": "$$\\\\Omega(N \\\\log N)$$"
+    },
+    {
+      "name": "Condición matemática de compatibilidad de tipos (Polimorfismo de Subtipado)",
+      "tex": "$$S \\\\subseteq T \\\\implies \\\\text{Upcasting seguro de } S \\\\text{ a } T$$"
+    },
+    {
+      "name": "Relación de recurrencia exacta para el algoritmo de ordenación Merge Sort",
+      "tex": "$$T(N) = 2T\\\\left(\\\\frac{N}{2}\\\\right) + \\\\Theta(N)$$"
+    }
+  ]
+}

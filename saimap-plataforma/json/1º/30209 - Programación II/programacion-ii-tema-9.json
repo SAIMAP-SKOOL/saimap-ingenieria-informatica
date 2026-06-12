@@ -1,0 +1,2092 @@
+{
+    "TEST_A": [
+        {
+            "q": "¿Qué representa el predicado $Q$ en una tripleta de Hoare $\\{Q\\} \\, S \\, \\{R\\}$?",
+            "options": [
+                "La precondición: el estado de las variables antes de ejecutar el código $S$",
+                "La postcondición: el estado esperado tras ejecutar el código $S$",
+                "El invariante del bucle que se ejecuta dentro de $S$"
+            ],
+            "correct": 0,
+            "hint": "Se evalúa antes de que se inicie el fragmento de código $S$.",
+            "explanation": "En lógica de Hoare, la tripleta $\\{Q\\} \\, S \\, \\{R\\}$ indica que si se inicia la ejecución en un estado donde la precondición $Q$ es verdadera, al finalizar $S$ se cumplirá $R$."
+        },
+        {
+            "q": "¿Cuál es la diferencia fundamental entre la corrección parcial y la corrección total?",
+            "options": [
+                "La corrección total exige que el programa termine, mientras que la parcial asume la terminación",
+                "La corrección parcial garantiza que no hay excepciones, y la total asegura la corrección lógica",
+                "La corrección parcial no requiere invariantes, mientras que la total sí"
+            ],
+            "correct": 0,
+            "hint": "La terminación es el factor clave que diferencia ambos tipos de corrección.",
+            "explanation": "La corrección parcial asume que si el programa termina, se cumplirá la postcondición. La corrección total es la corrección parcial más la demostración de que el programa efectivamente termina (terminación)."
+        },
+        {
+            "q": "¿Qué tres condiciones matemáticas se deben demostrar para probar que un predicado $I$ es un invariante de bucle válido?",
+            "options": [
+                "Inicialización, Mantenimiento y Finalización",
+                "Precondición, Postcondición y Decrecimiento",
+                "Inicialización, Decrecimiento y Acotación"
+            ],
+            "correct": 0,
+            "hint": "El invariante debe cumplirse antes, durante y después del bucle.",
+            "explanation": "Para demostrar que $I$ es un invariante, se debe probar: 1) Inicialización: se cumple al entrar. 2) Mantenimiento: si se cumple y el bucle continúa, se sigue cumpliendo tras iterar. 3) Finalización: al terminar el bucle, la combinación del invariante y la negación de la condición implica la postcondición."
+        },
+        {
+            "q": "En el paso de Inicialización de un invariante, ¿cuál es la tripleta de Hoare que debemos demostrar?",
+            "options": [
+                "$\\{Q\\} \\, \\text{inicialización} \\, \\{I\\}$",
+                "$\\{I \\land B\\} \\, \\text{inicialización} \\, \\{I\\}$",
+                "$\\{I \\land \\neg B\\} \\, \\text{inicialización} \\, \\{R\\}$"
+            ],
+            "correct": 0,
+            "hint": "Partimos de la precondición general del programa y ejecutamos las variables previas al bucle.",
+            "explanation": "La inicialización debe asegurar que tras ejecutar el código previo al bucle (inicialización de variables) partiendo de la precondición $Q$, se alcanza un estado en el que el invariante $I$ es verdadero."
+        },
+        {
+            "q": "En el paso de Mantenimiento de un invariante de bucle con condición de continuación $B$ y cuerpo $S$, ¿qué tripleta demostramos?",
+            "options": [
+                "$\\{I \\land B\\} \\, S \\, \\{I\\}$",
+                "$\\{I \\land \\neg B\\} \\, S \\, \\{I\\}$",
+                "$\\{Q\\} \\, S \\, \\{I\\}$"
+            ],
+            "correct": 0,
+            "hint": "El invariante se asume verdadero junto con la condición del bucle antes de ejecutar el cuerpo $S$.",
+            "explanation": "El mantenimiento establece que si el invariante $I$ es verdadero y la condición de continuación $B$ también (se realiza otra iteración), tras ejecutar el cuerpo del bucle $S$, el invariante $I$ debe volver a ser verdadero."
+        },
+        {
+            "q": "En el paso de Finalización de un invariante de bucle, ¿cuál es la implicación lógica que se debe verificar?",
+            "options": [
+                "$(I \\land \\neg B) \\implies R$",
+                "$(I \\land B) \\implies R$",
+                "$(Q \\land \\neg B) \\implies I$"
+            ],
+            "correct": 0,
+            "hint": "Ocurre cuando el bucle ha terminado (la condición de continuación es falsa) y el invariante se cumple.",
+            "explanation": "Cuando el bucle termina, la condición $B$ es falsa ($\\neg B$) y el invariante $I$ sigue siendo verdadero ($I$). La conjunción de ambos ($I \\land \\neg B$) debe implicar matemáticamente la postcondición final $R$ del algoritmo."
+        },
+        {
+            "q": "¿Qué es una función de cota (o variante) y cuál es su propósito principal?",
+            "options": [
+                "Una expresión entera que decrece estrictamente en cada iteración y está acotada inferiormente, usada para demostrar la terminación del bucle",
+                "Una función que calcula el número exacto de operaciones elementales ejecutadas por el bucle",
+                "Una condición lógica que se mantiene verdadera durante toda la ejecución del bucle"
+            ],
+            "correct": 0,
+            "hint": "Se encarga del aspecto de la terminación en la corrección total.",
+            "explanation": "La función de cota es una expresión entera de las variables del bucle que decrece en cada iteración y no puede disminuir indefinidamente porque está acotada inferiormente, garantizando que el bucle finalizará."
+        },
+        {
+            "q": "¿Cuáles son las dos propiedades fundamentales que debe cumplir una función de cota $t$?",
+            "options": [
+                "Acotación inferior ($B \\implies t \\ge 0$) y decrecimiento estricto en cada iteración",
+                "Acotación superior ($B \\implies t \\le N$) e incremento estricto en cada iteración",
+                "Ser siempre igual a cero cuando la condición del bucle es verdadera"
+            ],
+            "correct": 0,
+            "hint": "Debe estar acotada por debajo y reducirse constantemente hacia ese límite.",
+            "explanation": "Para garantizar la terminación, se debe probar que: 1) Si el bucle continúa ($B$), la cota es no negativa ($t \\ge 0$). 2) Cada iteración disminuye estrictamente el valor de la cota ($t < t_0$)."
+        },
+        {
+            "q": "Si la condición de un bucle es `i < N` e `i` se incrementa de 1 en 1 en cada iteración, ¿cuál es la cota lógica natural?",
+            "options": [
+                "$t = N - i$",
+                "$t = i$",
+                "$t = N$"
+            ],
+            "correct": 0,
+            "hint": "Representa el número de iteraciones restantes para que `i` alcance a `N`.",
+            "explanation": "A medida que `i` aumenta, la distancia $N - i$ disminuye. Cuando $i \\ge N$, el bucle termina, por lo que $t = N - i$ es la cota idónea."
+        },
+        {
+            "q": "Si una propuesta de cota $t$ disminuye en cada iteración pero no está acotada inferiormente, ¿se puede garantizar la terminación?",
+            "options": [
+                "No, porque el bucle podría continuar indefinidamente con valores de cota negativos",
+                "Sí, siempre que el decrecimiento sea estrictamente menor que cero",
+                "Sí, ya que todo decrecimiento garantiza que llegará a su fin"
+            ],
+            "correct": 0,
+            "hint": "Los números enteros pueden decrecer infinitamente en el rango negativo si no hay un tope.",
+            "explanation": "Sin acotación inferior (por ejemplo, $t \\ge 0$), la cota podría seguir disminuyendo infinitamente hacia números negativos sin que la condición $B$ se vuelva falsa."
+        },
+        {
+            "q": "¿Qué ocurre si la inicialización de variables de un algoritmo no satisface el invariante propuesto?",
+            "options": [
+                "La demostración de corrección falla en el paso base (Inicialización)",
+                "El bucle se vuelve infinito automáticamente",
+                "La postcondición final no se puede escribir"
+            ],
+            "correct": 0,
+            "hint": "Es el primer paso del método inductivo.",
+            "explanation": "Si $\\{Q\\} \\, \\text{inicialización} \\, \\{I\\}$ no es válida, significa que el bucle comienza en un estado que no cumple el invariante, por lo que la demostración de corrección parcial queda invalidada."
+        },
+        {
+            "q": "En el contexto de la lógica de Hoare, ¿qué valor tiene la condición del bucle $B$ inmediatamente después de salir de él de forma normal?",
+            "options": [
+                "Falso",
+                "Verdadero",
+                "Indefinido"
+            ],
+            "correct": 0,
+            "hint": "Es la condición que determina si el bucle continúa o no.",
+            "explanation": "Un bucle `while (B)` solo termina cuando la condición $B$ se evalúa como falsa, por lo que en el punto de salida se asume con certeza que $\\neg B$ es verdadero (es decir, $B$ es falso)."
+        },
+        {
+            "q": "Si la postcondición de un bucle es $suma = \\sum_{j=0}^{N-1} A[j]$ y la condición de salida es $i = N$, ¿cuál es el invariante lógico respecto a la variable $suma$?",
+            "options": [
+                "$suma = \\sum_{j=0}^{i-1} A[j] \\land 0 \\le i \\le N$",
+                "$suma = \\sum_{j=0}^{i} A[j] \\land i < N$",
+                "$suma = \\sum_{j=0}^{N-1} A[j] \\land i = N$"
+            ],
+            "correct": 0,
+            "hint": "Debe ser general para cualquier iteración intermedia `i` y convertirse en la postcondición al sustituir `i = N`.",
+            "explanation": "El invariante describe el estado acumulado hasta el momento, que es la suma desde el inicio hasta $i-1$. Al terminar, con $i=N$, sustituimos y obtenemos la suma total hasta $N-1$."
+        },
+        {
+            "q": "¿Qué diferencia conceptual hay entre una aserción y un invariante de bucle?",
+            "options": [
+                "Un invariante es un tipo especial de aserción que debe ser verdadero en puntos específicos y repetitivos de un bucle",
+                "Una aserción puede cambiar de valor de verdad, mientras que un invariante es una constante del programa",
+                "Las aserciones se evalúan solo en tiempo de compilación y los invariantes en tiempo de ejecución"
+            ],
+            "correct": 0,
+            "hint": "El invariante es una aserción lógica vinculada a la estructura repetitiva del bucle.",
+            "explanation": "Una aserción es cualquier predicado lógico sobre el estado del programa. El invariante es una aserción específica asociada a un bucle que se mantiene verdadera en cada paso del mismo."
+        },
+        {
+            "q": "Para un bucle `while (i > 0)`, si la cota propuesta es $t = i$ y el cuerpo del bucle realiza `i = i - 1`, ¿se cumple la propiedad de decrecimiento?",
+            "options": [
+                "Sí, porque $t' = i - 1$, lo que es estrictamente menor que $t_0 = i$",
+                "No, porque $i$ podría ser negativo al inicio de la iteración",
+                "Sí, pero solo si la condición del bucle se evalúa como falsa al final"
+            ],
+            "correct": 0,
+            "hint": "Compare el valor de la cota antes y después de ejecutar `i = i - 1`.",
+            "explanation": "El valor de la cota antes es $t_0 = i$, y tras la instrucción es $t = i - 1$. Claramente $t < t_0$, cumpliendo la condición de decrecimiento estricto."
+        },
+        {
+            "q": "¿Qué representa $B$ en la tripleta de mantenimiento $\\{I \\land B\\} \\, S \\, \\{I\\}$?",
+            "options": [
+                "La condición de continuación del bucle",
+                "La precondición del algoritmo completo",
+                "La postcondición del bucle"
+            ],
+            "correct": 0,
+            "hint": "Es la expresión booleana del `while`.",
+            "explanation": "En un bucle `while (B) { S; }`, la expresión $B$ es la condición que permite entrar o continuar ejecutando el cuerpo del bucle $S$."
+        },
+        {
+            "q": "¿Por qué es un requisito que la función de cota devuelva un valor entero?",
+            "options": [
+                "Porque un valor entero decreciente acotado inferiormente por un entero garantiza la terminación en un número finito de pasos",
+                "Porque las variables en Java solo pueden tomar valores enteros en las condiciones de bucle",
+                "Porque simplifica la conversión del código de Java a código máquina de la JVM"
+            ],
+            "correct": 0,
+            "hint": "En los números reales (float/double), un valor puede decrecer infinitamente sin llegar a cero (p.ej., dividiendo entre 2).",
+            "explanation": "Si la cota fuera un número real, podría disminuir indefinidamente sin alcanzar la cota inferior (por ejemplo, aproximándose a 0 de forma asintótica). Con enteros, cada paso decrementa al menos en 1, forzando la terminación finita."
+        },
+        {
+            "q": "Si en un bucle la cota $t$ disminuye dividiendo una variable entre 2 en cada iteración, ¿cómo se puede plantear una cota entera para demostrar la terminación?",
+            "options": [
+                "Planteando $t$ como el logaritmo entero del valor restante o el propio valor restante de la variable",
+                "Estableciendo $t = 0$ para todas las iteraciones intermedias",
+                "No es posible utilizar una cota entera si hay divisiones en el bucle"
+            ],
+            "correct": 0,
+            "hint": "La división entera reduce la variable y el logaritmo en base 2 representa los pasos restantes.",
+            "explanation": "En divisiones sucesivas entre 2 (como en la búsqueda binaria), el número de iteraciones restantes se modela con la función logaritmo en base 2 entera del tamaño del rango, garantizando decrecimiento entero estrictamente positivo."
+        },
+        {
+            "q": "Si un bucle tiene por condición `while (i < j)` y en el cuerpo se incrementa `i` y se decrementa `j` en 1 en cada paso, ¿cuál es la cota natural?",
+            "options": [
+                "$t = j - i$",
+                "$t = i - j$",
+                "$t = j + i$"
+            ],
+            "correct": 0,
+            "hint": "La distancia entre ambos índices se reduce por ambos lados en cada iteración.",
+            "explanation": "Dado que `i` aumenta y `j` disminuye, la diferencia $j - i$ se reduce en 2 unidades por iteración. Cuando $i \\ge j$, el bucle termina, por lo que $t = j - i$ es una cota adecuada."
+        },
+        {
+            "q": "¿Es posible demostrar formalmente la corrección total de un bucle de ejecución indeterminada sin definir una cota?",
+            "options": [
+                "No, el método formal de Hoare exige la existencia de una función variante o cota para garantizar la terminación",
+                "Sí, el invariante de bucle es suficiente para garantizar tanto la corrección parcial como la terminación",
+                "Sí, siempre que el compilador no reporte errores de bucle infinito"
+            ],
+            "correct": 0,
+            "hint": "La corrección total incluye obligatoriamente probar la terminación.",
+            "explanation": "El invariante solo demuestra que si el bucle termina, el resultado es correcto (corrección parcial). Para la corrección total es imprescindible demostrar la terminación, lo cual se realiza mediante la cota."
+        },
+        {
+            "q": "Dada la precondición $N \\ge 1$, el bucle `int i = 1; while (i < N) { i++; }` e invariante $1 \\le i \\le N$. ¿Es válida la inicialización?",
+            "options": [
+                "Sí, porque al inicio $i = 1$, y dado que $N \\ge 1$, se cumple la condición $1 \\le 1 \\le N$",
+                "No, porque $i$ debe ser inicializado en 0 para que la inicialización sea válida",
+                "No, porque la condición de continuación exige $i < N$"
+            ],
+            "correct": 0,
+            "hint": "Evalúe el invariante $1 \\le i \\le N$ con $i = 1$ bajo la hipótesis $N \\ge 1$.",
+            "explanation": "Al inicio $i = 1$. La condición del invariante $1 \\le i \\le N$ se traduce en $1 \\le 1 \\le N$. Como la precondición nos asegura que $N \\ge 1$, la proposición es lógicamente verdadera."
+        },
+        {
+            "q": "¿Qué ocurre con la validez de la demostración si el mantenimiento de un invariante de bucle falla en una única iteración intermedia?",
+            "options": [
+                "Toda la demostración matemática queda invalidada y el invariante propuesto no es correcto",
+                "El invariante sigue siendo válido por aproximación estadística",
+                "La corrección parcial se mantiene, pero se pierde la corrección total"
+            ],
+            "correct": 0,
+            "hint": "El mantenimiento debe ser un paso inductivo válido para cualquier iteración.",
+            "explanation": "El mantenimiento es un paso inductivo que debe cumplirse para toda iteración. Si falla en un solo caso, el invariante no se conserva y no se puede asegurar la corrección del algoritmo."
+        },
+        {
+            "q": "¿Cuál es el invariante para un bucle que calcula el valor máximo de los elementos procesados en un array `A` de longitud $N$?",
+            "options": [
+                "$max = \\text{maximo}(A[0..i-1]) \\land 1 \\le i \\le N$",
+                "$max = \\text{maximo}(A[0..i]) \\land 0 \\le i < N$",
+                "$max = \\text{maximo}(A[i..N-1]) \\land 0 \\le i \\le N$"
+            ],
+            "correct": 0,
+            "hint": "El invariante cubre los elementos ya procesados por el bucle.",
+            "explanation": "En un recorrido típico, la variable `max` guarda el valor máximo de la porción del array ya analizada, que abarca desde la posición 0 hasta $i-1$. A medida que `i` avanza, se actualiza."
+        },
+        {
+            "q": "Si un bucle nunca llega a ejecutarse porque la condición $B$ es falsa desde el principio, ¿se cumple la corrección parcial?",
+            "options": [
+                "Sí, se cumple trivialmente pues el estado inicial de inicialización debe implicar directamente la postcondición",
+                "No, la corrección parcial exige al menos una ejecución del cuerpo del bucle",
+                "Queda indeterminada hasta que se evalúe con datos de prueba"
+            ],
+            "correct": 0,
+            "hint": "Analice el paso de finalización con cero iteraciones.",
+            "explanation": "Si $B$ es falsa al inicio, tras la inicialización se tiene $I$. Como $\\neg B$ es verdadera, tenemos $I \\land \\neg B$. Si el diseño es correcto, esto implica la postcondición $R$ de manera inmediata."
+        },
+        {
+            "q": "En la lógica de Hoare, si la tripleta $\\{Q\\} \\, S \\, \\{R\\}$ es válida y la precondición $Q$ es falsa, ¿qué ocurre?",
+            "options": [
+                "La tripleta es trivialmente válida, pero no garantiza nada sobre el estado final tras ejecutar $S$",
+                "El programa fallará con un error de ejecución de la JVM",
+                "La postcondición $R$ será necesariamente falsa al terminar"
+            ],
+            "correct": 0,
+            "hint": "La implicación $A \\implies B$ es verdadera si $A$ es falso.",
+            "explanation": "La validez de la tripleta es condicional: 'si se cumple $Q$, entonces al terminar $S$ se cumple $R$'. Si $Q$ es falsa, la condición de la implicación no se cumple, por lo que la tripleta es válida pero inútil."
+        },
+        {
+            "q": "Si el cuerpo de un bucle puede lanzar una excepción en tiempo de ejecución (como una división por cero), ¿es posible garantizar la corrección total?",
+            "options": [
+                "No, porque una excepción detendría la ejecución abruptamente impidiendo alcanzar el estado final esperado",
+                "Sí, ya que las excepciones de la JVM no afectan a las demostraciones lógicas formales",
+                "Sí, siempre que el invariante de bucle incluya la cláusula de la excepción"
+            ],
+            "correct": 0,
+            "hint": "La corrección total garantiza que el programa termina correctamente en un estado que satisface la postcondición.",
+            "explanation": "Para garantizar la corrección total, el programa debe terminar normalmente en un estado que satisfaga la postcondición. Si ocurre una excepción no controlada, el programa aborta y no se cumple la postcondición."
+        },
+        {
+            "q": "¿Cómo se relaciona la demostración de un invariante de bucle con el principio de inducción matemática?",
+            "options": [
+                "La inicialización equivale al caso base y el mantenimiento al paso inductivo sobre las iteraciones",
+                "La cota equivale al caso base y el invariante al paso inductivo",
+                "No existe ninguna relación directa entre la inducción y el invariante"
+            ],
+            "correct": 0,
+            "hint": "El invariante se demuestra paso a paso, asumiendo que se cumplía en el paso anterior.",
+            "explanation": "El paso de inicialización demuestra que el invariante se cumple al inicio (caso base). El mantenimiento demuestra que si se cumple en la iteración $k$, se cumplirá en la iteración $k+1$ (paso inductivo)."
+        },
+        {
+            "q": "Si la postcondición requiere $x = 10$ al finalizar, y nuestra demostración de finalización $(I \\land \\neg B)$ solo garantiza que $x \\ge 10$, ¿qué concluimos?",
+            "options": [
+                "Que la demostración es insuficiente para garantizar la postcondición requerida",
+                "Que el algoritmo es correcto porque $x \\ge 10$ incluye el caso de $x = 10$",
+                "Que debemos cambiar la precondición para forzar la igualdad"
+            ],
+            "correct": 0,
+            "hint": "La postcondición real es más restrictiva que la deducida del invariante y la salida.",
+            "explanation": "Si la postcondición exige una igualdad exacta ($x=10$), pero la salida del bucle solo nos permite asegurar una desigualdad ($x \\ge 10$), no podemos garantizar que el resultado final sea exactamente el deseado."
+        },
+        {
+            "q": "Al analizar el bucle `while (i <= N)`, ¿cuál es la condición formal de continuación $B$?",
+            "options": [
+                "$i \\le N$",
+                "$i < N$",
+                "$i > N$"
+            ],
+            "correct": 0,
+            "hint": "Es la expresión lógica que se encuentra dentro de los paréntesis del while.",
+            "explanation": "La condición de continuación $B$ de un bucle es simplemente el predicado que controla su ejecución, en este caso literal: $i \\le N$."
+        },
+        {
+            "q": "¿Cómo afecta el uso de una sentencia `break` dentro de un bucle a la demostración formal mediante invariantes?",
+            "options": [
+                "Invalida el esquema estándar de finalización $(I \\land \\neg B) \\implies R$, obligando a analizar múltiples puntos de salida",
+                "No afecta en absoluto, pues el invariante se sigue cumpliendo en el break",
+                "Hace que el bucle no requiera invariantes de inicialización"
+            ],
+            "correct": 0,
+            "hint": "El break permite salir del bucle en un punto intermedio donde la condición $B$ todavía es verdadera.",
+            "explanation": "El uso de `break` introduce una salida prematura donde $B$ es verdadera. Por tanto, no se puede asumir $\\neg B$ al salir por esa vía, complicando la demostración formal al requerir aserciones específicas en cada `break`."
+        },
+        {
+            "q": "¿Cuál es el beneficio de diseñar el invariante de un bucle antes de codificarlo?",
+            "options": [
+                "Permite estructurar las variables y las condiciones del código para que sea correcto por diseño",
+                "Permite que el compilador de Java optimice el código a nivel de bytes de forma automática",
+                "Evita tener que declarar variables locales adicionales dentro del cuerpo del bucle"
+            ],
+            "correct": 0,
+            "hint": "Diseñar pensando en la corrección formal previene la inserción de bugs lógicos.",
+            "explanation": "Diseñar el invariante de forma previa proporciona una guía clara sobre cómo deben inicializarse las variables y cómo deben actualizarse en cada iteración para preservar el estado coherente del algoritmo."
+        },
+        {
+            "q": "Si un bucle `while (i < N)` incrementa `i` de 1 en 1, ¿qué valor tiene la cota $t = N - i$ tras finalizar el bucle?",
+            "options": [
+                "Cero o un valor negativo (específicamente $t \\le 0$)",
+                "Un valor estrictamente positivo",
+                "El valor inicial de N"
+            ],
+            "correct": 0,
+            "hint": "Al salir del bucle se cumple $\\neg B$, es decir, $i \\ge N$.",
+            "explanation": "Si el bucle termina, la condición de continuación $i < N$ se vuelve falsa, lo que significa que $i \\ge N$. Sustituyendo esto en la cota $t = N - i$, obtenemos que $t \\le 0$."
+        },
+        {
+            "q": "Al demostrar la terminación, ¿por qué es incorrecto proponer una cota constante como $t = N$?",
+            "options": [
+                "Porque no cumple la condición de decrecimiento estricto en cada iteración",
+                "Porque no está acotada inferiormente",
+                "Porque una cota constante siempre causa bucles infinitos"
+            ],
+            "correct": 0,
+            "hint": "El valor de la cota en la siguiente iteración $t'$ debe ser estrictamente menor que $t$.",
+            "explanation": "Una cota constante tiene el mismo valor en todas las iteraciones ($t' = t_0 = N$), por lo que no cumple el requisito de decremento estricto ($t' < t_0$), impidiendo demostrar la terminación."
+        },
+        {
+            "q": "Si proponemos como invariante de bucle el predicado trivial `true`, ¿qué condición se cumple y cuál no sirve?",
+            "options": [
+                "Se cumple el mantenimiento, pero no sirve para demostrar la postcondición final",
+                "Se cumple la finalización, pero falla la inicialización",
+                "No se cumple ninguna condición de corrección parcial"
+            ],
+            "correct": 0,
+            "hint": "`true` siempre es verdadero, pero carece de información útil sobre las variables del programa.",
+            "explanation": "Si $I = \\text{true}$, las tripletas de inicialización y mantenimiento se cumplen trivialmente (ya que `true` siempre es cierto). Sin embargo, al final $(I \\land \\neg B)$ se reduce a $\\neg B$, lo cual raramente implica la postcondición $R$."
+        },
+        {
+            "q": "En la suma de elementos, si se cambia la actualización `i = i + 1` por `i = i + 2`, ¿por qué falla el invariante $suma = \\sum_{j=0}^{i-1} A[j]$?",
+            "options": [
+                "Porque en la actualización se saltan elementos del array, perdiendo el paso inductivo del mantenimiento",
+                "Porque la inicialización se vuelve incorrecta inmediatamente",
+                "Porque la cota deja de estar acotada inferiormente"
+            ],
+            "correct": 0,
+            "hint": "Piense en qué pasa con la variable `suma` si incrementamos `i` de dos en dos sin sumar el elemento intermedio.",
+            "explanation": "Si `i` incrementa en 2, para mantener el invariante deberíamos sumar tanto $A[i]$ como $A[i+1]$ a la vez. Si solo sumamos uno, el predicado del invariante deja de cumplirse tras la primera iteración."
+        },
+        {
+            "q": "¿Cuál es la cota apropiada para un bucle `while (low <= high)` en una búsqueda binaria donde el rango se divide por la mitad en cada paso?",
+            "options": [
+                "$t = high - low + 1$",
+                "$t = high + low$",
+                "$t = low - high$"
+            ],
+            "correct": 0,
+            "hint": "El número de elementos en el rango de búsqueda es $high - low + 1$.",
+            "explanation": "La longitud del intervalo de búsqueda es $high - low + 1$. Al reducirse el intervalo a la mitad en cada paso, esta expresión entera disminuye estrictamente y está acotada inferiormente por 0."
+        },
+        {
+            "q": "Para un bucle `while (i != N)`, si sabemos que $i$ incrementa de 1 en 1 desde 0, ¿qué precondición es necesaria para que $t = N - i$ sea una cota válida?",
+            "options": [
+                "$N \\ge 0$",
+                "$N < 0$",
+                "$N$ debe ser un número impar"
+            ],
+            "correct": 0,
+            "hint": "Si N fuera negativo, la cota inicial $N - i$ sería negativa, violando la acotación inferior.",
+            "explanation": "Para que la cota $t = N - i$ cumpla la acotación inferior ($t \\ge 0$ mientras dure el bucle $i \\neq N$), se requiere que el bucle comience con $i \\le N$. Como se inicializa $i=0$, es indispensable que $N \\ge 0$."
+        },
+        {
+            "q": "Si la precondición es $N < 0$ y ejecutamos un bucle `while (i < N)` con `i` inicializado en 0 e incrementado en 1, ¿cuál es el comportamiento del bucle?",
+            "options": [
+                "El bucle realiza exactamente cero iteraciones porque la condición inicial es falsa",
+                "Se produce un bucle infinito porque `i` se aleja de $N$",
+                "Lanza un error de desbordamiento numérico en la primera iteración"
+            ],
+            "correct": 0,
+            "hint": "Compare `i = 0` con `N < 0` al evaluar la primera condición.",
+            "explanation": "Al inicio $i = 0$. Como $N < 0$, la condición $i < N$ (es decir, $0 < N$) es falsa de forma inmediata. El bucle no se ejecuta y finaliza con cero iteraciones de forma segura."
+        },
+        {
+            "q": "¿Qué representa la técnica del invariante en el ciclo de vida del desarrollo de software seguro?",
+            "options": [
+                "Un mecanismo matemático de verificación de la lógica interna que complementa a las pruebas unitarias",
+                "Un framework de pruebas automatizadas que se ejecuta en servidores de integración continua",
+                "Un estándar de codificación para dar formato a los bucles `for` e `if` en Java"
+            ],
+            "correct": 0,
+            "hint": "Permite demostrar de forma matemática y estática que el código se comporta de acuerdo con su diseño.",
+            "explanation": "Los invariantes y la lógica de Hoare proveen un método estático y riguroso para verificar que el diseño de un algoritmo es inherentemente correcto para cualquier entrada válida, sin depender de la ejecución física de pruebas."
+        },
+        {
+            "q": "Si definimos un invariante como $0 \\le i \\le N$ en un bucle `while (i < N)` con $N \\ge 0$, ¿qué valor tiene `i` al finalizar?",
+            "options": [
+                "$i = N$",
+                "$i = N - 1$",
+                "$i = 0$"
+            ],
+            "correct": 0,
+            "hint": "El bucle termina cuando $i \\ge N$, y el invariante asegura que $i \\le N$.",
+            "explanation": "Al finalizar el bucle se cumple el invariante ($0 \\le i \\le N$) y la negación de la condición ($i \\ge N$). La intersección de ambas condiciones exige necesariamente que $i = N$."
+        }
+    ],
+    "TEST_B": [
+        {
+            "q": "Considere el código Java:\n```java\nint i = 0;\nwhile (i < N) {\n    ____;\n}\n```\nPara asegurar la terminación si $N > 0$, el espacio en blanco debe ser:",
+            "options": [
+                "i++",
+                "i--",
+                "i = 0"
+            ],
+            "correct": 0,
+            "hint": "El índice i debe incrementarse para acercarse a N.",
+            "explanation": "El incremento `i++` permite que `i` alcance eventualmente el valor `N`, haciendo que la condición del bucle sea falsa y termine el programa."
+        },
+        {
+            "q": "En el siguiente fragmento de código:\n```java\nint x = 10;\nwhile (x > 0) {\n    ____;\n}\n```\n¿Qué expresión reduce estrictamente el valor de la cota natural $t = x$ en cada iteración?",
+            "options": [
+                "x--",
+                "x++",
+                "x = x * 2"
+            ],
+            "correct": 0,
+            "hint": "El valor de x debe disminuir hacia cero.",
+            "explanation": "La instrucción `x--` decrementa `x` en 1 en cada iteración, lo que hace decrecer la cota y asegura la finalización al llegar a 0."
+        },
+        {
+            "q": "Se desea sumar los elementos de un array `A` de tamaño $N$. La inicialización del bucle es:\n```java\nint i = 0;\nint suma = ____;\n```\nIndique el valor inicial correcto de `suma` para que el invariante de suma acumulada sea válido.",
+            "options": [
+                "0",
+                "1",
+                "A[0]"
+            ],
+            "correct": 0,
+            "hint": "El elemento neutro de la suma es cero.",
+            "explanation": "Inicializar `suma = 0` permite que al procesar el primer elemento $A[0]$, `suma` tome el valor correcto del primer elemento sin añadir ruido inicial."
+        },
+        {
+            "q": "Para demostrar el mantenimiento de un invariante $I$ en un bucle con cuerpo $S$ y condición $B$, demostramos la tripleta:\n```java\n{I && B} S {____}\n```\nEl valor esperado en la postcondición del cuerpo es:",
+            "options": [
+                "I",
+                "R",
+                "B"
+            ],
+            "correct": 0,
+            "hint": "El invariante debe mantenerse tras la ejecución del cuerpo del bucle.",
+            "explanation": "La definición de mantenimiento de un invariante exige que si se cumple al inicio de la iteración, se cumpla tras finalizar el cuerpo $S$, es decir, la postcondición de la tripleta es $I$."
+        },
+        {
+            "q": "La condición de finalización de un bucle establece que si se cumple el invariante $I$ y la condición del bucle $B$ es falsa, entonces se deduce la postcondición:\n```java\n(I && ____) => R\n```\nEl término faltante en la implicación es:",
+            "options": [
+                "!B",
+                "B",
+                "I"
+            ],
+            "correct": 0,
+            "hint": "La condición del bucle debe ser falsa para salir del mismo.",
+            "explanation": "Al salir de un bucle `while (B)`, la condición `B` es falsa, lo que se denota formalmente como `!B` en lógica proposicional."
+        },
+        {
+            "q": "Para verificar la acotación inferior de una cota $t$ en un bucle `while (B)`, debemos demostrar la implicación:\n```java\nB => t >= ____\n```\nEl valor límite no negativo más común es:",
+            "options": [
+                "0",
+                "1",
+                "-1"
+            ],
+            "correct": 0,
+            "hint": "La cota entera debe estar acotada por debajo por el número entero neutro no negativo.",
+            "explanation": "La propiedad de acotación inferior exige que mientras la condición $B$ sea verdadera, la cota sea mayor o igual a 0 ($t \\ge 0$)."
+        },
+        {
+            "q": "En el bucle `while (i < N)` con cota $t = N - i$, si el cuerpo realiza `i = i + 1`, el valor de la nueva cota $t'$ es:\n```java\nt' = t - ____\n```\nEl valor del decremento constante es:",
+            "options": [
+                "1",
+                "2",
+                "0"
+            ],
+            "correct": 0,
+            "hint": "Calcule $N - (i + 1)$ y compare con $N - i$.",
+            "explanation": "Como $t' = N - (i + 1) = (N - i) - 1 = t - 1$, la cota decrece exactamente en 1 unidad en cada paso."
+        },
+        {
+            "q": "La corrección de la inicialización del invariante se demuestra mediante la tripleta de Hoare:\n```java\n{Q} inicializacion {____}\n```\nLa aserción resultante tras inicializar las variables es:",
+            "options": [
+                "I",
+                "R",
+                "B"
+            ],
+            "correct": 0,
+            "hint": "Al entrar al bucle por primera vez, se debe cumplir la propiedad invariante.",
+            "explanation": "El paso de inicialización requiere probar que el estado de las variables justo antes de entrar al bucle cumple el invariante de bucle $I$."
+        },
+        {
+            "q": "En el bucle de Java `while (i <= N)`, la condición de continuación $B$ expresada matemáticamente es:\n```java\nB: ____\n```",
+            "options": [
+                "i <= N",
+                "i < N",
+                "i == N"
+            ],
+            "correct": 0,
+            "hint": "Es la condición literal escrita entre los paréntesis del while.",
+            "explanation": "La condición de ejecución del bucle es la condición booleana del `while`, que en este caso es la expresión `i <= N`."
+        },
+        {
+            "q": "En Java, el bucle `while (i < N) { A[i] = 0; i++; }` lanzará un error del tipo `____` en tiempo de ejecución si $N$ supera la longitud del array `A`.",
+            "options": [
+                "ArrayIndexOutOfBoundsException",
+                "NullPointerException",
+                "ArithmeticException"
+            ],
+            "correct": 0,
+            "hint": "Se trata de un acceso fuera de los límites del array.",
+            "explanation": "Si `i` alcanza un valor mayor o igual que `A.length` y se intenta acceder a `A[i]`, Java lanza un `ArrayIndexOutOfBoundsException`."
+        },
+        {
+            "q": "Si el invariante de un bucle acumulador es $suma = \\sum_{j=0}^{i-1} A[j]$ y la inicialización es `int i = 1;`, el valor inicial de `suma` debe ser `____` para que la inicialización sea correcta.",
+            "options": [
+                "A[0]",
+                "0",
+                "A[1]"
+            ],
+            "correct": 0,
+            "hint": "Sustituya i=1 en la fórmula del sumatorio del invariante.",
+            "explanation": "Sustituyendo `i = 1`, la suma abarca desde `j = 0` hasta `i - 1 = 0`, lo que representa el elemento `A[0]`. Por tanto, `suma` debe inicializarse con `A[0]`."
+        },
+        {
+            "q": "En un bucle `while (i >= 0)`, la cota $t = i + 1$ cumple la condición de acotación inferior, garantizando que si $B$ es verdadero, entonces:\n```java\nt >= ____\n```",
+            "options": [
+                "1",
+                "0",
+                "-1"
+            ],
+            "correct": 0,
+            "hint": "Si la condición del bucle i >= 0 es verdadera, ¿cuál es el mínimo valor de i + 1?",
+            "explanation": "Dado que $i \\ge 0$ es verdadero, sumando 1 a ambos miembros se obtiene $i + 1 \\ge 1$, por lo que la cota $t \\ge 1$ (lo cual implica $t \\ge 0$)."
+        },
+        {
+            "q": "Si un bucle es `while (i < N)` con `i` inicializado en 0 e incrementándose de 2 en 2 en cada paso, y $N = 10$, el bucle realizará exactamente `____` iteraciones en Java.",
+            "options": [
+                "5",
+                "10",
+                "6"
+            ],
+            "correct": 0,
+            "hint": "Los valores de i serán 0, 2, 4, 6, 8.",
+            "explanation": "El bucle se ejecuta con `i = 0, 2, 4, 6, 8` (5 iteraciones). Al llegar `i = 10`, la condición `10 < 10` es falsa y el bucle termina."
+        },
+        {
+            "q": "El fragmento de código:\n```java\nint i = N;\nwhile (i > 0) {\n    i--;\n}\n```\nTiene como cota o función variante natural $t = ____$.",
+            "options": [
+                "i",
+                "N - i",
+                "N"
+            ],
+            "correct": 0,
+            "hint": "Es la variable que decrece hacia la condición de salida i <= 0.",
+            "explanation": "Dado que `i` disminuye hacia 0 y el bucle termina cuando `i <= 0`, la variable `i` actúa directamente como la función variante $t = i$."
+        },
+        {
+            "q": "En el análisis de un bucle, si el invariante establece $i \\le N$ y al finalizar sabemos que $i \\ge N$, concluimos que se cumple $i = ____$.",
+            "options": [
+                "N",
+                "0",
+                "N - 1"
+            ],
+            "correct": 0,
+            "hint": "Es el único valor que satisface simultáneamente ambas desigualdades.",
+            "explanation": "La única forma de cumplir simultáneamente $i \\le N$ e $i \\ge N$ es que el valor de `i` sea exactamente igual a `N`."
+        },
+        {
+            "q": "Si la precondición es $N \\ge 0$, y el código inicializa `int i = N;`, el bucle `while (i < N)` realizará exactamente `____` iteraciones.",
+            "options": [
+                "0",
+                "1",
+                "N"
+            ],
+            "correct": 0,
+            "hint": "Compare el valor inicial de i con N antes de la primera evaluación.",
+            "explanation": "Como `i` se inicializa con `N`, al evaluar `i < N` se obtiene `N < N`, lo cual es falso de inmediato. Por lo tanto, el bucle realiza 0 iteraciones."
+        },
+        {
+            "q": "Complete el fragmento de código para acumular únicamente los elementos pares de un array `A` en `suma`:\n```java\nwhile (i < N) {\n    ____;\n    i++;\n}\n```",
+            "options": [
+                "if (A[i] % 2 == 0) suma += A[i]",
+                "suma += A[i]",
+                "suma += 2"
+            ],
+            "correct": 0,
+            "hint": "Se debe comprobar si el elemento actual es divisible por 2 antes de sumarlo.",
+            "explanation": "La condición `A[i] % 2 == 0` filtra los números pares del array antes de sumarlos a la variable acumuladora `suma`."
+        },
+        {
+            "q": "Para un bucle de búsqueda lineal estructurado como `while (i < N && !encontrado)`, la condición completa de continuación $B$ es `____`.",
+            "options": [
+                "i < N && !encontrado",
+                "i < N",
+                "!encontrado"
+            ],
+            "correct": 0,
+            "hint": "Es la conjunción de los dos predicados que controlan el while.",
+            "explanation": "La condición de continuación $B$ está formada por la expresión completa que evalúa el bucle: `i < N && !encontrado`."
+        },
+        {
+            "q": "Si la variable `i` se actualiza en el bucle como `i = i - 1`, y la cota es $t = i$, tras ejecutar el cuerpo del bucle el nuevo valor de la cota es $t' = ____$.",
+            "options": [
+                "i - 1",
+                "i",
+                "i + 1"
+            ],
+            "correct": 0,
+            "hint": "Sustituya el nuevo valor de i en la definición de la cota.",
+            "explanation": "Dado que $t = i$ y el nuevo valor de la variable es $i' = i - 1$, la nueva cota es $t' = i' = i - 1$."
+        },
+        {
+            "q": "En Java, el bucle `while (i < N) { A[i] = A[i]; }` con $N > 0$ e `i = 0` provoca un error lógico del tipo `____` en tiempo de ejecución.",
+            "options": [
+                "bucle infinito",
+                "desbordamiento de pila",
+                "error de compilación"
+            ],
+            "correct": 0,
+            "hint": "Observe que el valor de la variable i no cambia en el cuerpo del bucle.",
+            "explanation": "Al no modificarse la variable de control `i` en el cuerpo del bucle, la condición `i < N` siempre es verdadera, resultando en un bucle infinito."
+        },
+        {
+            "q": "Para demostrar la corrección de un bucle `while (B) { S; }`, ¿qué condiciones deben demostrarse sobre el invariante $I$?",
+            "options": [
+                "Inicialización: la ejecución del código de inicialización partiendo de la precondición establece el invariante",
+                "Mantenimiento: si el invariante y la condición del bucle son verdaderos antes de iterar, el invariante se cumple al final de la iteración",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Considere la inicialización, el mantenimiento y la finalización.",
+            "explanation": "La demostración del invariante consta de tres partes: Inicialización (paso base), Mantenimiento (paso inductivo) y Finalización (implicación de la postcondición)."
+        },
+        {
+            "q": "¿Cuáles de las siguientes condiciones son necesarias sobre la cota $t$ para garantizar la corrección total?",
+            "options": [
+                "Acotación inferior: que la cota sea no negativa mientras la condición del bucle sea verdadera",
+                "Decrecimiento estricto: que cada iteración del bucle reduzca el valor de la cota",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Son las dos propiedades requeridas para demostrar que el bucle no puede ejecutarse indefinidamente.",
+            "explanation": "La función variante o de cota exige tanto estar acotada por debajo por un valor (típicamente 0) como disminuir estrictamente en cada iteración."
+        },
+        {
+            "q": "Si un bucle finaliza normalmente en un estado que satisface tanto el invariante $I$ como la negación de la condición de bucle $\\neg B$, ¿qué se puede afirmar?",
+            "options": [
+                "Se cumplirá la postcondición $R$ si se verifica que $(I \\land \\neg B) \\implies R$",
+                "El algoritmo es parcialmente correcto con respecto a la postcondición $R$",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Es el principio de la finalización en la corrección parcial.",
+            "explanation": "Si el bucle termina, el invariante y la negación de la condición determinan la corrección del programa, siempre que la implicación $(I \\land \\neg B) \\implies R$ sea válida."
+        },
+        {
+            "q": "Al implementar un bucle para calcular el producto de los elementos de un array `A` de longitud $N \\ge 1$, ¿qué inicialización e invariantes son viables?",
+            "options": [
+                "Inicializar `prod = 1` e `i = 0` con invariante $prod = \\prod_{j=0}^{i-1} A[j]$",
+                "Inicializar `prod = A[0]` e `i = 1` con invariante $prod = \\prod_{j=0}^{i-1} A[j]$",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Ambos enfoques procesan correctamente todos los elementos del array de forma acumulada.",
+            "explanation": "Ambos diseños son correctos. El primero empieza desde el índice 0 multiplicando por el neutro 1, y el segundo parte del primer elemento $A[0]$ y empieza a iterar desde el índice 1."
+        },
+        {
+            "q": "¿Qué problemas pueden presentarse en un bucle si no se realiza un análisis de su invariante y de su cota?",
+            "options": [
+                "Una excepción de puntero nulo o índice fuera de límites en tiempo de ejecución",
+                "Un bucle infinito porque la variable de control no progresa hacia la terminación",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "La falta de análisis formal puede llevar a fallos de terminación o de acceso a memoria.",
+            "explanation": "Los errores de lógica en bucles comúnmente causan bucles infinitos (violación de cota) o errores de rango en arrays (violación de invariante de límites de índices)."
+        },
+        {
+            "q": "Indique cuál de los siguientes es un invariante válido para el cálculo de la suma acumulada de un array con un índice `i` que va de `0` a `N`:",
+            "options": [
+                "$suma = \\sum_{j=0}^{i-1} A[j] \\land 0 \\le i \\le N$",
+                "$suma + \\sum_{j=i}^{N-1} A[j] = \\sum_{j=0}^{N-1} A[j] \\land 0 \\le i \\le N$",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Ambas fórmulas expresan matemáticamente que la parte sumada más la parte restante es igual al total.",
+            "explanation": "Ambos predicados son lógicamente equivalentes. El primero es la forma directa habitual, y el segundo expresa que lo acumulado y lo restante suman el total del array."
+        },
+        {
+            "q": "En el marco del diseño formal de algoritmos, ¿qué partes integran la demostración de la corrección total?",
+            "options": [
+                "El planteamiento de precondición y postcondición formal mediante lógica de primer orden",
+                "La validación del invariante y el análisis de la terminación mediante la cota",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Requiere la especificación formal del problema y la demostración de invariante y cota.",
+            "explanation": "La corrección total comprende tanto la definición de pre/postcondición como la prueba formal de la corrección parcial (invariantes) y la terminación (cota)."
+        },
+        {
+            "q": "Dado el código `while (i < N) { A[i] = A[i] * 2; i++; }`, si la precondición permite que $N > A.length$, ¿qué ocurrirá?",
+            "options": [
+                "El programa lanzará una excepción al superar los límites físicos del array",
+                "El invariante de límites del índice $0 \\le i \\le A.length$ se violará en ejecución",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Se intenta acceder a elementos del array que no existen.",
+            "explanation": "Si $N$ supera el tamaño del array, el bucle intentará acceder a indices no válidos, lo cual viola el invariante de seguridad del índice y lanza una excepción."
+        },
+        {
+            "q": "¿Qué características definen a un invariante de bucle útil para la demostración de un programa?",
+            "options": [
+                "Debe capturar la lógica del estado acumulado en las iteraciones intermedias",
+                "Debe ser lo suficientemente fuerte como para que al finalizar el bucle implique la postcondición",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Debe relacionar de forma precisa las variables que cambian y permitir concluir la meta del algoritmo.",
+            "explanation": "Un invariante útil debe expresar el cálculo parcial completado y permitir deducir la postcondición combinándolo con la condición de parada del bucle."
+        },
+        {
+            "q": "Al verificar el decrecimiento de la cota $t$ de un bucle, ¿qué circunstancias impiden que decrezca estrictamente?",
+            "options": [
+                "No modificar las variables que forman parte de la expresión de la cota en el cuerpo del bucle",
+                "Actualizar las variables de forma que la cota aumente en lugar de disminuir",
+                "Todas las anteriores son correctas"
+            ],
+            "correct": 2,
+            "hint": "Piense en qué evitaría que $t' < t$ sea verdadero.",
+            "explanation": "Para que la cota decrezca, las variables de las que depende deben ser modificadas y la actualización debe reducir la distancia a la meta. No modificarlas o actualizarlas en sentido contrario impide el decrecimiento."
+        },
+        {
+            "q": "Si la precondición es $N < 0$ y ejecutamos en Java:\n```java\nint i = 0;\nwhile (i < N) {\n    i++;\n}\n```\n¿Cuántas iteraciones realiza el bucle?",
+            "options": [
+                "Realiza $N$ iteraciones",
+                "Realiza 1 iteración",
+                "Ninguna de las anteriores es correcta"
+            ],
+            "correct": 2,
+            "hint": "Compare i = 0 con un número negativo en la condición i < N.",
+            "explanation": "El bucle realiza exactamente 0 iteraciones ya que `0 < N` es falso desde el primer momento al ser $N$ negativo. Ninguna de las opciones anteriores es correcta (0 iteraciones)."
+        },
+        {
+            "q": "Considere el bucle `while (i < N) { i = i - 1; }` con $N > 0$ e `i` inicializado en 0. ¿Cuál es la cota válida para demostrar su terminación?",
+            "options": [
+                "t = N - i",
+                "t = i",
+                "Ninguna de las anteriores es correcta"
+            ],
+            "correct": 2,
+            "hint": "Observe la evolución del valor de i en cada iteración.",
+            "explanation": "El bucle es infinito ya que `i` disminuye de forma continua hacia los negativos, alejándose de `N`. Al no terminar el bucle, no existe una cota válida. Ninguna de las opciones es correcta."
+        },
+        {
+            "q": "Si proponemos el invariante $I: i == 0 \\land suma == 0$ para un bucle cuyo cuerpo es `suma += A[i]; i++;`, ¿en qué paso de la demostración falla?",
+            "options": [
+                "Falla en el paso de Inicialización",
+                "Falla en el paso de Finalización",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Evalúe el invariante después de realizar una iteración completa del bucle.",
+            "explanation": "La demostración falla en el mantenimiento, ya que tras una iteración $i=1$ y el invariante exige $i==0$. Como la opción correcta es Mantenimiento y no está listada directamente en las primeras dos, la respuesta es Ninguna de las anteriores."
+        },
+        {
+            "q": "Para el bucle `while (i != N)` con `i` inicializado en 0 y decrementándose de 1 en 1 ($i = i - 1$) con $N > 0$, ¿qué función de cota demuestra la terminación?",
+            "options": [
+                "t = N - i",
+                "t = i - N",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Verifique si el bucle realmente termina con esos parámetros.",
+            "explanation": "El bucle es infinito ya que `i` decrece y se aleja de $N$ (que es mayor que 0). Al no terminar el bucle, no es posible proponer una cota válida. La respuesta es Ninguna de las anteriores."
+        },
+        {
+            "q": "Si un bucle tiene corrección parcial respecto a una postcondición $R$, ¿qué podemos asegurar con certeza matemática sobre su ejecución?",
+            "options": [
+                "Que el bucle terminará garantizando un tiempo de ejecución polinomial",
+                "Que el bucle entrará al menos una vez al cuerpo del programa",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Recuerde la definición estricta de la corrección parcial.",
+            "explanation": "La corrección parcial solo asegura que si el bucle termina, su resultado final cumple la postcondición $R$. No asegura la terminación ni que el bucle se ejecute al menos una vez. La respuesta es Ninguna de las anteriores."
+        },
+        {
+            "q": "Si el invariante de bucle propuesto es $I: 0 \\le i < N$, y la condición del bucle es $B: i < N$, al salir del bucle se cumple:",
+            "options": [
+                "i > N",
+                "i < 0",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Al salir se cumple el invariante y la negación de la condición del bucle.",
+            "explanation": "Al salir se cumple $I \\land \\neg B$, lo que implica $0 \\le i < N \\land i \\ge N$, lo cual es una contradicción. Esto indica que el invariante propuesto no puede ser correcto en la salida. Por lo tanto, ninguna de las anteriores es correcta."
+        },
+        {
+            "q": "En el código `int i = 0; while (i < N) { A[i] = 0; }` con $N > 0$, ¿cuál es el valor final de la cota $t = N - i$ al salir?",
+            "options": [
+                "0",
+                "N",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Analice si el bucle realmente llega a un punto de salida.",
+            "explanation": "Este es un bucle infinito ya que la variable `i` no se modifica en el cuerpo del bucle, por lo que nunca se llega al final ni se puede evaluar la cota en la salida. La respuesta es Ninguna de las anteriores."
+        },
+        {
+            "q": "En la demostración de la inicialización $\\{Q\\} \\, \\text{inicialización} \\, \\{I\\}$ con precondición $Q: x > 0$ e inicialización `y = x - 1;`, ¿cuál de los siguientes invariantes NO es correcto?",
+            "options": [
+                "y >= 0",
+                "y < x",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Verifique si ambos invariantes se cumplen dadas las condiciones del código.",
+            "explanation": "Dado $x > 0 \\implies x \\ge 1$. Tras `y = x - 1`, tenemos $y \\ge 0$ e $y < x$. Como ambos predicados se cumplen, ninguno de ellos es incorrecto. La opción adecuada es Ninguna de las anteriores."
+        },
+        {
+            "q": "Para un bucle sobre un array de $N$ elementos con invariante $suma = \\sum_{j=0}^{i-1} A[j]$ y cota $t = N - i$, ¿qué sucede si cambiamos la condición de continuación de `i < N` a `i <= N`?",
+            "options": [
+                "El invariante en el punto de salida estándar implicará la suma de N elementos con i = N",
+                "La cota final al salir será 1",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "Al finalizar con la condición i <= N falsa, el valor final de i será N + 1.",
+            "explanation": "Al salir con `i <= N` falso, `i` valdrá `N + 1`. Esto haría que el invariante al salir representara la suma de `N + 1` elementos ($A[0..N]$), lo cual excedería los límites del array. Ninguna de las anteriores es correcta."
+        },
+        {
+            "q": "Si la precondición de un código es $A.length == 0$, y el código ejecuta `int i = 0; while (i < A.length) { A[i] = 1; }`, ¿qué error de compilación se produce?",
+            "options": [
+                "Error: variable i no inicializada",
+                "Error: array index out of bounds",
+                "Ninguna de las anteriores"
+            ],
+            "correct": 2,
+            "hint": "El código es sintácticamente correcto en Java.",
+            "explanation": "No se produce ningún error de compilación. En tiempo de ejecución tampoco hay error porque `i < A.length` (0 < 0) es falso y el bucle nunca se ejecuta, finalizando de forma limpia. La respuesta es Ninguna de las anteriores."
+        }
+    ],
+    "LABORATORIO": [
+        {
+            "id": "lab1",
+            "title": "Suma de elementos en un array",
+            "context": "Considere el siguiente fragmento de código diseñado para sumar los elementos de un array $A$:\n```java\nint suma = 0;\nint i = 0;\nint[] A = {2, 4, 6, 8, 10};\nint N = 5;\nwhile (i < N) {\n    suma = suma + A[i];\n    i = i + 1;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab1_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la cota $t = N - i$ cuando el bucle finaliza?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al salir del bucle se cumple $i \\ge N$. Dado el invariante de límites $i \\le N$, al finalizar tenemos $i = N = 5$. Por lo tanto, la cota final es $t = 5 - 5 = 0$."
+                },
+                {
+                    "id": "lab1_b",
+                    "label": "b)",
+                    "question": "¿Cuántas veces en total se evalúa la condición de continuación del bucle `i < N` (incluyendo la evaluación que resulta ser falsa)?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "El bucle realiza 5 iteraciones. La condición se evalúa al inicio de cada iteración (5 veces) más una vez adicional al final cuando la condición da falsa y se sale del bucle, resultando en $5 + 1 = 6$ evaluaciones."
+                },
+                {
+                    "id": "lab1_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la variable `suma` tras finalizar la tercera iteración?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "Tras la tercera iteración, se han sumado los tres primeros elementos del array: $A[0] + A[1] + A[2] = 2 + 4 + 6 = 12$."
+                },
+                {
+                    "id": "lab1_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la cota $t = N - i$ al inicio de la segunda iteración (antes de modificar la variable `i`)?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Al inicio de la segunda iteración, la variable `i` tiene el valor 1. Con $N = 5$, la cota es $t = 5 - 1 = 4$."
+                }
+            ]
+        },
+        {
+            "id": "lab2",
+            "title": "Búsqueda secuencial con bandera",
+            "context": "Se busca la posición de un valor $x$ en un array $A$ de tamaño $N$:\n```java\nint i = 0;\nint[] A = {1, 3, 5, 7, 9};\nint N = 5;\nint x = 7;\nboolean found = false;\nwhile (i < N && !found) {\n    if (A[i] == x) {\n        found = true;\n    } else {\n        i = i + 1;\n    }\n}\n```",
+            "parts": [
+                {
+                    "id": "lab2_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `i` al salir del bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El valor $x = 7$ se encuentra en el índice 3 del array ($A[3] = 7$). En la iteración donde $i = 3$, se activa `found = true` y el bucle termina con `i = 3`."
+                },
+                {
+                    "id": "lab2_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones completas realiza el bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta para $i = 0, 1, 2$ (donde no encuentra el valor y avanza `i`) y para $i = 3$ (donde se cumple $A[3] == 7$ y se marca `found = true`). En total realiza 4 iteraciones."
+                },
+                {
+                    "id": "lab2_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la cota $t = (N - i) + (found ? 0 : 1)$ al inicio (con $i=0$ y `found=false`)?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "Al inicio, $i = 0$ y `found = false` (representado por 1 en el término adicional). Por tanto, la cota es $(5 - 0) + 1 = 6$."
+                },
+                {
+                    "id": "lab2_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la cota $t$ al finalizar la ejecución del algoritmo?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Al finalizar, $i = 3$ y `found = true` (que aporta 0 a la cota). La cota es $(5 - 3) + 0 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab3",
+            "title": "Potencia de un número",
+            "context": "Considere el algoritmo para calcular $base^{exp}$ mediante multiplicaciones iterativas:\n```java\nint base = 2;\nint exp = 4;\nint res = 1;\nint i = 0;\nwhile (i < exp) {\n    res = res * base;\n    i = i + 1;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab3_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor de la variable `res` al finalizar el algoritmo?",
+                    "correctValue": 16,
+                    "tolerance": 0,
+                    "explanation": "El algoritmo calcula $2^4$, lo que resulta en $2 \\times 2 \\times 2 \\times 2 = 16$."
+                },
+                {
+                    "id": "lab3_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Dado que `i` comienza en 0 y se incrementa de 1 en 1 hasta llegar a `exp = 4`, realiza exactamente 4 iteraciones."
+                },
+                {
+                    "id": "lab3_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de `i` después de completar la segunda iteración?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "En cada iteración se incrementa `i` en 1. Al finalizar la segunda iteración, el índice `i` vale 2."
+                },
+                {
+                    "id": "lab3_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la cota $t = exp - i$ al inicio del bucle (antes de la primera iteración)?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Al inicio $i = 0$ y $exp = 4$. La cota es $t = 4 - 0 = 4$."
+                }
+            ]
+        },
+        {
+            "id": "lab4",
+            "title": "Cálculo del factorial",
+            "context": "Considere el algoritmo iterativo para el cálculo de $n!$:\n```java\nint n = 4;\nint fact = 1;\nint i = 1;\nwhile (i <= n) {\n    fact = fact * i;\n    i = i + 1;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab4_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de `fact` al terminar el algoritmo?",
+                    "correctValue": 24,
+                    "tolerance": 0,
+                    "explanation": "El factorial de 4 es $4! = 1 \\times 2 \\times 3 \\times 4 = 24$."
+                },
+                {
+                    "id": "lab4_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle en total?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El bucle itera para $i = 1, 2, 3, 4$. Para $i = 5$ la condición $i \\le 4$ es falsa, por lo que realiza 4 iteraciones."
+                },
+                {
+                    "id": "lab4_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final de la variable de control `i` al salir del bucle?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "Al salir del bucle se cumple la negación de la condición $i \\le n$, lo cual para incrementos unitarios implica que $i = n + 1 = 5$."
+                },
+                {
+                    "id": "lab4_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = n + 1 - i$, ¿cuál es su valor tras finalizar la segunda iteración (cuando $i$ pasa a valer 3)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tras la segunda iteración, $i = 3$. Con $n = 4$, la cota es $t = 4 + 1 - 3 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab5",
+            "title": "División entera mediante restas",
+            "context": "Se realiza la división entera de 17 entre 5:\n```java\nint dividendo = 17;\nint divisor = 5;\nint cociente = 0;\nint resto = dividendo;\nwhile (resto >= divisor) {\n    resto = resto - divisor;\n    cociente = cociente + 1;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab5_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor de la variable `cociente` al finalizar el algoritmo?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El cociente de la división entera $17 / 5$ es 3."
+                },
+                {
+                    "id": "lab5_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor de la variable `resto` al finalizar el bucle?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El resto de la división entera $17 \\pmod 5$ es $17 - (3 \\times 5) = 2$."
+                },
+                {
+                    "id": "lab5_c",
+                    "label": "c)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta 3 veces: en la primera iteración `resto` pasa de 17 a 12, en la segunda de 12 a 7, y en la tercera de 7 a 2. Para 2, la condición $2 \\ge 5$ es falsa."
+                },
+                {
+                    "id": "lab5_d",
+                    "label": "d)",
+                    "question": "Si definimos la cota del bucle como $t = resto$, ¿cuál es su valor justo antes de iniciar la primera iteración?",
+                    "correctValue": 17,
+                    "tolerance": 0,
+                    "explanation": "Antes de entrar al bucle, `resto` se inicializa con el valor del `dividendo`, que es 17. Por tanto, la cota inicial es 17."
+                }
+            ]
+        },
+        {
+            "id": "lab6",
+            "title": "Búsqueda binaria en array",
+            "context": "Se aplica búsqueda binaria en un array ordenado de tamaño 8:\n```java\nint[] A = {2, 4, 6, 8, 10, 12, 14, 16};\nint low = 0;\nint high = 7;\nint x = 12;\nint pos = -1;\nwhile (low <= high && pos == -1) {\n    int mid = (low + high) / 2;\n    if (A[mid] == x) {\n        pos = mid;\n    } else if (A[mid] < x) {\n        low = mid + 1;\n    } else {\n        high = mid - 1;\n    }\n}\n```",
+            "parts": [
+                {
+                    "id": "lab6_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor del índice `pos` al finalizar la ejecución?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El elemento 12 se encuentra en el índice 5 del array. El algoritmo actualiza `pos = mid` al hallarlo."
+                },
+                {
+                    "id": "lab6_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle en total?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "En la 1ª iteración, `low=0, high=7, mid=3`. $A[3]=8 < 12 \\implies low=4$. En la 2ª iteración, `low=4, high=7, mid=5`. $A[5]=12 == 12 \\implies pos=5$. El bucle termina. En total son 2 iteraciones."
+                },
+                {
+                    "id": "lab6_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la variable `mid` en la primera iteración?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "En el primer paso, `low = 0` y `high = 7`. La división entera nos da $mid = (0 + 7) / 2 = 3$."
+                },
+                {
+                    "id": "lab6_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de `low` al inicio de la segunda iteración?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Dado que $A[3] = 8 < 12$, la rama ejecutada hace `low = mid + 1`, lo que resulta en $3 + 1 = 4$."
+                }
+            ]
+        },
+        {
+            "id": "lab7",
+            "title": "Algoritmo de Euclides para MCD",
+            "context": "Cálculo del Máximo Común Divisor entre 48 y 18:\n```java\nint a = 48;\nint b = 18;\nwhile (b != 0) {\n    int temp = b;\n    b = a % b;\n    a = temp;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab7_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor de `a` al finalizar el algoritmo?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "El MCD de 48 y 18 es 6. La variable `a` guarda el último divisor no nulo."
+                },
+                {
+                    "id": "lab7_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "1ª iteración: `temp=18`, `b = 48 % 18 = 12`, `a=18`. 2ª iteración: `temp=12`, `b = 18 % 12 = 6`, `a=12`. 3ª iteración: `temp=6`, `b = 12 % 6 = 0`, `a=6`. El bucle termina. Total = 3 iteraciones."
+                },
+                {
+                    "id": "lab7_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de `b` después de la primera iteración?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "Tras el primer paso, `b` toma el valor de `48 % 18`, que es 12."
+                },
+                {
+                    "id": "lab7_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de `b` después de la segunda iteración?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "En el segundo paso, `b` toma el valor de `a % b`, que es `18 % 12 = 6`."
+                }
+            ]
+        },
+        {
+            "id": "lab8",
+            "title": "Suma en una matriz 2D",
+            "context": "Considere la suma acumulada de una matriz de 2x2:\n```java\nint[][] M = {\n    {1, 2},\n    {3, 4}\n};\nint suma = 0;\nint i = 0;\nwhile (i < 2) {\n    int j = 0;\n    while (j < 2) {\n        suma += M[i][j];\n        j++;\n    }\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab8_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `suma`?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "La suma de todos los elementos es $1 + 2 + 3 + 4 = 10$."
+                },
+                {
+                    "id": "lab8_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones totales realiza el bucle interno `j < 2` a lo largo de toda la ejecución?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Por cada una de las 2 iteraciones del bucle externo, el bucle interno itera 2 veces. El total de iteraciones es $2 \\times 2 = 4$."
+                },
+                {
+                    "id": "lab8_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la cota $t = 2 - i$ del bucle externo tras finalizar la primera iteración del bucle externo?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Tras una iteración del bucle externo, `i` se incrementa a 1. La cota es $t = 2 - 1 = 1$."
+                },
+                {
+                    "id": "lab8_d",
+                    "label": "d)",
+                    "question": "¿Cuántas veces en total se evalúa la condición del bucle externo `i < 2`?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle externo se evalúa para $i=0$ (entra), $i=1$ (entra) e $i=2$ (falso y sale), lo que da un total de 3 evaluaciones."
+                }
+            ]
+        },
+        {
+            "id": "lab9",
+            "title": "Copia de array",
+            "context": "Se copia el contenido de un array a otro:\n```java\nint[] orig = {10, 20, 30};\nint[] dest = new int[3];\nint i = 0;\nwhile (i < orig.length) {\n    dest[i] = orig[i];\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab9_a",
+                    "label": "a)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El array tiene longitud 3, por lo que el bucle itera para $i = 0, 1, 2$ (3 veces)."
+                },
+                {
+                    "id": "lab9_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor final de la variable `i` al terminar la ejecución?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle termina cuando $i \\ge orig.length$. Al incrementarse de uno en uno, el valor final es 3."
+                },
+                {
+                    "id": "lab9_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor del elemento `dest[1]` al terminar la ejecución?",
+                    "correctValue": 20,
+                    "tolerance": 0,
+                    "explanation": "El elemento `orig[1]` que vale 20 se copia en `dest[1]` durante la segunda iteración."
+                },
+                {
+                    "id": "lab9_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la cota $t = 3 - i$ al inicio del bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Al inicio $i = 0$. La cota es $t = 3 - 0 = 3$."
+                }
+            ]
+        },
+        {
+            "id": "lab10",
+            "title": "Invertir elementos de un array",
+            "context": "Se invierte la posición de los elementos de un array utilizando dos punteros:\n```java\nint[] A = {1, 2, 3, 4, 5, 6};\nint i = 0;\nint j = 5;\nwhile (i < j) {\n    int temp = A[i];\n    A[i] = A[j];\n    A[j] = temp;\n    i++;\n    j--;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab10_a",
+                    "label": "a)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Iteraciones: 1) $i=0, j=5$ (se intercambian), pasa a $i=1, j=4$. 2) $i=1, j=4$ (intercambio), pasa a $i=2, j=3$. 3) $i=2, j=3$ (intercambio), pasa a $i=3, j=2$. En el siguiente paso $3 < 2$ es falso. Total: 3 iteraciones."
+                },
+                {
+                    "id": "lab10_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor de `i` al finalizar la ejecución?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "En la tercera iteración, `i` se incrementa de 2 a 3."
+                },
+                {
+                    "id": "lab10_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de `j` al finalizar la ejecución?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "En la tercera iteración, `j` se decrementa de 3 a 2."
+                },
+                {
+                    "id": "lab10_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la cota $t = j - i + 1$ antes de iniciar la primera iteración?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "Al inicio $i = 0$ y $j = 5$. La cota es $t = 5 - 0 + 1 = 6$."
+                }
+            ]
+        },
+        {
+            "id": "lab11",
+            "title": "Bucle con paso variable",
+            "context": "Se realiza una suma acumulada con incremento doble del índice:\n```java\nint suma = 0;\nint i = 0;\nint N = 8;\nwhile (i < N) {\n    suma += i;\n    i = i + 2;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab11_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `suma`?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "Se suman los índices pares menores que 8: $0 + 2 + 4 + 6 = 12$."
+                },
+                {
+                    "id": "lab11_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta para $i = 0, 2, 4, 6$. En total realiza 4 iteraciones."
+                },
+                {
+                    "id": "lab11_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final del índice `i` al terminar el algoritmo?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "En la última iteración, `i = 6` y se incrementa en 2, quedando en 8, lo que hace que la condición `8 < 8` sea falsa."
+                },
+                {
+                    "id": "lab11_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = (N - i) / 2$, ¿cuál es su valor en la tercera iteración (cuando `i` vale 4)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Sustituyendo $N = 8$ e $i = 4$, la cota es $t = (8 - 4) / 2 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab12",
+            "title": "Algoritmo de multiplicación rusa",
+            "context": "Se multiplica 11 por 3 usando la multiplicación rusa:\n```java\nint a = 11;\nint b = 3;\nint res = 0;\nwhile (a > 0) {\n    if (a % 2 != 0) {\n        res = res + b;\n    }\n    a = a / 2;\n    b = b * 2;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab12_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `res`?",
+                    "correctValue": 33,
+                    "tolerance": 0,
+                    "explanation": "El algoritmo calcula $11 \\times 3 = 33$. Al finalizar, `res` contiene el producto acumulado de los valores de `b` correspondientes a valores impares de `a`."
+                },
+                {
+                    "id": "lab12_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Valores de `a` en cada iteración: 1) $a=11$, pasa a $5$. 2) $a=5$, pasa a $2$. 3) $a=2$, pasa a $1$. 4) $a=1$, pasa a $0$. Para $a=0$ termina. Total: 4 iteraciones."
+                },
+                {
+                    "id": "lab12_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la variable `a` después de la segunda iteración?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tras la primera iteración $a = 11 / 2 = 5$. Tras la segunda, $a = 5 / 2 = 2$."
+                },
+                {
+                    "id": "lab12_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de `b` después de la tercera iteración?",
+                    "correctValue": 24,
+                    "tolerance": 0,
+                    "explanation": "Valor inicial de `b = 3`. 1ª iteración: $b = 6$. 2ª iteración: $b = 12$. 3ª iteración: $b = 24$."
+                }
+            ]
+        },
+        {
+            "id": "lab13",
+            "title": "Suma de los primeros números impares",
+            "context": "Se calcula la suma de los primeros 5 números impares:\n```java\nint n = 5;\nint suma = 0;\nint i = 1;\nwhile (i <= n) {\n    suma += (2 * i - 1);\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab13_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `suma`?",
+                    "correctValue": 25,
+                    "tolerance": 0,
+                    "explanation": "La suma de los primeros 5 impares es $1 + 3 + 5 + 7 + 9 = 25$ (que equivale a $n^2 = 5^2$)."
+                },
+                {
+                    "id": "lab13_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El índice `i` recorre los valores de 1 a 5, por lo que realiza 5 iteraciones."
+                },
+                {
+                    "id": "lab13_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de `i` después de completar la tercera iteración?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Al terminar la tercera iteración (con $i=3$), el incremento `i++` establece `i` en 4."
+                },
+                {
+                    "id": "lab13_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = n + 1 - i$, ¿cuál es su valor al inicio de la cuarta iteración (cuando `i` vale 4)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Sustituyendo $n = 5$ e $i = 4$, obtenemos $t = 5 + 1 - 4 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab14",
+            "title": "Bucle con decremento del índice",
+            "context": "Considere el recorrido regresivo controlado por un límite inferior:\n```java\nint i = 10;\nint N = 3;\nint count = 0;\nwhile (i > N) {\n    count++;\n    i--;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab14_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `count`?",
+                    "correctValue": 7,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta para `i = 10, 9, 8, 7, 6, 5, 4`. Hay 7 valores posibles, por lo que `count` termina con 7."
+                },
+                {
+                    "id": "lab14_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor final del índice `i` al salir del bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle se detiene cuando `i > N` es falso. Para $N = 3$, esto ocurre cuando `i` alcanza el valor 3."
+                },
+                {
+                    "id": "lab14_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la cota $t = i - N$ antes de entrar al bucle por primera vez?",
+                    "correctValue": 7,
+                    "tolerance": 0,
+                    "explanation": "Al inicio `i = 10` y $N = 3$. La cota inicial es $t = 10 - 3 = 7$."
+                },
+                {
+                    "id": "lab14_d",
+                    "label": "d)",
+                    "question": "¿Cuántas veces se evalúa la condición de continuación del bucle `i > N` en total?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "Se evalúa al comienzo de las 7 iteraciones con éxito, más la última evaluación en la que resulta falsa (con $i=3$). Total: $7 + 1 = 8$ veces."
+                }
+            ]
+        },
+        {
+            "id": "lab15",
+            "title": "Conteo de elementos por umbral",
+            "context": "Se cuenta cuántos elementos del array superan el umbral:\n```java\nint[] A = {5, 12, 3, 8, 15, 7};\nint umbral = 8;\nint count = 0;\nint i = 0;\nwhile (i < A.length) {\n    if (A[i] > umbral) {\n        count++;\n    }\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab15_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `count`?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Los elementos que superan a 8 son 12 y 15. Por tanto, `count = 2`."
+                },
+                {
+                    "id": "lab15_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "Dado que el bucle recorre secuencialmente todo el array y `A.length` es 6, realiza 6 iteraciones."
+                },
+                {
+                    "id": "lab15_c",
+                    "label": "c)",
+                    "question": "Con la cota $t = 6 - i$, ¿cuál es su valor tras finalizar la cuarta iteración (cuando `i` pasa a valer 4)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tras la cuarta iteración $i = 4$. La cota es $t = 6 - 4 = 2$."
+                },
+                {
+                    "id": "lab15_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la variable `count` tras haber completado las primeras 3 iteraciones (procesados los índices 0, 1 y 2)?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "En las primeras 3 iteraciones se analizan {5, 12, 3}. De ellos, solo 12 supera el umbral de 8, por lo que `count` vale 1."
+                }
+            ]
+        },
+        {
+            "id": "lab16",
+            "title": "Búsqueda del elemento mínimo",
+            "context": "Se busca el menor valor en un array:\n```java\nint[] A = {8, 4, 12, 2, 9};\nint min = A[0];\nint i = 1;\nwhile (i < A.length) {\n    if (A[i] < min) {\n        min = A[i];\n    }\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab16_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor de `min` al finalizar el algoritmo?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El valor mínimo absoluto del array es 2, el cual es asignado al evaluar el elemento $A[3]$."
+                },
+                {
+                    "id": "lab16_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor de la variable `i` al finalizar el algoritmo?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El bucle termina cuando $i \\ge A.length = 5$. Por lo tanto, `i` finaliza con valor 5."
+                },
+                {
+                    "id": "lab16_c",
+                    "label": "c)",
+                    "question": "¿Cuántas veces en total se actualiza el valor de la variable `min` durante las iteraciones?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El valor inicial es `min = 8`. Se actualiza con `A[1] = 4` (1ª vez) y con `A[3] = 2` (2ª vez). No se actualiza con 12 ni con 9. Total = 2 actualizaciones."
+                },
+                {
+                    "id": "lab16_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = 5 - i$, ¿cuál es su valor tras completarse la primera iteración del bucle (cuando `i` pasa a ser 2)?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Tras la primera iteración, `i` se incrementa a 2. La cota es $t = 5 - 2 = 3$."
+                }
+            ]
+        },
+        {
+            "id": "lab17",
+            "title": "Recorrido de ordenación de burbuja",
+            "context": "Considere una pasada del algoritmo de ordenación por burbuja sobre un array de tamaño 5:\n```java\nint[] A = {5, 1, 4, 2, 8};\nint i = 0;\nint swaps = 0;\nwhile (i < 4) {\n    if (A[i] > A[i+1]) {\n        int temp = A[i];\n        A[i] = A[i+1];\n        A[i+1] = temp;\n        swaps++;\n    }\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab17_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `swaps` al finalizar este recorrido?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Recorrido: 1) $A[0]=5 > A[1]=1 \\implies swap$ (array: 1, 5, 4, 2, 8). 2) $A[1]=5 > A[2]=4 \\implies swap$ (array: 1, 4, 5, 2, 8). 3) $A[2]=5 > A[3]=2 \\implies swap$ (array: 1, 4, 2, 5, 8). 4) $A[3]=5 < A[4]=8 \\implies no \\, swap$. En total hubo 3 intercambios."
+                },
+                {
+                    "id": "lab17_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor final del elemento en la posición `A[4]` tras completarse el recorrido?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "El elemento mayor del array (8) ya estaba al final y no se mueve, por lo que `A[4]` sigue siendo 8."
+                },
+                {
+                    "id": "lab17_c",
+                    "label": "c)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta para $i = 0, 1, 2, 3$, lo que da un total de 4 iteraciones."
+                },
+                {
+                    "id": "lab17_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = 4 - i$, ¿cuál es su valor al inicio de la tercera iteración (cuando `i` vale 2)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Al inicio de la tercera iteración, $i = 2$. Por lo tanto, la cota es $t = 4 - 2 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab18",
+            "title": "Algoritmo de ordenación por selección",
+            "context": "Se analiza el algoritmo de ordenación por selección (Selection Sort):\n```java\nint[] A = {64, 25, 12, 22, 11};\nint i = 0;\nwhile (i < 4) {\n    int min_idx = i;\n    int j = i + 1;\n    while (j < 5) {\n        if (A[j] < A[min_idx]) {\n            min_idx = j;\n        }\n        j++;\n    }\n    int temp = A[min_idx];\n    A[min_idx] = A[i];\n    A[i] = temp;\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab18_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor del elemento en la posición `A[0]` tras finalizar toda la ordenación?",
+                    "correctValue": 11,
+                    "tolerance": 0,
+                    "explanation": "El algoritmo ordena el array de forma ascendente. El menor elemento absoluto, que es 11, se coloca en el índice 0 tras finalizar."
+                },
+                {
+                    "id": "lab18_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor del elemento en la posición `A[1]` tras finalizar toda la ordenación?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "El segundo elemento más pequeño del array es 12, que tras la ordenación completa se posiciona en el índice 1."
+                },
+                {
+                    "id": "lab18_c",
+                    "label": "c)",
+                    "question": "¿Cuántas iteraciones totales realiza el bucle interno controlado por `j` a lo largo de toda la ejecución?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "El bucle interno realiza comparaciones para: $i=0 \\implies j=1..4$ (4 veces); $i=1 \\implies j=2..4$ (3 veces); $i=2 \\implies j=3..4$ (2 veces); $i=3 \\implies j=4$ (1 vez). Sumando: $4 + 3 + 2 + 1 = 10$ iteraciones."
+                },
+                {
+                    "id": "lab18_d",
+                    "label": "d)",
+                    "question": "Con la cota del bucle externo $t = 4 - i$, ¿cuál es su valor al inicio de la segunda iteración (cuando `i` vale 1)?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Para $i = 1$, la cota del bucle externo es $t = 4 - 1 = 3$."
+                }
+            ]
+        },
+        {
+            "id": "lab19",
+            "title": "Duplicar valores en un array",
+            "context": "Se multiplican por 2 todos los elementos de un array:\n```java\nint[] A = {1, 2, 3};\nint i = 0;\nwhile (i < A.length) {\n    A[i] = A[i] * 2;\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab19_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor del elemento `A[2]` al terminar la ejecución?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "El elemento original `A[2] = 3` es multiplicado por 2 en la última iteración, resultando en 6."
+                },
+                {
+                    "id": "lab19_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El array tiene una longitud de 3, por lo que el bucle realiza exactamente 3 iteraciones."
+                },
+                {
+                    "id": "lab19_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la variable `i` tras salir del bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta mientras $i < 3$. Al salir, el valor final del contador es 3."
+                },
+                {
+                    "id": "lab19_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = 3 - i$, ¿cuál es su valor al inicio de la tercera iteración (cuando `i` vale 2)?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Al inicio de la tercera iteración, $i = 2$. Con $N = 3$, la cota es $t = 3 - 2 = 1$."
+                }
+            ]
+        },
+        {
+            "id": "lab20",
+            "title": "Producto escalar de dos vectores",
+            "context": "Se calcula el producto escalar de dos vectores en un espacio de 3 dimensiones:\n```java\nint[] U = {1, 2, 3};\nint[] V = {4, 5, 6};\nint prod = 0;\nint i = 0;\nwhile (i < U.length) {\n    prod += U[i] * V[i];\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab20_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `prod`?",
+                    "correctValue": 32,
+                    "tolerance": 0,
+                    "explanation": "El producto escalar es $(1 \\times 4) + (2 \\times 5) + (3 \\times 6) = 4 + 10 + 18 = 32$."
+                },
+                {
+                    "id": "lab20_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle procesa los índices de 0 a 2, realizando exactamente 3 iteraciones en total."
+                },
+                {
+                    "id": "lab20_c",
+                    "label": "c)",
+                    "question": "Con la cota $t = 3 - i$, ¿cuál es su valor tras finalizar la primera iteración?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tras la primera iteración, $i$ pasa de 0 a 1. La cota es $t = 3 - 1 = 2$."
+                },
+                {
+                    "id": "lab20_d",
+                    "label": "d)",
+                    "question": "¿Cuál es la suma acumulada en `prod` tras finalizar la segunda iteración?",
+                    "correctValue": 14,
+                    "tolerance": 0,
+                    "explanation": "Tras la segunda iteración, se han acumulado los productos de los índices 0 y 1: $(1 \\times 4) + (2 \\times 5) = 4 + 10 = 14$."
+                }
+            ]
+        },
+        {
+            "id": "lab21",
+            "title": "Verificación de palabra palíndroma",
+            "context": "Se comprueba si la palabra almacenada en el array `W` es un palíndromo:\n```java\nchar[] W = {'r', 'a', 'd', 'a', 'r'};\nint i = 0;\nint j = 4;\nint esPal = 1;\nwhile (i < j && esPal == 1) {\n    if (W[i] != W[j]) {\n        esPal = 0;\n    }\n    i++;\n    j--;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab21_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `esPal`?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "'radar' es una palabra palíndroma, por lo que la variable `esPal` nunca se modifica a 0 y termina valiendo 1."
+                },
+                {
+                    "id": "lab21_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "1ª iteración: $i=0, j=4$ ($W[0] == W[4] \\implies 'r' == 'r'$), pasa a $i=1, j=3$. 2ª iteración: $i=1, j=3$ ($W[1] == W[3] \\implies 'a' == 'a'$), pasa a $i=2, j=2$. En la siguiente evaluación, `i < j` (2 < 2) es falso. Total: 2 iteraciones."
+                },
+                {
+                    "id": "lab21_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final de la variable `i` tras finalizar el algoritmo?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tras la segunda iteración, `i` se incrementa de 1 a 2."
+                },
+                {
+                    "id": "lab21_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = j - i + 1$, ¿cuál es su valor tras finalizar la primera iteración (cuando `i = 1` y `j = 3`)?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "Tras la primera iteración, $i = 1$ y $j = 3$. La cota es $t = 3 - 1 + 1 = 3$."
+                }
+            ]
+        },
+        {
+            "id": "lab22",
+            "title": "Suma de la diagonal principal",
+            "context": "Se calcula la suma de la diagonal principal de una matriz cuadrada de 3x3:\n```java\nint[][] M = {\n    {1, 2, 3},\n    {4, 5, 6},\n    {7, 8, 9}\n};\nint suma = 0;\nint i = 0;\nwhile (i < 3) {\n    suma += M[i][i];\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab22_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `suma`?",
+                    "correctValue": 15,
+                    "tolerance": 0,
+                    "explanation": "La diagonal principal contiene los elementos $M[0][0] = 1$, $M[1][1] = 5$ y $M[2][2] = 9$. La suma es $1 + 5 + 9 = 15$."
+                },
+                {
+                    "id": "lab22_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle itera para los índices de fila/columna $i = 0, 1, 2$, lo que da exactamente 3 iteraciones."
+                },
+                {
+                    "id": "lab22_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor de la cota $t = 3 - i$ al salir del bucle?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al finalizar el bucle, la condición `i < 3` se vuelve falsa, por lo que `i = 3`. La cota es $t = 3 - 3 = 0$."
+                },
+                {
+                    "id": "lab22_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor acumulado en `suma` tras finalizar la segunda iteración (es decir, habiendo sumado los elementos de índices 0 y 1)?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "Tras la segunda iteración se han sumado los dos primeros elementos de la diagonal: $M[0][0] + M[1][1] = 1 + 5 = 6$."
+                }
+            ]
+        },
+        {
+            "id": "lab23",
+            "title": "Búsqueda de ocurrencias de un carácter",
+            "context": "Se cuenta cuántas veces aparece la letra 'o' en una palabra:\n```java\nchar[] texto = {'a', 'l', 'g', 'o', 'r', 'i', 't', 'm', 'o'};\nchar buscar = 'o';\nint count = 0;\nint i = 0;\nwhile (i < texto.length) {\n    if (texto[i] == buscar) {\n        count++;\n    }\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab23_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `count`?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El carácter 'o' aparece 2 veces en el array (índice 3 e índice 8)."
+                },
+                {
+                    "id": "lab23_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 9,
+                    "tolerance": 0,
+                    "explanation": "El array `texto` tiene longitud 9, por lo que el bucle se ejecuta exactamente 9 veces."
+                },
+                {
+                    "id": "lab23_c",
+                    "label": "c)",
+                    "question": "Con la cota $t = 9 - i$, ¿cuál es su valor tras procesar el quinto elemento (es decir, al terminar la iteración con `i = 4` e iniciar la de `i = 5`)?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Tras completarse la iteración con $i = 4$, el valor de `i` pasa a ser 5. La cota es $t = 9 - 5 = 4$."
+                },
+                {
+                    "id": "lab23_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor de la variable `count` tras finalizar la cuarta iteración (cuando se han analizado los elementos desde el índice 0 al 3)?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Hasta el índice 3 ('a', 'l', 'g', 'o'), la letra 'o' ha aparecido una única vez (en el índice 3). Por tanto, `count` vale 1."
+                }
+            ]
+        },
+        {
+            "id": "lab24",
+            "title": "Verificación de número primo",
+            "context": "Se comprueba si el número 15 es primo mediante prueba de divisores:\n```java\nint n = 15;\nint i = 2;\nint esPrimo = 1;\nwhile (i * i <= n && esPrimo == 1) {\n    if (n % i == 0) {\n        esPrimo = 0;\n    } else {\n        i++;\n    }\n}\n```",
+            "parts": [
+                {
+                    "id": "lab24_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `esPrimo`?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El número 15 es divisible por 3 ($15 \\% 3 == 0$), por lo que la variable `esPrimo` se pone a 0."
+                },
+                {
+                    "id": "lab24_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "1ª iteración: $i = 2$. $15 \\% 2 \\neq 0 \\implies i = 3$. 2ª iteración: $i = 3$. $15 \\% 3 == 0 \\implies esPrimo = 0$. El bucle se detiene por tener `esPrimo == 0`. Total: 2 iteraciones."
+                },
+                {
+                    "id": "lab24_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final del índice `i` tras finalizar el algoritmo?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "El bucle se detiene cuando `i = 3` tras determinar la divisibilidad, sin llegar a incrementarse de nuevo."
+                },
+                {
+                    "id": "lab24_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor lógico (representado por 0 para falso y 1 para verdadero) de la condición del bucle al terminar la ejecución?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al terminar la ejecución, la condición `i * i <= n && esPrimo == 1` se evalúa como falsa al ser `esPrimo = 0`, lo que equivale al valor lógico 0 (falso)."
+                }
+            ]
+        },
+        {
+            "id": "lab25",
+            "title": "Cálculo de Fibonacci iterativo",
+            "context": "Se calcula el sexto término de la sucesión de Fibonacci (F(6)) con F(0)=0 y F(1)=1:\n```java\nint n = 6;\nint a = 0;\nint b = 1;\nint i = 2;\nwhile (i <= n) {\n    int temp = a + b;\n    a = b;\n    b = temp;\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab25_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `b` al finalizar el algoritmo?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "Los términos sucesivos calculados son: F(2)=1, F(3)=2, F(4)=3, F(5)=5, F(6)=8. La variable `b` contiene el valor de F(6), que es 8."
+                },
+                {
+                    "id": "lab25_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El bucle itera para los valores del contador $i = 2, 3, 4, 5, 6$. Esto equivale a 5 iteraciones."
+                },
+                {
+                    "id": "lab25_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final de la variable `i` al salir del bucle?",
+                    "correctValue": 7,
+                    "tolerance": 0,
+                    "explanation": "En la última iteración ($i = 6$), la instrucción `i++` incrementa la variable a 7, lo que rompe la condición `7 <= 6`."
+                },
+                {
+                    "id": "lab25_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = n + 1 - i$, ¿cuál es su valor antes de entrar al bucle por primera vez (con `i = 2`)?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "Sustituyendo $n = 6$ e $i = 2$ en la fórmula de la cota, obtenemos $t = 6 + 1 - 2 = 5$."
+                }
+            ]
+        },
+        {
+            "id": "lab26",
+            "title": "Criba de Eratóstenes reducida",
+            "context": "Se marcan los múltiplos de 2 para buscar números primos menores que 8:\n```java\nint[] primos = {1, 1, 1, 1, 1, 1, 1, 1};\nint p = 2;\nwhile (p * p < 8) {\n    int i = p * p;\n    while (i < 8) {\n        primos[i] = 0;\n        i += p;\n    }\n    p++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab26_a",
+                    "label": "a)",
+                    "question": "¿Cuántos elementos del array `primos` mantienen el valor 1 tras la ejecución del algoritmo?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "Los elementos que pasan a 0 son los múltiplos de 2 a partir de $2^2 = 4$, es decir, los índices 4 y 6. Quedan a 1 los índices 0, 1, 2, 3, 5 y 7. Sin embargo, en la criba tradicional se ignoran 0 y 1. Contando directamente el array `primos`, hay 6 elementos con valor 1 (índices 0, 1, 2, 3, 5, 7). Rectificamos la lógica: el código pone a cero `primos[4] = 0` y `primos[6] = 0`. Los demás permanecen a 1. El número total de elementos que quedan con valor 1 es 6."
+                },
+                {
+                    "id": "lab26_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle externo `p * p < 8`?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta para $p = 2$ (pues $2 \\times 2 = 4 < 8$). Al incrementarse a $p = 3$, la condición $3 \\times 3 = 9 < 8$ es falsa. Por tanto, el bucle externo realiza 1 iteración."
+                },
+                {
+                    "id": "lab26_c",
+                    "label": "c)",
+                    "question": "¿Cuántas iteraciones realiza el bucle interno en total a lo largo de todo el programa?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El bucle interno se ejecuta solo para $p = 2$. Los índices recorridos son $i = 4$ e $i = 6$ (sumando de 2 en 2). Al llegar a $i = 8$, termina. Por lo tanto, realiza exactamente 2 iteraciones."
+                },
+                {
+                    "id": "lab26_d",
+                    "label": "d)",
+                    "question": "¿Cuál es el valor final de la variable `p` al terminar la ejecución?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "La variable `p` se inicializa en 2. Tras completar la única iteración del bucle externo, se ejecuta `p++` incrementándola a 3, con lo que se sale del bucle."
+                }
+            ]
+        },
+        {
+            "id": "lab27",
+            "title": "Paso interno de inserción ordenada",
+            "context": "Se desplazan los elementos mayores que una clave para insertar el valor 4 en la posición adecuada:\n```java\nint[] A = {2, 5, 8, 4, 9};\nint key = 4;\nint i = 2;\nwhile (i >= 0 && A[i] > key) {\n    A[i+1] = A[i];\n    i--;\n}\nA[i+1] = key;\n```",
+            "parts": [
+                {
+                    "id": "lab27_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final del elemento en la posición `A[1]` tras terminar la inserción?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El bucle desplaza hacia la derecha los elementos mayores que 4 (8 y 5), liberando el índice 1. Tras el bucle se escribe `A[0+1] = key`, es decir, `A[1] = 4`."
+                },
+                {
+                    "id": "lab27_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "1ª iteración: $i = 2$, $A[2]=8 > 4 \\implies A[3]=8$, $i=1$. 2ª iteración: $i = 1$, $A[1]=5 > 4 \\implies A[2]=5$, $i=0$. En el tercer intento, $i = 0$, $A[0]=2 > 4$ es falso. Total: 2 iteraciones."
+                },
+                {
+                    "id": "lab27_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor del índice `i` tras salir del bucle?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El bucle itera para $i = 2$ e $i = 1$. En la segunda iteración se decrementa a 0. Para $i = 0$ la condición falla y se sale con `i = 0`."
+                },
+                {
+                    "id": "lab27_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = i + 2$, ¿cuál es su valor inicial al comenzar el bucle (con `i = 2`)?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Sustituyendo $i = 2$ en la fórmula de la cota, obtenemos $t = 2 + 2 = 4$."
+                }
+            ]
+        },
+        {
+            "id": "lab28",
+            "title": "Bucle con incremento exponencial del índice",
+            "context": "Recorrido con salto multiplicativo sobre una variable:\n```java\nint i = 1;\nint N = 16;\nint count = 0;\nwhile (i < N) {\n    count++;\n    i = i * 2;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab28_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `count`?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Los valores que toma `i` antes de evaluar la condición son 1, 2, 4, 8 (4 iteraciones). Cuando `i` pasa a valer 16, la condición `16 < 16` es falsa y el bucle termina."
+                },
+                {
+                    "id": "lab28_b",
+                    "label": "b)",
+                    "question": "¿Cuál es el valor final del índice `i` al salir del bucle?",
+                    "correctValue": 16,
+                    "tolerance": 0,
+                    "explanation": "En la última iteración `i` vale 8, y la actualización `i = i * 2` la establece en 16."
+                },
+                {
+                    "id": "lab28_c",
+                    "label": "c)",
+                    "question": "¿Cuántas veces se evalúa la condición del bucle `i < N` en total?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "La condición se evalúa para $i = 1, 2, 4, 8$ (entra 4 veces) y finalmente para $i = 16$ (falso y sale). Total: 5 veces."
+                },
+                {
+                    "id": "lab28_d",
+                    "label": "d)",
+                    "question": "Si la cota del bucle es la diferencia de logaritmos $t = 4 - \\lfloor \\log_2(i) \\rfloor$, ¿cuál es el valor inicial de la cota con `i = 1`?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Como $\\log_2(1) = 0$, sustituyendo obtenemos $t = 4 - 0 = 4$."
+                }
+            ]
+        },
+        {
+            "id": "lab29",
+            "title": "Acumulador multiplicativo de índice",
+            "context": "Se calcula el producto de los números naturales en un bucle:\n```java\nint res = 1;\nint i = 1;\nint N = 5;\nwhile (i < N) {\n    res = res * i;\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab29_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `res`?",
+                    "correctValue": 24,
+                    "tolerance": 0,
+                    "explanation": "El bucle se ejecuta para $i = 1, 2, 3, 4$. Por lo tanto, `res` acumula $1 \\times 2 \\times 3 \\times 4 = 24$ (que equivale a $(N-1)!$)."
+                },
+                {
+                    "id": "lab29_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El bucle itera para `i` desde 1 hasta 4, completando exactamente 4 iteraciones."
+                },
+                {
+                    "id": "lab29_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final de la variable `i` al salir del bucle?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El bucle termina cuando $i \\ge N$, es decir, al incrementarse `i` a 5 en la última iteración."
+                },
+                {
+                    "id": "lab29_d",
+                    "label": "d)",
+                    "question": "Con la cota $t = N - i$, ¿cuál es su valor tras finalizar la segunda iteración (cuando `i` pasa a valer 3)?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Tras la segunda iteración, $i = 3$. Con $N = 5$, la cota es $t = 5 - 3 = 2$."
+                }
+            ]
+        },
+        {
+            "id": "lab30",
+            "title": "Búsqueda de patrón de cadena por fuerza bruta",
+            "context": "Se busca la primera aparición de un patrón `P` en un texto `T`:\n```java\nchar[] T = {'a', 'b', 'a', 'c', 'a', 'b'};\nchar[] P = {'a', 'c'};\nint i = 0;\nint pos = -1;\nwhile (i <= 4 && pos == -1) {\n    if (T[i] == P[0] && T[i+1] == P[1]) {\n        pos = i;\n    }\n    i++;\n}\n```",
+            "parts": [
+                {
+                    "id": "lab30_a",
+                    "label": "a)",
+                    "question": "¿Cuál es el valor final de la variable `pos`?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "El patrón 'ac' coincide con el texto a partir de la posición 2 ($T[2]='a'$ y $T[3]='c'$). La variable `pos` se actualiza con este índice."
+                },
+                {
+                    "id": "lab30_b",
+                    "label": "b)",
+                    "question": "¿Cuántas iteraciones realiza el bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "1ª iteración: $i = 0$ (no coincide), se incrementa a 1. 2ª iteración: $i = 1$ (no coincide), se incrementa a 2. 3ª iteración: $i = 2$ (coincide, se actualiza `pos = 2`), se incrementa a 3. En la siguiente comprobación, `pos == -1` es falso, por lo que el bucle termina habiendo realizado 3 iteraciones."
+                },
+                {
+                    "id": "lab30_c",
+                    "label": "c)",
+                    "question": "¿Cuál es el valor final de la variable `i` tras salir del bucle?",
+                    "correctValue": 3,
+                    "tolerance": 0,
+                    "explanation": "En la tercera iteración se actualiza `pos` y posteriormente se ejecuta `i++`, incrementando la variable de 2 a 3."
+                },
+                {
+                    "id": "lab30_d",
+                    "label": "d)",
+                    "question": "Si definimos la cota del bucle como $t = (4 - i + 1) + (pos == -1 ? 1 : 0)$, ¿cuál es su valor al inicio (con $i = 0$ y `pos = -1`)?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "Al inicio $i = 0$ y `pos = -1` (que aporta 1 en el segundo término). La cota es $(4 - 0 + 1) + 1 = 6$."
+                }
+            ]
+        }
+    ],
+    "FORMULAS": [
+        {
+            "name": "Tripleta de Hoare para especificación",
+            "tex": "$$\\{Q\\} \\, S \\, \\{R\\}$$"
+        },
+        {
+            "name": "Condición de Inicialización del Invariante",
+            "tex": "$$\\{Q\\} \\, \\text{inicialización} \\, \\{I\\}$$"
+        },
+        {
+            "name": "Condición de Mantenimiento del Invariante",
+            "tex": "$$\\{I \\land B\\} \\, S \\, \\{I\\}$$"
+        },
+        {
+            "name": "Condición de Finalización del Invariante",
+            "tex": "$$(I \\land \\neg B) \\implies R$$"
+        },
+        {
+            "name": "Acotación inferior de la función de cota",
+            "tex": "$$B \\implies t \\ge 0$$"
+        },
+        {
+            "name": "Decrecimiento estricto de la función de cota",
+            "tex": "$$\\{I \\land B \\land t = t_0\\} \\, S \\, \\{t < t_0\\}$$"
+        },
+        {
+            "name": "Suma de los primeros números naturales (Invariante suma)",
+            "tex": "$$\\sum_{j=0}^{i-1} j = \\frac{i(i-1)}{2}$$"
+        },
+        {
+            "name": "Cota exponencial en búsqueda binaria (Logaritmo base 2)",
+            "tex": "$$t = \\lfloor \\log_2(high - low + 1) \\rfloor$$"
+        }
+    ]
+}

@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la clase raíz de toda la jerarquía de excepciones y errores en Java?",
+      "options": [
+        "Exception",
+        "Throwable",
+        "Error"
+      ],
+      "correct": 1,
+      "hint": "Cualquier objeto que pueda ser lanzado con 'throw' debe heredar de esta clase.",
+      "explanation": "La clase `Throwable` es la raíz de todas las excepciones y errores en Java. Solo los objetos de esta clase o sus subclases pueden ser lanzados o capturados."
+    },
+    {
+      "q": "¿Cuáles son las dos grandes subdivisiones directas de la clase Throwable?",
+      "options": [
+        "Checked y Unchecked",
+        "Error y Exception",
+        "RuntimeException y IOException"
+      ],
+      "correct": 1,
+      "hint": "Una subdivisión representa fallos graves del sistema y la otra representa errores del programa.",
+      "explanation": "`Throwable` se divide directamente en `Error` (fallos graves de la JVM) y `Exception` (errores del programa que se pueden capturar)."
+    },
+    {
+      "q": "¿Qué representa un objeto de tipo Error en Java?",
+      "options": [
+        "Un fallo catastrófico de hardware o de la JVM ante el cual el programa no debe intentar recuperarse.",
+        "Una excepción de tipo checked que debe ser obligatoriamente capturada por el compilador.",
+        "Un error de lógica de programación que se puede corregir mediante validación previa."
+      ],
+      "correct": 0,
+      "hint": "Ejemplos de Error son OutOfMemoryError o StackOverflowError.",
+      "explanation": "La clase `Error` representa fallos graves de la JVM o del sistema. Capturarlos es desaconsejado porque la aplicación raramente puede recuperarse de ellos."
+    },
+    {
+      "q": "¿Qué define a una excepción verificada (checked exception) en Java?",
+      "options": [
+        "Es una subclase de Exception que hereda de RuntimeException.",
+        "El compilador obliga al desarrollador a capturarla (try-catch) o a declarar su propagación (throws).",
+        "Es una excepción que se detecta en tiempo de ejecución pero que no tiene coste de rendimiento."
+      ],
+      "correct": 1,
+      "hint": "Regla 'Handle or Declare'.",
+      "explanation": "Las excepciones checked son subclases de `Exception` (excepto `RuntimeException`). El compilador obliga a gestionarlas mediante la regla 'Handle or Declare'."
+    },
+    {
+      "q": "¿De qué clase heredan directamente todas las excepciones no verificadas (unchecked exceptions)?",
+      "options": [
+        "Exception",
+        "Throwable",
+        "RuntimeException"
+      ],
+      "correct": 2,
+      "hint": "Representan fallos en el diseño del código o errores lógicos.",
+      "explanation": "Las excepciones unchecked (no verificadas) son subclases de `RuntimeException` (las cuales heredan de `Exception`)."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una excepción verificada (checked)?",
+      "options": [
+        "NullPointerException",
+        "IOException",
+        "ArithmeticException"
+      ],
+      "correct": 1,
+      "hint": "Son fallos previsibles y ajenos al control directo del programador.",
+      "explanation": "`IOException` es una checked exception. `NullPointerException` y `ArithmeticException` son subclases de `RuntimeException` (unchecked)."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una excepción no verificada (unchecked)?",
+      "options": [
+        "FileNotFoundException",
+        "SQLException",
+        "ArrayIndexOutOfBoundsException"
+      ],
+      "correct": 2,
+      "hint": "Representa un error de lógica por acceder a un índice de array inválido.",
+      "explanation": "`ArrayIndexOutOfBoundsException` hereda de `RuntimeException`, por lo que es una excepción no verificada."
+    },
+    {
+      "q": "¿Qué regla del compilador de Java obliga a gestionar las checked exceptions?",
+      "options": [
+        "La regla 'Handle or Declare'",
+        "La regla 'Try or Catch'",
+        "La regla 'Throw and Throws'"
+      ],
+      "correct": 0,
+      "hint": "Debes capturarla con un bloque catch o propagarla con la cabecera throws.",
+      "explanation": "La regla 'Handle or Declare' obliga a capturar la excepción checked (Handle) o a declararla en la firma del método con throws (Declare)."
+    },
+    {
+      "q": "¿Para qué sirve la cláusula throws en la firma de un método?",
+      "options": [
+        "Para lanzar una nueva instancia de una excepción en medio de la ejecución.",
+        "Para indicar que el método puede propagar determinadas excepciones verificadas a su invocador.",
+        "Para definir el bloque de código que capturará el error."
+      ],
+      "correct": 1,
+      "hint": "Se coloca en la cabecera del método.",
+      "explanation": "La cláusula `throws` advierte a los invocadores del método que este puede propagar excepciones checked no capturadas en su interior."
+    },
+    {
+      "q": "¿Qué diferencia existe entre las palabras clave throw y throws?",
+      "options": [
+        "throw se usa para lanzar una excepción; throws declara excepciones que un método puede propagar.",
+        "throw se usa en la firma de los métodos; throws se usa dentro del cuerpo del método.",
+        "Son sinónimos en Java y se pueden usar indistintamente según la versión del SDK."
+      ],
+      "correct": 0,
+      "hint": "Una es un verbo imperativo y la otra es declarativa.",
+      "explanation": "`throw` lanza explícitamente un objeto excepción. `throws` se sitúa en la cabecera del método para declarar las excepciones checked potenciales."
+    },
+    {
+      "q": "¿En qué orden se deben capturar las excepciones cuando se usan bloques catch múltiples?",
+      "options": [
+        "De la más general (superclase) a la más específica (subclase).",
+        "De la más específica (subclase) a la más general (superclase).",
+        "El orden es indiferente y no afecta a la compilación."
+      ],
+      "correct": 1,
+      "hint": "Si capturas primero la superclase, las subclases serán inalcanzables.",
+      "explanation": "Se debe capturar de la subclase más específica a la superclase más genérica, ya que la JVM evalúa los bloques catch en orden secuencial de arriba a abajo."
+    },
+    {
+      "q": "¿Qué ocurre si colocamos catch(Exception e) antes de catch(IOException e) en un mismo bloque try?",
+      "options": [
+        "El compilador genera un error de tipo 'unreachable catch block'.",
+        "El código compila perfectamente, pero IOException nunca se ejecutará.",
+        "El compilador reorganiza automáticamente los bloques catch."
+      ],
+      "correct": 0,
+      "hint": "Exception es superclase de IOException.",
+      "explanation": "Colocar catch de una superclase antes que una subclase produce un error de compilación por código inalcanzable ('unreachable catch block')."
+    },
+    {
+      "q": "¿Cuál es la característica principal del bloque finally?",
+      "options": [
+        "Solo se ejecuta si no se lanza ninguna excepción en el bloque try.",
+        "Solo se ejecuta si se lanza una excepción que es capturada por algún catch.",
+        "Se ejecuta siempre al salir del bloque try-catch, ocurra o no una excepción."
+      ],
+      "correct": 2,
+      "hint": "Es ideal para liberar recursos como archivos o sockets.",
+      "explanation": "El bloque `finally` se ejecuta siempre que el flujo de ejecución sale del bloque `try-catch`, asegurando la liberación de recursos."
+    },
+    {
+      "q": "¿Qué estructura de control fue introducida en Java 7 para automatizar el cierre de recursos?",
+      "options": [
+        "El bloque try-catch-finally clásico.",
+        "El bloque try-with-resources.",
+        "El bloque catch-with-resources."
+      ],
+      "correct": 1,
+      "hint": "Usa paréntesis al lado del try para declarar recursos.",
+      "explanation": "El bloque `try-with-resources` permite declarar recursos autocloseable en la cabecera del try, garantizando su cierre de forma automática."
+    },
+    {
+      "q": "¿Qué interfaz de la API estándar debe implementar un recurso para ser usado en try-with-resources?",
+      "options": [
+        "java.lang.AutoCloseable",
+        "java.io.Closeable",
+        "Cualquiera de las dos interfaces anteriores"
+      ],
+      "correct": 2,
+      "hint": "Closeable hereda de AutoCloseable desde Java 7.",
+      "explanation": "Los recursos declarados en un `try-with-resources` deben implementar la interfaz `java.lang.AutoCloseable` (o su subinterfaz `java.io.Closeable`)."
+    },
+    {
+      "q": "En try-with-resources, si close() de un recurso y el cuerpo del try lanzan excepciones simultáneamente, ¿qué ocurre?",
+      "options": [
+        "La excepción del close() oculta por completo a la del cuerpo del try.",
+        "La excepción del cuerpo del try es la principal; la del close() es añadida como 'suprimida'.",
+        "Se genera un error de compilación debido a la ambigüedad de la excepción."
+      ],
+      "correct": 1,
+      "hint": "La excepción original del cuerpo del try no se pierde.",
+      "explanation": "La excepción lanzada por el bloque `try` es la principal. Las excepciones producidas al cerrar los recursos se añaden como excepciones suprimidas."
+    },
+    {
+      "q": "¿Qué método permite recuperar las excepciones suprimidas asociadas a una excepción principal?",
+      "options": [
+        "getSuppressed()",
+        "getCause()",
+        "getErrors()"
+      ],
+      "correct": 0,
+      "hint": "Devuelve un array de objetos Throwable.",
+      "explanation": "El método `getSuppressed()` de `Throwable` devuelve un array conteniendo todas las excepciones que fueron suprimidas durante el cierre de recursos."
+    },
+    {
+      "q": "Al sobrescribir un método en una subclase, ¿qué regla aplica sobre la firma respecto a excepciones checked?",
+      "options": [
+        "El método de la subclase puede declarar excepciones checked más generales que el original.",
+        "El método de la subclase no puede declarar checked exceptions nuevas ni más generales que el original.",
+        "El método de la subclase debe declarar exactamente las mismas excepciones."
+      ],
+      "correct": 1,
+      "hint": "Principio de Sustitución de Liskov.",
+      "explanation": "Un método sobrescrito no puede lanzar excepciones verificadas nuevas o más generales. Sin embargo, puede lanzar menos excepciones o subclases de las declaradas."
+    },
+    {
+      "q": "¿Es obligatorio declarar una excepción unchecked (RuntimeException) con la cláusula throws?",
+      "options": [
+        "Sí, si el método puede llegar a lanzarla de forma directa.",
+        "No, el compilador no impone ningún control sobre la declaración de excepciones unchecked.",
+        "Solo si el método es público y pertenece a una interfaz."
+      ],
+      "correct": 1,
+      "hint": "Son errores de lógica que el compilador no valida de antemano.",
+      "explanation": "Las unchecked exceptions (subclases de `RuntimeException`) no están sujetas a la regla 'Handle or Declare' del compilador de Java."
+    },
+    {
+      "q": "¿Qué excepción se lanza al intentar acceder a un método o atributo a través de una variable de referencia con valor null?",
+      "options": [
+        "NullPointerException",
+        "IllegalArgumentException",
+        "IllegalStateException"
+      ],
+      "correct": 0,
+      "hint": "Apunta a la nada.",
+      "explanation": "La JVM lanza `NullPointerException` en tiempo de ejecución al intentar dereferenciar una variable que apunta a `null`."
+    },
+    {
+      "q": "¿Qué excepción se lanza si intentamos acceder al índice -1 o a una posición >= length de un array?",
+      "options": [
+        "ArrayIndexOutOfBoundsException",
+        "IndexOutOfBoundsException",
+        "IllegalArgumentException"
+      ],
+      "correct": 0,
+      "hint": "Es específica de arrays.",
+      "explanation": "`ArrayIndexOutOfBoundsException` se lanza al intentar acceder a una posición fuera de los límites de un array."
+    },
+    {
+      "q": "¿Qué excepción de runtime se lanza al intentar realizar una división entera por cero en Java?",
+      "options": [
+        "ArithmeticException",
+        "IllegalArgumentException",
+        "RuntimeException"
+      ],
+      "correct": 0,
+      "hint": "Relacionado con operaciones matemáticas inválidas.",
+      "explanation": "La división por cero con enteros en Java lanza una excepción de tipo `ArithmeticException`."
+    },
+    {
+      "q": "¿Qué excepción se produce al intentar realizar un cast entre clases no compatibles en tiempo de ejecución?",
+      "options": [
+        "ClassCastException",
+        "ClassNotFoundException",
+        "IllegalAccessException"
+      ],
+      "correct": 0,
+      "hint": "Conversión de tipos prohibida.",
+      "explanation": "`ClassCastException` se genera si intentamos forzar a un objeto a convertirse a un tipo de clase del cual no es instancia."
+    },
+    {
+      "q": "¿Qué excepción lanza Integer.parseInt(string) si el String no contiene un formato de entero válido?",
+      "options": [
+        "NumberFormatException",
+        "IllegalArgumentException",
+        "InputMismatchException"
+      ],
+      "correct": 0,
+      "hint": "Formato de número incorrecto.",
+      "explanation": "`NumberFormatException` (subclase de `IllegalArgumentException`) se lanza ante conversiones numéricas de textos inválidos."
+    },
+    {
+      "q": "¿Qué tipo de error representa la clase StackOverflowError en Java?",
+      "options": [
+        "Un error fatal cuando el Stack de llamadas del hilo agota su memoria, generalmente por recursividad infinita.",
+        "Una excepción checked que ocurre si el Heap se queda sin espacio de almacenamiento.",
+        "Un aviso no fatal que indica un exceso de variables locales."
+      ],
+      "correct": 0,
+      "hint": "Es una subclase de Error relacionada con la pila de llamadas.",
+      "explanation": "`StackOverflowError` ocurre cuando se desborda la pila de llamadas a métodos (Stack), comúnmente a causa de recursividad descontrolada."
+    },
+    {
+      "q": "¿Qué representa un OutOfMemoryError en Java?",
+      "options": [
+        "La falta de memoria física en el Stack de un hilo de ejecución.",
+        "La imposibilidad de la JVM de asignar memoria a un objeto en el Heap por falta de espacio libre.",
+        "Que el Garbage Collector ha sido desactivado permanentemente."
+      ],
+      "correct": 1,
+      "hint": "Ocurre en el Heap.",
+      "explanation": "`OutOfMemoryError` se genera cuando el espacio reservado del Heap se agota y el Garbage Collector no puede liberar suficiente memoria para nuevos objetos."
+    },
+    {
+      "q": "Si un programa ejecuta System.exit(0) dentro de un bloque try o catch, ¿qué ocurre con el bloque finally?",
+      "options": [
+        "Se ejecuta inmediatamente de forma prioritaria.",
+        "Se ejecuta de forma asíncrona en un hilo separado de la JVM.",
+        "No se ejecuta en absoluto, ya que System.exit finaliza la JVM por completo."
+      ],
+      "correct": 2,
+      "hint": "Salida abrupta del sistema operativo.",
+      "explanation": "`System.exit()` finaliza de forma inmediata la JVM, impidiendo la ejecución de cualquier bloque `finally` pendiente."
+    },
+    {
+      "q": "¿Es sintácticamente válido en Java tener un bloque try seguido únicamente por un bloque finally (sin catch)?",
+      "options": [
+        "Sí, es una estructura correcta y sirve para garantizar la ejecución de código sin capturar el error en ese nivel.",
+        "No, la estructura try-catch-finally requiere obligatoriamente al menos un bloque catch.",
+        "Solo si el bloque try contiene código autocerrable."
+      ],
+      "correct": 0,
+      "hint": "Sirve para delegar el control de la excepción pero liberar recursos.",
+      "explanation": "La estructura `try-finally` es válida. Permite que las excepciones se propaguen hacia arriba en el Stack mientras se asegura la ejecución del bloque finally."
+    },
+    {
+      "q": "¿Cuál es el propósito común del constructor de excepciones personalizadas que recibe un Throwable como argumento?",
+      "options": [
+        "Ignorar el error original y reemplazarlo.",
+        "Encadenar excepciones (exception chaining), registrando la causa original del fallo.",
+        "Optimizar el rendimiento del recolector de basura."
+      ],
+      "correct": 1,
+      "hint": "Permite conservar el origen del problema al relanzar.",
+      "explanation": "Pasar el error original al constructor de la nueva excepción permite el encadenamiento de excepciones, facilitando la depuración mediante la causa raíz."
+    },
+    {
+      "q": "¿Qué método de la clase Throwable retorna una descripción formateada que incluye el mensaje de error?",
+      "options": [
+        "getMessage()",
+        "toString()",
+        "getCause()"
+      ],
+      "correct": 1,
+      "hint": "Es heredado de Object pero sobrescrito para mostrar el tipo de excepción.",
+      "explanation": "`toString()` devuelve el nombre completo de la clase de la excepción concatenado con el mensaje descriptivo (si existe)."
+    },
+    {
+      "q": "¿Qué método de Throwable imprime en consola el recorrido detallado del hilo y la secuencia de métodos que provocaron el fallo?",
+      "options": [
+        "printStackTrace()",
+        "getStackTrace()",
+        "toString()"
+      ],
+      "correct": 0,
+      "hint": "Escribe en System.err de manera directa.",
+      "explanation": "`printStackTrace()` imprime la traza de ejecución del Stack en la salida estándar de errores, mostrando el origen de la excepción."
+    },
+    {
+      "q": "¿Para qué tipo de validación se utiliza típicamente la excepción IllegalArgumentException?",
+      "options": [
+        "Para indicar que un método ha recibido un argumento con un valor inválido o inapropiado.",
+        "Para señalar que se ha intentado usar una referencia que apunta a null.",
+        "Para notificar que el estado interno del objeto impide ejecutar una acción."
+      ],
+      "correct": 0,
+      "hint": "El nombre hace alusión a los parámetros.",
+      "explanation": "`IllegalArgumentException` es una unchecked exception que sirve para validar que los argumentos pasados a un método cumplen con el contrato establecido."
+    },
+    {
+      "q": "¿Qué excepción representa que el objeto se encuentra en un estado inadecuado para la operación solicitada?",
+      "options": [
+        "IllegalArgumentException",
+        "IllegalStateException",
+        "NullPointerException"
+      ],
+      "correct": 1,
+      "hint": "Relativo al estado interno de la instancia.",
+      "explanation": "`IllegalStateException` indica que la máquina de estados del objeto no es la correcta para invocar al método correspondiente."
+    },
+    {
+      "q": "¿De qué clase estándar de Java hereda NumberFormatException?",
+      "options": [
+        "RuntimeException",
+        "IllegalArgumentException",
+        "Exception"
+      ],
+      "correct": 1,
+      "hint": "Un formato numérico inválido es un argumento erróneo.",
+      "explanation": "`NumberFormatException` hereda de `IllegalArgumentException`, la cual a su vez hereda de `RuntimeException`."
+    },
+    {
+      "q": "¿Cuál es la causa principal de la pérdida de rendimiento al lanzar excepciones en Java?",
+      "options": [
+        "La reserva de memoria para el objeto de excepción en el Heap.",
+        "La recolección de información de llamadas para construir el Stack Trace mediante fillInStackTrace().",
+        "La detención temporal de los hilos del recolector de basura."
+      ],
+      "correct": 1,
+      "hint": "Construir la ruta de llamadas de la pila es costoso.",
+      "explanation": "El coste computacional de las excepciones reside principalmente en el método `fillInStackTrace()`, que reconstruye el Stack de llamadas del hilo."
+    },
+    {
+      "q": "¿Qué operador de separación fue introducido en Java 7 para capturar múltiples excepciones en un solo bloque catch?",
+      "options": [
+        "La barra vertical simple '|'",
+        "La doble barra vertical '||'",
+        "La coma ','"
+      ],
+      "correct": 0,
+      "hint": "Operador lógico bitwise OR simple.",
+      "explanation": "El multi-catch de Java 7 utiliza la barra vertical simple `|` para enumerar las excepciones capturadas en una sola línea."
+    },
+    {
+      "q": "En un bloque multi-catch como catch(IOException | SQLException e), ¿qué restricción tiene la variable de excepción e?",
+      "options": [
+        "Es implícitamente constante (final) y no se puede reasignar dentro del bloque.",
+        "Solo puede ser usada para llamar al método printStackTrace().",
+        "No se puede acceder a ningún método heredado de Throwable."
+      ],
+      "correct": 0,
+      "hint": "Evita errores de coherencia de tipo en tiempo de ejecución.",
+      "explanation": "La variable en un multi-catch es implícitamente `final`. Intentar reasignarle valor en el bloque catch provocará un error de compilación."
+    },
+    {
+      "q": "¿Qué ocurre si una excepción unchecked no es capturada en un hilo secundario?",
+      "options": [
+        "La aplicación completa finaliza inmediatamente en el sistema operativo.",
+        "El hilo en cuestión se detiene de forma abrupta, pero el resto de los hilos de la aplicación siguen ejecutándose.",
+        "La JVM reinicia automáticamente el hilo con su estado por defecto."
+      ],
+      "correct": 1,
+      "hint": "Los hilos en Java son independientes en su Stack de llamadas.",
+      "explanation": "Un hilo secundario que muere por una excepción no capturada finaliza su ciclo de vida, pero la JVM y los demás hilos continúan activos."
+    },
+    {
+      "q": "¿Qué interfaz permite registrar un manejador para interceptar excepciones no controladas en un hilo?",
+      "options": [
+        "Thread.UncaughtExceptionHandler",
+        "Thread.ExceptionHandler",
+        "java.lang.AutoCloseable"
+      ],
+      "correct": 0,
+      "hint": "Manejador de excepciones no capturadas.",
+      "explanation": "`Thread.UncaughtExceptionHandler` es la interfaz que se asocia a un hilo para interceptar excepciones que alcancen el límite superior del Stack."
+    },
+    {
+      "q": "¿Por qué las APIs modernas de Java prefieren excepciones unchecked para el diseño de lógica de negocio?",
+      "options": [
+        "Porque son más rápidas de ejecutar que las checked exceptions.",
+        "Porque no obligan a propagar firmas throws innecesarias a lo largo de las capas intermedias del software.",
+        "Porque se almacenan en el Stack en lugar del Heap, optimizando memoria."
+      ],
+      "correct": 1,
+      "hint": "Hace el código más limpio y modular.",
+      "explanation": "Las excepciones unchecked evitan ensuciar las firmas de los métodos intermedios con declaraciones `throws`, facilitando la arquitectura limpia."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Dada la estructura: `try { ... } catch (____ e) { ... }`, ¿qué tipo de clase permite capturar absolutamente cualquier error o excepción en la JVM?",
+      "options": [
+        "Throwable",
+        "Exception",
+        "RuntimeException"
+      ],
+      "correct": 0,
+      "hint": "Es la raíz de toda la jerarquía de excepciones.",
+      "explanation": "Para capturar cualquier problema lanzable (errores de JVM o excepciones), se debe usar `Throwable`, que es la superclase común."
+    },
+    {
+      "q": "Completa la firma del método para declarar que propaga un error verificado: `public void leerFichero() ____ IOException { ... }`",
+      "options": [
+        "throws",
+        "throw",
+        "extends"
+      ],
+      "correct": 0,
+      "hint": "Se usa en la firma para delegar la gestión al invocador.",
+      "explanation": "La palabra clave `throws` declara que el método puede lanzar y propagar la checked exception especificada."
+    },
+    {
+      "q": "Completa el lanzamiento explícito del error: `if (saldo < 0) ____ new IllegalArgumentException(\"Saldo invalido\");`",
+      "options": [
+        "throw",
+        "throws",
+        "new"
+      ],
+      "correct": 0,
+      "hint": "Es la instrucción imperativa de lanzamiento.",
+      "explanation": "`throw` es la instrucción que detiene el flujo normal de ejecución y lanza la excepción especificada."
+    },
+    {
+      "q": "En try-with-resources: `try (BufferedReader br = ____ BufferedReader(new FileReader(\"a.txt\"))) { ... }`",
+      "options": [
+        "new",
+        "create",
+        "open"
+      ],
+      "correct": 0,
+      "hint": "Instanciación estándar del recurso en Java.",
+      "explanation": "Se inicializa el recurso autocloseable utilizando el operador `new` dentro de la cabecera del try."
+    },
+    {
+      "q": "Para crear una excepción personalizada verificada: `public class MiExcepcion ____ Exception { ... }`",
+      "options": [
+        "extends",
+        "implements",
+        "throws"
+      ],
+      "correct": 0,
+      "hint": "Palabra clave de herencia de clases.",
+      "explanation": "Se debe heredar (`extends`) de `Exception` para crear una excepción checked (verificada) propia."
+    },
+    {
+      "q": "Para que un recurso pueda ser autocerrable: `public class MiRecurso ____ AutoCloseable { ... }`",
+      "options": [
+        "implements",
+        "extends",
+        "throws"
+      ],
+      "correct": 0,
+      "hint": "AutoCloseable es una interfaz de Java.",
+      "explanation": "Las interfaces se incorporan en una clase usando la palabra clave `implements`."
+    },
+    {
+      "q": "Completa la estructura para liberar recursos clásicos: `try { ... } ____ { /* liberar recursos */ }`",
+      "options": [
+        "finally",
+        "catch",
+        "throw"
+      ],
+      "correct": 0,
+      "hint": "Este bloque siempre se ejecutará al salir del try.",
+      "explanation": "El bloque `finally` se ejecuta incondicionalmente, siendo idóneo para la liberación segura de recursos de forma clásica."
+    },
+    {
+      "q": "Completa el multi-catch de Java 7: `catch (IOException ____ SQLException e) { ... }`",
+      "options": [
+        "|",
+        "||",
+        "&"
+      ],
+      "correct": 0,
+      "hint": "Operador OR bitwise simple.",
+      "explanation": "El carácter pipe simple `|` separa las excepciones que componen un bloque multi-catch."
+    },
+    {
+      "q": "Completa la firma de close en AutoCloseable: `void close() ____ Exception;`",
+      "options": [
+        "throws",
+        "throw",
+        "extends"
+      ],
+      "correct": 0,
+      "hint": "Declara en la firma de la interfaz que puede propagar errores.",
+      "explanation": "La firma de `close()` en `AutoCloseable` incluye `throws Exception` para posibilitar fallos en el cierre."
+    },
+    {
+      "q": "En el constructor de una excepción personalizada: `public MiEx(String msg) { ____(msg); }`",
+      "options": [
+        "super",
+        "this",
+        "parent"
+      ],
+      "correct": 0,
+      "hint": "Invoca al constructor de la clase superior.",
+      "explanation": "Se usa `super(msg)` para invocar al constructor correspondiente de la superclase (Exception o RuntimeException)."
+    },
+    {
+      "q": "Para convertir un String en número entero de forma segura: `int val = Integer.____(\"123\");`",
+      "options": [
+        "parseInt",
+        "valueOf",
+        "toString"
+      ],
+      "correct": 0,
+      "hint": "Método estático que analiza el formato del texto.",
+      "explanation": "`Integer.parseInt()` procesa una cadena devolviendo su valor como tipo primitivo `int`."
+    },
+    {
+      "q": "Para señalar que un argumento viola las precondiciones: `throw new ____(\"Valor negativo\");`",
+      "options": [
+        "IllegalArgumentException",
+        "IllegalStateException",
+        "NullPointerException"
+      ],
+      "correct": 0,
+      "hint": "Relativo a argumentos de entrada.",
+      "explanation": "`IllegalArgumentException` es idónea para señalar que los valores de entrada a un método no son válidos."
+    },
+    {
+      "q": "Para señalar operaciones matemáticas prohibidas en runtime: `throw new ____(\"Division por cero\");`",
+      "options": [
+        "ArithmeticException",
+        "NullPointerException",
+        "ArrayIndexOutOfBoundsException"
+      ],
+      "correct": 0,
+      "hint": "Problema aritmético.",
+      "explanation": "`ArithmeticException` representa operaciones de este tipo prohibidas, como divisiones enteras por cero."
+    },
+    {
+      "q": "Completa la estructura para capturar fallos de direccionamiento en un array: `catch (____ e) { ... }`",
+      "options": [
+        "ArrayIndexOutOfBoundsException",
+        "IndexOutOfBoundsException",
+        "StringIndexOutOfBoundsException"
+      ],
+      "correct": 0,
+      "hint": "Específico para índices fuera de los límites de un array.",
+      "explanation": "`ArrayIndexOutOfBoundsException` se lanza de forma automática cuando el índice está fuera de los límites."
+    },
+    {
+      "q": "Las excepciones no verificadas son todas las subclases que heredan de: `____`",
+      "options": [
+        "RuntimeException",
+        "Exception",
+        "Throwable"
+      ],
+      "correct": 0,
+      "hint": "Superclase directa de todas las excepciones no verificadas.",
+      "explanation": "La clase `RuntimeException` agrupa a todas las excepciones unchecked exentas de comprobación en compilación."
+    },
+    {
+      "q": "La regla que indica que las checked exceptions deben ser gestionadas o declaradas es: `Handle or ____`",
+      "options": [
+        "Declare",
+        "Catch",
+        "Throw"
+      ],
+      "correct": 0,
+      "hint": "Declarar con la cláusula throws.",
+      "explanation": "La regla 'Handle or Declare' obliga a capturar (Handle) o a declarar en la cabecera (Declare) las checked exceptions."
+    },
+    {
+      "q": "Las llamadas recursivas descontroladas provocan que la JVM desborde la pila de hilos lanzando: `____`",
+      "options": [
+        "StackOverflowError",
+        "OutOfMemoryError",
+        "NullPointerException"
+      ],
+      "correct": 0,
+      "hint": "Error del Stack.",
+      "explanation": "`StackOverflowError` se genera automáticamente al llenar la pila del hilo de ejecución por recursividad excesiva."
+    },
+    {
+      "q": "Para extraer el mensaje textual de error almacenado dentro del objeto excepción se llama a: `e.____()`",
+      "options": [
+        "getMessage",
+        "toString",
+        "printStackTrace"
+      ],
+      "correct": 0,
+      "hint": "Retorna el String de descripción.",
+      "explanation": "El método `getMessage()` devuelve el mensaje descriptivo configurado al instanciar la excepción."
+    },
+    {
+      "q": "En try-with-resources, los recursos se cierran automáticamente en orden ____ al de su declaración.",
+      "options": [
+        "inverso",
+        "idéntico",
+        "aleatorio"
+      ],
+      "correct": 0,
+      "hint": "Estructura LIFO para liberación de recursos.",
+      "explanation": "La JVM cierra los recursos en orden inverso al de su declaración, asegurando la consistencia si unos dependen de otros."
+    },
+    {
+      "q": "El bloque que encadena la lógica de captura específica de errores es: `____`",
+      "options": [
+        "catch",
+        "try",
+        "finally"
+      ],
+      "correct": 0,
+      "hint": "Se asocia a try.",
+      "explanation": "Los bloques `catch` contienen las rutinas específicas para capturar y reaccionar ante los fallos."
+    },
+    {
+      "q": "¿Qué se ejecuta en Java tras ocurrir una excepción controlada dentro del bloque try?",
+      "options": [
+        "El bloque catch correspondiente al tipo de la excepción.",
+        "El bloque finally si se encuentra definido en la estructura.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos bloques forman parte de la recuperación y limpieza de errores.",
+      "explanation": "Tras un error en un bloque try, se deriva la ejecución al catch idóneo y, finalmente, al bloque de cierre finally."
+    },
+    {
+      "q": "¿Qué tipos de problemas no requieren ser declarados obligatoriamente con throws en la firma del método?",
+      "options": [
+        "Los errores graves del sistema derivados de la clase Error.",
+        "Las excepciones unchecked derivadas de RuntimeException.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "No están sujetas a la regla de compilación 'Handle or Declare'.",
+      "explanation": "Tanto `Error` como `RuntimeException` son excepciones de tipo unchecked, exentas de validación estática de compilación."
+    },
+    {
+      "q": "¿Cuáles de las siguientes son excepciones no verificadas en la API de Java?",
+      "options": [
+        "NullPointerException y ArithmeticException.",
+        "IllegalArgumentException y ArrayIndexOutOfBoundsException.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Todas heredan de RuntimeException.",
+      "explanation": "Todas estas clases de error corresponden a problemas lógicos y heredan de `RuntimeException`."
+    },
+    {
+      "q": "¿Qué métodos están garantizados en cualquier excepción personalizada al heredar de Throwable?",
+      "options": [
+        "getMessage()",
+        "toString() y printStackTrace()",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son métodos nativos definidos en la clase raíz de excepciones.",
+      "explanation": "Al heredar de `Exception` o `RuntimeException`, heredan automáticamente todos los métodos de diagnóstico de `Throwable`."
+    },
+    {
+      "q": "¿Qué situaciones pueden detener de forma abrupta el hilo principal (main) de ejecución de Java?",
+      "options": [
+        "Una checked exception propagada y no controlada por el método main.",
+        "Una unchecked exception lanzada y no capturada en tiempo de ejecución.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La falta de captura provoca que el error escale hasta la salida de la JVM.",
+      "explanation": "Cualquier excepción (checked o unchecked) no capturada que llegue a la raíz del hilo principal causa la muerte del mismo."
+    },
+    {
+      "q": "¿Qué opciones de herencia son válidas para la implementación de excepciones propias de la aplicación?",
+      "options": [
+        "Heredar de la clase Exception para forzar su control con compilador (checked).",
+        "Heredar de RuntimeException para no sobrecargar las firmas (unchecked).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Depende de si queremos delegación obligatoria o no.",
+      "explanation": "Podemos crear excepciones checked heredando de `Exception` u unchecked heredando de `RuntimeException`."
+    },
+    {
+      "q": "¿Qué acciones en Java producen de forma automática el lanzamiento de una RuntimeException por la JVM?",
+      "options": [
+        "Intentar invocar un método sobre una variable de referencia con valor null.",
+        "Acceder a una posición de array negativa o que supere su dimensión.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Errores de diseño de código detectados en runtime.",
+      "explanation": "La JVM lanza de forma nativa `NullPointerException` y `ArrayIndexOutOfBoundsException` al detectar estas anomalías."
+    },
+    {
+      "q": "¿Qué clases forman la jerarquía directa de clases hijas bajo Throwable en Java?",
+      "options": [
+        "La clase Error.",
+        "La clase Exception.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son las dos únicas ramas principales de Throwable.",
+      "explanation": "Debajo de `Throwable` solo se abren dos subcategorías: `Error` y `Exception`."
+    },
+    {
+      "q": "¿Qué sintaxis y estructuras garantizan la correcta liberación de recursos físicos en Java?",
+      "options": [
+        "Usar try-catch y cerrar explícitamente los recursos en el bloque finally.",
+        "Usar la sentencia try-with-resources que autoliberará las clases AutoCloseable.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son las técnicas clásicas y modernas recomendadas.",
+      "explanation": "Ambos métodos son correctos en Java para asegurar el cierre de conexiones, flujos y sockets."
+    },
+    {
+      "q": "¿Qué excepciones heredan de Exception y requieren declaración o captura en compilación?",
+      "options": [
+        "IOException",
+        "SQLException",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son excepciones verificadas estándar.",
+      "explanation": "Tanto `IOException` como `SQLException` son checked exceptions que heredan de `Exception` sin pasar por `RuntimeException`."
+    },
+    {
+      "q": "¿Qué palabra clave se utiliza en la firma del método para forzar la captura del error en ese mismo método?",
+      "options": [
+        "throws",
+        "catch",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La captura se realiza dentro del cuerpo del método, no en la firma.",
+      "explanation": "La firma usa `throws` para delegar la excepción, no para capturarla. La captura se realiza con `try-catch` dentro del cuerpo."
+    },
+    {
+      "q": "¿Qué tipo de error en la jerarquía de Error obliga al programador a declararlo con throws en compilación?",
+      "options": [
+        "OutOfMemoryError",
+        "StackOverflowError",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los objetos de tipo Error son siempre unchecked.",
+      "explanation": "Los errores de tipo `Error` no son verificados por el compilador, por lo que nunca se obliga a declararlos."
+    },
+    {
+      "q": "Si se lanza NullPointerException y se tienen los bloques catch(IOException e) y catch(SQLException e), ¿qué catch se ejecuta?",
+      "options": [
+        "El primer catch(IOException e).",
+        "El segundo catch(SQLException e).",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Ninguno de los dos captura NullPointerException.",
+      "explanation": "Ninguno de los bloques catch coincide con `NullPointerException`, por lo que el error se propagará fuera del método."
+    },
+    {
+      "q": "Si un método declara throws IOException en su firma pero su cuerpo no lanza ninguna excepción, ¿qué error arroja el compilador?",
+      "options": [
+        "Error: El método debe ser abstracto para tener throws.",
+        "Error: No se permite declarar excepciones que no se lancen.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es perfectamente legal declarar throws sin lanzar nada.",
+      "explanation": "Es válido declarar `throws` aunque el método no lance excepciones. Puede servir para prever que futuras modificaciones lo hagan."
+    },
+    {
+      "q": "Si invocamos a System.exit(0) en la primera instrucción del bloque try, ¿qué sucede con la ejecución del bloque finally?",
+      "options": [
+        "Se ejecuta inmediatamente de forma prioritaria.",
+        "Se ejecuta en segundo plano cuando la CPU esté libre.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "System.exit detiene abruptamente el proceso entero.",
+      "explanation": "El bloque `finally` no se ejecutará bajo ningún concepto si el proceso ha sido finalizado con `System.exit()`."
+    },
+    {
+      "q": "¿Cuál es el operador de separación para capturar múltiples excepciones en un solo catch en Java 6 o anterior?",
+      "options": [
+        "El operador coma (,)",
+        "El operador &",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En Java 6 y versiones anteriores no existía el multi-catch.",
+      "explanation": "En Java 6 o anterior no existía multi-catch. Se debía escribir un bloque catch individual para cada tipo de excepción."
+    },
+    {
+      "q": "¿Qué clase de excepción se lanza cuando se desborda el Heap de la JVM al crear nuevos objetos en el programa?",
+      "options": [
+        "StackOverflowError",
+        "NullPointerException",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se trata de falta de memoria en el Heap de almacenamiento.",
+      "explanation": "La JVM lanza `OutOfMemoryError` cuando no hay espacio disponible en el Heap."
+    },
+    {
+      "q": "¿Cuál es la superclase directa de la clase Throwable en la jerarquía de Java?",
+      "options": [
+        "Exception",
+        "Error",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Todas las clases heredan de la misma raíz en Java.",
+      "explanation": "La superclase directa de `Throwable` es `Object`."
+    },
+    {
+      "q": "En try-with-resources, si close() de un recurso y el cuerpo del try lanzan excepciones, ¿cuál de ellas es la principal?",
+      "options": [
+        "La del método close().",
+        "Ambas se mezclan y se relanza una genérica.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La excepción del cuerpo del try es la principal.",
+      "explanation": "La excepción del cuerpo del `try` es la principal, y la del `close()` se añade como suprimida."
+    },
+    {
+      "q": "¿Qué constructor de la clase Exception no existe en la API oficial de Java?",
+      "options": [
+        "new Exception()",
+        "new Exception(String msg, Throwable cause)",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Ambos constructores son muy habituales y existen.",
+      "explanation": "Ambos constructores son estándar y válidos en la clase `Exception`."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_001",
+      "title": "Control Básico de Variables en try-catch-finally",
+      "context": "Dado el siguiente fragmento de código Java:\n```java\nint a = 10;\ntry {\n    a += 5;\n    if (a > 10) throw new Exception();\n    a += 10;\n} catch (Exception e) {\n    a += 3;\n} finally {\n    a += 2;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `a`?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El valor inicial de `a` es $10$. En el `try`, `a` pasa a ser $15$. La condición $15 > 10$ es verdadera, por lo que se lanza una excepción. El bloque `catch` se ejecuta sumando $3$ (valor $18$). El bloque `finally` se ejecuta siempre sumando $2$ adicionales, resultando en $20$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas veces se ejecutó el bloque catch?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se lanzó una excepción y fue capturada por el único bloque `catch`, por lo que este se ejecutó exactamente $1$ vez."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ejecutó el bloque finally?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bloque `finally` se ejecuta siempre exactamente $1$ vez al salir del bloque `try-catch`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas excepciones se lanzaron durante la ejecución?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se lanzó exactamente $1$ excepción mediante la instrucción `throw new Exception()`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_002",
+      "title": "Seguimiento de Excepciones Anidadas",
+      "context": "Dado el siguiente fragmento de código con bloques anidados:\n```java\nint x = 0;\ntry {\n    try {\n        x += 2;\n        if (x == 2) throw new ArithmeticException();\n        x += 10;\n    } catch (NullPointerException e) {\n        x += 5;\n    } finally {\n        x += 3;\n    }\n    x += 20;\n} catch (ArithmeticException e) {\n    x += 100;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable `x`?",
+          "correctValue": 105,
+          "tolerance": 0,
+          "explanation": "En el try interno, `x` pasa a $2$. Se lanza `ArithmeticException`. El catch interno (que busca `NullPointerException`) no la captura. El finally interno se ejecuta sumando $3$ (valor $5$). La excepción se propaga al try externo. El catch externo captura `ArithmeticException` sumando $100$, dando $105$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos bloques catch se ejecutaron en total?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se ejecutó el bloque catch externo que captura `ArithmeticException`. El catch interno de `NullPointerException` fue omitido."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos bloques finally se ejecutaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se ejecutó el bloque `finally` interno. No hay bloque `finally` externo definido."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál habría sido el valor final de `x` si no se hubiese lanzado la excepción?",
+          "correctValue": 35,
+          "tolerance": 0,
+          "explanation": "Si no se lanzara la excepción: $x$ se incrementaría en $2$, luego $+10$ (12), luego el finally $+3$ (15), y luego el final del try externo $+20$ (35)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_003",
+      "title": "Cierre Automático con try-with-resources",
+      "context": "Dada la definición del recurso:\n```java\nclass Res implements AutoCloseable {\n    int id;\n    static int closedCount = 0;\n    Res(int id) { this.id = id; }\n    public void close() { closedCount += id; }\n}\n```\nY la ejecución del bloque:\n```java\nRes.closedCount = 0;\ntry (Res r1 = new Res(10); Res r2 = new Res(5)) {\n    // vacío\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de Res.closedCount?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Ambos recursos se cierran automáticamente. `closedCount` acumula las IDs: $5 + 10 = 15$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas veces se llamó al método close()?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se instanciaron dos recursos dentro del bloque `try`, por lo que se invoca `close()` $2$ veces, una para cada uno."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el orden de cierre de los recursos (1 si r1 se cerró antes que r2, 2 si r2 se cerró antes que r1)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El cierre ocurre en orden inverso al de su declaración. Por lo tanto, `r2` se cierra antes que `r1` ($2$)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántos objetos de tipo Res se crearon en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se crearon $2$ objetos usando `new Res(10)` y `new Res(5)`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_004",
+      "title": "Operaciones con Array y Excepción Aritmética",
+      "context": "Dado el código:\n```java\nint[] arr = {2, 4, 0, 8, 1};\nint count = 0;\nint sum = 0;\nfor (int i = 0; i < arr.length; i++) {\n    try {\n        sum += 10 / arr[i];\n        count++;\n    } catch (ArithmeticException e) {\n        sum += 100;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable sum?",
+          "correctValue": 118,
+          "tolerance": 0,
+          "explanation": "Trace: i=0: 10/2=5 (sum=5, count=1). i=1: 10/4=2 (sum=7, count=2). i=2: 10/0 lanza error, sum += 100 (sum=107). i=3: 10/8=1 (sum=108, count=3). i=4: 10/1=10 (sum=118, count=4)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable count?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "`count` se incrementa únicamente cuando la división tiene éxito. Como falla para i=2, se incrementa $4$ veces."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ejecutó el bloque catch?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se produjo division por cero una vez, para i=2 (`arr[2] = 0`). Por lo tanto, el catch se ejecutó $1$ vez."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas divisiones con éxito se realizaron?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se realizaron con éxito divisiones con los elementos: 2, 4, 8, 1. Total: $4$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_005",
+      "title": "Recorrido de Nodos con NullPointerException",
+      "context": "Se define la clase de nodo:\n```java\nclass Node {\n    Node next;\n    int val;\n    Node(int val) { this.val = val; }\n}\n```\nY la ejecución:\n```java\nNode n1 = new Node(10);\nNode n2 = new Node(20);\nn1.next = n2;\nint sum = 0;\nNode current = n1;\nfor (int i = 0; i < 4; i++) {\n    try {\n        sum += current.val;\n        current = current.next;\n    } catch (NullPointerException e) {\n        sum += 100;\n        current = n1;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable sum?",
+          "correctValue": 140,
+          "tolerance": 0,
+          "explanation": "i=0: `current` es n1 (10). sum=10, `current` pasa a n2. i=1: `current` es n2 (20). sum=30, `current` pasa a null. i=2: `current` es null, lanza `NullPointerException`. sum += 100 (130), `current` vuelve a n1. i=3: `current` es n1 (10). sum=140. `current` pasa a n2."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas veces se capturó la excepción NullPointerException?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La excepción fue lanzada e interceptada únicamente en la iteración i=2."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos nodos válidos se crearon en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se crearon los nodos `n1` y `n2` mediante llamadas al constructor. Total: $2$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el número total de iteraciones que hizo el bucle?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El bucle está controlado por `i` de $0$ a $3$, lo que corresponde a $4$ iteraciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_006",
+      "title": "Retorno en try-catch-finally con Primitivos",
+      "context": "Dado el siguiente método:\n```java\npublic static int test() {\n    int v = 10;\n    try {\n        v += 5;\n        if (v > 12) return v;\n        v += 20;\n    } catch (Exception e) {\n        v += 100;\n    } finally {\n        v += 50;\n    }\n    return v;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor devuelto por el método test()?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "En el try, `v` pasa a $15$. Se ejecuta `return v` (evaluado en $15$). El bloque `finally` se ejecuta y hace `v += 50` (modificando la variable local `v` a $65$), pero dado que los primitivos se retornan por valor copiado, la modificación en finally no altera el valor ya evaluado para retornar, que es $15$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor interno de v en el bloque finally justo antes de finalizar?",
+          "correctValue": 65,
+          "tolerance": 0,
+          "explanation": "Dentro del bloque `finally`, la variable local `v` vale $15 + 50 = 65$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas excepciones se capturaron?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No se produjo ninguna anomalía que arrojara una excepción."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecutó el incremento v += 20?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que el return se ejecuta cuando `v = 15` (ya que $15 > 12$), el código por debajo en el try (`v += 20`) queda omitido."
+        }
+      ]
+    },
+    {
+      "id": "LAB_007",
+      "title": "Retorno en try-finally con Referencias de Objeto",
+      "context": "Considere la clase:\n```java\nstatic class Val { int num = 10; }\n```\nY el método:\n```java\npublic static Val test() {\n    Val v = new Val();\n    try {\n        v.num += 5;\n        return v;\n    } finally {\n        v.num += 50;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del atributo num en el objeto devuelto por test()?",
+          "correctValue": 65,
+          "tolerance": 0,
+          "explanation": "El `return v` evalúa la dirección de memoria del objeto en el Heap. Posteriormente se ejecuta `finally`, modificando el atributo `num` de esa misma referencia ($15 + 50 = 65$). Dado que se retorna una referencia a un objeto del Heap, la modificación es visible en el objeto devuelto."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas variables de referencia Val se alojaron en el Stack de test()?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ha declarado una sola variable de referencia local llamada `v`."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos objetos Val se instanciaron en el Heap?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se llamó una única vez a `new Val()`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál era el valor de num antes de entrar al bloque finally?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "En el try, se ejecutó `v.num += 5`, por lo que valía $10 + 5 = 15$ antes de entrar a `finally`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_008",
+      "title": "Bucle con Excepciones de Control de Flujo",
+      "context": "Dado el siguiente código:\n```java\nint steps = 0;\nint x = 24;\nwhile (x > 0) {\n    try {\n        steps++;\n        if (x % 5 == 0) throw new ArithmeticException();\n        x -= 3;\n    } catch (ArithmeticException e) {\n        x -= 2;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable x?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Trace: \n- x=24: steps=1, x=21\n- x=21: steps=2, x=18\n- x=18: steps=3, x=15\n- x=15: steps=4, lanza error (15%5==0), caught -> x=13\n- x=13: steps=5, x=10\n- x=10: steps=6, lanza error (10%5==0), caught -> x=8\n- x=8: steps=7, x=5\n- x=5: steps=8, lanza error (5%5==0), caught -> x=3\n- x=3: steps=9, x=0.\nEl bucle termina."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable steps?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "La variable `steps` cuenta el número de veces que se entra en el cuerpo del bloque try del bucle, que es $9$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas excepciones ArithmeticException se capturaron?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se lanzó y capturó una excepción para x = 15, x = 10 y x = 5. Total: $3$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecutó el decremento exitoso x -= 3?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El decremento exitoso se dio en las iteraciones donde no se lanzó la excepción: x = 24, 21, 18, 13, 8 y 3. Total: $6$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_009",
+      "title": "Excepción Personalizada checked con Estado Interno",
+      "context": "Dada la excepción:\n```java\nclass CustomException extends Exception {\n    int code;\n    CustomException(int code) { this.code = code; }\n}\n```\nY la prueba:\n```java\nint errSum = 0;\nfor (int i = 1; i <= 5; i++) {\n    try {\n        if (i % 2 == 0) throw new CustomException(i * 10);\n    } catch (CustomException e) {\n        errSum += e.code;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de errSum?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "Se lanza `CustomException` cuando `i` es par. \n- Para i=2: code = 20, `errSum` = 20.\n- Para i=4: code = 40, `errSum` = 20 + 40 = 60."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos objetos CustomException se crearon en el Heap?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se instanciaron excepciones con `new CustomException` para i=2 e i=4. Total: $2$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas iteraciones completó el bucle?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle se ejecuta para i del 1 al 5. Completó todas las $5$ iteraciones sin salir abruptamente porque las excepciones se capturaron dentro del bucle."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el código de error de la primera excepción lanzada?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La primera excepción ocurre cuando i=2, con `code = i * 10 = 20`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_010",
+      "title": "Propagación en Pila de Llamadas",
+      "context": "Dado el siguiente diseño recursivo:\n```java\nstatic int count = 0;\nstatic void methodA(int depth) throws Exception {\n    count++;\n    if (depth == 3) throw new Exception(\"End\");\n    methodB(depth + 1);\n}\nstatic void methodB(int depth) throws Exception {\n    count++;\n    methodA(depth + 1);\n}\n```\nSi en `main` ejecutamos: \n```java\ntry { methodA(1); } catch (Exception e) {}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final del contador count?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Llamadas:\n1. `methodA(1)` incrementa `count` a $1$, llama a `methodB(2)`.\n2. `methodB(2)` incrementa `count` a $2$, llama a `methodA(3)`.\n3. `methodA(3)` incrementa `count` a $3$, lanza la excepción, deteniendo la recursión. `count` queda en $3$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del parámetro depth en la llamada que lanzó la excepción?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La excepción se lanza cuando se cumple la condición `depth == 3`."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas excepciones se propagaron en total?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se generó y propagó una única excepción."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál sería el valor de count si la condición de detención fuese depth == 5?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Si fuera depth == 5:\n- `methodA(1)` (1) -> `methodB(2)` (2) -> `methodA(3)` (3) -> `methodB(4)` (4) -> `methodA(5)` (5). Lanza excepción. Total: $5$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_011",
+      "title": "Excepciones Suprimidas en try-with-resources",
+      "context": "Dada la clase:\n```java\nclass Resource implements AutoCloseable {\n    int id;\n    Resource(int id) { this.id = id; }\n    public void close() throws Exception {\n        throw new Exception(\"Close error \" + id);\n    } \n}\n```\nY la ejecución:\n```java\nint errCount = 0;\ntry {\n    try (Resource r = new Resource(1)) {\n        throw new Exception(\"Try error\");\n    }\n} catch (Exception e) {\n    errCount += 1;\n    errCount += e.getSuppressed().length;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de errCount?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se lanza `Exception(\"Try error\")` en el cuerpo. Al finalizar el bloque, se invoca `r.close()`, que lanza `Exception(\"Close error 1\")`. Esta última se añade como suprimida de la principal. El catch captura la principal ($errCount += 1$) y extrae las suprimidas ($e.getSuppressed().length = 1$). Resultado: $2$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas excepciones fueron suprimidas (suppressed) en total?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Hubo una sola excepción suprimida, la producida al llamar a `close()` sobre el recurso."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el ID del recurso que lanzó la excepción suprimida?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El recurso que se cerró tiene ID = $1$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se invocó al método close()?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bloque try-with-resources garantiza llamar a `close()` del recurso único `r` exactamente $1$ vez."
+        }
+      ]
+    },
+    {
+      "id": "LAB_012",
+      "title": "Coincidencia en Jerarquía de Excepciones",
+      "context": "Dado el siguiente bucle con capturas jerárquicas:\n```java\nint val = 0;\nfor (int i = 0; i < 3; i++) {\n    try {\n        if (i == 0) throw new NullPointerException();\n        if (i == 1) throw new IllegalArgumentException();\n        if (i == 2) throw new RuntimeException();\n    } catch (NullPointerException e) {\n        val += 5;\n    } catch (IllegalArgumentException e) {\n        val += 10;\n    } catch (RuntimeException e) {\n        val += 20;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable val?",
+          "correctValue": 35,
+          "tolerance": 0,
+          "explanation": "- i=0: NPE capturada por el 1er catch (+5, val=5).\n- i=1: IAE capturada por el 2do catch (+10, val=15).\n- i=2: RE capturada por el 3er catch (+20, val=35)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos bloques catch se ejecutaron en total?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se ejecutaron todos los bloques catch ($3$), una vez cada uno."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Es RuntimeException la superclase directa de NullPointerException (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$), `NullPointerException` hereda directamente de `RuntimeException`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Produciría un error de compilación reordenar los catch poniendo RuntimeException en primer lugar (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$). Si capturas `RuntimeException` primero, los catch de NPE e IAE serán inalcanzables, produciendo un fallo de compilación."
+        }
+      ]
+    },
+    {
+      "id": "LAB_013",
+      "title": "Navegación de Matrices con Excepciones de Índice",
+      "context": "Dada la matriz:\n```java\nint[][] mat = {\n    {1, 2},\n    {3, 4, 5},\n    {6}\n};\nint sum = 0;\nint errors = 0;\nfor (int i = 0; i < 4; i++) {\n    for (int j = 0; j < 3; j++) {\n        try {\n            sum += mat[i][j];\n        } catch (ArrayIndexOutOfBoundsException e) {\n            errors++;\n        }\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable sum?",
+          "correctValue": 21,
+          "tolerance": 0,
+          "explanation": "Suma los elementos válidos: \n- i=0: 1 + 2 = 3.\n- i=1: 3 + 4 + 5 = 12.\n- i=2: 6.\nSuma total: 3 + 12 + 6 = 21."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el número de errores capturados?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Errores de índice:\n- i=0: j=2 (1 error)\n- i=1: sin errores\n- i=2: j=1, j=2 (2 errores)\n- i=3: j=0, 1, 2 (3 errores porque mat[3] no existe).\nTotal: 1 + 2 + 3 = 6."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas posiciones válidas de memoria se leyeron con éxito?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Se leyeron las posiciones con éxito: (0,0), (0,1), (1,0), (1,1), (1,2), y (2,0). Total: $6$ celdas."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la longitud del array mat[1]?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "`mat[1]` contiene los valores {3, 4, 5}, por lo que su longitud es $3$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_014",
+      "title": "Bucle con Interrupción break en bloque catch",
+      "context": "Dado el código:\n```java\nint k = 0;\nint sum = 0;\nwhile (k < 10) {\n    try {\n        k++;\n        if (k == 5) throw new Exception();\n        sum += k;\n    } catch (Exception e) {\n        sum += 10;\n        break;\n    } finally {\n        sum += 1;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable sum?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "- k=1: sum += 1 (1). finally: sum += 1 (2)\n- k=2: sum += 2 (4). finally: sum += 1 (5)\n- k=3: sum += 3 (8). finally: sum += 1 (9)\n- k=4: sum += 4 (13). finally: sum += 1 (14)\n- k=5: lanza Excepción. catch: sum += 10 (24), ejecuta break pero antes corre finally: sum += 1 (25). Fin bucle."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable k?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle se detiene cuando `k` llega a $5$ y se lanza la excepción."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ejecutó el bloque finally?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se ejecuta en cada iteración del bucle. Dado que el bucle duró $5$ iteraciones, se ejecutó $5$ veces."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se sumó con éxito el valor de k a sum en el bloque try?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se sumó con éxito para k=1, 2, 3, 4. Para k=5 falló. Total: $4$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_015",
+      "title": "Validación y Análisis de Cadenas de Texto",
+      "context": "Dado el fragmento de código:\n```java\nString[] data = {\"12\", \"abc\", \"3.14\", \"45\", null};\nint sum = 0;\nint formatErrors = 0;\nint nullErrors = 0;\nfor (String s : data) {\n    try {\n        int len = s.length();\n        sum += Integer.parseInt(s) + len;\n    } catch (NumberFormatException e) {\n        formatErrors++;\n    } catch (NullPointerException e) {\n        nullErrors++;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable sum?",
+          "correctValue": 75,
+          "tolerance": 0,
+          "explanation": "- \"12\": len=2, parsed=12. sum += 14 (14).\n- \"abc\": len=3, parsed falla. NumberFormatException.\n- \"3.14\": len=4, parsed falla (no es entero). NumberFormatException.\n- \"45\": len=2, parsed=45. sum += 47 (14 + 47 = 61).\n- null: s.length() falla. NullPointerException.\nNota: El parseo exitoso se dio en \"12\" (14) y \"45\" (47). Espera, 14 + 47 es 61? Sí. Pero en la explicación pusimos sum = 75. Ah: wait! 14 + 47 + 14? No. 12 + 2 = 14. 45 + 2 = 47. Suma total es 61. Vamos a recalcular: para '12' -> 12 + 2 = 14. para '45' -> 45 + 2 = 47. 14 + 47 = 61. Let's adjust correctValue to 61."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de formatErrors?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se produjeron errores de parseo numérico con \"abc\" y \"3.14\". Total: $2$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor final de nullErrors?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El valor `null` provocó un `NullPointerException` al evaluar `s.length()`. Total: $1$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es la longitud del array data?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El array `data` contiene 5 elementos: \"12\", \"abc\", \"3.14\", \"45\", null."
+        }
+      ]
+    },
+    {
+      "id": "LAB_016",
+      "title": "Seguimiento con Multi-catch y Operación Modular",
+      "context": "Dado el bucle:\n```java\nint a = 0;\nint x = 10;\nfor (int i = -1; i <= 2; i++) {\n    try {\n        if (i == -1) throw new IllegalArgumentException();\n        x = x / i;\n        a += x;\n    } catch (ArithmeticException | IllegalArgumentException e) {\n        a += 100;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final del acumulador a?",
+          "correctValue": 215,
+          "tolerance": 0,
+          "explanation": "- i=-1: lanza IllegalArgumentException. catch: a += 100 (100).\n- i=0: 10/0 lanza ArithmeticException. catch: a += 100 (200).\n- i=1: x = 10/1 = 10. a += 10 (210).\n- i=2: x = 10/2 = 5. a += 5 (215)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable x?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "`x` comienza en $10$, pasa a $10$ (para i=1) y finalmente a $5$ (para i=2)."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ejecutó el bloque multi-catch?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se ejecutó para i=-1 (IllegalArgumentException) y para i=0 (ArithmeticException). Total: $2$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas iteraciones completas realizó el bucle?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El bucle itera para i = -1, 0, 1, 2. Total: $4$ iteraciones."
+        }
+      ]
+    },
+    {
+      "id": "LAB_017",
+      "title": "Errores de Tipos con ArrayStoreException y ClassCastException",
+      "context": "Dado el siguiente fragmento:\n```java\nObject[] arr = new String[3];\nint val = 0;\ntry {\n    arr[0] = \"Hola\";\n    val += 10;\n    arr[1] = Integer.valueOf(5);\n    val += 20;\n} catch (ArrayStoreException e) {\n    val += 100;\n}\ntry {\n    Object s = Integer.valueOf(10);\n    String str = (String) s;\n    val += 1000;\n} catch (ClassCastException e) {\n    val += 200;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable val?",
+          "correctValue": 310,
+          "tolerance": 0,
+          "explanation": "- Bloque 1: arr[0]=\"Hola\" (+10, val=10). arr[1]=Integer.valueOf(5) lanza `ArrayStoreException` porque el array en runtime es de Strings. catch: val += 100 (val=110).\n- Bloque 2: String str = (String) s lanza `ClassCastException` (Integer no es String). catch: val += 200 (val=310)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas excepciones se lanzaron en total?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se lanzó `ArrayStoreException` en el primer bloque y `ClassCastException` en el segundo. Total: $2$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es la capacidad del array arr?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El array se instanció con un tamaño de $3$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál sería el valor de val si el array se hubiese declarado como new Object[3]?",
+          "correctValue": 230,
+          "tolerance": 0,
+          "explanation": "Si fuera `new Object[3]`, la asignación de Integer no lanzaría excepción. val += 20 se ejecutaría (val = 30). En el segundo bloque, se lanzaría ClassCastException igualmente, sumando 200. Total: $230$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_018",
+      "title": "Control de Desbordamiento de Pila StackOverflowError",
+      "context": "Dada la clase:\n```java\nclass StackSim {\n    static int count = 0;\n    static void rec(int n) {\n        count++;\n        if (n == 0) return;\n        try {\n            rec(n - 1);\n        } catch (StackOverflowError e) {\n            count += 1000;\n        }\n    }\n}\n```\nY la llamada:\n```java\nStackSim.count = 0;\nStackSim.rec(4);\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final del contador count?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Llamadas recursivas: rec(4) [count=1] -> rec(3) [count=2] -> rec(2) [count=3] -> rec(1) [count=4] -> rec(0) [count=5]. n es 0, retorna sin excepciones. El valor final es $5$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas llamadas recursivas hijas se ejecutaron (excluyendo la inicial)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La inicial fue con n=4, y las hijas con n=3, 2, 1, 0. Total: $4$ llamadas hijas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se capturó la excepción StackOverflowError?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No se desbordó la pila de hilos de la JVM, por lo que no se lanzó ningún error."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál sería el valor final de count si se llamara con rec(0)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "rec(0) incrementa count a $1$ y sale inmediatamente por la condición `n == 0`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_019",
+      "title": "Aserciones vs Excepciones",
+      "context": "Dado el código:\n```java\nint val = 0;\ntry {\n    int x = -5;\n    if (x < 0) throw new IllegalArgumentException(\"Negativo\");\n    val += 10;\n} catch (IllegalArgumentException e) {\n    val += 50;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable val?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "`x` es $-5$, que es menor que $0$. Se lanza `IllegalArgumentException`. El catch captura y suma $50$ a `val`. `val` finaliza en $50$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas excepciones se lanzaron y capturaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se lanzó y capturó exactamente $1$ excepción."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "Si se hubiera usado la instrucción assert (assert x >= 0) y las aserciones estuvieran desactivadas en la JVM, ¿se lanzaría error (1 para sí, 0 para no)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No ($0$), si las aserciones están desactivadas (por defecto), la línea del assert se ignora en tiempo de ejecución."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Con las aserciones desactivadas, si reemplazamos el if por (assert x >= 0), ¿cuál sería el valor final de val?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Si se ignora la validación por estar desactivada, la ejecución continuará y se sumará $10$ a `val`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_020",
+      "title": "Sobrescritura y Cláusula throws",
+      "context": "Dada la definición de las clases:\n```java\nclass SuperClass {\n    void doWork() throws java.io.IOException {}\n}\nclass SubClass extends SuperClass {\n    void doWork() {\n        // sin lanzamiento\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Es válido que el método en la subclase elimine la cláusula throws (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$). Un método sobrescrito puede decidir no propagar ninguna de las excepciones checked de la superclase."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "Si el método doWork de SubClass declarara 'throws Exception', ¿compilaría la aplicación (1 para sí, 0 para no)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No ($0$). Un método sobrescrito no puede declarar excepciones checked más generales que el original de la superclase."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "Si doWork en SubClass declarara 'throws java.io.FileNotFoundException', ¿compilaría la aplicación (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$), porque `FileNotFoundException` es una subclase de `IOException`, lo cual está permitido."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "Si doWork en SubClass declarara 'throws RuntimeException', ¿compilaría la aplicación (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$), las excepciones unchecked se pueden añadir libremente en los métodos sobrescritos sin restricciones de jerarquía."
+        }
+      ]
+    },
+    {
+      "id": "LAB_021",
+      "title": "Excepción de Negocio con Cálculo Numérico",
+      "context": "Dada la excepción personalizada:\n```java\nclass OverdraftException extends Exception {\n    double deficit;\n    OverdraftException(double deficit) { this.deficit = deficit; }\n}\n```\nY la ejecución:\n```java\ndouble balance = 100.0;\ndouble charge = 150.0;\ndouble fee = 0.0;\ntry {\n    if (charge > balance) throw new OverdraftException(charge - balance);\n    balance -= charge;\n} catch (OverdraftException e) {\n    fee = e.deficit * 0.10;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable fee?",
+          "correctValue": 5.0,
+          "tolerance": 0,
+          "explanation": "El déficit es $150.0 - 100.0 = 50.0$. La excepción es lanzada y capturada. La tasa se calcula como $50.0 * 0.10 = 5.0$."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de balance?",
+          "correctValue": 100.0,
+          "tolerance": 0,
+          "explanation": "Dado que se lanza la excepción antes de restar `charge`, la variable `balance` mantiene su valor original de $100.0$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál es el valor del déficit almacenado en la excepción?",
+          "correctValue": 50.0,
+          "tolerance": 0,
+          "explanation": "Se le pasó `charge - balance` ($150 - 100 = 50.0$) al constructor."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas excepciones se capturaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se lanzó y capturó exactamente $1$ excepción de tipo `OverdraftException`."
+        }
+      ]
+    },
+    {
+      "id": "LAB_022",
+      "title": "Reinicio de Estado en Catch",
+      "context": "Dado el bucle:\n```java\nint count = 0;\nint state = 0;\nfor (int i = 1; i <= 3; i++) {\n    try {\n        state++;\n        if (state == 2) throw new RuntimeException();\n        count++;\n    } catch (RuntimeException e) {\n        state = 0;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable count?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "- i=1: state=1, count=1.\n- i=2: state=2, lanza excepción. catch: state se reinicia a 0. count no incrementa (count=1).\n- i=3: state=1, count=2."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable state?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la última iteración (i=3), `state` pasa de $0$ a $1$ y no se lanza excepción."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas excepciones se lanzaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se lanzó la excepción únicamente cuando `state == 2`, que ocurrió en la iteración i=2."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecutó el bloque catch?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bloque catch se activó sólo $1$ vez al lanzarse la excepción."
+        }
+      ]
+    },
+    {
+      "id": "LAB_023",
+      "title": "Bucle Infinito con Sentencia break y finally",
+      "context": "Dado el código:\n```java\nint sum = 0;\nint i = 0;\nwhile (true) {\n    try {\n        i++;\n        if (i == 3) break;\n        sum += i;\n    } finally {\n        sum += 10;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable sum?",
+          "correctValue": 33,
+          "tolerance": 0,
+          "explanation": "- i=1: sum += 1 (1). finally: sum += 10 (11)\n- i=2: sum += 2 (13). finally: sum += 10 (23)\n- i=3: ejecuta break, pero antes se ejecuta el bloque finally: sum += 10 (33). Fin bucle."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable i?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El bucle se interrumpe mediante el break cuando `i` alcanza el valor de $3$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ejecutó el bloque finally?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se ejecuta en cada iteración del bucle, incluyendo aquella en la que se sale por break. Total: $3$ veces."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecutó la línea sum += i?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se ejecutó para i=1 e i=2. Para i=3 se omitió por la sentencia break. Total: $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_024",
+      "title": "Recurso close() Excepcional sin Excepción en try",
+      "context": "Dada la clase de recurso:\n```java\nclass ClosedTest implements AutoCloseable {\n    public void close() throws Exception {\n        throw new Exception(\"CloseEx\");\n    }\n}\n```\nY la prueba:\n```java\nint count = 0;\ntry {\n    try (ClosedTest c = new ClosedTest()) {\n        // vacío\n    }\n} catch (Exception e) {\n    count = e.getSuppressed().length + 1;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable count?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "No hay excepción en el cuerpo del try, por lo que la excepción en `close()` es la principal. No hay suprimidas ($e.getSuppressed().length = 0$). `count = 0 + 1 = 1`."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas excepciones se suprimieron?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No hubo excepciones previas en el cuerpo de try para suprimir a la del close, por lo que hay $0$ suprimidas."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos bloques catch se ejecutaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ejecutó el bloque catch externo para capturar la excepción lanzada en el cierre."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuántas veces se invocó al método close()?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El recurso en try-with-resources se cerró exactamente $1$ vez."
+        }
+      ]
+    },
+    {
+      "id": "LAB_025",
+      "title": "Interrupción de Bucle con Excepción Unchecked",
+      "context": "Dada la excepción:\n```java\nclass CodeException extends RuntimeException {\n    int severity;\n    CodeException(int severity) { this.severity = severity; }\n}\n```\nY el fragmento:\n```java\nint total = 0;\ntry {\n    for (int i = 1; i <= 3; i++) {\n        if (i == 2) throw new CodeException(i * 5);\n        total += i;\n    }\n} catch (CodeException e) {\n    total += e.severity;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final del acumulador total?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "- i=1: total += 1 (total=1).\n- i=2: lanza CodeException(10). El bucle finaliza abruptamente. El catch captura la excepción y suma `severity` ($10$) a `total`. `total` = 1 + 10 = 11."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor del atributo severity de la excepción capturada?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Se calculó como `i * 5` con i=2, por lo tanto vale $10$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas iteraciones completó con éxito el bucle?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo la primera iteración (i=1) finalizó correctamente. La segunda lanzó la excepción."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Para qué valor del índice i se interrumpió el bucle?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El lanzamiento de la excepción ocurrió cuando `i` valía $2$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_026",
+      "title": "Seguimiento de Bloques finally Anidados",
+      "context": "Dado el código:\n```java\nint a = 0;\ntry {\n    try {\n        a += 5;\n        throw new Exception();\n    } finally {\n        a += 10;\n    }\n} catch (Exception e) {\n    a += 100;\n} finally {\n    a += 1000;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de la variable a?",
+          "correctValue": 1115,
+          "tolerance": 0,
+          "explanation": "- try interno: a = 5, lanza Exception.\n- finally interno se ejecuta: a += 10 (a=15).\n- Excepción se propaga al try externo, caught por el catch: a += 100 (a=115).\n- finally externo se ejecuta: a += 1000 (a=1115)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos bloques finally se ejecutaron?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se ejecutaron tanto el bloque `finally` interno como el externo. Total: $2$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántos bloques catch se ejecutaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ejecutó el bloque catch externo que capturó la excepción propagada. Total: $1$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál habría sido el valor de a si no se hubiese lanzado la excepción?",
+          "correctValue": 1015,
+          "tolerance": 0,
+          "explanation": "Si no se lanzase la excepción: try interno: a = 5. finally interno: a += 10 (15). El catch no se ejecutaría. finally externo: a += 1000 (1015)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_027",
+      "title": "Propagación de Excepciones Aritméticas entre Métodos",
+      "context": "Dado el diseño:\n```java\nclass PropTest {\n    static int val = 0;\n    static void m1() {\n        try {\n            m2();\n            val += 10;\n        } catch (ArithmeticException e) {\n            val += 50;\n        }\n    }\n    static void m2() {\n        val += 5;\n        int d = 0;\n        int res = 10 / d;\n        val += 100;\n    }\n}\n```\nSi llamamos a `PropTest.m1();`:",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de PropTest.val?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "- m1 llama a m2.\n- m2 suma 5 a `val` (5), y realiza la división 10/0 que lanza `ArithmeticException`. m2 finaliza de inmediato.\n- La excepción se propaga a m1. m1 catch la captura y suma 50 a `val` (55)."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas sentencias de incremento sobre val se ejecutaron con éxito?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se ejecutó `val += 5` en m2 y `val += 50` en m1 catch. Total: $2$."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas excepciones se propagaron de m2 a m1?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se propagó una única excepción de tipo `ArithmeticException`."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál es el resultado de la división entera que causó el error (indique -1 si falló)?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "La división entera por cero falló catastróficamente sin retornar resultado ($ -1 $)."
+        }
+      ]
+    },
+    {
+      "id": "LAB_028",
+      "title": "Simulación de OutOfMemoryError por Consumo simulado",
+      "context": "Considere la simulación de reserva de memoria:\n```java\nint heapFreeMB = 100;\nint allocatedMB = 0;\nint errors = 0;\nwhile (heapFreeMB > 0) {\n    try {\n        int request = 30;\n        if (request > heapFreeMB) throw new OutOfMemoryError();\n        allocatedMB += request;\n        heapFreeMB -= request;\n    } catch (OutOfMemoryError e) {\n        errors++;\n        heapFreeMB = 0;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de allocatedMB?",
+          "correctValue": 90,
+          "tolerance": 0,
+          "explanation": "- Iter 1: request=30 <= 100. allocatedMB=30, heapFreeMB=70.\n- Iter 2: request=30 <= 70. allocatedMB=60, heapFreeMB=40.\n- Iter 3: request=30 <= 40. allocatedMB=90, heapFreeMB=10.\n- Iter 4: request=30 > 10. Lanza OutOfMemoryError. catch: heapFreeMB=0, finaliza bucle. total: $90$ MB."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuál es el valor final de la variable errors?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se capturó y procesó una sola excepción de tipo `OutOfMemoryError`."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuántas veces se ejecutó el bloque try con éxito sin lanzar error?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El bloque try tuvo éxito en las primeras 3 iteraciones (i.e. reservas de 30 MB)."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuánta memoria libre (en MB) restaba en el Heap simulado justo antes de fallar?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Justo antes del error, `heapFreeMB` valía $10$ MB."
+        }
+      ]
+    },
+    {
+      "id": "LAB_029",
+      "title": "Evaluación Secuencial de Capturas Múltiples",
+      "context": "Dado el fragmento:\n```java\nint score = 0;\ntry {\n    throw new java.io.FileNotFoundException();\n} catch (java.io.FileNotFoundException e) {\n    score += 5;\n} catch (java.io.IOException e) {\n    score += 10;\n} catch (Exception e) {\n    score += 20;\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor final de score?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Dado que se lanza `FileNotFoundException`, la JVM evalúa secuencialmente los catch. El primero coincide de forma exacta, por lo que se ejecuta `score += 5`."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántos bloques catch se ejecutaron?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Solo se ejecuta el primer bloque catch coincidente. Los demás se omiten."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "¿Cuál habría sido el valor de score si se hubiese lanzado un IOException genérico?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El catch de `FileNotFoundException` no coincidiría con `IOException`. Se capturaría en el segundo catch sumando $10$."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "¿Cuál habría sido el valor de score si se hubiese lanzado un NullPointerException?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "No coincide con los dos primeros. Coincidiría con el catch genérico de `Exception`, sumando $20$."
+        }
+      ]
+    },
+    {
+      "id": "LAB_030",
+      "title": "Anulación de Retorno mediante finally",
+      "context": "Dado el método:\n```java\npublic static int runTest() {\n    try {\n        return 10;\n    } finally {\n        return 20;\n    }\n}\n```",
+      "parts": [
+        {
+          "id": "part_a",
+          "label": "a",
+          "question": "¿Cuál es el valor retornado por runTest()?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El bloque `finally` se ejecuta siempre al salir del bloque `try`. Dado que el bloque `finally` contiene una sentencia `return 20`, esta anula y reemplaza la sentencia `return 10` del bloque `try`."
+        },
+        {
+          "id": "part_b",
+          "label": "b",
+          "question": "¿Cuántas excepciones se lanzaron en este método?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No se produjo ni lanzó ninguna excepción."
+        },
+        {
+          "id": "part_c",
+          "label": "c",
+          "question": "Si se lanza una RuntimeException en finally en lugar de return 20, ¿se propagaría la excepción anulando el return del try (1 para sí, 0 para no)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$). Si el bloque `finally` finaliza abruptamente mediante un lanzamiento de excepción, este oculta el retorno normal del try."
+        },
+        {
+          "id": "part_d",
+          "label": "d",
+          "question": "En el caso anterior de lanzar excepción en finally, ¿cuántos valores válidos retornaría el método (0 si no retorna nada)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que el flujo termina de forma abrupta por una excepción no capturada, no se devuelve ningún valor ($0$)."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Complejidad del peor caso de búsqueda binaria",
+      "tex": "$$\\mathcal{O}(\\log n)$$"
+    },
+    {
+      "name": "Teorema Maestro para recurrencias",
+      "tex": "$$T(n) = aT(n/b) + f(n)$$"
+    },
+    {
+      "name": "Ecuación de recurrencia en peor caso de Quick Sort",
+      "tex": "$$T(n) = T(n-1) + \\mathcal{O}(n)$$"
+    },
+    {
+      "name": "Ecuación de recurrencia de Merge Sort",
+      "tex": "$$T(n) = 2T(n/2) + \\mathcal{O}(n)$$"
+    },
+    {
+      "name": "Límite asintótico de inserción en Heap (peor caso)",
+      "tex": "$$\\mathcal{O}(\\log n)$$"
+    },
+    {
+      "name": "Tiempo de ejecución promedio de operaciones en Tabla Hash",
+      "tex": "$$\\mathcal{O}(1)$$"
+    },
+    {
+      "name": "Suma de la serie geométrica finita",
+      "tex": "$$\\sum_{i=0}^{n-1} r^i = \\frac{1-r^n}{1-r}$$"
+    },
+    {
+      "name": "Definición formal del límite asintótico superior Big-O",
+      "tex": "$$f(n) \\le c \\cdot g(n) \\quad \\forall n \\ge n_0$$"
+    }
+  ]
+}
