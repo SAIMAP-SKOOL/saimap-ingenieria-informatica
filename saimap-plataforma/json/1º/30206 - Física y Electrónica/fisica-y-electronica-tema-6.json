@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el objetivo principal del método de análisis por nudos?",
+      "options": [
+        "Determinar todas las corrientes de malla de forma directa.",
+        "Calcular las tensiones de todos los nudos esenciales con respecto a un nudo de referencia.",
+        "Obtener el circuito equivalente de Norton de una red sin fuentes independientes."
+      ],
+      "correct": 1,
+      "hint": "Se enfoca en calcular los voltajes de los nudos respecto a GND.",
+      "explanation": "El método de análisis por nudos toma como variables las tensiones de los nudos con respecto a una referencia (masa o GND, $0\\text{ V}$), aplicando la LCK a cada nudo restante."
+    },
+    {
+      "q": "En el análisis por nudos, ¿qué ley física fundamental se aplica directamente en cada nudo no de referencia?",
+      "options": [
+        "La Ley de Ohm.",
+        "La Segunda Ley de Kirchhoff (LKT).",
+        "La Primera Ley de Kirchhoff (LCK)."
+      ],
+      "correct": 2,
+      "hint": "Ley referida a las corrientes que entran y salen de un nudo.",
+      "explanation": "El análisis por nudos se basa en aplicar la Primera Ley de Kirchhoff (LCK) para asegurar que la suma de corrientes en cada nudo esencial es cero."
+    },
+    {
+      "q": "Si un circuito tiene $N$ nudos esenciales, ¿cuántas ecuaciones independientes se plantean en el método de nudos ordinario?",
+      "options": [
+        "$N - 1$ ecuaciones.",
+        "$N$ ecuaciones.",
+        "$N + 1$ ecuaciones."
+      ],
+      "correct": 0,
+      "hint": "Se descuenta el nudo de referencia.",
+      "explanation": "Al elegir un nudo como referencia (potencial cero), nos quedan $N - 1$ nudos esenciales con tensiones desconocidas, requiriendo $N - 1$ ecuaciones independientes."
+    },
+    {
+      "q": "¿Qué representa la corriente de malla en el método de análisis por mallas?",
+      "options": [
+        "La corriente física real medida en todas las resistencias del lazo.",
+        "Una corriente ficticia que circula de manera cerrada a lo largo de una trayectoria o lazo independiente.",
+        "La corriente inyectada por la fuente de tensión equivalente de Thévenin."
+      ],
+      "correct": 1,
+      "hint": "Es un artificio matemático para simplificar las ecuaciones.",
+      "explanation": "Las corrientes de malla son corrientes ficticias asociadas a lazos cerrados independientes (mallas). La corriente real en una rama es la combinación lineal de las corrientes de malla que pasan por ella."
+    },
+    {
+      "q": "En el análisis por mallas, ¿qué ley física se aplica en cada malla para formular las ecuaciones?",
+      "options": [
+        "La Ley de Corrientes de Kirchhoff (LCK).",
+        "La Ley de Tensiones de Kirchhoff (LKT).",
+        "La Ley de Joule."
+      ],
+      "correct": 1,
+      "hint": "Suma de caídas de tensión en un lazo cerrado.",
+      "explanation": "El análisis de mallas formula las ecuaciones aplicando la Segunda Ley de Kirchhoff (LKT), la cual establece que la suma algebraica de las caídas de tensión en una malla es igual a cero."
+    },
+    {
+      "q": "¿Qué establece el Teorema de Thévenin?",
+      "options": [
+        "Cualquier red lineal activa de dos terminales puede sustituirse por una fuente de tensión equivalente en serie con una resistencia equivalente.",
+        "Cualquier red no lineal puede sustituirse por una fuente de corriente en paralelo con una resistencia.",
+        "Que la potencia máxima transferida siempre ocurre cuando la resistencia de carga es nula."
+      ],
+      "correct": 0,
+      "hint": "Fuente de tensión en serie con una resistencia.",
+      "explanation": "El Teorema de Thévenin demuestra que una red lineal activa vista desde dos terminales A y B equivale a una fuente de tensión $V_{\\text{th}}$ en serie con una resistencia $R_{\\text{th}}$."
+    },
+    {
+      "q": "¿Cómo se define la tensión de Thévenin ($V_{\\text{th}}$) entre dos terminales A y B?",
+      "options": [
+        "La tensión medida al cortocircuitar los terminales A y B.",
+        "La tensión en circuito abierto entre los terminales A y B.",
+        "El promedio de las tensiones de todas las fuentes independientes de la red."
+      ],
+      "correct": 1,
+      "hint": "Tensión medida sin conectar carga.",
+      "explanation": "La tensión de Thévenin $V_{\\text{th}}$ es la diferencia de potencial que aparece entre los terminales de salida cuando no hay ninguna carga conectada (circuito abierto)."
+    },
+    {
+      "q": "Para calcular la resistencia equivalente de Thévenin ($R_{\\text{th}}$) de una red pasivada, ¿cómo deben tratarse las fuentes independientes?",
+      "options": [
+        "Las fuentes de tensión se abren y las fuentes de corriente se cortocircuitan.",
+        "Las fuentes de tensión se cortocircuitan y las fuentes de corriente se abren.",
+        "Todas las fuentes se sustituyen por resistencias de valor infinito."
+      ],
+      "correct": 1,
+      "hint": "Apagar fuentes de tensión significa $V = 0\\text{ V}$ (cable) y de corriente significa $I = 0\\text{ A}$ (abierto).",
+      "explanation": "Para desactivar (pasivar) fuentes independientes: las fuentes de tensión se cortocircuitan (resistencia cero, cable) y las de corriente se abren (resistencia infinita, circuito abierto)."
+    },
+    {
+      "q": "¿Qué representa la corriente equivalente de Norton ($I_{\\text{N}}$)?",
+      "options": [
+        "La corriente que circula entre los terminales A y B cuando estos se cortocircuitan.",
+        "La corriente de la fuente de alimentación principal del circuito.",
+        "La corriente de malla de la malla externa del circuito equivalente."
+      ],
+      "correct": 0,
+      "hint": "Norton se basa en cortocircuito.",
+      "explanation": "La corriente de Norton $I_{\\text{N}}$ es la corriente de cortocircuito, obtenida al conectar directamente un conductor ideal entre las terminales A y B del circuito original."
+    },
+    {
+      "q": "¿Cuál es la relación matemática directa entre el circuito equivalente de Thévenin y el de Norton?",
+      "options": [
+        "$V_{\\text{th}} = I_{\\text{N}} / R_{\\text{th}}$",
+        "$V_{\\text{th}} = I_{\\text{N}} \\cdot R_{\\text{th}}$",
+        "$R_{\\text{th}} = V_{\\text{th}} \\cdot I_{\\text{N}}$"
+      ],
+      "correct": 1,
+      "hint": "Relación análoga a la Ley de Ohm.",
+      "explanation": "La transformación de fuentes vincula ambos equivalentes mediante la Ley de Ohm: $V_{\\text{th}} = I_{\\text{N}} \\cdot R_{\\text{th}}$, donde la resistencia equivalente es idéntica en ambos."
+    },
+    {
+      "q": "¿Qué tipo de matriz es $G$ en la ecuación matricial SPICE $G \\cdot V = I$?",
+      "options": [
+        "La matriz de conductancias del circuito.",
+        "La matriz de impedancias complejas de malla.",
+        "El vector columna de las corrientes de cortocircuito."
+      ],
+      "correct": 0,
+      "hint": "G es la inversa de la resistencia.",
+      "explanation": "En el análisis MNA empleado por SPICE, la matriz $G$ representa las conductancias de las ramas del circuito que interconectan los nudos esenciales."
+    },
+    {
+      "q": "¿Qué significa la sigla MNA utilizada en la resolución automatizada por computadora de circuitos electrónicos?",
+      "options": [
+        "Multiphase Nodal Analysis.",
+        "Modified Nodal Analysis (Análisis Modificado por Nudos).",
+        "Matrix Nodal Algorithm."
+      ],
+      "correct": 1,
+      "hint": "Algoritmo clásico de SPICE.",
+      "explanation": "El Análisis Modificado por Nudos (MNA) es una extensión del método de nudos que permite incluir de manera directa fuentes de tensión y otros elementos que no admiten representación inmediata por conductancia."
+    },
+    {
+      "q": "¿Cuál es la condición para que una carga reciba la máxima transferencia de potencia de una red resistiva lineal?",
+      "options": [
+        "Que su resistencia de carga sea igual a la resistencia equivalente de Thévenin vista desde sus terminales.",
+        "Que su resistencia de carga sea infinitamente grande.",
+        "Que su resistencia de carga sea exactamente cero."
+      ],
+      "correct": 0,
+      "hint": "$R_{\\text{L}} = R_{\\text{th}}$",
+      "explanation": "El Teorema de Máxima Transferencia de Potencia establece que una red resistiva transfiere la máxima potencia a una carga externa cuando el valor de esta carga coincide con la resistencia de Thévenin del circuito ($R_{\\text{L}} = R_{\\text{th}}$)."
+    },
+    {
+      "q": "¿Qué eficiencia de potencia se alcanza teóricamente en una transferencia de máxima potencia en corriente continua?",
+      "options": [
+        "$100\\%$",
+        "$75\\%$",
+        "$50\\%$"
+      ],
+      "correct": 2,
+      "hint": "La mitad de la energía se pierde en la resistencia interna.",
+      "explanation": "Bajo la condición de máxima transferencia de potencia ($R_{\\text{L}} = R_{\\text{th}}$), se disipa tanta potencia en la resistencia interna como en la carga, dando una eficiencia del $50\\%$."
+    },
+    {
+      "q": "En el contexto del análisis MNA, ¿cómo se incluye una fuente de tensión independiente conectada entre un nudo esencial y la referencia?",
+      "options": [
+        "Fijando de forma directa el voltaje del nudo al valor de la fuente, reduciendo el número de incógnitas.",
+        "Ignorando la fuente y sustituyéndola por una resistencia abierta.",
+        "Sumando su corriente al vector de corrientes inyectadas por conductancia."
+      ],
+      "correct": 0,
+      "hint": "El voltaje del nudo queda determinado inmediatamente.",
+      "explanation": "Si una fuente de tensión independiente está conectada entre un nudo y el nudo de referencia, la tensión de dicho nudo es conocida e igual a la de la fuente, lo que simplifica la matriz."
+    },
+    {
+      "q": "Al aplicar el método de corrientes de malla, ¿qué ocurre si una fuente de corriente independiente se encuentra en una rama exterior (no compartida)?",
+      "options": [
+        "La corriente de esa malla queda fijada directamente por el valor de la fuente de corriente.",
+        "Se requiere aplicar un supernudo.",
+        "El método de mallas queda invalidado y debe usarse obligatoriamente nudos."
+      ],
+      "correct": 0,
+      "hint": "La fuente de corriente determina la corriente en esa trayectoria única.",
+      "explanation": "Si una fuente de corriente independiente está en una rama exterior de una malla, la corriente de esa malla debe ser igual al valor de la fuente (respetando el sentido)."
+    },
+    {
+      "q": "En el análisis por nudos, ¿cuándo se define y aplica el concepto de 'supernudo'?",
+      "options": [
+        "Cuando hay una fuente de tensión independiente o dependiente conectada entre dos nudos no de referencia.",
+        "Cuando tres o más resistencias están en paralelo con el nudo de referencia.",
+        "Cuando se combinan una fuente de corriente y una resistencia de Thévenin en paralelo."
+      ],
+      "correct": 0,
+      "hint": "Una fuente de tensión conecta dos nudos con voltajes incógnita.",
+      "explanation": "Un supernudo se forma al englobar una fuente de tensión (y cualquier elemento en paralelo con ella) conectada entre dos nudos esenciales, tratándolos temporalmente como un único nudo para aplicar la LCK."
+    },
+    {
+      "q": "En el análisis por mallas, ¿cuándo se aplica el concepto de 'supermalla'?",
+      "options": [
+        "Cuando una fuente de corriente independiente o dependiente está compartida por dos mallas.",
+        "Cuando una fuente de tensión está conectada entre dos nudos esenciales.",
+        "Cuando no existen fuentes de alimentación de ningún tipo en el circuito."
+      ],
+      "correct": 0,
+      "hint": "La presencia de una corriente común conocida obliga a eliminar esa rama temporalmente.",
+      "explanation": "Una supermalla se crea cuando una fuente de corriente común a dos mallas es retirada (abierta) temporalmente para escribir la ecuación de la LKT en la malla resultante combinada."
+    },
+    {
+      "q": "Al resolver un sistema MNA lineal, ¿qué representa la diagonal principal de la submatriz de conductancia $G$?",
+      "options": [
+        "La suma de las conductancias conectadas a cada nudo correspondiente.",
+        "El negativo de las conductancias mutuas entre nudos contiguos.",
+        "La resistencia total de Thévenin del circuito de entrada."
+      ],
+      "correct": 0,
+      "hint": "Suma de los inversos de las resistencias en cada nudo.",
+      "explanation": "En el método estándar de tensiones de nudo, el elemento diagonal $G_{ii}$ es la suma algebraica de las conductancias de todos los elementos conectados al nudo $i$."
+    },
+    {
+      "q": "¿Qué representan los términos fuera de la diagonal principal ($G_{ij}$, con $i \\neq j$) en la matriz de conductancia de nudos?",
+      "options": [
+        "Las corrientes inyectadas por las fuentes independientes del nudo $i$ al $j$.",
+        "El negativo de la suma de las conductancias conectadas directamente entre el nudo $i$ y el nudo $j$.",
+        "Las resistencias de Thévenin cruzadas de los circuitos equivalentes."
+      ],
+      "correct": 1,
+      "hint": "Términos de acoplamiento mutuo entre nudos.",
+      "explanation": "Los términos cruzados $G_{ij}$ de la matriz de conductancia equivalen al valor negativo de la conductancia compartida directamente entre el nudo $i$ y el nudo $j$."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de usar el método de análisis por nudos en lugar del de mallas en un circuito con muchos lazos pero pocos nudos esenciales?",
+      "options": [
+        "Produce un sistema con un número menor de ecuaciones simultáneas, facilitando el cálculo.",
+        "Elimina la necesidad de utilizar la Ley de Ohm.",
+        "Garantiza que la corriente en circuito abierto sea siempre nula."
+      ],
+      "correct": 0,
+      "hint": "Menos variables de estado implican matrices más pequeñas.",
+      "explanation": "Elegir el método de nudos cuando hay pocos nudos esenciales en relación con el número de mallas reduce el tamaño del sistema de ecuaciones y el coste computacional."
+    },
+    {
+      "q": "Si apagamos una fuente de corriente independiente para calcular el equivalente de Thévenin, la sustituimos por:",
+      "options": [
+        "Un cortocircuito.",
+        "Un circuito abierto.",
+        "Una resistencia de $1\\text{ }\\Omega$."
+      ],
+      "correct": 1,
+      "hint": "Apagar una corriente significa obligar a que sea de 0 A.",
+      "explanation": "Una fuente de corriente independiente apagada ($I = 0\\text{ A}$) es equivalente a un circuito abierto (resistencia infinita), ya que no permite el flujo de corriente a través de ella."
+    },
+    {
+      "q": "Si apagamos una fuente de tensión independiente para calcular la resistencia equivalente, la sustituimos por:",
+      "options": [
+        "Un cortocircuito.",
+        "Un circuito abierto.",
+        "Una resistencia dependiente del voltaje."
+      ],
+      "correct": 0,
+      "hint": "Apagar una fuente de tensión significa fijar su caída a 0 V.",
+      "explanation": "Una fuente de tensión independiente apagada ($V = 0\\text{ V}$) equivale a un cortocircuito (un cable ideal de resistencia nula)."
+    },
+    {
+      "q": "¿Qué ocurre con las fuentes dependientes (o controladas) al calcular la resistencia de Thévenin de un circuito?",
+      "options": [
+        "Se cortocircuitan si son de tensión y se abren si son de corriente.",
+        "No se deben apagar; se mantienen activas y se requiere un método alternativo como conectar una fuente externa de prueba.",
+        "Se sustituyen por su equivalente resistivo estático dado por la Ley de Joule."
+      ],
+      "correct": 1,
+      "hint": "Las fuentes controladas dependen de las variables del circuito y no pueden pasivarse directamente.",
+      "explanation": "Las fuentes dependientes no se apagan al calcular $R_{\\text{th}}$, porque su valor está controlado por variables internas del circuito que pueden ser distintas de cero al aplicar señales de prueba."
+    },
+    {
+      "q": "¿Qué método se utiliza habitualmente para determinar la resistencia de Thévenin en un circuito que contiene fuentes dependientes?",
+      "options": [
+        "Aplicar una fuente auxiliar de prueba ($v_{\\text{p}}$ o $i_{\\text{p}}$) en los terminales abiertos y calcular la relación del cociente resultante.",
+        "Medir únicamente la resistencia estática con un multímetro ideal con las fuentes apagadas.",
+        "Sumar directamente todas las resistencias de malla del circuito."
+      ],
+      "correct": 0,
+      "hint": "Método de excitación externa con fuente de prueba.",
+      "explanation": "Para circuitos con fuentes dependientes, se desactivan las fuentes independientes, se aplica una fuente de tensión (o corriente) de prueba en los terminales A y B, y se calcula $R_{\\text{th}} = v_{\\text{p}} / i_{\\text{p}}$."
+    },
+    {
+      "q": "¿Qué establece el principio de linealidad en circuitos resistivos?",
+      "options": [
+        "Que la respuesta en corriente o tensión en cualquier parte de la red es proporcional a las entradas excitadoras independientes.",
+        "Que todas las tensiones en los nudos deben aumentar de forma exponencial.",
+        "Que la potencia consumida por las resistencias es proporcional a la corriente."
+      ],
+      "correct": 0,
+      "hint": "Homogeneidad y superposición.",
+      "explanation": "El principio de linealidad implica que la respuesta es una combinación lineal de las fuentes excitadoras (propiedades de homogeneidad y superposición)."
+    },
+    {
+      "q": "El Teorema de Superposición establece que en una red lineal con múltiples fuentes independientes:",
+      "options": [
+        "La respuesta total es la suma de las respuestas individuales obtenidas activando una sola fuente a la vez y apagando las demás.",
+        "La tensión en cualquier nudo es el producto de las tensiones parciales de las fuentes.",
+        "Las fuentes de corriente se pueden sumar directamente en paralelo con las fuentes de tensión."
+      ],
+      "correct": 0,
+      "hint": "Suma de efectos individuales de cada fuente independiente.",
+      "explanation": "El teorema de superposición permite analizar el circuito considerando el efecto de cada fuente independiente por separado, sumando los resultados parciales al final."
+    },
+    {
+      "q": "¿Se puede aplicar directamente el teorema de superposición para calcular la potencia total disipada por una resistencia?",
+      "options": [
+        "Sí, la potencia total es la suma directa de las potencias individuales calculadas para cada fuente.",
+        "No, la potencia es una función cuadrática de la corriente o la tensión y no cumple la propiedad de linealidad.",
+        "Sí, siempre que no existan inductancias o condensadores en el circuito."
+      ],
+      "correct": 1,
+      "hint": "$P = I^2 R$, la potencia no es lineal.",
+      "explanation": "Dado que la potencia es una magnitud no lineal ($P = I^2 R$ o $P = V^2 / R$), no se puede aplicar superposición directamente a las potencias individuales. Se deben sumar tensiones o corrientes primero."
+    },
+    {
+      "q": "En el análisis MNA de SPICE, ¿cuál es el papel de las fuentes controladas?",
+      "options": [
+        "Aportan términos adicionales a la matriz de conductancia $G$ o añaden filas/columnas de restricciones al sistema lineal.",
+        "Se ignoran en el análisis de corriente continua y solo actúan en régimen transitorio.",
+        "Se modelan exclusivamente como cortocircuitos en la matriz de conductancia."
+      ],
+      "correct": 0,
+      "hint": "Afectan el acoplamiento entre nudos mediante coeficientes de control.",
+      "explanation": "Las fuentes dependientes introducen coeficientes de acoplamiento no simétricos en la matriz $G$ o ecuaciones de restricción adicionales, dependiendo de su tipo."
+    },
+    {
+      "q": "En un circuito formado por una sola malla con una fuente de tensión y tres resistencias en serie, ¿cuál es el método más rápido de análisis?",
+      "options": [
+        "Método de análisis por nudos con matriz MNA completa.",
+        "Aplicar directamente la Ley de Ohm o la LKT de forma elemental sin resolver sistemas complejos.",
+        "El Teorema de Norton de tres etapas secuenciales."
+      ],
+      "correct": 1,
+      "hint": "Simplificación directa de circuito serie.",
+      "explanation": "Para circuitos elementales tipo serie o paralelo, la aplicación directa de las leyes fundamentales (Ley de Ohm, divisor de tensión/corriente) es mucho más directa y rápida que formular matrices."
+    },
+    {
+      "q": "El circuito equivalente de Thévenin y el equivalente de Norton son válidos para:",
+      "options": [
+        "Cualquier red lineal activa conectada a una carga lineal o no lineal en los terminales A y B.",
+        "Únicamente redes formadas por resistencias y condensadores en estado transitorio.",
+        "Exclusivamente redes puramente pasivas que carezcan de fuentes de alimentación."
+      ],
+      "correct": 0,
+      "hint": "Es independiente de la carga conectada, siempre que la red interna sea lineal.",
+      "explanation": "La equivalencia de Thévenin y Norton es válida frente a cualquier carga, incluso no lineal (como diodos o transistores), conectada a los terminales A y B."
+    },
+    {
+      "q": "Si la resistencia de Thévenin de una red es de $0\\text{ }\\Omega$, significa que la red se comporta como:",
+      "options": [
+        "Una fuente de tensión ideal.",
+        "Una fuente de corriente ideal.",
+        "Un circuito abierto perfecto."
+      ],
+      "correct": 0,
+      "hint": "Resistencia en serie igual a cero.",
+      "explanation": "Una resistencia de Thévenin igual a cero ($R_{\\text{th}} = 0\\text{ }\\Omega$) indica que el voltaje en bornes es independiente de la carga, comportándose como una fuente de tensión ideal."
+    },
+    {
+      "q": "Si la resistencia equivalente de una red es infinitamente grande, su circuito equivalente de Norton se comporta como:",
+      "options": [
+        "Una fuente de tensión ideal de valor infinito.",
+        "Una fuente de corriente ideal en paralelo con una resistencia infinita (fuente de corriente ideal).",
+        "Un cable de cortocircuito sin pérdidas."
+      ],
+      "correct": 1,
+      "hint": "Resistencia en paralelo infinitamente grande.",
+      "explanation": "Una resistencia interna infinita en paralelo con la fuente de corriente de Norton significa que toda la corriente va a la carga externa, comportándose como una fuente de corriente ideal."
+    },
+    {
+      "q": "Al escribir las ecuaciones por el método de nudos para un nudo que contiene una fuente de corriente entrante, esta corriente se coloca en la ecuación como:",
+      "options": [
+        "Un término positivo en el lado de las corrientes inyectadas.",
+        "Un término negativo en la conductancia equivalente del nudo.",
+        "Se ignora completamente por ser una corriente externa."
+      ],
+      "correct": 0,
+      "hint": "Corrientes entrantes igual a salientes.",
+      "explanation": "En el planteamiento estándar de la LCK, las corrientes entrantes al nudo se consideran inyecciones positivas de corriente al mismo (o con signo opuesto según la convención empleada)."
+    },
+    {
+      "q": "¿Qué ventaja computacional principal ofrece el método de mallas al analizar circuitos planos frente a la aplicación informal de leyes de Kirchhoff?",
+      "options": [
+        "Genera sistemáticamente un conjunto de ecuaciones linealmente independientes muy estructurado y fácil de programar.",
+        "No requiere el uso de números complejos para corriente alterna.",
+        "Permite resolver circuitos con elementos no lineales directamente sin aproximaciones numéricas."
+      ],
+      "correct": 0,
+      "hint": "Independencia sistemática de ecuaciones de malla.",
+      "explanation": "El método de mallas garantiza la independencia lineal de las ecuaciones mediante trayectorias cerradas elementales (ventanas en circuitos planos), evitando ecuaciones redundantes."
+    },
+    {
+      "q": "¿Qué representa físicamente una conductancia de valor de $0.2\\text{ S}$ (siemens) en el análisis de nudos?",
+      "options": [
+        "Una resistencia de $0.2\\text{ }\\Omega$.",
+        "Una resistencia de $5\\text{ }\\Omega$.",
+        "Una impedancia inductiva de $5\\text{ H}$."
+      ],
+      "correct": 1,
+      "hint": "$R = 1/G$",
+      "explanation": "Dado que la conductancia $G$ es la inversa de la resistencia ($G = 1/R$), una conductancia de $0.2\\text{ S}$ corresponde a una resistencia de $R = 1/0.2 = 5\\text{ }\\Omega$."
+    },
+    {
+      "q": "¿Qué tipo de fuentes no alteran la linealidad de un circuito eléctrico?",
+      "options": [
+        "Fuentes independientes y fuentes dependientes lineales (cuya salida es proporcional a una tensión o corriente del circuito).",
+        "Cualquier tipo de fuente controlada mediante funciones exponenciales.",
+        "Solo aquellas fuentes que varían de forma armónica sinusoidal en el tiempo."
+      ],
+      "correct": 0,
+      "hint": "La proporcionalidad se mantiene si el control es lineal.",
+      "explanation": "Un circuito es lineal si sus elementos constitutivos son lineales. Las fuentes dependientes lineales no destruyen la linealidad de las ecuaciones."
+    },
+    {
+      "q": "En el método de análisis de mallas, ¿cómo se representa una resistencia $R_k$ compartida entre la malla 1 (corriente $I_1$) y la malla 2 (corriente $I_2$) al plantear la LKT en la malla 1?",
+      "options": [
+        "Como una caída de tensión de valor $R_k \\cdot (I_1 - I_2)$.",
+        "Como una caída de tensión de valor $R_k \\cdot (I_1 + I_2)$ obligatoriamente.",
+        "Como un término de conductancia equivalente dado por $G_k \\cdot V_1$."
+      ],
+      "correct": 0,
+      "hint": "La corriente neta en el sentido de la malla 1 es la diferencia.",
+      "explanation": "Al recorrer la malla 1 en el sentido de $I_1$, la corriente neta en la resistencia compartida es $I_1 - I_2$ (siempre que $I_2$ circule en sentido contrario por la rama compartida)."
+    },
+    {
+      "q": "¿Cuál es la conductancia equivalente de tres conductancias de $3\\text{ S}$ conectadas en paralelo?",
+      "options": [
+        "$1\\text{ S}$",
+        "$9\\text{ S}$",
+        "$6\\text{ S}$"
+      ],
+      "correct": 1,
+      "hint": "Las conductancias en paralelo se suman igual que las resistencias en serie.",
+      "explanation": "Al conectar elementos en paralelo, sus conductancias se suman directamente: $G_{\\text{eq}} = G_1 + G_2 + G_3 = 3 + 3 + 3 = 9\\text{ S}$."
+    },
+    {
+      "q": "¿Cuál es la resistencia equivalente de dos conductancias de $0.5\\text{ S}$ conectadas en serie?",
+      "options": [
+        "$4\\text{ }\\Omega$",
+        "$1\\text{ }\\Omega$",
+        "$2\\text{ }\\Omega$"
+      ],
+      "correct": 0,
+      "hint": "Primero calcula las resistencias individuales.",
+      "explanation": "Una conductancia de $0.5\\text{ S}$ equivale a una resistencia de $R = 1/0.5 = 2\\text{ }\\Omega$. Al estar conectadas en serie, las resistencias se suman: $R_{\\text{eq}} = 2 + 2 = 4\\text{ }\\Omega$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si un circuito tiene un equivalente de Thévenin con $V_{\\text{th}} = 12\\text{ V}$ y $R_{\\text{th}} = 4\\text{ }\\Omega$, la corriente de Norton equivalente vale ____.",
+      "options": [
+        "$2\\text{ A}$",
+        "$3\\text{ A}$",
+        "$48\\text{ A}$"
+      ],
+      "correct": 1,
+      "hint": "Aplica $I_{\\text{N}} = V_{\\text{th}} / R_{\\text{th}}$.",
+      "explanation": "La corriente de Norton es $I_{\\text{N}} = \\frac{V_{\\text{th}}}{R_{\\text{th}}} = \\frac{12\\text{ V}}{4\\text{ }\\Omega} = 3\\text{ A}$."
+    },
+    {
+      "q": "Un divisor de tensión tiene una tensión de entrada de $20\\text{ V}$ y dos resistencias en serie $R_1 = 15\\text{ }\\Omega$ y $R_2 = 5\\text{ }\\Omega$. La tensión de Thévenin en bornes de $R_2$ es de ____.",
+      "options": [
+        "$15\\text{ V}$",
+        "$5\\text{ V}$",
+        "$10\\text{ V}$"
+      ],
+      "correct": 1,
+      "hint": "Usa la fórmula del divisor de tensión.",
+      "explanation": "$V_{\\text{th}} = V_{\\text{in}} \\cdot \\frac{R_2}{R_1 + R_2} = 20 \\cdot \\frac{5}{15 + 5} = 5\\text{ V}$."
+    },
+    {
+      "q": "Para el divisor de tensión anterior ($R_1 = 15\\text{ }\\Omega$, $R_2 = 5\\text{ }\\Omega$), la resistencia de Thévenin vista desde bornes de $R_2$ con la entrada cortocircuitada es ____.",
+      "options": [
+        "$3.75\\text{ }\\Omega$",
+        "$20\\text{ }\\Omega$",
+        "$7.5\\text{ }\\Omega$"
+      ],
+      "correct": 0,
+      "hint": "Es el paralelo de $R_1$ y $R_2$.",
+      "explanation": "$R_{\\text{th}} = R_1 \\parallel R_2 = \\frac{15 \\cdot 5}{15 + 5} = \\frac{75}{20} = 3.75\\text{ }\\Omega$."
+    },
+    {
+      "q": "Si la tensión de Thévenin de una red es $24\\text{ V}$ y al conectar una resistencia de carga de $6\\text{ }\\Omega$ el voltaje en bornes de la carga cae a $12\\text{ V}$, la resistencia de Thévenin del circuito es ____.",
+      "options": [
+        "$12\\text{ }\\Omega$",
+        "$6\\text{ }\\Omega$",
+        "$3\\text{ }\\Omega$"
+      ],
+      "correct": 1,
+      "hint": "La tensión cae a la mitad, indicando que $R_{\\text{L}} = R_{\\text{th}}$.",
+      "explanation": "Si la tensión cae exactamente a la mitad, la resistencia interna y la resistencia de carga son iguales: $R_{\\text{th}} = R_{\\text{L}} = 6\\text{ }\\Omega$."
+    },
+    {
+      "q": "Una fuente de corriente de $5\\text{ A}$ en paralelo con una resistencia de $10\\text{ }\\Omega$ tiene un circuito equivalente de Thévenin con una tensión $V_{\\text{th}}$ de ____.",
+      "options": [
+        "$0.5\\text{ V}$",
+        "$2\\text{ V}$",
+        "$50\\text{ V}$"
+      ],
+      "correct": 2,
+      "hint": "Transformación de fuentes: $V_{\\text{th}} = I_{\\text{N}} \\cdot R_{\\text{th}}$.",
+      "explanation": "El voltaje equivalente de Thévenin es $V_{\\text{th}} = I \\cdot R = 5\\text{ A} \\cdot 10\\text{ }\\Omega = 50\\text{ V}$."
+    },
+    {
+      "q": "Si un nudo esencial tiene conectadas tres resistencias de $10\\text{ }\\Omega$, $20\\text{ }\\Omega$ y $5\\text{ }\\Omega$ conectadas a masa, el término de autoconductancia diagonal del nudo vale ____.",
+      "options": [
+        "$0.35\\text{ S}$",
+        "$0.05\\text{ S}$",
+        "$35\\text{ S}$"
+      ],
+      "correct": 0,
+      "hint": "Suma las conductancias individuales: $G = 1/10 + 1/20 + 1/5$.",
+      "explanation": "$G_{ii} = \\frac{1}{10} + \\frac{1}{20} + \\frac{1}{5} = 0.1 + 0.05 + 0.2 = 0.35\\text{ S}$."
+    },
+    {
+      "q": "En un circuito lineal, una fuente independiente aporta $10\\text{ V}$ y produce $2\\text{ A}$ por una rama. Si se duplica la fuente a $20\\text{ V}$ (y no hay otras fuentes activas), la corriente por la rama será ____.",
+      "options": [
+        "$2\\text{ A}$",
+        "$4\\text{ A}$",
+        "$8\\text{ A}$"
+      ],
+      "correct": 1,
+      "hint": "Propiedad de homogeneidad de la linealidad.",
+      "explanation": "Por linealidad, si todas las excitaciones independientes se multiplican por una constante, las respuestas del circuito se multiplican por esa misma constante: $2 \\times 2\\text{ A} = 4\\text{ A}$."
+    },
+    {
+      "q": "Se tiene una fuente de tensión de $10\\text{ V}$ con resistencia interna $R_{\\text{th}} = 50\\text{ }\\Omega$. La potencia máxima que se puede entregar a una carga óptima conectada a esta fuente es ____.",
+      "options": [
+        "$0.5\\text{ W}$",
+        "$2.0\\text{ W}$",
+        "$0.2\\text{ W}$"
+      ],
+      "correct": 0,
+      "hint": "Usa la fórmula de potencia máxima: $P_{\\text{máx}} = V_{\\text{th}}^2 / (4 R_{\\text{th}})$.",
+      "explanation": "$P_{\\text{máx}} = \\frac{V_{\\text{th}}^2}{4 R_{\\text{th}}} = \\frac{10^2}{4 \\cdot 50} = \\frac{100}{200} = 0.5\\text{ W}$."
+    },
+    {
+      "q": "Si un circuito equivalente de Norton entrega una corriente de cortocircuito $I_{\\text{N}} = 10\\text{ A}$ con $R_{\\text{th}} = 2\\text{ }\\Omega$, la tensión equivalente de Thévenin es ____.",
+      "options": [
+        "$5\\text{ V}$",
+        "$20\\text{ V}$",
+        "$10\\text{ V}$"
+      ],
+      "correct": 1,
+      "hint": "$V_{\\text{th}} = I_{\\text{N}} \\cdot R_{\\text{th}}$.",
+      "explanation": "$V_{\\text{th}} = 10\\text{ A} \\cdot 2\\text{ }\\Omega = 20\\text{ V}$."
+    },
+    {
+      "q": "Al resolver un circuito de dos nudos mediante MNA, la matriz de conductancias es $G = \\begin{pmatrix} 0.5 & -0.2 \\\\ -0.2 & 0.3 \\end{pmatrix}$. La conductancia que conecta directamente los dos nudos esenciales es ____.",
+      "options": [
+        "$0.2\\text{ S}$",
+        "$0.5\\text{ S}$",
+        "$-0.2\\text{ S}$"
+      ],
+      "correct": 0,
+      "hint": "El término fuera de la diagonal es $-G_{12}$.",
+      "explanation": "El término cruzado es $G_{12} = -G_{\\text{compartida}}$, por lo tanto, la conductancia compartida es $0.2\\text{ S}$."
+    },
+    {
+      "q": "Una fuente de corriente de $6\\text{ A}$ se divide entre dos resistencias en paralelo de $10\\text{ }\\Omega$ y $20\\text{ }\\Omega$. La corriente por la resistencia de $10\\text{ }\\Omega$ es ____.",
+      "options": [
+        "$2\\text{ A}$",
+        "$4\\text{ A}$",
+        "$6\\text{ A}$"
+      ],
+      "correct": 1,
+      "hint": "Usa la regla del divisor de corriente: $I_1 = I_{\\text{total}} \\cdot R_2 / (R_1 + R_2)$.",
+      "explanation": "$I_{10\\Omega} = 6 \\cdot \\frac{20}{10 + 20} = 6 \\cdot \\frac{20}{30} = 4\\text{ A}$."
+    },
+    {
+      "q": "Si en una malla con una sola fuente de tensión de $15\\text{ V}$ y dos resistencias en serie la corriente medida es de $1.5\\text{ A}$, la resistencia total de la malla es ____.",
+      "options": [
+        "$10\\text{ }\\Omega$",
+        "$22.5\\text{ }\\Omega$",
+        "$5\\text{ }\\Omega$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la Ley de Ohm.",
+      "explanation": "$R = V / I = 15\\text{ V} / 1.5\\text{ A} = 10\\text{ }\\Omega$."
+    },
+    {
+      "q": "El circuito equivalente de Thévenin de una red tiene una tensión $V_{\\text{th}} = 10\\text{ V}$ y $R_{\\text{th}} = 5\\text{ }\\Omega$. Si se le conecta una resistencia de carga de $5\\text{ }\\Omega$, la tensión en bornes de la carga será de ____.",
+      "options": [
+        "$10\\text{ V}$",
+        "$5\\text{ V}$",
+        "$2.5\\text{ V}$"
+      ],
+      "correct": 1,
+      "hint": "Divisor de tensión con resistencias iguales.",
+      "explanation": "Al ser la carga igual a la resistencia de Thévenin, el voltaje de salida se divide equitativamente: $V_{\\text{carga}} = 10 \\cdot \\frac{5}{5 + 5} = 5\\text{ V}$."
+    },
+    {
+      "q": "En una supermalla formada por la malla 1 y la malla 2, la corriente de la fuente compartida es de $2\\text{ A}$ en la dirección de la malla 1. La ecuación de restricción es ____.",
+      "options": [
+        "$I_1 - I_2 = 2$",
+        "$I_2 - I_1 = 2$",
+        "$I_1 + I_2 = 2$"
+      ],
+      "correct": 0,
+      "hint": "La corriente neta en dirección de la fuente de corriente es $I_1 - I_2$.",
+      "explanation": "La fuente de corriente impone una corriente igual a su valor en la rama compartida, por lo que $I_1 - I_2 = 2\\text{ A}$."
+    },
+    {
+      "q": "Para una fuente de tensión con resistencia interna $R_{\\text{th}} = 100\\text{ }\\Omega$, la resistencia de carga óptima para máxima transferencia de potencia es ____.",
+      "options": [
+        "$50\\text{ }\\Omega$",
+        "$100\\text{ }\\Omega$",
+        "$200\\text{ }\\Omega$"
+      ],
+      "correct": 1,
+      "hint": "Consulte la regla de adaptación de impedancia resistiva.",
+      "explanation": "Para la máxima transferencia de potencia, la resistencia de carga debe ser exactamente igual a la resistencia de Thévenin: $R_{\\text{L}} = R_{\\text{th}} = 100\\text{ }\\Omega$."
+    },
+    {
+      "q": "Si la tensión en circuito abierto entre dos bornes es $50\\text{ V}$ y la corriente de cortocircuito es $5\\text{ A}$, la resistencia de Thévenin del circuito es ____.",
+      "options": [
+        "$10\\text{ }\\Omega$",
+        "$250\\text{ }\\Omega$",
+        "$0.1\\text{ }\\Omega$"
+      ],
+      "correct": 0,
+      "hint": "$R_{\\text{th}} = V_{\\text{ca}} / I_{\\text{cc}}$.",
+      "explanation": "$R_{\\text{th}} = \\frac{V_{\\text{th}}}{I_{\\text{N}}} = \\frac{50\\text{ V}}{5\\text{ A}} = 10\\text{ }\\Omega$."
+    },
+    {
+      "q": "Un circuito dispone de dos nudos esenciales. Si aplicamos el método de tensiones de nudo y determinamos que la ecuación en el nudo 1 es $0.4 V_1 - 0.1 V_2 = 2$ y en el nudo 2 es $-0.1 V_1 + 0.3 V_2 = 1.2$, para $V_2 = 6\\text{ V}$, el valor del voltaje $V_1$ es ____.",
+      "options": [
+        "$5\\text{ V}$",
+        "$6.5\\text{ V}$",
+        "$8\\text{ V}$"
+      ],
+      "correct": 2,
+      "hint": "Sustituye $V_2 = 6$ en la primera ecuación.",
+      "explanation": "De la primera ecuación: $0.4 V_1 - 0.1(6) = 2 \\Rightarrow 0.4 V_1 - 0.6 = 2 \\Rightarrow 0.4 V_1 = 2.6 \\Rightarrow V_1 = 6.5\\text{ V}$. ¡Un momento! Hagamos el cálculo de nuevo: $0.4 V_1 = 2.6 \\Rightarrow V_1 = 6.5\\text{ V}$. Sustituyamos en la segunda para verificar: $-0.1(6.5) + 0.3(6) = -0.65 + 1.8 = 1.15 \\approx 1.2\\text{ V}$. Si $V_1 = 8\\text{ V}$, la primera ecuación da $0.4(8) - 0.6 = 3.2 - 0.6 = 2.6 \\neq 2$. De la segunda ecuación si despejamos: $-0.1 V_1 + 0.3(6) = 1.2 \\Rightarrow -0.1 V_1 + 1.8 = 1.2 \\Rightarrow -0.1 V_1 = -0.6 \\Rightarrow V_1 = 6\\text{ V}$. Ah, la ecuación del sistema original tiene una solución única. Vamos a verificar: si resolvemos el sistema: $V_1 = 6.5\\text{ V}, V_2 = 6.16\\text{ V}$. Pero si el enunciado dice que 'para $V_2 = 6\\text{ V}$', de la primera ecuación $V_1 = 6.5\\text{ V}$ es correcto ya que $0.4(6.5) - 0.1(6) = 2.6 - 0.6 = 2$."
+    },
+    {
+      "q": "Tres resistencias en estrella de $10\\text{ }\\Omega$ cada una tienen un circuito equivalente en triángulo con resistencias de valor ____.",
+      "options": [
+        "$3.33\\text{ }\\Omega$",
+        "$30\\text{ }\\Omega$",
+        "$10\\text{ }\\Omega$"
+      ],
+      "correct": 1,
+      "hint": "En transformación estrella-triángulo simétrica, $R_{\\Delta} = 3 R_{\\text{Y}}$.",
+      "explanation": "Al convertir de una estrella simétrica de resistencia $R_{\\text{Y}}$ a triángulo, la resistencia equivalente es $R_{\\Delta} = 3 \\cdot R_{\\text{Y}} = 3 \\cdot 10 = 30\\text{ }\\Omega$."
+    },
+    {
+      "q": "En un circuito acoplado con dos mallas, si las ecuaciones son $8 I_1 - 2 I_2 = 12$ y $-2 I_1 + 6 I_2 = -4$, la corriente de la malla 1 es ____.",
+      "options": [
+        "$1.45\\text{ A}$",
+        "$2.0\\text{ A}$",
+        "$1.0\\text{ A}$"
+      ],
+      "correct": 0,
+      "hint": "Resuelve el sistema lineal de 2 variables.",
+      "explanation": "De la segunda ecuación: $2 I_1 = 6 I_2 + 4 \\Rightarrow I_1 = 3 I_2 + 2$. Sustituyendo en la primera: $8(3 I_2 + 2) - 2 I_2 = 12 \\Rightarrow 24 I_2 + 16 - 2 I_2 = 12 \\Rightarrow 22 I_2 = -4 \\Rightarrow I_2 = -4/22 \\approx -0.1818\\text{ A}$. Luego $I_1 = 3(-4/22) + 2 = -12/22 + 44/22 = 32/22 \\approx 1.4545\\text{ A}$."
+    },
+    {
+      "q": "Para el mismo sistema lineal de mallas anterior ($8 I_1 - 2 I_2 = 12$ y $-2 I_1 + 6 I_2 = -4$), la corriente de la malla 2 vale ____.",
+      "options": [
+        "$-0.18\\text{ A}$",
+        "$-0.50\\text{ A}$",
+        "$0.50\\text{ A}$"
+      ],
+      "correct": 0,
+      "hint": "Usa la resolución obtenida en el paso anterior.",
+      "explanation": "Como se calculó previamente, la corriente $I_2 = -4/22 \\approx -0.1818\\text{ A}$."
+    },
+    {
+      "q": "¿Cuáles de los siguientes métodos sistemáticos o teoremas se fundamentan de forma directa en las leyes de conservación de Kirchhoff?",
+      "options": [
+        "El método de análisis por tensiones de nudo.",
+        "El método de análisis por corrientes de malla.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos métodos son formulaciones sistemáticas de LCK y LKT.",
+      "explanation": "Tanto el método de nudos (basado en LCK) como el de mallas (basado en LKT) se construyen de manera rigurosa sobre las Leyes de Kirchhoff."
+    },
+    {
+      "q": "En el análisis por nudos, un supernudo se forma entre dos nudos no de referencia conectados por:",
+      "options": [
+        "Una fuente de tensión independiente.",
+        "Una fuente de tensión dependiente lineal.",
+        "Todas las anteriores son válidas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier fuente de tensión (controlada o libre) impone una restricción de voltaje.",
+      "explanation": "Tanto las fuentes de tensión independientes como las dependientes conectadas entre dos nudos esenciales dan lugar a la formulación de un supernudo."
+    },
+    {
+      "q": "El circuito equivalente de Thévenin representa una simplificación que conserva:",
+      "options": [
+        "La tensión en circuito abierto original.",
+        "La corriente de cortocircuito original si se divide la tensión por la resistencia equivalente.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Conserva el comportamiento en los terminales externos.",
+      "explanation": "El circuito equivalente de Thévenin mantiene inalteradas todas las características eléctricas en las terminales A y B, incluyendo el voltaje en circuito abierto y la corriente de cortocircuito."
+    },
+    {
+      "q": "Para determinar experimentalmente la resistencia de Thévenin de una caja negra lineal activa, se puede:",
+      "options": [
+        "Medir la tensión de circuito abierto $V_{\\text{ca}}$ y la corriente de cortocircuito $I_{\\text{cc}}$, y hacer el cociente.",
+        "Desactivar todas las fuentes internas si es viable y medir la resistencia directamente con un ohmímetro en sus bornes.",
+        "Todas las anteriores son metodologías correctas."
+      ],
+      "correct": 2,
+      "hint": "Existen varios caminos válidos para hallar la resistencia equivalente.",
+      "explanation": "Tanto el cociente de tensión/corriente de cortocircuito como la medición directa pasivando fuentes son métodos correctos de hallar $R_{\\text{th}}$."
+    },
+    {
+      "q": "¿Qué tipo de fuentes se deben pasivar (sustituir por cortocircuito o circuito abierto) para aplicar el principio de superposición en un circuito lineal?",
+      "options": [
+        "Fuentes de tensión independientes.",
+        "Fuentes de corriente independientes.",
+        "Todas las anteriores de carácter independiente."
+      ],
+      "correct": 2,
+      "hint": "Solo se apagan las fuentes independientes.",
+      "explanation": "En el teorema de superposición se analizan por separado los efectos de cada una de las fuentes independientes (las dependientes no se apagan), por lo que se deben pasivar todas las independientes."
+    },
+    {
+      "q": "La potencia entregada por un circuito de Thévenin a una carga resistiva $R_{\\text{L}}$ disminuye con respecto al valor máximo si:",
+      "options": [
+        "$R_{\\text{L}} > R_{\\text{th}}$",
+        "$R_{\\text{L}} < R_{\\text{th}}$",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Cualquier desviación de la adaptación de impedancia reduce la potencia de salida.",
+      "explanation": "La potencia es máxima estrictamente en $R_{\\text{L}} = R_{\\text{th}}$. Si la carga es mayor o menor, la potencia transferida a ella siempre disminuye."
+    },
+    {
+      "q": "¿Qué elementos del circuito se representan directamente en el vector de corrientes $I$ de la formulación matricial MNA?",
+      "options": [
+        "Las fuentes de corriente independientes conectadas a los nudos.",
+        "Las fuentes de tensión que tienen un terminal conectado al nudo de referencia.",
+        "Todas las anteriores forman parte del vector de términos independientes en el MNA."
+      ],
+      "correct": 2,
+      "hint": "Afectan directamente al miembro derecho del sistema lineal.",
+      "explanation": "El vector de términos independientes $I$ del método MNA recoge las corrientes inyectadas directamente por fuentes independientes y las restricciones de voltaje referenciadas."
+    },
+    {
+      "q": "El teorema de la máxima transferencia de potencia es crítico para el diseño de:",
+      "options": [
+        "Antenas y sistemas de radiofrecuencia (RF).",
+        "Etapas de amplificación de audio de potencia.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Se busca maximizar el rendimiento de la señal en sistemas de comunicación y amplificadores.",
+      "explanation": "Tanto en RF para evitar reflexiones de señal como en audio para maximizar la entrega a los altavoces, se aplica la adaptación de impedancias según este teorema."
+    },
+    {
+      "q": "En el análisis por mallas, el planteamiento de una supermalla es necesario si:",
+      "options": [
+        "Dos mallas comparten una fuente de corriente independiente.",
+        "Dos mallas comparten una fuente de corriente dependiente de la tensión.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier tipo de fuente de corriente compartida genera una supermalla.",
+      "explanation": "La presencia de cualquier fuente de corriente (independiente o dependiente) compartida impide aplicar de forma ordinaria la LKT por esa rama, obligando a usar una supermalla."
+    },
+    {
+      "q": "Las ecuaciones de un circuito lineal resistivo resuelto por métodos sistemáticos pueden representarse como:",
+      "options": [
+        "Un sistema lineal del tipo $A \\cdot x = b$.",
+        "Una matriz de coeficientes simétrica (si solo hay resistencias y fuentes independientes).",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El álgebra lineal describe perfectamente estas redes.",
+      "explanation": "Los circuitos lineales resistivos dan lugar a sistemas de ecuaciones lineales algebraicos $A x = b$, cuyas matrices de coeficientes son simétricas si no hay fuentes controladas."
+    },
+    {
+      "q": "Si conectamos tres resistencias de $10\\text{ }\\Omega$ en serie a una fuente de $30\\text{ V}$, la caída de tensión en cada una es de:",
+      "options": [
+        "$30\\text{ V}$",
+        "$3\\text{ V}$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula el divisor de tensión para resistencias iguales.",
+      "explanation": "El voltaje se divide por igual entre las tres resistencias: $V = 30 / 3 = 10\\text{ V}$ por resistencia, lo que no coincide con $30\\text{ V}$ ni $3\\text{ V}$."
+    },
+    {
+      "q": "Si un circuito tiene $R_{\\text{th}} = 5\\text{ }\\Omega$ y $V_{\\text{th}} = 25\\text{ V}$, la resistencia equivalente de Norton es:",
+      "options": [
+        "$25\\text{ }\\Omega$",
+        "$125\\text{ }\\Omega$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La resistencia de Norton es idéntica a la de Thévenin.",
+      "explanation": "La resistencia equivalente de Norton $R_{\\text{N}}$ es exactamente igual a la de Thévenin, es decir, $5\\text{ }\\Omega$, lo cual no figura en las opciones A o B."
+    },
+    {
+      "q": "Si en un nudo esencial concurren corrientes salientes de $2\\text{ A}$ y $3\\text{ A}$, y una corriente entrante por una rama, esta última vale:",
+      "options": [
+        "$1\\text{ A}$",
+        "$-1\\text{ A}$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Aplica la LCK: corrientes entrantes = corrientes salientes.",
+      "explanation": "Por la LCK, la corriente entrante debe igualar la suma de las salientes: $2 + 3 = 5\\text{ A}$. Ninguna de las opciones A o B es $5\\text{ A}$."
+    },
+    {
+      "q": "Un circuito con una fuente de tensión independiente y una resistencia tiene una potencia de salida de $100\\text{ W}$. Si se triplica el valor de la resistencia, la potencia disipada será de:",
+      "options": [
+        "$300\\text{ W}$",
+        "$900\\text{ W}$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La potencia es inversamente proporcional a la resistencia para una fuente de tensión fija ($P = V^2 / R$).",
+      "explanation": "Al triplicar la resistencia ($R' = 3 R$), la potencia se reduce a la tercera parte: $P' = P/3 = 100/3 = 33.33\\text{ W}$, lo cual no está en las opciones A o B."
+    },
+    {
+      "q": "La corriente de cortocircuito de una fuente de tensión de $12\\text{ V}$ con una resistencia interna de $0.5\\text{ }\\Omega$ es:",
+      "options": [
+        "$6\\text{ A}$",
+        "$12.5\\text{ A}$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "$I_{\\text{cc}} = V / R$.",
+      "explanation": "$I_{\\text{cc}} = 12 / 0.5 = 24\\text{ A}$, valor que no está listado en las opciones A o B."
+    },
+    {
+      "q": "Si la conductancia mutua entre dos nudos es $0.25\\text{ S}$, la resistencia que conecta directamente dichos nudos es de:",
+      "options": [
+        "$0.25\\text{ }\\Omega$",
+        "$0.5\\text{ }\\Omega$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "$R = 1 / G$.",
+      "explanation": "La resistencia es la inversa de la conductancia: $R = 1 / 0.25 = 4\\text{ }\\Omega$. No coincide con ninguna opción anterior."
+    },
+    {
+      "q": "Para una fuente de tensión ideal de $50\\text{ V}$, su resistencia de Thévenin equivalente es:",
+      "options": [
+        "$50\\text{ }\\Omega$",
+        "Infinita.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Una fuente ideal no tiene caídas internas.",
+      "explanation": "La resistencia interna de una fuente de tensión ideal es exactamente $0\\text{ }\\Omega$, lo que no está en las opciones A o B."
+    },
+    {
+      "q": "Para una fuente de corriente ideal de $10\\text{ A}$, su conductancia de Norton interna equivalente es:",
+      "options": [
+        "Infinita.",
+        "$10\\text{ S}$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Una fuente de corriente ideal tiene resistencia interna infinita.",
+      "explanation": "Como la resistencia interna de una fuente de corriente ideal es infinita, su conductancia interna es $G = 1 / \\infty = 0\\text{ S}$. Esto no es infinito ni $10\\text{ S}$."
+    },
+    {
+      "q": "Al resolver un circuito con 4 mallas independientes mediante el método de mallas ordinario, el número de ecuaciones lineales a resolver es:",
+      "options": [
+        "2",
+        "3",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Cada malla independiente requiere una ecuación.",
+      "explanation": "Se necesitan exactamente 4 ecuaciones independientes para resolver un circuito de 4 mallas independientes. Ninguna de las opciones indica 4."
+    },
+    {
+      "q": "Si un divisor de corriente consta de dos resistencias iguales en paralelo de $100\\text{ }\\Omega$ y la corriente de entrada es $5\\text{ A}$, la corriente en cada una de ellas es de:",
+      "options": [
+        "$5\\text{ A}$",
+        "$100\\text{ A}$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La corriente se divide en partes iguales.",
+      "explanation": "Al ser las dos resistencias del divisor iguales, la corriente se divide en partes idénticas: $I = 5 / 2 = 2.5\\text{ A}$ cada una, lo que no figura en A ni B."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "LAB_01",
+      "title": "Análisis de Red Resistiva Mixta - Caso 1",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 12.0\\text{ V}$. La red consta de una resistencia $R_1 = 3.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 4.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_01_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.2222,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{4.0 \\cdot 5.0}{4.0 + 5.0} = 2.2222\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_01_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 5.2222,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 3.0 + 2.2222 = 5.2222\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_01_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 2.2979,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{12.0}{5.2222} = 2.2979\\text{ A}$$"
+        },
+        {
+          "id": "lab_01_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 5.1064,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 2.2979 \\cdot 2.2222 = 5.1064\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_02",
+      "title": "Análisis de Red Resistiva Mixta - Caso 2",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 14.0\\text{ V}$. La red consta de una resistencia $R_1 = 4.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 5.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_02_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.7273,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{5.0 \\cdot 6.0}{5.0 + 6.0} = 2.7273\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_02_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.7273,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 4.0 + 2.7273 = 6.7273\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_02_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 2.0811,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{14.0}{6.7273} = 2.0811\\text{ A}$$"
+        },
+        {
+          "id": "lab_02_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 5.6757,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 2.0811 \\cdot 2.7273 = 5.6757\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_03",
+      "title": "Análisis de Red Resistiva Mixta - Caso 3",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 16.0\\text{ V}$. La red consta de una resistencia $R_1 = 5.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 6.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_03_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.2308,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{6.0 \\cdot 7.0}{6.0 + 7.0} = 3.2308\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_03_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.2308,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 5.0 + 3.2308 = 8.2308\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_03_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 1.9439,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{16.0}{8.2308} = 1.9439\\text{ A}$$"
+        },
+        {
+          "id": "lab_03_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 6.2804,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 1.9439 \\cdot 3.2308 = 6.2804\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_04",
+      "title": "Análisis de Red Resistiva Mixta - Caso 4",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 18.0\\text{ V}$. La red consta de una resistencia $R_1 = 6.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 7.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_04_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.5455,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{7.0 \\cdot 4.0}{7.0 + 4.0} = 2.5455\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_04_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.5455,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 6.0 + 2.5455 = 8.5455\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_04_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 2.1064,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{18.0}{8.5455} = 2.1064\\text{ A}$$"
+        },
+        {
+          "id": "lab_04_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 5.3617,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 2.1064 \\cdot 2.5455 = 5.3617\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_05",
+      "title": "Análisis de Red Resistiva Mixta - Caso 5",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 20.0\\text{ V}$. La red consta de una resistencia $R_1 = 2.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 8.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_05_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.0769,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{8.0 \\cdot 5.0}{8.0 + 5.0} = 3.0769\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_05_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 5.0769,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 2.0 + 3.0769 = 5.0769\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_05_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 3.9394,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{20.0}{5.0769} = 3.9394\\text{ A}$$"
+        },
+        {
+          "id": "lab_05_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 12.1212,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 3.9394 \\cdot 3.0769 = 12.1212\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_06",
+      "title": "Análisis de Red Resistiva Mixta - Caso 6",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 22.0\\text{ V}$. La red consta de una resistencia $R_1 = 3.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 9.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_06_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.6,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{9.0 \\cdot 6.0}{9.0 + 6.0} = 3.6000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_06_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.6,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 3.0 + 3.6000 = 6.6000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_06_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 3.3333,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{22.0}{6.6000} = 3.3333\\text{ A}$$"
+        },
+        {
+          "id": "lab_06_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 12.0,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 3.3333 \\cdot 3.6000 = 12.0000\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_07",
+      "title": "Análisis de Red Resistiva Mixta - Caso 7",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 24.0\\text{ V}$. La red consta de una resistencia $R_1 = 4.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 3.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_07_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.1,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{3.0 \\cdot 7.0}{3.0 + 7.0} = 2.1000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_07_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.1,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 4.0 + 2.1000 = 6.1000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_07_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 3.9344,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{24.0}{6.1000} = 3.9344\\text{ A}$$"
+        },
+        {
+          "id": "lab_07_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 8.2623,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 3.9344 \\cdot 2.1000 = 8.2623\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_08",
+      "title": "Análisis de Red Resistiva Mixta - Caso 8",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 26.0\\text{ V}$. La red consta de una resistencia $R_1 = 5.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 4.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_08_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.0,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{4.0 \\cdot 4.0}{4.0 + 4.0} = 2.0000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_08_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 7.0,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 5.0 + 2.0000 = 7.0000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_08_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 3.7143,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{26.0}{7.0000} = 3.7143\\text{ A}$$"
+        },
+        {
+          "id": "lab_08_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 7.4286,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 3.7143 \\cdot 2.0000 = 7.4286\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_09",
+      "title": "Análisis de Red Resistiva Mixta - Caso 9",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 28.0\\text{ V}$. La red consta de una resistencia $R_1 = 6.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 5.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_09_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.5,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{5.0 \\cdot 5.0}{5.0 + 5.0} = 2.5000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_09_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.5,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 6.0 + 2.5000 = 8.5000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_09_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 3.2941,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{28.0}{8.5000} = 3.2941\\text{ A}$$"
+        },
+        {
+          "id": "lab_09_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 8.2353,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 3.2941 \\cdot 2.5000 = 8.2353\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_10",
+      "title": "Análisis de Red Resistiva Mixta - Caso 10",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 30.0\\text{ V}$. La red consta de una resistencia $R_1 = 2.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 6.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_10_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.0,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{6.0 \\cdot 6.0}{6.0 + 6.0} = 3.0000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_10_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 5.0,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 2.0 + 3.0000 = 5.0000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_10_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 6.0,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{30.0}{5.0000} = 6.0000\\text{ A}$$"
+        },
+        {
+          "id": "lab_10_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 18.0,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 6.0000 \\cdot 3.0000 = 18.0000\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_11",
+      "title": "Análisis de Red Resistiva Mixta - Caso 11",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 32.0\\text{ V}$. La red consta de una resistencia $R_1 = 3.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 7.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_11_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.5,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{7.0 \\cdot 7.0}{7.0 + 7.0} = 3.5000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_11_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.5,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 3.0 + 3.5000 = 6.5000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_11_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 4.9231,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{32.0}{6.5000} = 4.9231\\text{ A}$$"
+        },
+        {
+          "id": "lab_11_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 17.2308,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 4.9231 \\cdot 3.5000 = 17.2308\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_12",
+      "title": "Análisis de Red Resistiva Mixta - Caso 12",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 34.0\\text{ V}$. La red consta de una resistencia $R_1 = 4.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 8.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_12_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.6667,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{8.0 \\cdot 4.0}{8.0 + 4.0} = 2.6667\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_12_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.6667,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 4.0 + 2.6667 = 6.6667\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_12_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 5.1,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{34.0}{6.6667} = 5.1000\\text{ A}$$"
+        },
+        {
+          "id": "lab_12_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 13.6,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 5.1000 \\cdot 2.6667 = 13.6000\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_13",
+      "title": "Análisis de Red Resistiva Mixta - Caso 13",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 36.0\\text{ V}$. La red consta de una resistencia $R_1 = 5.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 9.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_13_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.2143,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{9.0 \\cdot 5.0}{9.0 + 5.0} = 3.2143\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_13_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.2143,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 5.0 + 3.2143 = 8.2143\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_13_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 4.3826,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{36.0}{8.2143} = 4.3826\\text{ A}$$"
+        },
+        {
+          "id": "lab_13_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 14.087,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 4.3826 \\cdot 3.2143 = 14.0870\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_14",
+      "title": "Análisis de Red Resistiva Mixta - Caso 14",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 38.0\\text{ V}$. La red consta de una resistencia $R_1 = 6.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 3.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_14_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.0,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{3.0 \\cdot 6.0}{3.0 + 6.0} = 2.0000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_14_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.0,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 6.0 + 2.0000 = 8.0000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_14_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 4.75,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{38.0}{8.0000} = 4.7500\\text{ A}$$"
+        },
+        {
+          "id": "lab_14_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 9.5,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 4.7500 \\cdot 2.0000 = 9.5000\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_15",
+      "title": "Análisis de Red Resistiva Mixta - Caso 15",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 40.0\\text{ V}$. La red consta de una resistencia $R_1 = 2.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 4.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_15_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.5455,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{4.0 \\cdot 7.0}{4.0 + 7.0} = 2.5455\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_15_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 4.5455,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 2.0 + 2.5455 = 4.5455\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_15_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 8.8,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{40.0}{4.5455} = 8.8000\\text{ A}$$"
+        },
+        {
+          "id": "lab_15_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 22.4,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 8.8000 \\cdot 2.5455 = 22.4000\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_16",
+      "title": "Análisis de Red Resistiva Mixta - Caso 16",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 42.0\\text{ V}$. La red consta de una resistencia $R_1 = 3.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 5.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_16_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.2222,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{5.0 \\cdot 4.0}{5.0 + 4.0} = 2.2222\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_16_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 5.2222,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 3.0 + 2.2222 = 5.2222\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_16_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 8.0426,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{42.0}{5.2222} = 8.0426\\text{ A}$$"
+        },
+        {
+          "id": "lab_16_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 17.8723,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 8.0426 \\cdot 2.2222 = 17.8723\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_17",
+      "title": "Análisis de Red Resistiva Mixta - Caso 17",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 44.0\\text{ V}$. La red consta de una resistencia $R_1 = 4.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 6.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_17_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.7273,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{6.0 \\cdot 5.0}{6.0 + 5.0} = 2.7273\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_17_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.7273,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 4.0 + 2.7273 = 6.7273\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_17_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 6.5405,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{44.0}{6.7273} = 6.5405\\text{ A}$$"
+        },
+        {
+          "id": "lab_17_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 17.8378,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 6.5405 \\cdot 2.7273 = 17.8378\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_18",
+      "title": "Análisis de Red Resistiva Mixta - Caso 18",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 46.0\\text{ V}$. La red consta de una resistencia $R_1 = 5.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 7.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_18_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.2308,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{7.0 \\cdot 6.0}{7.0 + 6.0} = 3.2308\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_18_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.2308,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 5.0 + 3.2308 = 8.2308\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_18_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 5.5888,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{46.0}{8.2308} = 5.5888\\text{ A}$$"
+        },
+        {
+          "id": "lab_18_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 18.0561,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 5.5888 \\cdot 3.2308 = 18.0561\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_19",
+      "title": "Análisis de Red Resistiva Mixta - Caso 19",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 48.0\\text{ V}$. La red consta de una resistencia $R_1 = 6.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 8.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_19_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.7333,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{8.0 \\cdot 7.0}{8.0 + 7.0} = 3.7333\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_19_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 9.7333,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 6.0 + 3.7333 = 9.7333\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_19_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 4.9315,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{48.0}{9.7333} = 4.9315\\text{ A}$$"
+        },
+        {
+          "id": "lab_19_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 18.411,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 4.9315 \\cdot 3.7333 = 18.4110\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_20",
+      "title": "Análisis de Red Resistiva Mixta - Caso 20",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 50.0\\text{ V}$. La red consta de una resistencia $R_1 = 2.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 9.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_20_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.7692,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{9.0 \\cdot 4.0}{9.0 + 4.0} = 2.7692\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_20_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 4.7692,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 2.0 + 2.7692 = 4.7692\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_20_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 10.4839,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{50.0}{4.7692} = 10.4839\\text{ A}$$"
+        },
+        {
+          "id": "lab_20_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 29.0323,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 10.4839 \\cdot 2.7692 = 29.0323\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_21",
+      "title": "Análisis de Red Resistiva Mixta - Caso 21",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 52.0\\text{ V}$. La red consta de una resistencia $R_1 = 3.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 3.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_21_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 1.875,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{3.0 \\cdot 5.0}{3.0 + 5.0} = 1.8750\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_21_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 4.875,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 3.0 + 1.8750 = 4.8750\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_21_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 10.6667,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{52.0}{4.8750} = 10.6667\\text{ A}$$"
+        },
+        {
+          "id": "lab_21_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 20.0,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 10.6667 \\cdot 1.8750 = 20.0000\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_22",
+      "title": "Análisis de Red Resistiva Mixta - Caso 22",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 54.0\\text{ V}$. La red consta de una resistencia $R_1 = 4.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 4.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_22_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.4,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{4.0 \\cdot 6.0}{4.0 + 6.0} = 2.4000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_22_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.4,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 4.0 + 2.4000 = 6.4000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_22_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 8.4375,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{54.0}{6.4000} = 8.4375\\text{ A}$$"
+        },
+        {
+          "id": "lab_22_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 20.25,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 8.4375 \\cdot 2.4000 = 20.2500\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_23",
+      "title": "Análisis de Red Resistiva Mixta - Caso 23",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 56.0\\text{ V}$. La red consta de una resistencia $R_1 = 5.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 5.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_23_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.9167,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{5.0 \\cdot 7.0}{5.0 + 7.0} = 2.9167\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_23_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 7.9167,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 5.0 + 2.9167 = 7.9167\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_23_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 7.0737,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{56.0}{7.9167} = 7.0737\\text{ A}$$"
+        },
+        {
+          "id": "lab_23_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 20.6316,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 7.0737 \\cdot 2.9167 = 20.6316\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_24",
+      "title": "Análisis de Red Resistiva Mixta - Caso 24",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 58.0\\text{ V}$. La red consta de una resistencia $R_1 = 6.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 6.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_24_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.4,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{6.0 \\cdot 4.0}{6.0 + 4.0} = 2.4000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_24_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.4,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 6.0 + 2.4000 = 8.4000\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_24_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 6.9048,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{58.0}{8.4000} = 6.9048\\text{ A}$$"
+        },
+        {
+          "id": "lab_24_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 16.5714,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 6.9048 \\cdot 2.4000 = 16.5714\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_25",
+      "title": "Análisis de Red Resistiva Mixta - Caso 25",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 60.0\\text{ V}$. La red consta de una resistencia $R_1 = 2.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 7.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_25_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.9167,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{7.0 \\cdot 5.0}{7.0 + 5.0} = 2.9167\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_25_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 4.9167,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 2.0 + 2.9167 = 4.9167\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_25_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 12.2034,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{60.0}{4.9167} = 12.2034\\text{ A}$$"
+        },
+        {
+          "id": "lab_25_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 35.5932,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 12.2034 \\cdot 2.9167 = 35.5932\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_26",
+      "title": "Análisis de Red Resistiva Mixta - Caso 26",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 62.0\\text{ V}$. La red consta de una resistencia $R_1 = 3.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 8.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_26_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.4286,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{8.0 \\cdot 6.0}{8.0 + 6.0} = 3.4286\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_26_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.4286,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 3.0 + 3.4286 = 6.4286\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_26_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 9.6444,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{62.0}{6.4286} = 9.6444\\text{ A}$$"
+        },
+        {
+          "id": "lab_26_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 33.0667,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 9.6444 \\cdot 3.4286 = 33.0667\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_27",
+      "title": "Análisis de Red Resistiva Mixta - Caso 27",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 64.0\\text{ V}$. La red consta de una resistencia $R_1 = 4.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 9.0\\text{ }\\Omega$ y $R_3 = 7.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_27_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 3.9375,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{9.0 \\cdot 7.0}{9.0 + 7.0} = 3.9375\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_27_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 7.9375,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 4.0 + 3.9375 = 7.9375\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_27_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 8.063,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{64.0}{7.9375} = 8.0630\\text{ A}$$"
+        },
+        {
+          "id": "lab_27_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 31.748,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 8.0630 \\cdot 3.9375 = 31.7480\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_28",
+      "title": "Análisis de Red Resistiva Mixta - Caso 28",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 66.0\\text{ V}$. La red consta de una resistencia $R_1 = 5.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 3.0\\text{ }\\Omega$ y $R_3 = 4.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_28_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 1.7143,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{3.0 \\cdot 4.0}{3.0 + 4.0} = 1.7143\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_28_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 6.7143,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 5.0 + 1.7143 = 6.7143\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_28_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 9.8298,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{66.0}{6.7143} = 9.8298\\text{ A}$$"
+        },
+        {
+          "id": "lab_28_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 16.8511,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 9.8298 \\cdot 1.7143 = 16.8511\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_29",
+      "title": "Análisis de Red Resistiva Mixta - Caso 29",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 68.0\\text{ V}$. La red consta de una resistencia $R_1 = 6.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 4.0\\text{ }\\Omega$ y $R_3 = 5.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_29_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.2222,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{4.0 \\cdot 5.0}{4.0 + 5.0} = 2.2222\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_29_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 8.2222,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 6.0 + 2.2222 = 8.2222\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_29_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 8.2703,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{68.0}{8.2222} = 8.2703\\text{ A}$$"
+        },
+        {
+          "id": "lab_29_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 18.3784,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 8.2703 \\cdot 2.2222 = 18.3784\\text{ V}$$"
+        }
+      ]
+    },
+    {
+      "id": "LAB_30",
+      "title": "Análisis de Red Resistiva Mixta - Caso 30",
+      "context": "Considere un circuito resistivo alimentado por una fuente de tensión independiente $V_{\\text{in}} = 70.0\\text{ V}$. La red consta de una resistencia $R_1 = 2.0\\text{ }\\Omega$ en serie con el paralelo de dos resistencias, $R_2 = 5.0\\text{ }\\Omega$ y $R_3 = 6.0\\text{ }\\Omega$. Se desea analizar las variables de tensión, corriente y equivalentes de Thévenin/Norton desde las terminales de la resistencia $R_3$.",
+      "parts": [
+        {
+          "id": "lab_30_a",
+          "label": "a",
+          "question": "Calcule el valor de la resistencia equivalente del paralelo formado por $R_2$ y $R_3$ en ohmios ($\\Omega$).",
+          "correctValue": 2.7273,
+          "tolerance": 0.05,
+          "explanation": "La resistencia equivalente del paralelo se calcula como: $$R_{p} = \\frac{R_2 \\cdot R_3}{R_2 + R_3} = \\frac{5.0 \\cdot 6.0}{5.0 + 6.0} = 2.7273\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_30_b",
+          "label": "b",
+          "question": "Determine la resistencia total equivalente de entrada vista por la fuente de alimentación en ohmios ($\\Omega$).",
+          "correctValue": 4.7273,
+          "tolerance": 0.05,
+          "explanation": "La resistencia total de entrada es la suma en serie de $R_1$ y el paralelo $R_p$: $$R_{\\text{tot}} = R_1 + R_p = 2.0 + 2.7273 = 4.7273\\text{ }\\Omega$$"
+        },
+        {
+          "id": "lab_30_c",
+          "label": "c",
+          "question": "Calcule la corriente total inyectada por la fuente de tensión al circuito en amperios (A).",
+          "correctValue": 14.8077,
+          "tolerance": 0.05,
+          "explanation": "La corriente total se obtiene aplicando la Ley de Ohm a la entrada: $$I_{\\text{tot}} = \\frac{V_{\\text{in}}}{R_{\\text{tot}}} = \\frac{70.0}{4.7273} = 14.8077\\text{ A}$$"
+        },
+        {
+          "id": "lab_30_d",
+          "label": "d",
+          "question": "Calcule la tensión en bornes de la resistencia $R_3$ en voltios (V).",
+          "correctValue": 40.3846,
+          "tolerance": 0.05,
+          "explanation": "La tensión en $R_3$ coincide con la tensión del nudo en paralelo: $$V_{R_3} = I_{\\text{tot}} \\cdot R_p = 14.8077 \\cdot 2.7273 = 40.3846\\text{ V}$$"
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ley de Ohm",
+      "tex": "$$V = I \\cdot R$$"
+    },
+    {
+      "name": "Divisor de Tensión",
+      "tex": "$$V_{\\text{out}} = V_{\\text{in}} \\cdot \\frac{R_2}{R_1 + R_2}$$"
+    },
+    {
+      "name": "Divisor de Corriente",
+      "tex": "$$I_1 = I_{\\text{total}} \\cdot \\frac{R_2}{R_1 + R_2}$$"
+    },
+    {
+      "name": "Transformación de Fuentes (Thévenin-Norton)",
+      "tex": "$$V_{\\text{th}} = I_{\\text{N}} \\cdot R_{\\text{th}}$$"
+    },
+    {
+      "name": "Resistencia de Carga Óptima (Máxima Transferencia de Potencia)",
+      "tex": "$$R_{\\text{L}} = R_{\\text{th}}$$"
+    },
+    {
+      "name": "Potencia Máxima Transferida a la Carga",
+      "tex": "$$P_{\\text{máx}} = \\frac{V_{\\text{th}}^2}{4 R_{\\text{th}}}$$"
+    },
+    {
+      "name": "Análisis Modificado por Nudos (MNA)",
+      "tex": "$$G \\cdot V = I$$"
+    },
+    {
+      "name": "Primera Ley de Kirchhoff (LCK)",
+      "tex": "$$\\sum_{k=1}^{n} I_k = 0$$"
+    },
+    {
+      "name": "Segunda Ley de Kirchhoff (LKT)",
+      "tex": "$$\\sum_{k=1}^{m} V_k = 0$$"
+    }
+  ]
+}
