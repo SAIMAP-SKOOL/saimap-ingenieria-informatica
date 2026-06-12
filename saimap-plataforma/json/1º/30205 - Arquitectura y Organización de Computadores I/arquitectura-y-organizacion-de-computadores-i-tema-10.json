@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "En el estándar AAPCS de ARM, ¿en qué registro se almacena el primer parámetro entero de una función?",
+      "options": [
+        "En el registro R0.",
+        "En el registro R1.",
+        "En el registro SP."
+      ],
+      "correct": 0,
+      "hint": "El paso de parámetros se realiza de izquierda a derecha en los primeros registros de propósito general.",
+      "explanation": "El estándar AAPCS (Procedure Call Standard for the ARM Architecture) dictamina que los cuatro primeros argumentos de tipo entero o puntero se pasan en los registros $R0$, $R1$, $R2$ y $R3$ respectivamente."
+    },
+    {
+      "q": "¿Qué registros se consideran 'callee-saved' (preservados por la función llamada) en el estándar AAPCS?",
+      "options": [
+        "R0-R3 y R12",
+        "R4-R11 y SP (R13)",
+        "R0-R11 y LR (R14)"
+      ],
+      "correct": 1,
+      "hint": "Son registros que el receptor debe salvaguardar en la pila si desea modificarlos.",
+      "explanation": "Los registros $R4$ a $R11$ y el puntero de pila $SP$ son registros 'callee-saved'. La función llamada debe preservar sus valores originales, restaurándolos antes de retornar."
+    },
+    {
+      "q": "Si una función en ARM recibe 6 parámetros enteros de 32 bits, ¿dónde se reciben el 5º y 6º parámetro?",
+      "options": [
+        "En los registros R4 y R5.",
+        "En la pila (Stack) apuntada por SP (R13).",
+        "En los registros R12 e IP."
+      ],
+      "correct": 1,
+      "hint": "AAPCS solo asigna los primeros 4 parámetros a registros de propósito general.",
+      "explanation": "Los primeros 4 parámetros se colocan en $R0-R3$. A partir del 5º parámetro, la convención obliga a apilarlos en la memoria de pila (Stack), de modo que el 5º queda en la cima ($[SP]$) y el 6º en $[SP, \\#4]$."
+    },
+    {
+      "q": "¿Cuál es el rol asignado al registro R12 según la convención AAPCS de ARM?",
+      "options": [
+        "Es el Frame Pointer (FP).",
+        "Es el Link Register (LR) que almacena la dirección de retorno.",
+        "Es el Intra-Procedure-Call scratch register (IP)."
+      ],
+      "correct": 2,
+      "hint": "Se emplea habitualmente por el enlazador dinámico como registro temporal.",
+      "explanation": "El registro $R12$ se designa como IP (Intra-Procedure-Call scratch register). Es un registro temporal (caller-saved) que puede ser alterado en llamadas inter-módulo (PLT)."
+    },
+    {
+      "q": "¿Cuál es el propósito del registro R14 (LR) durante una llamada de función mediante la instrucción BL?",
+      "options": [
+        "Guardar la dirección base de la pila.",
+        "Almacenar automáticamente la dirección de retorno (la instrucción posterior a BL).",
+        "Contener el primer parámetro de retorno de 32 bits."
+      ],
+      "correct": 1,
+      "hint": "Branch with Link guarda la dirección de retorno para permitir el BX LR.",
+      "explanation": "La instrucción $BL$ (Branch with Link) copia automáticamente la dirección de la siguiente instrucción en el registro de enlace $LR$ ($R14$) antes de realizar el salto."
+    },
+    {
+      "q": "¿Qué alineación mínima en bytes debe cumplir el puntero de pila (SP) en los límites de llamada pública según AAPCS?",
+      "options": [
+        "4 bytes.",
+        "8 bytes.",
+        "16 bytes."
+      ],
+      "correct": 1,
+      "hint": "Es necesario para asegurar la compatibilidad con accesos de 64 bits (double o long long).",
+      "explanation": "El estándar AAPCS establece que el Stack Pointer ($SP$) debe estar alineado a una frontera de 8 bytes (doble palabra) en las interfaces públicas de las funciones."
+    },
+    {
+      "q": "Al retornar un valor de tipo 'long long' (entero de 64 bits) en ensamblador ARM de 32 bits, ¿dónde se coloca el resultado?",
+      "options": [
+        "En la pareja de registros R0 (32 bits menos significativos) y R1 (32 bits más significativos).",
+        "En el registro R0 únicamente, truncando los 32 bits superiores.",
+        "En la pila, en la dirección apuntada por SP."
+      ],
+      "correct": 0,
+      "hint": "Se requiere una pareja de registros de 32 bits para albergar 64 bits.",
+      "explanation": "Los valores de retorno de 64 bits se devuelven utilizando los registros de propósito general $R0$ (para la parte baja) y $R1$ (para la parte alta)."
+    },
+    {
+      "q": "¿Qué directiva se utiliza en el código ensamblador ARM (.s) para hacer que una etiqueta o función sea visible por el linker desde C?",
+      "options": [
+        ".extern",
+        ".global",
+        ".text"
+      ],
+      "correct": 1,
+      "hint": "Exporta el símbolo para que deje de tener ámbito únicamente local al archivo.",
+      "explanation": "La directiva $.global$ (o $.globl$) expone el símbolo en la tabla de símbolos del archivo objeto, lo que permite que el linker lo resuelva desde otros archivos como $main.c$."
+    },
+    {
+      "q": "Si se omite la declaración '.global' de una función ensamblador llamada desde C, ¿en qué fase se produce el error?",
+      "options": [
+        "En la fase de preprocesamiento de C.",
+        "En la fase de ensamblado del archivo .s.",
+        "En la fase de enlace (Linking)."
+      ],
+      "correct": 2,
+      "hint": "El compilador asume la existencia de la función externa, pero el enlazador no la encuentra.",
+      "explanation": "El compilador de C genera la referencia al símbolo externo sin problemas, pero el enlazador (linker) fallará al no encontrar el símbolo público en el archivo objeto ensamblado, arrojando 'undefined reference'."
+    },
+    {
+      "q": "¿Qué modificador se utiliza en C para declarar una función que está implementada en un archivo de ensamblador externo?",
+      "options": [
+        "extern",
+        "static",
+        "inline"
+      ],
+      "correct": 0,
+      "hint": "Indica al compilador de C que la definición está en otro módulo objeto.",
+      "explanation": "La palabra clave $extern$ en C declara la firma de una función indicando al compilador que su cuerpo se enlazará posteriormente desde otro módulo."
+    },
+    {
+      "q": "¿Cuáles de los siguientes registros de la arquitectura ARM son de tipo 'caller-saved' (preservados por el emisor)?",
+      "options": [
+        "R4-R11",
+        "R0-R3, R12, y LR (R14)",
+        "SP (R13) y PC (R15)"
+      ],
+      "correct": 1,
+      "hint": "Son registros volátiles que la función llamada puede modificar libremente.",
+      "explanation": "Los registros $R0-R3$, $R12$ y $LR$ son 'caller-saved' o temporales. El emisor debe guardarlos en la pila antes de hacer un $BL$ si desea mantener sus valores."
+    },
+    {
+      "q": "Si una subrutina modifica el registro callee-saved R5, ¿qué debe hacer según AAPCS?",
+      "options": [
+        "Guardar su valor original en la pila al principio (PUSH) y restaurarlo al final (POP).",
+        "Nada, R5 es caller-saved y se puede modificar libremente.",
+        "R5 no se puede modificar bajo ninguna circunstancia."
+      ],
+      "correct": 0,
+      "hint": "Debe asegurar que al retornar al llamador, R5 tenga el mismo valor que antes de la llamada.",
+      "explanation": "Al ser $R5$ un registro preservado por el receptor (callee-saved), la función llamada está obligada a guardarlo en la pila en su prólogo y restaurarlo en su epílogo."
+    },
+    {
+      "q": "¿Qué instrucción se suele emplear habitualmente al final de una función ensamblador para retornar si LR no se ha guardado en la pila?",
+      "options": [
+        "BX LR",
+        "MOV PC, LR",
+        "Ambos métodos son correctos y equivalentes."
+      ],
+      "correct": 2,
+      "hint": "Ambos transfieren el valor de LR al PC, forzando el retorno.",
+      "explanation": "Tanto $BX\\ LR$ como $MOV\\ PC,\\ LR$ copian el contenido de $LR$ (dirección de retorno) en el Program Counter ($PC$), finalizando la subrutina."
+    },
+    {
+      "q": "¿Qué ocurre con el registro CPSR (Current Program Status Register) al realizar una llamada de función estándar con BL?",
+      "options": [
+        "Se borran todos sus flags automáticamente.",
+        "Sus flags de condición se conservan para que la función llamada los lea, pero no se guardan en la pila automáticamente.",
+        "Se copia automáticamente en R12 para preservarlo."
+      ],
+      "correct": 1,
+      "hint": "La instrucción BL no altera los flags de condición ni guarda el estado CPSR automáticamente.",
+      "explanation": "El registro de estado $CPSR$ mantiene sus banderas tras un $BL$, lo que permite que una subrutina examine los flags establecidos por el llamador. Sin embargo, no se guardan en la pila de forma automática."
+    },
+    {
+      "q": "En el contexto de AAPCS, ¿qué es una 'función hoja' (leaf function)?",
+      "options": [
+        "Una función que no realiza ninguna llamada a otra función (no ejecuta BL).",
+        "Una función que no recibe parámetros.",
+        "Una función que no realiza accesos a memoria."
+      ],
+      "correct": 0,
+      "hint": "Se encuentra en el extremo final del árbol de llamadas.",
+      "explanation": "Una función hoja es aquella que no efectúa llamadas secundarias. Esto le permite optimizar su prólogo y epílogo al no requerir el guardado de $LR$ en la pila."
+    },
+    {
+      "q": "¿Por qué una función hoja no necesita guardar el registro LR en la pila?",
+      "options": [
+        "Porque no ejecuta ninguna instrucción BL que sobrescriba el LR, por lo que este mantiene la dirección de retorno original.",
+        "Porque las funciones hoja no pueden usar el stack bajo ninguna circunstancia.",
+        "Porque el compilador de C gestiona el LR de forma transparente."
+      ],
+      "correct": 0,
+      "hint": "El valor en LR no se destruirá por otras instrucciones de llamada.",
+      "explanation": "Dado que una función hoja no invoca a otras funciones mediante $BL$, el registro $LR$ conserva intacto su valor de retorno original durante toda la función."
+    },
+    {
+      "q": "En la convención de llamadas ARM 'soft-float', ¿cómo se pasan los parámetros de tipo float y double?",
+      "options": [
+        "Usando los registros de punto flotante del coprocesador VFP.",
+        "Usando los registros de propósito general R0-R3 y la pila si es necesario.",
+        "Se pasan siempre en la pila de forma exclusiva."
+      ],
+      "correct": 1,
+      "hint": "La convención soft-float emula el punto flotante o usa registros de propósito general.",
+      "explanation": "En 'soft-float', los parámetros de coma flotante se tratan como datos enteros y se pasan en los registros de propósito general $R0-R3$ y, si es necesario, en el stack."
+    },
+    {
+      "q": "En la convención de llamadas 'hard-float', ¿qué registros se utilizan para pasar parámetros de punto flotante de precisión simple?",
+      "options": [
+        "R0-R3",
+        "S0-S15",
+        "D0-D7"
+      ],
+      "correct": 1,
+      "hint": "Se emplean registros específicos del coprocesador matemático.",
+      "explanation": "En 'hard-float', el estándar utiliza directamente los registros del coprocesador $VFP$. Los floats de precisión simple se colocan en la serie de registros $S0$ a $S15$."
+    },
+    {
+      "q": "¿Cuál es el tamaño de alineación de pila requerido por AAPCS al realizar accesos a datos de 64 bits en memoria (como double o long long)?",
+      "options": [
+        "4 bytes.",
+        "8 bytes.",
+        "16 bytes."
+      ],
+      "correct": 1,
+      "hint": "Es la alineación óptima recomendada para evitar accesos desalineados perjudiciales para el rendimiento.",
+      "explanation": "El alineamiento a 8 bytes garantiza que las lecturas y escrituras de doble palabra ($64$ bits) no crucen fronteras físicas de bus, optimizando el rendimiento de instrucciones como $LDRD$ y $STRD$."
+    },
+    {
+      "q": "En ensamblador ARM GNU, ¿cuál es el propósito de la directiva '.align 2' antes de definir una función?",
+      "options": [
+        "Alinear la dirección de inicio a una frontera de 4 bytes (2^2 bytes).",
+        "Alinear la dirección de inicio a una frontera de 2 bytes.",
+        "Reservar 2 bytes de memoria para variables globales."
+      ],
+      "correct": 0,
+      "hint": "El parámetro de la directiva representa la potencia de 2 en sistemas GNU ARM.",
+      "explanation": "En el ensamblador GNU para ARM, $.align\\ n$ alinea a una frontera de $2^n$ bytes. Por tanto, $.align\\ 2$ alinea a $2^2 = 4$ bytes (límite de palabra ARM)."
+    },
+    {
+      "q": "¿Qué tipo de pila utiliza por defecto el procesador ARM Cortex-A en C/Assembly?",
+      "options": [
+        "Full Descending (Descendente Completa - FD).",
+        "Empty Descending (Descendente Vacía - ED).",
+        "Full Ascending (Ascendente Completa - FA)."
+      ],
+      "correct": 0,
+      "hint": "El SP decrementa antes de escribir y apunta al último dato ocupado.",
+      "explanation": "ARM utiliza el modelo de pila descendente completa ($FD$). El puntero de pila crece hacia direcciones más bajas y apunta al último dato válido almacenado en el stack."
+    },
+    {
+      "q": "¿Qué significa que la pila sea 'Full Descending' (FD) en ARM?",
+      "options": [
+        "El puntero SP apunta al último elemento válido y la pila crece hacia direcciones de memoria más bajas.",
+        "El puntero SP apunta a la primera posición vacía de la pila y crece hacia direcciones más bajas.",
+        "El puntero SP apunta al último elemento y crece hacia direcciones más altas."
+      ],
+      "correct": 0,
+      "hint": "Full significa que apunta al dato válido; Descending significa que decrece al empujar.",
+      "explanation": "En una pila Full Descending, la operación de inserción ($PUSH$) primero decrementa el puntero $SP$ y luego escribe el dato en dicha dirección, quedando $SP$ apuntando a un elemento lleno (Full)."
+    },
+    {
+      "q": "Al pasar una estructura (struct) pequeña de C (menor o igual a 4 bytes) como parámetro por valor, ¿cómo se transmite en AAPCS?",
+      "options": [
+        "Copiándola directamente en un registro de propósito general (por ejemplo, R0).",
+        "Pasando un puntero a la estructura en R0.",
+        "Obligatoriamente en la pila."
+      ],
+      "correct": 0,
+      "hint": "Si cabe en un registro de 32 bits, se introduce directamente en él.",
+      "explanation": "Las estructuras que caben en un registro de 32 bits (por ejemplo, una estructura con dos $short$ o un $int$) se cargan directamente en el registro correspondiente ($R0-R3$) como si fuesen enteros."
+    },
+    {
+      "q": "¿Cómo se pasa una estructura grande (mayor de 4 bytes) por valor en ARM AAPCS?",
+      "options": [
+        "Se divide en bloques de 32 bits y se asigna consecutivamente a R0-R3, pasando el resto a la pila si excede.",
+        "Siempre se pasa mediante una dirección de retorno en R0.",
+        "Se copia completa en la pila, ignorando los registros R0-R3."
+      ],
+      "correct": 0,
+      "hint": "Ocupa tantos registros de R0-R3 como sea posible, y el remanente va a la pila.",
+      "explanation": "Las estructuras medianas/grandes se desglosan en palabras de 32 bits que se copian en los registros disponibles de $R0-R3$ y, si no caben por completo, los bytes restantes se apilan."
+    },
+    {
+      "q": "¿Qué registro se suele utilizar como Frame Pointer (FP) opcional en compilaciones ARM de 32 bits?",
+      "options": [
+        "R11",
+        "R12",
+        "R14"
+      ],
+      "correct": 0,
+      "hint": "Sirve para referenciar variables locales con un offset constante e independiente del SP.",
+      "explanation": "En las arquitecturas ARM de 32 bits, el registro $R11$ se adopta comúnmente como Frame Pointer ($FP$) para mantener el registro del marco de activación actual de la pila."
+    },
+    {
+      "q": "Si un parámetro de entrada de 64 bits (long long) se pasa a una función, ¿qué regla de alineación de registros de propósito general impone la AAPCS?",
+      "options": [
+        "Debe alinearse a un par de registros par-impar, es decir, R0-R1 o R2-R3.",
+        "Puede ocupar cualquier par adyacente como R1-R2.",
+        "Se pasa obligatoriamente en el stack a partir de SP."
+      ],
+      "correct": 0,
+      "hint": "Para evitar accesos desalineados de 64 bits en el hardware, el registro inicial debe ser par.",
+      "explanation": "Los parámetros de 64 bits requieren alineación de doble palabra, lo que significa que deben comenzar en un registro par de la pareja ($R0$ o $R2$). Si el parámetro anterior deja libre $R1$, este se salta y se usa $R2-R3$."
+    },
+    {
+      "q": "En GCC para ARM, ¿cuál es el formato básico de una instrucción de ensamblador en línea (Inline Assembly)?",
+      "options": [
+        "__asm__(\"instrucciones\" : salidas : entradas : registros_modificados);",
+        "asm { instrucciones };",
+        "__inline__ { asm_code };"
+      ],
+      "correct": 0,
+      "hint": "Utiliza la sintaxis extendida de GCC con dos puntos como separadores de campos.",
+      "explanation": "La sintaxis extendida de GCC utiliza la estructura $__asm__(code : outputs : inputs : clobbers) para permitir que el compilador relacione variables de C con registros de ensamblador."
+    },
+    {
+      "q": "¿Qué indica el campo 'clobber list' (registros modificados) en una instrucción de ensamblador en línea de GCC?",
+      "options": [
+        "Indica al compilador qué registros son modificados por el código ensamblador para que los guarde y restaure adecuadamente si es necesario.",
+        "Indica qué variables de C se sobrescriben.",
+        "Indica el punto de entrada de la función llamada."
+      ],
+      "correct": 0,
+      "hint": "Evita que el compilador asuma que el contenido previo de dichos registros sigue siendo válido.",
+      "explanation": "La lista de clobber informa al compilador que los registros listados sufren modificaciones destructivas dentro del bloque de ensamblador, forzando a que salve sus valores si estaban activos."
+    },
+    {
+      "q": "Si usamos '__asm__ __volatile__' en un programa C, ¿qué le estamos indicando al optimizador del compilador?",
+      "options": [
+        "Que no debe mover, eliminar ni optimizar la instrucción de ensamblador en línea.",
+        "Que el código ensamblador debe ejecutarse en un hilo separado del procesador.",
+        "Que las variables de entrada pueden cambiar de forma asíncrona."
+      ],
+      "correct": 0,
+      "hint": "Fuerza a mantener el código exactamente donde y como el desarrollador lo escribió.",
+      "explanation": "El modificador $__volatile__$ instruye al compilador a desactivar las optimizaciones sobre el fragmento de ensamblador, garantizando que no sea removido por análisis de código muerto ni reordenado."
+    },
+    {
+      "q": "Al llamar a una función en ensamblador desde C, ¿cómo se accede a los argumentos pasados en la pila si R0-R3 ya están ocupados?",
+      "options": [
+        "A través de offsets positivos respecto a SP (por ejemplo, [SP, #0], [SP, #4]).",
+        "A través de offsets negativos respecto a SP (por ejemplo, [SP, #-4]).",
+        "Usando la instrucción POP para extraerlos individualmente de forma destructiva."
+      ],
+      "correct": 0,
+      "hint": "La pila contiene los parámetros apilados por el llamador por encima de SP.",
+      "explanation": "El llamador apila los parámetros excedentes antes del salto. Al entrar a la función, estos parámetros se encuentran en direcciones superiores a $SP$, por lo que se accede con offsets positivos $[SP, \\#offset]$."
+    },
+    {
+      "q": "¿Qué es el 'Procedimiento de Enlace Dinámico' (PLT) en ARM y con qué registro se relaciona habitualmente para llamadas inter-módulo?",
+      "options": [
+        "Se relaciona con R12 (IP) para enlazar llamadas dinámicas entre librerías.",
+        "Se relaciona con R14 (LR) únicamente.",
+        "Se relaciona con el coprocesador CP15."
+      ],
+      "correct": 0,
+      "hint": "Procedimiento utilizado para resolver símbolos de librerías compartidas en tiempo de ejecución.",
+      "explanation": "La Procedure Linkage Table (PLT) hace uso de la posición del enlazador dinámico que utiliza $R12$ ($IP$) como registro scratch temporal para realizar el salto indirecto hacia las funciones de bibliotecas compartidas ($S0$)."
+    },
+    {
+      "q": "¿Qué ocurre con los registros R0-R3 y LR al llamar a una función mediante la instrucción BL?",
+      "options": [
+        "Sus valores originales se pierden (caller-saved) y R14 se actualiza con la dirección de retorno.",
+        "Se salvan automáticamente en la pila del hardware.",
+        "Se congelan y no se pueden modificar por la función llamada."
+      ],
+      "correct": 0,
+      "hint": "Son registros temporales y de enlace modificados por el salto.",
+      "explanation": "Los registros $R0-R3$ son volátiles y se asumen destruidos tras la llamada. El registro $LR$ ($R14$) es sobrescrito por la CPU con la dirección de retorno de la instrucción."
+    },
+    {
+      "q": "¿Qué convención de paso de parámetros se utiliza si una función tiene un número variable de argumentos (como printf)?",
+      "options": [
+        "Se pasan en R0-R3 los primeros y el resto en la pila, con reglas específicas para la promoción de tipos en la pila según AAPCS.",
+        "Se pasan todos exclusivamente en la pila para evitar corrupción de registros.",
+        "Se pasan mediante un puntero único en R0."
+      ],
+      "correct": 0,
+      "hint": "El compilador debe seguir pasando los primeros argumentos en registros disponibles antes de usar la pila.",
+      "explanation": "Las funciones con número variable de argumentos (variádicas) en ARM siguen usando $R0-R3$ para los primeros parámetros y el resto se sitúa secuencialmente en el stack."
+    },
+    {
+      "q": "Si una subrutina en ensamblador realiza un 'PUSH {R4, R5, LR}', ¿cómo debe ser el correspondiente 'POP' antes de retornar?",
+      "options": [
+        "POP {R4, R5, PC} o bien POP {R4, R5, LR} seguido de BX LR.",
+        "POP {R4, R5} sin restaurar el LR.",
+        "POP {LR, R4, R5} únicamente."
+      ],
+      "correct": 0,
+      "hint": "Debe restaurar los registros preservados y transferir la dirección salvada al PC.",
+      "explanation": "Se puede restaurar el estado original de $R4$ y $R5$ y saltar a la dirección de retorno de forma simultánea escribiendo $POP\\ {R4,\\ R5,\\ PC}$, o de forma separada con $POP$ y luego $BX\\ LR$."
+    },
+    {
+      "q": "¿Cuál es el rango de valores de registros de propósito general estándar que están garantizados a conservar su valor después de llamar a una función C?",
+      "options": [
+        "R4, R5, R6, R7, R8, R9, R10, R11 y SP (R13).",
+        "R0, R1, R2 y R3.",
+        "Todos los registros de R0 a R15."
+      ],
+      "correct": 0,
+      "hint": "Son los registros callee-saved declarados por el estándar AAPCS.",
+      "explanation": "AAPCS garantiza que los registros $R4-R11$ y $SP$ se conservarán intactos tras el retorno, ya que es responsabilidad de la función llamada restaurarlos si los usa."
+    },
+    {
+      "q": "¿Por qué es fundamental que la pila mantenga una alineación de 8 bytes en las interfaces públicas?",
+      "options": [
+        "Porque algunas instrucciones de ARMv7 (como LDRD/STRD) o tipos de doble precisión requieren que las direcciones estén alineadas a 8 bytes.",
+        "Porque acelera la decodificación de instrucciones en el cauce (pipeline).",
+        "Porque el bus de datos del ARMv7 es siempre de 128 bits."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con requisitos del hardware y rendimiento en transferencias de doble palabra.",
+      "explanation": "Las instrucciones de lectura/escritura de 64 bits ($LDRD$ y $STRD$) generan excepciones de alineación o penalizaciones severas si la dirección no está alineada a 8 bytes, por ello la EABI lo exige."
+    },
+    {
+      "q": "En el ensamblado de programas ARM, ¿qué directiva especifica el tipo de símbolo como una función para evitar comportamientos extraños en el depurador?",
+      "options": [
+        ".type nombre_funcion, %function",
+        ".global nombre_funcion",
+        ".section .text"
+      ],
+      "correct": 0,
+      "hint": "Ayuda a las herramientas de depuración a identificar los límites del bloque de código ejecutable.",
+      "explanation": "La directiva $.type\\ nombre,\\ \\%function$ define explícitamente el tipo del símbolo como una subrutina o función en la tabla ELF."
+    },
+    {
+      "q": "¿Qué significa 'interworking' en la arquitectura ARM?",
+      "options": [
+        "La capacidad de intercalar y ejecutar código de 32 bits (ARM) y 16/32 bits (Thumb) de forma transparente usando instrucciones BX/BLX.",
+        "La capacidad de interoperar entre sistemas operativos Windows y Linux en ARM.",
+        "El trabajo concurrente de la CPU y la GPU."
+      ],
+      "correct": 0,
+      "hint": "Permite mezclar dos conjuntos de instrucciones diferentes en la misma ejecución.",
+      "explanation": "El 'interworking' permite que el código de ARM de 32 bits llame a subrutinas codificadas en el formato compacto Thumb (de 16 o 32 bits), lo cual se realiza mediante saltos con intercambio de estado con $BX/BLX$."
+    },
+    {
+      "q": "Si una rutina de ensamblador requiere modificar el puntero de pila (SP) temporalmente restando bytes para variables locales, ¿cómo debe restablecerse SP antes del retorno?",
+      "options": [
+        "Sumando exactamente el mismo número de bytes que se restaron o restaurándolo mediante un Frame Pointer.",
+        "No hace falta restablecerlo, el llamador en C lo reajusta automáticamente.",
+        "Ejecutando una instrucción de reset del procesador."
+      ],
+      "correct": 0,
+      "hint": "El puntero de pila SP debe quedar equilibrado en el epílogo exactamente al mismo valor del inicio.",
+      "explanation": "Si modificamos $SP$ en el cuerpo de la función (ej. $SUB\\ SP,\\ SP,\\ \\#24$), debemos sumar el mismo offset ($ADD\\ SP,\\ SP,\\ \\#24$) antes de hacer el $POP$ o retornar, para evitar leer direcciones corruptas."
+    },
+    {
+      "q": "Si una variable en C es declarada de tipo 'char' (8 bits), ¿cómo se pasa esta variable como parámetro de una función según AAPCS?",
+      "options": [
+        "Promocionada o extendida a un valor de 32 bits en el registro correspondiente (ej. R0).",
+        "Usando solo los 8 bits inferiores del registro y borrando por hardware los 24 superiores.",
+        "Como una dirección de memoria (puntero de 32 bits)."
+      ],
+      "correct": 0,
+      "hint": "Los registros ARM siempre procesan palabras completas de 32 bits.",
+      "explanation": "Los tipos menores de 32 bits ($char$, $short$) se promocionan a enteros de 32 bits mediante extensión con signo o ceros antes de copiarse al registro de argumentos."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Considera el siguiente código en C:\nextern int calcular(int x);\nSi llamamos a calcular(15), en la subrutina ensamblador el registro ____ contendrá el valor 15.",
+      "options": [
+        "R0",
+        "R1",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "El primer argumento entero de C se pasa en R0.",
+      "explanation": "Según AAPCS, el primer parámetro de tipo entero o puntero se deposita en el registro $R0$."
+    },
+    {
+      "q": "En una subrutina que implementa la suma de dos enteros:\nsubr:\n  ADD R0, R0, R1\n  BX ____\n¿Qué registro falta para retornar de forma correcta al llamador?",
+      "options": [
+        "LR",
+        "PC",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "El registro de enlace guarda la dirección de retorno.",
+      "explanation": "Para retornar al llamador se debe saltar a la dirección guardada en el Link Register ($LR$ o $R14$)."
+    },
+    {
+      "q": "Una función C declara:\nextern int test(int a, int b, int c, int d, int e);\nAl entrar a la función, el valor de 'e' se recupera usando la instrucción:\nLDR R4, [____]",
+      "options": [
+        "SP",
+        "R0",
+        "LR"
+      ],
+      "correct": 0,
+      "hint": "Los parámetros excedentes van a la pila.",
+      "explanation": "El 5º parámetro 'e' se pasa en la pila, por lo que se lee directamente en la dirección apuntada por $SP$ ($[SP]$)."
+    },
+    {
+      "q": "En la arquitectura ARM, si queremos preservar los registros R4 y R5 en la pila al inicio de una función, la instrucción adecuada es:\n____ {R4, R5, LR}",
+      "options": [
+        "PUSH",
+        "POP",
+        "SUB"
+      ],
+      "correct": 0,
+      "hint": "Instrucción de almacenamiento múltiple en la pila.",
+      "explanation": "La instrucción $PUSH$ almacena los registros indicados en la pila descendente completa, decrementando $SP$."
+    },
+    {
+      "q": "Para restaurar los registros R4, R5 y retornar en un solo paso al final de una subrutina que fue iniciada con PUSH {R4, R5, LR}, se utiliza la instrucción:\n____ {R4, R5, PC}",
+      "options": [
+        "POP",
+        "PUSH",
+        "ADD"
+      ],
+      "correct": 0,
+      "hint": "Restaura registros de la pila y escribe en el PC.",
+      "explanation": "Al ejecutar $POP\\ {R4,\\ R5,\\ PC}$, se extraen los valores de la pila y se escribe el valor de retorno directamente en el Program Counter ($PC$)."
+    },
+    {
+      "q": "Dada la siguiente signatura en C:\nextern long long duplicar(long long n);\nSi n vale 0x123456789ABCDEF0, al llamarse la función en ensamblador, el registro ____ contendrá la parte baja (0x9ABCDEF0).",
+      "options": [
+        "R0",
+        "R1",
+        "R2"
+      ],
+      "correct": 0,
+      "hint": "El entero de 64 bits se divide en dos registros, R0 para la parte baja.",
+      "explanation": "Por convención AAPCS, la parte de 32 bits menos significativos va en $R0$ y la más significativa en $R1$."
+    },
+    {
+      "q": "Para declarar que una función llamada 'mi_funcion' es visible fuera del archivo ensamblador actual, usamos la directiva:\n____ mi_funcion",
+      "options": [
+        ".global",
+        ".extern",
+        ".text"
+      ],
+      "correct": 0,
+      "hint": "Directiva que publica el símbolo al exterior.",
+      "explanation": "La directiva $.global\\ mi_funcion$ le dice al ensamblador que publique el símbolo en el archivo objeto final."
+    },
+    {
+      "q": "Si queremos reservar espacio en la pila para 3 variables locales de 32 bits cada una, debemos realizar la instrucción:\nSUB SP, SP, #____",
+      "options": [
+        "12",
+        "3",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "Cada variable entera ocupa 4 bytes.",
+      "explanation": "Tres variables de 32 bits ocupan $3 \\times 4 = 12$ bytes, los cuales se restan de $SP$ para reservar espacio."
+    },
+    {
+      "q": "Para mantener la pila alineada a 8 bytes tras realizar un PUSH de un solo registro de 32 bits (por ejemplo R4), se suele empujar también un registro de relleno como ____.",
+      "options": [
+        "R5",
+        "R0",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "Se añade otro registro de 32 bits para sumar 8 bytes en total.",
+      "explanation": "Si solo empujamos un registro, alteramos la alineación de 8 bytes (se desplaza 4 bytes). Empujar un registro adicional como $R5$ (que es callee-saved) mantiene la alineación de 8 bytes."
+    },
+    {
+      "q": "En el código:\nfunc:\n  PUSH {R4, LR}\n  ...\n  POP {R4, ____}\n¿Qué registro debe colocarse en el POP para retornar correctamente?",
+      "options": [
+        "PC",
+        "LR",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "La dirección de retorno original estaba en LR y debe restaurarse en PC.",
+      "explanation": "Para retornar directamente, el valor de $LR$ empujado al inicio se extrae directamente en el Program Counter ($PC$)."
+    },
+    {
+      "q": "Considere la función:\nfunc:\n  MOV R0, #100\n  ____ LR\n¿Qué instrucción de salto indirecto a la dirección en LR completa el retorno?",
+      "options": [
+        "BX",
+        "B",
+        "BL"
+      ],
+      "correct": 0,
+      "hint": "Salto con intercambio de estado a un registro.",
+      "explanation": "La instrucción $BX\\ LR$ realiza un salto a la dirección contenida en $LR$."
+    },
+    {
+      "q": "Si una función de C llama a una función en ensamblador declarada como:\nextern void swap(int *a, int *b);\nEl parámetro 'a' (un puntero a entero) se almacena en el registro ____.",
+      "options": [
+        "R0",
+        "R1",
+        "R2"
+      ],
+      "correct": 0,
+      "hint": "El primer argumento es un puntero, se coloca en el primer registro de parámetros.",
+      "explanation": "Los punteros en ARM son de 32 bits y se tratan igual que enteros, pasando en $R0$."
+    },
+    {
+      "q": "El enlazador dinámico utiliza el registro ____ como un registro temporal (scratch) durante las llamadas a funciones externas a través del PLT.",
+      "options": [
+        "R12",
+        "R4",
+        "R14"
+      ],
+      "correct": 0,
+      "hint": "Se le conoce como registro IP en el estándar.",
+      "explanation": "El estándar AAPCS reserva $R12$ ($IP$) para que el enlazador dinámico resuelva los saltos dinámicos en las llamadas a funciones."
+    },
+    {
+      "q": "Si una rutina en ensamblador modifica los registros R0, R1 y R4 sin restaurar R4, ¿cuál de ellos está violando la convención de llamadas AAPCS por ser ____?",
+      "options": [
+        "callee-saved",
+        "caller-saved",
+        "volátil"
+      ],
+      "correct": 0,
+      "hint": "R4 es callee-saved y requiere conservación.",
+      "explanation": "El registro $R4$ es callee-saved (no volátil), por lo que la función llamada debe conservarlo. Modificarlo sin restaurarlo es una violación."
+    },
+    {
+      "q": "Considere el código:\nextern int sumar(int a, int b);\nSi en el main de C hacemos sumar(5, 7), la instrucción de llamada generada por el compilador es:\n____ sumar",
+      "options": [
+        "BL",
+        "B",
+        "BX"
+      ],
+      "correct": 0,
+      "hint": "Llamada a función con enlace.",
+      "explanation": "La instrucción de llamada a funciones en ARM es $BL$ (Branch with Link), que además de saltar guarda la dirección de retorno en $LR$."
+    },
+    {
+      "q": "Para definir que el símbolo 'mi_subr' es una función de tipo código en el archivo .s, se escribe:\n____ mi_subr, %function",
+      "options": [
+        ".type",
+        ".global",
+        ".word"
+      ],
+      "correct": 0,
+      "hint": "Especifica el tipo de símbolo.",
+      "explanation": "La directiva $.type$ se usa para definir si un símbolo es un objeto o una función en formato ELF."
+    },
+    {
+      "q": "Si la pila es descendente completa, la instrucción PUSH {R4} primero decrementa SP en ____ bytes y luego almacena el contenido de R4.",
+      "options": [
+        "4",
+        "8",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Cada registro en ARMv7 de 32 bits ocupa 4 bytes.",
+      "explanation": "En una pila descendente completa, el puntero se decrementa en 4 bytes (tamaño del registro) y luego se realiza la escritura."
+    },
+    {
+      "q": "Si se desea compilar un programa mixto C-Ensamblador, el comando de GCC típico sería:\ngcc main.c ____ -o programa",
+      "options": [
+        "funciones.s",
+        "funciones.h",
+        "funciones.txt"
+      ],
+      "correct": 0,
+      "hint": "Se le debe pasar el archivo de código ensamblador.",
+      "explanation": "El archivo ensamblador con extensión $.s$ se pasa directamente al compilador $gcc$ junto al archivo $.c$."
+    },
+    {
+      "q": "En el estándar de llamadas soft-float, si una función recibe un double (64 bits) en los primeros parámetros, se asigna a los registros ____ y ____.",
+      "options": [
+        "R0, R1",
+        "R1, R2",
+        "S0, S1"
+      ],
+      "correct": 0,
+      "hint": "Los primeros dos registros de 32 bits se asocian al double de 64 bits.",
+      "explanation": "El valor se pasa en los registros de propósito general de 32 bits $R0$ y $R1$."
+    },
+    {
+      "q": "El estándar de llamadas de ARM establece que el registro ____ se reserva habitualmente como puntero de pila.",
+      "options": [
+        "SP",
+        "LR",
+        "PC"
+      ],
+      "correct": 0,
+      "hint": "Corresponde al registro R13.",
+      "explanation": "El puntero de pila es $SP$ ($R13$), el cual apunta a la cima de la pila actual."
+    },
+    {
+      "q": "¿Qué registros de la arquitectura ARM son considerados volátiles (caller-saved) según el estándar AAPCS?",
+      "options": [
+        "R0 y R1.",
+        "R2 y R3.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "La subrutina puede modificar R0-R3 libremente sin necesidad de restaurarlos.",
+      "explanation": "Los registros de parámetros $R0-R3$ son caller-saved, por lo que todas las opciones indicadas son correctas."
+    },
+    {
+      "q": "¿Cuáles son las consecuencias de no restaurar un registro callee-saved (como R4) antes de salir de una subrutina?",
+      "options": [
+        "El llamador (C) puede experimentar corrupción de sus variables locales.",
+        "El programa puede comportarse de manera impredecible o fallar.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "La violación del estándar altera el estado del llamador.",
+      "explanation": "Si un registro callee-saved no se restaura, el llamador pierde su estado previo, lo que corrompe el flujo y puede provocar fallos severos."
+    },
+    {
+      "q": "¿Qué elementos del estado de la CPU ARM se modifican al ejecutar una instrucción de llamada de función 'BL subrutina'?",
+      "options": [
+        "El Program Counter (PC) toma la dirección del destino.",
+        "El Link Register (LR) toma la dirección de retorno.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "La instrucción BL altera tanto el flujo de control como el registro de enlace.",
+      "explanation": "La instrucción $BL$ realiza el salto actualizando el $PC$ y a la vez guarda la dirección de retorno en $LR$ ($R14$)."
+    },
+    {
+      "q": "¿Por qué es necesario alinear la pila a 8 bytes en ARM antes de llamar a funciones de librerías estándares de C?",
+      "options": [
+        "Porque lo exige el estándar EABI/AAPCS en las interfaces públicas.",
+        "Porque previene fallos de alineación en instrucciones como LDRD o STRD.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se debe tanto al estándar binario como a requisitos de hardware.",
+      "explanation": "La alineación a 8 bytes es obligatoria en interfaces públicas y previene excepciones de acceso a memoria desalineada para variables de 64 bits."
+    },
+    {
+      "q": "En la interoperabilidad C-ensamblador en ARM, ¿cuál de los siguientes pasos es necesario para un enlazado exitoso?",
+      "options": [
+        "Declarar la función en C con la palabra clave extern.",
+        "Hacer visible el punto de entrada en el archivo ensamblador con la directiva .global.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se necesita visibilidad en el módulo C y exposición del símbolo en el módulo .s.",
+      "explanation": "Para compilar y enlazar con éxito se requiere la firma $extern$ en C y la directiva $.global$ en el archivo $.s$."
+    },
+    {
+      "q": "¿Cuáles son los registros que una función C-Assembly en ARM puede modificar libremente sin necesidad de guardarlos en la pila?",
+      "options": [
+        "R0, R1, R2, R3.",
+        "R12, LR.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son los registros caller-saved (volátiles).",
+      "explanation": "Todos los registros indicados ($R0-R3$, $R12$, $LR$) son clasificados como caller-saved, por lo que la función llamada los puede usar libremente."
+    },
+    {
+      "q": "Si tenemos la declaración 'extern int func(int a, int b, int c, int d, int e, int f);', ¿qué parámetros se pasan obligatoriamente a través de la pila?",
+      "options": [
+        "El parámetro e (5º parámetro).",
+        "El parámetro f (6º parámetro).",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "AAPCS solo dispone de 4 registros para parámetros enteros.",
+      "explanation": "Como los registros $R0-R3$ se llenan con los primeros 4 parámetros (a-d), los parámetros excedentes 'e' y 'f' se apilan en ese orden."
+    },
+    {
+      "q": "¿Qué métodos son válidos para retornar de una función en ensamblador ARM si se guardó el LR en la pila mediante 'PUSH {R4, LR}'?",
+      "options": [
+        "Ejecutar POP {R4, PC}.",
+        "Ejecutar POP {R4, LR} seguido de BX LR.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambos restauran el registro R4 y transfieren la dirección de retorno al PC.",
+      "explanation": "Se puede restaurar directamente la dirección al $PC$ en el $POP$ o cargarla de nuevo a $LR$ y realizar un salto con $BX\\ LR$."
+    },
+    {
+      "q": "¿Qué tipo de información suele almacenarse en el marco de pila (Stack Frame) de una función C?",
+      "options": [
+        "Variables locales que no caben en los registros disponibles.",
+        "Dirección de retorno (LR) y registros callee-saved preservados.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "El marco de pila organiza variables locales, registros salvados y argumentos de llamadas.",
+      "explanation": "El marco de pila almacena las variables locales de la función y preserva los registros que deben mantenerse intactos."
+    },
+    {
+      "q": "¿Qué directivas de GNU Assembler se utilizan habitualmente al declarar una sección de código ejecutable?",
+      "options": [
+        ".text para indicar la sección de código.",
+        ".align para alinear las instrucciones en la memoria.",
+        "Todas las opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se utilizan para definir el segmento de código y su alineación física.",
+      "explanation": "Tanto $.text$ como $.align$ son directivas estándar para estructurar la sección de instrucciones ejecutables."
+    },
+    {
+      "q": "Si llamamos a una función con firma 'extern void f(int a);' pasando f(100), ¿dónde guarda el estándar AAPCS el valor 100?",
+      "options": [
+        "En el registro R1.",
+        "En la pila apuntada por SP.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "El primer argumento se pasa en R0.",
+      "explanation": "El primer parámetro entero de una función se almacena en el registro $R0$. Ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "¿Cuál es el registro callee-saved que se utiliza como Program Counter en ARMv7?",
+      "options": [
+        "R14 (LR).",
+        "R13 (SP).",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "El Program Counter es R15 y no es callee-saved.",
+      "explanation": "El Program Counter es el registro $R15$ ($PC$) y es un registro de control del flujo, no callee-saved. Por tanto, ninguna de las anteriores opciones es correcta."
+    },
+    {
+      "q": "Si pasamos 5 argumentos enteros de 32 bits a una función, ¿en qué registro se almacena el 5º argumento según AAPCS?",
+      "options": [
+        "En el registro R4.",
+        "En el registro R12.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "El 5º argumento se pasa en la pila, no en registros.",
+      "explanation": "El 5º argumento se introduce en la pila apuntada por $SP$, por lo que no ocupa ningún registro. Ninguna opción es correcta."
+    },
+    {
+      "q": "¿Qué instrucción se utiliza en ARM para llamar a una función y guardar la dirección de retorno en el stack directamente en un solo ciclo de bus?",
+      "options": [
+        "PUSH BL.",
+        "CALL.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "La llamada BL almacena la dirección de retorno en el registro LR, no en el stack.",
+      "explanation": "ARM no tiene una instrucción simple que empuje la dirección de retorno a la pila automáticamente; utiliza $BL$ para guardarla en el registro $LR$."
+    },
+    {
+      "q": "Si una función C devuelve una estructura de 128 bytes por valor, ¿cómo se devuelve según AAPCS?",
+      "options": [
+        "En el registro R0 de forma directa.",
+        "En la pareja de registros R0-R1.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "Las estructuras grandes se devuelven copiándolas en memoria a través de una dirección pasada por el llamador.",
+      "explanation": "Las estructuras que exceden 4 bytes se devuelven escribiéndolas en un búfer reservado por el llamador, cuya dirección se pasa como un parámetro oculto en $R0$. Ninguna opción es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes directivas de ensamblador ARM declara una variable de tipo flotante de doble precisión (64 bits)?",
+      "options": [
+        ".word",
+        ".byte",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "Las variables double se declaran con directivas específicas para flotantes de 64 bits.",
+      "explanation": "Las directivas $.word$ y $.byte$ son para enteros de 32 y 8 bits respectivamente. Los double se definen con $.double$. Ninguna opción es correcta."
+    },
+    {
+      "q": "En el estándar de llamadas hard-float, ¿en qué registros de propósito general de la CPU (R0-R15) se pasan los parámetros de punto flotante de precisión simple?",
+      "options": [
+        "En R0-R3.",
+        "En R4-R7.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se pasan en registros de coprocesador, no de propósito general.",
+      "explanation": "En el modo 'hard-float' se usan los registros del coprocesador $VFP$ (registros $S0-S15$), no los de la CPU de propósito general ($R0-R15$)."
+    },
+    {
+      "q": "Si una subrutina ejecuta 'PUSH {R0-R3}', ¿qué registro callee-saved está intentando salvar para preservarlo?",
+      "options": [
+        "R0.",
+        "R1.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "R0-R3 son registros de tipo caller-saved.",
+      "explanation": "Los registros $R0-R3$ son de tipo caller-saved. Esta operación los guarda en la pila, pero no para cumplir con callee-saved. Ninguna opción es correcta."
+    },
+    {
+      "q": "¿Qué instrucción de salto condicional se utiliza exclusivamente para llamar a subrutinas C cuando el flag de acarreo (C) está activo?",
+      "options": [
+        "BLCS.",
+        "BCCS.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "No existen instrucciones exclusivas para C en el hardware de ARM.",
+      "explanation": "Las instrucciones condicionales de ARM como $BLCS$ se aplican a cualquier código ensamblador y no son exclusivas de llamadas C. Ninguna opción es correcta."
+    },
+    {
+      "q": "Si una función ensamblador tiene la firma 'extern int f(int a);' y devuelve el valor -1, ¿qué registro debe contener el valor -1 en el momento de ejecutar BX LR?",
+      "options": [
+        "El registro R1.",
+        "El registro R12.",
+        "Ninguna de las opciones es correcta."
+      ],
+      "correct": 2,
+      "hint": "El valor de retorno entero se coloca en R0.",
+      "explanation": "El valor de retorno de 32 bits debe depositarse en el registro $R0$. Por tanto, ninguna de las anteriores opciones es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "title": "Cálculo de Desplazamientos en Pila (AAPCS)",
+      "context": "Una función en C llama a una rutina en ensamblador con la siguiente firma:\n`extern int func(int a, int b, int c, int d, int e, int f);`\nAl inicio de la rutina ensamblador, se ejecuta la instrucción `PUSH {R4, R5, LR}`.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes desde el nuevo SP (justo después del PUSH) hasta el parámetro 'e'?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El prólogo guarda $R4$, $R5$ y $LR$, lo que desplaza $SP$ en $3 \\times 4 = 12$ bytes hacia abajo. Por lo tanto, el parámetro 'e' (que estaba en $[SP]$ al entrar) queda en la dirección $SP + 12$.",
+          "id": "1a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes desde el nuevo SP hasta el parámetro 'f'?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El parámetro 'f' (6º argumento) se colocó a continuación de 'e' en el stack, es decir, a un offset de $4$ bytes por encima de 'e'. Por lo tanto, se encuentra a $(3 \\times 4) + 4 = 16$ bytes de distancia de $SP$.",
+          "id": "1b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántos registros de 32 bits se han guardado en la pila mediante la instrucción PUSH?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La instrucción $PUSH\\ {R4,\\ R5,\\ LR}$ guarda exactamente tres registros en la pila: $R4$, $R5$ y $LR$.",
+          "id": "1c"
+        },
+        {
+          "label": "d",
+          "question": "Si también necesitamos asignar espacio en la pila para variables locales manteniendo la alineación de 8 bytes, ¿cuántos bytes de espacio de pila adicional como mínimo debemos reservar?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La pila se desplaza $12$ bytes en el PUSH. Para restaurar la alineación de 8 bytes, el desplazamiento total acumulado debe ser un múltiplo de 8. El siguiente múltiplo de 8 es 16, lo que requiere restar un mínimo de $16 - 12 = 4$ bytes adicionales para almacenamiento local y alineación.",
+          "id": "1d"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "title": "Paso de Parámetros Flotantes en Soft-Float",
+      "context": "En un sistema ARM de 32 bits configurado en modo soft-float, se realiza la llamada a la función:\n`extern double sumar_mixto(double x, double y, int z);`",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿En qué registro de propósito general (0 para R0, 1 for R1, etc.) se introduce la mitad de 32 bits menos significativa del parámetro 'x'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Según AAPCS, en la convención soft-float el primer parámetro, un double de 64 bits ($x$), ocupa los registros $R0$ y $R1$. La parte menos significativa se coloca en $R0$.",
+          "id": "2a"
+        },
+        {
+          "label": "b",
+          "question": "¿En qué registro de propósito general (0 para R0, 1 for R1, etc.) se introduce la mitad menos significativa del parámetro 'y'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El segundo parámetro double ($y$) ocupa los registros $R2$ y $R3$. Su parte menos significativa va en $R2$.",
+          "id": "2b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el desplazamiento en bytes desde el SP de entrada a la función para acceder al parámetro entero 'z'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que los registros $R0-R3$ están totalmente ocupados con los dos double ($x$ e $y$), el parámetro $z$ se pasa en el stack, situándose en la primera palabra de la pila (desplazamiento 0 respecto al $SP$ de entrada).",
+          "id": "2c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el tamaño total en bytes de los parámetros pasados en el stack para esta llamada?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Únicamente el parámetro $z$ (de tipo $int$, 32 bits) se pasa a través de la pila, lo que equivale a un tamaño de 4 bytes.",
+          "id": "2d"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "title": "Alineación de la Pila en la Subrutina",
+      "context": "Una función en C llama a una rutina de ensamblador. Al entrar a la rutina, el Stack Pointer (SP) está alineado a 8 bytes. La rutina realiza la instrucción `PUSH {R4, LR}` y luego reserva memoria para variables locales.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos bytes de pila consume la instrucción PUSH {R4, LR}?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Se guardan dos registros de 32 bits ($R4$ y $LR$), lo que equivale a $2 \\times 4 = 8$ bytes.",
+          "id": "3a"
+        },
+        {
+          "label": "b",
+          "question": "¿Es el SP alineado a 8 bytes inmediatamente después del PUSH? (Responda 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, como la pila ya estaba alineada a 8 bytes y hemos restado 8 bytes, el nuevo $SP$ sigue siendo múltiplo de 8 ($1$ para Sí).",
+          "id": "3b"
+        },
+        {
+          "label": "c",
+          "question": "Si a continuación ejecutamos `SUB SP, SP, #4` para una variable local, ¿es la pila todavía conforme con la alineación de 8 bytes requerida por AAPCS? (Responda 1 para Sí, 0 para No).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No, restar 4 bytes a un SP alineado a 8 bytes resulta en una dirección alineada a 4 bytes pero no a 8 bytes ($0$ para No).",
+          "id": "3c"
+        },
+        {
+          "label": "d",
+          "question": "¿Qué valor de offset (en bytes) se debe restar como relleno (padding) en SP para restaurar la alineación de 8 bytes después de haber restado los 4 bytes anteriores?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para alinear a 8 bytes un offset acumulado de 12 bytes ($8$ del PUSH $+ 4$ locales), debemos reservar $4$ bytes adicionales de relleno ($12 + 4 = 16$ bytes en total, divisible por 8).",
+          "id": "3d"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "title": "Paso de Estructuras por Valor en Registros",
+      "context": "En C se define la estructura:\n`struct Coord { int x; int y; int z; };`\nEsta estructura se pasa por valor a una función externa:\n`extern void procesar_punto(struct Coord c);`",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el tamaño de la estructura struct Coord en bytes?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "La estructura contiene tres variables de tipo entero de 32 bits ($int$), ocupando $3 \\times 4 = 12$ bytes.",
+          "id": "4a"
+        },
+        {
+          "label": "b",
+          "question": "¿En qué registro de parámetros (0 para R0, 1 para R1, etc.) se almacena el miembro 'x'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El primer miembro de la estructura se asigna al primer registro disponible de paso de argumentos, que es $R0$.",
+          "id": "4b"
+        },
+        {
+          "label": "c",
+          "question": "¿En qué registro de parámetros (0 para R0, 1 para R1, etc.) se almacena el miembro 'z'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El tercer miembro, 'z', se asigna secuencialmente al tercer registro de parámetros, que es $R2$.",
+          "id": "4c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántos bytes de la estructura se pasan a través de la pila en esta llamada?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como la estructura completa ocupa 12 bytes y cabe dentro de los registros $R0$, $R1$ y $R2$, no se requiere pasar ningún byte en la pila ($0$ bytes).",
+          "id": "4d"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "title": "Alineación de Argumentos de 64 bits en Registros",
+      "context": "Se declara la función externa:\n`extern void enviar_datos(int a, long long b, int c);`",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿En qué registro de parámetros (0 para R0, 1 para R1, etc.) se recibe el argumento 'a'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El primer argumento $a$ (32 bits) se aloja en el primer registro de parámetros, que es $R0$.",
+          "id": "5a"
+        },
+        {
+          "label": "b",
+          "question": "¿En qué registro (0 para R0, 1 para R1, etc.) se recibe la parte menos significativa de 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El argumento $b$ es de 64 bits ($long\\ long$) y debe alinearse a un par de registros par-impar. Al estar $R0$ ocupado, $R1$ se deja vacío como relleno y $b$ se aloja en $R2-R3$. La parte baja se sitúa en $R2$.",
+          "id": "5b"
+        },
+        {
+          "label": "c",
+          "question": "¿En qué registro o posición se pasa el argumento 'c'? (Responda -1 si se pasa en el stack).",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Dado que $R0$ contiene a $a$, $R1$ es de relleno, y $R2-R3$ contienen a $b$, se han agotado los cuatro registros de paso de argumentos ($R0-R3$). Por lo tanto, el argumento $c$ se pasa en el stack (retornando $-1$).",
+          "id": "5c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el desplazamiento en bytes desde el SP de entrada al parámetro 'c'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al ser $c$ el primer parámetro que no cupo en los registros, se deposita justo en la cima de la pila, a un desplazamiento de 0 bytes de $SP$.",
+          "id": "5d"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "title": "Simulación y Retorno de un Bucle Ensamblador",
+      "context": "Un programa en C llama a una función en ensamblador con la instrucción:\n`int res = sumatorio(10);`\nEl código de la subrutina es:\n```assembly\nsumatorio:\n  MOV R1, #0\nbucle:\n  CMP R0, #0\n  BLE fin\n  ADD R1, R1, R0\n  SUB R0, R0, #1\n  B bucle\nfin:\n  MOV R0, R1\n  BX LR\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántas iteraciones del bucle se realizan para la entrada 10?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El registro $R0$ decrece de 10 a 0. El bucle se repite mientras $R0 > 0$, lo que da un total de 10 iteraciones.",
+          "id": "6a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el valor final de R0 retornado a la función en C?",
+          "correctValue": 55,
+          "tolerance": 0,
+          "explanation": "La función calcula la suma de los primeros 10 enteros: $\\sum_{i=1}^{10} i = 55$. El resultado acumulado en $R1$ se mueve a $R0$ al final.",
+          "id": "6b"
+        },
+        {
+          "label": "c",
+          "question": "¿Qué valor almacena R0 al finalizar la última iteración del bucle justo antes de saltar a 'fin'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando la instrucción $SUB\\ R0,\\ R0,\\ \\#1$ decrementa $R0$ a 0, haciendo que la condición $BLE\\ fin$ sea verdadera.",
+          "id": "6c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántas instrucciones se ejecutan dentro del cuerpo del bucle ('bucle' a 'B bucle') en total durante toda la llamada?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "En cada iteración se ejecutan 5 instrucciones ($CMP$, $BLE$, $ADD$, $SUB$, $B$). Con 10 iteraciones, se ejecutan $10 \\times 5 = 50$ instrucciones.",
+          "id": "6d"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "title": "Verificación del Uso de Registros Caller-Saved",
+      "context": "Una función en ensamblador es llamada desde C. Dicha función ejecuta el siguiente cuerpo sin prólogo ni epílogo:\n```assembly\nfunc:\n  MOV R0, #5\n  MOV R1, #10\n  MOV R2, #15\n  MOV R3, #20\n  MOV R12, #25\n  BX LR\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos registros de tipo callee-saved ha modificado esta función?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Los registros modificados son $R0$, $R1$, $R2$, $R3$ y $R12$. Todos ellos son clasificados como 'caller-saved' (volátiles) por el estándar AAPCS. Ninguno es 'callee-saved'.",
+          "id": "7a"
+        },
+        {
+          "label": "b",
+          "question": "¿Qué valor entero de retorno recibe el programa en C?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El valor de retorno se coloca en el registro $R0$, cuyo valor final tras ejecutarse la función es 5.",
+          "id": "7b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántos bytes de pila ha reservado/consumido esta función?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Esta subrutina no modifica el Stack Pointer ($SP$), por lo que el uso de la pila es de 0 bytes.",
+          "id": "7c"
+        },
+        {
+          "label": "d",
+          "question": "Si el llamador C tenía almacenado el valor 99 en R4 antes de la llamada, ¿cuál será el valor de R4 después de retornar de func?",
+          "correctValue": 99,
+          "tolerance": 0,
+          "explanation": "Dado que la subrutina no modificó el registro callee-saved $R4$, este mantiene intacto su valor original de 99.",
+          "id": "7d"
+        }
+      ],
+      "id": 7
+    },
+    {
+      "title": "Cálculo de Espacio en el Stack Frame",
+      "context": "Una subrutina en ensamblador que gestiona variables locales de 32 bits define el siguiente prólogo:\n```assembly\nmi_funcion:\n  PUSH {R4, R5, R6, R7, LR}\n  SUB SP, SP, #16\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos bytes de pila se reservan al apilar los registros en la instrucción PUSH?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se guardan 5 registros de 32 bits ($R4, R5, R6, R7, LR$). Su tamaño conjunto es $5 \\times 4 = 20$ bytes.",
+          "id": "8a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el tamaño total del marco de pila (Stack Frame) asignado por esta función (en bytes)?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "El tamaño total es la suma de los registros apilados ($20$ bytes) más el espacio de variables locales reservado con SUB ($16$ bytes): $20 + 16 = 36$ bytes.",
+          "id": "8b"
+        },
+        {
+          "label": "c",
+          "question": "Si la función recibe 5 parámetros enteros en C, ¿cuál es el desplazamiento en bytes desde el SP actual (después del SUB) hasta el 5º parámetro?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "Al entrar a la función, el 5º parámetro estaba en $[SP]$ (desplazamiento 0). Como el prólogo ha decrementado $SP$ en 36 bytes ($20$ del PUSH y $16$ del SUB), dicho parámetro se encuentra ahora en la dirección $SP + 36$.",
+          "id": "8c"
+        },
+        {
+          "label": "d",
+          "question": "¿Es el SP final conforme a la alineación de 8 bytes, asumiendo que estaba alineado a la entrada? (1 para Sí, 0 para No).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El desplazamiento total es de 36 bytes. Dado que 36 no es divisible por 8 ($36 \\% 8 = 4$), la pila pierde la alineación de 8 bytes ($0$ para No).",
+          "id": "8d"
+        }
+      ],
+      "id": 8
+    },
+    {
+      "title": "Recursividad y Tamaño Máximo de la Pila",
+      "context": "Dada la siguiente implementación recursiva del factorial en ensamblador:\n```assembly\nfactorial:\n  CMP R0, #1\n  BGT rec\n  MOV R0, #1\n  BX LR\nrec:\n  PUSH {R4, LR}\n  MOV R4, R0\n  SUB R0, R0, #1\n  BL factorial\n  MUL R0, R0, R4\n  POP {R4, PC}\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "Si se realiza la llamada factorial(4), ¿cuántas veces se ejecuta el bloque de guardado PUSH?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La llamada inicial es factorial(4) ($R0=4$). Llama a factorial(3) ($R0=3$) y factorial(2) ($R0=2$), ejecutando PUSH en cada una. Para factorial(1) ($R0=1$), se cumple la condición base y retorna directamente. Total: 3 ejecuciones.",
+          "id": "9a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es la profundidad máxima de pila adicional (en bytes) consumida por esta función durante la ejecución de factorial(4)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Cada instrucción $PUSH\\ {R4,\\ LR}$ consume 8 bytes. La recursión alcanza una profundidad de 3 niveles de llamada activa, lo que equivale a $3 \\times 8 = 24$ bytes.",
+          "id": "9b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el valor final de R0 retornado por la llamada factorial(4)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El factorial de 4 es $4 \\times 3 \\times 2 \\times 1 = 24$.",
+          "id": "9c"
+        },
+        {
+          "label": "d",
+          "question": "Si el registro R4 tenía el valor inicial de 77 en C antes de la llamada factorial(4), ¿cuál es su valor tras el retorno?",
+          "correctValue": 77,
+          "tolerance": 0,
+          "explanation": "Debido a que $R4$ es preservado por la función llamada mediante la pareja PUSH y POP, su valor original de 77 se restaura intacto.",
+          "id": "9d"
+        }
+      ],
+      "id": 9
+    },
+    {
+      "title": "Alineación del Stack en Direcciones Numéricas",
+      "context": "En un sistema embebido ARM, el Stack Pointer (SP) apunta inicialmente a la dirección decimal 32768 al entrar a una función C. Dicha función efectúa llamadas que reducen el SP.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "Si la función realiza un PUSH {R4, R5, LR} (12 bytes) y luego ejecuta un SUB SP, SP, #4, ¿cuál es el nuevo valor numérico decimal de SP?",
+          "correctValue": 32752,
+          "tolerance": 0,
+          "explanation": "Se restan 12 bytes del PUSH y 4 bytes del SUB: $32768 - 12 - 4 = 32752$.",
+          "id": "10a"
+        },
+        {
+          "label": "b",
+          "question": "¿Es la dirección 32752 divisible por 8? (Responda 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$32752 / 8 = 4094$, con resto 0, lo que significa que la dirección está perfectamente alineada a 8 bytes ($1$ para Sí).",
+          "id": "10b"
+        },
+        {
+          "label": "c",
+          "question": "Si en lugar de lo anterior, la función guardara 4 registros en un PUSH {R4-R7} (16 bytes) sin restar nada más, ¿cuál sería el tamaño desplazado total del SP en bytes?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Se guardan 4 registros de 32 bits, lo que equivale a $4 \\times 4 = 16$ bytes de pila ocupados.",
+          "id": "10c"
+        },
+        {
+          "label": "d",
+          "question": "¿Es el SP resultante (32768 - 16) conforme con la alineación de 8 bytes? (Responda 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, el desplazamiento es de 16 bytes. Dado que 16 es múltiplo de 8, la dirección resultante ($32752$) mantiene la alineación de 8 bytes ($1$ para Sí).",
+          "id": "10d"
+        }
+      ],
+      "id": 10
+    },
+    {
+      "title": "Uso de Ensamblador en Línea (Inline Assembly)",
+      "context": "Considera el siguiente bloque de ensamblador en línea para GCC en ARM:\n`__asm__(\"ADD %0, %1, %2\" : \"=r\" (res) : \"r\" (a), \"r\" (b) : \"cc\");`\nSuponemos que 'a' vale 15 y 'b' vale 25.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos operandos de entrada se han declarado en este código?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los operandos de entrada se ubican tras los de salida, precedidos por dos puntos. Aquí se declaran dos: las variables $a$ y $b$.",
+          "id": "11a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuántos operandos de salida se han declarado?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se declara un único operando de salida: la variable $res$ marcada con el modificador de escritura \\\"=r\\\".",
+          "id": "11b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántos elementos se han añadido a la lista de clobber (registros modificados)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ha añadido un único elemento: $\"cc\"$, el cual informa al compilador que la instrucción altera las banderas de condición de la CPU.",
+          "id": "11c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el valor final en decimal de la variable 'res' tras ejecutar el bloque?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "La instrucción realiza una suma ($ADD$) de los operandos de entrada: $15 + 25 = 40$.",
+          "id": "11d"
+        }
+      ],
+      "id": 11
+    },
+    {
+      "title": "Paso de Punteros de Cadenas de C a Ensamblador",
+      "context": "Un programa en C pasa una cadena de caracteres: `char str[] = \"ARMv7\";` y su longitud a la función:\n`extern void procesar_cadena(char *s, int len);`\nEl llamador realiza la llamada `procesar_cadena(str, 5);`.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Qué valor numérico se almacena en el registro R1?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El segundo argumento ($len$) vale 5 y se coloca en el segundo registro de parámetros ($R1$).",
+          "id": "12a"
+        },
+        {
+          "label": "b",
+          "question": "¿Qué registro de parámetros (0 para R0, 1 para R1, etc.) contiene la dirección de memoria inicial del array str?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El primer parámetro ($char *s$) es la dirección de memoria de la cadena y se pasa en $R0$.",
+          "id": "12b"
+        },
+        {
+          "label": "c",
+          "question": "Si queremos acceder en ensamblador al carácter 'M' (que está en el índice 2 de la cadena \"ARMv7\"), ¿qué offset en bytes debemos aplicar al registro de dirección?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Dado que es un array de caracteres ($char$, 1 byte por elemento), el carácter en el índice 2 se sitúa en la dirección base $+ 2$ bytes.",
+          "id": "12c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el código ASCII decimal del carácter 'A' que se leería en la dirección base de la cadena?",
+          "correctValue": 65,
+          "tolerance": 0,
+          "explanation": "El código ASCII de la letra mayúscula 'A' en decimal es 65.",
+          "id": "12d"
+        }
+      ],
+      "id": 12
+    },
+    {
+      "title": "Offset de Parámetros Mixtos en el Stack",
+      "context": "Se define la función C con la firma:\n`extern void procesar(int a, int b, int c, int d, long long e);`\nEl parámetro 'e' de 64 bits se pasa por la pila debido a la limitación de registros de 32 bits.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos bytes ocupan los argumentos que caben en los registros de parámetros R0-R3?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Los parámetros $a, b, c, d$ son de 32 bits e introducen un total de $4 \\times 4 = 16$ bytes en $R0-R3$.",
+          "id": "13a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes desde el SP de entrada al inicio del parámetro de 64 bits 'e'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al ser 'e' el primer parámetro que va en la pila, se deposita al principio de la misma, a desplazamiento 0 bytes respecto a $SP$ de entrada.",
+          "id": "13b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántos bytes de memoria de pila ocupa el parámetro 'e'?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El tipo $long\\ long$ es un entero de 64 bits, por lo que ocupa exactamente 8 bytes de almacenamiento en la pila.",
+          "id": "13c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el desplazamiento en bytes desde el SP de entrada que marca el final de todos los parámetros apilados?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Solo el parámetro $e$ (8 bytes) está en la pila, por lo que el final de los parámetros se encuentra a 8 bytes del $SP$ inicial.",
+          "id": "13d"
+        }
+      ],
+      "id": 13
+    },
+    {
+      "title": "Análisis de Ciclos de Reloj en una Subrutina",
+      "context": "Una función contiene el siguiente código de ensamblador ARM:\n```assembly\nfunc:\n  PUSH {R4, LR}       ; 2 ciclos de reloj\n  MOV R4, #0          ; 1 ciclo de reloj\n  ADD R0, R0, R4      ; 1 ciclo de reloj\n  POP {R4, PC}        ; 3 ciclos de reloj\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el número total de ciclos de reloj requeridos para ejecutar esta subrutina?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El cómputo de ciclos de reloj es: $2$ (PUSH) $+ 1$ (MOV) $+ 1$ (ADD) $+ 3$ (POP) = 7 ciclos de reloj.",
+          "id": "14a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuántos bytes de pila utiliza temporalmente esta subrutina durante su ejecución?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La instrucción $PUSH\\ {R4,\\ LR}$ almacena dos registros de 32 bits ($8$ bytes), liberándolos con el POP al final.",
+          "id": "14b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántas instrucciones componen esta subrutina?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La subrutina consta exactamente de 4 instrucciones: PUSH, MOV, ADD y POP.",
+          "id": "14c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el valor medio de Ciclos Por Instrucción (CPI) de la subrutina?",
+          "correctValue": 1.75,
+          "tolerance": 0,
+          "explanation": "El $CPI$ es la relación de ciclos totales entre instrucciones totales: $7 \\text{ ciclos} / 4 \\text{ instrucciones} = 1.75$.",
+          "id": "14d"
+        }
+      ],
+      "id": 14
+    },
+    {
+      "title": "Reserva Alineada para Arrays en Pila",
+      "context": "Un programador necesita reservar espacio en el stack de una subrutina para alojar un array local de 5 variables de tipo double (8 bytes cada una). El SP de entrada está alineado a 8 bytes.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el tamaño total en bytes que ocupa estrictamente el array de 5 double?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "Cada variable de tipo double ocupa 8 bytes, por tanto $5 \\times 8 = 40$ bytes.",
+          "id": "15a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el número mínimo de bytes que debemos restar al SP para almacenar este array?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "Dado que 40 es múltiplo de 8, basta con restar exactamente 40 bytes para almacenar el array manteniendo la pila alineada.",
+          "id": "15b"
+        },
+        {
+          "label": "c",
+          "question": "Si restamos 40 bytes al SP, ¿sigue estando alineado a 8 bytes? (Responda 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, 40 es divisible entre 8 ($40 / 8 = 5$), por lo que no se altera el alineamiento ($1$ para Sí).",
+          "id": "15c"
+        },
+        {
+          "label": "d",
+          "question": "Si además del array tuviéramos una variable de tipo char (1 byte), ¿cuál sería el tamaño mínimo en bytes (múltiplo de 8) que deberíamos reservar en la pila para almacenar todo de forma alineada?",
+          "correctValue": 48,
+          "tolerance": 0,
+          "explanation": "El espacio estricto requerido sería $40 + 1 = 41$ bytes. El menor múltiplo de 8 que es mayor o igual a 41 es 48.",
+          "id": "15d"
+        }
+      ],
+      "id": 15
+    },
+    {
+      "title": "Estructura de Stack Frame con Frame Pointer (R11)",
+      "context": "Una función utiliza el registro R11 como Frame Pointer (FP). El prólogo de la función es:\n```assembly\nPUSH {R11, LR}\nADD R11, SP, #4\nSUB SP, SP, #8\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes desde la dirección apuntada por R11 (FP) hasta la posición donde se guardó el registro de enlace LR?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El PUSH guarda $R11$ en $SP$ y $LR$ en $SP+4$. Después, $ADD\\ R11,\\ SP,\\ \\#4$ establece $R11 = SP + 4$. Por tanto, $R11$ apunta exactamente a la celda del $LR$ guardado, lo que da un offset de 0 bytes.",
+          "id": "16a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes desde el FP (R11) hasta el registro R11 guardado?",
+          "correctValue": -4,
+          "tolerance": 0,
+          "explanation": "El $R11$ original se guardó en $SP$, y como $R11$ actual apunta a $SP+4$, el $R11$ guardado se sitúa a $(SP) - (SP+4) = -4$ bytes de distancia de $R11$.",
+          "id": "16b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántos bytes se reservan en la pila para variables locales en esta función?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La instrucción $SUB\\ SP,\\ SP,\\ \\#8$ reserva 8 bytes en la pila para el almacenamiento de variables locales.",
+          "id": "16c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el desplazamiento total neto del SP (en bytes) desde la entrada hasta la ejecución de la última instrucción del prólogo?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El PUSH de 2 registros decrementa $SP$ en 8 bytes, y el SUB decrementa $SP$ en 8 bytes adicionales. La variación total es de $8 + 8 = 16$ bytes.",
+          "id": "16d"
+        }
+      ],
+      "id": 16
+    },
+    {
+      "title": "Límites de Argumentos en Registros",
+      "context": "Considera la firma de la función:\n`extern int sumar_todos(int a, int b, int c, int d, int e, int f, int g);`",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿En qué registro de parámetros (0 para R0, 1 para R1, etc.) se recibe el argumento 'd'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El cuarto argumento entero, 'd', se recibe en el registro $R3$ ($3$).",
+          "id": "17a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes desde el SP de entrada hasta el argumento 'f'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los primeros 4 parámetros ($a-d$) van en registros. El 5º ($e$) va en $[SP]$, y el 6º ($f$) va en $[SP, \\#4]$. Por tanto, el offset de 'f' es 4 bytes.",
+          "id": "17b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el desplazamiento en bytes desde el SP de entrada hasta el argumento 'g'?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El 7º parámetro ($g$) se coloca a continuación en el stack, correspondiéndole el desplazamiento $SP + 8$.",
+          "id": "17c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántos parámetros de esta función se transmiten mediante registros en total?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los parámetros $a$, $b$, $c$ y $d$ se transmiten a través de los registros $R0-R3$, sumando un total de 4 parámetros.",
+          "id": "17d"
+        }
+      ],
+      "id": 17
+    },
+    {
+      "title": "Cálculo de Desplazamientos en Instrucciones de Salto",
+      "context": "Una instrucción de salto `BL` se encuentra en la dirección hexadecimal `0x1000`. La dirección de la etiqueta a la que salta es `0x1020`.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el valor del Program Counter (PC) en decimal cuando la instrucción en 0x1000 se está ejecutando (debido al efecto del pipeline de ARMv7)?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "En ARM de 32 bits, el $PC$ apunta a la dirección de la instrucción actual $+ 8$ bytes debido al cauce de ejecución. Así: $0x1000 + 8 = 0x1008 = 4104$ en decimal.",
+          "id": "18a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento neto en bytes entre el PC en ejecución y la dirección destino (0x1020)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El desplazamiento es $0x1020 - 0x1008 = 0x18 = 24$ bytes.",
+          "id": "18b"
+        },
+        {
+          "label": "c",
+          "question": "¿Qué valor numérico (desplazamiento en palabras) se codifica en el campo de offset de 24 bits de la instrucción BL?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Dado que las instrucciones ARM están alineadas a 4 bytes, el desplazamiento de salto se codifica dividiendo la distancia en bytes entre 4: $24 / 4 = 6$.",
+          "id": "18c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el valor decimal que se escribe en el registro LR tras ejecutarse la llamada BL?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "El registro $LR$ guarda la dirección de retorno, que corresponde a la instrucción inmediatamente siguiente a la de dirección $0x1000$ (es decir, $0x1004 = 4100$ en decimal).",
+          "id": "18d"
+        }
+      ],
+      "id": 18
+    },
+    {
+      "title": "Alineación de Estructuras C y Lectura en Ensamblador",
+      "context": "Se define una estructura en C:\n`struct Paquete { char a; int b; char c; };`\nSe pasa por dirección como primer argumento a una función ensamblador en R0.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el tamaño total en bytes de struct Paquete considerando las reglas de alineamiento del compilador de C?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El miembro $a$ ocupa 1 byte (offset 0). El entero $b$ requiere alineación a 4 bytes, por lo que se añaden 3 bytes de relleno (offset 4) y ocupa 4 bytes. El miembro $c$ ocupa 1 byte (offset 8). La estructura debe alinear su tamaño al múltiplo de su miembro mayor (4 bytes), por lo que se añaden 3 bytes al final, sumando $1 + 3 + 4 + 1 + 3 = 12$ bytes.",
+          "id": "19a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes del miembro 'b' respecto al inicio de la estructura?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Debido a que un entero de 32 bits ($int$) requiere alineación de 4 bytes, el compilador introduce padding y coloca a 'b' a un desplazamiento de 4 bytes.",
+          "id": "19b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el desplazamiento en bytes del miembro 'c' respecto al inicio de la estructura?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El miembro 'b' termina en el byte 7 (offsets 4, 5, 6, 7). Por tanto, el miembro 'c' (char) se coloca inmediatamente en el offset 8.",
+          "id": "19c"
+        },
+        {
+          "label": "d",
+          "question": "Si en R0 tenemos la dirección de la estructura, ¿qué offset inmediato debemos usar en la instrucción LDR R1, [R0, #offset] para cargar el valor de 'b'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El desplazamiento para el miembro 'b' es 4, por lo que la instrucción adecuada es $LDR\\ R1,\\ [R0,\\ \\#4]$.",
+          "id": "19d"
+        }
+      ],
+      "id": 19
+    },
+    {
+      "title": "Directivas de Datos e Inserción de Relleno (Padding)",
+      "context": "En el archivo ensamblador se define la siguiente sección de datos:\n```assembly\n.data\nvar1: .byte 0x12\n      .align 2\nvar2: .word 0x12345678\nvar3: .short 0xABCD\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos bytes de relleno (padding) se insertan tras var1 debido a la directiva .align 2?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$var1$ ocupa 1 byte (dirección base $+0$). La directiva $.align\\ 2$ alinea a $2^2 = 4$ bytes. Por tanto, la dirección de $var2$ pasa a ser la base $+4$, insertando $3$ bytes de padding (en los offsets 1, 2 y 3).",
+          "id": "20a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el tamaño físico en bytes que ocupa la variable var2 en la memoria?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La directiva $.word$ declara una palabra completa de 32 bits, la cual ocupa exactamente 4 bytes.",
+          "id": "20b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el tamaño físico en bytes que ocupa la variable var3 en la memoria?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La directiva $.short$ declara una media palabra (half-word) de 16 bits, equivalente a 2 bytes.",
+          "id": "20c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el tamaño total en bytes del segmento de datos declarado, incluyendo el relleno?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El tamaño total se desglosa en: 1 byte ($var1$) $+ 3$ bytes (padding) $+ 4$ bytes ($var2$) $+ 2$ bytes ($var3$) = 10 bytes.",
+          "id": "20d"
+        }
+      ],
+      "id": 20
+    },
+    {
+      "title": "Evaluación de Funciones Lógicas Llamadas desde C",
+      "context": "Un programa en C llama a la rutina ensamblador `int res = op_logica(15, 240);` (donde 15 es 0x0F y 240 es 0xF0).\nLa subrutina realiza:\n```assembly\nop_logica:\n  AND R2, R0, R1\n  ORR R3, R0, R1\n  EOR R0, R2, R3\n  BX LR\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el valor decimal en R2 tras ejecutarse la instrucción AND?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Se realiza $0x0F \\text{ AND } 0xF0 = 0x00$, que equivale a 0 en decimal.",
+          "id": "21a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el valor decimal en R3 tras ejecutarse la instrucción ORR?",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "Se realiza $0x0F \\text{ OR } 0xF0 = 0xFF$, que equivale a 255 en decimal.",
+          "id": "21b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el valor decimal retornado en R0 al código C?",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "Se realiza la operación XOR lógica: $0 \\text{ XOR } 255 = 255$.",
+          "id": "21c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántos registros del archivo de registros del procesador resultaron modificados en esta subrutina?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los registros modificados son $R2$, $R3$ y $R0$ (que contiene el resultado final).",
+          "id": "21d"
+        }
+      ],
+      "id": 21
+    },
+    {
+      "title": "Seguimiento Detallado de Modificaciones de SP",
+      "context": "El puntero de pila SP apunta inicialmente a la dirección decimal 4096. La subrutina ejecuta:\n```assembly\nPUSH {R4-R7}\nPUSH {R0-R3}\nPOP {R0-R1}\nADD SP, SP, #8\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el valor decimal del SP tras ejecutarse la instrucción PUSH {R4-R7}?",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "Se apilan 4 registros de 32 bits ($16$ bytes). Como la pila es descendente, el nuevo $SP$ es $4096 - 16 = 4080$.",
+          "id": "22a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es el valor decimal del SP tras ejecutarse la instrucción PUSH {R0-R3}?",
+          "correctValue": 4064,
+          "tolerance": 0,
+          "explanation": "Se apilan otros 4 registros ($16$ bytes), de modo que $SP$ desciende a $4080 - 16 = 4064$.",
+          "id": "22b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el valor decimal del SP tras ejecutarse la instrucción POP {R0-R1}?",
+          "correctValue": 4072,
+          "tolerance": 0,
+          "explanation": "Se desapilan 2 registros ($8$ bytes), incrementando el $SP$ a $4064 + 8 = 4072$.",
+          "id": "22c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el valor decimal final del SP tras ejecutarse la instrucción ADD SP, SP, #8?",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "Se suman 8 bytes directamente al puntero de pila, retornándolo a $4072 + 8 = 4080$.",
+          "id": "22d"
+        }
+      ],
+      "id": 22
+    },
+    {
+      "title": "Paso de Parámetros en Modo Hard-Float",
+      "context": "En un sistema ARMv7 con soporte de punto flotante por hardware (hard-float), se declara la función:\n`extern double procesar_float(double a, float b, double c);`",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿En qué registro double (0 para D0, 1 para D1, etc.) se recibe el argumento 'a'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En el modo 'hard-float', el primer parámetro de precisión doble, 'a', se aloja en el registro de coma flotante $D0$.",
+          "id": "23a"
+        },
+        {
+          "label": "b",
+          "question": "¿En qué registro float simple (0 para S0, 1 para S1, etc.) se recibe el argumento 'b'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro $D0$ equivale a la combinación de $S0$ y $S1$. Por tanto, el siguiente registro float de precisión simple disponible para 'b' es $S2$.",
+          "id": "23b"
+        },
+        {
+          "label": "c",
+          "question": "¿En qué registro double (0 para D0, 1 para D1, 2 para D2, etc.) se recibe el argumento 'c'?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El argumento 'c' es double y requiere un registro double par alineado. Como $D0$ está ocupado y $S2$ (que forma parte de $D1$) está ocupado, se asigna al siguiente registro double libre alineado, que es $D2$.",
+          "id": "23c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántos registros float S individuales (de 32 bits) son ocupados en total por estos parámetros?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El parámetro 'a' ($D0$) ocupa $S0-S1$. El parámetro 'b' ($S2$) ocupa 1 registro. El parámetro 'c' ($D2$) ocupa $S4-S5$. Total ocupados: $S0, S1, S2, S4, S5$, que suman 5 registros.",
+          "id": "23d"
+        }
+      ],
+      "id": 23
+    },
+    {
+      "title": "Indexación de Arrays de Enteros",
+      "context": "Un programa de C declara `int arr[10];` y realiza la llamada `procesar_array(arr, 3);`. La rutina en ensamblador realiza:\n```assembly\nprocesar_array:\n  LDR R2, [R0, #8]\n  LDR R3, [R0, R1, LSL #2]\n  ADD R0, R2, R3\n  BX LR\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Qué índice del array (0 para el primero, 1 para el segundo, etc.) se carga en el registro R2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El offset es de 8 bytes. Dado que cada $int$ ocupa 4 bytes, $8 / 4 = 2$, por lo que se lee el elemento en el índice 2 ($arr[2]$).",
+          "id": "24a"
+        },
+        {
+          "label": "b",
+          "question": "¿Qué índice del array (0 para el primero, etc.) se carga en el registro R3?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El registro $R1$ contiene el valor 3. La operación $R1, LSL\\ \\#2$ multiplica $R1$ por 4: $3 \\times 4 = 12$ bytes de offset. Esto corresponde al índice $12 / 4 = 3$ ($arr[3]$).",
+          "id": "24b"
+        },
+        {
+          "label": "c",
+          "question": "Si arr[2] = 100 y arr[3] = 200, ¿cuál es el valor retornado por la función en R0?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "La función realiza la suma $R2 + R3 = 100 + 200 = 300$.",
+          "id": "24c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el desplazamiento numérico en bytes aplicado para cargar el dato en R3?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "La indexación por registro desplazado $R1, LSL\\ \\#2$ con $R1=3$ calcula $3 \\times 2^2 = 12$ bytes de desplazamiento.",
+          "id": "24d"
+        }
+      ],
+      "id": 24
+    },
+    {
+      "title": "Uso de Instrucciones Condicionales",
+      "context": "Una función en ensamblador llamada desde C devuelve un indicador según el signo de la entrada:\n`int signo = obtener_signo(-5);`\nEl código de la subrutina es:\n```assembly\nobtener_signo:\n  CMP R0, #0\n  MOVLT R0, #-1\n  MOVGT R0, #1\n  MOVEQ R0, #0\n  BX LR\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el valor retornado por la función en R0 para el caso obtener_signo(-5)?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Como $-5 < 0$, la condición $LT$ (Less Than) de $MOVLT$ se cumple, por lo que se escribe $-1$ en $R0$. Las condiciones $GT$ y $EQ$ son falsas.",
+          "id": "25a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuántas instrucciones que evalúan condiciones de ejecución se ejecutan en total?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las instrucciones condicionales son $MOVLT$, $MOVGT$ y $MOVEQ$, sumando un total de 3.",
+          "id": "25b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es el valor de la bandera de signo N en CPSR tras ejecutarse CMP R0, #0 con la entrada -5? (1 si está activa, 0 si no).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al comparar $-5$ con $0$ (resta $-5 - 0 = -5$), el resultado es negativo, por lo que la bandera de signo $N$ se activa ($1$).",
+          "id": "25c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuál es el valor de la bandera de cero Z en CPSR tras ejecutarse la misma instrucción CMP?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El resultado de la resta es $-5$, distinto de cero. Por lo tanto, la bandera $Z$ se desactiva ($0$).",
+          "id": "25d"
+        }
+      ],
+      "id": 25
+    },
+    {
+      "title": "Penalización de Saltos en el Pipeline de CPU",
+      "context": "Un bucle de ensamblador se ejecuta 10 veces. El cuerpo del bucle incluye un salto condicional. El cauce (pipeline) de la CPU tiene 5 etapas. Si el salto se predice bien, tarda 1 ciclo de reloj. Si se predice mal, se limpia el cauce sufriendo una penalización de 3 ciclos adicionales.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "Si el salto se predice correctamente en 9 ocasiones, ¿cuántos ciclos de reloj se consumen en total para esas 9 ejecuciones correctas?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Cada predicción correcta consume exactamente 1 ciclo: $9 \\times 1 = 9$ ciclos.",
+          "id": "26a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj se consumen en la iteración donde ocurre la predicción incorrecta?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La ejecución incorrecta toma 1 ciclo base más la penalización por limpieza de cauce de 3 ciclos adicionales: $1 + 3 = 4$ ciclos.",
+          "id": "26b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuál es la suma total de ciclos dedicados exclusivamente a la instrucción de salto durante las 10 iteraciones?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Se suman los ciclos de las ejecuciones correctas más la incorrecta: $9 + 4 = 13$ ciclos.",
+          "id": "26c"
+        },
+        {
+          "label": "d",
+          "question": "Si el resto del cuerpo del bucle requiere 2 ciclos fijos por iteración, ¿cuántos ciclos en total toma la ejecución completa del bucle?",
+          "correctValue": 33,
+          "tolerance": 0,
+          "explanation": "El resto del bucle tarda $10 \\times 2 = 20$ ciclos. Añadiendo los 13 ciclos de los saltos, el total es $20 + 13 = 33$ ciclos.",
+          "id": "26d"
+        }
+      ],
+      "id": 26
+    },
+    {
+      "title": "Alineación de Arrays dentro de Estructuras C",
+      "context": "Se define la estructura de datos:\n`struct Informe { int id; int datos[5]; };`\nSe le pasa a la función `extern int evaluar(struct Informe *p, int idx);` la dirección de un informe en R0 y el índice de búsqueda en R1.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes del miembro datos[3] respecto al inicio de la estructura?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El campo $id$ ocupa 4 bytes (offset 0). El array $datos$ comienza en el offset 4. Como cada entero ocupa 4 bytes, el índice 3 se sitúa en $4 + (3 \\times 4) = 16$ bytes de offset.",
+          "id": "27a"
+        },
+        {
+          "label": "b",
+          "question": "¿Qué desplazamiento numérico en bytes debemos sumar a R0 para apuntar al inicio del array 'datos'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El array $datos$ empieza justo después de $id$ (que tiene un tamaño de 4 bytes), por lo que el offset de inicio es de 4 bytes.",
+          "id": "27b"
+        },
+        {
+          "label": "c",
+          "question": "Si R1 vale 3, y la instrucción de carga en ensamblador es `LDR R0, [R0, R1, LSL #2]` tras haber desplazado R0 para que apunte al array 'datos', ¿qué valor se devolverá si datos[3] es 45?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "La dirección calculada por la instrucción es $\\text{inicio\\_datos} + (3 \\times 4) = \\text{inicio\\_datos} + 12$. Esto carga el contenido de $datos[3]$, que es 45.",
+          "id": "27c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántos bytes de memoria ocupa la estructura completa struct Informe en total?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El campo $id$ ocupa 4 bytes y el array de 5 enteros ocupa $5 \\times 4 = 20$ bytes. La suma total es $4 + 20 = 24$ bytes.",
+          "id": "27d"
+        }
+      ],
+      "id": 27
+    },
+    {
+      "title": "Algoritmo de División por Restas Sucesivas",
+      "context": "La siguiente rutina calcula la división entera del primer argumento entre el segundo:\n```assembly\ndiv_restas:\n  MOV R2, #0\nloop_div:\n  CMP R0, R1\n  BLT fin_div\n  SUB R0, R0, R1\n  ADD R2, R2, #1\n  B loop_div\nfin_div:\n  MOV R0, R2\n  BX LR\n```",
+      "parts": [
+        {
+          "label": "a",
+          "question": "Si se llama a la función como div_restas(17, 5), ¿cuál es el cociente de la división retornado en R0?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "$17 / 5 = 3$ con resto 2. R0 almacena el cociente acumulado en R2.",
+          "id": "28a"
+        },
+        {
+          "label": "b",
+          "question": "¿Qué valor decimal queda retenido en el registro R0 justo antes de ejecutarse la instrucción MOV R0, R2 (es decir, el residuo)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "En cada ciclo se resta 5 a R0. Los valores sucesivos de R0 son 17, 12, 7 y finalmente 2. Al ser $2 < 5$, el bucle termina y R0 conserva el residuo de 2.",
+          "id": "28b"
+        },
+        {
+          "label": "c",
+          "question": "¿Cuántas veces se ejecuta el bloque de resta SUB R0, R0, R1?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Se resta 3 veces (para llegar a 12, 7 y 2).",
+          "id": "28c"
+        },
+        {
+          "label": "d",
+          "question": "Si se realiza la llamada div_restas(4, 5), ¿qué valor entero es devuelto?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al comparar inicialmente $4$ con $5$, $CMP\\ R0,\\ R1$ activa el flag para $BLT$, saltando inmediatamente a $fin\\_div$. El valor devuelto es R2, que fue inicializado a 0.",
+          "id": "28d"
+        }
+      ],
+      "id": 28
+    },
+    {
+      "title": "Alineación de Múltiples Variables Locales",
+      "context": "Una rutina necesita almacenar en su pila un buffer local de caracteres de 10 bytes y 2 variables locales tipo int (4 bytes cada una). El puntero SP inicial está alineado a 8 bytes.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos bytes requieren estrictamente estas variables en total?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "El buffer de caracteres ocupa 10 bytes y las dos variables $int$ ocupan $2 \\times 4 = 8$ bytes, sumando $10 + 8 = 18$ bytes.",
+          "id": "29a"
+        },
+        {
+          "label": "b",
+          "question": "¿Cuál es la cantidad mínima de bytes que se debe reservar en la pila (restando a SP) para asegurar que el SP resultante permanezca alineado a 8 bytes?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El menor múltiplo de 8 que es mayor o igual a 18 bytes de variables locales es 24.",
+          "id": "29b"
+        },
+        {
+          "label": "c",
+          "question": "Si las variables se sitúan al fondo del espacio reservado, ¿a qué desplazamiento en bytes respecto al nuevo SP de la rutina empezará el buffer de caracteres?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Si se colocan al inicio del marco de pila reservado, el primer byte del buffer de caracteres se ubica a un desplazamiento de 0 bytes del puntero de pila actual.",
+          "id": "29c"
+        },
+        {
+          "label": "d",
+          "question": "¿Cuántos bytes de memoria quedan sin uso como mero relleno de alineación en esta reserva de pila?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La reserva es de 24 bytes y los datos útiles consumen 18 bytes. El padding residual es de $24 - 18 = 6$ bytes.",
+          "id": "29d"
+        }
+      ],
+      "id": 29
+    },
+    {
+      "title": "Offsets de Pila en Llamadas Anidadas",
+      "context": "La función 'A' llama a 'B', y 'B' llama a 'C'. Se sigue la convención AAPCS.\n- Al entrar a 'A', realiza un `PUSH {R4, LR}`.\n- Al entrar a 'B', realiza un `PUSH {R4, R5, LR}`.\n- La función 'C' es una función hoja y no realiza ningún PUSH.",
+      "parts": [
+        {
+          "label": "a",
+          "question": "¿Cuántos bytes se almacenan en total en la pila en concepto de copias de registros salvados por estas funciones?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La función 'A' empuja 2 registros ($8$ bytes) y 'B' empuja 3 registros ($12$ bytes). El total guardado es $8 + 12 = 20$ bytes.",
+          "id": "30a"
+        },
+        {
+          "label": "b",
+          "question": "Durante la ejecución de 'C', ¿cuál es el desplazamiento en bytes desde el SP actual hasta encontrar el LR de 'A' guardado en el stack?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La función 'B' desplazó $SP$ en 12 bytes. Al entrar a 'B', el $SP$ inicial era igual a la dirección del final del marco de 'A'. El $LR$ de 'A' se guardó en la segunda ranura de su PUSH ($SP_{\\text{entrada\\_A}} - 4$, o lo que es lo mismo, $SP_{\\text{salida\\_A}} + 4$). Por tanto, la distancia desde el $SP$ de 'C' (que es el mismo de 'B') al $LR$ de 'A' es: $12$ bytes (PUSH de B) $+ 4$ bytes (posición de LR dentro del PUSH de A) = 16 bytes.",
+          "id": "30b"
+        },
+        {
+          "label": "c",
+          "question": "Durante la ejecución de 'C', ¿cuál es el desplazamiento en bytes desde el SP actual hasta encontrar el LR de 'B' guardado en el stack?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La función 'B' realizó $PUSH\\ {R4,\\ R5,\\ LR}$. En una pila descendente completa, los registros se colocan de menor a mayor índice, quedando $R4$ en $SP$, $R5$ en $SP+4$ y $LR$ en $SP+8$. Por lo tanto, el $LR$ de 'B' está a 8 bytes del $SP$ actual.",
+          "id": "30c"
+        },
+        {
+          "label": "d",
+          "question": "Si el SP valía 53248 al comenzar la ejecución de A, ¿cuál es el desplazamiento total restado en SP cuando la CPU ejecuta el cuerpo de C?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El desplazamiento total restado es el tamaño acumulado de los PUSH de 'A' y 'B': $8 + 12 = 20$ bytes.",
+          "id": "30d"
+        }
+      ],
+      "id": 30
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Alineación del puntero de pila (SP) a 8 bytes",
+      "tex": "$$\\text{SP}_{\\text{aligned}} = \\text{SP} \\ \\& \\ \\sim(0\\text{x}7)$$"
+    },
+    {
+      "name": "Desplazamiento para el N-ésimo parámetro en la pila (N >= 5)",
+      "tex": "$$\\text{Offset}(N) = (N - 5) \\times 4 + \\text{FrameSize}$$"
+    },
+    {
+      "name": "Dirección de retorno efectiva (LR) en salto BL",
+      "tex": "$$\\text{LR} = \\text{PC}_{\\text{llamada}} + 4$$"
+    },
+    {
+      "name": "Cálculo del offset de salto relativo codificado",
+      "tex": "$$\\text{Offset}_{\\text{encoded}} = \\frac{\\text{Target} - (\\text{PC}_{\\text{actual}} + 8)}{4}$$"
+    },
+    {
+      "name": "Alineación de parámetros de 64 bits en pares de registros",
+      "tex": "$$R_{\\text{start}} = 2 \\cdot \\left\\lceil \\frac{P_{\\text{idx}}}{2} \\right\\rceil$$"
+    },
+    {
+      "name": "Tamaño del marco de pila acumulado en llamadas anidadas",
+      "tex": "$$\\text{Stack}_{\\text{total}} = \\sum_{j=1}^{M} \\text{FrameSize}_j$$"
+    },
+    {
+      "name": "Tiempo de ejecución de una función con CPI medio",
+      "tex": "$$T_{\\text{exec}} = I_{\\text{count}} \\times \\text{CPI} \\times T_{\\text{clk}}$$"
+    },
+    {
+      "name": "Fórmula del CPI promedio de una subrutina",
+      "tex": "$$\\text{CPI} = \\frac{\\sum_{i} (C_i \\times N_i)}{\\sum_{i} N_i}$$"
+    }
+  ]
+}

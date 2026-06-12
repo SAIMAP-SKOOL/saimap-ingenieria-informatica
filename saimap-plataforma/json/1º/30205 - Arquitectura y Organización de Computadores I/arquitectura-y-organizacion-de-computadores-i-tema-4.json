@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "1. ¿Cuál es la función del Barrel Shifter en la arquitectura de un procesador ARM?",
+      "options": [
+        "Permite preprocesar y desplazar/rotar el segundo operando (Operand2) en el mismo ciclo de la ALU.",
+        "Realizar multiplicaciones de punto flotante de manera paralela a la ALU principal.",
+        "Controlar la transferencia de datos entre la caché de datos y la memoria RAM externa."
+      ],
+      "correct": 0,
+      "hint": "El Barrel Shifter está integrado en la ruta de datos directamente antes de la entrada de la ALU.",
+      "explanation": "El Barrel Shifter es un bloque de hardware que desplaza o rota un registro en un único ciclo de reloj, permitiendo realizar operaciones de escalado y direccionamiento de forma transparente."
+    },
+    {
+      "q": "2. ¿Qué instrucción realiza un desplazamiento lógico a la izquierda rellenando con ceros los bits menos significativos?",
+      "options": [
+        "LSR (Logical Shift Right)",
+        "LSL (Logical Shift Left)",
+        "ASR (Arithmetic Shift Right)"
+      ],
+      "correct": 1,
+      "hint": "Logical Shift Left.",
+      "explanation": "LSL desplaza los bits a la izquierda por el número de posiciones indicado, rellenando los bits vacíos de la derecha con ceros, lo que equivale a multiplicar por potencias de 2."
+    },
+    {
+      "q": "3. ¿Cuál es la diferencia de comportamiento entre un desplazamiento LSR y uno ASR al desplazar a la derecha?",
+      "options": [
+        "LSR introduce ceros en los bits más significativos, mientras que ASR mantiene el bit de signo (bit 31).",
+        "LSR mantiene el bit de signo del operando, mientras que ASR introduce ceros por el bit 31.",
+        "ASR rota los bits que salen de la derecha de vuelta a la izquierda, mientras que LSR los descarta."
+      ],
+      "correct": 0,
+      "hint": "ASR significa desplazamiento aritmético, el cual debe mantener el signo para números negativos.",
+      "explanation": "LSR (Logical Shift Right) desplaza y rellena con ceros por la izquierda. ASR (Arithmetic Shift Right) preserva el bit de signo (bit 31), permitiendo la división de números enteros con signo."
+    },
+    {
+      "q": "4. En ARM, tras ejecutar la instrucción de tipo Indexado Directo (Offset): LDR R0, [R1, #8], ¿qué ocurre con el registro base R1?",
+      "options": [
+        "Se actualiza automáticamente con el valor R1 + 8.",
+        "Permanece inalterado tras la ejecución de la instrucción.",
+        "Se decrementa en 8 debido al acceso a memoria."
+      ],
+      "correct": 1,
+      "hint": "En el direccionamiento indexado directo no se utiliza la exclamación ni el desplazamiento fuera de corchetes.",
+      "explanation": "En el direccionamiento indexado directo (offset), la dirección de acceso se calcula sumando el desplazamiento al registro base R1, pero R1 no sufre ninguna modificación al final de la instrucción."
+    },
+    {
+      "q": "5. ¿Cuál es la sintaxis en ensamblador ARM para representar el modo Pre-indexado con actualización (Writeback)?",
+      "options": [
+        "LDR R0, [R1, #4]!",
+        "LDR R0, [R1], #4",
+        "LDR R0, [R1, #4]"
+      ],
+      "correct": 0,
+      "hint": "Este modo lleva un signo de exclamación al final del corchete para indicar la actualización del registro base.",
+      "explanation": "La presencia de '!' indica al procesador que actualice el registro base R1 con la dirección efectiva calculada al finalizar la instrucción de carga."
+    },
+    {
+      "q": "6. ¿Cómo calcula la dirección efectiva de acceso la instrucción de tipo Post-indexado: LDR R0, [R1], #4?",
+      "options": [
+        "La dirección efectiva es R1 + 4, y el registro R1 no se modifica en absoluto.",
+        "La dirección efectiva es R1, y tras el acceso, R1 se actualiza con el valor R1 + 4.",
+        "La dirección efectiva es R1 + 4, y tras el acceso, R1 se actualiza con el valor R1 + 4."
+      ],
+      "correct": 1,
+      "hint": "El desplazamiento fuera de los corchetes indica que la actualización ocurre después del acceso a memoria.",
+      "explanation": "En el direccionamiento post-indexado, la dirección efectiva de acceso es el valor inicial de R1. Después del acceso, se le suma el offset a R1."
+    },
+    {
+      "q": "7. ¿Cuál es el tamaño máximo en bits del desplazamiento inmediato usado en instrucciones LDR/STR de palabra en ARM de 32 bits?",
+      "options": [
+        "8 bits",
+        "12 bits",
+        "16 bits"
+      ],
+      "correct": 1,
+      "hint": "Es el mismo tamaño que permite un rango de offset de -4095 a 4095 bytes.",
+      "explanation": "El desplazamiento inmediato en las instrucciones de transferencia simple (LDR/STR) se codifica en un campo de 12 bits en la palabra de instrucción."
+    },
+    {
+      "q": "8. En la instrucción ADD R0, R1, R2, ROR #4, ¿qué operación realiza el Barrel Shifter sobre R2?",
+      "options": [
+        "Una rotación hacia la derecha de 4 posiciones binarias.",
+        "Un desplazamiento lógico hacia la derecha de 4 bits.",
+        "Un desplazamiento aritmético hacia la derecha de 4 bits."
+      ],
+      "correct": 0,
+      "hint": "ROR corresponde a Rotate Right.",
+      "explanation": "ROR (Rotate Right) rota los bits del registro R2 hacia la derecha en 4 posiciones, reintroduciendo por el bit 31 los bits que van saliendo por el bit 0."
+    },
+    {
+      "q": "9. En la instrucción LDR R0, [R1, R2, LSL #2], ¿cuál es la dirección de acceso calculada?",
+      "options": [
+        "R1 + (R2 * 4)",
+        "R2 + (R1 * 4)",
+        "(R1 + R2) * 4"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento a la izquierda de 2 bits equivale a multiplicar el registro de índice Rm por 4.",
+      "explanation": "La dirección se calcula sumando al registro base R1 el registro Rm (R2) desplazado a la izquierda 2 bits (lo que equivale a multiplicar R2 por 4)."
+    },
+    {
+      "q": "10. ¿Por qué se dice que ARM tiene una arquitectura Load/Store (Carga/Almacenamiento)?",
+      "options": [
+        "Porque las instrucciones de la ALU solo pueden operar sobre registros y no directamente sobre memoria RAM.",
+        "Porque la memoria RAM está integrada físicamente dentro del propio banco de registros de la CPU.",
+        "Porque las instrucciones de procesamiento de datos pueden acceder a memoria RAM mediante un bit específico de control."
+      ],
+      "correct": 0,
+      "hint": "El acceso a la memoria externa está restringido a instrucciones dedicadas.",
+      "explanation": "En una arquitectura Load/Store, las operaciones lógicas y aritméticas solo operan sobre registros. Para mover datos entre registros y memoria se usan exclusivamente LDR y STR."
+    },
+    {
+      "q": "11. ¿Qué beneficio directo ofrece el direccionamiento post-indexado a nivel de eficiencia de código?",
+      "options": [
+        "Evita tener que usar una instrucción ADD adicional para incrementar el puntero en un bucle.",
+        "Permite acceder a la memoria externa en la mitad de ciclos de reloj que el pre-indexado.",
+        "Deshabilita el pipeline de la CPU evitando riesgos de datos de tipo RAW."
+      ],
+      "correct": 0,
+      "hint": "Permite realizar la carga del operando y la actualización del puntero en un solo ciclo de ejecución.",
+      "explanation": "Al integrar la actualización del puntero de vector en la misma instrucción LDR/STR, se ahorra una instrucción ADD de incremento en el bucle, optimizando el tamaño y velocidad del código."
+    },
+    {
+      "q": "12. Si queremos cargar un byte con signo desde memoria RAM y extender su signo a los 32 bits de un registro, ¿cuál es la instrucción correcta?",
+      "options": [
+        "LDRB",
+        "LDRSB",
+        "LDRSH"
+      ],
+      "correct": 1,
+      "hint": "La letra S indica 'Signed' (con signo) y la B indica 'Byte' (8 bits).",
+      "explanation": "LDRSB (Load Register Signed Byte) carga un byte de memoria y extiende el bit 7 (de signo del byte) a los 24 bits superiores del registro de destino de 32 bits."
+    },
+    {
+      "q": "13. ¿Qué instrucción se utiliza para almacenar los 16 bits menos significativos de un registro en memoria RAM?",
+      "options": [
+        "STRB",
+        "STRH",
+        "STRSH"
+      ],
+      "correct": 1,
+      "hint": "Halfword (media palabra) representa los datos de 16 bits.",
+      "explanation": "STRH (Store Register Halfword) guarda los 16 bits inferiores del registro en la memoria. No existen variantes con signo (como STRSH) para almacenamiento ya que la extensión de signo solo aplica a cargas."
+    },
+    {
+      "q": "14. ¿Cuál es el comportamiento de la instrucción LDR R0, [R1, #-8]?",
+      "options": [
+        "Accede a la dirección R1 - 8 para cargar R0, y decrementa R1 en 8.",
+        "Accede a la dirección R1 - 8 para cargar R0, dejando R1 intacto.",
+        "Resta 8 a R1 antes de acceder, y luego carga R0 desde la dirección R1 original."
+      ],
+      "correct": 1,
+      "hint": "Es direccionamiento indexado directo con desplazamiento negativo.",
+      "explanation": "Se calcula la dirección restando 8 al registro base R1. R0 se carga con el dato de esa dirección y R1 conserva su valor original."
+    },
+    {
+      "q": "15. En la instrucción pre-indexada con registro desplazado LDR R0, [R1, R2, ASR #2]!, ¿cómo se actualiza R1?",
+      "options": [
+        "R1 se actualiza con la dirección efectiva R1 + (R2 con desplazamiento aritmético de 2 posiciones).",
+        "R1 no cambia de valor ya que R2 recibe la actualización.",
+        "R1 se incrementa en 4 de forma fija sin importar el valor de R2."
+      ],
+      "correct": 0,
+      "hint": "El signo de exclamación al final aplica writeback del valor calculado al registro base.",
+      "explanation": "La dirección calculada es R1 + (R2 >> 2) conservando el bit de signo de R2. Debido a '!', este valor se escribe en R1 al finalizar la carga."
+    },
+    {
+      "q": "16. ¿Qué efecto tiene realizar un desplazamiento LSL #0 en el Barrel Shifter de ARM?",
+      "options": [
+        "No altera el valor del registro operando, dejándolo intacto.",
+        "Causa una excepción de instrucción no válida por hardware.",
+        "Pone a cero todos los bits del registro destino de forma incondicional."
+      ],
+      "correct": 0,
+      "hint": "Multiplicar por 2^0 equivale a multiplicar por 1.",
+      "explanation": "LSL #0 desplaza cero bits a la izquierda, lo cual no produce ningún cambio en el operando y equivale a pasar el registro sin modificar."
+    },
+    {
+      "q": "17. ¿Cómo se puede codificar la operación R0 = R1 * 9 en una sola instrucción ARM usando el Barrel Shifter?",
+      "options": [
+        "ADD R0, R1, R1, LSL #3",
+        "MUL R0, R1, #9",
+        "LSL R0, R1, #9"
+      ],
+      "correct": 0,
+      "hint": "R1 * 9 = R1 + (R1 * 8). R1 * 8 se calcula mediante LSL #3.",
+      "explanation": "ADD R0, R1, R1, LSL #3 realiza la operación R0 = R1 + (R1 * 2^3) = R1 + R1 * 8 = R1 * 9 en un solo ciclo de la ALU."
+    },
+    {
+      "q": "18. ¿Cuál es el rango de valores de desplazamiento inmediato en bits permitidos por el hardware del Barrel Shifter para LSL?",
+      "options": [
+        "De 0 a 31 posiciones.",
+        "De 0 a 15 posiciones.",
+        "De 0 a 63 posiciones."
+      ],
+      "correct": 0,
+      "hint": "El tamaño del registro es de 32 bits.",
+      "explanation": "Dado que los registros en ARM de 32 bits tienen posiciones del bit 0 al 31, los desplazamientos lógicos se limitan a un rango de 0 a 31 posiciones."
+    },
+    {
+      "q": "19. ¿Cuál es la ventaja de la integración del Barrel Shifter con la ALU en el procesador ARM?",
+      "options": [
+        "Permite fusionar desplazamientos y operaciones lógicas o aritméticas en un solo ciclo de instrucción.",
+        "Aumenta la velocidad de acceso a la caché de datos externa.",
+        "Soporta operaciones aritméticas de precisión doble (64 bits) en la ALU de 32 bits."
+      ],
+      "correct": 0,
+      "hint": "El preprocesamiento del segundo operando ocurre en paralelo antes de la ALU.",
+      "explanation": "El Barrel Shifter procesa Operand2 antes de pasarlo a la ALU, lo que evita requerir instrucciones de desplazamiento independientes y ahorra ciclos."
+    },
+    {
+      "q": "20. En la instrucción STR R2, [R3], R4, ¿cuál es el modo de direccionamiento y cómo se modifica el registro base?",
+      "options": [
+        "Post-indexado por registro. R3 se actualiza con R3 + R4.",
+        "Pre-indexado por registro. R3 se actualiza con R3 + R4.",
+        "Indexado directo por registro. R3 permanece constante."
+      ],
+      "correct": 0,
+      "hint": "El registro de desplazamiento R4 está fuera de los corchetes.",
+      "explanation": "Al estar R4 fuera del corchete, es un direccionamiento post-indexado. R2 se almacena en la dirección actual de R3, y luego R3 se actualiza sumándole R4."
+    },
+    {
+      "q": "21. ¿Qué instrucción realiza una división entera sin signo de R1 entre 16, almacenando el resultado en R0?",
+      "options": [
+        "MOV R0, R1, LSR #4",
+        "MOV R0, R1, ASR #4",
+        "MOV R0, R1, LSL #4"
+      ],
+      "correct": 0,
+      "hint": "La división sin signo a la derecha se realiza con desplazamiento lógico. 16 es 2^4.",
+      "explanation": "MOV R0, R1, LSR #4 desplaza R1 cuatro bits a la derecha e introduce ceros por la izquierda, lo que equivale a dividir entre 16 sin signo."
+    },
+    {
+      "q": "22. ¿Qué instrucción realiza una división entera de R1 entre 2 con signo, manteniendo el bit de signo del operando?",
+      "options": [
+        "MOV R0, R1, LSR #1",
+        "MOV R0, R1, ASR #1",
+        "MOV R0, R1, ROR #1"
+      ],
+      "correct": 1,
+      "hint": "La preservación del bit 31 (signo) requiere un desplazamiento aritmético.",
+      "explanation": "ASR (Arithmetic Shift Right) copia el bit de signo del operando en las posiciones liberadas por la izquierda, garantizando que el signo se preserve tras dividir por 2."
+    },
+    {
+      "q": "23. Si se ejecuta STR R1, [R2, #16]!, ¿dónde se escribe el dato y cómo cambia R2?",
+      "options": [
+        "Escribe en la dirección R2 + 16, y R2 se actualiza a R2 + 16.",
+        "Escribe en la dirección R2, y R2 se actualiza a R2 + 16.",
+        "Escribe en la dirección R2 + 16, y R2 no se modifica."
+      ],
+      "correct": 0,
+      "hint": "El signo '!' aplica writeback sobre el registro base R2.",
+      "explanation": "En pre-indexado con actualización (!), la dirección efectiva de acceso es R2 + 16. El dato se escribe en esa dirección y R2 toma el valor de esa dirección."
+    },
+    {
+      "q": "24. En ARM, ¿se puede utilizar el registro Program Counter (R15) como registro base en instrucciones LDR/STR?",
+      "options": [
+        "Sí, lo que permite realizar direccionamientos relativos al programa (PC-relative) para cargar constantes.",
+        "No, el Program Counter no puede ser leído ni escrito por instrucciones de carga/almacenamiento.",
+        "Sí, pero únicamente para instrucciones de almacenamiento (STR) y no para carga (LDR)."
+      ],
+      "correct": 0,
+      "hint": "El PC se puede tratar como un registro de propósito general para lecturas en LDR.",
+      "explanation": "LDR R0, [PC, #offset] permite leer datos constantes del bloque de código actual (literal pools) usando direccionamiento relativo al PC."
+    },
+    {
+      "q": "25. ¿Cuál es el formato de instrucción en ARM de 32 bits?",
+      "options": [
+        "Tamaño fijo de 32 bits para todas las instrucciones, garantizando decodificación simple y regular.",
+        "Longitud variable de 16, 32 o 48 bits según los operandos inmediatos utilizados.",
+        "Tamaño de instrucción determinado por la alineación de la memoria RAM activa."
+      ],
+      "correct": 0,
+      "hint": "ARM es una arquitectura RISC con instrucciones regulares de tamaño constante.",
+      "explanation": "Como arquitectura RISC clásica, todas las instrucciones ARM de 32 bits ocupan exactamente una palabra de 4 bytes en memoria."
+    },
+    {
+      "q": "26. ¿Qué ocurre en procesadores ARM clásicos si se intenta cargar una palabra de 32 bits desde una dirección no alineada a múltiplo de 4?",
+      "options": [
+        "El procesador genera un fallo de alineación o devuelve los datos rotados según la configuración.",
+        "La CPU detiene su reloj inmediatamente y entra en modo de bajo consumo de forma forzada.",
+        "El hardware divide automáticamente el acceso en dos accesos de 16 bits sin pérdida de rendimiento."
+      ],
+      "correct": 0,
+      "hint": "Las arquitecturas RISC clásicas imponen estrictas reglas de alineación de accesos a memoria.",
+      "explanation": "Los accesos a palabras completas (32 bits) deben estar alineados a múltiplos de 4. Direcciones no alineadas causan excepciones de hardware o datos corrompidos (rotados)."
+    },
+    {
+      "q": "27. En la instrucción de carga LDR R0, [R1, R2], ¿cuál es el desplazamiento aplicado de forma implícita sobre R2?",
+      "options": [
+        "Un desplazamiento de 0 posiciones (LSL #0).",
+        "Un desplazamiento de 2 posiciones a la izquierda (LSL #2).",
+        "Ninguno, esta instrucción provoca un error de sintaxis en el compilador."
+      ],
+      "correct": 0,
+      "hint": "Si no se indica desplazamiento sobre el registro de índice, se asume un paso directo sin escalado.",
+      "explanation": "LDR R0, [R1, R2] equivale a LDR R0, [R1, R2, LSL #0]. R2 se suma directamente a R1 sin sufrir alteraciones en el Barrel Shifter."
+    },
+    {
+      "q": "28. ¿Cuál es la diferencia fundamental entre las instrucciones LDR R0, [R1], R2 y LDR R0, [R1, R2]?",
+      "options": [
+        "La primera es post-indexada (actualiza R1 = R1 + R2), mientras que la segunda es indexada directa (R1 no se modifica).",
+        "La primera no modifica R1, mientras que la segunda actualiza R1 = R1 + R2.",
+        "Ambas acceden a la misma dirección de memoria RAM y actualizan R1 por igual."
+      ],
+      "correct": 0,
+      "hint": "Analiza la posición de los corchetes que delimitan el cálculo del acceso inicial.",
+      "explanation": "LDR R0, [R1], R2 accede a la dirección R1 y luego actualiza R1 a R1 + R2. LDR R0, [R1, R2] accede a R1 + R2 y R1 permanece inalterado."
+    },
+    {
+      "q": "29. ¿Qué instrucción se debe utilizar para almacenar únicamente los 8 bits menos significativos del registro R0 en memoria?",
+      "options": [
+        "STR R0, [R1], #1",
+        "STRB R0, [R1]",
+        "STRH R0, [R1]"
+      ],
+      "correct": 1,
+      "hint": "La letra B representa la unidad de datos 'Byte'.",
+      "explanation": "STRB (Store Register Byte) escribe el byte inferior del registro destino en la dirección de memoria seleccionada."
+    },
+    {
+      "q": "30. ¿Qué controla el bit W (Writeback) en la codificación binaria de las instrucciones de carga/almacenamiento de ARM?",
+      "options": [
+        "Controla si el registro base Rn se actualiza con la dirección efectiva al final de la instrucción.",
+        "Determina si la instrucción realiza una lectura o una escritura en memoria.",
+        "Indica si el procesador debe activar la señal de espera en el bus del sistema."
+      ],
+      "correct": 0,
+      "hint": "Writeback significa escribir de vuelta la dirección calculada al registro de origen.",
+      "explanation": "El bit W de la instrucción LDR/STR es el encargado de activar el writeback para actualizar el registro base con el resultado calculado."
+    },
+    {
+      "q": "31. ¿Qué instrucción de carga post-indexada simula la extracción de una palabra de la pila (LIFO) e incrementa el puntero SP en 4?",
+      "options": [
+        "LDR R0, [SP], #4",
+        "LDR R0, [SP, #4]",
+        "STR R0, [SP], #-4"
+      ],
+      "correct": 0,
+      "hint": "Lee de la dirección SP y luego añade 4 a SP para liberar el espacio de la pila.",
+      "explanation": "LDR R0, [SP], #4 lee la palabra apuntada por SP y luego incrementa SP en 4 bytes, completando un POP en una pila descendente."
+    },
+    {
+      "q": "32. ¿Qué modo de direccionamiento representa la instrucción STR R3, [R4, #-12]!?",
+      "options": [
+        "Pre-indexado con desplazamiento negativo y actualización del registro base.",
+        "Post-indexado con desplazamiento negativo y actualización.",
+        "Indexado directo con desplazamiento negativo."
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento está dentro de los corchetes y hay un signo de exclamación al final.",
+      "explanation": "La presencia de '!' y el desplazamiento dentro de corchetes define el direccionamiento pre-indexado. El signo '-' indica que se resta 12 al registro base."
+    },
+    {
+      "q": "33. Si un registro contiene un valor cuyo bit de signo (bit 31) es 1, ¿cuál es el efecto de realizar un desplazamiento ASR de 1 posición?",
+      "options": [
+        "El bit 31 del resultado se establece en 1, preservando el signo negativo.",
+        "El bit 31 del resultado se establece en 0, perdiendo el signo del número.",
+        "Todos los bits del registro se invierten como complemento a uno."
+      ],
+      "correct": 0,
+      "hint": "ASR es un desplazamiento aritmético y preserva la polaridad de signo.",
+      "explanation": "ASR mantiene el bit de signo. Si el bit 31 era 1, al desplazar a la derecha se rellenará el bit 31 con un 1 para mantener el signo negativo del valor."
+    },
+    {
+      "q": "34. ¿Por qué las pseudo-instrucciones como LSR R0, R1, #3 son aceptadas por el ensamblador de ARM?",
+      "options": [
+        "Porque el ensamblador las traduce directamente a una instrucción MOV con el operando Operand2 modificado por el Barrel Shifter.",
+        "Porque ARM posee instrucciones dedicadas de desplazamiento con códigos de operación independientes de la ALU.",
+        "Porque son instrucciones interpretadas por el microcódigo de la CPU ARM en 3 ciclos."
+      ],
+      "correct": 0,
+      "hint": "Los desplazamientos lógicos en ARM se realizan a través de instrucciones de movimiento de registros.",
+      "explanation": "El ensamblador traduce `LSR R0, R1, #3` a `MOV R0, R1, LSR #3`, ejecutándose de manera nativa sobre el Barrel Shifter en un único ciclo."
+    },
+    {
+      "q": "35. ¿Cuál es la dirección efectiva para la instrucción LDR R0, [R1, R2, LSL #3] si R1 = 0x2000 y R2 = 0x8?",
+      "options": [
+        "0x2040",
+        "0x2008",
+        "0x2020"
+      ],
+      "correct": 0,
+      "hint": "R2 = 8. Desplazar a la izquierda 3 bits multiplica por 8. 8 * 8 = 64 (0x40 en hexadecimal).",
+      "explanation": "La dirección de acceso se calcula como R1 + (R2 * 8) = 0x2000 + (8 * 8) = 0x2000 + 64 = 0x2000 + 0x40 = 0x2040."
+    },
+    {
+      "q": "36. En el direccionamiento indexado con registro, ¿cuál de los siguientes registros de la CPU ARM no se puede usar como registro de desplazamiento Rm?",
+      "options": [
+        "R15 (PC)",
+        "R14 (LR)",
+        "R13 (SP)"
+      ],
+      "correct": 0,
+      "hint": "No se puede usar el Program Counter como registro de índice dinámico para evitar saltos descontrolados.",
+      "explanation": "ARM restringe el uso del Program Counter (R15) como registro de índice desplazado Rm en instrucciones LDR/STR."
+    },
+    {
+      "q": "37. ¿Cuál es el resultado de realizar un desplazamiento lógico a la derecha de 32 bits sobre cualquier registro en ARM?",
+      "options": [
+        "El resultado devuelto es cero de forma incondicional.",
+        "El registro mantiene su valor original debido al desbordamiento.",
+        "Se produce una excepción por división inválida en la CPU."
+      ],
+      "correct": 0,
+      "hint": "Desplazar un registro de 32 bits a la derecha en 32 o más posiciones vacía el registro.",
+      "explanation": "En la arquitectura ARM, un desplazamiento lógico a la derecha de 32 bits resulta en la inserción de 32 ceros por la izquierda, dejando el valor final en 0."
+    },
+    {
+      "q": "38. ¿Qué indica el bit de signo del desplazamiento en la codificación de las instrucciones LDR y STR?",
+      "options": [
+        "El bit 'U' en la instrucción indica si el desplazamiento se suma (U=1) o se resta (U=0) al registro base.",
+        "Que los offsets inmediatos siempre deben estar codificados en complemento a dos.",
+        "Que las direcciones de memoria accedidas solo pueden ser de signo negativo."
+      ],
+      "correct": 0,
+      "hint": "Se utiliza un bit de dirección para indicar sumas y restas de offsets sin signo.",
+      "explanation": "La codificación usa un desplazamiento absoluto sin signo y un bit de control U (Up/Down) que indica si se suma o se resta al registro base."
+    },
+    {
+      "q": "39. En una pila que crece de forma descendente en memoria, ¿cuál es el modo natural para la operación de apilado (push)?",
+      "options": [
+        "Pre-indexado con desplazamiento negativo y actualización: STR R0, [SP, #-4]!",
+        "Post-indexado con desplazamiento positivo: STR R0, [SP], #4",
+        "Indexado directo sin actualización: STR R0, [SP, #-4]"
+      ],
+      "correct": 0,
+      "hint": "Para apilar, primero decrementamos el puntero SP en 4 y luego guardamos en esa dirección.",
+      "explanation": "Al realizar un push en una pila descendente, el puntero SP debe decrementarse antes de escribir el dato en memoria, lo que se modela con pre-indexado y writeback."
+    },
+    {
+      "q": "40. ¿Es posible especificar la cantidad de bits a desplazar en el Barrel Shifter usando un registro en lugar de un inmediato?",
+      "options": [
+        "Sí, ARM permite especificar un registro cuyos 8 bits inferiores controlan la cantidad de desplazamiento.",
+        "No, la cantidad de desplazamiento debe ser siempre un valor inmediato fijo en la instrucción.",
+        "Sí, pero únicamente para instrucciones de desplazamiento lógico a la izquierda (LSL)."
+      ],
+      "correct": 0,
+      "hint": "ARM soporta desplazamientos controlados por registro de propósito general.",
+      "explanation": "ARM admite desplazamientos dinámicos donde la cantidad a desplazar está contenida en un tercer registro (por ejemplo, ADD R0, R1, R2, LSL R3)."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "1. En el código:\n```assembly\nMOV R1, #0x1000\nLDR R0, [R1], #4\n```\nLa instrucción LDR realiza un direccionamiento de tipo ____.",
+      "options": [
+        "post-indexado",
+        "pre-indexado con actualización",
+        "indexado directo (offset)"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento está fuera de los corchetes, lo que indica una operación secuencial posterior al acceso.",
+      "explanation": "La sintaxis [R1], #4 representa un direccionamiento post-indexado, donde el acceso se realiza con la dirección original de R1 y luego R1 se incrementa en 4."
+    },
+    {
+      "q": "2. Si R1 = 0x2000 y ejecutamos la instrucción `LDR R0, [R1, #8]!`, el registro base R1 tendrá el valor final de ____.",
+      "options": [
+        "0x2008",
+        "0x2000",
+        "0x1FF8"
+      ],
+      "correct": 0,
+      "hint": "El signo de exclamación al final del corchete indica que el valor final calculado se escribe de vuelta en R1.",
+      "explanation": "Es pre-indexado con actualización (writeback). R1 se actualiza con la dirección efectiva calculada: 0x2000 + 8 = 0x2008."
+    },
+    {
+      "q": "3. Tras ejecutar las instrucciones:\n```assembly\nMOV R2, #3\nMOV R0, R2, LSL #2\n```\nel registro R0 contiene el valor decimal ____.",
+      "options": [
+        "12",
+        "6",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "Un desplazamiento lógico a la izquierda (LSL) de 2 bits equivale a multiplicar el valor por 4.",
+      "explanation": "El valor inicial de R2 es 3. Al desplazarlo 2 posiciones a la izquierda, el valor se multiplica por 2^2 = 4, dando como resultado 12."
+    },
+    {
+      "q": "4. En la instrucción `LDR R0, [R1, ____]!`, la presencia del signo de exclamación al final indica que se realiza una actualización del registro base R1.",
+      "options": [
+        "#4",
+        "[R2]",
+        "#0"
+      ],
+      "correct": 0,
+      "hint": "El direccionamiento pre-indexado requiere un desplazamiento inmediato o por registro dentro de los corchetes.",
+      "explanation": "La sintaxis del direccionamiento pre-indexado con actualización es [Rn, #offset]! o [Rn, Rm]!. Por tanto, #4 es la opción correcta."
+    },
+    {
+      "q": "5. En el fragmento de código:\n```assembly\nMOV R1, #12\nMOV R0, R1, LSR #2\n```\nel registro R0 almacena el valor decimal ____.",
+      "options": [
+        "3",
+        "48",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "LSR #2 realiza un desplazamiento lógico a la derecha de 2 bits, dividiendo el valor entre 4.",
+      "explanation": "El valor 12 dividido por 2^2 (4) da como resultado 3. Los bits se desplazan hacia la derecha introduciendo ceros."
+    },
+    {
+      "q": "6. Si R1 = 0x4000 y ejecutamos la instrucción `STR R0, [R1, #-4]`, la dirección de memoria accedida is ____.",
+      "options": [
+        "0x3FFC",
+        "0x4004",
+        "0x4000"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento es de -4 bytes y se aplica directamente a la dirección base.",
+      "explanation": "La dirección de acceso se calcula como R1 - 4. 0x4000 en decimal es 16384, restándole 4 queda 16380, que en hexadecimal es 0x3FFC."
+    },
+    {
+      "q": "7. Si R1 = 10 y R2 = 3, tras ejecutar la instrucción `ADD R0, R1, R2, LSL #1`, el registro R0 tendrá el valor de ____.",
+      "options": [
+        "16",
+        "26",
+        "13"
+      ],
+      "correct": 0,
+      "hint": "LSL #1 sobre R2 multiplica su valor por 2 antes de sumarse a R1.",
+      "explanation": "R2 desplazado a la izquierda 1 bit es 3 * 2 = 6. Luego R0 = R1 + 6 = 10 + 6 = 16."
+    },
+    {
+      "q": "8. Para implementar un pop de la pila en ARM que crece de forma descendente, usamos la instrucción `LDR R0, ____`.",
+      "options": [
+        "[SP], #4",
+        "[SP, #4]!",
+        "[SP, #-4]"
+      ],
+      "correct": 0,
+      "hint": "Un pop lee de la dirección actual apuntada por SP y luego incrementa SP en 4 para liberar la palabra.",
+      "explanation": "En post-indexado, LDR R0, [SP], #4 lee el dato de la dirección actual de SP y luego actualiza SP = SP + 4, simulando un pop."
+    },
+    {
+      "q": "9. En la instrucción `LDR R0, [R1, R2, LSL #2]`, si R1 = 0x1000 y R2 = 4, la dirección de memoria accedida es ____.",
+      "options": [
+        "0x1010",
+        "0x1008",
+        "0x1004"
+      ],
+      "correct": 0,
+      "hint": "R2 se multiplica por 4 mediante LSL #2 antes de sumarse a R1.",
+      "explanation": "R2 desplazado LSL #2 es 4 * 4 = 16 (0x10). La dirección efectiva es R1 + 0x10 = 0x1000 + 0x10 = 0x1010."
+    },
+    {
+      "q": "10. Si R0 = 0xFFFFFFFF (valor -1 en complemento a dos) y ejecutamos `MOV R1, R0, ASR #1`, el valor final de R1 es ____.",
+      "options": [
+        "0xFFFFFFFF",
+        "0x7FFFFFFF",
+        "0x00000000"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento aritmético a la derecha preserva el bit de signo, introduciendo unos si el número es negativo.",
+      "explanation": "Dado que el bit 31 es 1, al desplazar a la derecha aritméticamente se inserta un 1 en la posición 31. Todos los bits continúan siendo 1, devolviendo 0xFFFFFFFF (-1)."
+    },
+    {
+      "q": "11. La instrucción `STR R0, [R1], ____` es un ejemplo de direccionamiento post-indexado con un desplazamiento inmediato de 4.",
+      "options": [
+        "#4",
+        "[#4]",
+        "!4"
+      ],
+      "correct": 0,
+      "hint": "En el direccionamiento post-indexado, el desplazamiento se coloca fuera de los corchetes.",
+      "explanation": "La sintaxis correcta para el post-indexado es [Rn], #offset. Así pues, queda STR R0, [R1], #4."
+    },
+    {
+      "q": "12. Si R1 = 0x3000 y ejecutamos la instrucción `LDR R0, [R1], #-4`, el registro R1 se actualiza con el valor de ____.",
+      "options": [
+        "0x2FFC",
+        "0x3004",
+        "0x3000"
+      ],
+      "correct": 0,
+      "hint": "Es post-indexado, por lo que R1 se actualiza restándole 4 al finalizar la carga.",
+      "explanation": "El direccionamiento post-indexado actualiza el registro base sumándole el offset: R1 = 0x3000 + (-4) = 0x2FFC."
+    },
+    {
+      "q": "13. Tras ejecutar:\n```assembly\nMOV R1, #5\nMOV R2, #2\nADD R0, R1, R2, ROR #0\n```\nel valor de R0 es ____.",
+      "options": [
+        "7",
+        "9",
+        "5"
+      ],
+      "correct": 0,
+      "hint": "Una rotación de cero bits deja el valor del operando inalterado.",
+      "explanation": "ROR #0 no produce ningún desplazamiento ni rotación de bits. R2 se mantiene en 2, y R0 = 5 + 2 = 7."
+    },
+    {
+      "q": "14. Si ejecutamos `MOV R1, #0x80 \n MOV R0, R1, LSL #8`, el registro R0 contendrá el valor hexadecimal ____.",
+      "options": [
+        "0x8000",
+        "0x800",
+        "0x80000"
+      ],
+      "correct": 0,
+      "hint": "LSL #8 equivale a desplazar el valor 8 bits (o dos dígitos hexadecimales) a la izquierda.",
+      "explanation": "El valor 0x80 en binario es 10000000. Desplazarlo 8 bits a la izquierda da 1000000000000000, que es 0x8000 en hexadecimal."
+    },
+    {
+      "q": "15. En un bucle que recorre un vector de tipo float (4 bytes), si R1 apunta al vector, la instrucción en cada paso para cargar el float e incrementar el puntero debe ser `LDR R0, ____`.",
+      "options": [
+        "[R1], #4",
+        "[R1, #4]",
+        "[R1, #4]!"
+      ],
+      "correct": 0,
+      "hint": "Debemos acceder al elemento actual apuntado por R1 y luego sumar 4 a R1 para apuntar al siguiente.",
+      "explanation": "LDR R0, [R1], #4 (post-indexado) es el modo idóneo: accede en R1 y posteriormente incrementa R1 en 4 bytes."
+    },
+    {
+      "q": "16. Si R1 = 0x1000 y ejecutamos `LDR R0, [R1, #0]`, la instrucción realiza un direccionamiento de tipo ____.",
+      "options": [
+        "indexado directo",
+        "pre-indexado",
+        "post-indexado"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento es cero y está dentro de los corchetes, sin signo de exclamación al final.",
+      "explanation": "Es un direccionamiento indexado directo (o con offset) donde el offset es #0. El registro base R1 no sufre modificaciones."
+    },
+    {
+      "q": "17. En la instrucción `LDR R0, [R1, R2, ____]`, el segundo registro Rm (R2) se desplaza a la izquierda 3 posiciones antes de sumarse a R1.",
+      "options": [
+        "LSL #3",
+        "LSR #3",
+        "ASR #3"
+      ],
+      "correct": 0,
+      "hint": "Desplazamiento lógico a la izquierda se denota con LSL.",
+      "explanation": "La sintaxis correcta para aplicar el escalado es indicar el registro de índice R2 y el método de desplazamiento LSL con el número de bits (#3)."
+    },
+    {
+      "q": "18. Si R1 = 0x5000, tras ejecutar la instrucción `STR R0, [R1, #16]`, el registro R1 contiene el valor ____.",
+      "options": [
+        "0x5000",
+        "0x5010",
+        "0x4FF0"
+      ],
+      "correct": 0,
+      "hint": "Es direccionamiento indexado directo; observa si se ha especificado writeback.",
+      "explanation": "Dado que es indexado directo (no incluye '!' ni es post-indexado), R1 permanece con su valor original, 0x5000."
+    },
+    {
+      "q": "19. Si R1 = 2 y ejecutamos `MOV R0, R1, LSL #3`, R0 almacena el valor decimal ____.",
+      "options": [
+        "16",
+        "8",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "LSL #3 multiplica el valor por 2^3 = 8.",
+      "explanation": "El valor original de R1 es 2. Al multiplicarlo por 8 mediante LSL #3 obtenemos 16."
+    },
+    {
+      "q": "20. Si R1 = 0x1000 y la instrucción es `LDR R0, [R1, #4]!`, tras su ejecución el registro R1 se actualiza a ____.",
+      "options": [
+        "0x1004",
+        "0x1000",
+        "0x0FFC"
+      ],
+      "correct": 0,
+      "hint": "Se trata de un direccionamiento pre-indexado con actualización debido a la exclamación.",
+      "explanation": "La dirección de acceso y de actualización es R1 + 4, por lo que R1 toma el valor final 0x1004."
+    },
+    {
+      "q": "21. ¿Cuáles de los siguientes desplazamientos son soportados por el Barrel Shifter en instrucciones de procesamiento de datos de ARM?",
+      "options": [
+        "LSL, LSR y ASR.",
+        "ROR y RRX (Rotate Right with Extend).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El Barrel Shifter de ARM es altamente flexible y soporta rotaciones y desplazamientos lógicos/aritméticos.",
+      "explanation": "ARM soporta desplazamientos lógicos a la izquierda y derecha (LSL, LSR), aritméticos a la derecha (ASR), rotación a la derecha (ROR) y rotación extendida de un bit (RRX)."
+    },
+    {
+      "q": "22. Para acceder a un vector en memoria actualizando el puntero al mismo tiempo, ¿qué modos de direccionamiento de ARM pueden utilizarse?",
+      "options": [
+        "Direccionamiento pre-indexado con actualización (e.g. `[R1, #4]!`).",
+        "Direccionamiento post-indexado (e.g. `[R1], #4`).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier modo que modifique el registro base Rn tras realizar la operación puede utilizarse para avanzar el puntero.",
+      "explanation": "Tanto el pre-indexado con actualización (writeback activo con '!') como el post-indexado modifican el registro base, siendo aptos para recorrer vectores."
+    },
+    {
+      "q": "23. ¿Qué registros de la CPU ARM pueden actuar válidamente como registro base Rn en una instrucción de carga de memoria (LDR)?",
+      "options": [
+        "Registros R0-R12 de propósito general.",
+        "Registros especiales R13 (SP), R14 (LR) y R15 (PC).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El procesador ARM permite utilizar prácticamente cualquier registro de su banco de registros como base.",
+      "explanation": "En ARM todos los registros del R0 al R15 pueden ser empleados como base, incluyendo registros de propósito especial como SP, LR y PC."
+    },
+    {
+      "q": "24. ¿Qué tipo de operandos de desplazamiento inmediato se pueden aplicar a un registro mediante el Barrel Shifter en ARM?",
+      "options": [
+        "Un valor constante entero de 0 a 31 para desplazamientos a la izquierda (LSL).",
+        "Un valor constante entero de 1 a 32 para desplazamientos lógicos a la derecha (LSR).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Los desplazamientos inmediatos en el Barrel Shifter se codifican en un campo de 5 bits, permitiendo rangos de 32 valores.",
+      "explanation": "El Barrel Shifter acepta desplazamientos definidos por inmediatos de 5 bits, lo que permite especificar desplazamientos entre 0 y 31 o 1 y 32 según la operación."
+    },
+    {
+      "q": "25. En la instrucción de carga `LDR R0, [R1, R2]`, ¿de qué tipo puede ser el término de desplazamiento (R2)?",
+      "options": [
+        "Un registro de propósito general sin modificar.",
+        "Un registro de propósito general modificado por un desplazamiento del Barrel Shifter.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "ARM ofrece direccionamiento indexado por registro y por registro escalado en una sola instrucción.",
+      "explanation": "El desplazamiento puede ser un registro directo (Rm) o un registro pasado por el Barrel Shifter (Rm, LSL #2)."
+    },
+    {
+      "q": "26. ¿Qué beneficios aporta el Barrel Shifter de ARM en las operaciones lógicas y aritméticas de la CPU?",
+      "options": [
+        "Ahorro de espacio de código al evitar instrucciones de desplazamiento independientes.",
+        "Mayor velocidad de ejecución en operaciones complejas de indexación y bucles.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza cómo se fusionan las instrucciones de desplazamiento y procesamiento aritmético en el ciclo de reloj.",
+      "explanation": "La integración del Barrel Shifter evita la necesidad de instrucciones independientes de desplazamiento y optimiza la velocidad del código al resolver indexados en un ciclo."
+    },
+    {
+      "q": "27. ¿Qué instrucciones de carga y almacenamiento de datos individuales existen en el repertorio de instrucciones ARM?",
+      "options": [
+        "Cargas y almacenes de palabras completas (LDR/STR) de 32 bits.",
+        "Cargas y almacenes de bytes (LDRB/STRB) y medias palabras (LDRH/STRH).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El procesador ARM posee instrucciones para acceder a datos de diferentes longitudes: 8, 16 y 32 bits.",
+      "explanation": "El repertorio de instrucciones de acceso simple en ARM incluye transferencia de bytes (B), medias palabras (H) y palabras completas."
+    },
+    {
+      "q": "28. ¿Qué características describen al modo de direccionamiento pre-indexado con actualización (writeback) en ARM?",
+      "options": [
+        "Calcula la dirección efectiva sumando o restando el desplazamiento al registro base.",
+        "Actualiza el registro base con la dirección efectiva resultante.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es el direccionamiento que aplica una suma/resta antes del acceso y escribe de vuelta el resultado.",
+      "explanation": "En pre-indexado con writeback, se realiza el cálculo de la dirección antes de acceder a la memoria, y esa dirección efectiva se guarda en el registro base."
+    },
+    {
+      "q": "29. ¿Qué tipos de desplazamientos a la derecha están disponibles en el procesador ARM para operar sobre un registro en un único ciclo?",
+      "options": [
+        "Desplazamiento lógico a la derecha (LSR), que rellena con ceros por la izquierda.",
+        "Desplazamiento aritmético a la derecha (ASR), que preserva el bit de signo del valor.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El procesador diferencia entre desplazamientos para enteros sin signo y con signo.",
+      "explanation": "ARM implementa LSR para desplazamientos lógicos (adecuados para valores sin signo) y ASR para desplazamientos aritméticos (para preservar el bit de signo)."
+    },
+    {
+      "q": "30. ¿Qué operaciones del Barrel Shifter de ARM se pueden aplicar a un registro antes de pasarlo a la ALU?",
+      "options": [
+        "Desplazamiento lógico a la izquierda (LSL) y a la derecha (LSR).",
+        "Rotación a la derecha (ROR) y desplazamiento aritmético a la derecha (ASR).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El Barrel Shifter realiza preprocesamiento flexible que incluye desplazamientos de todo tipo.",
+      "explanation": "El Barrel Shifter de ARM soporta desplazamientos lógicos (LSL, LSR), aritméticos (ASR) y rotaciones (ROR)."
+    },
+    {
+      "q": "31. Si R1 = 0x1000 y ejecutamos la instrucción `LDR R0, [R1], #4`, ¿en qué dirección de memoria RAM se realiza la lectura?",
+      "options": [
+        "En la dirección 0x1004.",
+        "En la dirección 0x0FFC.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se trata de un direccionamiento post-indexado, por lo que el acceso ocurre antes de modificar la dirección base.",
+      "explanation": "La lectura en post-indexado ocurre en la dirección inicial de R1, que es 0x1000. Por lo tanto, ninguna de las opciones anteriores es correcta (0x1000 es la correcta)."
+    },
+    {
+      "q": "32. Si R1 = 0x2000 y R2 = 3, tras ejecutar `LDR R0, [R1, R2, LSL #2]`, ¿cuál es el incremento efectivo del registro base R1?",
+      "options": [
+        "R1 se incrementa en 12.",
+        "R1 se incrementa en 3.",
+        "Ninguna de las opciones anteriores es correcta (R1 permanece inalterado)."
+      ],
+      "correct": 2,
+      "hint": "Es direccionamiento indexado directo (no tiene writeback '!').",
+      "explanation": "En direccionamiento indexado directo por registro desplazado, R1 se usa para calcular la dirección pero no se modifica. El incremento efectivo es 0."
+    },
+    {
+      "q": "33. ¿Qué instrucción de carga de 8 bits realiza la lectura de un byte y extiende el signo a 32 bits?",
+      "options": [
+        "LDRB R0, [R1]",
+        "LDRH R0, [R1]",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "LDRB carga un byte con extensión de ceros. LDRH carga media palabra.",
+      "explanation": "La instrucción que lee un byte y realiza la extensión de signo es LDRSB. Por tanto, ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "34. Si ejecutamos la instrucción `STR R0, [R1], #-4`, ¿en qué dirección de memoria se realiza la escritura de la palabra?",
+      "options": [
+        "En la dirección R1 - 4.",
+        "En la dirección R1 + 4.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En post-indexado se escribe en la dirección base y luego se realiza el decremento.",
+      "explanation": "La escritura se realiza en la dirección base inicial contenida en R1. Posteriormente, R1 se decrementa en 4. Ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "35. ¿Cuál es el desplazamiento a la izquierda (LSL) equivalente a multiplicar un número entero por 32?",
+      "options": [
+        "LSL #4",
+        "LSL #6",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Multiplicar por 32 equivale a desplazar a la izquierda por una potencia de 2, donde 32 = 2^k.",
+      "explanation": "32 es igual a 2^5, por lo que el desplazamiento equivalente es LSL #5. Ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "36. Si ejecutamos la instrucción `MOV R0, R1, ASR #3` con R1 = 16, ¿qué valor se almacena en el registro R0?",
+      "options": [
+        "El registro R0 almacena el valor 8.",
+        "El registro R0 almacena el valor 4.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "ASR #3 equivale a dividir el número entero por 2^3 = 8.",
+      "explanation": "16 dividido por 8 da como resultado 2. Ninguna de las opciones anteriores (8, 4) es correcta."
+    },
+    {
+      "q": "37. ¿Cuál de las siguientes instrucciones aritméticas en ARM puede escribir directamente un valor en la memoria RAM?",
+      "options": [
+        "ADD R0, R1, [R2]",
+        "MOV [R0], R1",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "ARM tiene una arquitectura Load/Store estricta; las operaciones aritméticas/lógicas solo operan sobre registros.",
+      "explanation": "Ninguna instrucción aritmética o de movimiento en ARM puede acceder a memoria RAM. Solo LDR/STR (y derivados) acceden a memoria."
+    },
+    {
+      "q": "38. Si R1 = 0x1000 y ejecutamos la instrucción `LDR R0, [R1, #4]!`, ¿qué valor en hexadecimal tendrá R1 tras finalizar?",
+      "options": [
+        "El registro R1 tendrá el valor 0x1000.",
+        "El registro R1 tendrá el valor 0x1008.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es pre-indexado con actualización, por lo que R1 toma el valor de la dirección de acceso.",
+      "explanation": "R1 se actualiza con la dirección calculada: 0x1000 + 4 = 0x1004. Por lo tanto, ninguna de las opciones anteriores (0x1000, 0x1008) es correcta."
+    },
+    {
+      "q": "39. Si queremos realizar un desplazamiento a la derecha de 3 bits introduciendo bits 1 por la izquierda para un número sin signo, ¿qué operación del Barrel Shifter usamos?",
+      "options": [
+        "LSR #3",
+        "ASR #3",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "LSR introduce ceros. ASR introduce el bit de signo, que para un valor sin signo se considera cero.",
+      "explanation": "No existe una instrucción de desplazamiento estándar en ARM que introduzca de forma incondicional unos por la izquierda. Ninguna de las opciones es correcta."
+    },
+    {
+      "q": "40. Si R1 = 0x1000 y R2 = 0x2000, tras la ejecución de la instrucción `STR R0, [R1, R2]`, ¿cuál es el valor final de R1?",
+      "options": [
+        "El registro R1 tendrá el valor 0x3000.",
+        "El registro R1 tendrá el valor 0x2000.",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es un direccionamiento indexado directo por registro. El registro base no recibe actualización.",
+      "explanation": "Al no llevar el signo de exclamación '!', el registro base R1 no se modifica y mantiene su valor de 0x1000. Ninguna de las opciones anteriores (0x3000, 0x2000) es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Cálculo de Dirección Indexada Directa (Offset)",
+      "context": "Suponga que inicialmente los registros de la CPU ARM contienen los siguientes valores decimales: R0 = 0, R1 = 4096 (0x1000) y R2 = 4. La memoria RAM tiene almacenados los siguientes valores de 32 bits: RAM[4096] = 100, RAM[4100] = 200 y RAM[4104] = 300. Se ejecuta la instrucción: LDR R0, [R1, #4].",
+      "parts": [
+        {
+          "id": "p1a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de memoria efectiva (en decimal) calculada para el acceso?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "La dirección se calcula sumando el desplazamiento inmediato al registro base: $$Dir = R1 + 4 = 4096 + 4 = 4100$$."
+        },
+        {
+          "id": "p1b",
+          "label": "b)",
+          "question": "¿Qué valor entero queda almacenado en el registro R0 tras completarse la instrucción?",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "El procesador accede a la dirección calculada (4100) y copia su contenido de 32 bits en el registro de destino: $$R0 = RAM[4100] = 200$$."
+        },
+        {
+          "id": "p1c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final (en decimal) del registro base R1?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "En el direccionamiento indexado directo (offset), el registro base no se modifica: $$R1 = 4096$$."
+        },
+        {
+          "id": "p1d",
+          "label": "d)",
+          "question": "Si después se ejecutase la instrucción ADD R0, R0, R2, LSL #2, ¿cuál sería el valor final de R0 en decimal?",
+          "correctValue": 216,
+          "tolerance": 0,
+          "explanation": "La operación realiza $$R0 = R0 + (R2 \\cdot 2^2) = 200 + (4 \\cdot 4) = 200 + 16 = 216$$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Cálculo de Dirección Pre-indexada con Writeback",
+      "context": "Con el mismo estado inicial: R0 = 0, R1 = 4096, R2 = 4. Memoria: RAM[4096] = 100, RAM[4100] = 200, RAM[4104] = 300. Se ejecuta la instrucción: LDR R0, [R1, #4]!.",
+      "parts": [
+        {
+          "id": "p2a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de memoria efectiva (en decimal) de la que se lee el dato?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "La dirección se calcula sumando el desplazamiento antes del acceso: $$Dir = R1 + 4 = 4096 + 4 = 4100$$."
+        },
+        {
+          "id": "p2b",
+          "label": "b)",
+          "question": "¿Qué valor entero se carga en el registro destino R0?",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "Se accede a la dirección 4100: $$R0 = RAM[4100] = 200$$."
+        },
+        {
+          "id": "p2c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final del registro base R1 en decimal?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "Al ser pre-indexado con writeback (!), R1 se actualiza con la dirección efectiva: $$R1 = R1 + 4 = 4100$$."
+        },
+        {
+          "id": "p2d",
+          "label": "d)",
+          "question": "Si ejecutamos inmediatamente después LDR R2, [R1, #4], ¿qué valor en decimal se cargará en R2?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "La nueva dirección efectiva es $$R1 + 4 = 4100 + 4 = 4104$$. El contenido en esa dirección es 300: $$R2 = RAM[4104] = 300$$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cálculo de Dirección Post-indexada",
+      "context": "Mismo estado inicial: R0 = 0, R1 = 4096, R2 = 4. Memoria: RAM[4096] = 100, RAM[4100] = 200, RAM[4104] = 300. Se ejecuta la instrucción: LDR R0, [R1], #4.",
+      "parts": [
+        {
+          "id": "p3a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de acceso a memoria (en decimal) utilizada para cargar R0?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "En post-indexado, el acceso se realiza utilizando el valor original del registro base: $$Dir = R1 = 4096$$."
+        },
+        {
+          "id": "p3b",
+          "label": "b)",
+          "question": "¿Qué valor entero queda cargado en el registro R0?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Se carga el dato de la dirección 4096: $$R0 = RAM[4096] = 100$$."
+        },
+        {
+          "id": "p3c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final en decimal del registro base R1?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza de forma automática después del acceso sumándole el desplazamiento: $$R1 = R1 + 4 = 4100$$."
+        },
+        {
+          "id": "p3d",
+          "label": "d)",
+          "question": "Si tras esto ejecutamos LDR R2, [R1], #4, ¿qué valor en decimal se carga en R2?",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "El acceso se realiza en la dirección actual de R1 (4100): $$R2 = RAM[4100] = 200$$. Luego R1 se actualiza a 4104."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Indexado por Registro Desplazado",
+      "context": "Suponga los registros: R0 = 0, R1 = 4096, R2 = 2. Memoria: RAM[4096] = 100, RAM[4100] = 200, RAM[4104] = 300, RAM[4108] = 400. Se ejecuta: LDR R0, [R1, R2, LSL #2].",
+      "parts": [
+        {
+          "id": "p4a",
+          "label": "a)",
+          "question": "¿Cuál es el desplazamiento en bytes (en decimal) obtenido al aplicar LSL #2 a R2?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El valor del desplazamiento se calcula como $$Desp = R2 \\cdot 2^2 = 2 \\cdot 4 = 8$$."
+        },
+        {
+          "id": "p4b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección de memoria efectiva (en decimal) a la que accede la instrucción?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "La dirección se calcula sumando el desplazamiento al registro base: $$Dir = R1 + Desp = 4096 + 8 = 4104$$."
+        },
+        {
+          "id": "p4c",
+          "label": "c)",
+          "question": "¿Qué valor entero se carga en R0 tras la instrucción?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "Se lee de la dirección 4104: $$R0 = RAM[4104] = 300$$."
+        },
+        {
+          "id": "p4d",
+          "label": "d)",
+          "question": "¿Cuál es el valor final en decimal del registro base R1?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "Dado que es indexado directo (no tiene writeback '!'), R1 no cambia: $$R1 = 4096$$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Barrel Shifter con Desplazamiento Lógico Izquierda (LSL)",
+      "context": "Se dispone de una CPU ARM donde R1 = 15 y R2 = 3. Se ejecuta: ADD R0, R1, R2, LSL #3.",
+      "parts": [
+        {
+          "id": "p5a",
+          "label": "a)",
+          "question": "¿Por qué factor de escala se multiplica el registro R2 en el Barrel Shifter mediante LSL #3?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Desplazar 3 bits a la izquierda equivale a multiplicar por $$2^3 = 8$$."
+        },
+        {
+          "id": "p5b",
+          "label": "b)",
+          "question": "¿Cuál es el valor resultante del operando R2 tras pasar por el Barrel Shifter?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El valor del operando escalado es $$3 \\cdot 2^3 = 24$$."
+        },
+        {
+          "id": "p5c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final en decimal del registro R0?",
+          "correctValue": 39,
+          "tolerance": 0,
+          "explanation": "La ALU realiza la suma: $$R0 = R1 + 24 = 15 + 24 = 39$$."
+        },
+        {
+          "id": "p5d",
+          "label": "d)",
+          "question": "¿Cuál es el valor final en decimal del registro R2 al terminar la instrucción?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El Barrel Shifter opera sobre una copia temporal de R2. El registro original R2 no se modifica: $$R2 = 3$$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Barrel Shifter con Desplazamiento Lógico Derecha (LSR)",
+      "context": "Se dispone de los registros R1 = 128 y R2 = 48. Se ejecuta: SUB R0, R1, R2, LSR #4.",
+      "parts": [
+        {
+          "id": "p6a",
+          "label": "a)",
+          "question": "¿Por qué número entero se divide el valor de R2 al realizar LSR #4?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "LSR #4 desplaza 4 bits a la derecha, equivalente a la división entera entre $$2^4 = 16$$."
+        },
+        {
+          "id": "p6b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R2 modificado tras el Barrel Shifter?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El valor modificado es $$48 \\div 16 = 3$$."
+        },
+        {
+          "id": "p6c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final en decimal de R0?",
+          "correctValue": 125,
+          "tolerance": 0,
+          "explanation": "La ALU realiza la resta: $$R0 = R1 - 3 = 128 - 3 = 125$$."
+        },
+        {
+          "id": "p6d",
+          "label": "d)",
+          "question": "Si tras esto ejecutamos MOV R1, R0, LSL #2, ¿cuál será el valor de R1 en decimal?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "La operación realiza $$R1 = R0 \\cdot 2^2 = 125 \\cdot 4 = 500$$."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Barrel Shifter con Desplazamiento Aritmético Derecha (ASR)",
+      "context": "Considere la secuencia de instrucciones: MOV R1, #10; MOV R2, #5; ADD R0, R1, R2, ASR #1.",
+      "parts": [
+        {
+          "id": "p7a",
+          "label": "a)",
+          "question": "¿Cuál es el valor entero resultante de aplicar ASR #1 sobre R2 = 5?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El valor 5 es binario 101. Un desplazamiento aritmético a la derecha de 1 bit da 010 en binario, que en decimal es 2."
+        },
+        {
+          "id": "p7b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final de R0 en decimal?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Se realiza la suma $$R0 = R1 + 2 = 10 + 2 = 12$$."
+        },
+        {
+          "id": "p7c",
+          "label": "c)",
+          "question": "Si el valor original de R2 fuese -5 (representado como 0xFFFFFFFB), ¿cuál sería el resultado decimal de R2, ASR #1?",
+          "correctValue": -3,
+          "tolerance": 0,
+          "explanation": "El desplazamiento aritmético de un valor negativo mantiene el signo: $$-5 \\text{ (1111...1011)} \\gg 1 = \\text{1111...1101} = -3$$."
+        },
+        {
+          "id": "p7d",
+          "label": "d)",
+          "question": "Utilizando R1 = 10 y R2 = -5, ¿cuál sería el valor final de R0 (en decimal) tras ADD R0, R1, R2, ASR #1?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El cálculo es $$R0 = R1 + (R2 \\gg 1) = 10 + (-3) = 7$$."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Análisis de Rotación de Bits (ROR)",
+      "context": "Se analiza una rotación de bits en ARM de 32 bits: MOV R1, #9; MOV R0, R1, ROR #2.",
+      "parts": [
+        {
+          "id": "p8a",
+          "label": "a)",
+          "question": "¿Cuántas posiciones de bits se desplazan hacia la derecha en ROR #2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La rotación desplaza a la derecha 2 posiciones."
+        },
+        {
+          "id": "p8b",
+          "label": "b)",
+          "question": "El bit 0 (que vale 1 en el valor 9) pasa a ocupar qué posición de bit (0 a 31) en el resultado?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "En una rotación a la derecha de 2 bits en un registro de 32 bits, el bit 0 pasa a ocupar el bit $$32 - 2 = 30$$."
+        },
+        {
+          "id": "p8c",
+          "label": "c)",
+          "question": "¿Cuál es el valor decimal del bit 31 del resultado de la rotación?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit 1 del número original 9 (1001) es 0. Al rotar 2 posiciones a la derecha, pasa a ser el bit 31 del resultado."
+        },
+        {
+          "id": "p8d",
+          "label": "d)",
+          "question": "¿Cuál es la contribución en formato decimal del bit que rota a la posición 30 (es decir, 2 elevado a 30)?",
+          "correctValue": 1073741824,
+          "tolerance": 0,
+          "explanation": "El bit 30 vale 1. Su contribución decimal es $$2^{30} = 1073741824$$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Manejo de la Pila con Pre-indexación y Desplazamiento Negativo",
+      "context": "Considere que el puntero de pila SP (R13) inicialmente vale 32768 (0x8000). Se ejecuta la instrucción: STR R0, [SP, #-4]!.",
+      "parts": [
+        {
+          "id": "p9a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección efectiva en decimal donde se almacena el contenido de R0?",
+          "correctValue": 32764,
+          "tolerance": 0,
+          "explanation": "La dirección se calcula restando 4 a SP: $$32768 - 4 = 32764$$."
+        },
+        {
+          "id": "p9b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final de SP en decimal tras ejecutar esta instrucción?",
+          "correctValue": 32764,
+          "tolerance": 0,
+          "explanation": "Al ser pre-indexado con writeback (!), SP se actualiza con la dirección efectiva: $$SP = 32764$$."
+        },
+        {
+          "id": "p9c",
+          "label": "c)",
+          "question": "Si ejecutamos una segunda instrucción STR R1, [SP, #-4]!, ¿cuál es el nuevo valor de SP en decimal?",
+          "correctValue": 32760,
+          "tolerance": 0,
+          "explanation": "SP se vuelve a actualizar restándole 4: $$32764 - 4 = 32760$$."
+        },
+        {
+          "id": "p9d",
+          "label": "d)",
+          "question": "Si finalmente se realiza LDR R2, [SP], #8, ¿qué valor final de SP (en decimal) queda establecido?",
+          "correctValue": 32768,
+          "tolerance": 0,
+          "explanation": "Es post-indexado. Se accede a la dirección SP (32760) y luego SP se incrementa en 8: $$32760 + 8 = 32768$$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Recorrido de Vectores con Post-indexado",
+      "context": "Se desea recorrer un vector de enteros en memoria (4 bytes por elemento). El puntero R1 apunta inicialmente a la dirección 8000. Se ejecuta en un bucle: LDR R0, [R1], #4.",
+      "parts": [
+        {
+          "id": "p10a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de acceso a memoria (en decimal) del primer elemento leído?",
+          "correctValue": 8000,
+          "tolerance": 0,
+          "explanation": "En post-indexado, el primer acceso se hace con el valor inicial de R1, que es 8000."
+        },
+        {
+          "id": "p10b",
+          "label": "b)",
+          "question": "¿Cuál es el valor de R1 en decimal justo después del primer acceso?",
+          "correctValue": 8004,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza sumándole el offset: $$R1 = 8000 + 4 = 8004$$."
+        },
+        {
+          "id": "p10c",
+          "label": "c)",
+          "question": "¿Qué dirección de memoria en decimal tendrá R1 tras completar 5 iteraciones del bucle?",
+          "correctValue": 8020,
+          "tolerance": 0,
+          "explanation": "Cada iteración suma 4 a R1. Tras 5 accesos: $$R1 = 8000 + (5 \\cdot 4) = 8020$$."
+        },
+        {
+          "id": "p10d",
+          "label": "d)",
+          "question": "¿Cuántos bytes de memoria en total se habrán transferido tras completar 10 cargas del bucle?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "Cada palabra de 32 bits son 4 bytes. Para 10 lecturas: $$10 \\cdot 4 = 40 \\text{ bytes}$$."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Cargas de Media Palabra (Halfword) y Extensión de Signo",
+      "context": "Considere la instrucción LDRH R0, [R1, #2]!. Suponer que R1 = 8192 y que en la dirección 8194 se encuentra el valor de 16 bits 0xABCD.",
+      "parts": [
+        {
+          "id": "p11a",
+          "label": "a)",
+          "question": "¿Cuántos bytes de datos se transfieren de memoria al registro R0?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "LDRH carga una media palabra (halfword), que equivale a 2 bytes (16 bits)."
+        },
+        {
+          "id": "p11b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final en decimal de R1 tras completarse la instrucción?",
+          "correctValue": 8194,
+          "tolerance": 0,
+          "explanation": "Al ser pre-indexado con writeback, R1 se actualiza a $$8192 + 2 = 8194$$."
+        },
+        {
+          "id": "p11c",
+          "label": "c)",
+          "question": "¿Qué valor entero (en decimal) queda en R0 tras la ejecución (extensión de ceros)?",
+          "correctValue": 43981,
+          "tolerance": 0,
+          "explanation": "0xABCD en binario sin signo es $$10 \\cdot 16^3 + 11 \\cdot 16^2 + 12 \\cdot 16^1 + 13 = 43981$$."
+        },
+        {
+          "id": "p11d",
+          "label": "d)",
+          "question": "Si la instrucción hubiera sido LDRSH R0, [R1, #2]!, ¿cuál sería el valor entero decimal cargado en R0?",
+          "correctValue": -21555,
+          "tolerance": 0,
+          "explanation": "LDRSH realiza extensión de signo. El bit 15 de 0xABCD es 1, por lo que se rellena con 1s. El valor representa $$-21555$$ en decimal ($$43981 - 65536 = -21555$$)."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Cálculo de Desplazamiento Negativo Escalado",
+      "context": "Considere la instrucción: STR R3, [R1, -R2, LSL #2]. Suponga que R1 = 10000, R2 = 50 y R3 = 99.",
+      "parts": [
+        {
+          "id": "p12a",
+          "label": "a)",
+          "question": "¿Cuál es el desplazamiento en bytes (valor absoluto decimal) que se le resta al registro base?",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "El desplazamiento es $$R2 \\cdot 2^2 = 50 \\cdot 4 = 200$$."
+        },
+        {
+          "id": "p12b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección efectiva en decimal donde se almacena el dato?",
+          "correctValue": 9800,
+          "tolerance": 0,
+          "explanation": "La dirección se calcula restando el desplazamiento al registro base: $$Dir = 10000 - 200 = 9800$$."
+        },
+        {
+          "id": "p12c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final en decimal del registro base R1?",
+          "correctValue": 10000,
+          "tolerance": 0,
+          "explanation": "Al no tener writeback, R1 permanece inalterado: $$R1 = 10000$$."
+        },
+        {
+          "id": "p12d",
+          "label": "d)",
+          "question": "Si después se ejecuta LDR R0, [R1], #-100, ¿cuál será el valor de R1 tras finalizar?",
+          "correctValue": 9900,
+          "tolerance": 0,
+          "explanation": "En post-indexado, R1 se actualiza sumando el desplazamiento negativo: $$R1 = 10000 - 100 = 9900$$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Análisis de Codificación de LDR/STR",
+      "context": "Se analiza la codificación de la instrucción LDR R4, [R5, #40] en la arquitectura ARM de 32 bits.",
+      "parts": [
+        {
+          "id": "p13a",
+          "label": "a)",
+          "question": "¿Cuántos bits de la instrucción se usan para codificar el registro destino Rd (R4)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "En ARM, el campo para el registro de destino Rd ocupa 4 bits."
+        },
+        {
+          "id": "p13b",
+          "label": "b)",
+          "question": "¿Cuántos bits de la instrucción se usan para codificar el registro base Rn (R5)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El campo para el registro base Rn ocupa 4 bits."
+        },
+        {
+          "id": "p13c",
+          "label": "c)",
+          "question": "¿Cuántos bits se asignan en la palabra de instrucción para el offset inmediato?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Las instrucciones de carga/almacenamiento simple dedican 12 bits para el offset inmediato."
+        },
+        {
+          "id": "p13d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del desplazamiento codificado en la instrucción?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El desplazamiento inmediato especificado es de 40 bytes."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Acceso a Matrices por Columnas (Stride)",
+      "context": "Una matriz bidimensional de enteros (4 bytes) se almacena por filas. Tiene 20 columnas. Se accede a una columna con la instrucción LDR R0, [R1], R2.",
+      "parts": [
+        {
+          "id": "p14a",
+          "label": "a)",
+          "question": "¿Qué valor decimal debe tener R2 para que la instrucción avance el puntero a la siguiente fila de la misma columna?",
+          "correctValue": 80,
+          "tolerance": 0,
+          "explanation": "Para pasar al elemento en la siguiente fila, debemos saltar una fila completa de 20 elementos: $$20 \\cdot 4 = 80 \\text{ bytes}$$."
+        },
+        {
+          "id": "p14b",
+          "label": "b)",
+          "question": "Si R1 apunta inicialmente a 5000, ¿cuál es la dirección decimal del primer elemento accedido?",
+          "correctValue": 5000,
+          "tolerance": 0,
+          "explanation": "Al ser post-indexado, se accede con el valor inicial de R1, es decir, 5000."
+        },
+        {
+          "id": "p14c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de R1 en decimal tras ejecutarse la primera instrucción con R2 = 80?",
+          "correctValue": 5080,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza sumando el desplazamiento: $$R1 = R1 + R2 = 5000 + 80 = 5080$$."
+        },
+        {
+          "id": "p14d",
+          "label": "d)",
+          "question": "¿Cuál es la dirección decimal de acceso en el cuarto paso del bucle (tras 3 avances)?",
+          "correctValue": 5240,
+          "tolerance": 0,
+          "explanation": "Tras 3 incrementos, la dirección efectiva de acceso es $$5000 + 3 \\cdot 80 = 5240$$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Instrucciones de Desplazamiento Controladas por Registro",
+      "context": "Considere los registros: R0 = 0, R1 = 4096, R2 = 4, R3 = 1. Se ejecutan: ADD R1, R1, R2, LSL #2; LDR R0, [R1], R2, LSL R3.",
+      "parts": [
+        {
+          "id": "p15a",
+          "label": "a)",
+          "question": "¿Cuál es el valor de R1 en decimal tras la ejecución de la instrucción ADD?",
+          "correctValue": 4112,
+          "tolerance": 0,
+          "explanation": "La suma calcula $$R1 = R1 + (R2 \\cdot 2^2) = 4096 + (4 \\cdot 4) = 4112$$."
+        },
+        {
+          "id": "p15b",
+          "label": "b)",
+          "question": "En la instrucción LDR, ¿cuál es el desplazamiento efectivo (en decimal) al desplazar R2 por R3?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Desplazar R2 (4) a la izquierda por el número de bits indicado en R3 (1) da $$4 \\cdot 2^1 = 8$$."
+        },
+        {
+          "id": "p15c",
+          "label": "c)",
+          "question": "¿Cuál es la dirección decimal de acceso a memoria en LDR?",
+          "correctValue": 4112,
+          "tolerance": 0,
+          "explanation": "Es post-indexado, por lo que la dirección es el valor previo de R1, es decir, 4112."
+        },
+        {
+          "id": "p15d",
+          "label": "d)",
+          "question": "¿Cuál es el valor final de R1 en decimal tras ejecutarse la instrucción LDR?",
+          "correctValue": 4120,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza sumando el desplazamiento efectivo: $$R1 = 4112 + 8 = 4120$$."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Almacenamiento de un Único Byte (STRB)",
+      "context": "Considere la instrucción: STRB R0, [R1, #1]!. Suponga que R1 = 2000 y R0 = 0x12345678.",
+      "parts": [
+        {
+          "id": "p16a",
+          "label": "a)",
+          "question": "¿Cuántos bytes de datos se escriben en memoria RAM?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "STRB escribe un único byte (8 bits) en memoria."
+        },
+        {
+          "id": "p16b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección decimal exacta donde se almacena el byte?",
+          "correctValue": 2001,
+          "tolerance": 0,
+          "explanation": "La dirección efectiva es $$R1 + 1 = 2000 + 1 = 2001$$."
+        },
+        {
+          "id": "p16c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final de R1 en decimal?",
+          "correctValue": 2001,
+          "tolerance": 0,
+          "explanation": "Al ser pre-indexado con writeback, R1 se actualiza con la dirección efectiva: 2001."
+        },
+        {
+          "id": "p16d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del byte que se escribe (el byte inferior de R0)?",
+          "correctValue": 120,
+          "tolerance": 0,
+          "explanation": "El byte de menor peso de 0x12345678 es 0x78. En decimal: $$7 \\cdot 16 + 8 = 120$$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Combinación de Sumas y Desplazamientos",
+      "context": "Se ejecutan las siguientes instrucciones en secuencia: MOV R1, #100; MOV R2, #4; ADD R0, R1, R2, LSL #4.",
+      "parts": [
+        {
+          "id": "p17a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del desplazamiento en bytes en decimal producido por LSL #4 sobre R2?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "El desplazamiento es $$4 \\cdot 2^4 = 4 \\cdot 16 = 64$$."
+        },
+        {
+          "id": "p17b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final en decimal de R0?",
+          "correctValue": 164,
+          "tolerance": 0,
+          "explanation": "La suma da $$R0 = 100 + 64 = 164$$."
+        },
+        {
+          "id": "p17c",
+          "label": "c)",
+          "question": "Si cambiamos la instrucción a ADD R0, R1, R2, LSR #2, ¿cuál es el valor de R2 tras el Barrel Shifter?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "R2 desplazado LSR #2 es $$4 \\div 2^2 = 1$$."
+        },
+        {
+          "id": "p17d",
+          "label": "d)",
+          "question": "Con la instrucción modificada, ¿cuál sería el valor final de R0 en decimal?",
+          "correctValue": 101,
+          "tolerance": 0,
+          "explanation": "La suma resultante es $$R0 = 100 + 1 = 101$$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Análisis de Ciclos de Reloj en Cargas",
+      "context": "Una instrucción LDR tarda 3 ciclos de reloj en una CPU ARM sin solapamiento de cauce. Un bucle ejecuta de forma secuencial 50 instrucciones LDR independientes.",
+      "parts": [
+        {
+          "id": "p18a",
+          "label": "a)",
+          "question": "¿Cuántos ciclos de reloj totales se requieren para ejecutar las 50 cargas?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "El tiempo total es $$50 \\text{ instrucciones} \\cdot 3 \\text{ ciclos/instrucción} = 150 \\text{ ciclos}$$."
+        },
+        {
+          "id": "p18b",
+          "label": "b)",
+          "question": "Si optimizamos el acceso mediante una instrucción LDM (Load Multiple) para cargar 4 registros, la cual consume 3 + (N-1) ciclos de reloj, ¿cuántos ciclos tarda en cargar 4 variables?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Para N = 4: $$Ciclos = 3 + (4-1) = 6 \\text{ ciclos}$$."
+        },
+        {
+          "id": "p18c",
+          "label": "c)",
+          "question": "¿Cuál es la ganancia de velocidad (speedup) de la instrucción LDM frente a 4 LDR independientes (que tardan 12 ciclos)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El speedup se calcula como: $$Speedup = 12 / 6 = 2.0$$."
+        },
+        {
+          "id": "p18d",
+          "label": "d)",
+          "question": "Si agrupamos 100 cargas usando 25 instrucciones LDM de 4 registros cada una, ¿cuántos ciclos totales se consumen?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "Se consumen $$25 \\text{ instrucciones LDM} \\cdot 6 \\text{ ciclos/instrucción} = 150 \\text{ ciclos}$$."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Direccionamiento Relativo al PC",
+      "context": "Una instrucción LDR se encuentra en la dirección decimal 32768 (0x8000). En ARM de 32 bits, debido al pipeline de 3 etapas, el registro PC (R15) lee 8 bytes por delante de la instrucción actual. Se ejecuta: LDR R0, [PC, #24].",
+      "parts": [
+        {
+          "id": "p19a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del registro PC (en decimal) usado como base para el cálculo?",
+          "correctValue": 32776,
+          "tolerance": 0,
+          "explanation": "El PC lee 8 bytes por delante de la dirección actual: $$PC = 32768 + 8 = 32776$$."
+        },
+        {
+          "id": "p19b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección decimal efectiva de la que se lee el dato?",
+          "correctValue": 32800,
+          "tolerance": 0,
+          "explanation": "La dirección efectiva es $$PC + 24 = 32776 + 24 = 32800$$."
+        },
+        {
+          "id": "p19c",
+          "label": "c)",
+          "question": "Si el dato en la dirección 32800 vale 555, ¿qué valor se carga en R0?",
+          "correctValue": 555,
+          "tolerance": 0,
+          "explanation": "Se lee el valor almacenado en la dirección calculada: 555."
+        },
+        {
+          "id": "p19d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del PC (en decimal) una vez finalizada la instrucción y antes de iniciar la siguiente?",
+          "correctValue": 32772,
+          "tolerance": 0,
+          "explanation": "El PC del programa avanza 4 bytes para apuntar a la instrucción inmediatamente siguiente a la actual: $$32768 + 4 = 32772$$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Pre-indexado con Registro Desplazado a la Izquierda",
+      "context": "Considere R1 = 4096 y R2 = 32. Se ejecuta la instrucción: STR R0, [R1, R2, LSL #3]!.",
+      "parts": [
+        {
+          "id": "p20a",
+          "label": "a)",
+          "question": "¿Cuál es el desplazamiento en bytes (en decimal) calculado mediante LSL #3?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "El desplazamiento es $$R2 \\cdot 2^3 = 32 \\cdot 8 = 256$$."
+        },
+        {
+          "id": "p20b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección efectiva de acceso a memoria en decimal?",
+          "correctValue": 4352,
+          "tolerance": 0,
+          "explanation": "La dirección es $$R1 + Desp = 4096 + 256 = 4352$$."
+        },
+        {
+          "id": "p20c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final de R1 en decimal?",
+          "correctValue": 4352,
+          "tolerance": 0,
+          "explanation": "Al tener writeback, R1 se actualiza con la dirección efectiva: 4352."
+        },
+        {
+          "id": "p20d",
+          "label": "d)",
+          "question": "Si después se ejecuta SUB R1, R1, #256, ¿cuál será el valor de R1 en decimal?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "Se resta 256 al valor de R1: $$4352 - 256 = 4096$$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Post-indexado con Registro Desplazado",
+      "context": "Se analiza LDR R0, [R1], -R2, LSL #1 con R1 = 5000 y R2 = 10.",
+      "parts": [
+        {
+          "id": "p21a",
+          "label": "a)",
+          "question": "¿Cuál es el valor absoluto decimal del desplazamiento calculado?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El desplazamiento es $$R2 \\cdot 2^1 = 10 \\cdot 2 = 20$$."
+        },
+        {
+          "id": "p21b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección decimal efectiva utilizada para el acceso?",
+          "correctValue": 5000,
+          "tolerance": 0,
+          "explanation": "En post-indexado se accede con la dirección base inicial: 5000."
+        },
+        {
+          "id": "p21c",
+          "label": "c)",
+          "question": "¿Cuál es el valor de R1 en decimal tras completarse la instrucción?",
+          "correctValue": 4980,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza restándole el desplazamiento: $$R1 = 5000 - 20 = 4980$$."
+        },
+        {
+          "id": "p21d",
+          "label": "d)",
+          "question": "Si después se ejecuta LDR R3, [R1], R2, ¿cuál es el nuevo valor de R1 en decimal?",
+          "correctValue": 4990,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza sumándole R2 (10): $$R1 = 4980 + 10 = 4990$$."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Acceso Secuencial a Vector de 32 bits",
+      "context": "Memoria: RAM[12288] = 0x11111111, RAM[12292] = 0x22222222, RAM[12296] = 0x33333333. Registros: R1 = 12288 y R2 = 4. Se ejecuta: LDR R0, [R1], R2.",
+      "parts": [
+        {
+          "id": "p22a",
+          "label": "a)",
+          "question": "¿Qué valor decimal tiene R0 tras cargarse el dato de la primera dirección?",
+          "correctValue": 286331153,
+          "tolerance": 0,
+          "explanation": "Se carga el valor 0x11111111 de la dirección 12288. En decimal es $$286331153$$."
+        },
+        {
+          "id": "p22b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final de R1 en decimal tras la primera instrucción?",
+          "correctValue": 12292,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza sumándole R2: $$R1 = 12288 + 4 = 12292$$."
+        },
+        {
+          "id": "p22c",
+          "label": "c)",
+          "question": "Si se vuelve a ejecutar LDR R0, [R1], R2, ¿qué valor decimal se carga en R0?",
+          "correctValue": 572662306,
+          "tolerance": 0,
+          "explanation": "Se lee de la dirección 12292 el valor 0x22222222, que equivale a $$572662306$$ en decimal."
+        },
+        {
+          "id": "p22d",
+          "label": "d)",
+          "question": "¿Cuál es el valor final de R1 en decimal tras la segunda instrucción?",
+          "correctValue": 12296,
+          "tolerance": 0,
+          "explanation": "R1 se actualiza sumándole R2 de nuevo: $$R1 = 12292 + 4 = 12296$$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Cálculo de Desplazamientos en el Barrel Shifter",
+      "context": "Se analiza el comportamiento del registro R2 = 255 (0x000000FF) bajo diferentes desplazamientos.",
+      "parts": [
+        {
+          "id": "p23a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de R2 tras aplicarle LSL #4?",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "LSL #4 multiplica por 16: $$255 \\cdot 16 = 4080$$."
+        },
+        {
+          "id": "p23b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal de R2 tras aplicarle LSR #2 (división entera)?",
+          "correctValue": 63,
+          "tolerance": 0,
+          "explanation": "LSR #2 divide entre 4 de forma entera: $$255 \\div 4 = 63$$."
+        },
+        {
+          "id": "p23c",
+          "label": "c)",
+          "question": "¿Cuál es el valor decimal de R2 tras aplicarle ASR #3?",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "ASR #3 divide entre 8 de forma entera. Al ser positivo, equivale a LSR: $$255 \\div 8 = 31$$."
+        },
+        {
+          "id": "p23d",
+          "label": "d)",
+          "question": "Si R2 fuese -2147483648 (0x80000000), ¿cuál sería el valor decimal tras aplicarle ASR #1?",
+          "correctValue": -1073741824,
+          "tolerance": 0,
+          "explanation": "ASR #1 preserva el bit de signo negativo. El resultado es 0xC0000000, que representa $$-1073741824$$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Direccionamientos Comparados",
+      "context": "Se dispone de la instrucción STR R0, [R1, #8] con R1 = 4096 y R0 = 777.",
+      "parts": [
+        {
+          "id": "p24a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección decimal de acceso en la instrucción original?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "Dirección efectiva = $$R1 + 8 = 4096 + 8 = 4104$$."
+        },
+        {
+          "id": "p24b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final de R1 en decimal?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "Al ser indexado directo sin writeback, R1 no cambia: 4096."
+        },
+        {
+          "id": "p24c",
+          "label": "c)",
+          "question": "Si usamos STR R0, [R1, #8]!, ¿cuál es el valor final de R1 en decimal?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "Al usar '!', R1 se actualiza con la dirección calculada: 4104."
+        },
+        {
+          "id": "p24d",
+          "label": "d)",
+          "question": "Si usamos STR R0, [R1], #8, ¿cuál es la dirección decimal de acceso a memoria?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "En post-indexado, el acceso se realiza en la dirección inicial R1, es decir, 4096."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Carga de Bytes con Extensión de Signo",
+      "context": "Considere LDRB R0, [R1, R2, LSL #2] con R1 = 4000 y R2 = 10. En la dirección 4040 se encuentra el byte 0x7F (127) y en 4041 el byte 0x80 (128).",
+      "parts": [
+        {
+          "id": "p25a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección decimal efectiva del acceso a memoria?",
+          "correctValue": 4040,
+          "tolerance": 0,
+          "explanation": "Dirección efectiva = $$R1 + (R2 \\cdot 4) = 4000 + 40 = 4040$$."
+        },
+        {
+          "id": "p25b",
+          "label": "b)",
+          "question": "¿Qué valor entero decimal se almacena en R0?",
+          "correctValue": 127,
+          "tolerance": 0,
+          "explanation": "LDRB lee un byte y rellena con ceros. Se lee 0x7F = 127."
+        },
+        {
+          "id": "p25c",
+          "label": "c)",
+          "question": "¿Cuántos bytes de memoria se leen?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "LDRB transfiere un solo byte de datos."
+        },
+        {
+          "id": "p25d",
+          "label": "d)",
+          "question": "Si la instrucción fuese LDRSB R0, [R1, R2, LSL #2]! y accediera a la dirección 4041 (cargando 0x80), ¿qué valor entero decimal se guardará en R0?",
+          "correctValue": -128,
+          "tolerance": 0,
+          "explanation": "LDRSB realiza extensión de signo. 0x80 como byte representa $$-128$$ en decimal, extendiendo el signo queda $$-128$$ en el registro de 32 bits."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Optimización de Inicialización de Arrays",
+      "context": "Se escribe código para inicializar un array de 5 palabras con ceros: MOV R0, #0; MOV R1, #4000; y 5 veces STR R0, [R1], #4.",
+      "parts": [
+        {
+          "id": "p26a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección de memoria decimal del quinto almacenamiento?",
+          "correctValue": 4016,
+          "tolerance": 0,
+          "explanation": "Los accesos son: 1º en 4000, 2º en 4004, 3º en 4008, 4º en 4012, 5º en 4016."
+        },
+        {
+          "id": "p26b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final de R1 en decimal tras completarse las 5 instrucciones?",
+          "correctValue": 4020,
+          "tolerance": 0,
+          "explanation": "Tras el quinto acceso (en 4016), R1 se actualiza sumando 4: $$4016 + 4 = 4020$$."
+        },
+        {
+          "id": "p26c",
+          "label": "c)",
+          "question": "¿Cuántos bytes de memoria de datos se escriben en total?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se escriben 5 palabras de 4 bytes cada una: $$5 \\cdot 4 = 20 \\text{ bytes}$$."
+        },
+        {
+          "id": "p26d",
+          "label": "d)",
+          "question": "¿Cuántos bytes de memoria de programa ocupan las 5 instrucciones STR?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Cada instrucción ARM ocupa 4 bytes: $$5 \\cdot 4 = 20 \\text{ bytes}$$."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Desplazamientos Extremos en Registros",
+      "context": "Se analiza R1 = 65535 (0x0000FFFF) bajo operaciones de desplazamiento.",
+      "parts": [
+        {
+          "id": "p27a",
+          "label": "a)",
+          "question": "¿Cuál es el resultado decimal de R1, LSL #16 (tratado como entero con signo de 32 bits)?",
+          "correctValue": -65536,
+          "tolerance": 0,
+          "explanation": "0x0000FFFF desplazado 16 bits a la izquierda es 0xFFFF0000. En complemento a dos, esto representa $$-65536$$ en decimal."
+        },
+        {
+          "id": "p27b",
+          "label": "b)",
+          "question": "¿Cuál es el resultado decimal de R1, LSR #8?",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "0x0000FFFF desplazado 8 bits a la derecha es 0x000000FF, que en decimal es 255."
+        },
+        {
+          "id": "p27c",
+          "label": "c)",
+          "question": "¿Cuál es el resultado decimal de R1, LSL #4?",
+          "correctValue": 1048560,
+          "tolerance": 0,
+          "explanation": "65535 desplazado 4 bits a la izquierda es $$65535 \\cdot 16 = 1048560$$."
+        },
+        {
+          "id": "p27d",
+          "label": "d)",
+          "question": "¿Cuál es el resultado decimal de R1, LSR #16?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Desplazar a la derecha 16 bits vacía por completo el contenido de R1 (que solo ocupa los 16 bits inferiores), resultando en 0."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Pre-indexado con Actualización Negativa",
+      "context": "Registros iniciales: R0 = 0, R1 = 4000, R2 = 8. Se ejecuta la instrucción: LDR R0, [R1, -R2]!.",
+      "parts": [
+        {
+          "id": "p28a",
+          "label": "a)",
+          "question": "¿Cuál es la dirección decimal efectiva de acceso a memoria?",
+          "correctValue": 3992,
+          "tolerance": 0,
+          "explanation": "Se resta R2 a R1: $$4000 - 8 = 3992$$."
+        },
+        {
+          "id": "p28b",
+          "label": "b)",
+          "question": "¿Cuál es el valor final de R1 en decimal?",
+          "correctValue": 3992,
+          "tolerance": 0,
+          "explanation": "Debido a la actualización (!), R1 se actualiza con la dirección efectiva: 3992."
+        },
+        {
+          "id": "p28c",
+          "label": "c)",
+          "question": "Si en la dirección 3992 está el valor entero 12345, ¿cuál es el valor final de R0 en decimal?",
+          "correctValue": 12345,
+          "tolerance": 0,
+          "explanation": "El valor leído es copiado a R0: 12345."
+        },
+        {
+          "id": "p28d",
+          "label": "d)",
+          "question": "Si inmediatamente después se ejecuta LDR R3, [R1], #-8, ¿cuál será el valor de R1 en decimal?",
+          "correctValue": 3984,
+          "tolerance": 0,
+          "explanation": "Es post-indexado, R1 se actualiza restándole 8: $$3992 - 8 = 3984$$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Almacenamiento de Media Palabra y Bytes",
+      "context": "Suponga R0 = 0x12345678 y R1 = 8000. Se ejecutan instrucciones de almacenamiento.",
+      "parts": [
+        {
+          "id": "p29a",
+          "label": "a)",
+          "question": "¿Cuántos bits de datos se escriben en memoria al ejecutar STRB R0, [R1]?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "STRB escribe un byte, que equivale a 8 bits."
+        },
+        {
+          "id": "p29b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal del byte que se escribe en memoria con STRB?",
+          "correctValue": 120,
+          "tolerance": 0,
+          "explanation": "El byte menos significativo es 0x78. En decimal: $$7 \\cdot 16 + 8 = 120$$."
+        },
+        {
+          "id": "p29c",
+          "label": "c)",
+          "question": "¿Cuántos bits de datos se escriben al ejecutar STRH R0, [R1, #4]?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "STRH escribe una media palabra, que equivale a 16 bits."
+        },
+        {
+          "id": "p29d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal de la media palabra que se escribe en memoria en 8004?",
+          "correctValue": 22136,
+          "tolerance": 0,
+          "explanation": "La media palabra menos significativa es 0x5678. En decimal: $$5 \\cdot 4096 + 6 \\cdot 256 + 7 \\cdot 16 + 8 = 22136$$."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Traza de Fragmento Completo",
+      "context": "Se analiza el fragmento de código: MOV R1, #10; MOV R2, #20; ADD R0, R1, R2; SUB R0, R0, R1, LSL #1.",
+      "parts": [
+        {
+          "id": "p30a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de R0 tras la instrucción ADD?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "La instrucción ADD realiza la suma de R1 y R2: $$R0 = 10 + 20 = 30$$."
+        },
+        {
+          "id": "p30b",
+          "label": "b)",
+          "question": "¿Qué valor decimal produce el Barrel Shifter para R1, LSL #1?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Desplazar R1 (10) 1 bit a la izquierda multiplica por 2: $$10 \\cdot 2 = 20$$."
+        },
+        {
+          "id": "p30c",
+          "label": "c)",
+          "question": "¿Cuál es el valor final de R0 en decimal al terminar todo el fragmento?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "La resta calcula: $$R0 = 30 - 20 = 10$$."
+        },
+        {
+          "id": "p30d",
+          "label": "d)",
+          "question": "Si a continuación ejecutamos MUL R0, R0, R1, ¿cuál es el valor final de R0 en decimal?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "La multiplicación calcula: $$R0 = R0 \\cdot R1 = 10 \\cdot 10 = 100$$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Desplazamiento Lógico a la Izquierda (LSL)",
+      "tex": "$$R_{\\text{dest}} = R_n + (R_m \\cdot 2^k)$$"
+    },
+    {
+      "name": "Desplazamiento Lógico a la Derecha (LSR)",
+      "tex": "$$R_{\\text{dest}} = R_n + (R_m \\div 2^k)$$"
+    },
+    {
+      "name": "Desplazamiento Aritmético a la Derecha (ASR)",
+      "tex": "$$R_{\\text{dest}} = \\lfloor R_m / 2^k \\rfloor$$"
+    },
+    {
+      "name": "Rotación a la Derecha (ROR)",
+      "tex": "$$ROR(R_m, k) = (R_m \\gg k) \\mid (R_m \\ll (32 - k))$$"
+    },
+    {
+      "name": "Direccionamiento Indexado Directo (Offset)",
+      "tex": "$$Dir_{\\text{efectiva}} = R_n + Offset$$"
+    },
+    {
+      "name": "Direccionamiento Pre-indexado con Actualización (Writeback)",
+      "tex": "$$Dir_{\\text{efectiva}} = R_n + Offset, \\quad R_n \\leftarrow R_n + Offset$$"
+    },
+    {
+      "name": "Direccionamiento Post-indexado",
+      "tex": "$$Dir_{\\text{efectiva}} = R_n, \\quad R_n \\leftarrow R_n + Offset$$"
+    },
+    {
+      "name": "Direccionamiento por Registro Escalado",
+      "tex": "$$Dir_{\\text{efectiva}} = R_n \\pm (R_m \\cdot 2^k)$$"
+    },
+    {
+      "name": "Rango de Desplazamiento Inmediato en LDR/STR (12 bits)",
+      "tex": "$$[-4095, 4095] \\iff [-(2^{12}-1), 2^{12}-1]$$"
+    }
+  ]
+}

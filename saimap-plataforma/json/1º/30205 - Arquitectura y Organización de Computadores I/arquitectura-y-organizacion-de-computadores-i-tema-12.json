@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cómo se denomina el método de sincronización de E/S en el que el procesador lee repetidamente el registro de estado de un periférico hasta que este esté listo?",
+      "options": [
+        "E/S por Interrupciones",
+        "Consulta de estado o espera activa (Polling)",
+        "Acceso Directo a Memoria (DMA)"
+      ],
+      "correct": 1,
+      "hint": "La CPU realiza un bucle cerrado de consulta constante.",
+      "explanation": "El polling o consulta de estado (espera activa) consiste en que la CPU lee de manera cíclica el registro de estado de un controlador de periférico para verificar si está listo para una transferencia."
+    },
+    {
+      "q": "¿Cuál de los siguientes registros de un controlador de periférico se utiliza para comprobar si hay un dato disponible para lectura?",
+      "options": [
+        "Registro de Datos (DATA_REG)",
+        "Registro de Control (CONTROL_REG)",
+        "Registro de Estado (STATUS_REG)"
+      ],
+      "correct": 2,
+      "hint": "Indica las condiciones físicas actuales del periférico.",
+      "explanation": "El registro de estado (STATUS_REG) contiene banderas de estado que indican condiciones tales como datos listos para lectura, buffer vacío, o errores de transmisión."
+    },
+    {
+      "q": "En la E/S por consulta de estado, ¿qué recurso del sistema se utiliza al 100% mientras se espera a que el dispositivo esté listo?",
+      "options": [
+        "El bus de datos",
+        "El procesador (CPU)",
+        "El controlador de DMA"
+      ],
+      "correct": 1,
+      "hint": "Se ejecuta un bucle de instrucciones cerrado continuamente.",
+      "explanation": "Durante el polling, la CPU ejecuta de forma ininterrumpida instrucciones para leer y comprobar el registro de estado, lo que consume el 100% de su capacidad sin realizar cómputo útil."
+    },
+    {
+      "q": "¿Qué bit del registro de estado suele indicar que la UART está lista para recibir un nuevo byte de salida desde la CPU?",
+      "options": [
+        "RxReady",
+        "TxEmpty o READY",
+        "INT_EN"
+      ],
+      "correct": 1,
+      "hint": "Representa el estado del buffer de transmisión.",
+      "explanation": "El bit TxEmpty (transmisión vacía) o READY en el registro de estado de la UART indica que el transmisor ha enviado el dato previo y el buffer está libre para la siguiente escritura."
+    },
+    {
+      "q": "¿Cuál es una de las principales ventajas del polling sobre el método de interrupciones?",
+      "options": [
+        "Menor consumo de energía de la CPU",
+        "Menor latencia de respuesta si la CPU está dedicada únicamente a la consulta",
+        "Permite una mejor multiprogramación en sistemas multitarea"
+      ],
+      "correct": 1,
+      "hint": "La CPU no tiene que guardar el contexto ni saltar a una ISR.",
+      "explanation": "Dado que la CPU está consultando constantemente el registro del periférico, detecta el cambio de estado de manera casi instantánea, eliminando la sobrecarga y la latencia del servicio de interrupciones."
+    },
+    {
+      "q": "En el bucle de polling en ensamblador ARM: 'espera: LDR R3, [R0]; TST R3, #1; BEQ espera', ¿qué condición hace que la CPU salga del bucle?",
+      "options": [
+        "Que el bit 0 del registro de estado sea 1",
+        "Que el registro R3 sea igual a 0",
+        "Que ocurra una interrupción externa"
+      ],
+      "correct": 0,
+      "hint": "BEQ salta si la bandera Z es 1, es decir, si el resultado de TST es 0.",
+      "explanation": "La instrucción TST realiza una operación AND lógica entre R3 y la máscara 1. Si el bit 0 es 0, el resultado es 0 y Z=1, por lo que BEQ salta. Si el bit es 1, Z=0, BEQ no salta y se sale del bucle."
+    },
+    {
+      "q": "¿Qué ocurre si la CPU escribe un dato en el registro de datos (DATA_REG) de una UART de salida antes de que el bit READY sea 1?",
+      "options": [
+        "El dato anterior que se estaba transmitiendo puede ser sobrescrito y perderse",
+        "El procesador entra automáticamente en un estado de excepción por alineación",
+        "La UART ignora la escritura y genera una interrupción de error"
+      ],
+      "correct": 0,
+      "hint": "El hardware del transmisor no tiene tiempo de procesar el dato anterior.",
+      "explanation": "Escribir en DATA_REG mientras el hardware está ocupado (READY = 0) sobrescribe el búfer de transmisión del chip, causando la pérdida del dato previo antes de que este se envíe por completo."
+    },
+    {
+      "q": "¿Qué modificador de tipo de variable en lenguaje C se debe usar para evitar que el compilador optimice y elimine las lecturas repetidas de un registro de estado mapeado en memoria?",
+      "options": [
+        "static",
+        "volatile",
+        "extern"
+      ],
+      "correct": 1,
+      "hint": "Indica que la variable puede cambiar fuera del flujo normal del programa.",
+      "explanation": "La palabra clave 'volatile' le indica al compilador que la dirección de memoria asociada puede ser modificada por hardware externo, forzando a la CPU a leerla de la RAM en cada iteración del bucle."
+    },
+    {
+      "q": "En la transferencia por consulta de estado con múltiples periféricos, ¿cómo se llama el esquema en el que se consulta secuencialmente a cada periférico uno por uno en un bucle cerrado?",
+      "options": [
+        "Polling por prioridad",
+        "Polling Round-Robin",
+        "Espera activa distribuida"
+      ],
+      "correct": 1,
+      "hint": "Es un orden secuencial circular similar al de un carrusel.",
+      "explanation": "El esquema de polling Round-Robin comprueba de forma secuencial y circular el estado de cada uno de los periféricos activos, garantizando un servicio equitativo a todos."
+    },
+    {
+      "q": "¿Cuál de las siguientes afirmaciones describe mejor el 'Live-lock' o bloqueo vivo en el contexto de la E/S por polling?",
+      "options": [
+        "La CPU se queda sin energía debido al bucle continuo",
+        "La CPU consume todo su tiempo atendiendo o consultando periféricos rápidos, impidiendo que otros procesos de usuario de fondo progresen",
+        "El periférico detiene su reloj interno al no recibir datos de la CPU"
+      ],
+      "correct": 1,
+      "hint": "La CPU realiza trabajo constante pero infructuoso para los procesos del SO.",
+      "explanation": "El Live-lock ocurre cuando la CPU está tan sobrecargada atendiendo de forma continua las consultas de estado de periféricos rápidos que no le queda tiempo de proceso para otras tareas del sistema operativo."
+    },
+    {
+      "q": "Si un periférico tiene su registro de datos mapeado en memoria en 0x40003004, ¿qué tipo de E/S se está empleando?",
+      "options": [
+        "E/S mapeada en memoria (Memory-Mapped I/O)",
+        "E/S mapeada en puertos (Port-Mapped I/O)",
+        "E/S aislada"
+      ],
+      "correct": 0,
+      "hint": "Se accede mediante el mismo espacio de direcciones que la memoria principal.",
+      "explanation": "En la E/S mapeada en memoria (MMIO), los registros de los periféricos comparten el mismo espacio de direcciones que la memoria RAM, permitiendo el uso de las instrucciones estándar de lectura y escritura."
+    },
+    {
+      "q": "¿Qué instrucción del repertorio ARM de 32 bits realiza una operación AND bit a bit entre un registro y un inmediato, actualizando las banderas pero sin guardar el resultado?",
+      "options": [
+        "AND",
+        "TST",
+        "CMP"
+      ],
+      "correct": 1,
+      "hint": "Sus siglas corresponden a 'Test'.",
+      "explanation": "La instrucción TST (Test) realiza un AND bit a bit entre los operandos y actualiza los flags del CPSR (especialmente Z y N), pero descarta el resultado de la operación lógica sin modificar el registro fuente."
+    },
+    {
+      "q": "¿Por qué el polling es extremadamente ineficiente para gestionar dispositivos muy lentos como un teclado humano?",
+      "options": [
+        "Porque el teclado genera demasiados datos por segundo",
+        "Porque el procesador pasa millones de ciclos ejecutando el bucle de espera activa estérilmente entre pulsaciones",
+        "Porque el hardware del teclado requiere tensiones eléctricas incompatibles con el polling"
+      ],
+      "correct": 1,
+      "hint": "El intervalo de tiempo entre eventos del usuario es gigantesco para la CPU.",
+      "explanation": "Un usuario escribe a velocidades del orden de milisegundos, mientras que la CPU funciona en el orden de nanosegundos. Esto significa que la CPU realiza millones de lecturas redundantes del registro de estado."
+    },
+    {
+      "q": "En una UART de recepción, ¿qué bit del registro de estado se pone a 1 para indicar que ha llegado un byte desde la línea serie y está disponible en DATA_REG?",
+      "options": [
+        "TxEmpty",
+        "RxReady",
+        "ParityError"
+      ],
+      "correct": 1,
+      "hint": "Indica la recepción completa y disponibilidad del dato.",
+      "explanation": "El bit RxReady (receptor listo) indica al procesador que la UART ha recibido de forma completa un dato del exterior, lo ha desensamblado de la trama serie y lo ha depositado en el registro de datos para su lectura."
+    },
+    {
+      "q": "En una arquitectura ARM con E/S mapeada en memoria, ¿qué instrucciones se utilizan para acceder a los registros de los periféricos?",
+      "options": [
+        "Instrucciones específicas IN y OUT",
+        "Instrucciones generales de transferencia con memoria como LDR y STR",
+        "Únicamente instrucciones de procesamiento de datos como ADD y MOV"
+      ],
+      "correct": 1,
+      "hint": "ARM sigue la arquitectura Load/Store de forma uniforme.",
+      "explanation": "Al ser E/S mapeada en memoria, no existen instrucciones específicas de puerto. Se emplean instrucciones estándar de carga de memoria (LDR/LDRB) y almacenamiento (STR/STRB)."
+    },
+    {
+      "q": "Si la CPU hace polling a un periférico que nunca se activa debido a un fallo físico, ¿qué mecanismo de software puede evitar que la CPU quede bloqueada indefinidamente?",
+      "options": [
+        "Mecanismo de control de paridad",
+        "Un bucle con límite de tiempo o timeout",
+        "Uso exclusivo de direccionamiento indirecto"
+      ],
+      "correct": 1,
+      "hint": "Consiste en salir del bucle de espera después de un número máximo de intentos.",
+      "explanation": "El uso de un timeout limita el número de iteraciones o el tiempo transcurrido en el bucle de polling. Si se supera el límite sin que el periférico esté listo, se reporta un error y se evita el bloqueo."
+    },
+    {
+      "q": "¿Qué sucede con el bit READY en el registro de estado cuando la CPU lee el dato correspondiente del registro de datos (DATA_REG) en un periférico de entrada?",
+      "options": [
+        "Se pone a 1 automáticamente por hardware",
+        "Se pone a 0 automáticamente por hardware indicando que el dato ya fue leído",
+        "Debe ser puesto a 0 manualmente mediante una instrucción STR"
+      ],
+      "correct": 1,
+      "hint": "Evita que el software lea el mismo dato repetidamente.",
+      "explanation": "El hardware del controlador borra el bit READY (poniéndolo a 0) en el momento en que detecta la lectura del registro de datos, indicando que el dato actual ya ha sido retirado y que no hay información nueva."
+    },
+    {
+      "q": "Si la tasa de baudios de una UART es de 115200 bps y cada carácter ocupa una trama de 10 bits en la línea física, ¿cuál es la tasa máxima de caracteres transferidos por segundo?",
+      "options": [
+        "115200 caracteres/s",
+        "11520 caracteres/s",
+        "1152 caracteres/s"
+      ],
+      "correct": 1,
+      "hint": "Se divide el número total de bits por segundo entre los bits por carácter.",
+      "explanation": "La velocidad en bytes/s o caracteres/s se calcula dividiendo la velocidad en bits/s (baud rate) entre el tamaño total de la trama (10 bits), lo que da 11520 caracteres por segundo."
+    },
+    {
+      "q": "En el polling de transmisión, ¿cuál es la secuencia correcta de pasos que realiza la CPU?",
+      "options": [
+        "1. Escribir dato en DATA_REG; 2. Esperar READY == 1; 3. Leer STATUS_REG",
+        "1. Leer STATUS_REG; 2. Esperar READY == 1; 3. Escribir dato en DATA_REG",
+        "1. Leer DATA_REG; 2. Comprobar READY == 0; 3. Escribir en STATUS_REG"
+      ],
+      "correct": 1,
+      "hint": "Primero se verifica la disponibilidad del hardware antes de enviarle datos.",
+      "explanation": "La CPU debe leer primero el registro de estado y permanecer en bucle hasta comprobar que READY == 1. Solo entonces es seguro escribir el dato en el registro de datos para su envío."
+    },
+    {
+      "q": "¿Qué significa el término 'espera activa' (busy waiting) en el contexto de E/S?",
+      "options": [
+        "Que la CPU está en modo de bajo consumo esperando que el reloj del sistema se reactive",
+        "Que la CPU ejecuta activamente un bucle consumiendo ciclos de reloj para verificar una condición",
+        "Que el periférico realiza cálculos activos mientras espera comandos del procesador"
+      ],
+      "correct": 1,
+      "hint": "La CPU realiza un consumo activo de energía y procesamiento mientras espera.",
+      "explanation": "La espera activa implica que la CPU permanece en un bucle cerrado ejecutando instrucciones de manera activa con el único fin de chequear el estado de una condición de hardware."
+    },
+    {
+      "q": "En un procesador ARM, si la dirección del registro de estado está en R0 y el bit de listo es el bit 31, ¿qué instrucción de salto condicional se puede usar para seguir esperando en el bucle tras leer con LDR R3, [R0]?",
+      "options": [
+        "BPL (saltar si es positivo o cero, es decir, bit 31 es 0)",
+        "BMI (saltar si es negativo, es decir, bit 31 es 1)",
+        "BVS (saltar si hay desbordamiento)"
+      ],
+      "correct": 0,
+      "hint": "El bit 31 representa el bit de signo. Si el bit 31 es 0, el número se interpreta como positivo.",
+      "explanation": "El bit 31 es el bit de signo del registro R3. Si está en 0 (no listo), las banderas de estado interpretarán el valor como positivo o cero, por lo que un salto condicional BPL (Branch on Plus) mantendrá el bucle."
+    },
+    {
+      "q": "¿Qué problema grave puede surgir en un sistema multiprogramado si un hilo utiliza espera activa sin ceder voluntariamente el procesador?",
+      "options": [
+        "Inanición (starvation) de los demás hilos de ejecución debido al monopolio de la CPU",
+        "Reducción física del ancho de banda del periférico de salida",
+        "Incompatibilidad de paridad de bus"
+      ],
+      "correct": 0,
+      "hint": "El planificador no puede otorgar ciclos de CPU a otras tareas si un hilo acapara el procesador.",
+      "explanation": "En un sistema mononúcleo, un hilo que ejecuta espera activa infinita consume todo el tiempo de CPU, provocando la inanición de otros procesos que necesitan ejecutar código útil de fondo."
+    },
+    {
+      "q": "¿Cuál es el coste en términos de circuitería o hardware de implementar el método de consulta de estado?",
+      "options": [
+        "Es muy alto, requiere líneas dedicadas de interrupción para cada periférico",
+        "Es mínimo, sólo requiere que los registros del periférico sean direccionables en el bus",
+        "Requiere un controlador de DMA dedicado obligatoriamente"
+      ],
+      "correct": 1,
+      "hint": "No requiere líneas de control especiales ni árbitros adicionales de interrupción.",
+      "explanation": "El polling no necesita circuitería especial de interrupciones o lógica de control de prioridades. Simplemente requiere mapear los registros de estado y datos en el mapa de memoria o E/S básico."
+    },
+    {
+      "q": "En la transmisión serie UART, ¿para qué sirve el 'bit de parada' (stop bit)?",
+      "options": [
+        "Para sincronizar el inicio de la transferencia de datos",
+        "Para indicar el final de la transmisión de un carácter y retornar la línea a su estado lógico de reposo (nivel alto)",
+        "Para detectar errores de paridad en el byte"
+      ],
+      "correct": 1,
+      "hint": "Se ubica al final de la trama serie.",
+      "explanation": "El bit de parada marca el final de la trama de transmisión serie y fuerza a la línea física a retornar al nivel lógico alto (reposo o mark) para prepararse para la siguiente trama."
+    },
+    {
+      "q": "Si un periférico tiene sus registros mapeados en memoria a partir de 0x40003000 y queremos leer el byte en esa dirección, ¿qué instrucción ARM realiza esta operación?",
+      "options": [
+        "LDR R1, [R0] (con R0 = 0x40003000)",
+        "LDRB R1, [R0] (con R0 = 0x40003000)",
+        "STRB R1, [R0] (con R0 = 0x40003000)"
+      ],
+      "correct": 1,
+      "hint": "Se desea leer un byte de datos específico, no una palabra completa.",
+      "explanation": "La instrucción LDRB (Load Register Byte) lee exactamente un byte (8 bits) desde la dirección de memoria apuntada por R0 y lo carga en R1, lo cual es ideal para registros de 8 bits."
+    },
+    {
+      "q": "¿Cuál es la principal limitación del polling cuando se tienen múltiples periféricos con diferentes tasas de transferencia?",
+      "options": [
+        "Que la CPU debe atenderlos a todos con la misma prioridad en un bucle simple, aumentando la latencia de los más rápidos",
+        "Que el bus de datos no soporta múltiples periféricos direccionados simultáneamente",
+        "Que se requiere un registro de estado común gigante para todos los periféricos"
+      ],
+      "correct": 0,
+      "hint": "Un bucle de polling simple pasa por todos los dispositivos en orden fijo.",
+      "explanation": "En un bucle de polling múltiple, si el procesador está esperando o atendiendo a un periférico lento, se incrementa notablemente la latencia para atender a un periférico rápido que puede requerir atención urgente."
+    },
+    {
+      "q": "¿Qué bandera del CPSR en ARM es afectada directamente por la instrucción 'TST R3, #0x01'?",
+      "options": [
+        "Bandera Z (Zero)",
+        "Bandera V (Overflow)",
+        "Bandera C (Carry)"
+      ],
+      "correct": 0,
+      "hint": "Esta bandera indica si el resultado de la operación fue exactamente cero.",
+      "explanation": "La instrucción TST realiza un AND lógico. Si el resultado es cero (el bit de estado es 0), la bandera Z (Zero flag) del CPSR se pone a 1. Si el resultado es distinto de cero, Z se pone a 0."
+    },
+    {
+      "q": "Si un dispositivo genera datos cada 10 microsegundos y la CPU tarda 12 microsegundos en consultarlo y procesar cada dato, ¿qué ocurrirá?",
+      "options": [
+        "Habrá una pérdida de datos (pérdida de muestras) debido a la incapacidad del procesador para seguir el ritmo",
+        "El dispositivo reducirá automáticamente su velocidad de muestreo",
+        "El bus de datos bloqueará la CPU hasta que el dispositivo esté listo"
+      ],
+      "correct": 0,
+      "hint": "El procesador tarda más tiempo en procesar un dato que el periférico en producir el siguiente.",
+      "explanation": "Dado que el tiempo de ciclo de procesamiento del procesador (12 µs) es mayor que el periodo de generación de datos (10 µs), la CPU no puede consumir los datos al ritmo necesario, causando desbordamientos de datos."
+    },
+    {
+      "q": "En el polling de recepción serie, ¿qué condición se comprueba para evitar leer un dato duplicado?",
+      "options": [
+        "Que el bit de listo (RxReady) sea 1, indicando la presencia de un dato nuevo, y que este bit se limpie automáticamente al leer",
+        "Que el bit de transmisión (TxEmpty) sea 0",
+        "Que el buffer de salida esté completamente vacío"
+      ],
+      "correct": 0,
+      "hint": "El receptor de la UART limpia el estado de listo una vez consumido el dato.",
+      "explanation": "Para evitar la lectura duplicada del mismo dato, la CPU lee el registro de datos solo cuando RxReady es 1. Dicha lectura del registro borra automáticamente el flag RxReady, impidiendo lecturas adicionales del mismo byte."
+    },
+    {
+      "q": "En ARMv7, ¿por qué es útil la instrucción TST en lugar de una instrucción AND convencional para comprobar bits en espera activa?",
+      "options": [
+        "Porque no sobrescribe el contenido del registro que contiene los bits de estado",
+        "Porque es la única instrucción que puede actualizar las banderas",
+        "Porque tarda menos ciclos de reloj en ejecutarse que la instrucción AND"
+      ],
+      "correct": 0,
+      "hint": "AND guarda el resultado en un registro de destino, alterándolo.",
+      "explanation": "La instrucción TST realiza la operación lógica AND pero no almacena el resultado en ningún registro de destino, preservando el contenido del registro de estado leído para comprobaciones posteriores."
+    },
+    {
+      "q": "En E/S mapeada en memoria (MMIO), ¿qué dispositivo de hardware diferencia los accesos a RAM de los accesos a registros de periféricos?",
+      "options": [
+        "Un decodificador de direcciones en el bus del sistema",
+        "La propia CPU mediante instrucciones específicas de puertos",
+        "El registro CPSR del procesador"
+      ],
+      "correct": 0,
+      "hint": "Detecta si la dirección solicitada en el bus cae dentro del rango del periférico.",
+      "explanation": "El decodificador de direcciones del hardware monitoriza las líneas del bus de direcciones de la CPU y activa la señal de selección (Chip Select) del periférico correspondiente cuando se accede a su rango de direcciones."
+    },
+    {
+      "q": "Si la CPU hace polling en un sistema monoprocesador y entra en un bucle infinito por fallo del periférico, ¿cómo afecta esto a los procesos del SO?",
+      "options": [
+        "No les afecta porque los procesos de fondo corren en la GPU",
+        "Quedan completamente bloqueados a menos que actúe una interrupción de temporizador (timer) que permita cambiar de tarea",
+        "Los procesos de fondo se ejecutan de forma paralela en la memoria caché"
+      ],
+      "correct": 1,
+      "hint": "La CPU requiere de un mecanismo de interrupción periódica para recuperar el control.",
+      "explanation": "Si no hay interrupciones habilitadas (como la del timer del sistema), una espera activa infinita bloqueará de manera definitiva el procesador, impidiendo que el sistema operativo realice un cambio de contexto."
+    },
+    {
+      "q": "En la especificación de una UART, ¿qué significa el término 'Baud Rate'?",
+      "options": [
+        "El número de caracteres de 8 bits transmitidos por minuto",
+        "La velocidad de transmisión en baudios (número de símbolos o bits físicos transmitidos por segundo)",
+        "La capacidad total del buffer FIFO de recepción en bytes"
+      ],
+      "correct": 1,
+      "hint": "Define la velocidad física del canal de transmisión de bits.",
+      "explanation": "El baud rate representa el número de símbolos de señalización física transmitidos por unidad de segundo. En transmisiones serie asíncronas estándar, equivale directamente a los bits físicos por segundo."
+    },
+    {
+      "q": "¿Qué valor tiene el flag Z de CPSR si ejecutamos 'TST R3, #0x02' y el contenido de R3 es 0x00000001?",
+      "options": [
+        "El flag Z se pone a 1",
+        "El flag Z se pone a 0",
+        "El flag Z no cambia de estado"
+      ],
+      "correct": 0,
+      "hint": "Se realiza una operación lógica AND entre 0x01 y 0x02.",
+      "explanation": "El AND lógico entre 0x00000001 y 0x00000002 da como resultado 0x00000000. Al ser el resultado de la operación igual a cero, el flag Z (Zero) del CPSR se pone a 1."
+    },
+    {
+      "q": "En un bucle de consulta de estado para un conversor A/D, ¿cuál de los siguientes pasos es el que típicamente inicia la conversión física?",
+      "options": [
+        "La lectura del registro de estado (STATUS_REG)",
+        "La escritura en un registro de control (CONTROL_REG) con el bit START activo",
+        "La lectura del registro de datos (DATA_REG)"
+      ],
+      "correct": 1,
+      "hint": "Se debe enviar una orden de comando para que el hardware del sensor empiece a medir.",
+      "explanation": "Para iniciar la conversión en un convertidor analógico-digital (ADC), el software escribe típicamente en el registro de control del periférico para activar la señal de inicio de conversión (START)."
+    },
+    {
+      "q": "Si se realiza un acceso de lectura MMIO a un periférico a través de un puntero en C declarado sin la palabra clave 'volatile', ¿cuál es el peligro?",
+      "options": [
+        "El compilador puede optimizar el bucle almacenando en caché el valor del registro en un registro de la CPU y omitir las lecturas reales al bus",
+        "El compilador cambiará automáticamente el acceso de lectura a escritura",
+        "El compilador dividirá la dirección en dos accesos de 16 bits independientes"
+      ],
+      "correct": 0,
+      "hint": "El compilador cree que el contenido de la memoria no cambia de manera externa.",
+      "explanation": "Sin 'volatile', el optimizador del compilador asume que el valor en memoria no cambia solo. Al ver lecturas repetidas a la misma variable sin escrituras intermedias, optimiza leyendo solo una vez y reutilizando el valor en registros."
+    },
+    {
+      "q": "¿Qué elemento de la CPU ARM gestiona las señales de control del bus para transferir datos hacia y desde las direcciones MMIO?",
+      "options": [
+        "El Banco de Registros",
+        "La Unidad de Control y la interfaz de bus",
+        "La Unidad Aritmético Lógica (ALU)"
+      ],
+      "correct": 1,
+      "hint": "Es la encargada de generar los ciclos de lectura y escritura en el bus.",
+      "explanation": "La Unidad de Control del procesador coordina la interfaz de bus para generar los ciclos de lectura (LDR) o escritura (STR) correspondientes en el bus de datos y direcciones del sistema."
+    },
+    {
+      "q": "En un sistema de polling de red, ¿qué término describe la pérdida de paquetes debido a que el buffer del adaptador de red se llena antes de que la CPU lo consulte?",
+      "options": [
+        "Desbordamiento de buffer o Overrun",
+        "Subdesbordamiento o Underrun",
+        "Colisión de colas"
+      ],
+      "correct": 0,
+      "hint": "Ocurre al no vaciar un búfer a tiempo ante la llegada de nuevos datos.",
+      "explanation": "El overrun o desbordamiento de búfer ocurre cuando llegan nuevos datos físicos del periférico y no hay espacio para guardarlos porque el procesador no leyó a tiempo los datos anteriores."
+    },
+    {
+      "q": "¿Cuál es el propósito del registro divisor de reloj (UART_DIV) en una UART?",
+      "options": [
+        "Establecer el formato de datos a 7 u 8 bits",
+        "Reducir la frecuencia del reloj del sistema para adaptarla a la tasa de baudios deseada para la comunicación serie",
+        "Almacenar temporalmente los datos transmitidos"
+      ],
+      "correct": 1,
+      "hint": "Se utiliza para realizar la división de frecuencia del reloj principal.",
+      "explanation": "El registro UART_DIV almacena el factor de división necesario para obtener la frecuencia de muestreo de bits correspondiente al baud rate de comunicación a partir del reloj maestro."
+    },
+    {
+      "q": "Cuando un dispositivo de E/S por polling es mapeado en el espacio de memoria física, ¿qué impacto tiene sobre el tamaño de la memoria RAM disponible para el sistema?",
+      "options": [
+        "El rango de direcciones utilizado por el periférico queda reservado y no se puede utilizar para celdas de memoria RAM física",
+        "Incrementa la cantidad de RAM física de forma virtual",
+        "No tiene ningún impacto porque las direcciones MMIO se solapan con la RAM sin restricciones"
+      ],
+      "correct": 0,
+      "hint": "El bus de direcciones es compartido por la memoria y los periféricos.",
+      "explanation": "Al mapear periféricos en memoria (MMIO), se reserva un rango de direcciones en el bus. Esas direcciones activan al periférico y, por tanto, quedan inutilizadas para la memoria RAM física en ese mismo rango."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En el código de espera activa, la instrucción 'LDR R3, [____]' carga el registro de estado en R3 si R0 contiene la dirección del registro.",
+      "options": [
+        "R0",
+        "R3",
+        "#0x01"
+      ],
+      "correct": 0,
+      "hint": "La dirección base o de registro de estado se precarga en un registro de propósito general.",
+      "explanation": "Para realizar la consulta, se utiliza un registro (habitualmente R0) para almacenar la dirección del registro de estado y se accede a él indirectamente con LDR."
+    },
+    {
+      "q": "Para comprobar únicamente si el bit 0 de estado está activo sin alterar R3, se ejecuta 'TST R3, #____'.",
+      "options": [
+        "0x01",
+        "0x02",
+        "0x00"
+      ],
+      "correct": 0,
+      "hint": "La máscara para el bit 0 es 2^0.",
+      "explanation": "La máscara para probar el bit 0 es 1 (0x01 en hexadecimal). La instrucción TST aplica un AND lógico con esta máscara para actualizar la bandera Z."
+    },
+    {
+      "q": "Complete el salto en el bucle de espera para continuar en bucle mientras READY sea 0 (Z=1): 'espera: LDR R3, [R0]; TST R3, #1; ____ espera'.",
+      "options": [
+        "BEQ",
+        "BNE",
+        "BPL"
+      ],
+      "correct": 0,
+      "hint": "Si READY es 0, el AND lógico dará 0, activando la bandera Z.",
+      "explanation": "BEQ (Branch on Equal) salta si la bandera Z es 1 (es decir, si el resultado de TST fue cero, lo cual indica que el bit de listo está en 0)."
+    },
+    {
+      "q": "Para transmitir un byte almacenado en R2 al registro de datos apuntado por R1, se utiliza la instrucción: '____ R2, [R1]'.",
+      "options": [
+        "STRB",
+        "LDRB",
+        "STR"
+      ],
+      "correct": 0,
+      "hint": "Se trata de un almacenamiento (store) de un tamaño de 8 bits (byte).",
+      "explanation": "La instrucción STRB (Store Register Byte) escribe el byte menos significativo de R2 en la dirección de memoria apuntada por R1 (DATA_REG)."
+    },
+    {
+      "q": "Para configurar el puntero del registro de estado en la dirección física 0x40003000, se utiliza: 'LDR R0, =____'.",
+      "options": [
+        "0x40003000",
+        "[0x40003000]",
+        "#0x40003000"
+      ],
+      "correct": 0,
+      "hint": "Se carga el valor inmediato de 32 bits correspondiente a la dirección usando el literal pool.",
+      "explanation": "La pseudoinstrucción LDR R0, =0x40003000 se traduce cargando el valor literal de la dirección desde el literal pool a R0."
+    },
+    {
+      "q": "Para leer el carácter actual de una cadena y avanzar el puntero R2, se usa direccionamiento post-incrementado: 'LDRB R0, [R2], #____'.",
+      "options": [
+        "1",
+        "4",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Un carácter ASCII ocupa exactamente un byte en memoria.",
+      "explanation": "La instrucción LDRB R0, [R2], #1 lee un byte en R0 desde la dirección apuntada por R2 y posteriormente incrementa R2 en 1 byte."
+    },
+    {
+      "q": "Si el registro de estado UART tiene el bit READY en la posición del bit 3, la máscara para probar el bit es: 'TST R3, #____'.",
+      "options": [
+        "0x08",
+        "0x04",
+        "0x01"
+      ],
+      "correct": 0,
+      "hint": "El valor de la máscara es 2 elevado al exponente 3.",
+      "explanation": "El bit 3 corresponde a un peso binario de 2^3 = 8 (0x08 en hexadecimal). Por tanto, la máscara correcta es 0x08."
+    },
+    {
+      "q": "Para retornar de una subrutina restaurando R4 y R5 desde la pila, la instrucción correcta es: 'POP {R4, R5, ____}'.",
+      "options": [
+        "PC",
+        "LR",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "Se carga el valor de retorno directamente en el contador de programa.",
+      "explanation": "En ARM, restaurar el registro de retorno de la pila directamente en el Program Counter (PC) mediante POP {R4, R5, PC} realiza un salto de retorno inmediato."
+    },
+    {
+      "q": "En un retardo por software, decrementamos R4 y saltamos si no es cero: 'SUBS R4, R4, #1; ____ bucle'.",
+      "options": [
+        "BNE",
+        "BEQ",
+        "B"
+      ],
+      "correct": 0,
+      "hint": "BNE salta cuando Z es 0, es decir, cuando el resultado del decremento no es cero.",
+      "explanation": "La instrucción SUBS actualiza las banderas. Mientras R4 sea mayor que cero, la resta no da cero (Z=0). BNE (Branch on Not Equal) salta de vuelta al bucle."
+    },
+    {
+      "q": "Si R1 contiene la dirección de DATA_REG, la instrucción para escribir el carácter almacenado en R2 es: 'STRB R2, [____]'.",
+      "options": [
+        "R1",
+        "R2",
+        "[R1]"
+      ],
+      "correct": 0,
+      "hint": "Se pasa el registro que contiene la dirección de destino.",
+      "explanation": "En el direccionamiento indirecto por registro, especificamos la base entre corchetes, de modo que 'STRB R2, [R1]' almacena el byte en la dirección de R1."
+    },
+    {
+      "q": "Si el bit de listo está activo en nivel bajo (0 = Listo, 1 = Ocupado), la CPU debe permanecer en bucle mediante: 'TST R3, #1; ____ espera'.",
+      "options": [
+        "BNE",
+        "BEQ",
+        "B"
+      ],
+      "correct": 0,
+      "hint": "Se repite el bucle mientras el bit sea 1 (Z = 0 en la prueba TST).",
+      "explanation": "BNE (Branch on Not Equal) salta si Z=0, lo que significa que el resultado del AND con 1 fue distinto de cero (el bit de estado es 1, ocupado)."
+    },
+    {
+      "q": "Para comprobar el final de una cadena ASCIIZ apuntada por R2, usamos la instrucción de comparación: 'LDRB R0, [R2], #1; CMP R0, #____'.",
+      "options": [
+        "0",
+        "1",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "El carácter terminador de una cadena ASCIIZ es el nulo.",
+      "explanation": "Las cadenas ASCIIZ terminan con el byte cero ('\\0'). Por ello, comparamos el carácter leído con 0 para determinar el final de la cadena."
+    },
+    {
+      "q": "Si STATUS_REG está en 0x40003000 y DATA_REG en 0x40003004, la separación física es de ____ bytes en el mapa de memoria.",
+      "options": [
+        "4",
+        "1",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "Se resta la dirección menor de la mayor.",
+      "explanation": "La diferencia de direcciones 0x40003004 - 0x40003000 = 4. Esto representa una separación de 4 bytes (una palabra de 32 bits)."
+    },
+    {
+      "q": "Para leer el registro de estado de 32 bits de un periférico mapeado en R0 con un desplazamiento de 8 bytes, se escribe: 'LDR R3, [R0, #____]'.",
+      "options": [
+        "8",
+        "4",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento inmediato se indica con el signo # seguido del valor.",
+      "explanation": "El direccionamiento inmediato con desplazamiento se expresa como [R0, #8], cargando la palabra que está en la dirección R0 + 8."
+    },
+    {
+      "q": "En la instrucción de espera activa 'LDR R3, [R0]; TST R3, #0x02; BEQ bucle', se comprueba el estado del bit número ____ de R3.",
+      "options": [
+        "1",
+        "2",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "La máscara 0x02 representa la potencia de 2 en binario correspondiente.",
+      "explanation": "El valor hexadecimal 0x02 equivale a 0010 en binario, lo que representa que solo el bit 1 está activo en la máscara."
+    },
+    {
+      "q": "Para cargar una constante de 8 bits (por ejemplo, 0xFF) en R0 de forma directa, completamos la instrucción: 'MOV R0, #____'.",
+      "options": [
+        "0xFF",
+        "0x1FF",
+        "0x200"
+      ],
+      "correct": 0,
+      "hint": "Es el valor máximo representable con un solo byte físico en ensamblador.",
+      "explanation": "El valor 0xFF (255 en decimal) es una constante de 8 bits representable de forma directa en el operando inmediato de ARM sin requerir rotaciones."
+    },
+    {
+      "q": "Si R3 contiene 0x01, la instrucción 'TST R3, #0x01' actualiza la bandera Z a ____.",
+      "options": [
+        "0",
+        "1",
+        "no la altera"
+      ],
+      "correct": 0,
+      "hint": "El resultado lógico AND entre 0x01 y 0x01 es 0x01 (distinto de cero).",
+      "explanation": "Dado que el resultado del AND bit a bit no es cero, la bandera Z (Zero flag) del registro CPSR se pone a 0."
+    },
+    {
+      "q": "El registro de estado de un periférico suele ser configurado de sólo ____ para la CPU, mientras que el de control suele ser de escritura.",
+      "options": [
+        "lectura",
+        "escritura",
+        "ejecución"
+      ],
+      "correct": 0,
+      "hint": "La CPU solo lee el estado del hardware, no puede forzar cambios directos de estado mediante este registro.",
+      "explanation": "El registro de estado es típicamente de sólo lectura (Read-Only) para el procesador, ya que refleja estados de hardware internos gobernados por el controlador."
+    },
+    {
+      "q": "La CPU realiza espera activa o busy waiting en un ____ cerrado mientras comprueba iterativamente el bit de estado.",
+      "options": [
+        "bucle",
+        "subproceso",
+        "retorno"
+      ],
+      "correct": 0,
+      "hint": "Se ejecuta repetidamente la misma secuencia de instrucciones de consulta.",
+      "explanation": "La CPU permanece dando vueltas en un bucle cerrado (bucle de polling) hasta que el dispositivo externo cambia el estado del bit verificado."
+    },
+    {
+      "q": "Para comprobar si el bit 7 (TxEmpty) de un registro de estado está activo, usamos la instrucción: 'TST R3, #____'.",
+      "options": [
+        "0x80",
+        "0x40",
+        "0x20"
+      ],
+      "correct": 0,
+      "hint": "El bit 7 tiene un peso binario de 2^7.",
+      "explanation": "El bit 7 equivale en binario a 10000000, que en base hexadecimal se representa como 0x80."
+    },
+    {
+      "q": "¿Qué información relevante para el programador contiene el manual de referencia de un periférico de E/S?",
+      "options": [
+        "Las direcciones base de los registros mapeados en memoria",
+        "El formato y significado de cada bit en el registro de estado",
+        "Todas las opciones anteriores son correctas"
+      ],
+      "correct": 2,
+      "hint": "Se requiere conocer tanto dónde acceder como el mapa de bits del controlador.",
+      "explanation": "El manual del periférico detalla el mapeo de memoria de sus registros, así como la estructura del registro de estado (READY, ERROR) y el de datos."
+    },
+    {
+      "q": "¿Cuáles son los riesgos asociados al polling continuado sin límites (espera activa infinita) si el periférico falla físicamente?",
+      "options": [
+        "Bloqueo completo de la CPU en el bucle de espera",
+        "Incapacidad para responder a eventos de otros periféricos no gestionados por interrupción",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La CPU no puede escapar del bucle cerrado por software si no hay un temporizador.",
+      "explanation": "Si el periférico falla y nunca activa el bit de listo, la CPU quedará atrapada en el bucle cerrado indefinidamente, bloqueando todo el sistema."
+    },
+    {
+      "q": "En el desarrollo de un controlador de E/S por polling en ARM, ¿qué funciones debe implementar el software de bajo nivel?",
+      "options": [
+        "Inicialización de los registros de control (velocidad, formato de trama)",
+        "Consulta del estado mediante bucles y transferencia del dato",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El software debe inicializar el hardware y luego controlar el flujo de datos.",
+      "explanation": "El controlador debe configurar los parámetros del hardware del periférico (registro de control) y luego implementar las rutinas de polling para enviar/recibir."
+    },
+    {
+      "q": "¿Qué registros mínimos componen la interfaz de un controlador de periférico mapeado en memoria?",
+      "options": [
+        "Un registro de estado (STATUS_REG) y un registro de control (CONTROL_REG)",
+        "Un registro de datos de entrada/salida (DATA_REG)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se necesitan registros para control, lectura de estado e intercambio de información.",
+      "explanation": "Una interfaz de periférico típica incluye registros de datos (lectura/escritura), estado (lectura) y control (configuración de modos)."
+    },
+    {
+      "q": "¿Por qué se prefiere el método de interrupciones frente al de polling en sistemas multitarea de propósito general?",
+      "options": [
+        "Porque libera a la CPU de la espera activa, permitiendo ejecutar otros procesos",
+        "Porque reduce el consumo de energía del procesador al poder pasar a estados de reposo",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El uso eficiente de la CPU y la energía son factores clave en sistemas modernos.",
+      "explanation": "Las interrupciones permiten al procesador realizar otros cálculos útiles o entrar en modo de reposo, despertando solo cuando el periférico está listo."
+    },
+    {
+      "q": "Al programar controladores de dispositivos en C, ¿por qué es crítico el uso de la directiva 'volatile'?",
+      "options": [
+        "Indica al compilador que el valor de la dirección puede ser modificado por hardware externo",
+        "Evita que el compilador optimice y elimine las lecturas repetidas de un registro en un bucle",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El hardware de E/S es asíncrono respecto a la ejecución de instrucciones de la CPU.",
+      "explanation": "La palabra 'volatile' le dice al compilador que no asuma que el contenido del registro es estático, previniendo optimizaciones que arruinen el bucle de polling."
+    },
+    {
+      "q": "En la transmisión de una cadena de caracteres mediante polling de UART, ¿qué tareas realiza la CPU para cada carácter de la cadena?",
+      "options": [
+        "Cargar el carácter actual desde la memoria RAM",
+        "Hacer polling hasta que el transmisor esté listo y escribir el carácter en DATA_REG",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se requiere procesar individualmente cada carácter secuencialmente.",
+      "explanation": "La rutina debe leer el carácter, esperar de forma activa a que la UART esté libre (polling de TxEmpty) y luego almacenar el byte en DATA_REG."
+    },
+    {
+      "q": "¿Cuáles son los componentes del retardo total en la comunicación con un periférico usando polling?",
+      "options": [
+        "El tiempo físico que tarda el dispositivo en procesar o transmitir el dato",
+        "El tiempo que tarda el bucle de la CPU en detectar el cambio de estado (latencia de polling)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El retardo incluye tanto la velocidad del hardware como la frecuencia de chequeo del software.",
+      "explanation": "El retardo está compuesto por el tiempo de servicio físico del periférico más el tiempo transcurrido desde que el periférico está listo hasta que la CPU realiza la lectura."
+    },
+    {
+      "q": "¿Qué tipos de errores de comunicación se pueden notificar en el registro de estado de una UART?",
+      "options": [
+        "Error de paridad (parity error) si se corrompe la trama",
+        "Error de desbordamiento (overrun error) si llega un dato y el anterior no fue leído",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La UART monitoriza activamente la integridad física de la línea serie.",
+      "explanation": "El registro de estado expone fallos físicos de transmisión tales como errores de paridad, de encuadre (framing error) o desbordamientos (overrun)."
+    },
+    {
+      "q": "¿Qué factores pueden justificar el uso de polling en lugar de interrupciones?",
+      "options": [
+        "El periférico es de muy alta velocidad y requiere una respuesta inmediata con mínima latencia",
+        "La sencillez del hardware del sistema que no dispone de controlador de interrupciones",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El polling elimina la sobrecarga de guardar/restaurar contexto de interrupción.",
+      "explanation": "En dispositivos ultrarrápidos (como tarjetas de red de alta velocidad o en la fase inicial del arranque), la sobrecarga de una interrupción es mayor que el coste de la espera activa."
+    },
+    {
+      "q": "¿Qué valor final tendrá R0 si se ejecutan las siguientes instrucciones en ARM con R3 conteniendo 0x00000000?\n\nTST R3, #0x01\nBEQ es_cero\nMOV R0, #5\nB fin\nes_cero: MOV R0, #10\nfin:",
+      "options": [
+        "El valor 5",
+        "El valor 0",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "R3 tiene el bit 0 en 0. TST dará un resultado de 0, activando la bandera Z.",
+      "explanation": "Al realizar TST R3, #1, como R3=0, el resultado es 0 y Z=1. BEQ salta a 'es_cero', ejecutando MOV R0, #10. Por tanto, R0 finaliza con el valor 10."
+    },
+    {
+      "q": "¿Qué instrucción ARM de bifurcación condicional se utiliza para repetir un bucle de polling de recepción si el bit 2 del registro de estado (RxReady) es 0 después de realizar TST R3, #0x04?",
+      "options": [
+        "BNE",
+        "BPL",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se busca saltar cuando el resultado de la instrucción de prueba sea exactamente cero.",
+      "explanation": "Si el bit 2 es 0, la operación AND da 0 (Z=1). La instrucción de salto que se debe usar es BEQ. Como no figura en las opciones, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Qué registro del banco de registros de ARMv7 se utiliza por convención para apuntar al registro de estado en las subrutinas de polling estándar si no se dispone de R0?",
+      "options": [
+        "El registro SP (R13)",
+        "El registro PC (R15)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se utilizan los registros de propósito general normales de la arquitectura.",
+      "explanation": "Por convención y para evitar alterar el flujo de programa o la pila, se emplean registros de propósito general (R1 a R12) para almacenar direcciones de periféricos. SP y PC tienen funciones específicas y no se usan para esto."
+    },
+    {
+      "q": "Si una UART transmite a 19200 baudios (aproximadamente 1920 bytes/s), ¿cuál es el tiempo aproximado de transmisión de un solo carácter en milisegundos?",
+      "options": [
+        "0.052 ms",
+        "5.2 ms",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se calcula dividiendo 1 entre el número de bytes por segundo.",
+      "explanation": "El tiempo es 1 / 1920 segundos = 0.00052 s = 0.52 ms. Ninguna de las opciones anteriores (0.052 ms y 5.2 ms) es correcta."
+    },
+    {
+      "q": "¿Cuál es el comportamiento de una instrucción 'STRB R2, [R1]' en un periférico de salida si R1 contiene una dirección de memoria impar?",
+      "options": [
+        "Genera una excepción de desalineación obligatoria en todas las CPU ARMv7",
+        "Sobrescribe la palabra completa de 32 bits alineada",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La instrucción de escritura de byte opera de forma independiente de la alineación de palabras.",
+      "explanation": "Los accesos a nivel de byte (LDRB, STRB) no sufren problemas de desalineación en ARM, permitiendo el acceso directo a cualquier dirección (par o impar) sin generar excepciones ni alterar bytes contiguos."
+    },
+    {
+      "q": "¿Qué máscara en hexadecimal se requiere para comprobar únicamente los bits 0 y 1 simultáneamente en una sola instrucción TST?",
+      "options": [
+        "0x01",
+        "0x02",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se requiere que el bit 0 y el bit 1 de la máscara estén en 1.",
+      "explanation": "Para comprobar los bits 0 (2^0=1) y 1 (2^1=2) al mismo tiempo, se necesita una máscara de 3 (0x03 en hexadecimal), que no está en las opciones."
+    },
+    {
+      "q": "En un bucle de polling de recepción UART, ¿qué instrucción ARM lee el byte recibido de un periférico mapeado en R1 y lo guarda en R4?",
+      "options": [
+        "STRB R4, [R1]",
+        "LDR R4, [R1, #4]",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se requiere realizar una lectura (load) de un byte de datos.",
+      "explanation": "La instrucción correcta es LDRB R4, [R1]. Las opciones presentadas son una escritura (STRB) y una lectura de palabra completa desplazada (LDR con desplazamiento)."
+    },
+    {
+      "q": "Si la CPU ejecuta un bucle de polling que tarda exactamente 5 ciclos de reloj a 200 MHz, ¿cuál es el tiempo de duración de cada consulta en nanosegundos?",
+      "options": [
+        "1000 ns",
+        "5 ns",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "A 200 MHz, el periodo de reloj es de 5 nanosegundos.",
+      "explanation": "Un ciclo de reloj a 200 MHz dura 1 / (200 * 10^6) = 5 ns. Un bucle de 5 ciclos dura 5 * 5 ns = 25 ns, lo cual no figura en las opciones."
+    },
+    {
+      "q": "¿Qué instrucción ARM permite realizar un salto a una subrutina de polling guardando la dirección de retorno en el registro LR de forma automática?",
+      "options": [
+        "B subrutina",
+        "BX subrutina",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se trata de la instrucción 'Branch with Link'.",
+      "explanation": "La instrucción correcta es BL (Branch with Link). B realiza un salto simple sin retorno, y BX se utiliza para cambiar de estado ARM/Thumb."
+    },
+    {
+      "q": "Si el bus de direcciones de un procesador tiene 16 bits, ¿cuántos kilobytes de espacio de memoria física puede direccionar en total?",
+      "options": [
+        "1024 KB",
+        "4096 KB",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se calcula como 2 elevado al número de líneas de dirección dividido entre 1024.",
+      "explanation": "Un bus de 16 bits direcciona 2^16 = 65536 bytes = 64 KB, valor que no se encuentra en las opciones."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "prob_1",
+      "title": "Baud Rate y Tasa de Bytes en UART",
+      "context": "Un puerto UART se configura para transmitir a 115200 baudios. La trama física de cada carácter transmitido consta de: 1 bit de inicio, 8 bits de datos, sin paridad y 1 bit de parada (total 10 bits por trama).",
+      "parts": [
+        {
+          "id": "prob_1_a",
+          "label": "a",
+          "question": "¿Cuántos caracteres o bytes por segundo se pueden transmitir como máximo a través de esta UART en condiciones ideales?",
+          "correctValue": 11520,
+          "tolerance": 0,
+          "explanation": "La tasa de transmisión de caracteres se calcula como: $$\\text{Tasa} = \\frac{\\text{Baud Rate}}{\\text{bits/trama}} = \\frac{115200}{10} = 11520 \\text{ bytes/s}$$"
+        },
+        {
+          "id": "prob_1_b",
+          "label": "b",
+          "question": "¿Cuál es el tiempo de transmisión de un solo carácter expresado en microsegundos?",
+          "correctValue": 86.8,
+          "tolerance": 0.1,
+          "explanation": "El tiempo de transmisión de una trama de 10 bits es: $$T_{char} = \\frac{10}{115200} \\approx 8.6805 \\times 10^{-5} \\text{ s} = 86.8 \\text{ \\mu s}$$"
+        },
+        {
+          "id": "prob_1_c",
+          "label": "c",
+          "question": "Si la CPU funciona a 50 MHz y cada iteración del bucle de polling tarda 5 ciclos de reloj, ¿cuántas iteraciones del bucle se ejecutan en promedio durante la transmisión física de un solo carácter?",
+          "correctValue": 868,
+          "tolerance": 1,
+          "explanation": "A $50$ MHz, un ciclo de reloj es $20$ ns. Una iteración del bucle dura $5 \\times 20$ ns = $100$ ns = $0.1 \\text{ \\mu s}$. El número de iteraciones es: $$\\text{Iteraciones} = \\frac{86.8 \\text{ \\mu s}}{0.1 \\text{ \\mu s}} = 868$$"
+        },
+        {
+          "id": "prob_1_d",
+          "label": "d",
+          "question": "¿Qué porcentaje del rendimiento de la CPU se consume en espera activa si se realiza polling continuo para transmitir a la máxima velocidad física?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Durante la transmisión continua por polling, la CPU está bloqueada al $100\\%$ ejecutando el bucle de espera activa, sin poder realizar ninguna otra tarea."
+        }
+      ]
+    },
+    {
+      "id": "prob_2",
+      "title": "Bucle de Polling Básico en Ensamblador ARM",
+      "context": "Analizamos la rutina en ARM: 'espera: LDR R3, [R0]; TST R3, #0x02; BEQ espera'. R0 contiene la dirección del registro de estado 0x40001000.",
+      "parts": [
+        {
+          "id": "prob_2_a",
+          "label": "a",
+          "question": "¿Qué número de bit (0-31) del registro de estado se comprueba con la máscara 0x02?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La máscara $0x02$ es $0010_2$ en binario, lo que significa que el bit comprobado es el bit $1$."
+        },
+        {
+          "id": "prob_2_b",
+          "label": "b",
+          "question": "Si LDR tarda 3 ciclos de reloj, TST tarda 1 ciclo y BEQ tarda 3 ciclos cuando salta, ¿cuántos ciclos de reloj dura cada iteración fallida de espera en el bucle?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Cada iteración fallida ejecuta LDR (3 ciclos), TST (1 ciclo) y realiza el salto BEQ de vuelta (3 ciclos). Total: $3 + 1 + 3 = 7$ ciclos."
+        },
+        {
+          "id": "prob_2_c",
+          "label": "c",
+          "question": "Si el reloj del sistema es de 20 MHz, ¿cuántos nanosegundos dura una sola iteración de espera en el bucle?",
+          "correctValue": 350,
+          "tolerance": 0,
+          "explanation": "Periodo de reloj: $T = 1 / (20 \\text{ MHz}) = 50$ ns. Duración de la iteración: $7 \\text{ ciclos} \\times 50$ ns/ciclo = $350$ ns."
+        },
+        {
+          "id": "prob_2_d",
+          "label": "d",
+          "question": "Si la UART tarda 20 microsegundos en ponerse lista, ¿cuántas iteraciones del bucle se completarán aproximadamente antes de salir de la espera activa?",
+          "correctValue": 57,
+          "tolerance": 1,
+          "explanation": "Número de iteraciones: $$\\text{Iteraciones} = \\frac{20 \\text{ \\mu s}}{350 \\text{ ns}} = \\frac{20000 \\text{ ns}}{350 \\text{ ns}} \\approx 57.14$$ Por tanto, se completan 57 iteraciones."
+        }
+      ]
+    },
+    {
+      "id": "prob_3",
+      "title": "Transmisión de Cadena ASCIIZ por Polling",
+      "context": "Se ejecuta la subrutina 'enviar_cadena' descrita en el manual para transmitir la cadena 'ARM-CPU' (terminada en cero, ASCIIZ). R2 contiene inicialmente la dirección base decimal 1000.",
+      "parts": [
+        {
+          "id": "prob_3_a",
+          "label": "a",
+          "question": "¿Cuántos bytes en total (incluido el terminador nulo) ocupa esta cadena en la memoria?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La cadena 'ARM-CPU' contiene 7 caracteres legibles ('A', 'R', 'M', '-', 'C', 'P', 'U') más el carácter nulo '\\0', totalizando 8 bytes."
+        },
+        {
+          "id": "prob_3_b",
+          "label": "b",
+          "question": "¿Cuántas escrituras de bytes en el registro de datos (DATA_REG) se realizarán durante la ejecución de la rutina?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Se transmiten únicamente los 7 caracteres legibles. El carácter nulo final se utiliza para romper el bucle y no se transmite físicamente."
+        },
+        {
+          "id": "prob_3_c",
+          "label": "c",
+          "question": "¿Cuál será la dirección decimal final del puntero R2 al terminar la rutina si se avanza con la instrucción LDRB R0, [R2], #1?",
+          "correctValue": 1008,
+          "tolerance": 0,
+          "explanation": "Dado que se leen 8 bytes de forma secuencial y cada instrucción LDRB incrementa R2 en 1 (post-incremento), la dirección final en R2 es: $1000 + 8 = 1008$."
+        },
+        {
+          "id": "prob_3_d",
+          "label": "d",
+          "question": "¿Cuántas veces en total se ejecuta la instrucción de comparación 'CMP R0, #0' en la subrutina?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Se ejecuta una vez por cada carácter leído de la memoria para verificar si es el carácter nulo, incluyendo la lectura del propio nulo. Total: 8 veces."
+        }
+      ]
+    },
+    {
+      "id": "prob_4",
+      "title": "Consulta Secuencial de Tres Periféricos (Round-Robin)",
+      "context": "Un microcontrolador consulta el estado de tres dispositivos A, B y C mediante un bucle secuencial. El tiempo que tarda la CPU en leer y verificar el estado de cada periférico cuando no está listo es: A = 10 ciclos, B = 15 ciclos, C = 12 ciclos.",
+      "parts": [
+        {
+          "id": "prob_4_a",
+          "label": "a",
+          "question": "Si ninguno de los tres periféricos está listo, ¿cuántos ciclos de reloj consume una vuelta completa del bucle de polling?",
+          "correctValue": 37,
+          "tolerance": 0,
+          "explanation": "Vuelta completa = A (10) + B (15) + C (12) = 37 ciclos de reloj."
+        },
+        {
+          "id": "prob_4_b",
+          "label": "b",
+          "question": "Si la CPU funciona a 100 MHz, ¿cuál es la frecuencia máxima en kHz a la que se puede muestrear el estado de cada periférico individual en espera activa continua sin servicio?",
+          "correctValue": 2702.7,
+          "tolerance": 1.0,
+          "explanation": "El tiempo de una vuelta completa es $37 \\times 10$ ns = $370$ ns. La frecuencia es: $$f = \\frac{1}{370 \\text{ ns}} \\approx 2702702.7 \\text{ Hz} = 2702.7 \\text{ kHz}$$"
+        },
+        {
+          "id": "prob_4_c",
+          "label": "c",
+          "question": "Si en una iteración el dispositivo B resulta estar listo y atender su transferencia de datos consume 50 ciclos de reloj adicionales, ¿cuántos ciclos dura esa iteración completa del bucle?",
+          "correctValue": 87,
+          "tolerance": 0,
+          "explanation": "La iteración consume la consulta de A (10), la consulta de B (15), el servicio de B (50) y la consulta de C (12). Total: $10 + 15 + 50 + 12 = 87$ ciclos."
+        },
+        {
+          "id": "prob_4_d",
+          "label": "d",
+          "question": "Si los tres periféricos se vuelven listos simultáneamente en una misma iteración y atender a cada uno consume 50 ciclos adicionales, ¿cuántos ciclos consume esa vuelta completa?",
+          "correctValue": 187,
+          "tolerance": 0,
+          "explanation": "Se realiza el chequeo básico (37 ciclos) más el servicio de los tres periféricos ($3 \\times 50 = 150$ ciclos). Total: $37 + 150 = 187$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_5",
+      "title": "UART a 9600 Baudios y Desperdicio de CPU",
+      "context": "Una UART transmite caracteres utilizando una trama de 10 bits a una velocidad de 9600 baudios. El procesador funciona a una frecuencia de reloj de 1 GHz y no realiza ninguna otra tarea útil.",
+      "parts": [
+        {
+          "id": "prob_5_a",
+          "label": "a",
+          "question": "¿Cuántos nanosegundos tarda en transmitirse un solo bit físico a través de la línea?",
+          "correctValue": 104166.7,
+          "tolerance": 10.0,
+          "explanation": "Duración de 1 bit: $$T_{bit} = \\frac{1}{9600} \\approx 1.041667 \\times 10^{-4} \\text{ s} = 104166.7 \\text{ ns}$$"
+        },
+        {
+          "id": "prob_5_b",
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj de la CPU transcurren durante la transmisión completa de una trama de 10 bits?",
+          "correctValue": 1041667,
+          "tolerance": 100,
+          "explanation": "Tiempo trama: $10 \\text{ bits} \\times 104166.7$ ns/bit = $1041667$ ns. A $1$ GHz (1 ciclo = 1 ns), esto equivale a $1041667$ ciclos de reloj."
+        },
+        {
+          "id": "prob_5_c",
+          "label": "c",
+          "question": "¿Cuántas instrucciones de 1 ciclo cada una se podrían haber ejecutado teóricamente si no se usara espera activa durante la transmisión de ese carácter?",
+          "correctValue": 1041667,
+          "tolerance": 100,
+          "explanation": "Puesto que cada ciclo puede ejecutar 1 instrucción, se habrían podido ejecutar teóricamente $1041667$ instrucciones útiles en lugar de hacer polling."
+        },
+        {
+          "id": "prob_5_d",
+          "label": "d",
+          "question": "Si optimizamos el software añadiendo un retardo de 100.000 ciclos en el bucle de polling, ¿cuál es el número máximo de consultas de estado que realizará la CPU antes de que el carácter esté totalmente transmitido?",
+          "correctValue": 11,
+          "tolerance": 1,
+          "explanation": "El tiempo total de transmisión es de $1041667$ ciclos. Haciendo consultas cada $100000$ ciclos, el número máximo de consultas es $\\lceil 1041667 / 100000 \\rceil = 11$ consultas."
+        }
+      ]
+    },
+    {
+      "id": "prob_6",
+      "title": "Análisis del Muestreo de un Bucle de Recepción",
+      "context": "Se ejecuta el siguiente bucle de recepción UART en ARM: 'recibir: LDR R3, [R0]; TST R3, #0x04; BEQ recibir; LDRB R4, [R1]'. La CPU corre a 40 MHz y cada iteración del bucle tarda 8 ciclos de reloj.",
+      "parts": [
+        {
+          "id": "prob_6_a",
+          "label": "a",
+          "question": "¿Cuál es el intervalo de tiempo (en microsegundos) entre cada consulta de estado de la CPU (periodo de muestreo del polling)?",
+          "correctValue": 0.2,
+          "tolerance": 0.01,
+          "explanation": "Periodo de reloj: $T = 1 / (40 \\text{ MHz}) = 25$ ns. Una consulta dura 8 ciclos: $8 \\times 25$ ns = $200$ ns = $0.2 \\text{ \\mu s}$."
+        },
+        {
+          "id": "prob_6_b",
+          "label": "b",
+          "question": "Si el periférico recibe bytes de forma constante a una velocidad de 500.000 bytes/s, ¿cuántas veces se ejecuta el bucle de polling entre cada byte recibido?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Tiempo entre bytes recibidos: $1 / 500000 = 2 \\text{ \\mu s}$. Como cada consulta tarda $0.2 \\text{ \\mu s}$, el bucle se ejecuta $2 / 0.2 = 10$ veces."
+        },
+        {
+          "id": "prob_6_c",
+          "label": "c",
+          "question": "Asumiendo que no llegan más datos, ¿cuál será el valor del bit 2 en R3 después de leer R4 mediante LDRB y volver a ejecutar la instrucción LDR R3, [R0]?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al realizar la lectura del registro de datos con LDRB, el controlador borra automáticamente el flag de listo (bit 2), por lo que valdrá 0."
+        },
+        {
+          "id": "prob_6_d",
+          "label": "d",
+          "question": "Si la tasa de recepción aumenta a 6.000.000 bytes/s, ¿cuál es el tiempo máximo en nanosegundos que tiene la CPU para leer R4 antes de que se pierda el dato por overrun?",
+          "correctValue": 166.7,
+          "tolerance": 1.0,
+          "explanation": "El tiempo de llegada entre bytes a esta nueva tasa es: $1 / (6 \\times 10^6) \\approx 1.6667 \\times 10^{-7}$ s = $166.7$ ns."
+        }
+      ]
+    },
+    {
+      "id": "prob_7",
+      "title": "Eficiencia Energética y Consumo por Polling",
+      "context": "Un microcontrolador consume 40 mA cuando ejecuta instrucciones de forma activa (modo Run) y 5 mA cuando está en modo de bajo consumo (Sleep). Un sensor le envía un dato cada 100 ms.",
+      "parts": [
+        {
+          "id": "prob_7_a",
+          "label": "a",
+          "question": "Si usamos polling continuo, el procesador está siempre en modo Run. ¿Cuál es el consumo de corriente promedio en mA?",
+          "correctValue": 40.0,
+          "tolerance": 0,
+          "explanation": "Dado que el procesador nunca duerme y está en bucle continuo de polling, consume siempre la corriente máxima de $40.0$ mA."
+        },
+        {
+          "id": "prob_7_b",
+          "label": "b",
+          "question": "Si usamos interrupciones, el microcontrolador permanece en Sleep y despierta sólo durante 1 ms para procesar el dato en modo Run. ¿Cuál es el consumo promedio en mA?",
+          "correctValue": 5.35,
+          "tolerance": 0.05,
+          "explanation": "En un periodo de 100 ms: 1 ms se consume a 40 mA y 99 ms a 5 mA. Consumo medio: $$\\text{Consumo} = \\frac{(1 \\times 40) + (99 \\times 5)}{100} = \\frac{40 + 495}{100} = 5.35 \\text{ mA}$$"
+        },
+        {
+          "id": "prob_7_c",
+          "label": "c",
+          "question": "¿Cuántas veces menor es el consumo de corriente al implementar el sistema por interrupciones en lugar de polling?",
+          "correctValue": 7.48,
+          "tolerance": 0.1,
+          "explanation": "Relación de consumo: $$\\text{Relación} = \\frac{\\text{Consumo Polling}}{\\text{Consumo Interrupción}} = \\frac{40}{5.35} \\approx 7.48$$"
+        },
+        {
+          "id": "prob_7_d",
+          "label": "d",
+          "question": "Si la capacidad de la batería es de 1000 mAh, ¿cuántas horas durará el sistema funcionando bajo el esquema de polling continuo?",
+          "correctValue": 25.0,
+          "tolerance": 0,
+          "explanation": "Duración de la batería: $$\\text{Duración} = \\frac{1000 \\text{ mAh}}{40 \\text{ mA}} = 25 \\text{ horas}$$"
+        }
+      ]
+    },
+    {
+      "id": "prob_8",
+      "title": "Mapeo en Memoria de Registros UART",
+      "context": "Los registros de una interfaz UART están mapeados en memoria a partir de la dirección base base = 0x4000F000. El registro STATUS_REG está en el desplazamiento (offset) 0x00, DATA_REG en 0x04 y CONTROL_REG en 0x08.",
+      "parts": [
+        {
+          "id": "prob_8_a",
+          "label": "a",
+          "question": "¿Cuál es la dirección decimal correspondiente al registro DATA_REG?",
+          "correctValue": 1073803268,
+          "tolerance": 0,
+          "explanation": "La dirección hexadecimal es $0x4000F004$. Convertido a decimal: $4 \\times 16^7 + 15 \\times 16^2 + 4 = 1073741824 + 61440 + 4 = 1073803268$."
+        },
+        {
+          "id": "prob_8_b",
+          "label": "b",
+          "question": "¿Cuál es la dirección decimal correspondiente al registro CONTROL_REG?",
+          "correctValue": 1073803272,
+          "tolerance": 0,
+          "explanation": "La dirección hexadecimal es $0x4000F008$. Convertido a decimal: $4 \\times 16^7 + 15 \\times 16^2 + 8 = 1073741824 + 61440 + 8 = 1073803272$."
+        },
+        {
+          "id": "prob_8_c",
+          "label": "c",
+          "question": "Si se accede a estos registros mediante palabras de 32 bits, ¿cuántos bytes de espacio ocupa cada registro?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "En una arquitectura de 32 bits, cada acceso a palabra completa (word) ocupa 4 bytes de memoria."
+        },
+        {
+          "id": "prob_8_d",
+          "label": "d",
+          "question": "¿Qué desplazamiento o diferencia en bytes existe entre CONTROL_REG y DATA_REG?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Diferencia de offsets: $0x08 - 0x04 = 4$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_9",
+      "title": "Tasa de Consultas Estériles en Espera Activa",
+      "context": "Un sensor de temperatura se actualiza una vez por segundo. La CPU hace polling continuo sobre el estado del sensor ejecutando un bucle que tarda 5 microsegundos por iteración.",
+      "parts": [
+        {
+          "id": "prob_9_a",
+          "label": "a",
+          "question": "¿Cuántas consultas del registro de estado realiza la CPU por segundo?",
+          "correctValue": 200000,
+          "tolerance": 0,
+          "explanation": "Consultas por segundo: $1 \\text{ s} / 5 \\text{ \\mu s} = 200000$ consultas."
+        },
+        {
+          "id": "prob_9_b",
+          "label": "b",
+          "question": "¿Cuántas de estas consultas realizadas en un segundo son lecturas estériles (donde el sensor informa que no está listo)?",
+          "correctValue": 199999,
+          "tolerance": 0,
+          "explanation": "Solo una de las consultas de estado da como resultado que el sensor está listo. Las restantes $200000 - 1 = 199999$ son estériles."
+        },
+        {
+          "id": "prob_9_c",
+          "label": "c",
+          "question": "Si cada consulta de estado estéril ejecuta 4 instrucciones, ¿cuántas instrucciones ejecuta la CPU de forma redundante por segundo?",
+          "correctValue": 799996,
+          "tolerance": 0,
+          "explanation": "Instrucciones estériles: $199999 \\times 4 = 799996$ instrucciones."
+        },
+        {
+          "id": "prob_9_d",
+          "label": "d",
+          "question": "Si la CPU funciona a una frecuencia de 1 MHz, ¿qué porcentaje de su capacidad de procesamiento útil anualizado o por segundo se desperdicia en polling?",
+          "correctValue": 80.0,
+          "tolerance": 0.1,
+          "explanation": "A $1$ MHz, la CPU ejecuta $1.000.000$ de ciclos por segundo. El porcentaje desperdiciado es: $$\\% = \\frac{799996}{1000000} \\times 100 \\approx 80.0\\%$$"
+        }
+      ]
+    },
+    {
+      "id": "prob_10",
+      "title": "Latencia en Polling Round-Robin",
+      "context": "Un sistema gestiona 8 dispositivos mediante polling round-robin. La consulta del registro de estado de cada uno toma 12 ciclos de reloj. Si un dispositivo está listo, atender su transferencia consume 500 ciclos. La CPU corre a 50 MHz.",
+      "parts": [
+        {
+          "id": "prob_10_a",
+          "label": "a",
+          "question": "¿Cuál es la duración en microsegundos de una iteración del bucle si ningún periférico está listo?",
+          "correctValue": 1.92,
+          "tolerance": 0.05,
+          "explanation": "Ciclos totales sin periféricos listos: $8 \\times 12 = 96$ ciclos. Duración: $96 / 50$ MHz = $1.92$ microsegundos."
+        },
+        {
+          "id": "prob_10_b",
+          "label": "b",
+          "question": "En el peor caso, ¿cuál es la latencia máxima en microsegundos para consultar a un dispositivo si los otros 7 se ponen listos justo antes?",
+          "correctValue": 71.92,
+          "tolerance": 0.5,
+          "explanation": "Peor caso: La CPU debe verificar todos los estados ($8 \\times 12 = 96$ ciclos) y atender a los otros 7 periféricos ($7 \\times 500 = 3500$ ciclos). Total ciclos: $3596$ ciclos. Latencia: $3596 / 50$ MHz = $71.92$ \\mu s."
+        },
+        {
+          "id": "prob_10_c",
+          "label": "c",
+          "question": "Si el dispositivo A tiene un búfer físico que retiene el dato solo 50 microsegundos, ¿se perderán datos en el peor caso? (1 para Sí, 0 para No)",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, ya que la latencia máxima ($71.92$ \\mu s) supera el tiempo que el dato es estable en el búfer ($50$ \\mu s)."
+        },
+        {
+          "id": "prob_10_d",
+          "label": "d",
+          "question": "Si se reduce el número de dispositivos a 4, ¿cuál es la nueva latencia máxima en el peor caso (en microsegundos)?",
+          "correctValue": 30.96,
+          "tolerance": 0.5,
+          "explanation": "Con 4 dispositivos, el peor caso implica verificar 4 estados ($4 \\times 12 = 48$ ciclos) y atender a los otros 3 ($3 \\times 500 = 1500$ ciclos). Total ciclos: $1548$. Latencia: $1548 / 50$ MHz = $30.96$ \\mu s."
+        }
+      ]
+    },
+    {
+      "id": "prob_11",
+      "title": "Tránsito de Datos y Capacidad de Buffer FIFO",
+      "context": "Un puerto serie recibe bytes a una tasa constante de 100.000 bytes/s. La UART dispone de un buffer FIFO para almacenar caracteres recibidos y la CPU los retira por polling.",
+      "parts": [
+        {
+          "id": "prob_11_a",
+          "label": "a",
+          "question": "¿Cuántos microsegundos tarda el FIFO en llenarse desde vacío hasta 4 bytes si la CPU no realiza lecturas?",
+          "correctValue": 40.0,
+          "tolerance": 0.1,
+          "explanation": "El tiempo entre bytes es $1 / 100000 = 10$ \\mu s. El tiempo para recibir 4 bytes es: $4 \\times 10 \\text{ \\mu s} = 40.0 \\text{ \\mu s}$."
+        },
+        {
+          "id": "prob_11_b",
+          "label": "b",
+          "question": "Si la CPU tarda 5 microsegundos en realizar cada iteración de polling para comprobar el estado, ¿cuál es el número máximo de comprobaciones que puede realizar antes de que el FIFO de 4 bytes se desborde?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El FIFO tarda $40$ \\mu s en llenarse. Por tanto, la CPU puede consultar un máximo de $40 / 5 = 8$ veces antes del overrun."
+        },
+        {
+          "id": "prob_11_c",
+          "label": "c",
+          "question": "Si una vez detectado que el FIFO está lleno, la CPU tarda 2 microsegundos en leer un byte, ¿cuántos microsegundos se necesitan para vaciarlo por completo (4 bytes)?",
+          "correctValue": 8.0,
+          "tolerance": 0.1,
+          "explanation": "Para vaciar 4 bytes a razón de 2 \\mu s por byte, la CPU tarda: $4 \\times 2 = 8.0$ \\mu s."
+        },
+        {
+          "id": "prob_11_d",
+          "label": "d",
+          "question": "Si el FIFO se llena, ¿cuál es el margen de seguridad de tiempo adicional (en microsegundos) que tiene la CPU antes de que llegue un quinto byte y cause desbordamiento?",
+          "correctValue": 10.0,
+          "tolerance": 0.1,
+          "explanation": "El quinto byte comenzará a llegar a los $40$ \\mu s y se consolidará a los $50$ \\mu s. El margen adicional desde que el FIFO se llena (4 bytes a los 40 \\mu s) hasta que se consolida el desbordamiento es de exactamente 1 carácter = $10.0$ \\mu s."
+        }
+      ]
+    },
+    {
+      "id": "prob_12",
+      "title": "Codificación y Desensamblado de Instrucciones de Polling",
+      "context": "Se analiza la instrucción ARM 'TST R3, #0x01'. Esta instrucción se codifica en formato de 32 bits.",
+      "parts": [
+        {
+          "id": "prob_12_a",
+          "label": "a",
+          "question": "¿Cuántos bits de longitud física ocupa esta instrucción en memoria?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "Todas las instrucciones en la arquitectura ARM estándar de 32 bits ocupan de forma fija 32 bits (4 bytes)."
+        },
+        {
+          "id": "prob_12_b",
+          "label": "b",
+          "question": "¿Cuántos bits del extremo superior de la instrucción (bits 31-28) se reservan para el campo de código de condición (cond)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El campo 'cond' ocupa exactamente los 4 bits más significativos (del bit 28 al 31) en el formato ARMv7."
+        },
+        {
+          "id": "prob_12_c",
+          "label": "c",
+          "question": "El código de operación (opcode) de la instrucción TST es 1000 en binario. ¿Cuál es su equivalente decimal?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El binario $1000_2$ se traduce directamente a decimal como $8$ ($1 \\times 2^3$)."
+        },
+        {
+          "id": "prob_12_d",
+          "label": "d",
+          "question": "Si la instrucción se ejecuta incondicionalmente (código de condición 'AL', siempre), el campo 'cond' se codifica como 1110 en binario. ¿Qué valor decimal representa?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "El binario $1110_2$ equivale a: $1 \\times 8 + 1 \\times 4 + 1 \\times 2 + 0 \\times 1 = 14$."
+        }
+      ]
+    },
+    {
+      "id": "prob_13",
+      "title": "Rendimiento CPU y Muestreo de un ADC",
+      "context": "Un conversor analógico-digital (ADC) toma muestras periódicas a una frecuencia constante de 50 kHz. La CPU procesa cada muestra haciendo polling de conversión completa.",
+      "parts": [
+        {
+          "id": "prob_13_a",
+          "label": "a",
+          "question": "¿Cuál es el intervalo de tiempo o periodo de muestreo del ADC expresado en microsegundos?",
+          "correctValue": 20.0,
+          "tolerance": 0.1,
+          "explanation": "El periodo de muestreo es: $$T = \\frac{1}{f} = \\frac{1}{50000 \\text{ Hz}} = 2 \\times 10^{-5} \\text{ s} = 20.0 \\text{ \\mu s}$$"
+        },
+        {
+          "id": "prob_13_b",
+          "label": "b",
+          "question": "Si la CPU tarda exactamente 2 microsegundos en procesar el dato tras leerlo, ¿cuántos microsegundos quedan libres entre muestras?",
+          "correctValue": 18.0,
+          "tolerance": 0.1,
+          "explanation": "El tiempo restante libre es: $20.0$ \\mu s (periodo) - $2.0$ \\mu s (procesamiento) = $18.0$ \\mu s."
+        },
+        {
+          "id": "prob_13_c",
+          "label": "c",
+          "question": "Si durante el tiempo libre la CPU espera en un bucle de polling cerrado, ¿qué porcentaje de tiempo de CPU se gasta de forma ineficiente?",
+          "correctValue": 90.0,
+          "tolerance": 0.5,
+          "explanation": "El porcentaje desperdiciado en espera activa es: $$\\% = \\frac{18.0}{20.0} \\times 100 = 90.0\\%$$"
+        },
+        {
+          "id": "prob_13_d",
+          "label": "d",
+          "question": "Si cambiamos a interrupciones, el procesamiento tarda 2 microsegundos y la sobrecarga por interrupción es de 1 microsegundo. ¿Qué porcentaje de tiempo de CPU queda libre para otras tareas de fondo?",
+          "correctValue": 85.0,
+          "tolerance": 0.5,
+          "explanation": "Tiempo de CPU consumido por muestra: $2 \\text{ \\mu s} \\text{ (procesar)} + 1 \\text{ \\mu s} \\text{ (sobrecarga)} = 3 \\text{ \\mu s}$. Fracción consumida: $3 / 20 = 15\\%$. Porcentaje libre: $100\\% - 15\\% = 85.0\\%$."
+        }
+      ]
+    },
+    {
+      "id": "prob_14",
+      "title": "Máscaras y Desplazamientos de Bits en Polling",
+      "context": "Se desea analizar las máscaras binarias e inmediatas para comprobar bits específicos de estado (bit N) mediante instrucciones TST en ARM.",
+      "parts": [
+        {
+          "id": "prob_14_a",
+          "label": "a",
+          "question": "Si el bit READY se encuentra en el bit 0 (N = 0), ¿cuál es el valor decimal de la máscara inmediata?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para el bit 0, la máscara es $2^0 = 1$."
+        },
+        {
+          "id": "prob_14_b",
+          "label": "b",
+          "question": "Si el bit se encuentra en la posición 7 (N = 7), ¿cuál es el valor decimal de la máscara?",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "Para el bit 7, la máscara es $2^7 = 128$."
+        },
+        {
+          "id": "prob_14_c",
+          "label": "c",
+          "question": "Si el bit se encuentra en la posición 10 (N = 10), ¿cuál es el valor decimal de la máscara?",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "Para el bit 10, la máscara es $2^{10} = 1024$."
+        },
+        {
+          "id": "prob_14_d",
+          "label": "d",
+          "question": "Si la máscara utilizada en un programa de control tiene un valor decimal de 65536, ¿qué bit N se está comprobando?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Dado que $2^N = 65536$, tomamos el logaritmo en base 2: $N = \\log_2(65536) = 16$."
+        }
+      ]
+    },
+    {
+      "id": "prob_15",
+      "title": "Espera Activa con Retardo por Software",
+      "context": "Considere la rutina ARM: 'espera: LDR R3, [R0]; TST R3, #1; BNE listo; LDR R4, =1000; delay: SUBS R4, R4, #1; BNE delay; B espera; listo: STR R2, [R1]'.",
+      "parts": [
+        {
+          "id": "prob_15_a",
+          "label": "a",
+          "question": "Si SUBS toma 1 ciclo y BNE toma 3 ciclos si salta, ¿cuántos ciclos de reloj toma una sola iteración del bucle 'delay' mientras R4 sea mayor que cero?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Cada iteración del bucle ejecuta SUBS (1 ciclo) y BNE (3 ciclos si salta). Total: 4 ciclos."
+        },
+        {
+          "id": "prob_15_b",
+          "label": "b",
+          "question": "¿Cuántos ciclos consume el bucle 'delay' en total para decrementar R4 desde 1000 hasta 0 (asuma que la última iteración sin salto toma 2 ciclos en total)?",
+          "correctValue": 3998,
+          "tolerance": 2,
+          "explanation": "Las primeras 999 iteraciones saltan: $999 \\times 4 = 3996$ ciclos. La última iteración no salta y consume 2 ciclos. Total: $3996 + 2 = 3998$ ciclos."
+        },
+        {
+          "id": "prob_15_c",
+          "label": "c",
+          "question": "Si la CPU funciona a 40 MHz, ¿cuántos microsegundos dura aproximadamente este retardo por software?",
+          "correctValue": 99.95,
+          "tolerance": 0.5,
+          "explanation": "A $40$ MHz, 1 ciclo = 25 ns. Tiempo de retardo: $3998 \\times 25$ ns = $99950$ ns = $99.95$ \\mu s."
+        },
+        {
+          "id": "prob_15_d",
+          "label": "d",
+          "question": "Si el periférico tarda exactamente 300 microsegundos en estar listo, ¿cuántas veces leerá la CPU el registro de estado (LDR R3, [R0]) antes de salir del bucle?",
+          "correctValue": 4,
+          "tolerance": 1,
+          "explanation": "Cada ciclo de espera (incluyendo lectura de estado, prueba y retardo) tarda aprox. $100$ \\mu s. Lectura 1 a los 0 \\mu s (no listo). Lectura 2 a los ~100 \\mu s (no listo). Lectura 3 a los ~200 \\mu s (no listo). Lectura 4 a los ~300 \\mu s (listo). Se lee 4 veces."
+        }
+      ]
+    },
+    {
+      "id": "prob_16",
+      "title": "Bucle de Transmisión de Bloques de Memoria",
+      "context": "Se desea transmitir un bloque de 256 bytes usando una UART que tarda 10 microsegundos en procesar y transmitir cada byte. La CPU realiza polling continuo con un bucle que dura 0.5 microsegundos por iteración.",
+      "parts": [
+        {
+          "id": "prob_16_a",
+          "label": "a",
+          "question": "¿Cuántos bytes en total se transfieren en la operación?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "El tamaño del bloque es de exactamente 256 bytes."
+        },
+        {
+          "id": "prob_16_b",
+          "label": "b",
+          "question": "¿Cuál es el tiempo mínimo total en milisegundos empleado en transferir todo el bloque si no hay demoras de software adicionales?",
+          "correctValue": 2.56,
+          "tolerance": 0.01,
+          "explanation": "Tiempo = $256 \\text{ bytes} \\times 10 \\text{ \\mu s/byte} = 2560 \\text{ \\mu s} = 2.56$ ms."
+        },
+        {
+          "id": "prob_16_c",
+          "label": "c",
+          "question": "¿Cuántas consultas del registro de estado resultarán fallidas o estériles en total durante toda la transferencia del bloque?",
+          "correctValue": 4864,
+          "tolerance": 50,
+          "explanation": "Para cada byte, la transmisión física toma $10$ \\mu s. La CPU realiza consultas cada $0.5$ \\mu s, es decir, $10 / 0.5 = 20$ consultas. De ellas, 1 es exitosa y 19 son estériles. Total estériles: $19 \\times 256 = 4864$ consultas."
+        },
+        {
+          "id": "prob_16_d",
+          "label": "d",
+          "question": "Si aumentamos el tamaño del bloque a 1024 bytes, ¿cuál será el tiempo total de transmisión en milisegundos?",
+          "correctValue": 10.24,
+          "tolerance": 0.05,
+          "explanation": "Tiempo = $1024 \\text{ bytes} \\times 10 \\text{ \\mu s/byte} = 10240 \\text{ \\mu s} = 10.24$ ms."
+        }
+      ]
+    },
+    {
+      "id": "prob_17",
+      "title": "Sobrecarga de Ciclos de CPU en Bucle de Polling",
+      "context": "La CPU ejecuta el bucle: 'bucle: LDRB R3, [R0]; TST R3, #0x01; BEQ bucle; STRB R2, [R1]'. Costes de instrucción: LDRB = 3 ciclos, TST = 1 ciclo, BEQ (salta) = 3 ciclos, BEQ (no salta) = 1 ciclo, STRB = 2 ciclos.",
+      "parts": [
+        {
+          "id": "prob_17_a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj consume la CPU en cada iteración fallida del bucle de polling?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Iteración fallida = LDRB (3) + TST (1) + BEQ que salta (3) = 7 ciclos de reloj."
+        },
+        {
+          "id": "prob_17_b",
+          "label": "b",
+          "question": "¿Cuántos ciclos consume la CPU en la última iteración cuando el dispositivo está listo (incluyendo la escritura STRB)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Última iteración = LDRB (3) + TST (1) + BEQ que no salta (1) + STRB (2) = 7 ciclos."
+        },
+        {
+          "id": "prob_17_c",
+          "label": "c",
+          "question": "Si la CPU realiza 99 iteraciones fallidas antes de encontrar el periférico listo en la número 100, ¿cuál es el coste total en ciclos de reloj de la CPU?",
+          "correctValue": 700,
+          "tolerance": 0,
+          "explanation": "Coste = $99 \\text{ iteraciones fallidas} \\times 7 \\text{ ciclos} + 7 \\text{ ciclos (última)} = 693 + 7 = 700$ ciclos."
+        },
+        {
+          "id": "prob_17_d",
+          "label": "d",
+          "question": "¿Qué porcentaje del tiempo total en ciclos consumidos se dedicó de forma efectiva a la escritura del dato (STRB)?",
+          "correctValue": 0.286,
+          "tolerance": 0.005,
+          "explanation": "Escritura STRB = 2 ciclos. Fracción: $2 / 700 \\approx 0.002857 = 0.286\\%$."
+        }
+      ]
+    },
+    {
+      "id": "prob_18",
+      "title": "Tiempo de Ciclo y Velocidad de UART",
+      "context": "Un microcontrolador funciona a una frecuencia de 80 MHz. Se configura su puerto UART para transmitir a 57600 baudios (trama de 10 bits: 1 inicio, 8 datos, 1 parada).",
+      "parts": [
+        {
+          "id": "prob_18_a",
+          "label": "a",
+          "question": "¿Cuántos caracteres o bytes por segundo se pueden transmitir como máximo a través de la UART en condiciones ideales?",
+          "correctValue": 5760,
+          "tolerance": 0,
+          "explanation": "Tasa máxima: $57600 \\text{ bps} / 10 \\text{ bits/char} = 5760$ char/s."
+        },
+        {
+          "id": "prob_18_b",
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj de la CPU transcurren entre la llegada de cada byte recibido por la UART?",
+          "correctValue": 13888.9,
+          "tolerance": 5.0,
+          "explanation": "Tiempo entre bytes: $1 / 5760 \\approx 1.73611 \\times 10^{-4}$ s = $173611.1$ ns. Ciclo de reloj a $80$ MHz: $1 / (80 \\times 10^6) = 12.5$ ns. Ciclos: $173611.1 / 12.5 = 13888.89$ ciclos."
+        },
+        {
+          "id": "prob_18_c",
+          "label": "c",
+          "question": "Si la CPU hace polling de recepción cada 1000 ciclos de reloj, ¿cuál es el número promedio de consultas que realizará antes de recibir un byte?",
+          "correctValue": 13.9,
+          "tolerance": 0.2,
+          "explanation": "Consultas: $13888.9 \\text{ ciclos} / 1000 \\text{ ciclos/consulta} \\approx 13.8889$ consultas."
+        },
+        {
+          "id": "prob_18_d",
+          "label": "d",
+          "question": "Si la UART duplica su velocidad a 115200 baudios, ¿cuántos ciclos de reloj transcurrirán ahora entre la llegada de cada byte?",
+          "correctValue": 6944.4,
+          "tolerance": 2.5,
+          "explanation": "A doble velocidad, el tiempo se reduce a la mitad. Ciclos: $13888.89 / 2 = 6944.44$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_19",
+      "title": "Análisis de Banderas en Instrucción TST",
+      "context": "Se utiliza la instrucción 'TST R3, #0x08' en un bucle de polling para verificar el estado del bit 3 de un puerto físico.",
+      "parts": [
+        {
+          "id": "prob_19_a",
+          "label": "a",
+          "question": "Si R3 contiene el valor hexadecimal 0x00000000, ¿cuál será el valor lógico del flag Z (Zero) del CPSR tras ejecutar TST?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El AND lógico entre $0x00000000$ y $0x08$ da $0x00000000$. Al ser el resultado igual a cero, el flag Z se pone a 1."
+        },
+        {
+          "id": "prob_19_b",
+          "label": "b",
+          "question": "Si R3 contiene el valor hexadecimal 0x00000008, ¿cuál será el valor lógico del flag Z?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El AND entre $0x08$ y $0x08$ da $0x08$ (distinto de cero), por lo que el flag Z se pone a 0."
+        },
+        {
+          "id": "prob_19_c",
+          "label": "c",
+          "question": "Si R3 contiene el valor hexadecimal 0xF0000008, ¿cuál será el valor lógico del flag N (Negative) tras ejecutar la instrucción TST?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción TST actualiza la bandera N según el bit 31 del resultado. El resultado del AND es $0x00000008$, cuyo bit 31 es 0, por lo que N=0."
+        },
+        {
+          "id": "prob_19_d",
+          "label": "d",
+          "question": "Si R3 tiene el bit 3 en 0, ¿cuál es el estado lógico final del flag Z tras la instrucción TST?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Si el bit 3 es 0, el AND con $0x08$ ($1000_2$) dará obligatoriamente un resultado de 0, poniendo el flag Z a 1."
+        }
+      ]
+    },
+    {
+      "id": "prob_20",
+      "title": "Capacidad de Buffer y Tasa de Entrada/Salida",
+      "context": "Un dispositivo de E/S transfiere datos a una velocidad de 2 MB/s (donde 1 MB = 10^6 bytes) a la CPU. El procesador utiliza un buffer físico de 16 bytes y hace polling de buffer lleno.",
+      "parts": [
+        {
+          "id": "prob_20_a",
+          "label": "a",
+          "question": "¿Cuántos microsegundos tarda el dispositivo de E/S en llenar por completo el buffer de 16 bytes?",
+          "correctValue": 8.0,
+          "tolerance": 0.1,
+          "explanation": "Tiempo de llenado: $$T_{llenado} = \\frac{16 \\text{ bytes}}{2 \\times 10^6 \\text{ bytes/s}} = 8 \\times 10^{-6} \\text{ s} = 8.0 \\text{ \\mu s}$$"
+        },
+        {
+          "id": "prob_20_b",
+          "label": "b",
+          "question": "Si cada consulta de estado por polling tarda 100 ciclos de reloj en un procesador a 200 MHz, ¿cuál es la duración en microsegundos de una sola consulta?",
+          "correctValue": 0.5,
+          "tolerance": 0.05,
+          "explanation": "Ciclo de reloj: $T = 1 / (200 \\text{ MHz}) = 5$ ns. Consulta: $100 \\times 5$ ns = $500$ ns = $0.5$ \\mu s."
+        },
+        {
+          "id": "prob_20_c",
+          "label": "c",
+          "question": "¿Cuántas veces consultará la CPU el buffer en promedio durante cada periodo de llenado si está en espera activa continua?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Consultas: $8.0$ \\mu s / $0.5$ \\mu s = 16 consultas."
+        },
+        {
+          "id": "prob_20_d",
+          "label": "d",
+          "question": "Si vaciar el buffer por la CPU requiere 2 microsegundos una vez que está lleno, ¿qué porcentaje de tiempo de procesamiento se consume de forma útil en vaciar el buffer respecto al periodo total de transferencia?",
+          "correctValue": 25.0,
+          "tolerance": 0.5,
+          "explanation": "El periodo total de transferencia es el tiempo de llenado: 8 \\mu s. El procesamiento útil toma 2 \\mu s. Porcentaje: $2 / 8 \\times 100 = 25.0\\%$."
+        }
+      ]
+    },
+    {
+      "id": "prob_21",
+      "title": "Cálculo del Registro Divisor para Baud Rate",
+      "context": "La UART de un microcontrolador genera su tasa de baudios dividiendo la frecuencia del reloj del sistema (fsys = 16 MHz) según la fórmula: Baud Rate = fsys / (16 * UART_DIV), donde UART_DIV es un registro divisor entero de 16 bits.",
+      "parts": [
+        {
+          "id": "prob_21_a",
+          "label": "a",
+          "question": "Si deseamos obtener una velocidad de 9600 baudios, ¿cuál es el valor entero más cercano que debemos configurar en UART_DIV?",
+          "correctValue": 104,
+          "tolerance": 0,
+          "explanation": "Despejamos UART_DIV: $$\\text{UART\\_DIV} = \\frac{16 \\times 10^6}{16 \\times 9600} = \\frac{10^6}{9600} \\approx 104.167$$ El entero más cercano es 104."
+        },
+        {
+          "id": "prob_21_b",
+          "label": "b",
+          "question": "Con el divisor de reloj configurado en 104, ¿cuál es el baud rate real obtenido por el hardware?",
+          "correctValue": 9615.4,
+          "tolerance": 1.0,
+          "explanation": "Baud Rate real: $$\\text{Baud Rate} = \\frac{16000000}{16 \\times 104} = \\frac{1000000}{104} \\approx 9615.38 \\text{ baudios}$$"
+        },
+        {
+          "id": "prob_21_c",
+          "label": "c",
+          "question": "¿Cuál es el porcentaje de error absoluto de esta tasa de baudios respecto al valor teórico objetivo de 9600 (redondeado a dos decimales)?",
+          "correctValue": 0.16,
+          "tolerance": 0.01,
+          "explanation": "Porcentaje de error: $$\\text{Error} = \\left| \\frac{9615.38 - 9600}{9600} \\right| \\times 100 \\approx 0.16\\%$$"
+        },
+        {
+          "id": "prob_21_d",
+          "label": "d",
+          "question": "Si queremos configurar 115200 baudios en la misma UART, ¿cuál es el divisor entero más cercano?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Divisor: $$\\text{UART\\_DIV} = \\frac{16 \\times 10^6}{16 \\times 115200} = \\frac{10^6}{115200} \\approx 8.68$$ El entero más cercano es 9."
+        }
+      ]
+    },
+    {
+      "id": "prob_22",
+      "title": "Polling en Teclado Matricial 4x4",
+      "context": "Un teclado matricial de 4 filas y 4 columnas se escanea por polling. Escanear una fila y leer el estado de las columnas correspondientes toma 15 microsegundos de CPU.",
+      "parts": [
+        {
+          "id": "prob_22_a",
+          "label": "a",
+          "question": "¿Cuántos microsegundos se necesitan para realizar un escaneo completo de todo el teclado (las 4 filas)?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "Tiempo = 4 filas * 15 \\mu s/fila = 60 microsegundos."
+        },
+        {
+          "id": "prob_22_b",
+          "label": "b",
+          "question": "Si el programa principal realiza este escaneo completo una vez cada 10 milisegundos para control de rebote, ¿cuántos escaneos realiza por segundo?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Escaneos por segundo: $1 \\text{ s} / 10 \\text{ ms} = 1000 \\text{ ms} / 10 \\text{ ms} = 100$ escaneos."
+        },
+        {
+          "id": "prob_22_c",
+          "label": "c",
+          "question": "¿Qué porcentaje de tiempo de la CPU se consume en total en realizar el polling de este teclado?",
+          "correctValue": 0.6,
+          "tolerance": 0.05,
+          "explanation": "Tiempo gastado por segundo: $100 \\text{ escaneos} \\times 60 \\text{ \\mu s} = 6000 \\text{ \\mu s} = 6$ ms. Porcentaje: $6 \\text{ ms} / 1000 \\text{ ms} \\times 100 = 0.6\\%$. El resto está libre."
+        },
+        {
+          "id": "prob_22_d",
+          "label": "d",
+          "question": "Si la CPU funciona a 16 MHz, ¿cuántos ciclos de reloj consume cada escaneo completo de 60 microsegundos?",
+          "correctValue": 960,
+          "tolerance": 0,
+          "explanation": "Ciclos: $60 \\text{ \\mu s} \\times 16 \\text{ MHz} = 60 \\times 10^{-6} \\times 16 \\times 10^6 = 960$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_23",
+      "title": "Pérdida de Datos por Overrun en Recepción UART",
+      "context": "Una UART recibe caracteres de forma continua sin buffer FIFO a una velocidad de 115200 baudios (trama de 10 bits).",
+      "parts": [
+        {
+          "id": "prob_23_a",
+          "label": "a",
+          "question": "¿Cuál es el tiempo máximo en microsegundos que un carácter permanece en DATA_REG antes de que comience a ser sobrescrito por el siguiente?",
+          "correctValue": 86.8,
+          "tolerance": 0.5,
+          "explanation": "Un nuevo byte llega completo cada $10 / 115200$ s $\\approx 86.8$ \\mu s, momento en el cual se sobrescribe DATA_REG."
+        },
+        {
+          "id": "prob_23_b",
+          "label": "b",
+          "question": "Si la CPU no lee DATA_REG durante 100 microsegundos debido a otra tarea, ¿cuántos caracteres como mínimo se habrán perdido?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como $100 \\text{ \\mu s} > 86.8 \\text{ \\mu s}$, llegará un segundo byte que sobrescribirá al primero en DATA_REG, perdiéndose al menos 1 carácter."
+        },
+        {
+          "id": "prob_23_c",
+          "label": "c",
+          "question": "Si la UART tuviera una cola FIFO de 16 niveles, ¿cuál sería el tiempo máximo de tolerancia en microsegundos antes de que ocurra un desbordamiento si el FIFO está inicialmente vacío?",
+          "correctValue": 1388.9,
+          "tolerance": 2.0,
+          "explanation": "El FIFO puede almacenar 16 caracteres. Tiempo máximo: $16 \\times 86.805$ \\mu s $\\approx 1388.9$ \\mu s."
+        },
+        {
+          "id": "prob_23_d",
+          "label": "d",
+          "question": "Si la tasa fuera de 9600 baudios (1.04 ms por carácter), ¿cuál sería este tiempo de tolerancia del FIFO de 16 niveles en milisegundos?",
+          "correctValue": 16.67,
+          "tolerance": 0.1,
+          "explanation": "Tiempo por carácter: $10 / 9600 \\approx 1.0417$ ms. Tiempo para 16 niveles: $16 \\times 1.0417 \\text{ ms} \\approx 16.67$ ms."
+        }
+      ]
+    },
+    {
+      "id": "prob_24",
+      "title": "Desplazamientos y Mapeo en Memoria de Bloques E/S",
+      "context": "En un procesador ARM, los registros de control de un bloque de E/S están mapeados en memoria en el rango 0x40000000 - 0x40000FF. Cada periférico ocupa un subbloque de 16 bytes de espacio direccionable.",
+      "parts": [
+        {
+          "id": "prob_24_a",
+          "label": "a",
+          "question": "¿Cuántos periféricos diferentes se pueden mapear como máximo en este rango de 256 bytes?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El tamaño del rango es de $256$ bytes. Cada periférico ocupa $16$ bytes: $256 / 16 = 16$ periféricos."
+        },
+        {
+          "id": "prob_24_b",
+          "label": "b",
+          "question": "Si el registro de datos de la UART es el tercer periférico (índice 2, empezando en 0), ¿cuál es su dirección base en formato decimal?",
+          "correctValue": 1073741856,
+          "tolerance": 0,
+          "explanation": "La dirección base en hexadecimal es: $0x40000000 + 2 \\times 16 = 0x40000020$. Convertido a decimal: $4 \\times 16^7 + 2 \\times 16^1 = 1073741824 + 32 = 1073741856$."
+        },
+        {
+          "id": "prob_24_c",
+          "label": "c",
+          "question": "Si el registro de estado de este periférico está en un desplazamiento (offset) de 4 bytes respecto a su base, ¿cuál es su dirección decimal?",
+          "correctValue": 1073741860,
+          "tolerance": 0,
+          "explanation": "La dirección es: $1073741856 \\text{ (base)} + 4 = 1073741860$."
+        },
+        {
+          "id": "prob_24_d",
+          "label": "d",
+          "question": "Si se accede a este registro de estado mediante la instrucción LDR R1, [R0, #4], ¿qué valor decimal debe estar cargado en R0?",
+          "correctValue": 1073741856,
+          "tolerance": 0,
+          "explanation": "La instrucción utiliza direccionamiento base con desplazamiento. R0 debe contener la dirección base del periférico, que es $1073741856$."
+        }
+      ]
+    },
+    {
+      "id": "prob_25",
+      "title": "Costes de Ciclos en un Bucle de Polling ANDS",
+      "context": "Se ejecuta el bucle ARM: 'bucle: LDR R3, [R0]; ANDS R3, R3, #0x01; BEQ bucle'. El procesador funciona a 120 MHz.",
+      "parts": [
+        {
+          "id": "prob_25_a",
+          "label": "a",
+          "question": "¿Qué bandera del CPSR se comprueba en BEQ tras la ejecución de la instrucción ANDS? (1 para Z, 2 para N, 3 para C, 4 para V)",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "BEQ (Branch on Equal) evalúa la bandera Z (Zero flag), que es la que se activa si el resultado de ANDS es igual a cero."
+        },
+        {
+          "id": "prob_25_b",
+          "label": "b",
+          "question": "Si R3 contiene originalmente el valor decimal 5, ¿cuál es el resultado decimal de la operación lógica ANDS con 0x01?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El AND lógico entre 5 ($0101_2$) y 1 ($0001_2$) da como resultado $0001_2 = 1$."
+        },
+        {
+          "id": "prob_25_c",
+          "label": "c",
+          "question": "Si LDR tarda 3 ciclos de reloj, ANDS tarda 1 ciclo y BEQ tarda 3 ciclos cuando salta, ¿cuántos ciclos consume cada vuelta fallida?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Vuelta fallida: LDR (3) + ANDS (1) + BEQ (3) = 7 ciclos de reloj."
+        },
+        {
+          "id": "prob_25_d",
+          "label": "d",
+          "question": "¿Cuántas vueltas completas de bucle de espera activa se pueden ejecutar como máximo en 1 microsegundo?",
+          "correctValue": 17,
+          "tolerance": 1,
+          "explanation": "A $120$ MHz, 1 microsegundo contiene $120$ ciclos. Vueltas del bucle: $120 / 7 \\approx 17.14$. Por tanto, se ejecutan 17 vueltas completas."
+        }
+      ]
+    },
+    {
+      "id": "prob_26",
+      "title": "Uso de Ancho de Banda en el Bus por Polling",
+      "context": "La CPU y el controlador de DMA comparten el bus del sistema. La CPU hace polling continuo sobre un registro de estado mapeado en memoria, realizando un acceso de lectura cada 50 ns. El bus funciona a 32 bits.",
+      "parts": [
+        {
+          "id": "prob_26_a",
+          "label": "a",
+          "question": "¿Cuántos millones de accesos a memoria por segundo realiza la CPU debido a esta espera activa?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Accesos por segundo: $1 / 50 \\text{ ns} = 20 \\times 10^6$ accesos/s (20 millones)."
+        },
+        {
+          "id": "prob_26_b",
+          "label": "b",
+          "question": "Si cada acceso de lectura lee una palabra de 32 bits (4 bytes), ¿cuál es el ancho de banda del bus consumido por la CPU en MB/s?",
+          "correctValue": 80.0,
+          "tolerance": 0,
+          "explanation": "Ancho de banda: $20 \\times 10^6 \\text{ accesos/s} \\times 4 \\text{ bytes} = 80 \\times 10^6 \\text{ bytes/s} = 80$ MB/s."
+        },
+        {
+          "id": "prob_26_c",
+          "label": "c",
+          "question": "Si el bus del sistema tiene un ancho de banda máximo de 400 MB/s, ¿qué porcentaje de dicho ancho de banda consume de manera ineficiente la CPU?",
+          "correctValue": 20.0,
+          "tolerance": 0.5,
+          "explanation": "Porcentaje consumido: $$\\% = \\frac{80 \\text{ MB/s}}{400 \\text{ MB/s}} \\times 100 = 20.0\\%$$"
+        },
+        {
+          "id": "prob_26_d",
+          "label": "d",
+          "question": "Si la CPU cambia a interrupciones y solo consulta la memoria cuando el dato está listo (1000 veces por segundo), ¿cuál será el ancho de banda del bus consumido por este concepto en bytes por segundo?",
+          "correctValue": 4000,
+          "tolerance": 0,
+          "explanation": "Ancho de banda: $1000 \\text{ lecturas/s} \\times 4 \\text{ bytes} = 4000$ bytes/s."
+        }
+      ]
+    },
+    {
+      "id": "prob_27",
+      "title": "Estructura del Registro de Control de Periféricos",
+      "context": "Un periférico dispone de un registro de control de 8 bits en la dirección 0x40002000. Los bits se definen así: Bit 0 = ENABLE (1=activado, 0=desactivado); Bit 1 = DIR (0=Entrada, 1=Salida); Bit 2 = INT_EN (1=interrupciones habilitadas, 0=deshabilitadas).",
+      "parts": [
+        {
+          "id": "prob_27_a",
+          "label": "a",
+          "question": "¿Qué valor decimal se debe escribir en el registro de control para habilitar el periférico en modo Entrada con interrupciones desactivadas?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Configuración en binario: INT_EN=0, DIR=0, ENABLE=1. Esto da $001_2 = 1$ en decimal."
+        },
+        {
+          "id": "prob_27_b",
+          "label": "b",
+          "question": "¿Qué valor decimal se debe escribir para habilitar el periférico en modo Salida con interrupciones habilitadas?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Configuración en binario: INT_EN=1, DIR=1, ENABLE=1. Esto da $111_2 = 7$ en decimal."
+        },
+        {
+          "id": "prob_27_c",
+          "label": "c",
+          "question": "Si el registro de control tiene almacenado el valor decimal 5, ¿cuál es el modo de transferencia configurado? (0 para Entrada, 1 para Salida)",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El valor decimal 5 es $101_2$ en binario. Bit 1 (DIR) es 0, lo cual indica que está en modo Entrada."
+        },
+        {
+          "id": "prob_27_d",
+          "label": "d",
+          "question": "Si el bit 7 del registro es el bit de reset por software (RESET) y queremos activarlo manteniendo todos los demás bits del registro en 0, ¿qué valor decimal debemos escribir?",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "La máscara para activar solo el bit 7 es $2^7 = 128$."
+        }
+      ]
+    },
+    {
+      "id": "prob_28",
+      "title": "Velocidad de Conversión A/D y Sobrecarga de Espera",
+      "context": "Un conversor analógico-digital (ADC) requiere 5 microsegundos para realizar una conversión de datos. La CPU inicia cada conversión escribiendo en el registro de control y luego hace polling del bit DONE.",
+      "parts": [
+        {
+          "id": "prob_28_a",
+          "label": "a",
+          "question": "Si el bucle de polling de la CPU tarda 0.25 microsegundos por iteración, ¿cuántas iteraciones del bucle se ejecutan como mínimo por cada conversión?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Iteraciones: $5 \\text{ \\mu s} / 0.25 \\text{ \\mu s} = 20$ iteraciones."
+        },
+        {
+          "id": "prob_28_b",
+          "label": "b",
+          "question": "Si se realiza la conversión de 10.000 muestras consecutivas, ¿cuál es el tiempo mínimo total en milisegundos empleado puramente en esperar a que los datos estén listos?",
+          "correctValue": 50.0,
+          "tolerance": 0.1,
+          "explanation": "Tiempo de espera: $10000 \\times 5 \\text{ \\mu s} = 50000 \\text{ \\mu s} = 50.0$ ms."
+        },
+        {
+          "id": "prob_28_c",
+          "label": "c",
+          "question": "Si la CPU funciona a 100 MHz, ¿cuántos ciclos de reloj se desperdician en total durante la espera de estas 10.000 muestras?",
+          "correctValue": 5000000,
+          "tolerance": 0,
+          "explanation": "Periodo de reloj: 10 ns. Ciclos desperdiciados: $50 \\text{ ms} / 10 \\text{ ns} = 50000000$ ns / $10$ ns = $5000000$ ciclos."
+        },
+        {
+          "id": "prob_28_d",
+          "label": "d",
+          "question": "Si procesar una muestra una vez lista toma 1000 ciclos de reloj, ¿cuántos ciclos de CPU se consumen en procesamiento útil para las 10.000 muestras?",
+          "correctValue": 10000000,
+          "tolerance": 0,
+          "explanation": "Ciclos de procesamiento: $10000 \\text{ muestras} \\times 1000 \\text{ ciclos/muestra} = 10000000$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_29",
+      "title": "Comparación del Tiempo de CPU: Polling vs Interrupciones",
+      "context": "Un periférico lento requiere atención una vez cada 1 milisegundo. Atender la transferencia de datos requiere 2 microsegundos por parte de la CPU.",
+      "parts": [
+        {
+          "id": "prob_29_a",
+          "label": "a",
+          "question": "Si la CPU utiliza polling continuo, está acaparada al 100%. ¿Cuántos microsegundos por segundo se dedican a la espera y atención del dispositivo?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "Con polling continuo, el procesador consume todo el segundo ($10^6$ \\mu s) en espera activa y servicio."
+        },
+        {
+          "id": "prob_29_b",
+          "label": "b",
+          "question": "Si se usan interrupciones, la sobrecarga por interrupción (guardado y restauración de contexto) es de 4 microsegundos. ¿Cuántos microsegundos por segundo consume la CPU en total atendiendo el dispositivo?",
+          "correctValue": 6000,
+          "tolerance": 0,
+          "explanation": "Se producen 1000 interrupciones por segundo. Cada una consume $2 \\text{ \\mu s (servicio)} + 4 \\text{ \\mu s (sobrecarga)} = 6 \\text{ \\mu s}$. Total por segundo: $1000 \\times 6 \\text{ \\mu s} = 6000$ \\mu s."
+        },
+        {
+          "id": "prob_29_c",
+          "label": "c",
+          "question": "¿Qué porcentaje de tiempo de CPU se libera para tareas útiles de fondo tras cambiar de polling a interrupciones?",
+          "correctValue": 99.4,
+          "tolerance": 0.1,
+          "explanation": "Consumo con interrupción: $6000 \\text{ \\mu s} / 10^6 \\text{ \\mu s} = 0.6\\%$. Porcentaje liberado: $100\\% - 0.6\\% = 99.4\\%$."
+        },
+        {
+          "id": "prob_29_d",
+          "label": "d",
+          "question": "Si por mala programación la sobrecarga de interrupción se incrementa a 98 microsegundos, ¿cuál será el porcentaje de CPU total consumido por el periférico?",
+          "correctValue": 10.0,
+          "tolerance": 0.1,
+          "explanation": "Tiempo por interrupción: $2 + 98 = 100$ \\mu s. Total por segundo: $1000 \\times 100 \\text{ \\mu s} = 100000$ \\mu s ($100$ ms). Porcentaje: $100 \\text{ ms} / 1000 \\text{ ms} \\times 100 = 10.0\\%$."
+        }
+      ]
+    },
+    {
+      "id": "prob_30",
+      "title": "Baud Rate y Pérdida de Muestras en Polling",
+      "context": "Una UART se conecta a un emisor continuo que transmite a 230400 baudios (trama de 10 bits). El procesador realiza tareas generales de fondo además de atender la UART por polling.",
+      "parts": [
+        {
+          "id": "prob_30_a",
+          "label": "a",
+          "question": "¿Cuál es el número máximo de bytes por segundo que puede recibir el puerto serie?",
+          "correctValue": 23040,
+          "tolerance": 0,
+          "explanation": "Tasa máxima: $230400 \\text{ bps} / 10 \\text{ bits/char} = 23040$ bytes/s."
+        },
+        {
+          "id": "prob_30_b",
+          "label": "b",
+          "question": "¿Cuál es el intervalo de tiempo en microsegundos entre la llegada de cada byte consecutivo?",
+          "correctValue": 43.4,
+          "tolerance": 0.2,
+          "explanation": "Tiempo entre bytes: $1 / 23040 \\approx 4.3403 \\times 10^{-5}$ s = $43.4$ \\mu s."
+        },
+        {
+          "id": "prob_30_c",
+          "label": "c",
+          "question": "Si el bucle general de la CPU tarda 50 microsegundos en realizar una vuelta completa (muestreo), ¿se producirán pérdidas de datos? (1 para Sí, 0 para No)",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí, dado que el periodo de muestreo ($50$ \\mu s) es mayor que el tiempo entre bytes ($43.4$ \\mu s), la CPU no consultará a tiempo la llegada de algunos caracteres."
+        },
+        {
+          "id": "prob_30_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño mínimo en bytes del buffer FIFO que necesita el puerto UART para evitar la pérdida de caracteres si la CPU puede estar sin hacer polling hasta 200 microsegundos en el peor caso?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Durante 200 \\mu s de inactividad, se pueden acumular: $200 \\text{ \\mu s} / 43.4 \\text{ \\mu s/byte} \\approx 4.6$ bytes. Para evitar pérdidas, el buffer FIFO debe poder almacenar al menos $\\lceil 4.61 \\rceil = 5$ bytes."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Ecuación de la velocidad de transmisión (Baud Rate)",
+      "tex": "$$\\text{Baud Rate} = \\frac{f_{sys}}{16 \\times \\text{UART\\_DIV}}$$"
+    },
+    {
+      "name": "Tiempo de transmisión de un bit (Bit Time)",
+      "tex": "$$T_{bit} = \\frac{1}{\\text{Baud Rate}}$$"
+    },
+    {
+      "name": "Tiempo de transmisión de un carácter UART (Character Time)",
+      "tex": "$$T_{char} = N_{bits} \\times T_{bit}$$"
+    },
+    {
+      "name": "Latencia máxima de polling en round-robin",
+      "tex": "$$\\text{Latencia}_{max} = \\sum_{i=1}^{M-1} T_{servicio, i} + M \\times T_{consulta}$$"
+    },
+    {
+      "name": "Porcentaje de sobrecarga de la CPU por espera activa",
+      "tex": "$$\\text{Sobrecarga} = \\frac{T_{espera}}{T_{total}} \\times 100\\%$$"
+    },
+    {
+      "name": "Rendimiento efectivo en caracteres/bytes por segundo",
+      "tex": "$$\\text{Tasa}_{transferencia} = \\frac{\\text{Baud Rate}}{N_{bits\\_trama}} \\text{ bytes/s}$$"
+    },
+    {
+      "name": "Divisor entero más cercano para la tasa de baudios",
+      "tex": "$$\\text{Divisor} = \\text{round}\\left(\\frac{f_{sys}}{16 \\times \\text{Baud Rate}}\\right)$$"
+    },
+    {
+      "name": "Consumo de ancho de banda del bus por polling",
+      "tex": "$$BW_{polling} = f_{muestreo} \\times \\text{Tamaño\\_Registro} \\text{ bytes/s}$$"
+    }
+  ]
+}

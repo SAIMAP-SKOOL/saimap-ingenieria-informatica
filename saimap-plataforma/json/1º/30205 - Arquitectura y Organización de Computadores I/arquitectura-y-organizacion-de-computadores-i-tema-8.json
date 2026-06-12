@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué tipo de estructura de datos representa la pila (Stack) en un computador?",
+      "options": [
+        "Una estructura de tipo FIFO (First-In, First-Out).",
+        "Una estructura de tipo LIFO (Last-In, First-Out).",
+        "Una estructura de acceso aleatorio directo sin restricciones."
+      ],
+      "correct": 1,
+      "hint": "El último elemento en entrar es el primero en salir.",
+      "explanation": "La pila es una estructura de datos LIFO, donde el último elemento que se apila es el primero que se desapila."
+    },
+    {
+      "q": "¿Qué registro de la arquitectura ARM está reservado por hardware como el Stack Pointer (SP)?",
+      "options": [
+        "El registro R13.",
+        "El registro R14.",
+        "El registro R15."
+      ],
+      "correct": 0,
+      "hint": "Es el registro R13 en el banco de registros de ARM.",
+      "explanation": "En ARM, el Stack Pointer (SP) es el registro R13, encargado de almacenar la dirección de memoria que apunta al tope de la pila."
+    },
+    {
+      "q": "¿Cómo varía el valor del Stack Pointer (SP) en una pila descendente (Descending) al realizar un PUSH?",
+      "options": [
+        "El puntero SP se incrementa.",
+        "El puntero SP se decrementa.",
+        "El puntero SP permanece inalterado."
+      ],
+      "correct": 1,
+      "hint": "Crece hacia direcciones de memoria más bajas.",
+      "explanation": "En las pilas descendentes, el apilado (PUSH) implica restar direcciones, por lo que el SP se decrementa."
+    },
+    {
+      "q": "¿Cómo varía el valor del Stack Pointer (SP) en una pila ascendente (Ascending) al realizar un PUSH?",
+      "options": [
+        "El puntero SP se incrementa.",
+        "El puntero SP se decrementa.",
+        "El puntero SP permanece inalterado."
+      ],
+      "correct": 0,
+      "hint": "Crece hacia direcciones de memoria más altas.",
+      "explanation": "En las pilas ascendentes, el apilado (PUSH) implica sumar direcciones, por lo que el SP se incrementa."
+    },
+    {
+      "q": "¿Qué define a una pila de tipo 'Llena' (Full) respecto a su puntero SP?",
+      "options": [
+        "SP apunta al último elemento realmente almacenado y válido en la pila.",
+        "SP apunta a la primera posición vacía (libre) de la pila.",
+        "SP apunta siempre al centro de la memoria RAM reservada."
+      ],
+      "correct": 0,
+      "hint": "Apunta a un dato válido ya almacenado.",
+      "explanation": "Una pila 'Llena' (Full) es aquella en la que el SP apunta directamente al último dato real que se ha introducido en ella."
+    },
+    {
+      "q": "¿Qué define a una pila de tipo 'Vacía' (Empty) respecto a su puntero SP?",
+      "options": [
+        "SP apunta al último elemento realmente almacenado y válido en la pila.",
+        "SP apunta a la primera dirección vacía o libre, donde se guardará el próximo dato.",
+        "SP apunta a una dirección de memoria nula (0x00000000)."
+      ],
+      "correct": 1,
+      "hint": "Apunta al siguiente hueco libre.",
+      "explanation": "Una pila 'Vacía' (Empty) es aquella en la que el SP apunta al primer espacio libre listo para recibir una nueva escritura."
+    },
+    {
+      "q": "Según el Estándar de Llamadas de la Arquitectura ARM (AAPCS), ¿qué tipo de pila se utiliza por convención?",
+      "options": [
+        "Pila Vacía Ascendente (Empty Ascending - EA).",
+        "Pila Llena Ascendente (Full Ascending - FA).",
+        "Pila Llena Descendente (Full Descending - FD)."
+      ],
+      "correct": 2,
+      "hint": "Se conoce comúnmente como pila FD.",
+      "explanation": "El estándar ARM (AAPCS) define que la pila debe ser Full Descending (Llena Descendente)."
+    },
+    {
+      "q": "En una pila Full Descending (FD), ¿cuál es la secuencia exacta de operaciones al ejecutar un PUSH?",
+      "options": [
+        "Se escribe el dato en la dirección SP, y luego se decrementa SP.",
+        "Se decrementa SP en 4 bytes (por palabra) y luego se escribe el dato en esa nueva dirección.",
+        "Se incrementa SP en 4 bytes y luego se lee el dato de la memoria."
+      ],
+      "correct": 1,
+      "hint": "Es llena descendente: decrementar y escribir.",
+      "explanation": "Como es 'Llena', SP apunta al último elemento guardado. Al hacer PUSH, primero se debe liberar espacio decrementando SP y luego escribir el dato."
+    },
+    {
+      "q": "En una pila Full Descending (FD), ¿cuál es la secuencia exacta de operaciones al ejecutar un POP?",
+      "options": [
+        "Se lee el dato de la dirección actual apuntada por SP y luego se incrementa SP en 4 bytes.",
+        "Se incrementa SP en 4 bytes y luego se lee el dato de esa dirección.",
+        "Se lee el dato de la dirección SP y luego se decrementa SP en 4 bytes."
+      ],
+      "correct": 0,
+      "hint": "Es llena descendente: leer y luego incrementar.",
+      "explanation": "Al ser 'Llena', SP apunta a un elemento válido. En POP, primero se lee este elemento y luego se incrementa SP para liberar lógicamente el espacio."
+    },
+    {
+      "q": "¿Qué instrucción máquina en ARM es equivalente al alias PUSH {R4, R5, LR} en una pila FD?",
+      "options": [
+        "LDMIA SP!, {R4, R5, LR}",
+        "STMIA SP!, {R4, R5, LR}",
+        "STMDB SP!, {R4, R5, LR}"
+      ],
+      "correct": 2,
+      "hint": "Se requiere almacenar de forma descendente (Decrement Before).",
+      "explanation": "PUSH equivale a almacenar múltiples registros decrementando el puntero antes de escribir: STMDB (Store Multiple Decrement Before)."
+    },
+    {
+      "q": "¿Qué instrucción máquina en ARM es equivalente al alias POP {R4, R5, PC} en una pila FD?",
+      "options": [
+        "LDMIA SP!, {R4, R5, PC}",
+        "STMDB SP!, {R4, R5, PC}",
+        "LDMDB SP!, {R4, R5, PC}"
+      ],
+      "correct": 0,
+      "hint": "Se requiere cargar de forma ascendente (Increment After).",
+      "explanation": "POP equivale a cargar múltiples registros incrementando el puntero después de leer: LDMIA (Load Multiple Increment After)."
+    },
+    {
+      "q": "En la instrucción 'STMDB SP!, {R4, R5, LR}', ¿qué función tiene el signo de exclamación '!'?",
+      "options": [
+        "Es un indicador de que los registros se cargan en orden inverso.",
+        "Indica que el registro base SP debe actualizarse con el valor final tras la transferencia (writeback).",
+        "Fuerza a que la instrucción se ejecute en modo privilegiado."
+      ],
+      "correct": 1,
+      "hint": "Permite la actualización automática del puntero SP.",
+      "explanation": "El signo '!' activa el writeback, lo que significa que el registro base (SP) se actualiza con la nueva dirección calculada."
+    },
+    {
+      "q": "¿Qué registros se consideran no volátiles (callee-saved) y deben conservar su valor al retornar de una subrutina?",
+      "options": [
+        "Los registros R4-R11 y SP.",
+        "Los registros R0-R3 y LR.",
+        "Los registros R0-R12 y PC."
+      ],
+      "correct": 0,
+      "hint": "Son los registros de preservación obligatoria por la subrutina llamada.",
+      "explanation": "Según AAPCS, los registros R4 a R11 y SP son no volátiles. Si una subrutina los modifica, debe restaurar su estado original antes de retornar."
+    },
+    {
+      "q": "¿Qué registros se clasifican como volátiles (caller-saved) y pueden ser libremente destruidos por una subrutina?",
+      "options": [
+        "Los registros R4-R11.",
+        "Los registros R0-R3, R12 y LR.",
+        "Únicamente el registro PC."
+      ],
+      "correct": 1,
+      "hint": "Son registros de trabajo rápido y paso de parámetros.",
+      "explanation": "Los registros R0-R3, R12 y LR son volátiles. El llamador no puede asumir que mantendrán su valor tras invocar a otra función."
+    },
+    {
+      "q": "¿Por qué es obligatorio guardar el registro LR en la pila en el prólogo de una subrutina no hoja (que llama a otra)?",
+      "options": [
+        "Porque LR se utiliza para almacenar variables locales automáticamente.",
+        "Porque la instrucción BL para llamar a la siguiente subrutina sobrescribirá LR con la nueva dirección de retorno.",
+        "Porque el hardware de ARM obliga a apilar LR en cualquier instrucción de salto."
+      ],
+      "correct": 1,
+      "hint": "El enlace de retorno se sobrescribe en llamadas anidadas.",
+      "explanation": "La instrucción 'BL' guarda la dirección de retorno en LR. Si una subrutina llama a otra, su propio retorno en LR se perdería si no se guarda en la pila."
+    },
+    {
+      "q": "¿En qué consiste el 'prólogo' de una subrutina en ensamblador ARM?",
+      "options": [
+        "Es la porción de código inicial que guarda registros en la pila y reserva espacio para variables locales.",
+        "Es el bloque de código que realiza los saltos condicionales principales.",
+        "Es la última instrucción que hace el retorno al programa llamador."
+      ],
+      "correct": 0,
+      "hint": "Se encarga de la preparación del contexto al entrar.",
+      "explanation": "El prólogo se ejecuta al inicio de la función para guardar el contexto (PUSH) y reservar espacio local en la pila (SUB SP, SP, #offset)."
+    },
+    {
+      "q": "¿En qué consiste el 'epílogo' de una subrutina en ensamblador ARM?",
+      "options": [
+        "Es la fase de inicialización de los registros de entrada.",
+        "Es la porción de código final que libera el espacio local de la pila, restaura los registros y retorna.",
+        "Es una directiva de ensamblador que indica el final del archivo de código."
+      ],
+      "correct": 1,
+      "hint": "Se encarga del retorno seguro y de la restauración del contexto.",
+      "explanation": "El epílogo restaura el estado original de la CPU (POP) y asegura el retorno al flujo del llamador transfiriendo el control al PC."
+    },
+    {
+      "q": "Al ejecutar 'PUSH {R0, R1, R2}' en un procesador ARM, ¿cómo se distribuyen en las direcciones de memoria?",
+      "options": [
+        "El registro de menor índice (R0) se almacena en la dirección de memoria más baja.",
+        "El registro de mayor índice (R2) se almacena en la dirección de memoria más baja.",
+        "Los tres registros se almacenan aleatoriamente según el estado de la caché."
+      ],
+      "correct": 0,
+      "hint": "ARM almacena menor índice en menor dirección.",
+      "explanation": "En ARM, el hardware del bloque de transferencia múltiple almacena siempre el registro con menor índice en la dirección de memoria más baja asignada."
+    },
+    {
+      "q": "¿Qué fallo ocurre si un programa intenta desapilar (POP) datos de una pila vacía?",
+      "options": [
+        "Stack Overflow.",
+        "Segmentation Fault inmediato en todos los casos.",
+        "Stack Underflow (desbordamiento por debajo)."
+      ],
+      "correct": 2,
+      "hint": "La pila se queda sin elementos para extraer.",
+      "explanation": "Intentar sacar datos de una pila que no tiene elementos o cuyo SP ha superado su límite superior lógico/físico produce un Stack Underflow."
+    },
+    {
+      "q": "¿Qué fallo ocurre cuando la pila crece excesivamente superando los límites físicos asignados en memoria?",
+      "options": [
+        "Stack Overflow.",
+        "Stack Underflow.",
+        "Excepción de alineación de bus."
+      ],
+      "correct": 0,
+      "hint": "Desbordamiento por exceso de almacenamiento.",
+      "explanation": "Un Stack Overflow ocurre cuando el tamaño de la pila sobrepasa el espacio límite de memoria RAM reservado para este fin."
+    },
+    {
+      "q": "¿Por qué es eficiente utilizar la instrucción 'POP {R4, R5, PC}' en lugar de 'POP {R4, R5, LR}' seguido de 'BX LR'?",
+      "options": [
+        "Porque 'POP {R4, R5, PC}' no modifica el puntero de pila SP.",
+        "Porque permite restaurar el contexto y realizar el salto de retorno en una única instrucción máquina.",
+        "Porque evita usar el decodificador de instrucciones del procesador."
+      ],
+      "correct": 1,
+      "hint": "Optimiza los ciclos de reloj de retorno.",
+      "explanation": "Cargar directamente el valor de retorno en el Program Counter (PC) mediante POP evita tener que ejecutar una instrucción de salto adicional (BX LR)."
+    },
+    {
+      "q": "¿Qué registro de ARM corresponde al Link Register (LR)?",
+      "options": [
+        "R14.",
+        "R13.",
+        "R15."
+      ],
+      "correct": 0,
+      "hint": "Es el registro previo al contador de programa.",
+      "explanation": "El Link Register (LR) es R14 y se utiliza para almacenar la dirección de retorno al realizar llamadas con la instrucción BL."
+    },
+    {
+      "q": "¿Qué registro de ARM corresponde al Program Counter (PC)?",
+      "options": [
+        "R13.",
+        "R14.",
+        "R15."
+      ],
+      "correct": 2,
+      "hint": "Es el contador de instrucciones.",
+      "explanation": "El Program Counter (PC) es R15 y contiene la dirección de la instrucción actual que se está ejecutando (con desfase por segmentación)."
+    },
+    {
+      "q": "¿Cuál es el tamaño estándar en bytes que ocupa un registro de 32 bits al ser apilado en ARM?",
+      "options": [
+        "2 bytes.",
+        "4 bytes.",
+        "8 bytes."
+      ],
+      "correct": 1,
+      "hint": "Equivale a una palabra (word) de 32 bits.",
+      "explanation": "Un registro en la arquitectura ARM de 32 bits ocupa exactamente una palabra de memoria, lo cual equivale a 4 bytes."
+    },
+    {
+      "q": "¿Qué significa la sigla 'IA' en la familia de instrucciones de transferencia múltiple LDMIA?",
+      "options": [
+        "Increment After (Incrementar Después).",
+        "Increment Always (Incrementar Siempre).",
+        "Immediate Addressing (Direccionamiento Inmediato)."
+      ],
+      "correct": 0,
+      "hint": "Determina cuándo se incrementa el registro base.",
+      "explanation": "IA significa 'Increment After', lo que indica que el procesador realiza la carga y después incrementa la dirección del puntero."
+    },
+    {
+      "q": "¿Qué significa la sigla 'DB' en la familia de instrucciones de transferencia múltiple STMDB?",
+      "options": [
+        "Decrement Before (Decrementar Antes).",
+        "Double Byte (Doble Byte).",
+        "Data Branch (Bifurcación de Datos)."
+      ],
+      "correct": 0,
+      "hint": "Determina cuándo se decrementa el registro base.",
+      "explanation": "DB significa 'Decrement Before', indicando que se decrementa el valor de la dirección de SP antes de escribir el dato en memoria."
+    },
+    {
+      "q": "Si el puntero SP vale inicialmente 0x8000 y ejecutamos PUSH {R0, R1, R2, R3}, ¿cuál será su valor final?",
+      "options": [
+        "0x8010.",
+        "0x7FF0.",
+        "0x7FFE."
+      ],
+      "correct": 1,
+      "hint": "Se restan 4 registros de 4 bytes cada uno.",
+      "explanation": "Se apilan 4 registros. En pila descendente: 4 * 4 = 16 bytes (0x10 en hexadecimal). 0x8000 - 0x0010 = 0x7FF0."
+    },
+    {
+      "q": "Si el puntero SP vale 0x7FC0 y ejecutamos la instrucción POP {R4, R5}, ¿cuál será su valor final?",
+      "options": [
+        "0x7FC8.",
+        "0x7FB8.",
+        "0x7FC4."
+      ],
+      "correct": 0,
+      "hint": "Se desapilan 2 registros, sumando al puntero.",
+      "explanation": "Al desapilar 2 registros de 4 bytes en pila FD, el puntero se incrementa: 2 * 4 = 8 bytes. 0x7FC0 + 8 = 0x7FC8."
+    },
+    {
+      "q": "¿Qué instrucción guarda la dirección de retorno en el Link Register (LR) al bifurcar?",
+      "options": [
+        "B (Branch).",
+        "BL (Branch with Link).",
+        "BX (Branch and Exchange)."
+      ],
+      "correct": 1,
+      "hint": "Bifurcación con enlace.",
+      "explanation": "La instrucción BL (Branch with Link) es la utilizada para llamadas a subrutinas ya que guarda automáticamente el retorno en LR."
+    },
+    {
+      "q": "De acuerdo con el estándar AAPCS, ¿cuál debe ser la alineación de la pila SP en los límites del cuerpo de funciones de la API pública?",
+      "options": [
+        "Alineación a 8 bytes.",
+        "Alineación a 4 bytes.",
+        "Alineación a 16 bytes."
+      ],
+      "correct": 0,
+      "hint": "Es un requisito para operaciones eficientes de coma flotante y 64 bits.",
+      "explanation": "El estándar ARM (AAPCS) especifica que la pila debe estar alineada a 8 bytes (doble palabra) en las interfaces públicas para asegurar compatibilidad con tipos de 64 bits."
+    },
+    {
+      "q": "¿Qué ocurre físicamente con los datos de la memoria RAM en las posiciones liberadas tras un POP?",
+      "options": [
+        "Se reescriben a cero automáticamente por hardware.",
+        "Se destruyen físicamente mediante un ciclo de descarga.",
+        "Los datos antiguos permanecen físicamente en la memoria hasta que sean sobrescritos por otro PUSH."
+      ],
+      "correct": 2,
+      "hint": "El procesador solo actualiza la dirección lógica del puntero SP.",
+      "explanation": "Físicamente, la RAM mantiene el valor que contenía. Únicamente se actualiza de forma lógica el SP, de forma que ese bloque se considera 'libre' y será sobrescrito en futuros PUSH."
+    },
+    {
+      "q": "¿Qué registro de ARM suele emplearse como Frame Pointer (FP) para gestionar marcos de pila estables?",
+      "options": [
+        "R13.",
+        "R11.",
+        "R12."
+      ],
+      "correct": 1,
+      "hint": "Es un registro no volátil de índice alto.",
+      "explanation": "El registro R11 se utiliza convencionalmente como Frame Pointer (FP) por los compiladores para facilitar la depuración y acceso a variables locales."
+    },
+    {
+      "q": "¿Por qué los registros R0 a R3 no son callee-saved (no requieren ser restaurados por el callee)?",
+      "options": [
+        "Porque son los registros destinados a pasar parámetros de entrada y retornar resultados.",
+        "Porque no forman parte de la memoria física del procesador.",
+        "Porque están protegidos por hardware contra escrituras indebidas."
+      ],
+      "correct": 0,
+      "hint": "Son registros destinados a la comunicación entre llamador y llamado.",
+      "explanation": "Los registros R0-R3 se usan para el paso de parámetros y retorno de datos, por lo que su contenido se destruye en la ejecución normal de la subrutina."
+    },
+    {
+      "q": "¿Cuál es la instrucción adecuada en el prólogo para reservar espacio en la pila para 3 variables locales de 32 bits?",
+      "options": [
+        "ADD SP, SP, #12",
+        "SUB SP, SP, #12",
+        "SUB SP, SP, #3"
+      ],
+      "correct": 1,
+      "hint": "Reservar en pila descendente requiere restar bytes.",
+      "explanation": "3 variables de 32 bits ocupan 3 * 4 = 12 bytes. Al ser una pila descendente, se resta del puntero de pila: 'SUB SP, SP, #12'."
+    },
+    {
+      "q": "En una pila de tipo Empty Descending (ED), ¿cuál es el comportamiento al realizar un POP?",
+      "options": [
+        "Se lee el dato de la dirección apuntada por SP y luego se decrementa SP.",
+        "Se incrementa el SP en 4 bytes y luego se lee el dato de la nueva dirección.",
+        "Se lee el dato y luego se incrementa el SP en 4 bytes."
+      ],
+      "correct": 1,
+      "hint": "Al ser Empty, apunta a hueco vacío, por lo que primero hay que moverse al dato.",
+      "explanation": "En las pilas Empty (vacías), SP apunta al espacio libre. Para hacer POP, primero se debe desplazar el puntero al último dato válido (incrementando en descendente) y luego leer."
+    },
+    {
+      "q": "En una pila de tipo Full Ascending (FA), ¿cuál es el comportamiento al realizar un PUSH?",
+      "options": [
+        "Se incrementa SP en 4 bytes y luego se escribe el dato.",
+        "Se escribe el dato y luego se incrementa SP en 4 bytes.",
+        "Se decrementa SP y luego se escribe el dato."
+      ],
+      "correct": 0,
+      "hint": "Llena y crece hacia arriba: primero ajustar puntero hacia arriba, luego escribir.",
+      "explanation": "En una pila Full Ascending, SP apunta al último dato válido y crece hacia direcciones altas. Por tanto, al apilar se incrementa primero SP y luego se realiza la escritura."
+    },
+    {
+      "q": "¿Qué registro de ARM actúa como un registro temporal o intra-procedure-call scratch (IP)?",
+      "options": [
+        "R12.",
+        "R14.",
+        "R11."
+      ],
+      "correct": 0,
+      "hint": "Es el registro inmediatamente anterior al Stack Pointer R13.",
+      "explanation": "R12 es el registro IP (Intra-Procedure-call scratch register), usado por el enlazador como registro temporal de paso en llamadas a funciones."
+    },
+    {
+      "q": "Si deseamos preservar los registros R4, R5, R6 y LR, ¿cuál es el prólogo correcto en ensamblador ARM?",
+      "options": [
+        "PUSH {R4-R6, LR}",
+        "PUSH {R4, R5, R6, PC}",
+        "STMIA SP!, {R4-R6, LR}"
+      ],
+      "correct": 0,
+      "hint": "Se deben salvar los registros callee-saved y la dirección de retorno.",
+      "explanation": "La directiva estándar de prólogo es PUSH {R4-R6, LR}, que preserva los registros no volátiles necesarios y la dirección de enlace."
+    },
+    {
+      "q": "¿Qué sucede si una subrutina modifica el registro R4 y no lo guarda en la pila?",
+      "options": [
+        "La CPU detecta un fallo de instrucción ilegal.",
+        "Al retornar al programa llamador, éste verá corrompido el valor de su variable asociada a R4, causando un comportamiento indeterminado.",
+        "El compilador generará un error automático en tiempo de ejecución."
+      ],
+      "correct": 1,
+      "hint": "R4 es callee-saved, el llamador asume que no cambiará.",
+      "explanation": "Al ser R4 no volátil, el llamador asume que mantiene su valor. Si el callee lo modifica sin restaurarlo, se corrompe el flujo y el contexto del llamador."
+    },
+    {
+      "q": "Si en el epílogo de una función ejecutamos POP {R4-R6, PC}, ¿cuál es su efecto?",
+      "options": [
+        "Restaura R4-R6 y transfiere el control de vuelta a la dirección de retorno almacenada originalmente en LR.",
+        "Guarda los registros R4-R6 en la pila.",
+        "Restaura únicamente el registro PC sin alterar R4, R5 ni R6."
+      ],
+      "correct": 0,
+      "hint": "Extrae el valor del PC de la pila directamente.",
+      "explanation": "La instrucción desapila los valores correspondientes a R4, R5 y R6, y extrae el valor original de LR de la pila directamente hacia PC, completando el retorno."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Para preservar la dirección de retorno en una función no hoja, ejecutamos en el prólogo: PUSH {R4, ____}.",
+      "options": [
+        "LR",
+        "PC",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "Se refiere al Link Register (R14).",
+      "explanation": "En funciones no hoja, la dirección de retorno almacenada en LR se debe apilar para evitar que sea destruida por posteriores llamadas BL."
+    },
+    {
+      "q": "Para restaurar los registros de trabajo y retornar directamente en el epílogo, escribimos: POP {R4, ____}.",
+      "options": [
+        "LR",
+        "PC",
+        "R12"
+      ],
+      "correct": 1,
+      "hint": "El valor extraído se carga en el contador de programa.",
+      "explanation": "Apuntar la restauración de la dirección de retorno guardada en la pila directamente al Program Counter (PC) produce el retorno de la función."
+    },
+    {
+      "q": "La instrucción de almacenamiento múltiple STMDB SP!, {R0, R1, ____} guarda R0, R1 y R2 decrementando SP antes de escribir.",
+      "options": [
+        "R3",
+        "LR",
+        "R2"
+      ],
+      "correct": 2,
+      "hint": "Complete con el registro que falta para completar la secuencia.",
+      "explanation": "La máscara de registros incluye R0, R1 y R2. La instrucción guarda los tres registros en orden en la pila."
+    },
+    {
+      "q": "En el epílogo de una subrutina, la instrucción LDMIA SP!, {R4-R6, ____} recupera los registros desde R4 hasta R7.",
+      "options": [
+        "R7",
+        "PC",
+        "LR"
+      ],
+      "correct": 0,
+      "hint": "Es el registro consecutivo a R6.",
+      "explanation": "La lista de registros {R4-R6, R7} es equivalente a {R4-R7}. Recupera el contexto de estos cuatro registros."
+    },
+    {
+      "q": "Para reservar espacio en la pila para variables locales con un tamaño total de 16 bytes, ejecutamos: SUB SP, SP, #____.",
+      "options": [
+        "8",
+        "16",
+        "32"
+      ],
+      "correct": 1,
+      "hint": "Indique la constante numérica entera en bytes.",
+      "explanation": "Se restan 16 bytes del SP para reservar dicho espacio en la pila descendente."
+    },
+    {
+      "q": "Para restaurar (liberar) el espacio de 8 bytes ocupado por variables locales en la pila, escribimos: ADD SP, SP, #____.",
+      "options": [
+        "4",
+        "8",
+        "12"
+      ],
+      "correct": 1,
+      "hint": "Es la constante que contrarresta la reserva previa de 8 bytes.",
+      "explanation": "Para liberar espacio se incrementa el puntero de pila descendente sumando los mismos 8 bytes."
+    },
+    {
+      "q": "Para leer la palabra en memoria que está una posición por encima del tope actual de la pila (offset 4), usamos: LDR R0, [SP, #____].",
+      "options": [
+        "4",
+        "0",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "Indique el desplazamiento numérico necesario en bytes.",
+      "explanation": "El offset 4 nos permite acceder a la palabra de 32 bits situada justo por encima del tope apuntado por SP."
+    },
+    {
+      "q": "Para guardar R1 en la dirección exacta apuntada por el puntero de pila, la instrucción adecuada es: STR R1, [SP, #____].",
+      "options": [
+        "4",
+        "0",
+        "8"
+      ],
+      "correct": 1,
+      "hint": "El offset debe ser cero para apuntar directamente a SP.",
+      "explanation": "Un desplazamiento de 0 bytes accede directamente a la dirección de memoria contenida en el registro SP."
+    },
+    {
+      "q": "La instrucción simplificada PUSH {R0-R2} equivale internamente a la instrucción de ensamblador ARM: STMDB SP!, {____}.",
+      "options": [
+        "R0-R2",
+        "R0, R2",
+        "R0, R1"
+      ],
+      "correct": 0,
+      "hint": "La lista de registros debe ser la misma que en la instrucción alias.",
+      "explanation": "PUSH {R0-R2} es traducida por el ensamblador como STMDB SP!, {R0-R2} en una pila FD estándar."
+    },
+    {
+      "q": "La instrucción simplificada POP {R0-R2} equivale internamente a la instrucción de ensamblador ARM: LDMIA SP!, {____}.",
+      "options": [
+        "R0-R2",
+        "R0, R2",
+        "R0, R1"
+      ],
+      "correct": 0,
+      "hint": "La lista de registros recuperados debe mantenerse idéntica.",
+      "explanation": "POP {R0-R2} se traduce como LDMIA SP!, {R0-R2} para desapilar en el estándar ARM."
+    },
+    {
+      "q": "En una pila de tipo Empty Descending, al realizar un PUSH, primero se escribe el dato y luego se ____ el valor de SP.",
+      "options": [
+        "incrementa",
+        "decrementa",
+        "borra"
+      ],
+      "correct": 1,
+      "hint": "Es descendente, por lo que crece hacia abajo.",
+      "explanation": "En las pilas Empty Descending, el SP apunta al hueco libre. Primero se escribe y luego se decrementa el puntero para el siguiente dato."
+    },
+    {
+      "q": "De acuerdo con el estándar de llamadas AAPCS, los registros desde R4 hasta ____ son callee-saved.",
+      "options": [
+        "R10",
+        "R11",
+        "R12"
+      ],
+      "correct": 1,
+      "hint": "Es el registro utilizado en ocasiones como Frame Pointer.",
+      "explanation": "Los registros R4-R11 son los registros no volátiles de propósito general que el callee debe preservar."
+    },
+    {
+      "q": "Al ejecutar 'BL subrutina', el procesador guarda de manera automática la dirección de retorno en el registro de enlace ____.",
+      "options": [
+        "R15",
+        "R14",
+        "R13"
+      ],
+      "correct": 1,
+      "hint": "Nemotécnicamente se conoce como LR.",
+      "explanation": "El registro R14 (Link Register) almacena la dirección de la siguiente instrucción al ejecutarse BL."
+    },
+    {
+      "q": "En subrutinas hoja que no alteran LR, la forma estándar de retornar es mediante la instrucción: BX ____.",
+      "options": [
+        "LR",
+        "PC",
+        "R12"
+      ],
+      "correct": 0,
+      "hint": "Bifurcación con intercambio al registro de enlace.",
+      "explanation": "BX LR realiza un salto a la dirección almacenada en R14 (LR), retornando al flujo llamador de manera inmediata."
+    },
+    {
+      "q": "Al realizar PUSH {R0, R3}, el hardware colocará el registro ____ en la dirección de memoria más baja de la pila.",
+      "options": [
+        "R3",
+        "R0",
+        "ambos en la misma"
+      ],
+      "correct": 1,
+      "hint": "Es el registro con menor índice.",
+      "explanation": "ARM procesa las transferencias múltiples ordenando los registros de menor a mayor índice, guardando el menor en la menor dirección física."
+    },
+    {
+      "q": "Si el registro SP contiene el valor 0x1000, tras la ejecución de la instrucción PUSH {R0}, su valor lógico pasa a ser 0x____.",
+      "options": [
+        "1004",
+        "0FFC",
+        "0FFF"
+      ],
+      "correct": 1,
+      "hint": "Pila descendente: resta 4 bytes.",
+      "explanation": "0x1000 - 4 bytes = 0x0FFC. SP se decrementa debido al crecimiento hacia direcciones bajas."
+    },
+    {
+      "q": "Si el puntero SP apunta a la dirección 0x0FFC, tras ejecutar la instrucción POP {R0}, su valor final será 0x____.",
+      "options": [
+        "1000",
+        "0FF8",
+        "0FF4"
+      ],
+      "correct": 0,
+      "hint": "Pila descendente: desapilar suma 4 bytes.",
+      "explanation": "Al desapilar se recupera el espacio libre de 4 bytes, incrementando SP: 0x0FFC + 4 = 0x1000."
+    },
+    {
+      "q": "El Stack Pointer en ARM se denota nemotécnicamente como SP, el cual corresponde físicamente al registro ____.",
+      "options": [
+        "R11",
+        "R12",
+        "R13"
+      ],
+      "correct": 2,
+      "hint": "Es el registro R13 del banco principal.",
+      "explanation": "El registro R13 de la arquitectura ARM está reservado por convención como el puntero de pila (SP)."
+    },
+    {
+      "q": "El Link Register en ARM se denota nemotécnicamente como LR, el cual corresponde físicamente al registro ____.",
+      "options": [
+        "R14",
+        "R15",
+        "R13"
+      ],
+      "correct": 0,
+      "hint": "Es el registro R14 del banco principal.",
+      "explanation": "El registro R14 de la arquitectura ARM está reservado por hardware para almacenar la dirección de enlace (LR)."
+    },
+    {
+      "q": "El Program Counter en ARM se denota nemotécnicamente como PC, el cual corresponde físicamente al registro ____.",
+      "options": [
+        "R14",
+        "R15",
+        "R13"
+      ],
+      "correct": 1,
+      "hint": "Es el registro R15 del banco principal.",
+      "explanation": "El registro R15 es el contador de programa (PC), el cual contiene la dirección de ejecución de las instrucciones."
+    },
+    {
+      "q": "¿Qué registros de propósito general tienen la consideración de callee-saved (no volátiles) y deben ser preservados en la pila si se modifican en una subrutina?",
+      "options": [
+        "Los registros R4, R5, R6 y R7.",
+        "Los registros R8, R9, R10 y R11.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El rango completo callee-saved de uso general es R4-R11.",
+      "explanation": "Tanto los registros del rango R4-R7 como los del R8-R11 pertenecen a la clasificación de callee-saved (no volátiles) según AAPCS."
+    },
+    {
+      "q": "¿Qué efectos produce la instrucción 'POP {R4, R5, PC}' al ejecutarse como epílogo de una función?",
+      "options": [
+        "Recupera los valores previos de R4 y R5 de la pila.",
+        "Desapila la dirección de retorno directamente en el contador de programa PC, forzando la vuelta.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analice los efectos en los registros locales y el flujo de control.",
+      "explanation": "La instrucción desapila R4 y R5 restaurando su estado y carga el valor de retorno en PC, lo cual provoca la bifurcación de retorno."
+    },
+    {
+      "q": "¿Qué mecanismo en ARM permite retornar al flujo llamador tras finalizar una subrutina?",
+      "options": [
+        "Ejecutar la instrucción 'BX LR' si LR no fue modificado en la subrutina.",
+        "Ejecutar la instrucción 'POP {..., PC}' si la dirección de retorno fue apilada en el prólogo.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Existen varias formas válidas de transferir el control de retorno en ARM.",
+      "explanation": "Ambas formas son correctas y estándar en ARM. BX LR se usa para subrutinas hoja y POP {..., PC} para subrutinas no hoja."
+    },
+    {
+      "q": "¿Qué registros se catalogan como volátiles (caller-saved) y no requieren preservación obligatoria en subrutinas?",
+      "options": [
+        "Los registros R0 y R1.",
+        "Los registros R2, R3 y R12.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se incluye R0-R3 y el registro temporal R12.",
+      "explanation": "Los registros R0-R3 (parámetros y resultados) y R12 (IP) son volátiles según la especificación de la arquitectura ARM."
+    },
+    {
+      "q": "Si SP = 0x8000 y ejecutamos PUSH {R0-R2}, ¿qué direcciones físicas de memoria RAM se ven modificadas con la información de los registros?",
+      "options": [
+        "La dirección 0x7FFC.",
+        "Las direcciones 0x7FF8 y 0x7FF4.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se apilan 3 registros de 4 bytes, ocupando desde 0x7FF4 hasta 0x7FFF.",
+      "explanation": "La pila decrementa de 0x8000 a 0x7FF4. Las palabras se almacenan en 0x7FFC (R2), 0x7FF8 (R1) y 0x7FF4 (R0). Todas ellas son modificadas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes características definen a una pila Full Descending (FD) como la usada en ARM?",
+      "options": [
+        "El puntero SP apunta siempre a un dato válido y ocupado (Full).",
+        "El puntero SP se decrementa hacia direcciones bajas al apilar datos (Descending).",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se compone de dos conceptos: puntero en última posición y dirección de crecimiento hacia abajo.",
+      "explanation": "Una pila FD se define por tener SP en la última celda llena de la pila y por decrementar SP en las inserciones (PUSH)."
+    },
+    {
+      "q": "¿Qué sucede en un microprocesador ARM al ejecutar la instrucción de prólogo 'STMDB SP!, {R4, LR}'?",
+      "options": [
+        "El valor de SP se reduce exactamente en 8 bytes.",
+        "Se copia el registro R4 en la dirección más baja y LR en la más alta del espacio reservado.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es equivalente a un PUSH de 2 registros en pila FD.",
+      "explanation": "STMDB decrementa SP en 8 bytes debido a los 2 registros. Además, almacena R4 (menor índice) en la dirección menor y LR en la mayor."
+    },
+    {
+      "q": "¿Cuáles son las aplicaciones principales del uso de la pila (Stack) en un programa ensamblador ARM?",
+      "options": [
+        "Preservación de registros no volátiles (callee-saved) y contexto del procesador.",
+        "Soporte para variables locales y paso de parámetros excedentes.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La pila tiene múltiples utilidades de software en la gestión de memoria de funciones.",
+      "explanation": "La pila se usa para guardar contextos de registros, alojar datos locales de funciones y pasar más de 4 parámetros si es necesario."
+    },
+    {
+      "q": "¿Qué describe adecuadamente a una pila clasificada como 'Empty' (vacía)?",
+      "options": [
+        "SP apunta al primer espacio de memoria que no contiene datos válidos.",
+        "Durante un PUSH, primero se guarda el dato en la dirección SP y después se actualiza SP.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere la posición del puntero y la secuencia de apilado.",
+      "explanation": "En una pila vacía (Empty), SP apunta al hueco disponible. Al hacer PUSH, se escribe directamente en SP y luego se realiza el ajuste de dirección."
+    },
+    {
+      "q": "¿Qué cambios lógicos y físicos ocurren al ejecutarse la instrucción PUSH {R4, R5, LR} en un procesador ARM?",
+      "options": [
+        "El registro de pila SP (R13) disminuye su valor en 12 unidades (bytes).",
+        "Se escriben 3 palabras en la memoria RAM en las direcciones correspondientes.",
+        "Todas las anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Evalúe los cambios tanto en los registros del procesador como en la memoria física.",
+      "explanation": "El SP se decrementa en 12 bytes. Físicamente, se escriben los valores de R4, R5 y LR en el espacio reservado de la RAM."
+    },
+    {
+      "q": "Si SP = 0x1000 y ejecutamos PUSH {R0} en una pila del tipo Full Ascending, ¿cuál será el valor final de SP?",
+      "options": [
+        "0x0FFC.",
+        "0x0FF8.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Una pila Ascending incrementa el puntero al apilar.",
+      "explanation": "En una pila Full Ascending, al apilar 1 registro de 4 bytes, el SP se incrementa en 4. El nuevo valor de SP es 0x1004. Por tanto, ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "¿Qué instrucción máquina en ARM es equivalente a POP {R0} en una pila de tipo Empty Descending?",
+      "options": [
+        "LDMIA SP!, {R0}",
+        "LDMDB SP!, {R0}",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Pila vacía descendente: POP incrementa el SP antes de realizar la lectura.",
+      "explanation": "El POP de una pila Empty Descending equivale a un LDMIB SP!, {R0} (Increment Before). Ninguna de las opciones de la lista coincide."
+    },
+    {
+      "q": "Si SP = 0x8000 inicialmente en la pila estándar de ARM, ¿cuál será el valor de SP tras ejecutar PUSH {R0-R7}?",
+      "options": [
+        "0x8020.",
+        "0x8008.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se apilan 8 registros en una pila descendente.",
+      "explanation": "Se apilan 8 registros de 4 bytes cada uno, restando 32 bytes (0x20 en hexadecimal). SP pasa a ser 0x7FE0. Ninguna opción es correcta."
+    },
+    {
+      "q": "Si desapilamos R4 en una pila Full Descending y el valor de SP era 0x2000, ¿dónde estaba almacenado físicamente R4 antes del POP?",
+      "options": [
+        "En la dirección 0x2004.",
+        "En la dirección 0x1FFC.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Pila Llena (Full): SP apunta al último elemento válido.",
+      "explanation": "En una pila Full, el SP apunta al elemento actual válido. Por lo tanto, R4 estaba almacenado exactamente en 0x2000. Ninguna de las opciones dadas es correcta."
+    },
+    {
+      "q": "Si una subrutina no preserva el registro no volátil R4 y modifica su valor, ¿qué error directo se produce al retornar?",
+      "options": [
+        "Un error de Stack Overflow inmediato en la CPU.",
+        "Una excepción de instrucción no definida.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "R4 es callee-saved. Su alteración rompe la lógica del llamador pero no genera excepciones de hardware directas.",
+      "explanation": "No causa un error de hardware directo. Lo que provoca es una corrupción de datos en el contexto del llamador que dependía de R4, originando fallos lógicos posteriores. Ninguna de las opciones es correcta."
+    },
+    {
+      "q": "¿Qué instrucción equivale exactamente a la instrucción nemotécnica PUSH {R4, R5} en la convención estándar de ARM?",
+      "options": [
+        "STMIA SP!, {R4, R5}",
+        "STMDA SP!, {R4, R5}",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es una pila Full Descending, requiere Store Multiple Decrement Before.",
+      "explanation": "La equivalencia exacta es STMDB SP!, {R4, R5}. Ninguna de las dos opciones ofrecidas es la correcta."
+    },
+    {
+      "q": "¿Qué instrucción equivale exactamente a la instrucción nemotécnica POP {R4, R5} en la convención estándar de ARM?",
+      "options": [
+        "LDMDB SP!, {R4, R5}",
+        "LDMDA SP!, {R4, R5}",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es una pila Full Descending, requiere Load Multiple Increment After.",
+      "explanation": "La equivalencia exacta es LDMIA SP!, {R4, R5}. Ninguna de las dos opciones indicadas es correcta."
+    },
+    {
+      "q": "Si SP = 0x5000 y ejecutamos la instrucción POP {R0-R3}, ¿cuál será el valor final de SP en decimal?",
+      "options": [
+        "20464.",
+        "20484.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se desapilan 4 registros de 4 bytes, incrementando SP en 16 bytes.",
+      "explanation": "El SP inicial es 0x5000 = 20480 en decimal. Al desapilar 4 registros, se añaden 16 bytes. El SP final es 20480 + 16 = 20496. Ninguna opción es correcta."
+    },
+    {
+      "q": "¿Cuál de las siguientes instrucciones implementa un PUSH de R4 y LR en una pila de tipo Empty Ascending (EA)?",
+      "options": [
+        "STMDB SP!, {R4, LR}",
+        "LDMIA SP!, {R4, PC}",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En Empty Ascending, PUSH escribe y luego incrementa (Increment After).",
+      "explanation": "Un PUSH en pila EA equivale a STMIA SP!, {R4, LR} (Store Multiple Increment After). Ninguna de las opciones de la lista es correcta."
+    },
+    {
+      "q": "Si realizamos PUSH {R0-R2} con un SP inicial = 0x4000 (16384), ¿en qué dirección exacta de memoria se almacenará el registro R1?",
+      "options": [
+        "En la dirección 16384.",
+        "En la dirección 16372.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Los registros se ordenan de menor a mayor índice, R0 va en la dirección más baja (SP final).",
+      "explanation": "Se apilan 3 registros, SP decrece 12 bytes de 0x4000 (16384) a 0x3FF4 (16372). R0 se guarda en 16372, R1 en 16376 (0x3FF8) y R2 en 16380 (0x3FFC). Por tanto, R1 se guarda en 16376. Ninguna de las opciones es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Modificación del SP tras PUSH simple",
+      "context": "Se tiene un procesador ARM con pila estándar (Full Descending) y un valor de SP = 4096 (0x1000). Se ejecuta la instrucción: `PUSH {R0}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Número de registros apilados en esta instrucción.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se apila únicamente el registro $R0$, por lo que la cantidad es $1$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Espacio ocupado en la pila en bytes.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Cada registro en ARM ocupa una palabra de 32 bits, que equivale a $4$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Nuevo valor del puntero de pila SP (en decimal).",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "Como la pila es descendente, el puntero se decrementa: $\\text{SP} = 4096 - 4 = 4092$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Dirección de memoria RAM (en decimal) donde se almacena el contenido del registro R0.",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "En una pila Full Descending, SP apunta al último elemento apilado, es decir, el valor se almacena en $\\text{SP}_{\\text{final}} = 4092$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Modificación del SP tras PUSH múltiple",
+      "context": "Se tiene un procesador ARM con pila estándar (Full Descending) y valor inicial de SP = 32768 (0x8000). Se ejecuta la instrucción: `PUSH {R4-R7}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Número de registros apilados en esta instrucción.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La instrucción apila el rango de registros $R4, R5, R6, R7$, haciendo un total de $4$ registros."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Espacio total ocupado en la pila en bytes.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$4 \\text{ registros} \\times 4 \\text{ bytes/registro} = 16$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Nuevo valor del puntero de pila SP (en decimal).",
+          "correctValue": 32752,
+          "tolerance": 0,
+          "explanation": "Como la pila es descendente, el puntero disminuye en 16 bytes: $\\text{SP} = 32768 - 16 = 32752$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Dirección de memoria RAM (en decimal) donde se almacena el contenido de R4 (registro de menor índice).",
+          "correctValue": 32752,
+          "tolerance": 0,
+          "explanation": "En ARM, el registro con menor índice se almacena siempre en la dirección de memoria más baja asignada, que es la dirección final de SP: $32752$."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Operaciones consecutivas de PUSH y POP",
+      "context": "Se tiene un procesador ARM con pila estándar (Full Descending) y valor inicial de SP = 8192 (0x2000). Se ejecutan las instrucciones: `PUSH {R0-R2}` y posteriormente `POP {R4, R5}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor del puntero SP (en decimal) justo tras finalizar la instrucción PUSH.",
+          "correctValue": 8180,
+          "tolerance": 0,
+          "explanation": "Se apilan 3 registros ($R0, R1, R2$), restando 12 bytes a SP: $\\text{SP} = 8192 - 12 = 8180$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Número de registros que quedan almacenados en la pila tras la operación POP.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se habían guardado 3 registros y se desapilaron 2. Queda $3 - 2 = 1$ registro en la pila."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor final del puntero SP (en decimal) tras la instrucción POP.",
+          "correctValue": 8188,
+          "tolerance": 0,
+          "explanation": "POP de 2 registros suma 8 bytes a SP: $\\text{SP}_{\\text{final}} = 8180 + 8 = 8188$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Índice numérico del registro original cuyo valor permanece en la pila (0 para R0, 1 para R1, 2 para R2).",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los registros se recuperan en orden. Los valores de la base correspondientes a los registros de menor índice ($R0$ y $R1$) se desapilan hacia $R4$ y $R5$. El registro de mayor índice ($R2$) queda almacenado en la dirección superior ($8188$), por lo que es el índice $2$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Distribución detallada de registros en memoria",
+      "context": "Se tiene un procesador ARM con pila estándar (Full Descending) y valor inicial de SP = 12288 (0x3000). Se ejecuta la instrucción: `PUSH {R1, R3, R5}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor del puntero SP (en decimal) tras realizar el PUSH.",
+          "correctValue": 12276,
+          "tolerance": 0,
+          "explanation": "Se apilan 3 registros, restando 12 bytes a SP: $\\text{SP} = 12288 - 12 = 12276$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Dirección de memoria (en decimal) donde se almacena el registro R1.",
+          "correctValue": 12276,
+          "tolerance": 0,
+          "explanation": "R1 es el registro de menor índice, por lo que se guarda en la dirección más baja, que coincide con el SP final: $12276$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Dirección de memoria (en decimal) donde se almacena el registro R3.",
+          "correctValue": 12280,
+          "tolerance": 0,
+          "explanation": "R3 es el registro intermedio, almacenándose en $\\text{SP} + 4 = 12276 + 4 = 12280$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Dirección de memoria (en decimal) donde se almacena el registro R5.",
+          "correctValue": 12284,
+          "tolerance": 0,
+          "explanation": "R5 es el de mayor índice, almacenándose en la dirección más alta de la pila: $\\text{SP} + 8 = 12284$."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Estructura de marcos de pila en llamadas anidadas",
+      "context": "La función A llama a la función B. El prólogo de A ejecuta `PUSH {R4, R5, LR}` partiendo de SP = 20480 (0x5000). Posteriormente, la función B ejecuta `PUSH {R4, LR}` en su prólogo.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor del puntero SP en decimal tras el prólogo de la función A.",
+          "correctValue": 20468,
+          "tolerance": 0,
+          "explanation": "El prólogo de A apila 3 registros, reduciendo SP en 12 bytes: $20480 - 12 = 20468$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Dirección de memoria en decimal donde se almacena el Link Register (LR) de la función A.",
+          "correctValue": 20476,
+          "tolerance": 0,
+          "explanation": "En A, los registros $R4, R5, LR$ se ordenan de menor a mayor índice. LR va en la dirección más alta de las reservadas: $20480 - 4 = 20476$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor de SP en decimal tras ejecutarse el prólogo de la función B.",
+          "correctValue": 20460,
+          "tolerance": 0,
+          "explanation": "B apila 2 registros ($R4, LR$), restando 8 bytes adicionales a SP: $20468 - 8 = 20460$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Tamaño total en bytes que ocupan los contextos guardados de ambas funciones en la pila.",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se apilaron 3 registros de A y 2 de B. En total, 5 registros: $5 \\times 4 = 20$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Análisis de ciclos de reloj para instrucciones de pila",
+      "context": "En un núcleo ARM7TDMI, una instrucción STMDB (PUSH) tarda $1 + N$ ciclos (donde $N$ es el número de registros) y LDMIA (POP) tarda $1 + N$ ciclos. Si LDMIA carga el PC (retorno), se añaden 2 ciclos adicionales por penalización de salto (limpieza de pipeline).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Ciclos de reloj empleados para ejecutar la instrucción `PUSH {R4-R7}`.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para $N=4$ registros, la instrucción tarda $1 + 4 = 5$ ciclos."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Ciclos de reloj empleados para ejecutar la instrucción `POP {R4-R7}`.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Para $N=4$ registros sin PC, la instrucción tarda $1 + 4 = 5$ ciclos."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Ciclos de reloj empleados para ejecutar la instrucción `POP {R4-R7, PC}`.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Para $N=5$ registros (incluyendo PC), tarda $1 + 5 = 6$ ciclos. Al cargar PC, se añaden 2 ciclos de penalización: $6 + 2 = 8$ ciclos."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Diferencia de ciclos entre retornar con `POP {R4, PC}` y la secuencia `POP {R4, LR}` seguida de `BX LR` (que requiere 3 ciclos).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El `POP {R4, PC}` toma $1+2+2 = 5$ ciclos. La alternativa: `POP {R4, LR}` ($1+2 = 3$ ciclos) más `BX LR` ($3$ ciclos) da un total de $6$ ciclos. La diferencia es $6 - 5 = 1$ ciclo."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Reservas de memoria para variables locales",
+      "context": "Una función reserva 24 bytes para sus variables locales con `SUB SP, SP, #24` partiendo de un SP inicial = 16384 (0x4000). Posteriormente, ejecuta la instrucción `PUSH {R4-R7}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor de SP en decimal inmediatamente después de reservar las variables locales.",
+          "correctValue": 16360,
+          "tolerance": 0,
+          "explanation": "$16384 - 24 = 16360$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor de SP en decimal tras apilar los cuatro registros de contexto.",
+          "correctValue": 16344,
+          "tolerance": 0,
+          "explanation": "Se apilan 4 registros (16 bytes), por lo que el SP pasa a ser: $16360 - 16 = 16344$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Desplazamiento (offset) en bytes desde el nuevo SP hasta el inicio del bloque de variables locales.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El bloque de variables locales se encuentra justo encima de los registros guardados en la pila. Puesto que los registros ocupan 16 bytes, la base del bloque está en un offset de $16$ bytes desde el nuevo SP."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Offset en bytes que se debe usar en `LDR R0, [SP, #offset]` para acceder a la primera variable local (almacenada en la dirección 16360).",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La variable en la dirección $16360$ está a una distancia de $16360 - 16344 = 16$ bytes de la punta actual de la pila."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Alineación de pila a 8 bytes según AAPCS",
+      "context": "El estándar AAPCS requiere que SP esté alineado a 8 bytes al llamar a funciones externas. Se asume un SP inicial = 4096 (0x1000), el cual es múltiplo de 8. La función requiere apilar los registros R4, R5 y LR.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Espacio ocupado en bytes por los registros R4, R5 y LR si se apilan directamente.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Son 3 registros de 4 bytes: $3 \\times 4 = 12$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿El nuevo SP estará alineado a 8 bytes si se apilan solo esos 3 registros? (1 = SÍ, 0 = NO).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$4096 - 12 = 4084$, el cual no es divisible entre 8 ($4084 \\pmod 8 = 4$). Por tanto, la respuesta es $0$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Para corregir esto, el compilador añade el registro R12 como relleno: `PUSH {R4, R5, R12, LR}`. ¿Cuántos bytes ocupa esta nueva operación?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "4 registros ocupan $4 \\times 4 = 16$ bytes."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿El nuevo SP tras apilar 4 registros está alineado a 8 bytes? (1 = SÍ, 0 = NO).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$4096 - 16 = 4080$, el cual es divisible entre 8 ($4080 \\pmod 8 = 0$). Por tanto, la respuesta es $1$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Tamaño de instrucciones de pila ARM vs Thumb",
+      "context": "Se examina el tamaño en bytes de las instrucciones de manipulación de la pila en modos ARM (32 bits) y Thumb (16 bits) en un microcontrolador Cortex-M.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Tamaño en bytes de la instrucción `PUSH {R4, LR}` en modo ARM.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "En el modo de ejecución ARM, todas las instrucciones máquina ocupan exactamente $4$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Tamaño en bytes de la instrucción `PUSH {R4, LR}` en modo Thumb estándar.",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "En el modo de ejecución Thumb, las instrucciones estándar tienen un tamaño reducido de $2$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Número de bits dedicados a especificar la máscara de registros en la codificación de STMDB en ARM de 32 bits.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "En ARM, el campo inferior de 16 bits de la instrucción contiene la máscara de registros ($R0-R15$), un bit por registro."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Número de bits destinados a especificar registros de la lista baja (R0-R7) en la instrucción PUSH de Thumb (16 bits).",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La instrucción PUSH de Thumb contiene un campo de 8 bits para indicar la presencia de los registros de la lista baja ($R0-R7$)."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Evolución de SP tras apilados sucesivos",
+      "context": "Un fragmento de programa ejecuta la secuencia: `PUSH {R0, R1}`, `PUSH {R2, R3}` y `PUSH {R4}`. El SP inicial es 4096 (0x1000). Pila FD.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor de SP (en decimal) tras finalizar el primer PUSH.",
+          "correctValue": 4088,
+          "tolerance": 0,
+          "explanation": "Se apilan 2 registros, restando 8 bytes: $4096 - 8 = 4088$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor de SP (en decimal) tras finalizar el segundo PUSH.",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "Se apilan otros 2 registros, restando 8 bytes: $4088 - 8 = 4080$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor de SP (en decimal) tras finalizar el tercer PUSH.",
+          "correctValue": 4076,
+          "tolerance": 0,
+          "explanation": "Se apila 1 registro más, restando 4 bytes: $4080 - 4 = 4076$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Total de bytes de memoria reservados en la pila al concluir las tres instrucciones.",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se han apilado $2+2+1=5$ registros. $5 \\times 4 \\text{ bytes} = 20$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Recuperación de valores mediante POP",
+      "context": "El estado de la memoria RAM de la pila es: en dirección 4080 hay un 10, en 4084 hay un 20, en 4088 hay un 30 y en 4092 hay un 40. El SP apunta a 4080 (pila FD). Se ejecuta: `POP {R0, R1}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor numérico recuperado y almacenado en el registro R0.",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El registro con menor índice ($R0$) se carga desde la dirección más baja, que es la apuntada por SP ($4080$), recuperando el valor $10$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor numérico recuperado y almacenado en el registro R1.",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$R1$ se carga de la dirección contigua superior ($4084$), obteniendo el valor $20$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Nuevo valor de SP en decimal tras ejecutar el POP.",
+          "correctValue": 4088,
+          "tolerance": 0,
+          "explanation": "Se recuperan 2 registros, incrementando SP en 8 bytes: $4080 + 8 = 4088$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si a continuación se ejecuta la instrucción `POP {R2}`, ¿qué valor se guarda en R2?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "Como el SP está en $4088$, `POP {R2}` lee el valor de esa dirección, que es $30$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Simulación de una pila Empty Descending (ED)",
+      "context": "Se analiza una pila de tipo Empty Descending (ED). El SP inicial es 8192 (0x2000). Se ejecuta la instrucción: `PUSH {R0, R1}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Dirección de memoria en decimal donde se realiza la escritura del registro R1 (el de mayor índice va en dirección más alta).",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "En una pila Empty Descending, el SP apunta al espacio vacío. Al apilar, primero se escribe en SP (la dirección más alta de la reserva es para R1, que es $8192$) y luego se decrementa SP."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor final de SP en decimal tras apilar los dos registros.",
+          "correctValue": 8184,
+          "tolerance": 0,
+          "explanation": "Se apilan 2 registros, restando 8 bytes al SP de forma lógica: $8192 - 8 = 8184$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si ejecutamos a continuación un POP de un registro, ¿cuál es la dirección de memoria en decimal desde donde se lee el dato?",
+          "correctValue": 8188,
+          "tolerance": 0,
+          "explanation": "En Empty Descending, SP apunta a la posición libre ($8184$). Para desapilar, primero se incrementa el puntero ($8184 + 4 = 8188$) y luego se lee el dato de esa dirección."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Valor final de SP en decimal tras el POP de un registro.",
+          "correctValue": 8188,
+          "tolerance": 0,
+          "explanation": "El SP queda apuntando a la dirección donde se leyó el dato: $8188$."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Simulación de una pila Full Ascending (FA)",
+      "context": "Se analiza una pila de tipo Full Ascending (FA). El SP inicial es 4096 (0x1000). Se ejecuta la instrucción: `PUSH {R0, R1}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor final de SP en decimal tras completarse el PUSH de dos registros.",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "La pila crece hacia arriba (ascendente), por lo que se suman 8 bytes a SP: $4096 + 8 = 4104$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Dirección de memoria en decimal donde se almacena el registro R0.",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "Al ser Full Ascending, se incrementa SP y luego se escribe. R0 (menor índice) se almacena en la dirección más baja del rango de incremento: $4096 + 4 = 4100$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Dirección de memoria en decimal donde se almacena el registro R1.",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "R1 se almacena en la dirección más alta de la reserva, que coincide con el SP final: $4104$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si a continuación se ejecuta un POP de un registro, ¿cuál es la dirección en decimal de donde se lee?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "En Full Ascending, SP apunta al último elemento válido ($4104$). Se realiza la lectura directa en esa dirección y luego se decrementa SP."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Simulación de una pila Empty Ascending (EA)",
+      "context": "Se analiza una pila de tipo Empty Ascending (EA). El SP inicial es 4096 (0x1000). Se realiza la instrucción: `PUSH {R0, R1}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Dirección de memoria en decimal donde se escribe el registro R0 (primer registro en orden de menor dirección).",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "En Empty Ascending, SP apunta al espacio libre. Se escribe directamente en SP ($4096$) para el registro R0 y luego se incrementa."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor final de SP en decimal tras el PUSH de dos registros.",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "La pila crece hacia arriba sumando 8 bytes: $4096 + 8 = 4104$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si a continuación se realiza un POP de un registro, ¿cuál es la dirección en decimal desde la que se lee?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "En EA, SP apunta al espacio libre ($4104$). Para POP, primero se decrementa SP ($4104 - 4 = 4100$) y luego se realiza la lectura de memoria."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Valor final de SP en decimal tras la operación de POP.",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "El SP se queda con el valor tras decrementarse: $4100$."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Cálculo de direcciones de retorno",
+      "context": "Un procesador ARM ejecuta un programa en el cual la instrucción `BL sub` se encuentra alojada en la dirección de memoria 32768 (0x8000).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Tamaño en bytes de la instrucción BL en el set de instrucciones ARM de 32 bits.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "En ARM de 32 bits, cada instrucción ocupa de forma fija $4$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Dirección de retorno (en decimal) que carga el procesador en LR cuando se ejecuta la llamada.",
+          "correctValue": 32772,
+          "tolerance": 0,
+          "explanation": "La dirección de retorno es la de la instrucción siguiente: $32768 + 4 = 32772$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si la función llamada escribe en el prólogo `PUSH {R4, LR}`, ¿qué valor de retorno (en decimal) se guarda en la pila?",
+          "correctValue": 32772,
+          "tolerance": 0,
+          "explanation": "Se guarda el contenido de LR, que es la dirección de retorno guardada: $32772$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si al terminar la función se ejecuta `POP {R4, PC}`, ¿qué dirección (en decimal) se escribe en el PC para retornar?",
+          "correctValue": 32772,
+          "tolerance": 0,
+          "explanation": "La instrucción POP recupera el valor de la pila correspondiente a LR (que es $32772$) y lo escribe en el PC."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Crecimiento de la pila por recursión",
+      "context": "Una subrutina recursiva utiliza un marco de pila (stack frame) de 16 bytes. El SP inicial es 32768 (0x8000). La profundidad de la recursión llega a 8 niveles.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Tamaño en bytes de cada marco de pila.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Dado en el enunciado: $16$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Cantidad total de bytes reservados en la pila cuando se alcanza la profundidad máxima (8 llamadas).",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "8 llamadas $\\times$ 16 bytes/llamada = $128$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor de SP (en decimal) en el punto de máxima profundidad recursiva.",
+          "correctValue": 32640,
+          "tolerance": 0,
+          "explanation": "$32768 - 128 = 32640$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si la pila tiene un límite máximo de 4096 bytes, ¿cuántas llamadas recursivas anidadas como máximo se pueden realizar antes de causar un desbordamiento de pila?",
+          "correctValue": 256,
+          "tolerance": 0,
+          "explanation": "$4096 \\text{ bytes} / 16 \\text{ bytes por llamada} = 256$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Acceso a variables locales y cambios de SP",
+      "context": "Una función tiene tres variables locales enteras: `x` en `SP+8`, `y` en `SP+4` y `z` en `SP+0`. El SP inicial tras reservar el bloque de variables es 4096 (0x1000). Posteriormente ejecuta: `PUSH {R4}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Nuevo valor de SP en decimal tras el PUSH.",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "$4096 - 4 = 4092$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Nuevo offset en bytes desde el SP actual para acceder a la variable 'x'.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El SP ha disminuido en 4 bytes. Por lo tanto, la distancia a las variables que están por encima aumenta en 4 bytes: $\\text{nuevo\\_offset} = 8 + 4 = 12$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Dirección física de memoria en decimal de la variable 'z' tras el PUSH.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "La variable $z$ estaba en $\\text{SP}_{\\text{inicial}} + 0 = 4096$. Su dirección física en RAM no varía: $4096$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si después ejecutamos `POP {R4}`, ¿cuál es el offset en bytes para acceder a 'y'?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Tras desapilar, SP vuelve a ser $4096$ y el offset de $y$ regresa a su valor original de $4$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Ordenación de registros en transferencias múltiples",
+      "context": "Un procesador ejecuta la instrucción de almacenamiento múltiple: `STMDB SP!, {R0, R5, R2, R7, R1}`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Número de registros guardados en la pila.",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La lista contiene los registros $R0, R1, R2, R5, R7$, sumando $5$ registros."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Espacio ocupado en memoria por el bloque de registros (en bytes).",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$5 \\times 4 = 20$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Índice numérico del registro (0-15) almacenado en la dirección de memoria más baja.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El hardware de ARM almacena el registro con menor índice ($R0$) en la dirección más baja."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Índice numérico del registro (0-15) almacenado en la dirección de memoria más alta del grupo.",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El registro con mayor índice ($R7$) se guarda en la dirección más alta."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Efecto de la actualización del SP (Writeback)",
+      "context": "Se comparan dos versiones de almacenamiento de registros: `STMDB SP, {R4-R7}` (sin actualización) y `STMDB SP!, {R4-R7}` (con actualización). El SP inicial es 4096 (0x1000). Pila FD.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor de SP en decimal tras la ejecución de la instrucción sin actualización (!).",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "Al no llevar el modificador '!', el puntero base SP no se actualiza y mantiene su valor: $4096$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor de SP en decimal tras la ejecución de la instrucción con actualización (!).",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "Al llevar '!', el SP se actualiza con la dirección final calculada: $4096 - (4 \\times 4) = 4080$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Dirección de memoria en decimal donde se guarda el registro R4 en ambos casos.",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "R4 es el menor del grupo. Su dirección física se calcula decrementando antes de escribir. Como menor va en menor: $\\text{SP} - 16 = 4080$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Dirección de memoria en decimal donde se guarda el registro R7.",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "R7 es el registro de mayor índice, ocupando la dirección más alta de las reservadas: $\\text{SP} - 4 = 4092$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Análisis de LDM y desapilado con Writeback",
+      "context": "Se comparan dos instrucciones de desapilado: `LDMIA SP, {R0-R3}` y `LDMIA SP!, {R0-R3}`. El SP inicial es 4096 (0x1000).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor de SP en decimal tras ejecutar la versión sin actualización.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "Sin el signo '!', el SP no se modifica tras la transferencia: $4096$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor de SP en decimal tras ejecutar la versión con actualización.",
+          "correctValue": 4112,
+          "tolerance": 0,
+          "explanation": "Con '!', SP se actualiza incrementando en 16 bytes: $4096 + 16 = 4112$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Dirección de memoria en decimal desde la que se carga R0.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "En LDMIA, se lee primero desde SP y luego se incrementa. R0 (menor índice) se lee desde la dirección inicial: $4096$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Dirección de memoria en decimal desde la que se carga R3.",
+          "correctValue": 4108,
+          "tolerance": 0,
+          "explanation": "R3 es el de mayor índice, por lo que se lee de la dirección más alta cargada: $\\text{SP} + 12 = 4108$."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Simulación de pila mediante direccionamientos no estándar",
+      "context": "Un programador escribe un código que simula una pila empleando `STMIA SP!, {R0, R1}` para apilar y `LDMDB SP!, {R0, R1}` para desapilar. El SP inicial es 4096 (0x1000).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor de SP en decimal tras ejecutar la instrucción STMIA.",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "STMIA incrementa SP después de cada almacenamiento. Al apilar 2 registros, SP aumenta en 8 bytes: $4096 + 8 = 4104$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Dirección de memoria en decimal donde se almacena el registro R0.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "Como es 'Increment After' (IA), primero escribe y luego incrementa. R0 (menor índice) se escribe primero en la dirección inicial de SP: $4096$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor de SP en decimal tras desapilar los registros con LDMDB partiendo de SP = 4104.",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "LDMDB decrementa antes de cargar. Al cargar 2 registros, SP se reduce en 8: $4104 - 8 = 4096$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Dirección de memoria en decimal de la que se lee el registro R1 durante LDMDB.",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "LDMDB decrementa antes de leer. Con SP inicial 4104, el primer decremento lo sitúa en $4100$, donde se almacena y lee R1 (el mayor de la lista)."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Preservación del contexto según AAPCS",
+      "context": "Se analiza el uso de pila de dos funciones. La función hoja A usa registros de trabajo R0-R2. La función no hoja B usa R4-R5 y realiza llamadas a subrutinas.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Bytes que debe reservar la función hoja A en la pila para preservar sus registros de trabajo R0-R2.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "R0-R2 son volátiles (caller-saved) y no requieren preservación por el callee en subrutinas hoja: $0$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Bytes que debe reservar en la pila la función B para preservar R4 y R5.",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "R4 y R5 son callee-saved (no volátiles), debiendo preservarse: $2 \\times 4 = 8$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Bytes adicionales que debe reservar la función B en la pila para guardar la dirección de retorno LR.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "LR ocupa exactamente una palabra de memoria: $4$ bytes."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Tamaño total en bytes que ocupará en la pila la instrucción de prólogo de la función B.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Se guardan R4, R5 y LR: $8 + 4 = 12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Ajuste de alineación y variables locales",
+      "context": "Una función necesita guardar los registros R4, R5, R6 y LR (SP inicial alineado a 8 bytes). Además, requiere declarar variables locales que ocupan un total de 12 bytes.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Número de registros apilados en la instrucción PUSH inicial.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se apilan 4 registros: $R4, R5, R6, LR$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Espacio ocupado por los registros apilados en bytes.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$4 \\times 4 = 16$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si reservamos exactamente 12 bytes locales sin padding, ¿el SP resultante final estará alineado a 8 bytes? (1 = SÍ, 0 = NO).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El cambio total de SP sería $16 + 12 = 28$ bytes. Dado que 28 no es divisible por 8, la alineación se perdería. Respuesta: $0$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Total de bytes (incluido padding, múltiplo de 8) que se deben restar a SP en todo el prólogo para mantener la alineación.",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "El espacio requerido es 28 bytes. El primer múltiplo de 8 igual o superior es $32$. Se aplican 4 bytes de padding para mantener la alineación."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Acceso a registros apilados en el Stack Frame",
+      "context": "Una subrutina inicia con la instrucción: `PUSH {R4-R7, LR}`. El SP resultante final tras la instrucción es 4096 (0x1000).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Tamaño del bloque de registros almacenados en la pila (en bytes).",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se apilan 5 registros ($R4, R5, R6, R7, LR$): $5 \\times 4 = 20$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Desplazamiento (offset) en bytes desde el SP final para acceder al registro R4.",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al ser el menor índice, R4 se guarda en la dirección más baja, que coincide con el SP final. El offset es $0$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Desplazamiento (offset) en bytes desde el SP final para acceder al registro R7.",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "R7 se almacena a 3 posiciones del inicio ($R4 \\to 0$, $R5 \\to 4$, $R6 \\to 8$, $R7 \\to 12$). El offset es $12$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Desplazamiento (offset) en bytes desde el SP final para acceder al registro LR.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "LR es el de mayor índice, almacenándose en el tope original: $\\text{SP} + 16$ bytes. El offset es $16$."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Traza de ejecución en ensamblador ARM",
+      "context": "Se analiza el siguiente código ARM:\n`MOV R0, #100`\n`MOV R1, #200`\n`PUSH {R0, R1}`\n`MOV R0, #0`\n`MOV R1, #0`\n`POP {R1, R0}`\nEl SP inicial es 4096.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor numérico final del registro R0.",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "El PUSH guarda $R0=100$ en la menor dirección y $R1=200$ en la mayor. Al ejecutar `POP {R1, R0}`, a pesar del orden en la lista, ARM desapila el menor índice ($R0$) primero desde la menor dirección (recuperando $100$) y el mayor ($R1$) después (recuperando $200$)."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor numérico final del registro R1.",
+          "correctValue": 200,
+          "tolerance": 0,
+          "explanation": "Como se explicó, $R1$ recupera su valor de la dirección superior de la pila: $200$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Diferencia aritmética de los registros tras la ejecución (R1 - R0).",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "$200 - 100 = 100$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Espacio temporal ocupado en la pila durante el proceso (en bytes).",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Se apilaron 2 registros, lo que consumió temporalmente $8$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Manejo del Frame Pointer (FP/R11)",
+      "context": "Una función configura un marco de pila empleando el registro R11 como Frame Pointer (FP):\n`PUSH {R4, R11, LR}`\n`ADD R11, SP, #8`\n`SUB SP, SP, #16`\nEl SP inicial antes de ejecutarse el bloque es 4096 (0x1000).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor del puntero SP en decimal tras ejecutarse la instrucción PUSH.",
+          "correctValue": 4084,
+          "tolerance": 0,
+          "explanation": "Se apilan 3 registros, restando 12 bytes: $4096 - 12 = 4084$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor en decimal del Frame Pointer R11 tras la instrucción ADD.",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "$\\text{R11} = \\text{SP} + 8 = 4084 + 8 = 4092$. Este valor apunta al antiguo R11 guardado."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor del puntero SP en decimal tras la reserva de variables locales (SUB).",
+          "correctValue": 4068,
+          "tolerance": 0,
+          "explanation": "Se restan 16 bytes locales a SP: $4084 - 16 = 4068$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Diferencia en bytes entre R11 y SP tras concluir las tres instrucciones.",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "$4092 - 4068 = 24$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Recursión de Fibonacci y análisis de pila",
+      "context": "Se analiza una función de Fibonacci recursiva implementada en ARM. Cada llamada a la función realiza un prólogo con `PUSH {R4, LR}` (8 bytes). Se realiza la llamada principal a `fib(4)`.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Número máximo de marcos de pila activos simultáneamente en el peor camino recursivo.",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El camino máximo del árbol recursivo es $\\text{fib}(4) \\to \\text{fib}(3) \\to \\text{fib}(2) \\to \\text{fib}(1)$, lo que requiere $4$ marcos de pila activos a la vez."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Consumo de memoria máximo en bytes de la pila por las llamadas simultáneas.",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$4 \\text{ marcos} \\times 8 \\text{ bytes/marco} = 32$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Número total de llamadas recursivas que se realizan para resolver fib(4) (incluida la inicial).",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El árbol completo realiza: $1$ (para $n=4$) + $1$ (para $n=3$) + $2$ (para $n=2$) + $3$ (para $n=1$) + $2$ (para $n=0$) = $9$ llamadas."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si se llamara a `fib(5)`, ¿cuál sería el número máximo de marcos activos simultáneos?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El camino máximo sería $\\text{fib}(5) \\to \\text{fib}(4) \\to \\text{fib}(3) \\to \\text{fib}(2) \\to \\text{fib}(1)$, requiriendo $5$ marcos activos."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Formato de codificación de instrucciones LDM/STM",
+      "context": "El formato binario de 32 bits de las instrucciones LDM/STM en ARM contiene campos de control: Cond (31:28), bit P (24), bit U (23), bit W (21), bit L (20), registro base Rn (19:16) y lista de registros (15:0).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Número de bits destinados al mapa de registros a transferir.",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El mapa de registros ocupa los bits del $0$ al $15$, sumando $16$ bits."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor del bit L (Load) en la instrucción PUSH {R0} (que es STMDB).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit L vale $0$ para instrucciones de escritura (Store, STM) y $1$ para lectura (Load, LDM)."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Valor del bit W (Writeback) en la instrucción `PUSH {R0}`.",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La pila requiere actualizar el registro SP de base tras la transferencia, por lo que el bit W es $1$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Valor en decimal de la combinación de bits P y U (campo PU) para el direccionamiento Decrement Before (P=1, U=0).",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La combinación binaria es $10_2$, cuyo equivalente decimal es $2$."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Distribución del mapa de memoria RAM",
+      "context": "Un microcontrolador posee 64 KB de memoria RAM (de 0x00000000 a 0x00010000). El Heap crece desde la dirección 0x00004000 hacia arriba. El Stack crece desde el final de la RAM (0x00010000) hacia abajo.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Tamaño de la memoria RAM disponible en kilobytes.",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "Dado en el enunciado: $64$ KB."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Dirección inicial del Stack Pointer (SP) en decimal.",
+          "correctValue": 65536,
+          "tolerance": 0,
+          "explanation": "$0x00010000$ en hexadecimal equivale a $65536$ en decimal."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si el Heap se expande ocupando un tamaño de 8 KB (hasta 0x00006000) y la pila se expande ocupando 8 KB hacia abajo, ¿cuántos KB de espacio libre quedan entre ellos?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "El Heap llega a $0x00006000 = 24$ KB. El Stack baja a $64\\text{ KB} - 8\\text{ KB} = 56$ KB. El espacio libre es: $56 - 24 = 32$ KB."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Número máximo de variables de tipo entero de 32 bits (4 bytes) que se pueden almacenar en el espacio libre restante.",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "$32$ KB = $32768$ bytes. $32768 / 4 = 8192$ enteros."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Detección de Stack Overflow por hardware",
+      "context": "Un procesador ARM supervisa el Stack Pointer. Genera una excepción si SP cae estrictamente por debajo de `STACK_LIMIT` = 0x00007E00 (32256). El SP inicial es 32264 (0x7E08).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Valor en decimal de la dirección límite STACK_LIMIT.",
+          "correctValue": 32256,
+          "tolerance": 0,
+          "explanation": "$0x7E00$ equivale a $32256$ en decimal."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Valor de SP en decimal tras ejecutar `PUSH {R0, R1}`.",
+          "correctValue": 32256,
+          "tolerance": 0,
+          "explanation": "Se apilan 2 registros, restando 8 bytes: $32264 - 8 = 32256$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Se ha desencadenado una excepción tras esta primera instrucción? (1 = SÍ, 0 = NO).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El SP final es $32256$, el cual es igual a `STACK_LIMIT` y no estrictamente menor. Por lo tanto, no hay excepción. Respuesta: $0$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si a continuación se ejecuta la instrucción `PUSH {R2}`, ¿cuál es el valor de SP en decimal, que ahora sí dispara la excepción?",
+          "correctValue": 32252,
+          "tolerance": 0,
+          "explanation": "Se apila 1 registro más, restando 4 bytes: $32256 - 4 = 32252$. Como $32252 < 32256$, se dispara la excepción."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Dirección final del puntero SP tras un PUSH de N registros en pila Full Descending",
+      "tex": "$$\\text{SP}_{\\text{nuevo}} = \text{SP}_{\\text{anterior}} - 4 \\times N$$"
+    },
+    {
+      "name": "Dirección final del puntero SP tras un POP de N registros en pila Full Descending",
+      "tex": "$$\\text{SP}_{\\text{nuevo}} = \text{SP}_{\\text{anterior}} + 4 \\times N$$"
+    },
+    {
+      "name": "Dirección física de almacenamiento de un registro en pila Full Descending durante PUSH",
+      "tex": "$$\\text{Dirección}(R_i) = \\text{SP}_{\\text{anterior}} - 4 \\times (N - i)$$"
+    },
+    {
+      "name": "Condición matemática de alineación de la pila a 8 bytes en ARM",
+      "tex": "$$\\text{SP} \\pmod 8 = 0$$"
+    },
+    {
+      "name": "Ciclos de reloj empleados en instrucciones de almacenamiento múltiple (STM)",
+      "tex": "$$T_{\\text{STM}} = 1 + N \\quad \\text{ciclos}$$"
+    },
+    {
+      "name": "Ciclos de reloj en LDM con restauración del PC (retorno de subrutina)",
+      "tex": "$$T_{\\text{LDM\\_PC}} = 1 + N + 2 = 3 + N \\quad \\text{ciclos}$$"
+    },
+    {
+      "name": "Tamaño total de un marco de pila (Stack Frame) con variables locales",
+      "tex": "$$\\text{Tamaño\\_Frame} = 4 \\times N_{\\text{regs}} + \\text{Tamaño\\_Locales} + \\text{Padding}$$"
+    },
+    {
+      "name": "Profundidad máxima de llamadas recursivas antes de Stack Overflow",
+      "tex": "$$D_{\\text{max}} = \\left\\lfloor \\frac{\\text{Tamaño\\_Pila}}{\\text{Tamaño\\_Frame}} \\right\\rfloor$$"
+    }
+  ]
+}

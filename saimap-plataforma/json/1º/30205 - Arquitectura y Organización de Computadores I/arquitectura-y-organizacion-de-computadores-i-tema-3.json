@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el tamaño fijo de una instrucción en la arquitectura ARM de 32 bits?",
+      "options": [
+        "16 bits (2 bytes)",
+        "32 bits (4 bytes)",
+        "64 bits (8 bytes)"
+      ],
+      "correct": 1,
+      "hint": "ARM32 utiliza instrucciones de tamaño constante para simplificar la decodificación.",
+      "explanation": "Las instrucciones en la arquitectura ARM de 32 bits clásica tienen un tamaño fijo de 32 bits (4 bytes) para facilitar la decodificación rápida por hardware."
+    },
+    {
+      "q": "¿Qué campo de la instrucción ARM de 32 bits determina la ejecución condicional de la misma?",
+      "options": [
+        "El campo cond (bits 31-28)",
+        "El campo opcode (bits 24-21)",
+        "El campo Operand2 (bits 11-0)"
+      ],
+      "correct": 0,
+      "hint": "Se encuentra en los 4 bits más significativos.",
+      "explanation": "El campo condicional `cond` (bits 31-28) permite la ejecución condicional de casi cualquier instrucción en ARM."
+    },
+    {
+      "q": "¿Cuál es el valor binario del campo cond que representa la ejecución incondicional (Always, AL) en ARM?",
+      "options": [
+        "0000",
+        "1110",
+        "1111"
+      ],
+      "correct": 1,
+      "hint": "Es el valor por defecto para la mayoría de las instrucciones sin sufijo.",
+      "explanation": "El valor binario `1110` (0xE) indica ejecución incondicional (`AL` - Always)."
+    },
+    {
+      "q": "Para las instrucciones de procesamiento de datos en ARM, ¿qué valor deben tener los bits de tipo de instrucción (bits 27-26)?",
+      "options": [
+        "00",
+        "01",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Es el tipo base para operaciones aritmético-lógicas.",
+      "explanation": "Las instrucciones de procesamiento de datos tienen los bits de tipo (27-26) en `00`."
+    },
+    {
+      "q": "¿Qué indica el bit I (Immediate flag, bit 25) en una instrucción de procesamiento de datos en ARM?",
+      "options": [
+        "Si es 1, el segundo operando (Operand2) es un inmediato. Si es 0, es un registro.",
+        "Si es 1, la instrucción altera las banderas del CPSR.",
+        "Si es 1, es una instrucción de salto indirecto."
+      ],
+      "correct": 0,
+      "hint": "Indica la naturaleza de Operand2.",
+      "explanation": "El bit `I` (bit 25) a 1 indica que `Operand2` es un valor inmediato (constante), mientras que a 0 indica que es un registro."
+    },
+    {
+      "q": "¿Qué bits de la instrucción de procesamiento de datos codifican el opcode?",
+      "options": [
+        "Bits 15-12",
+        "Bits 19-16",
+        "Bits 24-21"
+      ],
+      "correct": 2,
+      "hint": "Son 4 bits que definen la operación.",
+      "explanation": "El código de operación (opcode) se almacena en los bits 24-21 de la instrucción."
+    },
+    {
+      "q": "¿Cuál es el opcode en binario para la instrucción de suma (ADD) en ARM?",
+      "options": [
+        "0010",
+        "0100",
+        "1101"
+      ],
+      "correct": 1,
+      "hint": "Equivale a 4 en decimal.",
+      "explanation": "El opcode de la instrucción ADD es `0100`."
+    },
+    {
+      "q": "¿Cuál es el opcode en binario para la instrucción de resta (SUB) en ARM?",
+      "options": [
+        "0010",
+        "0100",
+        "1101"
+      ],
+      "correct": 0,
+      "hint": "Equivale a 2 en decimal.",
+      "explanation": "El opcode de la instrucción SUB es `0010`."
+    },
+    {
+      "q": "¿Cuál es el opcode en binario para la instrucción de mover (MOV) en ARM?",
+      "options": [
+        "0000",
+        "0100",
+        "1101"
+      ],
+      "correct": 2,
+      "hint": "Equivale a 13 en decimal.",
+      "explanation": "La instrucción MOV tiene el opcode `1101`."
+    },
+    {
+      "q": "¿Qué representa el bit S (bit 20) en una instrucción de procesamiento de datos?",
+      "options": [
+        "Indica si el procesador entra en modo supervisor.",
+        "Determina si se actualizan las banderas de condición en el CPSR.",
+        "Indica que es un salto con enlace (Link)."
+      ],
+      "correct": 1,
+      "hint": "Proviene de 'Set' flags.",
+      "explanation": "Si el bit `S` es 1, la operación actualiza las banderas de estado (N, Z, C, V) en el CPSR."
+    },
+    {
+      "q": "¿Qué campo de la instrucción de procesamiento de datos en ARM codifica el registro del primer operando fuente?",
+      "options": [
+        "Rn (bits 19-16)",
+        "Rd (bits 15-12)",
+        "Rm (bits 3-0)"
+      ],
+      "correct": 0,
+      "hint": "Es el registro fuente primario.",
+      "explanation": "El campo `Rn` (bits 19-16) especifica el registro del primer operando fuente."
+    },
+    {
+      "q": "¿Qué campo de la instrucción de procesamiento de datos especifica el registro de destino?",
+      "options": [
+        "Rn (bits 19-16)",
+        "Rd (bits 15-12)",
+        "Rm (bits 3-0)"
+      ],
+      "correct": 1,
+      "hint": "Rd representa 'Destination Register'.",
+      "explanation": "El registro donde se guarda el resultado se almacena en el campo `Rd` (bits 15-12)."
+    },
+    {
+      "q": "¿De cuántos bits dispone el campo Operand2 en las instrucciones de procesamiento de datos en ARM?",
+      "options": [
+        "8 bits",
+        "12 bits",
+        "16 bits"
+      ],
+      "correct": 1,
+      "hint": "Es el último campo de la palabra de instrucción.",
+      "explanation": "El campo `Operand2` ocupa los 12 bits inferiores de la instrucción (bits 11-0)."
+    },
+    {
+      "q": "Cuando el bit I es 1, ¿cómo se divide el campo Operand2 de 12 bits para representar un inmediato?",
+      "options": [
+        "4 bits para rotación y 8 bits para el valor base",
+        "6 bits para rotación y 6 bits para el valor base",
+        "8 bits para rotación y 4 bits para el valor base"
+      ],
+      "correct": 0,
+      "hint": "Permite un valor de rotación y una constante base de 8 bits.",
+      "explanation": "El operando inmediato de 12 bits se divide en 4 bits de rotación (bits 11-8) y 8 bits de valor base (bits 7-0)."
+    },
+    {
+      "q": "¿Cuál es el factor de escala por el cual se multiplica el valor del campo rotación en Operand2?",
+      "options": [
+        "1",
+        "2",
+        "4"
+      ],
+      "correct": 1,
+      "hint": "Permite rotaciones de números pares de bits (0, 2, 4, ..., 30).",
+      "explanation": "La rotación real aplicada a la derecha sobre el valor base de 8 bits es de $2 \\cdot \\text{Rotación}$ bits."
+    },
+    {
+      "q": "¿Cuál es la constante de 8 bits máxima que se puede representar de forma directa con rotación 0 en ARM?",
+      "options": [
+        "127",
+        "255",
+        "511"
+      ],
+      "correct": 1,
+      "hint": "Es 2^8 - 1.",
+      "explanation": "Con 8 bits de valor base y rotación 0, el rango representable directo es de 0 a 255."
+    },
+    {
+      "q": "¿Cómo representa el procesador ARM la constante 1024 en Operand2 con I=1?",
+      "options": [
+        "Valor base 4 rotado a la derecha 24 posiciones",
+        "Valor base 1 rotado a la derecha 11 posiciones",
+        "Valor base 256 sin rotación"
+      ],
+      "correct": 0,
+      "hint": "Rotar a la derecha 24 posiciones en un registro de 32 bits es equivalente a desplazar a la izquierda 8 posiciones.",
+      "explanation": "1024 se codifica como el valor base 4 y rotación 12. Dado que la rotación efectiva es $12 \\times 2 = 24$ bits a la derecha, en 32 bits esto equivale a desplazar 4 a la izquierda por 8 bits ($4 \\times 256 = 1024$)."
+    },
+    {
+      "q": "¿Cuál de los siguientes valores inmediatos NO se puede representar con el formato Operand2 de ARM?",
+      "options": [
+        "256",
+        "300",
+        "257"
+      ],
+      "correct": 2,
+      "hint": "257 requiere más de 8 bits significativos continuos.",
+      "explanation": "257 en binario es `100000001`. Dado que el bit más significativo y el menos significativo están a una distancia de 9 bits, no puede representarse con un byte base de 8 bits rotado."
+    },
+    {
+      "q": "En el direccionamiento de datos con registro en ARM, ¿qué unidad de hardware permite desplazar o rotar el segundo operando sin coste de ciclos adicionales?",
+      "options": [
+        "La Unidad Aritmético-Lógica (ALU)",
+        "El Barrel Shifter",
+        "La Unidad de Control"
+      ],
+      "correct": 1,
+      "hint": "Está integrado en el camino de datos.",
+      "explanation": "El Barrel Shifter permite desplazar (LSL, LSR, ASR, ROR) el operando Rm en el mismo ciclo en el que se ejecuta la instrucción."
+    },
+    {
+      "q": "En un desplazamiento por registro Operand2 (I=0), ¿qué bit especifica si el desplazamiento es por inmediato o por registro?",
+      "options": [
+        "El bit 4",
+        "El bit 7",
+        "El bit 12"
+      ],
+      "correct": 0,
+      "hint": "Si es 0, la cantidad es fija; si es 1, proviene de un registro.",
+      "explanation": "El bit 4 de Operand2 determina el tipo de desplazamiento: 0 para inmediato y 1 para desplazamiento por registro."
+    },
+    {
+      "q": "Para desplazamientos por inmediato (bit 4 = 0), ¿qué bits especifican la cantidad de desplazamiento?",
+      "options": [
+        "Bits 11-7",
+        "Bits 6-5",
+        "Bits 3-0"
+      ],
+      "correct": 0,
+      "hint": "Son 5 bits para especificar desplazamientos de 0 a 31.",
+      "explanation": "La cantidad de desplazamiento se especifica en el campo de 5 bits del bit 11 al 7 de Operand2."
+    },
+    {
+      "q": "¿Qué bits de Operand2 codifican el tipo de desplazamiento (LSL, LSR, ASR, ROR)?",
+      "options": [
+        "Bits 4-3",
+        "Bits 6-5",
+        "Bits 11-10"
+      ],
+      "correct": 1,
+      "hint": "Son 2 bits que seleccionan la operación de desplazamiento.",
+      "explanation": "Los bits 6-5 de Operand2 codifican el tipo de desplazamiento: 00=LSL, 01=LSR, 10=ASR, 11=ROR."
+    },
+    {
+      "q": "¿Cuál es el código binario de condición para 'Equal' (EQ) en ARM?",
+      "options": [
+        "0000",
+        "0001",
+        "1010"
+      ],
+      "correct": 0,
+      "hint": "Es la primera condición en la tabla.",
+      "explanation": "La condición EQ se representa con el código de condición `0000`."
+    },
+    {
+      "q": "¿Cuál es el código binario de condición para 'Not Equal' (NE) en ARM?",
+      "options": [
+        "0000",
+        "0001",
+        "1100"
+      ],
+      "correct": 1,
+      "hint": "Sigue directamente a EQ.",
+      "explanation": "La condición NE se representa con el código de condición `0001`."
+    },
+    {
+      "q": "¿Qué registro actúa como Program Counter (PC) en ARM de 32 bits?",
+      "options": [
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "correct": 2,
+      "hint": "Es el último de los registros visibles de 32 bits.",
+      "explanation": "R15 es el registro que se utiliza convencionalmente como Program Counter (PC)."
+    },
+    {
+      "q": "¿Qué registro actúa como Link Register (LR) en ARM?",
+      "options": [
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "correct": 1,
+      "hint": "Almacena la dirección de retorno en llamadas a funciones.",
+      "explanation": "El registro R14 es el Link Register (LR), que almacena la dirección a la que debe retornar una subrutina."
+    },
+    {
+      "q": "¿Qué registro se utiliza convencionalmente como Stack Pointer (SP) en ARM?",
+      "options": [
+        "R12",
+        "R13",
+        "R14"
+      ],
+      "correct": 1,
+      "hint": "Apunta al tope de la pila.",
+      "explanation": "El registro R13 es el Stack Pointer (SP) utilizado para la gestión de la pila."
+    },
+    {
+      "q": "¿Qué tipo de instrucción se identifica con los bits de tipo (bits 27-26) en '01'?",
+      "options": [
+        "Procesamiento de datos",
+        "Carga y almacenamiento en memoria (LDR/STR)",
+        "Bifurcaciones (B/BL)"
+      ],
+      "correct": 1,
+      "hint": "Son instrucciones de transferencia de memoria.",
+      "explanation": "Las instrucciones de carga y almacenamiento (LDR y STR) tienen los bits de tipo 27-26 en `01`."
+    },
+    {
+      "q": "¿Qué indica el bit 20 (L) en una instrucción de tipo LDR/STR?",
+      "options": [
+        "Indica si el desplazamiento es inmediato o por registro.",
+        "Indica si se trata de una carga (Load, L=1) o almacenamiento (Store, L=0).",
+        "Indica si se actualiza el registro base."
+      ],
+      "correct": 1,
+      "hint": "Load es 1, Store es 0.",
+      "explanation": "El bit `L` indica si la operación carga datos a un registro (`L=1`) o si almacena datos en la memoria (`L=0`)."
+    },
+    {
+      "q": "¿Qué bandera de CPSR se activa si el resultado de una operación es negativo?",
+      "options": [
+        "Bandera N (Negative)",
+        "Bandera Z (Zero)",
+        "Bandera C (Carry)"
+      ],
+      "correct": 0,
+      "hint": "Refleja el bit de signo.",
+      "explanation": "La bandera `N` se establece igual al bit 31 (el bit de signo) del resultado."
+    },
+    {
+      "q": "¿Qué bandera de CPSR se activa si el resultado de una operación es exactamente cero?",
+      "options": [
+        "Bandera Z (Zero)",
+        "Bandera C (Carry)",
+        "Bandera V (Overflow)"
+      ],
+      "correct": 0,
+      "hint": "Indica igualdad tras una comparación.",
+      "explanation": "La bandera `Z` se pone a 1 si el resultado de la operación aritmética o lógica es cero."
+    },
+    {
+      "q": "¿Qué significa el código de condición 'VS' en una instrucción ARM?",
+      "options": [
+        "Ejecutar si el desbordamiento está activo (V=1)",
+        "Ejecutar si el resultado es menor o igual",
+        "Ejecutar si no hay acarreo"
+      ],
+      "correct": 0,
+      "hint": "V Set.",
+      "explanation": "El código condicional VS (Overflow Set) ejecuta la instrucción solo si la bandera V de desbordamiento es 1."
+    },
+    {
+      "q": "¿Cuál es el formato de la instrucción de salto B (Branch) en ARM de 32 bits?",
+      "options": [
+        "Los bits 23-0 contienen un offset de 24 bits con signo.",
+        "Los bits 11-0 contienen un offset de 12 bits con signo.",
+        "Los bits 15-0 contienen la dirección absoluta de destino."
+      ],
+      "correct": 0,
+      "hint": "Permite saltar en un rango relativo.",
+      "explanation": "La instrucción de bifurcación (B) tiene un offset de 24 bits con signo para saltos relativos al PC."
+    },
+    {
+      "q": "Para calcular la dirección de destino de un salto en ARM, ¿por qué valor se multiplica el offset de 24 bits?",
+      "options": [
+        "Por 2",
+        "Por 4",
+        "No se multiplica"
+      ],
+      "correct": 1,
+      "hint": "Todas las instrucciones en memoria ocupan 4 bytes y están alineadas.",
+      "explanation": "El offset de 24 bits representa palabras de 4 bytes, por lo que se multiplica por 4 (se desplaza 2 bits a la izquierda) antes de sumarse al PC."
+    },
+    {
+      "q": "Debido al diseño del cauce (pipeline) de ARM, ¿a qué valor apunta el registro PC (R15) con respecto a la instrucción en ejecución?",
+      "options": [
+        "A la instrucción en ejecución + 4 bytes",
+        "A la instrucción en ejecución + 8 bytes",
+        "A la dirección de inicio de la memoria RAM"
+      ],
+      "correct": 1,
+      "hint": "Son 2 instrucciones adelante en el pipeline de 3 etapas.",
+      "explanation": "El pipeline de 3 etapas (búsqueda, decodificación, ejecución) hace que el PC apunte a la instrucción que se está buscando, que está a 8 bytes de distancia de la que se está ejecutando."
+    },
+    {
+      "q": "¿Qué ocurre con el registro base Rn en un direccionamiento LDR/STR con Pre-indexado y actualización (Writeback)?",
+      "options": [
+        "El registro Rn no cambia.",
+        "El registro Rn se actualiza con la nueva dirección antes del acceso.",
+        "El registro Rn se modifica solo después de acceder a memoria."
+      ],
+      "correct": 1,
+      "hint": "Lleva el símbolo '!'.",
+      "explanation": "El direccionamiento pre-indexado con writeback (`!`) actualiza el registro base con la dirección calculada antes de hacer la transferencia."
+    },
+    {
+      "q": "¿Qué ocurre en el direccionamiento de Post-indexado (LDR R1, [R2], #4)?",
+      "options": [
+        "Se accede a la dirección original en R2, y luego se actualiza R2 sumándole 4.",
+        "Se actualiza R2 sumándole 4 y luego se accede.",
+        "El registro base no se modifica."
+      ],
+      "correct": 0,
+      "hint": "Acceso con la dirección inicial, incremento posterior.",
+      "explanation": "En post-indexado se accede a la dirección en `R2`, y posteriormente `R2` se actualiza con la dirección modificada."
+    },
+    {
+      "q": "¿Qué registro almacena el estado del procesador al ocurrir una excepción?",
+      "options": [
+        "El CPSR",
+        "El SPSR",
+        "El registro PC"
+      ],
+      "correct": 1,
+      "hint": "Saved Program Status Register.",
+      "explanation": "El SPSR se utiliza para guardar el estado del CPSR del modo de ejecución previo a la excepción."
+    },
+    {
+      "q": "¿Qué bandera en el CPSR se utiliza para detectar desbordamientos aritméticos con signo?",
+      "options": [
+        "Bandera C (Carry)",
+        "Bandera V (Overflow)",
+        "Bandera Z (Zero)"
+      ],
+      "correct": 1,
+      "hint": "Indica desbordamiento en complemento a dos.",
+      "explanation": "La bandera V (Overflow) se activa cuando el resultado de una operación aritmética con signo desborda el rango de 32 bits."
+    },
+    {
+      "q": "En una instrucción ARM, si los bits 27-26 son '10', ¿qué tipo de instrucción se está codificando?",
+      "options": [
+        "Bifurcación (B o BL)",
+        "Procesamiento de datos",
+        "Carga y almacenamiento múltiple"
+      ],
+      "correct": 0,
+      "hint": "Saltos del flujo de ejecución.",
+      "explanation": "Las instrucciones de bifurcación (B y BL) se identifican con los bits 27-26 en `10`."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si el registro R1 contiene `0x00000002` y ejecutamos `ADD R0, R1, R1, LSL #2`, el valor final en R0 será ____.",
+      "options": [
+        "10",
+        "8",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "R1 LSL #2 es 2 * 4 = 8. Luego se suma R1.",
+      "explanation": "R1 desplazado 2 posiciones a la izquierda es $2 \\cdot 4 = 8$. Sumando R1 (2) el resultado es 10."
+    },
+    {
+      "q": "Para que la instrucción `ADD R0, R1, #____` sea válida sin requerir una rotación del inmediato en Operand2, el valor de la constante debe estar en el rango de 0 a 255.",
+      "options": [
+        "255",
+        "300",
+        "512"
+      ],
+      "correct": 0,
+      "hint": "Es el valor máximo directo de 8 bits.",
+      "explanation": "El campo de valor inmediato base es de 8 bits, lo que permite constantes directas de 0 a 255 con rotación 0."
+    },
+    {
+      "q": "En la codificación de la instrucción `SUB R5, R6, R7`, el campo correspondiente al registro destino Rd contiene el valor binario ____.",
+      "options": [
+        "0111",
+        "0110",
+        "0101"
+      ],
+      "correct": 2,
+      "hint": "Rd es R5.",
+      "explanation": "R5 en binario se codifica como `0101` (5 en decimal) en el campo Rd (bits 15-12)."
+    },
+    {
+      "q": "En la instrucción de carga `LDR R0, [R1, #8]!`, después del acceso a memoria, el registro base R1 se actualiza con el valor R1 + ____.",
+      "options": [
+        "4",
+        "8",
+        "12"
+      ],
+      "correct": 1,
+      "hint": "El signo '!' actualiza el registro base con el offset.",
+      "explanation": "En el direccionamiento pre-indexado con writeback, el registro base R1 se actualiza con el valor calculado R1 + 8."
+    },
+    {
+      "q": "Si ejecutamos la instrucción `LDR R4, [R5], #12`, el registro base R5 se actualiza sumándole ____ después del acceso a memoria.",
+      "options": [
+        "4",
+        "12",
+        "8"
+      ],
+      "correct": 1,
+      "hint": "Post-indexado actualiza la base después de la lectura.",
+      "explanation": "En post-indexado, se accede con R5 y luego R5 se incrementa directamente en el offset inmediato de 12."
+    },
+    {
+      "q": "La instrucción máquina `0xE3A020FF` representa la instrucción ensamblador `MOV R2, #____`.",
+      "options": [
+        "255",
+        "1024",
+        "4096"
+      ],
+      "correct": 0,
+      "hint": "El valor base en los bits 7-0 es 0xFF.",
+      "explanation": "Los 8 bits inferiores son `FF` (255) y la rotación es 0, lo que da el inmediato 255."
+    },
+    {
+      "q": "Al codificar la instrucción `ADD R1, R2, #45`, el campo de registro fuente Rn codifica el valor decimal ____.",
+      "options": [
+        "1",
+        "2",
+        "45"
+      ],
+      "correct": 1,
+      "hint": "Rn representa el primer operando fuente.",
+      "explanation": "Rn es el registro R2, codificado como 2 en decimal (bits 19-16)."
+    },
+    {
+      "q": "La codificación de la instrucción `MOV R0, R1` corresponde a `0xE1A00001`, donde el campo Rd contiene el valor decimal ____.",
+      "options": [
+        "0",
+        "1",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Rd es el registro destino R0.",
+      "explanation": "Rd es el registro R0 (0 en decimal), almacenado en los bits 15-12."
+    },
+    {
+      "q": "En la instrucción de salto `B #0x10`, si la dirección de la instrucción es `0x1000`, el valor del PC durante la etapa de ejecución (antes de aplicar el salto) es `0x1000 + ____`.",
+      "options": [
+        "4",
+        "8",
+        "12"
+      ],
+      "correct": 1,
+      "hint": "Es el desajuste del pipeline en ARM.",
+      "explanation": "Debido a las 3 etapas del pipeline, el PC leído durante la ejecución es el de la instrucción actual más 8 bytes."
+    },
+    {
+      "q": "La instrucción `ADDNE R0, R1, R2` se ejecutará solo si la bandera Z en el registro CPSR tiene el valor ____.",
+      "options": [
+        "0",
+        "1",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "NE significa diferente (Z = 0).",
+      "explanation": "La condición NE (Not Equal) se cumple si y solo si la bandera de cero Z es igual a 0."
+    },
+    {
+      "q": "La instrucción `ADDEQ R0, R1, R2` se ejecutará solo si la bandera Z en el registro CPSR tiene el valor ____.",
+      "options": [
+        "0",
+        "1",
+        "2"
+      ],
+      "correct": 1,
+      "hint": "EQ requiere que sean iguales.",
+      "explanation": "La condición EQ (Equal) requiere que la bandera Z sea igual a 1."
+    },
+    {
+      "q": "Si una instrucción máquina ARM de procesamiento de datos tiene un opcode `1101`, la operación realizada es ____.",
+      "options": [
+        "ADD",
+        "SUB",
+        "MOV"
+      ],
+      "correct": 2,
+      "hint": "Opcode decimal 13.",
+      "explanation": "El opcode `1101` binario es 13 en decimal, el cual corresponde a la operación MOV."
+    },
+    {
+      "q": "Si una instrucción máquina ARM tiene el opcode `0100`, la operación correspondiente es ____.",
+      "options": [
+        "ADD",
+        "SUB",
+        "AND"
+      ],
+      "correct": 0,
+      "hint": "Opcode decimal 4.",
+      "explanation": "El opcode `0100` binario es 4 en decimal, que corresponde a la operación ADD."
+    },
+    {
+      "q": "En la instrucción `MOV R0, R1, LSR #____`, si R1 contiene `0x00000010` y R0 termina con `0x00000004`, la cantidad de bits desplazada es 2.",
+      "options": [
+        "1",
+        "2",
+        "4"
+      ],
+      "correct": 1,
+      "hint": "Desplazamiento a la derecha de 16 para obtener 4.",
+      "explanation": "`0x10` en binario es 16. Para obtener 4 (`0x04`), debemos realizar un desplazamiento lógico a la derecha de 2 bits."
+    },
+    {
+      "q": "Si el bit S de una instrucción está en ____, la ejecución de la instrucción no modificará las banderas del registro CPSR.",
+      "options": [
+        "0",
+        "1",
+        "Cualquiera"
+      ],
+      "correct": 0,
+      "hint": "S = 0 desactiva la modificación de flags.",
+      "explanation": "El bit S (bit 20) en 0 indica que la instrucción no altera las banderas en el CPSR."
+    },
+    {
+      "q": "Al decodificar `0xE3A03B01`, el valor de la rotación (rot) es de 11, lo que equivale a desplazar el valor base ____ bits a la derecha de forma efectiva.",
+      "options": [
+        "11",
+        "22",
+        "44"
+      ],
+      "correct": 1,
+      "hint": "Se multiplica la rotación por 2.",
+      "explanation": "La rotación efectiva a la derecha en ARM es $2 \\cdot \\text{rot}$. Para $\\text{rot} = 11$, es $22$ bits."
+    },
+    {
+      "q": "Para representar la constante 4096 en ARM, se utiliza una base de 1 y una rotación de ____.",
+      "options": [
+        "10",
+        "12",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "1 rotado a la derecha por 20 posiciones es 4096.",
+      "explanation": "Rotar 1 a la derecha por 20 posiciones en 32 bits es equivalente a desplazarlo 12 posiciones a la izquierda, dando $2^{12} = 4096$. Por tanto, $\\text{rot} = 10$ ($10 \\times 2 = 20$ bits)."
+    },
+    {
+      "q": "En una instrucción de carga de memoria como `LDR R0, [R1, #4]`, el bit I (bit 25) vale ____ para indicar que el offset es una constante inmediata.",
+      "options": [
+        "0",
+        "1",
+        "Cualquiera"
+      ],
+      "correct": 0,
+      "hint": "Funciona al revés que procesamiento de datos.",
+      "explanation": "En las instrucciones de carga/almacenamiento en memoria, `I = 0` indica offset inmediato y `I = 1` indica offset en registro."
+    },
+    {
+      "q": "En las instrucciones de procesamiento de datos, si el bit I vale ____, indica que Operand2 es un valor inmediato.",
+      "options": [
+        "0",
+        "1",
+        "Cualquiera"
+      ],
+      "correct": 1,
+      "hint": "Indica inmediato de 12 bits.",
+      "explanation": "En las operaciones aritmético-lógicas, el bit I en 1 indica que el segundo operando (Operand2) es una constante inmediata."
+    },
+    {
+      "q": "El Program Counter (PC) se almacena en el registro ____ del procesador.",
+      "options": [
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "correct": 2,
+      "hint": "Es el último de los 16 registros de propósito general.",
+      "explanation": "R15 es el registro especial que actúa como el Program Counter."
+    },
+    {
+      "q": "Dada la instrucción `ADD R1, R2, R3`, ¿cuáles de las siguientes características se aplican a su formato de codificación?",
+      "options": [
+        "El bit I (bit 25) está puesto a 0, indicando que Operand2 es un registro.",
+        "El registro destino Rd es R1 y el registro base Rn es R2.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es una instrucción básica de procesamiento de datos con registros.",
+      "explanation": "Todas las afirmaciones son correctas: el bit I es 0 porque el operando es un registro, Rd es R1 y Rn es R2."
+    },
+    {
+      "q": "¿Qué campos binarios forman parte de una instrucción ARM clásica de 32 bits?",
+      "options": [
+        "Campo de condición (cond) en los bits 31-28.",
+        "Campo de registro de destino (Rd) en los bits 15-12.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "ARM de 32 bits divide la instrucción en campos bien delimitados.",
+      "explanation": "Todos estos campos forman parte de la estructura básica de 32 bits de las instrucciones ARM."
+    },
+    {
+      "q": "¿Qué ventajas presenta el formato de instrucciones de tamaño fijo de ARM?",
+      "options": [
+        "Simplifica y acelera la decodificación por hardware.",
+        "Facilita la implementación de la técnica de segmentación de instrucciones (pipeline).",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es una de las principales directrices de las arquitecturas RISC.",
+      "explanation": "El formato RISC de instrucciones fijas de 32 bits tiene como fin facilitar la decodificación y el pipeline del microprocesador."
+    },
+    {
+      "q": "Sobre el registro CPSR del procesador ARM, ¿cuál de los siguientes enunciados es verdadero?",
+      "options": [
+        "Contiene las banderas de condición N, Z, C, V.",
+        "Es el registro de estado del programa actual (Current Program Status Register).",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "CPSR almacena la información de estado de ejecución del procesador.",
+      "explanation": "El CPSR almacena tanto el estado del procesador como las banderas aritméticas (N, Z, C, V)."
+    },
+    {
+      "q": "¿Cuál de las siguientes condiciones del campo cond (bits 31-28) de ARM es correcta?",
+      "options": [
+        "EQ (Equal) se representa con el código 0000.",
+        "NE (Not Equal) se representa con el código 0001.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Son las dos primeras condiciones de la tabla condicional.",
+      "explanation": "EQ = `0000` y NE = `0001` son los dos códigos condicionales iniciales."
+    },
+    {
+      "q": "Respecto al operando inmediato de 12 bits (Operand2) cuando I=1, ¿qué es correcto?",
+      "options": [
+        "Consta de un campo de rotación par de 4 bits.",
+        "Consta de un campo de valor base de 8 bits.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se divide en dos partes: rotación y constante base.",
+      "explanation": "Operand2 con I=1 se compone de 4 bits para la rotación y 8 bits para el valor base de la constante."
+    },
+    {
+      "q": "En el direccionamiento de memoria de las instrucciones LDR/STR, ¿cuáles de estos modos existen?",
+      "options": [
+        "Desplazamiento inmediato o por registro.",
+        "Pre-indexado (con o sin actualización) y Post-indexado.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "ARM ofrece una amplia gama de modos de direccionamiento para accesos a memoria.",
+      "explanation": "ARM soporta desplazamientos por registro/inmediato, indexado previo con o sin writeback, y direccionamiento posterior."
+    },
+    {
+      "q": "Si ejecutamos una instrucción con el bit S a 1 (como ADDS), ¿qué banderas de condición pueden cambiar?",
+      "options": [
+        "Z (Zero) si el resultado es cero y N (Negative) si el resultado tiene el bit 31 a 1.",
+        "C (Carry) si hay desbordamiento sin signo y V (Overflow) si hay desbordamiento con signo.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El bit S habilita la actualización completa de las banderas en CPSR.",
+      "explanation": "Bajo la influencia de S=1, las banderas N, Z, C y V pueden cambiar según el resultado de la operación."
+    },
+    {
+      "q": "¿Cuáles de las siguientes combinaciones de desplazamiento de registro Rm en Operand2 son válidas?",
+      "options": [
+        "LSL (Logical Shift Left) y LSR (Logical Shift Right).",
+        "ASR (Arithmetic Shift Right) y ROR (Rotate Right).",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Son los cuatro tipos de desplazamiento nativos del Barrel Shifter.",
+      "explanation": "El Barrel Shifter de ARM permite aplicar LSL, LSR, ASR y ROR al segundo operando de forma transparente."
+    },
+    {
+      "q": "¿Qué registros especiales juegan un papel crucial durante el flujo de subrutinas?",
+      "options": [
+        "El Program Counter (PC / R15) para la dirección actual.",
+        "El Link Register (LR / R14) para almacenar la dirección de retorno.",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Permiten el salto de llamada y el retorno.",
+      "explanation": "La llamada a subrutina escribe la dirección de retorno en LR, y el retorno se logra cargando ese valor de nuevo en el PC."
+    },
+    {
+      "q": "Si R1 contiene 5 y restamos 10 con la instrucción `SUB R0, R1, #10`, ¿cuál es el valor almacenado en R0?",
+      "options": [
+        "0x00000005",
+        "0x0000000A",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El resultado de 5 - 10 es -5 (0xFFFFFFFB en complemento a dos).",
+      "explanation": "El valor resultante es -5, codificado en complemento a dos de 32 bits como `0xFFFFFFFB`, que no está en las opciones."
+    },
+    {
+      "q": "Para direccionar 4 GB de memoria, ¿cuál es la longitud necesaria del bus de direcciones?",
+      "options": [
+        "16 bits",
+        "24 bits",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "4 GB = 2^32 bytes.",
+      "explanation": "Se requiere un bus de direcciones de 32 bits para un rango de 4 GB ($2^{32}$ bytes). Ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "¿Cuál es la representación hexadecimal de la instrucción máquina de 'no operación' (NOP), codificada como `MOV R0, R0`?",
+      "options": [
+        "0x00000000",
+        "0xFFFFFFFF",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La instrucción NOP estándar en ARM se codifica como 0xE1A00000.",
+      "explanation": "La codificación para `MOV R0, R0` con cond=AL es `0xE1A00000`, que no coincide con las opciones."
+    },
+    {
+      "q": "En el procesador ARM, si los bits 31-28 son 1111 en una instrucción estándar de tipo procesamiento de datos, ¿qué condición se evalúa?",
+      "options": [
+        "Ejecución si desbordamiento (VS)",
+        "Ejecución si es menor (LT)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "El código 1111 está reservado para instrucciones especiales.",
+      "explanation": "El valor condicional `1111` no representa una condición ordinaria, sino que está reservado para instrucciones de extensión y del sistema."
+    },
+    {
+      "q": "Si intentamos codificar la instrucción `MOV R0, #257` en una única instrucción lógica ordinaria, ¿cuál es la rotación correspondiente?",
+      "options": [
+        "Rotación = 0",
+        "Rotación = 1",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "257 no se puede codificar con el formato de inmediato estándar.",
+      "explanation": "257 requiere más de 8 bits significativos continuos, por lo que no es posible codificarlo con ninguna rotación. Ninguna de las opciones es válida."
+    },
+    {
+      "q": "¿Qué bandera del CPSR se pone a 1 si el resultado de una operación aritmética con signo desborda el límite de 32 bits?",
+      "options": [
+        "Z (Zero)",
+        "C (Carry)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es la bandera V de desbordamiento.",
+      "explanation": "El desbordamiento con signo activa la bandera `V` (Overflow), la cual no figura en las opciones."
+    },
+    {
+      "q": "¿Cuál es el opcode en binario para la operación lógica AND en las instrucciones ARM?",
+      "options": [
+        "0100",
+        "1101",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Equivale a 0 en decimal.",
+      "explanation": "El opcode de AND es `0000` en binario. Ninguna de las opciones propuestas es correcta."
+    },
+    {
+      "q": "¿Qué registro contiene de forma directa y secuencial la dirección de la instrucción en ejecución sin considerar la desviación del pipeline?",
+      "options": [
+        "R13 (SP)",
+        "R14 (LR)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es el Program Counter (R15).",
+      "explanation": "El registro que almacena la dirección de flujo es el Program Counter (PC / R15), que no figura entre las opciones."
+    },
+    {
+      "q": "En el direccionamiento de post-indexado `LDR R0, [R1], #4`, ¿cómo se accede a la memoria?",
+      "options": [
+        "Primero se incrementa R1 y luego se lee.",
+        "Se lee de la memoria y R1 nunca se actualiza.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se lee con el valor actual de R1 y luego se le suma 4.",
+      "explanation": "El comportamiento correcto es acceder a la dirección actual en `R1` y posteriormente sumar 4 a `R1`, lo cual invalida las opciones propuestas."
+    },
+    {
+      "q": "Si codificamos la instrucción `MOV R1, R2, LSL #32`, ¿cuál es el desplazamiento inmediato representado?",
+      "options": [
+        "Un desplazamiento lógico a la izquierda de 32 bits.",
+        "Un desplazamiento aritmético a la izquierda de 32 bits.",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La instrucción por inmediato solo permite valores de LSL de 0 a 31.",
+      "explanation": "El desplazamiento por inmediato de LSL está restringido al rango 0-31 bits. Un desplazamiento de 32 no está permitido por inmediato. Ninguna de las anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "prob_1",
+      "title": "Decodificación de ADD inmediato 1",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE2831005`.",
+      "parts": [
+        {
+          "id": "prob_1_a",
+          "label": "a)",
+          "question": "¿Cuál es el número de registro fuente Rn decodificado?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El campo $Rn$ ocupa los bits 19-16. `0xE2831005` en binario tiene en los bits 19-16 el valor `0011`, que es $3$ en decimal ($R_3$)."
+        },
+        {
+          "id": "prob_1_b",
+          "label": "b)",
+          "question": "¿Cuál es el número de registro destino Rd decodificado?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ ocupa los bits 15-12. En `0xE2831005`, los bits 15-12 son `0001`, lo que corresponde a $1$ ($R_1$)."
+        },
+        {
+          "id": "prob_1_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit de inmediato I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit $I$ (bit 25) indica si el segundo operando es un inmediato. En `0xE2831005` (bits 27-24 son `0010`, bit 25 es $1$), el valor del bit $I$ es $1$."
+        },
+        {
+          "id": "prob_1_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del operando inmediato (Operand2) decodificado?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Los 12 bits inferiores son `0000 0000 0101`. La rotación es $0$ y el valor base es $5$. Por tanto, el valor es $5 \\cdot 2^{-0} = 5$."
+        }
+      ]
+    },
+    {
+      "id": "prob_2",
+      "title": "Decodificación de ADD inmediato 2",
+      "context": "Dada la instrucción ensamblador `ADD R1, R2, #45`.",
+      "parts": [
+        {
+          "id": "prob_2_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de su campo opcode?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El opcode para la suma ($ADD$) es `0100` en binario, que en decimal equivale a $4$."
+        },
+        {
+          "id": "prob_2_b",
+          "label": "b)",
+          "question": "¿Cuál es el número de registro Rn?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro primer operando fuente es $R_2$, por lo que $Rn = 2$."
+        },
+        {
+          "id": "prob_2_c",
+          "label": "c)",
+          "question": "¿Cuál es el número de registro Rd?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El registro de destino es $R_1$, por lo que $Rd = 1$."
+        },
+        {
+          "id": "prob_2_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit S (Set Flags)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como la instrucción es `ADD` (y no `ADDS`), el bit $S$ (bit 20) es $0$."
+        }
+      ]
+    },
+    {
+      "id": "prob_3",
+      "title": "Codificación de constante 300",
+      "context": "Se desea codificar la constante inmediata $300$ en Operand2 (I=1).",
+      "parts": [
+        {
+          "id": "prob_3_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 75,
+          "tolerance": 0,
+          "explanation": "Para representar $300$ con un byte base y rotación par, expresamos $300 = 75 \\cdot 4 = 75 \\cdot 2^2$. Así, la base es $75$."
+        },
+        {
+          "id": "prob_3_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot) de 4 bits?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Multiplicar por $4$ equivale a desplazar a la izquierda por 2 bits, lo que equivale a una rotación a la derecha de 30 bits. Como la rotación real es $2 \\cdot \\text{rot}$, tenemos $2 \\cdot \\text{rot} = 30 \\implies \\text{rot} = 15$."
+        },
+        {
+          "id": "prob_3_c",
+          "label": "c)",
+          "question": "¿Cuántos bits reales se rota a la derecha la base?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "La rotación real es $2 \\cdot \\text{rot} = 2 \\cdot 15 = 30$ bits a la derecha."
+        },
+        {
+          "id": "prob_3_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Dado que se está representando un valor inmediato, el bit $I$ (bit 25) es $1$."
+        }
+      ]
+    },
+    {
+      "id": "prob_4",
+      "title": "Decodificación de SUB con registro",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE04F2003`.",
+      "parts": [
+        {
+          "id": "prob_4_a",
+          "label": "a)",
+          "question": "¿Cuál es el número de registro Rn decodificado?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El campo $Rn$ (bits 19-16) contiene `1111` ($F$ en hexadecimal), lo que corresponde al registro $R_{15}$ ($PC$), es decir, $15$ en decimal."
+        },
+        {
+          "id": "prob_4_b",
+          "label": "b)",
+          "question": "¿Cuál es el número de registro Rd decodificado?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ (bits 15-12) contiene `0010`, correspondiente a $R_2$ ($2$)."
+        },
+        {
+          "id": "prob_4_c",
+          "label": "c)",
+          "question": "¿Cuál es el número de registro Rm decodificado?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El campo $Rm$ (bits 3-0) contiene `0011`, correspondiente a $R_3$ ($3$)."
+        },
+        {
+          "id": "prob_4_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit de inmediato I?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit $I$ (bit 25) en `0xE04F2003` es $0$ (ya que los bits 27-24 son `0000`), indicando que Operand2 es un registro."
+        }
+      ]
+    },
+    {
+      "id": "prob_5",
+      "title": "Codificación de constante 1024",
+      "context": "Se desea codificar la constante $1024$ con la menor base decimal posible ($1$).",
+      "parts": [
+        {
+          "id": "prob_5_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Representamos $1024$ como $1 \\cdot 1024 = 1 \\cdot 2^{10}$. La base menor posible es $1$."
+        },
+        {
+          "id": "prob_5_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot) para la base 1?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Desplazar 10 posiciones a la izquierda equivale a rotar 22 posiciones a la derecha en 32 bits ($32 - 10 = 22$). Como la rotación es $2 \\cdot \\text{rot}$, tenemos $22 = 2 \\cdot \\text{rot} \\implies \\text{rot} = 11$."
+        },
+        {
+          "id": "prob_5_c",
+          "label": "c)",
+          "question": "¿Cuántos bits reales se rota a la derecha la base?",
+          "correctValue": 22,
+          "tolerance": 0,
+          "explanation": "La rotación real es $2 \\cdot \\text{rot} = 2 \\cdot 11 = 22$ bits a la derecha."
+        },
+        {
+          "id": "prob_5_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al codificar un inmediato, el bit $I$ debe estar en $1$."
+        }
+      ]
+    },
+    {
+      "id": "prob_6",
+      "title": "Codificación de constante 4096",
+      "context": "Se desea codificar la constante $4096$ con base 1.",
+      "parts": [
+        {
+          "id": "prob_6_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$4096 = 2^{12} = 1 \\cdot 2^{12}$. La base es $1$."
+        },
+        {
+          "id": "prob_6_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot)?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Desplazar 12 a la izquierda equivale a rotar a la derecha $32 - 12 = 20$ posiciones. Así, $2 \\cdot \\text{rot} = 20 \\implies \\text{rot} = 10$."
+        },
+        {
+          "id": "prob_6_c",
+          "label": "c)",
+          "question": "¿Cuántos bits reales se rota a la derecha la base?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La rotación real es $2 \\cdot 10 = 20$ bits."
+        },
+        {
+          "id": "prob_6_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para operandos inmediatos, el bit $I$ es $1$."
+        }
+      ]
+    },
+    {
+      "id": "prob_7",
+      "title": "Codificación de constante 256",
+      "context": "Se desea codificar la constante $256$ con base 1.",
+      "parts": [
+        {
+          "id": "prob_7_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$256 = 2^8 = 1 \\cdot 2^8$. La base es $1$."
+        },
+        {
+          "id": "prob_7_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Desplazar 8 a la izquierda equivale a rotar a la derecha $32 - 8 = 24$ posiciones. Así, $2 \\cdot \\text{rot} = 24 \\implies \\text{rot} = 12$."
+        },
+        {
+          "id": "prob_7_c",
+          "label": "c)",
+          "question": "¿Cuántos bits reales se rota a la derecha la base?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "La rotación real es $2 \\cdot 12 = 24$ bits."
+        },
+        {
+          "id": "prob_7_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit $I$ es $1$."
+        }
+      ]
+    },
+    {
+      "id": "prob_8",
+      "title": "Análisis de la constante 257",
+      "context": "Analice la representabilidad de la constante $257$ en Operand2.",
+      "parts": [
+        {
+          "id": "prob_8_a",
+          "label": "a)",
+          "question": "¿Se puede codificar de forma directa en un inmediato de 12 bits? (1=sí, 0=no)",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$257$ requiere 9 bits significativos (`100000001`), lo que excede el límite de 8 bits base de Operand2. Por tanto, no se puede codificar ($0$)."
+        },
+        {
+          "id": "prob_8_b",
+          "label": "b)",
+          "question": "¿Cuál es el número máximo de bits significativos consecutivos para una constante representable?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El valor base en Operand2 tiene exactamente $8$ bits de ancho."
+        },
+        {
+          "id": "prob_8_c",
+          "label": "c)",
+          "question": "¿Cuál es el número máximo que se puede codificar con rotación 0?",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "Con rotación 0, el byte base representa directamente los números del 0 al $255$."
+        },
+        {
+          "id": "prob_8_d",
+          "label": "d)",
+          "question": "¿Cuál es la rotación máxima permitida en el campo de rotación?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El campo de rotación tiene $4$ bits, permitiendo valores del 0 al $15$."
+        }
+      ]
+    },
+    {
+      "id": "prob_9",
+      "title": "Decodificación de MOV con constante 255",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE3A020FF`.",
+      "parts": [
+        {
+          "id": "prob_9_a",
+          "label": "a)",
+          "question": "¿Cuál es el número de registro de destino Rd?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ (bits 15-12) de `0xE3A020FF` es `0010` ($2$, registro $R_2$)."
+        },
+        {
+          "id": "prob_9_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal del inmediato de Operand2?",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "El valor base es `0xFF` ($255$) y la rotación es $0$. El inmediato resultante es $255$."
+        },
+        {
+          "id": "prob_9_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del campo de rotación (rot)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El campo de rotación (bits 11-8) es `0000`, es decir, $0$."
+        },
+        {
+          "id": "prob_9_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del opcode decodificado?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "El opcode (bits 24-21) es `1101`, lo que corresponde a $13$ en decimal ($MOV$)."
+        }
+      ]
+    },
+    {
+      "id": "prob_10",
+      "title": "Decodificación de MOV con constante 1024",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE3A03B01`.",
+      "parts": [
+        {
+          "id": "prob_10_a",
+          "label": "a)",
+          "question": "¿Cuál es el número de registro de destino Rd?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ (bits 15-12) contiene `0011`, lo que corresponde a $3$ ($R_3$)."
+        },
+        {
+          "id": "prob_10_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El byte base (bits 7-0) es `01`, lo que corresponde a $1$."
+        },
+        {
+          "id": "prob_10_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del campo de rotación (rot) en decimal?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "El campo de rotación (bits 11-8) es `1011`, lo que corresponde a $11$ en decimal."
+        },
+        {
+          "id": "prob_10_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor decimal del inmediato final?",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "El inmediato es $1 \\text{ rotado derecha } (11 \\cdot 2) \\text{ bits} = 1 \\text{ rotado } 22 \\text{ bits} = 1024$."
+        }
+      ]
+    },
+    {
+      "id": "prob_11",
+      "title": "Operand2 con desplazamiento LSL inmediato",
+      "context": "Dada la instrucción `ADD R0, R1, R2, LSL #4`.",
+      "parts": [
+        {
+          "id": "prob_11_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de los bits 11-7 (shift_imm)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El valor del desplazamiento inmediato es $4$ ($4$ en decimal)."
+        },
+        {
+          "id": "prob_11_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal de los bits 6-5 (shift_type) para LSL?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "LSL se codifica con `00` en binario, que es $0$ en decimal."
+        },
+        {
+          "id": "prob_11_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit 4?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit 4 es $0$ para desplazamientos controlados por inmediatos."
+        },
+        {
+          "id": "prob_11_d",
+          "label": "d)",
+          "question": "¿Cuál es el número de registro Rm?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro del segundo operando es $R_2$, por lo que $Rm = 2$."
+        }
+      ]
+    },
+    {
+      "id": "prob_12",
+      "title": "Operand2 con desplazamiento LSR inmediato",
+      "context": "Dada la instrucción `ADD R0, R1, R2, LSR #8`.",
+      "parts": [
+        {
+          "id": "prob_12_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de los bits 11-7 (shift_imm)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El valor del desplazamiento inmediato es $8$."
+        },
+        {
+          "id": "prob_12_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal de los bits 6-5 (shift_type) para LSR?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "LSR se codifica con `01` en binario, que es $1$ en decimal."
+        },
+        {
+          "id": "prob_12_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit 4?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit 4 es $0$ para desplazamientos controlados por inmediatos."
+        },
+        {
+          "id": "prob_12_d",
+          "label": "d)",
+          "question": "¿Cuál es el número de registro Rm?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro segundo operando es $R_2$, por lo que $Rm = 2$."
+        }
+      ]
+    },
+    {
+      "id": "prob_13",
+      "title": "Operand2 con desplazamiento ASR inmediato",
+      "context": "Dada la instrucción `SUB R5, R6, R7, ASR #16`.",
+      "parts": [
+        {
+          "id": "prob_13_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de los bits 11-7 (shift_imm)?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El valor del desplazamiento inmediato es $16$."
+        },
+        {
+          "id": "prob_13_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal de los bits 6-5 (shift_type) para ASR?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "ASR se codifica con `10` en binario, que es $2$ en decimal."
+        },
+        {
+          "id": "prob_13_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit 4?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit 4 es $0$ para desplazamientos controlados por inmediatos."
+        },
+        {
+          "id": "prob_13_d",
+          "label": "d)",
+          "question": "¿Cuál es el número de registro Rm?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El registro del segundo operando es $R_7$, por lo que $Rm = 7$."
+        }
+      ]
+    },
+    {
+      "id": "prob_14",
+      "title": "Operand2 con desplazamiento ROR inmediato",
+      "context": "Dada la instrucción `MOV R0, R1, ROR #31`.",
+      "parts": [
+        {
+          "id": "prob_14_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de los bits 11-7 (shift_imm)?",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "El desplazamiento inmediato es $31$."
+        },
+        {
+          "id": "prob_14_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor decimal de los bits 6-5 (shift_type) para ROR?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "ROR se codifica con `11` en binario, que es $3$ en decimal."
+        },
+        {
+          "id": "prob_14_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit 4?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit 4 es $0$ para desplazamientos controlados por inmediatos."
+        },
+        {
+          "id": "prob_14_d",
+          "label": "d)",
+          "question": "¿Cuál es el número de registro Rm?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El registro del segundo operando es $R_1$, por lo que $Rm = 1$."
+        }
+      ]
+    },
+    {
+      "id": "prob_15",
+      "title": "Operand2 con desplazamiento por registro",
+      "context": "Dada la instrucción `ADD R0, R1, R2, LSL R3`.",
+      "parts": [
+        {
+          "id": "prob_15_a",
+          "label": "a)",
+          "question": "¿Cuál es el número del registro Rs que especifica la cantidad de desplazamiento?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El registro de desplazamiento es $R_3$, por lo que $Rs = 3$ (bits 11-8)."
+        },
+        {
+          "id": "prob_15_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del bit 4 para desplazamiento por registro?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit 4 debe ser $1$ para indicar que la cantidad de desplazamiento se almacena en un registro."
+        },
+        {
+          "id": "prob_15_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit 7?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit 7 en un desplazamiento controlado por registro siempre debe ser $0$."
+        },
+        {
+          "id": "prob_15_d",
+          "label": "d)",
+          "question": "¿Cuál es el número de registro Rm?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro que se va a desplazar es $R_2$, por lo que $Rm = 2$."
+        }
+      ]
+    },
+    {
+      "id": "prob_16",
+      "title": "Instrucción de Salto relativo 1",
+      "context": "Una instrucción de salto `B` está en la dirección `0x1000` y salta a `0x1028`.",
+      "parts": [
+        {
+          "id": "prob_16_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal del PC de la instrucción?",
+          "correctValue": 4096,
+          "tolerance": 0,
+          "explanation": "La dirección `0x1000` en decimal es $4096$."
+        },
+        {
+          "id": "prob_16_b",
+          "label": "b)",
+          "question": "¿Cuál es la dirección del PC + 8 en decimal?",
+          "correctValue": 4104,
+          "tolerance": 0,
+          "explanation": "El $PC + 8$ es $4096 + 8 = 4104$ bytes (dirección `0x1008`)."
+        },
+        {
+          "id": "prob_16_c",
+          "label": "c)",
+          "question": "¿Cuál es la diferencia de bytes entre la dirección de destino y PC+8?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "$0x1028 - 0x1008 = 0x20 = 32$ bytes en decimal."
+        },
+        {
+          "id": "prob_16_d",
+          "label": "d)",
+          "question": "¿Cuál es el offset de 24 bits codificado en la instrucción (en decimal)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El offset codificado es la diferencia en palabras de 4 bytes: $32 / 4 = 8$."
+        }
+      ]
+    },
+    {
+      "id": "prob_17",
+      "title": "Instrucción de Salto relativo 2",
+      "context": "Una instrucción de salto con enlace `BL` está en la dirección `0x2000` y salta a `0x2048`.",
+      "parts": [
+        {
+          "id": "prob_17_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor en decimal de la dirección de retorno guardada en LR?",
+          "correctValue": 8196,
+          "tolerance": 0,
+          "explanation": "La dirección de retorno guardada en $LR$ es $PC + 4$ de la instrucción actual: $0x2000 + 4 = 0x2004$, que en decimal es $8196$."
+        },
+        {
+          "id": "prob_17_b",
+          "label": "b)",
+          "question": "¿Cuál es el offset de 24 bits codificado en la instrucción (en decimal)?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El destino es $0x2048$, el $PC+8$ es $0x2008$. La diferencia es $0x2048 - 0x2008 = 0x40 = 64$ bytes. El offset es $64 / 4 = 16$."
+        },
+        {
+          "id": "prob_17_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit L (Link) en la instrucción?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La instrucción es `BL` (Branch con Link), por lo que el bit $L$ (bit 24) es $1$."
+        },
+        {
+          "id": "prob_17_d",
+          "label": "d)",
+          "question": "¿Cuántos bits ocupa el campo de offset en la instrucción?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Las instrucciones de salto B y BL reservan $24$ bits (bits 23-0) para el offset con signo."
+        }
+      ]
+    },
+    {
+      "id": "prob_18",
+      "title": "Codificación de constante 80",
+      "context": "Se desea codificar la constante $80$ en una instrucción.",
+      "parts": [
+        {
+          "id": "prob_18_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 80,
+          "tolerance": 0,
+          "explanation": "Como $80 \\le 255$, se representa directamente con base $80$."
+        },
+        {
+          "id": "prob_18_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No requiere rotación, por lo que el campo de rotación es $0$."
+        },
+        {
+          "id": "prob_18_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del bit I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al ser un operando inmediato, el bit $I$ es $1$."
+        },
+        {
+          "id": "prob_18_d",
+          "label": "d)",
+          "question": "¿Cuántos bits en total se usan para el campo de Operand2?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El campo `Operand2` siempre ocupa $12$ bits en el formato de procesamiento de datos."
+        }
+      ]
+    },
+    {
+      "id": "prob_19",
+      "title": "Codificación de constante 512",
+      "context": "Se desea codificar la constante $512$ con la menor base decimal posible ($2$).",
+      "parts": [
+        {
+          "id": "prob_19_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base mínimo en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "$512 = 2 \\cdot 256 = 2 \\cdot 2^8$. La base es $2$."
+        },
+        {
+          "id": "prob_19_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Desplazar 8 a la izquierda equivale a rotar 24 a la derecha: $2 \\cdot \\text{rot} = 24 \\implies \\text{rot} = 12$."
+        },
+        {
+          "id": "prob_19_c",
+          "label": "c)",
+          "question": "¿Cuántos bits reales se rota a la derecha la base?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "La rotación efectiva es $2 \\cdot 12 = 24$ bits."
+        },
+        {
+          "id": "prob_19_d",
+          "label": "d)",
+          "question": "¿Cuál es la suma en decimal del valor base y el campo de rotación?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Base + rot = $2 + 12 = 14$."
+        }
+      ]
+    },
+    {
+      "id": "prob_20",
+      "title": "Codificación de constante 65536",
+      "context": "Se desea codificar la constante $65536 = 2^{16}$ con la menor base decimal ($1$).",
+      "parts": [
+        {
+          "id": "prob_20_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor base en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$65536 = 1 \\cdot 2^{16}$. La base es $1$."
+        },
+        {
+          "id": "prob_20_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del campo de rotación (rot)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Desplazar 16 a la izquierda equivale a rotar 16 a la derecha en 32 bits ($32 - 16 = 16$). Así, $2 \\cdot \\text{rot} = 16 \\implies \\text{rot} = 8$."
+        },
+        {
+          "id": "prob_20_c",
+          "label": "c)",
+          "question": "¿Cuántos bits reales se rota a la derecha la base?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La rotación efectiva es $2 \\cdot 8 = 16$ bits a la derecha."
+        },
+        {
+          "id": "prob_20_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit I?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit $I$ es $1$ para el operando inmediato."
+        }
+      ]
+    },
+    {
+      "id": "prob_21",
+      "title": "Decodificación de LDR inmediato",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE5912004`.",
+      "parts": [
+        {
+          "id": "prob_21_a",
+          "label": "a)",
+          "question": "¿Cuál es el número de registro base Rn en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Rn ocupa los bits 19-16. En `0xE5912004`, es `0001`, es decir, $1$ ($R_1$)."
+        },
+        {
+          "id": "prob_21_b",
+          "label": "b)",
+          "question": "¿Cuál es el número de registro de destino Rd en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Rd ocupa los bits 15-12. En `0xE5912004`, es `0010`, es decir, $2$ ($R_2$)."
+        },
+        {
+          "id": "prob_21_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del offset inmediato de 12 bits en decimal?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El offset ocupa los bits 11-0. En `0xE5912004`, es `0x004`, que equivale a $4$ en decimal."
+        },
+        {
+          "id": "prob_21_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit L (Load/Store) decodificado?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit $L$ (bit 20) es $1$ para operaciones de carga (Load, $LDR$)."
+        }
+      ]
+    },
+    {
+      "id": "prob_22",
+      "title": "Decodificación de STR inmediato",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE5834008`.",
+      "parts": [
+        {
+          "id": "prob_22_a",
+          "label": "a)",
+          "question": "¿Cuál es el número de registro base Rn en decimal?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El campo $Rn$ (bits 19-16) contiene `0011` ($3$, que es $R_3$)."
+        },
+        {
+          "id": "prob_22_b",
+          "label": "b)",
+          "question": "¿Cuál es el número de registro fuente Rd en decimal?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ (bits 15-12) contiene `0100` ($4$, que es $R_4$)."
+        },
+        {
+          "id": "prob_22_c",
+          "label": "c)",
+          "question": "¿Cuál es el valor del offset inmediato en decimal?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El campo offset (bits 11-0) contiene `0x008` ($8$ en decimal)."
+        },
+        {
+          "id": "prob_22_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit L (Load/Store) decodificado?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit $L$ (bit 20) es $0$ para operaciones de almacenamiento (Store, $STR$)"
+        }
+      ]
+    },
+    {
+      "id": "prob_23",
+      "title": "Codificación de LDR de byte",
+      "context": "Dada la instrucción `LDRB R5, [R6, #12]`.",
+      "parts": [
+        {
+          "id": "prob_23_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del bit B (Byte/Word) decodificado?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La instrucción es `LDRB` (Load Register Byte), por lo que el bit $B$ (bit 22) se establece en $1$."
+        },
+        {
+          "id": "prob_23_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del bit L (Load/Store) decodificado?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al tratarse de una carga, el bit $L$ (bit 20) es $1$."
+        },
+        {
+          "id": "prob_23_c",
+          "label": "c)",
+          "question": "¿Cuál es el registro destino Rd en decimal?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El registro destino de la carga es $R_5$, por lo que $Rd = 5$."
+        },
+        {
+          "id": "prob_23_d",
+          "label": "d)",
+          "question": "¿Cuál es el offset inmediato en decimal?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El offset inmediato es $12$."
+        }
+      ]
+    },
+    {
+      "id": "prob_24",
+      "title": "LDR Pre-indexado con writeback",
+      "context": "Dada la instrucción `LDR R1, [R2, #8]!`.",
+      "parts": [
+        {
+          "id": "prob_24_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del bit W (Writeback)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El sufijo `!` indica que el registro base debe actualizarse, por lo que el bit $W$ (bit 21) es $1$."
+        },
+        {
+          "id": "prob_24_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del bit P (Pre/Post-index)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En el direccionamiento pre-indexado, el bit $P$ (bit 24) se pone a $1$."
+        },
+        {
+          "id": "prob_24_c",
+          "label": "c)",
+          "question": "¿Cuál es el registro base Rn en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro base es $R_2$, por lo que $Rn = 2$."
+        },
+        {
+          "id": "prob_24_d",
+          "label": "d)",
+          "question": "¿Cuál es el offset inmediato en decimal?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El desplazamiento inmediato es de $8$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_25",
+      "title": "LDR Post-indexado",
+      "context": "Dada la instrucción `LDR R1, [R2], #8`.",
+      "parts": [
+        {
+          "id": "prob_25_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor del bit P (Pre/Post-index)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En el direccionamiento post-indexado, el bit $P$ (bit 24) se pone a $0$."
+        },
+        {
+          "id": "prob_25_b",
+          "label": "b)",
+          "question": "¿Cuál es el valor del bit W (Writeback)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En el direccionamiento post-indexado, la actualización se hace por definición, por lo que el bit de control de writeback $W$ (bit 21) se codifica como $0$."
+        },
+        {
+          "id": "prob_25_c",
+          "label": "c)",
+          "question": "¿Cuál es el registro base Rn en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro base es $R_2$, por lo que $Rn = 2$."
+        },
+        {
+          "id": "prob_25_d",
+          "label": "d)",
+          "question": "¿Cuál es el offset inmediato en decimal?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El desplazamiento inmediato post-acceso es de $8$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_26",
+      "title": "Codificación condicional EQ",
+      "context": "Dada la instrucción máquina en hexadecimal `0x0282102D`.",
+      "parts": [
+        {
+          "id": "prob_26_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de la condición cond?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La condición es $EQ$, que se codifica como `0000` en binario ($0$ en decimal) en los bits 31-28."
+        },
+        {
+          "id": "prob_26_b",
+          "label": "b)",
+          "question": "¿Cuál es el registro destino Rd en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ (bits 15-12) contiene `0001` ($1$, registro $R_1$)."
+        },
+        {
+          "id": "prob_26_c",
+          "label": "c)",
+          "question": "¿Cuál es el registro fuente Rn en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El campo $Rn$ (bits 19-16) contiene `0010` ($2$, registro $R_2$)."
+        },
+        {
+          "id": "prob_26_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del inmediato en decimal?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "Los bits 11-0 codifican rotación $0$ y valor base $45$. El inmediato es $45$."
+        }
+      ]
+    },
+    {
+      "id": "prob_27",
+      "title": "Codificación condicional NE",
+      "context": "Dada la instrucción máquina en hexadecimal `0x1282102D`.",
+      "parts": [
+        {
+          "id": "prob_27_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de la condición cond?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La condición es $NE$, que se codifica como `0001` en binario ($1$ en decimal) en los bits 31-28."
+        },
+        {
+          "id": "prob_27_b",
+          "label": "b)",
+          "question": "¿Cuál es el registro destino Rd en decimal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El registro destino $Rd$ es $R_1$, es decir, $1$ en decimal."
+        },
+        {
+          "id": "prob_27_c",
+          "label": "c)",
+          "question": "¿Cuál es el registro fuente Rn en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El registro fuente $Rn$ es $R_2$, es decir, $2$ en decimal."
+        },
+        {
+          "id": "prob_27_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del inmediato en decimal?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "El inmediato es de valor base $45$ con rotación $0$, es decir, $45$."
+        }
+      ]
+    },
+    {
+      "id": "prob_28",
+      "title": "Decodificación de salto incondicional",
+      "context": "Dada la instrucción máquina en hexadecimal `0xEA000002`.",
+      "parts": [
+        {
+          "id": "prob_28_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal de la condición cond?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Los bits 31-28 contienen `1110`, lo que equivale a $14$ en decimal ($AL$ - Always)."
+        },
+        {
+          "id": "prob_28_b",
+          "label": "b)",
+          "question": "¿Cuál es el offset de 24 bits codificado (en decimal)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los bits 23-0 contienen `0x000002`, que es $2$ en decimal."
+        },
+        {
+          "id": "prob_28_c",
+          "label": "c)",
+          "question": "¿Cuántos bytes efectivos de salto representa este offset?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El salto efectivo es $\\text{offset} \\cdot 4 = 2 \\cdot 4 = 8$ bytes."
+        },
+        {
+          "id": "prob_28_d",
+          "label": "d)",
+          "question": "Si la instrucción está en la dirección 1000, ¿a qué dirección de destino (en decimal) saltará?",
+          "correctValue": 1016,
+          "tolerance": 0,
+          "explanation": "La dirección de destino se calcula como $\\text{Destino} = \\text{PC} + 8 + (\\text{offset} \\cdot 4) = 1000 + 8 + 8 = 1016$."
+        }
+      ]
+    },
+    {
+      "id": "prob_29",
+      "title": "Decodificación de NOP",
+      "context": "Dada la instrucción máquina en hexadecimal `0xE1A00000` (NOP o MOV R0, R0).",
+      "parts": [
+        {
+          "id": "prob_29_a",
+          "label": "a)",
+          "question": "¿Cuál es el valor decimal del opcode decodificado?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Los bits 24-21 contienen `1101` ($13$ en decimal), correspondiente a la instrucción $MOV$."
+        },
+        {
+          "id": "prob_29_b",
+          "label": "b)",
+          "question": "¿Cuál es el registro Rd en decimal?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El campo $Rd$ (bits 15-12) contiene `0000`, correspondiente a $R_0$ ($0$)."
+        },
+        {
+          "id": "prob_29_c",
+          "label": "c)",
+          "question": "¿Cuál es el registro Rm (segundo operando fuente) en decimal?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El campo $Rm$ (bits 3-0) contiene `0000`, correspondiente a $R_0$ ($0$)."
+        },
+        {
+          "id": "prob_29_d",
+          "label": "d)",
+          "question": "¿Cuál es el valor del bit S (Set Flags)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit $S$ (bit 20) es $0$, por lo que no altera las banderas de CPSR."
+        }
+      ]
+    },
+    {
+      "id": "prob_30",
+      "title": "Decodificación de instrucción con desplazamiento",
+      "context": "Dada la instrucción ensamblador `ADD R4, R5, R6, LSL #2`.",
+      "parts": [
+        {
+          "id": "prob_30_a",
+          "label": "a)",
+          "question": "¿Cuál es el registro destino Rd en decimal?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El registro de destino es $R_4$, lo que significa $Rd = 4$."
+        },
+        {
+          "id": "prob_30_b",
+          "label": "b)",
+          "question": "¿Cuál es el registro primer operando Rn en decimal?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El registro del primer operando fuente es $R_5$, por lo que $Rn = 5$."
+        },
+        {
+          "id": "prob_30_c",
+          "label": "c)",
+          "question": "¿Cuál es la cantidad de desplazamiento por inmediato en decimal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La cantidad de desplazamiento inmediato es $2$ ($LSL \\#2$)."
+        },
+        {
+          "id": "prob_30_d",
+          "label": "d)",
+          "question": "¿Cuál es el registro segundo operando Rm en decimal?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El registro del segundo operando fuente que se desplaza es $R_6$, por lo que $Rm = 6$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Decodificación de constantes inmediatas en Operand2",
+      "tex": "$$\\text{Constante} = \\text{Valor Base} \\ggg (2 \\cdot \\text{Rotación})$$"
+    },
+    {
+      "name": "Cálculo de dirección destino en saltos (B/BL)",
+      "tex": "$$\\text{Dirección Destino} = \\text{PC} + 8 + (\\text{Offset} \\cdot 4)$$"
+    },
+    {
+      "name": "Dirección efectiva en carga/almacenamiento inmediato",
+      "tex": "$$\\text{Dirección Efectiva} = \\text{Rn} \\pm \\text{Offset}$$"
+    },
+    {
+      "name": "Operación de barrel shifter LSL (Logical Shift Left)",
+      "tex": "$$\\text{Resultado} = \\text{Rm} \\ll \\text{shift\\_imm}$$"
+    },
+    {
+      "name": "Operación de barrel shifter LSR (Logical Shift Right)",
+      "tex": "$$\\text{Resultado} = \\text{Rm} \\gg \\text{shift\\_imm}$$"
+    },
+    {
+      "name": "Operación de barrel shifter ASR (Arithmetic Shift Right)",
+      "tex": "$$\\text{Resultado} = \\text{Rm} \\gg_{\\text{signo}} \\text{shift\\_imm}$$"
+    },
+    {
+      "name": "Operación de barrel shifter ROR (Rotate Right)",
+      "tex": "$$\\text{Resultado} = (\\text{Rm} \\gg \\text{shift\\_imm}) \\lor (\\text{Rm} \\ll (32 - \\text{shift\\_imm}))$$"
+    },
+    {
+      "name": "Actualización de flags para operaciones de comparación (CMP)",
+      "tex": "$$\\text{CPSR}_{\\text{flags}} = \\text{Flags}(\\text{Rn} - \\text{Operand2})$$"
+    },
+    {
+      "name": "Formato general de palabra de instrucción de Procesamiento de Datos",
+      "tex": "$$\\text{Instrucción}_{\\text{bits}} = \\text{cond}[31:28] \\parallel \\text{tipo}[27:26] \\parallel I[25] \\parallel \\text{opcode}[24:21] \\parallel S[20] \\parallel \\text{Rn}[19:16] \\parallel \\text{Rd}[15:12] \\parallel \\text{Operand2}[11:0]$$"
+    }
+  ]
+}

@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el propósito principal del Frame Pointer (FP) en un bloque de activación?",
+      "options": [
+        "Apuntar siempre a la última posición libre en la pila",
+        "Proporcionar una referencia estática e invariable para acceder a variables locales y parámetros excedentes",
+        "Almacenar la dirección de retorno de la subrutina"
+      ],
+      "correct": 1,
+      "hint": "A diferencia del SP, el FP no cambia con PUSH o POP durante la ejecución de la función.",
+      "explanation": "El FP (R11) permanece estático en la subrutina, ofreciendo una dirección base fija para el acceso a memoria."
+    },
+    {
+      "q": "¿Cuál es la principal desventaja de direccionar variables locales utilizando desplazamientos respecto al Stack Pointer (SP)?",
+      "options": [
+        "SP es un registro de solo lectura en la arquitectura ARM",
+        "El valor de SP cambia continuamente debido a operaciones de apilado temporal, haciendo inestables los desplazamientos fijos",
+        "SP solo permite direccionamientos positivos, impidiendo guardar variables locales"
+      ],
+      "correct": 1,
+      "hint": "PUSH y POP modifican dinámicamente el SP.",
+      "explanation": "Dado que SP cambia con cada PUSH/POP, los offsets respecto a él varían, lo que dificulta al compilador la referencia estable de variables locales."
+    },
+    {
+      "q": "En el bloque de activación típico descrito en el manual, ¿en qué desplazamientos respecto al FP se encuentran las variables locales?",
+      "options": [
+        "Desplazamientos positivos (ej: [FP, #8])",
+        "Desplazamientos negativos (ej: [FP, #-8])",
+        "No se pueden referenciar respecto a FP"
+      ],
+      "correct": 1,
+      "hint": "Las variables locales se reservan en direcciones de pila más bajas que el FP.",
+      "explanation": "Las variables locales se colocan por debajo del FP en la pila (direcciones menores), por lo que tienen desplazamientos negativos."
+    },
+    {
+      "q": "¿Dónde se almacenan los parámetros de llamada excedentes (del quinto en adelante) según el estándar de ARM?",
+      "options": [
+        "En los registros R4-R10",
+        "En la pila, direccionados con desplazamientos positivos respecto al FP anterior o actual (ej: [FP, #8])",
+        "En el registro de estado CPSR"
+      ],
+      "correct": 1,
+      "hint": "Los primeros 4 parámetros van en registros.",
+      "explanation": "Según la convención, los parámetros excedentes se apilan antes de la llamada y se encuentran en direcciones superiores al FP."
+    },
+    {
+      "q": "En un bloque de activación estándar en ARMv7, ¿a qué registro apunta el FP (R11) actual inmediatamente después de ejecutarse el prólogo?",
+      "options": [
+        "A la dirección del FP anterior (salvado en la pila)",
+        "A la dirección de la primera variable local",
+        "A la dirección del Program Counter (PC)"
+      ],
+      "correct": 0,
+      "hint": "Observe la instrucción ADD R11, SP, #4 en el prólogo del manual.",
+      "explanation": "Tras ejecutar el prólogo, el FP apunta a la dirección de memoria donde se guardó el FP anterior."
+    },
+    {
+      "q": "Si una función recibe 6 enteros como argumentos, ¿cuántos de estos argumentos se pasarán a través de la pila según el estándar AAPCS?",
+      "options": [
+        "6 argumentos",
+        "2 argumentos",
+        "Ninguno, todos van en registros"
+      ],
+      "correct": 1,
+      "hint": "R0 a R3 se usan para los 4 primeros argumentos.",
+      "explanation": "Los primeros 4 argumentos van en R0-R3. Los argumentos 5 y 6 (2 en total) se pasan en la pila."
+    },
+    {
+      "q": "¿Qué registros se salvan típicamente en el prólogo si la función es no hoja (llama a otras funciones) y utiliza variables locales?",
+      "options": [
+        "R0, R1 y R2",
+        "FP (R11), LR (R14) y opcionalmente registros preservados como R4-R8",
+        "Únicamente el registro PC (R15)"
+      ],
+      "correct": 1,
+      "hint": "Es necesario preservar el enlace de retorno y el marco de pila anterior.",
+      "explanation": "Para funciones no hoja, se debe salvar LR para no perder la dirección de retorno al llamar a otra función, y FP para restaurar el marco anterior."
+    },
+    {
+      "q": "En el prólogo estándar `PUSH {R4, FP, LR}`, ¿cuántos bytes se restan implícitamente al Stack Pointer (SP)?",
+      "options": [
+        "4 bytes",
+        "12 bytes",
+        "16 bytes"
+      ],
+      "correct": 1,
+      "hint": "Cada registro en ARMv7 ocupa 4 bytes.",
+      "explanation": "Se salvan 3 registros de 32 bits (4 bytes cada uno). Por tanto, la pila (que es descendente) disminuye su dirección en 12 bytes."
+    },
+    {
+      "q": "¿Cuál es la instrucción típica en el prólogo que establece el valor del Frame Pointer (FP) respecto al Stack Pointer (SP)?",
+      "options": [
+        "ADD R11, SP, #4",
+        "SUB R11, SP, #4",
+        "MOV R11, SP"
+      ],
+      "correct": 0,
+      "hint": "Debe apuntar al FP salvado, que quedó por encima del SP actual tras el PUSH.",
+      "explanation": "El FP se establece típicamente mediante `ADD R11, SP, #4` para apuntar a la dirección donde se almacenó el FP anterior del llamador."
+    },
+    {
+      "q": "Si en el prólogo ejecutamos `SUB SP, SP, #16`, ¿qué estamos realizando exactamente?",
+      "options": [
+        "Reservando espacio en la pila para 4 variables locales de 32 bits",
+        "Liberando 16 bytes de la pila",
+        "Alineando la pila a direcciones impares"
+      ],
+      "correct": 0,
+      "hint": "Restar al SP hace crecer la pila hacia abajo en direcciones.",
+      "explanation": "Decrementar el SP en 16 reserva espacio seguro para 4 enteros de 32 bits (4 bytes cada uno) en el bloque de activación."
+    },
+    {
+      "q": "¿Cuál es el propósito del epílogo de una subrutina?",
+      "options": [
+        "Reservar espacio para las variables locales de la función llamadora",
+        "Desasignar el bloque de activación actual, restaurar los registros salvados y retornar el control al llamador",
+        "Modificar los flags del registro CPSR para indicar que la función terminó con éxito"
+      ],
+      "correct": 1,
+      "hint": "Es el código encargado de deshacer el prólogo.",
+      "explanation": "El epílogo libera el espacio de variables locales, restaura el FP anterior y carga la dirección de retorno en el PC."
+    },
+    {
+      "q": "En el epílogo, la instrucción `SUB SP, R11, #4` tiene como objetivo:",
+      "options": [
+        "Restaurar el SP justo por debajo del contexto salvado, eliminando el espacio de variables locales",
+        "Incrementar el espacio de variables locales",
+        "Modificar el registro LR"
+      ],
+      "correct": 0,
+      "hint": "R11 es el FP actual. R11 - 4 es la dirección de R4 salvado.",
+      "explanation": "Restaura el valor de SP a la dirección inmediatamente posterior a las variables locales, liberándolas."
+    },
+    {
+      "q": "¿Qué registro se carga con la dirección de retorno en el epílogo mediante `POP {R4, FP, PC}`?",
+      "options": [
+        "El registro LR",
+        "El registro PC",
+        "El registro SP"
+      ],
+      "correct": 1,
+      "hint": "El POP saca de la pila el valor que originalmente era LR y lo deposita en este registro para efectuar el retorno directo.",
+      "explanation": "Al hacer POP sobre PC con el valor de retorno guardado (que provino de LR), el flujo de ejecución salta automáticamente a la instrucción de retorno."
+    },
+    {
+      "q": "En una pila del tipo Full Descending (FD) como la de ARM, ¿hacia dónde crece la pila al apilar elementos?",
+      "options": [
+        "Hacia direcciones de memoria superiores",
+        "Hacia direcciones de memoria inferiores",
+        "Se mantiene constante"
+      ],
+      "correct": 1,
+      "hint": "La pila crece en sentido decreciente de las direcciones.",
+      "explanation": "En una pila FD, los nuevos elementos se colocan en direcciones más bajas de memoria, decrementando el SP."
+    },
+    {
+      "q": "Según el estándar de alineación AAPCS de ARM, ¿cómo debe estar alineada la pila en los límites de llamada a funciones externas?",
+      "options": [
+        "Alineada a 4 bytes",
+        "Alineada a 8 bytes (doble palabra)",
+        "Alineada a 16 bytes"
+      ],
+      "correct": 1,
+      "hint": "Es necesario para soportar tipos de datos de 64 bits como double o long long eficientemente.",
+      "explanation": "El estándar AAPCS impone que el SP esté alineado a múltiplos de 8 bytes en las llamadas públicas a subrutinas."
+    },
+    {
+      "q": "¿Qué sucede con el Frame Pointer en la técnica de optimización conocida como FPO (Frame Pointer Omission)?",
+      "options": [
+        "Se reserva un segundo registro como FP secundario",
+        "Se omite el uso de FP, liberando el registro (R11) para uso general, y direccionando todo mediante SP",
+        "Se prohíbe el uso de variables locales"
+      ],
+      "correct": 1,
+      "hint": "Omission significa omitir o prescindir del puntero de marco.",
+      "explanation": "Con FPO, el compilador no genera FP (ahorrando instrucciones en prólogo/epílogo) y gestiona los offsets de variables mediante SP de forma estricta."
+    },
+    {
+      "q": "¿Cuál es una ventaja clave de usar Frame Pointer (R11) en depuración (debugging)?",
+      "options": [
+        "Hace que el código ocupe menos espacio en memoria Flash",
+        "Facilita el desenrollado de la pila (stack unwinding) para mostrar la traza de llamadas (backtrace) ante fallos",
+        "Reduce a la mitad el número de accesos a memoria RAM"
+      ],
+      "correct": 1,
+      "hint": "El FP anterior apunta al marco anterior, formando una cadena de marcos.",
+      "explanation": "Los FP enlazados forman una lista enlazada de contextos de activación que los depuradores siguen para reconstruir la pila de llamadas."
+    },
+    {
+      "q": "En el bloque de activación de una función que no tiene variables locales ni parámetros excedentes, ¿es estrictamente obligatorio usar FP?",
+      "options": [
+        "Sí, el hardware ARM no permite saltos sin FP",
+        "No, no es necesario crear un marco de pila complejo si no hay datos locales o si se puede direccionar por SP",
+        "Es obligatorio solo si la función es hoja"
+      ],
+      "correct": 1,
+      "hint": "Si no hay variables ni llamadas externas, basta con un salto directo.",
+      "explanation": "No es necesario usar FP si no se requiere el direccionamiento de variables locales dinámicas o si el compilador decide optimizarlo."
+    },
+    {
+      "q": "Si una función es de tipo 'hoja' (leaf function), lo que significa que no realiza llamadas a otras funciones, ¿qué optimización básica se realiza en ARM?",
+      "options": [
+        "No es estrictamente necesario guardar el Link Register (LR) en la pila",
+        "No se pueden usar registros de R0 a R3",
+        "Se debe desactivar el uso del Program Counter"
+      ],
+      "correct": 0,
+      "hint": "LR no se sobrescribirá por ninguna llamada interna BL.",
+      "explanation": "Al no haber llamadas BL que sobrescriban LR, este mantiene el retorno intacto y se puede retornar directamente con `BX LR` sin apilarlo."
+    },
+    {
+      "q": "En un bloque de activación típico, si la variable local 1 está en `[FP, #-8]` y la variable local 2 está en `[FP, #-12]`, ¿cuántos bytes ocupa cada variable local tipo entero estándar?",
+      "options": [
+        "2 bytes",
+        "4 bytes",
+        "8 bytes"
+      ],
+      "correct": 1,
+      "hint": "El desplazamiento decrece en 4 bytes.",
+      "explanation": "Cada entero estándar de 32 bits ocupa 4 bytes en memoria, lo que explica la diferencia de 4 unidades entre desplazamientos."
+    },
+    {
+      "q": "Si ejecutamos la instrucción `LDR R0, [R11, #8]`, ¿qué dato estamos cargando en R0?",
+      "options": [
+        "El quinto parámetro (primer parámetro excedente de la pila)",
+        "La dirección de retorno LR",
+        "La primera variable local de la función"
+      ],
+      "correct": 0,
+      "hint": "R11 es el FP. [FP, #8] está por encima del FP y de LR.",
+      "explanation": "En el layout estándar de la pila, [FP, #0] contiene el FP anterior, [FP, #4] contiene LR, y [FP, #8] es la ubicación del quinto parámetro."
+    },
+    {
+      "q": "¿Por qué el registro LR (R14) se almacena en el desplazamiento `[FP, #4]` y no en `[FP, #-4]`?",
+      "options": [
+        "Porque la dirección de retorno se apiló antes de que se estableciera el nuevo marco de pila",
+        "Porque los registros del llamador siempre se almacenan por debajo de las variables locales",
+        "Es un error del compilador y no se almacena ahí"
+      ],
+      "correct": 0,
+      "hint": "La instrucción BL del llamador ocurre antes del prólogo de la función.",
+      "explanation": "LR se guarda en la pila al principio del prólogo, antes de establecer el FP en la posición del FP anterior, quedando en una dirección superior."
+    },
+    {
+      "q": "Qué registro del procesador ARMv7 se corresponde con el Frame Pointer (FP) por convención estándar en sistemas Linux/ARM?",
+      "options": [
+        "R13",
+        "R11",
+        "R12"
+      ],
+      "correct": 1,
+      "hint": "R13 es SP y R12 es IP (Intra-Procedure call scratch register).",
+      "explanation": "En la arquitectura ARM de 32 bits, el registro R11 se reserva comúnmente para actuar como el Frame Pointer (FP)."
+    },
+    {
+      "q": "En el prólogo `PUSH {R4, FP, LR}`, ¿cuál es el orden físico en el que se guardan los registros en memoria pila (de direcciones altas a bajas)?",
+      "options": [
+        "LR en la dirección más alta, luego FP, y R4 en la dirección más baja",
+        "R4 en la dirección más alta, luego FP, y LR en la dirección más baja",
+        "Depende de la opción especificada al compilador"
+      ],
+      "correct": 0,
+      "hint": "Las instrucciones PUSH en ARM guardan los registros en orden descendente de número de registro (R14/LR primero en dirección alta).",
+      "explanation": "PUSH en ARM procesa los registros de mayor a menor índice para direcciones de memoria de altas a bajas. Así, LR (R14) va a la dirección más alta, luego FP (R11), y R4 a la más baja."
+    },
+    {
+      "q": "Si una función declara un array local `char buffer[10]` en la pila, ¿cuántos bytes de alineación se reservarán para cumplir con la alineación de palabras (32 bits) de las siguientes variables?",
+      "options": [
+        "Se reservarán 10 bytes exactamente sin ningún relleno",
+        "Se reservarán 12 bytes en total (redondeando hacia arriba a múltiplo de 4)",
+        "Se reservarán 16 bytes obligatoriamente"
+      ],
+      "correct": 1,
+      "hint": "Cada elemento en la pila de variables locales debe estar al menos alineado a palabra de 32 bits.",
+      "explanation": "Para mantener el alineamiento de variables locales individuales a palabra de 32 bits, 10 bytes se rellenan con 2 bytes de padding para sumar 12."
+    },
+    {
+      "q": "¿Qué sucede con el valor de las variables locales del bloque de activación cuando la función retorna?",
+      "options": [
+        "Se borran explícitamente escribiendo ceros en toda la memoria RAM reservada",
+        "Se invalidan lógicamente al modificar el puntero de pila SP, aunque los datos físicos permanecen hasta ser sobrescritos",
+        "Se copian automáticamente al banco de registros de propósito general"
+      ],
+      "correct": 1,
+      "hint": "Borrar la memoria físicamente consumiría demasiados ciclos de reloj.",
+      "explanation": "Las variables locales simplemente se descartan lógicamente al modificar SP en el epílogo. Los datos residuales permanecen hasta que otra función los sobrescriba."
+    },
+    {
+      "q": "¿Qué es el 'Stack Overflow' en relación con el Bloque de Activación?",
+      "options": [
+        "Cuando se leen variables locales fuera de los desplazamientos negativos permitidos",
+        "Cuando la pila crece excesivamente superando el límite asignado en memoria, colisionando con el montón o memoria no permitida",
+        "Cuando se pasan más de 4 argumentos en registros"
+      ],
+      "correct": 1,
+      "hint": "Desbordamiento de la pila.",
+      "explanation": "Ocurre cuando sucesivas llamadas (por ejemplo, recursión infinita) hacen crecer la pila hasta invadir zonas reservadas o no asignadas de memoria."
+    },
+    {
+      "q": "¿Qué registro se utiliza como puntero temporal de llamada intra-procedimiento (IP) en ARM, liberando espacio de cálculo en el prólogo/epílogo?",
+      "options": [
+        "R12",
+        "R14",
+        "R10"
+      ],
+      "correct": 0,
+      "hint": "Es el registro IP (Intra-Procedure-call scratch register).",
+      "explanation": "El registro R12 se conoce en el estándar AAPCS como IP (Intra-Procedure-call scratch register) y es de propósito temporal."
+    },
+    {
+      "q": "Si llamamos a una subrutina y pasamos un parámetro de tipo double (64 bits), ¿cuántos registros de la CPU ocupará según el estándar de paso de parámetros?",
+      "options": [
+        "Un solo registro",
+        "Dos registros consecutivos de 32 bits (por ejemplo, R0 y R1)",
+        "Se pasa obligatoriamente por la pila"
+      ],
+      "correct": 1,
+      "hint": "64 bits son 2 palabras de 32 bits.",
+      "explanation": "Los datos de 64 bits se pasan usando pares de registros consecutivos de 32 bits alineados adecuadamente (como R0-R1 o R2-R3)."
+    },
+    {
+      "q": "¿Qué instrucción del epílogo destruye el bloque de activación si no se usó el Frame Pointer?",
+      "options": [
+        "ADD SP, SP, #Offset para devolver el tamaño de las variables locales reservadas",
+        "SUB SP, SP, #Offset",
+        "POP {PC}"
+      ],
+      "correct": 0,
+      "hint": "Debe sumarse a SP para devolverlo a su posición superior antes de retornar.",
+      "explanation": "Si no se usa FP, el compilador debe deshacer la reserva de pila sumando exactamente la misma constante restada en el prólogo."
+    },
+    {
+      "q": "¿Por qué se prefiere guardar FP (R11) y LR (R14) en el prólogo antes de reservar espacio para variables locales?",
+      "options": [
+        "Para evitar que las variables locales sobrescriban los valores de retorno y contexto de la pila",
+        "Porque no es posible reservar espacio para variables locales antes de guardar registros",
+        "Para que las variables locales queden en direcciones de memoria superiores"
+      ],
+      "correct": 0,
+      "hint": "Al apilarlos primero, quedan en una ubicación segura y con offsets estables positivos respecto al nuevo FP.",
+      "explanation": "Guardar el contexto del llamador (FP, LR) al principio de la pila garantiza su integridad y establece la base del marco."
+    },
+    {
+      "q": "¿Qué ocurre si un programador modifica manualmente el registro R11 dentro de una función sin restaurarlo al finalizar?",
+      "options": [
+        "Nada, R11 es un registro volátil que no requiere ser guardado",
+        "La función llamadora perderá su propio puntero de marco de pila, provocando fallos de acceso a sus variables locales al retornar",
+        "El procesador ARM generará una excepción por instrucción ilegal"
+      ],
+      "correct": 1,
+      "hint": "R11 es un registro no volátil (callee-saved).",
+      "explanation": "R11 debe ser preservado entre funciones. Si una subrutina lo modifica sin restaurar su valor original, la función llamadora fallará al intentar leer sus propias variables locales."
+    },
+    {
+      "q": "¿Qué convención de paso de argumentos utiliza ARMv7 para estructuras de datos muy grandes?",
+      "options": [
+        "Se dividen en múltiples registros R0-R12",
+        "Se pasa un puntero a la estructura en un registro en lugar de copiar toda la estructura",
+        "Se envían byte a byte mediante interrupciones de E/S"
+      ],
+      "correct": 1,
+      "hint": "Copiar estructuras grandes en la pila consume mucho tiempo de reloj y memoria.",
+      "explanation": "Por eficiencia, las estructuras grandes que superan el tamaño de paso por registros se suelen pasar por referencia (puntero a la estructura)."
+    },
+    {
+      "q": "¿Qué bit del CPSR indica que estamos trabajando en modo Thumb (16 bits de instrucción) en lugar de modo ARM (32 bits)?",
+      "options": [
+        "El bit T (bit 5)",
+        "El bit N (bit 31)",
+        "El bit Z (bit 30)"
+      ],
+      "correct": 0,
+      "hint": "Es el bit de estado Thumb.",
+      "explanation": "El bit T del CPSR indica si el procesador ejecuta instrucciones Thumb (T=1) o ARM (T=0)."
+    },
+    {
+      "q": "¿Cuál es el rango de valores de los desplazamientos negativos típicos para variables locales con respecto al FP (R11) en ARMv7 de 32 bits?",
+      "options": [
+        "Múltiplos de 4 bytes negativos (ej: -8, -12, -16)",
+        "Múltiplos de 8 bytes positivos",
+        "Any byte impar de memoria"
+      ],
+      "correct": 0,
+      "hint": "El FP apunta al FP anterior y a su lado está el contexto salvado (típicamente a -4, -8, etc.).",
+      "explanation": "Las variables locales de 32 bits se direccionan mediante múltiplos de 4 bytes con signo negativo con respecto a FP."
+    },
+    {
+      "q": "En el fragmento de prólogo: PUSH {R4, FP, LR}; ADD R11, SP, #4. ¿A qué dirección apunta R11 si el SP final tras el PUSH es 0x7FB8?",
+      "options": [
+        "0x7FBC",
+        "0x7FC0",
+        "0x7FB8"
+      ],
+      "correct": 0,
+      "hint": "Aplique la operación matemática SP + 4.",
+      "explanation": "Si SP es 0x7FB8, entonces R11 = 0x7FB8 + 4 = 0x7FBC, que es la posición donde se almacenó el FP anterior."
+    },
+    {
+      "q": "¿Por qué el registro R4 se incluye a menudo en el prólogo PUSH {R4, FP, LR} de una función?",
+      "options": [
+        "R4 es el único registro permitido para realizar sumas aritméticas",
+        "Porque R4 es un registro no volátil y la función necesita usarlo de forma interna sin perder su valor previo en el llamador",
+        "Porque R4 guarda el puntero al vector de interrupciones"
+      ],
+      "correct": 1,
+      "hint": "R4-R11 son callee-saved (preservados por el llamado).",
+      "explanation": "R4 es un registro preservado que el llamador espera que se mantenga inalterado tras el retorno de la función. Si la función lo usa, debe salvarlo y restaurarlo."
+    },
+    {
+      "q": "Al realizar un salto a subrutina mediante `BL MiFuncion`, ¿qué valor toma el registro Link Register (LR)?",
+      "options": [
+        "La dirección de la instrucción BNE más cercana",
+        "La dirección de la instrucción que sigue inmediatamente a `BL MiFuncion`",
+        "La dirección de la propia etiqueta `MiFuncion`"
+      ],
+      "correct": 1,
+      "hint": "Es la dirección a la que debe retornar la CPU una vez finalice la subrutina.",
+      "explanation": "`BL` guarda la dirección de retorno (la dirección siguiente a `BL`) en LR antes de saltar a la dirección destino."
+    },
+    {
+      "q": "¿Cuál de los siguientes no es un elemento estándar en el prólogo de un bloque de activación?",
+      "options": [
+        "Modificar el registro de control CPSR para desactivar interrupciones",
+        "Salvar el contexto del llamador (FP, LR, registros preservados)",
+        "Reservar memoria para variables locales en la pila mediante la resta de SP"
+      ],
+      "correct": 0,
+      "hint": "Desactivar interrupciones no es parte de la gestión estándar de pila de una subrutina de usuario.",
+      "explanation": "Desactivar interrupciones no es un componente estándar ni requerido para el prólogo de un bloque de activación."
+    },
+    {
+      "q": "Si una subrutina no modifica R4 ni R11 ni realiza llamadas, y retorna usando `BX LR`, ¿cuál es el costo en instrucciones en la pila?",
+      "options": [
+        "0 instrucciones de pila (no requiere PUSH ni POP)",
+        "2 instrucciones",
+        "4 instrucciones"
+      ],
+      "correct": 0,
+      "hint": "Es una función hoja optimizada al máximo.",
+      "explanation": "Las funciones hoja muy simples no requieren manipular la pila si no tienen variables locales que excedan los registros ni modifican registros callee-saved."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En el prólogo de una función, la instrucción `PUSH {R4, ____, LR}` se utiliza para guardar el puntero de marco previo en la pila.",
+      "options": [
+        "R10",
+        "FP",
+        "R12"
+      ],
+      "correct": 1,
+      "hint": "Se trata del Frame Pointer.",
+      "explanation": "Se debe guardar el FP (R11) del llamador para poder restaurarlo al finalizar la subrutina."
+    },
+    {
+      "q": "Para establecer el puntero de marco actual a partir del Stack Pointer en el prólogo, se ejecuta `ADD R11, SP, #____`.",
+      "options": [
+        "4",
+        "8",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Debe apuntar a la dirección donde se guardó el FP anterior.",
+      "explanation": "El valor cargado es #4 ya que el FP anterior se encuentra guardado en SP + 4 tras un PUSH de 3 registros."
+    },
+    {
+      "q": "Si reservamos espacio para variables locales mediante la instrucción `SUB SP, SP, #16`, estamos reservando espacio para ____ variables enteras de 32 bits.",
+      "options": [
+        "2",
+        "4",
+        "8"
+      ],
+      "correct": 1,
+      "hint": "Cada entero ocupa 4 bytes.",
+      "explanation": "Dividiendo 16 entre 4 bytes por entero obtenemos exactamente 4 variables locales."
+    },
+    {
+      "q": "En el epílogo de la función, la instrucción `SUB SP, R11, #____` restaura el SP inmediatamente por debajo del contexto salvado.",
+      "options": [
+        "4",
+        "8",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "R11 es el FP. R11 - 4 apunta al contexto salvado.",
+      "explanation": "Al restar 4 al FP (R11) se sitúa el SP justo donde empiezan los registros salvados del llamador (R4, FP, LR), liberando las variables locales."
+    },
+    {
+      "q": "Para retornar al llamador y restaurar el contexto en una sola instrucción en el epílogo, ejecutamos `POP {R4, FP, ____}`.",
+      "options": [
+        "LR",
+        "PC",
+        "SP"
+      ],
+      "correct": 1,
+      "hint": "El valor de retorno se saca directamente al registro de control del programa.",
+      "explanation": "Apuntar el POP al PC (Program Counter) carga el valor de retorno en el flujo de ejecución, retornando de forma inmediata."
+    },
+    {
+      "q": "Las variables locales en un bloque de activación se direccionan utilizando desplazamientos ____ con respecto a R11 (FP).",
+      "options": [
+        "positivos",
+        "negativos",
+        "indirectos"
+      ],
+      "correct": 1,
+      "hint": "Están por debajo del puntero de marco en la pila.",
+      "explanation": "Las variables locales tienen direcciones más bajas que el FP, por lo que se direccionan con desplazamientos negativos."
+    },
+    {
+      "q": "El quinto parámetro pasado a una función se encuentra almacenado en la pila en el desplazamiento `[FP, #____]`.",
+      "options": [
+        "8",
+        "12",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "Se ubica justo por encima de LR en el stack frame.",
+      "explanation": "En el layout de la pila, LR está en [FP, #4] y el primer parámetro excedente (quinto parámetro) está en [FP, #8]."
+    },
+    {
+      "q": "Si una subrutina es hoja y no usa variables locales ni altera registros no volátiles, puede retornar simplemente con `BX ____`.",
+      "options": [
+        "PC",
+        "LR",
+        "SP"
+      ],
+      "correct": 1,
+      "hint": "Es el registro de enlace de retorno.",
+      "explanation": "El registro LR (Link Register) conserva la dirección de retorno intacta al no haber llamadas internas."
+    },
+    {
+      "q": "La alineación estándar de la pila impuesta por la norma AAPCS en las llamadas a funciones externas es de ____ bytes.",
+      "options": [
+        "4",
+        "8",
+        "16"
+      ],
+      "correct": 1,
+      "hint": "Es una alineación de doble palabra.",
+      "explanation": "AAPCS especifica que la pila debe estar alineada a múltiplos de 8 bytes (double-word) en los límites de llamada externa."
+    },
+    {
+      "q": "Al desapilar el registro destino de retorno directamente al Program Counter, la instrucción equivalente a `POP {PC}` es `LDR PC, [SP], #____`.",
+      "options": [
+        "4",
+        "8",
+        "12"
+      ],
+      "correct": 0,
+      "hint": "Es un post-incremento del SP por el tamaño de un registro.",
+      "explanation": "LDR PC, [SP], #4 carga el contenido de la pila en el PC y luego suma 4 al SP, equivaliendo a POP {PC}."
+    },
+    {
+      "q": "Si ejecutamos `LDR R0, [R11, #____]`, cargamos el sexto argumento pasado por la pila (segundo excedente).",
+      "options": [
+        "8",
+        "12",
+        "16"
+      ],
+      "correct": 1,
+      "hint": "El quinto argumento está en [FP, #8].",
+      "explanation": "El sexto argumento está desplazado 4 bytes más arriba que el quinto, es decir, en [FP, #12]."
+    },
+    {
+      "q": "Para referenciar la variable local más alta en la pila, usualmente se accede al desplazamiento `[FP, #-____]`.",
+      "options": [
+        "4",
+        "8",
+        "12"
+      ],
+      "correct": 1,
+      "hint": "El registro R4 salvado está en [FP, #-4].",
+      "explanation": "Justo por debajo de R4 salvado ([FP, #-4]) comienza la reserva de variables locales, siendo la primera [FP, #-8]."
+    },
+    {
+      "q": "La técnica para no usar el puntero de marco de pila y direccionar todo a través de SP se llama Frame Pointer ____.",
+      "options": [
+        "Allocation",
+        "Omission",
+        "Alignment"
+      ],
+      "correct": 1,
+      "hint": "Es la omisión del registro base.",
+      "explanation": "Se llama Frame Pointer Omission (FPO) y permite ganar un registro adicional (R11) para el compilador."
+    },
+    {
+      "q": "En ARMv7, el registro R11 representa el puntero de marco de pila o ____.",
+      "options": [
+        "Stack Pointer",
+        "Frame Pointer",
+        "Link Register"
+      ],
+      "correct": 1,
+      "hint": "Significa puntero de marco en inglés.",
+      "explanation": "R11 es el Frame Pointer (FP) por convención en sistemas de llamadas en ARM."
+    },
+    {
+      "q": "Si la pila comienza en 0x8000 y ejecutamos `PUSH {R4, FP, LR}`, la dirección final del Stack Pointer (SP) será 0x____.",
+      "options": [
+        "7FFC",
+        "7FF4",
+        "7FF8"
+      ],
+      "correct": 1,
+      "hint": "Se restan 12 bytes en hexadecimal.",
+      "explanation": "0x8000 - 12 (0xC en hex) = 0x7FF4. La pila decrece 12 bytes por los 3 registros."
+    },
+    {
+      "q": "El prólogo de una subrutina tiene como misión construir el ____ en la pila.",
+      "options": [
+        "Vector de Interrupciones",
+        "Bloque de Activación",
+        "Descriptor de Proceso"
+      ],
+      "correct": 1,
+      "hint": "Es la estructura de pila que aloja los datos de ejecución locales.",
+      "explanation": "El prólogo se encarga de crear el Bloque de Activación (Stack Frame) de la subrutina actual."
+    },
+    {
+      "q": "Si ejecutamos `STR R0, [FP, #____]`, corremos el riesgo de corromper la dirección de retorno de la subrutina.",
+      "options": [
+        "0",
+        "4",
+        "-8"
+      ],
+      "correct": 1,
+      "hint": "LR está almacenado en un offset positivo pequeño.",
+      "explanation": "El Link Register (LR) original está almacenado en [FP, #4]. Sobrescribirlo impide que la función retorne al llamador original."
+    },
+    {
+      "q": "El registro ____ almacena temporalmente la dirección de retorno original cuando se realiza una llamada mediante BL.",
+      "options": [
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "correct": 1,
+      "hint": "Es el Link Register.",
+      "explanation": "El registro R14 (LR) almacena la dirección de retorno de forma automática tras una instrucción BL."
+    },
+    {
+      "q": "Cuando se produce una llamada a una función no hoja, es necesario apilar el registro ____ para evitar perder el retorno.",
+      "options": [
+        "CPSR",
+        "LR",
+        "SP"
+      ],
+      "correct": 1,
+      "hint": "Es el registro que será sobrescrito por la siguiente llamada BL.",
+      "explanation": "Cualquier BL posterior destruirá el contenido de LR, por lo que debe ser apilado al inicio en el prólogo."
+    },
+    {
+      "q": "En el bloque de activación, el registro salvado ____ anterior se sitúa exactamente en `[FP, #0]`.",
+      "options": [
+        "SP",
+        "FP",
+        "LR"
+      ],
+      "correct": 1,
+      "hint": "Es el puntero de marco de pila del llamador.",
+      "explanation": "El FP anterior del llamador se guarda al inicio del marco de pila y el FP actual apunta a su ubicación en [FP, #0]."
+    },
+    {
+      "q": "Dada la instrucción `PUSH {R4-R7, R11, R14}`, ¿cuáles de estos registros pertenecen a los registros que deben ser restaurados al llamador?",
+      "options": [
+        "El Frame Pointer R11",
+        "Los registros R4-R7 de propósito general",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Considere la preservación de registros no volátiles.",
+      "explanation": "Tanto R11 (FP) como R4-R7 son registros no volátiles (callee-saved) y deben ser restaurados al llamador según la convención."
+    },
+    {
+      "q": "Si un bloque de activación contiene parámetros excedentes, variables locales y registros salvados, ¿qué factores modifican dinámicamente el valor almacenado en R13 (SP)?",
+      "options": [
+        "Instrucciones PUSH dentro del cuerpo de la función",
+        "Llamadas internas a subrutinas mediante la pila",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Piense en qué operaciones alteran la cima de la pila.",
+      "explanation": "Tanto las operaciones explícitas de PUSH/POP en el código de la subrutina como el paso de parámetros temporales alteran el SP."
+    },
+    {
+      "q": "Al implementar el epílogo de una función, ¿qué operaciones se consideran correctas para asegurar el retorno seguro al llamador?",
+      "options": [
+        "Desasignar las variables locales apuntando SP respecto a FP",
+        "Hacer POP de los registros salvados y de la dirección de retorno directamente en PC",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Revise las dos fases del epílogo.",
+      "explanation": "El epílogo primero restablece SP usando FP y luego restaura el contexto del llamador (FP, R4, etc.) y salta cargando el retorno en PC."
+    },
+    {
+      "q": "En un procesador ARMv7 de 32 bits, ¿cuál de los siguientes elementos forma parte de la información en memoria que compone un Stack Frame estándar?",
+      "options": [
+        "El Link Register (dirección de retorno) del llamador",
+        "Las variables locales asignadas al ámbito de la subrutina",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Consulte la anatomía de un bloque de activación en el manual.",
+      "explanation": "Un bloque de activación almacena el contexto de retorno (LR), las variables locales de la función y el FP anterior."
+    },
+    {
+      "q": "¿Qué ventajas se obtienen al estructurar las llamadas a funciones con un Frame Pointer (R11) invariable?",
+      "options": [
+        "Se simplifica el direccionamiento de variables locales de tamaño dinámico",
+        "Permite un seguimiento limpio del flujo de ejecución (backtracing)",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Proporciona una referencia estática estable.",
+      "explanation": "El FP ayuda a simplificar el cálculo de offsets para variables dinámicas y a que las herramientas de depuración sigan la traza de llamadas."
+    },
+    {
+      "q": "En la convención AAPCS de ARM, ¿cuál de las siguientes opciones describe una regla para el paso de parámetros?",
+      "options": [
+        "Los primeros cuatro argumentos se asignan a R0-R3 en orden",
+        "Los argumentos que no caben en R0-R3 se apilan en la pila de llamadas",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es el estándar de paso de parámetros de ARM.",
+      "explanation": "AAPCS define que R0-R3 son para los primeros 4 parámetros, y los siguientes se apilan ordenadamente en memoria pila."
+    },
+    {
+      "q": "Si un programa ensamblador ARMv7 escribe datos locales en la pila, ¿qué riesgos pueden ocurrir si no se gestiona correctamente la alineación a 8 bytes?",
+      "options": [
+        "Incompatibilidad con librerías externas precompiladas que asumen alineación AAPCS",
+        "Pérdida de rendimiento en lecturas/escrituras de datos de 64 bits en memoria",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La desalineación provoca problemas de interoperabilidad y lentitud.",
+      "explanation": "No alinear a 8 bytes incumple la norma AAPCS, rompiendo la interoperabilidad con librerías compiladas y degradando el acceso a dobles palabras."
+    },
+    {
+      "q": "¿Qué elementos definen a una función 'hoja' en ARM?",
+      "options": [
+        "No ejecuta la instrucción BL para invocar subrutinas adicionales",
+        "No requiere obligatoriamente guardar el Link Register LR en pila si no usa variables locales",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Una función hoja es el nodo terminal del árbol de llamadas.",
+      "explanation": "Las funciones hoja no hacen llamadas externas, lo que les permite retener LR y no necesitar apilar la dirección de retorno."
+    },
+    {
+      "q": "En el prólogo `PUSH {R4, R5, FP, LR}; ADD R11, SP, #8`, ¿qué información se ha preservado en el marco?",
+      "options": [
+        "Los registros preservados R4 y R5",
+        "El registro FP del llamador y el registro de retorno LR",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Analice los registros apilados en el prólogo.",
+      "explanation": "La instrucción PUSH almacena en pila R4, R5, FP (R11) y LR (R14) antes de mover el puntero de marco."
+    },
+    {
+      "q": "¿Qué tipos de datos locales requerirían direccionamiento indirecto en la pila de ARM?",
+      "options": [
+        "Estructuras complejas y arrays de caracteres",
+        "Variables con alineación superior que requieren rellenos de alineación",
+        "Todas las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Son datos que exceden o no se adaptan al tamaño del registro de 32 bits de forma simple.",
+      "explanation": "Tanto arrays como estructuras y tipos de datos que requieren relleno y alineación estricta son ubicados en la pila y direccionados vía offsets."
+    },
+    {
+      "q": "Si R11 (FP) tiene el valor 0x00007FC0 y ejecutamos `LDR R0, [R11, #-12]`, ¿qué elemento de pila estamos cargando si el prólogo fue `PUSH {R4, FP, LR}; ADD R11, SP, #4; SUB SP, SP, #12`?",
+      "options": [
+        "El valor del Frame Pointer anterior",
+        "El quinto parámetro excedente",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "La primera variable local está en [FP, #-8].",
+      "explanation": "En el desplazamiento [FP, #-12] se encuentra la variable local 2. Como no figura entre las opciones propuestas, la opción correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Dada la instrucción `STR R0, [FP, #16]`, ¿a qué variable local estamos accediendo si la subrutina sigue el estándar?",
+      "options": [
+        "A la variable local 1",
+        "A la variable local 4",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Los desplazamientos positivos corresponden a parámetros excedentes.",
+      "explanation": "El offset +16 corresponde al parámetro excedente número 7 de la llamada. Ninguna variable local se accede con offsets positivos."
+    },
+    {
+      "q": "En un bloque de activación, ¿qué registro de la CPU apunta directamente a la base de las variables locales, marcando el inicio del direccionamiento positivo?",
+      "options": [
+        "El registro R13 (SP)",
+        "El registro R14 (LR)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Se trata del Frame Pointer (FP/R11).",
+      "explanation": "El Frame Pointer (R11) es el registro que sirve como base para el bloque de activación. Ninguno de los registros R13 o R14 realiza esta función."
+    },
+    {
+      "q": "Si ejecutamos `ADD SP, SP, #24` en el epílogo para liberar variables locales, ¿cuántas variables de tipo entero de 32 bits se habían reservado en el prólogo?",
+      "options": [
+        "4 enteros",
+        "8 enteros",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Divida el tamaño reservado entre el tamaño del entero.",
+      "explanation": "24 bytes / 4 bytes por entero = 6 variables locales. Como el número 6 no está listado en las opciones, la correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Si la pila contiene la dirección de retorno en el desplazamiento `[FP, #4]`, ¿en qué desplazamiento respecto a FP se encontrará el primer parámetro excedente (parámetro 5)?",
+      "options": [
+        "En [FP, #0]",
+        "En [FP, #-4]",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Está inmediatamente arriba de LR.",
+      "explanation": "El primer parámetro excedente se sitúa en [FP, #8]. Ninguna de las dos opciones numéricas dadas es correcta."
+    },
+    {
+      "q": "Si una subrutina no tiene variables locales ni registros guardados, ¿cuál de los siguientes es el prólogo estándar generado por el compilador?",
+      "options": [
+        "ADD R11, SP, #4",
+        "SUB SP, SP, #8",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Una subrutina sin recursos locales no requiere inicialización de pila.",
+      "explanation": "Si no hay variables ni registros guardados, el prólogo es vacío (no hay instrucciones de reserva). La opción correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Dada la instrucción `POP {R4, FP, LR}`, ¿qué valor toma el Program Counter tras su ejecución?",
+      "options": [
+        "El valor del Frame Pointer anterior",
+        "La dirección de la cima de la pila",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Observe los registros involucrados en la instrucción POP.",
+      "explanation": "Esta instrucción no tiene a PC en su lista de registros, por lo que el PC simplemente avanza a la siguiente instrucción. La correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Si R11 (FP) = 0x1000 y ejecutamos `LDR R0, [R11, #-4]`, ¿cuál es el contenido cargado si el prólogo fue `PUSH {R4, FP, LR}; ADD R11, SP, #4`?",
+      "options": [
+        "El Link Register (LR)",
+        "El Program Counter (PC)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Está inmediatamente debajo de FP anterior en la pila.",
+      "explanation": "El valor almacenado en [FP, #-4] es el registro preservado R4. Ninguna opción propuesta es R4."
+    },
+    {
+      "q": "¿Qué registro actúa como puntero de marco de pila en la arquitectura ARM de 64 bits (AArch64)?",
+      "options": [
+        "R11",
+        "R13",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es el registro X29.",
+      "explanation": "En AArch64 el Frame Pointer es el registro X29. Por tanto, la respuesta correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Si la pila del sistema ARM crece hacia direcciones de memoria ascendentes, ¿cómo se llamaría ese tipo de pila?",
+      "options": [
+        "Full Descending (FD)",
+        "Empty Descending (ED)",
+        "Ninguna de las anteriores"
+      ],
+      "correct": 2,
+      "hint": "Es una pila ascendente.",
+      "explanation": "Las pilas que crecen hacia direcciones superiores se denominan Ascending (FA o EA). La respuesta correcta es Ninguna de las anteriores."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "prob_01",
+      "title": "Desplazamiento de variables y parámetros",
+      "context": "Una función es llamada con 6 parámetros enteros de 32 bits y declara 3 variables locales también enteras de 32 bits en su stack frame. El FP actual se establece en 0x7FC0.",
+      "parts": [
+        {
+          "id": "prob_01_a",
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes (como valor entero con signo) respecto al FP para acceder a la variable local 1?",
+          "correctValue": -8,
+          "tolerance": 0,
+          "explanation": "El FP apunta al FP anterior. En $[FP, #-4]$ está el R4 salvado, y en $[FP, #-8]$ está la primera variable local."
+        },
+        {
+          "id": "prob_01_b",
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes (como valor entero con signo) respecto al FP para acceder a la variable local 3?",
+          "correctValue": -16,
+          "tolerance": 0,
+          "explanation": "La variable local 2 está en $[FP, #-12]$ y la variable local 3 está en $[FP, #-16]$."
+        },
+        {
+          "id": "prob_01_c",
+          "label": "c",
+          "question": "¿Cuál es el desplazamiento en bytes respecto al FP para acceder al parámetro excedente 5 (primer argumento en la pila)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "En $[FP, #4]$ se almacena LR. El parámetro excedente 5 se ubica inmediatamente encima, en $[FP, #8]$."
+        },
+        {
+          "id": "prob_01_d",
+          "label": "d",
+          "question": "¿Cuál es el desplazamiento en bytes respecto al FP para acceder al parámetro excedente 6?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El parámetro excedente 6 se ubica a continuación del quinto, en $[FP, #12]$."
+        }
+      ]
+    },
+    {
+      "id": "prob_02",
+      "title": "Reservas de memoria y Stack Pointer",
+      "context": "En el prólogo de una función se ejecuta PUSH {R4, FP, LR} y luego se reservan 24 bytes para variables locales. La pila se inicia en SP = 0x8000 (32768 en decimal).",
+      "parts": [
+        {
+          "id": "prob_02_a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal de SP inmediatamente después del PUSH de 3 registros?",
+          "correctValue": 32756,
+          "tolerance": 0,
+          "explanation": "Se apilan 3 registros de 4 bytes ($12$ bytes). SP final = $32768 - 12 = 32756$."
+        },
+        {
+          "id": "prob_02_b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal del FP si se establece mediante `ADD R11, SP, #4` tras el PUSH?",
+          "correctValue": 32760,
+          "tolerance": 0,
+          "explanation": "FP = SP + 4 = $32756 + 4 = 32760$."
+        },
+        {
+          "id": "prob_02_c",
+          "label": "c",
+          "question": "¿Cuál es el valor decimal del SP final tras reservar los 24 bytes de variables locales?",
+          "correctValue": 32732,
+          "tolerance": 0,
+          "explanation": "SP = $32756 - 24 = 32732$."
+        },
+        {
+          "id": "prob_02_d",
+          "label": "d",
+          "question": "¿Cuántas variables de 32 bits caben en el espacio local reservado?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "$24$ bytes $/ 4$ bytes por entero = $6$ variables."
+        }
+      ]
+    },
+    {
+      "id": "prob_03",
+      "title": "Alineación de pila y AAPCS",
+      "context": "Una función con SP de entrada = 0x1008 (4104 decimal) salva R4, FP y LR. La función tiene variables locales que ocupan exactamente 10 bytes.",
+      "parts": [
+        {
+          "id": "prob_03_a",
+          "label": "a",
+          "question": "¿Cuál es la dirección decimal de SP tras apilar los 3 registros (12 bytes)?",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "SP final = $4104 - 12 = 4092$."
+        },
+        {
+          "id": "prob_03_b",
+          "label": "b",
+          "question": "¿Cuántos bytes mínimos deben añadirse a las variables locales (10 bytes) para que estén alineadas a palabra de 32 bits?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para alinear a múltiplo de 4, $10$ bytes se redondean a $12$ bytes. Padding = $12 - 10 = 2$ bytes."
+        },
+        {
+          "id": "prob_03_c",
+          "label": "c",
+          "question": "Si se reservan 12 bytes alineados en pila, ¿cuál es el nuevo SP en decimal?",
+          "correctValue": 4080,
+          "tolerance": 0,
+          "explanation": "SP = $4092 - 12 = 4080$."
+        },
+        {
+          "id": "prob_03_d",
+          "label": "d",
+          "question": "¿Es el valor final de SP (4080) divisible por 8 como exige AAPCS? (1 para Sí, 0 para No)",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "$4080 / 8 = 510$ sin resto, por lo que es divisible (1)."
+        }
+      ]
+    },
+    {
+      "id": "prob_04",
+      "title": "Trazado de registros en subrutinas",
+      "context": "Se ejecuta la secuencia: PUSH {R4, FP, LR}; ADD R11, SP, #4; MOV R4, #100; STR R4, [R11, #-8]; LDR R0, [R11, #-8]; ADD R0, R0, #50; STR R0, [R11, #-8].",
+      "parts": [
+        {
+          "id": "prob_04_a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal final en el registro R4?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "R4 se inicializa en $100$ y no se vuelve a modificar en la secuencia."
+        },
+        {
+          "id": "prob_04_b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal intermedio cargado en R0 desde la variable local?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Se carga el contenido de $[FP, #-8]$, que contenía el valor de R4 ($100$)."
+        },
+        {
+          "id": "prob_04_c",
+          "label": "c",
+          "question": "¿Cuál es el valor final en R0 después de la instrucción de suma?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "$100 + 50 = 150$."
+        },
+        {
+          "id": "prob_04_d",
+          "label": "d",
+          "question": "¿Qué valor decimal queda almacenado en la variable local en [R11, #-8] al final?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "La última instrucción `STR R0, [R11, #-8]` escribe el contenido de R0 ($150$) en dicha dirección."
+        }
+      ]
+    },
+    {
+      "id": "prob_05",
+      "title": "Análisis de ciclos en prólogo y epílogo",
+      "context": "Una instrucción PUSH/POP tarda 1 + N ciclos de reloj (N es el número de registros). Las instrucciones ADD y SUB tardan 1 ciclo de reloj cada una. El procesador funciona a 50 MHz.",
+      "parts": [
+        {
+          "id": "prob_05_a",
+          "label": "a",
+          "question": "¿Cuántos ciclos toma el prólogo: `PUSH {R4, FP, LR}; ADD R11, SP, #4; SUB SP, SP, #8`?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "PUSH de 3 registros = $1 + 3 = 4$ ciclos. ADD = $1$ ciclo. SUB = $1$ ciclo. Total = $4 + 1 + 1 = 6$ ciclos."
+        },
+        {
+          "id": "prob_05_b",
+          "label": "b",
+          "question": "¿Cuántos ciclos toma el epílogo: `SUB SP, R11, #4; POP {R4, FP, PC}`?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "SUB = $1$ ciclo. POP de 3 registros = $1 + 3 = 4$ ciclos. Total = $1 + 4 = 5$ ciclos."
+        },
+        {
+          "id": "prob_05_c",
+          "label": "c",
+          "question": "¿Cuál es el número total de ciclos acumulados para prólogo y epílogo?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Total = $6$ (prólogo) + $5$ (epílogo) = $11$ ciclos."
+        },
+        {
+          "id": "prob_05_d",
+          "label": "d",
+          "question": "¿Cuál es el tiempo de ejecución en nanosegundos correspondiente a estos ciclos?",
+          "correctValue": 220,
+          "tolerance": 0,
+          "explanation": "Frecuencia = $50$ MHz. Período = $20$ ns. $11$ ciclos $\\times 20$ ns/ciclo = $220$ ns."
+        }
+      ]
+    },
+    {
+      "id": "prob_06",
+      "title": "Parámetros y offsets del Stack",
+      "context": "Una subrutina declara la firma: `void func(int a, int b, int c, int d, int e, int f, int g)` en C.",
+      "parts": [
+        {
+          "id": "prob_06_a",
+          "label": "a",
+          "question": "¿Cuántos parámetros se pasan mediante los registros del procesador?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los primeros 4 parámetros (a, b, c, d) se asignan a R0-R3."
+        },
+        {
+          "id": "prob_06_b",
+          "label": "b",
+          "question": "¿Cuántos parámetros se ven obligados a pasar por la pila?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los 3 parámetros restantes (e, f, g) se pasan por la pila."
+        },
+        {
+          "id": "prob_06_c",
+          "label": "c",
+          "question": "¿Cuál es el offset en bytes respecto al FP del parámetro `g` (séptimo parámetro)?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "`e` está en $[FP, #8]$, `f` en $[FP, #12]$, y `g` en $[FP, #16]$."
+        },
+        {
+          "id": "prob_06_d",
+          "label": "d",
+          "question": "¿Cuántos bytes de pila ocupan en total todos los parámetros excedentes?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$3$ parámetros excedentes $\\times 4$ bytes/parámetro = $12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_07",
+      "title": "Cálculo del tamaño del Stack Frame",
+      "context": "Una función no hoja salva los registros R4, R5, FP y LR, y declara 5 variables locales de 32 bits.",
+      "parts": [
+        {
+          "id": "prob_07_a",
+          "label": "a",
+          "question": "¿Cuántos bytes se consumen al salvar los registros en la pila?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$4$ registros $\\times 4$ bytes/registro = $16$ bytes."
+        },
+        {
+          "id": "prob_07_b",
+          "label": "b",
+          "question": "¿Cuántos bytes se reservan para las variables locales?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "$5$ variables locales $\\times 4$ bytes/variable = $20$ bytes."
+        },
+        {
+          "id": "prob_07_c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño total en bytes del stack frame reservado?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "Tamaño total = $16$ (registros) + $20$ (locales) = $36$ bytes."
+        },
+        {
+          "id": "prob_07_d",
+          "label": "d",
+          "question": "Si la pila de partida es 8192 (0x2000), ¿cuál es la dirección decimal de SP tras establecer este bloque?",
+          "correctValue": 8156,
+          "tolerance": 0,
+          "explanation": "SP = $8192 - 36 = 8156$."
+        }
+      ]
+    },
+    {
+      "id": "prob_08",
+      "title": "Acceso a arrays locales indexados",
+      "context": "Se asigna un array local de 4 enteros de 32 bits inmediatamente después de salvar R4, FP y LR. El FP se establece a 0x7000 (28672 decimal). El array comienza en la dirección más baja del espacio reservado.",
+      "parts": [
+        {
+          "id": "prob_08_a",
+          "label": "a",
+          "question": "¿Cuál es la dirección decimal de la primera variable local (buf[0], que es la dirección más alta de las locales)?",
+          "correctValue": 28664,
+          "tolerance": 0,
+          "explanation": "FP anterior está en $28672$, R4 en $28668$, la primera variable está en $[FP, #-8] = 28672 - 8 = 28664$."
+        },
+        {
+          "id": "prob_08_b",
+          "label": "b",
+          "question": "¿Cuál es la dirección decimal correspondiente a buf[3] (último elemento del array en direcciones bajas)?",
+          "correctValue": 28652,
+          "tolerance": 0,
+          "explanation": "buf[3] está en $[FP, #-20] = 28672 - 20 = 28652$."
+        },
+        {
+          "id": "prob_08_c",
+          "label": "c",
+          "question": "¿Cuál es el desplazamiento en bytes (con signo) del último elemento del array (buf[3]) respecto al FP?",
+          "correctValue": -20,
+          "tolerance": 0,
+          "explanation": "Desplazamiento = $-20$ bytes."
+        },
+        {
+          "id": "prob_08_d",
+          "label": "d",
+          "question": "¿Cuántos bytes de pila ocupa este array de 4 enteros?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "$4$ enteros $\\times 4$ bytes/entero = $16$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_09",
+      "title": "Rastreo de variables locales con FPO",
+      "context": "Se deshabilita el Frame Pointer (FPO). En el prólogo se ejecuta `PUSH {R4, LR}` y `SUB SP, SP, #16`. No se modifica SP en la función.",
+      "parts": [
+        {
+          "id": "prob_09_a",
+          "label": "a",
+          "question": "¿Cuál es el offset en bytes respecto a SP para acceder a la variable local 1 (ubicada en la parte alta del espacio local)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El espacio local ocupa de $SP$ a $SP+15$. Las locales se direccionan en múltiplos de 4. La variable local 1 está en $SP + 12$."
+        },
+        {
+          "id": "prob_09_b",
+          "label": "b",
+          "question": "¿Cuál es el offset en bytes respecto a SP para acceder a la variable local 4 (en la parte más baja del espacio local)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La variable local 4 está justo en la base del espacio local, es decir, en $SP + 0$."
+        },
+        {
+          "id": "prob_09_c",
+          "label": "c",
+          "question": "¿Cuál es el offset en bytes respecto a SP para recuperar la dirección de retorno original (LR salvado)?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "El espacio local ocupa $16$ bytes. R4 está en $SP + 16$ y LR está en $SP + 20$."
+        },
+        {
+          "id": "prob_09_d",
+          "label": "d",
+          "question": "¿Cuántos bytes se deben sumar a SP en el epílogo para liberar las variables locales?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Se debe ejecutar `ADD SP, SP, #16` para deshacer la reserva de locales."
+        }
+      ]
+    },
+    {
+      "id": "prob_10",
+      "title": "Paso de parámetros mixtos",
+      "context": "Se llama a la función `void func(int a, double b, int c, int d)` en ARM. double es de 64 bits y debe estar alineado a par de registros. R0-R3 son los registros de argumentos.",
+      "parts": [
+        {
+          "id": "prob_10_a",
+          "label": "a",
+          "question": "¿Qué número de registro (0-3) se asigna al parámetro `a`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El primer parámetro `a` se asigna a R0."
+        },
+        {
+          "id": "prob_10_b",
+          "label": "b",
+          "question": "¿Qué número de registro de inicio (0-3) se asigna a `b` tras aplicar alineación de 64 bits?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "`b` requiere un par alineado. Se salta R1 y se le asigna el par R2-R3."
+        },
+        {
+          "id": "prob_10_c",
+          "label": "c",
+          "question": "¿Se pasa el parámetro `c` en algún registro? (Indicar el número de registro si es R0-R3, o -1 si va a la pila)",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Como R0-R3 ya están ocupados (R0 por `a`, R2-R3 por `b`), el parámetro `c` debe pasar por la pila (-1)."
+        },
+        {
+          "id": "prob_10_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño en bytes del parámetro de 64 bits `b`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Un dato de 64 bits ocupa $8$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_11",
+      "title": "Desplazamientos en la Pila con Múltiples Registros",
+      "context": "Se ejecuta el prólogo `PUSH {R4-R7, R11, LR}` y luego `ADD R11, SP, #16`.",
+      "parts": [
+        {
+          "id": "prob_11_a",
+          "label": "a",
+          "question": "¿Cuántos registros se salvan en total en la instrucción PUSH?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Se salvan R4, R5, R6, R7, R11, LR ($6$ registros)."
+        },
+        {
+          "id": "prob_11_b",
+          "label": "b",
+          "question": "¿Cuál es el offset en bytes de R11 (FP) salvado con respecto al SP resultante?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "R4-R7 ocupan las posiciones más bajas en la pila ($4 \\times 4 = 16$ bytes). El FP salvado está justo por encima, en SP + 16."
+        },
+        {
+          "id": "prob_11_c",
+          "label": "c",
+          "question": "Si el SP final tras el PUSH es 4096 (0x1000), ¿cuál es la dirección decimal a la que apunta el FP?",
+          "correctValue": 4112,
+          "tolerance": 0,
+          "explanation": "FP = SP + 16 = $4096 + 16 = 4112$."
+        },
+        {
+          "id": "prob_11_d",
+          "label": "d",
+          "question": "¿Cuál es el desplazamiento en bytes (como valor negativo) de R4 salvado con respecto al R11 actual?",
+          "correctValue": -16,
+          "tolerance": 0,
+          "explanation": "R4 está en SP. FP está en SP + 16. Offset de R4 = $SP - (SP + 16) = -16$."
+        }
+      ]
+    },
+    {
+      "id": "prob_12",
+      "title": "Ciclos en ejecuciones de bucles locales",
+      "context": "Una función lee una variable local en bucle 10 veces. La instrucción de lectura es `LDR R0, [R11, #-8]`. Cada LDR toma 3 ciclos. El resto de las instrucciones del bucle toma 2 ciclos por iteración.",
+      "parts": [
+        {
+          "id": "prob_12_a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj se consumen exclusivamente en las lecturas de memoria del bucle?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "$10$ iteraciones $\\times 3$ ciclos = $30$ ciclos."
+        },
+        {
+          "id": "prob_12_b",
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj toma el bucle completo?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "Cada iteración toma $3$ (LDR) + $2$ (resto) = $5$ ciclos. Total = $10 \\times 5 = 50$ ciclos."
+        },
+        {
+          "id": "prob_12_c",
+          "label": "c",
+          "question": "Si la frecuencia es 100 MHz, ¿cuál es el tiempo de ejecución en microsegundos del bucle completo?",
+          "correctValue": 0.5,
+          "tolerance": 0,
+          "explanation": "Período = $10$ ns. Tiempo = $50$ ciclos $\\times 10$ ns = $500$ ns = $0.5$ $\\mu$s."
+        },
+        {
+          "id": "prob_12_d",
+          "label": "d",
+          "question": "Si optimizamos la variable local en R4 (1 ciclo de acceso), ¿cuántos ciclos de reloj se ahorran en total?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Ahorro por iteración = $3 - 1 = 2$ ciclos. Total = $10 \\times 2 = 20$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_13",
+      "title": "Depuración y Enlaces de Pila",
+      "context": "Un depurador analiza una pila. El FP actual es 0x8000 (32768 decimal). En [FP, #0] está el FP anterior, que es 0x7FDC (32732 decimal). Y en [0x7FDC] se almacena el FP previo, que es 0x7FB8 (32696 decimal).",
+      "parts": [
+        {
+          "id": "prob_13_a",
+          "label": "a",
+          "question": "¿Cuál es el tamaño en bytes del stack frame de la función actual?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "Tamaño = FP actual - FP anterior = $0x8000 - 0x7FDC = 36$ bytes."
+        },
+        {
+          "id": "prob_13_b",
+          "label": "b",
+          "question": "¿Cuál es el tamaño en bytes del stack frame de la función llamadora anterior?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "Tamaño = $0x7FDC - 0x7FB8 = 36$ bytes."
+        },
+        {
+          "id": "prob_13_c",
+          "label": "c",
+          "question": "Si el FP anterior a 0x7FB8 es 0x7F90 (32656 decimal), ¿cuál es el tamaño en bytes de ese marco?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "$0x7FB8 - 0x7F90 = 32696 - 32656 = 40$ bytes."
+        },
+        {
+          "id": "prob_13_d",
+          "label": "d",
+          "question": "¿Cuántas funciones activas con marco de pila hay representadas en esta cadena de 3 enlaces de FP?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Hay 3 marcos enlazados correspondientes a 3 funciones activas en la pila."
+        }
+      ]
+    },
+    {
+      "id": "prob_14",
+      "title": "Búfer local y alineación de bytes",
+      "context": "Se declara localmente una variable `char buf[13]`. La pila ARM requiere alineación de palabras a múltiplo de 4 bytes.",
+      "parts": [
+        {
+          "id": "prob_14_a",
+          "label": "a",
+          "question": "¿Cuántos bytes netos ocupa el buffer en C?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "El array char de 13 elementos ocupa exactamente $13$ bytes."
+        },
+        {
+          "id": "prob_14_b",
+          "label": "b",
+          "question": "¿Cuál es el tamaño mínimo en bytes alineado a 4 bytes que se reservará en la pila?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El múltiplo de 4 superior a 13 más cercano es $16$."
+        },
+        {
+          "id": "prob_14_c",
+          "label": "c",
+          "question": "¿Cuántos bytes de relleno (padding) se insertan para la alineación?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Padding = $16 - 13 = 3$ bytes."
+        },
+        {
+          "id": "prob_14_d",
+          "label": "d",
+          "question": "Si además se declara un entero `int x` (4 bytes), ¿cuántos bytes totales se reservarán en pila para las variables locales?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Total locales = $16$ (buffer alineado) + $4$ (entero x) = $20$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_15",
+      "title": "Acceso a arrays locales mediante SP",
+      "context": "Sin usar Frame Pointer (FPO), se reserva un array `int A[4]` mediante `SUB SP, SP, #16` al inicio de la función.",
+      "parts": [
+        {
+          "id": "prob_15_a",
+          "label": "a",
+          "question": "¿Cuál es el offset inicial en bytes respecto a SP para acceder a A[0] (primer elemento del array, en la base)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "A[0] está en el fondo del bloque reservado, es decir, en $SP + 0$."
+        },
+        {
+          "id": "prob_15_b",
+          "label": "b",
+          "question": "¿Cuál es el offset en bytes respecto a SP para acceder a A[2]?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "A[2] está desplazado $2 \\times 4 = 8$ bytes respecto a A[0], es decir, en $SP + 8$."
+        },
+        {
+          "id": "prob_15_c",
+          "label": "c",
+          "question": "Si durante la ejecución se realiza `PUSH {R0}` temporalmente, ¿cuál es el nuevo offset en bytes de A[0] respecto a SP?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Al decrementar SP en 4, la dirección de A[0] ahora se encuentra en $SP + 4$."
+        },
+        {
+          "id": "prob_15_d",
+          "label": "d",
+          "question": "¿Cuál es el nuevo offset en bytes respecto a SP de A[2] tras el PUSH?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El nuevo offset es $8 + 4 = 12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_16",
+      "title": "Retorno de Subrutinas y PC/LR",
+      "context": "Se ejecuta `BL subrutina` desde la dirección de memoria 0x8004 (32772 decimal). La subrutina se encuentra en 0x9000 (36864 decimal).",
+      "parts": [
+        {
+          "id": "prob_16_a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal de PC (en la etapa de Fetch) durante la ejecución de la instrucción BL?",
+          "correctValue": 32780,
+          "tolerance": 0,
+          "explanation": "El PC de ejecución es Ejecución + 8 = $32772 + 8 = 32780$."
+        },
+        {
+          "id": "prob_16_b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal almacenado en LR por la instrucción BL?",
+          "correctValue": 32776,
+          "tolerance": 0,
+          "explanation": "La instrucción siguiente está en $0x8004 + 4 = 0x8008 = 32776$."
+        },
+        {
+          "id": "prob_16_c",
+          "label": "c",
+          "question": "Si la subrutina ejecuta `PUSH {R4, FP, LR}` al entrar, ¿cuál es el valor decimal de LR que se guarda en la pila?",
+          "correctValue": 32776,
+          "tolerance": 0,
+          "explanation": "El valor de LR salvado es el guardado por BL ($32776$)."
+        },
+        {
+          "id": "prob_16_d",
+          "label": "d",
+          "question": "Si el epílogo ejecuta `POP {R4, FP, PC}`, ¿qué dirección en decimal se cargará en el PC?",
+          "correctValue": 32776,
+          "tolerance": 0,
+          "explanation": "Se extrae de la pila el valor correspondiente a LR salvado ($32776$) directamente en PC."
+        }
+      ]
+    },
+    {
+      "id": "prob_17",
+      "title": "Frecuencia y Tiempo de ejecución de Subrutina",
+      "context": "Una subrutina ejecuta en promedio 150 instrucciones ARM con un CPI promedio de 1.4. El procesador funciona a una frecuencia de 200 MHz.",
+      "parts": [
+        {
+          "id": "prob_17_a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj toma ejecutar la subrutina?",
+          "correctValue": 210,
+          "tolerance": 0,
+          "explanation": "Ciclos = $150 \\text{ instrucciones} \\times 1.4 \\text{ CPI} = 210$ ciclos."
+        },
+        {
+          "id": "prob_17_b",
+          "label": "b",
+          "question": "¿Cuál es el período del reloj del procesador en nanosegundos?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Período = $1 / 200$ MHz = $5$ ns."
+        },
+        {
+          "id": "prob_17_c",
+          "label": "c",
+          "question": "¿Cuál es el tiempo de ejecución en microsegundos de la subrutina?",
+          "correctValue": 1.05,
+          "tolerance": 0,
+          "explanation": "Tiempo = $210 \\text{ ciclos} \\times 5 \\text{ ns} = 1050 \\text{ ns} = 1.05$ $\\mu$s."
+        },
+        {
+          "id": "prob_17_d",
+          "label": "d",
+          "question": "Si 30 instrucciones de la subrutina leen variables locales de la pila con una penalización adicional de 2 ciclos de espera cada una, ¿cuántos ciclos totales tomaría la subrutina si estas variables se mapearan a registros?",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "Ciclos ahorrados = $30 \\times 2 = 60$ ciclos. Ciclos totales optimizados = $210 - 60 = 150$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_18",
+      "title": "Tamaño de registros salvados en pila",
+      "context": "En una función se salvan secuencialmente conjuntos de registros: primero `PUSH {R4, R5}`, y más tarde dentro de una condición `PUSH {R6, R7}`.",
+      "parts": [
+        {
+          "id": "prob_18_a",
+          "label": "a",
+          "question": "¿Cuántos bytes se restan al SP en el primer PUSH?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$2$ registros $\\times 4$ bytes = $8$ bytes."
+        },
+        {
+          "id": "prob_18_b",
+          "label": "b",
+          "question": "¿Cuántos bytes se restan al SP en el segundo PUSH?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "$2$ registros $\\times 4$ bytes = $8$ bytes."
+        },
+        {
+          "id": "prob_18_c",
+          "label": "c",
+          "question": "¿Cuál es la disminución total acumulada de SP en bytes debido a ambos PUSH?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Total = $8 + 8 = 16$ bytes."
+        },
+        {
+          "id": "prob_18_d",
+          "label": "d",
+          "question": "¿Cuántos POP individuales de 4 bytes se necesitan para restaurar SP a su estado inicial?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$16$ bytes $/ 4$ bytes por registro = $4$ POP."
+        }
+      ]
+    },
+    {
+      "id": "prob_19",
+      "title": "Offset de Parámetros Mixtos",
+      "context": "Una función en C declara `void f(char a, double b, int c)`. double requiere alineación de 64 bits a par de registros. R0-R3 son los registros de argumentos.",
+      "parts": [
+        {
+          "id": "prob_19_a",
+          "label": "a",
+          "question": "¿En qué registro de argumento (0-3) se pasa el parámetro `a`?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "`a` se asigna a R0."
+        },
+        {
+          "id": "prob_19_b",
+          "label": "b",
+          "question": "¿En qué registro de inicio (0-3) se pasa el parámetro `b`?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se alinea a par de registros: R1 se salta y se asigna a R2 (usa R2-R3)."
+        },
+        {
+          "id": "prob_19_c",
+          "label": "c",
+          "question": "¿En qué registro se pasa `c`? (Indicar registro 0-3, o -1 si va a la pila)",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "R0-R3 están llenos, por lo que `c` debe pasar por la pila (-1)."
+        },
+        {
+          "id": "prob_19_d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño en bytes del parámetro `b`?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "double es de 64 bits = $8$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_20",
+      "title": "Desbordamiento de pila y recursión",
+      "context": "Una función recursiva sin variables locales guarda FP y LR en cada llamada. La pila tiene un tamaño disponible de 4096 bytes.",
+      "parts": [
+        {
+          "id": "prob_20_a",
+          "label": "a",
+          "question": "¿Cuántos bytes se consumen en la pila en cada llamada recursiva para guardar el contexto?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Se salvan FP y LR ($2$ registros de $4$ bytes = $8$ bytes)."
+        },
+        {
+          "id": "prob_20_b",
+          "label": "b",
+          "question": "¿Cuál es el número máximo de llamadas recursivas permitidas antes de desbordar la pila?",
+          "correctValue": 512,
+          "tolerance": 0,
+          "explanation": "$4096 / 8 = 512$ llamadas."
+        },
+        {
+          "id": "prob_20_c",
+          "label": "c",
+          "question": "Si se optimizara para no usar FP (solo guardar LR), ¿cuántos bytes por llamada se consumirían?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$1$ registro (LR) $\\times 4$ bytes = $4$ bytes."
+        },
+        {
+          "id": "prob_20_d",
+          "label": "d",
+          "question": "¿Cuál sería el nuevo número máximo de llamadas permitidas con esa optimización?",
+          "correctValue": 1024,
+          "tolerance": 0,
+          "explanation": "$4096 / 4 = 1024$ llamadas."
+        }
+      ]
+    },
+    {
+      "id": "prob_21",
+      "title": "Direccionamiento relativo a FP en ensamblador",
+      "context": "Se analiza la instrucción `LDR R2, [R11, #-12]`. FP (R11) es 0x4000 (16384 decimal).",
+      "parts": [
+        {
+          "id": "prob_21_a",
+          "label": "a",
+          "question": "¿Cuál es la dirección de memoria decimal de lectura que resulta de [R11, #-12]?",
+          "correctValue": 16372,
+          "tolerance": 0,
+          "explanation": "$16384 - 12 = 16372$."
+        },
+        {
+          "id": "prob_21_b",
+          "label": "b",
+          "question": "Si el valor en esa celda es 45, ¿qué valor decimal se carga en R2?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "R2 toma el valor cargado de la memoria ($45$)."
+        },
+        {
+          "id": "prob_21_c",
+          "label": "c",
+          "question": "Si luego se ejecuta `STR R2, [R11, #-8]`, ¿en qué dirección decimal de memoria se escribe?",
+          "correctValue": 16376,
+          "tolerance": 0,
+          "explanation": "$16384 - 8 = 16376$."
+        },
+        {
+          "id": "prob_21_d",
+          "label": "d",
+          "question": "¿Cuál es la diferencia de bytes entre la dirección de escritura y la de lectura?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$16376 - 16372 = 4$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_22",
+      "title": "Operaciones aritméticas y variables en stack",
+      "context": "En un stack frame se leen variables locales: `[R11, #-8]` contiene el valor 5 y `[R11, #-12]` contiene el valor 12. Se ejecuta `ADD R2, R0, R1` (donde R0 y R1 tienen esos valores) y `STR R2, [R11, #-16]`.",
+      "parts": [
+        {
+          "id": "prob_22_a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal que se almacena en la dirección `[R11, #-16]`?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "Suma: $5 + 12 = 17$."
+        },
+        {
+          "id": "prob_22_b",
+          "label": "b",
+          "question": "Si multiplicamos ese valor por 2 en R2 y lo escribimos en `[R11, #-8]`, ¿qué nuevo valor decimal se guardará allí?",
+          "correctValue": 34,
+          "tolerance": 0,
+          "explanation": "$17 \\times 2 = 34$."
+        },
+        {
+          "id": "prob_22_c",
+          "label": "c",
+          "question": "¿Cuántas variables locales de 32 bits diferentes están involucradas en esta secuencia de accesos?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las ubicadas en los offsets $-8$, $-12$ y $-16$ ($3$ variables)."
+        },
+        {
+          "id": "prob_22_d",
+          "label": "d",
+          "question": "¿Cuántos bytes totales de pila ocupan conjuntamente estas 3 variables locales?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "$3 \\times 4$ bytes = $12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_23",
+      "title": "Cálculo de offset del Program Counter",
+      "context": "Se ejecuta la instrucción de salto `B etiqueta` en la dirección 0x00002004 (8196 decimal). La etiqueta destino está en 0x0000201C (8220 decimal).",
+      "parts": [
+        {
+          "id": "prob_23_a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal de PC en la fase de ejecución cuando se evalúa la instrucción de salto?",
+          "correctValue": 8204,
+          "tolerance": 0,
+          "explanation": "PC de ejecución = Dirección instrucción + 8 = $8196 + 8 = 8204$."
+        },
+        {
+          "id": "prob_23_b",
+          "label": "b",
+          "question": "¿Cuál es el destino decimal de la etiqueta?",
+          "correctValue": 8220,
+          "tolerance": 0,
+          "explanation": "0x0000201C = $8220$."
+        },
+        {
+          "id": "prob_23_c",
+          "label": "c",
+          "question": "¿Cuál es el offset relativo al PC de ejecución necesario en bytes?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Offset = Destino - PC = $8220 - 8204 = 16$ bytes."
+        },
+        {
+          "id": "prob_23_d",
+          "label": "d",
+          "question": "Si ARMv7 divide este offset en bytes por 4 para codificar el salto inmediato, ¿qué valor entero se almacena?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Offset codificado = $16 / 4 = 4$."
+        }
+      ]
+    },
+    {
+      "id": "prob_24",
+      "title": "Tamaño de código y ejecutable de subrutinas",
+      "context": "Una subrutina consta de 20 instrucciones ARM. El linker reúne esta y otras 3 funciones del mismo tamaño en la sección de código.",
+      "parts": [
+        {
+          "id": "prob_24_a",
+          "label": "a",
+          "question": "¿Cuántos bytes ocupa una subrutina individual de 20 instrucciones?",
+          "correctValue": 80,
+          "tolerance": 0,
+          "explanation": "$20$ instrucciones $\\times 4$ bytes/instrucción = $80$ bytes."
+        },
+        {
+          "id": "prob_24_b",
+          "label": "b",
+          "question": "¿Cuántos bytes ocupan las 4 subrutinas reunidas en total?",
+          "correctValue": 320,
+          "tolerance": 0,
+          "explanation": "$4 \\times 80$ bytes = $320$ bytes."
+        },
+        {
+          "id": "prob_24_c",
+          "label": "c",
+          "question": "A 100 MHz, si cada instrucción toma 1 ciclo de reloj, ¿cuál es el tiempo de ejecución en microsegundos de una subrutina?",
+          "correctValue": 0.2,
+          "tolerance": 0,
+          "explanation": "Ciclos = $20$. Período = $10$ ns. $20 \\times 10$ ns = $200$ ns = $0.2$ $\\mu$s."
+        },
+        {
+          "id": "prob_24_d",
+          "label": "d",
+          "question": "Si se reduce a 15 instrucciones mediante optimizaciones, ¿cuál es el nuevo tamaño en bytes del código de la subrutina?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "$15$ instrucciones $\\times 4$ bytes = $60$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_25",
+      "title": "Desplazamientos de pila para paso de argumentos",
+      "context": "Se llama a la función `f(int a, int b, int c, int d, int e, int f)` en C. El SP de entrada al entrar a la función es 0x5000 (20480 decimal).",
+      "parts": [
+        {
+          "id": "prob_25_a",
+          "label": "a",
+          "question": "¿Cuál es la dirección decimal en la pila del argumento `e` (parámetro 5)?",
+          "correctValue": 20480,
+          "tolerance": 0,
+          "explanation": "El llamador coloca el quinto parámetro en la cima de la pila antes de hacer BL, es decir, en el SP inicial ($20480$)."
+        },
+        {
+          "id": "prob_25_b",
+          "label": "b",
+          "question": "¿Cuál es la dirección decimal en la pila del argumento `f` (parámetro 6)?",
+          "correctValue": 20484,
+          "tolerance": 0,
+          "explanation": "El sexto parámetro está 4 bytes por encima, en $20480 + 4 = 20484$."
+        },
+        {
+          "id": "prob_25_c",
+          "label": "c",
+          "question": "Si el prólogo de la función ejecuta `PUSH {R4, FP, LR}`, ¿cuál es el nuevo valor de SP en decimal?",
+          "correctValue": 20468,
+          "tolerance": 0,
+          "explanation": "Se restan $12$ bytes por apilar 3 registros: $20480 - 12 = 20468$."
+        },
+        {
+          "id": "prob_25_d",
+          "label": "d",
+          "question": "¿Cuál es la distancia en bytes (offset positivo) del argumento `e` respecto al nuevo SP?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "Offset = Dirección del argumento `e` - nuevo SP = $20480 - 20468 = 12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_26",
+      "title": "Frame Pointer Omission y offsets",
+      "context": "Se compila una función con FPO y se reservan 8 bytes de variables locales. Durante la ejecución, se realiza un PUSH {R0} temporal para almacenar un resultado.",
+      "parts": [
+        {
+          "id": "prob_26_a",
+          "label": "a",
+          "question": "¿Cuál es el offset inicial en bytes respecto a SP de la variable local 1 (antes de PUSH)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Las locales ocupan de $SP$ a $SP+7$. La local 1 está en $SP + 4$."
+        },
+        {
+          "id": "prob_26_b",
+          "label": "b",
+          "question": "Después del PUSH {R0}, ¿cuál es el nuevo offset en bytes respecto a SP de la variable local 1?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Al decrementarse SP en 4, todas las locales se desplazan +4 respecto a SP. Nuevo offset = $4 + 4 = 8$."
+        },
+        {
+          "id": "prob_26_c",
+          "label": "c",
+          "question": "¿Cuál es el nuevo offset en bytes de la variable local 2 (estaba en offset 0 antes de PUSH)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Nuevo offset = $0 + 4 = 4$."
+        },
+        {
+          "id": "prob_26_d",
+          "label": "d",
+          "question": "Si recuperamos R0 mediante POP {R0}, ¿cuál vuelve a ser el offset de la variable local 2 respecto a SP?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al restaurar SP por POP, el offset vuelve a su valor inicial ($0$)."
+        }
+      ]
+    },
+    {
+      "id": "prob_27",
+      "title": "Transferencias Load/Store y accesos a pila",
+      "context": "Se ejecuta la secuencia: `PUSH {R4}; LDR R4, [SP]; STR R4, [SP, #4]`.",
+      "parts": [
+        {
+          "id": "prob_27_a",
+          "label": "a",
+          "question": "¿Cuántos accesos de escritura en memoria realiza en total esta secuencia?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "PUSH escribe en pila (1) y STR escribe en pila (2). Total = $2$ escrituras."
+        },
+        {
+          "id": "prob_27_b",
+          "label": "b",
+          "question": "¿Cuántos accesos de lectura en memoria realiza la secuencia?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sólo la instrucción LDR lee de la pila. Total = $1$ lectura."
+        },
+        {
+          "id": "prob_27_c",
+          "label": "c",
+          "question": "Si la pila estaba en SP = 0x1000 (4096 decimal), ¿cuál es el SP resultante en decimal tras el PUSH?",
+          "correctValue": 4092,
+          "tolerance": 0,
+          "explanation": "SP = $4096 - 4 = 4092$."
+        },
+        {
+          "id": "prob_27_d",
+          "label": "d",
+          "question": "¿Cuál es el offset en bytes de la dirección accedida por `STR R4, [SP, #4]` respecto a SP?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El offset es de $4$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_28",
+      "title": "Alineación AAPCS a 8 bytes y padding",
+      "context": "Se compila una función con 3 variables locales de 32 bits (12 bytes) y requiere apilar R4, FP y LR (12 bytes). Se añade una variable local de tipo char (1 byte).",
+      "parts": [
+        {
+          "id": "prob_28_a",
+          "label": "a",
+          "question": "¿Cuántos bytes de datos locales y contexto se necesitan acumular en total sin contar alineación?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "Total = $12$ (locales) + $12$ (registros) + $1$ (char) = $25$ bytes."
+        },
+        {
+          "id": "prob_28_b",
+          "label": "b",
+          "question": "¿Es el número 25 divisible por 8? (1 para Sí, 0 para No)",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "$25$ no es divisible por 8, tiene un resto de 1."
+        },
+        {
+          "id": "prob_28_c",
+          "label": "c",
+          "question": "¿Cuál es el número total de bytes reservado en la pila tras redondear para mantener la alineación a 8 bytes?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "El múltiplo de 8 superior a 25 más cercano es $32$."
+        },
+        {
+          "id": "prob_28_d",
+          "label": "d",
+          "question": "¿Cuántos bytes de relleno (padding) añadirá el compilador en la pila?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Padding = $32 - 25 = 7$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "prob_29",
+      "title": "Tráfico de bus en variables locales",
+      "context": "Un bucle realiza la lectura y escritura `LDR R0, [R11, #-8]` y `STR R0, [R11, #-12]` en cada iteración. Se ejecutan 50 iteraciones.",
+      "parts": [
+        {
+          "id": "prob_29_a",
+          "label": "a",
+          "question": "¿Cuántas lecturas a memoria RAM se realizan en total en el bucle?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "$50$ iteraciones $\\times 1$ lectura LDR = $50$ lecturas."
+        },
+        {
+          "id": "prob_29_b",
+          "label": "b",
+          "question": "¿Cuántas escrituras a memoria RAM se realizan en total en el bucle?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "$50$ iteraciones $\\times 1$ escritura STR = $50$ escrituras."
+        },
+        {
+          "id": "prob_29_c",
+          "label": "c",
+          "question": "¿Cuál es la cantidad total de accesos a memoria RAM realizados en las 50 iteraciones?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "Total = $50$ (lecturas) + $50$ (escrituras) = $100$ accesos."
+        },
+        {
+          "id": "prob_29_d",
+          "label": "d",
+          "question": "Si cada acceso a memoria toma 3 ciclos de reloj de bus, ¿cuántos ciclos de bus se consumen exclusivamente en accesos a memoria en este bucle?",
+          "correctValue": 300,
+          "tolerance": 0,
+          "explanation": "Ciclos = $100$ accesos $\\times 3$ ciclos = $300$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": "prob_30",
+      "title": "Desplazamientos en bloques de activación jerárquicos",
+      "context": "La función `main` llama a `funcA`, que a su vez llama a `funcB`. Cada una usa un bloque de activación estándar con 4 bytes para guardar el FP anterior, 4 bytes para LR y 8 bytes de variables locales.",
+      "parts": [
+        {
+          "id": "prob_30_a",
+          "label": "a",
+          "question": "¿Cuántos bytes de pila consume el bloque de activación de `funcA`?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Consumo = FP anterior ($4$ bytes) + LR ($4$ bytes) + locales ($8$ bytes) = $16$ bytes."
+        },
+        {
+          "id": "prob_30_b",
+          "label": "b",
+          "question": "¿Cuántos bytes de pila consume el bloque de activación de `funcB`?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Consumo = FP anterior ($4$ bytes) + LR ($4$ bytes) + locales ($8$ bytes) = $16$ bytes."
+        },
+        {
+          "id": "prob_30_c",
+          "label": "c",
+          "question": "¿Cuántos bytes totales de pila consumen conjuntamente `funcA` y `funcB`?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "Total = $16$ (funcA) + $16$ (funcB) = $32$ bytes."
+        },
+        {
+          "id": "prob_30_d",
+          "label": "d",
+          "question": "Si la pila se inicia en 0x3000 (12288 decimal), ¿cuál es la dirección decimal de SP cuando `funcB` está en ejecución?",
+          "correctValue": 12256,
+          "tolerance": 0,
+          "explanation": "SP final = SP inicial - consumo total = $12288 - 32 = 12256$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Tamaño del marco de pila estándar",
+      "tex": "$$S_{frame} = N_{regs} \\\\times 4 + S_{locals} + S_{padding}$$"
+    },
+    {
+      "name": "Dirección alineada a 8 bytes (AAPCS)",
+      "tex": "$$SP_{aligned} = SP_{entry} - (S_{frame} + (8 - (SP_{entry} - S_{frame}) \\\\pmod 8) \\\\pmod 8)$$"
+    },
+    {
+      "name": "Offset de variables locales respecto a FP",
+      "tex": "$$\\\\text{Offset}_{local}(i) = -(4 \\\\times i + 4)$$"
+    },
+    {
+      "name": "Offset de parámetros excedentes respecto a FP",
+      "tex": "$$\\\\text{Offset}_{param}(j) = 8 + 4 \\\\times (j - 5)$$"
+    },
+    {
+      "name": "Ciclos de ejecución de PUSH/POP en ARM",
+      "tex": "$$Cycles_{push/pop} = 1 + N_{registers}$$"
+    },
+    {
+      "name": "Dirección de retorno tras llamada BL",
+      "tex": "$$LR = PC_{execution} + 4$$"
+    },
+    {
+      "name": "Dirección del PC en etapa de ejecución ARM",
+      "tex": "$$PC_{exec} = PC_{fetch} - 8$$"
+    },
+    {
+      "name": "Dirección del SP tras reserva en pila Full Descending",
+      "tex": "$$SP_{new} = SP_{old} - 4 \\\\times N_{regs}$$"
+    }
+  ]
+}

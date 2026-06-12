@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la diferencia fundamental entre una excepción y una interrupción en la arquitectura ARM?",
+      "options": [
+        "Las excepciones son internas y síncronas a la ejecución del programa, mientras que las interrupciones son externas y asíncronas.",
+        "Las excepciones son asíncronas y de hardware, mientras que las interrupciones son síncronas de software.",
+        "Ambas son idénticas en su origen y solo difieren en la prioridad de hardware."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el origen del evento (interno por instrucciones vs externo por hardware).",
+      "explanation": "Las excepciones son síncronas ya que ocurren debido a la ejecución de instrucciones específicas (como SVC o división por cero), mientras que las interrupciones son asíncronas porque ocurren por eventos de hardware externos independientes de la instrucción en curso."
+    },
+    {
+      "q": "¿Qué instrucción de ARM realiza una llamada al sistema de forma síncrona provocando una excepción de software?",
+      "options": [
+        "SVC (Supervisor Call)",
+        "IRQ (Interrupt Request)",
+        "BKPT (Breakpoint)"
+      ],
+      "correct": 0,
+      "hint": "Anteriormente se conocía como SWI (Software Interrupt).",
+      "explanation": "La instrucción SVC (Supervisor Call) se utiliza para realizar llamadas al sistema, conmutando el procesador al modo Supervisor de manera síncrona."
+    },
+    {
+      "q": "¿Cuál de los siguientes eventos se considera una interrupción asíncrona?",
+      "options": [
+        "El intento de ejecutar una instrucción con código de operación inválido.",
+        "La pulsación de una tecla por parte del usuario en un teclado físico.",
+        "El fallo de página al intentar acceder a una dirección de memoria virtual no mapeada."
+      ],
+      "correct": 1,
+      "hint": "Busca el evento que proviene de un periférico externo de forma impredecible.",
+      "explanation": "La pulsación de una tecla es un evento físico externo e impredecible que genera una interrupción de hardware de manera asíncrona."
+    },
+    {
+      "q": "¿En qué registro de la CPU se almacena el CPSR original del procesador antes de entrar en el modo de interrupción?",
+      "options": [
+        "SPSR (Saved Program Status Register)",
+        "LR (Link Register)",
+        "CPSR_old"
+      ],
+      "correct": 0,
+      "hint": "Cada modo de excepción privilegiado tiene su propio registro guardado de estado.",
+      "explanation": "El hardware de la CPU guarda de forma automática el CPSR en el registro SPSR (Saved Program Status Register) correspondiente al modo de excepción al que se cambia."
+    },
+    {
+      "q": "¿Qué dirección física de la Tabla de Vectores de Interrupción (IVT) está reservada para el vector de Reset en ARM?",
+      "options": [
+        "0x00000000",
+        "0x00000004",
+        "0x00000008"
+      ],
+      "correct": 0,
+      "hint": "Es la primera dirección de memoria del procesador al arrancar.",
+      "explanation": "El vector de Reset se encuentra en la dirección 0x00000000. Es el punto de entrada físico de arranque del microprocesador."
+    },
+    {
+      "q": "¿Qué dirección física de la Tabla de Vectores de Interrupción (IVT) está reservada para la excepción IRQ (petición de interrupción estándar)?",
+      "options": [
+        "0x00000010",
+        "0x00000018",
+        "0x0000001C"
+      ],
+      "correct": 1,
+      "hint": "Se sitúa justo antes del vector de interrupción rápida FIQ.",
+      "explanation": "El vector físico para la interrupción estándar IRQ está asignado a la dirección de memoria 0x00000018."
+    },
+    {
+      "q": "¿Cuál es la dirección del vector en la IVT para una interrupción rápida (FIQ) en ARM?",
+      "options": [
+        "0x00000018",
+        "0x0000001C",
+        "0x0000000C"
+      ],
+      "correct": 1,
+      "hint": "Es el último vector de la tabla de vectores de interrupción estándar en direcciones bajas.",
+      "explanation": "El vector para FIQ se localiza en la dirección 0x0000001C en la arquitectura ARM."
+    },
+    {
+      "q": "¿Qué dirección física de la IVT corresponde a una llamada al sistema mediante SVC?",
+      "options": [
+        "0x00000008",
+        "0x0000000C",
+        "0x00000010"
+      ],
+      "correct": 0,
+      "hint": "Se ubica entre el vector de instrucción no definida y el de Prefetch Abort.",
+      "explanation": "La excepción de llamada de software (SVC) tiene asignado el vector físico en la dirección 0x00000008."
+    },
+    {
+      "q": "¿Cuál es el tamaño (en bytes) de cada entrada individual en la Tabla de Vectores de Interrupción de ARM?",
+      "options": [
+        "2 bytes",
+        "4 bytes",
+        "8 bytes"
+      ],
+      "correct": 1,
+      "hint": "Debe ser suficiente para almacenar una instrucción de salto de la arquitectura ARM de 32 bits.",
+      "explanation": "Cada entrada en la IVT ocupa 4 bytes, permitiendo colocar una única instrucción ARM (como B o LDR PC) que bifurque a la rutina de servicio real."
+    },
+    {
+      "q": "¿Por qué el vector FIQ se sitúa al final de la Tabla de Vectores de Interrupción (0x0000001C)?",
+      "options": [
+        "Permite colocar la Rutina de Servicio a la Interrupción (ISR) inmediatamente a continuación, ahorrando una instrucción de salto.",
+        "Es necesario para evitar interferencias electromagnéticas con el vector de Reset.",
+        "Así lo exige la especificación del pipeline del coprocesador matemático."
+      ],
+      "correct": 0,
+      "hint": "Piensa en qué habría que escribir si el vector estuviera en medio de la tabla.",
+      "explanation": "Al ser la última entrada en la IVT, no hay vectores debajo de él, por lo que la ISR de FIQ puede escribirse directamente desde la dirección 0x0000001C hacia adelante, eliminando el ciclo de penalización de un salto intermedio."
+    },
+    {
+      "q": "¿Cuál es el registro de enlace utilizado para guardar la dirección de retorno durante una interrupción IRQ?",
+      "options": [
+        "LR_irq (R14_irq)",
+        "SP_irq (R13_irq)",
+        "SPSR_irq"
+      ],
+      "correct": 0,
+      "hint": "El procesador conmuta al banco del modo IRQ y usa su registro de enlace sombreado.",
+      "explanation": "Cuando se atiende una interrupción IRQ, el hardware escribe la dirección de retorno en el registro de enlace dedicado del modo IRQ, denominado LR_irq o R14_irq."
+    },
+    {
+      "q": "¿Qué instrucción se utiliza típicamente para retornar de una rutina de servicio a la interrupción (ISR) de tipo IRQ en ARM?",
+      "options": [
+        "MOV PC, LR",
+        "SUBS PC, LR, #4",
+        "BX LR"
+      ],
+      "correct": 1,
+      "hint": "Debe corregir el desfase del pipeline y restaurar el CPSR desde el SPSR al mismo tiempo.",
+      "explanation": "La instrucción SUBS PC, LR, #4 realiza dos tareas atómicamente: resta 4 a LR para compensar el pipeline de ARM, lo escribe en PC para saltar, y copia el SPSR al CPSR."
+    },
+    {
+      "q": "¿Qué ocurre con el bit I (bit de interrupción IRQ) del CPSR cuando el hardware de la CPU entra en el modo de interrupción IRQ?",
+      "options": [
+        "Se pone a 0 para permitir que otras interrupciones normales aniden inmediatamente.",
+        "Se pone a 1 para deshabilitar temporalmente nuevas interrupciones de tipo IRQ y evitar la corrupción de registros.",
+        "Permanece inalterado, delegando su control exclusivamente a la lógica del software."
+      ],
+      "correct": 1,
+      "hint": "El procesador debe evitar que una nueva interrupción destruya el SPSR_irq o LR_irq recién escritos.",
+      "explanation": "Al entrar en el modo IRQ, la CPU pone automáticamente a 1 el bit I en el CPSR. Esto enmascara (deshabilita) nuevas interrupciones IRQ de entrada para evitar corrupción antes de salvar el contexto en la pila."
+    },
+    {
+      "q": "¿Qué registro de hardware contiene la dirección de la instrucción en ejecución modificada por el pipeline en el momento de la interrupción?",
+      "options": [
+        "PC (Program Counter)",
+        "LR (Link Register)",
+        "SPSR"
+      ],
+      "correct": 0,
+      "hint": "Es el registro R15 de la arquitectura ARM.",
+      "explanation": "El PC (Program Counter o R15) contiene la dirección del flujo actual de instrucciones de la CPU, modificada por la fase del pipeline en la que se encuentre."
+    },
+    {
+      "q": "¿En qué momento del ciclo de instrucción evalúa el hardware de la CPU si hay una interrupción física pendiente?",
+      "options": [
+        "Al finalizar la ejecución de la instrucción máquina actual.",
+        "Durante la etapa intermedia de decodificación de cada instrucción.",
+        "En cada flanco de subida del reloj del bus del coprocesador."
+      ],
+      "correct": 0,
+      "hint": "La CPU no puede cortar a la mitad una instrucción elemental en curso, debe finalizarla.",
+      "explanation": "Las interrupciones de hardware se evalúan al finalizar la instrucción máquina que se está ejecutando físicamente en ese momento, asegurando que las operaciones individuales no queden a medias."
+    },
+    {
+      "q": "¿Qué estructura de datos del sistema permite salvar de forma segura el contexto de registros modificados por la ISR?",
+      "options": [
+        "El banco de registros específicos del modo FIQ.",
+        "La pila (Stack) asociada al modo correspondiente (SP_irq en el caso de IRQ).",
+        "La propia Tabla de Vectores de Interrupción (IVT)."
+      ],
+      "correct": 1,
+      "hint": "Es una estructura LIFO en memoria RAM direccionada por SP.",
+      "explanation": "La pila (Stack) del modo de interrupción (apuntada por SP_irq) se utiliza para salvaguardar (PUSH) los registros de trabajo del procesador en el prólogo de la ISR."
+    },
+    {
+      "q": "¿Qué es el 'prólogo' de una Rutina de Servicio a la Interrupción (ISR)?",
+      "options": [
+        "El código encargado de desactivar la señal física en el periférico de Entrada/Salida.",
+        "El bloque de instrucciones inicial que salva en la pila los registros de la CPU que serán utilizados.",
+        "La instrucción de salto ubicada en la dirección física de la IVT."
+      ],
+      "correct": 1,
+      "hint": "Tiene el objetivo de preservar el contexto del programa interrumpido.",
+      "explanation": "El prólogo de la ISR consiste en las instrucciones iniciales (típicamente STMFD/PUSH) destinadas a salvar los registros de trabajo en la pila para no corromper los datos del programa interrumpido."
+    },
+    {
+      "q": "¿Qué es el 'epílogo' de una Rutina de Servicio a la Interrupción (ISR)?",
+      "options": [
+        "La restauración de los registros salvados desde la pila y el retorno atómico mediante la instrucción dedicada.",
+        "La subrutina de hardware que conmuta físicamente las señales en el bus del procesador.",
+        "La lectura de los puertos del periférico para obtener el dato binario procesado."
+      ],
+      "correct": 0,
+      "hint": "Ocurre al final de la ISR y deshace los cambios realizados por el prólogo.",
+      "explanation": "El epílogo de la ISR restaura los registros originales desde la pila (mediante LDMFD/POP) y ejecuta la instrucción de retorno (como SUBS PC, LR, #4) restaurando simultáneamente el CPSR."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una optimización física del modo de excepción rápido (FIQ) respecto al modo normal (IRQ) en ARM?",
+      "options": [
+        "Un mecanismo de predicción de saltos exclusivo en el cauce del procesador.",
+        "Un bus de datos dedicado de 64 bits para acceder directamente a la memoria caché.",
+        "Un banco de registros duplicado (shadow registers R8_fiq a R14_fiq) que evita el uso de la pila en la ISR."
+      ],
+      "correct": 2,
+      "hint": "Esta característica evita tener que hacer PUSH y POP de los registros de propósito general intermedios.",
+      "explanation": "FIQ proporciona sus propios registros físicos R8 a R14. Así, la ISR de FIQ puede usar hasta 7 registros de trabajo directamente sin salvarlos en la pila, lo que reduce la latencia drásticamente."
+    },
+    {
+      "q": "En el retorno de una ISR de tipo IRQ en ARM, ¿por qué se resta 4 al valor del registro de enlace LR_irq?",
+      "options": [
+        "Por el desfase del pipeline de 3 etapas; LR_irq captura PC+4 (instrucción en decodificación) que no llegó a completarse.",
+        "Porque las instrucciones de excepción ocupan 8 bytes y se debe retroceder a la mitad.",
+        "Debido a que el salto a la IVT siempre añade una penalización de 4 bytes que debe compensarse en software."
+      ],
+      "correct": 0,
+      "hint": "Tiene que ver con la instrucción que estaba en decodificación cuando ocurrió el evento.",
+      "explanation": "Debido al pipeline de ARM, cuando se atiende la interrupción, la instrucción en fase de decodificación (ubicada en la dirección de la instrucción en ejecución + 4) es descartada. Para volver a ejecutarla al regresar, se debe restar 4 a LR_irq."
+    },
+    {
+      "q": "¿Qué tipo de excepción se genera cuando la CPU intenta buscar una instrucción en memoria y la dirección física es inválida o falla?",
+      "options": [
+        "Prefetch Abort",
+        "Data Abort",
+        "Undefined Instruction"
+      ],
+      "correct": 0,
+      "hint": "Ocurre en la primera etapa del pipeline al intentar traer la instrucción.",
+      "explanation": "La excepción Prefetch Abort se dispara cuando la unidad de memoria no puede recuperar la instrucción solicitada durante la fase de búsqueda (Fetch)."
+    },
+    {
+      "q": "¿Qué tipo de excepción de memoria se genera si ocurre un fallo al intentar leer o escribir un dato de la memoria RAM (como un error de alineación)?",
+      "options": [
+        "Data Abort",
+        "Undefined Instruction",
+        "Reset"
+      ],
+      "correct": 0,
+      "hint": "Es provocada por instrucciones de acceso a memoria como LDR o STR.",
+      "explanation": "La excepción Data Abort ocurre de forma síncrona cuando una instrucción de acceso a datos (LDR, STR, LDM, STM) intenta acceder a una dirección prohibida o no válida."
+    },
+    {
+      "q": "¿Qué acción realiza por hardware la instrucción máquina especial SUBS PC, LR, #4 al ejecutarse desde un modo de excepción?",
+      "options": [
+        "Resta 4 al registro LR y escribe el resultado en el registro PC, copiando además el SPSR al CPSR de manera atómica.",
+        "Resta 4 al PC y salta al vector de interrupciones del sistema operativo.",
+        "Limpia el bit T del registro CPSR para volver al modo Thumb."
+      ],
+      "correct": 0,
+      "hint": "Esta instrucción devuelve al procesador al modo de ejecución anterior (ej: User) restaurando estado y PC.",
+      "explanation": "SUBS PC, LR, #4 escribe el valor calculado en el PC y, al tener a PC como destino en modo excepción, el hardware copia de forma atómica el SPSR del modo actual al CPSR del sistema."
+    },
+    {
+      "q": "¿Qué circuito integrado o bloque interno de la arquitectura ARM gestiona el orden de prioridad y el envío de interrupciones físicas a la CPU?",
+      "options": [
+        "El controlador vectorizado de interrupciones (VIC o NVIC)",
+        "La unidad lógica aritmética (ALU)",
+        "La controladora de acceso directo a memoria (DMA)"
+      ],
+      "correct": 0,
+      "hint": "Normalmente es conocido como NVIC en los núcleos ARM Cortex-M.",
+      "explanation": "El controlador de interrupciones (VIC en ARM7 o NVIC en ARM Cortex) centraliza las líneas físicas de interrupción, maneja sus prioridades y señaliza a la CPU mediante las patillas IRQ/FIQ."
+    },
+    {
+      "q": "¿Qué significa que un sistema de interrupciones sea 'vectorizado'?",
+      "options": [
+        "Que cada periférico tiene una dirección física reservada en la IVT que apunta directamente a su rutina de atención.",
+        "Que utiliza arrays vectoriales de datos de coma flotante para calcular la prioridad en la CPU.",
+        "Que transmite la señal de interrupción secuencialmente por un bus serie de un solo cable."
+      ],
+      "correct": 0,
+      "hint": "El procesador sabe a dónde saltar sin necesidad de preguntar por software a todos los periféricos.",
+      "explanation": "En un sistema vectorizado, la CPU bifurca automáticamente a una posición de memoria física única (vector) asignada a ese tipo de evento, evitando el sondeo de software para descubrir la fuente."
+    },
+    {
+      "q": "¿Cómo se denomina al mecanismo en el cual la CPU interroga periódicamente en un bucle cerrado si un periférico tiene datos listos?",
+      "options": [
+        "Entrada/Salida por Polling (E/S por sondeo)",
+        "Entrada/Salida por Interrupciones",
+        "Entrada/Salida por DMA"
+      ],
+      "correct": 0,
+      "hint": "Es una técnica de espera activa muy ineficiente para la CPU.",
+      "explanation": "El Polling o E/S por sondeo implica que el procesador consulta de forma reiterada el registro de estado del periférico hasta que éste indica que está listo, consumiendo el 100% de la CPU durante la espera."
+    },
+    {
+      "q": "¿Qué bit del registro de estado CPSR controla la habilitación global de las interrupciones rápidas FIQ en ARM?",
+      "options": [
+        "El bit F (bit 6)",
+        "El bit I (bit 7)",
+        "El bit T (bit 5)"
+      ],
+      "correct": 0,
+      "hint": "Su nombre proviene de la inicial de 'Fast Interrupt'.",
+      "explanation": "El bit F (bit 6 del CPSR) actúa como máscara para las interrupciones rápidas FIQ. Si está a 1, las interrupciones FIQ quedan bloqueadas o deshabilitadas."
+    },
+    {
+      "q": "Si el bit I del CPSR está configurado a 1, ¿cómo reacciona la CPU ante una petición física en la línea IRQ?",
+      "options": [
+        "La CPU enmascara la interrupción, ignorando la petición y continuando la ejecución del programa.",
+        "La CPU atiende de inmediato la interrupción saltando al vector 0x00000018.",
+        "La CPU detiene su reloj (estado Halt) y entra en modo de bajo consumo."
+      ],
+      "correct": 0,
+      "hint": "El bit I a 1 significa que la máscara está activa (interrupciones deshabilitadas).",
+      "explanation": "Cuando el bit I es 1, las peticiones físicas en la línea IRQ están bloqueadas (enmascaradas) y la CPU no las atiende hasta que dicho bit se ponga a 0."
+    },
+    {
+      "q": "¿Qué modo de operación adopta el procesador ARM al ejecutar la instrucción SVC desde el modo Usuario?",
+      "options": [
+        "Modo Supervisor (SVC Mode)",
+        "Modo IRQ",
+        "Modo System"
+      ],
+      "correct": 0,
+      "hint": "Es el modo en el que se ejecuta la mayor parte del núcleo del sistema operativo.",
+      "explanation": "La instrucción SVC cambia el modo de la CPU a modo Supervisor (SVC Mode), permitiendo al sistema operativo tomar el control en un modo privilegiado."
+    },
+    {
+      "q": "¿Por qué el software de aplicación general del usuario se ejecuta en 'Modo Usuario' (User Mode) en lugar de un modo privilegiado?",
+      "options": [
+        "Para evitar que una aplicación pueda modificar registros críticos de control del procesador (como el CPSR) o deshabilitar interrupciones.",
+        "Porque el Modo Usuario ejecuta las operaciones aritméticas a doble velocidad.",
+        "Para permitir al compilador optimizar el uso de los registros R0 a R7."
+      ],
+      "correct": 0,
+      "hint": "Es una medida fundamental de seguridad de hardware en los sistemas operativos modernos.",
+      "explanation": "El Modo Usuario es no privilegiado; previene que las aplicaciones modifiquen la configuración de la CPU (como el estado de las interrupciones) o accedan a recursos protegidos del sistema directamente."
+    },
+    {
+      "q": "¿Qué causa de forma síncrona la excepción 'Undefined Instruction' (Instrucción no definida)?",
+      "options": [
+        "El intento de ejecutar una instrucción cuyo patrón de bits no corresponde a ningún código de operación válido del ISA de ARM.",
+        "La ejecución de una suma con desbordamiento aritmético (overflow).",
+        "Un error al intentar acceder a la pila desalineada."
+      ],
+      "correct": 0,
+      "hint": "Ocurre en la etapa de decodificación cuando la CPU no reconoce el comando.",
+      "explanation": "Si la unidad de control de la CPU lee una palabra de instrucción que no coincide con ninguna instrucción válida de la arquitectura, genera esta excepción síncrona."
+    },
+    {
+      "q": "¿Qué sucede con el registro físico del puntero de pila SP (R13) cuando el procesador cambia del modo User al modo IRQ?",
+      "options": [
+        "La CPU conmuta de forma automática al registro físico duplicado SP_irq, aislando la pila de usuario.",
+        "La CPU sigue utilizando el mismo registro físico SP, pero incrementado en 1024 bytes.",
+        "La pila se borra por hardware para evitar accesos indebidos de la ISR."
+      ],
+      "correct": 0,
+      "hint": "El procesador ARM implementa registros sombreados (banked) para aislar las pilas de cada modo.",
+      "explanation": "ARM implementa registros banked para el puntero de pila. Al entrar en modo IRQ, la CPU usa físicamente el registro SP_irq, lo que protege y aísla la pila del programa del modo usuario."
+    },
+    {
+      "q": "¿Cuáles de los modos de funcionamiento de la CPU ARM7 disponen de su propio SPSR dedicado?",
+      "options": [
+        "Los 5 modos privilegiados de excepción (FIQ, IRQ, Supervisor, Abort y Undefined).",
+        "Exclusivamente el modo FIQ por razones de velocidad.",
+        "Todos los modos de procesador sin excepción, incluido el Modo Usuario."
+      ],
+      "correct": 0,
+      "hint": "El modo User y el modo System no tienen SPSR ya que no se entra en ellos mediante una excepción de hardware.",
+      "explanation": "Únicamente los 5 modos de excepción disponen de registro SPSR físico dedicado para guardar el estado previo CPSR cuando se produce la bifurcación de hardware."
+    },
+    {
+      "q": "¿A qué dirección física salta el procesador ARM cuando ocurre una señal física de reinicio o encendido?",
+      "options": [
+        "0x00000000",
+        "0x00000004",
+        "0x0000001C"
+      ],
+      "correct": 0,
+      "hint": "Es el vector de Reset.",
+      "explanation": "El vector de Reset se encuentra en la primera posición física de la IVT: 0x00000000."
+    },
+    {
+      "q": "¿Cuál es la función del registro SPSR en cada uno de los modos privilegiados de excepción?",
+      "options": [
+        "Almacenar temporalmente el CPSR del modo anterior al producirse la excepción, permitiendo restaurarlo al retornar.",
+        "Almacenar la dirección de salto a la ISR en la memoria flash.",
+        "Contar de forma descendente el número de ciclos del temporizador del sistema."
+      ],
+      "correct": 0,
+      "hint": "SPSR significa 'Saved Program Status Register'.",
+      "explanation": "El SPSR guarda el estado del registro CPSR previo a la excepción. Al ejecutar la instrucción de retorno especial, el SPSR se vuelve a copiar al CPSR, devolviendo a la CPU a su estado original."
+    },
+    {
+      "q": "¿Por qué es obligatorio limpiar el bit de solicitud de interrupción en la controladora del periférico dentro de la ISR?",
+      "options": [
+        "Para evitar que la CPU atienda de nuevo inmediatamente la misma interrupción al habilitar de nuevo las interrupciones normales al retornar.",
+        "Para liberar el bus de datos y permitir transferencias de DMA.",
+        "Para que el periférico pueda apagarse y ahorrar energía."
+      ],
+      "correct": 0,
+      "hint": "Si no se apaga la señal física del periférico, la CPU verá la línea activa al salir de la ISR.",
+      "explanation": "Las interrupciones de hardware se activan por nivel o flanco. Si el periférico mantiene activa la línea física al habilitarse de nuevo las interrupciones en la CPU, esta volverá a saltar a la ISR indefinidamente."
+    },
+    {
+      "q": "¿Qué instrucción ARM típica se coloca en cada vector de la IVT para saltar a rutinas ISR situadas fuera de la IVT?",
+      "options": [
+        "LDR PC, [PC, #offset]",
+        "PUSH {PC}",
+        "BX LR"
+      ],
+      "correct": 0,
+      "hint": "Debe leer un puntero de 32 bits de memoria y escribirlo en el contador de programa.",
+      "explanation": "Dado que las entradas de la IVT miden solo 4 bytes, se suele usar la instrucción LDR PC, [PC, #offset] para cargar una dirección de 32 bits completa desde una tabla de saltos cercana y asignarla al PC."
+    },
+    {
+      "q": "¿Qué define el término 'latencia de interrupción' en sistemas de tiempo real?",
+      "options": [
+        "El retardo temporal desde que el periférico activa físicamente la línea de interrupción hasta que la CPU ejecuta la primera instrucción de la ISR.",
+        "El tiempo total empleado por la CPU en restaurar los registros en el epílogo.",
+        "El tiempo que tarda el bus en completar una transferencia de ráfaga de datos."
+      ],
+      "correct": 0,
+      "hint": "Es el tiempo que tarda la CPU en empezar a responder a la petición física.",
+      "explanation": "La latencia de interrupción es el tiempo transcurrido desde la petición física del hardware hasta el comienzo de la ejecución del manejador (ISR), clave en sistemas empotrados de tiempo real."
+    },
+    {
+      "q": "¿Qué diferencia sustancial hay entre la fase de hardware y la fase de software en el proceso de atención a una interrupción?",
+      "options": [
+        "La fase de hardware guarda el estado mínimo e ingresa al vector correspondiente de forma automática; la fase de software salva los registros restantes y ejecuta la lógica de E/S.",
+        "La fase de hardware es programada por el usuario y la de software está fija en la microarquitectura de la CPU.",
+        "No hay diferencia, ambos procesos se ejecutan en paralelo por hardware."
+      ],
+      "correct": 0,
+      "hint": "El hardware es la CPU modificando registros de control; el software es el código escrito en ensamblador o C.",
+      "explanation": "El hardware reacciona de forma automática salvando el CPSR en el SPSR, cargando el PC con el vector e inhabilitando interrupciones. El software de la ISR realiza el guardado del contexto restante y la lógica de negocio."
+    },
+    {
+      "q": "¿Cómo resuelve la CPU ARM la colisión cuando ocurren dos o más excepciones/interrupciones de forma simultánea?",
+      "options": [
+        "Mediante una jerarquía fija de prioridades implementada en el hardware de control de excepciones del procesador.",
+        "Ejecutándolas en paralelo gracias a la tecnología multihilo hipersegmentada.",
+        "Deteniendo la ejecución de la CPU y lanzando un fallo de sistema irrecuperable."
+      ],
+      "correct": 0,
+      "hint": "Cada excepción tiene un nivel de prioridad único (como el Reset con prioridad 1).",
+      "explanation": "La arquitectura ARM tiene definido un orden rígido de prioridades de excepción en hardware (ej. Reset es 1, Data Abort es 2, FIQ es 3, etc.). Si coinciden, se atiende primero la de mayor prioridad."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En el epílogo de una ISR de tipo IRQ, la instrucción `SUBS PC, LR, #____` se utiliza para retornar al programa principal restando 4 bytes del registro de enlace.",
+      "options": [
+        "4",
+        "8",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "El valor del operando inmediato debe compensar la fase de decodificación del pipeline.",
+      "explanation": "Se debe restar 4 bytes del registro de enlace (LR) mediante la instrucción SUBS PC, LR, #4 para re-ejecutar la instrucción que estaba en decodificación cuando ocurrió el evento."
+    },
+    {
+      "q": "Para desactivar las interrupciones IRQ de forma global en el procesador ARM, se debe poner a 1 el bit ____ del registro CPSR.",
+      "options": [
+        "I",
+        "F",
+        "T"
+      ],
+      "correct": 0,
+      "hint": "Es el bit número 7 del CPSR.",
+      "explanation": "El bit I del CPSR actúa como máscara de interrupción. Escribir un 1 en este bit enmascara (deshabilita) las peticiones IRQ."
+    },
+    {
+      "q": "Si la dirección de la instrucción interrumpida en ejecución física era 0x8000, el valor guardado por hardware en LR_irq al atender la interrupción será ____.",
+      "options": [
+        "0x8004",
+        "0x8008",
+        "0x800C"
+      ],
+      "correct": 0,
+      "hint": "Es la dirección de la instrucción que estaba en la etapa de decodificación (PC + 4).",
+      "explanation": "El hardware guarda PC + 4 en LR_irq (donde PC es la dirección de la instrucción en ejecución 0x8000), resultando en 0x8004."
+    },
+    {
+      "q": "La dirección física en la Tabla de Vectores de Interrupción donde se bifurca ante una excepción de instrucción no definida es ____.",
+      "options": [
+        "0x00000004",
+        "0x00000008",
+        "0x00000000"
+      ],
+      "correct": 0,
+      "hint": "Es la segunda posición de la IVT en direcciones bajas.",
+      "explanation": "La excepción Undefined Instruction tiene asignado el vector físico en la dirección 0x00000004."
+    },
+    {
+      "q": "El vector reservado para llamadas al sistema mediante la instrucción SVC está ubicado en la dirección de memoria ____.",
+      "options": [
+        "0x00000008",
+        "0x00000004",
+        "0x0000000C"
+      ],
+      "correct": 0,
+      "hint": "Corresponde al vector de Software Interrupt en la IVT.",
+      "explanation": "El vector físico para las llamadas al sistema SVC se encuentra en la dirección 0x00000008."
+    },
+    {
+      "q": "En la arquitectura ARM, el registro especial ____ almacena de forma automática el estado de CPSR antes de que ocurra el cambio de modo por la interrupción.",
+      "options": [
+        "SPSR",
+        "LR",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "Cada modo privilegiado tiene su propia versión de este registro guardado de estado.",
+      "explanation": "El hardware realiza la copia del CPSR al SPSR (Saved Program Status Register) del modo al que se conmuta al atender la excepción."
+    },
+    {
+      "q": "En el prólogo de una ISR, la instrucción `STMFD SP!, {R0-R3, ____}` guarda los registros de trabajo y la dirección de retorno en la pila.",
+      "options": [
+        "LR",
+        "PC",
+        "SPSR"
+      ],
+      "correct": 0,
+      "hint": "Es el registro R14 que contiene la dirección de retorno.",
+      "explanation": "Se debe guardar el registro de enlace (LR) en la pila junto con los registros de trabajo si se van a realizar llamadas a subrutinas dentro de la ISR."
+    },
+    {
+      "q": "Para retornar de una rutina de interrupción restaurando el estado original de la CPU, la instrucción `LDMFD SP!, {R0-R3, ____}^` restaura los registros y copia el SPSR a CPSR.",
+      "options": [
+        "PC",
+        "LR",
+        "CPSR"
+      ],
+      "correct": 0,
+      "hint": "Carga la dirección de retorno directamente en el contador de programa.",
+      "explanation": "La instrucción LDMFD con el sufijo '^' cargando R15 (PC) copia automáticamente el SPSR al CPSR, restaurando el modo y banderas anteriores."
+    },
+    {
+      "q": "Cuando ocurre una interrupción IRQ externa, el procesador cambia automáticamente su modo de operación a ____.",
+      "options": [
+        "MODO_IRQ",
+        "MODO_SUPERVISOR",
+        "MODO_USER"
+      ],
+      "correct": 0,
+      "hint": "Se escribe el valor binario 10010 en los bits de control del CPSR.",
+      "explanation": "La CPU conmuta automáticamente al Modo IRQ para gestionar la petición mediante el hardware correspondiente."
+    },
+    {
+      "q": "En la arquitectura ARM, las interrupciones asíncronas son causadas por eventos de ____.",
+      "options": [
+        "hardware externo",
+        "software interno",
+        "instrucciones inválidas"
+      ],
+      "correct": 0,
+      "hint": "Son ajenas a la secuencia de instrucciones que corre la CPU.",
+      "explanation": "Las interrupciones asíncronas son causadas por periféricos o señales de hardware externo (como temporizadores o puertos de red) ajenas a la ejecución lógica interna."
+    },
+    {
+      "q": "La dirección física de memoria reservada para el vector de la excepción Data Abort en ARM es ____.",
+      "options": [
+        "0x00000010",
+        "0x0000000C",
+        "0x00000014"
+      ],
+      "correct": 0,
+      "hint": "Está situada justo después del vector de Prefetch Abort (0x0C).",
+      "explanation": "El vector de la excepción Data Abort se localiza en la dirección física de memoria 0x00000010."
+    },
+    {
+      "q": "Para deshabilitar tanto las interrupciones normales (IRQ) como las rápidas (FIQ), se deben poner a 1 los bits I y ____ del registro CPSR.",
+      "options": [
+        "F",
+        "T",
+        "Z"
+      ],
+      "correct": 0,
+      "hint": "Es el bit de máscara de las interrupciones rápidas.",
+      "explanation": "El bit F (bit 6 del CPSR) controla el enmascaramiento de las interrupciones rápidas FIQ. Al poner a 1 ambos bits (I y F), se enmascaran IRQ y FIQ."
+    },
+    {
+      "q": "En el modo FIQ, el procesador dispone de registros duplicados ('shadow registers') de trabajo que van desde ____ hasta R14_fiq.",
+      "options": [
+        "R8_fiq",
+        "R4_fiq",
+        "R0_fiq"
+      ],
+      "correct": 0,
+      "hint": "Son 7 registros de propósito general dedicados.",
+      "explanation": "Los registros shadow específicos de FIQ abarcan desde R8_fiq hasta R14_fiq, permitiendo no tener que salvar R8-R12 en la pila."
+    },
+    {
+      "q": "Dado el pipeline de 3 etapas de ARM, el valor que el hardware escribe en el registro LR_irq es igual a ____.",
+      "options": [
+        "PC + 4",
+        "PC + 8",
+        "PC"
+      ],
+      "correct": 0,
+      "hint": "PC en este contexto hace referencia a la dirección de la instrucción actual en ejecución.",
+      "explanation": "El hardware almacena la dirección de la instrucción en fase de decodificación (que es Dirección + 4) en el registro LR_irq."
+    },
+    {
+      "q": "El vector correspondiente a la excepción Prefetch Abort se localiza en la dirección ____ de la IVT.",
+      "options": [
+        "0x0000000C",
+        "0x00000010",
+        "0x00000008"
+      ],
+      "correct": 0,
+      "hint": "Está justo antes de Data Abort.",
+      "explanation": "El vector para Prefetch Abort está ubicado en la dirección física 0x0000000C."
+    },
+    {
+      "q": "Si el bit ____ del CPSR está a 1, la CPU no atenderá ninguna petición física de interrupción rápida FIQ.",
+      "options": [
+        "F",
+        "I",
+        "V"
+      ],
+      "correct": 0,
+      "hint": "Es la máscara asociada a las interrupciones rápidas.",
+      "explanation": "El bit F del CPSR enmascara las interrupciones rápidas FIQ cuando se encuentra activo (puesto a 1)."
+    },
+    {
+      "q": "Una instrucción `SVC #____` típica se ejecuta en modo de usuario para solicitar un servicio de Entrada/Salida al sistema operativo.",
+      "options": [
+        "inmediato (operando)",
+        "registro",
+        "desplazamiento"
+      ],
+      "correct": 0,
+      "hint": "Es un número codificado dentro de los 24 bits inferiores de la instrucción.",
+      "explanation": "La instrucción SVC codifica un valor inmediato (operando) que indica al sistema operativo el servicio solicitado por la aplicación."
+    },
+    {
+      "q": "Para el retorno de una excepción de instrucción no definida, se suele utilizar `MOVS PC, LR`, lo que significa que el desplazamiento restado al LR es ____.",
+      "options": [
+        "0",
+        "4",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "Queremos volver a la instrucción posterior a la que causó el error sin re-ejecutar la inválida.",
+      "explanation": "Como la instrucción era indefinida e inválida, se desea saltar directamente a la siguiente instrucción del flujo sin restar nada a LR_und (desplazamiento 0)."
+    },
+    {
+      "q": "Al escribir una ISR, el olvido de restaurar los registros guardados en la pila corromperá el registro SP (y los de trabajo) del programa principal, quedando ____.",
+      "options": [
+        "desalineados o corruptos",
+        "intactos",
+        "inicializados a cero"
+      ],
+      "correct": 0,
+      "hint": "La pila debe estar perfectamente balanceada al salir de la ISR.",
+      "explanation": "Si omitimos restaurar los registros en el epílogo, el puntero de pila SP del modo quedará con un valor desalineado y los registros de la aplicación principal quedarán corruptos con los valores de la ISR."
+    },
+    {
+      "q": "El mecanismo de Entrada/Salida en el que la CPU no espera de forma activa sino que es notificada se conoce como Entrada/Salida por ____.",
+      "options": [
+        "Interrupciones",
+        "Polling",
+        "DMA directo"
+      ],
+      "correct": 0,
+      "hint": "Es el tema central de esta lección y mejora la eficiencia drásticamente.",
+      "explanation": "La Entrada/Salida por Interrupciones permite a los periféricos notificar a la CPU cuando ocurre un evento relevante, eliminando la espera activa de la CPU."
+    },
+    {
+      "q": "¿Qué información es resguardada automáticamente por el hardware de la CPU ARM al recibir una interrupción física IRQ?",
+      "options": [
+        "El valor de CPSR en SPSR_irq.",
+        "El PC de retorno corregido en LR_irq y el cambio al modo IRQ.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El hardware se encarga de guardar el estado mínimo e indispensable para poder restaurarlo después.",
+      "explanation": "El hardware de forma atómica copia CPSR a SPSR, guarda el valor de retorno en LR_irq, cambia los bits de modo en CPSR y deshabilita nuevas interrupciones (I=1)."
+    },
+    {
+      "q": "¿Qué pasos realiza el software dentro del prólogo de una rutina de servicio a la interrupción (ISR)?",
+      "options": [
+        "Guardar los registros de trabajo en la pila de memoria (Stack).",
+        "Guardar el registro de enlace LR en caso de soportar interrupciones anidadas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El prólogo prepara el procesador para ejecutar la lógica de la ISR de forma segura.",
+      "explanation": "El prólogo de la ISR debe salvaguardar en la pila todos los registros que planee usar (R0-R3, R12) y el LR si hubiera anidamiento."
+    },
+    {
+      "q": "¿Cuáles son causas comunes que provocan una excepción síncrona en la arquitectura ARM?",
+      "options": [
+        "La ejecución de la instrucción SVC para invocar un servicio del S.O.",
+        "El intento de ejecutar un código de operación no definido en la CPU.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda que las excepciones síncronas se originan internamente por la ejecución de instrucciones.",
+      "explanation": "Tanto las llamadas al sistema (SVC) como los códigos de operación inválidos (Undefined Instruction) e incluso los fallos de acceso a datos (Data Abort) generan excepciones síncronas."
+    },
+    {
+      "q": "¿Cuáles son características del modo de ejecución de interrupción rápida (FIQ) en ARM?",
+      "options": [
+        "Su vector está en la dirección 0x0000001C, la última de la tabla IVT.",
+        "Dispone de registros de sombreado (shadow) de R8_fiq a R14_fiq.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son las optimizaciones de hardware que le otorgan su velocidad característica.",
+      "explanation": "FIQ es rápido porque la ISR puede ir directamente desde 0x1C (sin saltos adicionales) y posee 7 registros propios (R8-R14) que no requieren ser salvados en la pila."
+    },
+    {
+      "q": "¿Qué cambios de estado ocurren en la CPU de forma atómica por hardware al entrar a un modo de excepción?",
+      "options": [
+        "El CPSR se copia al SPSR del modo correspondiente.",
+        "El modo de ejecución del procesador cambia en los bits de control del CPSR y se deshabilitan interrupciones.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El hardware realiza la transición segura antes de que se ejecute la primera línea de la ISR.",
+      "explanation": "El hardware de la CPU se encarga de guardar el CPSR en SPSR, actualizar los bits de modo del CPSR, configurar las máscaras I/F y desviar el PC al vector correspondiente de la IVT."
+    },
+    {
+      "q": "¿Qué registros tienen versiones físicas duplicadas (bancos de registros específicos) en el modo IRQ de ARM?",
+      "options": [
+        "El registro SP_irq (R13_irq) y el registro LR_irq (R14_irq).",
+        "El registro de estado guardado SPSR_irq.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Estos registros permiten aislar el contexto de estado y de pila del modo IRQ.",
+      "explanation": "El modo IRQ tiene dedicados físicamente SP_irq, LR_irq y SPSR_irq, evitando interferencias con el modo de ejecución del programa de usuario."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son vectores válidos en la Tabla de Vectores de Interrupción de ARM?",
+      "options": [
+        "El vector de Reset en la dirección 0x00000000 y el de Undefined Instruction en 0x00000004.",
+        "El vector de IRQ en la dirección 0x00000018 y el de FIQ en 0x0000001C.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revisa el mapa de memoria de la IVT desde 0x0 hasta 0x1C.",
+      "explanation": "La IVT de ARM tiene definidos los vectores en 0x00 (Reset), 0x04 (Undefined), 0x08 (SVC), 0x0C (Prefetch Abort), 0x10 (Data Abort), 0x18 (IRQ) y 0x1C (FIQ)."
+    },
+    {
+      "q": "Al finalizar una ISR, ¿qué ocurre si el software olvida limpiar el flag de solicitud del periférico que causó la interrupción?",
+      "options": [
+        "La señal física de interrupción al procesador permanecerá activa.",
+        "La CPU volverá a saltar a la ISR inmediatamente tras restaurar el CPSR al retornar.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Es uno de los bugs más comunes y genera un bloqueo del sistema en un bucle infinito de ISR.",
+      "explanation": "Si no se apaga el bit de interrupción en el periférico, la CPU detecta la línea física activa justo al habilitar de nuevo las interrupciones al salir de la ISR, volviendo a saltar inmediatamente de forma infinita."
+    },
+    {
+      "q": "¿Qué registros deben salvarse en la pila durante el prólogo de una ISR si van a ser modificados en su cuerpo?",
+      "options": [
+        "Los registros de trabajo de propósito general no sombreados en el modo IRQ (R0 a R3 y R12).",
+        "El registro de enlace LR_irq en caso de que la ISR permita anidamiento de otras interrupciones.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Debemos restaurar exactamente el mismo entorno que tenía el programa antes de ser interrumpido.",
+      "explanation": "Para evitar alterar el flujo del programa principal, cualquier registro de trabajo de la CPU no sombreado (R0-R3, R12) que se use en la ISR debe preservarse en la pila, así como el LR si se va a sobrescribir."
+    },
+    {
+      "q": "¿Qué ventajas ofrece el uso de interrupciones en comparación con el polling para la gestión de Entrada/Salida?",
+      "options": [
+        "Mayor eficiencia global de la CPU al poder ejecutar tareas útiles mientras el periférico procesa.",
+        "Eliminación del bucle ineficiente de espera activa de la CPU.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piensa en el tiempo de CPU desperdiciado en un bucle cerrado vs la notificación asíncrona.",
+      "explanation": "El mecanismo de interrupciones evita la espera activa (polling) permitiendo a la CPU dedicarse a otras tareas útiles de fondo, incrementando significativamente la eficiencia y rendimiento del sistema."
+    },
+    {
+      "q": "Si ejecutamos la instrucción `MOV PC, LR` para retornar de una interrupción IRQ, ¿cuál será el comportamiento del procesador?",
+      "options": [
+        "Retornará correctamente a la instrucción que estaba ejecutándose.",
+        "Saltará al vector de reset reiniciando el sistema por hardware.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El registro LR_irq almacena PC+4 del modo User. MOV PC, LR no decrementa y no restaura CPSR.",
+      "explanation": "La instrucción MOV PC, LR saltaría a LR (que es PC+4, saltándose la instrucción que estaba en decodificación) y además no copiaría el SPSR al CPSR. La forma correcta es SUBS PC, LR, #4."
+    },
+    {
+      "q": "¿Qué dirección física de la IVT corresponde a la excepción de división por cero por hardware en un procesador ARM7TDMI estándar?",
+      "options": [
+        "0x00000020",
+        "0x00000008",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El procesador ARM7TDMI no tiene instrucciones de división por hardware ni vector asociado.",
+      "explanation": "La arquitectura ARM7TDMI no implementa división por hardware ni dispone de un vector de división por cero en su IVT física. El compilador o el S.O. gestionan esta división mediante subrutinas de software."
+    },
+    {
+      "q": "¿Qué registro de propósito general del banco (R0-R15) está prohibido leer o modificar bajo cualquier circunstancia dentro de una ISR?",
+      "options": [
+        "El registro R15 (PC).",
+        "El registro R13 (SP).",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "En ARM ensamblador no hay restricciones de hardware para leer o escribir en registros generales, aunque debe hacerse con cuidado.",
+      "explanation": "No existen restricciones físicas que impidan acceder a ningún registro en modo privilegiado; sin embargo, modificar registros como PC o SP sin el debido control provocará fallos en el sistema."
+    },
+    {
+      "q": "Si el CPSR tiene el valor hexadecimal 0x00000010 (Modo User, interrupciones habilitadas) y ocurre una interrupción IRQ, ¿cuál será el valor del bit I (IRQ disable) en el CPSR del modo IRQ al comenzar la ISR?",
+      "options": [
+        "0 (interrupciones IRQ habilitadas).",
+        "2 (interrupciones IRQ en modo anidado).",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El bit I es un valor lógico binario (0 o 1).",
+      "explanation": "El hardware pone automáticamente a 1 el bit I en el CPSR al entrar a modo IRQ para deshabilitar temporalmente nuevas interrupciones IRQ. Dado que 1 no figura en las opciones, la correcta es ninguna de las anteriores."
+    },
+    {
+      "q": "¿Cuál es el desplazamiento inmediato que se le resta a LR para retornar de una excepción de tipo Data Abort en ARM?",
+      "options": [
+        "0",
+        "4",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Queremos re-ejecutar la instrucción que falló, y LR contiene el valor del PC de instrucción + 8.",
+      "explanation": "El retorno de Data Abort se realiza mediante SUBS PC, LR, #8 ya que se debe re-ejecutar la instrucción que provocó el fallo de acceso a memoria. Al ser el offset 8, la respuesta correcta es ninguna de las anteriores."
+    },
+    {
+      "q": "¿Qué instrucción en ensamblador ARM se utiliza para conmutar directamente al modo físico IRQ desde el código de aplicación en modo Usuario?",
+      "options": [
+        "MSR CPSR_c, #0x12",
+        "SVC #0x12",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Las aplicaciones en modo Usuario no pueden modificar los bits de control del CPSR.",
+      "explanation": "Un programa ejecutándose en Modo Usuario carece de privilegios para alterar el CPSR directamente mediante MSR. Tampoco SVC conmuta a modo IRQ (conmuta a Supervisor). Ninguna es correcta."
+    },
+    {
+      "q": "En una CPU ARM con pipeline de 3 etapas, si la instrucción actual en ejecución está en la dirección 0x1000, ¿cuál es el valor del registro PC (R15) que lee una instrucción en esa misma dirección?",
+      "options": [
+        "0x1000",
+        "0x1004",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Debido al pipeline, el PC físico siempre apunta 2 instrucciones por delante de la actual.",
+      "explanation": "El PC físico apunta a la instrucción que se está buscando (Fetch), la cual está a Dirección + 8 bytes (0x1008). Como no está en las opciones, es Ninguna de las anteriores."
+    },
+    {
+      "q": "¿Qué señal de hardware externa se conecta al procesador ARM para notificar una excepción de instrucción no definida (Undefined Instruction)?",
+      "options": [
+        "La línea física IRQ.",
+        "La línea física FIQ.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Esta excepción es síncrona y de origen interno.",
+      "explanation": "La excepción de instrucción no definida es síncrona e interna, originada por la ALU/decodificador de la CPU al leer un código binario inválido, no por señales externas. Ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "Si un periférico requiere la transferencia de millones de bytes por segundo a la memoria RAM, ¿cuál es el mecanismo recomendado que no sobrecarga la CPU con interrupciones?",
+      "options": [
+        "Entrada/Salida por Polling rápido.",
+        "Paso de datos a través de la pila de software de usuario.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Este mecanismo realiza transferencias directas de memoria sin participación continua de la CPU.",
+      "explanation": "El mecanismo recomendado para altas tasas de transferencia es el Acceso Directo a Memoria (DMA). Como no está en las opciones, la correcta es ninguna de las anteriores."
+    },
+    {
+      "q": "Si el bit F (FIQ Mask) del registro CPSR se encuentra configurado con el valor 1, ¿qué tipo de interrupción atenderá de inmediato el procesador?",
+      "options": [
+        "Las interrupciones rápidas FIQ.",
+        "Las interrupciones normales IRQ.",
+        "Ninguna de las anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El bit F a 1 significa que la máscara está activa y las interrupciones FIQ están desactivadas.",
+      "explanation": "El bit F a 1 bloquea las interrupciones rápidas FIQ. El bit F no afecta a las interrupciones IRQ de forma directa (las cuales dependen del bit I). Por tanto, no se atiende de inmediato ninguna de las dos opciones listadas. Ninguna de las anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Pipeline y Dirección de Retorno de IRQ",
+      "context": "Un procesador ARM de 3 etapas ejecuta instrucciones desde la dirección 0x00008000. Se produce una interrupción IRQ externa mientras se ejecuta la instrucción en 0x00008010 (decimal 32784).",
+      "parts": [
+        {
+          "id": "1a",
+          "label": "a",
+          "question": "¿Cuál es la dirección de memoria (en base decimal) de la instrucción que se encuentra en la etapa de búsqueda (Fetch) en el ciclo en que se detecta la interrupción?",
+          "correctValue": 32792,
+          "tolerance": 0,
+          "explanation": "En un pipeline de 3 etapas (Fetch, Decode, Execute), si la instrucción en execute está en $0x8010$, la instrucción en decode está en $0x8014$ y la de fetch en $0x8018$. En decimal: $0x8018 = 32792$."
+        },
+        {
+          "id": "1b",
+          "label": "b",
+          "question": "¿Qué dirección de memoria (en base decimal) se almacena automáticamente por hardware en el registro LR_irq?",
+          "correctValue": 32788,
+          "tolerance": 0,
+          "explanation": "El hardware de ARM guarda la dirección $PC + 4$ (donde PC es la dirección de la instrucción en ejecución, $0x8000 + 16 = 0x8010$), lo que equivale a la dirección de la instrucción en decodificación: $0x8014 = 32788$."
+        },
+        {
+          "id": "1c",
+          "label": "c",
+          "question": "¿Qué desplazamiento (offset, en decimal) se debe restar a LR_irq en la instrucción de retorno para regresar a la instrucción que fue interrumpida?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Para retornar a la instrucción en $0x8010$ desde la dirección guardada en LR ($0x8014$), se debe restar $4$ bytes: $0x8014 - 4 = 0x8010$."
+        },
+        {
+          "id": "1d",
+          "label": "d",
+          "question": "¿Cuál es la dirección física (en decimal) en la IVT a la que salta el PC automáticamente tras detectarse la interrupción IRQ?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El vector físico de la interrupción IRQ es $0x00000018$. En decimal: $24$."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Tabla de Vectores de Interrupción (IVT) y Direccionamiento",
+      "context": "Analizamos las posiciones y tamaños físicos de los vectores en la IVT estándar de ARM en direcciones bajas.",
+      "parts": [
+        {
+          "id": "2a",
+          "label": "a",
+          "question": "¿Cuántos bytes de memoria ocupa la IVT completa desde el vector de Reset hasta el vector de FIQ inclusive (es decir, el rango de direcciones físicas reservadas para la IVT completa)?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "La IVT empieza en $0x00$ y el último vector (FIQ) está en $0x1C$. Con un tamaño de entrada de $4$ bytes, la IVT va de $0x00$ a $0x1F$, ocupando un total de $32$ bytes."
+        },
+        {
+          "id": "2b",
+          "label": "b",
+          "question": "¿Qué dirección (en decimal) corresponde al vector de la excepción de instrucción no definida (Undefined Instruction)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El vector de instrucción no definida está en la dirección $0x00000004$, que equivale a $4$ en decimal."
+        },
+        {
+          "id": "2c",
+          "label": "c",
+          "question": "¿Qué dirección (en decimal) corresponde al vector de la excepción Data Abort?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El vector de Data Abort está en la dirección $0x00000010$, que es $16$ en decimal."
+        },
+        {
+          "id": "2d",
+          "label": "d",
+          "question": "¿Cuál es la dirección física (en decimal) asignada al vector SVC (Software Interrupt)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El vector SVC está en la dirección $0x00000008$, es decir, $8$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Banco de Registros Sombreados en Modos de Excepción",
+      "context": "El procesador ARM implementa registros dedicados (sombreados o banked) para evitar guardar el contexto en la pila durante ciertas excepciones.",
+      "parts": [
+        {
+          "id": "3a",
+          "label": "a",
+          "question": "¿Cuántos registros de propósito general (R0-R14) tienen una versión física dedicada y exclusiva para el modo de interrupción rápida FIQ?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "FIQ tiene sus propios registros dedicados para $R8\\_fiq$ a $R14\\_fiq$, lo que suma un total de $7$ registros."
+        },
+        {
+          "id": "3b",
+          "label": "b",
+          "question": "¿Cuántos registros de propósito general (R0-R14) tienen una versión física dedicada exclusiva para el modo de interrupción estándar IRQ?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "IRQ solo dispone de $SP\\_irq$ ($R13\\_irq$) y $LR\\_irq$ ($R14\\_irq$) como registros dedicados. Por lo tanto, son $2$ registros."
+        },
+        {
+          "id": "3c",
+          "label": "c",
+          "question": "¿Cuántos registros físicos de estado guardado SPSR existen en total en la arquitectura ARM (uno por cada modo privilegiado de excepción)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Existen $5$ modos de excepción con privilegios: FIQ, IRQ, SVC, ABT y UND. Cada uno tiene un registro $SPSR$ propio, por lo que el total es $5$."
+        },
+        {
+          "id": "3d",
+          "label": "d",
+          "question": "¿Qué número de registro de enlace (LR) comparten los modos de operación Usuario y System?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "Tanto el modo Usuario como el modo System utilizan el mismo registro de enlace general $R14$ ($LR$)."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Cálculo de Eficiencia: Polling vs Interrupciones",
+      "context": "Un procesador de 100 MHz gestiona un puerto de Entrada/Salida. El bucle de polling tarda 10 ciclos por consulta. El periférico produce un nuevo dato cada 20000 ciclos.",
+      "parts": [
+        {
+          "id": "4a",
+          "label": "a",
+          "question": "¿Cuántas consultas (iteraciones del bucle) realiza la CPU por segundo mediante polling si el puerto no tiene datos disponibles?",
+          "correctValue": 10000000,
+          "tolerance": 0,
+          "explanation": "Con $100\\text{ MHz} = 10^8$ ciclos/segundo, y tardando $10$ ciclos por iteración, realiza $10^8 / 10 = 10^7 = 10.000.000$ consultas/segundo."
+        },
+        {
+          "id": "4b",
+          "label": "b",
+          "question": "¿Cuántas veces consulta el bucle el puerto antes de que un dato nuevo esté listo?",
+          "correctValue": 2000,
+          "tolerance": 0,
+          "explanation": "Si el dato se produce cada $20000$ ciclos y cada consulta tarda $10$ ciclos, la CPU consulta $20000 / 10 = 2000$ veces."
+        },
+        {
+          "id": "4c",
+          "label": "c",
+          "question": "Si se cambia a interrupciones y la ISR tarda 50 ciclos en total por cada dato nuevo, ¿qué porcentaje (%) de la CPU consume la atención al periférico?",
+          "correctValue": 0.25,
+          "tolerance": 0.01,
+          "explanation": "En un periodo de $20000$ ciclos, solo se consumen $50$ ciclos. El consumo es $(50 / 20000) \\times 100 = 0.25\\%$."
+        },
+        {
+          "id": "4d",
+          "label": "d",
+          "question": "¿Cuántos ciclos de CPU se ahorran en total por cada dato transferido gracias a las interrupciones en este escenario?",
+          "correctValue": 19950,
+          "tolerance": 0,
+          "explanation": "Con polling se consumen $20000$ ciclos por periodo. Con interrupciones, solo $50$. El ahorro neto es $20000 - 50 = 19950$ ciclos."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Codificación y Desplazamiento de la Instrucción B (Branch)",
+      "context": "En el vector de IRQ (0x00000018) se escribe una instrucción de salto directo `B 0x00009000` para bifurcar a la ISR.",
+      "parts": [
+        {
+          "id": "5a",
+          "label": "a",
+          "question": "¿Cuál es el valor (en base decimal) del desplazamiento en palabras de 32 bits que se codifica en la instrucción de salto?",
+          "correctValue": 9208,
+          "tolerance": 0,
+          "explanation": "El PC real durante la ejecución de la instrucción en $0x18$ es $0x18 + 8 = 0x20$. El salto va a $0x9000$. El offset en bytes es $0x9000 - 0x20 = 0x8FE0$. En palabras es $0x8FE0 / 4 = 0x23F8 = 9208$."
+        },
+        {
+          "id": "5b",
+          "label": "b",
+          "question": "¿Cuántos bits de la instrucción de salto B de ARM se reservan para codificar el campo del offset firmado?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "La instrucción `B` en ARM de 32 bits reserva los 24 bits de menor peso para codificar el offset firmado en palabras."
+        },
+        {
+          "id": "5c",
+          "label": "c",
+          "question": "¿Cuál es el rango máximo de direccionamiento relativo en megabytes (MB) hacia adelante que permite este campo de 24 bits?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "Un inmediato de 24 bits firmado representa $[-2^{23}, 2^{23}-1]$ palabras. Escalarlo por 4 bytes da un rango de $[-32\\text{ MB}, +32\\text{ MB}]$. Hacia adelante son $32\\text{ MB}$."
+        },
+        {
+          "id": "5d",
+          "label": "d",
+          "question": "¿Cuál es el valor decimal del desplazamiento en bytes si quisiéramos realizar un salto inverso desde el vector IRQ (0x18) al vector Reset (0x00)?",
+          "correctValue": -32,
+          "tolerance": 0,
+          "explanation": "El PC al ejecutar la instrucción en $0x18$ es $0x18 + 8 = 0x20$. El destino es $0x00$. Offset en bytes = $0x00 - 0x20 = -32$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Máscaras y Bits de Control del CPSR",
+      "context": "Se programan las máscaras de interrupción en el registro CPSR del procesador ARM.",
+      "parts": [
+        {
+          "id": "6a",
+          "label": "a",
+          "question": "¿En qué índice de bit (0 a 31) se encuentra la bandera I (IRQ disable) en el CPSR?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El bit de máscara de IRQ (I) se sitúa en la posición de bit $7$ del registro CPSR."
+        },
+        {
+          "id": "6b",
+          "label": "b",
+          "question": "¿En qué índice de bit (0 a 31) se encuentra la bandera F (FIQ disable) en el CPSR?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El bit de máscara de FIQ (F) se sitúa en la posición de bit $6$ del registro CPSR."
+        },
+        {
+          "id": "6c",
+          "label": "c",
+          "question": "¿Qué valor decimal tiene la máscara binaria de 8 bits necesaria para poner a 1 únicamente el bit I en el CPSR mediante una operación OR?",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "El bit 7 puesto a 1 equivale a $2^7 = 128$ en decimal."
+        },
+        {
+          "id": "6d",
+          "label": "d",
+          "question": "¿Qué valor decimal tiene la máscara binaria de 8 bits necesaria para poner a 1 únicamente el bit F en el CPSR?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "El bit 6 puesto a 1 equivale a $2^6 = 64$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Consumo de Pila en el Prólogo de la ISR",
+      "context": "Al entrar en una ISR de tipo IRQ, la primera instrucción ejecutada es `STMFD SP!, {R0-R3, R12, LR}` para proteger el contexto del programa interrumpido.",
+      "parts": [
+        {
+          "id": "7a",
+          "label": "a",
+          "question": "¿Cuántos bytes de memoria RAM se restan del puntero SP_irq tras la ejecución de esta instrucción?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "Se guardan 6 registros (R0, R1, R2, R3, R12, LR). Dado que cada registro ocupa 4 bytes, el puntero SP decrementa en $6 \\times 4 = 24$ bytes."
+        },
+        {
+          "id": "7b",
+          "label": "b",
+          "question": "Si el valor inicial de SP_irq era 0x00080000 (decimal 524288), ¿cuál es el nuevo valor del puntero de pila (en decimal) tras la instrucción?",
+          "correctValue": 524264,
+          "tolerance": 0,
+          "explanation": "El nuevo SP es $524288 - 24 = 524264$ (que es $0x7FFE8$ en hex)."
+        },
+        {
+          "id": "7c",
+          "label": "c",
+          "question": "¿Cuántos accesos a memoria de escritura se realizan en el bus de datos para almacenar el contexto en esta operación?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Cada registro guardado requiere un acceso de escritura de 32 bits a la memoria RAM, haciendo un total de 6 accesos."
+        },
+        {
+          "id": "7d",
+          "label": "d",
+          "question": "¿Cuántos bytes ocuparía en total en la pila si además fuera necesario salvaguardar los registros de trabajo R4 y R5?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "Con R4 y R5 serían 8 registros. El espacio total sería de $8 \\times 4 = 32$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Retorno de Excepciones de Aborto de Memoria",
+      "context": "Una instrucción que intenta realizar un acceso a datos en la dirección 0x0000A004 genera un Data Abort.",
+      "parts": [
+        {
+          "id": "8a",
+          "label": "a",
+          "question": "¿Cuál es la dirección de retorno (en base decimal) escrita en LR_abt si la dirección de la instrucción abortada es 0x0000A004 (40964 en decimal)?",
+          "correctValue": 40972,
+          "tolerance": 0,
+          "explanation": "Para Data Abort, el registro LR_abt se carga con la dirección de la instrucción abortada + 8, es decir, $0xA004 + 8 = 0xA00C = 40972$ en decimal."
+        },
+        {
+          "id": "8b",
+          "label": "b",
+          "question": "¿Qué valor decimal se debe restar a LR_abt al retornar para volver a ejecutar la instrucción que provocó la excepción tras solucionar el fallo?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Para re-ejecutar la instrucción en $0xA004$, se debe hacer $LR\\_abt - 8$, por lo que el desplazamiento es 8."
+        },
+        {
+          "id": "8c",
+          "label": "c",
+          "question": "Si en su lugar se produce una excepción Prefetch Abort al intentar buscar la instrucción en la dirección 0x0000A004, ¿qué dirección en decimal se guarda en LR_abt?",
+          "correctValue": 40968,
+          "tolerance": 0,
+          "explanation": "Para Prefetch Abort, LR se carga con la dirección de la instrucción + 4, es decir, $0xA004 + 4 = 0xA008 = 40968$ en decimal."
+        },
+        {
+          "id": "8d",
+          "label": "d",
+          "question": "¿Qué valor decimal se debe restar a LR en el retorno de Prefetch Abort para reintentar la ejecución de la instrucción corregida?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se debe restar 4 bytes a LR para regresar a $0xA004$ ($0xA008 - 4 = 0xA004$)."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Llamadas al Sistema mediante SVC",
+      "context": "Un programa de usuario ejecuta la instrucción de llamada al sistema `SVC #15` ubicada en la dirección 0x00004000 (16384 en decimal).",
+      "parts": [
+        {
+          "id": "9a",
+          "label": "a",
+          "question": "¿Qué código numérico inmediato está codificado en la instrucción para identificar el servicio solicitado?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "El operando inmediato del SVC es 15."
+        },
+        {
+          "id": "9b",
+          "label": "b",
+          "question": "¿Cuál es la dirección de retorno (en decimal) escrita en LR_svc al entrar en la excepción?",
+          "correctValue": 16388,
+          "tolerance": 0,
+          "explanation": "Para SVC, el hardware almacena en LR_svc la dirección de la instrucción SVC + 4, que es $0x4000 + 4 = 0x4004 = 16388$ en decimal."
+        },
+        {
+          "id": "9c",
+          "label": "c",
+          "question": "¿Qué desplazamiento (offset, en decimal) se debe restar a LR_svc para retornar a la instrucción siguiente después de SVC?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que el programa no debe re-ejecutar el SVC sino continuar con la siguiente instrucción (que ya está en $0x4004$), el offset restado es 0."
+        },
+        {
+          "id": "9d",
+          "label": "d",
+          "question": "¿Cuántos bits de la instrucción de 32 bits de SVC están reservados en la arquitectura ARM7 para codificar el inmediato de la llamada?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "La codificación de SVC destina los 24 bits inferiores de la instrucción para el número identificador del servicio."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Prioridades Fijas de Excepción por Hardware",
+      "context": "La arquitectura ARM implementa una prioridad por hardware para resolver peticiones concurrentes de excepciones.",
+      "parts": [
+        {
+          "id": "10a",
+          "label": "a",
+          "question": "¿Qué nivel de prioridad (1 para la máxima, mayor número menor prioridad) tiene asignado el Reset?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El Reset tiene prioridad de hardware 1, la máxima de la CPU."
+        },
+        {
+          "id": "10b",
+          "label": "b",
+          "question": "¿Qué nivel de prioridad de hardware tiene asignado la excepción Data Abort?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Data Abort es la prioridad 2, evaluada justo debajo del Reset."
+        },
+        {
+          "id": "10c",
+          "label": "c",
+          "question": "¿Qué nivel de prioridad de hardware tiene asignado la interrupción rápida FIQ?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "FIQ tiene prioridad 3, por encima de las interrupciones normales IRQ."
+        },
+        {
+          "id": "10d",
+          "label": "d",
+          "question": "¿Qué nivel de prioridad de hardware tiene asignado la interrupción normal IRQ?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "IRQ tiene prioridad 4, por debajo de FIQ y por encima de Prefetch Abort."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Latencia de Interrupción y Cálculo de Tiempos",
+      "context": "Una CPU ARM corre a 50 MHz. El tiempo para terminar la instrucción actual es de 4 ciclos en promedio, la fase de hardware tarda 5 ciclos, el prólogo de la ISR tarda 6 ciclos y el salto al cuerpo de la ISR toma 3 ciclos.",
+      "parts": [
+        {
+          "id": "11a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj se consumen en total en la latencia de interrupción hasta iniciar el cuerpo de la ISR?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "Suma de ciclos: $4 \\text{ (instrucción)} + 5 \\text{ (hardware)} + 6 \\text{ (prólogo)} + 3 \\text{ (salto)} = 18$ ciclos."
+        },
+        {
+          "id": "11b",
+          "label": "b",
+          "question": "¿A cuántos nanosegundos (ns) equivalen estos ciclos en un procesador a 50 MHz?",
+          "correctValue": 360,
+          "tolerance": 0,
+          "explanation": "Periodo de reloj $T = 1 / 50\\text{ MHz} = 20\\text{ ns}$. Latencia en tiempo = $18 \\times 20\\text{ ns} = 360\\text{ ns}$."
+        },
+        {
+          "id": "11c",
+          "label": "c",
+          "question": "Si el periférico genera una interrupción cada 10 microsegundos, ¿cuántos ciclos de reloj transcurren entre dos interrupciones sucesivas?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "Ciclos = $10\\ \\mu\\text{s} \\times 50\\text{ MHz} = 10 \\times 10^{-6} \\times 50 \\times 10^6 = 500$ ciclos."
+        },
+        {
+          "id": "11d",
+          "label": "d",
+          "question": "¿Qué porcentaje (%) de tiempo de la CPU se dedica a la latencia de la interrupción en este caso?",
+          "correctValue": 3.6,
+          "tolerance": 0.1,
+          "explanation": "Consumo de latencia: $(18 / 500) \\times 100 = 3.6\\%$."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Carga Relativa al PC en el Vector de IRQ",
+      "context": "En el vector de IRQ (0x00000018) se escribe `LDR PC, [PC, #offset]` para cargar dinámicamente la dirección de la ISR.",
+      "parts": [
+        {
+          "id": "12a",
+          "label": "a",
+          "question": "Si queremos que la instrucción lea el puntero de la ISR desde la dirección de memoria 0x00000028, ¿cuál debe ser el valor del offset inmediato (en bytes)?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El PC durante la ejecución en $0x18$ es $0x18 + 8 = 0x20$. Para leer de $0x28$, el offset es $0x28 - 0x20 = 8$ bytes."
+        },
+        {
+          "id": "12b",
+          "label": "b",
+          "question": "Si la dirección de memoria 0x00000028 contiene el valor de puntero 0x00009500 (decimal 38144), ¿a qué dirección de memoria (en decimal) saltará la CPU tras ejecutar la instrucción?",
+          "correctValue": 38144,
+          "tolerance": 0,
+          "explanation": "La instrucción carga el contenido de $0x28$ ($0x9500$) en el PC, por lo que salta a la dirección $0x9500 = 38144$ en decimal."
+        },
+        {
+          "id": "12c",
+          "label": "c",
+          "question": "¿Cuántos bytes de datos se leen del bus de memoria al acceder a la dirección 0x00000028 para obtener este puntero?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Un puntero de dirección en ARM ocupa 32 bits, lo que corresponde a $4$ bytes."
+        },
+        {
+          "id": "12d",
+          "label": "d",
+          "question": "Si estuviéramos en el vector de FIQ (0x0000001C) y quisiéramos leer el puntero en la dirección 0x00000030, ¿cuál sería el offset inmediato (en bytes)?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El PC en $0x1C$ apunta a $0x1C + 8 = 0x24$. Para leer de $0x30$, el offset es $0x30 - 0x24 = 12$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Bits de Modo de CPU en el Registro CPSR",
+      "context": "El registro CPSR de ARM codifica el modo de operación en sus 5 bits de menor peso (bits 4 a 0).",
+      "parts": [
+        {
+          "id": "13a",
+          "label": "a",
+          "question": "¿Qué valor entero decimal representan estos 5 bits para el Modo Usuario (User)?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El modo User se codifica como `10000` en binario, lo que equivale a $16$ en decimal."
+        },
+        {
+          "id": "13b",
+          "label": "b",
+          "question": "¿Qué valor entero decimal representan estos 5 bits para el Modo de Interrupción Normal (IRQ)?",
+          "correctValue": 18,
+          "tolerance": 0,
+          "explanation": "El modo IRQ se codifica como `10010` en binario, lo que equivale a $18$ en decimal."
+        },
+        {
+          "id": "13c",
+          "label": "c",
+          "question": "¿Qué valor entero decimal representan estos 5 bits para el Modo de Interrupción Rápida (FIQ)?",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "El modo FIQ se codifica como `10001` en binario, lo que equivale a $17$ en decimal."
+        },
+        {
+          "id": "13d",
+          "label": "d",
+          "question": "¿Qué valor entero decimal representan estos 5 bits para el Modo Supervisor (SVC)?",
+          "correctValue": 19,
+          "tolerance": 0,
+          "explanation": "El modo Supervisor se codifica como `10011` en binario, lo que equivale a $19$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Anidamiento de Interrupciones y Corrupción de Estado",
+      "context": "Una ISR de tipo IRQ habilita de nuevo las interrupciones normales (bit I = 0) para permitir que otras IRQ la interrumpan.",
+      "parts": [
+        {
+          "id": "14a",
+          "label": "a",
+          "question": "¿Cuántos registros SPSR de tipo IRQ físicos existen en la CPU que podrían corromperse si se produce una nueva interrupción antes de salvar su contenido?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Existe un único registro físico $SPSR\\_irq$. Si otra interrupción IRQ ocurre, sobreescribirá este registro, perdiendo el estado anterior."
+        },
+        {
+          "id": "14b",
+          "label": "b",
+          "question": "¿Cuál es el número del registro del puntero de pila (SP) donde se deben guardar LR_irq y SPSR_irq antes de habilitar las interrupciones anidadas?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "El puntero de pila es el registro $R13$ ($SP$)."
+        },
+        {
+          "id": "14c",
+          "label": "c",
+          "question": "¿Qué número de bit del CPSR debe limpiarse (poner a 0) para volver a permitir interrupciones IRQ?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El bit I es el bit número $7$ del CPSR."
+        },
+        {
+          "id": "14d",
+          "label": "d",
+          "question": "Si la ISR toma 200 ciclos y se produce una interrupción cada 150 ciclos de forma asíncrona, ¿cuál es el nivel máximo de anidamiento de interrupciones acumuladas en la pila al transcurrir 600 ciclos?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "A los $0, 150, 300$ y $450$ ciclos se activan 4 interrupciones. Dado que cada una dura $200$ ciclos, no da tiempo a que finalicen antes de que llegue la siguiente, acumulando un máximo de 4 ISR activas simultáneamente en pila."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Detección de Desalineación en Accesos a Datos",
+      "context": "Se ejecutan lecturas de memoria con direcciones arbitrarias en una CPU ARM.",
+      "parts": [
+        {
+          "id": "15a",
+          "label": "a",
+          "question": "Si se ejecuta `LDR R0, [R1]` con `R1 = 0x00001003`, ¿se genera una excepción Data Abort en un procesador que tiene activado el chequeo de alineación? (Responde 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$). Para palabras de 32 bits ($LDR$), la dirección debe ser múltiplo de 4. Como $0x1003$ no es múltiplo de 4, el hardware genera Data Abort."
+        },
+        {
+          "id": "15b",
+          "label": "b",
+          "question": "¿Cuántos bytes de alineamiento son requeridos para evitar excepciones en una lectura de palabra completa (word) mediante LDR?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Se requiere que las palabras de 32 bits estén alineadas a múltiplos de $4$ bytes."
+        },
+        {
+          "id": "15c",
+          "label": "c",
+          "question": "Si se ejecuta `LDRH R0, [R1]` (lectura de media palabra) con `R1 = 0x00001002`, ¿es un acceso alineado? (Responde 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$). Las medias palabras ($LDRH$) ocupan 2 bytes y requieren alineación a múltiplos de 2. Como $0x1002$ es múltiplo de 2, está alineado."
+        },
+        {
+          "id": "15d",
+          "label": "d",
+          "question": "Si el Data Abort por desalineación ocurre al intentar ejecutar la instrucción en la dirección 0x00008000, ¿cuál es el valor de la dirección de retorno (en decimal) guardada en LR_abt?",
+          "correctValue": 32776,
+          "tolerance": 0,
+          "explanation": "El hardware de Data Abort escribe en LR_abt la dirección de la instrucción abortada ($0x8000$) + 8. Esto da $0x8008 = 32776$ en decimal."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "DMA vs Interrupciones en Redes de Alta Velocidad",
+      "context": "Una tarjeta de red recibe datos a 10 MB/s (10.000.000 de bytes por segundo). La CPU funciona a 1 GHz (1.000.000.000 de ciclos por segundo).",
+      "parts": [
+        {
+          "id": "16a",
+          "label": "a",
+          "question": "Si cada byte recibido genera una interrupción y la ISR tarda 100 ciclos en total, ¿cuántos ciclos de CPU por segundo se requerirían solo para atender las interrupciones?",
+          "correctValue": 1000000000,
+          "tolerance": 0,
+          "explanation": "Se tienen $10^7$ interrupciones por segundo. Cada una tarda 100 ciclos: $10^7 \\times 100 = 10^9$ ciclos/segundo."
+        },
+        {
+          "id": "16b",
+          "label": "b",
+          "question": "¿Qué porcentaje (%) de la capacidad total de la CPU de 1 GHz se consume en este caso?",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "La CPU tiene $10^9$ ciclos/segundo. Como se necesitan $10^9$ ciclos para la red, se consume el $(10^9 / 10^9) \\times 100 = 100\\%$."
+        },
+        {
+          "id": "16c",
+          "label": "c",
+          "question": "Si se configura DMA para transferir ráfagas de 1000 bytes directamente a RAM, generando una sola interrupción al final de cada ráfaga, ¿cuántas interrupciones por segundo atiende la CPU?",
+          "correctValue": 10000,
+          "tolerance": 0,
+          "explanation": "$10.000.000$ de bytes divididos en bloques de $1000$ bytes da $10.000.000 / 1000 = 10.000$ interrupciones por segundo."
+        },
+        {
+          "id": "16d",
+          "label": "d",
+          "question": "Con el mecanismo de DMA y la misma ISR de 100 ciclos, ¿cuántos ciclos de CPU por segundo se consumen ahora en el procesamiento?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "Se procesan $10.000$ interrupciones/segundo. Consumo = $10.000 \\times 100 = 1.000.000$ ciclos/segundo."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Retorno Multiregistro y Alineamiento de Pila",
+      "context": "En el epílogo de una ISR se ejecuta la instrucción de retorno multiregistro `LDMFD SP!, {R0-R3, PC}^`.",
+      "parts": [
+        {
+          "id": "17a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal del código condicional 'AL' (Always, bits 31-28) con el que se compila esta instrucción por defecto?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "El código condicional AL de ARM es `1110` en binario, que en decimal equivale a $14$."
+        },
+        {
+          "id": "17b",
+          "label": "b",
+          "question": "¿Qué valor binario toma el bit número 22 (bit 'S') en la codificación de la instrucción LDM para indicarle al hardware que copie SPSR al CPSR?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit S (bit 22) de la instrucción LDM debe estar puesto a 1 junto con la inclusión del PC en la lista de registros para activar la restauración del CPSR."
+        },
+        {
+          "id": "17c",
+          "label": "c",
+          "question": "¿Cuántos registros en total se cargan desde la pila en esta instrucción?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se desapilan R0, R1, R2, R3 y PC, lo que hace un total de 5 registros."
+        },
+        {
+          "id": "17d",
+          "label": "d",
+          "question": "¿Cuántos bytes avanza el puntero de pila SP en sentido positivo tras desapilar estos registros?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Se desapilan 5 registros de 4 bytes cada uno: $5 \\times 4 = 20$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Operaciones a nivel de bit en Registros de E/S",
+      "context": "Una controladora de Entrada/Salida mapeada en memoria en la dirección 0x40000000 tiene un registro de control de 32 bits. El bit 0 es 'Dato Listo' (lectura) y el bit 1 es 'Habilitar Interrupciones' (L/E).",
+      "parts": [
+        {
+          "id": "18a",
+          "label": "a",
+          "question": "¿Qué valor decimal se debe escribir en este registro de control para habilitar únicamente las interrupciones del periférico?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para habilitar el bit 1 (valor $2^1 = 2$) y dejar el resto a 0, se escribe $2$ en decimal."
+        },
+        {
+          "id": "18b",
+          "label": "b",
+          "question": "¿Cuántos bits están a 1 en la máscara de 32 bits necesaria para apagar solo el bit 0 (Dato Listo) mediante una operación AND lógica?",
+          "correctValue": 31,
+          "tolerance": 0,
+          "explanation": "Para apagar solo el bit 0, la máscara debe tener a 1 los otros 31 bits del registro de 32 bits (máscara 0xFFFFFFFE)."
+        },
+        {
+          "id": "18c",
+          "label": "c",
+          "question": "Si el programa principal lee el registro de control y obtiene el valor decimal 3, ¿qué valor lógico (0 o 1) tiene el bit de 'Dato Listo'?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El valor decimal 3 es `11` en binario. El bit 0 está a 1, indicando que hay un dato listo."
+        },
+        {
+          "id": "18d",
+          "label": "d",
+          "question": "Si el programa lee un valor decimal de 2, ¿hay algún dato listo para leer en el puerto? (Responde 1 para Sí, 0 para No).",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El valor decimal 2 es `10` en binario. El bit 0 está a 0, indicando que no hay ningún dato listo."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Vectores en Direcciones Altas (High Vectors)",
+      "context": "El sistema se configura con vectores en direcciones altas (bit V del registro de control CP15 puesto a 1).",
+      "parts": [
+        {
+          "id": "19a",
+          "label": "a",
+          "question": "¿Cuál es la dirección base (en decimal) de la IVT en direcciones altas (0xFFFF0000 en hexadecimal)?",
+          "correctValue": 4294901760,
+          "tolerance": 0,
+          "explanation": "La dirección $0xFFFF0000$ en decimal equivale a $4294901760$."
+        },
+        {
+          "id": "19b",
+          "label": "b",
+          "question": "¿A qué dirección física (en decimal) saltará la CPU ante una interrupción IRQ?",
+          "correctValue": 4294901784,
+          "tolerance": 0,
+          "explanation": "IRQ tiene un offset de $0x18$. La dirección de salto es $0xFFFF0018$. En decimal: $4294901760 + 24 = 4294901784$."
+        },
+        {
+          "id": "19c",
+          "label": "c",
+          "question": "¿A qué dirección física (en decimal) saltará ante un Reset físico?",
+          "correctValue": 4294901760,
+          "tolerance": 0,
+          "explanation": "Reset está en el offset $0x00$, saltando a la dirección base $0xFFFF0000 = 4294901760$."
+        },
+        {
+          "id": "19d",
+          "label": "d",
+          "question": "¿Cuál es la dirección física (en decimal) para el vector FIQ con vectores altos habilitados?",
+          "correctValue": 4294901788,
+          "tolerance": 0,
+          "explanation": "FIQ tiene un offset de $0x1C$ ($28$ en decimal). Dirección de salto: $0xFFFF001C = 4294901788$."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Desfase del Pipeline y Retorno de Salto Condicional",
+      "context": "Una interrupción ocurre cuando la CPU ejecuta una instrucción de salto condicional tomado `BNE 0x00009000` (ubicada en 0x00008000). La interrupción se atiende en la primera instrucción del destino (0x00009000).",
+      "parts": [
+        {
+          "id": "20a",
+          "label": "a",
+          "question": "A pesar de que el salto desvía el flujo, si la instrucción en 0x00008000 se evalúa falsa (no se toma el salto), ¿se realiza el cambio de modo de hardware? (Responde 1 para Sí, 0 para No).",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Sí ($1$). Si la instrucción se evalúa y finaliza su ciclo normal, el procesador evalúa la interrupción al final de esta e inicia el proceso de hardware."
+        },
+        {
+          "id": "20b",
+          "label": "b",
+          "question": "Si el salto es tomado y se atiende la interrupción justo en la instrucción destino de 0x00009000 (36864 en decimal), ¿qué dirección en decimal se guarda en LR_irq?",
+          "correctValue": 36868,
+          "tolerance": 0,
+          "explanation": "Al ejecutarse la instrucción en $0x9000$, la instrucción en decode está en $0x9004$. El hardware almacena $PC + 4$ que es la dirección en decode: $0x9004 = 36868$ en decimal."
+        },
+        {
+          "id": "20c",
+          "label": "c",
+          "question": "¿A qué dirección (en decimal) retornaremos tras aplicar la resta requerida SUBS PC, LR, #4?",
+          "correctValue": 36864,
+          "tolerance": 0,
+          "explanation": "Dirección de retorno: $LR - 4 = 0x9004 - 4 = 0x9000$. En decimal: $36864$."
+        },
+        {
+          "id": "20d",
+          "label": "d",
+          "question": "¿Cuántos bytes por delante de la dirección de retorno real apunta el registro LR_irq en el momento de entrar a la ISR?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El registro LR_irq almacena $0x9004$ y el retorno es a $0x9000$. La diferencia es de $4$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Dimensión de la Pila de Interrupciones y Desbordamiento",
+      "context": "Se asigna un bloque de memoria RAM de 4096 bytes para la pila del modo IRQ (SP_irq). La pila se inicializa en la dirección 0x000F1000 (987136 en decimal) y crece de forma descendente (Full Descending).",
+      "parts": [
+        {
+          "id": "21a",
+          "label": "a",
+          "question": "¿Cuál es la dirección límite inferior (en decimal) de este bloque de pila para evitar un desbordamiento (Stack Overflow)?",
+          "correctValue": 983040,
+          "tolerance": 0,
+          "explanation": "El tamaño es $4096$ bytes ($0x1000$ en hex). Límite = $0x000F1000 - 0x1000 = 0x000F0000 = 983040$ en decimal."
+        },
+        {
+          "id": "21b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal inicial del SP_irq antes de guardar ningún elemento (al estar vacía)?",
+          "correctValue": 987136,
+          "tolerance": 0,
+          "explanation": "La pila está en la dirección de inicialización $0x000F1000 = 987136$."
+        },
+        {
+          "id": "21c",
+          "label": "c",
+          "question": "Si la ISR de interrupciones anidadas guarda exactamente 8 registros en cada llamada, ¿cuál es el número máximo de niveles de anidamiento que soporta la pila sin desbordarse?",
+          "correctValue": 128,
+          "tolerance": 0,
+          "explanation": "Cada nivel de anidamiento consume $8 \\times 4 = 32$ bytes. Niveles soportados = $4096 / 32 = 128$ niveles."
+        },
+        {
+          "id": "21d",
+          "label": "d",
+          "question": "Si la pila se desborda en un solo nivel adicional (nivel 129), ¿cuántas palabras de 32 bits del código o datos ubicados por debajo de 0x000F0000 serán sobrescritas?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Un nivel adicional escribe 8 registros en la pila, lo que sobrescribe 8 palabras de 32 bits de memoria RAM por debajo del límite."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Sobrecarga de CPU por Frecuencia de Muestreo",
+      "context": "Un temporizador de hardware genera interrupciones a 20 kHz para leer un conversor analógico-digital. La ISR tarda 150 ciclos de reloj en total. La CPU funciona a 12 MHz.",
+      "parts": [
+        {
+          "id": "22a",
+          "label": "a",
+          "question": "¿Cuántas interrupciones atiende la CPU por segundo?",
+          "correctValue": 20000,
+          "tolerance": 0,
+          "explanation": "La frecuencia del temporizador es de $20\\text{ kHz}$, lo que equivale a $20.000$ interrupciones por segundo."
+        },
+        {
+          "id": "22b",
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj por segundo se destinan exclusivamente a ejecutar estas interrupciones?",
+          "correctValue": 3000000,
+          "tolerance": 0,
+          "explanation": "Consumo de ciclos = $20.000 \\text{ interrupciones/segundo} \\times 150 \\text{ ciclos/ISR} = 3.000.000$ ciclos/segundo."
+        },
+        {
+          "id": "22c",
+          "label": "c",
+          "question": "¿Qué porcentaje (%) de la capacidad total de la CPU de 12 MHz se consume en la ejecución de las ISR?",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "CPU total = $12 \\times 10^6$ ciclos/segundo. Porcentaje de uso = $(3.000.000 / 12.000.000) \\times 100 = 25\\%$."
+        },
+        {
+          "id": "22d",
+          "label": "d",
+          "question": "¿Cuántos ciclos de reloj por segundo quedan libres para que el programa principal de usuario realice otras tareas?",
+          "correctValue": 9000000,
+          "tolerance": 0,
+          "explanation": "Ciclos libres = $12.000.000 - 3.000.000 = 9.000.000$ ciclos/segundo."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Análisis de Latencia por SVC",
+      "context": "Un sistema operativo ejecuta llamadas al sistema por SVC. Cada llamada consume 5 ciclos por cambio de modo físico de entrada, 80 ciclos por el código de la rutina y 5 ciclos por el cambio de modo de salida.",
+      "parts": [
+        {
+          "id": "23a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj se consumen exclusivamente en los cambios físicos de modo de hardware (entrada y salida) por cada llamada?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "Entrada (5 ciclos) + Salida (5 ciclos) = 10 ciclos."
+        },
+        {
+          "id": "23b",
+          "label": "b",
+          "question": "¿Qué porcentaje (%) del total de los 90 ciclos que dura la llamada al sistema se destina a la gestión de cambios de modo por hardware?",
+          "correctValue": 11.11,
+          "tolerance": 0.1,
+          "explanation": "Porcentaje = $(10 / 90) \\times 100 \\approx 11.11\\%$."
+        },
+        {
+          "id": "23c",
+          "label": "c",
+          "question": "Si el S.O. ejecuta 50.000 llamadas SVC por segundo, ¿cuántos ciclos de reloj se dedican en total a su procesamiento por segundo?",
+          "correctValue": 4500000,
+          "tolerance": 0,
+          "explanation": "Ciclos totales = $50.000 \\times 90 \\text{ ciclos} = 4.500.000$ ciclos/segundo."
+        },
+        {
+          "id": "23d",
+          "label": "d",
+          "question": "Si la CPU funciona a 10 MHz, ¿qué porcentaje (%) del tiempo de CPU consume esta gestión de llamadas al sistema?",
+          "correctValue": 45,
+          "tolerance": 0,
+          "explanation": "Uso de CPU = $(4.500.000 / 10.000.000) \\times 100 = 45\\%$."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Efectos en Banderas de Estado tras Interrupción",
+      "context": "Antes de una interrupción IRQ, el CPSR contiene el valor hexadecimal 0x60000010 (flags V y C activos en 1, modo User y estado ARM). La CPU entra en modo IRQ tras el evento.",
+      "parts": [
+        {
+          "id": "24a",
+          "label": "a",
+          "question": "¿Cuál es el valor (en base decimal) almacenado en el registro SPSR_irq al entrar a la ISR?",
+          "correctValue": 1610612752,
+          "tolerance": 0,
+          "explanation": "El hardware copia CPSR a SPSR_irq. $0x60000010$ en decimal es $6 \\times 16^7 + 16^1 = 1.610.612.752$."
+        },
+        {
+          "id": "24b",
+          "label": "b",
+          "question": "¿Cuál es el valor lógico binario del bit 7 (I) en el CPSR del modo IRQ inmediatamente después de la interrupción?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El hardware pone a 1 el bit I para bloquear nuevas interrupciones de forma inmediata."
+        },
+        {
+          "id": "24c",
+          "label": "c",
+          "question": "¿Cuál es el valor lógico binario del bit 6 (F) en el CPSR del modo IRQ si no hay peticiones FIQ pendientes?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La interrupción IRQ no modifica el bit F del CPSR. Como antes de la interrupción estaba en 0, permanece en 0."
+        },
+        {
+          "id": "24d",
+          "label": "d",
+          "question": "¿Cuál es el valor lógico binario del bit 28 (flag V) en el CPSR al iniciar el modo IRQ?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Las banderas aritméticas (N, Z, C, V) no se alteran al cambiar de modo por una excepción. El bit 28 (V) permanece en 1."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Llamada a Subrutina y Retorno de Interrupción",
+      "context": "Un programa de usuario ejecuta una llamada a subrutina `BL 0x00005000` ubicada en la dirección 0x00003000 (12288 en decimal).",
+      "parts": [
+        {
+          "id": "25a",
+          "label": "a",
+          "question": "¿Qué dirección (en decimal) se almacena en el registro LR de usuario como retorno de la subrutina?",
+          "correctValue": 12292,
+          "tolerance": 0,
+          "explanation": "La instrucción BL almacena la dirección de la siguiente instrucción ($PC + 4$ de la instrucción $BL$, es decir, $0x3000 + 4 = 0x3004 = 12292$ en decimal) en el registro LR."
+        },
+        {
+          "id": "25b",
+          "label": "b",
+          "question": "Si al ejecutarse la primera instrucción de la subrutina en 0x00005000 (20480 en decimal) ocurre una interrupción IRQ, ¿qué dirección en decimal se guarda en LR_irq?",
+          "correctValue": 20484,
+          "tolerance": 0,
+          "explanation": "Al ejecutarse en $0x5000$, la instrucción en decode es $0x5004$. El hardware almacena en LR_irq la dirección $PC+4$, es decir, $0x5004 = 20484$ en decimal."
+        },
+        {
+          "id": "25c",
+          "label": "c",
+          "question": "¿Cuál es la dirección de retorno real (en decimal) a la que debe volver la ISR?",
+          "correctValue": 20480,
+          "tolerance": 0,
+          "explanation": "La ISR debe retornar a la instrucción en $0x5000$ que no llegó a completarse: $0x5004 - 4 = 0x5000 = 20480$ en decimal."
+        },
+        {
+          "id": "25d",
+          "label": "d",
+          "question": "¿Cuál es la diferencia en bytes entre la dirección almacenada en el LR de usuario (12292) y la dirección original de la instrucción BL (12288)?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Diferencia: $12292 - 12288 = 4$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Prioridades del Controlador NVIC",
+      "context": "Un microcontrolador ARM Cortex-M implementa solo los 3 bits más significativos (MSB) de cada registro de prioridad de 8 bits del NVIC.",
+      "parts": [
+        {
+          "id": "26a",
+          "label": "a",
+          "question": "¿Cuántos niveles de prioridad de interrupción diferentes se pueden configurar físicamente?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Con 3 bits implementados, el número de combinaciones es $2^3 = 8$ niveles (0 a 7)."
+        },
+        {
+          "id": "26b",
+          "label": "b",
+          "question": "Si escribimos el valor 0xE0 en el registro de prioridad, ¿qué número de prioridad de 0 a 7 se ha configurado (los 3 MSB)?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "El valor $0xE0 = 11100000$ en binario. Los 3 bits MSB son `111`, lo que representa la prioridad $7$ (la menor prioridad)."
+        },
+        {
+          "id": "26c",
+          "label": "c",
+          "question": "Si configuramos el registro con el valor 0x20, ¿qué número de prioridad (0 a 7) se ha configurado?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El valor $0x20 = 00100000$ en binario. Los 3 bits MSB son `001`, representando la prioridad $1$."
+        },
+        {
+          "id": "26d",
+          "label": "d",
+          "question": "Si ocurren de manera concurrente dos interrupciones, una con nivel de prioridad 1 y otra con nivel 3, ¿cuál de las dos prioridades (1 o 3) se atenderá primero?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En ARM, el menor número de prioridad representa la mayor prioridad física. Por tanto, se atiende primero la prioridad 1."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Alineamiento de Pila a 8 Bytes y Reserva de Variables",
+      "context": "En la ISR del sistema se requiere mantener la pila SP alineada a 8 bytes.",
+      "parts": [
+        {
+          "id": "27a",
+          "label": "a",
+          "question": "Si el compilador declara una variable de 5 bytes y otra de 3 bytes en la pila de la ISR, ¿cuántos bytes en total se reservan en la pila cumpliendo el alineamiento a 8 bytes?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Total variables = $5 + 3 = 8$ bytes, lo que ya coincide exactamente con un múltiplo de 8."
+        },
+        {
+          "id": "27b",
+          "label": "b",
+          "question": "Si agregamos otra variable local de 2 bytes (total 10 bytes), ¿cuántos bytes se reservan en total redondeando hacia arriba para mantener el alineamiento a 8 bytes?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Con 10 bytes, el siguiente múltiplo de 8 es 16. Se reservarán 16 bytes."
+        },
+        {
+          "id": "27c",
+          "label": "c",
+          "question": "Si la pila SP_irq inicial es 0x000F0000 (983040 en decimal) y reservamos estos 16 bytes de la pila, ¿cuál es la nueva dirección del SP en decimal?",
+          "correctValue": 983024,
+          "tolerance": 0,
+          "explanation": "La pila decrece: $983040 - 16 = 983024$."
+        },
+        {
+          "id": "27d",
+          "label": "d",
+          "question": "¿Cuántas palabras completas de 32 bits (4 bytes) se pueden almacenar en este espacio alineado de 16 bytes?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "$16 \\text{ bytes} / 4 \\text{ bytes/palabra} = 4$ palabras."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Salto Indirecto en Vector de Llamada al Sistema (SVC)",
+      "context": "En la dirección 0x00000008 (vector SVC) se encuentra la instrucción `LDR PC, [PC, #24]`.",
+      "parts": [
+        {
+          "id": "28a",
+          "label": "a",
+          "question": "¿A qué dirección de memoria física (en decimal) accede la CPU para leer la dirección de salto a la ISR?",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "El PC al ejecutar en $0x08$ es $0x08 + 8 = 0x10$. Con un offset de 24, la dirección leída es $0x10 + 24 = 40$ ($0x28$ en hex)."
+        },
+        {
+          "id": "28b",
+          "label": "b",
+          "question": "Si en la dirección 40 de memoria está almacenado el valor 0x0000F000 (61440 en decimal), ¿cuál será el valor del PC (en decimal) tras ejecutar la instrucción?",
+          "correctValue": 61440,
+          "tolerance": 0,
+          "explanation": "La instrucción escribe el valor de memoria leído ($0x0000F000$) en el PC. En decimal: $61440$."
+        },
+        {
+          "id": "28c",
+          "label": "c",
+          "question": "¿Cuántos ciclos de reloj toma ejecutar la instrucción LDR PC en el bus en un procesador ARM7 si no hay fallos de memoria?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Cargar PC con LDR toma 3 ciclos: 1 ciclo para buscar la instrucción, 1 ciclo para leer los datos del bus y 1 ciclo adicional de flush del pipeline al escribir en el PC."
+        },
+        {
+          "id": "28d",
+          "label": "d",
+          "question": "¿Cuántos bytes se leen del bus de datos en la lectura de memoria de la dirección 40?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La lectura de una palabra (LDR) accede a un valor de 32 bits, que equivale a $4$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Tratamiento y Retorno de Instrucción no Definida",
+      "context": "En la dirección 0x00005000 (20480 en decimal) se detecta un patrón de instrucción inválido que genera una excepción de instrucción no definida.",
+      "parts": [
+        {
+          "id": "29a",
+          "label": "a",
+          "question": "¿Cuál es la dirección (en decimal) escrita automáticamente en LR_und?",
+          "correctValue": 20484,
+          "tolerance": 0,
+          "explanation": "Para la excepción Undefined Instruction, LR_und almacena $PC + 4$ de la instrucción de origen, que es $0x5000 + 4 = 0x5004 = 20484$ en decimal."
+        },
+        {
+          "id": "29b",
+          "label": "b",
+          "question": "¿Qué dirección física (en decimal) de la IVT se carga en el PC para atender la excepción?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El vector físico de Undefined Instruction se encuentra en la dirección $0x00000004 = 4$."
+        },
+        {
+          "id": "29c",
+          "label": "c",
+          "question": "Si la ISR decide omitir la instrucción errónea y continuar con la siguiente instrucción, ¿a qué dirección (en decimal) se debe retornar?",
+          "correctValue": 20484,
+          "tolerance": 0,
+          "explanation": "La instrucción siguiente está en la dirección $0x5004 = 20484$ en decimal."
+        },
+        {
+          "id": "29d",
+          "label": "d",
+          "question": "¿Qué valor de desplazamiento (offset, en decimal) se debe restar a LR_und para saltar a esa dirección?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que LR_und contiene $20484$ y se desea retornar a $20484$, el desplazamiento restado es 0 (ejecutando `MOVS PC, LR`)."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Estados de Ejecución y Flags del CPSR",
+      "context": "Se analizan los bits de control del registro CPSR para determinar el estado lógico del procesador.",
+      "parts": [
+        {
+          "id": "30a",
+          "label": "a",
+          "question": "¿Qué valor decimal tiene el bit T (Thumb, bit 5) si la CPU está en estado ARM de 32 bits?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En estado ARM (instrucciones de 32 bits), el bit $T$ debe estar a 0."
+        },
+        {
+          "id": "30b",
+          "label": "b",
+          "question": "¿Qué valor decimal tiene el bit T si la CPU cambia a estado Thumb de 16 bits?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En estado Thumb (instrucciones de 16 bits), el bit $T$ debe estar a 1."
+        },
+        {
+          "id": "30c",
+          "label": "c",
+          "question": "¿Qué valor decimal tiene el bit I (máscara de IRQ, bit 7) si las interrupciones IRQ están completamente habilitadas?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La habilitación de interrupciones corresponde a una máscara desactivada, es decir, el bit $I = 0$."
+        },
+        {
+          "id": "30d",
+          "label": "d",
+          "question": "¿Qué valor decimal tiene el bit F (máscara de FIQ, bit 6) si las interrupciones FIQ están deshabilitadas?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La deshabilitación de interrupciones corresponde a una máscara activada, es decir, el bit $F = 1$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Dirección de retorno para excepciones de tipo IRQ y FIQ",
+      "tex": "$$LR\\_irq - 4 = PC_{retorno}$$"
+    },
+    {
+      "name": "Dirección de retorno para excepciones de tipo Data Abort",
+      "tex": "$$LR\\_abt - 8 = PC_{retorno}$$"
+    },
+    {
+      "name": "Dirección de retorno para excepciones de tipo Prefetch Abort",
+      "tex": "$$LR\\_abt - 4 = PC_{retorno}$$"
+    },
+    {
+      "name": "Cálculo del offset de salto inmediato de 24 bits de la instrucción B",
+      "tex": "$$Offset_{word} = \\frac{Destino - (PC_{instruccion} + 8)}{4}$$"
+    },
+    {
+      "name": "Dirección física del vector de interrupción en configuración de vectores altos",
+      "tex": "$$Vector_{alto} = 0xFFFF0000 + Offset_{vector}$$"
+    },
+    {
+      "name": "Latencia mínima total de interrupción",
+      "tex": "$$T_{latencia} = T_{instruccion\\_actual} + T_{hardware} + T_{prologo}$$"
+    },
+    {
+      "name": "Porcentaje de ocupación de la CPU debido a la atención a periféricos por interrupción",
+      "tex": "$$\\%CPU_{ISR} = \\frac{Frecuencia_{interrupcion} \\times Ciclos_{ISR}}{Frecuencia_{CPU}} \\times 100$$"
+    },
+    {
+      "name": "Relación entre el contador de programa PC y la instrucción de ejecución debido al pipeline",
+      "tex": "$$PC_{fisico} = Address_{ejecucion} + 8$$"
+    }
+  ]
+}

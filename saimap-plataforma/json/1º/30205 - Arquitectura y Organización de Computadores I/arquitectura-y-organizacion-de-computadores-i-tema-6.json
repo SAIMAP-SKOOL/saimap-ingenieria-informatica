@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la función primordial de la instrucción 'CMP R0, R1' en la arquitectura ARMv7?",
+      "options": [
+        "Realizar una resta aritmética entre R0 y R1 y almacenar el resultado en R0.",
+        "Efectuar la resta R0 - R1 para actualizar los flags de estado en el CPSR, descartando el resultado numérico.",
+        "Saltar automáticamente a una subrutina si R0 y R1 son iguales."
+      ],
+      "correct": 1,
+      "hint": "CMP no altera los registros operandos, solo altera las banderas de estado del procesador.",
+      "explanation": "La instrucción 'CMP' realiza internamente la resta $R0 - R1$ y actualiza las banderas N, Z, C y V en el CPSR. El resultado numérico de la resta es descartado y los operandos no se modifican."
+    },
+    {
+      "q": "En ensamblador ARMv7, ¿bajo qué condición lógica de banderas firma-sensibles se toma el salto 'BGE' (Branch if Greater or Equal)?",
+      "options": [
+        "Cuando la bandera Z es igual a 1.",
+        "Cuando el flag N (Negative) es igual al flag V (Overflow).",
+        "Cuando C (Carry) es igual a 1 y Z es igual a 0."
+      ],
+      "correct": 1,
+      "hint": "Las condiciones firmadas comparan el signo del resultado y la presencia de desbordamiento.",
+      "explanation": "El salto condicional firmado 'BGE' se ejecuta si $N == V$. Esto significa que el resultado es positivo y sin desbordamiento, o negativo pero con un desbordamiento que invierte el signo aparente."
+    },
+    {
+      "q": "¿Qué acción realiza la instrucción de direccionamiento post-indexado 'LDR R0, [R1], #4'?",
+      "options": [
+        "Suma 4 a R1, y luego carga el contenido de esa nueva dirección en R0.",
+        "Carga el contenido de la dirección almacenada en R1 hacia R0, y luego incrementa R1 en 4.",
+        "Carga el contenido de R1 + 4 en R0 sin modificar el registro R1."
+      ],
+      "correct": 1,
+      "hint": "En el direccionamiento post-indexado, el corchete se cierra antes del desplazamiento.",
+      "explanation": "En el direccionamiento post-indexado, el acceso a memoria se realiza usando la dirección base original en $R1$. Tras el acceso, la dirección base se actualiza sumándole el desplazamiento inmediato (en este caso, #4)."
+    },
+    {
+      "q": "¿Qué acción realiza la instrucción de direccionamiento pre-indexado con actualización 'LDR R0, [R1, #4]!'?",
+      "options": [
+        "Carga en R0 el contenido de la dirección R1 + 4 y escribe R1 + 4 de vuelta en R1.",
+        "Carga en R0 el contenido de R1 y luego le suma 4 a R1 en memoria.",
+        "Suma R1 y 4, carga el contenido en R0, pero mantiene el valor original en R1."
+      ],
+      "correct": 0,
+      "hint": "El símbolo '!' al final indica actualización o 'writeback' del registro base.",
+      "explanation": "El direccionamiento pre-indexado con actualización 'LDR R0, [R1, #4]!' calcula la dirección de acceso como $R1 + 4$, carga el dato en $R0$, y actualiza el registro base escribiendo $R1 = R1 + 4$ debido al sufijo de exclamación."
+    },
+    {
+      "q": "Si la dirección base de un array de enteros ('int', 4 bytes) está en R0, ¿cuál es el desplazamiento en bytes requerido para acceder a array[5]?",
+      "options": [
+        "5 bytes.",
+        "20 bytes.",
+        "10 bytes."
+      ],
+      "correct": 1,
+      "hint": "Cada entero ocupa 4 bytes, multiplica el índice por el tamaño del tipo de dato.",
+      "explanation": "El desplazamiento se calcula como $\\text{índice} \\times \\text{tamaño del tipo de dato}$. Para un entero de 4 bytes e índice 5, el desplazamiento es $5 \\times 4 = 20$ bytes."
+    },
+    {
+      "q": "¿Por qué la ejecución condicional de instrucciones (como 'ADDGT R0, R1') mejora el rendimiento en CPU segmentadas (pipelined)?",
+      "options": [
+        "Porque elimina la necesidad de instrucciones de salto, previniendo penalizaciones por fallos de predicción.",
+        "Porque permite ejecutar varias instrucciones simultáneamente en un único ciclo de reloj.",
+        "Porque incrementa la frecuencia de reloj del procesador al reducir el número de registros activos."
+      ],
+      "correct": 0,
+      "hint": "Los saltos obligan a limpiar el pipeline si la predicción falla; la ejecución condicional evita esto.",
+      "explanation": "La ejecución condicional permite omitir o ejecutar instrucciones basándose en el estado del CPSR. Al evitar saltos condicionales ('B'), se eliminan las paradas ('stalls') y burbujas del pipeline asociadas a fallos de predicción de saltos."
+    },
+    {
+      "q": "En una comparación de números enteros con signo, ¿qué flags de estado del CPSR determinan el salto 'BLE' (Less than or Equal)?",
+      "options": [
+        "Z == 1 o N == V.",
+        "Z == 1 o N != V.",
+        "C == 0 y Z == 1."
+      ],
+      "correct": 1,
+      "hint": "Menor o igual firmado requiere que sea menor (N != V) o que sea igual (Z == 1).",
+      "explanation": "La condición lógica para 'BLE' (menor o igual firmado) se cumple si el resultado es igual a cero ($Z == 1$) o si hay una relación de menor estricto con signo ($N \\neq V$)."
+    },
+    {
+      "q": "¿Cuál es la función del sufijo 'S' en instrucciones de procesamiento de datos como 'ADDS R0, R1, R2'?",
+      "options": [
+        "Hacer que la operación sea de signo (Signed).",
+        "Indicar al procesador que actualice las banderas de estado (N, Z, C, V) en el registro CPSR.",
+        "Forzar el almacenamiento del resultado en la pila (Stack)."
+      ],
+      "correct": 1,
+      "hint": "En ARM, las instrucciones normales no actualizan banderas a menos que se solicite explícitamente.",
+      "explanation": "Por defecto, las instrucciones lógicas y aritméticas en ARM no alteran las banderas de estado en el CPSR. El sufijo 'S' le indica explícitamente al hardware que actualice dichas banderas basadas en el resultado de la operación."
+    },
+    {
+      "q": "Al implementar un bucle 'while' clásico con pre-test, ¿qué estructura lógica se suele emplear en ensamblador ARM?",
+      "options": [
+        "Un salto incondicional al inicio y una comparación con salto condicional al final.",
+        "Una comparación y salto condicional de salida al inicio del bucle, y un salto incondicional al final de la iteración.",
+        "Ninguna comparación, confiando únicamente en la pila para detener la ejecución."
+      ],
+      "correct": 1,
+      "hint": "El bucle 'while' evalúa la condición antes de ejecutar el cuerpo.",
+      "explanation": "En un bucle 'while', se evalúa la condición al inicio. Si es falsa, un salto condicional sale del bucle. Al final del bloque del bucle, un salto incondicional vuelve al inicio para reevaluar la condición."
+    },
+    {
+      "q": "¿Cuál es la principal diferencia entre las instrucciones de salto condicional firmadas (BGE, BLT) y no firmadas (BHS, BLO)?",
+      "options": [
+        "Las firmadas asumen que el bit más significativo representa el signo y usan N y V; las no firmadas usan C y Z.",
+        "Las no firmadas solo pueden utilizarse con registros pares.",
+        "Las firmadas se ejecutan un ciclo de reloj más rápido que las no firmadas."
+      ],
+      "correct": 0,
+      "hint": "El signo cambia el significado lógico de las comparaciones y las banderas involucradas.",
+      "explanation": "Las comparaciones firmadas evalúan relaciones basadas en el signo de complemento a dos utilizando los flags N (negativo) y V (desbordamiento). Las no firmadas consideran los números como valores absolutos y utilizan C (carry) y Z (cero)."
+    },
+    {
+      "q": "Si R0 = 7 y R1 = 7, ¿cuáles serán los estados de los flags Z (Zero) y C (Carry) tras ejecutar 'CMP R0, R1'?",
+      "options": [
+        "Z = 1, C = 0.",
+        "Z = 1, C = 1.",
+        "Z = 0, C = 1."
+      ],
+      "correct": 1,
+      "hint": "La comparación es una resta. 7 - 7 = 0. En resta ARM, la ausencia de préstamo implica Carry = 1.",
+      "explanation": "La resta de valores iguales produce un resultado de cero, por lo que $Z = 1$. Además, en ARM, la resta $A - B$ genera un acarreo ($C = 1$) siempre que $A \\ge B$, indicando que no se requirió préstamo."
+    },
+    {
+      "q": "¿Cuántos bytes de memoria ocupa una instrucción estándar en el estado de ejecución ARM (no Thumb)?",
+      "options": [
+        "2 bytes.",
+        "4 bytes.",
+        "8 bytes."
+      ],
+      "correct": 1,
+      "hint": "La arquitectura ARM original posee un tamaño de instrucción fijo de 32 bits.",
+      "explanation": "Todas las instrucciones en el set de instrucciones ARM estándar tienen una longitud fija de 32 bits, lo que equivale a exactamente 4 bytes."
+    },
+    {
+      "q": "¿Cómo calcula el procesador ARMv7 la dirección de destino en una instrucción de salto como 'B etiqueta'?",
+      "options": [
+        "Suma al registro PC un desplazamiento de 24 bits con signo, el cual se desplaza 2 bits a la izquierda.",
+        "Sustituye directamente los 32 bits del PC por la dirección inmediata de la etiqueta.",
+        "Suma el contenido de R14 (LR) al valor inmediato codificado en la instrucción."
+      ],
+      "correct": 0,
+      "hint": "El salto es relativo al PC y se aprovecha que las instrucciones están alineadas a palabra de 32 bits.",
+      "explanation": "El formato de instrucción de salto codifica un inmediato de 24 bits con signo relativo al PC. Dado que las instrucciones están alineadas a 4 bytes, los dos bits más bajos del salto siempre serían cero, por lo que no se codifican y se recuperan desplazando el inmediato 2 bits a la izquierda antes de sumarlo al PC."
+    },
+    {
+      "q": "¿Qué ventaja tiene el direccionamiento post-indexado frente al direccionamiento indexado simple al recorrer un array?",
+      "options": [
+        "Evita tener que usar una instrucción adicional para incrementar el puntero de recorrido.",
+        "Permite leer elementos en orden inverso automáticamente sin modificar el índice.",
+        "Reduce la cantidad de memoria física requerida para el almacenamiento del array."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el incremento del puntero i++ integrado en la lectura del dato.",
+      "explanation": "El direccionamiento post-indexado permite cargar el elemento del vector y, en el mismo ciclo de instrucción, sumar un valor al registro base. Esto elimina la necesidad de una instrucción `ADD` separada para avanzar el puntero."
+    },
+    {
+      "q": "En la traducción de bucles, ¿qué ventaja ofrece el bucle 'do-while' (post-test) sobre el bucle 'while' (pre-test) en términos de eficiencia de saltos?",
+      "options": [
+        "No requiere instrucciones de comparación.",
+        "Requiere solo un salto condicional al final del cuerpo por iteración en lugar de evaluar un salto incondicional extra.",
+        "Permite al procesador deshabilitar las interrupciones durante el bucle."
+      ],
+      "correct": 1,
+      "hint": "En do-while, el cuerpo siempre se ejecuta al menos una vez, y la comprobación se realiza al final.",
+      "explanation": "Un bucle post-test ('do-while') ejecuta el cuerpo y luego realiza la comparación y el salto de vuelta si es verdadero. Esto requiere solo un salto condicional por iteración, mientras que el bucle pre-test básico a menudo requiere un salto incondicional para volver a la cabecera."
+    },
+    {
+      "q": "¿Cuál es la función del registro R15 en la arquitectura ARMv7?",
+      "options": [
+        "Actuar como el puntero de pila (Stack Pointer).",
+        "Actuar como el registro de enlace para almacenar direcciones de retorno.",
+        "Actuar como el Contador de Programa (PC)."
+      ],
+      "correct": 2,
+      "hint": "Es el registro que apunta a la siguiente instrucción a buscar del flujo de ejecución.",
+      "explanation": "En el banco de registros de ARMv7, el registro R15 funciona como el Program Counter (PC), apuntando al flujo actual de ejecución de instrucciones."
+    },
+    {
+      "q": "¿Qué registro de propósito especial de ARMv7 se utiliza para almacenar la dirección de retorno al llamar a una subrutina?",
+      "options": [
+        "R13 (SP).",
+        "R14 (LR).",
+        "R15 (PC)."
+      ],
+      "correct": 1,
+      "hint": "Se conoce como Link Register.",
+      "explanation": "El registro R14 es el Link Register (LR). Su función es almacenar de forma automática la dirección de la instrucción siguiente a la llamada de subrutina ('BL') para permitir el retorno posterior."
+    },
+    {
+      "q": "¿Cuál es la función típica del registro R13 en ARMv7?",
+      "options": [
+        "Guardar los códigos de condición del procesador.",
+        "Servir como puntero de pila (SP) para el control de subrutinas y variables locales.",
+        "Acumular el resultado de las operaciones lógicas de multiplicación."
+      ],
+      "correct": 1,
+      "hint": "Su nombre abreviado es SP.",
+      "explanation": "El registro R13 está reservado por convención como el Stack Pointer (SP), el cual apunta al tope de la pila activa en memoria RAM."
+    },
+    {
+      "q": "¿Qué realiza la combinación de instrucciones 'SUBS R3, R3, #1' y 'BNE bucle' al final de un bucle?",
+      "options": [
+        "Suma 1 a R3 y salta si el resultado es igual a cero.",
+        "Resta 1 a R3, actualiza los flags del CPSR y salta a 'bucle' si R3 no ha llegado a cero.",
+        "Compara R3 con cero y salta únicamente si R3 es negativo."
+      ],
+      "correct": 1,
+      "hint": "El sufijo S en SUBS hace que el resultado actualice el flag Z cuando R3 llega a 0.",
+      "explanation": "La instrucción 'SUBS' resta 1 a $R3$ y actualiza las banderas del CPSR (especialmente Z). 'BNE' salta si $Z == 0$ (es decir, el resultado de la resta no fue cero), creando un control eficiente de bucles descendentes sin necesidad de una instrucción `CMP` adicional."
+    },
+    {
+      "q": "¿Cómo se suele implementar una estructura de selección múltiple 'switch' en ensamblador ARM cuando los valores de los casos están muy dispersos (no contiguos)?",
+      "options": [
+        "Mediante una tabla de saltos indexada basada en offsets directos.",
+        "Mediante un árbol de decisión jerárquico o una serie de comparaciones y saltos secuenciales (if-else condicional).",
+        "Almacenando todos los destinos en la pila y ejecutando instrucciones POP condicionales."
+      ],
+      "correct": 1,
+      "hint": "Si los valores están muy separados, una tabla de saltos desperdiciaría demasiada memoria.",
+      "explanation": "Cuando los casos de un switch están dispersos, la alternativa más eficiente en espacio es realizar comparaciones secuenciales o bien estructurar un árbol binario de comparaciones para optimizar el tiempo de búsqueda, evitando las tablas de saltos con huecos."
+    },
+    {
+      "q": "En un array cuyos elementos son del tipo 'short' (enteros de 16 bits), ¿cuál es el incremento de dirección necesario para avanzar al siguiente elemento?",
+      "options": [
+        "1 byte.",
+        "2 bytes.",
+        "4 bytes."
+      ],
+      "correct": 1,
+      "hint": "Un entero corto de 16 bits ocupa exactamente dos posiciones de bytes en memoria.",
+      "explanation": "El tipo 'short' tiene un tamaño físico de 16 bits, lo que equivale a 2 bytes. Por tanto, para apuntar al siguiente elemento de un array de shorts, la dirección base del puntero debe incrementarse en 2."
+    },
+    {
+      "q": "¿Qué flag del registro CPSR se pone a 1 si una operación aritmética con signo produce un resultado fuera del rango representable en 32 bits?",
+      "options": [
+        "El flag C (Carry).",
+        "El flag V (Overflow).",
+        "El flag N (Negative)."
+      ],
+      "correct": 1,
+      "hint": "Overflow mide el desbordamiento en complemento a dos (aritmética con signo).",
+      "explanation": "La bandera V (Overflow) se activa si el resultado de una operación aritmética con signo excede el rango de representación de 32 bits ($[-2^{31}, 2^{31}-1]$)."
+    },
+    {
+      "q": "En la arquitectura ARM, ¿cómo se gestiona el préstamo (borrow) durante una instrucción de resta como 'SUB R0, R1, R2'?",
+      "options": [
+        "El flag C (Carry) actúa como un flag de acarreo invertido: C = 0 indica préstamo, C = 1 indica que no hubo préstamo.",
+        "El flag V indica el préstamo de forma directa.",
+        "No existe el concepto de préstamo en las restas de la arquitectura ARM."
+      ],
+      "correct": 0,
+      "hint": "En ARM, la resta se implementa sumando el complemento a dos del sustraendo.",
+      "explanation": "ARM implementa la resta $A - B$ como $A + \\bar{B} + 1$. De esta forma, si $A \\ge B$, no hay préstamo y la suma produce acarreo ($C=1$). Si $A < B$, se necesita préstamo y no hay acarreo ($C=0$). Por lo tanto, $C=0$ representa la presencia de préstamo (borrow)."
+    },
+    {
+      "q": "¿Cuál es el significado del sufijo de condición 'HI' (Higher) en las instrucciones ARMv7?",
+      "options": [
+        "Mayor con signo (N == V y Z == 0).",
+        "Mayor sin signo (C == 1 y Z == 0).",
+        "Menor sin signo (C == 0)."
+      ],
+      "correct": 1,
+      "hint": "HI se utiliza para comparaciones de números enteros sin signo.",
+      "explanation": "El sufijo de condición 'HI' (Higher) indica una comparación 'mayor que' para valores sin signo. Su condición lógica en flags es que exista carry y el resultado no sea cero: $C == 1$ y $Z == 0$."
+    },
+    {
+      "q": "¿Cuál es el significado del sufijo de condición 'LS' (Lower or Same) en las instrucciones ARMv7?",
+      "options": [
+        "Menor o igual sin signo (C == 0 o Z == 1).",
+        "Menor o igual con signo (N != V o Z == 1).",
+        "Menor estricto firmado (N != V)."
+      ],
+      "correct": 0,
+      "hint": "Es la condición complementaria a HI para comparaciones no firmadas.",
+      "explanation": "La condición 'LS' (Lower or Same) representa la relación menor o igual en aritmética sin signo. Se evalúa como verdadera si no hubo carry ($C == 0$) o si el resultado fue igual a cero ($Z == 1$)."
+    },
+    {
+      "q": "¿Qué problema de rendimiento se asocia con el procesamiento de instrucciones de salto ('B') en procesadores segmentados (pipelined)?",
+      "options": [
+        "Hacen que la memoria caché de datos se invalide por completo.",
+        "Producen burbujas o paradas en el cauce (branch penalty) debido a que las instrucciones siguientes precargadas en el pipeline deben ser descartadas.",
+        "Aumentan la impedancia eléctrica en el bus de direcciones."
+      ],
+      "correct": 1,
+      "hint": "La segmentación asume una ejecución continua; al cambiar el flujo se interrumpe esa secuencia.",
+      "explanation": "Cuando se toma un salto, la dirección de ejecución cambia. Las instrucciones que ya habían entrado en las etapas de búsqueda ('Fetch') y decodificación ('Decode') en el pipeline deben descartarse, lo que introduce ciclos perdidos denominados 'branch penalty'."
+    },
+    {
+      "q": "¿De qué manera el 'desenrollado de bucles' (loop unrolling) mejora el rendimiento de ejecución?",
+      "options": [
+        "Reduce la frecuencia de reloj necesaria para el procesador.",
+        "Disminuye los accesos a la memoria flash de instrucciones.",
+        "Reduce el número de evaluaciones de condición y saltos ejecutados a costa de aumentar el tamaño del código."
+      ],
+      "correct": 2,
+      "hint": "Esta técnica duplica o repite el cuerpo del bucle para procesar múltiples elementos por iteración.",
+      "explanation": "El desenrollado de bucles replica el cuerpo del bucle varias veces en el código fuente de ensamblador. Esto disminuye la cantidad total de veces que se realiza la comparación de límite y el salto de retorno, disminuyendo la sobrecarga de control del bucle."
+    },
+    {
+      "q": "Al ejecutar la instrucción 'LDRB R0, [R1]', ¿qué sucede con los 24 bits superiores del registro de destino R0?",
+      "options": [
+        "Se rellenan con ceros (extensión de cero).",
+        "Se rellenan copiando el bit de signo del byte cargado (extensión de signo).",
+        "Mantienen los valores previos que tuviera R0."
+      ],
+      "correct": 0,
+      "hint": "LDRB carga un byte sin signo y lo expande al tamaño del registro.",
+      "explanation": "La instrucción 'LDRB' (Load Register Byte) extrae un único byte de la memoria y lo almacena en el registro de 32 bits de destino, rellenando con ceros los 24 bits más significativos (extensión a cero)."
+    },
+    {
+      "q": "¿Qué diferencia fundamental hay entre 'LDRB' y 'LDRSB' al cargar un dato desde memoria?",
+      "options": [
+        "LDRSB solo lee de direcciones de memoria impares.",
+        "LDRSB realiza una extensión de signo para mantener el valor negativo o positivo del byte en 32 bits, mientras que LDRB extiende con ceros.",
+        "LDRSB es una instrucción que lee directamente de la pila."
+      ],
+      "correct": 1,
+      "hint": "La 'S' adicional en LDRSB hace referencia a 'Signed' (con signo).",
+      "explanation": "LDRB carga un byte y pone a cero los 24 bits superiores. LDRSB (Load Register Signed Byte) copia el bit 7 del byte cargado (el bit de signo) en los 24 bits superiores del registro de destino, preservando el valor en complemento a dos."
+    },
+    {
+      "q": "En el formato de codificación de instrucciones ARM de 32 bits, ¿cómo se representan los operandos inmediatos en las instrucciones de procesamiento de datos?",
+      "options": [
+        "Como un entero de 12 bits con signo directo.",
+        "Mediante un valor de 8 bits rotado a la derecha un número par de posiciones (codificado en 4 bits).",
+        "Como una dirección absoluta de memoria de 12 bits."
+      ],
+      "correct": 1,
+      "hint": "Dado que la instrucción completa mide 32 bits, no hay espacio para un inmediato de 32 bits directo.",
+      "explanation": "Para encajar un operando inmediato en los 12 bits disponibles del formato de instrucción, ARM utiliza un esquema donde 8 bits representan una constante de 0 a 255 y 4 bits especifican una rotación a la derecha de $2 \\times \\text{rotación}$ bits (de 0 a 30 posiciones pares)."
+    },
+    {
+      "q": "En la arquitectura ARM de 32 bits, ¿cuál es el requisito de alineación por defecto para la carga y almacenamiento de una palabra ('word') de 32 bits?",
+      "options": [
+        "No requiere alineación, puede cargarse en cualquier dirección de memoria.",
+        "La dirección de memoria de acceso debe ser múltiplo de 4.",
+        "La dirección de memoria debe ser impar."
+      ],
+      "correct": 1,
+      "hint": "Una palabra de 32 bits son 4 bytes. La alineación natural coincide con su tamaño.",
+      "explanation": "Por defecto, el procesador ARM estándar requiere que los accesos a palabras completas (32 bits / 4 bytes) estén alineados a límites de palabra, es decir, la dirección de acceso a memoria debe terminar en bits binarios '00' (ser múltiplo de 4)."
+    },
+    {
+      "q": "En procesadores ARM con arquitectura ARMv7-A que soportan el set de instrucciones Thumb-2, ¿cuál es el propósito del bloque 'IT' (If-Then)?",
+      "options": [
+        "Definir el inicio de un bucle iterativo de hardware de alta velocidad.",
+        "Permitir la ejecución condicional de hasta cuatro instrucciones consecutivas en modo Thumb.",
+        "Establecer la zona de almacenamiento temporal de variables locales."
+      ],
+      "correct": 1,
+      "hint": "Thumb-2 no tiene espacio para codificar condiciones en cada instrucción; IT suple esta carencia.",
+      "explanation": "El bloque 'IT' (If-Then) de Thumb-2 permite simular la ejecución condicional nativa de ARM. Define una secuencia de hasta cuatro instrucciones siguientes indicando si se ejecutan si la condición se cumple ('T' - Then) o si es falsa ('E' - Else)."
+    },
+    {
+      "q": "¿Qué bits del formato de instrucción ARM de 32 bits se reservan para codificar la condición de ejecución (como EQ, NE, GT, etc.)?",
+      "options": [
+        "Los 4 bits más significativos (bits 31:28).",
+        "Los 4 bits menos significativos (bits 3:0).",
+        "Los bits intermedios del opcode (bits 15:12)."
+      ],
+      "correct": 0,
+      "hint": "Las condiciones están al principio de la codificación de la instrucción.",
+      "explanation": "Los 4 bits superiores de casi todas las instrucciones ARM de 32 bits (bits [31:28]) se utilizan para especificar la condición bajo la cual se ejecuta la instrucción."
+    },
+    {
+      "q": "Si R0 contiene 0x2000 (dirección de memoria) y ejecutamos 'LDRSB R1, [R0]' cargando el valor de memoria 0x9A, ¿qué valor decimal tendrá R1?",
+      "options": [
+        "154 (0x0000009A).",
+        "-102 (0xFFFFFF9A).",
+        "-154 (0xFFFFFF66)."
+      ],
+      "correct": 1,
+      "hint": "0x9A en binario es 10011010. El bit de signo está activo (1).",
+      "explanation": "El valor 0x9A tiene el bit 7 (bit de signo del byte) a 1. Con 'LDRSB', se extiende el signo de 8 bits a 32 bits, resultando en 0xFFFFFF9A en el registro R1. En complemento a dos, 0xFFFFFF9A es $-102$ decimal."
+    },
+    {
+      "q": "Durante la traducción de la expresión condicional 'if (A && B)' en C, ¿qué optimización realiza un compilador estándar para mejorar el rendimiento?",
+      "options": [
+        "Evaluación en cortocircuito: si la condición A es falsa, se salta inmediatamente al bloque else sin evaluar B.",
+        "Evaluación paralela obligatoria de ambas condiciones en la ALU.",
+        "Retrasar la evaluación de A y B hasta la salida del bucle principal."
+      ],
+      "correct": 0,
+      "hint": "Si el primer término de un AND lógico es falso, el resultado completo ya no puede ser verdadero.",
+      "explanation": "La evaluación en cortocircuito traduce la expresión de manera que si la primera condición $A$ falla, no tiene sentido evaluar $B$. El código ensamblador generado salta directamente al bloque 'else' o al final del 'if' tras evaluar $A$, ahorrando ciclos."
+    },
+    {
+      "q": "Dada una matriz bidimensional 'int M[5][10]' de enteros de 32 bits con base en R0, ¿qué fórmula matemática representa la dirección de memoria para el elemento M[i][j] (Row-Major)?",
+      "options": [
+        "R0 + (i * 5 + j) * 4",
+        "R0 + (i * 10 + j) * 4",
+        "R0 + (i + j * 10) * 4"
+      ],
+      "correct": 1,
+      "hint": "Cada fila contiene 10 columnas, y cada entero ocupa 4 bytes.",
+      "explanation": "Para una matriz de tamaño $N \\times M$ almacenada por filas, el índice plano es $i \\times M + j$. Aquí $M = 10$ columnas. Dado que cada entero son 4 bytes, el desplazamiento en bytes es $(i \\times 10 + j) \\times 4$. La dirección es la base $R0$ más dicho desplazamiento."
+    },
+    {
+      "q": "¿Qué realiza la instrucción 'LDMIA SP!, {R4-R7, PC}' al final de una función en ARM?",
+      "options": [
+        "Carga los valores de R4 a R7 y el PC desde la pila, incrementando el SP y retornando de la subrutina.",
+        "Almacena los registros R4 a R7 y el PC en la pila, decrementando el SP.",
+        "Escribe un bloque de memoria de forma secuencial sin alterar el puntero SP."
+      ],
+      "correct": 0,
+      "hint": "LDMIA significa Load Multiple Increment After, y el símbolo '!' indica actualización del SP.",
+      "explanation": "La instrucción 'LDMIA SP!' recupera múltiples registros de la pila. Cargar R4-R7 y el PC restaura las variables guardadas y coloca la dirección de retorno guardada en el PC, forzando un retorno automático de la subrutina."
+    },
+    {
+      "q": "¿Cómo guarda el procesador ARM la dirección de retorno cuando ejecuta la instrucción 'BL subrutina'?",
+      "options": [
+        "Guarda la dirección de la siguiente instrucción en la pila del sistema.",
+        "Copia la dirección de la siguiente instrucción en el registro Link Register (R14).",
+        "Guarda la dirección actual en el registro R0 de forma temporal."
+      ],
+      "correct": 1,
+      "hint": "BL significa Branch with Link (Salto con Enlace). El 'enlace' es un registro físico.",
+      "explanation": "A diferencia de arquitecturas x86 que guardan la dirección de retorno directamente en la pila, ARM utiliza el registro de enlace LR (R14) para guardar dicha dirección de forma rápida sin acceder a memoria."
+    },
+    {
+      "q": "¿Cuál es el método más rápido en ARM para retornar de una función hoja (una función que no llama a otra función)?",
+      "options": [
+        "Ejecutar la instrucción 'BX LR' o 'MOV PC, LR'.",
+        "Ejecutar 'POP {PC}' sin haber hecho PUSH previo.",
+        "Hacer un salto directo incondicional a la dirección 0x00000000."
+      ],
+      "correct": 0,
+      "hint": "La dirección de retorno ya está disponible en el registro R14 (LR). No es necesario leer la pila.",
+      "explanation": "Para funciones hoja, la dirección de retorno se mantiene intacta en el registro LR. Retornar requiere simplemente copiar el valor de LR al PC, lo cual se logra eficientemente mediante 'BX LR' o 'MOV PC, LR'."
+    },
+    {
+      "q": "En un sistema con arquitectura Von Neumann, ¿qué componente de la CPU se encarga de descodificar la instrucción y generar las señales de control correspondientes para las transferencias de bus?",
+      "options": [
+        "La Unidad de Control (UC).",
+        "La Unidad Aritmético Lógica (ALU).",
+        "El Registro de Datos de Memoria (MDR)."
+      ],
+      "correct": 0,
+      "hint": "Es la parte encargada de dirigir y coordinar todo el flujo de datos del procesador.",
+      "explanation": "La Unidad de Control (UC) es el componente fundamental que interpreta los opcodes de las instrucciones leídas de memoria y activa las señales de control para que la ALU, los registros y el bus realicen las operaciones deseadas."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Se desea implementar en ensamblador ARM el bucle 'while (R0 <= 10) { R1++; }'. Rellene el espacio:\n```assembly\nbucle: CMP R0, #10\n       ____ fin\n       ADD R1, R1, #1\n       B bucle\nfin:\n```",
+      "options": [
+        "BGT",
+        "BLE",
+        "BGE"
+      ],
+      "correct": 0,
+      "hint": "Queremos salir del bucle cuando la condición contraria sea verdadera (R0 > 10).",
+      "explanation": "Para salir del bucle en cuanto R0 sea estrictamente mayor que 10, la comparación 'CMP R0, #10' debe ir acompañada de un salto condicional si es mayor: 'BGT fin'."
+    },
+    {
+      "q": "Para implementar la estructura condicional en C: 'if (R0 == 0) { R1 = 5; } else { R1 = 10; }', complete la instrucción:\n```assembly\n       CMP R0, #0\n       ____ else_block\n       MOV R1, #5\n       B end_if\nelse_block:\n       MOV R1, #10\nend_if:\n```",
+      "options": [
+        "BNE",
+        "BEQ",
+        "BGT"
+      ],
+      "correct": 0,
+      "hint": "Debemos saltar al bloque else si R0 no es igual a 0.",
+      "explanation": "La instrucción 'BNE' (Branch if Not Equal) realiza el salto al bloque else cuando el resultado de la comparación indica que R0 no es igual a 0 (flag Z == 0)."
+    },
+    {
+      "q": "Se desea recorrer un vector de tipo 'int' (4 bytes) incrementando el puntero R1 antes de cada acceso (pre-indexado). Rellene el espacio:\n```assembly\n       LDR R2, [R1, ____]!\n```",
+      "options": [
+        "#4",
+        "R0",
+        "[R0]"
+      ],
+      "correct": 0,
+      "hint": "Un int ocupa 4 bytes y queremos avanzar al siguiente elemento.",
+      "explanation": "El direccionamiento pre-indexado con actualización utiliza la sintaxis '[R1, #desplazamiento]!'. Para enteros, el tamaño es 4 bytes, por lo que se escribe '[R1, #4]!'."
+    },
+    {
+      "q": "Complete la instrucción para leer un elemento de un vector e incrementar el puntero R1 después del acceso en 4 bytes (post-indexado):\n```assembly\n       LDR R0, ____\n```",
+      "options": [
+        "[R1], #4",
+        "[R1, #4]",
+        "[R1, #4]!"
+      ],
+      "correct": 0,
+      "hint": "En post-indexado, el desplazamiento va fuera de los corchetes.",
+      "explanation": "El direccionamiento post-indexado se escribe indicando el registro base entre corchetes, y el desplazamiento fuera de ellos: '[R1], #4'."
+    },
+    {
+      "q": "Deseamos implementar un contador de iteraciones en R3 para un bucle simple. Complete la instrucción para decrementar y actualizar las banderas:\n```assembly\nloop:  ; cuerpo del bucle\n       ____ R3, R3, #1\n       BNE loop\n```",
+      "options": [
+        "SUB",
+        "SUBS",
+        "DEC"
+      ],
+      "correct": 1,
+      "hint": "Se necesita actualizar los flags en la resta para que BNE funcione.",
+      "explanation": "La instrucción 'SUBS' resta 1 de R3 y actualiza las banderas del CPSR. Si el resultado es distinto de cero (Z=0), el salto 'BNE' vuelve al bucle."
+    },
+    {
+      "q": "Para retornar de una subrutina en ARM, complete el espacio en blanco de la instrucción:\n```assembly\n       BX ____\n```",
+      "options": [
+        "LR",
+        "PC",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "La dirección de retorno se guarda originalmente en el Link Register.",
+      "explanation": "La instrucción 'BX LR' realiza un salto indirecto a la dirección almacenada en el registro de enlace R14 (LR), retornando al llamador de la función."
+    },
+    {
+      "q": "Dado el bucle en C: 'for (int i = 0; i < 50; i += 2)'. Tradúzcalo completando el incremento:\n```assembly\n       MOV R0, #0\nloop:  CMP R0, #50\n       BGE fin\n       ; cuerpo del bucle\n       ADD R0, R0, ____\n       B loop\nfin:\n```",
+      "options": [
+        "#1",
+        "#2",
+        "#4"
+      ],
+      "correct": 1,
+      "hint": "El incremento de la variable de control es de 2 en cada ciclo.",
+      "explanation": "Para incrementar la variable de control 'i' (en R0) en 2 unidades, se debe emplear 'ADD R0, R0, #2'."
+    },
+    {
+      "q": "Se desea hacer un incremento condicional del registro R1 en 1 unidad únicamente si el valor R0 es estrictamente mayor que 10. Rellene el sufijo:\n```assembly\n       CMP R0, #10\n       ADD____ R1, R1, #1\n```",
+      "options": [
+        "GT",
+        "GE",
+        "HI"
+      ],
+      "correct": 0,
+      "hint": "La relación 'mayor que' firmado se identifica con el sufijo Greater Than.",
+      "explanation": "El sufijo condicional para mayor que firmado es 'GT'. La instrucción combinada es 'ADDGT R1, R1, #1'."
+    },
+    {
+      "q": "Para inicializar un contador a cero en el registro R0 de forma directa, complete la instrucción:\n```assembly\n       ____ R0, #0\n```",
+      "options": [
+        "CLR",
+        "MOV",
+        "LDR"
+      ],
+      "correct": 1,
+      "hint": "Se usa la instrucción Move para cargar inmediatos en registros.",
+      "explanation": "La instrucción 'MOV R0, #0' carga el valor inmediato cero directamente en el registro general R0."
+    },
+    {
+      "q": "Para acceder a un array de enteros de 32 bits usando un índice en R2 y la dirección base en R1, complete el desplazamiento lógico:\n```assembly\n       LDR R0, [R1, R2, LSL ____]\n```",
+      "options": [
+        "#2",
+        "#4",
+        "#1"
+      ],
+      "correct": 0,
+      "hint": "Cada entero mide 4 bytes. Desplazar a la izquierda un bit multiplica por 2.",
+      "explanation": "Desplazar a la izquierda 2 bits (LSL #2) equivale a multiplicar por $2^2 = 4$, que es el tamaño en bytes de un entero de 32 bits."
+    },
+    {
+      "q": "Se desea traducir: 'if (R0 < 0) { R1 = -R1; }'. Rellene el salto condicional para evitar el cuerpo cuando R0 sea positivo o cero:\n```assembly\n       CMP R0, #0\n       B____ positivo_o_cero\n       NEG R1, R1\npositivo_o_cero:\n```",
+      "options": [
+        "PL",
+        "MI",
+        "GE"
+      ],
+      "correct": 0,
+      "hint": "El flag de signo positivo o cero se denota por el sufijo Plus.",
+      "explanation": "El sufijo 'PL' (Plus) salta si el flag N es 0 (indica resultado positivo o cero). Si R0 >= 0, se cumple la condición de salto y se omite la negación."
+    },
+    {
+      "q": "Se desea verificar si el bit 0 de R0 es igual a 0. Complete el código:\n```assembly\n       ____ R0, #1\n       BEQ bit_es_cero\n```",
+      "options": [
+        "TST",
+        "TEQ",
+        "CMP"
+      ],
+      "correct": 0,
+      "hint": "La instrucción realiza un AND lógico y actualiza banderas sin almacenar el resultado.",
+      "explanation": "La instrucción 'TST' (Test) realiza un AND bit a bit entre R0 y #1. Si el bit 0 es 0, el resultado es cero y se activa la bandera Z, haciendo que 'BEQ' tome el salto."
+    },
+    {
+      "q": "Deseamos acceder a un vector de bytes ('char') cuya base está en R1 e índice en R2. Rellene el direccionamiento sin escala:\n```assembly\n       LDRB R0, [R1, ____]\n```",
+      "options": [
+        "R2",
+        "R2, LSL #2",
+        "R2, LSL #1"
+      ],
+      "correct": 0,
+      "hint": "Un byte no requiere escalado, pues su tamaño es 1 byte.",
+      "explanation": "Dado que cada elemento de tipo byte ocupa 1 byte, el desplazamiento es directo por el índice R2, por lo que basta con escribir '[R1, R2]'."
+    },
+    {
+      "q": "Se requiere realizar un salto condicional si R0 no es igual a R1. Rellene la instrucción:\n```assembly\n       CMP R0, R1\n       B____ label_diferentes\n```",
+      "options": [
+        "NE",
+        "EQ",
+        "VS"
+      ],
+      "correct": 0,
+      "hint": "El sufijo Not Equal es el adecuado en este caso.",
+      "explanation": "El sufijo condicional para no igual es 'NE'. Por tanto, 'BNE label_diferentes' salta si el resultado de la comparación indica desigualdad."
+    },
+    {
+      "q": "Se desea implementar un bucle que recorra 10 elementos de un vector de enteros empleando R1 como índice de bucle (de 0 a 9). Rellene el incremento del índice:\n```assembly\n       LDR R0, =vector\n       MOV R1, #0\nloop:  CMP R1, #10\n       BGE end\n       LDR R2, [R0, R1, LSL #2]\n       ADD R3, R3, R2\n       ADD R1, R1, ____\n       B loop\nend:\n```",
+      "options": [
+        "#1",
+        "#4",
+        "#2"
+      ],
+      "correct": 0,
+      "hint": "El direccionamiento LSL #2 ya escala el índice R1 por 4.",
+      "explanation": "El índice R1 actúa como contador lógico (0, 1, 2, ...). Dado que el direccionamiento realiza el escalado lógico de escala 4 mediante 'LSL #2', R1 se debe incrementar en '1' en cada ciclo."
+    },
+    {
+      "q": "Traduzca un bucle do-while firmado: 'do { R0 += R1; } while (R0 < 100);'. Complete la condición de salto de vuelta:\n```assembly\nloop:  ADD R0, R0, R1\n       CMP R0, #100\n       B____ loop\n```",
+      "options": [
+        "LO",
+        "LT",
+        "LE"
+      ],
+      "correct": 1,
+      "hint": "La relación 'menor estricto firmado' utiliza Less Than.",
+      "explanation": "La relación '<' con signo corresponde al sufijo 'LT' (Less Than). Así, 'BLT loop' mantiene el bucle activo mientras R0 < 100."
+    },
+    {
+      "q": "Una instrucción de resta condicional 'SUBLE R1, R1, R2' se ejecutará únicamente si las banderas cumplen:\n```\n       Z == 1 OR ____\n```",
+      "options": [
+        "N != V",
+        "N == V",
+        "C == 0"
+      ],
+      "correct": 0,
+      "hint": "LE es la condición firmado menor o igual.",
+      "explanation": "La condición condicional 'LE' (Less or Equal) firmado se cumple si el resultado es igual a cero ($Z == 1$) o si es menor estricto ($N \\neq V$)."
+    },
+    {
+      "q": "Deseamos cargar la dirección de memoria de una variable global en R0. Rellene la instrucción:\n```assembly\n       ____ R0, =mi_variable\n```",
+      "options": [
+        "LDR",
+        "MOV",
+        "STR"
+      ],
+      "correct": 0,
+      "hint": "Es una pseudo-instrucción para cargar una dirección de 32 bits de la tabla de literales.",
+      "explanation": "La pseudo-instrucción 'LDR R0, =mi_variable' indica al ensamblador que coloque la dirección de 32 bits de 'mi_variable' en una celda de la tabla de literales y genere un LDR relativo al PC para leer dicha dirección."
+    },
+    {
+      "q": "Queremos implementar: 'if (R0 >= R1 && R2 < R3) { R4 = 1; }'. Rellene el salto condicional:\n```assembly\n       CMP R0, R1\n       BLT else_block\n       CMP R2, R3\n       ____ else_block\n       MOV R4, #1\nelse_block:\n```",
+      "options": [
+        "BGE",
+        "BGT",
+        "BGE"
+      ],
+      "correct": 0,
+      "hint": "Queremos saltar al else si la segunda condición (R2 < R3) es falsa, es decir, si R2 >= R3.",
+      "explanation": "Para saltar al bloque else si la condición $R2 < R3$ es falsa, evaluamos si $R2 \\ge R3$ mediante la instrucción 'BGE else_block'."
+    },
+    {
+      "q": "Para guardar el registro R4 y la dirección de retorno en la pila al inicio de una función, complete el espacio:\n```assembly\n       PUSH {R4, ____}\n```",
+      "options": [
+        "LR",
+        "PC",
+        "SP"
+      ],
+      "correct": 0,
+      "hint": "La dirección de retorno en la llamada a subrutina se ubica en R14.",
+      "explanation": "Al entrar a una función no hoja, debemos salvaguardar el Link Register (LR) junto con los registros preservados como R4 mediante 'PUSH {R4, LR}'."
+    },
+    {
+      "q": "¿Qué modos de direccionamiento de carga/almacenamiento se pueden emplear en ARMv7 para recorrer vectores de forma iterativa?",
+      "options": [
+        "Direccionamiento indexado simple sin actualización del registro base.",
+        "Direccionamiento pre-indexado o post-indexado con actualización del registro base (Writeback).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Se pueden usar índices fijos sumados al registro base o avanzar el puntero automáticamente.",
+      "explanation": "El programador puede optar por calcular el desplazamiento en cada ciclo manualmente (indexado simple) o bien usar modos que actualizan el registro puntero de forma automática (pre o post-indexado con writeback). Todas las opciones anteriores son correctas."
+    },
+    {
+      "q": "¿Qué banderas de estado del CPSR pueden sufrir modificaciones tras ejecutar una instrucción aritmética con el sufijo 'S' (como ADDS)?",
+      "options": [
+        "Banderas de Cero (Z) y Negativo (N).",
+        "Banderas de Acarreo (C) y Desbordamiento (V).",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Las banderas aritméticas estándar son cuatro y se agrupan en el registro de estado.",
+      "explanation": "Cualquier instrucción de tipo aritmético-lógico con sufijo 'S' actualiza el conjunto completo de banderas del CPSR: N (Negative), Z (Zero), C (Carry) y V (Overflow). Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "¿Cuáles son las ventajas de utilizar ejecución condicional (como 'SUBNE R0, R0, R1') en lugar de saltar con instrucciones de bifurcación ('BNE')?",
+      "options": [
+        "Evita paradas del cauce (pipeline stalls) al no alterar el secuenciamiento del Program Counter.",
+        "Reduce el tamaño total del código en memoria al no requerir instrucciones de salto y etiquetas auxiliares.",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere el impacto de los saltos condicionales en el pipeline y el espacio de código.",
+      "explanation": "La ejecución condicional de datos previene los fallos de predicción de salto en pipelines profundos y compacta el código eliminando saltos. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "Al implementar la estructura condicional de selección múltiple 'switch' de C en ensamblador, ¿cuál de los siguientes enfoques de traducción es válido?",
+      "options": [
+        "Estructura secuencial de comparaciones y saltos (equivalente a if-else-if).",
+        "Tabla de saltos indexada (jump table) con las direcciones de las etiquetas de los casos.",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Dependiendo de la densidad de los casos del switch, se eligen distintas técnicas de optimización.",
+      "explanation": "El compilador genera una serie de CMP/bifurcaciones si hay pocos casos disjuntos, o una tabla de saltos indexada si los casos son densos y continuos. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "¿Qué datos son necesarios para realizar el cálculo del desplazamiento en bytes (offset) de un elemento específico dentro de un array unidimensional?",
+      "options": [
+        "El índice lógico del elemento al que se desea acceder.",
+        "El tamaño físico del tipo de dato del array en bytes (1 para char, 2 para short, 4 para int, etc.).",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El desplazamiento es proporcional a la posición relativa y al tamaño de cada dato.",
+      "explanation": "El offset se calcula con la expresión $\\text{índice} \\times \\text{tamaño del tipo de dato}$. Por ende, se requieren tanto el índice como el tamaño físico. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "En la optimización de bucles en ensamblador ARM, ¿qué técnicas reducen la cantidad de instrucciones de salto ejecutadas?",
+      "options": [
+        "Desenrollado de bucles (loop unrolling).",
+        "Bucle descendente comparando contra cero implícitamente mediante la instrucción 'SUBS R0, R0, #1'.",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambas técnicas mitigan la sobrecarga asociada al control de las iteraciones.",
+      "explanation": "El desenrollado de bucles reduce el número de comprobaciones del bucle, y el bucle descendente elimina la instrucción 'CMP' al evaluar las banderas directamente de la resta. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "¿Qué instrucciones de ARMv7 alteran el flujo de instrucciones secuencial modificando el PC?",
+      "options": [
+        "Instrucciones de bifurcación incondicional 'B' o condicional 'BEQ'.",
+        "Instrucción de llamada a subrutina 'BL' o asignación directa de registros 'MOV PC, LR'.",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier salto implica, de forma directa o indirecta, alterar el registro R15 (PC).",
+      "explanation": "Las instrucciones de salto modulan el PC de forma relativa, 'BL' guarda el retorno y salta, y 'MOV PC, LR' o 'BX LR' escriben el PC directamente. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "¿Qué situaciones hacen que la bandera Z (Zero) del CPSR se ponga a 1 tras realizar la operación 'CMP R0, R1'?",
+      "options": [
+        "Que los valores almacenados en los registros R0 y R1 sean idénticos.",
+        "Que el resultado matemático interno de la resta R0 - R1 sea exactamente igual a cero.",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Z = 1 indica resultado nulo. Relaciónalo con la resta interna de CMP.",
+      "explanation": "La instrucción CMP realiza $R0 - R1$. Si los valores son idénticos, la resta matemática es cero, lo que activa el flag de cero ($Z=1$). Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son componentes del direccionamiento con registro desplazado 'LDR R0, [R1, R2, LSL #2]'?",
+      "options": [
+        "Un registro base (R1) que contiene la dirección de inicio.",
+        "Un registro índice (R2) y una cantidad de desplazamiento lógico constante (LSL #2).",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analice los parámetros internos de los corchetes en este direccionamiento indexado.",
+      "explanation": "Este direccionamiento compuesto consta del registro base R1, el registro de índice R2 y el operador barrel shifter que multiplica el índice por 4. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "¿Cuál es la importancia del registro de enlace LR (R14) en las llamadas a subrutinas?",
+      "options": [
+        "Almacena la dirección de retorno de forma automática al ejecutar una instrucción 'BL'.",
+        "Permite regresar rápidamente a la función llamadora con instrucciones como 'BX LR' o 'MOV PC, LR'.",
+        "Todas las respuestas anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El LR guarda la dirección a la que debe volver el procesador una vez termine la subrutina.",
+      "explanation": "El registro LR (R14) almacena la dirección de retorno en llamadas a función con enlace y se usa para restaurar el PC al finalizar la ejecución. Todas las respuestas anteriores son correctas."
+    },
+    {
+      "q": "Se ejecuta 'CMP R0, R1' con R0 = 10 y R1 = 20 (enteros con signo). ¿Cuál de las siguientes condiciones de banderas indica correctamente que R0 < R1?",
+      "options": [
+        "Z == 1",
+        "N == V y Z == 0",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La condición firmado menor estricto (LT) tiene una expresión de bandera muy característica.",
+      "explanation": "La condición para menor firmado estricto (LT) es $N \\neq V$. Ninguna de las opciones anteriores muestra esta condición lógica de banderas."
+    },
+    {
+      "q": "¿Qué instrucción realiza una suma condicional 'R1 = R1 + 5' únicamente si el resultado anterior fue negativo (flag N = 1)?",
+      "options": [
+        "ADDPL R1, R1, #5",
+        "ADDVS R1, R1, #5",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Busque el sufijo condicional correspondiente a negativo (Minus).",
+      "explanation": "La condición para ejecutar si es negativo ($N=1$) es 'MI' (Minus), resultando en 'ADDMI R1, R1, #5'. 'PL' representa positivo o cero y 'VS' representa desbordamiento, por lo que ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "¿Qué instrucción ensamblador ARM equivale a la sentencia 'vector[i] = R0;' (con vector de enteros de 32 bits, dirección base en R1 e índice i en R2)?",
+      "options": [
+        "LDR R0, [R1, R2, LSL #2]",
+        "STR R0, [R1, R2]",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "La operación es de almacenamiento en memoria (Store) y los enteros requieren escalado.",
+      "explanation": "La instrucción correcta es 'STR R0, [R1, R2, LSL #2]'. La primera opción carga datos (LDR) en lugar de escribirlos, y la segunda no escala por 4 el índice R2. Ninguna de las respuestas anteriores es correcta."
+    },
+    {
+      "q": "Si R1 vale 0x1000, ¿cuál es el valor final de R1 tras la ejecución de la instrucción de carga 'LDR R0, [R1], #4'?",
+      "options": [
+        "0x0FFF",
+        "0x1000",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Es post-indexado, el puntero se incrementa en el valor inmediato después del acceso.",
+      "explanation": "En el direccionamiento post-indexado 'LDR R0, [R1], #4', el puntero R1 se actualiza sumándole 4 bytes. Por ende, el valor final de R1 es 0x1004. Ninguna de las respuestas anteriores es correcta."
+    },
+    {
+      "q": "Para un vector de variables de tipo 'double' (64 bits, 8 bytes de tamaño) con base en R0, ¿qué desplazamiento inmediato en bytes corresponde a la posición vector[5]?",
+      "options": [
+        "20 bytes.",
+        "32 bytes.",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Multiplique la posición del elemento por el tamaño del double en bytes.",
+      "explanation": "El desplazamiento es de $5 \\times 8 = 40$ bytes. Ninguna de las opciones anteriores de 20 o 32 es correcta."
+    },
+    {
+      "q": "Si deseamos implementar un bucle infinito en ensamblador ARMv7 y el registro PC lee 0x2000, ¿qué valor exacto debe escribirse en el registro PC para saltar a 0x1000?",
+      "options": [
+        "0x2000",
+        "0x2008",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El Program Counter almacena la dirección exacta a la que debe saltar el flujo de ejecución.",
+      "explanation": "Para transferir el flujo a la dirección 0x1000, el valor que se debe escribir en el registro PC es exactamente 0x1000. Ninguna de las respuestas anteriores es correcta."
+    },
+    {
+      "q": "¿Qué instrucción de salto condicional se ejecuta si en una comparación anterior de enteros sin signo el primer operando fue menor o igual que el segundo?",
+      "options": [
+        "BLE etiqueta",
+        "BLT etiqueta",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "BLE y BLT se reservan para comparaciones firmadas. Busque el equivalente sin signo.",
+      "explanation": "Para números sin signo, la condición 'menor o igual' se representa mediante el sufijo 'LS' (Lower or Same). Las opciones propuestas BLE y BLT corresponden a comparaciones firmadas. Ninguna de las respuestas anteriores es correcta."
+    },
+    {
+      "q": "En un bucle optimizado descendente 'while (R0 > 0)', ¿cuál de las siguientes instrucciones decrementa R0 y actualiza banderas en un único ciclo sin usar CMP?",
+      "options": [
+        "SUB R0, R0, #1",
+        "DEC R0",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Se necesita el sufijo para alterar banderas y la instrucción de resta de ARM.",
+      "explanation": "La instrucción correcta es 'SUBS R0, R0, #1'. La primera opción (SUB) no altera banderas y la segunda (DEC) no existe en el set ARM. Ninguna de las respuestas anteriores es correcta."
+    },
+    {
+      "q": "Si la pila de datos crece hacia direcciones descendentes y el SP apunta al último elemento ocupado (Full Descending), ¿cuál es la instrucción correcta para almacenar R0 en la pila?",
+      "options": [
+        "STR R0, [SP], #-4",
+        "LDR R0, [SP, #-4]!",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Debe restar primero 4 a SP (pre-decremento) y luego guardar R0.",
+      "explanation": "Para una pila Full Descending, la inserción (push) requiere pre-decrementar el SP antes del almacenamiento: 'STR R0, [SP, #-4]!'. La primera opción usa post-decremento, y la segunda realiza una carga (LDR). Ninguna de las respuestas anteriores es correcta."
+    },
+    {
+      "q": "¿Cuál es el valor máximo en decimal que puede tomar el contador de programa (PC) en un microprocesador Von Neumann con un bus de direcciones de 16 bits?",
+      "options": [
+        "1048575",
+        "4294967295",
+        "Ninguna de las respuestas anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Calcule el rango máximo direccionable por 16 líneas de direccionamiento ($2^{16} - 1$).",
+      "explanation": "Un bus de 16 bits puede direccionar hasta $2^{16} = 65536$ posiciones de memoria diferentes, siendo la dirección máxima la 65535. Ninguna de las opciones anteriores es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": 1,
+      "title": "Trazado de un Bucle de Suma Sencillo",
+      "context": "Dado el siguiente fragmento de código ensamblador ARMv7:\n```assembly\nMOV R0, #0\nMOV R1, #0\nbucle:\n    ADD R0, R0, #1\n    ADD R1, R1, R0\n    CMP R0, #5\n    BLT bucle\n```",
+      "parts": [
+        {
+          "id": "1a",
+          "label": "a",
+          "question": "¿Cuál es el valor numérico final almacenado en el registro R0 al finalizar la ejecución del código?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle se repite incrementando $R0$ de 1 en 1. La condición de permanencia es $R0 < 5$. Cuando $R0$ se incrementa de 4 a 5, la comparación $R0 < 5$ ($5 < 5$) resulta falsa y el bucle termina, dejando en $R0$ el valor final de $5$."
+        },
+        {
+          "id": "1b",
+          "label": "b",
+          "question": "¿Cuál es el valor numérico final acumulado en el registro R1 al terminar la ejecución?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "En cada ciclo se le suma el valor actual de $R0$ a $R1$. Los valores sucesivos sumados son $1, 2, 3, 4$ y $5$. Por lo tanto, el valor acumulado en $R1$ es la suma aritmética: $1+2+3+4+5 = 15$."
+        },
+        {
+          "id": "1c",
+          "label": "c",
+          "question": "¿Cuántas veces en total se ejecuta la instrucción de comparación 'CMP R0, #5'?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La instrucción de comparación se ejecuta al final de cada iteración del bucle. Dado que el bucle realiza exactamente 5 iteraciones (para $R0 = 1, 2, 3, 4, 5$), la instrucción de comparación se ejecuta $5$ veces."
+        },
+        {
+          "id": "1d",
+          "label": "d",
+          "question": "¿Cuántos bytes de memoria de programa ocupa este bloque de código si cada instrucción ARM ocupa 4 bytes?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El bloque de código consta de 6 instrucciones en total ('MOV', 'MOV', 'ADD', 'ADD', 'CMP', 'BLT'). Dado que cada instrucción estándar de ARM mide 32 bits (4 bytes), el tamaño total ocupado es $6 \\times 4 = 24$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Cálculo de Direcciones de Elementos de Array",
+      "context": "Considere un array unidimensional de enteros de 32 bits ('int') cuya dirección de memoria base se encuentra en la posición decimal 8192 (0x2000).",
+      "parts": [
+        {
+          "id": "2a",
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes (offset) correspondiente al elemento array[8]?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "Dado que cada elemento de tipo 'int' en un procesador ARM de 32 bits ocupa 4 bytes, el desplazamiento en bytes para el índice 8 es $\\text{index} \\times \\text{size} = 8 \\times 4 = 32$ bytes."
+        },
+        {
+          "id": "2b",
+          "label": "b",
+          "question": "¿Cuál es la dirección de memoria en decimal del elemento array[8]?",
+          "correctValue": 8224,
+          "tolerance": 0,
+          "explanation": "La dirección se calcula sumando la dirección base y el desplazamiento del elemento: $\\text{Dirección} = \\text{Base} + \\text{Offset} = 8192 + 32 = 8224$."
+        },
+        {
+          "id": "2c",
+          "label": "c",
+          "question": "Si el array fuera de elementos tipo 'short' (16 bits), ¿cuál sería el desplazamiento en bytes de array[8]?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Cada elemento de tipo 'short' ocupa 16 bits, lo que equivale a 2 bytes. Por tanto, el desplazamiento para el elemento 8 es $8 \\times 2 = 16$ bytes."
+        },
+        {
+          "id": "2d",
+          "label": "d",
+          "question": "Si el array fuera de bytes ('char'), ¿cuál sería el desplazamiento en bytes de array[8]?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Cada elemento de tipo 'char' ocupa 1 byte. Por tanto, el desplazamiento para el elemento 8 es simplemente $8 \\times 1 = 8$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Análisis de Bucles Anidados",
+      "context": "Dado el siguiente fragmento de código ensamblador:\n```assembly\nMOV R0, #3\nMOV R1, #2\nMOV R2, #0\nloop1:\n    MOV R3, R1\nloop2:\n    ADD R2, R2, #1\n    SUBS R3, R3, #1\n    BNE loop2\n    SUBS R0, R0, #1\n    BNE loop1\n```",
+      "parts": [
+        {
+          "id": "3a",
+          "label": "a",
+          "question": "¿Cuántas veces en total se ejecuta la instrucción 'ADD R2, R2, #1'?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El bucle externo se repite 3 veces (de $R0 = 3$ a $1$). En cada iteración de 'loop1', el bucle interno 'loop2' se ejecuta $R3 = R1 = 2$ veces. Por tanto, el número total de ejecuciones del cuerpo del bucle interno es $3 \\times 2 = 6$ veces."
+        },
+        {
+          "id": "3b",
+          "label": "b",
+          "question": "¿Cuál es el valor final almacenado en el registro R2?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Dado que el registro $R2$ se inicializa en 0 y la instrucción 'ADD R2, R2, #1' se ejecuta exactamente 6 veces en total, el valor final de $R2$ será $6$."
+        },
+        {
+          "id": "3c",
+          "label": "c",
+          "question": "¿Cuál es el valor final en el registro R0?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle externo decrementa $R0$ en cada iteración mediante 'SUBS R0, R0, #1' y salta con 'BNE' mientras no sea cero. Por tanto, el bucle termina precisamente cuando $R0$ alcanza el valor de $0$."
+        },
+        {
+          "id": "3d",
+          "label": "d",
+          "question": "¿Cuál es el valor final en el registro R3 al terminar la ejecución?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle interno 'loop2' termina cada vez que la instrucción 'SUBS R3, R3, #1' reduce el registro $R3$ a 0, haciendo que 'BNE' no salte. Por lo tanto, al finalizar la ejecución, el valor de $R3$ es necesariamente $0$."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Evaluación de Ejecución Condicional",
+      "context": "Dado el siguiente bloque de código:\n```assembly\nMOV R0, #10\nMOV R1, #5\nCMP R0, R1\nADDGT R2, R0, R1\nSUBLE R2, R0, R1\nADD R2, R2, #1\n```",
+      "parts": [
+        {
+          "id": "4a",
+          "label": "a",
+          "question": "¿Cuál es el valor final almacenado en el registro R2?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Comparamos $R0$ ($10$) y $R1$ ($5$). Como $10 > 5$, se cumple la condición GT (Greater Than) y se ejecuta 'ADDGT R2, R0, R1' dejando $R2 = 10 + 5 = 15$. La condición LE (Less or Equal) no se cumple, omitiéndose 'SUBLE'. Finalmente se ejecuta 'ADD R2, R2, #1' dando $R2 = 15 + 1 = 16$."
+        },
+        {
+          "id": "4b",
+          "label": "b",
+          "question": "¿Cuál es el resultado de la resta interna (R0 - R1) realizada por la instrucción CMP?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La instrucción 'CMP R0, R1' realiza internamente la resta $R0 - R1 = 10 - 5 = 5$, que determina el estado de los flags de condición."
+        },
+        {
+          "id": "4c",
+          "label": "c",
+          "question": "¿Cuántas instrucciones físicas en total procesa la CPU en este fragmento secuencial?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "A nivel físico, la CPU busca, decodifica y evalúa las 6 instrucciones secuenciales del bloque de forma consecutiva, independientemente de que se descarte la ejecución del cuerpo de 'SUBLE' tras la decodificación."
+        },
+        {
+          "id": "4d",
+          "label": "d",
+          "question": "Si cada instrucción consume 1 ciclo de reloj al no haber saltos, ¿cuántos ciclos consume la ejecución?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Al no producirse bifurcaciones del Program Counter (no hay instrucciones de salto 'B'), el cauce no sufre vaciados por salto y se ejecutan secuencialmente las 6 instrucciones en 6 ciclos."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Recorrido de Vector con Post-indexado",
+      "context": "Un puntero R0 apunta al inicio de un vector de enteros en la dirección decimal 4096. Ejecutamos la instrucción 'LDR R1, [R0], #4' dentro de un bucle de 5 iteraciones.",
+      "parts": [
+        {
+          "id": "5a",
+          "label": "a",
+          "question": "¿Cuál es el valor en decimal de R0 tras completarse la primera iteración?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "La instrucción 'LDR R1, [R0], #4' es post-indexada. Lee de la dirección original $R0 = 4096$ y luego suma el inmediato $4$ al registro base, dejando $R0 = 4096 + 4 = 4100$."
+        },
+        {
+          "id": "5b",
+          "label": "b",
+          "question": "¿Cuál es el valor en decimal de R0 tras finalizar las 5 iteraciones del bucle?",
+          "correctValue": 4116,
+          "tolerance": 0,
+          "explanation": "En cada una de las 5 iteraciones, el registro base $R0$ se incrementa en 4 bytes. Al final del bucle, el valor total acumulado en $R0$ será $\\text{Base} + 5 \\times 4 = 4096 + 20 = 4116$."
+        },
+        {
+          "id": "5c",
+          "label": "c",
+          "question": "¿Cuántos bytes de memoria en total ha leído el procesador tras las 5 iteraciones?",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "Cada lectura LDR accede a una palabra de 32 bits (4 bytes). En 5 iteraciones se leen $5 \\times 4 = 20$ bytes en total de la memoria."
+        },
+        {
+          "id": "5d",
+          "label": "d",
+          "question": "Si se empleara pre-indexado con actualización 'LDR R1, [R0, #4]!', ¿de qué dirección decimal se lee el primer elemento?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "El modo pre-indexado primero incrementa el registro base $R0$ por el valor inmediato y luego lee de la dirección calculada: $\\text{Dirección} = 4096 + 4 = 4100$."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Estado de las Banderas del CPSR",
+      "context": "Suponga que los registros R0 y R1 de una CPU ARMv7 contienen los valores R0 = 0xFFFFFFFF (representando -1) y R1 = 0x00000001 (representando 1). Se ejecuta 'CMP R0, R1'.",
+      "parts": [
+        {
+          "id": "6a",
+          "label": "a",
+          "question": "¿Cuál es el valor del flag Z (Zero) del CPSR tras la operación?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP realiza la resta de R0 - R1. $0xFFFFFFFF - 0x00000001 = 0xFFFFFFFE$. Como el resultado no es cero, el flag de cero $Z$ se pone a 0."
+        },
+        {
+          "id": "6b",
+          "label": "b",
+          "question": "¿Cuál es el valor del flag N (Negative) del CPSR tras la operación?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit más significativo (bit 31) del resultado de la resta ($0xFFFFFFFE$) es 1, indicando que el resultado es negativo. Por lo tanto, el flag $N$ se pone a 1."
+        },
+        {
+          "id": "6c",
+          "label": "c",
+          "question": "¿Cuál es el valor del flag C (Carry/no borrow) del CPSR tras la operación?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En resta ARM, $C = 1$ indica que no hubo préstamo (borrow). Dado que el operando sin signo R0 ($4294967295$) es mayor o igual que R1 ($1$), no hay préstamo y $C$ se establece en 1."
+        },
+        {
+          "id": "6d",
+          "label": "d",
+          "question": "¿Cuál es el valor del flag V (Overflow) del CPSR tras la operación?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La operación firmada es $-1 - 1 = -2$. Dado que $-2$ es representable en un registro de 32 bits firmado, no ocurre desbordamiento y el flag $V$ se pone a 0."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Trazado del Puntero de Pila (SP)",
+      "context": "Inicialmente, el Stack Pointer (SP) está inicializado en la dirección decimal 32768 (0x8000). Se ejecutan consecutivamente las siguientes operaciones en la pila:\n```assembly\nPUSH {R0-R3}\nPOP {R4-R5}\n```",
+      "parts": [
+        {
+          "id": "7a",
+          "label": "a",
+          "question": "¿Cuál es la dirección decimal de SP tras ejecutar la instrucción PUSH?",
+          "correctValue": 32752,
+          "tolerance": 0,
+          "explanation": "La pila en ARMv7 es Full Descending, por lo que crece hacia direcciones menores. PUSH de 4 registros (R0 a R3) almacena 4 palabras ($4 \\times 4 = 16$ bytes) y resta 16 del SP: $32768 - 16 = 32752$."
+        },
+        {
+          "id": "7b",
+          "label": "b",
+          "question": "¿Cuál es la dirección decimal de SP tras ejecutar la instrucción POP?",
+          "correctValue": 32760,
+          "tolerance": 0,
+          "explanation": "La instrucción POP recupera 2 registros (R4 y R5), lo cual libera 2 palabras ($2 \\times 4 = 8$ bytes) de la pila. El SP se incrementa en 8: $32752 + 8 = 32760$."
+        },
+        {
+          "id": "7c",
+          "label": "c",
+          "question": "¿Cuál es la variación neta (diferencia positiva) en bytes del valor del SP entre el estado inicial y el final?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El SP inició en 32768 y terminó en 32760. La variación neta del tamaño ocupado en la pila o el desplazamiento neto de SP es $32768 - 32760 = 8$ bytes."
+        },
+        {
+          "id": "7d",
+          "label": "d",
+          "question": "¿Cuántas palabras (registros de 32 bits) quedan acumuladas en la pila tras la secuencia?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Se introdujeron 4 palabras con PUSH y se extrajeron 2 palabras con POP. Quedan por tanto $4 - 2 = 2$ palabras pendientes de extraer en la pila."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Evaluación de Expresión Lógica de Cortocircuito",
+      "context": "Se traduce la expresión de C: `if (R0 > 5 || R1 > 5) { R2 = 1; } else { R2 = 0; }` a ensamblador ARM con evaluación en cortocircuito:\n```assembly\n    CMP R0, #5\n    BGT true_lbl\n    CMP R1, #5\n    BGT true_lbl\n    MOV R2, #0\n    B end_lbl\ntrue_lbl:\n    MOV R2, #1\nend_lbl:\n```",
+      "parts": [
+        {
+          "id": "8a",
+          "label": "a",
+          "question": "Si R0 = 3 y R1 = 7, ¿cuántas instrucciones de comparación (CMP) se ejecutarán en total?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La primera comparación 'CMP R0, #5' se ejecuta siempre. Como R0 (3) no es mayor que 5, el primer BGT no se toma. Luego se ejecuta obligatoriamente la segunda comparación 'CMP R1, #5' (2 en total)."
+        },
+        {
+          "id": "8b",
+          "label": "b",
+          "question": "Con R0 = 3 y R1 = 7, ¿cuál será el valor final en el registro R2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como la segunda condición se cumple (R1 = 7 > 5), el flujo salta a 'true_lbl' y se ejecuta la instrucción 'MOV R2, #1', asignando $1$ a $R2$."
+        },
+        {
+          "id": "8c",
+          "label": "c",
+          "question": "Si R0 = 10 y R1 = 2, ¿cuántas instrucciones de comparación (CMP) se ejecutarán en total?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Se ejecuta 'CMP R0, #5'. Como R0 (10) > 5, el primer salto 'BGT true_lbl' se toma inmediatamente por cortocircuito, omitiendo la segunda comparación. Por tanto, solo se ejecuta $1$ comparación."
+        },
+        {
+          "id": "8d",
+          "label": "d",
+          "question": "Si R0 = 2 y R1 = 2, ¿cuál será el valor final en el registro R2?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Ninguna de las dos condiciones se cumple ($2 > 5$ es falso). La ejecución continúa de forma secuencial por el bloque else, ejecutando 'MOV R2, #0'. R2 finaliza con $0$."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Cálculo de Saltos Relativos al PC",
+      "context": "En la arquitectura ARMv7, las instrucciones de bifurcación codifican un desplazamiento de palabra relativo al PC. Suponga que una instrucción de salto se encuentra en la dirección decimal 16376 (0x3FF8). El PC durante la etapa de ejecución de esta instrucción lee la dirección 16384 (0x4000) debido al prefetch del pipeline.",
+      "parts": [
+        {
+          "id": "9a",
+          "label": "a",
+          "question": "Si el destino del salto está en la dirección decimal 16408 (0x4018), ¿cuál es la diferencia en bytes entre la instrucción destino y la instrucción del salto?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "La diferencia física en bytes entre el destino y la instrucción de origen del salto es $\\text{Destino} - \\text{Origen} = 16408 - 16376 = 32$ bytes."
+        },
+        {
+          "id": "9b",
+          "label": "b",
+          "question": "¿Cuál es la diferencia en bytes entre la dirección de destino y el valor del PC de ejecución (0x4000)?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "El desplazamiento relativo real calculado por el hardware es $\\text{Destino} - \\text{PC} = 16408 - 16384 = 24$ bytes."
+        },
+        {
+          "id": "9c",
+          "label": "c",
+          "question": "¿Qué valor inmediato (en número de palabras) se codifica en el campo de desplazamiento de 24 bits de la instrucción de salto?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Dado que las instrucciones ocupan 4 bytes (1 palabra), el desplazamiento en bytes relativo al PC ($24$) se divide entre 4 para obtener el desplazamiento en número de palabras: $24 / 4 = 6$."
+        },
+        {
+          "id": "9d",
+          "label": "d",
+          "question": "Si el destino fuera un salto hacia atrás a la dirección decimal 16348, ¿qué valor con signo de palabras se codificaría en la instrucción?",
+          "correctValue": -9,
+          "tolerance": 0,
+          "explanation": "El desplazamiento relativo en bytes es $\\text{Destino} - \\text{PC} = 16348 - 16384 = -36$ bytes. En número de palabras con signo, este desplazamiento equivale a $-36 / 4 = -9$."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Direccionamiento de una Matriz Bidimensional",
+      "context": "Dada una matriz de enteros de 32 bits declarada en C como `int M[4][4]` almacenada en formato Row-Major con base en la dirección decimal 20480 (0x5000).",
+      "parts": [
+        {
+          "id": "10a",
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes (offset) para acceder al elemento M[2][1]?",
+          "correctValue": 36,
+          "tolerance": 0,
+          "explanation": "El índice plano en una matriz de $4 \\times 4$ es $\\text{fila} \\times \\text{columnas} + \\text{columna}$. Para M[2][1], el índice es $2 \\times 4 + 1 = 9$. Como cada entero de 32 bits mide 4 bytes, el offset es $9 \\times 4 = 36$ bytes."
+        },
+        {
+          "id": "10b",
+          "label": "b",
+          "question": "¿Cuál es la dirección decimal correspondiente a M[2][1]?",
+          "correctValue": 20516,
+          "tolerance": 0,
+          "explanation": "La dirección decimal de memoria se halla sumando el desplazamiento calculado a la dirección base: $\\text{Dirección} = 20480 + 36 = 20516$."
+        },
+        {
+          "id": "10c",
+          "label": "c",
+          "question": "¿Cuál es el desplazamiento en bytes para acceder al último elemento M[3][3]?",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "El índice plano del elemento M[3][3] es $3 \\times 4 + 3 = 15$. El desplazamiento en bytes es $15 \\times 4 = 60$ bytes."
+        },
+        {
+          "id": "10d",
+          "label": "d",
+          "question": "¿Cuál es el tamaño total de almacenamiento de la matriz M en bytes?",
+          "correctValue": 64,
+          "tolerance": 0,
+          "explanation": "La matriz contiene un total de $4 \\times 4 = 16$ celdas de enteros de 4 bytes de tamaño cada una. El tamaño total en memoria es $16 \\times 4 = 64$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Bucle con decremento anidado",
+      "context": "Dado el siguiente código:\n```assembly\nMOV R0, #0\nMOV R1, #4\nouter:\n    MOV R2, #3\ninner:\n    ADD R0, R0, #1\n    SUBS R2, R2, #1\n    BNE inner\n    SUBS R1, R1, #1\n    BNE outer\n```",
+      "parts": [
+        {
+          "id": "11a",
+          "label": "a",
+          "question": "¿Cuántas veces en total se ejecuta la instrucción 'ADD R0, R0, #1'?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El bucle externo ejecuta 4 pasadas. En cada una, el bucle interno ejecuta 3 pasadas. La instrucción interna se ejecuta $4 \\times 3 = 12$ veces."
+        },
+        {
+          "id": "11b",
+          "label": "b",
+          "question": "¿Cuál es el valor final en R0?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "R0 parte de 0 y se incrementa en 1 en cada iteración interna. Puesto que hay 12 iteraciones en total, R0 finaliza con 12."
+        },
+        {
+          "id": "11c",
+          "label": "c",
+          "question": "¿Cuál es el valor final en R1?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El registro R1 se decrementa de 4 a 0 para finalizar el bucle 'outer'. Termina en 0."
+        },
+        {
+          "id": "11d",
+          "label": "d",
+          "question": "¿Cuál es el valor final de R2 al terminar toda la ejecución del código?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al final del bucle 'inner', R2 es decrementado a 0 por SUBS antes de que BNE evalúe falso. Por tanto, R2 queda con valor 0."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Acceso indexado con Barrel Shifter",
+      "context": "Supongamos que R1 = 8192 (0x2000) y R2 = 3. Se ejecuta: 'LDR R0, [R1, R2, LSL #2]'.",
+      "parts": [
+        {
+          "id": "12a",
+          "label": "a",
+          "question": "¿Qué desplazamiento en bytes se le suma a R1 en esta instrucción?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "R2 contiene 3. 'LSL #2' desplaza 3 a la izquierda 2 posiciones, lo que equivale a multiplicar por 4: $3 \\times 4 = 12$ bytes."
+        },
+        {
+          "id": "12b",
+          "label": "b",
+          "question": "¿Cuál es la dirección de memoria decimal de la que se lee el valor?",
+          "correctValue": 8204,
+          "tolerance": 0,
+          "explanation": "La dirección es el resultado de sumarle el desplazamiento al registro base R1: $8192 + 12 = 8204$."
+        },
+        {
+          "id": "12c",
+          "label": "c",
+          "question": "Si se cambiara el escalado por 'LSL #3', ¿cuál sería el desplazamiento en bytes?",
+          "correctValue": 24,
+          "tolerance": 0,
+          "explanation": "'LSL #3' multiplica por $2^3 = 8$. Por tanto, el desplazamiento sería $3 \\times 8 = 24$ bytes."
+        },
+        {
+          "id": "12d",
+          "label": "d",
+          "question": "¿Qué valor decimal tiene R1 tras ejecutar la instrucción original (sin writeback)?",
+          "correctValue": 8192,
+          "tolerance": 0,
+          "explanation": "Al no emplearse el signo de exclamación '!', la instrucción no realiza actualización ('writeback') sobre el registro base R1, el cual mantiene su valor inicial de 8192."
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Bucle con Decremento Mayor a 1",
+      "context": "Dado el siguiente fragmento de código:\n```assembly\nMOV R0, #30\nMOV R1, #0\nbucle:\n    ADD R1, R1, #1\n    SUBS R0, R0, #3\n    BGT bucle\n```",
+      "parts": [
+        {
+          "id": "13a",
+          "label": "a",
+          "question": "¿Cuántas iteraciones del bucle se ejecutan?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El bucle decrementa R0 de 3 en 3 partiendo de 30. Los valores de R0 en la condición son: 27, 24, 21, 18, 15, 12, 9, 6, 3 y 0. Para R0 = 0, el salto 'BGT' (mayor que cero) es falso y se sale, habiendo iterado 10 veces."
+        },
+        {
+          "id": "13b",
+          "label": "b",
+          "question": "¿Cuál es el valor final en el registro R1?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "R1 se incrementa de 1 en 1 en cada iteración. Al haber 10 iteraciones, su valor final es 10."
+        },
+        {
+          "id": "13c",
+          "label": "c",
+          "question": "¿Cuál es el valor final en el registro R0?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En la décima iteración R0 se decrementa de 3 a 0. Este valor provoca la salida del bucle y queda como valor final."
+        },
+        {
+          "id": "13d",
+          "label": "d",
+          "question": "Si cambiamos 'BGT bucle' por 'BGE bucle', ¿cuántas iteraciones se ejecutarían?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Con BGE, cuando R0 llega a 0, la condición $0 \\ge 0$ es verdadera y se realiza una undécima iteración. R0 se decrementa a $-3$. Como $-3 < 0$, en la siguiente comprobación se sale del bucle."
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Trazado del Link Register en Subrutinas",
+      "context": "Asumiendo que cada instrucción ARM ocupa 4 bytes y que la función 'main' comienza en la dirección decimal 4096. Considere el código:\n```assembly\nmain:\n    BL sub1\n    ADD R0, R0, #1\nsub1:\n    PUSH {R4, LR}\n    BL sub2\n    POP {R4, PC}\nsub2:\n    ADD R4, R4, #1\n    BX LR\n```",
+      "parts": [
+        {
+          "id": "14a",
+          "label": "a",
+          "question": "¿Qué dirección decimal se almacena en el registro LR al ejecutarse 'BL sub1'?",
+          "correctValue": 4100,
+          "tolerance": 0,
+          "explanation": "La instrucción 'BL sub1' se ubica en la dirección 4096. La instrucción de retorno es 'ADD' en la dirección 4100. Por ende, LR almacena 4100."
+        },
+        {
+          "id": "14b",
+          "label": "b",
+          "question": "¿Cuántos bytes disminuye el puntero SP tras la instrucción 'PUSH {R4, LR}'?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El PUSH guarda dos registros de 32 bits (R4 y LR) en la pila. Como cada registro ocupa 4 bytes, el SP se reduce en $2 \\times 4 = 8$ bytes."
+        },
+        {
+          "id": "14c",
+          "label": "c",
+          "question": "¿Qué dirección decimal se escribe en LR cuando se ejecuta 'BL sub2' en la dirección 4108?",
+          "correctValue": 4112,
+          "tolerance": 0,
+          "explanation": "'BL sub2' está en la dirección 4108. La dirección de retorno es la de la instrucción 'POP' en la dirección 4112. Esta es la que se guarda en LR."
+        },
+        {
+          "id": "14d",
+          "label": "d",
+          "question": "¿Cuántas veces se ejecuta la instrucción 'BX LR' en total?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La subrutina 'sub2' se llama una vez y ejecuta 'BX LR'. El retorno de 'sub1' se hace cargando directamente el PC desde la pila con POP, omitiendo BX. Así, BX LR se ejecuta 1 vez."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Suma con Desbordamiento sin Signo",
+      "context": "Sean R0 = 0xFFFFFFF0 (4294967280) y R1 = 0x00000020 (32). Ejecutamos 'ADDS R2, R0, R1'.",
+      "parts": [
+        {
+          "id": "15a",
+          "label": "a",
+          "question": "¿Cuál es el valor resultante en R2 (en decimal)?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Suma matemática: $0xFFFFFFF0 + 0x20 = 0x100000010$. Al truncar el resultado a 32 bits, se obtiene $0x00000010$, que en decimal es 16."
+        },
+        {
+          "id": "15b",
+          "label": "b",
+          "question": "¿Cuál es el estado de la bandera Carry (C) tras la suma (0 o 1)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Dado que la suma aritmética excede el valor representable máximo sin signo de 32 bits ($2^{32}-1$), se genera un acarreo de salida, lo que pone a 1 el flag C."
+        },
+        {
+          "id": "15c",
+          "label": "c",
+          "question": "¿Cuál es el estado de la bandera Zero (Z) tras la suma (0 o 1)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El resultado final en el registro R2 es 16, el cual es distinto de cero. Por tanto, el flag Z se establece en 0."
+        },
+        {
+          "id": "15d",
+          "label": "d",
+          "question": "¿Cuál es el estado de la bandera Negative (N) tras la suma (0 o 1)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bit más significativo (bit 31) del resultado (16) es 0. Por tanto, la bandera N de negativo es 0."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Uso de Barrel Shifter y Aritmética",
+      "context": "Suponga R1 = 10 y R2 = 5.",
+      "parts": [
+        {
+          "id": "16a",
+          "label": "a",
+          "question": "Si ejecutamos 'ADD R0, R1, R2, LSL #3', ¿cuál es el valor final en R0?",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "'LSL #3' multiplica R2 por $2^3 = 8$. La operación es $R0 = R1 + R2 \\times 8 = 10 + 5 \\times 8 = 50$."
+        },
+        {
+          "id": "16b",
+          "label": "b",
+          "question": "¿Qué factor multiplicativo constante aplica el barrel shifter al registro R2 en la instrucción anterior?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El desplazamiento a la izquierda de 3 bits equivale a multiplicar el operando por $2^3 = 8$."
+        },
+        {
+          "id": "16c",
+          "label": "c",
+          "question": "Si la instrucción es 'ADD R0, R1, R2, LSR #1' con R2 = 5 y R1 = 10, ¿cuál es el valor final de R0?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "'LSR #1' realiza una división entera entre 2 sobre R2: $5 / 2 = 2$. Luego $R0 = 10 + 2 = 12$."
+        },
+        {
+          "id": "16d",
+          "label": "d",
+          "question": "Si ejecutamos 'ADD R0, R1, R2, ASR #1' con R2 = -6 (0xFFFFFFFA) y R1 = 10, ¿cuál es el valor en R0?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "'ASR #1' conserva el signo en el desplazamiento a la derecha. Para $-6$ da $-3$. La suma es $R0 = 10 + (-3) = 7$."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Banderas asociadas a Saltos Condicionales",
+      "context": "Analice los valores lógicos de banderas requeridos para activar saltos en la arquitectura ARM.",
+      "parts": [
+        {
+          "id": "17a",
+          "label": "a",
+          "question": "¿Qué valor debe tener la bandera Z (0 o 1) para que se tome el salto 'BEQ'?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El salto 'BEQ' (Branch if Equal) se toma si la comparación previa dio cero, lo que equivale a la bandera $Z = 1$."
+        },
+        {
+          "id": "17b",
+          "label": "b",
+          "question": "¿Qué valor debe tener la bandera C (0 o 1) para que se tome el salto 'BHS'?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "'BHS' (Branch if Higher or Same) se toma cuando la bandera de Carry está a 1, indicando que no hubo préstamo en la resta."
+        },
+        {
+          "id": "17c",
+          "label": "c",
+          "question": "¿Qué valor debe tener la bandera C (0 o 1) para que se tome el salto 'BLO'?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "'BLO' (Branch if Lower) representa menor sin signo. Se toma si la bandera de Carry es 0, lo que denota la existencia de préstamo."
+        },
+        {
+          "id": "17d",
+          "label": "d",
+          "question": "¿Qué valor debe tener la bandera N (0 o 1) para que se tome el salto 'BMI'?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "'BMI' (Branch if Minus) se toma cuando la última operación dio un resultado negativo, lo que equivale al flag $N = 1$."
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Análisis Temporal del Bucle de Control",
+      "context": "Un procesador trabaja a 10 MHz (ciclo de reloj = 100 ns). Un bucle que itera 100 veces ejecuta 4 instrucciones normales de 1 ciclo cada una y un salto que consume 3 ciclos si es tomado y 1 ciclo si no se toma.",
+      "parts": [
+        {
+          "id": "18a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj dura una iteración en la que el salto es tomado?",
+          "correctValue": 7,
+          "tolerance": 0,
+          "explanation": "Se ejecutan 4 instrucciones normales ($4 \\times 1 = 4$ ciclos) y el salto que al tomarse consume 3 ciclos, sumando un total de $4 + 3 = 7$ ciclos."
+        },
+        {
+          "id": "18b",
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj dura la iteración final (salto no tomado)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "Se ejecutan 4 instrucciones normales (4 ciclos) y el salto final que al no tomarse requiere solo 1 ciclo, sumando $4 + 1 = 5$ ciclos."
+        },
+        {
+          "id": "18c",
+          "label": "c",
+          "question": "¿Cuál es el número total de ciclos de reloj consumidos por el bucle completo?",
+          "correctValue": 698,
+          "tolerance": 0,
+          "explanation": "El bucle realiza 99 iteraciones con el salto tomado y 1 iteración final con el salto no tomado. El total de ciclos de reloj es $99 \\times 7 + 1 \\times 5 = 693 + 5 = 698$."
+        },
+        {
+          "id": "18d",
+          "label": "d",
+          "question": "¿Cuál es la duración total del bucle en microsegundos?",
+          "correctValue": 69.8,
+          "tolerance": 0.01,
+          "explanation": "La duración en nanosegundos es $698 \\times 100\\text{ ns} = 69800\\text{ ns}$. En microsegundos, esto equivale a $69800 / 1000 = 69.8$ microsegundos."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Máscaras Bit a Bit y Control Condicional",
+      "context": "Dado el siguiente bloque de código ARMv7:\n```assembly\nAND R0, R1, #0x0F\nCMP R0, #0x05\nADDNE R2, R2, #1\nADDEQ R3, R3, #1\n```\nSuponga R1 = 37 (0x25), R2 = 0 y R3 = 0.",
+      "parts": [
+        {
+          "id": "19a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal resultante en R0 tras la operación AND?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La operación AND bit a bit filtra los 4 bits inferiores de R1 ($0x25$). En binario, $0x25 \\text{ AND } 0x0F = 0x05$, que equivale a 5 en decimal."
+        },
+        {
+          "id": "19b",
+          "label": "b",
+          "question": "¿Cuál es el valor final almacenado en R2?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Comparamos R0 (5) con 5. Como son iguales, el flag Z se activa y la condición 'NE' (Not Equal) es falsa. 'ADDNE' no se ejecuta, por lo que R2 permanece en 0."
+        },
+        {
+          "id": "19c",
+          "label": "c",
+          "question": "¿Cuál es el valor final almacenado en R3?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Al cumplirse la igualdad en la comparación ($5 == 5$), la condición 'EQ' es verdadera. Se ejecuta 'ADDEQ R3, R3, #1', incrementando R3 de 0 a 1."
+        },
+        {
+          "id": "19d",
+          "label": "d",
+          "question": "Si R1 se inicializara con 42 (0x2A), ¿cuál sería el valor final de R3?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Con R1 = 0x2A, $R0 = 0x2A \\text{ AND } 0x0F = 0x0A = 10$. Al comparar 10 con 5, no hay igualdad. 'ADDEQ' se descarta y R3 se mantiene en 0."
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Direccionamiento Pre-indexado con Actualización",
+      "context": "Un puntero R0 contiene inicialmente la dirección decimal 12288 (0x3000). Ejecutamos 'LDR R1, [R0, #8]!'.",
+      "parts": [
+        {
+          "id": "20a",
+          "label": "a",
+          "question": "¿Cuál es la dirección decimal de memoria de la que se lee el valor?",
+          "correctValue": 12296,
+          "tolerance": 0,
+          "explanation": "El direccionamiento es pre-indexado. Suma el desplazamiento #8 a R0 antes de acceder a la dirección: $12288 + 8 = 12296$."
+        },
+        {
+          "id": "20b",
+          "label": "b",
+          "question": "¿Cuál es el valor de R0 en decimal tras ejecutar la instrucción?",
+          "correctValue": 12296,
+          "tolerance": 0,
+          "explanation": "La presencia del símbolo '!' indica writeback, por lo que el registro base R0 se actualiza con la dirección calculada: R0 = 12296."
+        },
+        {
+          "id": "20c",
+          "label": "c",
+          "question": "Si se vuelve a ejecutar la misma instrucción inmediatamente después, ¿de qué dirección decimal lee ahora?",
+          "correctValue": 12304,
+          "tolerance": 0,
+          "explanation": "En la segunda ejecución, R0 parte de 12296. Suma 8 bytes nuevamente para obtener la nueva dirección: $12296 + 8 = 12304$."
+        },
+        {
+          "id": "20d",
+          "label": "d",
+          "question": "¿Cuál es el incremento neto acumulado en R0 en decimal tras ambas ejecuciones?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "El puntero se incrementó en 8 bytes dos veces consecutivas, resultando en un incremento neto de $8 + 8 = 16$ bytes."
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Bucle de Extracción de Bits",
+      "context": "Dado el siguiente programa:\n```assembly\nMOV R0, #13\nMOV R1, #0\nbucle:\n    TST R0, #1\n    ADDNE R1, R1, #1\n    LSR R0, R0, #1\n    CMP R0, #0\n    BNE bucle\n```",
+      "parts": [
+        {
+          "id": "21a",
+          "label": "a",
+          "question": "¿Cuántas veces en total se ejecuta el cuerpo del bucle?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "R0 = 13 (binario 1101). En cada iteración R0 se desplaza un bit a la derecha (LSR): $13 \\rightarrow 6 \\rightarrow 3 \\rightarrow 1 \\rightarrow 0$. El bucle se repite mientras R0 != 0. Las iteraciones corresponden a R0 valiendo originalmente 13, 6, 3 y 1, sumando 4 ciclos."
+        },
+        {
+          "id": "21b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal almacenado en R1 al finalizar?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La instrucción 'TST R0, #1' comprueba si el bit menos significativo es 1. 'ADDNE' incrementa R1 si es así. Esto cuenta el número de unos binarios en 13 (1101), que es 3."
+        },
+        {
+          "id": "21c",
+          "label": "c",
+          "question": "¿Cuál es el valor final en R0?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando R0 llega a ser 0, ya que en ese momento la instrucción 'BNE bucle' encuentra que R0 == 0 y no toma la bifurcación."
+        },
+        {
+          "id": "21d",
+          "label": "d",
+          "question": "Si R0 se inicializara con 255 (0xFF), ¿cuál sería el valor final de R1?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El valor 255 se representa como 11111111 en binario (8 bits a 1). El algoritmo cuenta todos los bits activos, resultando en un conteo de 8."
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Alineación de Datos y Desplazamientos",
+      "context": "Un registro R0 apunta al inicio de una estructura de variables en C alineada en memoria RAM a partir de la dirección decimal 16384 (0x4000). La estructura se compone de:\n`char a; char b; short c; int d;`",
+      "parts": [
+        {
+          "id": "22a",
+          "label": "a",
+          "question": "¿Cuál es el desplazamiento en bytes (offset) de la variable short c?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La variable 'a' se sitúa en offset 0 y 'b' en offset 1. El tipo 'short' (16 bits/2 bytes) requiere estar alineado a una dirección múltiplo de 2. El offset 2 cumple esta condición sin relleno."
+        },
+        {
+          "id": "22b",
+          "label": "b",
+          "question": "¿Cuál es el desplazamiento en bytes (offset) de la variable int d?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La variable 'c' ocupa los offsets 2 y 3. El tipo 'int' (32 bits/4 bytes) exige alinearse a múltiplo de 4. Por ende, se ubica en el offset 4."
+        },
+        {
+          "id": "22c",
+          "label": "c",
+          "question": "¿Cuál es el tamaño total en bytes que ocupa la estructura entera?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La variable 'd' ocupa los offsets 4, 5, 6 y 7. El tamaño total de la estructura se define por el último byte ocupado (offset 7), lo que da un tamaño total alineado de 8 bytes."
+        },
+        {
+          "id": "22d",
+          "label": "d",
+          "question": "¿Cuál es la dirección de memoria decimal donde comienza la variable int d?",
+          "correctValue": 16388,
+          "tolerance": 0,
+          "explanation": "Comienza sumándole el offset de 'd' (4 bytes) a la dirección base de la estructura (16384): $16384 + 4 = 16388$."
+        }
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Operaciones Lógicas y Banderas",
+      "context": "Sean R0 = 0x0F0F0F0F y R1 = 0xF0F0F0F0. Ejecutamos la instrucción 'EORS R2, R0, R1'.",
+      "parts": [
+        {
+          "id": "23a",
+          "label": "a",
+          "question": "¿Cuál es el valor final en R2 interpretado como entero con signo de 32 bits en decimal?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "La operación XOR (EOR) da un bit 1 siempre que los bits difieran. $0x0F0F0F0F \\oplus 0xF0F0F0F0 = 0xFFFFFFFF$. En complemento a dos de 32 bits, 0xFFFFFFFF equivale al valor decimal $-1$."
+        },
+        {
+          "id": "23b",
+          "label": "b",
+          "question": "¿Cuál es el estado de la bandera Zero (Z) tras la instrucción (0 o 1)?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El resultado final de R2 ($0xFFFFFFFF$) es diferente de cero, de manera que la bandera Z se pone a 0."
+        },
+        {
+          "id": "23c",
+          "label": "c",
+          "question": "¿Cuál es el estado de la bandera Negative (N) tras la instrucción (0 o 1)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El bit más significativo (bit 31) del resultado es 1, indicando que es un número negativo, lo que pone el flag N a 1."
+        },
+        {
+          "id": "23d",
+          "label": "d",
+          "question": "Si ejecutamos 'ANDS R3, R0, R1' con los mismos operandos, ¿cuál sería el valor decimal de R3?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La operación AND bit a bit entre valores complementarios da como resultado 0 en todos sus bits, por lo que R3 termina con valor decimal 0."
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Rendimiento y Desenrollado de Bucles",
+      "context": "Se desea sumar 8 enteros de un array en memoria RAM.\nVersión A (Bucle clásico):\n```assembly\nloop:\n    LDR R3, [R0], #4\n    ADD R1, R1, R3\n    SUBS R2, R2, #1\n    BNE loop\n```\nVersión B (Desenrollado completo): 8 repeticiones secuenciales del par `LDR R3, [R0], #4` y `ADD R1, R1, R3`.",
+      "parts": [
+        {
+          "id": "24a",
+          "label": "a",
+          "question": "¿Cuántas instrucciones se ejecutan en total en la versión A?",
+          "correctValue": 32,
+          "tolerance": 0,
+          "explanation": "La versión A tiene 4 instrucciones en su cuerpo de bucle y se ejecuta 8 veces: $4 \\times 8 = 32$ instrucciones en total."
+        },
+        {
+          "id": "24b",
+          "label": "b",
+          "question": "¿Cuántas instrucciones se ejecutan en la versión B?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La versión B simplemente repite el bloque de carga y suma 8 veces de forma continua: $2 \\times 8 = 16$ instrucciones."
+        },
+        {
+          "id": "24c",
+          "label": "c",
+          "question": "Si cada instrucción básica consume 1 ciclo y el salto condicionado tomado consume 3 ciclos (y 1 si no es tomado), ¿cuántos ciclos consume la Versión A?",
+          "correctValue": 46,
+          "tolerance": 0,
+          "explanation": "Las instrucciones secuenciales (LDR, ADD, SUBS) consumen $3 \\text{ instrucciones} \\times 8 \\text{ iteraciones} = 24$ ciclos. El salto BNE es tomado 7 veces ($7 \\times 3 = 21$ ciclos) y no es tomado 1 vez ($1 \\times 1 = 1$ ciclo). Total = $24 + 21 + 1 = 46$ ciclos."
+        },
+        {
+          "id": "24d",
+          "label": "d",
+          "question": "¿Cuántos ciclos consume la Versión B?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "La versión B no contiene saltos de control de bucle ni dependencias de bifurcación, por lo que consume $16$ ciclos para ejecutar sus 16 instrucciones."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Saltos Condicionales Multi-rama en C",
+      "context": "Dado el siguiente código en C:\n```c\nif (a < 10) { b = 1; }\nelse if (a < 20) { b = 2; }\nelse { b = 3; }\n```\nSuponga que 'a' está almacenado en R0 y 'b' en R1.",
+      "parts": [
+        {
+          "id": "25a",
+          "label": "a",
+          "question": "Si R0 = 5, ¿cuál es el valor final en R1 al finalizar el bloque?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como $a = 5 < 10$, se satisface la primera condición y se asigna $b = 1$, finalizando de inmediato el bloque condicional."
+        },
+        {
+          "id": "25b",
+          "label": "b",
+          "question": "Si R0 = 15, ¿cuál es el valor final en R1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Como R0 no es menor que 10, la primera condición es falsa. Se evalúa la segunda: $15 < 20$ es verdadera, por lo que se ejecuta $b = 2$."
+        },
+        {
+          "id": "25c",
+          "label": "c",
+          "question": "Si R0 = 25, ¿cuál es el valor final en R1?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Como ambas condiciones ($25 < 10$ y $25 < 20$) son falsas, el flujo entra al bloque por defecto asignando $b = 3$."
+        },
+        {
+          "id": "25d",
+          "label": "d",
+          "question": "¿Cuál es el número mínimo de instrucciones de comparación (CMP) ejecutadas cuando a = 25?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para determinar que 'a' no es menor que 10 ni menor que 20, la CPU debe ejecutar obligatoriamente las dos comparaciones asociadas a cada una de las condiciones del if-else."
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Paso de Parámetros en la Pila",
+      "context": "Una subrutina recibe 5 parámetros según el estándar ARM (ATPCS). Los 4 primeros van en R0-R3 y el 5º se apila. El SP inicial antes de apilar es 32764 (0x7FFC).",
+      "parts": [
+        {
+          "id": "26a",
+          "label": "a",
+          "question": "¿Cuántos bytes de pila ocupa el 5º parámetro si es de tipo int?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Un parámetro de tipo entero ocupa una palabra completa de 32 bits (4 bytes) en la pila de memoria."
+        },
+        {
+          "id": "26b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal de SP después de que el llamador apile dicho parámetro?",
+          "correctValue": 32760,
+          "tolerance": 0,
+          "explanation": "Al almacenar el entero en la pila Full Descending, el puntero disminuye en 4: $32764 - 4 = 32760$."
+        },
+        {
+          "id": "26c",
+          "label": "c",
+          "question": "Dentro de la subrutina, si no se modifica SP, ¿qué offset positivo respecto a SP se usa para leer dicho parámetro?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como el parámetro es el último dato introducido en la pila antes de entrar en la subrutina, su valor reside exactamente en la dirección apuntada por el SP, por lo que su desplazamiento es 0."
+        },
+        {
+          "id": "26d",
+          "label": "d",
+          "question": "Si la subrutina ejecuta 'PUSH {R4, LR}' al inicio, ¿cuál es el nuevo offset positivo respecto a SP para leer el parámetro?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El PUSH de R4 y LR desplaza el SP en 8 bytes hacia abajo. Por ende, para volver a la posición donde reside el 5º parámetro, se requiere sumarle un desplazamiento positivo de 8 bytes a la nueva dirección apuntada por SP."
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Algoritmo de División por Restas Sucesivas",
+      "context": "Dado el programa:\n```assembly\nMOV R0, #17\nMOV R1, #3\nMOV R2, #0\nbucle:\n    CMP R0, R1\n    BLT fin\n    SUB R0, R0, R1\n    ADD R2, R2, #1\n    B bucle\nfin:\n```",
+      "parts": [
+        {
+          "id": "27a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal final del cociente en R2?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El bucle resta 3 de 17 consecutivamente. El número de veces que se puede restar 3 sin obtener un número menor que 3 es 5 (ya que $17 = 5 \\times 3 + 2$), dejando el cociente en $5$."
+        },
+        {
+          "id": "27b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal final del resto en R0?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El resto es el valor remanente en R0 una vez que ya no se puede realizar la resta porque R0 es menor que R1 ($2 < 3$). El valor es $2$."
+        },
+        {
+          "id": "27c",
+          "label": "c",
+          "question": "¿Cuántas veces en total se ejecuta la instrucción 'CMP R0, R1'?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La comparación se realiza al principio de cada iteración. Se ejecuta 5 veces para los casos en que se restará y una 6ª vez que resulta en menor que R1 ($2 < 3$) para romper el bucle. Total = 6 veces."
+        },
+        {
+          "id": "27d",
+          "label": "d",
+          "question": "¿Cuántas instrucciones de resta ('SUB R0, R0, R1') se llegan a ejecutar?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La resta se ejecuta únicamente en las iteraciones donde la comparación previa resultó en verdadero, que corresponde a $5$ veces en total."
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Evaluación Alternada en Bucle",
+      "context": "Dado el bucle:\n```assembly\nMOV R0, #0\nMOV R1, #10\nbucle:\n    TST R0, #1\n    ADDNE R1, R1, #2\n    ADDEQ R1, R1, #1\n    ADD R0, R0, #1\n    CMP R0, #4\n    BNE bucle\n```",
+      "parts": [
+        {
+          "id": "28a",
+          "label": "a",
+          "question": "¿Cuál es el valor decimal de R1 tras finalizar la primera iteración?",
+          "correctValue": 11,
+          "tolerance": 0,
+          "explanation": "Para R0 = 0, 'TST R0, #1' indica que el bit de orden 0 es cero ($Z=1$). Se ejecuta 'ADDEQ R1, R1, #1' y se descarta 'ADDNE'. R1 pasa de 10 a 11. Luego R0 pasa a 1."
+        },
+        {
+          "id": "28b",
+          "label": "b",
+          "question": "¿Cuál es el valor decimal de R1 tras la segunda iteración?",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Para R0 = 1, la bandera Z es 0 tras TST. Se ejecuta 'ADDNE R1, R1, #2'. R1 pasa de 11 a 13. Luego R0 pasa a 2."
+        },
+        {
+          "id": "28c",
+          "label": "c",
+          "question": "¿Cuál es el valor final de R1 tras completarse la ejecución del bucle?",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "Iteración 3 (R0 = 2): par ($EQ$), R1 aumenta en 1 $\\rightarrow 14$. R0 pasa a 3. Iteración 4 (R0 = 3): impar ($NE$), R1 aumenta en 2 $\\rightarrow 16$. R0 pasa a 4. Al comparar R0 con 4, BNE no salta y el bucle termina, resultando en R1 = 16."
+        },
+        {
+          "id": "28d",
+          "label": "d",
+          "question": "¿Cuál es el valor final en R0?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El contador R0 se incrementa hasta que al compararse con 4 en 'CMP R0, #4' se detecta la igualdad, terminando el bucle cuando R0 = 4."
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Alineación y Padding de Directivas Ensamblador",
+      "context": "Se definen en memoria las siguientes variables:\n```assembly\nvar1: .byte 0x12\n      .align 2\nvar2: .word 0x12345678\nvar3: .short 0xABCD\n```\nAsuma que 'var1' se sitúa en la dirección decimal 1000.",
+      "parts": [
+        {
+          "id": "29a",
+          "label": "a",
+          "question": "¿En qué dirección de memoria decimal se ubicará 'var2' debido al '.align 2' (múltiplo de 4)?",
+          "correctValue": 1004,
+          "tolerance": 0,
+          "explanation": "La directiva '.align 2' alinea la dirección al siguiente múltiplo de $2^2 = 4$ bytes. var1 está en 1000, ocupando 1 byte. El siguiente múltiplo de 4 después de 1000 es 1004."
+        },
+        {
+          "id": "29b",
+          "label": "b",
+          "question": "¿Cuántos bytes de relleno (padding) se insertan entre 'var1' y 'var2'?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "var1 ocupa la dirección 1000. El byte 1001, 1002 y 1003 quedan vacíos para cumplir el requisito de alineación a 1004. Por lo tanto, se insertan 3 bytes de relleno."
+        },
+        {
+          "id": "29c",
+          "label": "c",
+          "question": "¿En qué dirección de memoria decimal se ubica 'var3'?",
+          "correctValue": 1008,
+          "tolerance": 0,
+          "explanation": "var2 ocupa 4 bytes (de la dirección 1004 a la 1007). El siguiente byte es el 1008. Al ser 'short', requiere alineación a 2 bytes (múltiplo de 2). Dado que 1008 es múltiplo de 2, var3 se ubica directamente en 1008."
+        },
+        {
+          "id": "29d",
+          "label": "d",
+          "question": "¿Cuántos bytes en total ocupan en memoria RAM estas variables más su relleno?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "La secuencia ocupa desde el byte 1000 hasta el byte 1009 inclusive (ya que var3 en 1008 mide 2 bytes y ocupa 1008 y 1009). Por tanto, ocupa un total de 10 bytes."
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Tiempo de Ejecución en Pipeline de 5 Etapas",
+      "context": "Un fragmento de programa con 10 instrucciones secuenciales se procesa en un microprocesador con un cauce (pipeline) de 5 etapas sin dependencias ni riesgos de control.",
+      "parts": [
+        {
+          "id": "30a",
+          "label": "a",
+          "question": "¿Cuántos ciclos de reloj se requieren para que la primera instrucción del bloque se complete?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La primera instrucción requiere pasar por todas las 5 etapas del pipeline (Búsqueda, Decodificación, Ejecución, Memoria y Escritura) consumiendo 5 ciclos de reloj para llenar el cauce."
+        },
+        {
+          "id": "30b",
+          "label": "b",
+          "question": "¿Cuántos ciclos de reloj adicionales se necesitan para terminar las restantes 9 instrucciones?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Una vez que el pipeline está lleno, se completa una instrucción por cada ciclo de reloj. Por tanto, para las 9 instrucciones restantes se necesitan 9 ciclos adicionales."
+        },
+        {
+          "id": "30c",
+          "label": "c",
+          "question": "¿Cuál es el número total de ciclos de reloj necesarios para completar las 10 instrucciones?",
+          "correctValue": 14,
+          "tolerance": 0,
+          "explanation": "El tiempo total es la suma de los ciclos para completar la primera más las restantes: $5 + 9 = 14$ ciclos de reloj en total."
+        },
+        {
+          "id": "30d",
+          "label": "d",
+          "question": "¿Cuál es el número medio de Ciclos por Instrucción (CPI) de este fragmento?",
+          "correctValue": 1.4,
+          "tolerance": 0.01,
+          "explanation": "El CPI medio es la división de los ciclos de reloj totales consumidos entre el número de instrucciones ejecutadas: $\\text{CPI} = 14 / 10 = 1.4$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Dirección de elemento en vector unidimensional",
+      "tex": "$$\\text{Dirección}(V[i]) = \\text{Base} + i \\cdot \\text{Tamaño}$$"
+    },
+    {
+      "name": "Dirección en matriz bidimensional (Row-Major)",
+      "tex": "$$\\text{Dirección}(M[i][j]) = \\text{Base} + (i \\cdot N_C + j) \\cdot \\text{Tamaño}$$"
+    },
+    {
+      "name": "Tiempo de ejecución de bucle",
+      "tex": "$$T_{\\text{bucle}} = N \\cdot \\text{CPI}_{\\text{medio}} \\cdot T_{\\text{ciclo}}$$"
+    },
+    {
+      "name": "Direccionamiento pre-indexado con actualización",
+      "tex": "$$R_{\\text{base}} \\leftarrow R_{\\text{base}} + \\text{Offset}$$"
+    },
+    {
+      "name": "Multiplicación por Barrel Shifter",
+      "tex": "$$\\text{Valor del Desplazamiento} = R_m \\cdot 2^{\\text{shift}}$$"
+    },
+    {
+      "name": "Dirección de destino de salto relativo al PC",
+      "tex": "$$\\text{Destino} = \\text{PC} + 8 + (\\text{Inmediato}_{24} \\cdot 4)$$"
+    },
+    {
+      "name": "CPI promedio con penalización de saltos",
+      "tex": "$$\\text{CPI}_{\\text{medio}} = \\text{CPI}_{\\text{base}} + P_{\\text{salto}} \\cdot \\text{Penalización}_{\\text{salto}}$$"
+    },
+    {
+      "name": "Condición de salto menor firmado (BLT)",
+      "tex": "$$\\text{Flag}_{\\text{BLT}} = (N \\neq V)$$"
+    },
+    {
+      "name": "Condición de salto menor o igual firmado (BLE)",
+      "tex": "$$\\text{Flag}_{\\text{BLE}} = (Z == 1) \\lor (N \\neq V)$$"
+    }
+  ]
+}

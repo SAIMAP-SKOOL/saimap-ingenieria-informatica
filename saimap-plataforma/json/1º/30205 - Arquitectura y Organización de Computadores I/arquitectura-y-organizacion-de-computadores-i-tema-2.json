@@ -1,0 +1,2092 @@
+{
+    "TEST_A": [
+        {
+            "q": "¿Qué registro de la arquitectura ARM de 32 bits actúa habitualmente como el Contador de Programa (PC)?",
+            "options": [
+                "El registro R13.",
+                "El registro R14.",
+                "El registro R15."
+            ],
+            "correct": 2,
+            "hint": "Es el último registro del banco de registros básicos de 16 elementos.",
+            "explanation": "El registro R15 es el contador de programa (PC, Program Counter) en la arquitectura ARM. Contiene la dirección de la instrucción que se está ejecutando (con la peculiaridad del pipeline)."
+        },
+        {
+            "q": "En la arquitectura ARM, ¿con qué alias se conoce comúnmente al registro R13?",
+            "options": [
+                "SP (Stack Pointer).",
+                "LR (Link Register).",
+                "IP (Intra-Procedure-call scratch register)."
+            ],
+            "correct": 0,
+            "hint": "Apunta a la cima de la pila en memoria.",
+            "explanation": "El registro R13 se utiliza por convención y soporte de hardware como el Puntero de Pila (SP, Stack Pointer)."
+        },
+        {
+            "q": "¿Cuál es la función principal del registro R14 (LR) en ARM?",
+            "options": [
+                "Apuntar al inicio del bloque de activación de la pila.",
+                "Almacenar la dirección de retorno al llamar a una subrutina.",
+                "Actuar como registro temporal exclusivo del enlazador dinámico."
+            ],
+            "correct": 1,
+            "hint": "Su nombre es Link Register (Registro de Enlace).",
+            "explanation": "El registro R14 (LR, Link Register) almacena la dirección de retorno cuando se realiza una llamada a una subrutina mediante la instrucción de salto con enlace (BL)."
+        },
+        {
+            "q": "¿A qué dirección apunta el registro R15 (PC) en un procesador ARM de 32 bits debido al pipeline de instrucciones?",
+            "options": [
+                "A la dirección de la instrucción actual en ejecución ($PC$).",
+                "A la dirección de la instrucción en ejecución más 4 bytes ($PC+4$).",
+                "A la dirección de la instrucción en ejecución más 8 bytes ($PC+8$)."
+            ],
+            "correct": 2,
+            "hint": "Considere un pipeline clásico de 3 etapas en modo ARM de 32 bits.",
+            "explanation": "Debido al pipeline de 3 etapas (búsqueda, decodificación y ejecución), cuando una instrucción se está ejecutando, el PC ya ha avanzado dos instrucciones más allá, es decir, $PC+8$ bytes en modo ARM (donde cada instrucción ocupa 4 bytes)."
+        },
+        {
+            "q": "¿Cuál es el rango de bits dentro del registro CPSR de ARM que se reserva para los flags de condición?",
+            "options": [
+                "Bits 0 a 3.",
+                "Bits 28 a 31.",
+                "Bits 16 a 19."
+            ],
+            "correct": 1,
+            "hint": "Están situados en la parte más significativa (MSB) del registro de 32 bits.",
+            "explanation": "Los flags de condición (N, Z, C, V) ocupan los bits más significativos del registro de estado CPSR (bits 31, 30, 29 y 28 respectivamente)."
+        },
+        {
+            "q": "¿Qué bandera (flag) del CPSR se activa si el resultado de una instrucción con sufijo 'S' es negativo?",
+            "options": [
+                "El flag N (Negative, bit 31).",
+                "El flag V (Overflow, bit 28).",
+                "El flag C (Carry, bit 29)."
+            ],
+            "correct": 0,
+            "hint": "Detecta si el bit más significativo (bit 31) del resultado es 1.",
+            "explanation": "El flag N (Negative) se activa ($N=1$) si el bit 31 del resultado de la última operación que modifica banderas es 1, lo cual representa un valor negativo en complemento a 2."
+        },
+        {
+            "q": "¿Cómo se comporta el flag C (Carry) tras ejecutar una resta en la arquitectura ARM?",
+            "options": [
+                "Se activa ($C=1$) si el resultado es exactamente cero.",
+                "Se activa ($C=1$) si no se requiere préstamo (minuendo mayor o igual que el sustraendo).",
+                "Se activa ($C=1$) si se requiere préstamo (minuendo menor que el sustraendo)."
+            ],
+            "correct": 1,
+            "hint": "En ARM, el acarreo en la resta funciona de forma invertida al préstamo (borrow).",
+            "explanation": "En las restas de ARM, el flag C actúa como un indicador de 'no préstamo' (no borrow). Vale 1 si el minuendo es mayor o igual que el sustraendo ($Rn \\ge Op2$), e indica préstamo ($C=0$) si $Rn < Op2$."
+        },
+        {
+            "q": "¿Cuándo se activa la bandera V (Overflow) en el registro CPSR de ARM?",
+            "options": [
+                "Cuando se produce un acarreo en operaciones con enteros sin signo.",
+                "Cuando el resultado de una operación aritmética con signo excede el rango representable en complemento a 2 de 32 bits.",
+                "Cuando el resultado de una operación lógica o aritmética es cero."
+            ],
+            "correct": 1,
+            "hint": "Se asocia con desbordamiento en aritmética con signo.",
+            "explanation": "La bandera V (Overflow) se activa si se produce un desbordamiento aritmético al operar con números con signo de 32 bits en complemento a 2, por ejemplo, al sumar dos números positivos y obtener un resultado negativo."
+        },
+        {
+            "q": "¿Qué bit del registro de estado CPSR se encarga de definir si el procesador está en modo ARM o modo Thumb?",
+            "options": [
+                "El bit T (bit 5).",
+                "El bit I (bit 7).",
+                "El bit F (bit 6)."
+            ],
+            "correct": 0,
+            "hint": "Su nombre hace referencia al estado de la CPU (State bit).",
+            "explanation": "El bit T (State bit, bit 5) define si el procesador ejecuta en modo ARM de 32 bits ($T=0$) o en modo Thumb de 16 bits ($T=1$)."
+        },
+        {
+            "q": "¿Qué indican los bits de control M[4:0] (bits 0 a 4) en el registro CPSR?",
+            "options": [
+                "El modo de direccionamiento de la pila (ascendente o descendente).",
+                "La prioridad de la interrupción en curso.",
+                "El modo de operación actual del procesador (Usuario, System, Supervisor, IRQ, etc.)."
+            ],
+            "correct": 2,
+            "hint": "Permiten el aislamiento de recursos entre el software de usuario y el SO.",
+            "explanation": "Los bits M[4:0] indican el modo de operación actual del procesador (User, System, FIQ, IRQ, Supervisor, Abort, Undefined), permitiendo controlar los privilegios de acceso."
+        },
+        {
+            "q": "Según el estándar de llamadas AAPCS para ARM, ¿qué registros se utilizan para pasar parámetros a una función y retornar valores?",
+            "options": [
+                "Registros R4 a R7.",
+                "Registros R0 a R3.",
+                "Registros R11 a R14."
+            ],
+            "correct": 1,
+            "hint": "Son los primeros registros del banco.",
+            "explanation": "El estándar AAPCS (ARM Architecture Procedure Call Standard) especifica que R0-R3 se usan para pasar los primeros cuatro argumentos a una función y para devolver los valores resultantes."
+        },
+        {
+            "q": "¿Qué sucede con el contenido de los registros R4 a R10 tras una llamada a una subrutina según la convención AAPCS?",
+            "options": [
+                "Se destruye o modifica de manera libre por la función llamada.",
+                "Conservan su valor original al volver de la subrutina (la función llamada debe preservarlos).",
+                "Se copian de forma automática a la pila y se ponen a cero."
+            ],
+            "correct": 1,
+            "hint": "Se conocen como registros 'callee-saved' o preservados por el llamado.",
+            "explanation": "Los registros R4-R10 son preservados por convención AAPCS. Si la subrutina necesita utilizarlos, debe salvarlos previamente en la pila y restaurarlos antes de retornar."
+        },
+        {
+            "q": "¿Qué alias recibe el registro R11 en la arquitectura ARM?",
+            "options": [
+                "FP (Frame Pointer o Puntero de Marco).",
+                "IP (Intra-Procedure-call scratch register).",
+                "SP (Stack Pointer)."
+            ],
+            "correct": 0,
+            "hint": "Marca de forma opcional el inicio del bloque de activación en la pila.",
+            "explanation": "El registro R11 recibe habitualmente el alias de FP (Frame Pointer) y se utiliza para delimitar el marco de pila de la función actual."
+        },
+        {
+            "q": "¿Cuál es el propósito del registro R12 (IP) en ARM?",
+            "options": [
+                "Guardar el estado de las banderas aritméticas en modo interrupción.",
+                "Actuar como puntero de pila secundario.",
+                "Servir de registro temporal en llamadas de procedimiento interno, usado por el enlazador dinámico."
+            ],
+            "correct": 2,
+            "hint": "Sus siglas significan 'Intra-Procedure-call scratch register'.",
+            "explanation": "El registro R12 es el IP (Intra-Procedure-call scratch register), empleado temporalmente por los enlazadores entre llamadas a funciones."
+        },
+        {
+            "q": "Si queremos que una instrucción de suma modifique los flags de condición del CPSR, ¿cómo debemos escribirla en ensamblador?",
+            "options": [
+                "ADD R0, R1, R2",
+                "ADDS R0, R1, R2",
+                "ADDC R0, R1, R2"
+            ],
+            "correct": 1,
+            "hint": "Se añade una letra al nemónico que indica 'Update Status Flags'.",
+            "explanation": "La letra 'S' añadida al final de las instrucciones aritmético-lógicas (como ADDS) indica al hardware que debe actualizar los flags de condición del registro CPSR con el resultado de la operación."
+        },
+        {
+            "q": "¿Qué tipo de instrucciones modifican siempre las banderas del CPSR sin necesidad de añadir un sufijo 'S'?",
+            "options": [
+                "Las instrucciones de comparación como CMP y TST.",
+                "Las instrucciones de transferencia de datos como MOV y LDR.",
+                "Las instrucciones lógicas básicas como AND y ORR."
+            ],
+            "correct": 0,
+            "hint": "Estas instrucciones no guardan un resultado en un registro, solo evalúan condiciones.",
+            "explanation": "Las instrucciones de comparación como CMP (Compare), TST (Test) y TEQ (Test Equivalence) no guardan resultado de destino; su único propósito es actualizar los flags del CPSR, por lo que siempre lo hacen."
+        },
+        {
+            "q": "Si el procesador ARM está ejecutando en Modo Usuario (USR), ¿cuál es el nivel de privilegios del software?",
+            "options": [
+                "No privilegiado, lo que impide acceder a recursos restringidos o cambiar de modo directamente modificando el CPSR.",
+                "Privilegiado para interrupciones rápidas (FIQ) pero no normales (IRQ).",
+                "Completamente privilegiado, permitiendo cambiar libremente de modo en el CPSR."
+            ],
+            "correct": 0,
+            "hint": "Es el modo estándar de aplicaciones de usuario.",
+            "explanation": "El modo Usuario es un modo no privilegiado. El software en este modo no puede acceder directamente a dispositivos de hardware protegidos, ni modificar directamente bits de control del CPSR (como el cambio de modo)."
+        },
+        {
+            "q": "¿Qué máscara de interrupción se corresponde con el bit 7 (I) del CPSR?",
+            "options": [
+                "Enmascara las interrupciones externas rápidas (FIQ).",
+                "Enmascara las interrupciones externas normales (IRQ).",
+                "Enmascara las excepciones por instrucción no definida."
+            ],
+            "correct": 1,
+            "hint": "I representa 'Interrupt request mask'.",
+            "explanation": "El bit 7 (I) del CPSR deshabilita las interrupciones normales externas (IRQ) cuando su valor es 1."
+        },
+        {
+            "q": "¿Qué modo de operación de ARM se activa cuando ocurre una llamada al sistema mediante la instrucción 'SVC'?",
+            "options": [
+                "Modo Supervisor (SVC).",
+                "Modo System (SYS).",
+                "Modo Abort (ABT)."
+            ],
+            "correct": 0,
+            "hint": "El propio nombre de la instrucción (Supervisor Call) lo indica.",
+            "explanation": "La instrucción SVC (Supervisor Call), antes conocida como SWI (Software Interrupt), fuerza una excepción que pone a la CPU en modo Supervisor (SVC) para realizar servicios del núcleo del SO."
+        },
+        {
+            "q": "En llamadas anidadas (Función A llama a Función B), ¿por qué es crítico guardar R14 (LR) en la pila al inicio de la Función A?",
+            "options": [
+                "Porque la llamada a la Función B sobrescribe R14 (LR) con la dirección de retorno a la Función A, perdiendo el retorno original a la función principal.",
+                "Porque la pila es el único lugar donde se pueden ejecutar instrucciones de salto.",
+                "Porque el hardware de ARM prohíbe usar R14 dentro de subrutinas secundarias."
+            ],
+            "correct": 0,
+            "hint": "Piense en qué valor almacena el hardware en LR al ejecutar BL.",
+            "explanation": "La instrucción BL sobrescribe R14 (LR). Si la Función A no guarda el LR original antes de ejecutar un BL hacia la Función B, se perderá la dirección a la que debía retornar A (retorno al llamador de A), resultando en un bucle infinito."
+        },
+        {
+            "q": "Si una resta da como resultado exactamente 0, ¿qué valores toman las banderas N y Z en el CPSR?",
+            "options": [
+                "N = 0, Z = 0",
+                "N = 0, Z = 1",
+                "N = 1, Z = 1"
+            ],
+            "correct": 1,
+            "hint": "Evalúe si el resultado es negativo y si es cero.",
+            "explanation": "Como el resultado es cero, se activa la bandera de cero ($Z=1$). Como cero no es un número negativo (bit 31 es 0), la bandera de negativo queda desactivada ($N=0$)."
+        },
+        {
+            "q": "¿Cuál es el tamaño físico del registro CPSR en la arquitectura ARM de 32 bits?",
+            "options": [
+                "16 bits.",
+                "32 bits.",
+                "64 bits."
+            ],
+            "correct": 1,
+            "hint": "El procesador y todos sus registros principales en este modelo son del mismo ancho.",
+            "explanation": "El CPSR es un registro de 32 bits en la arquitectura ARM de 32 bits, aunque varios de sus bits centrales no se utilicen o estén reservados."
+        },
+        {
+            "q": "En el CPSR, ¿qué bit corresponde a la bandera Z (Zero)?",
+            "options": [
+                "Bit 31.",
+                "Bit 30.",
+                "Bit 29."
+            ],
+            "correct": 1,
+            "hint": "Está justo al lado del bit más significativo (bit 31).",
+            "explanation": "La bandera Z (Zero) se encuentra en el bit 30 del registro CPSR."
+        },
+        {
+            "q": "En el CPSR, ¿qué bit corresponde a la bandera N (Negative)?",
+            "options": [
+                "Bit 31.",
+                "Bit 30.",
+                "Bit 28."
+            ],
+            "correct": 0,
+            "hint": "Es el bit más significativo (MSB) de todo el registro.",
+            "explanation": "La bandera N (Negative) se sitúa en el bit 31 del CPSR, coincidiendo con la posición del bit de signo en un entero de 32 bits."
+        },
+        {
+            "q": "En el CPSR, ¿qué bit corresponde a la bandera C (Carry)?",
+            "options": [
+                "Bit 29.",
+                "Bit 28.",
+                "Bit 30."
+            ],
+            "correct": 0,
+            "hint": "Se encuentra inmediatamente a la izquierda del bit 28 (V).",
+            "explanation": "La bandera C (Carry) se sitúa en el bit 29 del CPSR."
+        },
+        {
+            "q": "En el CPSR, ¿qué bit corresponde a la bandera V (Overflow)?",
+            "options": [
+                "Bit 29.",
+                "Bit 28.",
+                "Bit 31."
+            ],
+            "correct": 1,
+            "hint": "Es el bit menos significativo de los cuatro flags de condición (N, Z, C, V).",
+            "explanation": "La bandera V (Overflow) se encuentra en el bit 28 del registro CPSR."
+        },
+        {
+            "q": "¿Qué ocurre con la ejecución de instrucciones cuando el bit T del CPSR vale 1?",
+            "options": [
+                "El procesador interpreta instrucciones ARM estándar de 32 bits.",
+                "El procesador interpreta instrucciones Thumb compactas de 16 bits.",
+                "El procesador entra en estado de bajo consumo deteniendo el reloj."
+            ],
+            "correct": 1,
+            "hint": "Thumb es un conjunto alternativo de instrucciones de menor tamaño.",
+            "explanation": "Cuando el bit T (bit 5) vale 1, el procesador conmuta al estado Thumb, donde lee y ejecuta instrucciones de 16 bits (o instrucciones de 32 bits de Thumb-2, según el modelo)."
+        },
+        {
+            "q": "Si sumamos los enteros con signo $0x7FFFFFFF$ y $0x00000001$ usando 'ADDS', ¿qué valor tendrán los flags N y V?",
+            "options": [
+                "N = 1, V = 1",
+                "N = 0, V = 0",
+                "N = 1, V = 0"
+            ],
+            "correct": 0,
+            "hint": "La suma da $0x80000000$. Interprete este valor en complemento a 2.",
+            "explanation": "La suma de $0x7FFFFFFF$ (máximo entero positivo) y $1$ da $0x80000000$ (mínimo entero negativo). Al ser el bit 31 igual a 1, se activa $N=1$. Además, al sumar dos positivos y dar un negativo, hay desbordamiento con signo ($V=1$)."
+        },
+        {
+            "q": "Al realizar la operación sin signo $0xFFFFFFFF + 0x00000001$ con 'ADDS', ¿qué valor toma la bandera C (Carry)?",
+            "options": [
+                "C = 0, porque el resultado es exactamente cero en 32 bits.",
+                "C = 1, porque se genera un acarreo saliente del bit 31.",
+                "C = 0, porque no hay desbordamiento con signo."
+            ],
+            "correct": 1,
+            "hint": "La suma aritmética supera la capacidad máxima de un registro de 32 bits.",
+            "explanation": "La suma de $0xFFFFFFFF$ y $1$ da aritméticamente $2^{32}$, lo que requiere 33 bits. El bit de acarreo saliente del bit 31 se guarda en la bandera C, de modo que $C=1$."
+        },
+        {
+            "q": "Al realizar la resta $10 - 20$ con 'SUBS R0, R1, R2' (donde R1=10 y R2=20), ¿qué valor toma la bandera C (Carry) en ARM?",
+            "options": [
+                "C = 1, porque no hay préstamo.",
+                "C = 0, porque hay préstamo ($10 < 20$).",
+                "C = 1, porque el resultado es negativo."
+            ],
+            "correct": 1,
+            "hint": "Recuerde que en restas de ARM, C es 1 si no hay préstamo (no borrow).",
+            "explanation": "Dado que el minuendo ($10$) es menor que el sustraendo ($20$), se necesita un préstamo de rango superior. Por lo tanto, el flag de acarreo (que en restas indica no-préstamo) se pone a 0 ($C=0$)."
+        },
+        {
+            "q": "Al realizar la resta $20 - 10$ con 'SUBS R0, R1, R2' (donde R1=20 y R2=10), ¿qué valor toma la bandera C (Carry) en ARM?",
+            "options": [
+                "C = 1, porque no requiere préstamo ($20 \\ge 10$).",
+                "C = 0, porque hay un acarreo hacia el bit 32.",
+                "C = 0, porque no hay préstamo."
+            ],
+            "correct": 0,
+            "hint": "El minuendo es mayor que el sustraendo.",
+            "explanation": "Puesto que $20 \\ge 10$, la resta se puede realizar sin pedir prestado ningún bit virtual superior. Así, la bandera de 'no préstamo' (C) se activa ($C=1$)."
+        },
+        {
+            "q": "¿Qué modelo define la interfaz del procesador visible para el programador de bajo nivel, incluyendo registros y flags?",
+            "options": [
+                "Modelo de Programación del procesador.",
+                "Microarquitectura del camino de datos.",
+                "Unidad de Control del sistema."
+            ],
+            "correct": 0,
+            "hint": "Expone los elementos lógicos manipulables mediante código máquina.",
+            "explanation": "El Modelo de Programación describe los registros, flags de estado, modos de direccionamiento y repertorio de instrucciones que el programador ve y puede controlar directamente."
+        },
+        {
+            "q": "¿Qué registro del banco de ARM de 32 bits almacena la dirección de memoria de la cima de la pila?",
+            "options": [
+                "El registro R13 (SP).",
+                "El registro R14 (LR).",
+                "El registro R15 (PC)."
+            ],
+            "correct": 0,
+            "hint": "Se encarga del soporte del puntero de pila.",
+            "explanation": "El registro R13 es el Stack Pointer (SP), el cual guarda la dirección del último elemento almacenado en la pila de llamadas del sistema."
+        },
+        {
+            "q": "¿Qué significa el alias 'IP' asignado al registro R12 en la arquitectura ARM?",
+            "options": [
+                "Instruction Pointer.",
+                "Intra-Procedure-call scratch register.",
+                "Interrupt Port register."
+            ],
+            "correct": 1,
+            "hint": "Es un registro temporal de apoyo usado en las llamadas entre procedimientos.",
+            "explanation": "R12 es conocido como el 'Intra-Procedure-call scratch register' (IP), utilizado por el linker y compiladores para optimizar la carga y el salto de funciones."
+        },
+        {
+            "q": "¿Cuál es el efecto de establecer las máscaras I y F en 1 dentro del CPSR?",
+            "options": [
+                "Habilitar de inmediato todas las interrupciones externas.",
+                "Deshabilitar o enmascarar el procesamiento de interrupciones IRQ y FIQ.",
+                "Forzar el reinicio (reset) por hardware de la CPU."
+            ],
+            "correct": 1,
+            "hint": "Cuando están a 1 actúan como filtros bloqueando la entrada de solicitudes.",
+            "explanation": "Los bits I (bit 7) y F (bit 6) son máscaras de interrupción. Si valen 1, las peticiones IRQ y FIQ respectivamente son ignoradas (enmascaradas) por la CPU."
+        },
+        {
+            "q": "¿Por qué se dice que el banco de registros en modo usuario es parcialmente 'sombreado' (banked) en otros modos?",
+            "options": [
+                "Porque algunos registros físicos se sustituyen de forma automática por otros específicos del modo de ejecución para agilizar el cambio de contexto.",
+                "Porque se deshabilitan por completo los registros R0 a R7.",
+                "Porque el acceso a la memoria caché de datos se bloquea temporalmente."
+            ],
+            "correct": 0,
+            "hint": "Evita tener que salvar en pila todos los registros al entrar en una excepción.",
+            "explanation": "Los modos privilegiados (como FIQ o IRQ) tienen copias físicas propias de ciertos registros (como R8-R14 en FIQ). Esto se llama 'sombreado' (banking) y permite usar esos registros sin destruir los datos del modo usuario ni requerir volcados a la pila."
+        },
+        {
+            "q": "Si ejecutamos la instrucción 'CMP R0, R1', ¿cuál es el resultado almacenado en el registro R0?",
+            "options": [
+                "R0 se modifica con la diferencia aritmética $R0 - R1$.",
+                "R0 no se modifica; la instrucción solo calcula la diferencia y altera los flags del CPSR.",
+                "R0 se pone a 0 si R0 es igual a R1."
+            ],
+            "correct": 1,
+            "hint": "Es una instrucción de comparación lógica/aritmética sin registro de destino.",
+            "explanation": "La instrucción CMP resta el operando de la derecha del de la izquierda ($R0 - R1$) pero no escribe el resultado en ningún registro; solo sirve para actualizar los flags condicionales del CPSR."
+        },
+        {
+            "q": "En la instrucción 'TST R0, R1', ¿qué operación lógica realiza la CPU para actualizar los flags del CPSR?",
+            "options": [
+                "Una operación AND lógica bit a bit entre R0 y R1, sin guardar el resultado.",
+                "Una operación OR lógica bit a bit, almacenando el resultado en R0.",
+                "Una operación XOR lógica entre R0 y R1, modificando R1."
+            ],
+            "correct": 0,
+            "hint": "TST (Test) comprueba bits específicos utilizando una máscara.",
+            "explanation": "La instrucción TST realiza una operación AND lógica bit a bit entre sus operandos, actualizando los flags de estado (Z y N) sin alterar el valor de los operandos."
+        },
+        {
+            "q": "¿Cuál de los siguientes modos de ejecución de ARM NO pertenece a los modos privilegiados del procesador?",
+            "options": [
+                "Modo Supervisor (SVC).",
+                "Modo Usuario (USR).",
+                "Modo IRQ."
+            ],
+            "correct": 1,
+            "hint": "Es el modo en el que se ejecuta el software de aplicación normal.",
+            "explanation": "El modo Usuario (USR) es el único modo no privilegiado estándar de ejecución del procesador ARM, diseñado para proteger el sistema frente a fallos de aplicaciones."
+        },
+        {
+            "q": "En una arquitectura con pipeline, si una instrucción está en la etapa de ejecución, ¿qué está ocurriendo con la instrucción apuntada por $PC+8$?",
+            "options": [
+                "Se está decodificando en la etapa de decodificación.",
+                "Se está buscando en la memoria (etapa de Fetch).",
+                "Está terminando de escribirse en el banco de registros."
+            ],
+            "correct": 1,
+            "hint": "El PC apunta dos instrucciones por delante de la actual en ejecución.",
+            "explanation": "Debido a la segmentación de 3 etapas, cuando la instrucción $I_i$ se ejecuta, la instrucción $I_{i+1}$ (en $PC+4$) se decodifica, y la instrucción $I_{i+2}$ (en $PC+8$) se está buscando en memoria (Fetch)."
+        }
+    ],
+    "TEST_B": [
+        {
+            "q": "Para retornar de una subrutina en ARM, una instrucción habitual es 'MOV PC, ____', donde el registro vacío almacena la dirección de retorno.",
+            "options": [
+                "LR",
+                "SP",
+                "R12"
+            ],
+            "correct": 0,
+            "hint": "Es el registro R14.",
+            "explanation": "El Link Register (LR o R14) guarda la dirección de retorno, por lo que copiar su valor al PC (R15) hace que la ejecución continúe en la instrucción posterior al salto."
+        },
+        {
+            "q": "Si ejecutamos la secuencia 'ADDS R0, R1, R2' con R1 = 0xFFFFFFFF y R2 = 0x00000001, el resultado en R0 será 0x00000000 y el flag CPSR.Z tomará el valor ____.",
+            "options": [
+                "1",
+                "0",
+                "0xFFFFFFFF"
+            ],
+            "correct": 0,
+            "hint": "Z se activa cuando el resultado de la instrucción que modifica banderas es nulo.",
+            "explanation": "Como el resultado en R0 es exactamente cero (tras el acarreo en 32 bits), el flag Z de cero se pone a 1."
+        },
+        {
+            "q": "La instrucción 'CMP R0, R1' realiza internamente la operación aritmética 'R0 ____ R1' para actualizar las banderas del CPSR, sin almacenar el resultado.",
+            "options": [
+                "-",
+                "+",
+                "&"
+            ],
+            "correct": 0,
+            "hint": "Se asemeja a una resta (subtraction).",
+            "explanation": "CMP realiza una resta de sus operandos ($R0 - R1$) para actualizar flags como Z, N, C, V, pero no almacena el resultado."
+        },
+        {
+            "q": "En ARM, si queremos salvar el registro de enlace (LR) en la pila al inicio de una subrutina, usamos la instrucción 'PUSH {____}'.",
+            "options": [
+                "LR",
+                "PC",
+                "SP"
+            ],
+            "correct": 0,
+            "hint": "El registro de enlace es R14.",
+            "explanation": "Para guardar R14 (LR) en la pila al principio de una función, se añade LR a la lista de registros de la instrucción PUSH."
+        },
+        {
+            "q": "Al inicio de una función, la instrucción 'PUSH {R4, LR}' guarda los registros en la pila. Para retornar correctamente al final de la función, se debe restaurar el contexto con 'POP {R4, ____}'.",
+            "options": [
+                "PC",
+                "LR",
+                "SP"
+            ],
+            "correct": 0,
+            "hint": "El valor del retorno (que estaba en LR) se carga directamente en el contador de programa.",
+            "explanation": "Hacer 'POP {R4, PC}' restaura R4 y saca la dirección de retorno que estaba guardada en la pila cargándola directamente en el PC (R15), realizando el retorno de forma atómica."
+        },
+        {
+            "q": "Si una instrucción ejecuta 'SUBS R0, R1, R2' siendo R1 = 5 y R2 = 10, el flag C (Carry) del CPSR se actualizará a ____ en la arquitectura ARM.",
+            "options": [
+                "0",
+                "1",
+                "2"
+            ],
+            "correct": 0,
+            "hint": "Hay préstamo en la resta puesto que $5 < 10$.",
+            "explanation": "En ARM, una resta con préstamo pone la bandera de Carry a 0. Como $5 < 10$, se necesita préstamo y $C=0$."
+        },
+        {
+            "q": "Cuando el procesador ARM opera en modo ARM (instrucciones de 32 bits), el bit ____ del CPSR (flag T) vale 0.",
+            "options": [
+                "5",
+                "7",
+                "28"
+            ],
+            "correct": 0,
+            "hint": "Es la posición de bit del flag de estado Thumb.",
+            "explanation": "El bit T está ubicado en la posición 5 del CPSR y determina si se ejecuta código ARM (T=0) o Thumb (T=1)."
+        },
+        {
+            "q": "Si se ejecuta 'SUBS R0, R1, R2' con R1 = 0x80000000 y R2 = 1, el resultado en R0 es 0x7FFFFFFF. El bit de signo cambia de negativo a positivo, por lo que el flag V tomará el valor ____.",
+            "options": [
+                "1",
+                "0",
+                "0xFFFFFFFF"
+            ],
+            "correct": 0,
+            "hint": "Restar un positivo a un negativo y obtener un positivo indica un desbordamiento de signo.",
+            "explanation": "Ocurre un desbordamiento de signo en complemento a 2 porque restamos un positivo ($1$) al valor mínimo negativo ($0x80000000$) y el resultado ($0x7FFFFFFF$) es positivo, por lo que $V=1$."
+        },
+        {
+            "q": "Al ejecutar 'MOVS R0, R1', donde R1 contiene 0x80000000, el flag CPSR.N tomará el valor ____.",
+            "options": [
+                "1",
+                "0",
+                "31"
+            ],
+            "correct": 0,
+            "hint": "N es una copia del bit 31 del resultado.",
+            "explanation": "Como el resultado en R0 tiene un 1 en el bit 31, la instrucción MOVS (con sufijo S) pone el flag de negativo N a 1."
+        },
+        {
+            "q": "La instrucción 'TST R0, R1' realiza la operación lógica ____ bit a bit para actualizar los flags Z y N, sin modificar los registros R0 o R1.",
+            "options": [
+                "AND",
+                "OR",
+                "XOR"
+            ],
+            "correct": 0,
+            "hint": "Sirve para comprobar si hay bits a 1 comunes.",
+            "explanation": "TST realiza un AND lógico entre R0 y R1 y actualiza las banderas condicionales según el resultado lógico."
+        },
+        {
+            "q": "Debido a la segmentación (pipeline), cuando la instrucción en la dirección $PC$ se está ejecutando, la instrucción que se está cargando (Fetch) está en la dirección $PC + ____$ en modo ARM de 32 bits.",
+            "options": [
+                "8",
+                "4",
+                "12"
+            ],
+            "correct": 0,
+            "hint": "Son dos instrucciones más adelante en un bus alineado a 4 bytes.",
+            "explanation": "En ARM de 32 bits, la dirección de búsqueda está a $PC+8$ bytes con respecto a la instrucción en ejecución debido a la segmentación de tres etapas."
+        },
+        {
+            "q": "Si queremos configurar el procesador para ejecutar en modo Thumb (instrucciones de 16 bits), el bit T de CPSR debe tener el valor ____.",
+            "options": [
+                "1",
+                "0",
+                "2"
+            ],
+            "correct": 0,
+            "hint": "El bit T (Thumb) se activa para habilitar dicho modo.",
+            "explanation": "El bit T del CPSR debe establecerse en 1 para que el procesador decodifique las instrucciones como Thumb."
+        },
+        {
+            "q": "El registro especial ____ almacena permanentemente la dirección de la última instrucción que provocó una llamada a subrutina con salto 'BL'.",
+            "options": [
+                "LR (R14)",
+                "SP (R13)",
+                "PC (R15)"
+            ],
+            "correct": 0,
+            "hint": "Se encarga del enlace con el punto de retorno.",
+            "explanation": "El Link Register (LR, R14) es donde el procesador escribe automáticamente la dirección de retorno antes de saltar al destino de una instrucción BL."
+        },
+        {
+            "q": "En un sistema operativo ejecutándose sobre ARM, el código de la aplicación de usuario se ejecuta en modo de operación ____ para evitar que acceda a registros de control privilegiados.",
+            "options": [
+                "USR (Usuario)",
+                "SVC (Supervisor)",
+                "SYS (Sistema)"
+            ],
+            "correct": 0,
+            "hint": "Es el modo de menor nivel de privilegios.",
+            "explanation": "Las aplicaciones corren en modo USR (Usuario), el cual no es privilegiado y está aislado de los recursos críticos y de los registros protegidos del sistema."
+        },
+        {
+            "q": "Si el registro SP contiene la dirección 0x20000000, después de ejecutar 'PUSH {R0}' (donde R0 es de 32 bits), el registro SP contendrá la dirección ____.",
+            "options": [
+                "0x1FFFFFC",
+                "0x20000004",
+                "0x1FFFFF8"
+            ],
+            "correct": 0,
+            "hint": "La pila en ARM es descendente (decrementa antes de escribir).",
+            "explanation": "En una pila descendente alineada a 4 bytes, PUSH decrementa el SP en 4 bytes antes de escribir el valor, por lo que $0x20000000 - 4 = 0x1FFFFFC$."
+        },
+        {
+            "q": "Si ejecutamos la secuencia 'MOV R0, #10' seguida de 'CMP R0, #10', el valor de la bandera CPSR.Z después de la comparación será ____.",
+            "options": [
+                "1",
+                "0",
+                "10"
+            ],
+            "correct": 0,
+            "hint": "CMP compara restando ambos operandos.",
+            "explanation": "Dado que $10 - 10 = 0$, el resultado de la comparación es cero, lo que activa la bandera de cero ($Z=1$)."
+        },
+        {
+            "q": "Para enmascarar o deshabilitar las interrupciones externas normales IRQ, se debe establecer el bit ____ del CPSR en 1.",
+            "options": [
+                "7 (I)",
+                "6 (F)",
+                "5 (T)"
+            ],
+            "correct": 0,
+            "hint": "Es el bit de la máscara I.",
+            "explanation": "El bit 7 (I) del CPSR es la máscara IRQ. Al ponerlo a 1 se deshabilitan las interrupciones normales (IRQ)."
+        },
+        {
+            "q": "Si ejecutamos la instrucción 'ADDS R0, R1, R2' y el resultado obtenido es mayor que $2^{32} - 1$, la bandera de condición CPSR.____ se pondrá a 1.",
+            "options": [
+                "C (Carry)",
+                "V (Overflow)",
+                "Z (Zero)"
+            ],
+            "correct": 0,
+            "hint": "Suma sin signo que excede el límite del registro de 32 bits.",
+            "explanation": "Cuando una suma supera $2^{32}-1$, se produce un acarreo saliente del bit 31, lo cual activa la bandera de acarreo C (Carry)."
+        },
+        {
+            "q": "En el banco de registros visibles de ARM, el registro ____ actúa habitualmente como el puntero de marco de pila (Frame Pointer).",
+            "options": [
+                "R11",
+                "R12",
+                "R13"
+            ],
+            "correct": 0,
+            "hint": "Su alias es FP.",
+            "explanation": "El registro R11 tiene el rol y alias estándar de Puntero de Marco (FP, Frame Pointer) para gestionar los registros locales de funciones."
+        },
+        {
+            "q": "La instrucción 'TEQ R0, R1' realiza una operación lógica ____ entre R0 y R1 para verificar si son equivalentes, modificando las banderas del CPSR pero sin alterar el registro destino.",
+            "options": [
+                "XOR",
+                "AND",
+                "OR"
+            ],
+            "correct": 0,
+            "hint": "Test Equivalence usa una operación que da cero si ambos operandos son idénticos.",
+            "explanation": "La instrucción TEQ (Test Equivalence) aplica una operación XOR lógica bit a bit. Si ambos operandos son iguales, el resultado es 0 y se activa la bandera Z."
+        },
+        {
+            "q": "¿Qué registros del banco de ARM conservan su valor tras una llamada a una subrutina según el estándar AAPCS?",
+            "options": [
+                "Los registros R4, R5 y R6.",
+                "Los registros R7, R8 y R9.",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Piense en el grupo de registros callee-saved (R4-R10).",
+            "explanation": "Según la convención de llamadas AAPCS de ARM, el rango de registros R4 a R10 debe ser preservado por la subrutina llamada, lo cual engloba tanto a R4-R6 como a R7-R9."
+        },
+        {
+            "q": "Al ejecutar la instrucción 'SUBS R0, R1, R2', ¿qué banderas del CPSR se pueden actualizar en función del resultado?",
+            "options": [
+                "Los flags de signo (N) y de cero (Z).",
+                "Los flags de acarreo (C) y de desbordamiento (V).",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El sufijo S de SUBS actualiza todos los flags condicionales de la ALU.",
+            "explanation": "Las instrucciones aritméticas con el sufijo 'S' (como SUBS) actualizan el conjunto completo de flags condicionales: N (Negativo), Z (Cero), C (Acarreo) y V (Desbordamiento)."
+        },
+        {
+            "q": "¿Cuáles son los propósitos del registro de estado CPSR en la arquitectura ARM?",
+            "options": [
+                "Almacenar los flags de condición aritméticos (N, Z, C, V) para la ejecución condicional.",
+                "Controlar el modo de ejecución del procesador (Usuario, Supervisor, etc.) y enmascarar interrupciones (I, F).",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El CPSR contiene tanto flags de condición como bits de control.",
+            "explanation": "El CPSR (Current Program Status Register) tiene un propósito mixto: proveer los flags aritméticos/lógicos de control de flujo y controlar el estado del procesador (modo, bits de interrupción y tipo de instrucción ARM/Thumb)."
+        },
+        {
+            "q": "¿Qué registros del procesador ARM tienen una función de control o direccionamiento específica bien definida por convención o hardware?",
+            "options": [
+                "El registro R13, que actúa como Stack Pointer (SP).",
+                "Los registros R14 (Link Register, LR) y R15 (Program Counter, PC).",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Son los registros situados al final del banco principal.",
+            "explanation": "Tanto R13 (SP), R14 (LR) como R15 (PC) tienen roles dedicados específicos para la pila, los retornos de subrutina y el flujo del programa."
+        },
+        {
+            "q": "¿Qué eventos causan que el procesador cambie su modo de operación en los bits M[4:0] del CPSR?",
+            "options": [
+                "Una interrupción externa del hardware (IRQ/FIQ).",
+                "Una excepción de software generada por la instrucción SVC.",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Las excepciones y llamadas de sistema cambian el modo de ejecución.",
+            "explanation": "El procesador ARM conmuta su modo de operación (bits M[4:0]) de manera automática ante interrupciones de hardware (IRQ o FIQ) o excepciones de software mediante la instrucción de llamada al supervisor (SVC)."
+        },
+        {
+            "q": "Si el procesador ejecuta una subrutina anidada que a su vez llama a otra, ¿cuáles de las siguientes acciones evitan un bucle infinito al retornar?",
+            "options": [
+                "Hacer PUSH {LR} al inicio y POP {PC} al final de la subrutina intermedia.",
+                "Salvar el valor de LR en un registro preservado (como R4) antes de la llamada interna y hacer MOV PC, R4 al final.",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Debemos restaurar el punto de retorno original de la subrutina intermedia.",
+            "explanation": "Cualquier método que salve el registro LR original (ya sea en la pila de llamadas con PUSH/POP o en un registro preservado por convención como R4) y lo restaure al finalizar impedirá que la instrucción de retorno vuelva sobre sí misma."
+        },
+        {
+            "q": "¿Cuáles de las siguientes operaciones modifican los flags de condición del registro CPSR?",
+            "options": [
+                "La suma con actualización de banderas 'ADDS R0, R1, R2'.",
+                "La comparación aritmética 'CMP R4, R5'.",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Considere qué instrucciones modifican las banderas condicionales.",
+            "explanation": "La instrucción 'ADDS' actualiza las banderas debido al sufijo 'S'. La instrucción 'CMP' realiza una comparación restando operandos y por definición siempre actualiza las banderas. Por lo tanto, ambas opciones son válidas."
+        },
+        {
+            "q": "En la arquitectura ARM, ¿qué elementos del procesador son visibles directamente a través de su Modelo de Programación en Modo Usuario?",
+            "options": [
+                "Los registros de propósito general R0 a R12.",
+                "Los registros de control de ejecución R13 (SP), R14 (LR), R15 (PC) y el registro CPSR.",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "El modelo de programación engloba todos los registros accesibles por el programador.",
+            "explanation": "En el modo de usuario de ARM, el programador tiene acceso a 16 registros de 32 bits (R0-R15), además del registro de estado CPSR."
+        },
+        {
+            "q": "¿Qué información de control se encuentra en los bits inferiores (0 a 7) del registro CPSR?",
+            "options": [
+                "La máscara de interrupciones IRQ y FIQ (bits I y F).",
+                "El modo de ejecución actual (bits M[4:0]) y el modo Thumb (bit T).",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "Los bits de control del CPSR están en el byte menos significativo.",
+            "explanation": "Los bits 0 a 7 del CPSR controlan el estado de las interrupciones (I, F), el estado Thumb/ARM (T) y los bits de modo de operación del procesador (M[4:0])."
+        },
+        {
+            "q": "Al realizar una operación aritmética, ¿qué tipos de desbordamiento o acarreo pueden ser detectados y reflejados en el CPSR?",
+            "options": [
+                "Acarreo en operaciones con datos sin signo mediante el flag C.",
+                "Desbordamiento en operaciones con datos con signo (complemento a 2) mediante el flag V.",
+                "Todas las opciones anteriores son correctas."
+            ],
+            "correct": 2,
+            "hint": "CPSR dispone de banderas separadas para aritmética con y sin signo.",
+            "explanation": "La arquitectura ARM proporciona la bandera C (Carry) para identificar el acarreo o préstamo en operaciones sin signo, y la bandera V (Overflow) para detectar el desbordamiento de signo en complemento a dos."
+        },
+        {
+            "q": "Si ejecutamos la instrucción 'ADD R0, R1, R2' (sin el sufijo 'S') con R1 = 0x7FFFFFFF y R2 = 1, ¿qué valor toma la bandera V de desbordamiento en el CPSR?",
+            "options": [
+                "Toma el valor 1 debido a que se supera el rango representable.",
+                "Toma el valor 0 porque no hay desbordamiento en una suma de positivos.",
+                "Ninguna de las opciones anteriores es correcta (no se modifica el CPSR)."
+            ],
+            "correct": 2,
+            "hint": "Fíjese bien si la instrucción lleva la letra 'S' al final.",
+            "explanation": "Dado que la instrucción es 'ADD' sin el sufijo 'S', no se modifican los flags de condición en el CPSR. Por tanto, el valor de V permanece idéntico a su estado previo."
+        },
+        {
+            "q": "¿Qué instrucción se utiliza para guardar el registro CPSR en un registro de propósito general?",
+            "options": [
+                "MOV R0, CPSR",
+                "LDR R0, =CPSR",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Requiere una instrucción dedicada a registros de estado (MRS o MSR).",
+            "explanation": "La transferencia de un registro de estado a uno de propósito general requiere la instrucción especializada MRS (ej: `MRS R0, CPSR`). Las instrucciones MOV o LDR no pueden acceder directamente a registros especiales."
+        },
+        {
+            "q": "¿Qué instrucción se utiliza para escribir en el CPSR desde un registro de propósito general?",
+            "options": [
+                "MOV CPSR, R0",
+                "STR R0, [CPSR]",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Se trata de la instrucción especializada que mueve un registro general a uno de estado.",
+            "explanation": "Para modificar el CPSR desde un registro de propósito general, se debe usar la instrucción especializada MSR (ej: `MSR CPSR, R0`). Las instrucciones MOV o STR no tienen soporte hardware para esto."
+        },
+        {
+            "q": "Si ejecutamos 'SUBS R0, R1, R2' y el resultado es positivo (mayor que cero) y sin desbordamiento, ¿cuál es el estado final de las banderas N y Z en el CPSR?",
+            "options": [
+                "N = 1, Z = 1",
+                "N = 1, Z = 0",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Determine el valor lógico individual de N (negativo) y Z (cero).",
+            "explanation": "Al ser un resultado positivo mayor que cero, no es negativo ($N=0$) ni es cero ($Z=0$). Por lo tanto, el estado correcto es N = 0, Z = 0."
+        },
+        {
+            "q": "¿Cuál es el valor del registro SP después de hacer 'POP {R0, R1}' si antes de la instrucción SP valía 0x1000?",
+            "options": [
+                "0x0FF8",
+                "0x1004",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "POP saca datos de la pila e incrementa el SP. ¿Cuánto mide cada registro?",
+            "explanation": "Cada registro extraído de la pila ocupa 4 bytes. Al hacer POP de dos registros (R0 y R1), el valor del Stack Pointer se incrementa en $2 \\times 4 = 8$ bytes, pasando de $0x1000$ a $0x1008$."
+        },
+        {
+            "q": "Si ejecutamos 'SUBS R0, R1, R2' con R1 = 5 y R2 = 5, ¿qué valor final se almacena en el registro de destino R0?",
+            "options": [
+                "El registro R0 no se ve modificado en absoluto.",
+                "R0 se carga con el valor actual del registro CPSR.",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "La instrucción realiza una resta y guarda el resultado en el primer registro indicado.",
+            "explanation": "La instrucción SUBS calcula $R1 - R2 = 5 - 5 = 0$, y escribe dicho resultado en el registro de destino R0. Por tanto, R0 almacena el valor 0."
+        },
+        {
+            "q": "En el diseño de pipeline de ARM, ¿qué valor se guarda automáticamente en el registro LR cuando se ejecuta la instrucción de salto 'BL 0x8000' desde la dirección 0x4000?",
+            "options": [
+                "La dirección 0x8004.",
+                "La dirección 0x4008 debido al desfase del pipeline de ejecución.",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "LR debe almacenar la dirección de retorno, que es la instrucción inmediatamente posterior a BL.",
+            "explanation": "La instrucción BL se encuentra en 0x4000 y ocupa 4 bytes. La dirección de retorno es la de la siguiente instrucción, es decir, $0x4004$. En esa dirección se almacena el retorno, por lo que LR toma el valor $0x4004$."
+        },
+        {
+            "q": "En la arquitectura ARM de 32 bits, ¿cuántos registros físicos de 32 bits en total existen en el hardware (incluyendo los registros sombreados para todos los modos de operación)?",
+            "options": [
+                "Exactamente 16 registros.",
+                "Exactamente 32 registros.",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Hay registros sombreados específicos para FIQ, IRQ, SVC, Abort, Undefined.",
+            "explanation": "El hardware físico de ARMv7 cuenta con un total de 37 registros de 32 bits (31 registros de propósito general, incluyendo SP, LR, PC, y 6 registros de estado como CPSR y SPSR de cada modo)."
+        },
+        {
+            "q": "Si el registro CPSR tiene el valor hexadecimal '0x00000010', ¿en qué modo de ejecución se encuentra el procesador?",
+            "options": [
+                "En Modo Supervisor (SVC).",
+                "En Modo IRQ.",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Analice los bits inferiores M[4:0] = 10000 binario.",
+            "explanation": "Los bits de modo M[4:0] ocupan los bits 0 a 4 del CPSR. El valor $0x10$ (en binario `10000`) corresponde al modo de ejecución Usuario (USR). Por lo tanto, ninguna de las opciones anteriores (SVC, IRQ) es correcta."
+        },
+        {
+            "q": "Al realizar la operación 'ADDS R0, R1, R2' con R1 = 0x80000000 y R2 = 0x80000000, ¿cuál es el resultado en R0 y el valor de las banderas C y V?",
+            "options": [
+                "R0 = 0x00000000, C = 0, V = 0.",
+                "R0 = 0x00000000, C = 1, V = 0.",
+                "Ninguna de las opciones anteriores es correcta."
+            ],
+            "correct": 2,
+            "hint": "Considere la suma aritmética de dos números negativos extremos y analice acarreo y desbordamiento.",
+            "explanation": "La suma de $0x80000000$ (mínimo entero negativo, $-2^{31}$) más sí mismo da aritméticamente $-2^{32}$, lo cual se trunca a $0x00000000$ en 32 bits. Hay acarreo saliente del bit 31 ($C=1$). Y dado que sumamos dos negativos y el resultado es positivo (cero), se produce desbordamiento de signo ($V=1$). El resultado correcto sería R0 = 0, C = 1, V = 1."
+        }
+    ],
+    "LABORATORIO": [
+        {
+            "id": "lab_1",
+            "title": "Trace de suma simple y flags",
+            "context": "Se ejecuta la siguiente secuencia de instrucciones de 32 bits en un procesador ARM:\n```assembly\nMOV R1, #0x7FFFFFFF\nADDS R0, R1, #1\n```",
+            "parts": [
+                {
+                    "id": "lab_1_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en el registro R0 expresado como entero con signo de 32 bits en complemento a 2?",
+                    "correctValue": -2147483648,
+                    "tolerance": 0,
+                    "explanation": "El valor del registro R1 es $0x7FFFFFFF = 2^{31} - 1$. Al sumar $1$ mediante $ADDS$, el resultado en binario es $0x80000000$, el cual representa el valor $-2^{31} = -2147483648$ en complemento a 2."
+                },
+                {
+                    "id": "lab_1_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor del flag de cero Z tras la ejecución de la suma?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado obtenido es $0x80000000$, que no es igual a cero, de manera que la bandera de cero Z toma el valor $0$."
+                },
+                {
+                    "id": "lab_1_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor del flag de negativo N en el registro de estado CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bit 31 (MSB) del resultado $0x80000000$ está a 1, por lo tanto el flag N se activa ($N=1$)."
+                },
+                {
+                    "id": "lab_1_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor del flag de desbordamiento V tras la ejecución de la suma?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Se han sumado dos números positivos ($0x7FFFFFFF > 0$ y $1 > 0$) y se ha obtenido un número negativo ($0x80000000 < 0$). Esto indica un desbordamiento en la representación con signo, activando el flag V ($V=1$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_2",
+            "title": "Operaciones con bits y actualización CPSR",
+            "context": "Considera la ejecución de la siguiente instrucción:\n```assembly\nMOVS R0, #0x80000000\n```",
+            "parts": [
+                {
+                    "id": "lab_2_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor binario del bit 31 (MSB) del registro R0 después del movimiento?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La instrucción carga el valor literal $0x80000000$ en el registro R0. En binario, esto corresponde a un $1$ en el bit 31 y ceros en los bits 0-30."
+                },
+                {
+                    "id": "lab_2_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma la bandera N (Negative) en el registro CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Dado el uso de $MOVS$, las banderas del CPSR se actualizan. La bandera N toma el valor del bit 31 del resultado, que en este caso es $1$."
+                },
+                {
+                    "id": "lab_2_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera Z (Zero) en el registro CPSR?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Como el resultado cargado en R0 es $0x80000000 \\neq 0$, la bandera de cero se desactiva ($Z=0$)."
+                },
+                {
+                    "id": "lab_2_d",
+                    "label": "d",
+                    "question": "Si la instrucción anterior hubiera sido 'MOV R0, #0x80000000' (sin el sufijo S) y el CPSR tuviera originalmente N = 0, ¿qué valor final tendría la bandera N?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Sin el sufijo 'S', la instrucción de movimiento no actualiza los flags del registro CPSR. Por lo tanto, el flag N conserva su valor inicial de $0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_3",
+            "title": "Resta con préstamo (Borrow)",
+            "context": "Se ejecuta el siguiente código ensamblador ARM:\n```assembly\nMOV R1, #5\nSUBS R0, R1, #10\n```",
+            "parts": [
+                {
+                    "id": "lab_3_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en formato numérico entero sin signo de 32 bits (representación del valor decimal) de R0?",
+                    "correctValue": 4294967291,
+                    "tolerance": 0,
+                    "explanation": "La operación es $5 - 10 = -5$. En representación binaria sin signo de 32 bits, $-5$ equivale a $2^{32} - 5 = 4294967291$ (hexadecimal $0xFFFFFFFB$)."
+                },
+                {
+                    "id": "lab_3_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor de la bandera C (Carry/no-borrow) tras la ejecución de la resta?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "En las restas de ARM, el Carry actúa como 'no préstamo'. Dado que el minuendo ($5$) es menor que el sustraendo ($10$), se produce un préstamo (borrow), por lo que $C=0$."
+                },
+                {
+                    "id": "lab_3_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor del flag de signo N tras la ejecución de la resta?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El resultado final en binario de 32 bits es $0xFFFFFFFB$. El bit 31 es $1$, lo que activa el flag de negativo ($N=1$)."
+                },
+                {
+                    "id": "lab_3_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor del flag de desbordamiento de signo V tras la ejecución de la resta?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Se resta un positivo de un positivo ($5 - 10$) obteniendo un resultado negativo ($-5$). No hay desbordamiento en la aritmética con signo porque el resultado es correcto dentro del rango de 32 bits, por lo que $V=0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_4",
+            "title": "Gestión del Puntero de Pila (SP)",
+            "context": "El Stack Pointer se inicializa en la dirección decimal SP = 8192 (0x2000). A continuación se ejecutan las siguientes instrucciones:\n```assembly\nPUSH {R0, R1, R2}\nPOP {R4}\n```",
+            "parts": [
+                {
+                    "id": "lab_4_a",
+                    "label": "a",
+                    "question": "¿Cuántos bytes en total se reservan o restan en el registro SP al ejecutar la instrucción PUSH?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "La instrucción PUSH introduce tres registros de 32 bits (4 bytes cada uno) en la pila. La pila en ARM es descendente, por lo que se restan $3 \\times 4 = 12$ bytes al registro SP."
+                },
+                {
+                    "id": "lab_4_b",
+                    "label": "b",
+                    "question": "¿Cuál es la dirección apuntada por SP en formato decimal inmediatamente después de completar el PUSH?",
+                    "correctValue": 8180,
+                    "tolerance": 0,
+                    "explanation": "La dirección inicial de SP es $8192$. Tras el decremento de $12$ bytes, el nuevo valor de SP es $8192 - 12 = 8180$ (0x1FFFFFC)."
+                },
+                {
+                    "id": "lab_4_c",
+                    "label": "c",
+                    "question": "¿Cuál es la dirección decimal de SP tras ejecutar la instrucción POP?",
+                    "correctValue": 8184,
+                    "tolerance": 0,
+                    "explanation": "La instrucción POP saca un registro (R4, de 4 bytes) de la pila e incrementa el SP. El nuevo valor de SP será $8180 + 4 = 8184$."
+                },
+                {
+                    "id": "lab_4_d",
+                    "label": "d",
+                    "question": "¿Cuántos bytes de datos válidos de los empujados por el PUSH inicial quedan aún sin restaurar en la pila?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "De los 12 bytes iniciales insertados en la pila (3 registros), solo se ha recuperado 1 registro (4 bytes). Por tanto, quedan $12 - 4 = 8$ bytes por restaurar."
+                }
+            ]
+        },
+        {
+            "id": "lab_5",
+            "title": "Pipeline de ejecución y registro LR",
+            "context": "Una instrucción de salto con enlace (BL) se encuentra en la dirección de memoria 0x00008000 (32768 decimal) en un procesador ARM que ejecuta en modo de 32 bits.",
+            "parts": [
+                {
+                    "id": "lab_5_a",
+                    "label": "a",
+                    "question": "En el instante en el que la instrucción BL en 0x00008000 se está ejecutando, ¿cuál es la dirección decimal apuntada por el PC debido al pipeline de 3 etapas?",
+                    "correctValue": 32776,
+                    "tolerance": 0,
+                    "explanation": "Debido a las 3 etapas del pipeline (Búsqueda, Decodificación, Ejecución), el PC apunta a la instrucción que se está buscando, que está a $2$ instrucciones ($2 \\times 4 = 8$ bytes) de distancia. Por tanto, $PC = 0x8000 + 8 = 0x8008 = 32776$."
+                },
+                {
+                    "id": "lab_5_b",
+                    "label": "b",
+                    "question": "¿Qué valor decimal se almacena en el registro LR (R14) al ejecutarse el salto BL?",
+                    "correctValue": 32772,
+                    "tolerance": 0,
+                    "explanation": "El Link Register almacena la dirección de retorno, que corresponde a la instrucción consecutiva a la llamada en memoria ($0x8000 + 4 = 0x8004 = 32772$)."
+                },
+                {
+                    "id": "lab_5_c",
+                    "label": "c",
+                    "question": "Si la instrucción BL estuviese en modo Thumb (instrucciones de 16 bits), ¿cuál sería el valor decimal del PC en la etapa de ejecución (2 instrucciones por delante)?",
+                    "correctValue": 32772,
+                    "tolerance": 0,
+                    "explanation": "En modo Thumb, las instrucciones básicas ocupan 2 bytes. El pipeline de 3 etapas busca a $PC + 4$ bytes (2 instrucciones de 2 bytes). Así, $PC = 0x8000 + 4 = 0x8004 = 32772$."
+                },
+                {
+                    "id": "lab_5_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor del bit de estado T del CPSR cuando el procesador ejecuta en el modo Thumb?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bit T (bit 5) del CPSR determina el modo de ejecución: $T=1$ indica modo Thumb y $T=0$ indica modo ARM estándar."
+                }
+            ]
+        },
+        {
+            "id": "lab_6",
+            "title": "Bucle condicional simple",
+            "context": "Se analiza el siguiente código ensamblador ARM:\n```assembly\nMOV R0, #0\nMOV R1, #10\nbucle:\nADD R0, R0, #2\nSUBS R1, R1, #1\nBNE bucle\n```",
+            "parts": [
+                {
+                    "id": "lab_6_a",
+                    "label": "a",
+                    "question": "¿Cuántas iteraciones en total realiza el bucle?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "El registro R1 se inicializa en $10$ y en cada paso disminuye de uno en uno con $SUBS$. El salto condicional $BNE$ repite el ciclo hasta que el resultado de $SUBS$ es cero, requiriendo exactamente $10$ iteraciones."
+                },
+                {
+                    "id": "lab_6_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor decimal final del registro R0 al finalizar la ejecución?",
+                    "correctValue": 20,
+                    "tolerance": 0,
+                    "explanation": "R0 comienza en $0$ y en cada una de las 10 iteraciones se le suma $2$. Por lo tanto, el valor final de R0 es $10 \\times 2 = 20$."
+                },
+                {
+                    "id": "lab_6_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor final en el registro R1 al terminar la ejecución?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El bucle finaliza cuando la resta en $SUBS$ da como resultado cero ($R1=0$), lo cual provoca que no se cumpla la condición de salto BNE."
+                },
+                {
+                    "id": "lab_6_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera Z (Zero) en el CPSR tras finalizar el bucle?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La última operación de actualización de flags fue $SUBS R1, R1, #1$ dando un resultado de $0$, por lo que el flag Z se activa ($Z=1$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_7",
+            "title": "Resta sin préstamo y banderas",
+            "context": "Se ejecuta la siguiente secuencia de código:\n```assembly\nMOV R1, #20\nSUBS R0, R1, #20\n```",
+            "parts": [
+                {
+                    "id": "lab_7_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal final del registro R0?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La operación es $20 - 20 = 0$, valor que se almacena en el registro R0."
+                },
+                {
+                    "id": "lab_7_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma la bandera de cero Z en el CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Dado que el resultado de la resta es $0$, la bandera Z se activa ($Z=1$)."
+                },
+                {
+                    "id": "lab_7_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera C (Carry) tras esta resta?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "En las restas de ARM, el Carry indica la ausencia de préstamo. Como el minuendo es mayor o igual que el sustraendo ($20 \\ge 20$), no hay préstamo y por lo tanto $C=1$."
+                },
+                {
+                    "id": "lab_7_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera N (Negative) tras esta resta?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado $0$ no es negativo (su bit 31 es 0), de manera que $N=0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_8",
+            "title": "Suma de números negativos",
+            "context": "Se ejecuta la siguiente secuencia de instrucciones:\n```assembly\nMOV R1, #0xFFFFFFFF  @ -1 en complemento a 2\nMOV R2, #0xFFFFFFFF  @ -1 en complemento a 2\nADDS R0, R1, R2\n```",
+            "parts": [
+                {
+                    "id": "lab_8_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor numérico en decimal sin signo almacenado en el registro R0?",
+                    "correctValue": 4294967294,
+                    "tolerance": 0,
+                    "explanation": "La suma binaria de $0xFFFFFFFF$ y $0xFFFFFFFF$ da $0x1FFFFFFFF$, el cual se trunca a 32 bits como $0xFFFFFFFE$. El valor decimal sin signo equivalente es $4294967294$."
+                },
+                {
+                    "id": "lab_8_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor de la bandera N (Negative) en el registro CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bit 31 de $0xFFFFFFFE$ es 1. Dado que se ha empleado $ADDS$, el flag N toma el valor de este bit, por lo que $N=1$."
+                },
+                {
+                    "id": "lab_8_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor de la bandera C (Carry) en el CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La suma aritmética supera la capacidad máxima de un registro de 32 bits ($2 \\times 2^{32} - 2 \\ge 2^{32}$), generando un acarreo de salida de bit 31, por lo que $C=1$."
+                },
+                {
+                    "id": "lab_8_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor de la bandera V (Overflow) en el CPSR?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Se suman dos números negativos ($-1$ y $-1$) y el resultado obtenido ($-2$, $0xFFFFFFFE$) es también negativo. No hay desbordamiento en la aritmética con signo (el resultado de la operación cabe en 32 bits), con lo que $V=0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_9",
+            "title": "Instrucción de comparación (CMP)",
+            "context": "Considera la ejecución de las siguientes instrucciones:\n```assembly\nMOV R0, #15\nMOV R1, #25\nCMP R0, R1\n```",
+            "parts": [
+                {
+                    "id": "lab_9_a",
+                    "label": "a",
+                    "question": "¿Qué valor decimal se almacena en el registro R0 tras ejecutar la instrucción CMP?",
+                    "correctValue": 15,
+                    "tolerance": 0,
+                    "explanation": "La instrucción de comparación CMP realiza la resta pero no almacena el resultado en el registro destino. Por tanto, R0 conserva su valor original de $15$."
+                },
+                {
+                    "id": "lab_9_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor de la bandera Z (Zero) tras la comparación?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Se evalúa la resta $15 - 25 = -10 \\neq 0$. Por lo tanto, el flag Z se desactiva ($Z=0$)."
+                },
+                {
+                    "id": "lab_9_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor de la bandera N (Negative) tras la comparación?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El resultado de la resta interna es $-10$, un valor negativo. En consecuencia, el flag N se activa ($N=1$)."
+                },
+                {
+                    "id": "lab_9_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor de la bandera C (Carry) tras la comparación?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al restar un valor mayor de uno menor ($15 < 25$), se produce préstamo (borrow). Al haber préstamo en la resta, el flag Carry se pone a 0 ($C=0$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_10",
+            "title": "Almacenamiento múltiple y desplazamiento de SP",
+            "context": "El puntero de pila SP se inicializa en la dirección decimal 4096 (0x1000). A continuación se ejecuta la instrucción:\n```assembly\nPUSH {R0-R7}\n```",
+            "parts": [
+                {
+                    "id": "lab_10_a",
+                    "label": "a",
+                    "question": "¿Cuántos bytes de memoria se reservan en la pila para almacenar los registros indicados?",
+                    "correctValue": 32,
+                    "tolerance": 0,
+                    "explanation": "La instrucción PUSH introduce 8 registros (R0 a R7). Cada registro de 32 bits ocupa 4 bytes, sumando un espacio total de $8 \\times 4 = 32$ bytes."
+                },
+                {
+                    "id": "lab_10_b",
+                    "label": "b",
+                    "question": "¿Cuál es la dirección decimal del Stack Pointer (SP) tras completarse el PUSH?",
+                    "correctValue": 4064,
+                    "tolerance": 0,
+                    "explanation": "Al ser una pila de tipo descendente, el SP se reduce según los bytes almacenados: $4096 - 32 = 4064$."
+                },
+                {
+                    "id": "lab_10_c",
+                    "label": "c",
+                    "question": "Si a continuación se ejecuta la instrucción 'POP {R0-R3}', ¿cuál es el nuevo valor decimal de SP?",
+                    "correctValue": 4080,
+                    "tolerance": 0,
+                    "explanation": "La instrucción POP saca 4 registros (R0 a R3) de la pila. El SP se incrementa en $4 \\times 4 = 16$ bytes, pasando de $4064$ a $4064 + 16 = 4080$."
+                },
+                {
+                    "id": "lab_10_d",
+                    "label": "d",
+                    "question": "¿Cuántos registros quedan almacenados en la pila tras estas dos instrucciones?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Inicialmente se apilaron 8 registros y luego se desapilaron 4. El número de registros restantes en la pila es $8 - 4 = 4$."
+                }
+            ]
+        },
+        {
+            "id": "lab_11",
+            "title": "Desplazamiento lógico a la izquierda (LSL)",
+            "context": "Se ejecutan las siguientes instrucciones en un procesador ARM:\n```assembly\nMOV R1, #2\nMOV R0, R1, LSL #2\n```",
+            "parts": [
+                {
+                    "id": "lab_11_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en formato decimal del registro R0?",
+                    "correctValue": 8,
+                    "tolerance": 0,
+                    "explanation": "El valor de R1 ($2$) se desplaza dos posiciones a la izquierda ($2 \\times 2^2 = 8$), cargando el resultado en R0."
+                },
+                {
+                    "id": "lab_11_b",
+                    "label": "b",
+                    "question": "Si ejecutamos 'MOVS R0, R1, LSL #30', ¿cuál es el valor decimal sin signo resultante en R0?",
+                    "correctValue": 2147483648,
+                    "tolerance": 0,
+                    "explanation": "Desplazar R1 ($2$) treinta posiciones a la izquierda equivale a realizar la operación binaria $2 \\times 2^{30} = 2^{31} = 0x80000000$. El equivalente decimal sin signo de este valor es $2147483648$."
+                },
+                {
+                    "id": "lab_11_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera N del CPSR tras la instrucción 'MOVS R0, R1, LSL #30'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bit 31 del resultado es $1$. Como se emplea el sufijo S de modificación de estado ($MOVS$), la bandera N se activa ($N=1$)."
+                },
+                {
+                    "id": "lab_11_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera Z del CPSR tras esta misma instrucción?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Dado que el resultado obtenido $0x80000000$ es distinto de cero, el flag Z se desactiva ($Z=0$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_12",
+            "title": "Ciclos en bucle anidado",
+            "context": "Se analiza el comportamiento del siguiente algoritmo:\n```assembly\nMOV R0, #0\nMOV R1, #3\nexterno:\nMOV R2, #4\ninterno:\nADD R0, R0, #1\nSUBS R2, R2, #1\nBNE interno\nSUBS R1, R1, #1\nBNE externo\n```",
+            "parts": [
+                {
+                    "id": "lab_12_a",
+                    "label": "a",
+                    "question": "¿Cuántas veces en total se ejecuta la instrucción ADD R0, R0, #1?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "El bucle externo se ejecuta $3$ veces (R1 va de 3 a 0). En cada iteración de este, el bucle interno ejecuta $4$ veces la instrucción ADD (R2 va de 4 a 0). La instrucción se repite un total de $3 \\times 4 = 12$ veces."
+                },
+                {
+                    "id": "lab_12_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor decimal final del registro R0?",
+                    "correctValue": 12,
+                    "tolerance": 0,
+                    "explanation": "R0 se inicializa en $0$ y recibe doce incrementos unitarios, resultando en un valor final de $12$."
+                },
+                {
+                    "id": "lab_12_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor decimal final del registro R1 al terminar la ejecución?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El bucle externo finaliza cuando la instrucción $SUBS R1, R1, #1$ da como resultado $0$ ($R1=0$)."
+                },
+                {
+                    "id": "lab_12_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor decimal final del registro R2 al terminar la ejecución?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El bucle interno finaliza en cada pasada cuando R2 llega a $0$ por la instrucción $SUBS R2, R2, #1$, por lo que su valor de parada es $0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_13",
+            "title": "Verificación de equivalencia lógica (TEQ)",
+            "context": "Se ejecutan las siguientes instrucciones:\n```assembly\nMOV R1, #0x0F\nMOV R2, #0xF0\nTEQ R1, R2\n```",
+            "parts": [
+                {
+                    "id": "lab_13_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en decimal del registro R1 tras ejecutar TEQ?",
+                    "correctValue": 15,
+                    "tolerance": 0,
+                    "explanation": "La instrucción de comparación lógica TEQ (Test Equivalence) no modifica el valor de sus registros operandos. R1 conserva el valor $0x0F = 15$."
+                },
+                {
+                    "id": "lab_13_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor de la bandera Z en el CPSR después de la ejecución de TEQ?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "TEQ realiza una operación XOR bit a bit: $0x0F \\oplus 0xF0 = 0xFF \\neq 0$. Al ser el resultado distinto de cero, el flag Z se pone a $0$."
+                },
+                {
+                    "id": "lab_13_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor de la bandera N en el CPSR después de la ejecución de TEQ?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado binario de 32 bits es $0x000000FF$. Al tener el bit 31 (MSB) igual a $0$, la bandera N se pone a $0$."
+                },
+                {
+                    "id": "lab_13_d",
+                    "label": "d",
+                    "question": "Si hubiésemos cargado R2 con el valor 0x0F y ejecutado TEQ R1, R2, ¿qué valor tomaría la bandera Z?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Hacer XOR de dos valores idénticos da como resultado cero ($0x0F \\oplus 0x0F = 0$). Como el resultado es cero, la bandera Z se activa ($Z=1$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_14",
+            "title": "Comprobación de bits con TST",
+            "context": "Se ejecuta la siguiente secuencia de código:\n```assembly\nMOV R1, #0x05  @ 0101 en binario\nTST R1, #0x02  @ 0010 en binario\n```",
+            "parts": [
+                {
+                    "id": "lab_14_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal del registro R1 tras la ejecución de TST?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "TST es una instrucción de comparación lógica que no modifica sus operandos; solo actualiza banderas de estado. R1 permanece en $5$."
+                },
+                {
+                    "id": "lab_14_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor de la bandera Z en el CPSR tras la instrucción TST?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "TST realiza un AND bit a bit: $0101_2 \\text{ AND } 0010_2 = 0000_2$. Como el resultado es exactamente cero, el flag Z se activa ($Z=1$)."
+                },
+                {
+                    "id": "lab_14_c",
+                    "label": "c",
+                    "question": "Si la instrucción fuese 'TST R1, #0x04', ¿qué valor tomaría el flag Z?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La operación AND sería $0101_2 \\text{ AND } 0100_2 = 0100_2 = 4 \\neq 0$. Por lo tanto, la bandera Z se desactiva ($Z=0$)."
+                },
+                {
+                    "id": "lab_14_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera N del CPSR tras ejecutar 'TST R1, #0x04'?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado binario de 32 bits de la operación AND es $0x00000004$. El bit 31 es $0$, por lo que $N=0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_15",
+            "title": "Flags en caso de desbordamiento completo",
+            "context": "Se provoca un desbordamiento al sumar el número negativo máximo consigo mismo:\n```assembly\nMOV R1, #0x80000000\nMOV R2, #0x80000000\nADDS R0, R1, R2\n```",
+            "parts": [
+                {
+                    "id": "lab_15_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal final de R0?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La suma binaria de $0x80000000$ y $0x80000000$ resulta en $0x100000000$, que al truncarse a 32 bits da como resultado en R0 exactamente $0$."
+                },
+                {
+                    "id": "lab_15_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma el flag de cero Z tras la operación?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Dado que el resultado almacenado en R0 es cero, el flag Z se activa ($Z=1$)."
+                },
+                {
+                    "id": "lab_15_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma el flag de acarreo C tras la operación?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La operación genera un acarreo de salida de bit 31 ($0x1$ saliente), de modo que $C=1$."
+                },
+                {
+                    "id": "lab_15_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma el flag de desbordamiento de signo V tras la operación?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Sumar dos números negativos y obtener un resultado positivo (cero) representa un desbordamiento con signo en complemento a 2, por lo que $V=1$."
+                }
+            ]
+        },
+        {
+            "id": "lab_16",
+            "title": "Codificación y direccionamiento físico de memoria",
+            "context": "Evaluamos el direccionamiento físico en un procesador ARMv7 con instrucciones alineadas en memoria.",
+            "parts": [
+                {
+                    "id": "lab_16_a",
+                    "label": "a",
+                    "question": "¿Cuántos bytes de memoria ocupa una única instrucción máquina de 32 bits en modo ARM estándar?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "Cada instrucción en el modo de ejecución estándar de ARM mide exactamente 32 bits de longitud, lo que equivale a $4$ bytes."
+                },
+                {
+                    "id": "lab_16_b",
+                    "label": "b",
+                    "question": "¿Cuántos bytes de memoria ocupa una instrucción compacta Thumb clásica de 16 bits?",
+                    "correctValue": 2,
+                    "tolerance": 0,
+                    "explanation": "Las instrucciones básicas en estado Thumb miden 16 bits de longitud, es decir, $2$ bytes."
+                },
+                {
+                    "id": "lab_16_c",
+                    "label": "c",
+                    "question": "Si la instrucción actual en modo ARM se sitúa en la dirección 0x00004000 (16384 decimal), ¿en qué dirección decimal de memoria se ubicará la siguiente instrucción consecutiva?",
+                    "correctValue": 16388,
+                    "tolerance": 0,
+                    "explanation": "En modo ARM de 32 bits, las instrucciones ocupan 4 bytes. La siguiente instrucción estará en la dirección $0x4000 + 4 = 0x4004$, que equivale a $16388$ en decimal."
+                },
+                {
+                    "id": "lab_16_d",
+                    "label": "d",
+                    "question": "Si estuviésemos en modo Thumb y la instrucción actual se sitúa en la dirección 0x00004000 (16384 decimal), ¿cuál será la dirección decimal de la instrucción inmediatamente contigua?",
+                    "correctValue": 16386,
+                    "tolerance": 0,
+                    "explanation": "En modo Thumb de 16 bits, las instrucciones ocupan 2 bytes, de modo que la dirección de la siguiente instrucción es $0x4000 + 2 = 0x4002 = 16386$."
+                }
+            ]
+        },
+        {
+            "id": "lab_17",
+            "title": "Distribución de bits del CPSR - Flags de Condición",
+            "context": "Analizamos la estructura interna y la posición exacta de los bits del registro CPSR de 32 bits.",
+            "parts": [
+                {
+                    "id": "lab_17_a",
+                    "label": "a",
+                    "question": "¿Cuál es la posición de bit (0 a 31) correspondiente al flag de negativo N?",
+                    "correctValue": 31,
+                    "tolerance": 0,
+                    "explanation": "El flag N de negativo se ubica en el bit más significativo, el bit $31$ del registro CPSR."
+                },
+                {
+                    "id": "lab_17_b",
+                    "label": "b",
+                    "question": "¿Cuál es la posición de bit (0 a 31) correspondiente al flag de cero Z?",
+                    "correctValue": 30,
+                    "tolerance": 0,
+                    "explanation": "El flag Z se encuentra en el bit $30$ del registro CPSR."
+                },
+                {
+                    "id": "lab_17_c",
+                    "label": "c",
+                    "question": "¿Cuál es la posición de bit (0 a 31) correspondiente al flag de acarreo C?",
+                    "correctValue": 29,
+                    "tolerance": 0,
+                    "explanation": "El flag C está ubicado en el bit $29$ del registro CPSR."
+                },
+                {
+                    "id": "lab_17_d",
+                    "label": "d",
+                    "question": "¿Cuál es la posición de bit (0 a 31) correspondiente al flag de desbordamiento V?",
+                    "correctValue": 28,
+                    "tolerance": 0,
+                    "explanation": "El flag V se sitúa en el bit $28$ del registro CPSR."
+                }
+            ]
+        },
+        {
+            "id": "lab_18",
+            "title": "Distribución de bits del CPSR - Control del Procesador",
+            "context": "Evaluamos los bits de control del CPSR encargados de gestionar las interrupciones, el modo Thumb y el nivel de privilegios.",
+            "parts": [
+                {
+                    "id": "lab_18_a",
+                    "label": "a",
+                    "question": "¿Cuántos bits (campo M[4:0]) se destinan en total a almacenar el modo de operación de la CPU?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El modo del procesador está determinado por 5 bits en el rango de posiciones del 0 al 4 del CPSR ($M[4:0]$)."
+                },
+                {
+                    "id": "lab_18_b",
+                    "label": "b",
+                    "question": "¿Cuál es la posición de bit (0 a 31) de la máscara de interrupción normal I?",
+                    "correctValue": 7,
+                    "tolerance": 0,
+                    "explanation": "El bit de enmascaramiento IRQ (I) se ubica en el bit $7$ del CPSR."
+                },
+                {
+                    "id": "lab_18_c",
+                    "label": "c",
+                    "question": "¿Cuál es la posición de bit (0 a 31) de la máscara de interrupción rápida F?",
+                    "correctValue": 6,
+                    "tolerance": 0,
+                    "explanation": "El bit de enmascaramiento FIQ (F) se ubica en el bit $6$ del CPSR."
+                },
+                {
+                    "id": "lab_18_d",
+                    "label": "d",
+                    "question": "¿Cuál es la posición de bit (0 a 31) del bit de estado T (Thumb)?",
+                    "correctValue": 5,
+                    "tolerance": 0,
+                    "explanation": "El bit T de estado Thumb/ARM se encuentra en la posición de bit $5$ del CPSR."
+                }
+            ]
+        },
+        {
+            "id": "lab_19",
+            "title": "Pila de llamadas y subrutinas",
+            "context": "Se analiza el siguiente bloque de ejecución de subrutinas con uso de pila. El registro SP se inicializa en 8192 (0x2000).\n```assembly\nMOV R0, #10\nBL sub_a\nADD R0, R0, #5\n@ ... final ...\nsub_a:\nPUSH {R0, LR}\nADD R0, R0, #20\nPOP {R0, PC}\n```",
+            "parts": [
+                {
+                    "id": "lab_19_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal del registro SP dentro de la subrutina 'sub_a' justo después del PUSH?",
+                    "correctValue": 8184,
+                    "tolerance": 0,
+                    "explanation": "La instrucción PUSH guarda dos registros (R0 y LR), lo que equivale a restar 8 bytes al SP. $8192 - 8 = 8184$."
+                },
+                {
+                    "id": "lab_19_b",
+                    "label": "b",
+                    "question": "¿Qué valor decimal del registro R0 se almacena físicamente en la pila por la instrucción PUSH?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "Al ejecutarse el PUSH, R0 vale $10$, que es el valor de entrada a la subrutina que queda resguardado en memoria."
+                },
+                {
+                    "id": "lab_19_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor decimal de R0 tras completarse la instrucción 'ADD R0, R0, #5' (después de retornar)?",
+                    "correctValue": 15,
+                    "tolerance": 0,
+                    "explanation": "Dentro de la subrutina, R0 pasa de 10 a 30. Pero la instrucción $POP {R0, PC}$ recupera el valor original de R0 que estaba en la pila ($10$) al mismo tiempo que carga el retorno en el PC. Después, en la instrucción posterior al salto, se ejecuta $ADD R0, R0, #5$, haciendo que R0 valga $10 + 5 = 15$."
+                },
+                {
+                    "id": "lab_19_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor decimal del Stack Pointer (SP) una vez se ha retornado de la función (tras la ejecución de POP)?",
+                    "correctValue": 8192,
+                    "tolerance": 0,
+                    "explanation": "La instrucción POP saca dos registros de 32 bits de la pila, sumando 8 bytes al SP. El nuevo valor de SP vuelve a ser $8184 + 8 = 8192$."
+                }
+            ]
+        },
+        {
+            "id": "lab_20",
+            "title": "Operaciones de rotación a la derecha (ROR)",
+            "context": "Evaluamos el uso de barril de desplazamiento mediante la rotación:\n```assembly\nMOV R1, #0x0000000F  @ R1 = 15\nMOV R0, R1, ROR #4\n```",
+            "parts": [
+                {
+                    "id": "lab_20_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal sin signo que queda en el registro R0?",
+                    "correctValue": 4026531840,
+                    "tolerance": 0,
+                    "explanation": "Rotar a la derecha por 4 bits un valor de 32 bits hace que los 4 bits inferiores pasen a ocupar los bits 28 a 31. El valor binario de R0 será $0xF0000000$, que equivale a $15 \\times 2^{28} = 4026531840$ en decimal sin signo."
+                },
+                {
+                    "id": "lab_20_b",
+                    "label": "b",
+                    "question": "Si la instrucción fuese 'MOVS R0, R1, ROR #4', ¿qué valor tomaría la bandera N en el CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Dado que el bit 31 del resultado $0xF0000000$ es 1, y al usar $MOVS$ se modifican las banderas del CPSR, el flag N se activa ($N=1$)."
+                },
+                {
+                    "id": "lab_20_c",
+                    "label": "c",
+                    "question": "¿Qué valor tomaría la bandera Z en el CPSR tras esa misma instrucción 'MOVS'?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Como el resultado $0xF0000000$ es distinto de cero, la bandera Z se pone a $0$."
+                },
+                {
+                    "id": "lab_20_d",
+                    "label": "d",
+                    "question": "¿En qué número de bit del registro R0 (rango 0 a 31) terminará ubicado el bit que originalmente ocupaba la posición 0 en el registro R1?",
+                    "correctValue": 28,
+                    "tolerance": 0,
+                    "explanation": "Al rotar a la derecha por 4 bits, la posición $0$ del registro de origen se desplaza cíclicamente a la posición $32 - 4 = 28$ del registro destino."
+                }
+            ]
+        },
+        {
+            "id": "lab_21",
+            "title": "Comparación por suma (CMN)",
+            "context": "La instrucción CMN compara dos operandos sumándolos: realiza internamente la suma `Rn + Op2` y actualiza flags condicionales del CPSR.\n```assembly\nMOV R1, #10\nCMN R1, #-10\n```",
+            "parts": [
+                {
+                    "id": "lab_21_a",
+                    "label": "a",
+                    "question": "¿Qué valor decimal se almacena en el registro R1 tras ejecutar CMN?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "CMN es una instrucción de comparación que no actualiza el registro de destino. R1 mantiene su valor original de $10$."
+                },
+                {
+                    "id": "lab_21_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma la bandera Z del CPSR tras la instrucción?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La operación interna es $10 + (-10) = 0$. Puesto que el resultado es cero, se activa la bandera Z ($Z=1$)."
+                },
+                {
+                    "id": "lab_21_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera N del CPSR tras la instrucción?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado $0$ no es negativo (su bit 31 es 0), por lo que $N=0$."
+                },
+                {
+                    "id": "lab_21_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera C (Carry) del CPSR tras la instrucción?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La suma en binario de 32 bits de $10$ (0x0000000A) y $-10$ (0xFFFFFFF6) genera un acarreo saliente del bit 31 ($0x0000000A + 0xFFFFFFF6 = 0x100000000$). Por lo tanto, $C=1$."
+                }
+            ]
+        },
+        {
+            "id": "lab_22",
+            "title": "Limpieza de bits con BIC",
+            "context": "La instrucción BIC (Bit Clear) pone a 0 los bits del registro destino que estén a 1 en el segundo operando.\n```assembly\nMOV R1, #0xFF\nBIC R0, R1, #0x0F\n```",
+            "parts": [
+                {
+                    "id": "lab_22_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en decimal del registro R0?",
+                    "correctValue": 240,
+                    "tolerance": 0,
+                    "explanation": "La operación es $0xFF \\text{ AND NOT } 0x0F = 0xF0$. El equivalente decimal es $240$."
+                },
+                {
+                    "id": "lab_22_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor final en decimal del registro R1?",
+                    "correctValue": 255,
+                    "tolerance": 0,
+                    "explanation": "El registro R1 actúa como operando fuente y no es modificado por la instrucción. Mantiene el valor $0xFF = 255$."
+                },
+                {
+                    "id": "lab_22_c",
+                    "label": "c",
+                    "question": "Si ejecutamos 'BICS R0, R1, #0xFF', ¿qué valor tomaría la bandera Z en el CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La operación sería $0xFF \\text{ AND NOT } 0xFF = 0$. Al ser el resultado cero y usar el sufijo S ($BICS$), se activa el flag Z ($Z=1$)."
+                },
+                {
+                    "id": "lab_22_d",
+                    "label": "d",
+                    "question": "¿Qué valor tendría la bandera N en esa misma operación 'BICS'?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado de la operación es $0$. Al no tener el bit 31 en 1, el flag N se desactiva ($N=0$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_23",
+            "title": "Operación XOR bit a bit (EOR)",
+            "context": "Evaluamos el uso de operaciones booleanas con modificación de banderas:\n```assembly\nMOV R1, #0xAAAAAAAA\nMOV R2, #0x55555555\nEORS R0, R1, R2\n```",
+            "parts": [
+                {
+                    "id": "lab_23_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal sin signo resultante en el registro R0?",
+                    "correctValue": 4294967295,
+                    "tolerance": 0,
+                    "explanation": "La operación XOR bit a bit entre $0xAAAAAAAA$ (`1010...`) y $0x55555555$ (`0101...`) da como resultado un valor con todos los bits a 1, es decir, $0xFFFFFFFF$. Su valor decimal sin signo es $2^{32} - 1 = 4294967295$."
+                },
+                {
+                    "id": "lab_23_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma la bandera N del CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bit 31 del resultado ($0xFFFFFFFF$) es 1. Al usar $EORS$, el flag N toma este valor, de manera que $N=1$."
+                },
+                {
+                    "id": "lab_23_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera Z del CPSR?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado no es nulo ($0xFFFFFFFF \\neq 0$), por lo que $Z=0$."
+                },
+                {
+                    "id": "lab_23_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera de desbordamiento V del CPSR tras la instrucción EORS?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Las operaciones lógicas no producen desbordamiento aritmético. En ARM, la instrucción EORS establece el flag V en 0 (o lo deja inalterado, según la implementación, aunque por convención de ALU lógica es 0)."
+                }
+            ]
+        },
+        {
+            "id": "lab_24",
+            "title": "Modos de direccionamiento indexado en LDR",
+            "context": "Se dispone de la memoria con el siguiente contenido: en la dirección 4096 (0x1000) se almacena 170 (0xAA) y en la dirección 4100 (0x1004) se almacena 187 (0xBB). Se ejecutan las instrucciones:\n```assembly\nMOV R1, #0x1000\nLDR R0, [R1, #4]\n```",
+            "parts": [
+                {
+                    "id": "lab_24_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en decimal del registro R0?",
+                    "correctValue": 187,
+                    "tolerance": 0,
+                    "explanation": "La instrucción carga el contenido de la dirección $R1 + 4 = 0x1000 + 4 = 0x1004$, el cual corresponde al valor $0xBB = 187$."
+                },
+                {
+                    "id": "lab_24_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor final en decimal del registro R1?",
+                    "correctValue": 4096,
+                    "tolerance": 0,
+                    "explanation": "Se ha utilizado direccionamiento indexado sin actualización (no se incluye el sufijo '!'). Por tanto, R1 mantiene su valor original $0x1000 = 4096$."
+                },
+                {
+                    "id": "lab_24_c",
+                    "label": "c",
+                    "question": "Si en su lugar ejecutamos 'LDR R2, [R1], #4' (direccionamiento post-indexado), ¿cuál es el valor final en decimal de R2?",
+                    "correctValue": 170,
+                    "tolerance": 0,
+                    "explanation": "En el direccionamiento post-indexado, la carga se realiza utilizando el valor actual de R1 ($0x1000$). Por lo tanto, se lee de la dirección $0x1000$, cargando el valor $0xAA = 170$ en R2."
+                },
+                {
+                    "id": "lab_24_d",
+                    "label": "d",
+                    "question": "¿Cuál es el valor final de R1 en decimal tras ejecutar la instrucción post-indexada anterior?",
+                    "correctValue": 4100,
+                    "tolerance": 0,
+                    "explanation": "En el direccionamiento post-indexado, tras realizar la transferencia, el registro base se actualiza sumando el desplazamiento: $R1 = 0x1000 + 4 = 0x1004 = 4100$."
+                }
+            ]
+        },
+        {
+            "id": "lab_25",
+            "title": "Instrucción de multiplicación básica (MUL)",
+            "context": "Se ejecutan las siguientes instrucciones:\n```assembly\nMOV R1, #12\nMOV R2, #5\nMUL R0, R1, R2\n```",
+            "parts": [
+                {
+                    "id": "lab_25_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final en decimal del registro R0?",
+                    "correctValue": 60,
+                    "tolerance": 0,
+                    "explanation": "MUL realiza la multiplicación de R1 por R2, almacenando el resultado en R0: $12 \\times 5 = 60$."
+                },
+                {
+                    "id": "lab_25_b",
+                    "label": "b",
+                    "question": "Si ejecutamos 'MULS R0, R1, R2' con los mismos operandos, ¿qué valor toma la bandera Z en el CPSR?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado de la multiplicación es $60 \\neq 0$, por lo que la bandera Z se desactiva ($Z=0$)."
+                },
+                {
+                    "id": "lab_25_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera N del CPSR tras la instrucción 'MULS' anterior?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado $60$ es positivo (su bit 31 es 0). Por lo tanto, el flag N se pone a $0$."
+                },
+                {
+                    "id": "lab_25_d",
+                    "label": "d",
+                    "question": "¿Cuántos bits de precisión tiene el resultado directo que almacena la instrucción MUL en ARM?",
+                    "correctValue": 32,
+                    "tolerance": 0,
+                    "explanation": "La instrucción de multiplicación básica MUL produce un resultado de 32 bits correspondientes a los 32 bits inferiores del producto de dos registros de 32 bits."
+                }
+            ]
+        },
+        {
+            "id": "lab_26",
+            "title": "Desbordamiento por suma de positivos (V Flag)",
+            "context": "Se realiza la suma de dos valores positivos extremos en complemento a 2:\n```assembly\nMOV R1, #0x40000000\nMOV R2, #0x40000000\nADDS R0, R1, R2\n```",
+            "parts": [
+                {
+                    "id": "lab_26_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal sin signo final almacenado en el registro R0?",
+                    "correctValue": 2147483648,
+                    "tolerance": 0,
+                    "explanation": "La suma binaria es $0x40000000 + 0x40000000 = 0x80000000$. El equivalente en decimal sin signo es $2147483648$."
+                },
+                {
+                    "id": "lab_26_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma la bandera N del CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El bit 31 del resultado es 1, lo que representa un valor negativo en complemento a 2, activando el flag N ($N=1$)."
+                },
+                {
+                    "id": "lab_26_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera V (Overflow) del CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Se han sumado dos operandos positivos ($0x40000000 > 0$) y se ha obtenido un resultado que en representación con signo es negativo ($0x80000000 = -2^{31} < 0$). Esto activa el flag de desbordamiento V ($V=1$)."
+                },
+                {
+                    "id": "lab_26_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera C (Carry) del CPSR?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La suma no supera la capacidad máxima de representación sin signo ($0x80000000 < 2^{32}$), por lo que no se produce acarreo del bit 31 y $C=0$."
+                }
+            ]
+        },
+        {
+            "id": "lab_27",
+            "title": "Desplazamiento aritmético a la derecha (ASR)",
+            "context": "Evaluamos el comportamiento de ASR que mantiene el bit de signo, frente al desplazamiento lógico:\n```assembly\nMOV R1, #0x80000000\nMOVS R0, R1, ASR #1\n```",
+            "parts": [
+                {
+                    "id": "lab_27_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor de R0 interpretado como entero con signo de 32 bits en complemento a 2?",
+                    "correctValue": -1073741824,
+                    "tolerance": 0,
+                    "explanation": "ASR conserva el bit de signo (bit 31 = 1). Desplazar una posición a la derecha da $0xC0000000$. En complemento a 2 de 32 bits, este valor representa el número $-1073741824$."
+                },
+                {
+                    "id": "lab_27_b",
+                    "label": "b",
+                    "question": "¿Qué valor toma la bandera N del CPSR?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "Como el bit 31 del resultado sigue siendo 1, la bandera de negativo permanece activada ($N=1$)."
+                },
+                {
+                    "id": "lab_27_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera Z del CPSR?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "El resultado $0xC0000000$ no es nulo, de manera que $Z=0$."
+                },
+                {
+                    "id": "lab_27_d",
+                    "label": "d",
+                    "question": "Si en lugar de ASR realizamos un desplazamiento lógico 'LSR #1' sobre R1, ¿cuál es el valor final decimal en R0?",
+                    "correctValue": 1073741824,
+                    "tolerance": 0,
+                    "explanation": "El desplazamiento lógico introduce ceros a la izquierda. Desplazar $0x80000000$ una posición da $0x40000000$, que equivale a $1073741824$ en decimal."
+                }
+            ]
+        },
+        {
+            "id": "lab_28",
+            "title": "Instrucción de resta inversa (RSB)",
+            "context": "La instrucción RSB (Reverse Subtract) resta el registro del primer operando al segundo: `Rd = Op2 - Rn`.\n```assembly\nMOV R1, #15\nRSB R0, R1, #25\n```",
+            "parts": [
+                {
+                    "id": "lab_28_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor final decimal almacenado en R0?",
+                    "correctValue": 10,
+                    "tolerance": 0,
+                    "explanation": "La operación es $25 - R1 = 25 - 15 = 10$, guardando este valor en R0."
+                },
+                {
+                    "id": "lab_28_b",
+                    "label": "b",
+                    "question": "Si ejecutamos 'RSBS R0, R1, #5', ¿cuál es el valor decimal resultante en R0 interpretado con signo?",
+                    "correctValue": -10,
+                    "tolerance": 0,
+                    "explanation": "La operación es $5 - 15 = -10$, almacenando el valor $-10$ ($0xFFFFFFF6$) en R0."
+                },
+                {
+                    "id": "lab_28_c",
+                    "label": "c",
+                    "question": "¿Qué valor toma la bandera C del CPSR tras la instrucción 'RSBS R0, R1, #5'?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "La resta es $5 - 15$. Como el minuendo ($5$) es menor que el sustraendo ($15$), se necesita un préstamo, lo que desactiva el flag de acarreo ($C=0$)."
+                },
+                {
+                    "id": "lab_28_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera N del CPSR tras ejecutar 'RSBS R0, R1, #5'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "El resultado es negativo ($-10$), por lo que el flag N se activa ($N=1$)."
+                }
+            ]
+        },
+        {
+            "id": "lab_29",
+            "title": "Direccionamiento con Pre-indexado y actualización",
+            "context": "Se analiza el uso del sufijo '!' para la actualización del registro base en cargas de memoria. R1 contiene la dirección decimal 8192 (0x2000).\n```assembly\nLDR R0, [R1, #4]!\n```",
+            "parts": [
+                {
+                    "id": "lab_29_a",
+                    "label": "a",
+                    "question": "¿Cuál es el valor decimal final del registro base R1 tras ejecutar la instrucción?",
+                    "correctValue": 8196,
+                    "tolerance": 0,
+                    "explanation": "El direccionamiento pre-indexado con actualización ('!') suma el desplazamiento al registro base antes del acceso y escribe el resultado de vuelta en el registro: $R1 = 8192 + 4 = 8196$."
+                },
+                {
+                    "id": "lab_29_b",
+                    "label": "b",
+                    "question": "¿Qué desplazamiento en bytes se ha aplicado a la dirección base?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "El desplazamiento indicado en el operando de direccionamiento es de $4$ bytes."
+                },
+                {
+                    "id": "lab_29_c",
+                    "label": "c",
+                    "question": "Si a continuación ejecutamos la instrucción 'STR R0, [R1, #-4]!', ¿cuál será el nuevo valor final de R1 en decimal?",
+                    "correctValue": 8192,
+                    "tolerance": 0,
+                    "explanation": "Se aplica un desplazamiento de $-4$ bytes con actualización, de modo que R1 se actualiza a $8196 - 4 = 8192$."
+                },
+                {
+                    "id": "lab_29_d",
+                    "label": "d",
+                    "question": "¿Cuántos accesos o transferencias de lectura de memoria realiza en total la instrucción 'LDR R0, [R1, #4]!'?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La instrucción realiza una única transferencia de lectura (de 32 bits) desde la memoria hacia el registro R0."
+                }
+            ]
+        },
+        {
+            "id": "lab_30",
+            "title": "Iteración de bucle con decremento",
+            "context": "Se analiza la ejecución del siguiente bucle que implementa un multiplicador mediante sumas sucesivas:\n```assembly\nMOV R0, #1\nMOV R1, #8\nbucle_mult:\nADD R0, R0, R0\nSUBS R1, R1, #2\nBGT bucle_mult\n```",
+            "parts": [
+                {
+                    "id": "lab_30_a",
+                    "label": "a",
+                    "question": "¿Cuántas veces en total se ejecuta el cuerpo del bucle?",
+                    "correctValue": 4,
+                    "tolerance": 0,
+                    "explanation": "R1 empieza en $8$. En cada paso disminuye de 2 en 2 ($SUBS R1, R1, #2$). La instrucción $BGT$ salta si el resultado es estrictamente mayor que cero ($R1 > 0$). Los valores intermedios de R1 son $6$ (salta), $4$ (salta), $2$ (salta) y $0$ (no salta). Por ende, se ejecutan exactamente $4$ iteraciones."
+                },
+                {
+                    "id": "lab_30_b",
+                    "label": "b",
+                    "question": "¿Cuál es el valor final en decimal del registro R0?",
+                    "correctValue": 16,
+                    "tolerance": 0,
+                    "explanation": "R0 se inicializa en $1$. En cada una de las 4 iteraciones se multiplica por 2 (haciendo $R0 = R0 + R0$). Su progresión es: $2, 4, 8, 16$."
+                },
+                {
+                    "id": "lab_30_c",
+                    "label": "c",
+                    "question": "¿Cuál es el valor final decimal del registro R1?",
+                    "correctValue": 0,
+                    "tolerance": 0,
+                    "explanation": "Al terminar la última iteración, la resta da $2 - 2 = 0$, valor que se almacena en R1."
+                },
+                {
+                    "id": "lab_30_d",
+                    "label": "d",
+                    "question": "¿Qué valor toma la bandera Z tras la última instrucción SUBS del bucle?",
+                    "correctValue": 1,
+                    "tolerance": 0,
+                    "explanation": "La última operación SUBS dio como resultado $0$. Al ser cero, la bandera Z se activa ($Z=1$)."
+                }
+            ]
+        }
+    ],
+    "FORMULAS": [
+        {
+            "name": "CPSR Flag N (Negative)",
+            "tex": "$$N = \\text{Resultado}_{31}$$"
+        },
+        {
+            "name": "CPSR Flag Z (Zero)",
+            "tex": "$$Z = \\begin{cases} 1 & \\text{si } \\text{Resultado} = 0 \\\\ 0 & \\text{en otro caso} \\end{cases}$$"
+        },
+        {
+            "name": "CPSR Flag C (Carry) en Sumas",
+            "tex": "$$C_{\\text{suma}} = \\text{Acarreo de salida del bit } 31$$"
+        },
+        {
+            "name": "CPSR Flag C (Carry) en Restas",
+            "tex": "$$C_{\\text{resta}} = \\overline{\\text{Préstamo}} = \\begin{cases} 1 & \\text{si } Rn \\ge Op2 \\\\ 0 & \\text{si } Rn < Op2 \\end{cases}$$"
+        },
+        {
+            "name": "CPSR Flag V (Overflow) en Sumas",
+            "tex": "$$V_{\\text{suma}} = (Rn_{31} \\cdot Op2_{31} \\cdot \\overline{Rd}_{31}) + (\\overline{Rn}_{31} \\cdot \\overline{Op2}_{31} \\cdot Rd_{31})$$"
+        },
+        {
+            "name": "CPSR Flag V (Overflow) en Restas",
+            "tex": "$$V_{\\text{resta}} = (Rn_{31} \\cdot \\overline{Op2}_{31} \\cdot \\overline{Rd}_{31}) + (\\overline{Rn}_{31} \\cdot Op2_{31} \\cdot Rd_{31})$$"
+        },
+        {
+            "name": "Efecto del Pipeline de 3 etapas en modo ARM de 32 bits",
+            "tex": "$$PC_{\\text{ejecución}} = PC_{\\text{instrucción}} + 8$$"
+        },
+        {
+            "name": "Efecto del Pipeline en modo Thumb de 16 bits",
+            "tex": "$$PC_{\\text{ejecución}} = PC_{\\text{instrucción}} + 4$$"
+        }
+    ]
+}

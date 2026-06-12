@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Qué representa el registro CPSR en la arquitectura ARM?",
+      "options": [
+        "Current Program Status Register, que almacena las banderas de condición y estado del sistema.",
+        "Control Program Stack Register, que gestiona el puntero de la pila del sistema.",
+        "Central Processing System Register, que define la frecuencia de reloj del procesador."
+      ],
+      "correct": 0,
+      "hint": "CPSR contiene las banderas N, Z, C, V, así como los bits de modo de control.",
+      "explanation": "El CPSR (Current Program Status Register) es el registro de estado actual en ARM. Contiene las banderas de condición (Negative, Zero, Carry, Overflow) y los bits de control del sistema."
+    },
+    {
+      "q": "¿Qué bandera del CPSR se pone a 1 si el resultado de una operación aritmética es exactamente cero?",
+      "options": [
+        "La bandera Z (Zero).",
+        "La bandera C (Carry).",
+        "La bandera N (Negative)."
+      ],
+      "correct": 0,
+      "hint": "Se evalúa para condiciones como EQ (Equal) o NE (Not Equal).",
+      "explanation": "La bandera Z (Zero) del registro CPSR se pone a 1 cuando el resultado de la última operación que modifica las banderas es cero."
+    },
+    {
+      "q": "¿Cuál es la función principal de la instrucción RSB (Reverse Subtraction) en ARM?",
+      "options": [
+        "Restar el registro del primer operando del segundo operando ($Rd = Operand2 - Rn$).",
+        "Restar con acarreo inverso desde la memoria principal.",
+        "Realizar una resta y activar la bandera de desbordamiento (V) de forma obligatoria."
+      ],
+      "correct": 0,
+      "hint": "Permite restar un registro de una constante inmediata fácilmente (ej: RSB R0, R1, #0).",
+      "explanation": "La instrucción RSB realiza una resta inversa, restando el primer operando (Rn) del segundo operando (Operand2), a diferencia de SUB que resta el segundo del primero."
+    },
+    {
+      "q": "¿Qué realiza la instrucción BIC (Bit Clear) en ARM?",
+      "options": [
+        "Limpia los bits del primer operando que están a 1 en el segundo operando.",
+        "Invierte todos los bits de un registro fuente.",
+        "Borra la memoria caché de instrucciones del procesador."
+      ],
+      "correct": 0,
+      "hint": "La operación lógica equivalente es $Rd = Rn \\land \\neg Operand2$.",
+      "explanation": "La instrucción BIC realiza una operación AND lógica entre el primer operando y la negación bit a bit del segundo operando, borrando selectivamente los bits correspondientes."
+    },
+    {
+      "q": "¿Cuál es el sufijo de condición en ARM para evaluar si la bandera Z es 1?",
+      "options": [
+        "EQ (Equal)",
+        "NE (Not Equal)",
+        "CS (Carry Set)"
+      ],
+      "correct": 0,
+      "hint": "Se utiliza para verificar la igualdad después de una comparación CMP.",
+      "explanation": "El sufijo EQ (Equal) se ejecuta si el flag Z del CPSR es 1, indicando que los valores comparados eran iguales."
+    },
+    {
+      "q": "¿Qué flags del CPSR se evalúan para la condición de comparación con signo GE (Greater or Equal)?",
+      "options": [
+        "N = V (las banderas de negativo y desbordamiento son iguales)",
+        "Z = 1 o N = V",
+        "C = 1 (acarreo activo)"
+      ],
+      "correct": 0,
+      "hint": "Requiere comprobar que la bandera de negativo coincida con la de desbordamiento.",
+      "explanation": "La condición GE (Greater or Equal) con signo se evalúa como verdadera si y solo si la bandera de negativo (N) es igual a la bandera de desbordamiento de signo (V) ($N = V$)."
+    },
+    {
+      "q": "¿Cómo se define la condición GT (Greater Than) con signo en términos de los flags del CPSR?",
+      "options": [
+        "Z = 0 y N = V",
+        "Z = 1 o N != V",
+        "N = 0 y C = 1"
+      ],
+      "correct": 0,
+      "hint": "Debe ser estrictamente mayor, por lo que el resultado no puede ser cero ($Z=0$).",
+      "explanation": "La condición GT (Greater Than) requiere que el resultado no sea cero ($Z=0$) y que el signo sea correcto sin desbordamiento incongruente ($N=V$)."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de la ejecución condicional en la mayoría de las instrucciones ARM?",
+      "options": [
+        "Evita la necesidad de usar saltos condicionales y con ello el impacto por pipeline stalls (paradas del cauce).",
+        "Permite duplicar el espacio de registros direccionables por la CPU.",
+        "Reduce el consumo de energía al apagar la ALU cuando no se cumple la condición."
+      ],
+      "correct": 0,
+      "hint": "Los saltos rompen el flujo secuencial y vacían el pipeline.",
+      "explanation": "Al aplicar ejecución condicional directamente en las instrucciones de datos, se evita insertar instrucciones de salto (Branch), eliminando la penalización por vaciado del cauce (pipeline stalls)."
+    },
+    {
+      "q": "¿Qué instrucción realiza una operación lógica XOR bit a bit en ARM?",
+      "options": [
+        "EOR (Exclusive OR)",
+        "ORR (Logical OR)",
+        "BIC (Bit Clear)"
+      ],
+      "correct": 0,
+      "hint": "El name en inglés es 'Exclusive OR'.",
+      "explanation": "La instrucción EOR realiza la O lógica exclusiva (XOR) bit a bit entre dos operandos y guarda el resultado en el registro destino."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre la instrucción CMP y la instrucción SUB?",
+      "options": [
+        "CMP no guarda el resultado en ningún registro de destino, solo actualiza las banderas del CPSR.",
+        "SUB no puede modificar las banderas del CPSR en ningún caso.",
+        "CMP realiza una suma en lugar de una resta."
+      ],
+      "correct": 0,
+      "hint": "Ambas restan, pero una de ellas descarta el resultado numérico.",
+      "explanation": "La instrucción CMP realiza la misma resta lógica que SUB ($Rn - Operand2$), pero no almacena el resultado final; su único propósito es actualizar las banderas del CPSR."
+    },
+    {
+      "q": "¿Qué registro de propósito general de ARM funciona convencionalmente como el Link Register (LR)?",
+      "options": [
+        "R14",
+        "R13",
+        "R15"
+      ],
+      "correct": 0,
+      "hint": "Se encarga de guardar la dirección de retorno de una función.",
+      "explanation": "El registro R14 es el Link Register (LR), donde se almacena automáticamente la dirección de retorno al ejecutar una instrucción de salto con enlace (BL)."
+    },
+    {
+      "q": "¿Qué registro de propósito general de ARM funciona convencionalmente como el Stack Pointer (SP)?",
+      "options": [
+        "R13",
+        "R14",
+        "R15"
+      ],
+      "correct": 0,
+      "hint": "Apunta al tope de la pila en memoria.",
+      "explanation": "El registro R13 de ARM se utiliza de manera convencional como el Stack Pointer (SP), el cual realiza el seguimiento del tope de la pila de memoria."
+    },
+    {
+      "q": "¿Qué registro de ARM es el Program Counter (PC)?",
+      "options": [
+        "R15",
+        "R14",
+        "R13"
+      ],
+      "correct": 0,
+      "hint": "Contiene la dirección de la instrucción en ejecución o búsqueda.",
+      "explanation": "El registro R15 es el Program Counter (PC), encargado de gestionar la dirección de la instrucción actual dentro del flujo del programa."
+    },
+    {
+      "q": "¿Qué permite hacer la instrucción BX (Branch and Exchange) en ARM?",
+      "options": [
+        "Saltar a una dirección contenida en un registro y opcionalmente cambiar de estado (ARM/Thumb).",
+        "Intercambiar el contenido de dos registros sin usar memoria auxiliar.",
+        "Realizar un salto incondicional relativo a la posición actual del PC."
+      ],
+      "correct": 0,
+      "hint": "Usa la dirección almacenada en un registro y lee el bit menos significativo para el estado de ejecución.",
+      "explanation": "La instrucción BX realiza un salto a la dirección especificada en un registro y puede cambiar entre el estado ARM (32 bits) y Thumb (16 bits) basándose en el bit LSB de la dirección."
+    },
+    {
+      "q": "¿Qué operación interna realiza la instrucción TST (Test) para actualizar las banderas?",
+      "options": [
+        "Una operación lógica AND bit a bit sin guardar el resultado.",
+        "Una operación lógica OR bit a bit sin guardar el resultado.",
+        "Una resta lógica sin guardar el resultado."
+      ],
+      "correct": 0,
+      "hint": "Sirve para verificar si ciertos bits de un registro están activos (a 1).",
+      "explanation": "La instrucción TST realiza un AND lógico bit a bit entre los operandos para actualizar las banderas Z y N de acuerdo al resultado, sin guardar este en un registro destino."
+    },
+    {
+      "q": "¿Qué sufijo de condición representa 'Carry Clear' o 'Menor' en comparaciones sin signo?",
+      "options": [
+        "CC / LO",
+        "CS / HS",
+        "HI"
+      ],
+      "correct": 0,
+      "hint": "Se activa cuando el flag C del CPSR es 0.",
+      "explanation": "El sufijo CC (Carry Clear), también denominado LO (Lower), evalúa que la bandera de acarreo sea cero ($C = 0$), representando la relación 'menor que' sin signo."
+    },
+    {
+      "q": "¿Qué combinación de flags evalúa la condición LE (Less or Equal) con signo?",
+      "options": [
+        "Z = 1 o N != V",
+        "Z = 0 y N = V",
+        "C = 0 o Z = 1"
+      ],
+      "correct": 0,
+      "hint": "Debe cubrir el caso de igualdad (Z=1) o el caso menor estricto con signo (N != V).",
+      "explanation": "La condición LE (Less or Equal) con signo es verdadera si el resultado es cero ($Z = 1$) o si hay una discrepancia de signo indicando menor ($N \\neq V$)."
+    },
+    {
+      "q": "La instrucción condicional en ARM estándar codifica la condición en cuántos bits?",
+      "options": [
+        "4 bits",
+        "5 bits",
+        "8 bits"
+      ],
+      "correct": 0,
+      "hint": "Se encuentra en la parte superior (bits [31:28]) de la instrucción de 32 bits.",
+      "explanation": "En el formato de codificación de instrucciones ARM de 32 bits, los 4 bits más significativos (bits 31 al 28) están reservados para el campo de condición."
+    },
+    {
+      "q": "¿Qué efecto tiene añadir el sufijo 'S' a una instrucción de procesamiento de datos, por ejemplo, 'ADDS'?",
+      "options": [
+        "Fuerza a la instrucción a actualizar las banderas de condición (N, Z, C, V) en el CPSR.",
+        "Indica que el segundo operando es un valor con signo.",
+        "Hace que la instrucción se ejecute de forma síncrona en el pipeline."
+      ],
+      "correct": 0,
+      "hint": "Por defecto, las instrucciones de procesamiento de datos en ARM no alteran el CPSR a menos que se indique.",
+      "explanation": "El sufijo 'S' especifica que las banderas de estado del CPSR deben ser actualizadas según el resultado de dicha operación. Sin la 'S', las banderas permanecen intactas."
+    },
+    {
+      "q": "¿Qué ocurre en el pipeline del procesador ARM al ejecutarse un salto (B) tomado?",
+      "options": [
+        "Se produce una parada del cauce (stall) y es necesario vaciar las instrucciones en etapas previas.",
+        "El procesador duplica temporalmente su velocidad para compensar el salto.",
+        "Se detiene la ejecución por completo y se genera una interrupción de hardware."
+      ],
+      "correct": 0,
+      "hint": "Las instrucciones precargadas en Fetch y Decode ya no son válidas.",
+      "explanation": "Un salto tomado altera la secuencia lineal del programa. Las instrucciones que ya habían sido precargadas en el pipeline deben ser descartadas, provocando una penalización (pipeline flush)."
+    },
+    {
+      "q": "¿Qué operación matemática exacta realiza la instrucción 'SBC R0, R1, R2'?",
+      "options": [
+        "$R0 = R1 - R2 - (1 - C)$",
+        "$R0 = R1 - R2 - C$",
+        "$R0 = R2 - R1 - C$"
+      ],
+      "correct": 0,
+      "hint": "El bit de acarreo actúa de forma invertida como borrow (préstamo) en las restas ARM.",
+      "explanation": "SBC (Subtract with Carry) resta el segundo operando del primero y añade el préstamo (borrow). Dado que en ARM el acarreo es inverso en la resta, el préstamo es $\\neg C$ o $(1 - C)$."
+    },
+    {
+      "q": "¿Qué indica la bandera V (Overflow) en el registro de estado CPSR?",
+      "options": [
+        "Que se ha producido un desbordamiento al operar con números representados con signo.",
+        "Que el resultado ha generado un bit de acarreo sin signo.",
+        "Que se ha intentado dividir por cero."
+      ],
+      "correct": 0,
+      "hint": "Evalúa el comportamiento de los signos de los operandos y del resultado.",
+      "explanation": "La bandera V indica desbordamiento con signo (Arithmetic Overflow), lo cual ocurre si la operación produce un resultado fuera del rango representable en complemento a dos."
+    },
+    {
+      "q": "Si R0 contiene 0x0F e instruimos 'BIC R0, R0, #0x03', ¿qué valor queda en R0?",
+      "options": [
+        "0x0C",
+        "0x03",
+        "0x0F"
+      ],
+      "correct": 0,
+      "hint": "La instrucción borra los bits del primer operando que valen 1 en el segundo.",
+      "explanation": "0x0F es binario `1111` y 0x03 es `0011`. La instrucción BIC limpia los bits en las posiciones 0 y 1, resultando en `1100`, que es 0x0C."
+    },
+    {
+      "q": "¿En qué condiciones se activa la bandera N (Negative) del CPSR?",
+      "options": [
+        "Si el bit más significativo (bit 31) del resultado de la operación es 1.",
+        "Solo si el resultado numérico final es menor que -256.",
+        "Cuando la resta realiza un préstamo en el bit menos significativo."
+      ],
+      "correct": 0,
+      "hint": "Representa el signo en la representación en complemento a dos.",
+      "explanation": "La bandera N (Negative) copia directamente el estado del bit más significativo (bit 31) del resultado. Si dicho bit es 1, el resultado se interpreta como negativo con signo."
+    },
+    {
+      "q": "¿Cómo se activa la bandera C (Carry) tras una operación de suma (ADD) en ARM?",
+      "options": [
+        "Si la suma genera un acarreo de salida en el bit 31 (desbordamiento sin signo).",
+        "Solo si ambos operandos son números negativos.",
+        "Cuando la suma resulta en un número impar."
+      ],
+      "correct": 0,
+      "hint": "Ocurre cuando el resultado requiere un 33º bit para representarse sin signo.",
+      "explanation": "En una suma, el flag C (Carry) se pone a 1 si se genera un acarreo fuera del bit 31, es decir, cuando la suma excede el valor representable con 32 bits sin signo ($2^{32}-1$)."
+    },
+    {
+      "q": "¿Cómo se comporta la bandera C (Carry) en ARM durante una resta (SUB)?",
+      "options": [
+        "C es 1 si no hay préstamo (Rn >= Operand2), y es 0 si hay préstamo (Rn < Operand2).",
+        "C es 1 si se produce préstamo (Rn < Operand2), y es 0 en caso contrario.",
+        "C no se ve afectada en absoluto por operaciones de resta."
+      ],
+      "correct": 0,
+      "hint": "En ARM, el acarreo actúa de forma invertida para la resta, funcionando como un 'no-préstamo'.",
+      "explanation": "Durante una resta en ARM, la bandera C (Carry) actúa como un indicador de 'no préstamo' (no borrow). Por tanto, si el primer operando es mayor o igual que el segundo, no hay préstamo y C = 1."
+    },
+    {
+      "q": "¿Qué código de condición representa la ejecución incondicional (Always executed)?",
+      "options": [
+        "AL (1110 en binario)",
+        "NV (1111 en binario)",
+        "EX (0000 en binario)"
+      ],
+      "correct": 0,
+      "hint": "Es la condición implícita cuando omitimos el sufijo.",
+      "explanation": "El sufijo AL (Always) representa la ejecución incondicional. Ocupa el patrón binario 1110 en los bits cond del código de máquina."
+    },
+    {
+      "q": "¿Qué bandera y qué estado se evalúa con el sufijo condicional MI (Minus)?",
+      "options": [
+        "N = 1",
+        "N = 0",
+        "V = 1"
+      ],
+      "correct": 0,
+      "hint": "Representa valores negativos.",
+      "explanation": "El sufijo condicional MI (Minus) comprueba si la bandera de negativo (N) está establecida en 1 ($N = 1$)."
+    },
+    {
+      "q": "¿Qué bandera y qué estado se evalúa con el sufijo condicional PL (Plus)?",
+      "options": [
+        "N = 0",
+        "N = 1",
+        "Z = 1"
+      ],
+      "correct": 0,
+      "hint": "Representa valores positivos o cero.",
+      "explanation": "El sufijo condicional PL (Plus) comprueba si la bandera de negativo (N) está a cero ($N = 0$), lo que indica un resultado no negativo."
+    },
+    {
+      "q": "Si ejecutamos 'EOR R0, R1, R1', ¿cuál es el resultado almacenado en R0?",
+      "options": [
+        "Cero, independientemente de los valores de R1.",
+        "El valor original de R1 invertido bit a bit.",
+        "El doble del valor almacenado en R1."
+      ],
+      "correct": 0,
+      "hint": "La operación XOR de cualquier valor consigo mismo tiene una propiedad matemática notable.",
+      "explanation": "La operación lógica XOR (O exclusiva) da 0 para bits idénticos. Como operamos R1 consigo mismo, todos los bits serán idénticos, por lo que R0 resultará en 0."
+    },
+    {
+      "q": "¿Cuál es el tamaño estándar de una instrucción en el estado de ejecución ARM?",
+      "options": [
+        "32 bits",
+        "16 bits",
+        "64 bits"
+      ],
+      "correct": 0,
+      "hint": "Es una arquitectura RISC alineada a palabras de 4 bytes.",
+      "explanation": "En el estado ARM estándar, todas las instrucciones tienen un tamaño fijo de 32 bits (4 bytes), lo que simplifica la decodificación y el diseño del pipeline."
+    },
+    {
+      "q": "¿Cuál es el tamaño estándar de una instrucción en el estado Thumb de ARM?",
+      "options": [
+        "16 bits",
+        "32 bits",
+        "8 bits"
+      ],
+      "correct": 0,
+      "hint": "Fue diseñado para mejorar la densidad de código en sistemas empotrados.",
+      "explanation": "El estado Thumb utiliza instrucciones compactas de 16 bits para ahorrar espacio de almacenamiento de código, a costa de algunas restricciones en los registros accesibles y funciones."
+    },
+    {
+      "q": "La dirección de retorno al llamar a una subrutina mediante la instrucción BL se guarda en:",
+      "options": [
+        "El registro R14 (Link Register).",
+        "La pila del sistema (memoria RAM) de forma automática por hardware.",
+        "El registro R15 (Program Counter)."
+      ],
+      "correct": 0,
+      "hint": "ARM usa registros para llamadas rápidas a funciones en lugar de accesos lentos a memoria.",
+      "explanation": "La instrucción BL (Branch with Link) copia automáticamente la dirección de la siguiente instrucción al registro R14 (LR) antes de saltar a la dirección de destino."
+    },
+    {
+      "q": "¿Qué instrucción ARM se utiliza para copiar valores entre registros de datos sin aplicar transformaciones lógicas?",
+      "options": [
+        "MOV",
+        "LDR",
+        "ADD"
+      ],
+      "correct": 0,
+      "hint": "Su nombre proviene de 'Move'.",
+      "explanation": "La instrucción MOV (Move) copia un valor inmediato o el contenido de otro registro en el registro destino."
+    },
+    {
+      "q": "¿Qué componente de la arquitectura ARM permite desplazar o rotar el segundo operando antes de entrar a la ALU?",
+      "options": [
+        "El Barrel Shifter (Desplazador de barril).",
+        "El Banco de Registros.",
+        "La Unidad de Predicción de Saltos."
+      ],
+      "correct": 0,
+      "hint": "Esta característica permite realizar operaciones como sumas con multiplicaciones integradas en un ciclo.",
+      "explanation": "El Barrel Shifter es una característica clave en ARM que permite aplicar desplazamientos lógicos/aritméticos (LSL, LSR, ASR) o rotaciones (ROR) al segundo operando sin costo de ciclos adicionales."
+    },
+    {
+      "q": "¿Qué operación aritmética realiza la instrucción 'RSBS R0, R1, #0'?",
+      "options": [
+        "Negación aritmética con signo de R1 ($R0 = -R1$) y actualización de banderas.",
+        "Suma de R1 con cero y almacenamiento en R0.",
+        "Copia el valor absoluto de R1 a R0."
+      ],
+      "correct": 0,
+      "hint": "Calcula el resultado de restar R1 de 0, lo que equivale a la negación aritmética.",
+      "explanation": "RSB calcula $0 - R1$, lo cual es equivalente a la negación matemática de R1. Al añadir 'S', actualiza el CPSR según este resultado (por ejemplo, Z=1 si R1 era 0)."
+    },
+    {
+      "q": "Si Z = 0 en el CPSR, ¿qué acción toma la CPU al decodificar la instrucción 'ADDEQ R0, R1, #5'?",
+      "options": [
+        "Descarta la instrucción en la etapa de ejecución, actuando funcionalmente como un NOP.",
+        "Ejecuta la instrucción normalmente porque Z=0 significa que no hay error.",
+        "Detiene la ejecución del procesador debido a una condición no contemplada."
+      ],
+      "correct": 0,
+      "hint": "La instrucción condicional solo se ejecuta si se cumple su condición.",
+      "explanation": "Como Z=0 no cumple la condición EQ (Z=1), la CPU no ejecuta la suma sobre R0. Aunque consume un ciclo de procesamiento al pasar por el pipeline, se descarta su efecto en los registros."
+    },
+    {
+      "q": "¿Qué realiza la instrucción 'ORR R0, R1, R2'?",
+      "options": [
+        "Una operación lógica OR inclusiva bit a bit entre R1 y R2.",
+        "Una operación lógica OR exclusiva bit a bit entre R1 y R2.",
+        "Una suma aritmética con saturación lógica."
+      ],
+      "correct": 0,
+      "hint": "Se asemeja a la O lógica clásica.",
+      "explanation": "La instrucción ORR calcula la operación O lógica inclusiva (OR) bit a bit entre los operandos y almacena el resultado en el registro Rd."
+    },
+    {
+      "q": "¿Cómo se codifica típicamente un valor inmediato de 12 bits en las instrucciones de procesamiento de datos ARM?",
+      "options": [
+        "Como un valor de 8 bits (patrón base) y un valor de 4 bits para la rotación (múltiplo de 2).",
+        "Como un entero directo con signo en complemento a dos de 12 bits.",
+        "Como un valor float de precisión reducida."
+      ],
+      "correct": 0,
+      "hint": "Permite representar un rango amplio de constantes comunes sin usar 32 bits.",
+      "explanation": "El operando inmediato de 12 bits se codifica con un valor base de 8 bits y un campo de rotación de 4 bits. La rotación se multiplica por 2, permitiendo representar constantes en un rango amplio."
+    },
+    {
+      "q": "¿Cómo diferencia el procesador ARM entre desbordamientos de datos con signo y sin signo?",
+      "options": [
+        "El desbordamiento con signo activa el flag V, mientras que el desbordamiento sin signo activa el flag C.",
+        "El desbordamiento con signo activa el flag N, y sin signo activa el flag Z.",
+        "No los diferencia; ambos activan indistintamente la bandera V del CPSR."
+      ],
+      "correct": 0,
+      "hint": "V representa Overflow aritmético con signo, y C representa Carry (acarreo).",
+      "explanation": "El hardware de la CPU actualiza de forma independiente el flag C (Carry) para indicar desbordamiento en operaciones sin signo y el flag V (Overflow) para operaciones con signo."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Analiza las siguientes instrucciones:\nMOV R1, #10\nMOV R2, #20\nADD R0, R1, R2\nEl valor almacenado en R0 tras la ejecución es ____.",
+      "options": [
+        "30",
+        "10",
+        "20"
+      ],
+      "correct": 0,
+      "hint": "Realiza una suma directa entre 10 y 20.",
+      "explanation": "La instrucción ADD suma el contenido de R1 (10) y R2 (20), depositando el resultado (30) en R0."
+    },
+    {
+      "q": "Considera la siguiente secuencia de código:\nMOV R1, #5\nRSB R0, R1, #15\nTras completar estas instrucciones, el valor final de R0 es ____.",
+      "options": [
+        "10",
+        "-10",
+        "20"
+      ],
+      "correct": 0,
+      "hint": "La operación matemática es $15 - R1$.",
+      "explanation": "La instrucción RSB calcula la resta a la inversa, es decir, toma el valor inmediato 15 y le resta R1 (5), lo que da 10 como resultado final."
+    },
+    {
+      "q": "Dado el siguiente bloque de código:\nMOV R1, #0xFF\nBIC R0, R1, #0x0F\nEl valor del registro R0 en formato hexadecimal es ____.",
+      "options": [
+        "0xF0",
+        "0x0F",
+        "0xFF"
+      ],
+      "correct": 0,
+      "hint": "BIC pone a 0 los bits donde el segundo operando tiene un 1.",
+      "explanation": "R1 contiene 0xFF (binario `11111111`). La máscara 0x0F (`00001111`) provoca que se limpien los 4 bits menos significativos. R0 almacena `11110000`, que equivale a 0xF0."
+    },
+    {
+      "q": "Dada la siguiente secuencia de comparación:\nMOV R0, #8\nCMP R0, #8\nEl estado del flag Z (Zero) del CPSR tras la comparación es ____.",
+      "options": [
+        "1",
+        "0",
+        "Indeterminado"
+      ],
+      "correct": 0,
+      "hint": "CMP realiza una resta de los operandos y evalúa si es cero.",
+      "explanation": "La instrucción CMP realiza la resta implícita $R0 - 8$, la cual es $8 - 8 = 0$. Al ser el resultado cero, el flag de condición Z se establece a 1."
+    },
+    {
+      "q": "Si ejecutamos las siguientes instrucciones:\nMOV R1, #10\nMOV R2, #5\nCMP R1, R2\nEl valor del flag C (Carry) tras la comparación es ____.",
+      "options": [
+        "1",
+        "0",
+        "Indefinido"
+      ],
+      "correct": 0,
+      "hint": "Para restas en ARM, C = 1 si no hay préstamo ($R1 \\ge R2$).",
+      "explanation": "Como R1 (10) es mayor que R2 (5), la resta interna $10 - 5$ no requiere préstamo de un orden superior, por lo que el flag Carry (C) se establece a 1."
+    },
+    {
+      "q": "Dadas las instrucciones en ensamblador:\nMOV R1, #5\nMOV R2, #10\nCMP R1, R2\nEl valor de la bandera C (Carry) después de la comparación es ____.",
+      "options": [
+        "0",
+        "1",
+        "15"
+      ],
+      "correct": 0,
+      "hint": "Dado que $R1 < R2$, se requiere realizar un préstamo lógico.",
+      "explanation": "Dado que $5 - 10$ resulta en un valor negativo que requiere préstamo, la bandera de acarreo C se pone a 0, reflejando el préstamo (borrow)."
+    },
+    {
+      "q": "Observa el siguiente segmento de código:\nMOV R0, #1\nMOV R1, #2\nCMP R0, R1\nADDGT R0, R0, #1\nTras ejecutar estas líneas, el valor final de R0 es ____.",
+      "options": [
+        "1",
+        "2",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Evalúa si se cumple la condición GT antes de sumar.",
+      "explanation": "La instrucción CMP compara R0 (1) con R1 (2). Dado que $1 < 2$, la condición GT (Greater Than) es falsa. La instrucción ADDGT no se ejecuta, por lo que R0 mantiene su valor inicial de 1."
+    },
+    {
+      "q": "Dado el código en ARM assembly:\nMOV R0, #1\nMOV R1, #2\nCMP R0, R1\nADDLT R0, R0, #1\nEl valor del registro R0 al concluir la ejecución de la secuencia es ____.",
+      "options": [
+        "2",
+        "1",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "Evalúa si se cumple la condición LT (Less Than) antes de sumar.",
+      "explanation": "La comparación CMP R0, R1 evalúa $1 - 2$, que da menor. Se cumple la condición LT (Less Than), por lo que se ejecuta la instrucción ADDLT, incrementando R0 en 1. Su valor final es 2."
+    },
+    {
+      "q": "Analiza las siguientes instrucciones:\nMOV R0, #10\nBIC R0, R0, #10\nEl valor final de R0 tras completarse la secuencia es ____.",
+      "options": [
+        "0",
+        "10",
+        "20"
+      ],
+      "correct": 0,
+      "hint": "Considere la operación lógica de poner a cero los bits especificados por sí mismo.",
+      "explanation": "La instrucción BIC limpia los bits de R0 que están activos en el operando constante (10). Como ambos valores son idénticos, todos los bits activos de R0 se borran, resultando en 0."
+    },
+    {
+      "q": "Si tenemos el siguiente bucle:\nMOV R0, #1\nloop: ADDS R0, R0, R0\nCMP R0, #4\nBNE loop\nLa instrucción ADDS se ejecutará un total de ____ veces.",
+      "options": [
+        "2",
+        "3",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "En cada ciclo R0 se duplica. Empieza en 1, luego 2, luego 4.",
+      "explanation": "En el primer ciclo, R0 se duplica a 2. Como $2 \\neq 4$, salta de nuevo. En el segundo ciclo, R0 se duplica a 4. Como $4 = 4$, el salto condicional no se toma y el bucle termina. Se ejecuta 2 veces."
+    },
+    {
+      "q": "Si R1 tiene el valor decimal 7 y ejecutamos:\nAND R0, R1, #2\nEl valor en decimal de R0 después de la ejecución es ____.",
+      "options": [
+        "2",
+        "7",
+        "5"
+      ],
+      "correct": 0,
+      "hint": "7 en binario es 0111 y 2 es 0010.",
+      "explanation": "El AND lógico de `0111` con `0010` da `0010` en binario, que en decimal corresponde al valor 2."
+    },
+    {
+      "q": "Dado el código en ARM assembly:\nMOV R1, #7\nORR R0, R1, #8\nEl valor final de R0 es ____.",
+      "options": [
+        "15",
+        "7",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "7 es binario 0111 y 8 es binario 1000.",
+      "explanation": "La operación lógica OR inclusiva entre `0111` (7) y `1000` (8) da como resultado `1111` en binario, que equivale al número decimal 15."
+    },
+    {
+      "q": "Si R1 contiene el valor decimal 10 y ejecutamos:\nEOR R0, R1, #10\nEl valor final del registro R0 tras la operación es ____.",
+      "options": [
+        "0",
+        "10",
+        "20"
+      ],
+      "correct": 0,
+      "hint": "Realiza un XOR entre un registro y una constante idéntica.",
+      "explanation": "El XOR (O exclusiva) de cualquier valor con sí mismo resulta en cero, por lo que R0 se limpia y su valor final es 0."
+    },
+    {
+      "q": "Analiza las siguientes instrucciones:\nMOV R1, #0\nMVN R0, R1\nEl valor de R0 interpretado en formato de decimal con signo de 32 bits es ____.",
+      "options": [
+        "-1",
+        "0",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "MVN realiza una negación lógica bit a bit (NOT).",
+      "explanation": "MVN niega todos los bits de R1 (0). En binario de 32 bits, la negación de 0x00000000 es 0xFFFFFFFF, que representa el valor -1 en complemento a dos con signo."
+    },
+    {
+      "q": "Dado el fragmento de código:\nMOV R1, #5\nMOV R2, #5\nCMP R1, R2\nSUBEQ R0, R1, R2\nAsumiendo que R0 vale inicialmente 100, el valor de R0 tras ejecutarse es ____.",
+      "options": [
+        "0",
+        "5",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Como R1 = R2, se cumple la condición EQ.",
+      "explanation": "La comparación establece Z=1 porque $5 = 5$. Como la condición EQ es verdadera, se ejecuta la instrucción SUBEQ R0, R1, R2, calculando $5 - 5 = 0$ y almacenándolo en R0."
+    },
+    {
+      "q": "Analiza las siguientes instrucciones de desplazamiento:\nMOV R1, #1\nLSL R0, R1, #4\nEl valor final del registro R0 en base decimal es ____.",
+      "options": [
+        "16",
+        "4",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "Desplazar a la izquierda 4 posiciones equivale a multiplicar por $2^4$.",
+      "explanation": "Un desplazamiento lógico a la izquierda (LSL) de 1 por 4 posiciones equivale a multiplicar 1 por 16 ($2^4$), lo que da como resultado final 16 en R0."
+    },
+    {
+      "q": "Tras ejecutar la instrucción:\nMOV R1, #32\nLSR R0, R1, #3\nEl valor resultante en R0 en formato decimal es ____.",
+      "options": [
+        "4",
+        "8",
+        "16"
+      ],
+      "correct": 0,
+      "hint": "El desplazamiento lógico a la derecha equivale a dividir de forma entera por $2^3$.",
+      "explanation": "LSR R0, R1, #3 desplaza el contenido de R1 (32) hacia la derecha 3 bits, lo cual es equivalente a la división entera $32 / 2^3 = 32 / 8 = 4$."
+    },
+    {
+      "q": "Si ejecutamos el siguiente segmento de código:\nMOV R1, #3\nMOV R2, #4\nMUL R0, R1, R2\nEl valor final de R0 tras la multiplicación es ____.",
+      "options": [
+        "12",
+        "7",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "La instrucción MUL multiplica directamente los dos registros operandos.",
+      "explanation": "La instrucción MUL multiplica el valor de R1 (3) por el de R2 (4), lo que resulta en $3 \\times 4 = 12$, almacenado en R0."
+    },
+    {
+      "q": "Dado el bucle en ensamblador:\nMOV R1, #0\nloop: ADD R1, R1, #1\nCMP R1, #5\nBLT loop\nEl valor final del registro R1 al terminar la ejecución es ____.",
+      "options": [
+        "5",
+        "4",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "El bucle se repite mientras R1 sea estrictamente menor que 5.",
+      "explanation": "El bucle incrementa R1 y lo compara con 5. Cuando R1 llega a 4, la condición BLT (Less Than) se cumple y salta de nuevo, incrementando R1 a 5. Al evaluar CMP con 5, $5 < 5$ es falso, por lo que el bucle termina con R1 = 5."
+    },
+    {
+      "q": "Dada la secuencia de control:\nMOV R1, #0\nloop: ADD R1, R1, #1\nCMP R1, #5\nBLE loop\nEl valor de R1 al finalizar la ejecución del programa es ____.",
+      "options": [
+        "6",
+        "5",
+        "4"
+      ],
+      "correct": 0,
+      "hint": "El bucle continúa mientras R1 sea menor o igual que 5.",
+      "explanation": "El bucle se repite para R1 = 0, 1, 2, 3, 4 y 5 ya que la condición BLE (Less or Equal) permite saltar cuando R1 es igual a 5. Tras el último salto, R1 se incrementa a 6, haciendo que $6 \\le 5$ sea falso y terminando con R1 = 6."
+    },
+    {
+      "q": "¿Qué banderas de estado del registro CPSR se ven afectadas cuando se ejecuta una instrucción aritmética con el sufijo 'S' (ej. ADDS)?",
+      "options": [
+        "Las banderas de resultado cero (Z) y signo negativo (N).",
+        "Las banderas de acarreo lógico (C) y desbordamiento aritmético (V).",
+        "Todas las anteriores opciones son correctas."
+      ],
+      "correct": 2,
+      "hint": "El sufijo S afecta a todas las banderas de condición principales según el resultado aritmético.",
+      "explanation": "Cuando se utiliza el sufijo 'S', el procesador evalúa e introduce cambios en los 4 flags de condición del CPSR (N, Z, C y V) según corresponda, haciendo válidas todas las opciones anteriores."
+    },
+    {
+      "q": "¿Cuáles de las siguientes instrucciones pertenecen al grupo de operaciones lógicas y de manipulación de bits en la arquitectura ARM?",
+      "options": [
+        "La instrucción AND para realizar el producto lógico bit a bit.",
+        "Las instrucciones ORR y EOR para sumas lógicas inclusivas y exclusivas.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Revise el conjunto de instrucciones de tipo lógico del manual.",
+      "explanation": "Tanto AND como ORR y EOR son instrucciones lógicas de manipulación de bits incorporadas en el repertorio ARM, por lo que todas las opciones son correctas."
+    },
+    {
+      "q": "¿Qué sufijos condicionales en ARM dependen exclusivamente del estado del flag Z (Zero) del CPSR?",
+      "options": [
+        "El sufijo EQ (Equal) que requiere Z = 1.",
+        "El sufijo NE (Not Equal) que requiere Z = 0.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El flag Z indica si el resultado es cero, determinando igualdad en las comparaciones.",
+      "explanation": "Las condiciones EQ y NE se evalúan examinando únicamente la bandera Z de la CPU. EQ se ejecuta con Z=1 y NE con Z=0. Por lo tanto, todas las opciones son correctas."
+    },
+    {
+      "q": "¿Cuáles de los siguientes registros tienen un rol específico asignado por convención en la arquitectura ARM de 32 bits?",
+      "options": [
+        "El registro R13 que actúa como puntero de pila (Stack Pointer).",
+        "Los registros R14 (Link Register) y R15 (Program Counter).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Son registros de control con una asignación funcional particular.",
+      "explanation": "Por convención y diseño, R13 gestiona la pila (SP), R14 la dirección de retorno de llamadas (LR) y R15 la instrucción en curso (PC). Todas son correctas."
+    },
+    {
+      "q": "¿Cuáles son las ventajas de utilizar la ejecución condicional nativa de ARM en lugar de saltos condicionales tradicionales?",
+      "options": [
+        "Se reduce el número de instrucciones de salto dentro del código compilado.",
+        "Se previenen las paradas en el cauce de ejecución (pipeline stalls) por fallos de predicción de salto.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Esta técnica evita romper la secuencia lineal del cauce.",
+      "explanation": "La ejecución condicional nativa permite evitar saltos (instrucciones B), reduciendo el tamaño del código y eliminando las costosas paradas del pipeline del procesador."
+    },
+    {
+      "q": "¿Qué instrucciones permiten alterar la secuencia secuencial de las instrucciones de forma condicional o incondicional en ARM?",
+      "options": [
+        "La instrucción de salto relativo B (Branch).",
+        "La instrucción de salto indirecto BX (Branch and Exchange) a través de un registro.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambas instrucciones modifican el Program Counter para desviar la ejecución.",
+      "explanation": "Tanto B como BX alteran el flujo lineal de ejecución. B realiza un salto a una etiqueta relativa y BX salta a una dirección en registro con opción de cambio de estado. Ambas opciones son correctas."
+    },
+    {
+      "q": "En la instrucción 'SUB R0, R1, R2, LSL #2', ¿cuál es el papel del Barrel Shifter sobre R2 antes de la resta?",
+      "options": [
+        "Desplaza los bits de R2 dos posiciones a la izquierda.",
+        "Multiplica de manera efectiva el valor de R2 por 4 sin coste de ciclos adicionales.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere la equivalencia matemática y lógica de un desplazamiento LSL.",
+      "explanation": "LSL #2 desplaza los bits de R2 dos posiciones a la izquierda, lo cual equivale matemáticamente a multiplicar su valor por $2^2 = 4$. Ambas afirmaciones son correctas."
+    },
+    {
+      "q": "¿Qué características tienen las instrucciones de comparación CMP y TST en la arquitectura ARM?",
+      "options": [
+        "No escriben ningún valor final en un registro destino.",
+        "Su única función es actualizar las banderas de condición del registro CPSR.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Compare su comportamiento con instrucciones como SUB o AND.",
+      "explanation": "Ambas son instrucciones de prueba y comparación. Modifican las banderas del CPSR pero no guardan resultado, comportándose según describen las opciones anteriores."
+    },
+    {
+      "q": "¿Qué tipo de operaciones permiten la manipulación del segundo operando mediante el Barrel Shifter en ARM?",
+      "options": [
+        "Operaciones aritméticas como ADD y SUB.",
+        "Operaciones lógicas como AND y ORR.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El segundo operando flexible está disponible para casi todas las instrucciones de procesamiento de datos.",
+      "explanation": "Las instrucciones de procesamiento de datos (aritméticas y lógicas) admiten el uso del Barrel Shifter en su segundo operando flexible, haciendo que todas las opciones sean válidas."
+    },
+    {
+      "q": "Para que una instrucción condicional con el sufijo 'ADDEQ R0, R1, R2' sea ejecutada por la ALU, ¿qué factores deben cumplirse?",
+      "options": [
+        "La unidad de control debe verificar el flag Z del CPSR.",
+        "El flag Z debe estar establecido a 1, indicando igualdad previa.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Considere cómo funciona la evaluación de condiciones en el hardware de la CPU.",
+      "explanation": "El procesador lee el CPSR y verifica el flag Z. Al requerirse EQ, solo ejecutará la instrucción si Z = 1. Ambas opciones son correctas."
+    },
+    {
+      "q": "Si ejecutamos R1 = 5 y R2 = 5, y luego la instrucción 'CMP R1, R2', ¿cuál es el estado de los flags N y V en el CPSR?",
+      "options": [
+        "N = 1, V = 1",
+        "N = 1, V = 0",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Como R1 = R2, el resultado de la resta es exactamente 0.",
+      "explanation": "Dado que $5 - 5 = 0$, las banderas resultantes son Z = 1, N = 0 (no negativo), C = 1 (no préstamo) y V = 0 (no desbordamiento). Ninguna de las opciones de bandera indicadas es correcta."
+    },
+    {
+      "q": "¿Qué instrucción realiza una operación lógica XOR bit a bit en ARM?",
+      "options": [
+        "AND",
+        "ORR",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La instrucción para XOR es EOR.",
+      "explanation": "La operación lógica XOR se implementa mediante la instrucción EOR (Exclusive OR). Ninguna de las opciones listadas es correcta."
+    },
+    {
+      "q": "¿Cuál es el sufijo de condición utilizado en ARM para representar la condición 'Menor o igual que (con signo)'?",
+      "options": [
+        "LT",
+        "GT",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Menor o igual que se denota como LE (Less or Equal).",
+      "explanation": "La condición para menor o igual con signo es LE. Las opciones LT (menor) y GT (mayor) no corresponden, por lo que se marca 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Qué registro de propósito general de ARM se utiliza por defecto como el program counter (PC)?",
+      "options": [
+        "R13",
+        "R14",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El program counter es el registro R15.",
+      "explanation": "El program counter de ARM es el registro R15. Dado que R13 es el Stack Pointer y R14 es el Link Register, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "Si el flag C (Carry) es 1 y el flag Z (Zero) es 0, ¿qué condición condicional sin signo se cumple en ARM?",
+      "options": [
+        "CC (Carry Clear / Lower)",
+        "LS (Lower or Same)",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "C = 1 y Z = 0 corresponde a la condición HI (Higher) sin signo.",
+      "explanation": "La condición que requiere C = 1 y Z = 0 es HI (Higher). Como CC requiere C = 0 y LS requiere C = 0 o Z = 1, ninguna de las opciones anteriores es correcta."
+    },
+    {
+      "q": "¿Qué instrucción realiza una operación lógica Y (AND) pero no almacena el resultado, solo actualiza las banderas?",
+      "options": [
+        "CMP",
+        "BIC",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La instrucción que realiza esto es TST (Test).",
+      "explanation": "La instrucción que hace un test lógico AND sin guardar el resultado es TST. Dado que CMP realiza una resta y BIC guarda el resultado modificando bits, la respuesta correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "En el formato de codificación de una instrucción de procesamiento de datos ARM, ¿cuántos bits se reservan para especificar el registro de destino (Rd)?",
+      "options": [
+        "8 bits",
+        "6 bits",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "ARM tiene 16 registros de propósito general principales en su banco de registros activo.",
+      "explanation": "Se necesitan 4 bits para direccionar uno de los 16 registros ($2^4 = 16$). Por lo tanto, el campo Rd tiene exactamente 4 bits, lo que hace válida la opción 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si ejecutamos la instrucción 'RSB R0, R1, R2' con los valores iniciales R1 = 10 y R2 = 5, ¿cuál es el resultado almacenado en R0?",
+      "options": [
+        "5",
+        "15",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La instrucción realiza la resta $R2 - R1$.",
+      "explanation": "La instrucción RSB realiza la resta inversa, que es $R2 - R1$. En este caso: $5 - 10 = -5$. Como -5 no está entre las opciones numéricas, la correcta es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "¿Cuál es la dirección apuntada por el Program Counter (PC) cuando se está ejecutando la primera instrucción de un programa que comienza en la dirección de memoria 0x8000 en un procesador ARM clásico de 3 etapas (Fetch, Decode, Execute)?",
+      "options": [
+        "0x8000",
+        "0x8004",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "El PC apunta a la instrucción que se está buscando (Fetch), que se encuentra 2 posiciones por delante de la ejecución.",
+      "explanation": "En un procesador ARM clásico de 3 etapas de cauce, mientras una instrucción se ejecuta en 0x8000, la siguiente se decodifica en 0x8004 y la tercera se busca (Fetch) en 0x8008. El PC apunta a esta etapa de Fetch, es decir, 0x8008. Por lo tanto, ninguna de las anteriores es correcta."
+    },
+    {
+      "q": "¿Qué instrucción ARM se utiliza para realizar una suma con acarreo?",
+      "options": [
+        "ADD",
+        "SBC",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La suma con acarreo utiliza la instrucción ADC.",
+      "explanation": "La suma con acarreo es realizada por la instrucción ADC (Add with Carry). ADD realiza una suma normal y SBC es una resta con acarreo. Así, la respuesta es 'Ninguna de las anteriores'."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_1",
+      "title": "Análisis de banderas en resta de datos 1",
+      "context": "Considere el siguiente código ensamblador ARM:\nMOV R1, #15\nMOV R2, #10\nSUBS R3, R1, R2\nDetermine el estado de los registros y flags tras la ejecución de estas instrucciones.",
+      "parts": [
+        {
+          "id": "lab_1_a",
+          "label": "a",
+          "question": "Valor decimal del registro R3 (interpretado como entero con signo de 32 bits):",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "La instrucción realiza la operación de resta: $R3 = R1 - R2 = 15 - 10 = 5$."
+        },
+        {
+          "id": "lab_1_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El flag Z se activa ($Z=1$) si el resultado es cero. En este caso el resultado es 5, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_1_c",
+          "label": "c",
+          "question": "Valor de la bandera de signo negativo N en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El flag N se activa ($N=1$) si el resultado es negativo. Como el resultado es 5, el bit 31 del registro es 0, luego $N = 0$."
+        },
+        {
+          "id": "lab_1_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, el flag de Carry C funciona como 'no préstamo'. Dado que $R1 = 15$ y $R2 = 10$, se cumple que $R1 \\ge R2$, por lo que no se requiere préstamo y $C = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_2",
+      "title": "Análisis de banderas en resta de datos 2",
+      "context": "Considere el siguiente código ensamblador ARM:\nMOV R1, #10\nMOV R2, #20\nSUBS R3, R1, R2\nDetermine el estado de los registros y flags tras la ejecución de estas instrucciones.",
+      "parts": [
+        {
+          "id": "lab_2_a",
+          "label": "a",
+          "question": "Valor decimal del registro R3 (interpretado como entero con signo de 32 bits):",
+          "correctValue": -10,
+          "tolerance": 0,
+          "explanation": "La instrucción realiza la operación de resta: $R3 = R1 - R2 = 10 - 20 = -10$."
+        },
+        {
+          "id": "lab_2_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El flag Z se activa ($Z=1$) si el resultado es cero. En este caso el resultado es -10, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_2_c",
+          "label": "c",
+          "question": "Valor de la bandera de signo negativo N en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El flag N se activa ($N=1$) si el resultado es negativo. Como el resultado es -10, el bit 31 del registro es 1, luego $N = 1$."
+        },
+        {
+          "id": "lab_2_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, el flag de Carry C funciona como 'no préstamo'. Dado que $R1 = 10$ y $R2 = 20$, se cumple que $R1 < R2$, por lo que no se requiere préstamo y $C = 0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_3",
+      "title": "Análisis de banderas en resta de datos 3",
+      "context": "Considere el siguiente código ensamblador ARM:\nMOV R1, #5\nMOV R2, #5\nSUBS R3, R1, R2\nDetermine el estado de los registros y flags tras la ejecución de estas instrucciones.",
+      "parts": [
+        {
+          "id": "lab_3_a",
+          "label": "a",
+          "question": "Valor decimal del registro R3 (interpretado como entero con signo de 32 bits):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción realiza la operación de resta: $R3 = R1 - R2 = 5 - 5 = 0$."
+        },
+        {
+          "id": "lab_3_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El flag Z se activa ($Z=1$) si el resultado es cero. En este caso el resultado es 0, por lo que $Z = 1$."
+        },
+        {
+          "id": "lab_3_c",
+          "label": "c",
+          "question": "Valor de la bandera de signo negativo N en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El flag N se activa ($N=1$) si el resultado es negativo. Como el resultado es 0, el bit 31 del registro es 0, luego $N = 0$."
+        },
+        {
+          "id": "lab_3_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, el flag de Carry C funciona como 'no préstamo'. Dado que $R1 = 5$ y $R2 = 5$, se cumple que $R1 \\ge R2$, por lo que no se requiere préstamo y $C = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_4",
+      "title": "Análisis de banderas en resta de datos 4",
+      "context": "Considere el siguiente código ensamblador ARM:\nMOV R1, #100\nMOV R2, #100\nSUBS R3, R1, R2\nDetermine el estado de los registros y flags tras la ejecución de estas instrucciones.",
+      "parts": [
+        {
+          "id": "lab_4_a",
+          "label": "a",
+          "question": "Valor decimal del registro R3 (interpretado como entero con signo de 32 bits):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción realiza la operación de resta: $R3 = R1 - R2 = 100 - 100 = 0$."
+        },
+        {
+          "id": "lab_4_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El flag Z se activa ($Z=1$) si el resultado es cero. En este caso el resultado es 0, por lo que $Z = 1$."
+        },
+        {
+          "id": "lab_4_c",
+          "label": "c",
+          "question": "Valor de la bandera de signo negativo N en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El flag N se activa ($N=1$) si el resultado es negativo. Como el resultado es 0, el bit 31 del registro es 0, luego $N = 0$."
+        },
+        {
+          "id": "lab_4_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, el flag de Carry C funciona como 'no préstamo'. Dado que $R1 = 100$ y $R2 = 100$, se cumple que $R1 \\ge R2$, por lo que no se requiere préstamo y $C = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_5",
+      "title": "Análisis de banderas en resta de datos 5",
+      "context": "Considere el siguiente código ensamblador ARM:\nMOV R1, #50\nMOV R2, #100\nSUBS R3, R1, R2\nDetermine el estado de los registros y flags tras la ejecución de estas instrucciones.",
+      "parts": [
+        {
+          "id": "lab_5_a",
+          "label": "a",
+          "question": "Valor decimal del registro R3 (interpretado como entero con signo de 32 bits):",
+          "correctValue": -50,
+          "tolerance": 0,
+          "explanation": "La instrucción realiza la operación de resta: $R3 = R1 - R2 = 50 - 100 = -50$."
+        },
+        {
+          "id": "lab_5_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El flag Z se activa ($Z=1$) si el resultado es cero. En este caso el resultado es -50, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_5_c",
+          "label": "c",
+          "question": "Valor de la bandera de signo negativo N en el CPSR (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El flag N se activa ($N=1$) si el resultado es negativo. Como el resultado es -50, el bit 31 del registro es 1, luego $N = 1$."
+        },
+        {
+          "id": "lab_5_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C en el CPSR (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, el flag de Carry C funciona como 'no préstamo'. Dado que $R1 = 50$ y $R2 = 100$, se cumple que $R1 < R2$, por lo que no se requiere préstamo y $C = 0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_6",
+      "title": "Operaciones de manipulación de bits 6",
+      "context": "Considere el siguiente código de manipulación de bits en ARM:\nMOV R1, #255\nBIC R2, R1, #15\nAND R3, R2, #240\nEOR R4, R3, #85\nObtenga los valores numéricos decimales resultantes de cada registro.",
+      "parts": [
+        {
+          "id": "lab_6_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras la instrucción BIC:",
+          "correctValue": 240,
+          "tolerance": 0,
+          "explanation": "La instrucción BIC realiza $R2 = R1 \\land \\neg 15$. Con $R1 = 255$, obtenemos $R2 = 240$."
+        },
+        {
+          "id": "lab_6_b",
+          "label": "b",
+          "question": "Valor decimal del registro R3 tras la instrucción AND:",
+          "correctValue": 240,
+          "tolerance": 0,
+          "explanation": "La instrucción AND realiza $R3 = R2 \\land 240$. Con $R2 = 240$, obtenemos $R3 = 240 \\land 240 = 240$."
+        },
+        {
+          "id": "lab_6_c",
+          "label": "c",
+          "question": "Valor decimal del registro R4 tras la instrucción EOR:",
+          "correctValue": 165,
+          "tolerance": 0,
+          "explanation": "La instrucción EOR realiza la operación XOR lógica: $R4 = R3 \\oplus 85$. Con $R3 = 240$, resulta en $R4 = 240 \\oplus 85 = 165$."
+        },
+        {
+          "id": "lab_6_d",
+          "label": "d",
+          "question": "Valor decimal de la suma aritmética R2 + R3 + R4:",
+          "correctValue": 645,
+          "tolerance": 0,
+          "explanation": "La suma de los tres registros calculados es: $240 + 240 + 165 = 645$."
+        }
+      ]
+    },
+    {
+      "id": "lab_7",
+      "title": "Operaciones de manipulación de bits 7",
+      "context": "Considere el siguiente código de manipulación de bits en ARM:\nMOV R1, #170\nBIC R2, R1, #85\nAND R3, R2, #255\nEOR R4, R3, #15\nObtenga los valores numéricos decimales resultantes de cada registro.",
+      "parts": [
+        {
+          "id": "lab_7_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras la instrucción BIC:",
+          "correctValue": 170,
+          "tolerance": 0,
+          "explanation": "La instrucción BIC realiza $R2 = R1 \\land \\neg 85$. Con $R1 = 170$, obtenemos $R2 = 170$."
+        },
+        {
+          "id": "lab_7_b",
+          "label": "b",
+          "question": "Valor decimal del registro R3 tras la instrucción AND:",
+          "correctValue": 170,
+          "tolerance": 0,
+          "explanation": "La instrucción AND realiza $R3 = R2 \\land 255$. Con $R2 = 170$, obtenemos $R3 = 170 \\land 255 = 170$."
+        },
+        {
+          "id": "lab_7_c",
+          "label": "c",
+          "question": "Valor decimal del registro R4 tras la instrucción EOR:",
+          "correctValue": 165,
+          "tolerance": 0,
+          "explanation": "La instrucción EOR realiza la operación XOR lógica: $R4 = R3 \\oplus 15$. Con $R3 = 170$, resulta en $R4 = 170 \\oplus 15 = 165$."
+        },
+        {
+          "id": "lab_7_d",
+          "label": "d",
+          "question": "Valor decimal de la suma aritmética R2 + R3 + R4:",
+          "correctValue": 505,
+          "tolerance": 0,
+          "explanation": "La suma de los tres registros calculados es: $170 + 170 + 165 = 505$."
+        }
+      ]
+    },
+    {
+      "id": "lab_8",
+      "title": "Operaciones de manipulación de bits 8",
+      "context": "Considere el siguiente código de manipulación de bits en ARM:\nMOV R1, #240\nBIC R2, R1, #170\nAND R3, R2, #15\nEOR R4, R3, #85\nObtenga los valores numéricos decimales resultantes de cada registro.",
+      "parts": [
+        {
+          "id": "lab_8_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras la instrucción BIC:",
+          "correctValue": 80,
+          "tolerance": 0,
+          "explanation": "La instrucción BIC realiza $R2 = R1 \\land \\neg 170$. Con $R1 = 240$, obtenemos $R2 = 80$."
+        },
+        {
+          "id": "lab_8_b",
+          "label": "b",
+          "question": "Valor decimal del registro R3 tras la instrucción AND:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción AND realiza $R3 = R2 \\land 15$. Con $R2 = 80$, obtenemos $R3 = 80 \\land 15 = 0$."
+        },
+        {
+          "id": "lab_8_c",
+          "label": "c",
+          "question": "Valor decimal del registro R4 tras la instrucción EOR:",
+          "correctValue": 85,
+          "tolerance": 0,
+          "explanation": "La instrucción EOR realiza la operación XOR lógica: $R4 = R3 \\oplus 85$. Con $R3 = 0$, resulta en $R4 = 0 \\oplus 85 = 85$."
+        },
+        {
+          "id": "lab_8_d",
+          "label": "d",
+          "question": "Valor decimal de la suma aritmética R2 + R3 + R4:",
+          "correctValue": 165,
+          "tolerance": 0,
+          "explanation": "La suma de los tres registros calculados es: $80 + 0 + 85 = 165$."
+        }
+      ]
+    },
+    {
+      "id": "lab_9",
+      "title": "Operaciones de manipulación de bits 9",
+      "context": "Considere el siguiente código de manipulación de bits en ARM:\nMOV R1, #85\nBIC R2, R1, #255\nAND R3, R2, #170\nEOR R4, R3, #170\nObtenga los valores numéricos decimales resultantes de cada registro.",
+      "parts": [
+        {
+          "id": "lab_9_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras la instrucción BIC:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción BIC realiza $R2 = R1 \\land \\neg 255$. Con $R1 = 85$, obtenemos $R2 = 0$."
+        },
+        {
+          "id": "lab_9_b",
+          "label": "b",
+          "question": "Valor decimal del registro R3 tras la instrucción AND:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción AND realiza $R3 = R2 \\land 170$. Con $R2 = 0$, obtenemos $R3 = 0 \\land 170 = 0$."
+        },
+        {
+          "id": "lab_9_c",
+          "label": "c",
+          "question": "Valor decimal del registro R4 tras la instrucción EOR:",
+          "correctValue": 170,
+          "tolerance": 0,
+          "explanation": "La instrucción EOR realiza la operación XOR lógica: $R4 = R3 \\oplus 170$. Con $R3 = 0$, resulta en $R4 = 0 \\oplus 170 = 170$."
+        },
+        {
+          "id": "lab_9_d",
+          "label": "d",
+          "question": "Valor decimal de la suma aritmética R2 + R3 + R4:",
+          "correctValue": 170,
+          "tolerance": 0,
+          "explanation": "La suma de los tres registros calculados es: $0 + 0 + 170 = 170$."
+        }
+      ]
+    },
+    {
+      "id": "lab_10",
+      "title": "Operaciones de manipulación de bits 10",
+      "context": "Considere el siguiente código de manipulación de bits en ARM:\nMOV R1, #255\nBIC R2, R1, #0\nAND R3, R2, #85\nEOR R4, R3, #170\nObtenga los valores numéricos decimales resultantes de cada registro.",
+      "parts": [
+        {
+          "id": "lab_10_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras la instrucción BIC:",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "La instrucción BIC realiza $R2 = R1 \\land \\neg 0$. Con $R1 = 255$, obtenemos $R2 = 255$."
+        },
+        {
+          "id": "lab_10_b",
+          "label": "b",
+          "question": "Valor decimal del registro R3 tras la instrucción AND:",
+          "correctValue": 85,
+          "tolerance": 0,
+          "explanation": "La instrucción AND realiza $R3 = R2 \\land 85$. Con $R2 = 255$, obtenemos $R3 = 255 \\land 85 = 85$."
+        },
+        {
+          "id": "lab_10_c",
+          "label": "c",
+          "question": "Valor decimal del registro R4 tras la instrucción EOR:",
+          "correctValue": 255,
+          "tolerance": 0,
+          "explanation": "La instrucción EOR realiza la operación XOR lógica: $R4 = R3 \\oplus 170$. Con $R3 = 85$, resulta en $R4 = 85 \\oplus 170 = 255$."
+        },
+        {
+          "id": "lab_10_d",
+          "label": "d",
+          "question": "Valor decimal de la suma aritmética R2 + R3 + R4:",
+          "correctValue": 595,
+          "tolerance": 0,
+          "explanation": "La suma de los tres registros calculados es: $255 + 85 + 255 = 595$."
+        }
+      ]
+    },
+    {
+      "id": "lab_11",
+      "title": "Resta inversa y banderas 11",
+      "context": "Considere la ejecución de la instrucción RSB con actualización de flags:\nMOV R1, #5\nRSBS R2, R1, #20\nAnalice el resultado y el estado final del registro CPSR.",
+      "parts": [
+        {
+          "id": "lab_11_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras RSBS (representado como entero de 32 bits con signo):",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La instrucción RSBS realiza $R2 = 20 - R1$. Con $R1 = 5$, obtenemos $R2 = 20 - 5 = 15$."
+        },
+        {
+          "id": "lab_11_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera Z es 1 si el resultado es cero. En este caso el resultado es 15, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_11_c",
+          "label": "c",
+          "question": "Valor de la bandera de negativo N tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera N toma el bit más significativo (bit 31) del resultado. Para R2 = 15, la bandera $N = 0$."
+        },
+        {
+          "id": "lab_11_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C tras la operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta en ARM, la bandera C es 1 si no hay préstamo. Como se calcula $20 - 5$, se cumple $val2 \\ge val1$, por lo que $C = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_12",
+      "title": "Resta inversa y banderas 12",
+      "context": "Considere la ejecución de la instrucción RSB con actualización de flags:\nMOV R1, #25\nRSBS R2, R1, #10\nAnalice el resultado y el estado final del registro CPSR.",
+      "parts": [
+        {
+          "id": "lab_12_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras RSBS (representado como entero de 32 bits con signo):",
+          "correctValue": -15,
+          "tolerance": 0,
+          "explanation": "La instrucción RSBS realiza $R2 = 10 - R1$. Con $R1 = 25$, obtenemos $R2 = 10 - 25 = -15$."
+        },
+        {
+          "id": "lab_12_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera Z es 1 si el resultado es cero. En este caso el resultado es -15, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_12_c",
+          "label": "c",
+          "question": "Valor de la bandera de negativo N tras la operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La bandera N toma el bit más significativo (bit 31) del resultado. Para R2 = -15, la bandera $N = 1$."
+        },
+        {
+          "id": "lab_12_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En la resta en ARM, la bandera C es 1 si no hay préstamo. Como se calcula $10 - 25$, se cumple $val2 < val1$, por lo que $C = 0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_13",
+      "title": "Resta inversa y banderas 13",
+      "context": "Considere la ejecución de la instrucción RSB con actualización de flags:\nMOV R1, #15\nRSBS R2, R1, #15\nAnalice el resultado y el estado final del registro CPSR.",
+      "parts": [
+        {
+          "id": "lab_13_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras RSBS (representado como entero de 32 bits con signo):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La instrucción RSBS realiza $R2 = 15 - R1$. Con $R1 = 15$, obtenemos $R2 = 15 - 15 = 0$."
+        },
+        {
+          "id": "lab_13_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z tras la operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La bandera Z es 1 si el resultado es cero. En este caso el resultado es 0, por lo que $Z = 1$."
+        },
+        {
+          "id": "lab_13_c",
+          "label": "c",
+          "question": "Valor de la bandera de negativo N tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera N toma el bit más significativo (bit 31) del resultado. Para R2 = 0, la bandera $N = 0$."
+        },
+        {
+          "id": "lab_13_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C tras la operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta en ARM, la bandera C es 1 si no hay préstamo. Como se calcula $15 - 15$, se cumple $val2 \\ge val1$, por lo que $C = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_14",
+      "title": "Resta inversa y banderas 14",
+      "context": "Considere la ejecución de la instrucción RSB con actualización de flags:\nMOV R1, #100\nRSBS R2, R1, #50\nAnalice el resultado y el estado final del registro CPSR.",
+      "parts": [
+        {
+          "id": "lab_14_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras RSBS (representado como entero de 32 bits con signo):",
+          "correctValue": -50,
+          "tolerance": 0,
+          "explanation": "La instrucción RSBS realiza $R2 = 50 - R1$. Con $R1 = 100$, obtenemos $R2 = 50 - 100 = -50$."
+        },
+        {
+          "id": "lab_14_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera Z es 1 si el resultado es cero. En este caso el resultado es -50, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_14_c",
+          "label": "c",
+          "question": "Valor de la bandera de negativo N tras la operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La bandera N toma el bit más significativo (bit 31) del resultado. Para R2 = -50, la bandera $N = 1$."
+        },
+        {
+          "id": "lab_14_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En la resta en ARM, la bandera C es 1 si no hay préstamo. Como se calcula $50 - 100$, se cumple $val2 < val1$, por lo que $C = 0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_15",
+      "title": "Resta inversa y banderas 15",
+      "context": "Considere la ejecución de la instrucción RSB con actualización de flags:\nMOV R1, #50\nRSBS R2, R1, #150\nAnalice el resultado y el estado final del registro CPSR.",
+      "parts": [
+        {
+          "id": "lab_15_a",
+          "label": "a",
+          "question": "Valor decimal del registro R2 tras RSBS (representado como entero de 32 bits con signo):",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "La instrucción RSBS realiza $R2 = 150 - R1$. Con $R1 = 50$, obtenemos $R2 = 150 - 50 = 100$."
+        },
+        {
+          "id": "lab_15_b",
+          "label": "b",
+          "question": "Valor de la bandera de cero Z tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera Z es 1 si el resultado es cero. En este caso el resultado es 100, por lo que $Z = 0$."
+        },
+        {
+          "id": "lab_15_c",
+          "label": "c",
+          "question": "Valor de la bandera de negativo N tras la operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La bandera N toma el bit más significativo (bit 31) del resultado. Para R2 = 100, la bandera $N = 0$."
+        },
+        {
+          "id": "lab_15_d",
+          "label": "d",
+          "question": "Valor de la bandera de acarreo C tras la operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta en ARM, la bandera C es 1 si no hay préstamo. Como se calcula $150 - 50$, se cumple $val2 \\ge val1$, por lo que $C = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_16",
+      "title": "Bucle de control y análisis de ciclos 16",
+      "context": "Se presenta un bucle en ensamblador ARM para análisis de rendimiento y estados:\nMOV R0, #0\nMOV R1, #5\nloop: ADD R0, R0, #10\nSUBS R1, R1, #1\nBNE loop\nAsuma que: MOV toma 1 ciclo, ADD toma 1 ciclo, SUBS toma 1 ciclo y BNE toma 3 ciclos si salta y 1 ciclo si no salta.",
+      "parts": [
+        {
+          "id": "lab_16_a",
+          "label": "a",
+          "question": "Número total de iteraciones que realiza el bucle:",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El registro R1 se inicializa en 5 y decrementa de 1 en 1 hasta llegar a 0. Por tanto, se ejecutan exactamente 5 iteraciones."
+        },
+        {
+          "id": "lab_16_b",
+          "label": "b",
+          "question": "Valor final del registro R0 al concluir el programa:",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "R0 empieza en 0 y se suma #10 en cada iteración. Tras 5 iteraciones, $R0 = 5 \\times 10 = 50$."
+        },
+        {
+          "id": "lab_16_c",
+          "label": "c",
+          "question": "Valor final del registro R1 al concluir el programa:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando la condición del salto condicional BNE deja de cumplirse. Esto ocurre exactamente cuando R1 es igual a 0."
+        },
+        {
+          "id": "lab_16_d",
+          "label": "d",
+          "question": "Número total de ciclos de reloj necesarios para ejecutar la secuencia completa:",
+          "correctValue": 25,
+          "tolerance": 0,
+          "explanation": "La secuencia inicial tiene 2 instrucciones MOV ($2$ ciclos).\nLas primeras 4 iteraciones toman: ADD (1) + SUBS (1) + BNE tomado (3) = 5 ciclos cada una.\nLa última iteración toma: ADD (1) + SUBS (1) + BNE no tomado (1) = 3 ciclos.\nTotal de ciclos: $2 + 5 \\times 4 + 3 = 25$."
+        }
+      ]
+    },
+    {
+      "id": "lab_17",
+      "title": "Bucle de control y análisis de ciclos 17",
+      "context": "Se presenta un bucle en ensamblador ARM para análisis de rendimiento y estados:\nMOV R0, #0\nMOV R1, #8\nloop: ADD R0, R0, #5\nSUBS R1, R1, #1\nBNE loop\nAsuma que: MOV toma 1 ciclo, ADD toma 1 ciclo, SUBS toma 1 ciclo y BNE toma 3 ciclos si salta y 1 ciclo si no salta.",
+      "parts": [
+        {
+          "id": "lab_17_a",
+          "label": "a",
+          "question": "Número total de iteraciones que realiza el bucle:",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "El registro R1 se inicializa en 8 y decrementa de 1 en 1 hasta llegar a 0. Por tanto, se ejecutan exactamente 8 iteraciones."
+        },
+        {
+          "id": "lab_17_b",
+          "label": "b",
+          "question": "Valor final del registro R0 al concluir el programa:",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "R0 empieza en 0 y se suma #5 en cada iteración. Tras 8 iteraciones, $R0 = 8 \\times 5 = 40$."
+        },
+        {
+          "id": "lab_17_c",
+          "label": "c",
+          "question": "Valor final del registro R1 al concluir el programa:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando la condición del salto condicional BNE deja de cumplirse. Esto ocurre exactamente cuando R1 es igual a 0."
+        },
+        {
+          "id": "lab_17_d",
+          "label": "d",
+          "question": "Número total de ciclos de reloj necesarios para ejecutar la secuencia completa:",
+          "correctValue": 40,
+          "tolerance": 0,
+          "explanation": "La secuencia inicial tiene 2 instrucciones MOV ($2$ ciclos).\nLas primeras 7 iteraciones toman: ADD (1) + SUBS (1) + BNE tomado (3) = 5 ciclos cada una.\nLa última iteración toma: ADD (1) + SUBS (1) + BNE no tomado (1) = 3 ciclos.\nTotal de ciclos: $2 + 5 \\times 7 + 3 = 40$."
+        }
+      ]
+    },
+    {
+      "id": "lab_18",
+      "title": "Bucle de control y análisis de ciclos 18",
+      "context": "Se presenta un bucle en ensamblador ARM para análisis de rendimiento y estados:\nMOV R0, #0\nMOV R1, #10\nloop: ADD R0, R0, #2\nSUBS R1, R1, #1\nBNE loop\nAsuma que: MOV toma 1 ciclo, ADD toma 1 ciclo, SUBS toma 1 ciclo y BNE toma 3 ciclos si salta y 1 ciclo si no salta.",
+      "parts": [
+        {
+          "id": "lab_18_a",
+          "label": "a",
+          "question": "Número total de iteraciones que realiza el bucle:",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El registro R1 se inicializa en 10 y decrementa de 1 en 1 hasta llegar a 0. Por tanto, se ejecutan exactamente 10 iteraciones."
+        },
+        {
+          "id": "lab_18_b",
+          "label": "b",
+          "question": "Valor final del registro R0 al concluir el programa:",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "R0 empieza en 0 y se suma #2 en cada iteración. Tras 10 iteraciones, $R0 = 10 \\times 2 = 20$."
+        },
+        {
+          "id": "lab_18_c",
+          "label": "c",
+          "question": "Valor final del registro R1 al concluir el programa:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando la condición del salto condicional BNE deja de cumplirse. Esto ocurre exactamente cuando R1 es igual a 0."
+        },
+        {
+          "id": "lab_18_d",
+          "label": "d",
+          "question": "Número total de ciclos de reloj necesarios para ejecutar la secuencia completa:",
+          "correctValue": 50,
+          "tolerance": 0,
+          "explanation": "La secuencia inicial tiene 2 instrucciones MOV ($2$ ciclos).\nLas primeras 9 iteraciones toman: ADD (1) + SUBS (1) + BNE tomado (3) = 5 ciclos cada una.\nLa última iteración toma: ADD (1) + SUBS (1) + BNE no tomado (1) = 3 ciclos.\nTotal de ciclos: $2 + 5 \\times 9 + 3 = 50$."
+        }
+      ]
+    },
+    {
+      "id": "lab_19",
+      "title": "Bucle de control y análisis de ciclos 19",
+      "context": "Se presenta un bucle en ensamblador ARM para análisis de rendimiento y estados:\nMOV R0, #0\nMOV R1, #4\nloop: ADD R0, R0, #25\nSUBS R1, R1, #1\nBNE loop\nAsuma que: MOV toma 1 ciclo, ADD toma 1 ciclo, SUBS toma 1 ciclo y BNE toma 3 ciclos si salta y 1 ciclo si no salta.",
+      "parts": [
+        {
+          "id": "lab_19_a",
+          "label": "a",
+          "question": "Número total de iteraciones que realiza el bucle:",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "El registro R1 se inicializa en 4 y decrementa de 1 en 1 hasta llegar a 0. Por tanto, se ejecutan exactamente 4 iteraciones."
+        },
+        {
+          "id": "lab_19_b",
+          "label": "b",
+          "question": "Valor final del registro R0 al concluir el programa:",
+          "correctValue": 100,
+          "tolerance": 0,
+          "explanation": "R0 empieza en 0 y se suma #25 en cada iteración. Tras 4 iteraciones, $R0 = 4 \\times 25 = 100$."
+        },
+        {
+          "id": "lab_19_c",
+          "label": "c",
+          "question": "Valor final del registro R1 al concluir el programa:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando la condición del salto condicional BNE deja de cumplirse. Esto ocurre exactamente cuando R1 es igual a 0."
+        },
+        {
+          "id": "lab_19_d",
+          "label": "d",
+          "question": "Número total de ciclos de reloj necesarios para ejecutar la secuencia completa:",
+          "correctValue": 20,
+          "tolerance": 0,
+          "explanation": "La secuencia inicial tiene 2 instrucciones MOV ($2$ ciclos).\nLas primeras 3 iteraciones toman: ADD (1) + SUBS (1) + BNE tomado (3) = 5 ciclos cada una.\nLa última iteración toma: ADD (1) + SUBS (1) + BNE no tomado (1) = 3 ciclos.\nTotal de ciclos: $2 + 5 \\times 3 + 3 = 20$."
+        }
+      ]
+    },
+    {
+      "id": "lab_20",
+      "title": "Bucle de control y análisis de ciclos 20",
+      "context": "Se presenta un bucle en ensamblador ARM para análisis de rendimiento y estados:\nMOV R0, #0\nMOV R1, #12\nloop: ADD R0, R0, #1\nSUBS R1, R1, #1\nBNE loop\nAsuma que: MOV toma 1 ciclo, ADD toma 1 ciclo, SUBS toma 1 ciclo y BNE toma 3 ciclos si salta y 1 ciclo si no salta.",
+      "parts": [
+        {
+          "id": "lab_20_a",
+          "label": "a",
+          "question": "Número total de iteraciones que realiza el bucle:",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "El registro R1 se inicializa en 12 y decrementa de 1 en 1 hasta llegar a 0. Por tanto, se ejecutan exactamente 12 iteraciones."
+        },
+        {
+          "id": "lab_20_b",
+          "label": "b",
+          "question": "Valor final del registro R0 al concluir el programa:",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "R0 empieza en 0 y se suma #1 en cada iteración. Tras 12 iteraciones, $R0 = 12 \\times 1 = 12$."
+        },
+        {
+          "id": "lab_20_c",
+          "label": "c",
+          "question": "Valor final del registro R1 al concluir el programa:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "El bucle finaliza cuando la condición del salto condicional BNE deja de cumplirse. Esto ocurre exactamente cuando R1 es igual a 0."
+        },
+        {
+          "id": "lab_20_d",
+          "label": "d",
+          "question": "Número total de ciclos de reloj necesarios para ejecutar la secuencia completa:",
+          "correctValue": 60,
+          "tolerance": 0,
+          "explanation": "La secuencia inicial tiene 2 instrucciones MOV ($2$ ciclos).\nLas primeras 11 iteraciones toman: ADD (1) + SUBS (1) + BNE tomado (3) = 5 ciclos cada una.\nLa última iteración toma: ADD (1) + SUBS (1) + BNE no tomado (1) = 3 ciclos.\nTotal de ciclos: $2 + 5 \\times 11 + 3 = 60$."
+        }
+      ]
+    },
+    {
+      "id": "lab_21",
+      "title": "Ejecución condicional en datos 21",
+      "context": "Analice el siguiente fragmento con ejecución condicional en ARM:\nMOV R0, #10\nMOV R1, #5\nMOV R2, #5\nCMP R1, R2\nADDEQ R0, R0, #3\nSUBNE R0, R0, #2\nDetermine las salidas correspondientes a las banderas de estado y registros.",
+      "parts": [
+        {
+          "id": "lab_21_a",
+          "label": "a",
+          "question": "Valor de la bandera Z después de la instrucción CMP (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "CMP realiza la resta interna $R1 - R2 = 5 - 5$. Como la diferencia es cero, el flag Z se establece en 1."
+        },
+        {
+          "id": "lab_21_b",
+          "label": "b",
+          "question": "Valor de la bandera N después de la instrucción CMP (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP calcula $R1 - R2 = 5 - 5 = 0$. Como el valor es positivo o cero, el flag N se establece en 0."
+        },
+        {
+          "id": "lab_21_c",
+          "label": "c",
+          "question": "Valor final del registro R0 (representado como entero con signo):",
+          "correctValue": 13,
+          "tolerance": 0,
+          "explanation": "Como R1 y R2 son iguales, se ejecuta la instrucción ADDEQ. Por tanto, $R0 = 10 + 3 = 13$."
+        },
+        {
+          "id": "lab_21_d",
+          "label": "d",
+          "question": "Número de ciclos de reloj que consume la secuencia completa si cada instrucción tarda 1 ciclo en pasar por el cauce (incluidas las condiciones no ejecutadas):",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La secuencia consta de 6 instrucciones fijas. Aunque una de las instrucciones condicionales (ADDEQ o SUBNE) se omita lógicamente, se procesa en el pipeline consumiendo un ciclo de reloj. Total = 6 ciclos."
+        }
+      ]
+    },
+    {
+      "id": "lab_22",
+      "title": "Ejecución condicional en datos 22",
+      "context": "Analice el siguiente fragmento con ejecución condicional en ARM:\nMOV R0, #20\nMOV R1, #8\nMOV R2, #3\nCMP R1, R2\nADDEQ R0, R0, #10\nSUBNE R0, R0, #5\nDetermine las salidas correspondientes a las banderas de estado y registros.",
+      "parts": [
+        {
+          "id": "lab_22_a",
+          "label": "a",
+          "question": "Valor de la bandera Z después de la instrucción CMP (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP realiza la resta interna $R1 - R2 = 8 - 3$. Como la diferencia no es cero, el flag Z se establece en 0."
+        },
+        {
+          "id": "lab_22_b",
+          "label": "b",
+          "question": "Valor de la bandera N después de la instrucción CMP (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP calcula $R1 - R2 = 8 - 3 = 5$. Como el valor es positivo o cero, el flag N se establece en 0."
+        },
+        {
+          "id": "lab_22_c",
+          "label": "c",
+          "question": "Valor final del registro R0 (representado como entero con signo):",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "Como R1 y R2 son diferentes, se ejecuta la instrucción SUBNE. Por tanto, $R0 = 20 - 5 = 15$."
+        },
+        {
+          "id": "lab_22_d",
+          "label": "d",
+          "question": "Número de ciclos de reloj que consume la secuencia completa si cada instrucción tarda 1 ciclo en pasar por el cauce (incluidas las condiciones no ejecutadas):",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La secuencia consta de 6 instrucciones fijas. Aunque una de las instrucciones condicionales (ADDEQ o SUBNE) se omita lógicamente, se procesa en el pipeline consumiendo un ciclo de reloj. Total = 6 ciclos."
+        }
+      ]
+    },
+    {
+      "id": "lab_23",
+      "title": "Ejecución condicional en datos 23",
+      "context": "Analice el siguiente fragmento con ejecución condicional en ARM:\nMOV R0, #5\nMOV R1, #2\nMOV R2, #6\nCMP R1, R2\nADDEQ R0, R0, #4\nSUBNE R0, R0, #1\nDetermine las salidas correspondientes a las banderas de estado y registros.",
+      "parts": [
+        {
+          "id": "lab_23_a",
+          "label": "a",
+          "question": "Valor de la bandera Z después de la instrucción CMP (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP realiza la resta interna $R1 - R2 = 2 - 6$. Como la diferencia no es cero, el flag Z se establece en 0."
+        },
+        {
+          "id": "lab_23_b",
+          "label": "b",
+          "question": "Valor de la bandera N después de la instrucción CMP (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "CMP calcula $R1 - R2 = 2 - 6 = -4$. Como el valor es negativo, el flag N se establece en 1."
+        },
+        {
+          "id": "lab_23_c",
+          "label": "c",
+          "question": "Valor final del registro R0 (representado como entero con signo):",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Como R1 y R2 son diferentes, se ejecuta la instrucción SUBNE. Por tanto, $R0 = 5 - 1 = 4$."
+        },
+        {
+          "id": "lab_23_d",
+          "label": "d",
+          "question": "Número de ciclos de reloj que consume la secuencia completa si cada instrucción tarda 1 ciclo en pasar por el cauce (incluidas las condiciones no ejecutadas):",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La secuencia consta de 6 instrucciones fijas. Aunque una de las instrucciones condicionales (ADDEQ o SUBNE) se omita lógicamente, se procesa en el pipeline consumiendo un ciclo de reloj. Total = 6 ciclos."
+        }
+      ]
+    },
+    {
+      "id": "lab_24",
+      "title": "Ejecución condicional en datos 24",
+      "context": "Analice el siguiente fragmento con ejecución condicional en ARM:\nMOV R0, #100\nMOV R1, #15\nMOV R2, #15\nCMP R1, R2\nADDEQ R0, R0, #50\nSUBNE R0, R0, #20\nDetermine las salidas correspondientes a las banderas de estado y registros.",
+      "parts": [
+        {
+          "id": "lab_24_a",
+          "label": "a",
+          "question": "Valor de la bandera Z después de la instrucción CMP (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "CMP realiza la resta interna $R1 - R2 = 15 - 15$. Como la diferencia es cero, el flag Z se establece en 1."
+        },
+        {
+          "id": "lab_24_b",
+          "label": "b",
+          "question": "Valor de la bandera N después de la instrucción CMP (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP calcula $R1 - R2 = 15 - 15 = 0$. Como el valor es positivo o cero, el flag N se establece en 0."
+        },
+        {
+          "id": "lab_24_c",
+          "label": "c",
+          "question": "Valor final del registro R0 (representado como entero con signo):",
+          "correctValue": 150,
+          "tolerance": 0,
+          "explanation": "Como R1 y R2 son iguales, se ejecuta la instrucción ADDEQ. Por tanto, $R0 = 100 + 50 = 150$."
+        },
+        {
+          "id": "lab_24_d",
+          "label": "d",
+          "question": "Número de ciclos de reloj que consume la secuencia completa si cada instrucción tarda 1 ciclo en pasar por el cauce (incluidas las condiciones no ejecutadas):",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La secuencia consta de 6 instrucciones fijas. Aunque una de las instrucciones condicionales (ADDEQ o SUBNE) se omita lógicamente, se procesa en el pipeline consumiendo un ciclo de reloj. Total = 6 ciclos."
+        }
+      ]
+    },
+    {
+      "id": "lab_25",
+      "title": "Ejecución condicional en datos 25",
+      "context": "Analice el siguiente fragmento con ejecución condicional en ARM:\nMOV R0, #0\nMOV R1, #1\nMOV R2, #2\nCMP R1, R2\nADDEQ R0, R0, #5\nSUBNE R0, R0, #5\nDetermine las salidas correspondientes a las banderas de estado y registros.",
+      "parts": [
+        {
+          "id": "lab_25_a",
+          "label": "a",
+          "question": "Valor de la bandera Z después de la instrucción CMP (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "CMP realiza la resta interna $R1 - R2 = 1 - 2$. Como la diferencia no es cero, el flag Z se establece en 0."
+        },
+        {
+          "id": "lab_25_b",
+          "label": "b",
+          "question": "Valor de la bandera N después de la instrucción CMP (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "CMP calcula $R1 - R2 = 1 - 2 = -1$. Como el valor es negativo, el flag N se establece en 1."
+        },
+        {
+          "id": "lab_25_c",
+          "label": "c",
+          "question": "Valor final del registro R0 (representado como entero con signo):",
+          "correctValue": -5,
+          "tolerance": 0,
+          "explanation": "Como R1 y R2 son diferentes, se ejecuta la instrucción SUBNE. Por tanto, $R0 = 0 - 5 = -5$."
+        },
+        {
+          "id": "lab_25_d",
+          "label": "d",
+          "question": "Número de ciclos de reloj que consume la secuencia completa si cada instrucción tarda 1 ciclo en pasar por el cauce (incluidas las condiciones no ejecutadas):",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La secuencia consta de 6 instrucciones fijas. Aunque una de las instrucciones condicionales (ADDEQ o SUBNE) se omita lógicamente, se procesa en el pipeline consumiendo un ciclo de reloj. Total = 6 ciclos."
+        }
+      ]
+    },
+    {
+      "id": "lab_26",
+      "title": "Precisión múltiple de 64 bits 26",
+      "context": "Analice la siguiente secuencia de precisión múltiple (64 bits):\nMVN R1, #0\nMOV R2, #0\nMOV R3, #1\nMOV R4, #0\nADDS R5, R1, R3\nADC R6, R2, R4\nDetermine los valores de los registros y de la bandera de acarreo.",
+      "parts": [
+        {
+          "id": "lab_26_a",
+          "label": "a",
+          "question": "Valor decimal del registro R5 (interpretado como entero con signo):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "ADDS realiza $R5 = R1 + R3$. R1 = 0xffffffff y R3 = 0x1, dando $R5 = 0$."
+        },
+        {
+          "id": "lab_26_b",
+          "label": "b",
+          "question": "Valor del flag de acarreo C después de la primera operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como la suma excede los 32 bits ($low1 + low2 = 4294967296$), se genera acarreo de salida, por lo que $C = 1$."
+        },
+        {
+          "id": "lab_26_c",
+          "label": "c",
+          "question": "Valor decimal del registro R6:",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "ADC suma $R2 + R4 + C = 0 + 0 + 1 = 1$."
+        },
+        {
+          "id": "lab_26_d",
+          "label": "d",
+          "question": "Valor resultante de sumar los registros R6 + R5 (aritmética con signo clásica):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "La suma de R6 y R5 en decimal es $1 + 0 = 1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_27",
+      "title": "Precisión múltiple de 64 bits 27",
+      "context": "Analice la siguiente secuencia de precisión múltiple (64 bits):\nMVN R1, #0\nMOV R2, #5\nMOV R3, #2\nMOV R4, #10\nADDS R5, R1, R3\nADC R6, R2, R4\nDetermine los valores de los registros y de la bandera de acarreo.",
+      "parts": [
+        {
+          "id": "lab_27_a",
+          "label": "a",
+          "question": "Valor decimal del registro R5 (interpretado como entero con signo):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "ADDS realiza $R5 = R1 + R3$. R1 = 0xffffffff y R3 = 0x2, dando $R5 = 1$."
+        },
+        {
+          "id": "lab_27_b",
+          "label": "b",
+          "question": "Valor del flag de acarreo C después de la primera operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como la suma excede los 32 bits ($low1 + low2 = 4294967297$), se genera acarreo de salida, por lo que $C = 1$."
+        },
+        {
+          "id": "lab_27_c",
+          "label": "c",
+          "question": "Valor decimal del registro R6:",
+          "correctValue": 16,
+          "tolerance": 0,
+          "explanation": "ADC suma $R2 + R4 + C = 5 + 10 + 1 = 16$."
+        },
+        {
+          "id": "lab_27_d",
+          "label": "d",
+          "question": "Valor resultante de sumar los registros R6 + R5 (aritmética con signo clásica):",
+          "correctValue": 17,
+          "tolerance": 0,
+          "explanation": "La suma de R6 y R5 en decimal es $16 + 1 = 17$."
+        }
+      ]
+    },
+    {
+      "id": "lab_28",
+      "title": "Precisión múltiple de 64 bits 28",
+      "context": "Analice la siguiente secuencia de precisión múltiple (64 bits):\nMOV R1, #4026531840\nMOV R2, #1\nMOV R3, #268435456\nMOV R4, #2\nADDS R5, R1, R3\nADC R6, R2, R4\nDetermine los valores de los registros y de la bandera de acarreo.",
+      "parts": [
+        {
+          "id": "lab_28_a",
+          "label": "a",
+          "question": "Valor decimal del registro R5 (interpretado como entero con signo):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "ADDS realiza $R5 = R1 + R3$. R1 = 0xf0000000 y R3 = 0x10000000, dando $R5 = 0$."
+        },
+        {
+          "id": "lab_28_b",
+          "label": "b",
+          "question": "Valor del flag de acarreo C después de la primera operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como la suma excede los 32 bits ($low1 + low2 = 4294967296$), se genera acarreo de salida, por lo que $C = 1$."
+        },
+        {
+          "id": "lab_28_c",
+          "label": "c",
+          "question": "Valor decimal del registro R6:",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "ADC suma $R2 + R4 + C = 1 + 2 + 1 = 4$."
+        },
+        {
+          "id": "lab_28_d",
+          "label": "d",
+          "question": "Valor resultante de sumar los registros R6 + R5 (aritmética con signo clásica):",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "La suma de R6 y R5 en decimal es $4 + 0 = 4$."
+        }
+      ]
+    },
+    {
+      "id": "lab_29",
+      "title": "Precisión múltiple de 64 bits 29",
+      "context": "Analice la siguiente secuencia de precisión múltiple (64 bits):\nMOV R1, #10\nMOV R2, #3\nMOV R3, #5\nMOV R4, #2\nSUBS R5, R1, R3\nSBC R6, R2, R4\nDetermine los valores de los registros y de la bandera de acarreo.",
+      "parts": [
+        {
+          "id": "lab_29_a",
+          "label": "a",
+          "question": "Valor decimal del registro R5 (interpretado como entero con signo):",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "SUBS realiza $R5 = R1 - R3 = 10 - 5 = 5$."
+        },
+        {
+          "id": "lab_29_b",
+          "label": "b",
+          "question": "Valor del flag de acarreo C después de la primera operación (0 o 1):",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, C = 1 si no hay préstamo. Como $R1 = 10$ y $R3 = 5$, no se genera préstamo y $C = 1$."
+        },
+        {
+          "id": "lab_29_c",
+          "label": "c",
+          "question": "Valor decimal del registro R6:",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "SBC realiza $R6 = R2 - R4 - (1 - C) = 3 - 2 - 0 = 1$."
+        },
+        {
+          "id": "lab_29_d",
+          "label": "d",
+          "question": "Valor resultante de sumar los registros R6 + R5 (aritmética con signo clásica):",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La suma de R6 y R5 (con signo) es 6."
+        }
+      ]
+    },
+    {
+      "id": "lab_30",
+      "title": "Precisión múltiple de 64 bits 30",
+      "context": "Analice la siguiente secuencia de precisión múltiple (64 bits):\nMOV R1, #5\nMOV R2, #3\nMOV R3, #10\nMOV R4, #2\nSUBS R5, R1, R3\nSBC R6, R2, R4\nDetermine los valores de los registros y de la bandera de acarreo.",
+      "parts": [
+        {
+          "id": "lab_30_a",
+          "label": "a",
+          "question": "Valor decimal del registro R5 (interpretado como entero con signo):",
+          "correctValue": -5,
+          "tolerance": 0,
+          "explanation": "SUBS realiza $R5 = R1 - R3 = 5 - 10 = -5$."
+        },
+        {
+          "id": "lab_30_b",
+          "label": "b",
+          "question": "Valor del flag de acarreo C después de la primera operación (0 o 1):",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "En la resta ARM, C = 1 si no hay préstamo. Como $R1 = 5$ y $R3 = 10$,  se genera préstamo y $C = 0$."
+        },
+        {
+          "id": "lab_30_c",
+          "label": "c",
+          "question": "Valor decimal del registro R6:",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "SBC realiza $R6 = R2 - R4 - (1 - C) = 3 - 2 - 1 = 0$."
+        },
+        {
+          "id": "lab_30_d",
+          "label": "d",
+          "question": "Valor resultante de sumar los registros R6 + R5 (aritmética con signo clásica):",
+          "correctValue": -5,
+          "tolerance": 0,
+          "explanation": "La suma de R6 y R5 (con signo) es -5."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Program Counter Pipeline Offset",
+      "tex": "$$PC_{execute} = PC_{current} + 8$$"
+    },
+    {
+      "name": "GT Condition Flag Logic",
+      "tex": "$$GT \\iff (Z = 0) \\land (N = V)$$"
+    },
+    {
+      "name": "LT Condition Flag Logic",
+      "tex": "$$LT \\iff N \\neq V$$"
+    },
+    {
+      "name": "GE Condition Flag Logic",
+      "tex": "$$GE \\iff N = V$$"
+    },
+    {
+      "name": "LE Condition Flag Logic",
+      "tex": "$$LE \\iff (Z = 1) \\lor (N \\neq V)$$"
+    },
+    {
+      "name": "Reverse Subtraction (RSB)",
+      "tex": "$$RSB(R_d, R_n, \\text{Op2}) \\implies R_d = \\text{Op2} - R_n$$"
+    },
+    {
+      "name": "Bit Clear (BIC)",
+      "tex": "$$BIC(R_d, R_n, \\text{Op2}) \\implies R_d = R_n \\land \\neg(\\text{Op2})$$"
+    },
+    {
+      "name": "Addition with Carry (ADC)",
+      "tex": "$$ADC(R_d, R_n, \\text{Op2}) \\implies R_d = R_n + \\text{Op2} + C$$"
+    },
+    {
+      "name": "Subtraction with Carry (SBC)",
+      "tex": "$$SBC(R_d, R_n, \\text{Op2}) \\implies R_d = R_n - \\text{Op2} - (1 - C)$$"
+    }
+  ]
+}
