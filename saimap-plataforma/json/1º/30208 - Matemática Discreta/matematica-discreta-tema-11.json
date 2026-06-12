@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es la complejidad de almacenamiento en memoria de una lista de adyacencia para representar un grafo $G = (V, E)$?",
+      "options": [
+        "O(|V| + |E|)",
+        "O(|V|^2)",
+        "O(|V| \\cdot |E|)"
+      ],
+      "correct": 0,
+      "hint": "En una lista de adyacencia se guardan los vértices y, para cada uno, sus vecinos correspondientes.",
+      "explanation": "La lista de adyacencia requiere almacenar los $|V|$ vértices y cada una de las conexiones asociadas a las $|E|$ aristas. Esto da como resultado un coste de memoria de $O(|V| + |E|)$, que es óptimo para grafos dispersos."
+    },
+    {
+      "q": "¿Cuál es la complejidad espacial de una matriz de adyacencia para representar un grafo $G = (V, E)$?",
+      "options": [
+        "O(|V|^2)",
+        "O(|V| + |E|)",
+        "O(|E|^2)"
+      ],
+      "correct": 0,
+      "hint": "La matriz de adyacencia es una matriz cuadrada cuyas dimensiones son el número total de vértices.",
+      "explanation": "Dado que se trata de una matriz cuadrada de tamaño $|V| \\times |V|$, se requiere almacenar $|V|^2$ elementos (sean booleanos o enteros), lo que resulta en un coste de memoria de $O(|V|^2)$ independientemente del número de aristas."
+    },
+    {
+      "q": "¿Para qué tipo de grafos es idónea la representación mediante listas de adyacencia?",
+      "options": [
+        "Grafos dispersos (sparse)",
+        "Grafos densos (dense)",
+        "Grafos completos"
+      ],
+      "correct": 0,
+      "hint": "Un grafo es disperso cuando el número de aristas es muy pequeño en comparación con el máximo posible ($|E| \\ll |V|^2$)",
+      "explanation": "En un grafo disperso, la matriz de adyacencia tendría la gran mayoría de sus entradas en 0, desperdiciando mucha memoria. Las listas de adyacencia solo almacenan las aristas existentes, por lo que son ideales para grafos dispersos."
+    },
+    {
+      "q": "¿Para qué tipo de grafos o situaciones es idóneo utilizar una matriz de adyacencia?",
+      "options": [
+        "Grafos densos o cuando se requiere verificar la existencia de aristas en tiempo constante $O(1)$",
+        "Grafos dispersos o cuando el número de nodos es extremadamente grande",
+        "Grafos sin aristas o grafos nulos"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el coste temporal de verificar si existe una conexión entre un par de nodos específicos.",
+      "explanation": "En una matriz de adyacencia, comprobar si existe una arista $(u, v)$ se reduce a consultar la celda $A[u][v]$, lo cual toma tiempo constante $O(1)$. Además, si el grafo es denso ($|E| \\approx |V|^2$), el coste de memoria de $O(|V|^2)$ es comparable al de las listas de adyacencia."
+    },
+    {
+      "q": "Si un grafo no dirigido no contiene bucles (lazos de un nodo a sí mismo), ¿cómo es la diagonal principal de su matriz de adyacencia?",
+      "options": [
+        "Está compuesta exclusivamente por ceros",
+        "Está compuesta exclusivamente por unos",
+        "Contiene ceros y unos de forma aleatoria"
+      ],
+      "correct": 0,
+      "hint": "Un bucle es una arista de un nodo $v_i$ a sí mismo, representada por $A_{ii} = 1$.",
+      "explanation": "La diagonal principal de la matriz de adyacencia contiene los elementos $A_{ii}$, que representan la existencia de aristas de un nodo a sí mismo. Si el grafo no tiene bucles, todas las celdas $A_{ii}$ deben ser 0."
+    },
+    {
+      "q": "¿Qué propiedad algebraica posee la matriz de adyacencia $A$ de un grafo no dirigido simple?",
+      "options": [
+        "Es simétrica respecto a su diagonal principal ($A = A^T$)",
+        "Es antisimétrica ($A = -A^T$)",
+        "Es una matriz ortogonal"
+      ],
+      "correct": 0,
+      "hint": "En un grafo no dirigido, si existe una arista entre $v_i$ y $v_j$, también existe entre $v_j$ y $v_i$.",
+      "explanation": "Dado que las aristas no tienen dirección, la relación de adyacencia es simétrica. Si $A_{ij} = 1$, entonces $A_{ji} = 1$. Esto implica que la matriz de adyacencia $A$ es igual a su transpuesta $A^T$, es decir, es simétrica."
+    },
+    {
+      "q": "Si sumamos todos los elementos de la fila $i$ en la matriz de adyacencia de un grafo no dirigido, ¿qué valor obtenemos?",
+      "options": [
+        "El grado del vértice $v_i$",
+        "El doble del grado del vértice $v_i$",
+        "El número total de aristas del grafo"
+      ],
+      "correct": 0,
+      "hint": "Cada 1 en la fila $i$ corresponde a una arista conectada al vértice $v_i$.",
+      "explanation": "La suma de los elementos de la fila $i$ representa la cantidad de vértices conectados al vértice $v_i$. En un grafo simple no dirigido, esto equivale exactamente al grado del vértice $v_i$."
+    },
+    {
+      "q": "Sea $A$ la matriz de adyacencia de un grafo. ¿Qué representa el elemento $(A^k)_{ij}$ de la matriz potencia $A^k$?",
+      "options": [
+        "El número de caminos (caminatas) de longitud exactamente $k$ entre el vértice $v_i$ y el vértice $v_j$",
+        "La distancia más corta en aristas entre $v_i$ y $v_j$",
+        "El peso total de la arista de $v_i$ a $v_j$ elevada a la potencia $k$"
+      ],
+      "correct": 0,
+      "hint": "Es la interpretación combinatoria del producto de matrices en teoría de grafos.",
+      "explanation": "Según el Teorema de Caminos de Longitud $k$, el elemento $(A^k)_{ij}$ de la potencia $k$-ésima de la matriz de adyacencia es igual al número de caminos distintos de longitud exactamente $k$ desde el vértice $v_i$ al vértice $v_j$."
+    },
+    {
+      "q": "En la matriz de incidencia de un grafo no dirigido, ¿cuántos unos contiene cada columna?",
+      "options": [
+        "Exactamente dos unos",
+        "Un número de unos igual al grado del vértice",
+        "Exactamente un uno"
+      ],
+      "correct": 0,
+      "hint": "Cada columna de la matriz de incidencia representa una arista del grafo.",
+      "explanation": "En un grafo no dirigido, cada arista conecta exactamente dos vértices (sus extremos). Por lo tanto, la columna correspondiente a dicha arista en la matriz de incidencia tiene un 1 en la fila de cada uno de sus dos extremos, y 0 en las demás celdas."
+    },
+    {
+      "q": "¿Cuáles son las dimensiones de la matriz de incidencia de un grafo con $|V|$ vértices y $|E|$ aristas?",
+      "options": [
+        "$|V| \\times |E|$",
+        "$|V| \\times |V|$",
+        "$|E| \\times |E|$"
+      ],
+      "correct": 0,
+      "hint": "Las filas representan los vértices y las columnas representan las aristas.",
+      "explanation": "La matriz de incidencia asocia vértices con aristas. Por tanto, tiene tantas filas como vértices ($|V|$) y tantas columnas como aristas ($|E|$), dando un tamaño de $|V| \\times |E|$."
+    },
+    {
+      "q": "En la matriz de adyacencia $A$ de un grafo dirigido (digrafo), si hay una arista del nodo $v_i$ al nodo $v_j$, ¿cómo se representa?",
+      "options": [
+        "Estableciendo $A_{ij} = 1$",
+        "Estableciendo $A_{ji} = 1$",
+        "Estableciendo $A_{ij} = 1$ y $A_{ji} = 1$"
+      ],
+      "correct": 0,
+      "hint": "Por convención, las filas indican el nodo origen y las columnas el nodo destino.",
+      "explanation": "En un grafo dirigido, el sentido de la arista importa. Una arista orientada de $v_i$ a $v_j$ se registra colocando un 1 en la fila $i$ (origen) y columna $j$ (destino), es decir, $A_{ij} = 1$. La entrada $A_{ji}$ se mantiene en 0 a menos que exista la arista de retorno."
+    },
+    {
+      "q": "Si la matriz de adyacencia de un grafo simple no es simétrica, ¿qué tipo de grafo representa inequívocamente?",
+      "options": [
+        "Un grafo dirigido (o digrafo)",
+        "Un grafo no dirigido",
+        "Un grafo completo"
+      ],
+      "correct": 0,
+      "hint": "La falta de simetría indica que la relación de conectividad depende de la dirección del enlace.",
+      "explanation": "Si la matriz no es simétrica ($A \\neq A^T$), significa que para algún par de nodos $i, j$ se cumple que existe una arista de $i$ a $j$ pero no de $j$ a $i$. Esto solo ocurre en grafos dirigidos."
+    },
+    {
+      "q": "¿Cuál es el coste temporal para verificar si existe una arista $(u, v)$ utilizando una matriz de adyacencia?",
+      "options": [
+        "O(1)",
+        "O(deg(u))",
+        "O(|V|)"
+      ],
+      "correct": 0,
+      "hint": "Solo necesitamos comprobar una celda específica de la matriz utilizando indexación directa.",
+      "explanation": "Verificar la existencia de una arista $(u, v)$ se realiza accediendo directamente al elemento $A[u][v]$ en memoria, lo que se ejecuta en tiempo constante, es decir, $O(1)$."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de verificar la existencia de una arista $(u, v)$ usando listas de adyacencia?",
+      "options": [
+        "O(deg(u))",
+        "O(1)",
+        "O(|V|^2)"
+      ],
+      "correct": 0,
+      "hint": "Debes buscar el elemento $v$ en la lista de adyacencia correspondiente al nodo $u$.",
+      "explanation": "En una lista de adyacencia, para saber si existe $(u, v)$, debemos recorrer la lista de vecinos de $u$. En el peor de los casos, buscaremos a lo largo de toda la lista, lo que toma un tiempo proporcional al grado de $u$, denotado como $O(deg(u))$."
+    },
+    {
+      "q": "¿Cuál es el coste temporal para listar todos los vecinos del nodo $u$ utilizando una matriz de adyacencia?",
+      "options": [
+        "O(|V|)",
+        "O(deg(u))",
+        "O(1)"
+      ],
+      "correct": 0,
+      "hint": "Es necesario inspeccionar toda la fila correspondiente al nodo $u$.",
+      "explanation": "Para encontrar todos los vecinos de $u$ en una matriz de adyacencia, se debe recorrer la fila completa del vértice $u$ (que tiene longitud $|V|$), lo cual toma un tiempo de $O(|V|)$."
+    },
+    {
+      "q": "¿Cuál es el coste temporal para listar todos los vecinos de un nodo $u$ utilizando listas de adyacencia?",
+      "options": [
+        "O(deg(u))",
+        "O(|V|)",
+        "O(|E|)"
+      ],
+      "correct": 0,
+      "hint": "En la lista de adyacencia de $u$, cada elemento almacenado es directamente un vecino.",
+      "explanation": "La lista de adyacencia de $u$ contiene únicamente a los vecinos del nodo. Por lo tanto, recorrerla y listarlos a todos toma tiempo lineal respecto a su tamaño, que es $O(deg(u))$."
+    },
+    {
+      "q": "En un grafo no dirigido simple sin bucles con $|E|$ aristas, ¿cuál es la suma de todos los elementos de su matriz de adyacencia?",
+      "options": [
+        "2|E|",
+        "|E|",
+        "|V|"
+      ],
+      "correct": 0,
+      "hint": "Cada arista no dirigida de extremos $u$ y $v$ aporta dos unos a la matriz.",
+      "explanation": "Como el grafo no es dirigido, cada arista $\\{u, v\\}$ genera un 1 en la posición $A_{uv}$ y otro en $A_{vu}$. Por tanto, la suma total de elementos de la matriz de adyacencia es el doble del número de aristas, $2|E|$."
+    },
+    {
+      "q": "En un grafo dirigido (digrafo), ¿qué representa la suma de los elementos de la columna $j$ de su matriz de adyacencia?",
+      "options": [
+        "El grado de entrada (indegree) del vértice $v_j$",
+        "El grado de salida (outdegree) del vértice $v_j$",
+        "El número de ciclos en los que participa $v_j$"
+      ],
+      "correct": 0,
+      "hint": "Los elementos de la columna $j$ tienen la forma $A_{ij}$, es decir, arcos que terminan en $j$.",
+      "explanation": "La columna $j$ recopila todos los arcos que tienen como destino el vértice $v_j$. Al sumar estos elementos, obtenemos exactamente el grado de entrada o indegree del nodo."
+    },
+    {
+      "q": "En un grafo dirigido, ¿qué representa la suma de los elementos de la fila $i$ de su matriz de adyacencia?",
+      "options": [
+        "El grado de salida (outdegree) del vértice $v_i$",
+        "El grado de entrada (indegree) del vértice $v_i$",
+        "El número de componentes conexas a las que pertenece $v_i$"
+      ],
+      "correct": 0,
+      "hint": "Los elementos de la fila $i$ tienen la forma $A_{ij}$, es decir, arcos que se originan en $i$.",
+      "explanation": "La fila $i$ de la matriz de adyacencia de un digrafo registra todos los arcos con origen en $v_i$. Sumar sus elementos proporciona el grado de salida u outdegree del nodo."
+    },
+    {
+      "q": "En un pseudografo, ¿qué indica que una entrada $A_{ij}$ de la matriz de adyacencia sea igual a 3?",
+      "options": [
+        "Que existen exactamente 3 aristas paralelas que conectan al vértice $v_i$ con el vértice $v_j$",
+        "Que hay un camino de longitud 3 entre $v_i$ y $v_j$",
+        "Que el vértice $v_i$ y $v_j$ están a una distancia de 3 aristas"
+      ],
+      "correct": 0,
+      "hint": "Los pseudografos permiten aristas múltiples o paralelas entre un mismo par de nodos.",
+      "explanation": "En un pseudografo o multigrafo, la matriz de adyacencia generaliza sus entradas para permitir valores mayores que 1, representando la multiplicidad (número de aristas paralelas) entre dos nodos. $A_{ij} = 3$ indica la existencia de 3 aristas paralelas directas entre $v_i$ y $v_j$."
+    },
+    {
+      "q": "Para un grafo con un millón de vértices y dos millones de aristas, ¿por qué resulta impracticable usar una matriz de adyacencia?",
+      "options": [
+        "Porque requeriría almacenar $10^{12}$ elementos de memoria, lo cual desborda los límites normales de RAM",
+        "Porque la matriz de adyacencia no puede representar grafos de más de 1000 nodos",
+        "Porque el tiempo de inserción de aristas se vuelve exponencial $O(2^{|V|})$"
+      ],
+      "correct": 0,
+      "hint": "Calcula el tamaño del espacio requerido, que es de orden cuadrático $|V|^2$.",
+      "explanation": "El coste espacial es $O(|V|^2)$. Con $|V| = 10^6$, la matriz requiere almacenar $10^{12}$ elementos. Incluso usando 1 byte por elemento, esto equivaldría a 1 Terabyte de memoria RAM, haciendo inviable su almacenamiento."
+    },
+    {
+      "q": "¿Cómo se define formalmente la matriz de adyacencia para un grafo ponderado (con pesos)?",
+      "options": [
+        "La entrada $A_{ij}$ almacena el peso de la arista si existe, y un valor especial (como 0 o $\\infty$) si no existe",
+        "La entrada $A_{ij}$ siempre almacena 1 si la arista existe y los pesos se almacenan en un vector separado",
+        "La entrada $A_{ij}$ almacena el inverso del peso"
+      ],
+      "correct": 0,
+      "hint": "Para grafos ponderados, la matriz de adyacencia guarda el valor numérico del peso directamente.",
+      "explanation": "En grafos valorados o ponderados, cada celda $A_{ij}$ de la matriz de adyacencia se utiliza para registrar directamente el peso o coste de la arista $(v_i, v_j)$, y se define un valor convencional para indicar la ausencia de conexión."
+    },
+    {
+      "q": "Si un grafo contiene un bucle en el vértice $v_i$, ¿qué valor toma $A_{ii}$ en su matriz de adyacencia?",
+      "options": [
+        "1",
+        "0",
+        "2"
+      ],
+      "correct": 0,
+      "hint": "Un bucle es un enlace directo de un nodo a sí mismo.",
+      "explanation": "El bucle se representa como un enlace directo desde $v_i$ hacia $v_i$. En la matriz de adyacencia, esto se registra poniendo un 1 en la posición correspondiente en la diagonal principal ($A_{ii} = 1$)."
+    },
+    {
+      "q": "Si una arista $e_k$ conecta los vértices $v_i$ y $v_j$ en un grafo no dirigido, ¿qué valores tiene la columna $k$ en la matriz de incidencia?",
+      "options": [
+        "Un 1 en la fila $i$ y en la fila $j$, y 0 en las demás filas",
+        "Un 1 en la fila $i$ y un -1 en la fila $j$, y 0 en las demás",
+        "Un 2 en la fila $i$ y un 0 en la fila $j$"
+      ],
+      "correct": 0,
+      "hint": "Recuerda que la matriz de incidencia es de tamaño $|V| \\times |E|$.",
+      "explanation": "Para un grafo no dirigido, cada columna de la matriz de incidencia representa una arista y contiene exactamente dos unos en las posiciones correspondientes a los vértices incidentes (en este caso, fila $i$ y fila $j$)."
+    },
+    {
+      "q": "¿Cuál es el número máximo de aristas en un grafo simple no dirigido con $|V|$ vértices?",
+      "options": [
+        "$|V|(|V|-1)/2$",
+        "$|V|^2$",
+        "$|V|(|V|+1)/2$"
+      ],
+      "correct": 0,
+      "hint": "Equivale a elegir combinaciones de 2 vértices tomados de un conjunto de $|V|$ elementos.",
+      "explanation": "En un grafo simple, no hay bucles ni aristas paralelas. El número máximo de aristas se obtiene cuando cada par de nodos está conectado por una arista. Esto equivale a $\\binom{|V|}{2} = \\frac{|V|(|V|-1)}{2}$."
+    },
+    {
+      "q": "Si un grafo simple no dirigido es completo ($K_n$), ¿cómo es su matriz de adyacencia?",
+      "options": [
+        "Tiene ceros en la diagonal principal y unos en todas las demás posiciones",
+        "Tiene unos en la diagonal principal y ceros en todas las demás",
+        "Todos sus elementos son iguales a 1"
+      ],
+      "correct": 0,
+      "hint": "En un grafo completo, todos los pares de nodos distintos están conectados por una arista.",
+      "explanation": "Como es completo, existe una arista entre cualquier pareja de vértices diferentes (lo que pone un 1 en las posiciones fuera de la diagonal). Como es simple, no tiene bucles (ceros en la diagonal principal)."
+    },
+    {
+      "q": "¿Qué matriz representa a un grafo nulo (un grafo sin aristas)?",
+      "options": [
+        "La matriz nula (todos sus elementos son cero)",
+        "La matriz identidad",
+        "Una matriz llena de unos"
+      ],
+      "correct": 0,
+      "hint": "Si no hay aristas, no hay ninguna conexión que deba representarse con un 1.",
+      "explanation": "Un grafo nulo no tiene aristas. Por tanto, todas las celdas de su matriz de adyacencia deben ser 0, lo que da como resultado la matriz nula de dimensiones $|V| \\times |V|$."
+    },
+    {
+      "q": "Si sumamos todas las filas de la matriz de incidencia de un grafo no dirigido simple, ¿qué vector obtenemos?",
+      "options": [
+        "Un vector de tamaño $|E|$ donde cada componente es 2",
+        "Un vector de tamaño $|V|$ donde cada componente es 1",
+        "El vector nulo de tamaño $|E|$"
+      ],
+      "correct": 0,
+      "hint": "Sumar todas las filas significa calcular la suma vertical para cada una de las columnas.",
+      "explanation": "Cada columna de la matriz de incidencia representa una arista y contiene exactamente dos unos (los extremos de la arista). Al sumar todas las filas de la matriz, la suma de cada columna es $1 + 1 = 2$, lo que nos da un vector de tamaño $|E|$ con componentes todas iguales a 2."
+    },
+    {
+      "q": "¿Qué ventaja temporal ofrece una lista de adyacencia al realizar recorridos (como BFS o DFS) en grafos dispersos?",
+      "options": [
+        "Permite acceder e iterar sobre los vecinos de un nodo en tiempo proporcional a su grado, evitando examinar nodos no conectados",
+        "Garantiza que el tiempo de consulta de la existencia de cualquier arista sea siempre $O(1)$",
+        "Simplifica la implementación matemática al utilizar operaciones de álgebra lineal"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el bucle que busca los vecinos de un nodo durante el recorrido.",
+      "explanation": "En BFS o DFS, necesitamos explorar los vecinos de cada nodo. Con listas de adyacencia, iteramos exactamente sobre los vecinos del nodo (coste $O(deg(u))$). Con una matriz de adyacencia, tendríamos que examinar $|V|$ elementos para cada nodo, lo cual es ineficiente en grafos dispersos."
+    },
+    {
+      "q": "Si la matriz de adyacencia de un grafo es la matriz identidad $I_n$, ¿qué representa este grafo?",
+      "options": [
+        "Un grafo desconectado donde cada uno de los $n$ vértices tiene un único bucle a sí mismo y no hay más aristas",
+        "Un grafo completo $K_n$",
+        "Un camino lineal de longitud $n$"
+      ],
+      "correct": 0,
+      "hint": "La matriz identidad tiene unos en la diagonal principal y ceros en el resto.",
+      "explanation": "Los unos en la diagonal principal ($A_{ii} = 1$) representan bucles en cada vértice. Los ceros fuera de ella indican que no hay ninguna arista que conecte dos vértices distintos. Por lo tanto, es un grafo compuesto únicamente por bucles independientes."
+    },
+    {
+      "q": "En un grafo dirigido, la matriz de incidencia se define comúnmente asignando:",
+      "options": [
+        "1 al origen del arco, -1 al destino del arco (o viceversa) y 0 a los demás",
+        "1 a ambos extremos del arco y 0 a los demás",
+        "El peso del arco en el destino y el negativo del peso en el origen"
+      ],
+      "correct": 0,
+      "hint": "La dirección del arco debe quedar codificada para distinguir el nodo de inicio del nodo de fin.",
+      "explanation": "Para representar la dirección del arco en la matriz de incidencia, se asigna un 1 al vértice de donde parte el arco (origen) y un -1 al vértice donde termina (destino) [o viceversa], quedando el resto de filas en 0."
+    },
+    {
+      "q": "¿Qué ocurre con la matriz de adyacencia $A$ de un grafo si cambiamos el orden de etiquetado de sus vértices?",
+      "options": [
+        "La nueva matriz es semejante a la original de la forma $B = P^T A P$, donde $P$ es una matriz de permutación",
+        "La matriz no experimenta ningún cambio",
+        "La matriz se transpone"
+      ],
+      "correct": 0,
+      "hint": "El orden de los vértices define qué fila y columna corresponde a cada nodo.",
+      "explanation": "Permutar los nombres o etiquetas de los vértices equivale a permutar las filas y columnas correspondientes de la matriz de adyacencia. Esto algebraicamente se representa como una transformación de semejanza $B = P^T A P$, donde $P$ es la matriz de permutación asociada."
+    },
+    {
+      "q": "Si un grafo $G$ es bipartito y dividimos sus vértices en dos conjuntos independientes $V_1$ (tamaño $r$) y $V_2$ (tamaño $s$), ¿cómo se puede estructurar su matriz de adyacencia?",
+      "options": [
+        "Como una matriz por bloques de la forma $\\begin{pmatrix} 0 & B \\\\ B^T & 0 \\end{pmatrix}$, donde $B$ es una matriz de tamaño $r \\times s$",
+        "Como una matriz triangular superior con ceros en la diagonal",
+        "Como una matriz diagonal por bloques"
+      ],
+      "correct": 0,
+      "hint": "En un grafo bipartito no existen aristas entre nodos de un mismo conjunto.",
+      "explanation": "Dado que no hay aristas entre nodos de $V_1$, la submatriz que conecta $V_1$ con $V_1$ es nula (bloque de ceros de $r \\times r$). Lo mismo ocurre para $V_2$ (bloque de ceros de $s \\times s$). Las aristas solo conectan $V_1$ con $V_2$, lo que se representa por el bloque $B$ y su transpuesta $B^T$ por simetría."
+    },
+    {
+      "q": "¿Qué inconveniente presenta la matriz de adyacencia al representar multigrafos frente a las listas de adyacencia?",
+      "options": [
+        "Solo permite almacenar la cantidad de aristas como un valor entero, perdiendo la posibilidad de asociar atributos individuales a cada una de ellas",
+        "Es imposible representar aristas paralelas en una matriz",
+        "Las operaciones de álgebra lineal dejan de ser válidas en multigrafos"
+      ],
+      "correct": 0,
+      "hint": "Piensa en el caso de que cada arista tenga un identificador o propiedad única.",
+      "explanation": "En una matriz de adyacencia, una entrada $A_{ij} = 2$ solo indica que hay 2 aristas entre $i$ y $j$, pero no permite almacenar información particular (como pesos diferentes o nombres) de cada una de esas dos aristas por separado. Las listas de adyacencia pueden tener dos nodos distintos en la lista para cada arista con sus propios atributos."
+    },
+    {
+      "q": "En un grafo no dirigido simple sin bucles, ¿qué representa la entrada diagonal $(A^2)_{ii}$ de la matriz $A^2$?",
+      "options": [
+        "El grado del vértice $v_i$",
+        "El número de ciclos de longitud 3 que contienen a $v_i$",
+        "El número de caminos de longitud 2 entre $v_i$ y todos los demás vértices"
+      ],
+      "correct": 0,
+      "hint": "El elemento $(A^2)_{ii}$ es el número de caminos de longitud 2 de $v_i$ a sí mismo.",
+      "explanation": "Un camino de longitud 2 desde $v_i$ a sí mismo debe tener la forma $v_i \\to v_j \\to v_i$. Esto existe si y solo si $\\{v_i, v_j\\}$ es una arista. Por tanto, hay tantos caminos de este tipo como vecinos tenga $v_i$, lo cual es exactamente el grado del vértice $v_i$."
+    },
+    {
+      "q": "Si para un grafo no dirigido simple se cumple que la traza de la matriz $A^2$ es cero ($tr(A^2) = 0$), ¿qué podemos concluir?",
+      "options": [
+        "Que el grafo no contiene ninguna arista (es un grafo nulo)",
+        "Que el grafo no tiene ciclos",
+        "Que el grafo es regular"
+      ],
+      "correct": 0,
+      "hint": "La traza de $A^2$ es la suma de sus elementos diagonales, que representan los grados de los vértices.",
+      "explanation": "La traza de $A^2$ es $\\sum (A^2)_{ii} = \\sum deg(v_i) = 2|E|$. Si la traza es 0, entonces $|E| = 0$, lo que implica que el grafo no posee aristas."
+    },
+    {
+      "q": "En un grafo no dirigido simple sin bucles, ¿qué representa la entrada diagonal $(A^3)_{ii}$ de la matriz potencia $A^3$?",
+      "options": [
+        "El doble del número de triángulos (ciclos de longitud 3) que contienen al vértice $v_i$",
+        "El triple del número de triángulos que contienen al vértice $v_i$",
+        "El grado de salida del vértice $v_i$"
+      ],
+      "correct": 0,
+      "hint": "Un ciclo de longitud 3 que contiene a $v_i$ tiene la forma $v_i \\to v_j \\to v_k \\to v_i$.",
+      "explanation": "Un ciclo de longitud 3 (triángulo) con vértices $\\{v_i, v_j, v_k\\}$ puede ser recorrido en dos direcciones partiendo de $v_i$: $v_i \\to v_j \\to v_k \\to v_i$ y $v_i \\to v_k \\to v_j \\to v_i$. Ambas corresponden a caminos de longitud 3 de $v_i$ a sí mismo. Por lo tanto, hay exactamente 2 caminos por cada triángulo, de ahí que $(A^3)_{ii}$ sea el doble del número de triángulos que contienen a $v_i$."
+    },
+    {
+      "q": "¿Cuál es la fórmula para calcular el número total de triángulos (ciclos de longitud 3) en un grafo no dirigido simple?",
+      "options": [
+        "$tr(A^3) / 6$",
+        "$tr(A^3) / 3$",
+        "$tr(A^2) / 2$"
+      ],
+      "correct": 0,
+      "hint": "Cada triángulo tiene 3 vértices y puede recorrerse en 2 sentidos desde cada uno.",
+      "explanation": "La suma de los elementos de la diagonal de $A^3$ (la traza $tr(A^3)$) cuenta los caminos de longitud 3 de cada nodo a sí mismo. Cada triángulo $\\{u, v, w\\}$ genera 6 caminos en la traza (2 desde $u$, 2 desde $v$, y 2 desde $w$). Por ende, el número total de triángulos es $tr(A^3) / 6$."
+    },
+    {
+      "q": "¿Cómo se define la matriz Laplaciana $L$ de un grafo no dirigido?",
+      "options": [
+        "$L = D - A$, donde $D$ es la matriz diagonal de grados y $A$ es la matriz de adyacencia",
+        "$L = A - D$, donde $D$ es la matriz diagonal de grados y $A$ es la matriz de adyacencia",
+        "$L = D \\cdot A$"
+      ],
+      "correct": 0,
+      "hint": "La Laplaciana combina los grados de los nodos en la diagonal con las adyacencias negativas fuera de ella.",
+      "explanation": "La matriz Laplaciana se define como la diferencia entre la matriz de grados $D$ y la matriz de adyacencia $A$, es decir, $L = D - A$. Esta matriz es fundamental en la teoría espectral de grafos."
+    },
+    {
+      "q": "Si un grafo no dirigido es simple, ¿qué tipo de valores caracterizan a todos los autovalores de su matriz de adyacencia $A$?",
+      "options": [
+        "Todos los autovalores son números reales",
+        "Todos los autovalores son imaginarios puros",
+        "Todos los autovalores son enteros positivos"
+      ],
+      "correct": 0,
+      "hint": "Recuerda que la matriz de adyacencia de un grafo no dirigido es real y simétrica.",
+      "explanation": "Por el teorema espectral del álgebra lineal, toda matriz real y simétrica es diagonalizable y todos sus autovalores son números reales. Dado que la matriz de adyacencia de un grafo no dirigido es real y simétrica ($A = A^T$), todos sus autovalores son reales."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si un grafo tiene matriz de adyacencia $A$, y $A^2$ presenta un valor de 3 en la posición $(1, 2)$, significa que existen ____ caminos de longitud 2 entre $v_1$ y $v_2$.",
+      "options": [
+        "exactamente 3",
+        "exactamente 2",
+        "exactamente 1"
+      ],
+      "correct": 0,
+      "hint": "El elemento de la matriz potencia representa el número de caminos.",
+      "explanation": "De acuerdo con el teorema de caminos de longitud $k$, el valor de $(A^2)_{1,2} = 3$ indica que hay exactamente 3 caminos distintos de longitud 2 entre los nodos indicados."
+    },
+    {
+      "q": "Para calcular el número de caminos de longitud exactamente 3 en un grafo con matriz de adyacencia $A$, se debe calcular la potencia de matriz ____.",
+      "options": [
+        "$A^3$",
+        "$A^2$",
+        "$A^4$"
+      ],
+      "correct": 0,
+      "hint": "La potencia de la matriz de adyacencia corresponde a la longitud del camino.",
+      "explanation": "El teorema establece que para caminos de longitud $k$ se debe elevar la matriz a la potencia $k$. Para longitud 3, es $A^3$."
+    },
+    {
+      "q": "En un grafo no dirigido simple con 5 vértices y 6 aristas, la suma de todos los elementos de la matriz de adyacencia es igual a ____.",
+      "options": [
+        "12",
+        "6",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Cada arista conecta dos nodos, aportando dos unos a la matriz.",
+      "explanation": "La suma de todos los elementos de la matriz de adyacencia de un grafo no dirigido simple es igual a $2|E|$. Como $|E| = 6$, la suma es $2 \\times 6 = 12$."
+    },
+    {
+      "q": "Para un grafo con 4 vértices, si la fila 1 de la matriz de adyacencia es $[0, 1, 1, 0]$, entonces el grado del vértice 1 es ____.",
+      "options": [
+        "2",
+        "1",
+        "3"
+      ],
+      "correct": 0,
+      "hint": "El grado de un nodo es la suma de los elementos de su fila.",
+      "explanation": "Sumando los elementos de la fila 1 tenemos $0 + 1 + 1 + 0 = 2$, que representa el grado del vértice 1."
+    },
+    {
+      "q": "La matriz de incidencia de un grafo no dirigido con 4 vértices y 5 aristas tiene unas dimensiones de ____.",
+      "options": [
+        "4 filas por 5 columnas",
+        "5 filas por 4 columnas",
+        "4 filas por 4 columnas"
+      ],
+      "correct": 0,
+      "hint": "Las dimensiones son $|V| \\times |E|$.",
+      "explanation": "Con 4 vértices ($|V|=4$) y 5 aristas ($|E|=5$), la matriz de incidencia tiene dimensiones de 4 filas y 5 columnas."
+    },
+    {
+      "q": "Si un grafo tiene una matriz de adyacencia de dimensiones $10 \\times 10$, entonces el número de vértices en el grafo es ____.",
+      "options": [
+        "10",
+        "100",
+        "20"
+      ],
+      "correct": 0,
+      "hint": "La matriz de adyacencia es cuadrada de tamaño $|V| \\times |V|$.",
+      "explanation": "Las dimensiones de la matriz de adyacencia son $|V| \\times |V|$. Al ser de $10 \\times 10$, el número de vértices $|V|$ es 10."
+    },
+    {
+      "q": "En un grafo dirigido con matriz de adyacencia $A$, la suma de los elementos de la fila $i$ representa el grado de ____ de $v_i$.",
+      "options": [
+        "salida (outdegree)",
+        "entrada (indegree)",
+        "aislamiento"
+      ],
+      "correct": 0,
+      "hint": "La fila indica los arcos que parten de ese nodo.",
+      "explanation": "La fila $i$ registra los arcos salientes del nodo $v_i$. Sumar sus elementos da el grado de salida (outdegree)."
+    },
+    {
+      "q": "En un grafo dirigido con matriz de adyacencia $A$, la suma de los elementos de la columna $j$ representa el grado de ____ de $v_j$.",
+      "options": [
+        "entrada (indegree)",
+        "salida (outdegree)",
+        "aislamiento"
+      ],
+      "correct": 0,
+      "hint": "La columna indica los arcos que llegan a ese nodo.",
+      "explanation": "La columna $j$ registra los arcos entrantes al nodo $v_j$. Sumar sus elementos da el grado de entrada (indegree)."
+    },
+    {
+      "q": "Si representamos un grafo de 500 nodos y 600 aristas mediante una matriz de adyacencia, el número de celdas en memoria requeridas es ____.",
+      "options": [
+        "250000",
+        "1100",
+        "300000"
+      ],
+      "correct": 0,
+      "hint": "La matriz requiere $|V|^2$ celdas.",
+      "explanation": "El espacio de memoria de una matriz de adyacencia es $|V|^2$. Para 500 nodos, se requieren $500 \\times 500 = 250000$ celdas."
+    },
+    {
+      "q": "Si la diagonal principal de la matriz $A^2$ de un grafo no dirigido es $[2, 3, 2, 1]$, entonces el grado del vértice $v_2$ (segundo elemento de la diagonal) es ____.",
+      "options": [
+        "3",
+        "2",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "El elemento $(A^2)_{ii}$ es igual al grado de $v_i$.",
+      "explanation": "En un grafo no dirigido sin bucles, el elemento diagonal $(A^2)_{2,2}$ representa el número de caminos de longitud 2 de $v_2$ a sí mismo, el cual es igual a su grado, que en este caso es 3."
+    },
+    {
+      "q": "En la matriz de incidencia de un grafo no dirigido simple, la suma de los elementos de cualquier columna es siempre igual a ____.",
+      "options": [
+        "2",
+        "1",
+        "0"
+      ],
+      "correct": 0,
+      "hint": "Cada arista conecta exactamente dos vértices.",
+      "explanation": "Dado que cada arista tiene exactamente dos extremos, la columna correspondiente en la matriz de incidencia contiene exactamente dos unos, por lo que su suma siempre es 2."
+    },
+    {
+      "q": "Si una lista de adyacencia almacena un grafo simple no dirigido con $|V| = 10$ y $|E| = 15$, el número total de nodos de la lista enlazada (vecinos) en memoria es ____.",
+      "options": [
+        "30",
+        "15",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "En grafos no dirigidos, cada arista se guarda de forma bidireccional.",
+      "explanation": "Para un grafo no dirigido, cada arista $\\{u, v\\}$ se registra en la lista de $u$ y en la lista de $v$. Por lo tanto, el número total de nodos de adyacencia creados es $2|E| = 2 \\times 15 = 30$."
+    },
+    {
+      "q": "Para un digrafo con 3 vértices y aristas $1 \\to 2$, $2 \\to 3$, $3 \\to 1$, la matriz de adyacencia $A$ tiene su traza $tr(A)$ igual a ____.",
+      "options": [
+        "0",
+        "3",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "La traza es la suma de los elementos de la diagonal principal.",
+      "explanation": "El digrafo no contiene bucles (aristas de un nodo a sí mismo). Así, los elementos diagonales $A_{11}$, $A_{22}$ y $A_{33}$ son todos cero, por lo que su suma (traza) es 0."
+    },
+    {
+      "q": "En un grafo no dirigido simple, la suma de los elementos de la diagonal principal de la matriz potencia $A^2$ es igual a ____.",
+      "options": [
+        "el doble del número de aristas ($2|E|$)",
+        "el número de aristas ($|E|$)",
+        "el número de vértices ($|V|$)"
+      ],
+      "correct": 0,
+      "hint": "La traza de $A^2$ equivale a la suma de los grados de todos los vértices.",
+      "explanation": "Como $(A^2)_{ii} = deg(v_i)$, la suma de la diagonal es $\\sum deg(v_i)$. Por el lema del apretón de manos, esto es igual a $2|E|$."
+    },
+    {
+      "q": "Calcular la potencia $A^3$ de la matriz de adyacencia requiere realizar ____ multiplicaciones de matrices de tamaño $|V| \\times |V|$ si se calcula como $(A \\cdot A) \\cdot A$.",
+      "options": [
+        "2",
+        "3",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "Cuenta cuántos productos matriciales haces secuencialmente.",
+      "explanation": "Para hallar $A^3$, primero multiplicamos $A \\times A = A^2$ (1ª multiplicación) y luego $A^2 \\times A = A^3$ (2ª multiplicación). En total son 2 multiplicaciones de matrices."
+    },
+    {
+      "q": "Si en un grafo dirigido de dos vértices existe un arco de $v_1$ a $v_2$ y otro de $v_2$ a $v_1$, la matriz de adyacencia de este grafo es ____.",
+      "options": [
+        "$\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$",
+        "$\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$",
+        "$\\begin{pmatrix} 0 & 0 \\\\ 0 & 0 \\end{pmatrix}$"
+      ],
+      "correct": 0,
+      "hint": "Coloca los unos según el origen y destino de cada arco, sin bucles.",
+      "explanation": "No hay bucles, por lo que $A_{11}=0, A_{22}=0$. Al haber arco de $1 \\to 2$, $A_{12}=1$. Al haber arco de $2 \\to 1$, $A_{21}=1$. Esto da la matriz simétrica [[0, 1], [1, 0]]."
+    },
+    {
+      "q": "Para un grafo bipartito con conjuntos disjuntos de 3 y 4 vértices, el número máximo posible de aristas es ____.",
+      "options": [
+        "12",
+        "7",
+        "24"
+      ],
+      "correct": 0,
+      "hint": "Cada nodo de un conjunto se puede conectar con todos los del otro.",
+      "explanation": "El número máximo de aristas en un grafo bipartito completo $K_{r,s}$ es $r \\times s$. Aquí, $3 \\times 4 = 12$."
+    },
+    {
+      "q": "Si un grafo tiene matriz de adyacencia $A$, el número de triángulos (ciclos de longitud 3) que contienen al vértice $v_i$ es igual a $(A^3)_{ii}$ dividido por ____.",
+      "options": [
+        "2",
+        "3",
+        "6"
+      ],
+      "correct": 0,
+      "hint": "Un triángulo se puede recorrer en dos sentidos partiendo de $v_i$.",
+      "explanation": "Cada triángulo $\\{v_i, v_j, v_k\\}$ genera dos recorridos de longitud 3 que empiezan y terminan en $v_i$. Por lo tanto, $(A^3)_{ii} = 2 \\times \\text{número de triángulos con } v_i$. Dividimos entre 2."
+    },
+    {
+      "q": "En la matriz de adyacencia de un grafo no dirigido, si el elemento $A_{ii}$ es igual a 1, esto representa un ____ en el vértice $v_i$.",
+      "options": [
+        "bucle (o lazo)",
+        "camino de longitud 2",
+        "vértice aislado"
+      ],
+      "correct": 0,
+      "hint": "Un elemento en la diagonal representa una arista de un nodo a sí mismo.",
+      "explanation": "Una conexión directa del nodo $v_i$ consigo mismo se representa en la diagonal de la matriz ($A_{ii} = 1$) y recibe el nombre de bucle o lazo."
+    },
+    {
+      "q": "Si un grafo tiene 8 vértices y es regular de grado 3, su matriz de adyacencia contendrá un total de ____ unos.",
+      "options": [
+        "24",
+        "12",
+        "8"
+      ],
+      "correct": 0,
+      "hint": "La suma de los grados de todos los nodos es igual al número total de unos en la matriz.",
+      "explanation": "Como es regular de grado 3 y hay 8 nodos, la suma de los grados es $8 \\times 3 = 24$. Como cada grado equivale al número de unos en su respectiva fila, la matriz tendrá exactamente 24 unos."
+    },
+    {
+      "q": "¿Qué información se puede extraer de la diagonal principal de la matriz $A^2$ de un grafo no dirigido sin bucles?",
+      "options": [
+        "El grado de cada vértice correspondiente",
+        "El número de caminos de longitud 2 de cada vértice a sí mismo",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Recuerda la relación entre caminos cerrados de longitud 2 y el grado de los nodos.",
+      "explanation": "Ambas afirmaciones son verdaderas, por lo que la opción correcta es que todas las opciones son correctas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes afirmaciones sobre la matriz de adyacencia $A$ de un grafo no dirigido son verdaderas?",
+      "options": [
+        "Es simétrica respecto a la diagonal principal ($A = A^T$)",
+        "La suma de los elementos de la fila $i$ es igual al grado del vértice $v_i$",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Repasa las propiedades de simetría y suma de filas en grafos no dirigidos.",
+      "explanation": "Tanto la simetría como la relación de la suma de filas con el grado son propiedades fundamentales de la representación matricial de grafos no dirigidos."
+    },
+    {
+      "q": "Al diseñar un software, la elección de representar un grafo mediante listas de adyacencia en lugar de una matriz se justifica por:",
+      "options": [
+        "El importante ahorro de memoria cuando el grafo es disperso",
+        "La menor complejidad temporal para obtener la lista de vecinos de un nodo",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Piensa en los beneficios de espacio y tiempo de recorrido en listas de adyacencia.",
+      "explanation": "Las listas de adyacencia ahorran memoria en grafos dispersos ($O(|V|+|E|)$ frente a $O(|V|^2)$) y permiten listar los vecinos en tiempo $O(deg(u))$ en lugar de $O(|V|)$."
+    },
+    {
+      "q": "En un grafo dirigido con matriz de adyacencia $A$, ¿qué información se puede obtener sumando filas o columnas?",
+      "options": [
+        "El grado de entrada sumando los elementos de la columna correspondiente",
+        "El grado de salida sumando los elementos de la fila correspondiente",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Las filas representan conexiones salientes y las columnas conexiones entrantes.",
+      "explanation": "En un digrafo, la fila representa los arcos salientes y la columna los entrantes. Por tanto, sumar la fila da el outdegree y sumar la columna da el indegree."
+    },
+    {
+      "q": "La matriz de incidencia $M$ de un grafo no dirigido simple cumple que:",
+      "options": [
+        "Tiene dimensiones $|V| \\times |E|$",
+        "Cada columna contiene exactamente dos unos",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "La matriz de incidencia relaciona vértices con aristas.",
+      "explanation": "La matriz tiene $|V|$ filas y $|E|$ columnas. Al ser no dirigido simple, cada arista conecta exactamente dos vértices, por lo que cada columna tiene dos unos."
+    },
+    {
+      "q": "¿Qué operaciones de grafos se pueden realizar en tiempo constante $O(1)$ utilizando una matriz de adyacencia?",
+      "options": [
+        "Verificar si existe una arista $(u, v)$ entre dos nodos",
+        "Insertar o eliminar una arista entre dos nodos ya existentes",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Piensa en los accesos de lectura y escritura directa a una celda de matriz.",
+      "explanation": "Tanto verificar la existencia de una arista ($A[u][v] == 1$) como modificar su estado ($A[u][v] = 0$ o $1$) se realizan por acceso directo al índice en tiempo constante $O(1)$."
+    },
+    {
+      "q": "Si un grafo dirigido está representado por su matriz de adyacencia $A$, ¿qué propiedad algebraica se verifica para la matriz potencia $A^k$?",
+      "options": [
+        "El elemento $(A^k)_{ij}$ es el número de caminos dirigidos de longitud $k$ de $v_i$ a $v_j$",
+        "La traza de $A^k$ es la suma de los caminos dirigidos cerrados de longitud $k$ en el grafo",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Aplica el teorema de caminos dirigidos usando potencias matriciales.",
+      "explanation": "El teorema de caminos es válido también para grafos dirigidos, y la suma de elementos diagonales (traza) representa los caminos cerrados (ciclos) de longitud $k$."
+    },
+    {
+      "q": "Si un grafo es simple, no dirigido y no posee bucles ni aristas paralelas, su matriz de adyacencia $A$ cumple:",
+      "options": [
+        "La diagonal principal está compuesta por ceros",
+        "La matriz es igual a su transpuesta ($A = A^T$)",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Un grafo simple no dirigido tiene diagonal nula y es simétrico.",
+      "explanation": "Al no tener bucles, la diagonal de $A$ es nula. Al ser no dirigido, es simétrica. Por tanto, ambas condiciones se cumplen simultáneamente."
+    },
+    {
+      "q": "Las representaciones matriciales de grafos (adyacencia e incidencia) son de gran utilidad práctica para:",
+      "options": [
+        "Implementar algoritmos numéricos y algebraicos de búsqueda de caminos en computadores",
+        "Resolver problemas de redes aplicando conceptos de álgebra lineal",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Valora las ventajas del uso de matrices en computación y matemáticas.",
+      "explanation": "Las matrices de adyacencia conectan la teoría de grafos con el álgebra lineal, facilitando algoritmos de caminos, optimizaciones y análisis espectral."
+    },
+    {
+      "q": "Si en un grafo no dirigido duplicamos todas sus aristas (creando una arista paralela por cada arista existente), la nueva matriz de adyacencia $A'$ cumple que:",
+      "options": [
+        "El valor de cada celda fuera de la diagonal es $2 \\times A_{ij}$",
+        "La suma de los elementos de la fila $i$ es el doble del grado original del nodo",
+        "Todas las opciones son correctas"
+      ],
+      "correct": 2,
+      "hint": "Duplicar las aristas incrementa las adyacencias directas al doble.",
+      "explanation": "Al haber dos caminos directos (aristas paralelas) entre nodos adyacentes, las celdas no vacías valen 2, duplicando el valor de la celda y consecuentemente la suma de la fila."
+    },
+    {
+      "q": "Si la matriz de adyacencia de un grafo tiene un determinante igual a cero, ¿qué podemos afirmar de forma obligatoria sobre dicho grafo?",
+      "options": [
+        "Que el grafo es conexo",
+        "Que el grafo tiene ciclos de longitud par",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "El determinante de la matriz de adyacencia puede ser cero por múltiples configuraciones estructurales sin implicar conexidad o ciclos obligatorios.",
+      "explanation": "Tener determinante cero solo indica que las filas de la matriz son linealmente dependientes. Esto ocurre en muchos grafos (conexos, desconectados, con o sin ciclos). Ninguna de las afirmaciones dadas es obligatoria."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de listar los vecinos de un nodo $u$ en una matriz de adyacencia de un grafo $G=(V,E)$?",
+      "options": [
+        "$O(|E|)$",
+        "$O(1)$",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "Para listar los vecinos en una matriz de adyacencia hay que recorrer toda la fila correspondiente al nodo.",
+      "explanation": "La complejidad para listar vecinos en una matriz de adyacencia es $O(|V|)$, puesto que hay que recorrer toda la fila de longitud $|V|$. Ninguna de las opciones dadas es $O(|V|)$."
+    },
+    {
+      "q": "Si un grafo tiene $|V| = 4$ y su matriz de adyacencia es $A = \\begin{pmatrix} 0 & 1 & 0 & 0 \\\\ 1 & 0 & 1 & 0 \\\\ 0 & 1 & 0 & 1 \\\\ 0 & 0 & 1 & 0 \\end{pmatrix}$, ¿cuántos caminos de longitud 3 existen entre el nodo 1 (fila 0) y el nodo 2 (fila 1)?",
+      "options": [
+        "5",
+        "4",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "Calcula la potencia de la matriz $A^3$ y busca la posición $A^3[0][1]$ o dibuja los recorridos.",
+      "explanation": "Los caminos de longitud 3 entre 1 y 2 son: $1 \\to 2 \\to 1 \\to 2$ y $1 \\to 2 \\to 3 \\to 2$. El total es exactamente 2 caminos, lo cual corresponde al elemento $A^3[0][1] = 2$. Al no estar el 2 listado, la respuesta es ninguna."
+    },
+    {
+      "q": "Para un grafo no dirigido con $|V| = 5$, si la diagonal principal de su matriz $A^2$ es $[3, 2, 4, 1, 2]$, el número total de aristas en el grafo es:",
+      "options": [
+        "24",
+        "18",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "La suma de los elementos de la diagonal de $A^2$ es igual a la suma de los grados de los vértices, que es $2|E|$.",
+      "explanation": "La suma de los grados es $3 + 2 + 4 + 1 + 2 = 12$. Dado que $\\sum deg(v_i) = 2|E|$, entonces $2|E| = 12 \\implies |E| = 6$. Como 6 no está entre las opciones, se selecciona ninguna."
+    },
+    {
+      "q": "En un grafo dirigido, si la fila $i$ de su matriz de adyacencia tiene únicamente ceros y la columna $i$ tiene al menos un uno, el nodo $v_i$ es:",
+      "options": [
+        "Un sumidero universal",
+        "Una fuente (source)",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "Analiza los grados de entrada y salida implícitos.",
+      "explanation": "Que la fila tenga ceros significa que su grado de salida es 0 (es un sumidero o sink). Que la columna tenga al menos un 1 significa que su grado de entrada es mayor que 0. No es una fuente (indegree=0). No es sumidero universal (requiere indegree = $|V|-1$). Así que es ninguna."
+    },
+    {
+      "q": "¿Cuál es el espacio de memoria requerido por una lista de adyacencia de un grafo completo $K_n$?",
+      "options": [
+        "$O(n^3)$",
+        "$O(1)$",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "En $K_n$, el número de aristas es $n(n-1)/2$.",
+      "explanation": "La lista de adyacencia requiere $O(|V| + |E|)$. En un grafo completo, $|E| = O(n^2)$. Por lo tanto, el espacio es $O(n + n^2) = O(n^2)$. Al no estar listado $O(n^2)$, la opción correcta es ninguna."
+    },
+    {
+      "q": "Si la matriz de adyacencia de un grafo no dirigido con 2 nodos es $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, su matriz de incidencia $M$ de tamaño $2 \\times 1$ es:",
+      "options": [
+        "$\\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix}$",
+        "$\\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}$",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "En la matriz de incidencia de un grafo no dirigido, cada arista (columna) tiene un 1 en las filas de los dos nodos conectados.",
+      "explanation": "Como es un grafo no dirigido con una sola arista entre los nodos 1 y 2, la única columna de la matriz de incidencia debe tener un 1 en la fila 1 y un 1 en la fila 2, es decir, $\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. Como esta no está, la opción es ninguna."
+    },
+    {
+      "q": "En un grafo no dirigido regular de grado $d$ con $n$ vértices, ¿cuál es el valor de cada elemento de la diagonal principal de su matriz Laplaciana $L = D - A$?",
+      "options": [
+        "0",
+        "1",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "Los elementos diagonales de la Laplaciana corresponden a la matriz de grados $D$.",
+      "explanation": "Dado que $L_{ii} = D_{ii} - A_{ii} = deg(v_i) - 0 = deg(v_i)$, y el grafo es regular de grado $d$, cada elemento de la diagonal de $L$ es igual a $d$. Como $d$ no está en las opciones, es ninguna."
+    },
+    {
+      "q": "Si un grafo tiene matriz de adyacencia $A$, y queremos comprobar si existe algún ciclo de longitud 1 (bucle), buscamos si:",
+      "options": [
+        "El determinante $det(A) \\neq 0$",
+        "La matriz $A^2$ contiene elementos impares en su diagonal principal",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "Un bucle se refleja directamente como un 1 en la diagonal principal de la matriz de adyacencia $A$.",
+      "explanation": "Para verificar la existencia de un bucle, basta con ver si algún elemento diagonal $A_{ii}$ es igual a 1 en la matriz de adyacencia original $A$. Ninguna de las condiciones anteriores describe esto de manera exclusiva o correcta."
+    },
+    {
+      "q": "Si en un grafo dirigido con 3 vértices la matriz de adyacencia es $A = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$, el número total de caminos de longitud 3 es:",
+      "options": [
+        "1",
+        "2",
+        "Ninguna de las opciones es correcta"
+      ],
+      "correct": 2,
+      "hint": "Calcula la potencia $A^3$ de la matriz dada.",
+      "explanation": "Al calcular las potencias obtenemos: $A^2 = \\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$ y $A^3 = \\begin{pmatrix} 0 & 0 & 0 \\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$. Por tanto, el número de caminos de longitud 3 es 0. Como 0 no es una de las opciones numéricas, elegimos ninguna."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "1",
+      "title": "Caminos en un grafo lineal G (1-2-3)",
+      "context": "Sea el grafo no dirigido G con vértices {1, 2, 3} y aristas {1,2} y {2,3}. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el valor del elemento $A_{1,2}$ (fila 1, columna 2) en la matriz de adyacencia?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Dado que existe una arista directa entre el vértice 1 y el vértice 2, la entrada correspondiente es 1."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el grado del vértice 2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El vértice 2 está conectado a los vértices 1 y 3, por lo tanto su grado es 2."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 existen entre el vértice 1 y el vértice 3?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 2 de 1 a 3 es $1 \\to 2 \\to 3$. Algebraicamente, $(A^2)_{1,3} = 1$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 existen desde el vértice 2 al vértice 2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 2 de 2 a sí mismo son $2 \\to 1 \\to 2$ y $2 \\to 3 \\to 2$. Algebraicamente, $(A^2)_{2,2} = deg(2) = 2$."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Caminos en un ciclo C_4",
+      "context": "Sea el grafo ciclo no dirigido C_4 con vértices {1, 2, 3, 4} y aristas {1,2}, {2,3}, {3,4}, {4,1}. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado de cualquier vértice en C_4?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Al ser un ciclo regular, cada vértice tiene exactamente dos conexiones directas, por lo que su grado es 2."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántos caminos de longitud 2 existen entre el vértice 1 y el vértice 3?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Existen dos caminos de longitud 2: $1 \\to 2 \\to 3$ y $1 \\to 4 \\to 3$. En la matriz, $(A^2)_{1,3} = 2$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 3 existen entre el vértice 1 y el vértice 2?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Los caminos son: $1 \\to 2 \\to 1 \\to 2$, $1 \\to 2 \\to 3 \\to 2$, $1 \\to 4 \\to 3 \\to 2$ y $1 \\to 4 \\to 1 \\to 2$. En la matriz, $(A^3)_{1,2} = 4$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el número total de unos en la matriz de adyacencia A de C_4?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La suma de los grados de todos los nodos es $2 \\times 4 = 8$, que es el número total de unos en la matriz ($2|E|$)."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Grafo completo K_4",
+      "context": "Consideremos el grafo completo K_4 con 4 vértices y 6 aristas. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado de cualquier vértice en K_4?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "En un grafo completo de $n$ nodos, cada nodo está conectado a todos los demás, por lo que su grado es $n-1 = 3$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántas aristas tiene el grafo?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "El número de aristas de $K_4$ es $\\binom{4}{2} = \\frac{4 \\times 3}{2} = 6$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 hay de un vértice a sí mismo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "En un grafo simple, los caminos de longitud 2 de un nodo a sí mismo equivalen a su grado. Para cada nodo de $K_4$, esto es 3."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay de un vértice a otro diferente?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Para dos vértices $u, v$, los caminos son de la forma $u \\to w \\to v$ donde $w$ es un nodo común adyacente a ambos. Hay $4 - 2 = 2$ nodos comunes."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Grafo estrella S_4",
+      "context": "Sea el grafo estrella S_4 con un vértice central (nodo 1) conectado a 3 hojas (nodos 2, 3, 4).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado del vértice central (nodo 1)?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El nodo central está conectado directamente con las 3 hojas, por lo que su grado es 3."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el grado de cualquiera de los otros 3 vértices (hojas)?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Cada hoja del grafo estrella está conectada únicamente al nodo central, así que su grado es 1."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 existen desde el nodo central a sí mismo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 2 son del tipo central $\\to$ hoja $\\to$ central. Hay tantas hojas como grado, es decir, 3."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 existen entre dos hojas distintas?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para ir de una hoja a otra en longitud 2, la única opción es hoja1 $\\to$ central $\\to$ hoja2, por tanto hay exactamente 1 camino."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Digrafo con ciclo dirigido",
+      "context": "Sea el grafo dirigido (digrafo) G con vértices {1, 2, 3} y arcos (1,2), (2,3), (3,1).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado de salida (outdegree) del vértice 1?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El vértice 1 tiene una única arista saliente que va al vértice 2, por lo que su outdegree es 1."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el grado de entrada (indegree) del vértice 2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El vértice 2 tiene una única arista entrante que viene de 1, por lo que su indegree es 1."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 3 existen desde el vértice 1 al vértice 1?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 3 es el ciclo dirigido $1 \\to 2 \\to 3 \\to 1$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 4 existen desde el vértice 1 al vértice 2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino es $1 \\to 2 \\to 3 \\to 1 \\to 2$, que da una vuelta entera y avanza un paso más."
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Matriz de incidencia de un triángulo K_3",
+      "context": "Considera el grafo triángulo K_3 con 3 vértices y 3 aristas. Sea M su matriz de incidencia de tamaño 3x3.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántas filas tiene la matriz M?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las filas de la matriz de incidencia corresponden al número de vértices, el cual es 3."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántas columnas tiene la matriz M?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Las columnas corresponden al número de aristas, el cual es 3."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es la suma de todos los elementos de la matriz M?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Cada una de las 3 columnas representa una arista y contiene exactamente dos unos, por lo que la suma total es $3 \\times 2 = 6$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el número de unos en la fila correspondiente al nodo 2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El número de unos en la fila de un nodo es igual a su grado. Al ser un triángulo, el grado del nodo 2 es 2."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Complejidad espacial de representaciones",
+      "context": "Un programador desea almacenar un grafo social con 1000 vértices y 5000 aristas no dirigidas.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "Si se usa una matriz de adyacencia de tipo char (1 byte por celda), ¿cuántos bytes de memoria consumirá?",
+          "correctValue": 1000000,
+          "tolerance": 0,
+          "explanation": "La matriz es de tamaño $|V| \\times |V| = 1000 \\times 1000 = 10^6$ celdas. A 1 byte por celda, consume $10^6$ bytes."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "En una representación por matriz de adyacencia, ¿cuál es el exponente k de la complejidad temporal $O(|V|^k)$ para comprobar si dos usuarios son amigos?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Comprobar la adyacencia en la matriz toma tiempo constante $O(1) = O(|V|^0)$, por lo que el exponente de $|V|$ es 0."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si en una lista de adyacencia cada nodo de la lista enlazada requiere 8 bytes y representamos el grafo no dirigido como aristas bidireccionales, ¿cuántos bytes consumirán todos los nodos de la lista?",
+          "correctValue": 80000,
+          "tolerance": 0,
+          "explanation": "Para un grafo no dirigido con $|E|$ aristas, se necesitan $2|E| = 10000$ nodos de lista enlazada. A 8 bytes cada uno, consumen $10000 \\times 8 = 80000$ bytes."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "Si el grafo fuera completo con 1000 nodos, ¿cuántas aristas tendría en total?",
+          "correctValue": 499500,
+          "tolerance": 0,
+          "explanation": "El número de aristas de un grafo completo de 1000 nodos es $\\frac{1000 \\times 999}{2} = 499500$."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "title": "Caminos en un grafo con un bucle",
+      "context": "Sea el grafo con 3 vértices {1, 2, 3} y aristas {1,2}, {2,3} y un bucle en el vértice 1 (arista de 1 a 1). Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el valor del elemento diagonal $A_{1,1}$?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Debido al bucle en el vértice 1, la entrada correspondiente a la diagonal principal $A_{1,1}$ es 1."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es la suma de los elementos de la fila 1 de la matriz de adyacencia?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La fila 1 es $[1, 1, 0]$, por lo que la suma de sus elementos es $1+1+0=2$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 hay del nodo 1 al nodo 2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 2 es $1 \\to 1 \\to 2$. Algebraicamente, $(A^2)_{1,2} = A_{1,1}A_{1,2} + A_{1,2}A_{2,2} + A_{1,3}A_{3,2} = 1 \\cdot 1 + 1 \\cdot 0 + 0 \\cdot 1 = 1$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay del nodo 1 al nodo 1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los caminos son $1 \\to 1 \\to 1$ y $1 \\to 2 \\to 1$. Algebraicamente, $(A^2)_{1,1} = A_{1,1}^2 + A_{1,2}A_{2,1} + A_{1,3}A_{3,1} = 1 + 1 + 0 = 2$."
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Propiedades algebraicas en grafo bipartito completo K_{2,3}",
+      "context": "Sea el grafo bipartito completo K_{2,3} con particiones V_1 = {1, 2} y V_2 = {3, 4, 5}.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el número total de aristas?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Al ser un grafo bipartito completo, cada uno de los 2 nodos de $V_1$ está conectado a los 3 de $V_2$, totalizando $2 \\times 3 = 6$ aristas."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es la suma de todos los elementos de la matriz de adyacencia?",
+          "correctValue": 12,
+          "tolerance": 0,
+          "explanation": "La suma es igual a $2|E| = 2 \\times 6 = 12$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 existen del nodo 1 al nodo 2?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 2 de 1 a 2 deben pasar por algún nodo de $V_2$: $1 \\to 3 \\to 2$, $1 \\to 4 \\to 2$ y $1 \\to 5 \\to 2$. Total 3."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 existen del nodo 3 a sí mismo?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El camino es de la forma $3 \\to u \\to 3$ donde $u \\in V_1$. Hay exactamente 2 nodos en $V_1$, por lo que hay 2 caminos (su grado)."
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "Matriz Laplaciana de un grafo lineal G (1-2-3-4)",
+      "context": "Sea el grafo lineal con 4 vértices y aristas {1,2}, {2,3}, {3,4}. Definimos la matriz Laplaciana L = D - A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el elemento $L_{1,1}$ de la diagonal principal?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El elemento diagonal de la Laplaciana es el grado del nodo. El nodo 1 tiene grado 1, por lo que $L_{1,1} = 1$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el elemento $L_{2,2}$ de la diagonal principal?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El nodo 2 tiene grado 2, por lo que su elemento diagonal en la Laplaciana es $L_{2,2} = 2$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es el valor del elemento fuera de la diagonal $L_{1,2}$?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Para $i \\neq j$, $L_{ij} = -A_{ij}$. Como existe la arista $\\{1,2\\}$, $A_{12} = 1 \\implies L_{12} = -1$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es la suma de todos los elementos de cualquier fila de la matriz Laplaciana L?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Por definición, la suma de los elementos de cualquier fila en la matriz Laplaciana es siempre 0, dado que $L_{ii} = deg(v_i)$ y la suma de los $L_{ij}$ restantes es $-\\sum_{j \\neq i} A_{ij} = -deg(v_i)$."
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "title": "Grafo rueda W_4",
+      "context": "El grafo rueda W_4 consta de un ciclo C_3 (3 vértices) y un vértice central conectado a los otros 3 (total 4 vértices). Sea A su matriz de adyacencia.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado del vértice central?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El vértice central está conectado a los otros 3 nodos del ciclo, por lo que tiene grado 3."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el grado de cualquiera de los otros 3 vértices externos?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Cada nodo externo está conectado a sus dos vecinos del ciclo y al nodo central, lo que da un grado de 3."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántas aristas en total tiene el grafo W_4?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Tiene 3 aristas en el ciclo exterior y 3 aristas que conectan los vértices exteriores con el centro. En total, 6 aristas."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay desde el nodo central a sí mismo?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "En un grafo simple, la cantidad de caminos de longitud 2 de un nodo a sí mismo es su grado. El grado del centro es 3."
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "title": "Potencias de matrices en un digrafo acíclico",
+      "context": "Sea un grafo dirigido con 4 vértices y arcos (1,2), (2,3), (3,4) sin ciclos. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántos caminos de longitud 3 existen del vértice 1 al vértice 4?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 3 es la trayectoria dirigida $1 \\to 2 \\to 3 \\to 4$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántos caminos de longitud 3 existen del vértice 1 al vértice 3?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No hay forma de ir de 1 a 3 en exactamente 3 arcos, pues la distancia dirigida es 2 y no hay ciclos. $(A^3)_{1,3} = 0$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 4 existen en total en todo el grafo?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al ser un digrafo acíclico lineal de 4 nodos, no existen caminos de longitud mayor o igual a 4. La matriz $A^4$ es nula."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el valor del determinante de la matriz de adyacencia A?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La matriz es triangular superior estricta (si ordenamos los nodos), por lo que todos sus elementos en la diagonal principal son 0. Su determinante es el producto de su diagonal, que es 0."
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "title": "Matriz de adyacencia de grafo desconectado",
+      "context": "Sea un grafo G no dirigido con 5 vértices que consta de dos componentes conexas: un triángulo K_3 (vértices 1, 2, 3) y una arista aislada (vértices 4, 5).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es la suma de los elementos de la fila 1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El vértice 1 pertenece a la componente $K_3$ y está conectado con 2 y 3. Su grado (suma de fila) es 2."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es la suma de los elementos de la fila 4?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El vértice 4 está conectado únicamente con el vértice 5. Su grado es 1."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 existen entre el nodo 1 y el nodo 4?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que pertenecen a componentes conexas diferentes y aisladas, no existen caminos de ninguna longitud entre ellos."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 existen del nodo 1 a sí mismo?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Es igual al grado de 1, que es 2 ($1 \\to 2 \\to 1$ y $1 \\to 3 \\to 1$)."
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "title": "Caminos de longitud 3 en K_3",
+      "context": "Sea el grafo completo K_3 con vértices {1, 2, 3}. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántos caminos de longitud 2 hay del nodo 1 al nodo 2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 2 es $1 \\to 3 \\to 2$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántos caminos de longitud 3 hay de 1 a 1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 3 que empiezan y terminan en 1 son los dos ciclos: $1 \\to 2 \\to 3 \\to 1$ y $1 \\to 3 \\to 2 \\to 1$. En la matriz, $(A^3)_{1,1} = 2$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 3 hay del nodo 1 al nodo 2?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 3 de 1 a 2 son: $1 \\to 2 \\to 1 \\to 2$, $1 \\to 3 \\to 1 \\to 2$ y $1 \\to 2 \\to 3 \\to 2$. En la matriz, $(A^3)_{1,2} = 3$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el valor de la traza de la matriz $A^3$ (suma de los elementos de la diagonal)?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Cada vértice de $K_3$ tiene 2 caminos de longitud 3 a sí mismo. Como son 3 vértices, la traza de $A^3$ es $2 + 2 + 2 = 6$."
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "title": "Árbol binario completo de 3 nodos",
+      "context": "Sea un árbol binario completo con 3 nodos donde el nodo 1 es la raíz y los nodos 2 y 3 son las hojas (hijos directos).",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado de la raíz (nodo 1)?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La raíz está conectada a sus dos hijos directos, por lo que tiene grado 2."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el grado del nodo 2?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El nodo 2 es una hoja y está conectado únicamente a la raíz (nodo 1), grado 1."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántas aristas tiene este árbol?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Un árbol de 3 nodos siempre tiene $|V|-1 = 2$ aristas."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 existen del nodo 2 al nodo 3?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 2 es a través de la raíz: $2 \\to 1 \\to 3$."
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "title": "Grafo estrella K_{1,4}",
+      "context": "Sea el grafo estrella K_{1,4} con 1 vértice central y 4 hojas conectados mediante aristas no dirigidas.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es la suma de todos los elementos de su matriz de adyacencia?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "Tiene 4 aristas, por lo que la suma de los elementos de la matriz de adyacencia es $2|E| = 2 \\times 4 = 8$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es la suma de todos los elementos de su matriz de incidencia?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La matriz de incidencia tiene 4 columnas (aristas), cada una con exactamente dos unos. La suma total es $4 \\times 2 = 8$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 hay entre dos hojas distintas?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Para ir de una hoja a otra en dos pasos, se debe pasar obligatoriamente por el centro. Hay exactamente 1 camino."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay del nodo central a sí mismo?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Es igual al grado de la raíz central, que es 4 (uno por cada hoja a la que se va y se vuelve)."
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "title": "Multiplicidad en multigrafos",
+      "context": "Sea un multigrafo no dirigido con 3 vértices {1, 2, 3} con 2 aristas paralelas entre 1 y 2, y 3 aristas paralelas entre 2 y 3. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el valor del elemento $A_{1,2}$ en la matriz de adyacencia?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La entrada $A_{1,2}$ guarda el número de aristas directas entre 1 y 2, que es 2."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el valor del elemento $A_{2,3}$?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La entrada $A_{2,3}$ registra las 3 aristas paralelas entre 2 y 3, por lo que vale 3."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es el grado del nodo 2 (suma de la fila 2)?",
+          "correctValue": 5,
+          "tolerance": 0,
+          "explanation": "El nodo 2 está conectado al nodo 1 mediante 2 aristas, y al nodo 3 mediante 3 aristas, sumando un grado de $2 + 3 = 5$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay del nodo 1 al nodo 3?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "Para ir de 1 a 3 en 2 pasos, debemos pasar por 2. Hay 2 opciones para el primer paso y 3 opciones para el segundo, totalizando $2 \\times 3 = 6$ caminos."
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "title": "Grafo y complementario",
+      "context": "Sea el grafo lineal G (1-2-3-4). Su grafo complementario G_c tiene el mismo conjunto de vértices. Sea A la matriz de adyacencia de G y B la de G_c.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántas aristas tiene G?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El grafo lineal de 4 nodos tiene las aristas {1,2}, {2,3} y {3,4}, sumando 3 aristas."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántas aristas tiene el grafo complementario G_c?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El número máximo de aristas de 4 nodos es 6. El complementario tiene las aristas no presentes en G: $6 - 3 = 3$ aristas."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es el valor de la celda $B_{1,3}$ en la matriz de adyacencia del complementario?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "Como la arista {1,3} no existe en G, sí existe en el complementario, de forma que $B_{1,3} = 1$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el valor de la celda $B_{1,2}$ en la del complementario?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como la arista {1,2} existe en G, no existe en su complementario, por lo que $B_{1,2} = 0$."
+        }
+      ]
+    },
+    {
+      "id": "19",
+      "title": "Caminos en un digrafo bipartito",
+      "context": "Sea el digrafo con vértices {1, 2, 3} y arcos (1,2), (2,1), (2,3), (3,2). Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántos caminos dirigidos de longitud 2 hay de 1 a 1?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino es la secuencia de arcos $1 \\to 2$ y luego $2 \\to 1$. En la matriz, $(A^2)_{1,1} = 1$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántos caminos dirigidos de longitud 2 hay de 2 a 2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los caminos son $2 \\to 1 \\to 2$ y $2 \\to 3 \\to 2$. En la matriz, $(A^2)_{2,2} = 2$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos dirigidos de longitud 3 hay del vértice 1 al vértice 2?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 3 de 1 a 2 son $1 \\to 2 \\to 1 \\to 2$ y $1 \\to 2 \\to 3 \\to 2$. Algebraicamente, $(A^3)_{1,2} = 2$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos dirigidos de longitud 3 hay de 1 a 3?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No hay caminos dirigidos de longitud 3 que vayan de 1 a 3. Algebraicamente, $(A^3)_{1,3} = 0$."
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "title": "Representación por Listas de Adyacencia en memoria",
+      "context": "Tenemos un grafo dirigido con 100 vértices y 500 aristas representadas como una lista de adyacencia. Cada nodo de la lista enlazada requiere 12 bytes.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántos nodos de lista enlazada se crearán en total?",
+          "correctValue": 500,
+          "tolerance": 0,
+          "explanation": "En un grafo dirigido, cada arista se representa una sola vez en la lista de adyacencia del nodo origen, por lo que se crean exactamente 500 nodos de lista."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántos bytes de memoria consumen únicamente los nodos de las listas?",
+          "correctValue": 6000,
+          "tolerance": 0,
+          "explanation": "Cada nodo de lista consume 12 bytes, por lo que 500 nodos consumen $500 \\times 12 = 6000$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si el array de cabeceras requiere 8 bytes por cada uno de los 100 vértices, ¿cuántos bytes consume el array de cabeceras?",
+          "correctValue": 800,
+          "tolerance": 0,
+          "explanation": "El array de cabeceras tiene un puntero por cada uno de los 100 nodos. $100 \\times 8 = 800$ bytes."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el costo de memoria total en bytes (array de cabeceras + nodos)?",
+          "correctValue": 6800,
+          "tolerance": 0,
+          "explanation": "La memoria total es la suma de ambos costes: $6000 + 800 = 6800$ bytes."
+        }
+      ]
+    },
+    {
+      "id": "21",
+      "title": "Grafo con componentes aisladas",
+      "context": "Considera un grafo G no dirigido con 6 vértices, donde 4 vértices forman un ciclo C_4 y los otros 2 vértices son aislados.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántas aristas tiene G en total?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Las aristas provienen únicamente del ciclo $C_4$, que tiene 4 aristas. Los otros dos nodos no aportan aristas por estar aislados."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es la suma de la diagonal de la matriz $A^2$?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La suma es la suma de los grados de los nodos. Los 4 del ciclo tienen grado 2 y los 2 aislados grado 0. Suma = $4 \\times 2 + 2 \\times 0 = 8$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántas entradas de valor 1 hay en su matriz de adyacencia?",
+          "correctValue": 8,
+          "tolerance": 0,
+          "explanation": "La cantidad de unos en la matriz es $2|E| = 2 \\times 4 = 8$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el valor del determinante de la matriz de adyacencia de este grafo?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Al tener vértices aislados, las filas correspondientes en la matriz de adyacencia son completamente nulas. Cualquier matriz con filas nulas tiene determinante 0."
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "title": "Caminos en un Grafo Completo K_5",
+      "context": "Considera el grafo completo K_5 con 5 vértices. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado de cualquiera de sus vértices?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "En $K_5$, cada vértice está conectado a los otros 4 vértices, por lo que su grado es 4."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántas aristas tiene K_5?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El número de aristas de $K_5$ es $\\frac{5 \\times 4}{2} = 10$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 hay entre dos vértices distintos cualesquiera?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para ir de $u$ a $v$ en 2 pasos ($u \\to w \\to v$), $w$ debe ser conectado a ambos. Hay $5-2 = 3$ opciones para elegir a $w$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay de un vértice a sí mismo?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "En un grafo simple, los caminos de longitud 2 de un nodo a sí mismo equivalen a su grado, que es 4."
+        }
+      ]
+    },
+    {
+      "id": "23",
+      "title": "Digrafo Bipartito Unidireccional",
+      "context": "Sea un digrafo bipartito con vértices V_1 = {1, 2} y V_2 = {3, 4, 5}, donde todos los arcos van de V_1 a V_2. Hay arcos de 1 a 3, 1 a 4, 2 a 4, 2 a 5. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuántos arcos tiene el digrafo?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Hay 4 arcos explícitos dados en el enunciado."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el grado de salida (outdegree) del vértice 1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El nodo 1 tiene arcos dirigidos hacia 3 y 4, por lo que tiene un outdegree de 2."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es el grado de entrada (indegree) del vértice 4?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El nodo 4 recibe arcos de 1 y 2, por lo que su indegree es 2."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 existen en este digrafo?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Como todos los arcos van de $V_1$ a $V_2$, y no existen arcos que partan de $V_2$ ni dentro de $V_1$ o $V_2$, es imposible encadenar dos arcos. El total de caminos de longitud 2 es 0."
+        }
+      ]
+    },
+    {
+      "id": "24",
+      "title": "Matriz de incidencia de un ciclo C_3",
+      "context": "Sea el grafo ciclo no dirigido C_3 con vértices {1, 2, 3} y aristas e1={1,2}, e2={2,3}, e3={3,1}. Su matriz de incidencia es M.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el número de filas de M?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "La matriz de incidencia tiene una fila por cada vértice. Al haber 3 vértices, tiene 3 filas."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es la suma de los elementos de la columna 1?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La columna 1 corresponde a la arista e1. Como el grafo es no dirigido, la arista conecta 2 vértices y su columna tiene dos unos, sumando 2."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es el número total de celdas en la matriz M?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "La matriz es de tamaño 3 filas por 3 columnas, totalizando $3 \\times 3 = 9$ celdas."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es el número total de ceros en la matriz M?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Hay 3 columnas, cada una con dos unos (6 unos en total). El resto de celdas son 0, por lo que hay $9 - 6 = 3$ ceros."
+        }
+      ]
+    },
+    {
+      "id": "25",
+      "title": "Caminos en un multigrafo simple",
+      "context": "Sea un multigrafo con vértices {1, 2} y 3 aristas paralelas que conectan a 1 y 2. Su matriz de adyacencia es A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el valor del elemento $A_{1,2}$ en la matriz?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Dado que existen 3 aristas paralelas entre 1 y 2, el elemento correspondiente en la matriz es 3."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el valor de $A_{1,1}$?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "No existen bucles (lazos) en el nodo 1, por lo que $A_{1,1} = 0$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 existen del nodo 1 al nodo 1?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 2 son del tipo $1 \\to 2 \\to 1$. Hay 3 opciones de aristas para ir y 3 para volver. Algebraicamente, $(A^2)_{1,1} = A_{1,2}A_{2,1} = 3 \\times 3 = 9$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 3 existen del nodo 1 al nodo 2?",
+          "correctValue": 27,
+          "tolerance": 0,
+          "explanation": "Los caminos de longitud 3 son $1 \\to 2 \\to 1 \\to 2$. En la matriz, $(A^3)_{1,2} = A_{1,2}A_{2,1}A_{1,2} = 3 \\times 3 \\times 3 = 27$."
+        }
+      ]
+    },
+    {
+      "id": "26",
+      "title": "Matriz Laplaciana de un ciclo C_3",
+      "context": "Sea el ciclo no dirigido C_3. Su matriz Laplaciana L = D - A.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el valor de la celda $L_{1,1}$?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "La celda diagonal de la Laplaciana es el grado del vértice. En $C_3$, cada nodo tiene grado 2, por lo que $L_{1,1} = 2$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el valor de la celda $L_{1,2}$?",
+          "correctValue": -1,
+          "tolerance": 0,
+          "explanation": "Como hay una arista entre 1 y 2, $A_{12} = 1$, lo que da $L_{12} = -A_{12} = -1$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuál es la suma de los elementos de la diagonal principal de L?",
+          "correctValue": 6,
+          "tolerance": 0,
+          "explanation": "La diagonal de $L$ contiene los grados de los 3 vértices: $2 + 2 + 2 = 6$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es la suma de todos los elementos de la matriz Laplaciana L?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "La suma de los elementos de cualquier matriz Laplaciana siempre es 0."
+        }
+      ]
+    },
+    {
+      "id": "27",
+      "title": "Caminos en grafo bipartito completo K_{3,3}",
+      "context": "Sea el grafo bipartito completo K_{3,3} con 6 vértices divididos en dos conjuntos de 3.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado de cada uno de sus vértices?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Al ser completo bipartito, cada uno de los 3 vértices de un lado se conecta a los 3 del otro lado, grado 3."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántas aristas tiene el grafo?",
+          "correctValue": 9,
+          "tolerance": 0,
+          "explanation": "El número de aristas de $K_{3,3}$ es $3 \\times 3 = 9$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 hay entre dos vértices del mismo conjunto bipartido?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "Para ir de $u$ a $v$ (ambos en $V_1$), se debe pasar por un vértice de $V_2$. Hay 3 opciones de vértices intermediarios en $V_2$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 2 hay de un vértice de un conjunto a un vértice del otro conjunto?",
+          "correctValue": 0,
+          "tolerance": 0,
+          "explanation": "Dado que es bipartito, cualquier camino de longitud par (como longitud 2) siempre termina en el mismo conjunto de partida. Es imposible terminar en el conjunto opuesto."
+        }
+      ]
+    },
+    {
+      "id": "28",
+      "title": "Grafo dirigido ponderado",
+      "context": "Sea un grafo dirigido ponderado con 3 nodos. Su matriz de adyacencia de pesos W es: W_{1,2}=5, W_{2,3}=10, W_{3,1}=15, y cero en el resto.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el peso de la conexión directa del nodo 2 al nodo 3?",
+          "correctValue": 10,
+          "tolerance": 0,
+          "explanation": "El valor es directamente la entrada de la matriz $W_{2,3} = 10$."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuál es el peso de la conexión directa del nodo 3 al nodo 1?",
+          "correctValue": 15,
+          "tolerance": 0,
+          "explanation": "La entrada correspondiente de la matriz es $W_{3,1} = 15$."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si definimos el peso de un camino como la suma de los pesos de sus arcos, ¿cuál es el peso del único camino de longitud 3 que empieza en 1 y termina en 1?",
+          "correctValue": 30,
+          "tolerance": 0,
+          "explanation": "El camino es $1 \\to 2 \\to 3 \\to 1$. El peso total es la suma de los pesos individuales: $5 + 10 + 15 = 30$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es la longitud (en número de aristas) de este camino cerrado?",
+          "correctValue": 3,
+          "tolerance": 0,
+          "explanation": "El camino consta de los arcos (1,2), (2,3) y (3,1), por lo que tiene exactamente 3 aristas."
+        }
+      ]
+    },
+    {
+      "id": "29",
+      "title": "Grafo lineal G (1-2-3-4-5)",
+      "context": "Considera el grafo lineal no dirigido G con 5 vértices {1, 2, 3, 4, 5} y aristas {1,2}, {2,3}, {3,4}, {4,5}.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el grado del vértice central 3?",
+          "correctValue": 2,
+          "tolerance": 0,
+          "explanation": "El nodo 3 está conectado directamente con los nodos 2 y 4, por lo que su grado es 2."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "¿Cuántas aristas en total tiene el grafo?",
+          "correctValue": 4,
+          "tolerance": 0,
+          "explanation": "Un grafo lineal con 5 vértices tiene exactamente $5 - 1 = 4$ aristas."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "¿Cuántos caminos de longitud 2 existen entre el nodo 1 y el nodo 3?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 2 es $1 \\to 2 \\to 3$."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuántos caminos de longitud 3 existen entre el nodo 1 y el nodo 4?",
+          "correctValue": 1,
+          "tolerance": 0,
+          "explanation": "El único camino de longitud 3 es $1 \\to 2 \\to 3 \\to 4$."
+        }
+      ]
+    },
+    {
+      "id": "30",
+      "title": "Listas de adyacencia para un grafo no dirigido grande",
+      "context": "Tenemos un grafo no dirigido de 1000 nodos y 2000 aristas representadas mediante listas de adyacencia.",
+      "parts": [
+        {
+          "id": "a",
+          "label": "a",
+          "question": "¿Cuál es el número total de nodos de adyacencia (vecinos) creados en memoria?",
+          "correctValue": 4000,
+          "tolerance": 0,
+          "explanation": "Al ser un grafo no dirigido, cada arista $\\{u, v\\}$ se almacena dos veces (en la lista de $u$ y en la de $v$). Con 2000 aristas, se crean $2 \\times 2000 = 4000$ nodos de adyacencia."
+        },
+        {
+          "id": "b",
+          "label": "b",
+          "question": "Si cada nodo de la lista enlazada requiere 12 bytes de memoria, ¿cuál es el coste en bytes de estos nodos?",
+          "correctValue": 48000,
+          "tolerance": 0,
+          "explanation": "El coste es el número de nodos por el tamaño de cada nodo: $4000 \\times 12 = 48000$ bytes."
+        },
+        {
+          "id": "c",
+          "label": "c",
+          "question": "Si el array de cabeceras requiere 8 bytes por cada uno de los 1000 vértices, ¿cuántos bytes consume el array de cabeceras?",
+          "correctValue": 8000,
+          "tolerance": 0,
+          "explanation": "El array de cabeceras almacena 1000 punteros de 8 bytes, por lo que consume $1000 \\times 8 = 8000$ bytes."
+        },
+        {
+          "id": "d",
+          "label": "d",
+          "question": "¿Cuál es la memoria total consumida en bytes para esta representación?",
+          "correctValue": 56000,
+          "tolerance": 0,
+          "explanation": "La memoria total es la suma de los nodos y el array de cabeceras: $48000 + 8000 = 56000$ bytes."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Matriz de adyacencia para un grafo simple no dirigido",
+      "tex": "$$A_{ij} = \\begin{cases} 1 & \\text{si } \\{v_i, v_j\\} \\in E \\\\ 0 & \\text{en caso contrario} \\end{cases}$$"
+    },
+    {
+      "name": "Simetría de la matriz de adyacencia en grafos no dirigidos",
+      "tex": "$$A = A^T$$"
+    },
+    {
+      "name": "Grado de un vértice a partir de la matriz de adyacencia",
+      "tex": "$$deg(v_i) = \\sum_{j=1}^{|V|} A_{ij}$$"
+    },
+    {
+      "name": "Relación entre el número total de unos en la matriz y el número de aristas",
+      "tex": "$$\\sum_{i=1}^{|V|} \\sum_{j=1}^{|V|} A_{ij} = 2|E|$$"
+    },
+    {
+      "name": "Teorema de caminos de longitud k mediante potencia matricial",
+      "tex": "$$(A^k)_{ij} = \\text{número de caminos de longitud exactamente } k \\text{ entre } v_i \\text{ y } v_j$$"
+    },
+    {
+      "name": "Matriz de incidencia para un grafo no dirigido",
+      "tex": "$$M_{ij} = \\begin{cases} 1 & \\text{si el vértice } v_i \\text{ es incidente en la arista } e_j \\\\ 0 & \\text{en caso contrario} \\end{cases}$$"
+    },
+    {
+      "name": "Matriz Laplaciana de un grafo",
+      "tex": "$$L = D - A$$"
+    },
+    {
+      "name": "Complejidad espacial de la lista de adyacencia",
+      "tex": "$$\\text{Espacio} = O(|V| + |E|)$$"
+    }
+  ]
+}

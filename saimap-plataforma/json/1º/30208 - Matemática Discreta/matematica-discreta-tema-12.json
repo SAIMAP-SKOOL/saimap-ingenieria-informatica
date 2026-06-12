@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿Cuál es el objetivo principal del algoritmo de Dijkstra?",
+      "options": [
+        "Determinar si un grafo contiene ciclos de coste negativo.",
+        "Calcular el camino de coste mínimo desde un único vértice de origen a todos los demás.",
+        "Hallar el árbol de expansión mínima (MST) de un grafo conexo ponderado."
+      ],
+      "correct": 1,
+      "hint": "Dijkstra resuelve el problema de caminos mínimos desde una única fuente.",
+      "explanation": "El algoritmo de Dijkstra calcula los caminos mínimos desde un vértice origen $s$ a todos los demás vértices de un grafo con pesos no negativos."
+    },
+    {
+      "q": "¿Qué tipo de pesos en las aristas impide el funcionamiento correcto del algoritmo clásico de Dijkstra?",
+      "options": [
+        "Pesos fraccionarios.",
+        "Pesos impares.",
+        "Pesos negativos."
+      ],
+      "correct": 2,
+      "hint": "El carácter codicioso del algoritmo asume que los caminos no pueden reducir su coste al añadir más aristas.",
+      "explanation": "Si existen aristas de peso negativo, el enfoque codicioso (greedy) de Dijkstra falla al no reconsiderar nodos que ya han sido marcados como visitados."
+    },
+    {
+      "q": "¿Qué operación actualiza la distancia estimada a un nodo vecino si se encuentra un camino más corto?",
+      "options": [
+        "Compresión de caminos.",
+        "Relajación de aristas.",
+        "Unión por rango en conjuntos disjuntos."
+      ],
+      "correct": 1,
+      "hint": "Consiste en verificar si $d[u] + w(u,v) < d[v]$ e introducir el nuevo valor.",
+      "explanation": "La relajación de una arista $(u, v)$ comprueba si el camino a $v$ pasando por $u$ es más corto que el registrado actualmente ($d[v]$)."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de Dijkstra usando un Min-Heap (montículo binario)?",
+      "options": [
+        "$O(|V|^2)$",
+        "$O((|V| + |E|) \\log |V|)$",
+        "$O(|E| \\cdot |V|)$"
+      ],
+      "correct": 1,
+      "hint": "Involucra operaciones en la cola de prioridad por cada vértice y arista.",
+      "explanation": "Implementado con un Min-Heap, la complejidad es $O((|V| + |E|) \\log |V|)$ debido a las extracciones de mínimo y disminuciones de clave."
+    },
+    {
+      "q": "¿Qué paradigma algorítmico sigue el algoritmo de Dijkstra?",
+      "options": [
+        "Programación dinámica.",
+        "Algoritmo codicioso (greedy).",
+        "Búsqueda exhaustiva (backtracking)."
+      ],
+      "correct": 1,
+      "hint": "Toma la decisión óptima local en cada paso sin reconsiderar decisiones pasadas.",
+      "explanation": "Dijkstra es un algoritmo codicioso porque en cada iteración extrae el vértice no visitado con la menor distancia provisional."
+    },
+    {
+      "q": "¿Qué es un Árbol de Expansión Mínima (MST)?",
+      "options": [
+        "Un subgrafo conexo y acíclico que contiene todos los vértices del grafo y minimiza la suma de los pesos de las aristas.",
+        "El camino más corto que pasa por todos los vértices del grafo sin repetir ninguno.",
+        "Un ciclo simple de peso mínimo que conecta a todos los nodos de la red."
+      ],
+      "correct": 0,
+      "hint": "Debe ser un árbol (conexo, sin ciclos) y extenderse a todos los vértices.",
+      "explanation": "Un MST es un subgrafo recubridor (contiene todos los vértices $V$), que es conexo, no tiene ciclos (árbol) y tiene el menor peso total posible."
+    },
+    {
+      "q": "¿Cómo comienza a construir el MST el algoritmo de Prim?",
+      "options": [
+        "Ordenando todas las aristas de menor a mayor peso y procesándolas en ese orden.",
+        "Desde un nodo raíz inicial, haciendo crecer el árbol vértice a vértice.",
+        "Eliminando aristas de mayor peso del grafo hasta que no queden ciclos."
+      ],
+      "correct": 1,
+      "hint": "Prim mantiene una sola componente conexa que va creciendo paso a paso.",
+      "explanation": "El algoritmo de Prim comienza en un nodo raíz y en cada paso añade la arista más barata que conecta el árbol actual con un nodo externo."
+    },
+    {
+      "q": "¿Cómo previene el algoritmo de Kruskal la formación de ciclos de forma eficiente?",
+      "options": [
+        "Mediante búsquedas en profundidad (DFS) en cada paso.",
+        "Utilizando la estructura de datos Union-Find (conjuntos disjuntos).",
+        "Calculando la matriz de caminos mediante Floyd-Warshall."
+      ],
+      "correct": 1,
+      "hint": "Permite verificar si los extremos de la arista candidata ya están en la misma componente conexa.",
+      "explanation": "El algoritmo de Kruskal utiliza la estructura Union-Find para verificar eficientemente si añadir una arista une componentes disjuntas o si formaría un ciclo."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal del algoritmo de Prim utilizando colas de prioridad?",
+      "options": [
+        "$O(|E| \\log |V|)$",
+        "$O(|V|^2 \\log |E|)$",
+        "$O(|V| \\cdot |E|)$"
+      ],
+      "correct": 0,
+      "hint": "Depende de la cola de prioridad que gestiona las aristas incidentes.",
+      "explanation": "Utilizando colas de prioridad estándar, el coste de Prim es de $O(|E| \\log |V|)$."
+    },
+    {
+      "q": "¿Cuál es el primer paso en el algoritmo de Kruskal?",
+      "options": [
+        "Elegir un nodo raíz de manera aleatoria.",
+        "Ordenar todas las aristas del grafo de menor a mayor peso.",
+        "Inicializar un camino que recorra todo el grafo."
+      ],
+      "correct": 1,
+      "hint": "Kruskal es de base global y codicioso sobre el conjunto de aristas.",
+      "explanation": "El algoritmo de Kruskal requiere ordenar todas las aristas $E$ por peso ascendente antes de procesarlas secuencialmente."
+    },
+    {
+      "q": "¿Qué hace la técnica de 'compresión de caminos' (Path Compression) en Union-Find?",
+      "options": [
+        "Reduce el rango de todos los nodos de forma lineal.",
+        "Hace que cada nodo visitado durante una búsqueda apunte directamente a la raíz de su conjunto.",
+        "Elimina aristas redundantes en el grafo ponderado."
+      ],
+      "correct": 1,
+      "hint": "Modifica la estructura del árbol apuntando nodos directamente al representante.",
+      "explanation": "Durante el método Find, la compresión de caminos hace que todos los nodos en el camino de búsqueda apunten directamente a la raíz, aplanando el árbol."
+    },
+    {
+      "q": "¿Qué representa la función $\\alpha$ en la complejidad de Kruskal con Union-Find?",
+      "options": [
+        "La inversa de la función de Ackermann, de crecimiento extremadamente lento.",
+        "La constante de Euler que regula el comportamiento de grafos densos.",
+        "El factor de compresión logarítmica de un Min-Heap."
+      ],
+      "correct": 0,
+      "hint": "Es un valor menor o igual a 4 para cualquier tamaño práctico de entrada.",
+      "explanation": "La función $\\alpha(n)$ es la inversa de la función de Ackermann. Crece tan despacio que a efectos prácticos es una constante menor que 5."
+    },
+    {
+      "q": "¿Qué protocolo de enrutamiento utiliza el algoritmo de Dijkstra?",
+      "options": [
+        "OSPF (Open Shortest Path First).",
+        "RIP (Routing Information Protocol).",
+        "BGP (Border Gateway Protocol)."
+      ],
+      "correct": 0,
+      "hint": "Es un protocolo de estado de enlace muy común en redes internas de empresas.",
+      "explanation": "OSPF utiliza Dijkstra localmente en cada router para calcular los caminos más cortos basándose en su base de datos de estado de enlace."
+    },
+    {
+      "q": "Si un grafo no es conexo, ¿qué devuelve el algoritmo de Kruskal?",
+      "options": [
+        "Un único árbol que contiene solo a los nodos con aristas de peso menor a la media.",
+        "Un bosque de árboles de expansión mínima (un MST por cada componente conexa).",
+        "Un error de ejecución indicando que no hay solución."
+      ],
+      "correct": 1,
+      "hint": "Procesará todas las aristas sin formar ciclos y conectará lo que sea posible.",
+      "explanation": "Si el grafo no es conexo, Kruskal unirá los vértices de cada componente conexa en su propio MST, resultando en un bosque de expansión mínima."
+    },
+    {
+      "q": "¿Por qué falla Dijkstra en grafos con ciclos de coste negativo?",
+      "options": [
+        "Porque los ciclos de coste negativo permiten disminuir la distancia al infinito al recorrerlos repetidamente.",
+        "Porque la cola de prioridad no admite valores impares.",
+        "Porque el número de aristas de un ciclo siempre supera al número de vértices."
+      ],
+      "correct": 0,
+      "hint": "Recorrer el ciclo una y otra vez reduce el coste del camino indefinidamente.",
+      "explanation": "En un ciclo de coste negativo, se puede reducir la distancia de forma indefinida dando vueltas en él, por lo que el concepto de camino mínimo deja de tener sentido."
+    },
+    {
+      "q": "¿Qué algoritmo calcula caminos mínimos de un único origen tolerando pesos negativos (pero no ciclos negativos)?",
+      "options": [
+        "Algoritmo de Bellman-Ford.",
+        "Algoritmo de Kruskal.",
+        "Algoritmo de Prim."
+      ],
+      "correct": 0,
+      "hint": "Realiza $|V|-1$ pasadas relajando todas las aristas del grafo.",
+      "explanation": "El algoritmo de Bellman-Ford permite pesos negativos y detecta ciclos negativos, a costa de una complejidad mayor de $O(|V||E|)$."
+    },
+    {
+      "q": "¿Cuántas aristas tiene un árbol de expansión de un grafo conexo con $|V|$ vértices?",
+      "options": [
+        "$|V|$",
+        "$|V| - 1$",
+        "$|V| + 1$"
+      ],
+      "correct": 1,
+      "hint": "Un árbol conexo con $N$ nodos tiene un número fijo de aristas.",
+      "explanation": "Cualquier árbol de expansión sobre $|V|$ vértices contiene exactamente $|V| - 1$ aristas. Menos aristas desconectarían el grafo; más formarían ciclos."
+    },
+    {
+      "q": "En Union-Find con unión por rango, ¿cómo se enlazan dos raíces con rangos diferentes?",
+      "options": [
+        "La raíz de menor rango pasa a ser hija de la raíz de mayor rango.",
+        "La raíz de mayor rango pasa a ser hija de la de menor rango.",
+        "Se selecciona de forma aleatoria para evitar sesgos."
+      ],
+      "correct": 0,
+      "hint": "Se busca mantener los árboles lo más aplanados posible.",
+      "explanation": "Para minimizar la altura del árbol resultante, la raíz de menor rango se cuelga de la raíz de mayor rango. El rango de la raíz resultante no cambia."
+    },
+    {
+      "q": "¿Cuál de las siguientes es una aplicación directa de los árboles de expansión mínima?",
+      "options": [
+        "Optimización del trazado de cableado de fibra óptica interconectando ciudades con coste mínimo.",
+        "Cálculo del flujo de paquetes en una red social.",
+        "Determinación de la secuencia de tareas críticas en un proyecto."
+      ],
+      "correct": 0,
+      "hint": "Consiste en interconectar todos los nodos de forma conexa y acíclica al mínimo coste total.",
+      "explanation": "El MST minimiza el coste total de conectar un conjunto de nodos, lo que modela problemas como el cableado o tendido eléctrico."
+    },
+    {
+      "q": "En el protocolo OSPF, ¿cómo obtienen los routers el mapa completo del dígrafo de la red?",
+      "options": [
+        "Cada router calcula su mapa de forma independiente sin comunicarse.",
+        "Intercambiando mensajes de estado de enlace (LSA) que describen las conexiones de cada router.",
+        "Solicitándolo a un servidor central que almacena todo el estado de la red."
+      ],
+      "correct": 1,
+      "hint": "OSPF es distribuido y los routers se inundan mutuamente con información de sus enlaces directos.",
+      "explanation": "Los routers intercambian paquetes de estado de enlace para inundar la red. Así, cada router construye la misma base de datos de topología y ejecuta Dijkstra localmente."
+    },
+    {
+      "q": "Para el algoritmo de Dijkstra, ¿cuál es el coste de extraer el nodo con distancia mínima usando un array no ordenado?",
+      "options": [
+        "$O(1)$",
+        "$O(|V|)$",
+        "$O(\\log |V|)$"
+      ],
+      "correct": 1,
+      "hint": "Se debe recorrer todo el array para encontrar el valor más pequeño.",
+      "explanation": "En un array o lista no ordenada de tamaño $|V|$, encontrar el mínimo requiere un escaneo lineal, lo cual cuesta $O(|V|)$."
+    },
+    {
+      "q": "En el algoritmo de Kruskal, ¿qué ocurre si los extremos de una arista ya están en el mismo conjunto disjunto?",
+      "options": [
+        "Se añade la arista al MST y se duplican los nodos.",
+        "Se descarta la arista porque añadirla crearía un ciclo.",
+        "Se detiene el algoritmo indicando un error en los datos."
+      ],
+      "correct": 1,
+      "hint": "Si ya están en la misma componente, ya existe un camino entre ellos.",
+      "explanation": "Si los extremos pertenecen a la misma componente, ya hay un camino que los une. Añadir la arista crearía un camino alternativo, es decir, un ciclo."
+    },
+    {
+      "q": "Si un grafo ponderado conexo tiene todos los pesos de sus aristas diferentes, ¿cuántos MST tiene?",
+      "options": [
+        "Exactamente uno.",
+        "Tantos como el número de vértices.",
+        "Tantos como el número de aristas del grafo."
+      ],
+      "correct": 0,
+      "hint": "La unicidad de los pesos previene empates y garantiza un árbol único.",
+      "explanation": "Si todas las aristas de un grafo conexo ponderado tienen pesos distintos, existe un único árbol de expansión mínima."
+    },
+    {
+      "q": "En un grafo denso donde $|E| \\approx |V|^2$, ¿qué algoritmo de MST suele ser preferible implementar?",
+      "options": [
+        "El algoritmo de Prim con matriz de adyacencia y búsqueda lineal del mínimo ($O(|V|^2)$).",
+        "El algoritmo de Kruskal ordenando todas las aristas ($O(|E| \\log |V|)$).",
+        "El algoritmo de Dijkstra desde múltiples raíces."
+      ],
+      "correct": 0,
+      "hint": "Para grafos densos, ordenar $|E|$ aristas cuesta $O(|V|^2 \\log |V|)$, lo cual es superior a $O(|V|^2)$.",
+      "explanation": "Para grafos densos, Prim sin cola de prioridad ($O(|V|^2)$) supera a Kruskal ($O(|E| \\log |V|)$), ya que ordenar las aristas introduce un factor logarítmico innecesario."
+    },
+    {
+      "q": "¿Cuál es el rango de un nodo que se acaba de crear en la estructura Union-Find?",
+      "options": [
+        "0",
+        "1",
+        "El valor del identificador del propio nodo."
+      ],
+      "correct": 0,
+      "hint": "Un nodo aislado es un árbol de un único nodo (altura o rango mínimo).",
+      "explanation": "En la inicialización de Union-Find (Make-Set), cada nodo se crea como un conjunto disjunto con rango 0."
+    },
+    {
+      "q": "¿Por qué Kruskal garantiza la conexidad del árbol si el grafo original es conexo?",
+      "options": [
+        "Porque selecciona exactamente $|V|-1$ aristas sin ciclos, lo que fuerza a que el subgrafo sea un árbol conexo.",
+        "Porque siempre empieza en el nodo origen de mayor grado.",
+        "Porque recorre las aristas de forma aleatoria."
+      ],
+      "correct": 0,
+      "hint": "Un subgrafo con $|V|-1$ aristas y sin ciclos sobre $|V|$ nodos es conexo.",
+      "explanation": "Por propiedades de árboles, un grafo sin ciclos con $|V|$ vértices y $|V|-1$ aristas es conexo. Kruskal añade exactamente aristas que no forman ciclo hasta llegar a $|V|-1$ aristas."
+    },
+    {
+      "q": "¿Qué conjunto de nodos maneja Prim para decidir la arista a añadir?",
+      "options": [
+        "Los nodos pertenecientes al MST actual y los nodos restantes externos.",
+        "Los nodos que tienen grado par en el grafo completo.",
+        "Los nodos que están a distancia menor que la media."
+      ],
+      "correct": 0,
+      "hint": "La arista candidata debe cruzar la frontera entre el árbol y el resto de nodos.",
+      "explanation": "Prim mantiene el corte entre los nodos en el MST ($S$) y los que no ($V \\setminus S$), seleccionando la arista de peso mínimo en dicho corte."
+    },
+    {
+      "q": "Si todas las aristas de un grafo conexo tienen el mismo peso, ¿cuál de estas afirmaciones es verdadera?",
+      "options": [
+        "No se puede calcular ningún árbol de expansión mínima.",
+        "Cualquier árbol de expansión del grafo es un árbol de expansión mínima.",
+        "El MST debe ser obligatoriamente un camino lineal."
+      ],
+      "correct": 1,
+      "hint": "Todas las aristas cuestan lo mismo, por lo que cualquier árbol costará lo mismo.",
+      "explanation": "Dado que todos los árboles de expansión tienen $|V|-1$ aristas y todas las aristas tienen el mismo coste, cualquier árbol de expansión tendrá el mismo peso total mínimo."
+    },
+    {
+      "q": "El enfoque del algoritmo de Kruskal es de tipo:",
+      "options": [
+        "Codicioso (greedy).",
+        "Programación dinámica con memorización.",
+        "Búsqueda primero en profundidad con retroceso."
+      ],
+      "correct": 0,
+      "hint": "Selecciona la mejor opción disponible en cada momento (arista más barata) de forma local.",
+      "explanation": "Kruskal es codicioso porque procesa las aristas por peso de forma ascendente, cogiendo la arista de menor peso que no introduzca ciclos en ese instante."
+    },
+    {
+      "q": "¿Cuál es el propósito del rango en la estructura de conjuntos disjuntos?",
+      "options": [
+        "Representar una cota superior de la altura del árbol.",
+        "Guardar el grado máximo de los nodos de la componente.",
+        "Contar el número de aristas del subgrafo conexo."
+      ],
+      "correct": 0,
+      "hint": "Ayuda a colgar el árbol más bajo del más alto para no aumentar la altura global.",
+      "explanation": "El rango representa una cota superior de la altura de la estructura de árbol de cada conjunto disjunto, y sirve para mantener el árbol equilibrado."
+    },
+    {
+      "q": "¿Qué representa $d[v]$ en el algoritmo de Dijkstra?",
+      "options": [
+        "La distancia mínima provisional desde el origen $s$ hasta $v$.",
+        "La cantidad de saltos o aristas que separan a $s$ de $v$.",
+        "El peso de la arista directa entre el predecesor de $v$ y $v$."
+      ],
+      "correct": 0,
+      "hint": "Es un valor que empieza en infinito y se actualiza a la baja mediante relajaciones.",
+      "explanation": "$d[v]$ es la cota superior del coste del camino mínimo desde el origen $s$ a $v$. Al finalizar el algoritmo, si el grafo no tiene pesos negativos, representa la distancia mínima real."
+    },
+    {
+      "q": "Si hay empates en el peso de las aristas, ¿cómo se resuelven en los algoritmos de MST?",
+      "options": [
+        "Cualquier resolución de empates es válida y conduce a un MST correcto (no necesariamente único).",
+        "El algoritmo falla y debe abortarse.",
+        "Debe seleccionarse la arista conectada al nodo de menor índice de forma estricta."
+      ],
+      "correct": 0,
+      "hint": "Diferentes elecciones de empate darán diferentes MST válidos de igual peso total.",
+      "explanation": "Los empates pueden resolverse de cualquier forma. Esto dará lugar a diferentes árboles de expansión mínima, todos con el mismo coste total mínimo."
+    },
+    {
+      "q": "En Union-Find, ¿qué es la raíz de un conjunto?",
+      "options": [
+        "El representante oficial de dicho conjunto disjunto.",
+        "El nodo que tiene rango 0.",
+        "El nodo que se insertó en último lugar en la componente."
+      ],
+      "correct": 0,
+      "hint": "Todos los elementos del conjunto apuntan directa o indirectamente a él para identificarse.",
+      "explanation": "La raíz de un conjunto en Union-Find es el nodo que es su propio padre (`padre[i] == i`) y actúa como representante único de su conjunto."
+    },
+    {
+      "q": "¿Por qué es importante verificar `buscar(u) != buscar(v)` en el algoritmo de Kruskal?",
+      "options": [
+        "Para asegurarse de que los nodos pertenecen a componentes disjuntas y la arista no forma ciclo.",
+        "Para comprobar que la arista tiene peso positivo.",
+        "Para verificar si el grafo es bipartito."
+      ],
+      "correct": 0,
+      "hint": "Si pertenecen a la misma componente, ya están conectados; añadir la arista formaría un ciclo.",
+      "explanation": "La función `buscar` devuelve el representante de cada vértice. Si `buscar(u) == buscar(v)`, significa que $u$ y $v$ ya están en la misma componente conexa y añadir la arista $(u, v)$ crearía un ciclo."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de inicializar el bosque de Union-Find para $|V|$ vértices?",
+      "options": [
+        "$O(1)$",
+        "$O(|V|)$",
+        "$O(|V| \\log |V|)$"
+      ],
+      "correct": 1,
+      "hint": "Se debe crear un conjunto unitario para cada uno de los $|V|$ vértices.",
+      "explanation": "La inicialización de Union-Find requiere un bucle que asigne a cada nodo como su propio padre, lo cual toma tiempo lineal $O(|V|)$."
+    },
+    {
+      "q": "En el algoritmo de Prim, ¿qué criterio se usa para elegir la arista en cada paso?",
+      "options": [
+        "La de menor peso que conecta un nodo del árbol actual con uno exterior.",
+        "La de menor peso absoluto de todo el grafo.",
+        "La de mayor peso para maximizar la cobertura."
+      ],
+      "correct": 0,
+      "hint": "El árbol crece expandiéndose a nuevos nodos de forma adyacente y con coste mínimo.",
+      "explanation": "Prim elige la arista $(u, v)$ de peso mínimo tal que $u$ está en el árbol MST en desarrollo y $v$ no lo está, incorporando a $v$ al árbol."
+    },
+    {
+      "q": "¿Qué estructura de datos interna se usa en Union-Find para rastrear los conjuntos?",
+      "options": [
+        "Un vector de padres, donde cada índice apunta a su nodo progenitor.",
+        "Una matriz de adyacencia con booleanos.",
+        "Una pila de elementos ordenados."
+      ],
+      "correct": 0,
+      "hint": "Permite ir subiendo de nodo en nodo hasta encontrar el representante cuya propiedad `padre[i] == i` se cumple.",
+      "explanation": "Se usa típicamente un vector `padre` de tamaño $|V|$, donde `padre[i]` almacena el índice del padre del nodo `i`."
+    },
+    {
+      "q": "En el algoritmo de Dijkstra con $|V|$ vértices, ¿cuántas veces se extrae el nodo con la distancia mínima provisional?",
+      "options": [
+        "Exactamente $|E|$ veces.",
+        "Exactamente $|V|$ veces.",
+        "Hasta que no queden aristas por analizar."
+      ],
+      "correct": 1,
+      "hint": "Cada vértice se procesa (se extrae e introduce en el conjunto cerrado) exactamente una vez.",
+      "explanation": "El bucle principal de Dijkstra se ejecuta exactamente $|V|$ veces, extrayendo en cada paso el vértice con menor distancia provisional que aún no ha sido cerrado."
+    },
+    {
+      "q": "¿Qué relación general existe entre el MST de un grafo y el SPT (árbol de caminos mínimos) de Dijkstra?",
+      "options": [
+        "El MST y el SPT son siempre idénticos en cualquier grafo.",
+        "Pueden ser diferentes, ya que persiguen objetivos de optimización distintos.",
+        "El MST es siempre un subgrafo del SPT."
+      ],
+      "correct": 1,
+      "hint": "El MST minimiza el coste global de conexión; el SPT minimiza la distancia desde una raíz a cada nodo.",
+      "explanation": "El MST minimiza la suma total de los pesos del árbol. El SPT minimiza el camino desde la raíz a cada nodo de forma individual. Pueden diferir significativamente."
+    },
+    {
+      "q": "Una vez que Dijkstra extrae un nodo $u$ de la cola y lo marca como visitado (en ausencia de pesos negativos), ¿qué propiedad se cumple?",
+      "options": [
+        "Su distancia $d[u]$ es la distancia mínima definitiva desde el origen $s$.",
+        "El nodo $u$ debe eliminarse del grafo.",
+        "Su distancia es igual al peso medio de las aristas del grafo."
+      ],
+      "correct": 0,
+      "hint": "El enfoque codicioso de Dijkstra garantiza que no encontraremos un camino más corto a este nodo en el futuro.",
+      "explanation": "En ausencia de pesos negativos, el algoritmo garantiza que cuando un nodo se extrae de la cola (se cierra), la distancia provisional $d[u]$ se convierte en la distancia mínima definitiva."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "En el algoritmo de Dijkstra, la condición de relajación para actualizar $d[v]$ a través de un nodo $u$ es $d[u] + w(u,v) <$ ____.",
+      "options": [
+        "$d[v]$",
+        "$d[u]$",
+        "$w(u,v)$"
+      ],
+      "correct": 0,
+      "hint": "Comparamos la nueva distancia estimada a través de u con la mejor distancia registrada hasta ahora para v.",
+      "explanation": "La condición de relajación verifica si el camino alternativo a través de $u$ es menor que el coste actual $d[v]$, de modo que la actualización sea $d[v] = d[u] + w(u,v)$."
+    },
+    {
+      "q": "El algoritmo de ____ es un algoritmo de tipo codicioso diseñado para encontrar el MST de un grafo seleccionando secuencialmente aristas ordenadas por peso.",
+      "options": [
+        "Kruskal",
+        "Dijkstra",
+        "Bellman-Ford"
+      ],
+      "correct": 0,
+      "hint": "Procesa secuencialmente las aristas de menor a mayor peso comprobando la formación de ciclos.",
+      "explanation": "El algoritmo de Kruskal ordena las aristas y las procesa de manera ascendente, añadiéndolas al MST si no cierran ciclos."
+    },
+    {
+      "q": "En la estructura Union-Find, la función buscar realiza la técnica de ____ de caminos para optimizar las futuras búsquedas.",
+      "options": [
+        "compresión",
+        "duplicación",
+        "eliminación"
+      ],
+      "correct": 0,
+      "hint": "Consiste en hacer que cada nodo visitado apunte directamente al representante del conjunto.",
+      "explanation": "La compresión de caminos aplana la estructura del árbol apuntando cada nodo del camino de búsqueda directamente al nodo raíz."
+    },
+    {
+      "q": "En un grafo conexo con $|V|$ vértices, el árbol de expansión mínima contiene exactamente ____ aristas.",
+      "options": [
+        "$|V| - 1$",
+        "$|V|$",
+        "$|V| + 1$"
+      ],
+      "correct": 0,
+      "hint": "Un árbol con $N$ vértices siempre tiene una cantidad fija de aristas en función de sus vértices.",
+      "explanation": "Un árbol que recubre todos los vértices $|V|$ de un grafo conexo tiene siempre $|V| - 1$ aristas."
+    },
+    {
+      "q": "Si un grafo conexo ponderado no dirigido tiene 5 vértices, el número máximo de aristas que podemos seleccionar para formar un MST es de ____.",
+      "options": [
+        "4",
+        "5",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Equivale a $|V|-1$ aristas.",
+      "explanation": "Como el grafo tiene 5 vértices, el MST correspondiente tendrá exactamente $|V|-1 = 4$ aristas."
+    },
+    {
+      "q": "En la inicialización del algoritmo de Dijkstra, la distancia provisional del nodo de origen $s$ se establece en ____.",
+      "options": [
+        "0",
+        "infinito ($\\infty$)",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "La distancia desde un nodo a sí mismo es nula.",
+      "explanation": "El origen $s$ se inicializa con una distancia de $d[s] = 0$."
+    },
+    {
+      "q": "En la inicialización del algoritmo de Dijkstra, la distancia provisional de todos los nodos diferentes al de origen se establece en ____.",
+      "options": [
+        "infinito ($\\infty$)",
+        "0",
+        "-1"
+      ],
+      "correct": 0,
+      "hint": "Se asume un coste inicial insuperable que se reduce conforme se descubren caminos.",
+      "explanation": "Todos los nodos diferentes al de origen se inicializan con $d[v] = \\infty$ para representar que son inalcanzables hasta que se exploren aristas hacia ellos."
+    },
+    {
+      "q": "El algoritmo de ____ va haciendo crecer el árbol de expansión mínima nodo a nodo, seleccionando la arista más barata que conecte un nodo del árbol con uno fuera de él.",
+      "options": [
+        "Prim",
+        "Kruskal",
+        "Dijkstra"
+      ],
+      "correct": 0,
+      "hint": "Su enfoque es local, partiendo de un nodo raíz y agregando nodos vecinos.",
+      "explanation": "El algoritmo de Prim empieza en una raíz y va agregando el vértice no visitado más cercano al árbol actual."
+    },
+    {
+      "q": "El protocolo de enrutamiento ____ utiliza el algoritmo de Dijkstra para calcular los caminos más cortos en las redes de ordenadores.",
+      "options": [
+        "OSPF",
+        "BGP",
+        "RIP"
+      ],
+      "correct": 0,
+      "hint": "Sus siglas significan Open Shortest Path First.",
+      "explanation": "OSPF es un protocolo de enrutamiento basado en Dijkstra que minimiza los costes del camino de paquetes."
+    },
+    {
+      "q": "La complejidad del algoritmo de Kruskal con Union-Find es de ____, donde $|E|$ es el número de aristas y $|V|$ es el número de vértices.",
+      "options": [
+        "$O(|E| \\log |V|)$",
+        "$O(|V|^2)$",
+        "$O(|E| \\cdot |V|)$"
+      ],
+      "correct": 0,
+      "hint": "Viene dominada por el paso de ordenamiento de todas las aristas.",
+      "explanation": "Ordenar las aristas cuesta $O(|E| \\log |E|)$ que equivale a $O(|E| \\log |V|)$ ya que $|E| \\le |V|^2$. Las operaciones de Union-Find añaden un término despreciable."
+    },
+    {
+      "q": "Para evitar que la estructura Union-Find degenere en árboles lineales muy profundos, se implementa la unión por ____.",
+      "options": [
+        "rango",
+        "peso de arista",
+        "orden alfabético"
+      ],
+      "correct": 0,
+      "hint": "Implica comparar la altura estimada de los subárboles y colgar el menor del mayor.",
+      "explanation": "La unión por rango acota la altura del árbol a $O(\\log N)$, haciendo que el árbol de menor rango sea hijo del de mayor rango."
+    },
+    {
+      "q": "Si una arista de peso 3 conecta a los nodos $u$ y $v$, con $d[u] = 5$ y $d[v] = 10$, tras la relajación en Dijkstra el nuevo valor de $d[v]$ será ____.",
+      "options": [
+        "8",
+        "5",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Compara el valor actual de $d[v]$ con $d[u] + w(u,v)$.",
+      "explanation": "Como $d[u] + w(u,v) = 5 + 3 = 8 < d[v] = 10$, la distancia se actualiza a 8."
+    },
+    {
+      "q": "Si en un grafo ponderado conexo todas las aristas tienen peso 10 y hay 8 vértices, el coste total del árbol de expansión mínima será de ____.",
+      "options": [
+        "70",
+        "80",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Multiplica el número de aristas del MST por el peso uniforme de las aristas.",
+      "explanation": "Para 8 vértices el MST tiene exactamente 7 aristas. Como cada arista pesa 10, el coste total es $7 \\cdot 10 = 70$."
+    },
+    {
+      "q": "En un grafo ponderado conexo con vértices $\\{0, 1, 2\\}$, si las aristas son $(0,1)$ con peso 4, $(1,2)$ con peso 3 y $(0,2)$ con peso 5, el MST tiene un coste total de ____.",
+      "options": [
+        "7",
+        "8",
+        "12"
+      ],
+      "correct": 0,
+      "hint": "Selecciona las dos aristas de menor peso que no forman ciclo.",
+      "explanation": "Las aristas en orden de peso son $(1,2)$ de peso 3 y $(0,1)$ de peso 4. Añadirlas conecta los 3 nodos sin ciclos, sumando $3 + 4 = 7$."
+    },
+    {
+      "q": "El algoritmo de Dijkstra asume que el grafo no posee aristas de peso ____.",
+      "options": [
+        "negativo",
+        "fraccionario",
+        "par"
+      ],
+      "correct": 0,
+      "hint": "Los valores negativos invalidan la conclusión codiciosa de que los nodos ya cerrados tienen distancias definitivas.",
+      "explanation": "Dijkstra clásico requiere que todas las aristas tengan pesos no negativos ($w(u,v) \\ge 0$)."
+    },
+    {
+      "q": "La estructura Union-Find gestiona una partición de un conjunto en colecciones de conjuntos ____.",
+      "options": [
+        "disjuntos",
+        "ordenados",
+        "solapados"
+      ],
+      "correct": 0,
+      "hint": "No comparten elementos comunes entre sí.",
+      "explanation": "Union-Find gestiona conjuntos disjuntos (intersección vacía) donde cada elemento pertenece a un único conjunto."
+    },
+    {
+      "q": "Al aplicar el algoritmo de Kruskal, si una arista tiene sus extremos en el mismo conjunto disjunto, su adición produciría un ____.",
+      "options": [
+        "ciclo",
+        "camino mínimo",
+        "vértice aislado"
+      ],
+      "correct": 0,
+      "hint": "Cierra una trayectoria cerrada en la componente conexa.",
+      "explanation": "Si los extremos de una arista ya están en la misma componente conexa, añadir la arista crea un camino redundante, formando un ciclo."
+    },
+    {
+      "q": "En el peor de los casos, la altura máxima de un árbol en Union-Find con unión por rango sin compresión de caminos para $N$ elementos es de ____.",
+      "options": [
+        "$O(\\log N)$",
+        "$O(N)$",
+        "$O(1)$"
+      ],
+      "correct": 0,
+      "hint": "La unión por rango garantiza una altura logarítmica incluso sin compresión.",
+      "explanation": "La unión por rango mantiene la altura del árbol acotada superiormente por $O(\\log N)$."
+    },
+    {
+      "q": "En el algoritmo de Dijkstra con cola de prioridad, la operación de actualización de la prioridad de un nodo se denomina disminuir ____.",
+      "options": [
+        "clave (decrease key)",
+        "rango",
+        "altura"
+      ],
+      "correct": 0,
+      "hint": "Representa reducir el coste provisional de un nodo en la cola de prioridad.",
+      "explanation": "La operación se conoce en inglés como 'decrease-key', la cual reduce el valor de prioridad asociado a un elemento en el montículo."
+    },
+    {
+      "q": "El árbol de expansión mínima de un grafo conexo ponderado no dirigido de peso total mínimo es único si todas las aristas tienen pesos ____.",
+      "options": [
+        "distintos",
+        "iguales",
+        "enteros"
+      ],
+      "correct": 0,
+      "hint": "Evita empates a la hora de seleccionar aristas candidatas.",
+      "explanation": "Si los pesos de todas las aristas son distintos, se garantiza que no habrá elecciones alternativas de igual coste, por lo que el MST es único."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son algoritmos codiciosos (greedy) aplicados sobre grafos ponderados?",
+      "options": [
+        "El algoritmo de Dijkstra para caminos mínimos.",
+        "Los algoritmos de Prim y Kruskal para árboles de expansión mínima.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Todos toman decisiones óptimas locales (nodo más cercano, arista más barata) en cada paso.",
+      "explanation": "Tanto Dijkstra como Prim y Kruskal seleccionan la opción localmente óptima en cada iteración para resolver problemas globales."
+    },
+    {
+      "q": "¿Qué métodos o estrategias optimizan el rendimiento de la estructura de datos Union-Find?",
+      "options": [
+        "La compresión de caminos en las operaciones de búsqueda (Find).",
+        "La unión por rango o por tamaño en las operaciones de unión (Union).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Ambas técnicas reducen la altura y el tiempo de búsqueda en los árboles.",
+      "explanation": "La compresión de caminos aplana los árboles al buscar y la unión por rango evita que crezcan desmesuradamente, reduciendo el coste a casi $O(1)$."
+    },
+    {
+      "q": "¿Para qué fines prácticos se puede emplear el cálculo de un Árbol de Expansión Mínima (MST)?",
+      "options": [
+        "Diseñar el tendido físico de líneas de fibra óptica que interconecten ciudades minimizando la longitud total.",
+        "Optimizar trazados de redes de distribución de agua o electricidad con coste mínimo.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Consiste en conectar todos los puntos con el menor material o coste total.",
+      "explanation": "El MST resuelve cualquier problema de interconexión total donde el objetivo sea minimizar el coste de las conexiones sin necesidad de ciclos."
+    },
+    {
+      "q": "¿Qué puede ocurrir si aplicamos el algoritmo de Dijkstra en un grafo que tiene aristas con peso negativo?",
+      "options": [
+        "Que se alcancen estimaciones incorrectas de distancias mínimas en ciertos nodos.",
+        "Que el principio codicioso falle debido a que no se reevalúan los nodos ya cerrados.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Los pesos negativos contradicen la premisa codiciosa de que los caminos solo pueden aumentar de coste.",
+      "explanation": "Al tener aristas negativas, el camino más corto a un nodo ya cerrado podría reducirse después de haber sido cerrado, haciendo que Dijkstra devuelva valores incorrectos."
+    },
+    {
+      "q": "¿Qué elementos estructurales caracterizan a un árbol de expansión de un grafo conexo?",
+      "options": [
+        "Es un subgrafo recubridor que contiene todos los vértices del grafo original.",
+        "Es un subgrafo conexo que no contiene ciclos.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Debe cumplir la definición de árbol y de expansión (recubridor).",
+      "explanation": "Un árbol de expansión de un grafo $G=(V,E)$ es un árbol (conexo y acíclico) que incluye a todos los vértices de $V$."
+    },
+    {
+      "q": "¿Qué funciones realiza la clase o estructura UnionFind implementada para el algoritmo de Kruskal?",
+      "options": [
+        "Inicializar cada elemento del grafo como su propio padre (bosque de componentes aisladas).",
+        "Encontrar el representante de un conjunto e integrar dos componentes distintas mediante la unión por rango.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "El Union-Find encapsula el constructor, find (buscar) y union (unir).",
+      "explanation": "La clase Union-Find proporciona los métodos para inicializar los conjuntos unitarios, realizar búsquedas de representantes y unir componentes disjuntas."
+    },
+    {
+      "q": "En el algoritmo de Dijkstra, ¿cuáles de las siguientes inicializaciones son correctas?",
+      "options": [
+        "La distancia provisional del origen se establece en $d[s] = 0$.",
+        "La distancia de los demás nodos se establece en infinito ($d[v] = \\infty$).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Refleja el estado antes de explorar caminos, donde solo el origen está al alcance de la mano.",
+      "explanation": "Inicialmente, solo se conoce el camino al origen (coste 0). Los demás nodos se marcan con $\\infty$ a la espera de encontrar aristas que los conecten."
+    },
+    {
+      "q": "¿Qué características distinguen al algoritmo de Kruskal frente al de Prim?",
+      "options": [
+        "Kruskal ordena globalmente todas las aristas por su peso antes de procesarlas.",
+        "Kruskal utiliza conjuntos disjuntos para comprobar de forma eficiente la formación de ciclos.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Kruskal es un algoritmo codicioso global que usa Union-Find; Prim crece un árbol a partir de un nodo raíz.",
+      "explanation": "Kruskal se basa en ordenar todas las aristas e insertarlas en el MST si conectan componentes disjuntas, lo cual implementa mediante conjuntos disjuntos."
+    },
+    {
+      "q": "¿Qué tipo de redes u objetos se pueden representar mediante grafos ponderados para aplicar Dijkstra, Prim o Kruskal?",
+      "options": [
+        "Redes de enrutamiento de Internet donde los pesos representan el retardo o coste del enlace.",
+        "Mapas de carreteras donde los pesos representan distancias o consumos de combustible.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Cualquier red de conexiones físicas o virtuales con costes asociados en sus aristas.",
+      "explanation": "Tanto mapas de carreteras como redes de ordenadores se modelan mediante grafos con pesos en las aristas para optimizar distancias o costes de conexión."
+    },
+    {
+      "q": "¿Qué operaciones básicas componen la interfaz de la estructura de datos Union-Find?",
+      "options": [
+        "Inicializar un conjunto con un solo elemento (Make-Set).",
+        "Identificar el representante de un conjunto (Find) y combinar dos conjuntos (Union).",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Constituyen los tres pilares de la gestión de conjuntos disjuntos.",
+      "explanation": "La estructura de datos de conjuntos disjuntos se compone de la inicialización, la operación Find para determinar a qué conjunto pertenece un elemento, y la operación Union para fusionar conjuntos."
+    },
+    {
+      "q": "En un grafo ponderado conexo con 4 vértices, si los pesos de todas las aristas posibles son iguales a 7, ¿cuál es el peso del MST?",
+      "options": [
+        "28",
+        "14",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Un MST de 4 vértices tiene exactamente 3 aristas.",
+      "explanation": "Como el MST tiene $|V|-1 = 3$ aristas y cada una pesa 7, el coste total del árbol es $3 \\cdot 7 = 21$. Al no figurar 21 en las opciones, la correcta es la tercera."
+    },
+    {
+      "q": "Si al ejecutar el algoritmo de Kruskal en un grafo con 4 vértices seleccionamos aristas de pesos 1, 2 y 4, descartando la arista de peso 3 por formar ciclo, ¿cuál es el peso total del MST resultante?",
+      "options": [
+        "6",
+        "10",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Suma los pesos de las aristas que sí han sido seleccionadas para el MST.",
+      "explanation": "El MST se forma por las aristas seleccionadas de pesos 1, 2 y 4. Su coste total es $1 + 2 + 4 = 7$. Como 7 no está en las opciones, marcamos la última."
+    },
+    {
+      "q": "Si ejecutamos Dijkstra con origen en 0 y obtenemos las distancias finales $d[1]=4$, $d[2]=6$, $d[3]=9$, ¿cuál es la distancia final al nodo 4 si las aristas incidentes son $(2,4)$ con peso 2 y $(3,4)$ con peso 5?",
+      "options": [
+        "14",
+        "11",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Usa la propiedad de relajación: el camino mínimo a 4 será el mínimo entre d[2] + w(2,4) y d[3] + w(3,4).",
+      "explanation": "Los caminos candidatos a 4 son: por 2 ($d[2]+2 = 6+2=8$) y por 3 ($d[3]+5 = 9+5=14$). La distancia mínima es $\\min(8, 14) = 8$. Como 8 no está listado, la opción correcta es la tercera."
+    },
+    {
+      "q": "Para un grafo de 5 vértices, si las aristas del MST tienen pesos 2, 3, 5 y 7, ¿cuál es el coste total del árbol?",
+      "options": [
+        "15",
+        "20",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Suma los pesos de las 4 aristas del MST.",
+      "explanation": "El coste total del MST es $2 + 3 + 5 + 7 = 17$. Al no figurar 17 en las opciones de respuesta, marcamos la última."
+    },
+    {
+      "q": "Si en una estructura Union-Find con 6 elementos unimos todos de dos en dos, y luego unimos las parejas resultantes, ¿cuál es la altura máxima posible de los árboles sin compresión de caminos?",
+      "options": [
+        "5",
+        "4",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La altura en la unión por rango crece solo cuando unimos dos árboles de igual rango.",
+      "explanation": "Al unir elementos individuales (rango 0), se forman parejas de rango 1. Al unir dos parejas de rango 1, se forman conjuntos de rango 2. Con 6 elementos, la altura máxima de un árbol es 2. Como 2 no está en las opciones, la correcta es la última."
+    },
+    {
+      "q": "Si en el algoritmo de Dijkstra se parte de un origen $s$ y se relaja la arista $(u,v)$ de peso 12, sabiendo que $d[u]=7$ y $d[v]=25$, ¿cuál será el nuevo valor de $d[v]$ tras la relajación?",
+      "options": [
+        "25",
+        "12",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula el coste del camino a través de u, que es d[u] + w(u,v).",
+      "explanation": "La relajación calcula $d[u] + w(u,v) = 7 + 12 = 19$. Como $19 < 25$, la distancia provisional pasa a ser 19. Como 19 no está en las opciones, se selecciona la opción de ninguna."
+    },
+    {
+      "q": "En Kruskal, ordenamos las aristas y obtenemos los pesos: 2, 2, 3, 5 y 8. Si el grafo tiene 4 vértices y las aristas de peso 2 no forman ciclo, pero la de peso 3 sí, ¿cuál es la tercera arista que se selecciona para completar el MST si las de 5 y 8 no forman ciclos?",
+      "options": [
+        "La arista de peso 8.",
+        "Ninguna, el MST ya está completo con las dos de peso 2.",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Se necesitan exactamente 3 aristas. Llevamos dos de peso 2. La de peso 3 se descarta.",
+      "explanation": "La tercera arista seleccionada debe ser la de peso 5, ya que es la siguiente en orden de peso que no genera ciclos. Como 'La arista de peso 5' no está entre las primeras opciones, la correcta es la tercera."
+    },
+    {
+      "q": "Si un router ejecuta Dijkstra en una red y el camino mínimo al nodo A es 15 y al nodo C es 25, ¿cuál es el nuevo camino mínimo de C si la arista directa $(A,C)$ tiene peso 4?",
+      "options": [
+        "15",
+        "25",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Verifica si el camino a C pasando por A es menor que el registrado de 25.",
+      "explanation": "El camino a C pasando por A es $d[A] + w(A,C) = 15 + 4 = 19$. Como $19 < 25$, el camino mínimo se reduce a 19. Al no estar 19 listado, la opción correcta es la de ninguna."
+    },
+    {
+      "q": "En el algoritmo de Dijkstra, si el origen es $s$ y no existe ningún camino físico desde $s$ hasta un vértice $z$, ¿cuál es el valor final de $d[z]$?",
+      "options": [
+        "0",
+        "-1",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Recuerda el valor con el que se inicializa la distancia provisional de todos los nodos no origen.",
+      "explanation": "Si no hay camino, la distancia provisional $d[z]$ nunca se actualiza y permanece con su valor inicial de infinito ($\\infty$). Como infinito no está en las opciones, marcamos la última."
+    },
+    {
+      "q": "En una estructura de conjuntos disjuntos con 10 elementos iniciales independientes, si realizamos 4 uniones válidas entre conjuntos disjuntos, ¿cuántas componentes independientes nos quedan?",
+      "options": [
+        "4",
+        "10",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Cada unión exitosa entre dos componentes independientes reduce la cantidad de componentes en 1.",
+      "explanation": "Inicialmente hay 10 componentes. Cada unión reduce el total en 1. Tras 4 uniones, quedan $10 - 4 = 6$ componentes conexas independientes. Al no figurar 6 entre las opciones, se marca la tercera."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_prob_1",
+      "title": "Caminos Mínimos con Dijkstra - Caso 1",
+      "context": "Sea un dígrafo ponderado con vértices $V=\\{0, 1, 2, 3\\}$ y aristas dirigidas: $0 \\to 1$ (peso 4), $0 \\to 2$ (peso 2), $1 \\to 3$ (peso 5), $2 \\to 1$ (peso 1), $2 \\to 3$ (peso 8), $1 \\to 2$ (peso 3). Ejecutamos el algoritmo de Dijkstra con origen en el vértice 0.",
+      "parts": [
+        {
+          "id": "lab_prob_1_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 0 ($d[0]$).",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La distancia desde el origen $0$ a sí mismo es nula por definición: $$d[0] = 0$$."
+        },
+        {
+          "id": "lab_prob_1_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El camino directo $0 \\to 2$ tiene peso 2. Al ser el camino más corto posible, queda fijada la distancia definitiva: $$d[2] = 2$$."
+        },
+        {
+          "id": "lab_prob_1_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El camino $0 \\to 2 \\to 1$ tiene coste $d[2] + w(2,1) = 2 + 1 = 3$, que es menor que la arista directa $0 \\to 1$ de coste 4. Por tanto: $$d[1] = 3$$."
+        },
+        {
+          "id": "lab_prob_1_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Los caminos hacia 3 son $0 \\to 2 \\to 1 \\to 3$ con coste $d[1] + 5 = 3 + 5 = 8$ y $0 \\to 2 \\to 3$ con coste $d[2] + 8 = 2 + 8 = 10$. El camino mínimo es de coste: $$d[3] = \\min(8, 10) = 8$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_2",
+      "title": "Caminos Mínimos con Dijkstra - Caso 2",
+      "context": "Sea un dígrafo ponderado con vértices $V=\\{0, 1, 2, 3, 4\\}$ y aristas dirigidas: $0 \\to 1$ (peso 1), $0 \\to 2$ (peso 4), $1 \\to 2$ (peso 2), $1 \\to 3$ (peso 6), $2 \\to 3$ (peso 3), $2 \\to 4$ (peso 5), $3 \\to 4$ (peso 1). Ejecutamos Dijkstra con origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_2_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El coste del camino directo $0 \\to 1$ es 1. Al ser la arista más pequeña del origen, se cierra con: $$d[1] = 1$$."
+        },
+        {
+          "id": "lab_prob_2_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El camino a través de 1 es $0 \\to 1 \\to 2$ con coste $d[1] + w(1,2) = 1 + 2 = 3$, menor que el directo $0 \\to 2$ de peso 4. Así: $$d[2] = 3$$."
+        },
+        {
+          "id": "lab_prob_2_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Comparamos el camino por 1 ($d[1]+6 = 7$) y por 2 ($d[2]+3 = 6$). La distancia mínima es: $$d[3] = \\min(7, 6) = 6$$."
+        },
+        {
+          "id": "lab_prob_2_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 4 ($d[4]$).",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 2 ($d[2]+5 = 8$) y por 3 ($d[3]+1 = 7$). El camino mínimo a 4 es de coste: $$d[4] = \\min(8, 7) = 7$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_3",
+      "title": "Caminos Mínimos con Dijkstra - Caso 3",
+      "context": "Sea un dígrafo ponderado con vértices $V=\\{0, 1, 2, 3\\}$ y aristas dirigidas: $0 \\to 1$ (peso 10), $0 \\to 2$ (peso 3), $2 \\to 1$ (peso 4), $2 \\to 3$ (peso 2), $3 \\to 1$ (peso 1). Ejecutamos Dijkstra con origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_3_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El camino directo $0 \\to 2$ tiene coste 3. Es el camino mínimo directo: $$d[2] = 3$$."
+        },
+        {
+          "id": "lab_prob_3_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El camino pasa por 2: $0 \\to 2 \\to 3$, con coste: $$d[3] = d[2] + w(2,3) = 3 + 2 = 5$$."
+        },
+        {
+          "id": "lab_prob_3_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Comparamos el directo $0 \\to 1$ (10), por 2 ($d[2]+4 = 7$) y por 3 ($d[3]+1 = 6$). La distancia mínima es: $$d[1] = \\min(10, 7, 6) = 6$$."
+        },
+        {
+          "id": "lab_prob_3_d",
+          "label": "d)",
+          "question": "Calcula la suma de las distancias mínimas a todos los nodos alcanzables desde 0 (es decir, $d[0]+d[1]+d[2]+d[3]$).",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "La suma de las distancias mínimas es: $$d[0] + d[1] + d[2] + d[3] = 0 + 6 + 3 + 5 = 14$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_4",
+      "title": "Caminos Mínimos con Dijkstra - Caso 4",
+      "context": "Sea un dígrafo ponderado con vértices $V=\\{0, 1, 2, 3, 4\\}$ y aristas dirigidas: $0 \\to 1$ (peso 2), $0 \\to 3$ (peso 8), $1 \\to 2$ (peso 3), $1 \\to 3$ (peso 4), $2 \\to 4$ (peso 2), $3 \\to 2$ (peso 1), $3 \\to 4$ (peso 5). Ejecutamos Dijkstra con origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_4_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La arista directa $0 \\to 1$ tiene coste 2. Es el camino mínimo al nodo 1: $$d[1] = 2$$."
+        },
+        {
+          "id": "lab_prob_4_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Comparamos la arista directa $0 \\to 3$ (8) y el camino por 1 ($d[1]+4=6$). El camino mínimo es: $$d[3] = \\min(8, 6) = 6$$."
+        },
+        {
+          "id": "lab_prob_4_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Comparamos el camino por 1 ($d[1]+3=5$) y por 3 ($d[3]+1=7$). El camino mínimo es: $$d[2] = \\min(5, 7) = 5$$."
+        },
+        {
+          "id": "lab_prob_4_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 4 ($d[4]$).",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Comparamos el camino por 2 ($d[2]+2=7$) y por 3 ($d[3]+5=11$). El camino mínimo es: $$d[4] = \\min(7, 11) = 7$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_5",
+      "title": "Caminos Mínimos con Dijkstra - Caso 5",
+      "context": "Sea un dígrafo ponderado con vértices $V=\\{0, 1, 2, 3\\}$ y aristas dirigidas: $1 \\to 0$ (peso 2), $1 \\to 2$ (peso 5), $0 \\to 2$ (peso 1), $0 \\to 3$ (peso 7), $2 \\to 3$ (peso 2). Ejecutamos Dijkstra con origen en el vértice 1.",
+      "parts": [
+        {
+          "id": "lab_prob_5_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La distancia al origen 1 es cero: $$d[1] = 0$$."
+        },
+        {
+          "id": "lab_prob_5_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 0 ($d[0]$).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El único camino de entrada a 0 desde el origen 1 es la arista directa con coste: $$d[0] = 2$$."
+        },
+        {
+          "id": "lab_prob_5_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Comparamos la arista directa $1 \\to 2$ (5) y el camino por 0 ($d[0]+1=3$). El coste del camino mínimo es: $$d[2] = \\min(5, 3) = 3$$."
+        },
+        {
+          "id": "lab_prob_5_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Comparamos el camino por 0 ($d[0]+7=9$) y por 2 ($d[2]+2=5$). El camino mínimo cuesta: $$d[3] = \\min(9, 5) = 5$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_6",
+      "title": "Caminos Mínimos con Dijkstra - Caso 6",
+      "context": "Sea un dígrafo ponderado con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $0 \\to 1$ (peso 3), $0 \\to 2$ (peso 5), $1 \\to 2$ (peso 1), $1 \\to 3$ (peso 6), $2 \\to 3$ (peso 2), $2 \\to 4$ (peso 7), $3 \\to 4$ (peso 3). Origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_6_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El camino directo $0 \\to 1$ es de peso 3. Al ser el más corto se cierra con: $$d[1] = 3$$."
+        },
+        {
+          "id": "lab_prob_6_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Comparamos la arista directa $0 \\to 2$ (5) con el camino por 1 ($d[1]+1=4$). Obtenemos: $$d[2] = \\min(5, 4) = 4$$."
+        },
+        {
+          "id": "lab_prob_6_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 1 ($d[1]+6=9$) y por 2 ($d[2]+2=6$). La distancia mínima es: $$d[3] = \\min(9, 6) = 6$$."
+        },
+        {
+          "id": "lab_prob_6_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 4 ($d[4]$).",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 2 ($d[2]+7=11$) y por 3 ($d[3]+3=9$). La distancia mínima es: $$d[4] = \\min(11, 9) = 9$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_7",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 1",
+      "context": "Sea un grafo no dirigido conexo con vértices $V=\\{0, 1, 2, 3\\}$ y aristas ponderadas: $(0,1)$ con peso 4, $(0,2)$ con peso 3, $(1,2)$ con peso 1, $(1,3)$ con peso 5, $(2,3)$ con peso 2. Aplicamos Kruskal para hallar el MST.",
+      "parts": [
+        {
+          "id": "lab_prob_7_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada en el MST por el algoritmo.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La arista de menor peso absoluto en el grafo es $(1,2)$ con peso 1. Como no forma ciclo, se selecciona primero."
+        },
+        {
+          "id": "lab_prob_7_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada en el MST.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La siguiente arista más ligera es $(2,3)$ con peso 2. Conecta componentes disjuntas, por lo que se selecciona."
+        },
+        {
+          "id": "lab_prob_7_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista seleccionada en el MST.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La siguiente arista es $(0,2)$ con peso 3. Conecta el nodo 0 con la componente $\\{1,2,3\\}$ sin formar ciclos, por lo que se añade."
+        },
+        {
+          "id": "lab_prob_7_d",
+          "label": "d)",
+          "question": "Calcula el coste total (suma de pesos de aristas) del MST obtenido.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El coste total del MST es la suma de los pesos de las tres aristas elegidas: $$W_{MST} = 1 + 2 + 3 = 6$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_8",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 2",
+      "context": "Sea un grafo no dirigido conexo con vértices $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $(0,1)$ peso 10, $(0,2)$ peso 12, $(1,2)$ peso 2, $(1,3)$ peso 4, $(2,3)$ peso 3, $(2,4)$ peso 8, $(3,4)$ peso 6. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_8_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada en el MST.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La arista de menor peso es $(1,2)$ de peso 2. Se selecciona al no generar ciclos."
+        },
+        {
+          "id": "lab_prob_8_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada en el MST.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La siguiente arista por peso es $(2,3)$ de peso 3. Conecta las componentes de forma acíclica, por lo que se selecciona."
+        },
+        {
+          "id": "lab_prob_8_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista seleccionada en el MST.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La arista de peso 4, $(1,3)$, se descarta por formar un ciclo con $(1,2)$ y $(2,3)$. La siguiente arista no cíclica es $(3,4)$ de peso 6."
+        },
+        {
+          "id": "lab_prob_8_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 21,
+          "tolerance": 0.0,
+          "explanation": "El MST se completa añadiendo $(0,1)$ de peso 10 (las de peso 8 se descartan). El coste total es: $$W_{MST} = 2 + 3 + 6 + 10 = 21$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_9",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 3",
+      "context": "Sea un grafo no dirigido conexo con vértices $V=\\{0, 1, 2, 3\\}$ y aristas: $(0,1)$ peso 6, $(0,2)$ peso 5, $(0,3)$ peso 5, $(1,2)$ peso 1, $(2,3)$ peso 2. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_9_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La arista más ligera es $(1,2)$ con peso 1."
+        },
+        {
+          "id": "lab_prob_9_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La segunda arista más ligera es $(2,3)$ con peso 2."
+        },
+        {
+          "id": "lab_prob_9_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista seleccionada.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Las siguientes aristas de peso 5 son $(0,2)$ y $(0,3)$. Al seleccionar una (por ejemplo, $(0,2)$), se interconectan todos los vértices. La otra formaría un ciclo y se descarta."
+        },
+        {
+          "id": "lab_prob_9_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST obtenido.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "La suma de los pesos de las aristas del MST es: $$W_{MST} = 1 + 2 + 5 = 8$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_10",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 4",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $(0,1)$ peso 3, $(0,2)$ peso 5, $(1,2)$ peso 5, $(1,3)$ peso 6, $(2,3)$ peso 2, $(2,4)$ peso 4, $(3,4)$ peso 3. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_10_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La arista más ligera es $(2,3)$ con peso 2."
+        },
+        {
+          "id": "lab_prob_10_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Tenemos empates a peso 3 entre $(0,1)$ y $(3,4)$. Kruskal selecciona ambas ya que no forman ciclos entre sí."
+        },
+        {
+          "id": "lab_prob_10_c",
+          "label": "c)",
+          "question": "Determina el peso de la cuarta arista seleccionada.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La arista de peso 4, $(2,4)$, se descarta porque forma un ciclo con $(2,3)$ y $(3,4)$. La siguiente arista es de peso 5 ($(0,2)$), la cual se añade para conectar las componentes."
+        },
+        {
+          "id": "lab_prob_10_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 13,
+          "tolerance": 0.0,
+          "explanation": "El coste total del MST es la suma de las aristas de pesos 2, 3, 3 y 5: $$W_{MST} = 2 + 3 + 3 + 5 = 13$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_11",
+      "title": "Árbol de Expansión Mínima con Prim - Caso 1",
+      "context": "Sea un grafo no dirigido conexo con vértices $V=\\{0, 1, 2, 3\\}$ y aristas ponderadas: $(0,1)$ peso 4, $(0,2)$ peso 3, $(1,2)$ peso 1, $(1,3)$ peso 5, $(2,3)$ peso 2. Aplicamos el algoritmo de Prim iniciando en el vértice raíz 0.",
+      "parts": [
+        {
+          "id": "lab_prob_11_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista incorporada al árbol por Prim.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Iniciando en el conjunto de árbol $T=\\{0\\}$, las aristas candidatas son $(0,1)$ peso 4 y $(0,2)$ peso 3. Seleccionamos la menor: $(0,2)$ de peso 3. El árbol pasa a ser $T=\\{0,2\\}$."
+        },
+        {
+          "id": "lab_prob_11_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista incorporada al árbol.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{0,2\\}$, las aristas candidatas a nodos externos son $(0,1)$ peso 4, $(2,1)$ peso 1 y $(2,3)$ peso 2. La menor es $(2,1)$ con peso 1. Se añade, y $T=\\{0,2,1\\}$."
+        },
+        {
+          "id": "lab_prob_11_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista incorporada al árbol.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{0,2,1\\}$, la menor arista hacia el nodo restante 3 es $(2,3)$ con peso 2 (en lugar de $(1,3)$ con peso 5). Se selecciona."
+        },
+        {
+          "id": "lab_prob_11_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El coste total del MST es: $$W_{MST} = 3 + 1 + 2 = 6$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_12",
+      "title": "Árbol de Expansión Mínima con Prim - Caso 2",
+      "context": "Sea un grafo no dirigido conexo con vértices $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $(0,1)$ peso 2, $(0,2)$ peso 4, $(1,2)$ peso 1, $(1,3)$ peso 7, $(2,3)$ peso 3, $(2,4)$ peso 5, $(3,4)$ peso 2. Iniciamos Prim en el vértice raíz 0.",
+      "parts": [
+        {
+          "id": "lab_prob_12_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista incorporada al árbol por Prim.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{0\\}$, las opciones son $(0,1)$ peso 2 y $(0,2)$ peso 4. Seleccionamos $(0,1)$ de peso 2. El árbol es $T=\\{0,1\\}$."
+        },
+        {
+          "id": "lab_prob_12_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista incorporada al árbol.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{0,1\\}$, la menor arista hacia un nodo externo es $(1,2)$ con peso 1. Se añade, y $T=\\{0,1,2\\}$."
+        },
+        {
+          "id": "lab_prob_12_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista incorporada al árbol.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{0,1,2\\}$, las aristas hacia nodos externos $\\{3,4\\}$ son $(2,3)$ peso 3, $(2,4)$ peso 5 y $(1,3)$ peso 7. Seleccionamos la menor: $(2,3)$ de peso 3. El árbol es $T=\\{0,1,2,3\\}$."
+        },
+        {
+          "id": "lab_prob_12_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "El nodo 4 se conecta mediante $(3,4)$ con peso 2. La suma total es: $$W_{MST} = 2 + 1 + 3 + 2 = 8$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_13",
+      "title": "Árbol de Expansión Mínima con Prim - Caso 3",
+      "context": "Sea un grafo no dirigido conexo con vértices $V=\\{0, 1, 2, 3\\}$ y aristas: $(0,1)$ peso 5, $(0,2)$ peso 2, $(0,3)$ peso 6, $(1,2)$ peso 3, $(2,3)$ peso 4. Aplicamos el algoritmo de Prim iniciando en el vértice raíz 3.",
+      "parts": [
+        {
+          "id": "lab_prob_13_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista incorporada al árbol por Prim.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{3\\}$, las opciones son $(3,0)$ peso 6 y $(3,2)$ peso 4. Elegimos $(3,2)$ de peso 4. El árbol pasa a ser $T=\\{3,2\\}$."
+        },
+        {
+          "id": "lab_prob_13_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista incorporada al árbol.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{3,2\\}$, la menor arista hacia un nodo externo es $(2,0)$ con peso 2. Se añade y el árbol queda como $T=\\{3,2,0\\}$."
+        },
+        {
+          "id": "lab_prob_13_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista incorporada al árbol.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Con $T=\\{3,2,0\\}$, comparamos las opciones para añadir el nodo 1: $(2,1)$ peso 3 y $(0,1)$ peso 5. Elegimos la menor: $(2,1)$ de peso 3. El MST queda completo."
+        },
+        {
+          "id": "lab_prob_13_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "El coste del MST es la suma de las aristas incorporadas: $$W_{MST} = 4 + 2 + 3 = 9$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_14",
+      "title": "Estructura de Conjuntos Disjuntos - Caso 1",
+      "context": "Inicializamos una estructura Union-Find con 8 elementos $\\{0, 1, 2, 3, 4, 5, 6, 7\\}$ con rango 0. Ejecutamos la siguiente secuencia de uniones por rango: unir(0,1), unir(2,3), unir(4,5), unir(6,7), unir(0,2), unir(4,6), unir(0,4).",
+      "parts": [
+        {
+          "id": "lab_prob_14_a",
+          "label": "a)",
+          "question": "Determina el identificador del representante del elemento 1 tras la última unión (sin hacer búsquedas adicionales).",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Al unir(0,1) siendo del mismo rango, 1 pasa a apuntar a 0 como padre. Dado que el rango de 0 aumenta, las siguientes uniones mantendrán a 0 como raíz."
+        },
+        {
+          "id": "lab_prob_14_b",
+          "label": "b)",
+          "question": "Determina el identificador del representante del elemento 7 al final de todas las operaciones.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "El elemento 7 tiene de padre a 6, cuyo padre es 4, cuyo padre es 0. Cualquier búsqueda de representante (Find) sobre 7 devolverá la raíz última que es 0."
+        },
+        {
+          "id": "lab_prob_14_c",
+          "label": "c)",
+          "question": "Calcula el rango final del nodo representante 0 tras completar todas las uniones.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "unir(0,1) pone rango(0)=1. unir(0,2) con rango(2)=1 sube rango(0) a 2. unir(0,4) con rango(4)=2 sube rango(0) a 3."
+        },
+        {
+          "id": "lab_prob_14_d",
+          "label": "d)",
+          "question": "Calcula el número total de conjuntos disjuntos independientes al final.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Al haberse enlazado todas las componentes entre sí, al final solo queda 1 único conjunto disjunto conteniendo a todos los elementos."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_15",
+      "title": "Estructura de Conjuntos Disjuntos - Caso 2",
+      "context": "Inicializamos una estructura Union-Find con 6 elementos $\\{0, 1, 2, 3, 4, 5\\}$. Realizamos las siguientes uniones por rango: unir(0,1), unir(2,3), unir(4,5), unir(0,2).",
+      "parts": [
+        {
+          "id": "lab_prob_15_a",
+          "label": "a)",
+          "question": "Determina el valor del rango final de la raíz 0.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "unir(0,1) da rango(0)=1. Al unir(0,2), siendo rango(2)=1, la raíz 0 adquiere rango 2."
+        },
+        {
+          "id": "lab_prob_15_b",
+          "label": "b)",
+          "question": "Determina el valor del rango final de la raíz 4.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La componente $\\{4,5\\}$ solo ha recibido una unión, por lo que su representante 4 tiene rango 1."
+        },
+        {
+          "id": "lab_prob_15_c",
+          "label": "c)",
+          "question": "Calcula el número total de conjuntos disjuntos independientes al final de las operaciones.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Quedan dos conjuntos independientes: el conjunto $\\{0,1,2,3\\}$ (con representante 0) y el conjunto $\\{4,5\\}$ (con representante 4)."
+        },
+        {
+          "id": "lab_prob_15_d",
+          "label": "d)",
+          "question": "Determina el identificador del padre del nodo 3 (sin realizar compresión de caminos).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Al realizar unir(2,3), el nodo 3 pasa a apuntar al nodo 2 como su padre directo: `padre[3] = 2`."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_16",
+      "title": "Propiedades de Árboles de Expansión - Caso 1",
+      "context": "Consideremos un grafo no dirigido conexo simple $G=(V,E)$ que tiene exactamente 10 vértices y 15 aristas.",
+      "parts": [
+        {
+          "id": "lab_prob_16_a",
+          "label": "a)",
+          "question": "Calcula cuántas aristas contiene exactamente cualquier árbol de expansión de $G$.",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "Cualquier árbol de expansión de un grafo con $|V|$ vértices tiene exactamente $|V| - 1 = 10 - 1 = 9$ aristas."
+        },
+        {
+          "id": "lab_prob_16_b",
+          "label": "b)",
+          "question": "Determina la cantidad de aristas de $G$ que quedan fuera (se descartan) en el cálculo del MST.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El número de aristas descartadas es la diferencia entre las aristas totales del grafo y las del MST: $$|E| - (|V|-1) = 15 - 9 = 6$$."
+        },
+        {
+          "id": "lab_prob_16_c",
+          "label": "c)",
+          "question": "Si añadimos una arista de $G$ que no pertenezca al MST al árbol obtenido, ¿cuántos ciclos simples se formarán en el subgrafo resultante?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Añadir cualquier arista adicional a un árbol crea un único ciclo simple único."
+        },
+        {
+          "id": "lab_prob_16_d",
+          "label": "d)",
+          "question": "Calcula el valor de la suma de los grados de todos los vértices del grafo original $G$.",
+          "correctValue": 30,
+          "tolerance": 0.0,
+          "explanation": "Según el teorema del apretón de manos, la suma de los grados de los vértices es igual al doble de las aristas: $$\\sum \\text{deg}(v) = 2 |E| = 2 \\cdot 15 = 30$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_17",
+      "title": "Propiedades de Árboles de Expansión - Caso 2",
+      "context": "Consideremos un grafo no dirigido conexo simple $G=(V,E)$ que tiene exactamente 7 vértices y 10 aristas.",
+      "parts": [
+        {
+          "id": "lab_prob_17_a",
+          "label": "a)",
+          "question": "Calcula el número de aristas que conforman su MST.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El número de aristas en el MST es $|V|-1 = 7-1 = 6$."
+        },
+        {
+          "id": "lab_prob_17_b",
+          "label": "b)",
+          "question": "Calcula el número de aristas del grafo original que se descartan al hallar el MST.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Las aristas no seleccionadas son $|E| - (|V|-1) = 10 - 6 = 4$."
+        },
+        {
+          "id": "lab_prob_17_c",
+          "label": "c)",
+          "question": "Si el MST obtenido resulta ser un camino simple (todos los vértices de grado 1 o 2), ¿cuántos vértices de grado 1 (hojas) tiene dicho árbol?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Cualquier camino simple de longitud mayor o igual a 1 tiene exactamente 2 extremos u hojas (grado 1)."
+        },
+        {
+          "id": "lab_prob_17_d",
+          "label": "d)",
+          "question": "Calcula la suma de los grados de todos los vértices en el MST.",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "La suma de los grados de un árbol con $|V|$ vértices es $2(|V|-1) = 2 \\cdot 6 = 12$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_18",
+      "title": "Caminos Mínimos con Dijkstra - Caso 7",
+      "context": "Sea un dígrafo con ciclos de coste positivo con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $0 \\to 1$ (peso 3), $1 \\to 2$ (peso 2), $2 \\to 0$ (peso 4), $2 \\to 3$ (peso 1), $3 \\to 4$ (peso 2), $4 \\to 1$ (peso 1). Ejecutamos Dijkstra con origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_18_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El camino mínimo a 1 es directo: $d[1] = w(0,1) = 3$."
+        },
+        {
+          "id": "lab_prob_18_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El camino es $0 \\to 1 \\to 2$ con coste: $$d[2] = d[1] + 2 = 3 + 2 = 5$$."
+        },
+        {
+          "id": "lab_prob_18_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El camino es $0 \\to 1 \\to 2 \\to 3$ con coste: $$d[3] = d[2] + 1 = 5 + 1 = 6$$."
+        },
+        {
+          "id": "lab_prob_18_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 4 ($d[4]$).",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "El camino mínimo es $0 \\to 1 \\to 2 \\to 3 \\to 4$ con coste: $$d[4] = d[3] + 2 = 6 + 2 = 8$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_19",
+      "title": "Caminos Mínimos con Dijkstra - Caso 8",
+      "context": "Sea un dígrafo ponderado con $V=\\{0, 1, 2, 3\\}$ y aristas: $0 \\to 1$ (peso 5), $0 \\to 2$ (peso 10), $1 \\to 2$ (peso 2), $1 \\to 3$ (peso 8), $2 \\to 3$ (peso 1). Ejecutamos Dijkstra con origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_19_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El coste de $0 \\to 1$ es 5: $$d[1] = 5$$."
+        },
+        {
+          "id": "lab_prob_19_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Comparamos $0 \\to 2$ (10) con $0 \\to 1 \\to 2$ ($5+2=7$). El mínimo es: $$d[2] = 7$$."
+        },
+        {
+          "id": "lab_prob_19_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 1 ($d[1]+8 = 13$) y por 2 ($d[2]+1 = 8$). La distancia mínima es: $$d[3] = 8$$."
+        },
+        {
+          "id": "lab_prob_19_d",
+          "label": "d)",
+          "question": "Calcula la suma de las distancias mínimas a todos los nodos.",
+          "correctValue": 20,
+          "tolerance": 0.0,
+          "explanation": "La suma total es: $$d[0] + d[1] + d[2] + d[3] = 0 + 5 + 7 + 8 = 20$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_20",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 5",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $(0,1)$ peso 1, $(1,2)$ peso 2, $(2,3)$ peso 3, $(3,4)$ peso 4, $(0,4)$ peso 5, $(1,3)$ peso 6. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_20_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La de menor peso es $(0,1)$ con peso 1."
+        },
+        {
+          "id": "lab_prob_20_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La siguiente es $(1,2)$ con peso 2."
+        },
+        {
+          "id": "lab_prob_20_c",
+          "label": "c)",
+          "question": "Determina el peso de la cuarta arista seleccionada.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Las aristas se eligen en orden de peso: peso 1 ($(0,1)$), peso 2 ($(1,2)$), peso 3 ($(2,3)$), peso 4 ($(3,4)$). Ninguna de estas cuatro aristas forma ciclo, completando el MST de 5 nodos."
+        },
+        {
+          "id": "lab_prob_20_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 10,
+          "tolerance": 0.0,
+          "explanation": "El coste total es la suma de las aristas del MST: $$W_{MST} = 1 + 2 + 3 + 4 = 10$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_21",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 6",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $(0,1)$ peso 8, $(0,2)$ peso 5, $(1,2)$ peso 9, $(1,3)$ peso 11, $(2,3)$ peso 15, $(2,4)$ peso 10, $(3,4)$ peso 7. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_21_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La arista de menor peso es $(0,2)$ de peso 5."
+        },
+        {
+          "id": "lab_prob_21_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "La siguiente arista en orden de peso es $(3,4)$ de peso 7."
+        },
+        {
+          "id": "lab_prob_21_c",
+          "label": "c)",
+          "question": "Determina el peso de la cuarta arista seleccionada.",
+          "correctValue": 10,
+          "tolerance": 0.0,
+          "explanation": "Seleccionamos peso 5 ($(0,2)$), peso 7 ($(3,4)$) y peso 8 ($(0,1)$). Descartamos peso 9 ($(1,2)$) por ciclo. Seleccionamos peso 10 ($(2,4)$) que completa las 4 aristas."
+        },
+        {
+          "id": "lab_prob_21_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 30,
+          "tolerance": 0.0,
+          "explanation": "El coste es: $$W_{MST} = 5 + 7 + 8 + 10 = 30$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_22",
+      "title": "Árbol de Expansión Mínima con Prim - Caso 4",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $(0,1)$ peso 4, $(0,2)$ peso 8, $(1,2)$ peso 2, $(1,3)$ peso 6, $(2,3)$ peso 3, $(2,4)$ peso 9, $(3,4)$ peso 5. Aplicamos Prim desde la raíz 0.",
+      "parts": [
+        {
+          "id": "lab_prob_22_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista incorporada al árbol.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{0\\}$, elegimos la de menor peso: $(0,1)$ con peso 4. $T$ pasa a ser $\\{0,1\\}$."
+        },
+        {
+          "id": "lab_prob_22_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista incorporada al árbol.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{0,1\\}$, la menor arista hacia un nodo externo es $(1,2)$ con peso 2. Se incorpora y $T=\\{0,1,2\\}$."
+        },
+        {
+          "id": "lab_prob_22_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista incorporada al árbol.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{0,1,2\\}$, la menor arista hacia afuera es $(2,3)$ con peso 3. Se añade y $T=\\{0,1,2,3\\}$."
+        },
+        {
+          "id": "lab_prob_22_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "El nodo 4 se conecta finalmente mediante $(3,4)$ con peso 5. El peso total del MST es: $$W_{MST} = 4 + 2 + 3 + 5 = 14$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_23",
+      "title": "Caminos Mínimos con Dijkstra - Caso 9",
+      "context": "Sea un dígrafo ponderado con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $1 \\to 0$ (peso 4), $1 \\to 2$ (peso 1), $2 \\to 0$ (peso 2), $2 \\to 3$ (peso 6), $0 \\to 3$ (peso 1), $0 \\to 4$ (peso 8), $3 \\to 4$ (peso 3). Ejecutamos Dijkstra con origen en 1.",
+      "parts": [
+        {
+          "id": "lab_prob_23_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El camino directo desde 1 a 2 es de peso 1: $$d[2] = 1$$."
+        },
+        {
+          "id": "lab_prob_23_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 0 ($d[0]$).",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Comparamos la arista directa $1 \\to 0$ (4) con el camino por 2 ($d[2]+2 = 3$). El mínimo es: $$d[0] = 3$$."
+        },
+        {
+          "id": "lab_prob_23_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 2 ($d[2]+6 = 7$) y por 0 ($d[0]+1 = 4$). La distancia mínima es: $$d[3] = 4$$."
+        },
+        {
+          "id": "lab_prob_23_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 4 ($d[4]$).",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 0 ($d[0]+8 = 11$) y por 3 ($d[3]+3 = 7$). El camino mínimo a 4 es de coste: $$d[4] = 7$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_24",
+      "title": "Caminos Mínimos con Dijkstra - Caso 10",
+      "context": "Sea un dígrafo ponderado con $V=\\{0, 1, 2, 3, 4\\}$ y aristas: $0 \\to 1$ (peso 5), $0 \\to 2$ (peso 2), $2 \\to 1$ (peso 2), $1 \\to 3$ (peso 1), $2 \\to 3$ (peso 4), $2 \\to 4$ (peso 7), $3 \\to 4$ (peso 2). Origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_24_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La arista directa $0 \\to 2$ tiene peso 2. Es el camino mínimo directo: $$d[2] = 2$$."
+        },
+        {
+          "id": "lab_prob_24_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Comparamos la arista directa $0 \\to 1$ (5) con el camino por 2 ($d[2]+2 = 4$). El camino mínimo es: $$d[1] = 4$$."
+        },
+        {
+          "id": "lab_prob_24_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 1 ($d[1]+1 = 5$) y por 2 ($d[2]+4 = 6$). La distancia mínima es: $$d[3] = 5$$."
+        },
+        {
+          "id": "lab_prob_24_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 4 ($d[4]$).",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 2 ($d[2]+7 = 9$) y por 3 ($d[3]+2 = 7$). El camino mínimo a 4 tiene coste: $$d[4] = 7$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_25",
+      "title": "Estructura de Conjuntos Disjuntos - Caso 3",
+      "context": "Inicializamos una estructura Union-Find con 5 elementos $\\{0, 1, 2, 3, 4\\}$. Realizamos las siguientes uniones por rango: unir(1,2), unir(3,4), unir(1,3).",
+      "parts": [
+        {
+          "id": "lab_prob_25_a",
+          "label": "a)",
+          "question": "Determina el valor del rango final del nodo representante 1.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "unir(1,2) establece rango(1)=1. unir(3,4) establece rango(3)=1. Al unir(1,3), al ser del mismo rango (1), la raíz 1 adopta a 3 como hijo y su rango sube a 2."
+        },
+        {
+          "id": "lab_prob_25_b",
+          "label": "b)",
+          "question": "Determina el identificador del representante final del elemento 4.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "El elemento 4 pertenece a la componente $\\{1,2,3,4\\}$ cuyo representante es la raíz de mayor rango, es decir, el elemento 1."
+        },
+        {
+          "id": "lab_prob_25_c",
+          "label": "c)",
+          "question": "Calcula el número total de conjuntos disjuntos independientes al final.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Quedan dos conjuntos disjuntos: el conjunto $\\{1,2,3,4\\}$ y el conjunto aislado $\\{0\\}$."
+        },
+        {
+          "id": "lab_prob_25_d",
+          "label": "d)",
+          "question": "Determina el identificador del padre del nodo 2 (sin realizar compresión de caminos).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Al unir(1,2), el nodo 2 apunta directamente a 1 como su padre: `padre[2] = 1`."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_26",
+      "title": "Propiedades de Árboles de Expansión - Caso 3",
+      "context": "Sea un grafo no dirigido conexo simple $G=(V,E)$ con 8 vértices y 12 aristas.",
+      "parts": [
+        {
+          "id": "lab_prob_26_a",
+          "label": "a)",
+          "question": "Calcula cuántas aristas tiene su MST.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "El MST de un grafo conexo con $|V|$ vértices tiene exactamente $|V|-1 = 8-1 = 7$ aristas."
+        },
+        {
+          "id": "lab_prob_26_b",
+          "label": "b)",
+          "question": "Calcula cuántas aristas de $G$ se descartan en la construcción del MST.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Las aristas no seleccionadas son: $$|E| - (|V|-1) = 12 - 7 = 5$$."
+        },
+        {
+          "id": "lab_prob_26_c",
+          "label": "c)",
+          "question": "Si el MST tiene exactamente dos vértices de grado 3, y los demás vértices tienen grado 1 o 2, calcula el número de vértices de grado 1 (hojas) de este árbol.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "La suma de los grados en el MST es $2(|V|-1) = 14$. Dos nodos tienen grado 3 (suma = 6). Los otros 6 nodos tienen grados $d_i \\ge 1$. Para que sumen $14 - 6 = 8$, deben ser cuatro nodos de grado 1 y dos nodos de grado 2 ($4 \\cdot 1 + 2 \\cdot 2 = 8$). Así, hay exactamente 4 hojas."
+        },
+        {
+          "id": "lab_prob_26_d",
+          "label": "d)",
+          "question": "Calcula la suma de los grados de todos los vértices en el MST.",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "La suma de grados de cualquier árbol con $|V|=8$ es: $$2(|V|-1) = 2 \\cdot 7 = 14$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_27",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 7",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3\\}$ y aristas: $(0,1)$ peso 10, $(0,2)$ peso 1, $(0,3)$ peso 2, $(1,2)$ peso 3, $(2,3)$ peso 4. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_27_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La de menor peso es $(0,2)$ con peso 1."
+        },
+        {
+          "id": "lab_prob_27_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La segunda menor es $(0,3)$ con peso 2."
+        },
+        {
+          "id": "lab_prob_27_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista seleccionada.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La tercera arista por peso es $(1,2)$ con peso 3. Como no genera ciclos, se selecciona para completar el MST."
+        },
+        {
+          "id": "lab_prob_27_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST obtenido.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "La suma total del MST es: $$W_{MST} = 1 + 2 + 3 = 6$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_28",
+      "title": "Árbol de Expansión Mínima con Prim - Caso 5",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3\\}$ y aristas: $(0,1)$ peso 10, $(0,2)$ peso 1, $(0,3)$ peso 2, $(1,2)$ peso 3, $(2,3)$ peso 4. Aplicamos Prim desde la raíz 1.",
+      "parts": [
+        {
+          "id": "lab_prob_28_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{1\\}$, las aristas incidentes son $(1,0)$ peso 10 y $(1,2)$ peso 3. Seleccionamos $(1,2)$ con peso 3. El árbol pasa a ser $T=\\{1,2\\}$."
+        },
+        {
+          "id": "lab_prob_28_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{1,2\\}$, las aristas a nodos externos son $(2,0)$ peso 1, $(2,3)$ peso 4 e $(1,0)$ peso 10. Seleccionamos $(2,0)$ de peso 1. $T$ pasa a ser $\\{1,2,0\\}$."
+        },
+        {
+          "id": "lab_prob_28_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista seleccionada.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Desde $T=\\{1,2,0\\}$, la menor arista hacia el nodo restante 3 es $(0,3)$ con peso 2 (en lugar de $(2,3)$ de peso 4). Se selecciona."
+        },
+        {
+          "id": "lab_prob_28_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "El coste total es: $$W_{MST} = 3 + 1 + 2 = 6$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_29",
+      "title": "Caminos Mínimos con Dijkstra - Caso 11",
+      "context": "Sea un dígrafo ponderado con $V=\\{0, 1, 2, 3\\}$ y aristas: $0 \\to 1$ (peso 6), $0 \\to 2$ (peso 2), $2 \\to 1$ (peso 3), $2 \\to 3$ (peso 5), $1 \\to 3$ (peso 1). Origen en 0.",
+      "parts": [
+        {
+          "id": "lab_prob_29_a",
+          "label": "a)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 2 ($d[2]$).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La arista $0 \\to 2$ es la menor del origen, cerrándose con coste: $$d[2] = 2$$."
+        },
+        {
+          "id": "lab_prob_29_b",
+          "label": "b)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 1 ($d[1]$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Comparamos la arista directa $0 \\to 1$ (6) con el camino por 2 ($d[2]+3 = 5$). El camino mínimo cuesta: $$d[1] = 5$$."
+        },
+        {
+          "id": "lab_prob_29_c",
+          "label": "c)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 3 ($d[3]$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Comparamos por 2 ($d[2]+5 = 7$) y por 1 ($d[1]+1 = 6$). La distancia mínima es: $$d[3] = 6$$."
+        },
+        {
+          "id": "lab_prob_29_d",
+          "label": "d)",
+          "question": "Calcula el valor de la distancia mínima final al vértice 0 ($d[0]$).",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La distancia al origen 0 es nula: $$d[0] = 0$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_30",
+      "title": "Árbol de Expansión Mínima con Kruskal - Caso 8",
+      "context": "Sea un grafo no dirigido conexo con $V=\\{0, 1, 2, 3\\}$ y aristas: $(0,1)$ peso 7, $(0,2)$ peso 8, $(1,2)$ peso 3, $(1,3)$ peso 6, $(2,3)$ peso 2. Ejecutamos Kruskal.",
+      "parts": [
+        {
+          "id": "lab_prob_30_a",
+          "label": "a)",
+          "question": "Determina el peso de la primera arista seleccionada.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "La de menor peso es $(2,3)$ de peso 2."
+        },
+        {
+          "id": "lab_prob_30_b",
+          "label": "b)",
+          "question": "Determina el peso de la segunda arista seleccionada.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La siguiente arista en orden de peso es $(1,2)$ de peso 3."
+        },
+        {
+          "id": "lab_prob_30_c",
+          "label": "c)",
+          "question": "Determina el peso de la tercera arista seleccionada.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "La arista $(1,3)$ de peso 6 se descarta por formar un ciclo con $(1,2)$ y $(2,3)$. La siguiente arista es $(0,1)$ de peso 7, la cual conecta el vértice 0 y completa el MST."
+        },
+        {
+          "id": "lab_prob_30_d",
+          "label": "d)",
+          "question": "Calcula el coste total del MST final.",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "El coste total del MST es la suma de los pesos de las aristas seleccionadas: $$W_{MST} = 2 + 3 + 7 = 12$$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Condición de Relajación en Dijkstra",
+      "tex": "$$d[v] = \\min(d[v], d[u] + w(u,v))$$"
+    },
+    {
+      "name": "Número de aristas en un Árbol de Expansión (Spanning Tree)",
+      "tex": "$$|E_{MST}| = |V| - 1$$"
+    },
+    {
+      "name": "Complejidad Temporal de Dijkstra con Min-Heap",
+      "tex": "$$O((|V| + |E|) \\log |V|)$$"
+    },
+    {
+      "name": "Complejidad Temporal de Prim con Cola de Prioridad",
+      "tex": "$$O(|E| \\log |V|)$$"
+    },
+    {
+      "name": "Complejidad Temporal de Kruskal con Ordenación de Aristas",
+      "tex": "$$O(|E| \\log |E|) \\equiv O(|E| \\log |V|)$$"
+    },
+    {
+      "name": "Teorema del Apretón de Manos (Suma de Grados en Grafos)",
+      "tex": "$$\\sum_{v \\in V} \\text{deg}(v) = 2|E|$$"
+    },
+    {
+      "name": "Suma de Grados de los Vértices en cualquier Árbol",
+      "tex": "$$\\sum_{v \\in V} \\text{deg}(v) = 2(|V| - 1)$$"
+    },
+    {
+      "name": "Complejidad de Búsqueda de Kruskal con Union-Find optimizado",
+      "tex": "$$O(|E| \\cdot \\alpha(|V|))$$"
+    }
+  ]
+}

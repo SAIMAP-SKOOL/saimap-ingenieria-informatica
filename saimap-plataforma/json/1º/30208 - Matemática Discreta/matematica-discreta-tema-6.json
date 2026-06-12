@@ -1,0 +1,2092 @@
+{
+  "TEST_A": [
+    {
+      "q": "¿En qué principio matemático se basa fundamentalmente la seguridad del algoritmo RSA?",
+      "options": [
+        "La dificultad de calcular el logaritmo discreto sobre campos finitos.",
+        "La asimetría computacional entre multiplicar dos primos grandes y factorizar su producto.",
+        "La imposibilidad de encontrar colisiones en funciones de hash criptográficas."
+      ],
+      "correct": 1,
+      "hint": "Recuerda que multiplicar es computacionalmente fácil, pero deshacer el producto de primos grandes es inviable.",
+      "explanation": "La seguridad de RSA radica en el problema de la factorización entera: es fácil multiplicar dos primos grandes $p$ y $q$, pero es extremadamente difícil hallar $p$ y $q$ a partir de $n = p \\cdot q$."
+    },
+    {
+      "q": "En el contexto del criptosistema RSA, ¿qué componentes conforman la clave pública?",
+      "options": [
+        "El par formado por el exponente público $e$ y el módulo $n$.",
+        "El par formado por el exponente privado $d$ y el módulo $n$.",
+        "Los factores primos $p$ y $q$, junto con el módulo $n$."
+      ],
+      "correct": 0,
+      "hint": "Es la información que se difunde al mundo para que cualquiera pueda cifrar mensajes dirigidos a ti.",
+      "explanation": "La clave pública consiste en el par $(e, n)$, donde $e$ es el exponente de cifrado y $n$ es el módulo de cifrado. Esta clave se distribuye abiertamente."
+    },
+    {
+      "q": "En la criptografía asimétrica, ¿qué clave se emplea para cifrar un mensaje destinado a un receptor R?",
+      "options": [
+        "La clave privada del emisor.",
+        "La clave privada del receptor R.",
+        "La clave pública del receptor R."
+      ],
+      "correct": 2,
+      "hint": "Cualquiera debe poder escribirle de forma confidencial a R usando información que es pública.",
+      "explanation": "Para enviar un mensaje confidencial a R, se cifra utilizando la clave pública de R. Solo R, poseedor de la clave privada correspondiente, podrá descifrarlo."
+    },
+    {
+      "q": "¿Qué representa la función indicatriz de Euler $\\phi(n)$ en el contexto de RSA?",
+      "options": [
+        "La cantidad de enteros positivos menores o iguales a $n$ que son coprimos con $n$.",
+        "La suma de los factores primos que dividen a $n$.",
+        "El número de divisores primos de $n$ que son mayores que 2."
+      ],
+      "correct": 0,
+      "hint": "Piensa en el significado de la función indicatriz en la teoría de números.",
+      "explanation": "La función $\\phi(n)$ de Euler cuenta cuántos enteros positivos menores que $n$ son coprimos con $n$. Para $n = p \\cdot q$ con $p, q$ primos, su valor es $(p-1)(q-1)$."
+    },
+    {
+      "q": "¿Cuál de las siguientes condiciones debe satisfacer obligatoriamente el exponente público $e$ en RSA?",
+      "options": [
+        "Debe ser mayor que el módulo $n$ y ser un número primo par.",
+        "Debe ser menor que $\\phi(n)$ y coprimo con $\\phi(n)$.",
+        "Debe ser un divisor exacto de la función indicatriz $\\phi(n)$."
+      ],
+      "correct": 1,
+      "hint": "Debe existir un inverso modular para $e$ módulo $\\phi(n)$.",
+      "explanation": "Para poder calcular la clave privada $d$ (inverso modular de $e$), es condición necesaria y suficiente que $1 < e < \\phi(n)$ y que $\\text{mcd}(e, \\phi(n)) = 1$."
+    },
+    {
+      "q": "¿Cómo se recupera el mensaje original $M$ a partir del criptograma $C$ en el descifrado RSA?",
+      "options": [
+        "Mediante la operación $M = C^d \\pmod n$.",
+        "Mediante la operación $M = C^e \\pmod n$.",
+        "Mediante la operación $M = d \\cdot C \\pmod n$."
+      ],
+      "correct": 0,
+      "hint": "Se utiliza el exponente de descifrado (clave privada) en una operación modular.",
+      "explanation": "El receptor utiliza su clave privada $(d, n)$ y calcula $M = C^d \\pmod n$, lo cual, según el teorema de Euler, restituye el mensaje original."
+    },
+    {
+      "q": "Si un atacante consigue factorizar el módulo público $n$ en sus factores primos $p$ y $q$, ¿qué ocurre?",
+      "options": [
+        "El atacante no puede hacer nada porque el exponente privado $d$ no depende de $p$ y $q$.",
+        "El atacante puede calcular $\\phi(n) = (p-1)(q-1)$ e inmediatamente hallar la clave privada $d$ con el algoritmo de Euclides.",
+        "El atacante solo podrá descifrar los mensajes cuyo valor sea menor que $p$."
+      ],
+      "correct": 1,
+      "hint": "La única barrera para hallar $d$ a partir de la clave pública $(e, n)$ es la dificultad de calcular $\\phi(n)$.",
+      "explanation": "Si se factoriza $n$ en $p$ y $q$, se obtiene $\\phi(n) = (p-1)(q-1)$. A partir de ahí, se puede resolver $d \\cdot e \\equiv 1 \\pmod{\\phi(n)}$ obteniendo la clave privada $d$."
+    },
+    {
+      "q": "¿Cuál es la relación matemática exacta entre el exponente público $e$ y el exponente privado $d$?",
+      "options": [
+        "Con la suma: $d + e \\equiv 1 \\pmod n$.",
+        "Con la congruencia multiplicativa: $d \\cdot e \\equiv 1 \\pmod{\\phi(n)}$.",
+        "Con la división: $d \\equiv e^{-1} \\pmod n$."
+      ],
+      "correct": 1,
+      "hint": "Se busca que el producto de los exponentes sea congruente con 1 respecto al módulo especial $\\phi(n)$.",
+      "explanation": "El exponente privado $d$ es el inverso multiplicativo modular de $e$ módulo $\\phi(n)$, es decir, $d \\cdot e \\equiv 1 \\pmod{\\phi(n)}$."
+    },
+    {
+      "q": "¿Qué algoritmo reduce el coste de calcular $M^e \\pmod n$ de lineal a logarítmico respecto a $e$?",
+      "options": [
+        "El Algoritmo de Euclides Extendido.",
+        "El algoritmo de exponenciación modular rápida (Square-and-Multiply).",
+        "El algoritmo de la criba de Eratóstenes."
+      ],
+      "correct": 1,
+      "hint": "Es un método que procesa el exponente bit a bit mediante cuadrados y multiplicaciones.",
+      "explanation": "La exponenciación modular rápida divide el problema procesando la representación binaria de $e$, requiriendo solo $O(\\log e)$ multiplicaciones modulares en vez de $O(e)$."
+    },
+    {
+      "q": "¿Cuál de los siguientes exponentes públicos $e$ es un estándar muy común en la industria debido a su eficiencia de cálculo?",
+      "options": [
+        "$e = 3$",
+        "$e = 65537$",
+        "$e = 1024$"
+      ],
+      "correct": 1,
+      "hint": "Es el número primo de Fermat $2^{16} + 1$, compuesto mayormente por ceros en binario.",
+      "explanation": "El valor $e = 65537$ ($2^{16}+1$) tiene solo dos bits en 1 en su representación binaria ($10000000000000001_2$), lo que optimiza la exponenciación rápida y es coprimo con la mayoría de los $\\phi(n)$ prácticos."
+    },
+    {
+      "q": "En el criptosistema RSA, ¿quién debe tener acceso a la clave privada?",
+      "options": [
+        "Únicamente el destinatario legítimo de los mensajes.",
+        "Tanto el emisor como el receptor de los mensajes.",
+        "Cualquier entidad certificadora de la red pública."
+      ],
+      "correct": 0,
+      "hint": "Se llama clave privada precisamente porque no debe compartirse con nadie.",
+      "explanation": "La clave privada debe guardarse en secreto absoluto por parte de su dueño. Si otra persona la conoce, la confidencialidad de los mensajes recibidos se rompe por completo."
+    },
+    {
+      "q": "¿Qué teorema matemático garantiza que el descifrado RSA devuelve el mensaje original si este es coprimo con $n$?",
+      "options": [
+        "El Teorema de Euler.",
+        "El Teorema de Lagrange.",
+        "El Teorema Fundamental del Álgebra."
+      ],
+      "correct": 0,
+      "hint": "Establece que si $\\text{mcd}(a, n) = 1$, entonces $a^{\\phi(n)} \\equiv 1 \\pmod n$.",
+      "explanation": "El Teorema de Euler establece que $M^{\\phi(n)} \\equiv 1 \\pmod n$. Como $e \\cdot d = k \\cdot \\phi(n) + 1$, se deduce que $M^{ed} \\equiv (M^{\\phi(n)})^k \\cdot M \\equiv 1^k \\cdot M \\equiv M \\pmod n$."
+    },
+    {
+      "q": "¿Cuál es la principal ventaja de la criptografía asimétrica frente a la criptografía simétrica?",
+      "options": [
+        "Es mucho más rápida y consume menos recursos computacionales.",
+        "Elimina la necesidad de transmitir previamente una clave secreta por un canal seguro.",
+        "Las claves utilizadas son de menor tamaño para el mismo nivel de seguridad."
+      ],
+      "correct": 1,
+      "hint": "Piensa en el problema del intercambio de claves en canales inseguros.",
+      "explanation": "En la criptografía asimétrica, no hace falta acordar una clave compartida en secreto antes de comunicarse: basta con publicar la clave pública al mundo."
+    },
+    {
+      "q": "Si el módulo RSA es $n = p \\cdot q$ (con $p, q$ primos distintos), ¿cuántos enteros en el intervalo $[1, n]$ no son coprimos con $n$?",
+      "options": [
+        "$p + q - 1$",
+        "$p + q$",
+        "$(p-1)(q-1)$"
+      ],
+      "correct": 0,
+      "hint": "Resta al total de números $n$ la cantidad de coprimos $\\phi(n)$.",
+      "explanation": "El total de números es $n = p \\cdot q$. Los coprimos son $\\phi(n) = (p-1)(q-1) = p \\cdot q - p - q + 1$. Los no coprimos son $n - \\phi(n) = p \\cdot q - (p \\cdot q - p - q + 1) = p + q - 1$."
+    },
+    {
+      "q": "¿Qué herramienta matemática se emplea para calcular el inverso modular de un número de forma eficiente?",
+      "options": [
+        "La criba de Eratóstenes.",
+        "El Algoritmo de Euclides Extendido.",
+        "El Teorema Chino del Resto."
+      ],
+      "correct": 1,
+      "hint": "Permite resolver la identidad de Bezout $a \\cdot x + b \\cdot y = \\text{mcd}(a, b)$.",
+      "explanation": "El Algoritmo de Euclides Extendido calcula los coeficientes de Bezout $x, y$ tales que $e \\cdot x + \\phi(n) \\cdot y = 1$, lo que proporciona el inverso modular $x \\equiv e^{-1} \\pmod{\\phi(n)}$."
+    },
+    {
+      "q": "¿Qué recomendación de seguridad se hace sobre los primos $p$ y $q$ una vez que el par de claves RSA ha sido generado?",
+      "options": [
+        "Deben ser guardados en la clave pública junto con el módulo $n$.",
+        "Deben ser destruidos de forma segura e irreversible.",
+        "Deben ser compartidos con el emisor en el primer mensaje cifrado."
+      ],
+      "correct": 1,
+      "hint": "Si un atacante accede a $p$ o $q$, puede calcular $\\phi(n)$ y romper la clave.",
+      "explanation": "Dado que $\\phi(n)$ solo se necesita para calcular $d$ durante la generación de claves, una vez obtenida la clave privada $(d, n)$, los factores $p$ y $q$ deben eliminarse para evitar filtraciones."
+    },
+    {
+      "q": "En el protocolo HTTPS, ¿cómo se combinan normalmente la criptografía simétrica y la asimétrica (como RSA)?",
+      "options": [
+        "Se usa criptografía simétrica para todo el tráfico pesado y la asimétrica para autenticar el servidor y acordar la clave simétrica.",
+        "Se usa RSA para cifrar todos los datos de navegación y la simétrica solo para las cookies.",
+        "No se combinan; HTTPS solo permite usar uno de los dos métodos a la vez."
+      ],
+      "correct": 0,
+      "hint": "Cifrar gigabytes de información con RSA es extremadamente lento.",
+      "explanation": "RSA se usa en el apretón de manos (handshake) para autenticar la identidad del servidor e intercambiar de forma segura una clave simétrica temporal (ej. AES). Luego, esa clave simétrica (más rápida) cifra los datos de la sesión."
+    },
+    {
+      "q": "¿Cuál de las siguientes tareas no es adecuada para un cifrado puro con RSA?",
+      "options": [
+        "Cifrar y descifrar el hash de un documento para verificar una firma digital.",
+        "Transmitir de forma confidencial una pequeña clave de sesión simétrica.",
+        "Cifrar en tiempo real flujos masivos de datos multimedia en streaming de alta definición."
+      ],
+      "correct": 2,
+      "hint": "RSA implica exponenciaciones modulares con números gigantescos, lo que requiere un gran esfuerzo de CPU.",
+      "explanation": "Cifrar flujos masivos de datos con RSA es inviable debido a su alto coste computacional. Para ello se prefiere la criptografía simétrica (AES, ChaCha20)."
+    },
+    {
+      "q": "Si el tamaño de un mensaje entero $M$ a cifrar es mayor que el módulo público $n$, ¿cuál es el procedimiento estándar?",
+      "options": [
+        "Se descarta el mensaje por ser incompatible con RSA.",
+        "Se divide el mensaje en bloques de tamaño inferior a $n$ y se cifra cada uno por separado.",
+        "Se realiza una operación de división por $n$ y se cifra únicamente el residuo."
+      ],
+      "correct": 1,
+      "hint": "La operación matemática $M^e \\pmod n$ requiere que $M$ sea un representante en el grupo modular.",
+      "explanation": "El mensaje debe ser menor que $n$ ($0 \\le M < n$). Si es mayor, se divide en bloques menores que $n$ (o se usa cifrado híbrido, cifrando el archivo con AES y la clave simétrica con RSA)."
+    },
+    {
+      "q": "¿Cuál es la condición para que un entero $x$ tenga un único inverso modular módulo $m$?",
+      "options": [
+        "Que $x$ y $m$ sean coprimos, es decir, $\\text{mcd}(x, m) = 1$.",
+        "Que $x$ sea un número primo absoluto.",
+        "Que $m$ divida exactamente a $x$."
+      ],
+      "correct": 0,
+      "hint": "Piensa en cuándo se puede resolver la ecuación de Bezout para obtener 1.",
+      "explanation": "Un elemento $x$ tiene inverso modular módulo $m$ si y solo si su máximo común divisor con $m$ es 1 (son coprimos)."
+    },
+    {
+      "q": "¿Por qué un exponente público $e$ que no sea coprimo con $\\phi(n)$ no puede utilizarse en RSA?",
+      "options": [
+        "Porque no existiría un exponente privado $d$ que sea su inverso modular módulo $\\phi(n)$.",
+        "Porque el criptograma resultante sería siempre idéntico al mensaje original.",
+        "Porque el módulo $n$ se volvería automáticamente par."
+      ],
+      "correct": 0,
+      "hint": "Si no son coprimos, el máximo común divisor es mayor que 1, impidiendo el cálculo del inverso modular.",
+      "explanation": "El exponente privado $d$ se calcula como el inverso modular de $e$ módulo $\\phi(n)$. Este inverso solo existe si $\\text{mcd}(e, \\phi(n)) = 1$."
+    },
+    {
+      "q": "¿Qué sucede en el algoritmo Square-and-Multiply en cada paso al procesar un bit del exponente?",
+      "options": [
+        "Siempre se realiza un cuadrado del valor acumulado actual.",
+        "Siempre se realiza una multiplicación por la base original.",
+        "Siempre se calcula la raíz cuadrada modular del acumulador."
+      ],
+      "correct": 0,
+      "hint": "En la exponenciación rápida, el cuadrado (Square) se hace en cada paso, mientras que la multiplicación (Multiply) es condicional.",
+      "explanation": "El algoritmo de exponenciación rápida realiza una elevación al cuadrado en cada iteración del bucle. La multiplicación por la base solo ocurre si el bit correspondiente del exponente es 1."
+    },
+    {
+      "q": "¿Por qué es vulnerable RSA si los primos $p$ y $q$ elegidos son demasiado pequeños?",
+      "options": [
+        "Porque el exponente privado $d$ se volvería negativo y difícil de almacenar.",
+        "Porque es fácil para un ordenador moderno encontrar los divisores de $n = p \\cdot q$ por fuerza bruta.",
+        "Porque la función indicatriz de Euler $\\phi(n)$ daría un valor igual a cero."
+      ],
+      "correct": 1,
+      "hint": "El problema de la factorización es difícil solo para números sumamente grandes.",
+      "explanation": "Si $p$ y $q$ son pequeños, el módulo $n$ también lo es, y los algoritmos informáticos de factorización pueden descomponer $n$ rápidamente en cuestión de milisegundos."
+    },
+    {
+      "q": "¿Cómo funciona el esquema de firmas digitales basado en el algoritmo RSA?",
+      "options": [
+        "El emisor cifra el hash del mensaje con su clave privada, y cualquiera puede verificarlo descifrándolo con la clave pública del emisor.",
+        "El emisor cifra el hash del mensaje con la clave pública del receptor.",
+        "El emisor cifra el mensaje completo con una clave simétrica temporal compartida."
+      ],
+      "correct": 0,
+      "hint": "La firma debe probar que el mensaje proviene de una persona específica (el poseedor de la clave privada).",
+      "explanation": "Cifrar con la clave privada es la base de la firma digital: solo el poseedor de dicha clave pudo crear el valor cifrado, y cualquiera puede verificarlo usando la clave pública correspondiente."
+    },
+    {
+      "q": "En RSA, ¿cuál es el peligro de que dos usuarios compartan el mismo módulo público $n$ aunque tengan claves privadas diferentes?",
+      "options": [
+        "Ninguno, es una práctica común para ahorrar espacio de almacenamiento.",
+        "Es vulnerable a ataques de módulo común, que permiten a un atacante recuperar los mensajes sin conocer las claves privadas.",
+        "Los criptogramas se vuelven inestables y sufren pérdidas de datos en tránsito."
+      ],
+      "correct": 1,
+      "hint": "Si se envía el mismo mensaje a ambos usuarios, un atacante puede explotar relaciones aritméticas entre los exponentes públicos.",
+      "explanation": "El ataque de módulo común permite reconstruir el mensaje original si este se cifra con dos exponentes públicos diferentes y coprimos bajo un mismo módulo $n$, usando la identidad de Bezout."
+    },
+    {
+      "q": "Durante la generación de la clave privada, ¿qué se hace si el valor de $d$ obtenido por el algoritmo de Euclides Extendido es negativo?",
+      "options": [
+        "Se descarta todo el proceso y se eligen nuevos primos $p$ y $q$.",
+        "Se le suma $\\phi(n)$ para obtener su equivalente positivo mínimo congruente.",
+        "Se toma su valor absoluto de forma directa."
+      ],
+      "correct": 1,
+      "hint": "En la aritmética modular, sumarle el módulo a un número negativo preserva su valor de congruencia.",
+      "explanation": "Si el inverso modular resulta negativo, se suma el módulo $\\phi(n)$ para obtener el representante positivo mínimo dentro del rango $[0, \\phi(n) - 1]$."
+    },
+    {
+      "q": "¿Qué papel fundamental juega el Algoritmo de Euclides clásico (no extendido) en la fase previa a generar la clave privada RSA?",
+      "options": [
+        "Verificar si los números elegidos $p$ y $q$ son primos absolutos.",
+        "Comprobar si el exponente público $e$ elegido es coprimo con $\\phi(n)$ mediante $\\text{mcd}(e, \\phi(n)) = 1$.",
+        "Cifrar el mensaje mediante sumas y restas sucesivas."
+      ],
+      "correct": 1,
+      "hint": "Sirve para calcular el máximo común divisor y asegurar que el inverso modular existe.",
+      "explanation": "Antes de calcular el inverso, se usa el Algoritmo de Euclides para garantizar que $\\text{mcd}(e, \\phi(n)) = 1$. Si no lo es, se debe elegir otro valor para $e$."
+    },
+    {
+      "q": "Si los números primos elegidos fueran iguales ($p = q$), ¿cómo afectaría esto a la seguridad de RSA?",
+      "options": [
+        "No afectaría en absoluto si $p$ es lo suficientemente grande.",
+        "El módulo sería $n = p^2$, por lo que bastaría con calcular la raíz cuadrada ordinaria de $n$ para factorizarlo e inutilizar el sistema.",
+        "El exponente privado $d$ siempre resultaría ser igual a 1, anulando la asimetría."
+      ],
+      "correct": 1,
+      "hint": "Extraer una raíz cuadrada de un número real es computacionalmente inmediato.",
+      "explanation": "Si $p = q$, entonces $n = p^2$. Extraer la raíz cuadrada real de $n$ en un ordenador da $p$ al instante, rompiendo la clave sin necesidad de buscar divisores."
+    },
+    {
+      "q": "¿Qué es un certificado digital en el contexto de la infraestructura de clave pública (PKI)?",
+      "options": [
+        "Un programa que cifra el disco duro local.",
+        "Un documento electrónico que asocia una clave pública con una identidad, firmado por una Entidad Certificadora de confianza.",
+        "Un protocolo para acelerar el cifrado simétrico."
+      ],
+      "correct": 1,
+      "hint": "Garantiza que la clave pública que estás usando para cifrar realmente pertenece al receptor deseado.",
+      "explanation": "Los certificados digitales resuelven el problema de la suplantación de identidad vinculando las claves públicas a entidades (ej. dominios web) mediante firmas digitales de terceros confiables."
+    },
+    {
+      "q": "¿Por qué se dice que el algoritmo RSA es asimétrico?",
+      "options": [
+        "Porque la longitud del texto cifrado es diferente a la del texto original.",
+        "Porque utiliza una clave pública para cifrar y otra clave privada diferente para descifrar.",
+        "Porque los tiempos de cálculo del cifrado son linealmente proporcionales al tamaño del mensaje."
+      ],
+      "correct": 1,
+      "hint": "A diferencia de la criptografía simétrica, que usa una única clave compartida.",
+      "explanation": "Es asimétrico porque emplea un par de claves: la clave pública cifra y la privada descifra. La privada no puede deducirse fácilmente de la pública."
+    },
+    {
+      "q": "¿Qué enunciado corresponde al Pequeño Teorema de Fermat, base del teorema de Euler?",
+      "options": [
+        "Si $p$ es primo y $\\text{mcd}(a, p) = 1$, entonces $a^{p-1} \\equiv 1 \\pmod p$.",
+        "Si $a$ y $b$ son coprimos, entonces $a^b \\equiv b^a \\pmod 2$.",
+        "Para todo entero $n$, se cumple que $n^2 + 1$ es un número primo."
+      ],
+      "correct": 0,
+      "hint": "Es un caso particular del teorema de Euler para cuando el módulo es un número primo.",
+      "explanation": "El Pequeño Teorema de Fermat afirma que si $p$ es un número primo y $a$ no es divisible por $p$, entonces $a^{p-1} \\equiv 1 \\pmod p$."
+    },
+    {
+      "q": "¿Cuál es la principal razón por la que RSA no se utiliza para cifrar archivos grandes directamente?",
+      "options": [
+        "Porque es matemáticamente inseguro cifrar más de 1024 bytes seguidos.",
+        "Porque las operaciones modulares sobre claves gigantes son computacionalmente muy lentas en comparación con el cifrado simétrico.",
+        "Porque requiere una conexión constante a internet para validar el algoritmo."
+      ],
+      "correct": 1,
+      "hint": "Cifrar una película o un archivo de base de datos con exponenciaciones modulares consumiría demasiada CPU y tiempo.",
+      "explanation": "La criptografía de clave pública es órdenes de magnitud más lenta que la simétrica. Por eso se usa cifrado híbrido: el archivo se cifra con AES y solo la clave AES se cifra con RSA."
+    },
+    {
+      "q": "¿Qué propiedad matemática de la función indicatriz de Euler $\\phi$ permite escribir $\\phi(p \\cdot q) = (p-1)(q-1)$?",
+      "options": [
+        "Su propiedad multiplicativa para números que son coprimos entre sí.",
+        "Su carácter exponencial en bases de números primos.",
+        "La linealidad aditiva de todos sus divisores primos."
+      ],
+      "correct": 0,
+      "hint": "Recuerda que si $\\text{mcd}(a, b) = 1$, entonces $\\phi(a \\cdot b) = \\phi(a) \\cdot \\phi(b)$.",
+      "explanation": "La función de Euler es multiplicativa: si $a$ y $b$ son coprimos, $\\phi(a \\cdot b) = \\phi(a) \\cdot \\phi(b)$. Dado que $p$ y $q$ son primos distintos, son coprimos, y $\\phi(p) = p-1$ y $\\phi(q) = q-1$."
+    },
+    {
+      "q": "¿Cuál es el rango numérico que debe cumplir un mensaje $M$ para ser cifrado directamente por RSA con módulo $n$?",
+      "options": [
+        "$0 \\le M < n$.",
+        "$1 < M < \\phi(n)$.",
+        "Cualquier entero positivo sin restricción de tamaño."
+      ],
+      "correct": 0,
+      "hint": "Los cálculos se realizan en el grupo de congruencias módulo $n$.",
+      "explanation": "Para que las operaciones aritméticas modulares tengan sentido y el descifrado sea unívoco, el mensaje original $M$ debe estar en el conjunto de representantes modulares $[0, n-1]$."
+    },
+    {
+      "q": "En el algoritmo RSA, ¿qué conjunto de datos se expone públicamente al crear las claves?",
+      "options": [
+        "El módulo $n$ y la clave privada $d$.",
+        "El módulo $n$ y el exponente de cifrado $e$.",
+        "Los factores primos originales $p$ y $q$."
+      ],
+      "correct": 1,
+      "hint": "Es la información que constituye la clave pública.",
+      "explanation": "La clave pública consta del par $(e, n)$, los cuales son de libre acceso para cualquier entidad que desee enviar un mensaje cifrado."
+    },
+    {
+      "q": "¿Qué operación matemática exacta define el cifrado de un mensaje $M$ en RSA?",
+      "options": [
+        "$C = M \\cdot e \\pmod n$.",
+        "$C = M^e \\pmod n$.",
+        "$C = e^M \\pmod n$."
+      ],
+      "correct": 1,
+      "hint": "Consiste en elevar el mensaje a la potencia del exponente público bajo el módulo $n$.",
+      "explanation": "El cifrado RSA se realiza calculando la potencia del mensaje $M$ elevado al exponente de cifrado $e$, reducido módulo $n$, es decir: $C = M^e \\pmod n$."
+    },
+    {
+      "q": "Si sabemos que $a \\equiv b \\pmod m$, ¿cuál de las siguientes opciones describe esta relación de congruencia de forma correcta?",
+      "options": [
+        "La diferencia $a - b$ es divisible por $m$ de forma exacta.",
+        "La suma $a + b$ es siempre igual al módulo $m$.",
+        "El cociente de dividir $a$ por $b$ es igual a $m$ sin residuo."
+      ],
+      "correct": 0,
+      "hint": "Significa que $a$ y $b$ dejan el mismo resto al dividirse entre $m$.",
+      "explanation": "Por definición, dos números $a$ y $b$ son congruentes módulo $m$ si su diferencia $a - b$ es un múltiplo entero de $m$, es decir, $m \\mid (a - b)$."
+    },
+    {
+      "q": "En la implementación real de RSA, ¿por qué es crítico utilizar esquemas de relleno (padding) como OAEP?",
+      "options": [
+        "Para compactar el mensaje original y reducir su tamaño en bits.",
+        "Para introducir aleatoriedad y evitar ataques que explotan la naturaleza determinista del cifrado RSA básico.",
+        "Para acelerar el proceso de exponenciación en ordenadores con pocos recursos."
+      ],
+      "correct": 1,
+      "hint": "Si no se usa relleno, cifrar el mismo mensaje dos veces con la misma clave pública daría exactamente el mismo criptograma.",
+      "explanation": "RSA de base es determinista. El uso de esquemas de relleno (padding) como OAEP añade aleatoriedad a los mensajes antes de cifrarlos, garantizando que el mismo mensaje cifrado dos veces produzca criptogramas distintos."
+    },
+    {
+      "q": "¿Cuál es la complejidad temporal de factorizar un número $n$ mediante el método de fuerza bruta de división por tentativas?",
+      "options": [
+        "$O(\\sqrt{n})$ operaciones en el peor caso.",
+        "$O(\\log n)$ operaciones en el peor caso.",
+        "$O(1)$ operaciones."
+      ],
+      "correct": 0,
+      "hint": "Se prueban divisores primos potenciales hasta llegar a la raíz cuadrada del número.",
+      "explanation": "La factorización por división por tentativas requiere comprobar divisores hasta $\\sqrt{n}$, lo que resulta en una complejidad temporal de $O(\\sqrt{n})$, inviable para números de 2048 bits."
+    },
+    {
+      "q": "¿Qué relación existe entre los números primos y el conjunto de claves en RSA?",
+      "options": [
+        "Los factores primos determinan el tamaño y las propiedades de seguridad del módulo de cifrado.",
+        "Se requiere que el exponente de cifrado $e$ sea un divisor de los primos elegidos.",
+        "Los primos elegidos deben ser siempre consecutivos para evitar colisiones."
+      ],
+      "correct": 0,
+      "hint": "El módulo es el producto directo de dichos primos y define el grupo modular.",
+      "explanation": "Los números primos elegidos $p$ y $q$ son la clave de bóveda de RSA. Su producto define el módulo $n$, y su secreto (con $\\phi(n)$) protege la clave privada."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "Si elegimos los primos pequeños $p = 5$ y $q = 11$, el módulo de cifrado RSA es $n = ____$.",
+      "options": [
+        "15",
+        "55",
+        "40"
+      ],
+      "correct": 1,
+      "hint": "El módulo $n$ es el producto de los dos números primos.",
+      "explanation": "Se calcula el producto de ambos primos: $n = p \\cdot q = 5 \\cdot 11 = 55$."
+    },
+    {
+      "q": "Si los factores primos de la clave RSA son $p = 5$ y $q = 11$, el valor de la función indicatriz de Euler es $\\phi(n) = ____$.",
+      "options": [
+        "40",
+        "55",
+        "50"
+      ],
+      "correct": 0,
+      "hint": "Usa la fórmula $\\phi(n) = (p-1)(q-1)$.",
+      "explanation": "Se calcula la función de Euler como: $\\phi(n) = (p-1)(q-1) = (5-1)(11-1) = 4 \\cdot 10 = 40$."
+    },
+    {
+      "q": "En una simulación de RSA con $\\phi(n) = 24$, si elegimos el exponente público $e = 5$, su inverso modular (clave privada $d$) es $d = ____$.",
+      "options": [
+        "5",
+        "11",
+        "7"
+      ],
+      "correct": 0,
+      "hint": "Buscamos un entero $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{24}$.",
+      "explanation": "Probamos múltiplos o el algoritmo de Euclides: $5 \\cdot 5 = 25 \\equiv 1 \\pmod{24}$. Por lo tanto, $d = 5$."
+    },
+    {
+      "q": "Si ciframos el mensaje $M = 2$ usando la clave pública $(e = 3, n = 33)$, el criptograma resultante es $C = ____$.",
+      "options": [
+        "6",
+        "8",
+        "9"
+      ],
+      "correct": 1,
+      "hint": "Aplica la fórmula de cifrado $C = M^e \\pmod n$.",
+      "explanation": "Calculamos $C = 2^3 \\pmod{33} = 8 \\pmod{33} = 8$."
+    },
+    {
+      "q": "En el algoritmo de exponenciación modular rápida, el exponente 13 expresado en formato binario es $____$.",
+      "options": [
+        "$1101_2$",
+        "$1011_2$",
+        "$1110_2$"
+      ],
+      "correct": 0,
+      "hint": "Descompón 13 en potencias de 2: $13 = 8 + 4 + 1$.",
+      "explanation": "El número 13 en base 10 es $1 \\cdot 2^3 + 1 \\cdot 2^2 + 0 \\cdot 2^1 + 1 \\cdot 2^0$, lo que se escribe en binario como $1101_2$."
+    },
+    {
+      "q": "Si $a \\equiv 7 \\pmod{10}$, entonces el valor de $a^2 \\pmod{10}$ es $____$.",
+      "options": [
+        "49",
+        "9",
+        "7"
+      ],
+      "correct": 1,
+      "hint": "Calcula el cuadrado de 7 y obtén el resto al dividirlo entre 10.",
+      "explanation": "Como $a \\equiv 7 \\pmod{10}$, entonces $a^2 \\equiv 7^2 \\equiv 49 \\equiv 9 \\pmod{10}$."
+    },
+    {
+      "q": "El máximo común divisor entre el exponente $e = 15$ y la función $\\phi(n) = 28$ es $____$.",
+      "options": [
+        "1",
+        "3",
+        "5"
+      ],
+      "correct": 0,
+      "hint": "Encuentra el mayor divisor común entre 15 y 28.",
+      "explanation": "Los factores de $15$ son $3$ y $5$. Los factores de $28$ son $2, 4, 7, 14$. No tienen factores primos en común, por lo que su mcd es 1 (son coprimos)."
+    },
+    {
+      "q": "Si los primos elegidos son $p = 3$ y $q = 13$, entonces el valor de la función $\\phi(n)$ es $____$.",
+      "options": [
+        "39",
+        "24",
+        "36"
+      ],
+      "correct": 1,
+      "hint": "Aplica la fórmula $(p-1)(q-1)$.",
+      "explanation": "$\\phi(n) = (3-1)(13-1) = 2 \\cdot 12 = 24$."
+    },
+    {
+      "q": "Para el módulo $n = 35$ y el exponente público $e = 5$ (con $\\phi(n) = 24$), el exponente privado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{24}$ es $d = ____$.",
+      "options": [
+        "5",
+        "7",
+        "13"
+      ],
+      "correct": 0,
+      "hint": "Encuentra el inverso modular de 5 módulo 24.",
+      "explanation": "Como $5 \\cdot 5 = 25 \\equiv 1 \\pmod{24}$, el inverso es 5."
+    },
+    {
+      "q": "Utilizando el algoritmo de Euclides Extendido para el exponente $e = 7$ y la función $\\phi(n) = 40$, el inverso de $e$ módulo $\\phi(n)$ es $d = ____$.",
+      "options": [
+        "23",
+        "17",
+        "33"
+      ],
+      "correct": 0,
+      "hint": "Queremos encontrar $d$ tal que $7 \\cdot d \\equiv 1 \\pmod{40}$.",
+      "explanation": "Resolviendo la congruencia: $7 \\cdot 23 = 161 = 4 \\cdot 40 + 1 \\equiv 1 \\pmod{40}$. Por tanto, $d = 23$."
+    },
+    {
+      "q": "Al realizar la exponenciación rápida de $3^5 \\pmod{11}$, el resultado exacto obtenido es $____$.",
+      "options": [
+        "3",
+        "5",
+        "1"
+      ],
+      "correct": 2,
+      "hint": "Calcula $3^5 = 243$ y haz la reducción modular.",
+      "explanation": "$3^5 = 243$. Al dividir $243$ entre $11$, se obtiene $22$ de cociente y $1$ de resto: $243 = 11 \\cdot 22 + 1$. El resto es 1."
+    },
+    {
+      "q": "El residuo positivo mínimo de $-15 \\pmod 7$ es $____$.",
+      "options": [
+        "6",
+        "-1",
+        "1"
+      ],
+      "correct": 0,
+      "hint": "Suma múltiplos de 7 a $-15$ hasta obtener un valor no negativo menor que 7.",
+      "explanation": "$-15 + 7 \\cdot 3 = -15 + 21 = 6$. Por tanto, $-15 \\equiv 6 \\pmod 7$."
+    },
+    {
+      "q": "Si el criptograma interceptado es $C = 31$ y la clave privada es $(d = 7, n = 33)$, el mensaje descifrado $M = C^d \\pmod n$ es $M = ____$.",
+      "options": [
+        "4",
+        "8",
+        "31"
+      ],
+      "correct": 0,
+      "hint": "Calcula $31^7 \\pmod{33}$. Observa que $31 \\equiv -2 \\pmod{33}$.",
+      "explanation": "$31^7 \\equiv (-2)^7 \\equiv -128 \\pmod{33}$. Como $-128 = 33 \\cdot (-4) + 4$, el resto positivo es 4."
+    },
+    {
+      "q": "En el criptosistema RSA con $p = 7$ y $q = 11$, el valor de la función $\\phi(n)$ es $____$.",
+      "options": [
+        "60",
+        "70",
+        "66"
+      ],
+      "correct": 0,
+      "hint": "Calcula $(p-1)(q-1)$ con los primos dados.",
+      "explanation": "$\\phi(n) = (7-1)(11-1) = 6 \\cdot 10 = 60$."
+    },
+    {
+      "q": "Si el exponente público es $e = 11$ y la función indicatriz es $\\phi(n) = 60$, el exponente privado correspondiente es $d = ____$.",
+      "options": [
+        "11",
+        "31",
+        "41"
+      ],
+      "correct": 0,
+      "hint": "Buscamos $d$ de forma que $11 \\cdot d \\equiv 1 \\pmod{60}$.",
+      "explanation": "$11 \\cdot 11 = 121 = 2 \\cdot 60 + 1 \\equiv 1 \\pmod{60}$. Por tanto, el inverso modular de 11 es 11."
+    },
+    {
+      "q": "Si recibimos el criptograma $C = 4$ y nuestro exponente privado es $d = 3$ con módulo $n = 33$, el mensaje descifrado es $M = ____$.",
+      "options": [
+        "31",
+        "4",
+        "12"
+      ],
+      "correct": 0,
+      "hint": "Calcula $4^3 \\pmod{33}$.",
+      "explanation": "$M = 4^3 \\pmod{33} = 64 \\pmod{33} = 31$."
+    },
+    {
+      "q": "Para el módulo $n = 15$, el conjunto de enteros en $[1, 15]$ que son coprimos con 15 tiene exactamente $____$ elementos.",
+      "options": [
+        "8",
+        "7",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Calcula $\\phi(15)$ sabiendo que $15 = 3 \\cdot 5$.",
+      "explanation": "$\\phi(15) = (3-1)(5-1) = 2 \\cdot 4 = 8$ elementos. Estos son $\\{1, 2, 4, 7, 8, 11, 13, 14\\}$."
+    },
+    {
+      "q": "El valor del resto de $2^{10} \\pmod{11}$ según el Pequeño Teorema de Fermat es $____$.",
+      "options": [
+        "1",
+        "2",
+        "10"
+      ],
+      "correct": 0,
+      "hint": "Dado que 11 es primo y 2 es coprimo con 11, aplica directamente el teorema.",
+      "explanation": "El Pequeño Teorema de Fermat establece que $a^{p-1} \\equiv 1 \\pmod p$ cuando $p$ es primo y $\\text{mcd}(a, p) = 1$. Aquí $a=2, p=11$, por lo que $2^{10} \\equiv 1 \\pmod{11}$."
+    },
+    {
+      "q": "Si el exponente de cifrado es $e = 17$ y sabemos que $\\phi(n) = 3120$, el exponente de descifrado es $d = ____$.",
+      "options": [
+        "2753",
+        "1753",
+        "3000"
+      ],
+      "correct": 0,
+      "hint": "Encuentra el inverso modular de 17 módulo 3120 usando el Algoritmo de Euclides Extendido.",
+      "explanation": "$17 \\cdot 2753 = 46801 = 15 \\cdot 3120 + 1 \\equiv 1 \\pmod{3120}$. Así, $d = 2753$."
+    },
+    {
+      "q": "Al cifrar el mensaje $M = 3$ utilizando el exponente de cifrado $e = 3$ y el módulo $n = 55$, el criptograma es $C = ____$.",
+      "options": [
+        "27",
+        "9",
+        "15"
+      ],
+      "correct": 0,
+      "hint": "Calcula la potencia modular $3^3 \\pmod{55}$.",
+      "explanation": "$C = 3^3 \\pmod{55} = 27 \\pmod{55} = 27$."
+    },
+    {
+      "q": "¿Cuáles de las siguientes condiciones son necesarias para que los parámetros $(e, n)$ constituyan una clave pública RSA válida?",
+      "options": [
+        "$n = p \\cdot q$, con $p$ y $q$ primos distintos gigantescos.",
+        "$1 < e < \\phi(n)$ tal que $\\text{mcd}(e, \\phi(n)) = 1$.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Revisa los requisitos para generar de forma segura las claves en RSA.",
+      "explanation": "Ambas condiciones son obligatorias: el módulo $n$ debe ser producto de dos primos distintos, y el exponente público $e$ debe ser coprimo con $\\phi(n)$."
+    },
+    {
+      "q": "¿Qué peligros acarrea la revelación pública de la función indicatriz de Euler $\\phi(n)$?",
+      "options": [
+        "Permite a un atacante calcular inmediatamente el exponente privado $d$ usando $e$.",
+        "Invalida la asimetría matemática del criptosistema al hacer vulnerable la clave privada.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La seguridad de RSA depende de que tanto $\\phi(n)$ como $p$ y $q$ permanezcan secretos.",
+      "explanation": "Si $\\phi(n)$ es revelado, cualquiera puede hallar $d \\equiv e^{-1} \\pmod{\\phi(n)}$, por lo que el sistema deja de ser seguro."
+    },
+    {
+      "q": "En el algoritmo de exponenciación modular rápida para calcular $M^e \\pmod n$, ¿qué operaciones elementales se realizan secuencialmente?",
+      "options": [
+        "Se eleva el acumulador al cuadrado en cada iteración del bucle.",
+        "Se multiplica el acumulador por la base si el bit del exponente evaluado es igual a 1.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Es el método Square-and-Multiply.",
+      "explanation": "El algoritmo realiza una operación de cuadrado en cada paso y una multiplicación por la base cuando el bit correspondiente del exponente es un 1."
+    },
+    {
+      "q": "¿Qué parámetros deben mantenerse bajo estricto secreto para garantizar la invulnerabilidad de un sistema RSA?",
+      "options": [
+        "Los factores primos originales $p$ y $q$.",
+        "La función indicatriz de Euler $\\phi(n)$ y el exponente privado de descifrado $d$.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Todo aquello que no sea la clave pública $(e, n)$ o el criptograma $C$ debe ser secreto o destruirse.",
+      "explanation": "Los primos $p$ y $q$, su función indicatriz $\\phi(n)$ y la clave privada $d$ deben ser estrictamente confidenciales para evitar el descifrado no autorizado."
+    },
+    {
+      "q": "Para que un módulo RSA $n$ sea robusto frente a ataques de factorización informática, se requiere:",
+      "options": [
+        "Que sus factores $p$ y $q$ sean números primos extremadamente grandes.",
+        "Que los primos $p$ y $q$ no estén demasiado próximos entre sí para evitar la factorización de Fermat.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Piensa en el tamaño de los primos y su separación.",
+      "explanation": "Los primos deben ser gigantes (ej. de más de 1024 bits) para evitar la factorización por fuerza bruta, y deben ser diferentes y no cercanos para evitar el método de factorización de Fermat."
+    },
+    {
+      "q": "¿Cuáles de los siguientes son usos correctos de la clave privada en criptografía asimétrica?",
+      "options": [
+        "Descifrar un mensaje cifrado previamente con la clave pública de su propietario.",
+        "Firmar digitalmente un documento para probar la autenticidad e integridad del emisor.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "La clave privada realiza las operaciones opuestas o complementarias a la clave pública.",
+      "explanation": "La clave privada se usa tanto para descifrar la información confidencial dirigida al dueño de la clave, como para firmar digitalmente cifrando el hash del mensaje."
+    },
+    {
+      "q": "¿Qué datos de identidad y seguridad se incluyen habitualmente en un certificado SSL/TLS firmado?",
+      "options": [
+        "La clave pública del servidor y el nombre de dominio del sitio web.",
+        "La firma digital de una Entidad de Certificación autorizada y de confianza.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Un certificado sirve para autenticar la identidad del sitio y proveer su clave pública.",
+      "explanation": "Un certificado contiene la clave pública del servidor, datos sobre la entidad propietaria del dominio y la firma de la autoridad certificadora."
+    },
+    {
+      "q": "En el acceso remoto por llaves SSH, ¿qué pasos componen el protocolo de autenticación?",
+      "options": [
+        "El servidor remoto almacena previamente la clave pública del desarrollador.",
+        "El cliente demuestra posesión de la clave privada firmando un desafío numérico enviado por el servidor.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Se busca autenticar al usuario sin transmitir su clave privada por la red.",
+      "explanation": "El servidor comprueba la firma digital del desafío utilizando la clave pública guardada previamente. Si la firma es correcta, se concede el acceso."
+    },
+    {
+      "q": "¿Qué beneficios aporta el algoritmo de exponenciación rápida comparado con el cálculo directo multiplicativo?",
+      "options": [
+        "Reduce la cantidad de multiplicaciones de $O(e)$ a un número logarítmico $O(\\log e)$.",
+        "Hace viable computar potencias modulares sobre números de miles de bits en milisegundos.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Analiza las ventajas de rendimiento y viabilidad del algoritmo.",
+      "explanation": "El cálculo multiplicativo directo es imposible en RSA debido al tamaño de los exponentes. Square-and-Multiply reduce drásticamente el coste y lo hace viable."
+    },
+    {
+      "q": "Si disponemos del par de claves privada y pública de un usuario, ¿cuál de las siguientes afirmaciones es correcta?",
+      "options": [
+        "Cualquier persona del mundo puede enviarle un mensaje cifrado usando su clave pública.",
+        "Solo el poseedor de la clave privada correspondiente puede descifrar los mensajes recibidos.",
+        "Todas las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Es el principio básico de confidencialidad de la criptografía asimétrica.",
+      "explanation": "La clave pública está disponible para que cualquiera cifre un mensaje, pero solo la clave privada (en manos del dueño) tiene la capacidad matemática de descifrarlo."
+    },
+    {
+      "q": "Si elegimos $p = 7$, $q = 13$, y el exponente público es $e = 5$, ¿cuál es el valor exacto del exponente de descifrado $d$?",
+      "options": [
+        "$d = 5$",
+        "$d = 20$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $\\phi(n) = 72$ y busca el inverso de 5 módulo 72.",
+      "explanation": "$\\phi(n) = (7-1)(13-1) = 6 \\cdot 12 = 72$. Buscamos $d$ tal que $5 \\cdot d \\equiv 1 \\pmod{72}$. $5 \\cdot 29 = 145 = 2 \\cdot 72 + 1 \\equiv 1 \\pmod{72}$. Así, $d = 29$. Al no estar 29 en las opciones, la respuesta correcta es ninguna."
+    },
+    {
+      "q": "Para los primos pequeños $p = 3$ y $q = 11$, si el mensaje original es $M = 10$, ¿cuál es el criptograma $C$ cifrado con $e = 3$ y módulo $n = 33$?",
+      "options": [
+        "$C = 15$",
+        "$C = 20$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $C = 10^3 \\pmod{33}$.",
+      "explanation": "$10^3 = 1000$. Al dividir 1000 entre 33: $1000 = 33 \\cdot 30 + 10$. Por tanto, $C = 10$. Como 10 no está en las opciones, marcamos Ninguna."
+    },
+    {
+      "q": "Si interceptamos un criptograma $C = 15$ cifrado con una clave pública RSA $(e = 3, n = 55)$, ¿cuál es el mensaje original $M$?",
+      "options": [
+        "$M = 2$",
+        "$M = 3$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Prueba a elevar las opciones al cubo módulo 55 para ver si dan 15, o descifra usando $d$.",
+      "explanation": "Si desciframos: $\\phi(n) = 40$, $d = 27$ (inverso de 3 mod 40). $M = 15^{27} \\pmod{55} = 5$. Comprobamos cifrando $M=5$: $5^3 \\pmod{55} = 125 \\pmod{55} = 15$, lo cual es correcto. Dado que 5 no está entre las opciones, marcamos la última."
+    },
+    {
+      "q": "Para los primos $p = 5$ y $q = 13$, si el exponente público es $e = 7$ (con $\\phi(n) = 48$), ¿cuál es el exponente de descifrado $d$?",
+      "options": [
+        "$d = 23$",
+        "$d = 11$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Buscamos $d$ tal que $7 \\cdot d \\equiv 1 \\pmod{48}$.",
+      "explanation": "$7 \\cdot 7 = 49 \\equiv 1 \\pmod{48}$. Por lo tanto, $d = 7$. Dado que 7 no está listado en las primeras opciones, la correcta es Ninguna."
+    },
+    {
+      "q": "Si queremos cifrar el mensaje $M = 5$ usando la clave pública $(e = 3, n = 35)$, ¿cuál es el criptograma $C$ resultante?",
+      "options": [
+        "$C = 10$",
+        "$C = 15$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $5^3 \\pmod{35}$.",
+      "explanation": "$5^3 = 125$. Al dividir 125 entre 35: $125 = 35 \\cdot 3 + 20$. El criptograma es $C = 20$. Al no estar 20 en las opciones, la correcta es la última."
+    },
+    {
+      "q": "En el algoritmo RSA, si elegimos los primos $p = 7$ y $q = 17$, ¿cuál es el valor de la función $\\phi(n)$?",
+      "options": [
+        "$\\phi(n) = 119$",
+        "$\\phi(n) = 102$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $(p-1)(q-1)$.",
+      "explanation": "$\\phi(n) = (7-1)(17-1) = 6 \\cdot 16 = 96$. Al no figurar 96 en las opciones, la respuesta es Ninguna."
+    },
+    {
+      "q": "Si el exponente privado es $d = 77$ y el módulo es $n = 119$ (de los primos $p=7, q=17$), ¿cuál es el mensaje descifrado $M$ del criptograma recibido $C = 2$?",
+      "options": [
+        "$M = 8$",
+        "$M = 16$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $2^{77} \\pmod{119}$ mediante exponenciación rápida o el teorema del resto chino.",
+      "explanation": "$M = 2^{77} \\pmod{119} = 32$. Cifrando para verificar: $32^5 \\pmod{119} = 2$. Dado que 32 no está en las opciones, la respuesta correcta es Ninguna de las anteriores."
+    },
+    {
+      "q": "Si tenemos el exponente de cifrado $e = 7$ y el módulo $n = 55$, ¿cuál es el valor del exponente privado $d$?",
+      "options": [
+        "$d = 7$",
+        "$d = 13$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $\\phi(n) = 40$ y busca el inverso de 7 módulo 40.",
+      "explanation": "Queremos $7 \\cdot d \\equiv 1 \\pmod{40}$. $7 \\cdot 23 = 161 \\equiv 1 \\pmod{40}$. Por tanto, $d = 23$. Dado que 23 no está en las opciones, marcamos Ninguna."
+    },
+    {
+      "q": "Para un módulo RSA $n = 91$, si se sabe que $\\phi(n) = 72$ y el exponente público es $e = 5$, ¿cuál es el valor de $d$?",
+      "options": [
+        "$d = 5$",
+        "$d = 15$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Busca el inverso de 5 módulo 72.",
+      "explanation": "Buscamos $5 \\cdot d \\equiv 1 \\pmod{72}$. Calculando: $5 \\cdot 29 = 145 = 2 \\cdot 72 + 1 \\equiv 1 \\pmod{72}$. Así $d = 29$. Al no estar 29 en las opciones, marcamos Ninguna."
+    },
+    {
+      "q": "Si ciframos el mensaje $M = 3$ usando el exponente público $e = 5$ y el módulo $n = 91$, ¿cuál es el criptograma obtenido?",
+      "options": [
+        "$C = 81$",
+        "$C = 243$",
+        "Ninguna de las anteriores."
+      ],
+      "correct": 2,
+      "hint": "Calcula $3^5 \\pmod{91}$.",
+      "explanation": "$3^5 = 243$. Al dividir entre 91: $243 = 91 \\cdot 2 + 61$. El criptograma es $C = 61$. Como 61 no está en las opciones, es Ninguna de las anteriores."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_prob_1",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 1",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 3$ y $q = 11$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 4$.",
+      "parts": [
+        {
+          "id": "lab_prob_1_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 33,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 3 \\cdot 11 = 33$$."
+        },
+        {
+          "id": "lab_prob_1_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 20,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (3 - 1)(11 - 1) = 2 \\cdot 10 = 20$$."
+        },
+        {
+          "id": "lab_prob_1_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{20}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 7 \\quad \\text{ya que} \\quad 7 \\cdot 3 = 21 = 1 \\cdot 20 + 1 \\equiv 1 \\pmod{20}$$."
+        },
+        {
+          "id": "lab_prob_1_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 4$.",
+          "correctValue": 31,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 4$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 4^{3} \\pmod{33} = 31$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_2",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 2",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 11$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_2_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 55,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 11 = 55$$."
+        },
+        {
+          "id": "lab_prob_2_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 40,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(11 - 1) = 4 \\cdot 10 = 40$$."
+        },
+        {
+          "id": "lab_prob_2_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 23,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{40}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 23 \\quad \\text{ya que} \\quad 23 \\cdot 7 = 161 = 4 \\cdot 40 + 1 \\equiv 1 \\pmod{40}$$."
+        },
+        {
+          "id": "lab_prob_2_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 18,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{7} \\pmod{55} = 18$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_3",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 3",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 7$ y $q = 13$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_3_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 91,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 7 \\cdot 13 = 91$$."
+        },
+        {
+          "id": "lab_prob_3_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 72,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (7 - 1)(13 - 1) = 6 \\cdot 12 = 72$$."
+        },
+        {
+          "id": "lab_prob_3_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 29,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{72}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 29 \\quad \\text{ya que} \\quad 29 \\cdot 5 = 145 = 2 \\cdot 72 + 1 \\equiv 1 \\pmod{72}$$."
+        },
+        {
+          "id": "lab_prob_3_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 61,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{5} \\pmod{91} = 61$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_4",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 4",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 11$ y $q = 13$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 5$.",
+      "parts": [
+        {
+          "id": "lab_prob_4_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 143,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 11 \\cdot 13 = 143$$."
+        },
+        {
+          "id": "lab_prob_4_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 120,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (11 - 1)(13 - 1) = 10 \\cdot 12 = 120$$."
+        },
+        {
+          "id": "lab_prob_4_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 103,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{120}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 103 \\quad \\text{ya que} \\quad 103 \\cdot 7 = 721 = 6 \\cdot 120 + 1 \\equiv 1 \\pmod{120}$$."
+        },
+        {
+          "id": "lab_prob_4_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 5$.",
+          "correctValue": 47,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 5$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 5^{7} \\pmod{143} = 47$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_5",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 5",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 7$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_5_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 35,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 7 = 35$$."
+        },
+        {
+          "id": "lab_prob_5_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 24,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(7 - 1) = 4 \\cdot 6 = 24$$."
+        },
+        {
+          "id": "lab_prob_5_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{24}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 5 \\quad \\text{ya que} \\quad 5 \\cdot 5 = 25 = 1 \\cdot 24 + 1 \\equiv 1 \\pmod{24}$$."
+        },
+        {
+          "id": "lab_prob_5_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 33,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{5} \\pmod{35} = 33$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_6",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 6",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 13$, junto con el exponente público de cifrado $e = 11$. El emisor desea enviar de forma confidencial el mensaje entero $M = 4$.",
+      "parts": [
+        {
+          "id": "lab_prob_6_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 65,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 13 = 65$$."
+        },
+        {
+          "id": "lab_prob_6_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 48,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(13 - 1) = 4 \\cdot 12 = 48$$."
+        },
+        {
+          "id": "lab_prob_6_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 11 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 35,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 11 \\equiv 1 \\pmod{48}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 35 \\quad \\text{ya que} \\quad 35 \\cdot 11 = 385 = 8 \\cdot 48 + 1 \\equiv 1 \\pmod{48}$$."
+        },
+        {
+          "id": "lab_prob_6_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 4$.",
+          "correctValue": 49,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 4$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 4^{11} \\pmod{65} = 49$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_7",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 7",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 7$ y $q = 17$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_7_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 119,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 7 \\cdot 17 = 119$$."
+        },
+        {
+          "id": "lab_prob_7_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 96,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (7 - 1)(17 - 1) = 6 \\cdot 16 = 96$$."
+        },
+        {
+          "id": "lab_prob_7_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 77,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{96}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 77 \\quad \\text{ya que} \\quad 77 \\cdot 5 = 385 = 4 \\cdot 96 + 1 \\equiv 1 \\pmod{96}$$."
+        },
+        {
+          "id": "lab_prob_7_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{5} \\pmod{119} = 32$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_8",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 8",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 11$ y $q = 17$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_8_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 187,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 11 \\cdot 17 = 187$$."
+        },
+        {
+          "id": "lab_prob_8_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 160,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (11 - 1)(17 - 1) = 10 \\cdot 16 = 160$$."
+        },
+        {
+          "id": "lab_prob_8_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 107,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{160}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 107 \\quad \\text{ya que} \\quad 107 \\cdot 3 = 321 = 2 \\cdot 160 + 1 \\equiv 1 \\pmod{160}$$."
+        },
+        {
+          "id": "lab_prob_8_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 27,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{3} \\pmod{187} = 27$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_9",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 9",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 13$ y $q = 17$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 4$.",
+      "parts": [
+        {
+          "id": "lab_prob_9_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 221,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 13 \\cdot 17 = 221$$."
+        },
+        {
+          "id": "lab_prob_9_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 192,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (13 - 1)(17 - 1) = 12 \\cdot 16 = 192$$."
+        },
+        {
+          "id": "lab_prob_9_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 77,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{192}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 77 \\quad \\text{ya que} \\quad 77 \\cdot 5 = 385 = 2 \\cdot 192 + 1 \\equiv 1 \\pmod{192}$$."
+        },
+        {
+          "id": "lab_prob_9_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 4$.",
+          "correctValue": 140,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 4$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 4^{5} \\pmod{221} = 140$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_10",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 10",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 3$ y $q = 17$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 5$.",
+      "parts": [
+        {
+          "id": "lab_prob_10_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 51,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 3 \\cdot 17 = 51$$."
+        },
+        {
+          "id": "lab_prob_10_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (3 - 1)(17 - 1) = 2 \\cdot 16 = 32$$."
+        },
+        {
+          "id": "lab_prob_10_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{32}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 11 \\quad \\text{ya que} \\quad 11 \\cdot 3 = 33 = 1 \\cdot 32 + 1 \\equiv 1 \\pmod{32}$$."
+        },
+        {
+          "id": "lab_prob_10_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 5$.",
+          "correctValue": 23,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 5$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 5^{3} \\pmod{51} = 23$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_11",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 11",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 3$ y $q = 19$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_11_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 57,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 3 \\cdot 19 = 57$$."
+        },
+        {
+          "id": "lab_prob_11_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 36,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (3 - 1)(19 - 1) = 2 \\cdot 18 = 36$$."
+        },
+        {
+          "id": "lab_prob_11_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 29,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{36}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 29 \\quad \\text{ya que} \\quad 29 \\cdot 5 = 145 = 4 \\cdot 36 + 1 \\equiv 1 \\pmod{36}$$."
+        },
+        {
+          "id": "lab_prob_11_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{5} \\pmod{57} = 32$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_12",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 12",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 19$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_12_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 95,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 19 = 95$$."
+        },
+        {
+          "id": "lab_prob_12_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 72,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(19 - 1) = 4 \\cdot 18 = 72$$."
+        },
+        {
+          "id": "lab_prob_12_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 31,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{72}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 31 \\quad \\text{ya que} \\quad 31 \\cdot 7 = 217 = 3 \\cdot 72 + 1 \\equiv 1 \\pmod{72}$$."
+        },
+        {
+          "id": "lab_prob_12_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{7} \\pmod{95} = 2$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_13",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 13",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 7$ y $q = 19$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_13_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 133,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 7 \\cdot 19 = 133$$."
+        },
+        {
+          "id": "lab_prob_13_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 108,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (7 - 1)(19 - 1) = 6 \\cdot 18 = 108$$."
+        },
+        {
+          "id": "lab_prob_13_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 65,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{108}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 65 \\quad \\text{ya que} \\quad 65 \\cdot 5 = 325 = 3 \\cdot 108 + 1 \\equiv 1 \\pmod{108}$$."
+        },
+        {
+          "id": "lab_prob_13_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 110,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{5} \\pmod{133} = 110$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_14",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 14",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 11$ y $q = 19$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_14_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 209,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 11 \\cdot 19 = 209$$."
+        },
+        {
+          "id": "lab_prob_14_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 180,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (11 - 1)(19 - 1) = 10 \\cdot 18 = 180$$."
+        },
+        {
+          "id": "lab_prob_14_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 103,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{180}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 103 \\quad \\text{ya que} \\quad 103 \\cdot 7 = 721 = 4 \\cdot 180 + 1 \\equiv 1 \\pmod{180}$$."
+        },
+        {
+          "id": "lab_prob_14_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 128,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{7} \\pmod{209} = 128$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_15",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 15",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 13$ y $q = 19$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_15_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 247,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 13 \\cdot 19 = 247$$."
+        },
+        {
+          "id": "lab_prob_15_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 216,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (13 - 1)(19 - 1) = 12 \\cdot 18 = 216$$."
+        },
+        {
+          "id": "lab_prob_15_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 173,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{216}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 173 \\quad \\text{ya que} \\quad 173 \\cdot 5 = 865 = 4 \\cdot 216 + 1 \\equiv 1 \\pmod{216}$$."
+        },
+        {
+          "id": "lab_prob_15_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 243,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{5} \\pmod{247} = 243$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_16",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 16",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 3$ y $q = 23$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 4$.",
+      "parts": [
+        {
+          "id": "lab_prob_16_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 69,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 3 \\cdot 23 = 69$$."
+        },
+        {
+          "id": "lab_prob_16_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 44,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (3 - 1)(23 - 1) = 2 \\cdot 22 = 44$$."
+        },
+        {
+          "id": "lab_prob_16_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{44}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 15 \\quad \\text{ya que} \\quad 15 \\cdot 3 = 45 = 1 \\cdot 44 + 1 \\equiv 1 \\pmod{44}$$."
+        },
+        {
+          "id": "lab_prob_16_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 4$.",
+          "correctValue": 64,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 4$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 4^{3} \\pmod{69} = 64$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_17",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 17",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 23$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_17_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 115,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 23 = 115$$."
+        },
+        {
+          "id": "lab_prob_17_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 88,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(23 - 1) = 4 \\cdot 22 = 88$$."
+        },
+        {
+          "id": "lab_prob_17_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 59,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{88}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 59 \\quad \\text{ya que} \\quad 59 \\cdot 3 = 177 = 2 \\cdot 88 + 1 \\equiv 1 \\pmod{88}$$."
+        },
+        {
+          "id": "lab_prob_17_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 27,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{3} \\pmod{115} = 27$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_18",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 18",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 7$ y $q = 23$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_18_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 161,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 7 \\cdot 23 = 161$$."
+        },
+        {
+          "id": "lab_prob_18_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 132,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (7 - 1)(23 - 1) = 6 \\cdot 22 = 132$$."
+        },
+        {
+          "id": "lab_prob_18_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 53,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{132}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 53 \\quad \\text{ya que} \\quad 53 \\cdot 5 = 265 = 2 \\cdot 132 + 1 \\equiv 1 \\pmod{132}$$."
+        },
+        {
+          "id": "lab_prob_18_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{5} \\pmod{161} = 32$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_19",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 19",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 11$ y $q = 23$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_19_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 253,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 11 \\cdot 23 = 253$$."
+        },
+        {
+          "id": "lab_prob_19_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 220,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (11 - 1)(23 - 1) = 10 \\cdot 22 = 220$$."
+        },
+        {
+          "id": "lab_prob_19_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 147,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{220}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 147 \\quad \\text{ya que} \\quad 147 \\cdot 3 = 441 = 2 \\cdot 220 + 1 \\equiv 1 \\pmod{220}$$."
+        },
+        {
+          "id": "lab_prob_19_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 27,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{3} \\pmod{253} = 27$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_20",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 20",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 13$ y $q = 23$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_20_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 299,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 13 \\cdot 23 = 299$$."
+        },
+        {
+          "id": "lab_prob_20_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 264,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (13 - 1)(23 - 1) = 12 \\cdot 22 = 264$$."
+        },
+        {
+          "id": "lab_prob_20_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 53,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{264}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 53 \\quad \\text{ya que} \\quad 53 \\cdot 5 = 265 = 1 \\cdot 264 + 1 \\equiv 1 \\pmod{264}$$."
+        },
+        {
+          "id": "lab_prob_20_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{5} \\pmod{299} = 32$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_21",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 21",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 3$ y $q = 29$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 5$.",
+      "parts": [
+        {
+          "id": "lab_prob_21_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 87,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 3 \\cdot 29 = 87$$."
+        },
+        {
+          "id": "lab_prob_21_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 56,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (3 - 1)(29 - 1) = 2 \\cdot 28 = 56$$."
+        },
+        {
+          "id": "lab_prob_21_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 19,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{56}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 19 \\quad \\text{ya que} \\quad 19 \\cdot 3 = 57 = 1 \\cdot 56 + 1 \\equiv 1 \\pmod{56}$$."
+        },
+        {
+          "id": "lab_prob_21_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 5$.",
+          "correctValue": 38,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 5$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 5^{3} \\pmod{87} = 38$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_22",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 22",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 29$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 4$.",
+      "parts": [
+        {
+          "id": "lab_prob_22_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 145,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 29 = 145$$."
+        },
+        {
+          "id": "lab_prob_22_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 112,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(29 - 1) = 4 \\cdot 28 = 112$$."
+        },
+        {
+          "id": "lab_prob_22_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 75,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{112}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 75 \\quad \\text{ya que} \\quad 75 \\cdot 3 = 225 = 2 \\cdot 112 + 1 \\equiv 1 \\pmod{112}$$."
+        },
+        {
+          "id": "lab_prob_22_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 4$.",
+          "correctValue": 64,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 4$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 4^{3} \\pmod{145} = 64$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_23",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 23",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 7$ y $q = 29$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_23_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 203,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 7 \\cdot 29 = 203$$."
+        },
+        {
+          "id": "lab_prob_23_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 168,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (7 - 1)(29 - 1) = 6 \\cdot 28 = 168$$."
+        },
+        {
+          "id": "lab_prob_23_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 101,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{168}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 101 \\quad \\text{ya que} \\quad 101 \\cdot 5 = 505 = 3 \\cdot 168 + 1 \\equiv 1 \\pmod{168}$$."
+        },
+        {
+          "id": "lab_prob_23_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 40,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{5} \\pmod{203} = 40$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_24",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 24",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 11$ y $q = 29$, junto con el exponente público de cifrado $e = 3$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_24_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 319,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 11 \\cdot 29 = 319$$."
+        },
+        {
+          "id": "lab_prob_24_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 280,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (11 - 1)(29 - 1) = 10 \\cdot 28 = 280$$."
+        },
+        {
+          "id": "lab_prob_24_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 3 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 187,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 3 \\equiv 1 \\pmod{280}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 187 \\quad \\text{ya que} \\quad 187 \\cdot 3 = 561 = 2 \\cdot 280 + 1 \\equiv 1 \\pmod{280}$$."
+        },
+        {
+          "id": "lab_prob_24_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{3} \\pmod{319} = 8$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_25",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 25",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 13$ y $q = 29$, junto con el exponente público de cifrado $e = 5$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_25_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 377,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 13 \\cdot 29 = 377$$."
+        },
+        {
+          "id": "lab_prob_25_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 336,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (13 - 1)(29 - 1) = 12 \\cdot 28 = 336$$."
+        },
+        {
+          "id": "lab_prob_25_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 5 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 269,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 5 \\equiv 1 \\pmod{336}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 269 \\quad \\text{ya que} \\quad 269 \\cdot 5 = 1345 = 4 \\cdot 336 + 1 \\equiv 1 \\pmod{336}$$."
+        },
+        {
+          "id": "lab_prob_25_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 32,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{5} \\pmod{377} = 32$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_26",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 26",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 3$ y $q = 31$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_26_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 93,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 3 \\cdot 31 = 93$$."
+        },
+        {
+          "id": "lab_prob_26_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 60,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (3 - 1)(31 - 1) = 2 \\cdot 30 = 60$$."
+        },
+        {
+          "id": "lab_prob_26_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 43,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{60}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 43 \\quad \\text{ya que} \\quad 43 \\cdot 7 = 301 = 5 \\cdot 60 + 1 \\equiv 1 \\pmod{60}$$."
+        },
+        {
+          "id": "lab_prob_26_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 35,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{7} \\pmod{93} = 35$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_27",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 27",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 5$ y $q = 31$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_27_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 155,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 5 \\cdot 31 = 155$$."
+        },
+        {
+          "id": "lab_prob_27_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 120,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (5 - 1)(31 - 1) = 4 \\cdot 30 = 120$$."
+        },
+        {
+          "id": "lab_prob_27_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 103,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{120}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 103 \\quad \\text{ya que} \\quad 103 \\cdot 7 = 721 = 6 \\cdot 120 + 1 \\equiv 1 \\pmod{120}$$."
+        },
+        {
+          "id": "lab_prob_27_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 17,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{7} \\pmod{155} = 17$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_28",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 28",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 7$ y $q = 31$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_28_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 217,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 7 \\cdot 31 = 217$$."
+        },
+        {
+          "id": "lab_prob_28_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 180,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (7 - 1)(31 - 1) = 6 \\cdot 30 = 180$$."
+        },
+        {
+          "id": "lab_prob_28_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 103,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{180}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 103 \\quad \\text{ya que} \\quad 103 \\cdot 7 = 721 = 4 \\cdot 180 + 1 \\equiv 1 \\pmod{180}$$."
+        },
+        {
+          "id": "lab_prob_28_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 128,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{7} \\pmod{217} = 128$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_29",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 29",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 11$ y $q = 31$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 3$.",
+      "parts": [
+        {
+          "id": "lab_prob_29_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 341,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 11 \\cdot 31 = 341$$."
+        },
+        {
+          "id": "lab_prob_29_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 300,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (11 - 1)(31 - 1) = 10 \\cdot 30 = 300$$."
+        },
+        {
+          "id": "lab_prob_29_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 43,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{300}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 43 \\quad \\text{ya que} \\quad 43 \\cdot 7 = 301 = 1 \\cdot 300 + 1 \\equiv 1 \\pmod{300}$$."
+        },
+        {
+          "id": "lab_prob_29_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 3$.",
+          "correctValue": 141,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 3$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 3^{7} \\pmod{341} = 141$$."
+        }
+      ]
+    },
+    {
+      "id": "lab_prob_30",
+      "title": "Simulación Completa de RSA con Primos Pequeños - Caso 30",
+      "context": "En este ejercicio realizaremos una simulación del criptosistema RSA de extremo a extremo. Para ello, utilizaremos los dos números primos iniciales $p = 13$ y $q = 31$, junto con el exponente público de cifrado $e = 7$. El emisor desea enviar de forma confidencial el mensaje entero $M = 2$.",
+      "parts": [
+        {
+          "id": "lab_prob_30_a",
+          "label": "a)",
+          "question": "Calcula el valor del módulo de cifrado público $n = p \\cdot q$.",
+          "correctValue": 403,
+          "tolerance": 0.0,
+          "explanation": "El módulo público de cifrado $n$ se calcula como el producto de los dos primos elegidos: $$n = p \\cdot q = 13 \\cdot 31 = 403$$."
+        },
+        {
+          "id": "lab_prob_30_b",
+          "label": "b)",
+          "question": "Calcula el valor de la función indicatriz de Euler $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 360,
+          "tolerance": 0.0,
+          "explanation": "La función indicatriz de Euler $\\phi(n)$ se obtiene a partir de los factores primos de $n$: $$\\phi(n) = (p - 1)(q - 1) = (13 - 1)(31 - 1) = 12 \\cdot 30 = 360$$."
+        },
+        {
+          "id": "lab_prob_30_c",
+          "label": "c)",
+          "question": "Determina el valor del exponente privado de descifrado $d$ tal que $d \\cdot 7 \\equiv 1 \\pmod{\\phi(n)}$.",
+          "correctValue": 103,
+          "tolerance": 0.0,
+          "explanation": "El exponente privado $d$ es el inverso modular de $e$ módulo $\\phi(n)$. Resolvemos la congruencia: $$d \\cdot 7 \\equiv 1 \\pmod{360}$$ Aplicando el algoritmo de Euclides Extendido encontramos que: $$d = 103 \\quad \\text{ya que} \\quad 103 \\cdot 7 = 721 = 2 \\cdot 360 + 1 \\equiv 1 \\pmod{360}$$."
+        },
+        {
+          "id": "lab_prob_30_d",
+          "label": "d)",
+          "question": "Calcula el valor del criptograma cifrado $C = M^e \\pmod n$ correspondiente al mensaje $M = 2$.",
+          "correctValue": 128,
+          "tolerance": 0.0,
+          "explanation": "Para cifrar el mensaje original $M = 2$, aplicamos la fórmula del cifrado con la clave pública $(e, n)$: $$C = M^e \\pmod n = 2^{7} \\pmod{403} = 128$$."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Módulo de Cifrado RSA",
+      "tex": "$$n = p \\cdot q$$"
+    },
+    {
+      "name": "Función Indicatriz de Euler para Módulo RSA",
+      "tex": "$$\\phi(n) = (p-1)(q-1)$$"
+    },
+    {
+      "name": "Relación de Exponentes de Cifrado y Descifrado",
+      "tex": "$$d \\cdot e \\equiv 1 \\pmod{\\phi(n)}$$"
+    },
+    {
+      "name": "Operación de Cifrado RSA",
+      "tex": "$$C = M^e \\pmod n$$"
+    },
+    {
+      "name": "Operación de Descifrado RSA",
+      "tex": "$$M = C^d \\pmod n$$"
+    },
+    {
+      "name": "Teorema de Euler (Fundamento de RSA)",
+      "tex": "$$a^{\\phi(n)} \\equiv 1 \\pmod n \\quad \\text{si } \\text{mcd}(a, n) = 1$$"
+    },
+    {
+      "name": "Pequeño Teorema de Fermat (Caso Especial)",
+      "tex": "$$a^{p-1} \\equiv 1 \\pmod p \\quad \\text{si } \\text{mcd}(a, p) = 1 \\text{ y } p \\text{ es primo}$$"
+    },
+    {
+      "name": "Identidad de Bézout para Euclides Extendido",
+      "tex": "$$e \\cdot d + \\phi(n) \\cdot k = \\text{mcd}(e, \\phi(n)) = 1$$"
+    }
+  ]
+}

@@ -1,0 +1,2096 @@
+{
+  "TEST_A": [
+    {
+      "q": "Sean $a, b \\in \\mathbb{Z}$ y $m \\in \\mathbb{Z}^+$ ($m > 1$). ¿Cuál es la definición formal de que $a$ es congruente con $b$ módulo $m$ ($a \\equiv b \\pmod m$)?",
+      "options": [
+        "Que la diferencia $a - b$ es divisible por $m$.",
+        "Que el producto $a \\cdot b$ es divisible por $m$.",
+        "Que la suma $a + b$ es divisible por $m$."
+      ],
+      "correct": 0,
+      "hint": "Recuerda que la relación se basa en que ambos devuelven el mismo resto al dividirse entre $m$, lo cual equivale a que su diferencia sea múltiplo de $m$.",
+      "explanation": "Por definición, $a \\equiv b \\pmod m \\iff m \\mid (a - b)$. Esto significa que existe un entero $k$ tal que $a - b = k \\cdot m$, o equivalentemente, $a$ y $b$ tienen el mismo resto al dividirse por $m$."
+    },
+    {
+      "q": "El conjunto de clases de equivalencia módulo $m$, denotado por $\\mathbb{Z}_m$, tiene exactamente cuántos elementos?",
+      "options": [
+        "$m - 1$ elementos.",
+        "$m$ elementos.",
+        "Infinitos elementos."
+      ],
+      "correct": 1,
+      "hint": "Las clases corresponden a los posibles restos de la división por $m$, empezando desde $0$.",
+      "explanation": "El conjunto $\\mathbb{Z}_m$ está formado por las clases de equivalencia $\\{0, 1, 2, \\dots, m-1\\}$, lo cual suma exactamente $m$ elementos."
+    },
+    {
+      "q": "Si la relación de congruencia modular es reflexiva, simétrica y transitiva, ¿qué tipo de relación es?",
+      "options": [
+        "Relación de orden parcial.",
+        "Relación de equivalencia.",
+        "Relación de orden total."
+      ],
+      "correct": 1,
+      "hint": "Una relación que divide un conjunto en clases disjuntas tiene un nombre específico.",
+      "explanation": "Toda relación que es reflexiva ($a \\equiv a$), simétrica ($a \\equiv b \\implies b \\equiv a$) y transitiva ($a \\equiv b \\land b \\equiv c \\implies a \\equiv c$) es una relación de equivalencia."
+    },
+    {
+      "q": "¿Qué propiedad de la aritmética modular nos permite calcular $(a + b) \\pmod m$ a partir de los restos individuales?",
+      "options": [
+        "La congruencia conserva la suma: $(a + b) \\equiv (a \\pmod m + b \\pmod m) \\pmod m$.",
+        "La congruencia solo conserva el producto, la suma requiere conocer los números originales.",
+        "La congruencia elimina los sumandos no coprimos con $m$."
+      ],
+      "correct": 0,
+      "hint": "La suma modular se puede simplificar aplicando el módulo a cada operando antes de sumar.",
+      "explanation": "La aritmética modular es compatible con las operaciones de anillo de los enteros, por lo que la suma y el producto se conservan: $(a + b) \\pmod m = ((a \\pmod m) + (b \\pmod m)) \\pmod m$."
+    },
+    {
+      "q": "¿Bajo qué condición fundamental existe el inverso modular de un entero $a$ módulo $m$?",
+      "options": [
+        "Que $a$ sea un número primo.",
+        "Que $a$ y $m$ sean coprimos, es decir, $mcd(a, m) = 1$.",
+        "Que $a$ sea menor que $m$."
+      ],
+      "correct": 1,
+      "hint": "Para poder despejar el 1 en la combinación lineal de Bézout, se necesita que el MCD sea 1.",
+      "explanation": "El inverso modular de $a$ módulo $m$ existe si y solo si $mcd(a, m) = 1$. En este caso, por la identidad de Bézout, existen $x, y \\in \\mathbb{Z}$ tales que $a x + m y = 1$, lo que implica $a x \\equiv 1 \\pmod m$."
+    },
+    {
+      "q": "¿Qué algoritmo se utiliza comúnmente de forma eficiente para calcular el inverso modular de un número?",
+      "options": [
+        "Algoritmo de Prim.",
+        "Algoritmo de Euclides Extendido.",
+        "Algoritmo de Dijkstra."
+      ],
+      "correct": 1,
+      "hint": "Es una extensión del método clásico para hallar el máximo común divisor que también calcula los coeficientes de Bézout.",
+      "explanation": "El Algoritmo de Euclides Extendido no solo determina el $mcd(a, m)$, sino que también calcula los coeficientes de Bézout $x$ e $y$ tales que $a x + m y = mcd(a, m)$. Si $mcd(a, m) = 1$, entonces $x$ es el inverso modular de $a$."
+    },
+    {
+      "q": "¿Qué afirma el Teorema del Resto Chino (CRT)?",
+      "options": [
+        "Que un sistema de congruencias lineales con módulos coprimos dos a dos siempre tiene una solución única módulo el producto de dichos módulos.",
+        "Que cualquier número entero se puede expresar como suma de tres números primos.",
+        "Que no existen soluciones para sistemas de congruencias lineales si los módulos son mayores que 10."
+      ],
+      "correct": 0,
+      "hint": "Piensa en las condiciones sobre los módulos (coprimos) y el tipo de solución obtenida.",
+      "explanation": "El Teorema del Resto Chino afirma que si tenemos un sistema de congruencias lineales $x \\equiv a_i \\pmod{m_i}$ donde los $m_i$ son coprimos dos a dos, entonces existe una solución única módulo $M = m_1 \\cdot m_2 \\dots m_k$."
+    },
+    {
+      "q": "¿Cuál es la expresión matemática del Pequeño Teorema de Fermat para un número primo $p$ y un entero $a$ tal que $p \\nmid a$?",
+      "options": [
+        "$a^p \\equiv 1 \\pmod p$.",
+        "$a^{p-1} \\equiv 1 \\pmod p$.",
+        "$a^{p+1} \\equiv 1 \\pmod p$."
+      ],
+      "correct": 1,
+      "hint": "El exponente es una unidad menor que el número primo del módulo.",
+      "explanation": "El Pequeño Teorema de Fermat establece que si $p$ es primo y $a$ es un entero no divisible por $p$, entonces $a^{p-1} \\equiv 1 \\pmod p$."
+    },
+    {
+      "q": "¿Qué define la función indicatriz (o totient) de Euler $\\phi(n)$?",
+      "options": [
+        "El número de divisores primos de $n$.",
+        "El número de enteros positivos menores o iguales a $n$ que son coprimos con $n$.",
+        "La suma de todos los enteros menores que $n$."
+      ],
+      "correct": 1,
+      "hint": "Tiene que ver con los elementos que admiten inverso modular en $\\mathbb{Z}_n$.",
+      "explanation": "La función $\\phi(n)$ de Euler cuenta la cantidad de números enteros en el rango $[1, n]$ que cumplen $mcd(x, n) = 1$. Estos son precisamente los elementos que tienen inverso modular en $\\mathbb{Z}_n$."
+    },
+    {
+      "q": "Si $p$ es un número primo, ¿cuál es el valor de $\\phi(p)$?",
+      "options": [
+        "$p$.",
+        "$p - 1$.",
+        "$1$."
+      ],
+      "correct": 1,
+      "hint": "En un número primo, todos los enteros menores que él (excepto el cero) son coprimos con él.",
+      "explanation": "Como $p$ es primo, todos los elementos del conjunto $\\{1, 2, \\dots, p-1\\}$ son coprimos con $p$. Por lo tanto, $\\phi(p) = p - 1$."
+    },
+    {
+      "q": "Si $n = p \\cdot q$, donde $p$ y $q$ son primos distintos, ¿cómo se calcula $\\phi(n)$?",
+      "options": [
+        "$\\phi(n) = (p-1)(q-1)$.",
+        "$\\phi(n) = p \\cdot q - 1$.",
+        "$\\phi(n) = (p+1)(q+1)$."
+      ],
+      "correct": 0,
+      "hint": "La función de Euler es multiplicativa para números coprimos: $\\phi(p \\cdot q) = \\phi(p) \\cdot \\phi(q)$.",
+      "explanation": "Dado que $p$ y $q$ son primos distintos, son coprimos entre sí. La propiedad multiplicativa de la función de Euler indica que $\\phi(p \\cdot q) = \\phi(p) \\cdot \\phi(q) = (p-1)(q-1)$."
+    },
+    {
+      "q": "¿Cuál es el enunciado correcto del Teorema de Euler?",
+      "options": [
+        "Si $mcd(a, n) = 1$, entonces $a^{\\phi(n)} \\equiv 1 \\pmod n$.",
+        "Si $p$ es primo, entonces $a^{\\phi(p)} \\equiv a \\pmod p$ para cualquier $a$.",
+        "Si $a$ y $n$ son coprimos, entonces $a^n \\equiv 1 \\pmod{\\phi(n)}$."
+      ],
+      "correct": 0,
+      "hint": "Es la generalización del Pequeño Teorema de Fermat para cualquier módulo $n$ usando su totient.",
+      "explanation": "El Teorema de Euler generaliza el Pequeño Teorema de Fermat indicando que para cualquier entero $a$ coprimo con $n$ ($mcd(a, n) = 1$), se cumple la congruencia $a^{\\phi(n)} \\equiv 1 \\pmod n$."
+    },
+    {
+      "q": "En el contexto de las tablas hash informáticas, ¿para qué se utiliza la operación de módulo?",
+      "options": [
+        "Para asegurar que la clave sea siempre un número primo.",
+        "Para mapear claves de gran tamaño a un índice válido dentro del rango de memoria de la tabla.",
+        "Para encriptar las claves mediante un algoritmo simétrico rápido."
+      ],
+      "correct": 1,
+      "hint": "Permite acotar los números enteros al tamaño de un array.",
+      "explanation": "Las tablas hash calculan la posición de almacenamiento como $\\text{índice} = \\text{clave} \\pmod{\\text{tamaño\\_tabla}}$ para garantizar que el índice resultante esté en el rango de los índices válidos de la tabla ($0$ a $\\text{tamaño\\_tabla} - 1$)."
+    },
+    {
+      "q": "¿Por qué se suele elegir un número primo como el tamaño de una tabla hash?",
+      "options": [
+        "Porque los números primos son más fáciles de procesar en la CPU.",
+        "Porque reduce la probabilidad de colisiones cuando las claves siguen ciertos patrones o progresiones aritméticas.",
+        "Porque los números primos garantizan que no habrá ningún elemento colisionado."
+      ],
+      "correct": 1,
+      "hint": "Tiene que ver con la coprimidad entre el tamaño de la tabla y los pasos del patrón de las claves.",
+      "explanation": "Elegir un tamaño de tabla primo ayuda a que las claves que presentan patrones aritméticos regulares (como múltiplos de un número) se distribuyan de manera uniforme, minimizando las colisiones en el direccionamiento."
+    },
+    {
+      "q": "¿Cómo funciona el cálculo del dígito de control del DNI en España?",
+      "options": [
+        "Se toma la parte numérica del DNI y se calcula el resto módulo 23, asociando el resultado a una letra.",
+        "Se calcula la suma modular de los dígitos en base 10.",
+        "Se aplica el algoritmo de Euclides Extendido a los dígitos del DNI módulo 10."
+      ],
+      "correct": 0,
+      "hint": "Recuerda el módulo que se menciona en el tema (23).",
+      "explanation": "El número de control del DNI se calcula como el resto de la división entera de la parte numérica por 23 (es decir, $\\text{DNI} \\pmod{23}$). El resto de esta operación (que varía de 0 a 22) se asocia directamente a una tabla de equivalencias de letras."
+    },
+    {
+      "q": "Si $a \\equiv b \\pmod m$ y $c \\equiv d \\pmod m$, ¿cuál de las siguientes afirmaciones sobre el producto es correcta?",
+      "options": [
+        "$a \\cdot c \\equiv b \\cdot d \\pmod m$.",
+        "$a \\cdot c \\equiv (b + d) \\pmod m$.",
+        "El producto no se conserva bajo relaciones de congruencia modular."
+      ],
+      "correct": 0,
+      "hint": "La multiplicación modular es una operación bien definida en las clases de equivalencia de $\\mathbb{Z}_m$.",
+      "explanation": "La congruencia modular respeta la multiplicación: si multiplicamos término a término dos parejas congruentes, sus productos correspondientes son congruentes módulo $m$."
+    },
+    {
+      "q": "¿Qué ocurre si intentamos calcular el inverso de $a$ módulo $m$ cuando $mcd(a, m) = d > 1$?",
+      "options": [
+        "El inverso existe y es igual a $d$.",
+        "No existe inverso modular para $a$ módulo $m$.",
+        "El inverso modular solo existe si sumamos $d$ a $a$."
+      ],
+      "correct": 1,
+      "hint": "Si no son coprimos, no hay forma de encontrar un entero $x$ tal que $a x + m y = 1$.",
+      "explanation": "Si $mcd(a, m) = d > 1$, entonces para cualquier entero $x$, $a x$ será un múltiplo de $d$. Dado que $d > 1$, $a x$ no puede ser congruente con $1$ módulo $m$ (pues $1$ no es múltiplo de $d$). Por tanto, no existe inverso."
+    },
+    {
+      "q": "¿Qué estructura algebraica constituye el conjunto $\\mathbb{Z}_m$ con las operaciones de suma y producto modular?",
+      "options": [
+        "Un grupo abeliano con la multiplicación.",
+        "Un anillo conmutativo con elemento unitario.",
+        "Un espacio vectorial bidimensional."
+      ],
+      "correct": 1,
+      "hint": "Tiene suma y multiplicación con sus propiedades distributivas y asociativas, pero no todos los elementos tienen inverso multiplicativo.",
+      "explanation": "El conjunto $\\mathbb{Z}_m$ con la suma y producto modular forma un anillo conmutativo con unidad. No es un cuerpo (o campo) a menos que $m$ sea un número primo, ya que solo en ese caso todo elemento no nulo posee inverso multiplicativo."
+    },
+    {
+      "q": "¿Cuándo es $\\mathbb{Z}_m$ un cuerpo (o campo)?",
+      "options": [
+        "Cuando $m$ es un número par.",
+        "Cuando $m$ es un número primo.",
+        "Cuando $m$ es un número compuesto."
+      ],
+      "correct": 1,
+      "hint": "Para ser un cuerpo, todos los elementos distintos de cero deben poseer inverso modular.",
+      "explanation": "Si $m$ es primo, entonces para cualquier $a \\in \\mathbb{Z}_m$ con $a \\neq 0$, se cumple que $mcd(a, m) = 1$, por lo que todos los elementos no nulos tienen inverso modular y $\\mathbb{Z}_m$ es un cuerpo."
+    },
+    {
+      "q": "¿Qué es un 'divisor de cero' en la aritmética de $\\mathbb{Z}_m$?",
+      "options": [
+        "Un elemento no nulo $a$ para el cual existe otro elemento no nulo $b$ tal que $a \\cdot b \\equiv 0 \\pmod m$.",
+        "Un número que divide exactamente al módulo $m$.",
+        "Cualquier número impar en $\\mathbb{Z}_m$."
+      ],
+      "correct": 0,
+      "hint": "Son elementos que pueden multiplicarse para dar cero, a pesar de que ninguno de ellos es cero.",
+      "explanation": "En un anillo, un divisor de cero es un elemento no nulo $a$ tal que existe $b \\neq 0$ con $a \\cdot b = 0$. En $\\mathbb{Z}_m$, un elemento $a \\neq 0$ es un divisor de cero si y solo si $mcd(a, m) > 1$."
+    },
+    {
+      "q": "¿Cuál es la relación entre los elementos con inverso modular en $\\mathbb{Z}_m$ y los divisores de cero?",
+      "options": [
+        "Son conjuntos disjuntos; un elemento no nulo con inverso modular nunca puede ser un divisor de cero.",
+        "Todos los divisores de cero tienen inverso modular.",
+        "Son exactamente los mismos elementos."
+      ],
+      "correct": 0,
+      "hint": "Si un elemento tiene inverso, al multiplicar la ecuación $ab = 0$ por el inverso obtendríamos $b = 0$.",
+      "explanation": "Si $a$ tiene inverso modular $a^{-1}$ y $a b \\equiv 0 \\pmod m$, entonces multiplicando por el inverso obtenemos $a^{-1} a b \\equiv a^{-1} 0 \\pmod m$, de donde $b \\equiv 0 \\pmod m$. Por tanto, un elemento invertible no puede ser divisor de cero."
+    },
+    {
+      "q": "Si resolvemos algebraicamente la combinación lineal de Bézout $a \\cdot x + m \\cdot y = 1$ y obtenemos un coeficiente $x$ negativo, ¿cómo hallamos el inverso de $a$ en el rango estándar $[0, m-1]$?",
+      "options": [
+        "Multiplicando el valor negativo por $-1$.",
+        "Sumando el módulo $m$ al valor obtenido ($x + m$).",
+        "El inverso modular no existe en este caso."
+      ],
+      "correct": 1,
+      "hint": "Las clases modulares son periódicas con período $m$.",
+      "explanation": "Dado que las congruencias operan en $\\mathbb{Z}_m$, si $x$ es negativo, podemos sumarle el módulo $m$ (o múltiplos de él) para obtener el representante positivo de su clase de equivalencia, ya que $x \\equiv x + m \\pmod m$."
+    },
+    {
+      "q": "¿Qué propiedad de la congruencia modular representa la afirmación: 'Si $a \\equiv b \\pmod m$, entonces $b \\equiv a \\pmod m$'?",
+      "options": [
+        "Reflexividad.",
+        "Simetría.",
+        "Transitividad."
+      ],
+      "correct": 1,
+      "hint": "Es la propiedad que permite intercambiar los lados de una igualdad o congruencia.",
+      "explanation": "La simetría es la propiedad de una relación que garantiza que si el primer elemento está relacionado con el segundo, entonces el segundo también está relacionado con el primero."
+    },
+    {
+      "q": "¿Qué propiedad de la congruencia modular representa la afirmación: 'Si $a \\equiv b \\pmod m$ y $b \\equiv c \\pmod m$, entonces $a \\equiv c \\pmod m$'?",
+      "options": [
+        "Reflexividad.",
+        "Simetría.",
+        "Transitividad."
+      ],
+      "correct": 2,
+      "hint": "Es la propiedad que permite encadenar congruencias.",
+      "explanation": "La transitividad es la propiedad que establece que la relación se transfiere a través de un elemento intermedio común."
+    },
+    {
+      "q": "¿Cuál es el valor del máximo común divisor entre dos números que son coprimos?",
+      "options": [
+        "0.",
+        "1.",
+        "El producto de ambos números."
+      ],
+      "correct": 1,
+      "hint": "La definición de coprimidad implica que no comparten factores primos comunes.",
+      "explanation": "Por definición, dos números enteros son coprimos (o primos entre sí) si y solo si su único divisor común positivo es el 1, es decir, su MCD es 1."
+    },
+    {
+      "q": "¿Cuál es la forma general válida de Fermat para cualquier entero $a$ y un primo $p$ (sin requerir que sean coprimos)?",
+      "options": [
+        "$a^p \\equiv a \\pmod p$.",
+        "$a^{p-1} \\equiv a \\pmod p$.",
+        "$a^{p+1} \\equiv a \\pmod p$."
+      ],
+      "correct": 0,
+      "hint": "Multiplica la forma estándar del teorema de Fermat por $a$ en ambos lados.",
+      "explanation": "Si multiplicamos $a^{p-1} \\equiv 1 \\pmod p$ por $a$, obtenemos $a^p \\equiv a \\pmod p$. Esta forma es válida para cualquier entero $a$, incluso si $p \\mid a$ (en cuyo caso $0 \\equiv 0 \\pmod p$)."
+    },
+    {
+      "q": "Si tenemos la congruencia lineal $a x \\equiv b \\pmod m$, ¿bajo qué condición tiene solución esta ecuación?",
+      "options": [
+        "Tiene solución si y solo si el máximo común divisor de $a$ y $m$ divide a $b$.",
+        "Tiene solución si y solo si $a$ es un múltiplo directo de $m$.",
+        "Siempre tiene una única solución independientemente de los valores de $a$, $b$ y $m$."
+      ],
+      "correct": 0,
+      "hint": "El MCD de los coeficientes de una ecuación diofántica debe dividir al término independiente.",
+      "explanation": "La ecuación de congruencia lineal $a x \\equiv b \\pmod m$ equivale a la ecuación diofántica lineal $a x - m y = b$, la cual tiene solución si y solo si $mcd(a, m)$ divide a $b$."
+    },
+    {
+      "q": "Si $d = mcd(a, m)$ divide a $b$, ¿cuántas soluciones distintas módulo $m$ tiene la congruencia lineal $a x \\equiv b \\pmod m$?",
+      "options": [
+        "Exactamente una solución única.",
+        "Exactamente $d$ soluciones distintas.",
+        "Infinitas soluciones distintas módulo $m$."
+      ],
+      "correct": 1,
+      "hint": "La cantidad de soluciones módulo $m$ está determinada por el valor del MCD.",
+      "explanation": "Si la condición de existencia se cumple ($d \\mid b$), entonces la congruencia lineal tiene exactamente $d$ soluciones incongruentes entre sí módulo $m$."
+    },
+    {
+      "q": "Si $n = p^k$, donde $p$ es primo y $k \\ge 1$ es un entero, ¿cómo se calcula la función de Euler $\\phi(n)$?",
+      "options": [
+        "$\\phi(n) = p^k - p^{k-1}$.",
+        "$\\phi(n) = p^{k-1} \\cdot (p+1)$.",
+        "$\\phi(n) = (p-1)^k$."
+      ],
+      "correct": 0,
+      "hint": "De los $p^k$ números, hay que restar los que son múltiplos de $p$.",
+      "explanation": "En el rango de $1$ a $p^k$, los números que NO son coprimos con $p^k$ son los múltiplos de $p$, que son exactamente $p^k / p = p^{k-1}$ números. Restando estos de $p^k$, obtenemos $\\phi(p^k) = p^k - p^{k-1}$."
+    },
+    {
+      "q": "¿Qué relación existe entre la aritmética del reloj analógico de 12 horas y la aritmética modular?",
+      "options": [
+        "El reloj analógico representa una estructura de aritmética modular con módulo $m = 12$.",
+        "No tienen relación matemática directa.",
+        "El reloj analógico representa una estructura con módulo $m = 24$."
+      ],
+      "correct": 0,
+      "hint": "Piensa en qué hora marca el reloj después de transcurrir 13 horas desde la 1.",
+      "explanation": "El reloj analógico de 12 horas funciona sumando horas módulo 12: si son las 11 y sumamos 2 horas, da la 1 (pues $11 + 2 = 13 \\equiv 1 \\pmod{12}$)."
+    },
+    {
+      "q": "¿Es posible que dos números enteros tengan resto negativo en una división matemática y aun así sean congruentes?",
+      "options": [
+        "Sí, porque la congruencia depende únicamente de la divisibilidad de su diferencia por el módulo.",
+        "No, los restos siempre deben ser estrictamente positivos para evaluar congruencias.",
+        "Solo si el módulo también es negativo."
+      ],
+      "correct": 0,
+      "hint": "Analiza la definición: $a \\equiv b \\pmod m \\iff m \\mid (a - b)$.",
+      "explanation": "La definición de congruencia no depende del signo de los restos temporales, sino de que la diferencia de los números sea divisible por el módulo. Por ejemplo, $-1 \\equiv 5 \\pmod 6$ porque $6$ divide a $-1 - 5 = -6$."
+    },
+    {
+      "q": "Si $a \\equiv b \\pmod m$, ¿cuál de los siguientes enunciados es equivalente?",
+      "options": [
+        "$a \\pmod m = b \\pmod m$.",
+        "$a / m = b / m$.",
+        "$a \\cdot m = b \\cdot m$."
+      ],
+      "correct": 0,
+      "hint": "Los restos son iguales.",
+      "explanation": "Decir que $a$ y $b$ son congruentes módulo $m$ equivale a afirmar que devuelven exactamente el mismo resto cuando se dividen entre $m$."
+    },
+    {
+      "q": "Si $a \\equiv b \\pmod m$, ¿qué se puede afirmar sobre la expresión $a - b$?",
+      "options": [
+        "Es un número impar.",
+        "Es un múltiplo entero de $m$.",
+        "Es siempre menor que $m$."
+      ],
+      "correct": 1,
+      "hint": "Es la definición básica de divisibilidad.",
+      "explanation": "Por definición, $a \\equiv b \\pmod m$ significa que $m \\mid (a-b)$, es decir, $a - b = k \\cdot m$ para algún entero $k$. Por lo tanto, $a-b$ es un múltiplo entero de $m$."
+    },
+    {
+      "q": "¿Cuáles son las propiedades básicas de la divisibilidad modular?",
+      "options": [
+        "Conserva la suma y la multiplicación.",
+        "Conserva la división en todos los casos.",
+        "No conserva ninguna operación estándar."
+      ],
+      "correct": 0,
+      "hint": "La suma y la multiplicación modular están bien definidas en $\\mathbb{Z}_m$.",
+      "explanation": "La aritmética modular conserva la suma y la multiplicación de enteros. Sin embargo, la división no está siempre permitida, solo cuando se multiplica por el inverso modular, el cual no siempre existe."
+    },
+    {
+      "q": "Si $a$ y $m$ son coprimos, ¿cuántos inversos modulares distintos tiene $a$ dentro del conjunto $\\mathbb{Z}_m$?",
+      "options": [
+        "Exactamente uno.",
+        "Tantos como divisores tenga $m$.",
+        "Ninguno."
+      ],
+      "correct": 0,
+      "hint": "En un cuerpo o anillo, el inverso multiplicativo de un elemento, si existe, es único.",
+      "explanation": "Si $mcd(a, m) = 1$, existe un único representante $x \\in \\mathbb{Z}_m$ (rango $0$ a $m-1$) tal que $a x \\equiv 1 \\pmod m$."
+    },
+    {
+      "q": "¿Qué establece la propiedad reflexiva de la congruencia modular?",
+      "options": [
+        "Que $a \\equiv a \\pmod m$ para cualquier entero $a$.",
+        "Que si $a \\equiv b$, entonces $b \\equiv a$.",
+        "Que $a \\equiv -a \\pmod m$."
+      ],
+      "correct": 0,
+      "hint": "Reflexiva significa que todo elemento está relacionado consigo mismo.",
+      "explanation": "La reflexividad establece que para todo entero $a$ y cualquier módulo $m$, siempre se cumple que $a \\equiv a \\pmod m$, ya que $m$ divide a $a - a = 0$."
+    },
+    {
+      "q": "Si un número $n$ termina en el dígito 5 en base 10, ¿cuál es su congruencia módulo 5?",
+      "options": [
+        "$n \\equiv 0 \\pmod 5$.",
+        "$n \\equiv 1 \\pmod 5$.",
+        "$n \\equiv 5 \\pmod{10}$."
+      ],
+      "correct": 0,
+      "hint": "Cualquier número terminado en 5 o 0 es múltiplo de 5.",
+      "explanation": "En base 10, si un número termina en 5, es divisible por 5. Su diferencia con un múltiplo de 5 es cero, por lo tanto, $n \\equiv 0 \\pmod 5$."
+    },
+    {
+      "q": "¿Cuál es la relación de congruencia que define a los números pares?",
+      "options": [
+        "$x \\equiv 0 \\pmod 2$.",
+        "$x \\equiv 1 \\pmod 2$.",
+        "$x \\equiv 2 \\pmod 4$."
+      ],
+      "correct": 0,
+      "hint": "Los números pares tienen resto 0 al dividirse por 2.",
+      "explanation": "Los números pares son aquellos múltiplos de 2, es decir, su resto al dividirse entre 2 es 0. En términos de congruencia: $x \\equiv 0 \\pmod 2$."
+    },
+    {
+      "q": "¿Cuál es la relación de congruencia que define a los números impares?",
+      "options": [
+        "$x \\equiv 0 \\pmod 2$.",
+        "$x \\equiv 1 \\pmod 2$.",
+        "$x \\equiv 2 \\pmod 2$."
+      ],
+      "correct": 1,
+      "hint": "Los números impares dejan resto 1 al dividirse por 2.",
+      "explanation": "Los números impares al dividirse por 2 dejan resto 1, lo cual se denota como $x \\equiv 1 \\pmod 2$."
+    },
+    {
+      "q": "Si $a \\equiv b \\pmod m$, ¿se cumple siempre que $a^k \\equiv b^k \\pmod m$ para cualquier entero positivo $k$?",
+      "options": [
+        "Sí, debido a que el producto modular conserva la congruencia de manera iterativa.",
+        "No, las potencias no conservan la congruencia modular.",
+        "Solo si $k$ es un número primo."
+      ],
+      "correct": 0,
+      "hint": "Piensa en multiplicar $a \\equiv b$ consigo mismo $k$ veces.",
+      "explanation": "Dado que el producto modular conserva la congruencia ($a_1 a_2 \\equiv b_1 b_2$), aplicando de forma recursiva obtenemos que $a^k \\equiv b^k \\pmod m$ para cualquier entero positivo $k$."
+    }
+  ],
+  "TEST_B": [
+    {
+      "q": "El resto de dividir el número entero $37$ entre $5$ es ____.",
+      "options": [
+        "$2$",
+        "$3$",
+        "$1$"
+      ],
+      "correct": 0,
+      "hint": "Calcula el residuo de $37 \\div 5$.",
+      "explanation": "Como $37 = 7 \\cdot 5 + 2$, el resto de la división es $2$."
+    },
+    {
+      "q": "En el conjunto $\\mathbb{Z}_7$, el inverso modular del elemento $3$ es ____.",
+      "options": [
+        "$5$",
+        "$4$",
+        "$2$"
+      ],
+      "correct": 0,
+      "hint": "Busca un número $x \\in \\{0, \\dots, 6\\}$ tal que $3x \\equiv 1 \\pmod 7$.",
+      "explanation": "Como $3 \\cdot 5 = 15 \\equiv 1 \\pmod 7$, el inverso de $3$ módulo $7$ es $5$."
+    },
+    {
+      "q": "Si tenemos el sistema de congruencias lineales $x \\equiv 2 \\pmod 3$ y $x \\equiv 3 \\pmod 5$, entonces el menor entero positivo que cumple ambas condiciones es ____.",
+      "options": [
+        "$8$",
+        "$13$",
+        "$5$"
+      ],
+      "correct": 0,
+      "hint": "Aplica el Teorema del Resto Chino o prueba los múltiplos de 5 más 3.",
+      "explanation": "Los números congruentes con $3$ mod $5$ son $3, 8, 13, \\dots$ De ellos, el menor que es congruente con $2$ mod $3$ es $8$ (pues $8 = 2 \\cdot 3 + 2$)."
+    },
+    {
+      "q": "El valor del resto en la operación aritmética $15 \\pmod 4$ es ____.",
+      "options": [
+        "$3$",
+        "$1$",
+        "$2$"
+      ],
+      "correct": 0,
+      "hint": "Busca el múltiplo de 4 más cercano por debajo de 15.",
+      "explanation": "Dado que $15 = 3 \\cdot 4 + 3$, el resto es $3$."
+    },
+    {
+      "q": "Si tomamos $a = 14$ y el módulo $m = 9$, el inverso modular de $a$ en $\\mathbb{Z}_9$ es ____.",
+      "options": [
+        "$2$",
+        "$5$",
+        "$4$"
+      ],
+      "correct": 0,
+      "hint": "Simplifica primero $14$ módulo $9$ y luego busca su inverso.",
+      "explanation": "$14 \\equiv 5 \\pmod 9$. Buscamos $x$ tal que $5x \\equiv 1 \\pmod 9$. Como $5 \\cdot 2 = 10 \\equiv 1 \\pmod 9$, el inverso es $2$."
+    },
+    {
+      "q": "Según el Pequeño Teorema de Fermat, la potencia gigante $3^{100} \\pmod{101}$ equivale a ____.",
+      "options": [
+        "$1$",
+        "$3$",
+        "$99$"
+      ],
+      "correct": 0,
+      "hint": "101 es un número primo y el exponente es $101 - 1 = 100$.",
+      "explanation": "Por el Pequeño Teorema de Fermat, si $p$ es primo y $p \\nmid a$, entonces $a^{p-1} \\equiv 1 \\pmod p$. Aquí $p=101$ y $a=3$, luego $3^{100} \\equiv 1 \\pmod{101}$."
+    },
+    {
+      "q": "La función indicatriz de Euler evaluada en $n = 15$ devuelve el valor $\\phi(15) =$ ____.",
+      "options": [
+        "$8$",
+        "$7$",
+        "$6$"
+      ],
+      "correct": 0,
+      "hint": "Como $15 = 3 \\cdot 5$, aplica la propiedad multiplicativa $(3-1)(5-1)$.",
+      "explanation": "La función para el producto de dos primos distintos es $\\phi(p \\cdot q) = (p-1)(q-1)$. Así, $\\phi(15) = (3-1)(5-1) = 2 \\cdot 4 = 8$."
+    },
+    {
+      "q": "Si un número entero satisface $a \\equiv 5 \\pmod{11}$, entonces el valor de $a^2 \\pmod{11}$ es ____.",
+      "options": [
+        "$3$",
+        "$2$",
+        "$4$"
+      ],
+      "correct": 0,
+      "hint": "Eleva al cuadrado el resto 5 y calcula el módulo 11 del resultado.",
+      "explanation": "Si $a \\equiv 5 \\pmod{11}$, entonces $a^2 \\equiv 5^2 = 25 \\pmod{11}$. Dado que $25 = 2 \\cdot 11 + 3$, el resto es $3$."
+    },
+    {
+      "q": "El máximo común divisor entre $48$ y $30$ mediante el algoritmo de Euclides es ____.",
+      "options": [
+        "$6$",
+        "$8$",
+        "$12$"
+      ],
+      "correct": 0,
+      "hint": "Divide repetidamente y obtén el último resto no nulo.",
+      "explanation": "Aplicando Euclides: $48 = 1 \\cdot 30 + 18$; $30 = 1 \\cdot 18 + 12$; $18 = 1 \\cdot 12 + 6$; $12 = 2 \\cdot 6 + 0$. El MCD es $6$."
+    },
+    {
+      "q": "En el conjunto $\\mathbb{Z}_{10}$, el subconjunto de elementos que poseen inverso modular es ____.",
+      "options": [
+        "$\\{1, 3, 7, 9\\}$",
+        "$\\{1, 2, 5, 9\\}$",
+        "$\\{3, 5, 7, 9\\}$"
+      ],
+      "correct": 0,
+      "hint": "Busca aquellos elementos menores que 10 que sean coprimos con 10.",
+      "explanation": "Los elementos invertibles en $\\mathbb{Z}_{10}$ son aquellos coprimos con 10. Los números en $[1, 9]$ coprimos con 10 son $1, 3, 7$ y $9$."
+    },
+    {
+      "q": "El resto de calcular la potencia $2^{33} \\pmod 5$ aplicando Fermat es ____.",
+      "options": [
+        "$2$",
+        "$3$",
+        "$4$"
+      ],
+      "correct": 0,
+      "hint": "Como 5 es primo, $2^4 \\equiv 1 \\pmod 5$. Divide 33 entre 4.",
+      "explanation": "$33 = 8 \\cdot 4 + 1$. Por tanto, $2^{33} = (2^4)^8 \\cdot 2^1 \\equiv 1^8 \\cdot 2 = 2 \\pmod 5$."
+    },
+    {
+      "q": "Si diseñamos una tabla hash de tamaño $11$, la clave $25$ se asignará al índice de almacenamiento ____.",
+      "options": [
+        "$3$",
+        "$4$",
+        "$2$"
+      ],
+      "correct": 0,
+      "hint": "Calcula la clave módulo el tamaño de la tabla.",
+      "explanation": "El índice es $\\text{clave} \\pmod{\\text{tamaño}} = 25 \\pmod{11}$. Como $25 = 2 \\cdot 11 + 3$, el residuo es $3$."
+    },
+    {
+      "q": "El valor del resto resultante de la operación modular $(-5) \\pmod 3$ es ____.",
+      "options": [
+        "$1$",
+        "$2$",
+        "$0$"
+      ],
+      "correct": 0,
+      "hint": "Busca el múltiplo de 3 menor o igual a $-5$ y calcula la distancia.",
+      "explanation": "En aritmética modular los restos deben estar en el rango de $[0, m-1]$. Como $-5 = -2 \\cdot 3 + 1$, el resto es $1$."
+    },
+    {
+      "q": "Si un número de DNI es $12345678$, la operación aritmética $\\text{DNI} \\pmod{23}$ devuelve ____.",
+      "options": [
+        "$14$",
+        "$12$",
+        "$10$"
+      ],
+      "correct": 0,
+      "hint": "Realiza la división entera de 12345678 entre 23 y obtén el resto.",
+      "explanation": "$12345678 \\div 23 = 536768$ con resto $14$, ya que $536768 \\cdot 23 = 12345664$, y $12345678 - 12345664 = 14$."
+    },
+    {
+      "q": "Para el módulo $m = 8$, el representante en el rango estándar $[0, 7]$ de la clase del entero $-10$ es ____.",
+      "options": [
+        "$6$",
+        "$2$",
+        "$4$"
+      ],
+      "correct": 0,
+      "hint": "Suma múltiplos del módulo 8 a $-10$ hasta que el resultado sea no negativo.",
+      "explanation": "$-10 + 2 \\cdot 8 = -10 + 16 = 6 \\in \\mathbb{Z}_8$, por lo que la clase es $6$."
+    },
+    {
+      "q": "En el conjunto de enteros $\\mathbb{Z}_{12}$, el número total de divisores de cero es ____.",
+      "options": [
+        "$7$",
+        "$5$",
+        "$6$"
+      ],
+      "correct": 0,
+      "hint": "Son los elementos $a \\neq 0$ que comparten un factor común mayor que 1 con 12 ($mcd(a, 12) > 1$).",
+      "explanation": "Los elementos no nulos que no son coprimos con 12 son $\\{2, 3, 4, 6, 8, 9, 10\\}$. En total hay exactamente 7 elementos."
+    },
+    {
+      "q": "El valor del totient de Euler para el número primo $17$ es $\\phi(17) =$ ____.",
+      "options": [
+        "$16$",
+        "$17$",
+        "$15$"
+      ],
+      "correct": 0,
+      "hint": "Aplica la propiedad directa para módulos que son números primos.",
+      "explanation": "Dado que 17 es primo, todos los enteros del 1 al 16 son coprimos con él. Por tanto, $\\phi(17) = 17 - 1 = 16$."
+    },
+    {
+      "q": "Si un número entero cumple que $a \\equiv 3 \\pmod 7$, el valor de su potencia cúbica $a^3 \\pmod 7$ es ____.",
+      "options": [
+        "$6$",
+        "$1$",
+        "$5$"
+      ],
+      "correct": 0,
+      "hint": "Calcula el cubo del resto y luego reduce módulo 7.",
+      "explanation": "$a^3 \\equiv 3^3 = 27 \\pmod 7$. Como $27 = 3 \\cdot 7 + 6$, el resto es $6$."
+    },
+    {
+      "q": "Si se sabe que $mcd(a, m) = 1$, la ecuación modular lineal $a x \\equiv 1 \\pmod m$ tiene exactamente ____ solución(es) única(s) en $\\mathbb{Z}_m$.",
+      "options": [
+        "$1$",
+        "$2$",
+        "$0$"
+      ],
+      "correct": 0,
+      "hint": "El número de soluciones está dado por el valor de $mcd(a, m)$.",
+      "explanation": "Como el $mcd(a, m) = 1$, la condición para que haya soluciones se cumple y el número de soluciones únicas módulo $m$ es exactamente $1$ (el inverso modular)."
+    },
+    {
+      "q": "El inverso modular del número $5$ módulo $24$ es ____.",
+      "options": [
+        "$5$",
+        "$7$",
+        "$11$"
+      ],
+      "correct": 0,
+      "hint": "Busca un elemento de $\\mathbb{Z}_{24}$ que al multiplicarlo por 5 dé resto 1.",
+      "explanation": "Como $5 \\cdot 5 = 25 \\equiv 1 \\pmod{24}$, el elemento es su propio inverso modular. Por tanto, es $5$."
+    },
+    {
+      "q": "¿Cuál de las siguientes parejas de números enteros cumple que son números coprimos entre sí?",
+      "options": [
+        "$3$ y $8$.",
+        "$9$ y $10$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Comprueba si el MCD de cada pareja es igual a 1.",
+      "explanation": "$mcd(3, 8) = 1$ y $mcd(9, 10) = 1$, por lo que ambas parejas son coprimas."
+    },
+    {
+      "q": "¿Qué propiedades algebraicas cumple la relación de congruencia modular definible en los enteros?",
+      "options": [
+        "Reflexiva y Transitiva.",
+        "Simétrica.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda que es una relación de equivalencia y qué propiedades requiere.",
+      "explanation": "La congruencia modular cumple las tres propiedades básicas: es reflexiva ($a \\equiv a$), simétrica ($a \\equiv b \\implies b \\equiv a$) y transitiva ($a \\equiv b \\land b \\equiv c \\implies a \\equiv c$)."
+    },
+    {
+      "q": "Si $a \\equiv b \\pmod m$ y $c \\equiv d \\pmod m$, ¿cuál de las siguientes operaciones algebraicas es válida?",
+      "options": [
+        "$a + c \\equiv b + d \\pmod m$.",
+        "$a \\cdot c \\equiv b \\cdot d \\pmod m$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "La aritmética modular es compatible con las operaciones de anillo de los números enteros.",
+      "explanation": "La congruencia modular conserva tanto la suma como la multiplicación, por lo que ambas operaciones son totalmente válidas."
+    },
+    {
+      "q": "¿Cuáles de las siguientes aplicaciones de software o algoritmos informáticos hacen uso de la aritmética modular?",
+      "options": [
+        "Funciones hash y tablas de dispersión en memoria.",
+        "Cálculo de dígitos de control para tarjetas de crédito, IBAN y DNI.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Piensa en el uso de la operación módulo para reducir números grandes o mapear datos.",
+      "explanation": "Tanto el direccionamiento en tablas hash (clave % tamaño) como el cálculo de checksums de control se basan en las propiedades aritméticas del módulo."
+    },
+    {
+      "q": "¿Para qué valores de $x$ se satisface la congruencia lineal $x \\equiv 2 \\pmod 4$?",
+      "options": [
+        "$x = 6$.",
+        "$x = 10$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Evalúa cada valor propuesto calculando su resto al dividirlo por 4.",
+      "explanation": "$6 = 1 \\cdot 4 + 2$, por lo que $6 \\equiv 2 \\pmod 4$. $10 = 2 \\cdot 4 + 2$, por lo que $10 \\equiv 2 \\pmod 4$. Ambas son válidas."
+    },
+    {
+      "q": "¿Cuál de los siguientes números enteros es congruente con $1$ módulo $5$?",
+      "options": [
+        "$6$.",
+        "$-4$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Calcula el resto de cada opción o verifica si su diferencia con 1 es divisible por 5.",
+      "explanation": "$6 - 1 = 5$, que es divisible por 5. $-4 - 1 = -5$, que es divisible por 5. Ambas opciones cumplen la definición de congruencia."
+    },
+    {
+      "q": "Si $p$ es primo y $mcd(a, p) = 1$, ¿cuál de las siguientes igualdades es consecuencia de las leyes de Fermat y Euler?",
+      "options": [
+        "$a^{p-1} \\equiv 1 \\pmod p$.",
+        "$a^{\\phi(p)} \\equiv 1 \\pmod p$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Recuerda la relación entre Fermat y Euler cuando el módulo es primo.",
+      "explanation": "El Pequeño Teorema de Fermat establece $a^{p-1} \\equiv 1 \\pmod p$. Como $p$ es primo, su totient de Euler es $\\phi(p) = p-1$, por lo que el Teorema de Euler también da $a^{\\phi(p)} \\equiv 1 \\pmod p$."
+    },
+    {
+      "q": "Si $a \\cdot x \\equiv 1 \\pmod m$, ¿qué conclusiones lógicas e independientes se pueden extraer?",
+      "options": [
+        "$x$ es el inverso multiplicativo de $a$ módulo $m$.",
+        "El máximo común divisor entre $a$ y $m$ debe ser obligatoriamente $1$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Analiza la relación de equivalencia y la propiedad de existencia del inverso modular.",
+      "explanation": "La ecuación define al inverso modular $x$. Para que exista tal entero, es condición necesaria y suficiente que $a$ y $m$ sean coprimos, es decir, $mcd(a, m) = 1$."
+    },
+    {
+      "q": "¿Qué propiedades tiene la clase de equivalencia $[0]$ dentro de un anillo modular $\\mathbb{Z}_m$?",
+      "options": [
+        "Contiene a todos los números enteros múltiplos del módulo $m$.",
+        "Cualquier miembro de la clase tiene un resto de $0$ al dividirse por $m$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Define qué elementos pertenecen a la clase del cero.",
+      "explanation": "La clase $[0]$ está formada por $\\{k \\cdot m \\mid k \\in \\mathbb{Z}\\}$. Todos estos números son múltiplos de $m$ y su residuo al dividirse por $m$ es 0."
+    },
+    {
+      "q": "Si $mcd(a, m) = d$ y $d$ divide a $b$, ¿cuál de los siguientes enunciados se cumple para $a x \\equiv b \\pmod m$?",
+      "options": [
+        "La ecuación de congruencia lineal tiene solución.",
+        "El número de soluciones linealmente distintas módulo $m$ es exactamente $d$.",
+        "Todas las opciones anteriores son correctas."
+      ],
+      "correct": 2,
+      "hint": "Esta es la regla general para la resolución de congruencias lineales.",
+      "explanation": "Cuando $d \\mid b$, la ecuación diofántica asociada tiene solución y el número de soluciones incongruentes módulo $m$ es igual al máximo común divisor $d$."
+    },
+    {
+      "q": "Si calculamos el inverso modular del elemento $4$ módulo $6$ en $\\mathbb{Z}_6$, el valor resultante es:",
+      "options": [
+        "$2$",
+        "$4$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Comprueba primero el MCD entre 4 y 6.",
+      "explanation": "$mcd(4, 6) = 2 > 1$. Como no son coprimos, no existe inverso modular. Por tanto, ninguna opción es correcta."
+    },
+    {
+      "q": "El inverso modular del número entero $12$ módulo $30$ es:",
+      "options": [
+        "$18$",
+        "$3$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Comprueba si $12$ y $30$ comparten algún factor común mayor que 1.",
+      "explanation": "$mcd(12, 30) = 6 > 1$. Por lo tanto, no existe inverso modular para $12$ módulo $30$."
+    },
+    {
+      "q": "Si intentamos resolver el sistema lineal $x \\equiv 1 \\pmod 2$ y $x \\equiv 2 \\pmod 4$, el menor entero positivo que cumple el sistema es:",
+      "options": [
+        "$3$",
+        "$5$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Analiza las dos ecuaciones. ¿Puede un número satisfacer ambas simultáneamente?",
+      "explanation": "$x \\equiv 1 \\pmod 2$ significa que $x$ es impar, mientras que $x \\equiv 2 \\pmod 4$ implica que $x$ es par. No existe solución. Por lo tanto, ninguna de las anteriores."
+    },
+    {
+      "q": "El inverso modular del número entero $8$ módulo $24$ es:",
+      "options": [
+        "$3$",
+        "$11$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Determina si el máximo común divisor de 8 y 24 es igual a 1.",
+      "explanation": "Dado que $mcd(8, 24) = 8 > 1$, no existe el inverso modular."
+    },
+    {
+      "q": "El valor exacto del resto de dividir $2^{10}$ entre $11$ aplicando Fermat es:",
+      "options": [
+        "$2$",
+        "$1024$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "El Pequeño Teorema de Fermat proporciona directamente el resto módulo 11.",
+      "explanation": "Por Fermat, $2^{10} \\equiv 1 \\pmod{11}$. Como el valor 1 no figura en las opciones 0 y 1, la opción correcta es la de 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si buscamos soluciones para la congruencia $x \\equiv 4 \\pmod 9$, ¿cuál de los siguientes números es una solución válida?",
+      "options": [
+        "$20$",
+        "$35$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Prueba a dividir cada número entre 9 y observa el residuo.",
+      "explanation": "$20 \\pmod 9 = 2$ y $35 \\pmod 9 = 8$. Ninguno de ellos da resto 4 (la solución básica sería $13, 22$, etc.)."
+    },
+    {
+      "q": "En el conjunto algebraico $\\mathbb{Z}_8$, el inverso del elemento no nulo $2$ es:",
+      "options": [
+        "$4$",
+        "$6$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Evalúa el MCD de 2 y 8 para saber si existe el inverso.",
+      "explanation": "Como $mcd(2, 8) = 2 > 1$, el elemento 2 no posee inverso modular en $\\mathbb{Z}_8$."
+    },
+    {
+      "q": "¿Cuál es el valor resultante al evaluar la función indicatriz de Euler $\\phi(12)$?",
+      "options": [
+        "$6$",
+        "$2$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Usa la descomposición $12 = 4 \\cdot 3$ para hallar $\\phi(12)$.",
+      "explanation": "$\\phi(12) = \\phi(4) \\cdot \\phi(3) = 2 \\cdot 2 = 4$. Al no estar el valor 4 entre las opciones, se selecciona 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si deseamos resolver la congruencia lineal $5x \\equiv 2 \\pmod{10}$, el número de soluciones incongruentes en $\\mathbb{Z}_{10}$ es:",
+      "options": [
+        "$5$",
+        "$2$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Compara el MCD de 5 y 10 con el número 2.",
+      "explanation": "$mcd(5, 10) = 5$. Como 5 no divide a 2, la congruencia no tiene ninguna solución (0 soluciones). Por ende, es 'Ninguna de las anteriores'."
+    },
+    {
+      "q": "Si calculamos el residuo aritmético de $(-8) \\pmod 5$, el resultado correcto en el rango de clase es:",
+      "options": [
+        "$-3$",
+        "$3$",
+        "Ninguna de las opciones anteriores es correcta."
+      ],
+      "correct": 2,
+      "hint": "Encuentra el menor entero positivo congruente con $-8$ módulo 5.",
+      "explanation": "$-8 \\equiv -8 + 10 = 2 \\pmod 5$. Como el resto en la división euclídea estándar debe ser positivo y es 2, ninguna de las dos primeras opciones es correcta."
+    }
+  ],
+  "LABORATORIO": [
+    {
+      "id": "lab_1",
+      "title": "Algoritmo de Euclides Extendido para 26 y 7",
+      "context": "El algoritmo de Euclides extendido permite resolver ecuaciones diofánticas y hallar inversos modulares de la forma $7x \\equiv 1 \\pmod{26}$.",
+      "parts": [
+        {
+          "id": "lab_1_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del máximo común divisor entre $26$ y $7$, calculado por Euclides?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Aplicando divisiones sucesivas: $26 = 3 \\cdot 7 + 5$, $7 = 1 \\cdot 5 + 2$, $5 = 2 \\cdot 2 + 1$, $2 = 2 \\cdot 1 + 0$. El último resto no nulo es $1$."
+        },
+        {
+          "id": "lab_1_b",
+          "label": "b",
+          "question": "Calcula el coeficiente $x$ de Bézout para el número $7$ en la combinación lineal $7x + 26y = 1$ (permite valores negativos).",
+          "correctValue": -11,
+          "tolerance": 0.0,
+          "explanation": "Despejando hacia atrás: $1 = 5 - 2 \\cdot 2 = 5 - 2(7 - 5) = 3 \\cdot 5 - 2 \\cdot 7 = 3(26 - 3 \\cdot 7) - 2 \\cdot 7 = 3 \\cdot 26 - 11 \\cdot 7$. Por lo tanto, el coeficiente para $7$ es $-11$."
+        },
+        {
+          "id": "lab_1_c",
+          "label": "c",
+          "question": "Calcula el inverso modular de $7$ módulo $26$ (debe ser un valor positivo en $\\mathbb{Z}_{26}$).",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "Como el coeficiente de Bézout es $-11$, tomamos $-11 \\pmod{26} = -11 + 26 = 15$. Verificamos: $7 \\cdot 15 = 105 = 4 \\cdot 26 + 1 \\equiv 1 \\pmod{26}$."
+        },
+        {
+          "id": "lab_1_d",
+          "label": "d",
+          "question": "Calcula el coeficiente $y$ de Bézout correspondiente al módulo $26$ en la ecuación $7x + 26y = 1$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "De la combinación lineal obtenida en la parte b: $3 \\cdot 26 - 11 \\cdot 7 = 1$, el coeficiente para $26$ es $3$."
+        }
+      ]
+    },
+    {
+      "id": "lab_2",
+      "title": "Sistema de congruencias por CRT (Módulos 3 y 5)",
+      "context": "Queremos resolver el sistema lineal: $x \\equiv 2 \\pmod 3$, $x \\equiv 3 \\pmod 5$.",
+      "parts": [
+        {
+          "id": "lab_2_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del módulo conjunto total $M$?",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "Como los módulos son 3 y 5, y son coprimos, el módulo total es su producto: $M = 3 \\cdot 5 = 15$."
+        },
+        {
+          "id": "lab_2_b",
+          "label": "b",
+          "question": "Calcula el término $M_1 = M / 3$. ¿Cuál es el inverso de $M_1$ módulo $3$?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$M_1 = 15 / 3 = 5$. El inverso de $5 \\pmod 3$ es el inverso de $2 \\pmod 3$, que es $2$ (ya que $2 \\cdot 2 = 4 \\equiv 1 \\pmod 3$)."
+        },
+        {
+          "id": "lab_2_c",
+          "label": "c",
+          "question": "Calcula el término $M_2 = M / 5$. ¿Cuál es el inverso de $M_2$ módulo $5$?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$M_2 = 15 / 5 = 3$. El inverso de $3 \\pmod 5$ es $2$ (ya que $3 \\cdot 2 = 6 \\equiv 1 \\pmod 5$)."
+        },
+        {
+          "id": "lab_2_d",
+          "label": "d",
+          "question": "Encuentra la solución única para $x$ en el rango $[0, 14]$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Aplicando la fórmula del CRT: $x = (2 \\cdot 5 \\cdot 2 + 3 \\cdot 3 \\cdot 2) \\pmod{15} = (20 + 18) \\pmod{15} = 38 \\pmod{15} = 8$."
+        }
+      ]
+    },
+    {
+      "id": "lab_3",
+      "title": "Sistema de congruencias por CRT (Módulos 5 y 7)",
+      "context": "Resolvemos el sistema de congruencias lineales: $x \\equiv 1 \\pmod 5$, $x \\equiv 2 \\pmod 7$.",
+      "parts": [
+        {
+          "id": "lab_3_a",
+          "label": "a",
+          "question": "¿Cuál es el valor del módulo compuesto total $M$?",
+          "correctValue": 35,
+          "tolerance": 0.0,
+          "explanation": "El producto de los módulos coprimos es $M = 5 \\cdot 7 = 35$."
+        },
+        {
+          "id": "lab_3_b",
+          "label": "b",
+          "question": "Calcula el inverso modular de $M_1 = 7$ módulo $5$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "$7 \\equiv 2 \\pmod 5$. Buscamos $y$ tal que $2y \\equiv 1 \\pmod 5$, lo cual nos da $y = 3$ (ya que $2 \\cdot 3 = 6 \\equiv 1 \\pmod 5$)."
+        },
+        {
+          "id": "lab_3_c",
+          "label": "c",
+          "question": "Calcula el inverso modular de $M_2 = 5$ módulo $7$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Buscamos $y$ tal que $5y \\equiv 1 \\pmod 7$. Como $5 \\cdot 3 = 15 \\equiv 1 \\pmod 7$, el inverso modular es $3$."
+        },
+        {
+          "id": "lab_3_d",
+          "label": "d",
+          "question": "Determina la solución única $x$ en el rango $[0, 34]$.",
+          "correctValue": 16,
+          "tolerance": 0.0,
+          "explanation": "Usando la fórmula de reconstrucción: $x = (1 \\cdot 7 \\cdot 3 + 2 \\cdot 5 \\cdot 3) \\pmod{35} = (21 + 30) \\pmod{35} = 51 \\pmod{35} = 16$. Verificamos: $16 \\equiv 1 \\pmod 5$ y $16 \\equiv 2 \\pmod 7$."
+        }
+      ]
+    },
+    {
+      "id": "lab_4",
+      "title": "Simplificación de potencias grandes con Fermat",
+      "context": "Queremos hallar el valor de la potencia gigante $3^{202} \\pmod{101}$ sin realizar multiplicaciones iteradas.",
+      "parts": [
+        {
+          "id": "lab_4_a",
+          "label": "a",
+          "question": "¿Cuál es el exponente que hace que $3^e \\equiv 1 \\pmod{101}$ por el teorema de Fermat?",
+          "correctValue": 100,
+          "tolerance": 0.0,
+          "explanation": "Dado que 101 es un número primo y $mcd(3, 101) = 1$, por Fermat se cumple que $3^{100} \\equiv 1 \\pmod{101}$."
+        },
+        {
+          "id": "lab_4_b",
+          "label": "b",
+          "question": "Si dividimos el exponente original $202$ por $100$, ¿cuál es el resto obtenido?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "El exponente $202$ se escribe como $202 = 2 \\cdot 100 + 2$, por lo que el resto de la división es $2$."
+        },
+        {
+          "id": "lab_4_c",
+          "label": "c",
+          "question": "Calcula el valor de la base elevada a ese exponente sobrante ($3^{\\text{resto}}$) módulo $101$.",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "La base es 3 y el resto es 2, por lo que calculamos $3^2 = 9$. Módulo 101 es simplemente 9."
+        },
+        {
+          "id": "lab_4_d",
+          "label": "d",
+          "question": "¿Cuál es el valor final de $3^{202} \\pmod{101}$?",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "Como $3^{202} = (3^{100})^2 \\cdot 3^2 \\equiv (1)^2 \\cdot 9 = 9 \\pmod{101}$, el resultado final es $9$."
+        }
+      ]
+    },
+    {
+      "id": "lab_5",
+      "title": "Cálculo de la función indicatriz de Euler para n=60",
+      "context": "La función $\\phi(n)$ se calcula a partir de los factores primos de $n$. Para $n=60$, la factorización es $2^2 \\cdot 3 \\cdot 5$.",
+      "parts": [
+        {
+          "id": "lab_5_a",
+          "label": "a",
+          "question": "¿Cuántos factores primos diferentes tiene el número $60$?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los factores primos del número 60 son 2, 3 y 5. Por lo tanto, hay exactamente 3 factores primos distintos."
+        },
+        {
+          "id": "lab_5_b",
+          "label": "b",
+          "question": "Calcula el valor de $\\phi(4)$ (representa la contribución de la potencia del primo 2).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(2^2) = 2^2 - 2^{2-1} = 4 - 2 = 2$."
+        },
+        {
+          "id": "lab_5_c",
+          "label": "c",
+          "question": "Calcula el valor de $\\phi(15)$ (representa la contribución de los primos 3 y 5).",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Dado que 3 y 5 son primos distintos, $\\phi(15) = (3-1)(5-1) = 2 \\cdot 4 = 8$."
+        },
+        {
+          "id": "lab_5_d",
+          "label": "d",
+          "question": "¿Cuál es el valor final de $\\phi(60)$?",
+          "correctValue": 16,
+          "tolerance": 0.0,
+          "explanation": "Aplicando la propiedad multiplicativa: $\\phi(60) = \\phi(4) \\cdot \\phi(3) \\cdot \\phi(5) = 2 \\cdot 2 \\cdot 4 = 16$. También se puede calcular como $60(1 - 1/2)(1 - 1/3)(1 - 1/5) = 60(1/2)(2/3)(4/5) = 16$."
+        }
+      ]
+    },
+    {
+      "id": "lab_6",
+      "title": "Simplificación con el Teorema de Euler",
+      "context": "Queremos simplificar y calcular el valor de $7^{82} \\pmod{15}$.",
+      "parts": [
+        {
+          "id": "lab_6_a",
+          "label": "a",
+          "question": "Calcula el valor de $\\phi(15)$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Como vimos antes, $\\phi(15) = (3-1)(5-1) = 8$."
+        },
+        {
+          "id": "lab_6_b",
+          "label": "b",
+          "question": "Determina si 7 y 15 son coprimos (escribe 1 para sí, 0 para no).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$mcd(7, 15) = 1$, por lo que efectivamente son coprimos, representamos la respuesta afirmativa como 1."
+        },
+        {
+          "id": "lab_6_c",
+          "label": "c",
+          "question": "Divide el exponente original $82$ entre $\\phi(15)$. ¿Cuál es el resto?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Dividiendo $82 \\div 8$, obtenemos un cociente de 10 y un resto de $2$ ($82 = 10 \\cdot 8 + 2$)."
+        },
+        {
+          "id": "lab_6_d",
+          "label": "d",
+          "question": "Calcula el valor final de $7^{82} \\pmod{15}$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Por el Teorema de Euler, $7^8 \\equiv 1 \\pmod{15}$. Así, $7^{82} = (7^8)^{10} \\cdot 7^2 \\equiv (1)^{10} \\cdot 49 \\equiv 49 \\pmod{15}$. Como $49 = 3 \\cdot 15 + 4$, el resto final es $4$."
+        }
+      ]
+    },
+    {
+      "id": "lab_7",
+      "title": "Divisores de cero en Z_20",
+      "context": "Estudiamos la estructura del anillo modular $\\mathbb{Z}_{20}$ y clasificamos sus elementos.",
+      "parts": [
+        {
+          "id": "lab_7_a",
+          "label": "a",
+          "question": "¿Cuál es el número de elementos en $\\mathbb{Z}_{20}$?",
+          "correctValue": 20,
+          "tolerance": 0.0,
+          "explanation": "El anillo $\\mathbb{Z}_{20}$ contiene las clases desde $0$ hasta $19$, sumando exactamente $20$ elementos."
+        },
+        {
+          "id": "lab_7_b",
+          "label": "b",
+          "question": "¿Cuántos elementos de $\\mathbb{Z}_{20}$ tienen inverso modular?",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Los elementos que tienen inverso son aquellos coprimos con $20$. El número de tales elementos es $\\phi(20) = \\phi(4) \\cdot \\phi(5) = 2 \\cdot 4 = 8$."
+        },
+        {
+          "id": "lab_7_c",
+          "label": "c",
+          "question": "¿Cuántos elementos distintos de cero son divisores de cero en $\\mathbb{Z}_{20}$?",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "Los divisores de cero no nulos son los elementos $a \\neq 0$ tales que $mcd(a, 20) > 1$. De los 19 elementos no nulos de $\\mathbb{Z}_{20}$, restamos los 8 que son coprimos: $19 - 8 = 11$ elementos."
+        },
+        {
+          "id": "lab_7_d",
+          "label": "d",
+          "question": "Calcula la suma en $\\mathbb{Z}$ de los primeros tres divisores de cero positivos (excluyendo el 0).",
+          "correctValue": 11,
+          "tolerance": 0.0,
+          "explanation": "Los primeros divisores de cero distintos de cero son: $2$ (pues $2 \\cdot 10 = 20 \\equiv 0$), $4$ (pues $4 \\cdot 5 = 20 \\equiv 0$) y $5$ (pues $5 \\cdot 4 = 20 \\equiv 0$). La suma de estos tres elementos es $2 + 4 + 5 = 11$."
+        }
+      ]
+    },
+    {
+      "id": "lab_8",
+      "title": "Inversos cruzados en Z_19 y Z_11",
+      "context": "Analizaremos los inversos de los números 11 y 19 de forma cruzada.",
+      "parts": [
+        {
+          "id": "lab_8_a",
+          "label": "a",
+          "question": "Calcula el máximo común divisor de $19$ y $11$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como 19 y 11 son números primos distintos, su único divisor común es 1, por lo que $mcd(19, 11) = 1$."
+        },
+        {
+          "id": "lab_8_b",
+          "label": "b",
+          "question": "Halla el coeficiente $x$ de la identidad de Bézout $11x + 19y = 1$.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Aplicando divisiones: $19 = 1 \\cdot 11 + 8$; $11 = 1 \\cdot 8 + 3$; $8 = 2 \\cdot 3 + 2$; $3 = 1 \\cdot 2 + 1$. Substituyendo hacia atrás obtenemos $1 = 7 \\cdot 11 - 4 \\cdot 19$. Por tanto, $x = 7$."
+        },
+        {
+          "id": "lab_8_c",
+          "label": "c",
+          "question": "¿Cuál es el inverso modular de $11$ módulo $19$?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "De la combinación lineal $11 \\cdot 7 - 19 \\cdot 4 = 1$, al aplicar módulo 19 se tiene $11 \\cdot 7 \\equiv 1 \\pmod{19}$. El inverso es $7$."
+        },
+        {
+          "id": "lab_8_d",
+          "label": "d",
+          "question": "¿Cuál es el inverso modular de $19$ módulo $11$?",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "$19 \\equiv 8 \\pmod{11}$. Buscamos el inverso de $8 \\pmod{11}$. Como $8 \\cdot 7 = 56 = 5 \\cdot 11 + 1 \\equiv 1 \\pmod{11}$, el inverso modular es $7$."
+        }
+      ]
+    },
+    {
+      "id": "lab_9",
+      "title": "Distribución Hash y colisiones en tabla de tamaño 13",
+      "context": "Consideramos una tabla hash que direcciona las claves mediante la función modular simple $h(k) = k \\pmod{13}$.",
+      "parts": [
+        {
+          "id": "lab_9_a",
+          "label": "a",
+          "question": "¿En qué índice se almacena la clave $27$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $27 \\pmod{13}$. Como $27 = 2 \\cdot 13 + 1$, el resto es $1$."
+        },
+        {
+          "id": "lab_9_b",
+          "label": "b",
+          "question": "¿En qué índice se almacena la clave $40$?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $40 \\pmod{13}$. Como $40 = 3 \\cdot 13 + 1$, el resto es $1$."
+        },
+        {
+          "id": "lab_9_c",
+          "label": "c",
+          "question": "Si insertamos $27$ y luego $40$ en una tabla vacía, ¿cuántas colisiones totales ocurren en el instante de insertar ambas?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "La clave 27 se inserta en el índice 1 sin problemas. Al insertar la clave 40, intenta posicionarse en el índice 1, provocando una colisión. Por lo tanto, ocurre 1 colisión."
+        },
+        {
+          "id": "lab_9_d",
+          "label": "d",
+          "question": "¿En qué índice se almacenaría la clave $130$?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $130 \\pmod{13}$. Como $130 = 10 \\cdot 13 + 0$, el resto es $0$."
+        }
+      ]
+    },
+    {
+      "id": "lab_10",
+      "title": "Aritmética modular y dígitos de control de identidad",
+      "context": "El DNI español utiliza la congruencia módulo 23 para calcular una letra asociada. Analizamos el número $12345678$.",
+      "parts": [
+        {
+          "id": "lab_10_a",
+          "label": "a",
+          "question": "Calcula el resto de dividir $12345678$ entre $23$.",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "$12345678 = 536768 \\cdot 23 + 14$. El resto es $14$."
+        },
+        {
+          "id": "lab_10_b",
+          "label": "b",
+          "question": "Si modificamos el número de DNI sumándole 9 unidades ($12345687$), ¿cuál es el nuevo resto módulo 23?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Como sumamos 9 a la parte numérica, el resto anterior (14) se incrementa en 9: $14 + 9 = 23 \\equiv 0 \\pmod{23}$."
+        },
+        {
+          "id": "lab_10_c",
+          "label": "c",
+          "question": "Calcula el valor de la operación $100 \\pmod{23}$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "Como $100 = 4 \\cdot 23 + 8$, el residuo es $8$."
+        },
+        {
+          "id": "lab_10_d",
+          "label": "d",
+          "question": "Si duplicamos el número DNI original ($12345678 \\cdot 2$), ¿cuál es el residuo resultante módulo 23?",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "Por compatibilidad del producto, multiplicar el número por 2 equivale a multiplicar su resto por 2: $14 \\cdot 2 = 28 \\equiv 5 \\pmod{23}$."
+        }
+      ]
+    },
+    {
+      "id": "lab_11",
+      "title": "Cálculo de la potencia $5^{50} \\pmod 7$",
+      "context": "Estudiamos la reducción exponencial de la base 5 con el módulo 7.",
+      "parts": [
+        {
+          "id": "lab_11_a",
+          "label": "a",
+          "question": "¿Cuál es el valor de $\\phi(7)$?",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Como 7 es primo, $\\phi(7) = 7-1 = 6$."
+        },
+        {
+          "id": "lab_11_b",
+          "label": "b",
+          "question": "Calcula el resto del exponente mod $\\phi(7)$, es decir, $50 \\pmod 6$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$50 = 8 \\cdot 6 + 2$. El resto es $2$."
+        },
+        {
+          "id": "lab_11_c",
+          "label": "c",
+          "question": "Calcula la potencia simplificada $5^2 \\pmod 7$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$5^2 = 25$. Como $25 = 3 \\cdot 7 + 4$, el resto es $4$."
+        },
+        {
+          "id": "lab_11_d",
+          "label": "d",
+          "question": "¿Cuál es el valor final de la potencia gigante $5^{50} \\pmod 7$?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Por el teorema de Euler, $5^{50} = (5^6)^8 \\cdot 5^2 \\equiv (1)^8 \\cdot 4 = 4 \\pmod 7$."
+        }
+      ]
+    },
+    {
+      "id": "lab_12",
+      "title": "Inverso modular con módulo compuesto (17 mod 100)",
+      "context": "Calculamos el inverso de 17 módulo 100 aplicando el algoritmo de Euclides.",
+      "parts": [
+        {
+          "id": "lab_12_a",
+          "label": "a",
+          "question": "¿Son 17 y 100 coprimos? (1 para sí, 0 para no)",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como 17 es primo y no divide a 100, $mcd(17, 100) = 1$. Representamos el sí como 1."
+        },
+        {
+          "id": "lab_12_b",
+          "label": "b",
+          "question": "Calcula el valor de la función $\\phi(100)$.",
+          "correctValue": 40,
+          "tolerance": 0.0,
+          "explanation": "$100 = 2^2 \\cdot 5^2$. Por tanto, $\\phi(100) = 100(1 - 1/2)(1 - 1/5) = 100(1/2)(4/5) = 40$."
+        },
+        {
+          "id": "lab_12_c",
+          "label": "c",
+          "question": "Calcula el inverso modular positivo de $17$ módulo $100$.",
+          "correctValue": 53,
+          "tolerance": 0.0,
+          "explanation": "Buscamos $x$ tal que $17x \\equiv 1 \\pmod{100}$. Por Euclides extendido obtenemos la identidad $17 \\cdot 53 - 9 \\cdot 100 = 901 - 900 = 1$. Así, el inverso es $53$."
+        },
+        {
+          "id": "lab_12_d",
+          "label": "d",
+          "question": "Calcula el valor entero de la división $(17 \\cdot 53 - 1) / 100$.",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "$17 \\cdot 53 = 901$. La operación es $(901 - 1) / 100 = 900 / 100 = 9$."
+        }
+      ]
+    },
+    {
+      "id": "lab_13",
+      "title": "Ecuación lineal de congruencia (6x = 9 mod 15)",
+      "context": "Queremos analizar y resolver la congruencia $6x \\equiv 9 \\pmod{15}$.",
+      "parts": [
+        {
+          "id": "lab_13_a",
+          "label": "a",
+          "question": "Calcula el valor de $mcd(6, 15)$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Los divisores de 6 son 1, 2, 3, 6; los de 15 son 1, 3, 5, 15. El divisor común mayor es 3."
+        },
+        {
+          "id": "lab_13_b",
+          "label": "b",
+          "question": "¿Tiene solución la ecuación? (1 si sí, 0 si no)",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Dado que el $mcd(6, 15) = 3$ y 3 divide exactamente al término independiente 9, la ecuación sí tiene soluciones. Representamos sí con 1."
+        },
+        {
+          "id": "lab_13_c",
+          "label": "c",
+          "question": "¿Cuántas soluciones distintas módulo 15 tiene esta ecuación?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El número de soluciones linealmente distintas módulo $m$ es exactamente igual a $d = mcd(a, m) = 3$."
+        },
+        {
+          "id": "lab_13_d",
+          "label": "d",
+          "question": "Halla la menor solución entera positiva para $x$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Simplificamos la ecuación dividiendo todos los términos (incluyendo el módulo) por $3$: $2x \\equiv 3 \\pmod 5$. El inverso de $2$ mod $5$ es $3$, por lo que $x \\equiv 3 \\cdot 3 = 9 \\equiv 4 \\pmod 5$. La menor solución positiva es $4$."
+        }
+      ]
+    },
+    {
+      "id": "lab_14",
+      "title": "Ecuación lineal de congruencia (8x = 12 mod 20)",
+      "context": "Resolvemos la ecuación lineal $8x \\equiv 12 \\pmod{20}$.",
+      "parts": [
+        {
+          "id": "lab_14_a",
+          "label": "a",
+          "question": "Calcula el máximo común divisor de los términos $8$ y $20$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$mcd(8, 20) = 4$."
+        },
+        {
+          "id": "lab_14_b",
+          "label": "b",
+          "question": "¿Tiene solución la ecuación lineal? (1 si sí, 0 si no)",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como $mcd(8, 20) = 4$ and $4$ divide a $12$, la ecuación tiene soluciones. Indicamos sí con 1."
+        },
+        {
+          "id": "lab_14_c",
+          "label": "c",
+          "question": "¿Cuántas soluciones distintas posee módulo 20?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "El número de soluciones en $\\mathbb{Z}_{20}$ es igual a $mcd(8, 20) = 4$."
+        },
+        {
+          "id": "lab_14_d",
+          "label": "d",
+          "question": "Calcula la menor solución positiva de la ecuación.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "Dividiendo por 4 la congruencia obtenemos $2x \\equiv 3 \\pmod 5$, cuya menor solución es $x = 4$ (pues $8 \\cdot 4 = 32 \\equiv 12 \\pmod{20}$)."
+        }
+      ]
+    },
+    {
+      "id": "lab_15",
+      "title": "Sistema lineal de tres ecuaciones por CRT",
+      "context": "Resolvemos el sistema: $x \\equiv 3 \\pmod 4$, $x \\equiv 4 \\pmod 5$, $x \\equiv 1 \\pmod 3$.",
+      "parts": [
+        {
+          "id": "lab_15_a",
+          "label": "a",
+          "question": "¿Cuál es el módulo total $M = 4 \\cdot 5 \\cdot 3$?",
+          "correctValue": 60,
+          "tolerance": 0.0,
+          "explanation": "El módulo conjunto es $M = 4 \\cdot 5 \\cdot 3 = 60$."
+        },
+        {
+          "id": "lab_15_b",
+          "label": "b",
+          "question": "Encuentra la solución única para $x$ en el rango $[0, 59]$.",
+          "correctValue": 19,
+          "tolerance": 0.0,
+          "explanation": "Buscamos un número que deje resto 4 al dividir por 5 (4, 9, 14, 19, 24, ...). De ellos, $19$ deja resto $3$ al dividir por $4$ ($19 = 4 \\cdot 4 + 3$) y resto $1$ al dividir por $3$ ($19 = 6 \\cdot 3 + 1$). Cumple todas las condiciones, por lo que la solución es 19."
+        },
+        {
+          "id": "lab_15_c",
+          "label": "c",
+          "question": "Calcula el resto de esa solución módulo 7 ($x \\pmod 7$).",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "La solución es $19$. Calculamos $19 \\pmod 7 = 5$ (ya que $19 = 2 \\cdot 7 + 5$)."
+        },
+        {
+          "id": "lab_15_d",
+          "label": "d",
+          "question": "¿Cuál es la siguiente solución positiva más pequeña mayor que 60?",
+          "correctValue": 79,
+          "tolerance": 0.0,
+          "explanation": "Las soluciones son periódicas con período $M = 60$. La siguiente solución es $x + M = 19 + 60 = 79$."
+        }
+      ]
+    },
+    {
+      "id": "lab_16",
+      "title": "Algoritmo RSA: Cifrado y generación de claves",
+      "context": "Configuramos el sistema de cifrado RSA utilizando los números primos $p=3$ y $q=11$.",
+      "parts": [
+        {
+          "id": "lab_16_a",
+          "label": "a",
+          "question": "Calcula el valor del módulo de cifrado RSA $n = p \\cdot q$.",
+          "correctValue": 33,
+          "tolerance": 0.0,
+          "explanation": "$n = 3 \\cdot 11 = 33$."
+        },
+        {
+          "id": "lab_16_b",
+          "label": "b",
+          "question": "Calcula el valor de la función $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 20,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(33) = (3-1)(11-1) = 2 \\cdot 10 = 20$."
+        },
+        {
+          "id": "lab_16_c",
+          "label": "c",
+          "question": "Si seleccionamos el exponente público $e = 3$, calcula el valor del exponente privado $d$ ($3d \\equiv 1 \\pmod{20}$).",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "Buscamos el inverso de 3 módulo 20. Como $3 \\cdot 7 = 21 \\equiv 1 \\pmod{20}$, el exponente privado es $d = 7$."
+        },
+        {
+          "id": "lab_16_d",
+          "label": "d",
+          "question": "Si el mensaje en claro es $m = 2$, calcula el criptograma cifrado $c = m^e \\pmod n$.",
+          "correctValue": 8,
+          "tolerance": 0.0,
+          "explanation": "$c = 2^3 \\pmod{33} = 8$. El mensaje cifrado es $8$."
+        }
+      ]
+    },
+    {
+      "id": "lab_17",
+      "title": "Algoritmo RSA: Descifrado de mensajes",
+      "context": "Operamos sobre el sistema RSA anterior con $n = 33$, exponente público $e = 3$ y privado $d = 7$.",
+      "parts": [
+        {
+          "id": "lab_17_a",
+          "label": "a",
+          "question": "Si recibimos el mensaje cifrado $c = 8$, descífralo calculando $c^d \\pmod{33}$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$8^7 \\pmod{33} = (8^2)^3 \\cdot 8 = 64^3 \\cdot 8 \\equiv (-2)^3 \\cdot 8 = -8 \\cdot 8 = -64 \\equiv 2 \\pmod{33}$. Obtenemos el mensaje original $2$."
+        },
+        {
+          "id": "lab_17_b",
+          "label": "b",
+          "question": "Si el criptograma recibido es $c = 3$, calcula el mensaje original descifrado ($3^7 \\pmod{33}$).",
+          "correctValue": 9,
+          "tolerance": 0.0,
+          "explanation": "$3^7 = 2187$. Al dividir $2187$ entre $33$, el cociente es $66$ y el resto es $9$ ($2187 = 66 \\cdot 33 + 9$)."
+        },
+        {
+          "id": "lab_17_c",
+          "label": "c",
+          "question": "Si el mensaje en claro es $m = 5$, calcula el criptograma $c = m^3 \\pmod{33}$.",
+          "correctValue": 26,
+          "tolerance": 0.0,
+          "explanation": "$5^3 = 125$. Dividiendo $125$ entre $33$ obtenemos cociente $3$ y resto $26$ ($125 = 3 \\cdot 33 + 26$)."
+        },
+        {
+          "id": "lab_17_d",
+          "label": "d",
+          "question": "Si recibimos $c = 26$, descífralo calculando $26^7 \\pmod{33}$.",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El descifrado de $c=26$ debe devolver el mensaje original $5$, ya que la operación de cifrado y descifrado son inversas."
+        }
+      ]
+    },
+    {
+      "id": "lab_18",
+      "title": "Propiedad multiplicativa de la función de Euler",
+      "context": "Evaluamos el totient de Euler para un número compuesto grande $n = 72$ descomponiéndolo en factores coprimos.",
+      "parts": [
+        {
+          "id": "lab_18_a",
+          "label": "a",
+          "question": "Calcula el valor de $\\phi(8)$ (primer factor coprimo $2^3$).",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(2^3) = 2^3 - 2^2 = 8 - 4 = 4$."
+        },
+        {
+          "id": "lab_18_b",
+          "label": "b",
+          "question": "Calcula el valor de $\\phi(9)$ (segundo factor coprimo $3^2$).",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(3^2) = 3^2 - 3^1 = 9 - 3 = 6$."
+        },
+        {
+          "id": "lab_18_c",
+          "label": "c",
+          "question": "Calcula el valor de $\\phi(72)$ usando los dos resultados anteriores y la propiedad multiplicativa.",
+          "correctValue": 24,
+          "tolerance": 0.0,
+          "explanation": "Como 8 y 9 son coprimos, $\\phi(72) = \\phi(8) \\cdot \\phi(9) = 4 \\cdot 6 = 24$."
+        },
+        {
+          "id": "lab_18_d",
+          "label": "d",
+          "question": "Calcula ahora el valor de $\\phi(144)$ ($144 = 16 \\cdot 9$).",
+          "correctValue": 48,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(144) = \\phi(16) \\cdot \\phi(9) = (16 - 8) \\cdot 6 = 8 \\cdot 6 = 48$."
+        }
+      ]
+    },
+    {
+      "id": "lab_19",
+      "title": "Euclides extendido para 15 y 28",
+      "context": "Determinamos los inversos modulares de $15$ y $28$ respectivamente.",
+      "parts": [
+        {
+          "id": "lab_19_a",
+          "label": "a",
+          "question": "Calcula el máximo común divisor de $28$ y $15$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$mcd(28, 15) = 1$."
+        },
+        {
+          "id": "lab_19_b",
+          "label": "b",
+          "question": "Encuentra el coeficiente de Bézout positivo para $15$ en la ecuación $15x - 28y = 1$.",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "Por Euclides: $28 = 1 \\cdot 15 + 13$; $15 = 1 \\cdot 13 + 2$; $13 = 6 \\cdot 2 + 1$. Substituyendo obtenemos: $1 = 13 - 6(15 - 13) = 7 \\cdot 13 - 6 \\cdot 15 = 7(28 - 15) - 6 \\cdot 15 = 7 \\cdot 28 - 13 \\cdot 15$. El coeficiente para 15 es $-13 \\equiv 15 \\pmod{28}$."
+        },
+        {
+          "id": "lab_19_c",
+          "label": "c",
+          "question": "Calcula el inverso modular de $15$ módulo $28$.",
+          "correctValue": 15,
+          "tolerance": 0.0,
+          "explanation": "De la combinación lineal: el inverso modular positivo es $15$ ya que $15 \\cdot 15 = 225 = 8 \\cdot 28 + 1 \\equiv 1 \\pmod{28}$."
+        },
+        {
+          "id": "lab_19_d",
+          "label": "d",
+          "question": "Calcula el inverso modular de $28$ módulo $15$.",
+          "correctValue": 7,
+          "tolerance": 0.0,
+          "explanation": "$28 \\equiv 13 \\pmod{15}$. El inverso de 13 módulo 15 es 7, ya que $13 \\cdot 7 = 91 = 6 \\cdot 15 + 1 \\equiv 1 \\pmod{15}$."
+        }
+      ]
+    },
+    {
+      "id": "lab_20",
+      "title": "CRT de tres ecuaciones con primos pequeños",
+      "context": "Buscamos un número entero $x$ que satisfaga: $x \\equiv 1 \\pmod 2$, $x \\equiv 2 \\pmod 3$, $x \\equiv 3 \\pmod 5$.",
+      "parts": [
+        {
+          "id": "lab_20_a",
+          "label": "a",
+          "question": "Calcula el módulo compuesto total $M = 2 \\cdot 3 \\cdot 5$.",
+          "correctValue": 30,
+          "tolerance": 0.0,
+          "explanation": "El producto es $M = 2 \\cdot 3 \\cdot 5 = 30$."
+        },
+        {
+          "id": "lab_20_b",
+          "label": "b",
+          "question": "Halla la menor solución entera positiva para el sistema.",
+          "correctValue": 23,
+          "tolerance": 0.0,
+          "explanation": "Buscamos números impares que sean congruentes con 3 mod 5: 3, 13, 23, 33, ... De estos, el menor que deja resto 2 al dividir por 3 es $23$ ($23 = 7 \\cdot 3 + 2$)."
+        },
+        {
+          "id": "lab_20_c",
+          "label": "c",
+          "question": "Calcula el resto de esa solución módulo 7 ($x \\pmod 7$).",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$23 = 3 \\cdot 7 + 2$, por lo que el resto mod 7 es 2."
+        },
+        {
+          "id": "lab_20_d",
+          "label": "d",
+          "question": "Calcula el resto de esa solución módulo 11 ($x \\pmod{11}$).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$23 = 2 \\cdot 11 + 1$, por lo que el resto mod 11 es 1."
+        }
+      ]
+    },
+    {
+      "id": "lab_21",
+      "title": "Simplificación exponencial con módulo primo 13",
+      "context": "Calculamos el valor exacto de la potencia $2^{1000} \\pmod{13}$.",
+      "parts": [
+        {
+          "id": "lab_21_a",
+          "label": "a",
+          "question": "Calcula el valor de $\\phi(13)$.",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "Dado que 13 es primo, $\\phi(13) = 13 - 1 = 12$."
+        },
+        {
+          "id": "lab_21_b",
+          "label": "b",
+          "question": "Halla el residuo de dividir el exponente $1000$ entre $\\phi(13)$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$1000 = 83 \\cdot 12 + 4$. El residuo es $4$."
+        },
+        {
+          "id": "lab_21_c",
+          "label": "c",
+          "question": "Calcula el valor simplificado $2^4 \\pmod{13}$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "$2^4 = 16$. Módulo 13 es $16 - 13 = 3$."
+        },
+        {
+          "id": "lab_21_d",
+          "label": "d",
+          "question": "Determina el valor de $2^{1000} \\pmod{13}$.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "Como $2^{1000} = (2^{12})^{83} \\cdot 2^4 \\equiv (1)^{83} \\cdot 3 = 3 \\pmod{13}$, el resultado es $3$."
+        }
+      ]
+    },
+    {
+      "id": "lab_22",
+      "title": "Divisibilidad de n^3 - n",
+      "context": "El número $n^3 - n$ siempre es divisible por 6. Analizamos este hecho para varios enteros.",
+      "parts": [
+        {
+          "id": "lab_22_a",
+          "label": "a",
+          "question": "Calcula el valor de $n^3 - n$ para el entero $n = 2$.",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "$2^3 - 2 = 8 - 2 = 6$."
+        },
+        {
+          "id": "lab_22_b",
+          "label": "b",
+          "question": "Calcula el residuo de $(n^3 - n) \\pmod 6$ para $n = 5$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "$5^3 - 5 = 125 - 5 = 120$. Como $120 = 20 \\cdot 6$, el resto es $0$."
+        },
+        {
+          "id": "lab_22_c",
+          "label": "c",
+          "question": "Calcula el residuo de $(10^3 - 10) \\pmod 6$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "$10^3 - 10 = 990$. Dado que $990 = 165 \\cdot 6$, el resto es $0$."
+        },
+        {
+          "id": "lab_22_d",
+          "label": "d",
+          "question": "Para $n = 4$, calcula el valor del cociente entero $(n^3 - n) / 6$.",
+          "correctValue": 10,
+          "tolerance": 0.0,
+          "explanation": "$4^3 - 4 = 64 - 4 = 60$. El cociente es $60 / 6 = 10$."
+        }
+      ]
+    },
+    {
+      "id": "lab_23",
+      "title": "Cálculo de la función indicatriz de Euler para n=250",
+      "context": "El número 250 se descompone en factores primos de la forma $2^a \\cdot 5^b$.",
+      "parts": [
+        {
+          "id": "lab_23_a",
+          "label": "a",
+          "question": "Halla el exponente $a$ del factor primo 2.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$250 = 2 \\cdot 125 = 2^1 \\cdot 5^3$. El exponente para 2 es $1$."
+        },
+        {
+          "id": "lab_23_b",
+          "label": "b",
+          "question": "Halla el exponente $b$ del factor primo 5.",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "El exponente para 5 es $3$."
+        },
+        {
+          "id": "lab_23_c",
+          "label": "c",
+          "question": "Calcula el totient de Euler de la parte del primer factor primo: $\\phi(2)$.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como 2 es primo, $\\phi(2) = 2 - 1 = 1$."
+        },
+        {
+          "id": "lab_23_d",
+          "label": "d",
+          "question": "Calcula el valor final de $\\phi(250)$.",
+          "correctValue": 100,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(250) = 250 \\cdot (1 - 1/2) \\cdot (1 - 1/5) = 250 \\cdot (1/2) \\cdot (4/5) = 100$."
+        }
+      ]
+    },
+    {
+      "id": "lab_24",
+      "title": "Cálculo de inverso modular de 9 mod 25",
+      "context": "Buscamos calcular analíticamente el inverso multiplicativo de 9 módulo 25.",
+      "parts": [
+        {
+          "id": "lab_24_a",
+          "label": "a",
+          "question": "Calcula el $mcd(25, 9)$ para verificar coprimidad.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "$25 = 2 \\cdot 9 + 7$; $9 = 1 \\cdot 7 + 2$; $7 = 3 \\cdot 2 + 1$. El MCD es $1$."
+        },
+        {
+          "id": "lab_24_b",
+          "label": "b",
+          "question": "Halla el coeficiente Bézout $x$ para la ecuación $9x + 25y = 1$ (permite negativos).",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "Despejando: $1 = 7 - 3 \\cdot 2 = 7 - 3(9 - 7) = 4 \\cdot 7 - 3 \\cdot 9 = 4(25 - 2 \\cdot 9) - 3 \\cdot 9 = 4 \\cdot 25 - 11 \\cdot 9$. Así, el coeficiente para 9 es $-11 \\equiv 14 \\pmod{25}$."
+        },
+        {
+          "id": "lab_24_c",
+          "label": "c",
+          "question": "Calcula el inverso modular positivo de $9$ módulo $25$.",
+          "correctValue": 14,
+          "tolerance": 0.0,
+          "explanation": "El inverso modular es $14$, ya que $9 \\cdot 14 = 126 = 5 \\cdot 25 + 1 \\equiv 1 \\pmod{25}$."
+        },
+        {
+          "id": "lab_24_d",
+          "label": "d",
+          "question": "Calcula el inverso modular positivo de $25$ módulo $9$.",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$25 \\equiv 7 \\pmod 9$. El inverso de $7$ mod $9$ es $4$, ya que $7 \\cdot 4 = 28 = 3 \\cdot 9 + 1 \\equiv 1 \\pmod 9$."
+        }
+      ]
+    },
+    {
+      "id": "lab_25",
+      "title": "Evaluación de la clase de congruencia x = 5 mod 6",
+      "context": "Analizamos las propiedades numéricas asociadas al conjunto de soluciones de $x \\equiv 5 \\pmod 6$.",
+      "parts": [
+        {
+          "id": "lab_25_a",
+          "label": "a",
+          "question": "¿Cuál es el menor entero positivo $x$ que satisface la congruencia?",
+          "correctValue": 5,
+          "tolerance": 0.0,
+          "explanation": "El menor entero positivo de la clase $[5]_6$ es $5$."
+        },
+        {
+          "id": "lab_25_b",
+          "label": "b",
+          "question": "Calcula el valor de $x \\pmod 2$ para cualquier $x$ de esta clase.",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como $x = 6k + 5 = 2(3k + 2) + 1$, el número siempre es impar, por lo que $x \\pmod 2 = 1$."
+        },
+        {
+          "id": "lab_25_c",
+          "label": "c",
+          "question": "Calcula el valor de $x \\pmod 3$ para cualquier $x$ de esta clase.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "Como $x = 6k + 5 = 3(2k + 1) + 2$, al dividir por 3 siempre deja resto $2$."
+        },
+        {
+          "id": "lab_25_d",
+          "label": "d",
+          "question": "Si a un número $x$ de esta clase le sumamos 7, ¿cuál es el residuo resultante módulo 6?",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "$x + 7 \\equiv 5 + 7 = 12 \\equiv 0 \\pmod 6$."
+        }
+      ]
+    },
+    {
+      "id": "lab_26",
+      "title": "Propiedades de suma en el anillo corporal Z_7",
+      "context": "Evaluamos sumatorios sobre los elementos de $\\mathbb{Z}_7$.",
+      "parts": [
+        {
+          "id": "lab_26_a",
+          "label": "a",
+          "question": "Calcula la suma estándar en los enteros de todos los elementos de $\\mathbb{Z}_7$.",
+          "correctValue": 21,
+          "tolerance": 0.0,
+          "explanation": "La suma es $0 + 1 + 2 + 3 + 4 + 5 + 6 = 21$."
+        },
+        {
+          "id": "lab_26_b",
+          "label": "b",
+          "question": "Calcula la suma de todos los elementos del conjunto anterior en aritmética modular $\\mathbb{Z}_7$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "La suma total es $21$. Reduciendo módulo 7 obtenemos $21 \\pmod 7 = 0$."
+        },
+        {
+          "id": "lab_26_c",
+          "label": "c",
+          "question": "Suma en $\\mathbb{Z}_7$ los inversos modulares de todos los elementos invertibles de $\\mathbb{Z}_7$.",
+          "correctValue": 0,
+          "tolerance": 0.0,
+          "explanation": "Los elementos invertibles son $\\{1, 2, 3, 4, 5, 6\\}$. Sus inversos son $\\{1, 4, 5, 2, 3, 6\\}$, que vuelven a ser el mismo conjunto de números. La suma modular es de nuevo $0$."
+        },
+        {
+          "id": "lab_26_d",
+          "label": "d",
+          "question": "¿Cuántos elementos en $\\mathbb{Z}_7$ carecen de inverso modular?",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Solo el elemento $0$ no es coprimo con 7, por lo que únicamente $0$ carece de inverso. La respuesta es $1$."
+        }
+      ]
+    },
+    {
+      "id": "lab_27",
+      "title": "Sistema modular con módulos no coprimos",
+      "context": "Analizamos el sistema: $x \\equiv 2 \\pmod 4$, $x \\equiv 4 \\pmod 6$.",
+      "parts": [
+        {
+          "id": "lab_27_a",
+          "label": "a",
+          "question": "Calcula el máximo común divisor de los módulos, $mcd(4, 6)$.",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$mcd(4, 6) = 2$."
+        },
+        {
+          "id": "lab_27_b",
+          "label": "b",
+          "question": "Tiene solución el sistema? Escribe 1 para sí, 0 para no (la condición es que $mcd(4,6)$ divida a la diferencia de los restos $4 - 2 = 2$).",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Como $mcd(4, 6) = 2$ y 2 divide a $4 - 2 = 2$, el sistema es compatible y tiene solución. Representamos la respuesta afirmativa como 1."
+        },
+        {
+          "id": "lab_27_c",
+          "label": "c",
+          "question": "Calcula el mínimo común múltiplo, $mcm(4, 6)$.",
+          "correctValue": 12,
+          "tolerance": 0.0,
+          "explanation": "$mcm(4, 6) = (4 \\cdot 6) / mcd(4, 6) = 24 / 2 = 12$."
+        },
+        {
+          "id": "lab_27_d",
+          "label": "d",
+          "question": "Calcula la menor solución positiva única módulo el $mcm(4, 6)$.",
+          "correctValue": 10,
+          "tolerance": 0.0,
+          "explanation": "Buscamos entre los múltiplos de 6 más 4: 4, 10, 16... El número $10$ deja resto $2$ al dividir por $4$ ($10 = 2 \\cdot 4 + 2$). Por tanto, la solución es $10$."
+        }
+      ]
+    },
+    {
+      "id": "lab_28",
+      "title": "RSA con números primos medianos (p=5, q=11)",
+      "context": "Configuramos un criptosistema RSA usando $p = 5$ y $q = 11$.",
+      "parts": [
+        {
+          "id": "lab_28_a",
+          "label": "a",
+          "question": "Calcula el módulo de cifrado $n$.",
+          "correctValue": 55,
+          "tolerance": 0.0,
+          "explanation": "$n = 5 \\cdot 11 = 55$."
+        },
+        {
+          "id": "lab_28_b",
+          "label": "b",
+          "question": "Calcula el valor de la función $\\phi(n) = (p-1)(q-1)$.",
+          "correctValue": 40,
+          "tolerance": 0.0,
+          "explanation": "$\\phi(55) = (5-1)(11-1) = 4 \\cdot 10 = 40$."
+        },
+        {
+          "id": "lab_28_c",
+          "label": "c",
+          "question": "Si seleccionamos el exponente público $e = 7$, calcula el exponente privado $d$ tal que $7d \\equiv 1 \\pmod{40}$.",
+          "correctValue": 23,
+          "tolerance": 0.0,
+          "explanation": "Buscamos el inverso de 7 módulo 40. Por Euclides extendido: $7 \\cdot 23 = 161 = 4 \\cdot 40 + 1 \\equiv 1 \\pmod{40}$. El exponente privado es $23$."
+        },
+        {
+          "id": "lab_28_d",
+          "label": "d",
+          "question": "Si el mensaje es $m = 3$, calcula el criptograma cifrado $c = m^7 \\pmod{55}$.",
+          "correctValue": 42,
+          "tolerance": 0.0,
+          "explanation": "$c = 3^7 = 2187$. Al dividir $2187$ entre $55$, el cociente es $39$ y el resto es $42$ ($2187 = 39 \\cdot 55 + 42$)."
+        }
+      ]
+    },
+    {
+      "id": "lab_29",
+      "title": "Resolución de colisiones por direccionamiento abierto",
+      "context": "Insertamos de forma sucesiva las claves $12, 22$ y $32$ en una tabla hash de tamaño 10, utilizando sondeo lineal y la función modular básica $k \\pmod{10}$.",
+      "parts": [
+        {
+          "id": "lab_29_a",
+          "label": "a",
+          "question": "¿En qué índice de la tabla hash vacía se almacena la clave $12$?",
+          "correctValue": 2,
+          "tolerance": 0.0,
+          "explanation": "$12 \\pmod{10} = 2$. Como la posición está vacía, se inserta en el índice 2."
+        },
+        {
+          "id": "lab_29_b",
+          "label": "b",
+          "question": "¿En qué índice se almacena la clave $22$?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "$22 \\pmod{10} = 2$. Colisiona con 12 en la posición 2. Aplicando sondeo lineal, pasamos al índice $2+1 = 3$. Como está vacío, se almacena en el índice 3."
+        },
+        {
+          "id": "lab_29_c",
+          "label": "c",
+          "question": "¿En qué índice se almacena la clave $32$?",
+          "correctValue": 4,
+          "tolerance": 0.0,
+          "explanation": "$32 \\pmod{10} = 2$. Colisiona con 12 en el índice 2, y con 22 en el índice 3. Siguiendo el sondeo, pasa al índice 4, que está libre."
+        },
+        {
+          "id": "lab_29_d",
+          "label": "d",
+          "question": "¿Cuál fue el número total de colisiones sufridas durante la inserción de las tres claves?",
+          "correctValue": 3,
+          "tolerance": 0.0,
+          "explanation": "La clave 12 sufrió 0 colisiones. La clave 22 colisionó en la posición 2 (1 colisión). La clave 32 colisionó en las posiciones 2 y 3 (2 colisiones). En total se registraron $0 + 1 + 2 = 3$ colisiones."
+        }
+      ]
+    },
+    {
+      "id": "lab_30",
+      "title": "Aritmética del calendario (Módulo 7)",
+      "context": "Los días de la semana se pueden modelar con $\\mathbb{Z}_7$, donde Lunes=1, Martes=2, Miércoles=3, Jueves=4, Viernes=5, Sábado=6, Domingo=0. Hoy es Viernes (5).",
+      "parts": [
+        {
+          "id": "lab_30_a",
+          "label": "a",
+          "question": "¿Qué día de la semana será dentro de 10 días? (Escribe el número entero representativo)",
+          "correctValue": 1,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $(5 + 10) \\pmod 7 = 15 \\pmod 7 = 1$ (Lunes)."
+        },
+        {
+          "id": "lab_30_b",
+          "label": "b",
+          "question": "¿Qué día de la semana será dentro de 365 días?",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $(5 + 365) \\pmod 7 = 370 \\pmod 7 = 6$ (Sábado, ya que $370 = 52 \\cdot 7 + 6$)."
+        },
+        {
+          "id": "lab_30_c",
+          "label": "c",
+          "question": "¿Qué día de la semana fue hace exactamente 20 días?",
+          "correctValue": 6,
+          "tolerance": 0.0,
+          "explanation": "Calculamos $(5 - 20) \\pmod 7 = -15 \\pmod 7$. Como $-15 = -3 \\cdot 7 + 6$, el día es 6 (Sábado)."
+        },
+        {
+          "id": "lab_30_d",
+          "label": "d",
+          "question": "Calcula el menor número de días positivos $n > 0$ necesario para que vuelva a ser viernes y haya transcurrido un número entero exacto de 4 semanas.",
+          "correctValue": 28,
+          "tolerance": 0.0,
+          "explanation": "Cada semana tiene 7 días. Transcurrir exactamente 4 semanas requiere $4 \\cdot 7 = 28$ días. Tras 28 días, volverá a ser viernes y habrán pasado 4 semanas."
+        }
+      ]
+    }
+  ],
+  "FORMULAS": [
+    {
+      "name": "Definición de Congruencia Modular",
+      "tex": "$$a \\equiv b \\pmod m \\iff m \\mid (a - b)$$"
+    },
+    {
+      "name": "Propiedad de la Suma Modular",
+      "tex": "$$(a + b) \\pmod m = ((a \\pmod m) + (b \\pmod m)) \\pmod m$$"
+    },
+    {
+      "name": "Propiedad del Producto Modular",
+      "tex": "$$(a \\cdot b) \\pmod m = ((a \\pmod m) \\cdot (b \\pmod m)) \\pmod m$$"
+    },
+    {
+      "name": "Definición de Inverso Modular",
+      "tex": "$$a \\cdot x \\equiv 1 \\pmod m$$"
+    },
+    {
+      "name": "Identidad de Bézout",
+      "tex": "$$a \\cdot x + m \\cdot y = mcd(a, m)$$"
+    },
+    {
+      "name": "Pequeño Teorema de Fermat",
+      "tex": "$$a^{p-1} \\equiv 1 \\pmod p \\quad \\text{si } p \\nmid a$$"
+    },
+    {
+      "name": "Fórmula Indicatriz de Euler para Primos",
+      "tex": "$$\\phi(p) = p - 1 \\quad \\text{si } p \\text{ es primo}$$"
+    },
+    {
+      "name": "Teorema de Euler",
+      "tex": "$$a^{\\phi(n)} \\equiv 1 \\pmod n \\quad \\text{si } mcd(a, n) = 1$$"
+    },
+    {
+      "name": "Teorema del Resto Chino",
+      "tex": "$$x \\equiv \\left( \\sum_{i=1}^k a_i M_i y_i \\right) \\pmod M$$"
+    }
+  ]
+}
